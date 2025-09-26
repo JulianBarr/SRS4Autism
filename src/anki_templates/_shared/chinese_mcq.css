@@ -1,0 +1,68 @@
+.card {
+    font-family: arial, sans-serif;
+    font-size: 20px;
+    text-align: center;
+    color: black;
+    background-color: white;
+  }
+  .main-display {
+    margin-bottom: 20px;
+    font-size: 80pt;
+    font-family: "KaiTi", "BiauKai", "DFKai-SB", serif;
+  }
+  .answer-display {
+    font-size: 72pt;
+    font-family: "KaiTi", "BiauKai", "DFKai-SB", serif;
+  }
+  .mcq-table {
+    margin: 15px auto;
+    border-collapse: collapse;
+  }
+  .mcq-table td {
+    border: 2px solid #ddd;
+    padding: 5px;
+    vertical-align: middle;
+    text-align: center;
+    cursor: pointer;
+  }
+  .mcq-table td:hover {
+    background-color: #f0f0f0;
+  }
+  .char-cell {
+    font-size: 60pt;
+    font-family: "KaiTi", "BiauKai", "DFKai-SB", serif;
+    width: 140px;
+    height: 140px;
+  }
+  .rep-cell {
+    width: 120px;
+    height: 120px;
+  }
+  .rep-cell img {
+    max-width: 110px;
+    max-height: 110px;
+    display: block;
+    margin: auto;
+  }
+  .pinyin-cell {
+    font-size: 40pt;
+    font-family: "Arial", sans-serif;
+  }
+  .mcq-status-message {
+    font-size: 20px;
+    font-weight: bold;
+    color: #c00;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #ffe0e0;
+    border: 1px solid #c00;
+    border-radius: 8px;
+  }
+  /* Styles for highlighting answers on the back */
+  .correct-answer-rep {
+    background-color: cyan;
+  }
+  .correct-answer-char {
+    color: red;
+  }
+  
