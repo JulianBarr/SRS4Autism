@@ -1,39 +1,27 @@
 <div class="main-display">{{Character}}</div>
-<div id="mcq-container"></div>
-
+<div id="char-mcq-choices-4"></div>
 <script>
-// --- FRONT TEMPLATE SCRIPT ---
-function simpleHash(str) { let hash = 0; for (let i = 0; i < str.length; i++) { const char = str.charCodeAt(i); hash = ((hash << 5) - hash) + char; hash |= 0; } return Math.abs(hash); }
-const config = { currentCharacter: "{{Character}}", currentRepresentationHTML: `{{Picture}}` };
-const cardId = simpleHash(config.currentCharacter);
-let currentRepresentationValue = "";
-const imgMatch = config.currentRepresentationHTML.match(/src="?([^"\s>]+)"?/);
-if (imgMatch && imgMatch[1]) { currentRepresentationValue = imgMatch[1]; } else { const tempDiv = document.createElement('div'); tempDiv.innerHTML = config.currentRepresentationHTML; currentRepresentationValue = (tempDiv.textContent || tempDiv.innerText || "").trim(); }
-function playFeedback(element) { if (element.dataset.correct === 'true') { try { new Audio('ring.wav').play(); } catch (e) {} } }
-
-(async function initMCQ() {
-    const mcqContainer = document.getElementById('mcq-container');
-    if (!mcqContainer) return;
+if ("{{Card}}" === "4. MCQ (Pick Pic)") {
+(async function() {
+    const correctRep = `{{Representation}}`;
+    const correctChar = "{{Character}}";
+    const render = v => {
+        if (v.startsWith('<img')) return v;
+        if (/\.(jpe?g|png|gif|svg)$/i.test(v)) return `<img src="${v}">`;
+        return `<span class="pinyin-cell">${v}</span>`;
+    };
     try {
-        const response = await fetch('_anki_mcq_data.json');
-        if (!response.ok) throw new Error("Data file not found.");
-        const allNotesData = await response.json();
-        const otherNotes = allNotesData.filter(note => note.representation !== currentRepresentationValue);
-        if (otherNotes.length < 3) { mcqContainer.innerHTML = `<div class="mcq-status-message">Not enough other cards.</div>`; return; }
-        function mulberry32(a) { return function() { var t = a += 0x6D2B79F5; t = Math.imul(t ^ t >>> 15, t | 1); t ^= t + Math.imul(t ^ t >>> 7, t | 61); return ((t ^ t >>> 14) >>> 0) / 4294967296; } }
-        const random = mulberry32(cardId);
-        function shuffle(array) { for (let i = array.length - 1; i > 0; i--) { const j = Math.floor(random() * (i + 1)); [array[i], array[j]] = [array[j], array[i]]; } return array; }
-        function renderRepresentation(value) { return /\.(jpe?g|png|gif|svg)$/i.test(value) ? `<img src="${value}">` : `<span class="pinyin-cell">${value}</span>`; }
-        function generateRepTable(options, correctValue) {
-            let html = `<table class="mcq-table"><tr>`;
-            options.forEach(value => {
-                html += `<td class="rep-cell" data-correct="${value === correctValue}" onclick="playFeedback(this)">${renderRepresentation(value)}</td>`;
-            });
-            return html + '</tr></table>';
-        }
-        const distractors = shuffle([...otherNotes]).slice(0, 3);
-        const repOptions = shuffle(distractors.map(d => d.representation).concat([currentRepresentationValue]));
-        mcqContainer.innerHTML = generateRepTable(repOptions, currentRepresentationValue);
-    } catch (e) { mcqContainer.innerHTML = `<div class="mcq-status-message">Error: ${e.message}</div>`; }
+        const r = await fetch('_anki_mcq_data.json'); if (!r.ok) throw new Error();
+        const d = await r.json();
+        const others = d.filter(item => item.character !== correctChar).map(item => item.representation);
+        if (others.length < 3) return;
+        const shuffle = a => { for (let i=a.length-1; i>0; i--) { const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
+        const choices = shuffle([correctRep, ...shuffle(others).slice(0, 3)]);
+        window.ankiCharMcq4Choices = { choices: choices, correct: correctRep };
+        let h = '<table class="char-mcq-table"><tr>';
+        choices.forEach(c => { h += `<td class="rep-cell">${render(c)}</td>`; });
+        document.getElementById('char-mcq-choices-4').innerHTML = h + '</tr></table>';
+    } catch(e) {}
 })();
+}
 </script>
