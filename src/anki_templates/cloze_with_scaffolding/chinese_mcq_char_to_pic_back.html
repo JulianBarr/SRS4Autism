@@ -1,43 +1,19 @@
-<!-- Re-display the question part from the front -->
 <div class="main-display">{{Character}}</div>
-<!-- Container for the ANSWER MCQ with a unique ID -->
-<div id="mcq-container-back"></div>
-
-<hr id=answer>
-
+<div id="char-mcq-answer-4"></div>
 <script>
-// --- BACK TEMPLATE SCRIPT (FULLY SEPARATED) ---
-function simpleHash_back(str) { let hash = 0; for (let i = 0; i < str.length; i++) { const char = str.charCodeAt(i); hash = ((hash << 5) - hash) + char; hash |= 0; } return Math.abs(hash); }
-const config_back = { currentCharacter: "{{Character}}", currentRepresentationHTML: `{{Picture}}` };
-const cardId_back = simpleHash_back(config_back.currentCharacter);
-let currentRepresentationValue_back = "";
-const imgMatch_back = config_back.currentRepresentationHTML.match(/src="?([^"\s>]+)"?/);
-if (imgMatch_back && imgMatch_back[1]) { currentRepresentationValue_back = imgMatch_back[1]; } else { const tempDiv_back = document.createElement('div'); tempDiv_back.innerHTML = config_back.currentRepresentationHTML; currentRepresentationValue_back = (tempDiv_back.textContent || tempDiv_back.innerText || "").trim(); }
-
-(async function initMCQ_back() {
-    const mcqContainer_back = document.getElementById('mcq-container-back');
-    if (!mcqContainer_back) return;
-    try {
-        const response = await fetch('_anki_mcq_data.json');
-        if (!response.ok) return; // Silently fail on back if file not found
-        const allNotesData = await response.json();
-        const otherNotes = allNotesData.filter(note => note.representation !== currentRepresentationValue_back);
-        if (otherNotes.length < 3) { return; }
-        function mulberry32_back(a) { return function() { var t = a += 0x6D2B79F5; t = Math.imul(t ^ t >>> 15, t | 1); t ^= t + Math.imul(t ^ t >>> 7, t | 61); return ((t ^ t >>> 14) >>> 0) / 4294967296; } }
-        const random_back = mulberry32_back(cardId_back);
-        function shuffle_back(array) { for (let i = array.length - 1; i > 0; i--) { const j = Math.floor(random_back() * (i + 1)); [array[i], array[j]] = [array[j], array[i]]; } return array; }
-        function renderRepresentation_back(value) { return /\.(jpe?g|png|gif|svg)$/i.test(value) ? `<img src="${value}">` : `<span class="pinyin-cell">${value}</span>`; }
-        function generateRepTable_back(options, correctValue) {
-            let html = `<table class="mcq-table"><tr>`;
-            options.forEach(value => {
-                const highlightClass = (value === correctValue) ? 'correct-answer-rep' : '';
-                html += `<td class="rep-cell ${highlightClass}">${renderRepresentation_back(value)}</td>`;
-            });
-            return html + '</tr></table>';
-        }
-        const distractors = shuffle_back([...otherNotes]).slice(0, 3);
-        const repOptions = shuffle_back(distractors.map(d => d.representation).concat([currentRepresentationValue_back]));
-        mcqContainer_back.innerHTML = generateRepTable_back(repOptions, currentRepresentationValue_back);
-    } catch (e) { /* Silently fail on back */ }
-})();
+if ("{{Card}}" === "4. MCQ (Pick Pic)" && window.ankiCharMcq4Choices) {
+    const { choices, correct } = window.ankiCharMcq4Choices;
+    const render = v => {
+        if (v.startsWith('<img')) return v;
+        if (/\.(jpe?g|png|gif|svg)$/i.test(v)) return `<img src="${v}">`;
+        return `<span class="pinyin-cell">${v}</span>`;
+    };
+    let h = '<table class="char-mcq-table"><tr>';
+    choices.forEach(c => {
+        const cl = (c === correct) ? 'correct-answer-rep' : '';
+        h += `<td class="rep-cell ${cl}">${render(c)}</td>`;
+    });
+    document.getElementById('char-mcq-answer-4').innerHTML = h + '</tr></table>';
+    delete window.ankiCharMcq4Choices;
+}
 </script>
