@@ -1,0 +1,26 @@
+{{#Word1}}
+<div class="word-pinyin-container" id="word1-pinyin-container"></div>
+<div id="word1-picture-container"></div>
+<div id="word1-mcq-choices"></div>
+<script>
+if ("{{Card}}" === "5. Word 1") {
+(async function() {
+    const word = "{{Word1}}", pinyinNum = "{{Pinyin1}}", correctChar = "{{Character}}", picHTML = `{{Picture1}}`;
+    const convert = n => { const t={'a':['ā','á','ǎ','à','a'],'e':['ē','é','ě','è','e'],'i':['ī','í','ǐ','ì','i'],'o':['ō','ó','ǒ','ò','o'],'u':['ū','ú','ǔ','ù','u'],'v':['ǖ','ǘ','ǚ','ǜ','ü']}; return n.replace(/([aeiouvü]{1,3})(n?g?r?)([1-5])/gi,(m,p1,p2,p3)=>{let v='';if(p1.includes('a'))v='a';else if(p1.includes('e'))v='e';else if(p1.includes('o'))v='o';else v=p1.slice(-1);return p1.replace(v,t[v.toLowerCase()][parseInt(p3)-1])+p2;});};
+    const pinyinSylls = pinyinNum.split('_'), wordChars=[...word], cont=document.getElementById('word1-pinyin-container'); let h='';
+    if (pinyinSylls.length === wordChars.length) { wordChars.forEach((c,i)=>{const p=pinyinSylls[i]?convert(pinyinSylls[i]):'';const d=(c===correctChar)?`<span class="blank">[&nbsp;&nbsp;]</span>`:c;h+=`<div class="char-pinyin-pair"><div class="pinyin-syllable">${p}</div><div class="word-char">${d}</div></div>`;});}
+    else { h=`<div class="char-pinyin-pair"><div class="pinyin-syllable">${convert(pinyinNum)}</div><div class="word-char">${word.replace(new RegExp(correctChar,'g'),`<span class="blank">[&nbsp;&nbsp;]</span>`)}</div></div>`;}
+    cont.innerHTML=h; document.getElementById('word1-picture-container').innerHTML=picHTML;
+    try {
+        const r = await fetch('_anki_mcq_data.json'); if (!r.ok) throw new Error();
+        const d = await r.json(); const allChars=d.map(i=>i.character).filter(c=>c!==correctChar); if(allChars.length<3)return;
+        const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+        const choices=shuffle([correctChar,...shuffle(allChars).slice(0,3)]);
+        window.ankiWord1Choices={choices:choices,correct:correctChar,word:word,pinyin:pinyinNum};
+        let cH='<table class="word-mcq-table"><tr>'; choices.forEach(c=>{cH+=`<td class="word-char-cell">${c}</td>`;});
+        document.getElementById('word1-mcq-choices').innerHTML=cH+'</tr></table>';
+    } catch(e){}
+})();
+}
+</script>
+{{/Word1}}
