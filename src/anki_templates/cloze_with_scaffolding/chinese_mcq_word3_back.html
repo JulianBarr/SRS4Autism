@@ -1,0 +1,21 @@
+{{#Word3}}
+<div class="word-pinyin-container" id="word3-pinyin-container-back"></div>
+<div id="word3-picture-container-back">{{Picture3}}</div>
+<hr id="answer">
+<div id="word3-mcq-choices-back"></div>
+<script>
+if ("{{Card}}" === "7. Word 3" && window.ankiWord3Choices) {
+(function() {
+    const {choices,correct,word,pinyin}=window.ankiWord3Choices;
+    const convert=n=>{const t={'a':['ā','á','ǎ','à','a'],'e':['ē','é','ě','è','e'],'i':['ī','í','ǐ','ì','i'],'o':['ō','ó','ǒ','ò','o'],'u':['ū','ú','ǔ','ù','u'],'v':['ǖ','ǘ','ǚ','ǜ','ü']};return n.replace(/([aeiouvü]{1,3})(n?g?r?)([1-5])/gi,(m,p1,p2,p3)=>{let v='';if(p1.includes('a'))v='a';else if(p1.includes('e'))v='e';else if(p1.includes('o'))v='o';else v=p1.slice(-1);return p1.replace(v,t[v.toLowerCase()][parseInt(p3)-1])+p2;});};
+    const pinyinSylls=pinyin.split('_'),wordChars=[...word],cont=document.getElementById('word3-pinyin-container-back');let h='';
+    if(pinyinSylls.length===wordChars.length){wordChars.forEach((c,i)=>{const p=pinyinSylls[i]?convert(pinyinSylls[i]):'';h+=`<div class="char-pinyin-pair"><div class="pinyin-syllable">${p}</div><div class="word-char">${c}</div></div>`;});}
+    else{h=`<div class="char-pinyin-pair"><div class="pinyin-syllable">${convert(pinyin)}</div><div class="word-char">${word}</div></div>`;}
+    cont.innerHTML=h;
+    let cH='<table class="word-mcq-table"><tr>';choices.forEach(c=>{const cl=(c===correct)?'correct-answer-char':'';cH+=`<td class="word-char-cell ${cl}">${c}</td>`;});
+    document.getElementById('word3-mcq-choices-back').innerHTML=cH+'</tr></table>';
+    delete window.ankiWord3Choices;
+})();
+}
+</script>
+{{/Word3}}
