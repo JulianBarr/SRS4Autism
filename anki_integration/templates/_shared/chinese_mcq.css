@@ -19,6 +19,11 @@
 .blank { font-weight: bold; color: blue; }
 #picture-container, #picture-container-back { text-align: center; margin: 20px 0; }
 #picture-container img, #picture-container-back img { max-height: 350px; width: auto; }
+/* Selects all picture containers for words 1, 2, and 3 */
+[id^="word"][id*="-picture-container"] img {
+  max-height: 350px;
+  width: auto;
+}
 .word-mcq-table { margin: 20px auto; border-collapse: collapse; }
 .word-char-cell { font-size: 48pt; font-family: "KaiTi", "BiauKai", "DFKai-SB", serif; border: 2px solid #ddd; padding: 10px; width: 120px; height: 120px; vertical-align: middle; text-align: center;}
 .correct-answer-char { color: red !important; background-color: #e0ffff; }

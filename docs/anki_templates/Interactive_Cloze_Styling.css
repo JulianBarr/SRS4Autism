@@ -1,0 +1,164 @@
+/* Interactive Cloze Card Styling */
+
+.card {
+  font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 20px;
+  text-align: left;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  line-height: 1.8;
+}
+
+/* Night Mode Support */
+.night_mode .card {
+  color: #e0e0e0;
+  background-color: #1e1e1e;
+}
+
+.interactive-cloze .content {
+  margin-bottom: 20px;
+  min-height: 100px;
+}
+
+/* Image styling - CRITICAL for showing pasted images */
+.content img,
+.extra img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 15px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Cloze blank styling */
+.cloze-blank {
+  background-color: #e3f2fd;
+  color: #1976d2;
+  padding: 2px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  display: inline-block;
+  margin: 0 2px;
+  border: 2px solid #90caf9;
+}
+
+.cloze-blank:hover {
+  background-color: #bbdefb;
+  transform: scale(1.05);
+}
+
+.cloze-blank.revealed {
+  background-color: #c8e6c9;
+  color: #2e7d32;
+  border-color: #81c784;
+  cursor: default;
+}
+
+/* Night Mode - Cloze blanks */
+.night_mode .cloze-blank {
+  background-color: #1a237e;
+  color: #90caf9;
+  border-color: #3949ab;
+}
+
+.night_mode .cloze-blank:hover {
+  background-color: #283593;
+}
+
+.night_mode .cloze-blank.revealed {
+  background-color: #1b5e20;
+  color: #a5d6a7;
+  border-color: #388e3c;
+}
+
+/* Extra field styling */
+.extra {
+  margin-top: 15px;
+  padding: 15px;
+  background-color: #fff3e0;
+  border-left: 4px solid #ff9800;
+  border-radius: 4px;
+  font-size: 0.9em;
+  color: #666;
+}
+
+/* Night Mode - Extra field */
+.night_mode .extra {
+  background-color: #263238;
+  border-left-color: #ff9800;
+  color: #b0bec5;
+}
+
+/* Controls */
+.controls {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.show-all-btn {
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.show-all-btn:hover {
+  background-color: #1976d2;
+}
+
+.show-all-btn:active {
+  background-color: #0d47a1;
+}
+
+/* Night Mode - Button */
+.night_mode .show-all-btn {
+  background-color: #1976d2;
+  color: #e3f2fd;
+}
+
+.night_mode .show-all-btn:hover {
+  background-color: #1565c0;
+}
+
+.night_mode .show-all-btn:active {
+  background-color: #0d47a1;
+}
+
+/* Back side */
+.back-content {
+  margin-top: 20px;
+  text-align: center;
+}
+
+hr#answer {
+  margin: 30px 0;
+  border: none;
+  border-top: 2px solid #e0e0e0;
+}
+
+/* Night Mode - Horizontal rule */
+.night_mode hr#answer {
+  border-top-color: #424242;
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+  .card {
+    font-size: 18px;
+    padding: 15px;
+  }
+  
+  .content img,
+  .extra img {
+    margin: 10px 0;
+  }
+}
+

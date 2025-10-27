@@ -14,7 +14,10 @@ if ("{{Card}}" === "3. MCQ (Pick Char)") {
         const choices = shuffle([correctChar, ...shuffle(others).slice(0, 3)]);
         window.ankiCharMcq3Choices = { choices: choices, correct: correctChar };
         let h = '<table class="char-mcq-table"><tr>';
-        choices.forEach(c => { h += `<td class="char-cell">${c}</td>`; });
+        choices.forEach(c => {
+            const isCorrect = c === correctChar;
+            h += `<td class="char-cell" data-correct="${isCorrect}" onclick="if(this.dataset.correct === 'true') try { new Audio('bell.wav').play() } catch(e) {}">${c}</td>`;
+        });
         document.getElementById('char-mcq-choices-3').innerHTML = h + '</tr></table>';
     } catch(e) {}
 })();

@@ -1,0 +1,64 @@
+<!-- Interactive Cloze Card - Front Template -->
+<div class="card interactive-cloze">
+  <div class="content" id="cloze-content">
+    <!-- Content will be processed by JavaScript -->
+  </div>
+  
+  {{#Extra}}
+  <div class="extra">
+    {{Extra}}
+  </div>
+  {{/Extra}}
+  
+  <div class="controls">
+    <button id="showAll" class="show-all-btn">Show All</button>
+  </div>
+</div>
+
+<script>
+// Store the raw text in a hidden element
+var rawText = `{{Text}}`;
+
+// Process immediately when script loads
+(function() {
+  const contentDiv = document.getElementById('cloze-content');
+  if (!contentDiv) return;
+  
+  // Get the raw HTML content (includes images)
+  let html = rawText;
+  
+  // Replace [[c1::answer]] with clickable blanks
+  html = html.replace(/\[\[c(\d+)::([^\]]+)\]\]/g, function(match, num, answer) {
+    return `<span class="cloze-blank" data-answer="${answer}" data-num="${num}">[...]</span>`;
+  });
+  
+  // Update the content with the processed HTML
+  contentDiv.innerHTML = html;
+  
+  // Add click handlers to blanks
+  const blanks = document.querySelectorAll('.cloze-blank');
+  blanks.forEach(blank => {
+    blank.addEventListener('click', function() {
+      if (!this.classList.contains('revealed')) {
+        this.textContent = this.getAttribute('data-answer');
+        this.classList.add('revealed');
+      }
+    });
+  });
+  
+  // Show all button
+  const showAllBtn = document.getElementById('showAll');
+  if (showAllBtn) {
+    showAllBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      blanks.forEach(blank => {
+        if (!blank.classList.contains('revealed')) {
+          blank.textContent = blank.getAttribute('data-answer');
+          blank.classList.add('revealed');
+        }
+      });
+    });
+  }
+})();
+</script>
+

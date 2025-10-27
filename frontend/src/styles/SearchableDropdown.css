@@ -1,0 +1,131 @@
+.searchable-dropdown {
+  position: relative;
+  width: 100%;
+}
+
+.searchable-dropdown-label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: #333;
+}
+
+.searchable-dropdown-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchable-dropdown-input {
+  flex: 1;
+  padding: 8px 60px 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.searchable-dropdown-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
+}
+
+.searchable-dropdown-input:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.searchable-dropdown-icons {
+  position: absolute;
+  right: 8px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.dropdown-refresh-btn,
+.dropdown-toggle-btn {
+  background: transparent;
+  border: none;
+  padding: 4px 8px;
+  cursor: pointer;
+  color: #666;
+  font-size: 16px;
+  transition: color 0.2s;
+}
+
+.dropdown-refresh-btn:hover,
+.dropdown-toggle-btn:hover {
+  color: #007bff;
+}
+
+.dropdown-refresh-btn {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.dropdown-toggle-btn {
+  font-size: 12px;
+}
+
+.searchable-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 4px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.searchable-dropdown-item {
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.1s;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.searchable-dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.searchable-dropdown-item:hover,
+.searchable-dropdown-item.highlighted {
+  background-color: #f5f5f5;
+}
+
+.searchable-dropdown-item.no-results {
+  color: #666;
+  font-style: italic;
+  cursor: default;
+}
+
+.searchable-dropdown-item.no-results:hover {
+  background-color: white;
+}
+
+/* Scrollbar styling */
+.searchable-dropdown-menu::-webkit-scrollbar {
+  width: 8px;
+}
+
+.searchable-dropdown-menu::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.searchable-dropdown-menu::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.searchable-dropdown-menu::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
