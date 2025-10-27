@@ -1,0 +1,79 @@
+.rich-text-editor-container {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: white;
+  min-height: 100px;
+}
+
+.rich-text-editor {
+  padding: 10px;
+  min-height: 100px;
+  max-height: 400px;
+  overflow-y: auto;
+  outline: none;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+}
+
+.rich-text-editor:focus {
+  border-color: #007bff;
+}
+
+.rich-text-editor[data-placeholder]:empty:before {
+  content: attr(data-placeholder);
+  color: #999;
+  font-style: italic;
+}
+
+.rich-text-editor img.pasted-image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 10px 0;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.rich-text-editor:focus-within {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
+}
+
+/* Scrollbar styling */
+.rich-text-editor::-webkit-scrollbar {
+  width: 8px;
+}
+
+.rich-text-editor::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.rich-text-editor::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.rich-text-editor::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Ensure pasted content looks good */
+.rich-text-editor p {
+  margin: 0 0 10px 0;
+}
+
+.rich-text-editor br {
+  display: block;
+  margin: 5px 0;
+}
+
+.rich-text-editor code {
+  background: #f5f5f5;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-family: monospace;
+}
+
