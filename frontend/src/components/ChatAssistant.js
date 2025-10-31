@@ -15,6 +15,8 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
   const [cursorPosition, setCursorPosition] = useState(0);
   const [noteTypes, setNoteTypes] = useState([]);
   const [templates, setTemplates] = useState([]);
+  const [lastIntent, setLastIntent] = useState(null);
+  const [expandedMentionGroups, setExpandedMentionGroups] = useState({});
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -76,6 +78,16 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
     }
   };
 
+  // Helper function to generate slugs (same logic as backend)
+  const generateSlug = (str) => {
+    return str
+      .toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^\w\u4e00-\u9fff-]/g, '')
+      .replace(/-+/g, '-')
+      .trim();
+  };
+
   const getAllMentionables = () => {
     const mentionables = [];
     
@@ -105,34 +117,36 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
     });
     
     allCharacters.forEach(char => {
+      const slug = generateSlug(char);
       mentionables.push({
         type: 'character',
         display: char,
-        value: char,
-        searchTerms: [char.toLowerCase()]
+        value: slug,  // Use slug as the value for mentions
+        searchTerms: [char.toLowerCase(), slug.toLowerCase()]
       });
     });
     
     // Add note types
     noteTypes.forEach(noteType => {
-      // Replace spaces with underscores for the value
-      const value = noteType.replace(/\s+/g, '_');
+      // Generate slug for note type (handles spaces, special chars, etc.)
+      const slug = generateSlug(noteType);
       mentionables.push({
         type: 'notetype',
         display: noteType,
-        value: value,
-        searchTerms: [noteType.toLowerCase(), value.toLowerCase()]
+        value: slug,  // Use slug as the value for mentions
+        searchTerms: [noteType.toLowerCase(), slug.toLowerCase()]
       });
     });
     
     // Add templates
     templates.forEach(template => {
-      // Use template name as-is (already has underscores if saved that way)
+      // Generate slug for template name
+      const slug = generateSlug(template.name);
       mentionables.push({
         type: 'template',
         display: `${template.name} - ${template.description || 'Custom template'}`,
-        value: template.name,  // Use name as-is
-        searchTerms: [template.name.toLowerCase(), template.description?.toLowerCase() || '']
+        value: slug,  // Use slug as the value for mentions
+        searchTerms: [template.name.toLowerCase(), slug.toLowerCase(), template.description?.toLowerCase() || '']
       });
     });
     
@@ -268,6 +282,11 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
       const response = await axios.post(`${API_BASE}/chat`, userMessage);
       const assistantMessage = response.data;
       
+      // Check if the response contains intent information
+      if (response.data.intent) {
+        setLastIntent(response.data.intent);
+      }
+      
       setMessages(prev => [...prev, assistantMessage]);
 
       // Trigger parent component to refresh cards
@@ -336,6 +355,13 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
     }
   };
 
+  const toggleMentionGroup = (type) => {
+    setExpandedMentionGroups(prev => ({
+      ...prev,
+      [type]: !prev[type]
+    }));
+  };
+
   const formatMessage = (message) => {
     let content = message.content;
     
@@ -351,6 +377,9 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
       content = content.replace(regex, `<span class="mention">@${mention}</span>`);
     });
 
+    // Convert markdown images to HTML
+    content = content.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" style="max-width: 100%; height: auto; border-radius: 8px; margin: 10px 0; border: 1px solid #ddd;" />');
+
     return content;
   };
 
@@ -360,6 +389,19 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
         <div>
           <h2>{t('chatTitle')}</h2>
           <p>{t('chatDescription')}</p>
+          {lastIntent && (
+            <div className="intent-indicator">
+              <span className="intent-badge intent-{lastIntent.intent}">
+                {lastIntent.intent === 'conversation' && '💬 Chat'}
+                {lastIntent.intent === 'card_generation' && '🎴 Cards'}
+                {lastIntent.intent === 'image_generation' && '🖼️ Images'}
+                {lastIntent.intent === 'card_update' && '✏️ Update'}
+              </span>
+              <span className="intent-confidence">
+                {Math.round(lastIntent.confidence * 100)}% confidence
+              </span>
+            </div>
+          )}
         </div>
         {messages.length > 0 && (
           <button onClick={handleClearHistory} className="btn btn-secondary">
@@ -384,14 +426,29 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
             notetype: 'Note Type'
           };
           
+          const isExpanded = expandedMentionGroups[type];
+          const maxInitial = 3;
+          const visibleItems = isExpanded ? items : items.slice(0, maxInitial);
+          const hasMore = items.length > maxInitial;
+          
           return (
             <div key={type} className="mention-group">
               <strong>{labels[type]}:</strong>
-              {items.map(item => (
-                <span key={item.value} className="mention-tag">
-                  {type === 'roster' ? '@roster' : `@${type}:${item.value}`}
-                </span>
-              ))}
+              <div className="mention-items">
+                {visibleItems.map(item => (
+                  <span key={item.value} className="mention-tag">
+                    {type === 'roster' ? '@roster' : `@${type}:${item.value}`}
+                  </span>
+                ))}
+                {hasMore && (
+                  <span 
+                    className="mention-expand-link" 
+                    onClick={() => toggleMentionGroup(type)}
+                  >
+                    {isExpanded ? ' ... less' : ' ... more'}
+                  </span>
+                )}
+              </div>
             </div>
           );
         })}

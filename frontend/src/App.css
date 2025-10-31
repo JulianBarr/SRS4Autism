@@ -71,3 +71,40 @@
   background: #0056b3;
 }
 
+/* Main Workflow Layout */
+.main-workflow {
+  display: flex;
+  gap: 20px;
+  height: calc(100vh - 120px);
+  min-height: 600px;
+}
+
+.workflow-left {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.workflow-right {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+  .main-workflow {
+    flex-direction: column;
+    height: auto;
+  }
+  
+  .workflow-left,
+  .workflow-right {
+    flex: none;
+    height: 50vh;
+    min-height: 400px;
+  }
+}
+

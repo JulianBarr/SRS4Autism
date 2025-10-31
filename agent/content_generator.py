@@ -156,15 +156,31 @@ class ContentGenerator:
                 elif tag_type == "profile":
                     prompt_parts.append(f"- Context from profile: {tag_value}")
                 elif tag_type == "character":
-                    prompt_parts.append(f"- Feature this character: {tag_value} (from child's favorite stories/movies)")
+                    # Handle slug-based character values (e.g., "peppa-pig" -> "Peppa Pig")
+                    # Try to find original character name from child's roster
+                    import re
+                    character_name = tag_value
+                    if child_profile and child_profile.get("character_roster"):
+                        # Reverse lookup slug to original name
+                        for original_char in child_profile["character_roster"]:
+                            # Generate slug (Python version)
+                            slug = original_char.lower()
+                            slug = re.sub(r'\s+', '-', slug)
+                            slug = re.sub(r'[^\w\u4e00-\u9fff-]', '', slug)
+                            slug = re.sub(r'-+', '-', slug)
+                            if slug == tag_value or tag_value.replace('-', '').replace('_', '') in original_char.lower():
+                                character_name = original_char
+                                break
+                    prompt_parts.append(f"- Feature this character: {character_name} (from child's favorite stories/movies)")
                 elif tag_type == "character_list":
                     prompt_parts.append(f"- Choose from these characters: {tag_value}")
                     prompt_parts.append(f"  (Select the most appropriate character for this card)")
                 elif tag_type == "roster":
                     prompt_parts.append(f"- Use characters from the child's character roster")
                 elif tag_type == "notetype":
-                    # Replace underscores with spaces for display
-                    note_type_display = tag_value.replace('_', ' ')
+                    # Handle both slug-based (e.g., "basic-and-reversed-card") and original (e.g., "Basic (and reversed card)")
+                    # Replace hyphens with spaces, then normalize
+                    note_type_display = tag_value.replace('-', ' ').replace('_', ' ').strip()
                     prompt_parts.append(f"- REQUIRED: Use Anki note type '{note_type_display}'")
                     prompt_parts.append(f"  Set note_type field to '{note_type_display}'")
                 elif tag_type == "actor":

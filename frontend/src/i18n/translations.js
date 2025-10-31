@@ -1,9 +1,10 @@
 export const translations = {
   en: {
     // App Header
-    appTitle: "SRS4Autism - AI-Powered Learning Co-pilot",
+            appTitle: "Curious Mario (好奇马力) - AI-Powered Learning Co-pilot",
     
     // Tabs
+    mainWorkflow: "Main Workflow",
     chatAssistant: "Chat Assistant",
     cardCuration: "Card Curation",
     profiles: "Profiles",
@@ -111,9 +112,10 @@ export const translations = {
   
   zh: {
     // App Header
-    appTitle: "SRS4Autism - AI驱动的学习助手",
+            appTitle: "好奇马力 (Curious Mario) - AI驱动的学习助手",
     
     // Tabs
+    mainWorkflow: "主要工作流程",
     chatAssistant: "聊天助手",
     cardCuration: "卡片管理",
     profiles: "用户档案",
