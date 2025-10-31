@@ -325,6 +325,25 @@ code {
   background: #bbdefb;
 }
 
+.mention-items {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.mention-expand-link {
+  display: inline-block;
+  color: #1976d2;
+  cursor: pointer;
+  font-size: 12px;
+  margin-left: 4px;
+  text-decoration: underline;
+}
+
+.mention-expand-link:hover {
+  color: #1565c0;
+}
+
 /* Card Curation Styles */
 .selection-controls {
   display: flex;
@@ -395,8 +414,10 @@ code {
 .extra-info img {
   max-width: 100%;
   height: auto;
+  max-height: 200px;
+  object-fit: contain;
   display: block;
-  margin: 10px 0;
+  margin: 10px auto;
   border-radius: 4px;
   border: 1px solid #ddd;
 }
@@ -530,4 +551,45 @@ code {
   border-radius: 3px;
   font-family: monospace;
   font-size: 13px;
+}
+
+/* Intent Detection Styles */
+.intent-indicator {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+  font-size: 12px;
+}
+
+.intent-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 11px;
+}
+
+.intent-conversation {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.intent-card_generation {
+  background: #f3e5f5;
+  color: #7b1fa2;
+}
+
+.intent-image_generation {
+  background: #fff3e0;
+  color: #f57c00;
+}
+
+.intent-card_update {
+  background: #e8f5e8;
+  color: #388e3c;
+}
+
+.intent-confidence {
+  color: #666;
+  font-style: italic;
 }

@@ -11,7 +11,7 @@ const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
 function App() {
   const { language, toggleLanguage, t } = useLanguage();
-  const [activeTab, setActiveTab] = useState('chat');
+  const [activeTab, setActiveTab] = useState('main');
   const [profiles, setProfiles] = useState([]);
   const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -53,13 +53,13 @@ function App() {
   };
 
   if (loading) {
-    return (
-      <div className="container">
-        <div className="card">
-          <h2>Loading SRS4Autism...</h2>
-        </div>
-      </div>
-    );
+                return (
+                  <div className="container">
+                    <div className="card">
+                      <h2>Loading Curious Mario (好奇马力)...</h2>
+                    </div>
+                  </div>
+                );
   }
 
   return (
@@ -78,16 +78,10 @@ function App() {
           </div>
           <nav className="tab-nav">
             <button 
-              className={activeTab === 'chat' ? 'active' : ''}
-              onClick={() => setActiveTab('chat')}
+              className={activeTab === 'main' ? 'active' : ''}
+              onClick={() => setActiveTab('main')}
             >
-              {t('chatAssistant')}
-            </button>
-            <button 
-              className={activeTab === 'curation' ? 'active' : ''}
-              onClick={() => setActiveTab('curation')}
-            >
-              {t('cardCuration')}
+              {t('mainWorkflow')}
             </button>
             <button 
               className={activeTab === 'profiles' ? 'active' : ''}
@@ -106,18 +100,22 @@ function App() {
       </header>
 
       <main className="container">
-        {activeTab === 'chat' && (
-          <ChatAssistant 
-            profiles={profiles}
-            onNewCard={handleNewCard}
-          />
-        )}
-        {activeTab === 'curation' && (
-          <CardCuration 
-            cards={cards}
-            onApproveCard={handleApproveCard}
-            onRefresh={loadData}
-          />
+        {activeTab === 'main' && (
+          <div className="main-workflow">
+            <div className="workflow-left">
+              <ChatAssistant 
+                profiles={profiles}
+                onNewCard={handleNewCard}
+              />
+            </div>
+            <div className="workflow-right">
+              <CardCuration 
+                cards={cards}
+                onApproveCard={handleApproveCard}
+                onRefresh={loadData}
+              />
+            </div>
+          </div>
         )}
         {activeTab === 'profiles' && (
           <ProfileManager 

@@ -6,7 +6,7 @@ import json
 import os
 from datetime import datetime
 
-app = FastAPI(title="SRS4Autism API", version="1.0.0")
+app = FastAPI(title="Curious Mario API", version="1.0.0")
 
 # CORS middleware for frontend communication
 app.add_middleware(
@@ -45,6 +45,13 @@ class Card(BaseModel):
     tags: List[str] = []
     created_at: datetime
     status: str = "pending"  # "pending", "approved", "synced"
+    image_description: Optional[str] = None  # AI-generated image description
+    image_prompt: Optional[str] = None  # Prompt used for image generation
+    image_url: Optional[str] = None  # URL of generated image
+    image_data: Optional[str] = None  # Base64 encoded image data
+    image_generated: Optional[bool] = None  # Whether image was successfully generated
+    image_error: Optional[str] = None  # Error message if image generation failed
+    is_placeholder: Optional[bool] = None  # Whether the image is a placeholder
 
 class ChatMessage(BaseModel):
     id: str
@@ -147,7 +154,7 @@ def parse_context_tags(content: str, mentions: List[str]) -> List[Dict[str, Any]
 
 @app.get("/")
 async def root():
-    return {"message": "SRS4Autism API is running"}
+    return {"message": "Curious Mario API is running"}
 
 # Child Profile endpoints
 @app.get("/profiles", response_model=List[ChildProfile])
@@ -157,12 +164,26 @@ async def get_profiles():
 
 @app.post("/profiles", response_model=ChildProfile)
 async def create_profile(profile: ChildProfile):
-    import uuid
+    import sys
+    import os
+    sys.path.append(os.path.join(os.path.dirname(__file__), '../../'))
+    from utils import generate_slug
+    
     profiles = load_json_file(PROFILES_FILE, [])
     
-    # Generate ID if not provided
+    # Generate slug-based ID from name if not provided
     if not profile.id:
-        profile.id = str(uuid.uuid4())
+        profile.id = generate_slug(profile.name)
+    
+    # Ensure uniqueness
+    existing_ids = [p.get("id") for p in profiles]
+    if profile.id in existing_ids:
+        # If ID already exists, append number
+        counter = 2
+        base_id = profile.id
+        while f"{base_id}-{counter}" in existing_ids:
+            counter += 1
+        profile.id = f"{base_id}-{counter}"
     
     profiles.append(profile.dict())
     save_json_file(PROFILES_FILE, profiles)
@@ -285,101 +306,99 @@ async def send_message(message: ChatMessage):
         history = load_json_file(CHAT_HISTORY_FILE, [])
         history.append(message.dict())
         save_json_file(CHAT_HISTORY_FILE, history)
-        # Integrate with AI agent for content generation
+        
+        # Import intent detection and conversation handler
         import sys
         import os
         sys.path.append(os.path.join(os.path.dirname(__file__), '../../'))
         
         try:
+            from agent.intent_detector import IntentDetector, IntentType
+            from agent.conversation_handler import ConversationHandler
             from agent.content_generator import ContentGenerator
+            
+            # Initialize handlers
+            intent_detector = IntentDetector()
+            conversation_handler = ConversationHandler()
             generator = ContentGenerator()
             
             # Parse @mentions from the message
             context_tags = parse_context_tags(message.content, message.mentions)
+            
+            # Detect user intent
+            intent_result = intent_detector.detect_intent(message.content, context_tags)
+            intent_type = intent_result["intent"]
+            confidence = intent_result["confidence"]
+            reason = intent_result["reason"]
+            
+            print(f"\n🎯 INTENT DETECTION:")
+            print(f"   Intent: {intent_type.value}")
+            print(f"   Confidence: {confidence}")
+            print(f"   Reason: {reason}")
+            print(f"   Entities: {intent_result.get('entities', {})}")
             
             # Get child profile from mentions if specified
             child_profile = None
             profiles = load_json_file(PROFILES_FILE, [])
             for mention in message.mentions:
                 for profile in profiles:
-                    # Match by ID first, then by name (for backwards compatibility)
-                    if profile.get("id") == mention or profile.get("name") == mention:
+                    # Match by ID (including slugs), then by name
+                    # Handle both old UUIDs and new slugs
+                    profile_id = profile.get("id", "").lower()
+                    profile_name_slug = profile.get("name", "").lower().replace(" ", "-").replace("_", "-")
+                    mention_normalized = mention.lower().replace("_", "-")
+                    
+                    if (profile_id == mention_normalized or 
+                        profile.get("name") == mention or 
+                        profile_name_slug == mention_normalized or
+                        profile_id.endswith(mention_normalized) or  # For partial UUID matching
+                        mention_normalized.endswith(profile_id)):
                         child_profile = profile
                         print(f"📋 Found profile: {profile.get('name')} (ID: {profile.get('id')})")
                         break
                 if child_profile:
                     break
             
-            # Check for @roster mention - use entire character roster from profile
-            has_roster_mention = any(tag.get("type") == "roster" for tag in context_tags)
-            
-            if has_roster_mention:
-                # If no specific profile mentioned, use the first available profile
-                if not child_profile and profiles:
-                    child_profile = profiles[0]
-                    print(f"📋 No profile specified with @roster, using first profile: {child_profile.get('name')}")
+            # Handle different intents
+            if intent_type == IntentType.CONVERSATION:
+                # Handle conversational messages
+                response_content = conversation_handler.handle_conversation(
+                    message=message.content,
+                    context_tags=context_tags,
+                    child_profile=child_profile,
+                    chat_history=history[-5:]  # Last 5 messages for context
+                )
                 
-                if child_profile and child_profile.get("character_roster"):
-                    characters_str = ", ".join(child_profile["character_roster"])
-                    context_tags.append({
-                        "type": "character_list",
-                        "value": characters_str
-                    })
-                    print(f"🎭 Using character roster: {characters_str}")
-            
-            # Get prompt template if specified
-            prompt_template = None
-            for tag in context_tags:
-                if tag.get("type") == "template":
-                    template_value = tag.get("value")
-                    templates = load_json_file(PROMPT_TEMPLATES_FILE, [])
-                    print(f"Looking for template: {template_value}")
-                    print(f"Available templates: {[t.get('name') for t in templates]}")
-                    
-                    for tmpl in templates:
-                        # Match by ID, name, or name with underscores
-                        template_name_normalized = tmpl.get("name", "").replace(' ', '_')
-                        if (tmpl.get("id") == template_value or 
-                            tmpl.get("name") == template_value or
-                            template_name_normalized == template_value):
-                            prompt_template = tmpl.get("template_text")
-                            print(f"✅ Found template: {tmpl.get('name')}")
-                            break
-                    
-                    if not prompt_template:
-                        print(f"❌ Template not found: {template_value}")
-            
-            # Use the new flexible agent method
-            cards = generator.generate_from_prompt(
-                user_prompt=message.content,
-                context_tags=context_tags,
-                child_profile=child_profile,
-                prompt_template=prompt_template
-            )
-            
-            # Save generated cards
-            existing_cards = load_json_file(CARDS_FILE, [])
-            for card in cards:
-                existing_cards.append(card)
-            save_json_file(CARDS_FILE, existing_cards)
-            
-            # Create response message
-            response_content = f"✨ Generated {len(cards)} flashcard(s) from your request!\n\n"
-            response_content += f"📝 Created {len([c for c in cards if c['card_type'] == 'basic'])} basic, "
-            response_content += f"{len([c for c in cards if c['card_type'] == 'basic_reverse'])} reverse, "
-            response_content += f"and {len([c for c in cards if c['card_type'] == 'cloze'])} cloze cards.\n\n"
-            
-            if context_tags:
-                # For display, show profile name instead of ID
-                tag_strings = []
-                for t in context_tags:
-                    if t['type'] == 'profile' and child_profile:
-                        tag_strings.append(f"profile={child_profile.get('name')}")
-                    else:
-                        tag_strings.append(f"{t['type']}={t['value']}")
-                response_content += f"🎯 Applied context: {', '.join(tag_strings)}\n\n"
-            
-            response_content += "👉 Review and approve them in the Card Curation tab!"
+            elif intent_type == IntentType.CARD_GENERATION:
+                # Handle card generation requests
+                response_content = await _handle_card_generation(
+                    message, context_tags, child_profile, generator, profiles
+                )
+                
+            elif intent_type == IntentType.IMAGE_GENERATION:
+                # Handle image generation requests
+                response_content = await _handle_image_generation(
+                    message, context_tags, child_profile, generator, profiles
+                )
+                
+            elif intent_type == IntentType.IMAGE_INSERTION:
+                # Handle image insertion requests
+                response_content = await _handle_image_insertion(
+                    message, context_tags, child_profile
+                )
+                
+            elif intent_type == IntentType.CARD_UPDATE:
+                # Handle card update requests (placeholder for now)
+                response_content = "✏️ Card update feature is coming soon! For now, you can edit cards in the Card Curation tab."
+                
+            else:
+                # Fallback to conversation
+                response_content = conversation_handler.handle_conversation(
+                    message=message.content,
+                    context_tags=context_tags,
+                    child_profile=child_profile,
+                    chat_history=history[-5:]
+                )
             
         except ImportError as e:
             print(f"Agent import error: {e}")
@@ -406,6 +425,291 @@ async def send_message(message: ChatMessage):
     save_json_file(CHAT_HISTORY_FILE, history)
     
     return response
+
+async def _handle_card_generation(message: ChatMessage, context_tags: List[Dict[str, Any]], 
+                                child_profile: Dict[str, Any], generator,
+                                profiles: List[Dict[str, Any]]) -> str:
+    """Handle card generation requests."""
+    try:
+        # Check for @roster mention - use entire character roster from profile
+        has_roster_mention = any(tag.get("type") == "roster" for tag in context_tags)
+        
+        if has_roster_mention:
+            # If no specific profile mentioned, use the first available profile
+            if not child_profile and profiles:
+                child_profile = profiles[0]
+                print(f"📋 No profile specified with @roster, using first profile: {child_profile.get('name')}")
+            
+            if child_profile and child_profile.get("character_roster"):
+                characters_str = ", ".join(child_profile["character_roster"])
+                context_tags.append({
+                    "type": "character_list",
+                    "value": characters_str
+                })
+                print(f"🎭 Using character roster: {characters_str}")
+        
+        # Get prompt template if specified
+        prompt_template = None
+        for tag in context_tags:
+            if tag.get("type") == "template":
+                template_value = tag.get("value")
+                templates = load_json_file(PROMPT_TEMPLATES_FILE, [])
+                print(f"Looking for template: {template_value}")
+                print(f"Available templates: {[t.get('name') for t in templates]}")
+                
+                for tmpl in templates:
+                    # Match by ID, name, or name with underscores/hyphens
+                    # Normalize spaces, underscores, and hyphens for matching
+                    template_name_normalized = tmpl.get("name", "").replace(' ', '_').lower()
+                    template_value_normalized = template_value.replace('_', '_').replace('-', '_').lower()
+                    
+                    if (tmpl.get("id") == template_value or 
+                        tmpl.get("name") == template_value or
+                        template_name_normalized == template_value_normalized or
+                        template_name_normalized.replace('_', '') == template_value_normalized.replace('_', '') or
+                        tmpl.get("name", "").lower().replace(' ', '-') == template_value.lower().replace('_', '-')):
+                        prompt_template = tmpl.get("template_text")
+                        print(f"✅ Found template: {tmpl.get('name')}")
+                        break
+                
+                if not prompt_template:
+                    print(f"❌ Template not found: {template_value}")
+        
+        # Use the flexible agent method
+        cards = generator.generate_from_prompt(
+            user_prompt=message.content,
+            context_tags=context_tags,
+            child_profile=child_profile,
+            prompt_template=prompt_template
+        )
+        
+        # Save generated cards
+        existing_cards = load_json_file(CARDS_FILE, [])
+        for card in cards:
+            existing_cards.append(card)
+        save_json_file(CARDS_FILE, existing_cards)
+        
+        # Create response message
+        response_content = f"✨ Generated {len(cards)} flashcard(s) from your request!\n\n"
+        response_content += f"📝 Created {len([c for c in cards if c['card_type'] == 'basic'])} basic, "
+        response_content += f"{len([c for c in cards if c['card_type'] == 'basic_reverse'])} reverse, "
+        response_content += f"and {len([c for c in cards if c['card_type'] == 'cloze'])} cloze cards.\n\n"
+        
+        if context_tags:
+            # For display, show profile name instead of ID
+            tag_strings = []
+            for t in context_tags:
+                if t['type'] == 'profile' and child_profile:
+                    tag_strings.append(f"profile={child_profile.get('name')}")
+                else:
+                    tag_strings.append(f"{t['type']}={t['value']}")
+            response_content += f"🎯 Applied context: {', '.join(tag_strings)}\n\n"
+        
+        response_content += "👉 Review and approve them in the Card Curation tab!"
+        
+        return response_content
+        
+    except Exception as e:
+        print(f"Card generation error: {e}")
+        return f"I encountered an error generating cards: {str(e)}. Please try again with a different request."
+
+async def _handle_image_generation(message: ChatMessage, context_tags: List[Dict[str, Any]], 
+                                 child_profile: Dict[str, Any], generator,
+                                 profiles: List[Dict[str, Any]]) -> str:
+    """Handle image generation requests."""
+    try:
+        # Get recent cards to find the target card
+        all_cards = load_json_file(CARDS_FILE, [])
+        
+        # Find the most recent card (last generated)
+        if not all_cards:
+            return "❌ No cards found to add images to. Please generate some cards first."
+        
+        # Get the last card (most recent)
+        target_card = all_cards[-1]
+        card_id = target_card["id"]
+        
+        print(f"🎨 Generating image for card: {card_id}")
+        print(f"Card content: {target_card.get('front', '')} / {target_card.get('back', '')}")
+        
+        # Generate image using the LLM
+        image_prompt = f"Create a simple, child-friendly illustration for this flashcard content: '{target_card.get('front', '')}' - '{target_card.get('back', '')}'. The image should be colorful, simple, and appropriate for a child with autism."
+        
+        # Use the conversation handler to generate image description
+        from agent.conversation_handler import ConversationHandler
+        conversation_handler = ConversationHandler()
+        
+        # Generate image description first
+        image_description = conversation_handler._generate_image_description(
+            card_content=target_card,
+            user_request=message.content,
+            child_profile=child_profile
+        )
+        
+        # Generate actual image using DALL-E
+        image_result = conversation_handler.generate_actual_image(
+            image_description=image_description,
+            user_request=message.content
+        )
+        
+        # Update the card with image data
+        target_card["image_description"] = image_description
+        target_card["image_prompt"] = image_prompt
+        
+        if image_result["success"]:
+            # Don't automatically add to card - show in chat first
+            if image_result.get("is_placeholder", False):
+                return f"🖼️ **Generated Image Description:**\n\n{image_description}\n\n⚠️ **Note:** This is a placeholder image. To generate actual images, integrate with an image generation service like DALL-E 3, Midjourney, or Stable Diffusion.\n\n💡 **Instructions:** {image_result.get('instructions', '')}\n\n**To add this image to a card, please specify:**\n- Which card (by ID or 'last card')\n- Front or back\n- Before or after the text"
+            else:
+                # Show the image in chat with options
+                return f"🖼️ **Generated Image:**\n\n![Generated Image]({image_result['image_data']})\n\n**Image Description:**\n{image_description}\n\n**To add this image to a card, please specify:**\n- Which card (by ID or 'last card')\n- Front or back\n- Before or after the text\n\n**Example commands:**\n- 'Add this image to the last card, front, before text'\n- 'Insert image to card #123, back, after text'"
+        else:
+            # Fallback to description only
+            target_card["image_generated"] = False
+            target_card["image_error"] = image_result["error"]
+            
+            # Save updated card
+            for i, card in enumerate(all_cards):
+                if card["id"] == card_id:
+                    all_cards[i] = target_card
+                    break
+            
+            save_json_file(CARDS_FILE, all_cards)
+            
+            return f"🖼️ Generated image description for card '{target_card.get('front', 'Card')}':\n\n{image_description}\n\n❌ **Image generation failed:** {image_result['error']}\n\n💡 The description above can be used by an artist or image generation service."
+        
+    except Exception as e:
+        print(f"Image generation error: {e}")
+        return f"I encountered an error generating an image: {str(e)}. Please try again."
+
+async def _handle_image_insertion(message: ChatMessage, context_tags: List[Dict[str, Any]], 
+                                child_profile: Optional[Dict[str, Any]]) -> str:
+    """Handle image insertion requests."""
+    try:
+        # Parse the insertion command to extract:
+        # - Card reference (last card, card ID, etc.)
+        # - Position (front/back)
+        # - Location (before/after text)
+        
+        message_lower = message.content.lower()
+        
+        # Extract card reference
+        card_ref = None
+        if "last card" in message_lower:
+            # Get the most recent card
+            all_cards = load_json_file(CARDS_FILE)
+            if all_cards:
+                card_ref = all_cards[-1]
+            else:
+                return "❌ No cards found. Please create a card first."
+        elif "card #" in message_lower or "card " in message_lower:
+            # Extract card ID from message
+            import re
+            card_id_match = re.search(r'card\s*#?(\w+)', message_lower)
+            if card_id_match:
+                card_id = card_id_match.group(1)
+                print(f"🔍 Looking for card ending with: {card_id}")
+                all_cards = load_json_file(CARDS_FILE)
+                print(f"🔍 Total cards: {len(all_cards)}")
+                card_ref = next((card for card in all_cards if card["id"].endswith(card_id)), None)
+                if not card_ref:
+                    print(f"❌ Card #{card_id} not found in {len(all_cards)} cards")
+                    return f"❌ Card #{card_id} not found."
+                else:
+                    print(f"✅ Found card: {card_ref['id']} (type: {card_ref.get('card_type', 'unknown')})")
+        else:
+            return "❌ Please specify which card to add the image to (e.g., 'last card', 'card #123')."
+        
+        # Extract position (front/back)
+        position = "front"  # default
+        if "back" in message_lower:
+            position = "back"
+        elif "front" in message_lower:
+            position = "front"
+        
+        # Extract location (before/after text)
+        location = "after"  # default
+        if "before" in message_lower:
+            location = "before"
+        elif "after" in message_lower:
+            location = "after"
+        
+        # Get the last generated image from chat history
+        # For now, we'll need to store the last generated image somewhere
+        # This is a simplified approach - in a real system, you'd store this in session state
+        
+        # Check if there's a recent image in the chat history
+        chat_history = load_json_file(CHAT_HISTORY_FILE)
+        last_image = None
+        
+        print(f"🔍 Searching for image in last {len(chat_history[-10:])} messages...")
+        
+        # Look for the most recent image generation in chat history
+        for msg in reversed(chat_history[-10:]):  # Check last 10 messages
+            if msg.get("role") == "assistant":
+                content = msg.get("content", "")
+                print(f"  Checking message: {content[:100]}...")
+                
+                if "Generated Image:" in content:
+                    print(f"  ✅ Found 'Generated Image:' in message")
+                    # Extract image data from the message
+                    import re
+                    img_match = re.search(r'!\[Generated Image\]\(([^)]+)\)', content)
+                    if img_match:
+                        last_image = img_match.group(1)
+                        print(f"  ✅ Extracted image: {last_image[:50]}...")
+                        break
+                    else:
+                        print(f"  ❌ No image pattern found in message")
+        
+        if not last_image:
+            return "❌ No recent image found. Please generate an image first using commands like 'generate an image of [something]'."
+        
+        # Insert the image into the card
+        # For Interactive Cloze cards, use text_field instead of front
+        card_type = card_ref.get("card_type", "")
+        is_interactive_cloze = card_type == "interactive_cloze"
+        
+        if position == "front":
+            target_field = "text_field" if is_interactive_cloze else "front"
+            current_content = card_ref.get(target_field, "") or card_ref.get("front", "")
+            
+            if location == "before":
+                card_ref[target_field] = f"<img src=\"{last_image}\" alt=\"Generated image\" style=\"max-width: 100%; height: auto; margin-bottom: 10px;\">\n{current_content}"
+            else:  # after
+                card_ref[target_field] = f"{current_content}\n<img src=\"{last_image}\" alt=\"Generated image\" style=\"max-width: 100%; height: auto; margin-top: 10px;\">"
+        else:  # back
+            target_field = "extra_field" if is_interactive_cloze else "back"
+            current_content = card_ref.get(target_field, "") or card_ref.get("back", "")
+            
+            if location == "before":
+                card_ref[target_field] = f"<img src=\"{last_image}\" alt=\"Generated image\" style=\"max-width: 100%; height: auto; margin-bottom: 10px;\">\n{current_content}"
+            else:  # after
+                card_ref[target_field] = f"{current_content}\n<img src=\"{last_image}\" alt=\"Generated image\" style=\"max-width: 100%; height: auto; margin-top: 10px;\">"
+        
+        print(f"✅ Updated {target_field} for card {card_ref['id'][-6:]}")
+        
+        # Save the updated card
+        all_cards = load_json_file(CARDS_FILE)
+        card_updated = False
+        for i, card in enumerate(all_cards):
+            if card["id"] == card_ref["id"]:
+                all_cards[i] = card_ref
+                card_updated = True
+                print(f"✅ Card updated in memory at index {i}")
+                break
+        
+        if not card_updated:
+            print(f"❌ Warning: Card {card_ref['id']} not found in cards list when trying to save!")
+        else:
+            save_json_file(CARDS_FILE, all_cards)
+            print(f"✅ Card saved to file")
+        
+        return f"✅ Image successfully added to card #{card_ref['id'][-6:]}!\n\n**Position:** {position}\n**Location:** {location} text\n\nYou can view the updated card in the Card Curation tab."
+        
+    except Exception as e:
+        print(f"Image insertion error: {e}")
+        return f"I encountered an error inserting the image: {str(e)}. Please try again."
 
 # Anki profile endpoints
 @app.get("/anki-profiles", response_model=List[AnkiProfile])

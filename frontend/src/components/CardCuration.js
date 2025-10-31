@@ -57,13 +57,13 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
     try {
       const defaultProfile = {
         name: 'Default',
-        deck_name: 'SRS4Autism',
+        deck_name: 'Curious Mario',
         is_active: true
       };
       await axios.post(`${API_BASE}/anki-profiles`, defaultProfile);
       const response = await axios.get(`${API_BASE}/anki-profiles`);
       setAnkiProfiles(response.data);
-      setSelectedDeck('SRS4Autism');
+      setSelectedDeck('Curious Mario');
     } catch (error) {
       console.error('Error creating default profile:', error);
     }
@@ -219,6 +219,58 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
       return renderEditForm(card);
     }
 
+    // Show generated image if available
+    const renderGeneratedImage = () => {
+      if (card.image_generated && card.image_data) {
+        const isPlaceholder = card.is_placeholder;
+        return (
+          <div className="generated-image" style={{marginTop: '15px', padding: '10px', background: isPlaceholder ? '#fff3cd' : '#f8f9fa', borderRadius: '8px', border: `1px solid ${isPlaceholder ? '#ffeaa7' : '#dee2e6'}`}}>
+            <h5 style={{margin: '0 0 10px 0', color: isPlaceholder ? '#856404' : '#495057'}}>
+              {isPlaceholder ? '🎨 Image Description (Placeholder)' : '🎨 Generated Image:'}
+            </h5>
+            {!isPlaceholder && (
+              <img 
+                src={card.image_data} 
+                alt="Generated for flashcard" 
+                style={{ 
+                  maxWidth: '100%', 
+                  height: 'auto', 
+                  maxHeight: '200px',
+                  objectFit: 'contain',
+                  borderRadius: '8px', 
+                  border: '1px solid #ddd', 
+                  marginBottom: '10px',
+                  display: 'block',
+                  margin: '0 auto 10px auto'
+                }}
+              />
+            )}
+            {card.image_description && (
+              <div className="image-description" style={{fontSize: '12px', color: isPlaceholder ? '#856404' : '#6c757d'}}>
+                <strong>Description:</strong> {card.image_description}
+              </div>
+            )}
+            {isPlaceholder && (
+              <div style={{marginTop: '10px', padding: '8px', background: '#e9ecef', borderRadius: '4px', fontSize: '11px', color: '#6c757d'}}>
+                <strong>Note:</strong> This is a placeholder. To generate actual images, integrate with an image generation service like DALL-E 3, Midjourney, or Stable Diffusion.
+              </div>
+            )}
+          </div>
+        );
+      } else if (card.image_description && !card.image_generated) {
+        return (
+          <div className="image-description-only" style={{marginTop: '15px', padding: '10px', background: '#fff3cd', borderRadius: '8px', border: '1px solid #ffeaa7'}}>
+            <h5 style={{margin: '0 0 10px 0', color: '#856404'}}>🎨 Image Description:</h5>
+            <p style={{margin: '0 0 5px 0', fontStyle: 'italic'}}>{card.image_description}</p>
+            {card.image_error && (
+              <p style={{margin: '0', color: '#dc3545', fontSize: '12px'}}><strong>Error:</strong> {card.image_error}</p>
+            )}
+          </div>
+        );
+      }
+      return null;
+    };
+
     switch (card.card_type) {
       case 'basic':
         return (
@@ -232,6 +284,7 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
               <strong>{t('back')}:</strong> 
               <div dangerouslySetInnerHTML={{__html: card.back}} />
             </div>
+            {renderGeneratedImage()}
           </div>
         );
       case 'basic_reverse':
@@ -247,6 +300,7 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
               <div dangerouslySetInnerHTML={{__html: card.back}} />
             </div>
             <div className="note">{t('worksBoothWays')}</div>
+            {renderGeneratedImage()}
           </div>
         );
       case 'interactive_cloze':
@@ -264,6 +318,7 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
               </div>
             )}
             <div className="note">Click blanks to reveal (uses [[c1::answer]] syntax)</div>
+            {renderGeneratedImage()}
           </div>
         );
       case 'cloze':
@@ -272,6 +327,7 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
             <h4>{t('clozeCard')}</h4>
             <div className="cloze-text">{card.cloze_text}</div>
             <div className="note">{t('missingWordHidden')}</div>
+            {renderGeneratedImage()}
           </div>
         );
       default:
@@ -360,7 +416,7 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
       synced: t('synced')
     };
     return (
-      <span className={`status-badge ${statusClasses[status]}`}>
+      <span className={'status-badge ' + statusClasses[status]}>
         {statusText[status] || status.toUpperCase()}
       </span>
     );
