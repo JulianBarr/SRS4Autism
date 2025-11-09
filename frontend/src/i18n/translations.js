@@ -107,7 +107,10 @@ export const translations = {
     syncSuccess: "✅ Success!\n{message}\n\nCards have been added to Anki deck: {deck}",
     cannotConnectAnki: "❌ Cannot connect to Anki!\n\nMake sure:\n1. Anki is running\n2. AnkiConnect add-on is installed\n3. AnkiConnect is enabled",
     warningSelectApproved: "⚠️ Note: You have selected {count} card(s), but none are approved. Please approve cards before syncing.",
-    infoSelectProfile: "ℹ️ Please select an Anki profile above to enable syncing."
+    infoSelectProfile: "ℹ️ Please select an Anki profile above to enable syncing.",
+    generateImage: "Generate Image",
+    generatingImage: "Generating...",
+    generateImageError: "Failed to generate image for this card"
   },
   
   zh: {
@@ -218,7 +221,10 @@ export const translations = {
     syncSuccess: "✅ 成功！\n{message}\n\n卡片已添加到Anki牌组：{deck}",
     cannotConnectAnki: "❌ 无法连接到Anki！\n\n请确保：\n1. Anki正在运行\n2. AnkiConnect插件已安装\n3. AnkiConnect已启用",
     warningSelectApproved: "⚠️ 注意：您已选择 {count} 张卡片，但没有一张被批准。请在同步前批准卡片。",
-    infoSelectProfile: "ℹ️ 请在上方选择Anki配置以启用同步。"
+    infoSelectProfile: "ℹ️ 请在上方选择Anki配置以启用同步。",
+    generateImage: "生成图片",
+    generatingImage: "正在生成...",
+    generateImageError: "生成图片失败"
   }
 };
 
