@@ -1,0 +1,18 @@
+[
+  {
+    "id": "1761380792186",
+    "name": "English_Vocab_Cloze",
+    "description": "",
+    "template_text": "To train my autistic child for English vocab exercise. please generate ten cloze deletion cards of @notetype:Interactive_Cloze for the word family of the specified english word.  along with Chinese, The Chinese sentences doesn't need cloze deletion. only English sentences need cloze deletion. please use simplified Chinese characters which is o train my autistic child for English vocab exercise. Generate 10 cloze deletion cards using Interactive Cloze note type for the word family of the specified English word.\n\nFormat Requirements:\n- card_type: 'interactive_cloze'\n- note_type: 'Interactive Cloze'\n- text_field: English sentence with [[c1::word]] cloze, followed by Chinese translation (NO cloze in Chinese)\n- Use simplified Chinese characters (mainland China)\n- NO Chinese text in images - text rendering quality is poor\n\nExample Format:\nText:\nGeorge said, \"I [[c1::hate]] waiting in long lines.\"\n\nGeorge \u8bf4\uff1a\"\u6211 \u8ba8\u538c \u6392\u957f\u961f\u3002\"\nExtra:\nleave it empty for the moment.\n\nRequirements:\n- Vivid and easy to visualize\n- Age-appropriate for autistic child\n- Use characters from the provided character list when available\n- 10 cards per word family\n\nReturn as JSON array with fields: card_type, note_type, text_field, extra_field (optional), tags",
+    "created_at": "2025-10-25 09:48:03.025000+00:00",
+    "updated_at": "2025-10-25 09:48:03.025000+00:00"
+  },
+  {
+    "id": "1762556455965",
+    "name": "chinese_word",
+    "description": "",
+    "template_text": "Create interactive cloze cards for a chinese word.\n\nTo train my autistic child for Chinese vocab exercise. please generate ten (or as specified in @quantity) cloze deletion cards of @notetype:Interactive_Cloze for the word.   Please use simplified Chinese characters which is o train my autistic child for English vocab exercise. Generate 10 (or as specified in @quantity) cloze deletion cards using Interactive Cloze note type for the word family of the specified English word.\n\nFormat Requirements:\n- card_type: 'interactive_cloze'\n- note_type: 'Interactive Cloze'\n- text_field: Chinese sentence with [[c1::word]] cloze\n- Use simplified Chinese characters (mainland China)\n- NO Chinese text in images - text rendering quality is poor\n\nExample Format:\nText:\n\n\u4e54\u6cbb\u8bf4\uff1a\"\u6211[[c1::\u8ba8\u538c]]\u6392\u957f\u961f\u3002\"\n\nExtra:\nleave it empty for the moment.\n\nRequirements:\n- Vivid and easy to visualize\n- Age-appropriate for autistic child\n- Use characters from the provided character list when available\n- 10 cards per word family\n\nReturn as JSON array with fields: card_type, note_type, text_field, extra_field (optional), tags",
+    "created_at": "2025-11-07 23:39:41.109000+00:00",
+    "updated_at": "2025-11-07 23:39:41.109000+00:00"
+  }
+]
