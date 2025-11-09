@@ -1,7 +1,7 @@
 export const translations = {
   en: {
     // App Header
-            appTitle: "Curious Mario (好奇马力) - AI-Powered Learning Co-pilot",
+            appTitle: "Curious Mario (好奇马力)",
     
     // Tabs
     mainWorkflow: "Main Workflow",
@@ -112,7 +112,7 @@ export const translations = {
   
   zh: {
     // App Header
-            appTitle: "好奇马力 (Curious Mario) - AI驱动的学习助手",
+            appTitle: "好奇马力 (Curious Mario)",
     
     // Tabs
     mainWorkflow: "主要工作流程",

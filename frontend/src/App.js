@@ -15,6 +15,7 @@ function App() {
   const [profiles, setProfiles] = useState([]);
   const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [logoError, setLogoError] = useState(false);
 
   useEffect(() => {
     loadData();
@@ -67,7 +68,17 @@ function App() {
       <header className="app-header">
         <div className="container">
           <div className="header-top">
-            <h1>{t('appTitle')}</h1>
+            <div className="logo-container">
+              {!logoError && (
+                <img 
+                  src="/logo.png" 
+                  alt="Curious Mario Logo" 
+                  className="app-logo"
+                  onError={() => setLogoError(true)}
+                />
+              )}
+              <h1>{t('appTitle')}</h1>
+            </div>
             <button 
               className="language-toggle"
               onClick={toggleLanguage}
