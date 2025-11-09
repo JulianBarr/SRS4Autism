@@ -5,6 +5,12 @@ from typing import List, Optional, Dict, Any
 import json
 import os
 from datetime import datetime
+import requests
+from urllib.parse import urlencode
+from collections import defaultdict
+from html import unescape
+import csv
+import io
 
 app = FastAPI(title="Curious Mario API", version="1.0.0")
 
@@ -31,6 +37,8 @@ class ChildProfile(BaseModel):
     verbal_fluency: Optional[str] = None
     passive_language_level: Optional[str] = None
     raw_input: Optional[str] = None
+    mastered_words: Optional[str] = None  # Comma-separated list of mastered words
+    mastered_grammar: Optional[str] = None  # Comma-separated list of mastered grammar points
     extracted_data: Optional[Dict[str, Any]] = None
 
 class Card(BaseModel):
@@ -53,6 +61,11 @@ class Card(BaseModel):
     image_error: Optional[str] = None  # Error message if image generation failed
     is_placeholder: Optional[bool] = None  # Whether the image is a placeholder
 
+class CardImageRequest(BaseModel):
+    position: Optional[str] = "front"
+    location: Optional[str] = "after"
+    user_request: Optional[str] = None
+
 class ChatMessage(BaseModel):
     id: str
     content: str
@@ -72,6 +85,34 @@ class PromptTemplate(BaseModel):
     template_text: str  # Free-form text with examples
     created_at: datetime
     updated_at: Optional[datetime] = None
+
+class RecommendationRequest(BaseModel):
+    mastered_words: List[str]
+    profile_id: str
+    concreteness_weight: Optional[float] = 0.5  # Weight for concreteness (0.0-1.0), default 0.5
+    # 0.0 = only HSK level matters, 1.0 = only concreteness matters, 0.5 = balanced
+
+class GrammarRecommendationRequest(BaseModel):
+    mastered_grammar: List[str]
+    profile_id: str
+
+class WordRecommendation(BaseModel):
+    word: str
+    pinyin: str
+    hsk: int
+    score: float  # Changed to float for more precise scoring
+    known_chars: int
+    total_chars: int
+    concreteness: Optional[float] = None  # Concreteness rating (1-5 scale)
+
+class GrammarRecommendation(BaseModel):
+    grammar_point: str
+    grammar_point_zh: Optional[str]
+    structure: Optional[str]
+    explanation: Optional[str]
+    cefr_level: Optional[str]
+    example_chinese: Optional[str]
+    score: int
 
 # File paths for data storage
 PROFILES_FILE = "data/profiles/child_profiles.json"
@@ -95,6 +136,266 @@ def save_json_file(file_path: str, data: Any):
     """Save data to JSON file"""
     with open(file_path, 'w') as f:
         json.dump(data, f, indent=2, default=str)
+
+def normalize_to_slug(value: str) -> str:
+    """Normalize a string to a slug-friendly format without enforcing uniqueness."""
+    if not value:
+        return ""
+    import re
+    slug = value.lower()
+    slug = re.sub(r'[\s_]+', '-', slug)
+    slug = re.sub(r'[^\w\u4e00-\u9fff-]', '', slug)
+    slug = slug.strip('-')
+    slug = re.sub(r'-+', '-', slug)
+    return slug
+
+def extract_plain_text(value: str) -> str:
+    """Strip HTML tags and normalize whitespace for prompt generation."""
+    if not value:
+        return ""
+    import re
+    text = unescape(value)
+    text = re.sub(r'<[^>]+>', ' ', text)
+    text = re.sub(r'\s+', ' ', text)
+    return text.strip()
+
+# Knowledge Graph Configuration
+FUSEKI_ENDPOINT = "http://localhost:3030/srs4autism/query"
+
+def query_sparql(sparql_query: str, output_format: str = "text/csv"):
+    """Execute a SPARQL query against Jena Fuseki."""
+    try:
+        params = urlencode({"query": sparql_query})
+        url = f"{FUSEKI_ENDPOINT}?{params}"
+        response = requests.get(url, headers={"Accept": output_format}, timeout=10)
+        response.raise_for_status()
+        if output_format == "application/sparql-results+json":
+            return response.json()
+        return response.text
+    except requests.exceptions.RequestException as e:
+        raise HTTPException(status_code=503, detail=f"Knowledge graph server unavailable: {str(e)}")
+
+def find_learning_frontier(mastered_words: List[str], target_level: int = 1, top_n: int = 20, concreteness_weight: float = 0.5):
+    """
+    Find words to learn next using the "Learning Frontier" algorithm with concreteness scoring.
+    
+    Algorithm:
+    1. Get all words with HSK levels, pinyin, and concreteness ratings
+    2. Find words in the next level (Learning Frontier)
+    3. Score words based on:
+       - HSK level (learning frontier): weighted by (1 - concreteness_weight)
+       - Concreteness (higher = more concrete = easier): weighted by concreteness_weight
+       - Known characters (prerequisites): bonus points
+       - Being too hard: penalty
+    
+    Args:
+        mastered_words: List of mastered words
+        target_level: Target HSK level to focus on
+        top_n: Number of recommendations to return
+        concreteness_weight: Weight for concreteness (0.0-1.0)
+            - 0.0 = only HSK level matters
+            - 1.0 = only concreteness matters
+            - 0.5 = balanced (default)
+    """
+    # Step 1: Get all words with HSK levels, pinyin, and concreteness
+    sparql = f"""
+    PREFIX srs-kg: <http://srs4autism.com/schema/>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    
+    SELECT ?word ?word_text ?pinyin ?hsk ?concreteness WHERE {{
+        ?word a srs-kg:Word ;
+              srs-kg:text ?word_text ;
+              srs-kg:pinyin ?pinyin ;
+              srs-kg:hskLevel ?hsk .
+        OPTIONAL {{ ?word srs-kg:concreteness ?concreteness }}
+    }}
+    """
+    
+    csv_result = query_sparql(sparql, "text/csv")
+    
+    # Parse results using proper CSV parser
+    words_data = defaultdict(lambda: {'pinyin': '', 'hsk': None, 'concreteness': None, 'chars': set()})
+    reader = csv.reader(io.StringIO(csv_result))
+    header = next(reader)  # Skip header
+    print(f"   📊 CSV Header: {header}")
+    
+    mastered_set = set(mastered_words)
+    
+    words_with_concreteness = 0
+    total_words = 0
+    
+    for row in reader:
+        if len(row) >= 4:
+            total_words += 1
+            word_text = row[1]  # word_text is the second column
+            pinyin = row[2] if len(row) > 2 else ''
+            try:
+                hsk = int(row[3]) if len(row) > 3 and row[3] else None
+            except ValueError:
+                hsk = None
+            
+            # Parse concreteness (optional, may be empty)
+            # CSV format: word, word_text, pinyin, hsk, concreteness
+            concreteness = None
+            if len(row) > 4 and row[4] and row[4].strip():
+                try:
+                    concreteness = float(row[4].strip())
+                    words_with_concreteness += 1
+                except (ValueError, TypeError) as e:
+                    concreteness = None
+            
+            words_data[word_text]['pinyin'] = pinyin
+            words_data[word_text]['hsk'] = hsk
+            words_data[word_text]['concreteness'] = concreteness
+    
+    if total_words > 0:
+        print(f"   📈 Loaded {total_words} words, {words_with_concreteness} with concreteness data ({words_with_concreteness/total_words*100:.1f}%)")
+    else:
+        print(f"   ⚠️  Warning: No words loaded from SPARQL query!")
+    
+    # Step 2: Get all character composition data in one query
+    sparql_all_chars = """
+    PREFIX srs-kg: <http://srs4autism.com/schema/>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    
+    SELECT ?word_label ?char_label WHERE {
+        ?word a srs-kg:Word ;
+              srs-kg:composedOf ?char ;
+              rdfs:label ?word_label .
+        ?char rdfs:label ?char_label .
+    }
+    """
+    
+    try:
+        char_result = query_sparql(sparql_all_chars, "text/csv")
+        char_reader = csv.reader(io.StringIO(char_result))
+        next(char_reader)  # Skip header
+        
+        for row in char_reader:
+            if len(row) >= 2:
+                word_text = row[0]
+                char_text = row[1]
+                if word_text in words_data:
+                    words_data[word_text]['chars'].add(char_text)
+    except Exception as e:
+        print(f"Warning: Could not load character data: {e}")
+    
+    # Step 3: Score words with concreteness and HSK level balance
+    scored_words = []
+    
+    # Normalize concreteness_weight to 0-1 range
+    concreteness_weight = max(0.0, min(1.0, concreteness_weight))
+    hsk_weight = 1.0 - concreteness_weight
+    
+    print(f"   ⚖️  Scoring with concreteness_weight={concreteness_weight:.2f}, hsk_weight={hsk_weight:.2f}")
+    
+    for word, data in words_data.items():
+        if word in mastered_set:
+            continue  # Skip already mastered words
+        
+        hsk_score_raw = 0.0
+        concreteness_score_raw = 0.0
+        
+        # HSK level scoring (raw values, will be normalized)
+        if data['hsk'] is not None:
+            if data['hsk'] == target_level:
+                hsk_score_raw = 100.0  # Target level gets highest priority
+            elif data['hsk'] == target_level + 1:
+                hsk_score_raw = 50.0   # Next level gets medium priority
+            elif data['hsk'] < target_level:
+                hsk_score_raw = 25.0  # Lower levels get small bonus (review)
+            elif data['hsk'] > target_level + 1:
+                hsk_score_raw = -500.0  # Too hard gets penalized
+        else:
+            # No HSK level, give small baseline
+            hsk_score_raw = 10.0
+        
+        # Concreteness scoring (raw values, will be normalized)
+        # Higher concreteness = easier to learn = higher score
+        # Concreteness is on 1-5 scale
+        if data['concreteness'] is not None:
+            # Raw concreteness value (1.0 to 5.0)
+            concreteness_score_raw = data['concreteness']
+        else:
+            # No concreteness data, use neutral value (middle of range: 3.0)
+            # BUT: if concreteness_weight is high, words without concreteness should be penalized
+            # So we use a lower neutral value when weight is high
+            concreteness_score_raw = 3.0 * (1.0 - concreteness_weight * 0.5)  # Scale down neutral when weight is high
+        
+        # Normalize both scores to 0-100 scale for fair comparison
+        # BUT: We want to preserve the relative importance of HSK level differences
+        # The issue: if we normalize -500 to 100, we lose the distinction between target level and too hard
+        
+        # HSK score normalization: 
+        # - Target level (100) should stay at 100 (highest priority)
+        # - Next level (50) should stay at 50 (medium priority)  
+        # - Lower levels (25) should stay at 25 (review)
+        # - Too hard (-500) should be 0 (excluded)
+        # - No level (10) should stay at 10 (baseline)
+        # So we keep positive scores as-is, and map negative to 0
+        if hsk_score_raw <= 0:
+            hsk_score = 0.0  # Too hard or negative scores get 0
+        else:
+            # Keep positive scores as-is (they're already in 0-100 range)
+            hsk_score = hsk_score_raw
+        
+        # Concreteness score normalization: 1.0 (min) to 5.0 (max) -> 0 to 100
+        # Formula: (raw - 1) / (5 - 1) * 100
+        concreteness_score = max(0.0, min(100.0, ((concreteness_score_raw - 1.0) / 4.0) * 100.0))
+        
+        # Combine scores with weights
+        combined_score = (hsk_score * hsk_weight) + (concreteness_score * concreteness_weight)
+        
+        # Count known characters (prerequisites) - bonus points
+        known_chars = sum(1 for char in data['chars'] if char in mastered_set)
+        total_chars = len(data['chars']) if data['chars'] else 1
+        char_bonus = 0.0
+        if total_chars > 0:
+            char_ratio = known_chars / total_chars
+            char_bonus = 50.0 * char_ratio  # Bonus based on ratio of known chars
+        
+        final_score = combined_score + char_bonus
+        
+        if final_score > 0:  # Only include words with positive scores
+            scored_words.append({
+                'word': word,
+                'pinyin': data['pinyin'],
+                'hsk': data['hsk'],
+                'score': final_score,
+                'known_chars': known_chars,
+                'total_chars': len(data['chars']),
+                'concreteness': data['concreteness']
+            })
+    
+    # Sort by score and return top N
+    scored_words.sort(key=lambda x: x['score'], reverse=True)
+    
+    # Debug: Show top 5 scores with breakdown
+    if scored_words:
+        print(f"   🔝 Top 5 scores (target_level={target_level}):")
+        for i, item in enumerate(scored_words[:5]):
+            word_data = words_data.get(item['word'], {})
+            hsk = item['hsk']
+            conc = word_data.get('concreteness', None)
+            score = item['score']
+            # Calculate what the scores would have been
+            hsk_raw = 0.0
+            if hsk == target_level:
+                hsk_raw = 100.0
+            elif hsk == target_level + 1:
+                hsk_raw = 50.0
+            elif hsk and hsk < target_level:
+                hsk_raw = 25.0
+            elif hsk and hsk > target_level + 1:
+                hsk_raw = -500.0
+            hsk_norm = min(100.0, hsk_raw) if hsk_raw > 0 else 0.0
+            conc_norm = ((conc - 1.0) / 4.0 * 100.0) if conc else 50.0
+            hsk_contrib = hsk_norm * hsk_weight
+            conc_contrib = conc_norm * concreteness_weight
+            char_bonus = item.get('known_chars', 0) / max(item.get('total_chars', 1), 1) * 50.0
+            print(f"      {i+1}. {item['word']}: final={score:.1f} (HSK={hsk}→{hsk_norm:.0f}*{hsk_weight:.2f}={hsk_contrib:.1f}, conc={conc if conc else 'N/A'}→{conc_norm:.0f}*{concreteness_weight:.2f}={conc_contrib:.1f}, chars={char_bonus:.1f})")
+    
+    return scored_words[:top_n]
 
 def parse_context_tags(content: str, mentions: List[str]) -> List[Dict[str, Any]]:
     """
@@ -133,9 +434,10 @@ def parse_context_tags(content: str, mentions: List[str]) -> List[Dict[str, Any]
         # Skip if it's roster:roster (old format)
         if tag_type == 'roster' and tag_value == 'roster':
             continue
+        value_normalized = normalize_to_slug(tag_value) if tag_type == 'profile' else tag_value
         context_tags.append({
             "type": tag_type,
-            "value": tag_value
+            "value": value_normalized
         })
     
     # Add plain mentions as profile references
@@ -286,6 +588,105 @@ async def delete_card(card_id: str):
     save_json_file(CARDS_FILE, cards)
     return {"message": "Card deleted successfully"}
 
+@app.post("/cards/{card_id}/generate-image")
+async def generate_card_image(card_id: str, request: CardImageRequest):
+    cards = load_json_file(CARDS_FILE, [])
+    card_index = next((idx for idx, card in enumerate(cards) if card.get("id") == card_id), None)
+    
+    if card_index is None:
+        raise HTTPException(status_code=404, detail="Card not found")
+    
+    card = cards[card_index]
+    sanitized_card = {
+        **card,
+        "front": extract_plain_text(card.get("front", "")),
+        "back": extract_plain_text(card.get("back", "")),
+        "text_field": extract_plain_text(card.get("text_field", "")),
+        "extra_field": extract_plain_text(card.get("extra_field", "")),
+        "cloze_text": extract_plain_text(card.get("cloze_text", ""))
+    }
+    
+    try:
+        from agent.conversation_handler import ConversationHandler
+        conversation_handler = ConversationHandler()
+        
+        primary_text = (
+            sanitized_card.get("text_field")
+            or sanitized_card.get("cloze_text")
+            or sanitized_card.get("front")
+            or sanitized_card.get("back")
+            or ""
+        )
+        user_request = request.user_request or f"Generate an illustration for this flashcard content: {primary_text}"
+        
+        image_description = conversation_handler._generate_image_description(
+            card_content=sanitized_card,
+            user_request=user_request,
+            child_profile=None
+        )
+        
+        image_result = conversation_handler.generate_actual_image(
+            image_description=image_description,
+            user_request=user_request
+        )
+        
+        card["image_description"] = image_description
+        card["image_generated"] = image_result.get("success", False)
+        card["image_error"] = image_result.get("error")
+        card["is_placeholder"] = image_result.get("is_placeholder", False)
+        card["image_prompt"] = image_result.get("prompt_used")
+        card["image_url"] = image_result.get("image_url")
+        card["image_data"] = image_result.get("image_data")
+        
+        image_html = None
+        if image_result.get("success") and image_result.get("image_data"):
+            image_html = (
+                f'<img src="{image_result["image_data"]}" alt="Generated image" '
+                'style="max-width: 100%; height: auto; margin: 0 0 10px 0; border-radius: 8px; border: 1px solid #dee2e6;" />'
+            )
+            
+            position = (request.position or "front").lower()
+            location = (request.location or "before").lower()
+            
+            card_type = card.get("card_type", "")
+            if card_type == "interactive_cloze":
+                target_field = "text_field"
+            elif card_type == "cloze":
+                target_field = "cloze_text"
+            else:
+                target_field = "front" if position != "back" else "back"
+            
+            current_content = card.get(target_field) or ""
+            if location == "before":
+                new_content = f"{image_html}\n{current_content}".strip()
+            else:
+                new_content = f"{current_content}\n{image_html}".strip()
+            card[target_field] = new_content
+        
+        cards[card_index] = card
+        save_json_file(CARDS_FILE, cards)
+        
+        message = "Generated image description."
+        if image_result.get("success"):
+            message = "Image generated and added to card."
+        elif image_result.get("error"):
+            message = image_result.get("error")
+        
+        return {
+            "message": message,
+            "card": card,
+            "image": {
+                "success": image_result.get("success", False),
+                "is_placeholder": image_result.get("is_placeholder", False),
+                "error": image_result.get("error"),
+                "description": image_description
+            }
+        }
+        
+    except Exception as e:
+        print(f"Image generation endpoint error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to generate image: {str(e)}")
+
 # Chat endpoints
 @app.get("/chat/history", response_model=List[ChatMessage])
 async def get_chat_history():
@@ -344,15 +745,17 @@ async def send_message(message: ChatMessage):
                 for profile in profiles:
                     # Match by ID (including slugs), then by name
                     # Handle both old UUIDs and new slugs
-                    profile_id = profile.get("id", "").lower()
-                    profile_name_slug = profile.get("name", "").lower().replace(" ", "-").replace("_", "-")
-                    mention_normalized = mention.lower().replace("_", "-")
+                    profile_id_raw = (profile.get("id") or "").lower()
+                    profile_name_slug = normalize_to_slug(profile.get("name", ""))
+                    mention_lower = mention.lower()
+                    mention_slug = normalize_to_slug(mention)
                     
-                    if (profile_id == mention_normalized or 
+                    if (profile_id_raw and profile_id_raw == mention_lower or
                         profile.get("name") == mention or 
-                        profile_name_slug == mention_normalized or
-                        profile_id.endswith(mention_normalized) or  # For partial UUID matching
-                        mention_normalized.endswith(profile_id)):
+                        profile_name_slug and profile_name_slug == mention_slug or
+                        (profile_id_raw and profile_id_raw.endswith(mention_lower)) or  # For partial UUID matching
+                        (profile_id_raw and mention_lower.endswith(profile_id_raw)) or
+                        (profile_name_slug and mention_slug.endswith(profile_name_slug))):
                         child_profile = profile
                         print(f"📋 Found profile: {profile.get('name')} (ID: {profile.get('id')})")
                         break
@@ -922,6 +1325,501 @@ async def sync_to_anki(request: Dict[str, Any]):
         raise HTTPException(status_code=500, detail=f"AnkiConnect module not found: {e}")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/kg/recommendations")
+async def get_recommendations(request: RecommendationRequest):
+    """
+    Get vocabulary recommendations based on mastered words and knowledge graph.
+    
+    Returns top 50 words to learn next based on the Learning Frontier algorithm.
+    """
+    try:
+        # Validate input
+        if not request.mastered_words:
+            return {
+                "recommendations": [],
+                "message": "No mastered words provided"
+            }
+        
+        print(f"\n📚 Getting recommendations for {len(request.mastered_words)} mastered words")
+        
+        # Get recommendations
+        # Dynamically determine target level based on mastery rates
+        # Find the "learning frontier" - first level where mastery < 80%
+        target_level = 3  # Default fallback
+        
+        print(f"🎯 Determining optimal target level...")
+        
+        if request.mastered_words:
+            # Get mastery rate per level
+            mastery_by_level = defaultdict(lambda: {'total': 0, 'mastered': 0})
+            
+            try:
+                sparql = """
+                PREFIX srs-kg: <http://srs4autism.com/schema/>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                
+                SELECT ?word ?word_text ?hsk WHERE {
+                    ?word a srs-kg:Word ;
+                          srs-kg:text ?word_text ;
+                          srs-kg:hskLevel ?hsk .
+                }
+                """
+                
+                print(f"   🔍 Querying knowledge graph...")
+                csv_result = query_sparql(sparql, "text/csv")
+                reader = csv.reader(io.StringIO(csv_result))
+                next(reader)  # Skip header
+                
+                mastered_set = set(request.mastered_words)
+                
+                for row in reader:
+                    if len(row) >= 3:
+                        word_text = row[1]  # word_text is second column
+                        try:
+                            hsk = int(row[2]) if len(row) > 2 and row[2] else None
+                        except ValueError:
+                            hsk = None
+                        
+                        if hsk:
+                            mastery_by_level[hsk]['total'] += 1
+                            if word_text in mastered_set:
+                                mastery_by_level[hsk]['mastered'] += 1
+                
+                print(f"   📊 Mastery rates by level:")
+                for level in sorted(mastery_by_level.keys()):
+                    if mastery_by_level[level]['total'] > 0:
+                        rate = mastery_by_level[level]['mastered'] / mastery_by_level[level]['total']
+                        print(f"      HSK {level}: {mastery_by_level[level]['mastered']}/{mastery_by_level[level]['total']} ({rate*100:.1f}%)")
+                
+                # Find learning frontier (first level < 80% mastery)
+                for level in sorted(mastery_by_level.keys()):
+                    if mastery_by_level[level]['total'] > 0:
+                        rate = mastery_by_level[level]['mastered'] / mastery_by_level[level]['total']
+                        if rate < 0.8:  # Less than 80% mastered
+                            target_level = level
+                            print(f"   🎯 Learning frontier: HSK {target_level} ({rate*100:.1f}% mastered)")
+                            break
+            except Exception as e:
+                print(f"   ⚠️  Warning: Could not determine optimal target level: {e}")
+                import traceback
+                traceback.print_exc()
+                target_level = 1  # Conservative default
+        
+        print(f"   📌 Using target_level = {target_level}")
+        
+        # Get concreteness weight from request (default 0.5 = balanced)
+        concreteness_weight = request.concreteness_weight if hasattr(request, 'concreteness_weight') else 0.5
+        concreteness_weight = max(0.0, min(1.0, concreteness_weight))  # Clamp to 0-1
+        print(f"   ⚖️  Concreteness weight: {concreteness_weight:.2f} (HSK weight: {1.0 - concreteness_weight:.2f})")
+        
+        recommendations = find_learning_frontier(
+            mastered_words=request.mastered_words,
+            target_level=target_level,
+            top_n=50,  # Changed from 20 to 50
+            concreteness_weight=concreteness_weight
+        )
+        
+        print(f"   ✅ Found {len(recommendations)} recommendations")
+        
+        return {
+            "recommendations": recommendations,
+            "message": f"Found {len(recommendations)} recommendations"
+        }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error getting recommendations: {str(e)}")
+
+# Get HSK vocabulary for mastered words management
+@app.get("/vocabulary/hsk")
+async def get_hsk_vocabulary(hsk_level: Optional[int] = None):
+    """
+    Get HSK vocabulary words, optionally filtered by HSK level.
+    Returns words with their pinyin, HSK level, and simplified/traditional forms.
+    """
+    try:
+        import csv
+        from pathlib import Path
+        
+        # Path to HSK vocabulary CSV
+        vocab_file = Path(__file__).parent.parent.parent / "data" / "content_db" / "hsk_vocabulary.csv"
+        
+        if not vocab_file.exists():
+            raise HTTPException(status_code=404, detail="HSK vocabulary file not found")
+        
+        words = []
+        with open(vocab_file, 'r', encoding='utf-8') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                try:
+                    word_hsk = int(row.get('hsk_level', 0))
+                    if hsk_level is None or word_hsk == hsk_level:
+                        words.append({
+                            'word': row.get('word', '').strip(),
+                            'pinyin': row.get('pinyin', '').strip(),
+                            'hsk_level': word_hsk,
+                            'traditional': row.get('traditional', '').strip() if 'traditional' in row else None
+                        })
+                except (ValueError, KeyError):
+                    continue
+        
+        return {
+            "words": words,
+            "total": len(words),
+            "filtered_by": hsk_level
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error loading vocabulary: {str(e)}")
+
+# Get grammar points for mastered grammar management
+@app.get("/vocabulary/grammar")
+async def get_grammar_points(cefr_level: Optional[str] = None):
+    """
+    Get grammar points from the knowledge graph, optionally filtered by CEFR level (A1, A2, etc.).
+    Returns grammar points with their structure, explanation, and CEFR level.
+    """
+    try:
+        # Query the knowledge graph for grammar points
+        # Use OPTIONAL for properties that might be missing, and handle language-tagged literals
+        # Get both English and Chinese labels, and first example sentence (only one per grammar point)
+        # First get all grammar points with their properties
+        sparql = """
+        PREFIX srs-kg: <http://srs4autism.com/schema/>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        
+        SELECT DISTINCT ?gp_uri ?label_en ?label_zh ?structure ?explanation ?cefr WHERE {
+            ?gp_uri a srs-kg:GrammarPoint .
+            OPTIONAL { ?gp_uri rdfs:label ?label_en . FILTER(LANG(?label_en) = "en" || LANG(?label_en) = "") }
+            OPTIONAL { ?gp_uri rdfs:label ?label_zh . FILTER(LANG(?label_zh) = "zh") }
+            OPTIONAL { ?gp_uri srs-kg:structure ?structure }
+            OPTIONAL { ?gp_uri srs-kg:explanation ?explanation }
+            OPTIONAL { ?gp_uri srs-kg:cefrLevel ?cefr }
+            FILTER(BOUND(?label_en) || BOUND(?label_zh))  # At least one label must exist
+        }
+        ORDER BY ?cefr ?label_en
+        """
+        
+        if cefr_level:
+            # Filter by CEFR level
+            sparql = sparql.replace(
+                "ORDER BY ?cefr ?label",
+                f"""
+                FILTER(?cefr = "{cefr_level}")
+                ORDER BY ?cefr ?label
+                """
+            )
+        
+        # Query Fuseki
+        results = query_sparql(sparql, output_format="application/sparql-results+json")
+        
+        if not results or 'results' not in results:
+            return {
+                "grammar_points": [],
+                "total": 0,
+                "filtered_by": cefr_level
+            }
+        
+        grammar_points = []
+        seen_uris = set()  # Track seen grammar points to avoid duplicates
+        
+        for binding in results.get('results', {}).get('bindings', []):
+            try:
+                gp_uri = binding.get('gp_uri', {}).get('value', '')
+                
+                # Skip if we've already seen this grammar point (avoid duplicates)
+                if gp_uri in seen_uris:
+                    continue
+                seen_uris.add(gp_uri)
+                
+                label_en = binding.get('label_en', {}).get('value', '')
+                label_zh = binding.get('label_zh', {}).get('value', '')
+                structure = binding.get('structure', {}).get('value', '')
+                explanation = binding.get('explanation', {}).get('value', '')
+                cefr = binding.get('cefr', {}).get('value', '')
+                
+                # Use English label as primary, fallback to Chinese if no English
+                label = label_en or label_zh
+                
+                if label:
+                    # Get first example sentence for this grammar point
+                    example_chinese = ''
+                    try:
+                        example_sparql = f"""
+                        PREFIX srs-kg: <http://srs4autism.com/schema/>
+                        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                        SELECT ?example_chinese WHERE {{
+                            <{gp_uri}> srs-kg:hasExample ?example .
+                            ?example rdfs:label ?example_chinese . FILTER(LANG(?example_chinese) = "zh")
+                        }}
+                        LIMIT 1
+                        """
+                        example_results = query_sparql(example_sparql, output_format="application/sparql-results+json")
+                        if example_results and 'results' in example_results:
+                            bindings = example_results.get('results', {}).get('bindings', [])
+                            if bindings:
+                                example_chinese = bindings[0].get('example_chinese', {}).get('value', '')
+                    except:
+                        pass  # If example query fails, just continue without example
+                    
+                    grammar_points.append({
+                        'gp_uri': gp_uri,  # Include URI for updating
+                        'grammar_point': label,
+                        'grammar_point_zh': label_zh,  # Chinese translation
+                        'structure': structure,
+                        'explanation': explanation,
+                        'cefr_level': cefr,
+                        'example_chinese': example_chinese  # First example sentence in Chinese
+                    })
+            except Exception as e:
+                continue
+        
+        return {
+            "grammar_points": grammar_points,
+            "total": len(grammar_points),
+            "filtered_by": cefr_level
+        }
+    except Exception as e:
+        # If Fuseki is not available, return empty list
+        print(f"Warning: Could not query grammar points from KG: {e}")
+        return {
+            "grammar_points": [],
+            "total": 0,
+            "filtered_by": cefr_level,
+            "error": "Knowledge graph server may not be available"
+        }
+
+# Save grammar point corrections/edits
+GRAMMAR_CORRECTIONS_FILE = "data/content_db/grammar_corrections.json"
+
+@app.put("/vocabulary/grammar/{gp_uri:path}")
+async def update_grammar_point(gp_uri: str, grammar_data: dict):
+    """
+    Update a grammar point with user corrections.
+    Stores corrections in a JSON file that can be applied when repopulating the knowledge graph.
+    Uses :path to allow URLs with slashes in the URI.
+    """
+    try:
+        # Load existing corrections
+        corrections = load_json_file(GRAMMAR_CORRECTIONS_FILE, {})
+        
+        # URL decode the URI
+        from urllib.parse import unquote
+        decoded_uri = unquote(gp_uri)
+        
+        # Store the correction
+        corrections[decoded_uri] = {
+            'grammar_point': grammar_data.get('grammar_point', ''),
+            'grammar_point_zh': grammar_data.get('grammar_point_zh', ''),
+            'structure': grammar_data.get('structure', ''),
+            'explanation': grammar_data.get('explanation', ''),
+            'cefr_level': grammar_data.get('cefr_level', ''),
+            'example_chinese': grammar_data.get('example_chinese', ''),
+            'updated_at': datetime.now().isoformat()
+        }
+        
+        # Save corrections
+        save_json_file(GRAMMAR_CORRECTIONS_FILE, corrections)
+        
+        return {
+            "message": "Grammar point updated successfully",
+            "gp_uri": decoded_uri,
+            "corrections": corrections[decoded_uri]
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error saving grammar correction: {str(e)}")
+
+@app.get("/vocabulary/grammar/corrections")
+async def get_grammar_corrections():
+    """Get all grammar point corrections."""
+    try:
+        corrections = load_json_file(GRAMMAR_CORRECTIONS_FILE, {})
+        return {"corrections": corrections, "total": len(corrections)}
+    except Exception as e:
+        return {"corrections": {}, "total": 0, "error": str(e)}
+
+@app.post("/kg/grammar-recommendations")
+async def get_grammar_recommendations(request: GrammarRecommendationRequest):
+    """
+    Get grammar point recommendations based on mastered grammar and knowledge graph.
+    
+    Returns top 50 grammar points to learn next based on the Learning Frontier algorithm.
+    Uses CEFR levels instead of HSK levels.
+    """
+    try:
+        # Validate input
+        if not request.mastered_grammar:
+            return {
+                "recommendations": [],
+                "message": "No mastered grammar points provided"
+            }
+        
+        print(f"\n📖 Getting grammar recommendations for {len(request.mastered_grammar)} mastered grammar points")
+        
+        # Get all grammar points from knowledge graph
+        # mastered_grammar should contain URIs, not names (to avoid comma issues)
+        mastered_set = set(request.mastered_grammar)
+        
+        # Get mastery rate per CEFR level
+        mastery_by_level = defaultdict(lambda: {'total': 0, 'mastered': 0})
+        
+        try:
+            sparql = """
+            PREFIX srs-kg: <http://srs4autism.com/schema/>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            
+            SELECT ?gp_uri ?label_en ?label_zh ?cefr WHERE {
+                ?gp_uri a srs-kg:GrammarPoint .
+                OPTIONAL { ?gp_uri rdfs:label ?label_en . FILTER(LANG(?label_en) = "en" || LANG(?label_en) = "") }
+                OPTIONAL { ?gp_uri rdfs:label ?label_zh . FILTER(LANG(?label_zh) = "zh") }
+                OPTIONAL { ?gp_uri srs-kg:cefrLevel ?cefr }
+                FILTER(BOUND(?label_en) || BOUND(?label_zh))
+            }
+            """
+            
+            print(f"   🔍 Querying knowledge graph for grammar points...")
+            results = query_sparql(sparql, output_format="application/sparql-results+json")
+            
+            if results and 'results' in results:
+                for binding in results.get('results', {}).get('bindings', []):
+                    gp_uri = binding.get('gp_uri', {}).get('value', '')
+                    cefr = binding.get('cefr', {}).get('value', '') or 'not specified'
+                    
+                    if gp_uri:
+                        mastery_by_level[cefr]['total'] += 1
+                        if gp_uri in mastered_set:
+                            mastery_by_level[cefr]['mastered'] += 1
+        except Exception as e:
+            print(f"   ⚠️  Warning: Could not query grammar points: {e}")
+        
+        # Find learning frontier (first CEFR level < 80% mastery)
+        target_cefr = 'A1'  # Default
+        cefr_order = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'not specified']
+        
+        print(f"   📊 Mastery rates by CEFR level:")
+        for level in cefr_order:
+            if mastery_by_level[level]['total'] > 0:
+                rate = mastery_by_level[level]['mastered'] / mastery_by_level[level]['total']
+                print(f"      CEFR {level}: {mastery_by_level[level]['mastered']}/{mastery_by_level[level]['total']} ({rate*100:.1f}%)")
+                
+                if rate < 0.8:  # Less than 80% mastered
+                    target_cefr = level
+                    print(f"   🎯 Learning frontier: CEFR {target_cefr} ({rate*100:.1f}% mastered)")
+                    break
+        
+        # Get all grammar points and score them
+        print(f"   📌 Using target CEFR level = {target_cefr}")
+        
+        # Query all grammar points with their details
+        sparql_all = """
+        PREFIX srs-kg: <http://srs4autism.com/schema/>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        
+        SELECT DISTINCT ?gp_uri ?label_en ?label_zh ?structure ?explanation ?cefr WHERE {
+            ?gp_uri a srs-kg:GrammarPoint .
+            OPTIONAL { ?gp_uri rdfs:label ?label_en . FILTER(LANG(?label_en) = "en" || LANG(?label_en) = "") }
+            OPTIONAL { ?gp_uri rdfs:label ?label_zh . FILTER(LANG(?label_zh) = "zh") }
+            OPTIONAL { ?gp_uri srs-kg:structure ?structure }
+            OPTIONAL { ?gp_uri srs-kg:explanation ?explanation }
+            OPTIONAL { ?gp_uri srs-kg:cefrLevel ?cefr }
+            FILTER(BOUND(?label_en) || BOUND(?label_zh))
+        }
+        """
+        
+        results = query_sparql(sparql_all, output_format="application/sparql-results+json")
+        
+        if not results or 'results' not in results:
+            return {
+                "recommendations": [],
+                "message": "Could not query grammar points from knowledge graph"
+            }
+        
+        scored_grammar = []
+        seen_uris = set()
+        
+        for binding in results.get('results', {}).get('bindings', []):
+            try:
+                gp_uri = binding.get('gp_uri', {}).get('value', '')
+                if gp_uri in seen_uris:
+                    continue
+                seen_uris.add(gp_uri)
+                
+                label_en = binding.get('label_en', {}).get('value', '')
+                label_zh = binding.get('label_zh', {}).get('value', '')
+                structure = binding.get('structure', {}).get('value', '')
+                explanation = binding.get('explanation', {}).get('value', '')
+                cefr = binding.get('cefr', {}).get('value', '') or 'not specified'
+                
+                grammar_point = label_en or label_zh
+                
+                if not grammar_point or gp_uri in mastered_set:
+                    continue  # Skip if no label or already mastered (check by URI)
+                
+                # Score grammar points
+                score = 0
+                
+                # Prioritize grammar points in target CEFR level
+                if cefr == target_cefr:
+                    score += 100
+                
+                # Bonus for having structure and explanation
+                if structure:
+                    score += 10
+                if explanation:
+                    score += 10
+                
+                # Get example sentence
+                example_chinese = ''
+                try:
+                    example_sparql = f"""
+                    PREFIX srs-kg: <http://srs4autism.com/schema/>
+                    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                    SELECT ?example_chinese WHERE {{
+                        <{gp_uri}> srs-kg:hasExample ?example .
+                        ?example rdfs:label ?example_chinese . FILTER(LANG(?example_chinese) = "zh")
+                    }}
+                    LIMIT 1
+                    """
+                    example_results = query_sparql(example_sparql, output_format="application/sparql-results+json")
+                    if example_results and 'results' in example_results:
+                        bindings = example_results.get('results', {}).get('bindings', [])
+                        if bindings:
+                            example_chinese = bindings[0].get('example_chinese', {}).get('value', '')
+                except:
+                    pass
+                
+                scored_grammar.append({
+                    'gp_uri': gp_uri,  # Include URI as unique identifier
+                    'grammar_point': grammar_point,
+                    'grammar_point_zh': label_zh,
+                    'structure': structure,
+                    'explanation': explanation,
+                    'cefr_level': cefr,
+                    'example_chinese': example_chinese,
+                    'score': score
+                })
+            except Exception as e:
+                continue
+        
+        # Sort by score (descending) and take top 50
+        scored_grammar.sort(key=lambda x: x['score'], reverse=True)
+        recommendations = scored_grammar[:50]
+        
+        print(f"   ✅ Found {len(recommendations)} grammar recommendations")
+        
+        return {
+            "recommendations": recommendations,
+            "message": f"Found {len(recommendations)} recommendations",
+            "target_cefr": target_cefr
+        }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error getting grammar recommendations: {str(e)}")
 
 if __name__ == "__main__":
     import uvicorn

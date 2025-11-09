@@ -20,6 +20,16 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
 
+  const getProfileSlug = (profile) => {
+    if (!profile) return 'profile';
+    const rawId = (profile.id || '').toString().trim();
+    if (rawId) {
+      return rawId.toLowerCase();
+    }
+    const generated = generateSlug(profile.name || '');
+    return generated ? generated.toLowerCase() : 'profile';
+  };
+
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -90,7 +100,6 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
 
   const getAllMentionables = () => {
     const mentionables = [];
-    
     console.log('[DEBUG] getAllMentionables:', {
       templates: templates,
       templatesCount: templates?.length || 0,
@@ -100,11 +109,16 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
     
     // Add profiles (use ID as value, name for display/search)
     profiles.forEach(profile => {
+      const profileSlug = getProfileSlug(profile);
       mentionables.push({
         type: 'profile',
         display: profile.name,
-        value: profile.id || profile.name,  // Use ID if available, fallback to name
-        searchTerms: [profile.name.toLowerCase(), profile.id?.toLowerCase() || '']
+        value: profileSlug,
+        searchTerms: [
+          profile.name.toLowerCase(),
+          profileSlug,
+          profile.id?.toLowerCase() || ''
+        ]
       });
     });
     
@@ -181,31 +195,73 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
     } else if (atIndex !== -1) {
       // User is typing after @
       const query = textBeforeCursor.substring(atIndex + 1);
-      
-      // Check if it's a typed mention (@word:value)
-      if (query.includes(':')) {
-        setShowSuggestions(false);
-        return;
-      }
-      
-      // Filter suggestions based on query
-      const allSuggestions = getAllMentionables();
-      const filtered = allSuggestions.filter(item => {
-        return item.searchTerms.some(term => 
-          term.includes(query.toLowerCase())
-        );
-      });
-      
-      if (filtered.length > 0 && query.length > 0) {
-        setSuggestions(filtered);
-        setShowSuggestions(true);
-        setActiveSuggestionIndex(0);
+
+      const colonIndex = query.indexOf(':');
+
+      if (colonIndex === -1) {
+        // Filter suggestions based on query (mention type or display)
+        const allSuggestions = getAllMentionables();
+        const filtered = allSuggestions.filter(item => {
+          return item.searchTerms.some(term =>
+            term.includes(query.toLowerCase())
+          ) || item.type.toLowerCase().startsWith(query.toLowerCase());
+        });
+
+        if (filtered.length > 0) {
+          setSuggestions(filtered);
+          setShowSuggestions(true);
+          setActiveSuggestionIndex(0);
+        } else {
+          setShowSuggestions(false);
+        }
       } else {
-        setShowSuggestions(false);
+        // Query contains a colon -> user is specifying @type:value
+        const typePart = query.substring(0, colonIndex).toLowerCase();
+        const valuePart = query.substring(colonIndex + 1).toLowerCase();
+
+        const allSuggestions = getAllMentionables();
+        const typeMatches = allSuggestions.filter(item =>
+          item.type.toLowerCase().startsWith(typePart)
+        );
+
+        if (typeMatches.length === 0) {
+          setShowSuggestions(false);
+          return;
+        }
+
+        const filteredByValue = valuePart.length === 0
+          ? typeMatches
+          : typeMatches.filter(item =>
+              item.searchTerms.some(term => term.includes(valuePart))
+            );
+
+        if (filteredByValue.length > 0) {
+          setSuggestions(filteredByValue);
+          setShowSuggestions(true);
+          setActiveSuggestionIndex(0);
+        } else {
+          setShowSuggestions(false);
+        }
       }
     } else {
       setShowSuggestions(false);
     }
+  };
+
+  const insertMentionText = (mentionText, insertionStart, insertionEnd) => {
+    const before = input.substring(0, insertionStart);
+    const after = input.substring(insertionEnd);
+    const newInput = `${before}${mentionText}${after}`;
+    setInput(newInput);
+    setShowSuggestions(false);
+
+    setTimeout(() => {
+      if (inputRef.current) {
+        const newCursorPos = insertionStart + mentionText.length;
+        inputRef.current.focus();
+        inputRef.current.setSelectionRange(newCursorPos, newCursorPos);
+      }
+    }, 0);
   };
 
   const selectSuggestion = (suggestion) => {
@@ -217,26 +273,27 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
       const after = input.substring(cursorPosition);
       
       // Special handling for @roster - just insert @roster without :value
-      let newInput;
+      let mentionText;
       if (suggestion.type === 'roster') {
-        newInput = `${before}@roster ${after}`;
+        mentionText = '@roster ';
       } else {
-        newInput = `${before}@${suggestion.type}:${suggestion.value} ${after}`;
+        mentionText = `@${suggestion.type}:${suggestion.value} `;
       }
-      
-      setInput(newInput);
-      setShowSuggestions(false);
-      
-      // Focus back on input
-      setTimeout(() => {
-        if (inputRef.current) {
-          const newCursorPos = suggestion.type === 'roster' 
-            ? atIndex + 8  // length of "@roster "
-            : atIndex + suggestion.type.length + suggestion.value.length + 3;
-          inputRef.current.focus();
-          inputRef.current.setSelectionRange(newCursorPos, newCursorPos);
-        }
-      }, 0);
+      insertMentionText(mentionText, atIndex, cursorPosition);
+    } else {
+      if (inputRef.current) {
+        const selectionStart = inputRef.current.selectionStart ?? input.length;
+        const selectionEnd = inputRef.current.selectionEnd ?? selectionStart;
+        const mentionText = suggestion.type === 'roster'
+          ? '@roster '
+          : `@${suggestion.type}:${suggestion.value} `;
+        insertMentionText(mentionText, selectionStart, selectionEnd);
+      } else {
+        const mentionText = suggestion.type === 'roster'
+          ? '@roster '
+          : `@${suggestion.type}:${suggestion.value} `;
+        insertMentionText(mentionText, input.length, input.length);
+      }
     }
   };
 
@@ -311,6 +368,7 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
 
   const extractMentions = (text) => {
     const mentions = [];
+    const normalizeValue = (profile) => getProfileSlug(profile);
     
     // Only extract @profile:ID patterns (actual profile mentions)
     // Don't extract @template:, @word:, @roster, etc. - those are context tags, not mentions
@@ -322,11 +380,14 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
 
     // Also check for profile names/IDs directly mentioned (backwards compatibility)
     profiles.forEach(profile => {
+      const slug = normalizeValue(profile);
       // Check if profile ID or name is mentioned
       if (profile.id && text.includes(profile.id)) {
         mentions.push(profile.id);
-      } else if (text.toLowerCase().includes(profile.name.toLowerCase())) {
-        mentions.push(profile.id || profile.name);
+      } else if (text.includes(slug)) {
+        mentions.push(slug);
+      } else if (profile.name && text.toLowerCase().includes(profile.name.toLowerCase())) {
+        mentions.push(slug);
       }
     });
 
@@ -436,7 +497,19 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
               <strong>{labels[type]}:</strong>
               <div className="mention-items">
                 {visibleItems.map(item => (
-                  <span key={item.value} className="mention-tag">
+                  <span 
+                    key={`${item.type}-${item.value}`} 
+                    className="mention-tag"
+                    onClick={() => selectSuggestion(item)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(event) => {
+                      if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        selectSuggestion(item);
+                      }
+                    }}
+                  >
                     {type === 'roster' ? '@roster' : `@${type}:${item.value}`}
                   </span>
                 ))}

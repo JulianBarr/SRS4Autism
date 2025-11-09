@@ -19,6 +19,7 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
   const [editForm, setEditForm] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
   const [cardsPerPage] = useState(10);
+  const [imageGenerationState, setImageGenerationState] = useState({});
 
   React.useEffect(() => {
     loadAnkiProfiles();
@@ -152,6 +153,41 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
   const handleCancelEdit = () => {
     setEditingCard(null);
     setEditForm({});
+  };
+
+  const handleGenerateImage = async (cardId, position = 'front') => {
+    setImageGenerationState(prev => ({
+      ...prev,
+      [cardId]: { loading: true, error: null }
+    }));
+
+    try {
+      const response = await axios.post(`${API_BASE}/cards/${cardId}/generate-image`, {
+        position,
+        location: 'before'
+      });
+
+      const message = response.data?.message || '';
+      setImageGenerationState(prev => ({
+        ...prev,
+        [cardId]: { loading: false, error: null, success: true, message }
+      }));
+
+      if (message) {
+        console.log(message);
+      }
+
+      if (onRefresh) {
+        onRefresh();
+      }
+    } catch (error) {
+      const message = error.response?.data?.detail || t('generateImageError');
+      setImageGenerationState(prev => ({
+        ...prev,
+        [cardId]: { loading: false, error: message }
+      }));
+      alert(message);
+    }
   };
 
   const handleSyncToAnki = async (forceResync = false) => {
@@ -605,6 +641,13 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
                 {editingCard !== card.id && (
                   <div className="card-actions">
                     <button 
+                      onClick={() => handleGenerateImage(card.id)}
+                      className="btn btn-secondary"
+                      disabled={imageGenerationState[card.id]?.loading}
+                    >
+                      {imageGenerationState[card.id]?.loading ? t('generatingImage') : t('generateImage')}
+                    </button>
+                    <button 
                       onClick={() => handleEditCard(card)}
                       className="btn btn-secondary"
                     >
@@ -622,6 +665,16 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
                     >
                       {t('delete')}
                     </button>
+                  </div>
+                )}
+                {imageGenerationState[card.id]?.success && imageGenerationState[card.id]?.message && (
+                  <div style={{marginTop: '10px', color: '#28a745', fontSize: '12px'}}>
+                    {imageGenerationState[card.id].message}
+                  </div>
+                )}
+                {imageGenerationState[card.id]?.error && (
+                  <div style={{marginTop: '10px', color: '#dc3545', fontSize: '12px'}}>
+                    {imageGenerationState[card.id].error}
                   </div>
                 )}
               </div>
