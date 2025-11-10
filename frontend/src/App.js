@@ -66,7 +66,7 @@ function App() {
   return (
     <div className="App">
       <header className="app-header">
-        <div className="container">
+        <div className="container header-inner">
           <div className="header-top">
             <div className="logo-container">
               {!logoError && (
@@ -104,7 +104,7 @@ function App() {
               className={activeTab === 'templates' ? 'active' : ''}
               onClick={() => setActiveTab('templates')}
             >
-              Templates
+              {t('templates')}
             </button>
           </nav>
         </div>

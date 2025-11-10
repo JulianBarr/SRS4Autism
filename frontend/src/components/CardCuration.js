@@ -190,6 +190,11 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
     }
   };
 
+  const handleCardIdClick = (cardId) => {
+    if (!cardId) return;
+    window.dispatchEvent(new CustomEvent('card-id-clicked', { detail: `#${cardId.slice(-6)}` }));
+  };
+
   const handleSyncToAnki = async (forceResync = false) => {
     console.log('🔵 Sync to Anki clicked! Force resync:', forceResync);
     console.log('Selected deck:', selectedDeck, 'Type:', typeof selectedDeck, 'Truthy?:', !!selectedDeck);
@@ -573,7 +578,7 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
               marginLeft: '10px'
             }}
           >
-            🔄 Re-sync Selected
+            🔄 {t('resyncSelected')}
           </button>
         </div>
         
@@ -629,7 +634,20 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
                     checked={selectedCards.includes(card.id)}
                     onChange={() => handleCardSelect(card.id)}
                   />
-                  <span className="card-id">#{card.id.slice(-6)}</span>
+                  <span 
+                    className="card-id"
+                    onClick={() => handleCardIdClick(card.id)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(event) => {
+                      if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        handleCardIdClick(card.id);
+                      }
+                    }}
+                  >
+                    #{card.id.slice(-6)}
+                  </span>
                   {getStatusBadge(card.status)}
                   <span className="card-tags">
                     {card.tags.map(tag => (
@@ -698,7 +716,20 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
                     checked={selectedCards.includes(card.id)}
                     onChange={() => handleCardSelect(card.id)}
                   />
-                  <span className="card-id">#{card.id.slice(-6)}</span>
+                  <span 
+                    className="card-id"
+                    onClick={() => handleCardIdClick(card.id)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(event) => {
+                      if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        handleCardIdClick(card.id);
+                      }
+                    }}
+                  >
+                    #{card.id.slice(-6)}
+                  </span>
                   {getStatusBadge(card.status)}
                   <span className="card-tags">
                     {card.tags.map(tag => (
@@ -767,7 +798,20 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
                     }}
                     style={{marginRight: '10px', transform: 'scale(1.2)'}}
                   />
-                  <span className="card-id">#{card.id.slice(-6)}</span>
+                  <span 
+                    className="card-id"
+                    onClick={() => handleCardIdClick(card.id)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(event) => {
+                      if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        handleCardIdClick(card.id);
+                      }
+                    }}
+                  >
+                    #{card.id.slice(-6)}
+                  </span>
                   {getStatusBadge(card.status)}
                   <span className="card-tags">
                     {card.tags.map(tag => (

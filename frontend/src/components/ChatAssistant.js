@@ -17,6 +17,7 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
   const [templates, setTemplates] = useState([]);
   const [lastIntent, setLastIntent] = useState(null);
   const [expandedMentionGroups, setExpandedMentionGroups] = useState({});
+  const [expandedMessages, setExpandedMessages] = useState(new Set());
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -24,10 +25,10 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
     if (!profile) return 'profile';
     const rawId = (profile.id || '').toString().trim();
     if (rawId) {
-      return rawId.toLowerCase();
+      return rawId.toLowerCase().replace(/^@+/, '');
     }
     const generated = generateSlug(profile.name || '');
-    return generated ? generated.toLowerCase() : 'profile';
+    return generated ? generated.toLowerCase().replace(/^@+/, '') : 'profile';
   };
 
   const scrollToBottom = () => {
@@ -37,6 +38,25 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  useEffect(() => {
+    const handleCardIdClicked = (event) => {
+      const cardId = event.detail;
+      if (!cardId) return;
+      setInput(prev => {
+        const prefix = prev ? `${prev.trimEnd()} ` : '';
+        return `${prefix}${cardId} `;
+      });
+      setTimeout(() => {
+        inputRef.current?.focus();
+        const pos = inputRef.current?.value.length ?? 0;
+        inputRef.current?.setSelectionRange(pos, pos);
+      }, 0);
+    };
+
+    window.addEventListener('card-id-clicked', handleCardIdClicked);
+    return () => window.removeEventListener('card-id-clicked', handleCardIdClicked);
+  }, []);
 
   useEffect(() => {
     // Load chat history on mount
@@ -423,6 +443,18 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
     }));
   };
 
+  const toggleMessageExpand = (messageId) => {
+    setExpandedMessages(prev => {
+      const next = new Set(prev);
+      if (next.has(messageId)) {
+        next.delete(messageId);
+      } else {
+        next.add(messageId);
+      }
+      return next;
+    });
+  };
+
   const formatMessage = (message) => {
     let content = message.content;
     
@@ -465,68 +497,12 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
           )}
         </div>
         {messages.length > 0 && (
-          <button onClick={handleClearHistory} className="btn btn-secondary">
+          <button onClick={handleClearHistory} className="btn btn-secondary clear-history-btn">
             {t('clearHistory')}
           </button>
         )}
       </div>
       
-      <div className="mention-suggestions">
-        <h4>{t('availableMentions')}</h4>
-        
-        {/* Group mentionables by type */}
-        {['profile', 'roster', 'character', 'template', 'notetype'].map(type => {
-          const items = getAllMentionables().filter(m => m.type === type);
-          if (items.length === 0) return null;
-          
-          const labels = {
-            profile: t('childProfile'),
-            roster: 'Character Roster (All)',
-            character: 'Individual Character',
-            template: 'Prompt Template',
-            notetype: 'Note Type'
-          };
-          
-          const isExpanded = expandedMentionGroups[type];
-          const maxInitial = 3;
-          const visibleItems = isExpanded ? items : items.slice(0, maxInitial);
-          const hasMore = items.length > maxInitial;
-          
-          return (
-            <div key={type} className="mention-group">
-              <strong>{labels[type]}:</strong>
-              <div className="mention-items">
-                {visibleItems.map(item => (
-                  <span 
-                    key={`${item.type}-${item.value}`} 
-                    className="mention-tag"
-                    onClick={() => selectSuggestion(item)}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(event) => {
-                      if (event.key === 'Enter' || event.key === ' ') {
-                        event.preventDefault();
-                        selectSuggestion(item);
-                      }
-                    }}
-                  >
-                    {type === 'roster' ? '@roster' : `@${type}:${item.value}`}
-                  </span>
-                ))}
-                {hasMore && (
-                  <span 
-                    className="mention-expand-link" 
-                    onClick={() => toggleMentionGroup(type)}
-                  >
-                    {isExpanded ? ' ... less' : ' ... more'}
-                  </span>
-                )}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
       <div className="chat-container">
         <div className="chat-messages">
           {messages.length === 0 ? (
@@ -542,12 +518,23 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
           ) : (
             messages.map(message => (
               <div key={message.id} className={`message ${message.role}`}>
-                <div className="message-content">
+                <div 
+                  className={`message-content ${expandedMessages.has(message.id) ? 'expanded' : 'collapsible'}`}
+                  style={{maxWidth: message.role === 'user' ? '70%' : '75%'}}
+                >
                   <div 
                     dangerouslySetInnerHTML={{ 
                       __html: formatMessage(message) 
                     }} 
                   />
+                  {message.content.length > 400 && (
+                    <div 
+                      className="show-more-toggle"
+                      onClick={() => toggleMessageExpand(message.id)}
+                    >
+                      {expandedMessages.has(message.id) ? 'Show less ▲' : 'Show more ▼'}
+                    </div>
+                  )}
                   <div className="message-time">
                     {new Date(message.timestamp).toLocaleTimeString()}
                   </div>
@@ -603,6 +590,63 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
             {t('send')}
           </button>
         </form>
+      </div>
+      <div className="mention-suggestions">
+        <h4>{t('availableMentions')}</h4>
+        
+        <div className="mention-groups-grid">
+        {/* Group mentionables by type */}
+        {['profile', 'roster', 'character', 'template', 'notetype'].map(type => {
+          const items = getAllMentionables().filter(m => m.type === type);
+          if (items.length === 0) return null;
+          
+          const labels = {
+            profile: t('mentionChildProfile'),
+            roster: t('mentionRoster'),
+            character: t('mentionCharacter'),
+            template: t('mentionTemplate'),
+            notetype: t('mentionNoteType')
+          };
+          
+          const isExpanded = expandedMentionGroups[type];
+          const maxInitial = 3;
+          const visibleItems = isExpanded ? items : items.slice(0, maxInitial);
+          const hasMore = items.length > maxInitial;
+          
+          return (
+            <div key={type} className="mention-group">
+              <strong>{labels[type]}:</strong>
+              <div className="mention-items">
+                {visibleItems.map(item => (
+                  <span 
+                    key={`${item.type}-${item.value}`} 
+                    className="mention-tag"
+                    onClick={() => selectSuggestion(item)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(event) => {
+                      if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        selectSuggestion(item);
+                      }
+                    }}
+                  >
+                    {type === 'roster' ? '@roster' : `@${type}:${item.value}`}
+                  </span>
+                ))}
+                {hasMore && (
+                  <span 
+                    className="mention-expand-link" 
+                    onClick={() => toggleMentionGroup(type)}
+                  >
+                    {isExpanded ? ' ... less' : ' ... more'}
+                  </span>
+                )}
+              </div>
+            </div>
+          );
+        })}
+        </div>
       </div>
     </div>
   );

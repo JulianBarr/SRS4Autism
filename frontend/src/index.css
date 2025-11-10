@@ -25,10 +25,21 @@ code {
 
 .card {
   background: white;
-  border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+.card > h2,
+.card > h3 {
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+
+.card > p {
+  margin-top: 0;
+  margin-bottom: 10px;
 }
 
 .btn {
@@ -263,6 +274,60 @@ code {
   color: white;
 }
 
+.message-content.collapsible {
+  position: relative;
+  max-height: 220px;
+  overflow: hidden;
+}
+
+.message-content.expanded {
+  max-height: none;
+}
+
+.message-content.collapsible::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 48px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(241,243,244,1));
+  pointer-events: none;
+}
+
+.message.user .message-content.collapsible::after {
+  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(0,123,255,0.85));
+}
+
+.message-content.expanded::after {
+  display: none;
+}
+
+.show-more-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #1976d2;
+  cursor: pointer;
+  margin-top: 6px;
+  user-select: none;
+}
+
+.show-more-toggle:hover {
+  text-decoration: underline;
+}
+
+.message.user .show-more-toggle {
+  color: rgba(255,255,255,0.85);
+}
+
+.clear-history-btn {
+  font-size: 13px;
+  padding: 6px 10px;
+  white-space: nowrap;
+}
+
 .message-time {
   font-size: 12px;
   color: #666;
@@ -301,38 +366,51 @@ code {
 
 .mention-suggestions {
   background: #f8f9fa;
-  padding: 15px;
+  padding: 12px;
   border-radius: 8px;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
+}
+
+.mention-groups-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
 }
 
 .mention-group {
-  margin-bottom: 10px;
+  margin-bottom: 0;
 }
 
 .mention-tag {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   background: #e3f2fd;
   color: #1976d2;
-  padding: 2px 6px;
-  border-radius: 3px;
+  padding: 4px 8px;
+  border-radius: 4px;
   font-size: 12px;
-  margin: 2px;
   cursor: pointer;
+  outline: none;
 }
 
 .mention-tag:hover {
   background: #bbdefb;
 }
 
+.mention-tag:focus {
+  background: #bbdefb;
+  box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.3);
+}
+
 .mention-items {
   display: flex;
   flex-wrap: wrap;
+  gap: 6px;
   align-items: center;
 }
 
 .mention-expand-link {
-  display: inline-block;
+  display: inline-flex;
   color: #1976d2;
   cursor: pointer;
   font-size: 12px;
@@ -377,6 +455,15 @@ code {
   font-family: monospace;
   color: #666;
   font-size: 12px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  text-decoration: underline;
+}
+
+.card-id:hover,
+.card-id:focus {
+  color: #007bff;
+  outline: none;
 }
 
 .card-tags {
