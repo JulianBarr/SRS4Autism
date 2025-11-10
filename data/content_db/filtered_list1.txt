@@ -1,0 +1,571 @@
+#separator:tab
+#html:false
+	Lead
+	Koala
+	Composition
+	Crumb
+	quail
+	Cursor
+	Athlete
+	Manager
+	Secretary
+	Nightmare
+	Generous
+	Continent
+	Wicked
+	Center
+	Shut the door
+	Burglar
+synonym to stupid	Foolish
+Synonym to rude	Impolite
+Synonym to lazy	Idle
+	Dump
+	Shame
+	Businessman
+	Reluctant
+	Injured
+	Departure hall
+	Arrival hall
+	Assembly
+	Donation box
+	Poultry
+	Operator
+	Occupation
+	Universe
+	Weather forecast
+	Solve a rubik
+	Tiny
+对的，正确的 Synonym to right	Correct
+困难 Synonym to hard	Difficult
+	Volunteers
+	Surrender
+	Frustrated
+	Sales assistant
+	Hall
+意思、意义	Meaning
+	Guilty
+身高、高度	Height
+	Satisfied
+	Jealous
+	Previous
+	Spoiled children
+	A sore throat
+	Exhibition
+百万	million
+	Notice
+擅长	(be) good at
+不擅长	（be) poor at
+	Pudding
+	Reporter
+宁愿	would rather
+一开始，起先	at first
+竞赛、比赛	Competition
+	Woollen clothes
+	Fire drill
+	Double-decker bus
+	Material
+	Model
+农作物，庄稼	Crops
+	Spacecraft
+	Expand
+	Vast
+慈善机构	Charity
+	Hose reel
+口味	Flavor
+才能，天赋	Talent
+	Emotions
+挑选、选择，Synonym to choose	Select
+	Crazy
+	Exam result
+音乐欣赏	Music appreciation
+虚弱，synonym to weak	Feeble
+勇敢，Synonym to brave	Daring
+诗人	Poet
+克服	Overcome
+辅助, synonym to help	Assist
+允许，synonym to allow	Permit
+	Wade
+	Needle
+	Hoe
+A ___ of milk	A carton of milk
+	Cutlery
+语言	Language
+啁啾，唧唧叫	Chirp
+一摇一摆的走, 蹒跚地走	Waddle
+	Cashier
+作家	Author
+	Imitate
+公墓、墓地	Cemetery
+铰链	Hinge
+消失 Synonym to disappear	Vanish
+巨大的 Synonym to huge	Enormous
+剪断	Snip
+	Prod
+	Receptionist
+勇气	Courage
+山顶、顶峰	Summit
+	Orphan
+防止	Prevent
+	Cosmetics
+肺	Lung
+	Alive
+	Inventor
+小路、巷子	Lane
+命令	Order/Command
+水库	Reservoir
+胆小鬼、懦夫	Coward
+	Weapon
+厨房用具、炊具	Utensils
+翻、倾覆	Capsize
+水族馆	Aquarium
+游牧民	Nomad
+小气鬼、吝啬鬼	Miser
+画廊、美术馆	Art gallery
+吵架、争吵，synonym to quarrel	Argue
+变味的、不新鲜的	Stale bread
+堆，synonym to pile	Heap
+错误，synonym to mistake	Error
+释放，放走	Release
+空位	A vacant chair
+卡车, Synonym to truck	Lorry
+	Put away
+距离	Distance
+	On duty
+发现、发掘	Discover
+感激、感恩	Grateful
+静止的, synonym to stopped	Stationary
+素描	Sketch
+漱口水	Mouthwash
+	Toothpick
+	Tribe
+	Flutter
+灌木丛，synonym to bush	Shrub
+纹理	Texture
+图案、花纹	Pattern
+吃草	Graze
+篝火	Bonfire
+淤青	Bruise
+毕业	Graduate
+俯冲、猛扑	Swoop
+出发	Set out
+	Slap
+温馨的	Cosy
+盘旋	Hover
+	A shabby house
+翱翔	Soar
+奔驰	Gallop
+宴会、筵席	Feast
+交换座位	Swap seats
+喧闹	Din
+	Tug of war
+塞满的	Crammed
+凝视、注视	Gaze
+扔、掷、synonym to throw	Fling
+倒了	Topple
+	Emperor
+	Bacteria
+	Defeat
+恶臭	Stench
+	Greasy
+	Plump
+撤退	Retreat
+摇摆	Wobble
+皮革	Leather
+	Chameleon
+悬挂着	Dangling
+凶猛的	Ferocious
+沙沙作响	Rustle
+大口吃、狼吞虎咽	Devour
+箱子、箱柜、synonym to chest	Coffer
+哨兵、守卫	Sentinel
+鬼气森森的、令人毛骨悚然的	Spooky
+可笑的、荒谬的	Ridiculous
+公平	Fair
+征服、占领	Conquer
+气流、颠簸	Turbulence
+土堆	Mound
+眩晕、晕头转向	Vertigo
+翻箱倒柜、乱摸	Rummage
+水藻	Algae
+挖掘、发掘	Excavate
+苍白	Pale
+葬礼	Funeral
+闪闪发光的	Gleaming
+肮脏的、污秽的	Filthy
+荒凉的、贫瘠的、荒无人烟的	Barren
+紧握，synonnym to grip	Clutch
+天堂	Paradise
+	Embarassing
+吃的好饱	Stuffed
+结结巴巴的说	Stammer
+探险	Quest
+	Install
+青年	Youth
+胖乎乎的	Chubby
+烂泥、淤泥	Muck
+不耐烦	Impatient
+闪烁的	Shimmering
+摘、拔	Pluck
+反义词	Opposite
+玉米秆	Corn stalk
+皇室的、皇家的	Royal
+可以吃的	Edible
+奖励	Reward
+治疗	Cure
+翻白眼	She is rolling her eyes.
+焦糖	Caramel
+爆破 synonym to explosion	blast
+大声嚼	chomp
+	Talon
+护城河、壕沟	Moat
+黏糊糊的、糊糊状的	Gooey
+伤心、难过、synonym to sad	Upset
+喷射	Spurt
+呻吟	Moan
+解药，opposite to poison	Antidote
+迷惑、困惑	Confused
+丑陋的、丑怪的	Hideous
+	Bawl
+吊桥	Drawbridge
+下降	Descend
+胸腔	Rib cage
+血管	Blood vessel
+红细胞	Red blood cell
+成人、成年人、大人, synonym to adult	Grown-up
+器官	Organ
+大小、尺寸	Size
+肠	Intestine
+景色、风景	Scenery
+胳肢窝	Armpit
+红宝石	Ruby
+生气、气的冒烟	Fume
+坍塌、塌方	Cave in
+	Well rounded
+两手空空的	Empty handed
+小口喝	Sip
+惨死、去死、消失	Perish
+咆哮	Rant
+痛苦的	Miserable
+会传染的	Contagious
+沉闷的、令人沮丧的	Dreary
+恶心	Disgusting
+铝罐	Aluminum cans
+彗星	Comet
+垃圾场	Landfill
+轨道	Orbit
+豪华车	Luxurious car
+重力	Gravity
+奇迹	Miracle
+候鸟迁徙	Bird migration
+古怪的	Wacky
+门闩、门栓	Latch
+苏醒、恢复知觉	Come to
+大使	Ambassador
+	Steering wheel
+轰隆轰隆、咕噜咕噜	Rumble
+发电机	Generator
+牙龈	Gum
+	Hailstone
+测量仪器、仪表	Gauge
+坏脾气的、爱抱怨的	Grumpy
+看不见的、隐形的	Invisible
+	Expiry date
+旅行、探险之旅	Voyage
+金发	Blond
+粉刺、痘痘	Pimple
+咧嘴笑	Grin
+	Larva
+蛹	Pupa
+在下面	Underneath
+颠倒了	Upside down
+	Back up
+橡子、橡果	Acorn
+	Evergreen trees
+落叶树	Deciduous trees
+尖顶	Steeple
+永久性的	Permanent
+绑架	Kidnap
+安静	Hush
+	Avalanche
+伪装	Camouflage
+	Arch of triumph
+誓言	Oath
+	Zombie
+挂浆、搪瓷	Glaze
+	Vibrate
+My name is Zhou Yiming => 我叫周一鸣。 翻译	Translate
+恶作剧	Prank
+竞技场	Arena
+打断、插嘴	Interrupt
+熊熊燃烧的	Fiery
+跋涉、长途跋涉	Trudge
+阴险的、狡诈的	Treacherous
+出现	Emerge
+吃惊、震惊	Astonished
+聚会、集结	Gather
+发脾气、大哭大闹	Tantrum
+防卫、防守	Defend
+演讲、演说	Speech
+暴怒、怒火	Fury
+	Negative numbers
+	Corridor
+宁静的、平静的	Peaceful
+	Car brands
+	Geography
+烟灰	Soot
+小气	Stingy
+想家	Homesick
+取笑、捉弄	Tease
+	Manicure
+	Shooting star
+	limit
+	Hygiene
+	Clover
+巨大的	Humongous
+证书	Certificate
+	Podium
+	Scamper
+腐臭的、坏掉的	Rancid
+余火、余烬	Ember
+铺开、展开、蔓延	Spread
+逃走、逃离	Flee
+受不了的、难以忍受的	Unbearable
+丢脸的、羞辱性的	Humiliating
+留座、预留	Reserve
+虐待、拷打、折磨	Torture
+拼盘	Platter
+瞎编的、假想的	Make believe
+委员会	Council
+叛徒	Traitor
+蒙住眼睛	Blindfold
+炎热、热死人	Sweltering
+	Bronze
+匾额	Plaque
+麻烦、打扰	Bother
+仙女	Nymph
+搅拌、恶心、反胃	Churning
+花香、芳香	Scent
+弄乱(头发)	Ruffle
+破线、散开	Unravel
+瘫痪了	Paralyzed
+集中精神、聚精会神	Concentrate
+罂粟花、虞美人	Poppy
+英俊、帅	Handsome
+小瓶	Vial
+幼苗	Seedling
+湿透了	Sopping wet
+雕刻、雕刻品	Engraving
+（动物的）粪便	Dung
+仔细检查	Examine
+流口水	Drool
+小河、小溪	Brook
+预言	Prophecy
+嘎吱嘎吱的嚼、嘎吱嘎吱的走	Crunch
+之字形、之字形前进	Zigzag
+窃笑、偷笑	Snicker
+砰砰跳	Thump
+弄脏、污迹	Smudge
+山洞、洞穴	Cavern
+霉菌	Mold
+软泥	Ooze
+发誓	Vow
+开胃菜、前菜	Appetizer
+颤抖、战栗	Shudder
+悲剧	Tragedy
+退缩、畏惧	Flinch
+时尚、时装	Fashion
+横幅、横幅标语	Banner
+跌倒	Tumble
+窒息	Suffocate
+喊叫	Holler
+偷看、窥视	Peek
+滴答	Ticktock
+打气、鼓舞	Pep talk
+遮阳板、帽舌	Visor
+眯眼	Squint
+熟悉	Familiar
+日晷	Sundial
+诊所	Clinic
+皮艇、独木舟	Kayak
+浮潜	Snorkeling
+扫描	Scan
+贵族、高贵的	Noble
+挨饿	Starve
+被施了魔法的	Enchanted
+苗条的、瘦长的	Slender
+饮品、饮料	Beverage
+搬运工	Porter
+	Carriage
+水疱	Blister
+轮廓、剪影	Silhouette
+机械	Mechanism
+大量的、充足的	Plenty
+柔软洁白的白云	Puffy cloud
+踮着脚尖走	Tiptoe
+荆棘	Bramble
+奖章	Medallion
+假扮、伪装	Disguise
+天文学	Astronomy
+可怕的、怪异的	Eerie
+奸细、间谍	Spy
+世纪、一百年	Century
+暴力	Violent
+坍塌	Crumbling Tower
+脸红了、害羞了	Blushing
+滚开	Get lost
+狂犬病、狂暴的	Rabid
+弯腰、驼背	Stoop
+树瘤	Gnarl
+事实、真相	Fact
+层	Layer
+信使、送信人	Messenger
+后悔、遗憾	Regret
+惊呆了、石化了	Petrified
+讨厌的	Horrid
+肿包、疙瘩	Lump
+切断、斩断	Sever
+干瘪了	Shrivel
+胜利	Victory
+节奏、韵律	Rhythm
+花环、花冠	Wreath
+郁郁葱葱的、草木茂盛的	Lush
+躲闪	Dodge
+气喘吁吁	Panting
+奶昔	Smoothie
+大声的吃喝、呼噜呼噜的吃	Slurp
+头晕	Daze
+	Niblet
+传说、传奇	Legend
+咒语	Spell
+哀号、恸哭	Wail
+边沿、边缘	Rim
+锤子	Mallet
+专家	Expert
+不听话的	Disobedient
+百科全书	Encyclopedia
+猛推、推搡	Shove
+教授	Professor
+剧痛	Pang
+表情	Expression
+意志力	Willpower
+震中	Epicenter
+题词、铭文	Inscription
+花粉	Pollen
+嫁接	Grafting
+木板	Plank
+陶瓷	Porcelain
+刻薄	Mean
+忠诚	Loyal
+定义	Definition
+触须	Tentacles
+全体船员、机组人员	Crew
+坏人、反派	Villain
+镜像、图像	Image
+创作、创造	Create
+奇怪、古怪	Bizarre
+礼节、礼仪	Etiquette
+亭子	Pavilion
+盛宴、宴会	Banquet
+美食、美食家	Gourmet
+精致的	Delicate
+槽	Trough
+绅士	Gentleman
+自私	Selfish
+假牙	Denture
+拍打	Swat
+刀片	Razor
+深渊	Abyss
+勒死	Strangle
+少女、小姐、姑娘	Maiden
+小屋	Cottage
+不可思议的	Incredible
+令人恶心的	Gross
+下水道	Sewer
+排水管	Drain
+烂泥、污泥、淤泥	Sludge
+恶棍、无赖	Scoundrel
+慢跑	Trot
+	Take notes
+静脉	Vein
+毁坏、损坏	Damage
+宁静、平静	Serenity
+裂缝	Rift
+动脉	Artery
+预约	Appointment
+悄悄溜走	Sneak off
+碎片	Shard
+讨厌的、烦人的, synonym to Annoying	Pesky
+地平线、视野	Horizon
+侄子、外甥	Nephew
+侄女、外甥女	Niece
+表演	Perform
+消化	Digest
+木匠	Carpenter
+摇篮曲、催眠曲	Lullaby
+合唱、合唱团	Chorus
+姓名牌、姓名标签	Name tag
+怂包、软蛋	Wimp
+阴森的、冷酷的	Grim
+一摸一样	Identical
+体积	Volume
+昏昏欲睡	Drowsy
+鸿沟、峡谷	Chasm
+帽檐	Brim
+骨髓	Bone marrow
+上升	Ascending
+遥远的、远处的	Distant
+祖先	Ancestor
+文件	Document
+退休	Retire
+激情	Passion
+辩论	Debate
+真菌	Fungus
+摇一摇、抖一抖	Jiggle
+拥抱	Embrace
+外科医生	Surgeon
+视力	Sight
+肥胖、臃肿	Obese
+货物	Cargo
+哑巴	Mute
+缝、接缝	Seam
+修女	Nun
+节俭的	Thrifty
+美德	Virtue
+腐烂	Decay
+匕首	Dagger
+交流、沟通	Communicate
+娱乐	Entertainment
+仪式、典礼	Ceremony
+制造	Manufacture
+疾病	Disease
+讨厌的	Nasty
+放射	Radiate
+本地的	Local
+破布、旧布	Rags
+纺织品	Textile
+连根拔起	Uproot
+水瓶、凉水壶	Pitcher
+撒、扬	Scatter
+雄伟、壮丽	Magnificent
+纠缠	Tangle
+队员、成员、团员	Member
+	Dune
+碎石	Gravel
+牙线	Dental Floss
+阿拉伯数字	Digit
+线索	Clue
+准时	Punctual
+健身	Work out
+棉被、羽绒被	Comforter
+耀眼的、炫目的、眼花缭乱的	Dazzling
+吸了口气	Gasp
+栖息地	Habitat
+聋、听不见	Deaf
+长矛	Lance
+四肢	Limb
+衣服的边	Hem
+摇曳、摇晃	Sway
+	Average
+边界、边境	Border
+理论	Theory
+	Pause
