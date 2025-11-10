@@ -4,17 +4,27 @@
 }
 
 .app-header {
-  background: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
   border-bottom: 1px solid #ddd;
-  padding: 20px 0;
-  margin-bottom: 20px;
+  padding: 12px 0;
+  margin-bottom: 10px;
+}
+
+.header-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .header-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 4px;
 }
 
 .logo-container {
@@ -24,7 +34,7 @@
 }
 
 .app-logo {
-  height: 48px;
+  height: 38px;
   width: auto;
   object-fit: contain;
 }
@@ -32,7 +42,8 @@
 .app-header h1 {
   margin: 0;
   color: #333;
-  font-size: 28px;
+  font-size: 26px;
+  font-weight: 600;
 }
 
 .language-toggle {
@@ -62,7 +73,7 @@
 .tab-nav button {
   background: #f8f9fa;
   border: 1px solid #ddd;
-  padding: 10px 20px;
+  padding: 6px 12px;
   border-radius: 4px;
   cursor: pointer;
   font-size: 14px;
