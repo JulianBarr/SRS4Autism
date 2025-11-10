@@ -1,0 +1,267 @@
+# ---
+
+# Chinese Language Learning Ontology
+
+# Version: 1.0
+
+# Description: A custom ontology for the SRS4Autism learning agent.
+
+# ---
+
+# 1. PREFIXES
+
+# These are shortcuts to make the file readable
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+@prefix srs-kg: <http://srs4autism.com/schema/> . # Our custom schema
+
+# ---
+
+# 2. THE SCHEMA (The "Blueprint" using RDFS)
+
+# ---
+
+# 2.1. CLASSES (The Node Types)
+
+srs-kg:KnowledgePoint a rdfs:Class ;
+
+rdfs:comment "A base class for any atomic, learnable concept." .
+
+srs-kg:Character a rdfs:Class ;
+
+rdfs:subClassOf srs-kg:KnowledgePoint ;
+
+rdfs:comment "A single Chinese character (汉字)." .
+
+srs-kg:Word a rdfs:Class ;
+
+rdfs:subClassOf srs-kg:KnowledgePoint ;
+
+rdfs:comment "A multi-character word (词)." .
+
+srs-kg:GrammarPoint a rdfs:Class ;
+
+rdfs:subClassOf srs-kg:KnowledgePoint ;
+
+rdfs:comment "A grammar rule, from Chinese Grammar Wiki." .
+
+srs-kg:Sentence a rdfs:Class ;
+
+rdfs:comment "An example sentence, e.g., from Tatoeba." .
+
+srs-kg:Concept a rdfs:Class ;
+
+rdfs:comment "A language-agnostic concept hub, e.g., from WordNet." .
+
+# 2.2. DATA PROPERTIES (Linking a Node to a Value)
+
+srs-kg:glyph a rdf:Property ;
+
+rdfs:domain srs-kg:Character ;
+
+rdfs:range rdfs:Literal .
+
+srs-kg:text a rdf:Property ;
+
+rdfs:domain srs-kg:Word ;
+
+rdfs:range rdfs:Literal .
+
+srs-kg:pinyin a rdf:Property ;
+
+rdfs:range rdfs:Literal .
+
+srs-kg:traditional a rdf:Property ;
+
+rdfs:domain srs-kg:Word ;
+
+rdfs:range rdfs:Literal .
+
+srs-kg:definition a rdf:Property ;
+
+rdfs:range rdfs:Literal .
+
+srs-kg:hskLevel a rdf:Property ;
+
+rdfs:range rdfs:Integer .
+
+srs-kg:concreteness a rdf:Property ;
+
+rdfs:domain srs-kg:Word ;
+
+rdfs:range rdfs:Literal ;
+
+rdfs:comment "Concreteness rating (1-5 scale) from Brysbaert et al. BRM database. Higher values indicate more concrete words." .
+
+srs-kg:partOfSpeech a rdf:Property ;
+
+rdfs:range rdfs:Literal .
+
+srs-kg:structure a rdf:Property ;
+
+rdfs:domain srs-kg:GrammarPoint ;
+
+rdfs:range rdfs:Literal .
+
+srs-kg:cefrLevel a rdf:Property ;
+
+rdfs:domain srs-kg:GrammarPoint ;
+
+rdfs:range rdfs:Literal .
+
+srs-kg:explanation a rdf:Property ;
+
+rdfs:domain srs-kg:GrammarPoint ;
+
+rdfs:range rdfs:Literal .
+
+srs-kg:translationEN a rdf:Property ;
+
+rdfs:domain srs-kg:Sentence ;
+
+rdfs:range rdfs:Literal .
+
+# 2.3. OBJECT PROPERTIES (The "Edges" linking Node to Node)
+
+srs-kg:composedOf a rdf:Property ;
+
+rdfs:domain srs-kg:Word ;
+
+rdfs:range srs-kg:Character .
+
+srs-kg:requiresPrerequisite a rdf:Property ;
+
+rdfs:domain srs-kg:KnowledgePoint ;
+
+rdfs:range srs-kg:KnowledgePoint .
+
+srs-kg:means a rdf:Property ;
+
+rdfs:domain srs-kg:Word ;
+
+rdfs:range srs-kg:Concept .
+
+srs-kg:isSynonymOf a rdf:Property ;
+
+rdfs:subPropertyOf skos:related ; # We can borrow from SKOS!
+
+rdfs:domain srs-kg:Concept ;
+
+rdfs:range srs-kg:Concept .
+
+srs-kg:isAntonymOf a rdf:Property ;
+
+rdfs:domain srs-kg:Concept ;
+
+rdfs:range srs-kg:Concept .
+
+srs-kg:demonstratesGrammar a rdf:Property ;
+
+rdfs:domain srs-kg:Sentence ;
+
+rdfs:range srs-kg:GrammarPoint .
+
+srs-kg:containsWord a rdf:Property ;
+
+rdfs:domain srs-kg:Sentence ;
+
+rdfs:range srs-kg:Word .
+
+srs-kg:hasExample a rdf:Property ;
+
+rdfs:domain srs-kg:GrammarPoint ;
+
+rdfs:range srs-kg:Sentence .
+
+# ---
+
+# 3. THE DATA (Example Instances)
+
+# ---
+
+# Define the Characters
+
+srs-kg:char-peng a srs-kg:Character ;
+
+rdfs:label "朋" ;
+
+srs-kg:glyph "朋" ;
+
+srs-kg:pinyin "péng" ;
+
+srs-kg:definition "friend, pal" .
+
+srs-kg:char-you a srs-kg:Character ;
+
+rdfs:label "友" ;
+
+srs-kg:glyph "友" ;
+
+srs-kg:pinyin "yǒu" ;
+
+srs-kg:definition "friend, companion" .
+
+# Define the Word
+
+srs-kg:word-pengyou a srs-kg:Word ;
+
+rdfs:label "朋友" ;
+
+srs-kg:text "朋友" ;
+
+srs-kg:pinyin "péngyou" ;
+
+srs-kg:definition "friend" ;
+
+srs-kg:partOfSpeech "noun" ;
+
+srs-kg:hskLevel 1 ;
+
+# Define relationships (the edges)
+
+srs-kg:composedOf srs-kg:char-peng, srs-kg:char-you ; # Literacy link
+
+srs-kg:requiresPrerequisite srs-kg:char-peng, srs-kg:char-you ; # Agent's learning rule
+
+srs-kg:means srs-kg:concept-friend . # Semantic link
+
+# Define the Concept (from WordNet)
+
+srs-kg:concept-friend a srs-kg:Concept ;
+
+rdfs:label "concept:friend" ;
+
+rdfs:comment "A person you know well and regard with affection and trust." .
+
+# Define the Grammar
+
+srs-kg:grammar-de a srs-kg:GrammarPoint ;
+
+rdfs:label "Using '的' (de)" ;
+
+srs-kg:structure "Noun + 的 + Noun" ;
+
+srs-kg:hskLevel 1 .
+
+# Define the Sentence (from Tatoeba)
+
+srs-kg:sentence-2533 a srs-kg:Sentence ;
+
+rdfs:label "他是我的朋友。" ;
+
+srs-kg:text "他是我的朋友。" ;
+
+srs-kg:translationEN "He is my friend." ;
+
+# Define relationships (the edges)
+
+srs-kg:containsWord srs-kg:word-pengyou ; # Links to the word
+
+srs-kg:demonstratesGrammar srs-kg:grammar-de . # Links to the grammar rule
