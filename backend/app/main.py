@@ -2965,13 +2965,15 @@ async def get_grammar_recommendations(request: GrammarRecommendationRequest):
         mastery_by_level = defaultdict(lambda: {'total': 0, 'mastered': 0})
         
         try:
-            # Filter by language: English grammar has English labels, Chinese grammar has Chinese labels
+            # Filter by language: 
+            # English grammar (CEFR-J): URI starts with "grammar-en-" (from populate_english_grammar.py)
+            # Chinese grammar: URI does NOT start with "grammar-en-"
             if language == "en":
-                # English grammar: must have English label
-                label_filter = 'FILTER(BOUND(?label_en))'
+                # English grammar: URI must contain "grammar-en-"
+                label_filter = 'FILTER(CONTAINS(STR(?gp_uri), "grammar-en-"))'
             else:
-                # Chinese grammar: must have Chinese label
-                label_filter = 'FILTER(BOUND(?label_zh))'
+                # Chinese grammar: URI must NOT contain "grammar-en-" and must have Chinese label
+                label_filter = 'FILTER(!CONTAINS(STR(?gp_uri), "grammar-en-") && BOUND(?label_zh))'
             
             sparql = f"""
             PREFIX srs-kg: <http://srs4autism.com/schema/>
@@ -3020,10 +3022,12 @@ async def get_grammar_recommendations(request: GrammarRecommendationRequest):
         print(f"   📌 Using target CEFR level = {target_cefr}")
         
         # Query all grammar points with their details (filtered by language)
+        # English grammar: URI starts with "grammar-en-" (from CEFR-J)
+        # Chinese grammar: URI does NOT start with "grammar-en-"
         if language == "en":
-            label_filter_all = 'FILTER(BOUND(?label_en))'
+            label_filter_all = 'FILTER(CONTAINS(STR(?gp_uri), "grammar-en-"))'
         else:
-            label_filter_all = 'FILTER(BOUND(?label_zh))'
+            label_filter_all = 'FILTER(!CONTAINS(STR(?gp_uri), "grammar-en-") && BOUND(?label_zh))'
         
         sparql_all = f"""
         PREFIX srs-kg: <http://srs4autism.com/schema/>
