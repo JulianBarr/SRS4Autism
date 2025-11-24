@@ -137,6 +137,7 @@ class EnglishRecommendationRequest(BaseModel):
 class GrammarRecommendationRequest(BaseModel):
     mastered_grammar: List[str]
     profile_id: str
+    language: Optional[str] = "zh"  # "zh" for Chinese, "en" for English
 
 class WordRecommendation(BaseModel):
     word: str
@@ -2953,7 +2954,8 @@ async def get_grammar_recommendations(request: GrammarRecommendationRequest):
         # Validate input - allow empty list for first-time users
         mastered_count = len(request.mastered_grammar) if request.mastered_grammar else 0
         
-        print(f"\n📖 Getting grammar recommendations for {mastered_count} mastered grammar points")
+        language = request.language or "zh"
+        print(f"\n📖 Getting {language.upper()} grammar recommendations for {mastered_count} mastered grammar points")
         
         # Get all grammar points from knowledge graph
         # mastered_grammar should contain URIs, not names (to avoid comma issues)
@@ -2963,17 +2965,25 @@ async def get_grammar_recommendations(request: GrammarRecommendationRequest):
         mastery_by_level = defaultdict(lambda: {'total': 0, 'mastered': 0})
         
         try:
-            sparql = """
+            # Filter by language: English grammar has English labels, Chinese grammar has Chinese labels
+            if language == "en":
+                # English grammar: must have English label
+                label_filter = 'FILTER(BOUND(?label_en))'
+            else:
+                # Chinese grammar: must have Chinese label
+                label_filter = 'FILTER(BOUND(?label_zh))'
+            
+            sparql = f"""
             PREFIX srs-kg: <http://srs4autism.com/schema/>
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
             
-            SELECT ?gp_uri ?label_en ?label_zh ?cefr WHERE {
+            SELECT ?gp_uri ?label_en ?label_zh ?cefr WHERE {{
                 ?gp_uri a srs-kg:GrammarPoint .
-                OPTIONAL { ?gp_uri rdfs:label ?label_en . FILTER(LANG(?label_en) = "en" || LANG(?label_en) = "") }
-                OPTIONAL { ?gp_uri rdfs:label ?label_zh . FILTER(LANG(?label_zh) = "zh") }
-                OPTIONAL { ?gp_uri srs-kg:cefrLevel ?cefr }
-                FILTER(BOUND(?label_en) || BOUND(?label_zh))
-            }
+                OPTIONAL {{ ?gp_uri rdfs:label ?label_en . FILTER(LANG(?label_en) = "en" || LANG(?label_en) = "") }}
+                OPTIONAL {{ ?gp_uri rdfs:label ?label_zh . FILTER(LANG(?label_zh) = "zh") }}
+                OPTIONAL {{ ?gp_uri srs-kg:cefrLevel ?cefr }}
+                {label_filter}
+            }}
             """
             
             print(f"   🔍 Querying knowledge graph for grammar points...")
@@ -3009,20 +3019,25 @@ async def get_grammar_recommendations(request: GrammarRecommendationRequest):
         # Get all grammar points and score them
         print(f"   📌 Using target CEFR level = {target_cefr}")
         
-        # Query all grammar points with their details
-        sparql_all = """
+        # Query all grammar points with their details (filtered by language)
+        if language == "en":
+            label_filter_all = 'FILTER(BOUND(?label_en))'
+        else:
+            label_filter_all = 'FILTER(BOUND(?label_zh))'
+        
+        sparql_all = f"""
         PREFIX srs-kg: <http://srs4autism.com/schema/>
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
         
-        SELECT DISTINCT ?gp_uri ?label_en ?label_zh ?structure ?explanation ?cefr WHERE {
+        SELECT DISTINCT ?gp_uri ?label_en ?label_zh ?structure ?explanation ?cefr WHERE {{
             ?gp_uri a srs-kg:GrammarPoint .
-            OPTIONAL { ?gp_uri rdfs:label ?label_en . FILTER(LANG(?label_en) = "en" || LANG(?label_en) = "") }
-            OPTIONAL { ?gp_uri rdfs:label ?label_zh . FILTER(LANG(?label_zh) = "zh") }
-            OPTIONAL { ?gp_uri srs-kg:structure ?structure }
-            OPTIONAL { ?gp_uri srs-kg:explanation ?explanation }
-            OPTIONAL { ?gp_uri srs-kg:cefrLevel ?cefr }
-            FILTER(BOUND(?label_en) || BOUND(?label_zh))
-        }
+            OPTIONAL {{ ?gp_uri rdfs:label ?label_en . FILTER(LANG(?label_en) = "en" || LANG(?label_en) = "") }}
+            OPTIONAL {{ ?gp_uri rdfs:label ?label_zh . FILTER(LANG(?label_zh) = "zh") }}
+            OPTIONAL {{ ?gp_uri srs-kg:structure ?structure }}
+            OPTIONAL {{ ?gp_uri srs-kg:explanation ?explanation }}
+            OPTIONAL {{ ?gp_uri srs-kg:cefrLevel ?cefr }}
+            {label_filter_all}
+        }}
         """
         
         results = query_sparql(sparql_all, output_format="application/sparql-results+json")
@@ -3049,7 +3064,11 @@ async def get_grammar_recommendations(request: GrammarRecommendationRequest):
                 explanation = binding.get('explanation', {}).get('value', '')
                 cefr = binding.get('cefr', {}).get('value', '') or 'not specified'
                 
-                grammar_point = label_en or label_zh
+                # Use language-appropriate label
+                if language == "en":
+                    grammar_point = label_en or label_zh  # Prefer English, fallback to Chinese
+                else:
+                    grammar_point = label_zh or label_en  # Prefer Chinese, fallback to English
                 
                 if not grammar_point or gp_uri in mastered_set:
                     continue  # Skip if no label or already mastered (check by URI)
