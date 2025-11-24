@@ -47,10 +47,19 @@ def normalize_code_to_uri(shorthand_code: str) -> str:
 def parse_cefr_level(level_str: str) -> Optional[str]:
     """
     Parse CEFR level from string
-    Examples: A1.1 -> A1, B1.1 -> B1, empty -> None
+    Examples: 
+    - A1.1 -> A1
+    - B1.1 -> B1
+    - A1-A2 -> A1 (take first level)
+    - B1-C1 -> B1 (take first level)
+    - empty -> None
     """
     if not level_str or level_str.strip() == '':
         return None
+    
+    # Handle ranges like "A1-A2", "B1-C1" - take the first level
+    level_str = level_str.split('-')[0].split('ー')[0]  # Handle both - and ー (Japanese dash)
+    level_str = level_str.split('(')[0]  # Handle "A1-(A2)-B1" -> "A1"
     
     # Extract base level (A1, A2, B1, B2, C1, C2)
     match = re.match(r'([ABC][12])', level_str.upper())
@@ -123,14 +132,23 @@ def load_cefrj_grammar(csv_path: Path) -> List[Dict]:
             if not row.get('Shorthand Code'):
                 continue
             
+            # Try CEFR-J Level first, fall back to Core Inventory if empty
+            cefr_j_level = row.get('CEFR-J Level', '').strip()
+            core_inventory = row.get('Core Inventory', '').strip()
+            
+            cefr_level = parse_cefr_level(cefr_j_level)
+            # If no CEFR level from CEFR-J Level column, try Core Inventory
+            if not cefr_level and core_inventory and core_inventory != 'N/A':
+                cefr_level = parse_cefr_level(core_inventory)
+            
             grammar_point = {
                 'id': row['ID'],
                 'shorthand_code': row['Shorthand Code'],
                 'grammatical_item': row['Grammatical Item'],
                 'sentence_type': row.get('Sentence Type', ''),
-                'cefr_level_raw': row.get('CEFR-J Level', ''),
-                'cefr_level': parse_cefr_level(row.get('CEFR-J Level', '')),
-                'core_inventory': row.get('Core Inventory', ''),
+                'cefr_level_raw': cefr_j_level or core_inventory,  # Store the source
+                'cefr_level': cefr_level,
+                'core_inventory': core_inventory,
                 'notes': row.get('Notes', ''),
                 'category': extract_category_from_code(row['Shorthand Code'])
             }
