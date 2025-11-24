@@ -154,7 +154,9 @@ export const translations = {
     chineseVocabulary: "Chinese Vocabulary",
     englishVocabulary: "English Vocabulary",
     chineseGrammar: "Chinese Grammar",
-    englishGrammar: "English Grammar"
+    englishGrammar: "English Grammar",
+    tip: "Tip",
+    languageTip: "Manage vocabulary and grammar recommendations in the Profiles tab"
   },
   
   zh: {
@@ -417,7 +419,9 @@ export const translations = {
     chineseVocabulary: "中文词汇",
     englishVocabulary: "英语词汇",
     chineseGrammar: "中文语法",
-    englishGrammar: "英语语法"
+    englishGrammar: "英语语法",
+    tip: "提示",
+    languageTip: "在"用户档案"标签页中管理词汇和语法推荐"
   }
 };
 

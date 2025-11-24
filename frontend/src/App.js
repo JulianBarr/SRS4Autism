@@ -5,7 +5,6 @@ import CardCuration from './components/CardCuration';
 import ProfileManager from './components/ProfileManager';
 import TemplateManager from './components/TemplateManager';
 import ContentCategoryNav from './components/ContentCategoryNav';
-import LanguageLearningView from './components/views/LanguageLearningView';
 import { useLanguage } from './i18n/LanguageContext';
 import './App.css';
 
@@ -133,53 +132,52 @@ function App() {
               onCategoryChange={setActiveCategory}
             />
             
-            {/* Category Content */}
+            {/* Main Workflow - Chat & Card Curation (always visible) */}
+            <div className="main-workflow">
+              <div className="workflow-left">
+                <ChatAssistant 
+                  profiles={profiles}
+                  onNewCard={handleNewCard}
+                />
+              </div>
+              <div className="workflow-right">
+                <CardCuration 
+                  cards={cards}
+                  onApproveCard={handleApproveCard}
+                  onRefresh={loadData}
+                />
+              </div>
+            </div>
+            
+            {/* Category Content (below chat, collapsible or minimal) */}
             {activeCategory === 'language' && (
-              <LanguageLearningView 
-                profiles={profiles}
-                onProfilesChange={setProfiles}
-              />
+              <div style={{ marginTop: '20px', padding: '20px', backgroundColor: '#f5f5f5', borderRadius: '8px' }}>
+                <p style={{ color: '#666', fontSize: '14px' }}>
+                  💡 <strong>{t('tip')}:</strong> {t('languageTip')}
+                </p>
+              </div>
             )}
             
             {activeCategory === 'math' && (
-              <div style={{ padding: '20px', textAlign: 'center', color: '#666' }}>
+              <div style={{ marginTop: '20px', padding: '20px', textAlign: 'center', color: '#666' }}>
                 <h2>🔢 {t('math')}</h2>
                 <p>Math learning content coming soon...</p>
               </div>
             )}
             
             {activeCategory === 'knowledge' && (
-              <div style={{ padding: '20px', textAlign: 'center', color: '#666' }}>
+              <div style={{ marginTop: '20px', padding: '20px', textAlign: 'center', color: '#666' }}>
                 <h2>🌍 {t('commonKnowledge')}</h2>
                 <p>Common knowledge content coming soon...</p>
               </div>
             )}
             
             {activeCategory === 'culture' && (
-              <div style={{ padding: '20px', textAlign: 'center', color: '#666' }}>
+              <div style={{ marginTop: '20px', padding: '20px', textAlign: 'center', color: '#666' }}>
                 <h2>🎭 {t('culture')}</h2>
                 <p>Culture content coming soon...</p>
               </div>
             )}
-            
-            {/* Legacy Chat & Card Curation (accessible via separate tab or button) */}
-            <div style={{ marginTop: '40px', borderTop: '2px solid #e0e0e0', paddingTop: '20px' }}>
-              <div className="main-workflow">
-                <div className="workflow-left">
-                  <ChatAssistant 
-                    profiles={profiles}
-                    onNewCard={handleNewCard}
-                  />
-                </div>
-                <div className="workflow-right">
-                  <CardCuration 
-                    cards={cards}
-                    onApproveCard={handleApproveCard}
-                    onRefresh={loadData}
-                  />
-                </div>
-              </div>
-            </div>
           </div>
         )}
         {activeTab === 'profiles' && (
