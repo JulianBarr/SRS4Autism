@@ -421,7 +421,7 @@ export const translations = {
     chineseGrammar: "中文语法",
     englishGrammar: "英语语法",
     tip: "提示",
-    languageTip: "在"用户档案"标签页中管理词汇和语法推荐"
+    languageTip: "请前往「用户档案」标签页管理词汇和语法推荐功能"
   }
 };
 

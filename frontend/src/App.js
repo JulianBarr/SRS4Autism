@@ -150,14 +150,6 @@ function App() {
             </div>
             
             {/* Category Content (below chat, collapsible or minimal) */}
-            {activeCategory === 'language' && (
-              <div style={{ marginTop: '20px', padding: '20px', backgroundColor: '#f5f5f5', borderRadius: '8px' }}>
-                <p style={{ color: '#666', fontSize: '14px' }}>
-                  💡 <strong>{t('tip')}:</strong> {t('languageTip')}
-                </p>
-              </div>
-            )}
-            
             {activeCategory === 'math' && (
               <div style={{ marginTop: '20px', padding: '20px', textAlign: 'center', color: '#666' }}>
                 <h2>🔢 {t('math')}</h2>
