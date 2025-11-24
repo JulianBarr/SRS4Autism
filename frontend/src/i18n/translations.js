@@ -117,7 +117,44 @@ export const translations = {
     mentionRoster: "Character Roster (All)",
     mentionCharacter: "Individual Character",
     mentionTemplate: "Prompt Template",
-    mentionNoteType: "Note Type"
+    mentionNoteType: "Note Type",
+    
+    // Mastered Words & Recommendations
+    manageMasteredWords: "Manage Mastered Words",
+    getWordRecommendations: "Get Word Recommendations",
+    manageMasteredGrammar: "Manage Mastered Grammar",
+    getGrammarRecommendations: "Get Grammar Recommendations",
+    manageMasteredEnglishWords: "Manage Mastered English Words",
+    getEnglishRecommendations: "Get English Recommendations",
+    masteredWords: "Mastered Words",
+    masteredEnglishWords: "Mastered English Words",
+    masteredGrammar: "Mastered Grammar",
+    recommendations: "Recommendations",
+    wordRecommendations: "Word Recommendations",
+    grammarRecommendations: "Grammar Recommendations",
+    englishRecommendations: "English Recommendations",
+    chineseRecommendations: "Chinese Recommendations",
+    noRecommendations: "No recommendations available",
+    pleaseAddMasteredWords: "Please add mastered words to the profile first",
+    pleaseAddMasteredEnglishWords: "Please add mastered English words to the profile first",
+    addToMastered: "Add to Mastered",
+    removeFromMastered: "Remove from Mastered",
+    selectAll: "Select All",
+    deselectAll: "Deselect All",
+    addSelected: "Add Selected",
+    alreadyMastered: "already mastered",
+    saving: "Saving...",
+    saved: "Saved",
+    
+    // Content Categories
+    language: "Language",
+    math: "Math",
+    commonKnowledge: "Common Knowledge",
+    culture: "Culture",
+    chineseVocabulary: "Chinese Vocabulary",
+    englishVocabulary: "English Vocabulary",
+    chineseGrammar: "Chinese Grammar",
+    englishGrammar: "English Grammar"
   },
   
   zh: {
@@ -343,7 +380,44 @@ export const translations = {
     infoSelectProfile: "ℹ️ 请在上方选择Anki配置以启用同步。",
     generateImage: "生成图片",
     generatingImage: "正在生成...",
-    generateImageError: "生成图片失败"
+    generateImageError: "生成图片失败",
+    
+    // Mastered Words & Recommendations
+    manageMasteredWords: "管理已掌握词汇",
+    getWordRecommendations: "获取词汇推荐",
+    manageMasteredGrammar: "管理已掌握语法",
+    getGrammarRecommendations: "获取语法推荐",
+    manageMasteredEnglishWords: "管理已掌握英语词汇",
+    getEnglishRecommendations: "获取英语推荐",
+    masteredWords: "已掌握词汇",
+    masteredEnglishWords: "已掌握英语词汇",
+    masteredGrammar: "已掌握语法",
+    recommendations: "推荐",
+    wordRecommendations: "词汇推荐",
+    grammarRecommendations: "语法推荐",
+    englishRecommendations: "英语推荐",
+    chineseRecommendations: "中文推荐",
+    noRecommendations: "暂无推荐",
+    pleaseAddMasteredWords: "请先在档案中添加已掌握词汇",
+    pleaseAddMasteredEnglishWords: "请先在档案中添加已掌握英语词汇",
+    addToMastered: "添加到已掌握",
+    removeFromMastered: "从已掌握中移除",
+    selectAll: "全选",
+    deselectAll: "取消全选",
+    addSelected: "添加已选",
+    alreadyMastered: "已掌握",
+    saving: "保存中...",
+    saved: "已保存",
+    
+    // Content Categories
+    language: "语言",
+    math: "数学",
+    commonKnowledge: "常识",
+    culture: "文化",
+    chineseVocabulary: "中文词汇",
+    englishVocabulary: "英语词汇",
+    chineseGrammar: "中文语法",
+    englishGrammar: "英语语法"
   }
 };
 

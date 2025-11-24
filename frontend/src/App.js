@@ -37,9 +37,20 @@ function App() {
     }
   };
 
-  const handleNewCard = (newCard) => {
-    // Refresh cards from backend
-    loadData();
+  const handleNewCard = async (newCard) => {
+    // Optimistically add the new card without full page reload
+    if (newCard) {
+      setCards(prev => {
+        // Check if card already exists to avoid duplicates
+        const exists = prev.some(c => c.id === newCard.id);
+        if (exists) return prev;
+        return [newCard, ...prev];
+      });
+    }
+    // Optionally refresh in background (non-blocking)
+    setTimeout(() => {
+      loadData();
+    }, 1000);
   };
 
   const handleApproveCard = async (cardId) => {

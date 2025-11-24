@@ -870,7 +870,7 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
                     }}
                     className="btn"
                   >
-                    📝 Manage Mastered Words (Chinese)
+                    📝 {t('manageMasteredWords')} ({t('chineseVocabulary')})
                   </button>
                   <button 
                     onClick={() => {
@@ -879,7 +879,7 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
                     }}
                     className="btn"
                   >
-                    📝 Manage Mastered Words (English)
+                    📝 {t('manageMasteredEnglishWords')}
                   </button>
                   <button 
                     onClick={() => {
@@ -888,28 +888,28 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
                     }}
                     className="btn"
                   >
-                    📖 Manage Mastered Grammar
+                    📖 {t('manageMasteredGrammar')}
                   </button>
                   <button 
                     onClick={() => handleGetRecommendations(profile)}
                     className="btn"
                     disabled={loadingRecommendations}
                   >
-                    {loadingRecommendations ? 'Loading...' : '📚 Get Word Recommendations (Chinese)'}
+                    {loadingRecommendations ? t('saving') : `📚 ${t('getWordRecommendations')} (${t('chineseVocabulary')})`}
                   </button>
                   <button 
                     onClick={() => handleGetEnglishRecommendations(profile)}
                     className="btn"
                     disabled={loadingEnglishRecommendations}
                   >
-                    {loadingEnglishRecommendations ? 'Loading...' : '📚 Get Word Recommendations (English)'}
+                    {loadingEnglishRecommendations ? t('saving') : `📚 ${t('getWordRecommendations')} (${t('englishVocabulary')})`}
                   </button>
                   <button 
                     onClick={() => handleGetGrammarRecommendations(profile)}
                     className="btn"
                     disabled={loadingGrammarRecommendations}
                   >
-                    {loadingGrammarRecommendations ? 'Loading...' : '📖 Get Grammar Recommendations'}
+                    {loadingGrammarRecommendations ? t('saving') : `📖 ${t('getGrammarRecommendations')}`}
                   </button>
                   <button 
                     onClick={() => handleEdit(profile)}
@@ -998,7 +998,7 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
             >
               ×
             </button>
-            <h2>📚 Recommended Words to Learn</h2>
+            <h2>📚 {t('wordRecommendations')}</h2>
             {selectedProfileForRecommendations && (
               <p style={{ color: '#666', marginBottom: '20px' }}>
                 For: <strong>{selectedProfileForRecommendations.name}</strong>
@@ -1052,7 +1052,7 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
             </div>
             
             {recommendations.length === 0 ? (
-              <p>No recommendations available. Please add mastered words to the profile first.</p>
+              <p>{t('noRecommendations')}. {t('pleaseAddMasteredWords')}</p>
             ) : (
               <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
@@ -1071,7 +1071,7 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
                         fontSize: '14px'
                       }}
                     >
-                      {savingMasteredWords ? '💾 Saving...' : `✓ Add ${selectedRecommendations.size} Selected`}
+                      {savingMasteredWords ? `💾 ${t('saving')}` : `✓ ${t('addSelected')} (${selectedRecommendations.size})`}
                     </button>
                   )}
                 </div>
@@ -1113,7 +1113,7 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
                               {rec.word}
                               {isAlreadyMastered && (
                                 <span style={{ fontSize: '12px', color: '#ff9800', marginLeft: '8px' }}>
-                                  (already mastered)
+                                  ({t('alreadyMastered')})
                                 </span>
                               )}
                               {rec.pinyin && <span style={{ fontSize: '14px', color: '#666', marginLeft: '10px' }}>
@@ -1313,7 +1313,7 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
             </button>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
               <h2 style={{ margin: 0 }}>
-                📖 Recommended {grammarLanguage === 'en' ? 'English' : 'Chinese'} Grammar Points to Learn
+                📖 {t('grammarRecommendations')} ({grammarLanguage === 'en' ? t('englishGrammar') : t('chineseGrammar')})
               </h2>
               <div style={{ display: 'flex', gap: '10px' }}>
                 <button
@@ -1374,7 +1374,7 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
                         fontSize: '14px'
                       }}
                     >
-                      {savingMasteredGrammar ? '💾 Saving...' : `✓ Add ${selectedGrammarRecommendations.size} Selected`}
+                      {savingMasteredGrammar ? `💾 ${t('saving')}` : `✓ ${t('addSelected')} (${selectedGrammarRecommendations.size})`}
                     </button>
                   )}
                 </div>
@@ -1437,7 +1437,7 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
                               )}
                               {isAlreadyMastered && (
                                 <span style={{ fontSize: '12px', color: '#ff9800', marginLeft: '8px' }}>
-                                  (already mastered)
+                                  ({t('alreadyMastered')})
                                 </span>
                               )}
                             </div>
@@ -1503,7 +1503,7 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
             >
               ×
             </button>
-            <h2>📚 Recommended English Words to Learn</h2>
+            <h2>📚 {t('englishRecommendations')}</h2>
             {selectedProfileForEnglishRecommendations && (
               <p style={{ color: '#666', marginBottom: '20px' }}>
                 For: <strong>{selectedProfileForEnglishRecommendations.name}</strong>
@@ -1570,7 +1570,7 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
             </div>
             
             {englishRecommendations.length === 0 ? (
-              <p>No recommendations available. Please add mastered English words to the profile first.</p>
+              <p>{t('noRecommendations')}. {t('pleaseAddMasteredEnglishWords')}</p>
             ) : (
               <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
@@ -1589,7 +1589,7 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
                         fontSize: '14px'
                       }}
                     >
-                      {savingMasteredEnglishWords ? '💾 Saving...' : `✓ Add ${selectedEnglishRecommendations.size} Selected`}
+                      {savingMasteredEnglishWords ? `💾 ${t('saving')}` : `✓ ${t('addSelected')} (${selectedEnglishRecommendations.size})`}
                     </button>
                   )}
                 </div>
@@ -1631,7 +1631,7 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
                               {rec.word}
                               {isAlreadyMastered && (
                                 <span style={{ fontSize: '12px', color: '#ff9800', marginLeft: '8px' }}>
-                                  (already mastered)
+                                  ({t('alreadyMastered')})
                                 </span>
                               )}
                             </div>
