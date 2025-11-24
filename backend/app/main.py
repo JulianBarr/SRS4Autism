@@ -2778,39 +2778,51 @@ async def get_word_images(request: Dict[str, Any]):
 
 # Get grammar points for mastered grammar management
 @app.get("/vocabulary/grammar")
-async def get_grammar_points(cefr_level: Optional[str] = None):
+async def get_grammar_points(cefr_level: Optional[str] = None, language: Optional[str] = "zh"):
     """
-    Get grammar points from the knowledge graph, optionally filtered by CEFR level (A1, A2, etc.).
+    Get grammar points from the knowledge graph, optionally filtered by CEFR level (A1, A2, etc.) and language.
     Returns grammar points with their structure, explanation, and CEFR level.
+    
+    Args:
+        cefr_level: Optional CEFR level filter (A1, A2, B1, B2, etc.)
+        language: Language filter - "zh" for Chinese, "en" for English (default: "zh")
     """
     try:
+        # Filter by language: 
+        # English grammar (CEFR-J): URI starts with "grammar-en-"
+        # Chinese grammar: URI does NOT start with "grammar-en-"
+        if language == "en":
+            language_filter = 'FILTER(CONTAINS(STR(?gp_uri), "grammar-en-"))'
+        else:
+            language_filter = 'FILTER(!CONTAINS(STR(?gp_uri), "grammar-en-") && BOUND(?label_zh))'
+        
         # Query the knowledge graph for grammar points
         # Use OPTIONAL for properties that might be missing, and handle language-tagged literals
         # Get both English and Chinese labels, and first example sentence (only one per grammar point)
         # First get all grammar points with their properties
-        sparql = """
+        sparql = f"""
         PREFIX srs-kg: <http://srs4autism.com/schema/>
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
         
-        SELECT DISTINCT ?gp_uri ?label_en ?label_zh ?structure ?explanation ?cefr WHERE {
+        SELECT DISTINCT ?gp_uri ?label_en ?label_zh ?structure ?explanation ?cefr WHERE {{
             ?gp_uri a srs-kg:GrammarPoint .
-            OPTIONAL { ?gp_uri rdfs:label ?label_en . FILTER(LANG(?label_en) = "en" || LANG(?label_en) = "") }
-            OPTIONAL { ?gp_uri rdfs:label ?label_zh . FILTER(LANG(?label_zh) = "zh") }
-            OPTIONAL { ?gp_uri srs-kg:structure ?structure }
-            OPTIONAL { ?gp_uri srs-kg:explanation ?explanation }
-            OPTIONAL { ?gp_uri srs-kg:cefrLevel ?cefr }
-            FILTER(BOUND(?label_en) || BOUND(?label_zh))  # At least one label must exist
-        }
+            OPTIONAL {{ ?gp_uri rdfs:label ?label_en . FILTER(LANG(?label_en) = "en" || LANG(?label_en) = "") }}
+            OPTIONAL {{ ?gp_uri rdfs:label ?label_zh . FILTER(LANG(?label_zh) = "zh") }}
+            OPTIONAL {{ ?gp_uri srs-kg:structure ?structure }}
+            OPTIONAL {{ ?gp_uri srs-kg:explanation ?explanation }}
+            OPTIONAL {{ ?gp_uri srs-kg:cefrLevel ?cefr }}
+            {language_filter}
+        }}
         ORDER BY ?cefr ?label_en
         """
         
         if cefr_level:
             # Filter by CEFR level
             sparql = sparql.replace(
-                "ORDER BY ?cefr ?label",
+                "ORDER BY ?cefr ?label_en",
                 f"""
                 FILTER(?cefr = "{cefr_level}")
-                ORDER BY ?cefr ?label
+                ORDER BY ?cefr ?label_en
                 """
             )
         

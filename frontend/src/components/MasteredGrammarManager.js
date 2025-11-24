@@ -5,7 +5,8 @@ import { useLanguage } from '../i18n/LanguageContext';
 const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
 const MasteredGrammarManager = ({ profile, onUpdate }) => {
-  const { language } = useLanguage(); // Get current language
+  const { language: uiLanguage } = useLanguage(); // Get current UI language
+  const [grammarLanguage, setGrammarLanguage] = useState('zh'); // 'zh' for Chinese, 'en' for English
   const [grammarPoints, setGrammarPoints] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
@@ -42,9 +43,12 @@ const MasteredGrammarManager = ({ profile, onUpdate }) => {
   // Load grammar points and corrections
   useEffect(() => {
     const loadGrammarPoints = async () => {
+      setLoading(true);
       try {
         const [grammarResponse, correctionsResponse] = await Promise.all([
-          axios.get(`${API_BASE}/vocabulary/grammar`),
+          axios.get(`${API_BASE}/vocabulary/grammar`, {
+            params: { language: grammarLanguage }
+          }),
           axios.get(`${API_BASE}/vocabulary/grammar/corrections`).catch(() => ({ data: { corrections: {} } }))
         ]);
         
@@ -75,7 +79,7 @@ const MasteredGrammarManager = ({ profile, onUpdate }) => {
     };
 
     loadGrammarPoints();
-  }, []);
+  }, [grammarLanguage]);
 
   // Auto-save function with debounce
   const saveMasteredGrammar = useCallback(async (grammarToSave, immediate = false) => {
@@ -340,7 +344,7 @@ const MasteredGrammarManager = ({ profile, onUpdate }) => {
       <div style={{ marginBottom: '20px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div>
-            <h3>📚 Manage Mastered Grammar Points</h3>
+            <h3>📚 Manage Mastered {grammarLanguage === 'en' ? 'English' : 'Chinese'} Grammar Points</h3>
             <p style={{ color: '#666', fontSize: '14px', marginTop: '5px' }}>
               Select grammar points the child has mastered. Changes are saved automatically.
             </p>
@@ -394,6 +398,44 @@ const MasteredGrammarManager = ({ profile, onUpdate }) => {
               );
             })}
         </div>
+      </div>
+
+      {/* Language Selector */}
+      <div style={{ marginBottom: '15px', display: 'flex', gap: '10px', alignItems: 'center' }}>
+        <label style={{ fontWeight: 'bold', fontSize: '14px' }}>Grammar Language:</label>
+        <button
+          onClick={() => setGrammarLanguage('zh')}
+          style={{
+            padding: '8px 16px',
+            border: 'none',
+            borderRadius: '4px',
+            fontSize: '14px',
+            cursor: 'pointer',
+            backgroundColor: grammarLanguage === 'zh' ? '#1976d2' : '#e0e0e0',
+            color: grammarLanguage === 'zh' ? 'white' : '#333',
+            fontWeight: grammarLanguage === 'zh' ? 'bold' : 'normal'
+          }}
+        >
+          中文 (Chinese)
+        </button>
+        <button
+          onClick={() => setGrammarLanguage('en')}
+          style={{
+            padding: '8px 16px',
+            border: 'none',
+            borderRadius: '4px',
+            fontSize: '14px',
+            cursor: 'pointer',
+            backgroundColor: grammarLanguage === 'en' ? '#1976d2' : '#e0e0e0',
+            color: grammarLanguage === 'en' ? 'white' : '#333',
+            fontWeight: grammarLanguage === 'en' ? 'bold' : 'normal'
+          }}
+        >
+          English
+        </button>
+        {loading && (
+          <span style={{ fontSize: '12px', color: '#666', marginLeft: '10px' }}>Loading...</span>
+        )}
       </div>
 
       {/* Filters */}
@@ -609,18 +651,24 @@ const MasteredGrammarManager = ({ profile, onUpdate }) => {
                         <>
                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '4px' }}>
                             <div style={{ fontWeight: 'bold', fontSize: '16px', flex: 1 }}>
-                              {language === 'zh' && editData.grammar_point_zh
-                                ? editData.grammar_point_zh
-                                : editData.grammar_point}
-                              {language === 'zh' && editData.grammar_point_zh && editData.grammar_point !== editData.grammar_point_zh && (
-                                <span style={{ fontSize: '12px', color: '#999', fontWeight: 'normal', marginLeft: '8px' }}>
-                                  ({editData.grammar_point})
-                                </span>
-                              )}
-                              {language === 'en' && editData.grammar_point_zh && (
-                                <span style={{ fontSize: '12px', color: '#999', fontWeight: 'normal', marginLeft: '8px' }}>
-                                  ({editData.grammar_point_zh})
-                                </span>
+                              {grammarLanguage === 'en' ? (
+                                <>
+                                  {editData.grammar_point}
+                                  {editData.grammar_point_zh && (
+                                    <span style={{ fontSize: '12px', color: '#999', fontWeight: 'normal', marginLeft: '8px' }}>
+                                      ({editData.grammar_point_zh})
+                                    </span>
+                                  )}
+                                </>
+                              ) : (
+                                <>
+                                  {editData.grammar_point_zh || editData.grammar_point}
+                                  {editData.grammar_point_zh && editData.grammar_point !== editData.grammar_point_zh && (
+                                    <span style={{ fontSize: '12px', color: '#999', fontWeight: 'normal', marginLeft: '8px' }}>
+                                      ({editData.grammar_point})
+                                    </span>
+                                  )}
+                                </>
                               )}
                             </div>
                             <button
