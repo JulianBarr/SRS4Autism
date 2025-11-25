@@ -340,14 +340,14 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
           className="btn"
           disabled={loadingRecommendations}
         >
-          {loadingRecommendations ? t('loading') || 'Loading...' : `📚 ${t('getWordRecommendations')} ({t('chineseVocabulary')})`}
+          {loadingRecommendations ? t('loading') || 'Loading...' : `📚 ${t('getWordRecommendations')} (${t('chineseVocabulary')})`}
         </button>
         <button 
           onClick={() => handleGetEnglishRecommendations()}
           className="btn"
           disabled={loadingEnglishRecommendations}
         >
-          {loadingEnglishRecommendations ? t('loading') || 'Loading...' : `📚 ${t('getWordRecommendations')} ({t('englishVocabulary')})`}
+          {loadingEnglishRecommendations ? t('loading') || 'Loading...' : `📚 ${t('getWordRecommendations')} (${t('englishVocabulary')})`}
         </button>
         <button 
           onClick={() => handleGetGrammarRecommendations()}
