@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ChatAssistant from './components/ChatAssistant';
 import CardCuration from './components/CardCuration';
-import ProfileManager from './components/ProfileManager';
+import ChildProfileSettings from './components/ChildProfileSettings';
+import LanguageContentManager from './components/LanguageContentManager';
 import TemplateManager from './components/TemplateManager';
 import ContentCategoryNav from './components/ContentCategoryNav';
 import { useLanguage } from './i18n/LanguageContext';
@@ -15,6 +16,7 @@ function App() {
   const [activeTab, setActiveTab] = useState('main');
   const [activeCategory, setActiveCategory] = useState('language'); // Content category
   const [profiles, setProfiles] = useState([]);
+  const [currentProfile, setCurrentProfile] = useState(null);
   const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(true);
   const [logoError, setLogoError] = useState(false);
@@ -22,6 +24,30 @@ function App() {
   useEffect(() => {
     loadData();
   }, []);
+
+  // Ensure currentProfile is valid when profiles change
+  useEffect(() => {
+    if (profiles.length > 0) {
+      if (!currentProfile) {
+        // Default to first profile if none selected
+        setCurrentProfile(profiles[0]);
+      } else {
+        // Verify selected profile still exists, update ref if data changed
+        const found = profiles.find(p => p.name === currentProfile.name || p.id === currentProfile.id);
+        if (found) {
+          // Only update if data is different to avoid loops, but profiles usually come from API fresh
+          if (JSON.stringify(found) !== JSON.stringify(currentProfile)) {
+             setCurrentProfile(found);
+          }
+        } else {
+          // Profile was deleted, switch to first or null
+          setCurrentProfile(profiles[0] || null);
+        }
+      }
+    } else {
+      setCurrentProfile(null);
+    }
+  }, [profiles, currentProfile]);
 
   const loadData = async () => {
     try {
@@ -92,6 +118,28 @@ function App() {
               )}
               <h1>{t('appTitle')}</h1>
             </div>
+            
+            {/* Profile Selector */}
+            <div style={{ marginLeft: '20px', flex: 1 }}>
+              {profiles.length > 0 && (
+                 <div style={{ display: 'flex', alignItems: 'center' }}>
+                   <span style={{ marginRight: '10px', color: '#666', fontSize: '0.9em' }}>Current Child:</span>
+                   <select 
+                     value={currentProfile?.name || ''}
+                     onChange={(e) => {
+                       const selected = profiles.find(p => p.name === e.target.value);
+                       setCurrentProfile(selected);
+                     }}
+                     style={{ padding: '5px', borderRadius: '4px', border: '1px solid #ccc' }}
+                   >
+                     {profiles.map(p => (
+                       <option key={p.name} value={p.name}>{p.name}</option>
+                     ))}
+                   </select>
+                 </div>
+              )}
+            </div>
+
             <button 
               className="language-toggle"
               onClick={toggleLanguage}
@@ -105,7 +153,7 @@ function App() {
               className={activeTab === 'main' ? 'active' : ''}
               onClick={() => setActiveTab('main')}
             >
-              {t('mainWorkflow')}
+              {t('mainWorkflow') || 'Curriculum'}
             </button>
             <button 
               className={activeTab === 'profiles' ? 'active' : ''}
@@ -137,6 +185,7 @@ function App() {
               <div className="workflow-left">
                 <ChatAssistant 
                   profiles={profiles}
+                  currentProfile={currentProfile}
                   onNewCard={handleNewCard}
                 />
               </div>
@@ -149,7 +198,16 @@ function App() {
               </div>
             </div>
             
-            {/* Category Content (below chat, collapsible or minimal) */}
+            {/* Category Content (below chat) */}
+            {activeCategory === 'language' && (
+               <div style={{ marginTop: '20px', padding: '20px', backgroundColor: '#f5f5f5', borderRadius: '8px' }}>
+                  <LanguageContentManager 
+                    profile={currentProfile} 
+                    onProfileUpdate={loadData}
+                  />
+               </div>
+            )}
+            
             {activeCategory === 'math' && (
               <div style={{ marginTop: '20px', padding: '20px', textAlign: 'center', color: '#666' }}>
                 <h2>🔢 {t('math')}</h2>
@@ -173,7 +231,7 @@ function App() {
           </div>
         )}
         {activeTab === 'profiles' && (
-          <ProfileManager 
+          <ChildProfileSettings 
             profiles={profiles}
             onProfilesChange={setProfiles}
           />
@@ -187,4 +245,3 @@ function App() {
 }
 
 export default App;
-

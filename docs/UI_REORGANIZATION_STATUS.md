@@ -2,102 +2,56 @@
 
 ## ✅ Completed
 
-### 1. Localization Fixes
+### Phase 1: Foundation & Localization
 - ✅ Added translations for all mastered words/recommendations buttons
-- ✅ Added translations for grammar management
-- ✅ Fixed "Manage Mastered Words" → 管理已掌握词汇
-- ✅ Fixed "Get Word Recommendations" → 获取词汇推荐
-- ✅ Fixed "Get Grammar Recommendations" → 获取语法推荐
-- ✅ Fixed all button labels (Add Selected, Saving, etc.)
-- ✅ Fixed modal titles and messages
-- ✅ All UI text now properly localized
-
-### 2. Theme System
-- ✅ Created `theme.js` with consistent color coding
-- ✅ Category colors: Language (Blue), Math (Green), Knowledge (Orange), Culture (Purple)
-- ✅ Status colors: Mastered, In Progress, Not Started, Recommended
-- ✅ Consistent spacing, border radius, shadows
-
-### 3. Widget System Foundation
+- ✅ Fixed localization issues in ProfileManager
+- ✅ Created theme system (`theme.js`)
 - ✅ Created `BaseWidget.js` component
-- ✅ Consistent styling and structure
-- ✅ Category-based color coding
-- ✅ Loading and error states
+- ✅ Integrated `ContentCategoryNav` (Language, Math, Knowledge, Culture)
+- ✅ Improved ChatAssistant interactivity (no full page refresh)
 
-### 4. Content Category Navigation
-- ✅ Created `ContentCategoryNav.js`
-- ✅ Four main categories: Language, Math, Common Knowledge, Culture
-- ✅ Integrated into main App
-- ✅ Language category fully functional
+### Phase 2: Content Managers & Dashboard Revamp
+- ✅ Created **Global Profile Selector** in App Header.
+- ✅ Refactored `ProfileManager` into:
+    - **`ChildProfileSettings`**: Manages child identity (Name, Age, Interests) in the "Profiles" tab.
+    - **`LanguageContentManager`**: Manages learning content (Mastered Words/Grammar, Recommendations) in the "Language" section of the Dashboard.
+- ✅ Updated `App.js` to structure the "Main Workflow" as a **Caregiver Dashboard**:
+    - **Generator**: Chat Assistant & Card Curation (Always visible).
+    - **Planner**: Content Managers (Language, Math, etc.) below.
+- ✅ Removed legacy `LanguageLearningView` and updated imports.
 
-### 5. Interactivity Improvements
-- ✅ ChatAssistant no longer causes full page refresh
-- ✅ Optimistic UI updates for new cards
-- ✅ Background refresh without blocking UI
+## 🚧 Next Steps
 
-## 🚧 In Progress / Next Steps
+### 1. Widget Implementation (Refinement)
+- [ ] Refactor `LanguageContentManager` to use smaller, reusable widgets (RecommendationWidget, MasteryWidget).
+- [ ] Implement `MathContentManager` (currently placeholder).
+- [ ] Implement `SocialContentManager` (currently placeholder).
+- [ ] Implement `InterestContentManager` (currently placeholder).
 
-### 1. Widget Implementation
-- [ ] Create RecommendationWidget component
-- [ ] Create MasteryWidget component  
-- [ ] Create ProgressWidget component
-- [ ] Refactor ProfileManager to use widgets
+### 2. Child's Learning Interface ("Playground")
+- [ ] This will be a separate view/mode, distinct from the Caregiver Dashboard.
 
-### 2. Content Views
-- [ ] Complete LanguageLearningView with sub-categories
-- [ ] Create MathLearningView
-- [ ] Create CommonKnowledgeView
-- [ ] Create CultureView
-
-### 3. Account Considerations
-- [ ] Add profile selector at top (if multiple profiles)
-- [ ] Current profile indicator
-- [ ] Profile switching without reload
-
-### 4. Further Refinements
-- [ ] Extract vocabulary/grammar management into separate widgets
-- [ ] Add progress tracking widgets
-- [ ] Improve visual hierarchy
-- [ ] Add animations/transitions
+### 3. Data Persistence
+- [ ] Ensure all "Content Manager" data feeds correctly into the "Generator" (Chat Assistant).
 
 ## 📊 Current Structure
 
 ```
 App
-├── Header (with language toggle)
-├── Tab Navigation (Main Workflow, Profiles, Templates)
+├── Header
+│   ├── Logo & Title
+│   ├── **Profile Selector** (Select Current Child)
+│   └── Language Toggle
+├── Tab Navigation (Dashboard, Profiles, Templates)
 └── Main Content
-    ├── Content Category Nav (Language/Math/Knowledge/Culture)
-    ├── Category Content
-    │   ├── Language → ProfileManager (all language features)
-    │   ├── Math → Placeholder
-    │   ├── Knowledge → Placeholder
-    │   └── Culture → Placeholder
-    └── Legacy Chat & Card Curation
+    ├── **Dashboard (Main Workflow)**
+    │   ├── Content Category Nav (Language/Math/Knowledge/Culture)
+    │   ├── **Generator Section**: Chat Assistant & Card Curation
+    │   └── **Content Manager Section**:
+    │       ├── Language → LanguageContentManager (Recs, Mastered Lists)
+    │       ├── Math → Placeholder
+    │       ├── Knowledge → Placeholder
+    │       └── Culture → Placeholder
+    └── **Profiles Tab**
+        └── ChildProfileSettings (CRUD for Name, Age, Bio)
 ```
-
-## 🎨 Color Scheme
-
-- **Language**: Blue (#1976d2)
-- **Math**: Green (#4CAF50)
-- **Common Knowledge**: Orange (#FF9800)
-- **Culture**: Purple (#9C27B0)
-
-## 📝 Translation Coverage
-
-All major UI elements now have translations:
-- ✅ Button labels
-- ✅ Modal titles
-- ✅ Status messages
-- ✅ Form labels
-- ✅ Content categories
-- ✅ Error messages
-
-## 🚀 Next Phase
-
-1. **Widget Refactoring**: Break down ProfileManager into smaller widgets
-2. **Sub-category Views**: Separate Chinese/English vocabulary and grammar
-3. **Progress Tracking**: Add visual progress indicators
-4. **Account UI**: Profile selector and switching
-5. **Polish**: Animations, transitions, visual refinements
-
