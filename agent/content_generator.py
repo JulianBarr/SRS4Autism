@@ -4,6 +4,95 @@ from typing import List, Dict, Any, Optional
 from datetime import datetime
 import uuid
 import os
+import re
+
+# Canonical note type names with CUMA prefix
+DEFAULT_NOTE_TYPES = {
+    "interactive_cloze": "CUMA - Interactive Cloze",
+    "basic": "CUMA - Basic",
+    "basic_reverse": "CUMA - Basic (and reversed card)",
+    "cloze": "CUMA - Cloze",
+}
+
+
+def _normalize_note_type_key(value: str) -> str:
+    """Normalize note type strings (slug-style) for comparison."""
+    key = (value or "").strip().lower()
+    if not key:
+        return ""
+    key = key.replace("_", "-")
+    key = key.replace("–", "-").replace("—", "-")
+    key = key.replace("cuma –", "cuma -").replace("cuma—", "cuma-")
+    key = re.sub(r"[^a-z0-9\s\-]", "", key)
+    key = key.replace("cuma ", "cuma-")
+    key = re.sub(r"\s+", "-", key)
+    key = re.sub(r"-+", "-", key)
+    return key.strip("-")
+
+
+def _build_note_type_aliases() -> Dict[str, str]:
+    """Build a lookup of normalized aliases → canonical CUMA note type names."""
+    alias_map: Dict[str, str] = {}
+    for key, canonical in DEFAULT_NOTE_TYPES.items():
+        base = canonical.replace("CUMA - ", "").strip()
+        variants = {
+            canonical,
+            canonical.lower(),
+            base,
+            base.lower(),
+            f"CUMA - {base}",
+            f"CUMA {base}",
+            f"CUMA_{base}",
+            base.replace(" ", "-"),
+            base.replace(" ", "_"),
+            f"cuma - {base}",
+            f"cuma {base}",
+            f"cuma_{base}",
+            f"cuma-{base.replace(' ', '-').lower()}",
+            f"{base.replace(' ', '-')}",
+        }
+        for variant in variants:
+            normalized = _normalize_note_type_key(variant)
+            if normalized:
+                alias_map[normalized] = canonical
+    # Ensure common legacy variants map correctly
+    alias_map.setdefault("interactive-cloze", DEFAULT_NOTE_TYPES["interactive_cloze"])
+    alias_map.setdefault("basic", DEFAULT_NOTE_TYPES["basic"])
+    alias_map.setdefault("basic-and-reversed-card", DEFAULT_NOTE_TYPES["basic_reverse"])
+    alias_map.setdefault("cloze", DEFAULT_NOTE_TYPES["cloze"])
+    return alias_map
+
+
+NOTE_TYPE_ALIAS_MAP = _build_note_type_aliases()
+
+TAG_ANNOTATION_PREFIXES = (
+    "pronunciation",
+    "meaning",
+    "hsk",
+    "knowledge",
+    "note",
+    "remark",
+    "example",
+)
+
+
+def split_tags_for_annotations(raw_tags: List[Any]) -> (List[str], List[str]):
+    """Separate clean tags from descriptive annotations."""
+    keep_tags: List[str] = []
+    annotations: List[str] = []
+    for tag in raw_tags or []:
+        if tag is None:
+            continue
+        tag_str = str(tag).strip()
+        if not tag_str:
+            continue
+        lowered = tag_str.lower()
+        if ":" in tag_str or any(lowered.startswith(prefix) for prefix in TAG_ANNOTATION_PREFIXES):
+            annotations.append(tag_str)
+        else:
+            keep_tags.append(tag_str)
+    return keep_tags, annotations
+
 
 class ContentGenerator:
     """
@@ -22,8 +111,23 @@ class ContentGenerator:
             if api_key:
                 genai.configure(api_key=api_key)
         
-        # Initialize the model
-        self.model = genai.GenerativeModel('models/gemini-2.0-flash-exp')
+        # Initialize the model - upgraded to Gemini 2.5 Flash
+        self.model = genai.GenerativeModel('models/gemini-2.5-flash')
+
+    def _resolve_note_type_name(self, value: Optional[str]) -> Optional[str]:
+        """Resolve incoming note type strings to canonical CUMA-prefixed names."""
+        if not value:
+            return None
+        stripped = value.strip()
+        if not stripped:
+            return None
+        normalized = _normalize_note_type_key(stripped)
+        if normalized in NOTE_TYPE_ALIAS_MAP:
+            return NOTE_TYPE_ALIAS_MAP[normalized]
+        # If it already includes the CUMA prefix, trust it as-is
+        if stripped.lower().startswith("cuma -"):
+            return stripped
+        return NOTE_TYPE_ALIAS_MAP.get(normalized, stripped)
     
     def generate_from_prompt(self, user_prompt: str, context_tags: List[Dict[str, Any]] = None, 
                            child_profile: Dict[str, Any] = None, 
@@ -77,25 +181,35 @@ class ContentGenerator:
             cards = []
             for card_data in cards_data:
                 card_type = card_data.get("card_type", "basic")
+                resolved_note_type = self._resolve_note_type_name(card_data.get("note_type"))
+                raw_tags = card_data.get("tags", [])
+                clean_tags, tag_annotations = split_tags_for_annotations(raw_tags)
                 
                 card = {
                     "id": str(uuid.uuid4()),
                     "card_type": card_type,
                     "front": card_data.get("front", ""),
                     "back": card_data.get("back", ""),
-                    "tags": card_data.get("tags", []),
+                    "tags": clean_tags,
                     "created_at": datetime.now().isoformat(),
                     "status": "pending"
                 }
+                if tag_annotations:
+                    card["field__Remarks_annotations"] = tag_annotations
                 
                 # Handle different card types
                 if card_type == "interactive_cloze":
                     card["text_field"] = card_data.get("text_field", "")
                     card["extra_field"] = card_data.get("extra_field", "")
-                    card["note_type"] = card_data.get("note_type", "Interactive Cloze")
+                    card["note_type"] = resolved_note_type or DEFAULT_NOTE_TYPES["interactive_cloze"]
                     card["cloze_text"] = None  # Not used for interactive cloze
                 elif card_type == "cloze":
                     card["cloze_text"] = card_data.get("cloze_text")
+                    if resolved_note_type:
+                        card["note_type"] = resolved_note_type
+                else:
+                    if resolved_note_type:
+                        card["note_type"] = resolved_note_type
                 
                 cards.append(card)
             
@@ -132,7 +246,11 @@ class ContentGenerator:
             # Base system prompt
             prompt_parts = [
                 "You are an AI assistant specialized in creating educational flashcards for children with autism.",
-                ""
+                "",
+                "Curious Mario Anki integration rules:",
+                "- Always populate a `_Remarks` field with short bullet-style facts (pronunciation, meaning, HSK level, contextual notes).",
+                "- Keep `tags` minimal, machine-friendly labels (single words, hyphenated, or lowercase); NEVER include sentences, colons, or detailed descriptions in `tags`.",
+                "- Avoid duplicating information between `tags` and `_Remarks`."
             ]
         
         # Add child profile context if available
@@ -179,8 +297,8 @@ class ContentGenerator:
                     prompt_parts.append(f"- Use characters from the child's character roster")
                 elif tag_type == "notetype":
                     # Handle both slug-based (e.g., "basic-and-reversed-card") and original (e.g., "Basic (and reversed card)")
-                    # Replace hyphens with spaces, then normalize
-                    note_type_display = tag_value.replace('-', ' ').replace('_', ' ').strip()
+                    resolved_note_type = self._resolve_note_type_name(tag_value)
+                    note_type_display = resolved_note_type or tag_value.replace('-', ' ').replace('_', ' ').strip()
                     prompt_parts.append(f"- REQUIRED: Use Anki note type '{note_type_display}'")
                     prompt_parts.append(f"  Set note_type field to '{note_type_display}'")
                 elif tag_type == "actor":
@@ -197,7 +315,7 @@ class ContentGenerator:
         if context_tags:
             for tag in context_tags:
                 if tag.get("type") == "notetype":
-                    requested_notetype = tag.get("value", "").replace('_', ' ')
+                    requested_notetype = self._resolve_note_type_name(tag.get("value")) or tag.get("value", "").replace('_', ' ')
         
         # ONLY add output format if NO custom template was provided
         # Custom templates should define their own output format
@@ -210,14 +328,14 @@ class ContentGenerator:
                 "**Output Format:**",
                 f"Generate 1-3 flashcards using the '{requested_notetype}' note type.",
                 "",
-                f"If '{requested_notetype}' is 'Interactive Cloze':",
+                f"If '{requested_notetype}' is '{DEFAULT_NOTE_TYPES['interactive_cloze']}':",
                 "- card_type: 'interactive_cloze'",
                 f"- note_type: '{requested_notetype}'",
                 "- text_field: Text with [[c1::answer]] [[c2::answer]] for blanks",
                 "- extra_field: (optional) Additional context or hints",
                 "- tags: Array of relevant tags",
                 "",
-                f"If '{requested_notetype}' is 'Basic':",
+                f"If '{requested_notetype}' is '{DEFAULT_NOTE_TYPES['basic']}':",
                 "- card_type: 'basic'",
                 "- front: The question or prompt",
                 "- back: The answer",
@@ -237,14 +355,14 @@ class ContentGenerator:
                 "",
                 "Choose the best card type based on content:",
                 "",
-                "For Interactive Cloze cards (BEST for sentences with multiple blanks):",
+                f"For {DEFAULT_NOTE_TYPES['interactive_cloze']} cards (BEST for sentences with multiple blanks):",
                 "- card_type: 'interactive_cloze'",
-                "- note_type: 'Interactive Cloze'",
+                f"- note_type: '{DEFAULT_NOTE_TYPES['interactive_cloze']}'",
                 "- text_field: Text with [[c1::answer]] [[c2::answer]] for blanks",
                 "- extra_field: (optional) Additional context or hints",
                 "- tags: Array of relevant tags",
                 "",
-                "For Basic cards (simple Q&A):",
+                f"For {DEFAULT_NOTE_TYPES['basic']} cards (simple Q&A):",
                 "- card_type: 'basic' or 'basic_reverse'",
                 "- front: The question or prompt",
                 "- back: The answer",

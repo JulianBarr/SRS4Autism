@@ -44,12 +44,15 @@ SKOS_NS = Namespace("http://www.w3.org/2004/02/skos/core#")
 
 
 def generate_slug(text):
-    """Generate a URL-safe slug from Chinese or English text."""
-    # For Chinese characters, use a simple encoding
+    """Generate a URL-safe slug from Chinese or English text.
+    
+    For Chinese characters, uses direct UTF-8 (IRIs support Unicode).
+    For English, creates a lowercase hyphenated slug.
+    """
     if re.search(r'[\u4e00-\u9fff]', text):
-        # Chinese characters - encode as hex or use pinyin if available
-        # For now, we'll use a simple hash-like approach
-        return quote(text, safe='')
+        # Chinese characters - use direct UTF-8 (IRIs support Unicode)
+        # Keep Chinese characters as-is for readability
+        return text
     else:
         # English - convert to lowercase, replace spaces/special chars with hyphens
         slug = re.sub(r'[^\w\s-]', '', text.lower())

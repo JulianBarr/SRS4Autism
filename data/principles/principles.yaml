@@ -1,0 +1,8 @@
+scaffolding:
+  high_load:
+    novice: mcq
+    intermediate: cloze
+    advanced: free_response
+    default: mcq
+  default: mcq
+

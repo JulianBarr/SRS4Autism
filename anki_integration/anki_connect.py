@@ -15,6 +15,22 @@ import hashlib
 from typing import List, Dict, Any, Optional
 
 
+TAG_ANNOTATION_PREFIXES = (
+    "pronunciation",
+    "meaning",
+    "hsk",
+    "knowledge",
+    "note",
+    "remark",
+    "example",
+)
+
+
+def sanitize_tags_for_anki(raw_tags: List[Any]) -> List[str]:
+    """Return an empty tag list so that metadata lives in _Remarks instead of Anki tags."""
+    return []
+
+
 class AnkiConnect:
     """Client for communicating with Anki via AnkiConnect API."""
     
@@ -173,7 +189,7 @@ class AnkiConnect:
         return self._invoke("addNote", {"note": note})
     
     def add_basic_card(self, deck_name: str, front: str, back: str, 
-                      tags: List[str] = None) -> int:
+                      tags: List[str] = None, remarks: str = "") -> int:
         """
         Add a basic flashcard.
         
@@ -186,15 +202,18 @@ class AnkiConnect:
         Returns:
             Note ID
         """
+        fields = {"Front": front, "Back": back}
+        if remarks is not None:
+            fields["_Remarks"] = remarks
         return self.add_note(
             deck_name=deck_name,
-            model_name="Basic",
-            fields={"Front": front, "Back": back},
-            tags=tags
+            model_name="CUMA - Basic",
+            fields=fields,
+            tags=sanitize_tags_for_anki(tags)
         )
     
     def add_basic_reverse_card(self, deck_name: str, front: str, back: str,
-                              tags: List[str] = None) -> int:
+                              tags: List[str] = None, remarks: str = "") -> int:
         """
         Add a basic reverse flashcard (card that works both ways).
         
@@ -207,15 +226,18 @@ class AnkiConnect:
         Returns:
             Note ID
         """
+        fields = {"Front": front, "Back": back}
+        if remarks is not None:
+            fields["_Remarks"] = remarks
         return self.add_note(
             deck_name=deck_name,
-            model_name="Basic (and reversed card)",
-            fields={"Front": front, "Back": back},
-            tags=tags
+            model_name="CUMA - Basic (and reversed card)",
+            fields=fields,
+            tags=sanitize_tags_for_anki(tags)
         )
     
     def add_cloze_card(self, deck_name: str, text: str, extra: str = "",
-                      tags: List[str] = None) -> int:
+                      tags: List[str] = None, remarks: str = "") -> int:
         """
         Add a cloze deletion card.
         
@@ -228,11 +250,14 @@ class AnkiConnect:
         Returns:
             Note ID
         """
+        fields = {"Text": text, "Extra": extra}
+        if remarks is not None:
+            fields["_Remarks"] = remarks
         return self.add_note(
             deck_name=deck_name,
-            model_name="Cloze",
-            fields={"Text": text, "Extra": extra},
-            tags=tags
+            model_name="CUMA - Cloze",
+            fields=fields,
+            tags=sanitize_tags_for_anki(tags)
         )
     
     def add_custom_note(self, deck_name: str, note_type: str, fields: Dict[str, str],
@@ -242,7 +267,7 @@ class AnkiConnect:
         
         Args:
             deck_name: Target deck name
-            note_type: Custom note type name (e.g., "Interactive Cloze")
+            note_type: Custom note type name (e.g., "CUMA - Interactive Cloze")
             fields: Dictionary of field names to values
             tags: List of tags
             
@@ -284,11 +309,12 @@ class AnkiConnect:
                 card_type = card.get("card_type", "basic")
                 front = card.get("front", "")
                 back = card.get("back", "")
-                tags = card.get("tags", [])
+                tags = sanitize_tags_for_anki(card.get("tags", []))
                 cloze_text = card.get("cloze_text")
                 text_field = card.get("text_field")
                 extra_field = card.get("extra_field", "")
                 note_type = card.get("note_type")
+                remarks_value = card.get("field__Remarks") or card.get("field__remarks") or ""
                 
                 print(f"  Processing card {card.get('id')}: type={card_type}, note_type={note_type}")
                 
@@ -309,8 +335,12 @@ class AnkiConnect:
                     # Add any other custom fields from the card
                     for key, value in card.items():
                         if key.startswith("field_"):
+                            if key == "field__Remarks_annotations":
+                                continue
                             field_name = key.replace("field_", "")
                             fields[field_name] = value
+                    if remarks_value and "_Remarks" not in fields:
+                        fields["_Remarks"] = remarks_value
                     
                     print(f"    Adding custom note: {note_type} with fields: {list(fields.keys())}")
                     note_id = self.add_custom_note(deck_name, note_type, fields, tags)
@@ -320,17 +350,17 @@ class AnkiConnect:
                 elif card_type == "cloze" and cloze_text:
                     # Process images in cloze text
                     processed_cloze = self._process_html_images(cloze_text)
-                    note_id = self.add_cloze_card(deck_name, processed_cloze, "", tags)
+                    note_id = self.add_cloze_card(deck_name, processed_cloze, "", tags, remarks_value)
                 elif card_type == "basic_reverse":
                     # Process images in front and back
                     processed_front = self._process_html_images(front)
                     processed_back = self._process_html_images(back)
-                    note_id = self.add_basic_reverse_card(deck_name, processed_front, processed_back, tags)
+                    note_id = self.add_basic_reverse_card(deck_name, processed_front, processed_back, tags, remarks_value)
                 else:  # basic
                     # Process images in front and back
                     processed_front = self._process_html_images(front)
                     processed_back = self._process_html_images(back)
-                    note_id = self.add_basic_card(deck_name, processed_front, processed_back, tags)
+                    note_id = self.add_basic_card(deck_name, processed_front, processed_back, tags, remarks_value)
                 
                 results["success"].append({
                     "card_id": card.get("id"),

@@ -82,7 +82,12 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
     } catch (error) {
       console.error('Error loading note types:', error);
       // Fallback to common note types
-      setNoteTypes(['Basic', 'Basic (and reversed card)', 'Cloze', 'Interactive Cloze']);
+      setNoteTypes([
+        'CUMA - Basic',
+        'CUMA - Basic (and reversed card)',
+        'CUMA - Cloze',
+        'CUMA - Interactive Cloze'
+      ]);
     }
   };
 

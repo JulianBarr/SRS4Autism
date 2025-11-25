@@ -14,6 +14,10 @@ const MasteredWordsManager = ({ profile, onUpdate }) => {
   const [lastSaveTime, setLastSaveTime] = useState(null);
   const saveTimeoutRef = useRef(null);
   const initialMasteredSetRef = useRef(null); // Store original state for reset
+  const [wordImages, setWordImages] = useState({}); // Cache of word -> image URL
+  const [loadingImages, setLoadingImages] = useState(false);
+  const imageObserverRef = useRef(null);
+  const requestedWordsRef = useRef(new Set()); // Track which words we've already requested
 
   // Parse mastered words from profile
   useEffect(() => {
@@ -54,6 +58,76 @@ const MasteredWordsManager = ({ profile, onUpdate }) => {
     loadVocabulary();
   }, []);
 
+  // Filter vocabulary based on search and HSK level
+  const filteredVocab = useMemo(() => {
+    let filtered = vocabulary;
+
+    // Filter by HSK level
+    if (selectedHSK !== null) {
+      filtered = filtered.filter(w => w.hsk_level === selectedHSK);
+    }
+
+    // Filter by search term
+    if (searchTerm.trim()) {
+      const searchLower = searchTerm.toLowerCase();
+      filtered = filtered.filter(w =>
+        w.word.toLowerCase().includes(searchLower) ||
+        w.pinyin?.toLowerCase().includes(searchLower)
+      );
+    }
+
+    // Limit display unless showAll is true
+    if (!showAll && filtered.length > 100) {
+      filtered = filtered.slice(0, 100);
+    }
+
+    return filtered;
+  }, [vocabulary, searchTerm, selectedHSK, showAll]);
+
+  // Load images for visible words (batch query, lazy loading)
+  useEffect(() => {
+    if (filteredVocab.length === 0) return;
+
+    // Get words that we haven't requested yet
+    const wordsToLoad = filteredVocab
+      .slice(0, 100) // Only load for first 100 visible items
+      .map(w => w.word)
+      .filter(word => !requestedWordsRef.current.has(word));
+
+    if (wordsToLoad.length === 0) return;
+
+    // Mark these words as requested immediately to prevent duplicate requests
+    wordsToLoad.forEach(word => requestedWordsRef.current.add(word));
+
+    // Batch load images
+    const loadImages = async () => {
+      setLoadingImages(true);
+      try {
+        console.log('Loading images for words:', wordsToLoad.slice(0, 10), '...');
+        const response = await axios.post(`${API_BASE}/vocabulary/images`, {
+          words: wordsToLoad
+        });
+        const foundCount = Object.keys(response.data).filter(k => response.data[k]).length;
+        console.log(`Image response: ${foundCount} images found out of ${wordsToLoad.length} words requested`);
+        if (foundCount > 0) {
+          console.log('Sample images:', Object.entries(response.data).filter(([k, v]) => v).slice(0, 5));
+        }
+        setWordImages(prev => ({ ...prev, ...response.data }));
+      } catch (error) {
+        console.error('Error loading images:', error);
+        // On error, remove from requested set so we can retry
+        wordsToLoad.forEach(word => requestedWordsRef.current.delete(word));
+        // Graceful degradation - continue without images
+      } finally {
+        setLoadingImages(false);
+      }
+    };
+
+    // Debounce image loading
+    const timeoutId = setTimeout(loadImages, 300);
+    return () => clearTimeout(timeoutId);
+  }, [filteredVocab]);
+
   // Auto-save function with debounce
   const saveMasteredWords = useCallback(async (wordsToSave, immediate = false) => {
     if (saveTimeoutRef.current) {
@@ -67,7 +141,7 @@ const MasteredWordsManager = ({ profile, onUpdate }) => {
         const profileData = { ...profile, mastered_words: masteredWordsString };
         await axios.put(`${API_BASE}/profiles/${profile.name}`, profileData);
         setLastSaveTime(new Date());
-        if (onUpdate) {
+        if (immediate && onUpdate) {
           await onUpdate();
         }
       } catch (error) {
@@ -235,32 +309,6 @@ const MasteredWordsManager = ({ profile, onUpdate }) => {
       await saveMasteredWords(restoredSet, true);
     }
   }, [saveMasteredWords]);
-
-  // Filter vocabulary based on search and HSK level
-  const filteredVocab = useMemo(() => {
-    let filtered = vocabulary;
-
-    // Filter by HSK level
-    if (selectedHSK !== null) {
-      filtered = filtered.filter(w => w.hsk_level === selectedHSK);
-    }
-
-    // Filter by search term
-    if (searchTerm.trim()) {
-      const searchLower = searchTerm.toLowerCase();
-      filtered = filtered.filter(w =>
-        w.word.toLowerCase().includes(searchLower) ||
-        w.pinyin?.toLowerCase().includes(searchLower)
-      );
-    }
-
-    // Limit display unless showAll is true
-    if (!showAll && filtered.length > 100) {
-      filtered = filtered.slice(0, 100);
-    }
-
-    return filtered;
-  }, [vocabulary, searchTerm, selectedHSK, showAll]);
 
   // Calculate statistics
   const stats = useMemo(() => {
@@ -445,7 +493,8 @@ const MasteredWordsManager = ({ profile, onUpdate }) => {
                       borderRadius: '4px',
                       backgroundColor: isMastered ? '#e8f5e9' : 'transparent',
                       cursor: 'pointer',
-                      border: isMastered ? '2px solid #4CAF50' : '1px solid #e0e0e0'
+                      border: isMastered ? '2px solid #4CAF50' : '1px solid #e0e0e0',
+                      minHeight: '60px'
                     }}
                   >
                     <input
@@ -454,7 +503,44 @@ const MasteredWordsManager = ({ profile, onUpdate }) => {
                       onChange={() => toggleWord(w.word)}
                       style={{ marginRight: '8px', cursor: 'pointer' }}
                     />
-                    <div>
+                    {/* Small image preview */}
+                    {wordImages[w.word] ? (
+                      <img
+                        src={`${API_BASE}${wordImages[w.word]}`}
+                        alt={w.word}
+                        style={{
+                          width: '32px',
+                          height: '32px',
+                          objectFit: 'cover',
+                          borderRadius: '3px',
+                          marginRight: '6px',
+                          flexShrink: 0
+                        }}
+                        onError={(e) => {
+                          console.error(`Failed to load image for ${w.word}: ${wordImages[w.word]}`);
+                          // Hide broken images
+                          e.target.style.display = 'none';
+                        }}
+                        onLoad={() => {
+                          console.log(`✅ Image loaded for ${w.word}: ${wordImages[w.word]}`);
+                        }}
+                      />
+                    ) : loadingImages && !wordImages[w.word] ? (
+                      <div style={{
+                        width: '32px',
+                        height: '32px',
+                        marginRight: '6px',
+                        flexShrink: 0,
+                        backgroundColor: '#f0f0f0',
+                        borderRadius: '3px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: '10px',
+                        color: '#999'
+                      }}>...</div>
+                    ) : null}
+                    <div style={{ flex: 1 }}>
                       <div style={{ fontWeight: 'bold', fontSize: '16px' }}>{w.word}</div>
                       {w.pinyin && (
                         <div style={{ fontSize: '12px', color: '#666' }}>{w.pinyin}</div>

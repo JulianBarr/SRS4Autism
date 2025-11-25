@@ -65,10 +65,22 @@ SKOS_NS = Namespace("http://www.w3.org/2004/02/skos/core#")
 
 
 def generate_slug(text):
-    """Generate a URL-safe slug from Chinese or English text."""
+    """Generate a URL-safe slug from Chinese or English text.
+    
+    For Chinese characters, uses direct UTF-8 (IRIs support Unicode).
+    Removes problematic characters (parentheses, spaces, etc.) while preserving Chinese.
+    For English, creates a lowercase hyphenated slug.
+    """
     if re.search(r'[\u4e00-\u9fff]', text):
-        return quote(text, safe='')
+        # Chinese characters - use direct UTF-8 (IRIs support Unicode)
+        # Remove problematic characters that aren't valid in IRIs:
+        # - Parentheses, brackets, spaces, and other special chars
+        # - Keep only Chinese characters, alphanumeric, and hyphens
+        # This preserves readability while ensuring valid IRIs
+        cleaned = re.sub(r'[^\u4e00-\u9fff\w-]', '', text)
+        return cleaned if cleaned else text  # Fallback to original if all removed
     else:
+        # English - convert to lowercase, replace spaces/special chars with hyphens
         slug = re.sub(r'[^\w\s-]', '', text.lower())
         slug = re.sub(r'[-\s]+', '-', slug)
         return slug[:50]
@@ -261,6 +273,27 @@ def main():
     graph.bind("skos", SKOS_NS)
     graph.bind("srs-kg", SRS_KG)
     
+    # CRITICAL: Load existing KG first to preserve grammar points, sentences, and other data
+    # This script should ADD/UPDATE word data, not replace the entire graph
+    if os.path.exists(OUTPUT_FILE):
+        print(f"⚠️  WARNING: Existing KG file found: {OUTPUT_FILE}")
+        print(f"   Loading existing graph to preserve grammar points and other data...")
+        try:
+            graph.parse(OUTPUT_FILE, format="turtle")
+            existing_triples = len(graph)
+            print(f"   ✅ Loaded {existing_triples:,} existing triples")
+            
+            # Count existing grammar points
+            from rdflib import RDF
+            grammar_count = len(list(graph.triples((None, RDF.type, SRS_KG.GrammarPoint))))
+            if grammar_count > 0:
+                print(f"   ✅ Preserving {grammar_count} existing grammar points")
+        except Exception as e:
+            print(f"   ⚠️  WARNING: Could not load existing graph: {e}")
+            print("   Starting fresh (this will lose existing data!)")
+    else:
+        print(f"   '{OUTPUT_FILE}' not found. Starting a new graph.")
+    
     # Load ontology schema if it exists
     if os.path.exists(ONTOLOGY_FILE):
         print(f"Loading ontology schema from: {ONTOLOGY_FILE}")
@@ -286,10 +319,27 @@ def main():
     print()
     
     # Track entities
+    # IMPORTANT: Load existing word nodes to avoid duplicates and preserve links
     char_nodes = {}  # char -> char_uri
-    word_nodes = {}  # lemma -> word_uri
+    word_nodes = {}  # lemma -> word_uri (will be populated from existing graph)
     sense_concepts = {}  # sense_id -> concept_uri
     synset_concepts = {}  # synset_id -> concept_uri
+    
+    # Load existing word nodes from graph to avoid recreating them
+    print("Loading existing word nodes from graph...")
+    from rdflib import RDF
+    existing_words = list(graph.triples((None, RDF.type, SRS_KG.Word)))
+    for word_uri, _, _ in existing_words:
+        word_text = graph.value(word_uri, SRS_KG.text)
+        if word_text:
+            word_text_str = str(word_text)
+            word_nodes[word_text_str] = word_uri
+            # Also check for traditional form
+            traditional = graph.value(word_uri, SRS_KG.traditional)
+            if traditional:
+                word_nodes[str(traditional)] = word_uri
+    print(f"  Found {len(word_nodes)} existing word nodes")
+    print()
     
     # Build lemma-to-sense mapping from edges
     lemma_to_senses = defaultdict(list)
@@ -600,8 +650,14 @@ def main():
     output_dir = os.path.dirname(OUTPUT_FILE)
     os.makedirs(output_dir, exist_ok=True)
     
+    # CRITICAL: Backup before saving
+    from scripts.knowledge_graph.kg_backup import backup_kg_file
+    if os.path.exists(OUTPUT_FILE):
+        print(f"\n💾 Creating backup before saving...")
+        backup_kg_file(OUTPUT_FILE)
+    
     # Serialize to Turtle format
-    print(f"Writing knowledge graph to: {OUTPUT_FILE}")
+    print(f"\nWriting knowledge graph to: {OUTPUT_FILE}")
     try:
         graph.serialize(destination=OUTPUT_FILE, format="turtle", encoding="utf-8")
         file_size = os.path.getsize(OUTPUT_FILE)

@@ -4,9 +4,9 @@ import { useLanguage } from '../i18n/LanguageContext';
 
 const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
-const MasteredGrammarManager = ({ profile, onUpdate }) => {
+const MasteredGrammarManager = ({ profile, onUpdate, grammarLanguage = 'zh' }) => {
   const { language: uiLanguage } = useLanguage(); // Get current UI language
-  const [grammarLanguage, setGrammarLanguage] = useState('zh'); // 'zh' for Chinese, 'en' for English
+  // grammarLanguage is now passed as prop from parent (no local state)
   const [grammarPoints, setGrammarPoints] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
@@ -135,7 +135,8 @@ const MasteredGrammarManager = ({ profile, onUpdate }) => {
       structure: g.structure || '',
       explanation: g.explanation || '',
       cefr_level: g.cefr_level || '',
-      example_chinese: g.example_chinese || ''
+      example_chinese: g.example_chinese || g.example || '', // Support both Chinese and English examples
+      example: g.example || g.example_chinese || '' // Support both
     });
   }, []);
 
@@ -400,43 +401,7 @@ const MasteredGrammarManager = ({ profile, onUpdate }) => {
         </div>
       </div>
 
-      {/* Language Selector */}
-      <div style={{ marginBottom: '15px', display: 'flex', gap: '10px', alignItems: 'center' }}>
-        <label style={{ fontWeight: 'bold', fontSize: '14px' }}>Grammar Language:</label>
-        <button
-          onClick={() => setGrammarLanguage('zh')}
-          style={{
-            padding: '8px 16px',
-            border: 'none',
-            borderRadius: '4px',
-            fontSize: '14px',
-            cursor: 'pointer',
-            backgroundColor: grammarLanguage === 'zh' ? '#1976d2' : '#e0e0e0',
-            color: grammarLanguage === 'zh' ? 'white' : '#333',
-            fontWeight: grammarLanguage === 'zh' ? 'bold' : 'normal'
-          }}
-        >
-          中文 (Chinese)
-        </button>
-        <button
-          onClick={() => setGrammarLanguage('en')}
-          style={{
-            padding: '8px 16px',
-            border: 'none',
-            borderRadius: '4px',
-            fontSize: '14px',
-            cursor: 'pointer',
-            backgroundColor: grammarLanguage === 'en' ? '#1976d2' : '#e0e0e0',
-            color: grammarLanguage === 'en' ? 'white' : '#333',
-            fontWeight: grammarLanguage === 'en' ? 'bold' : 'normal'
-          }}
-        >
-          English
-        </button>
-        {loading && (
-          <span style={{ fontSize: '12px', color: '#666', marginLeft: '10px' }}>Loading...</span>
-        )}
-      </div>
+      {/* Language selector removed - language is selected in parent component */}
 
       {/* Filters */}
       <div style={{ marginBottom: '20px', display: 'flex', gap: '10px', flexWrap: 'wrap', alignItems: 'center' }}>
@@ -590,12 +555,18 @@ const MasteredGrammarManager = ({ profile, onUpdate }) => {
                           </div>
                           <div style={{ marginBottom: '10px' }}>
                             <label style={{ display: 'block', fontSize: '12px', color: '#666', marginBottom: '4px' }}>
-                              Example (Chinese):
+                              Example ({grammarLanguage === 'en' ? 'English' : 'Chinese'}):
                             </label>
                             <input
                               type="text"
-                              value={editData.example_chinese}
-                              onChange={(e) => setEditedGrammar({...editData, example_chinese: e.target.value})}
+                              value={grammarLanguage === 'en' ? (editData.example || '') : (editData.example_chinese || '')}
+                              onChange={(e) => {
+                                if (grammarLanguage === 'en') {
+                                  setEditedGrammar({...editData, example: e.target.value});
+                                } else {
+                                  setEditedGrammar({...editData, example_chinese: e.target.value});
+                                }
+                              }}
                               style={{ width: '100%', padding: '6px', border: '1px solid #ddd', borderRadius: '4px' }}
                             />
                           </div>
@@ -691,7 +662,7 @@ const MasteredGrammarManager = ({ profile, onUpdate }) => {
                           {editData.explanation && (
                             <div style={{ fontSize: '13px', color: '#666', marginBottom: '4px' }}>
                               {/* Example sentence at the beginning of the explanation text */}
-                              {editData.example_chinese && (
+                              {(editData.example_chinese || editData.example) && (
                                 <div style={{
                                   fontSize: '15px',
                                   fontWeight: '500',
@@ -699,7 +670,7 @@ const MasteredGrammarManager = ({ profile, onUpdate }) => {
                                   marginBottom: '6px',
                                   fontStyle: 'italic'
                                 }}>
-                                  {editData.example_chinese.replace(/\s+/g, '')}
+                                  {(editData.example_chinese || editData.example || '').replace(/\s+/g, '')}
                                 </div>
                               )}
                               {editData.explanation.length > 150 ? `${editData.explanation.substring(0, 150)}...` : editData.explanation}
@@ -707,7 +678,7 @@ const MasteredGrammarManager = ({ profile, onUpdate }) => {
                           )}
                           
                           {/* If no explanation but there's an example, show it */}
-                          {!editData.explanation && editData.example_chinese && (
+                          {!editData.explanation && (editData.example_chinese || editData.example) && (
                             <div style={{ fontSize: '13px', color: '#666', marginBottom: '4px' }}>
                               <div style={{
                                 fontSize: '15px',
@@ -716,7 +687,7 @@ const MasteredGrammarManager = ({ profile, onUpdate }) => {
                                 marginBottom: '6px',
                                 fontStyle: 'italic'
                               }}>
-                                {editData.example_chinese.replace(/\s+/g, '')}
+                                {(editData.example_chinese || editData.example || '').replace(/\s+/g, '')}
                               </div>
                             </div>
                           )}

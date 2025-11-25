@@ -187,7 +187,16 @@ const ChildProfileSettings = ({ profiles, onProfilesChange }) => {
               <input type="text" name="character_roster" value={charactersInput} onChange={handleCharactersInputChange} placeholder={t('characterRosterPlaceholder')} />
             </div>
             
-            {/* Other fields omitted for brevity in this refactor, but can be added back if needed */}
+            <div className="form-group">
+              <label>{t('rawInput')}</label>
+              <textarea
+                name="raw_input"
+                value={formData.raw_input}
+                onChange={handleInputChange}
+                placeholder={t('rawInputPlaceholder')}
+                rows="4"
+              />
+            </div>
 
             <div className="form-actions">
               <button type="submit" className="btn">{editingProfile ? t('updateProfile') : t('createProfile')}</button>
@@ -214,6 +223,16 @@ const ChildProfileSettings = ({ profiles, onProfilesChange }) => {
                  <div className="detail-row"><strong>{t('age')}:</strong> {profile.dob ? new Date().getFullYear() - new Date(profile.dob).getFullYear() : t('notSpecified')}</div>
                  <div className="detail-row"><strong>Mental Age:</strong> {profile.mental_age || t('notSpecified')}</div>
                  <div className="detail-row"><strong>{t('interests')}:</strong> {profile.interests?.join(', ') || t('noneSpecified')}</div>
+                 <div className="detail-row" style={{
+                   marginTop: '10px',
+                   padding: '10px',
+                   backgroundColor: '#f0f4ff',
+                   border: '1px solid #cfe2ff',
+                   borderRadius: '8px',
+                   whiteSpace: 'pre-line'
+                 }}>
+                   <strong>{t('additionalNotes')}:</strong> {profile.raw_input ? profile.raw_input : <span style={{ color: '#999', fontStyle: 'italic' }}>{t('noAdditionalNotes') || 'No additional notes'}</span>}
+                 </div>
               </div>
             </div>
           ))

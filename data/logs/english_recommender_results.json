@@ -1,0 +1,172 @@
+{
+  "recommendations": [
+    {
+      "word_id": "word-en-tablespoon",
+      "word_text": "tablespoon",
+      "score": 90.00000000000001,
+      "activation": 0.0,
+      "resistance": 1.6,
+      "reason": "CEFR A2 (target), high concreteness"
+    },
+    {
+      "word_id": "word-en-oven",
+      "word_text": "oven",
+      "score": 89.775,
+      "activation": 0.0,
+      "resistance": 1.612,
+      "reason": "CEFR A2 (target), high concreteness"
+    },
+    {
+      "word_id": "word-en-soda",
+      "word_text": "soda",
+      "score": 89.775,
+      "activation": 0.0,
+      "resistance": 1.612,
+      "reason": "CEFR A2 (target), high concreteness"
+    },
+    {
+      "word_id": "word-en-bookcase",
+      "word_text": "bookcase",
+      "score": 89.47500000000001,
+      "activation": 0.0,
+      "resistance": 1.6280000000000001,
+      "reason": "CEFR A2 (target), high concreteness"
+    },
+    {
+      "word_id": "word-en-folder",
+      "word_text": "folder",
+      "score": 89.47500000000001,
+      "activation": 0.0,
+      "resistance": 1.6280000000000001,
+      "reason": "CEFR A2 (target), high concreteness"
+    },
+    {
+      "word_id": "word-en-handbag",
+      "word_text": "handbag",
+      "score": 89.47500000000001,
+      "activation": 0.0,
+      "resistance": 1.6280000000000001,
+      "reason": "CEFR A2 (target), high concreteness"
+    },
+    {
+      "word_id": "word-en-headphone",
+      "word_text": "headphone",
+      "score": 89.47500000000001,
+      "activation": 0.0,
+      "resistance": 1.6280000000000001,
+      "reason": "CEFR A2 (target), high concreteness"
+    },
+    {
+      "word_id": "word-en-text",
+      "word_text": "text",
+      "score": 89.47500000000001,
+      "activation": 0.0,
+      "resistance": 1.6280000000000001,
+      "reason": "CEFR A2 (target), high concreteness"
+    },
+    {
+      "word_id": "word-en-portrait",
+      "word_text": "portrait",
+      "score": 89.25000000000001,
+      "activation": 0.0,
+      "resistance": 1.6400000000000001,
+      "reason": "CEFR A2 (target), high concreteness"
+    },
+    {
+      "word_id": "word-en-post-office",
+      "word_text": "post office",
+      "score": 89.25000000000001,
+      "activation": 0.0,
+      "resistance": 1.6400000000000001,
+      "reason": "CEFR A2 (target), high concreteness"
+    },
+    {
+      "word_id": "word-en-id-card",
+      "word_text": "ID card",
+      "score": 89.17500000000001,
+      "activation": 0.0,
+      "resistance": 1.6440000000000001,
+      "reason": "CEFR A2 (target), high concreteness"
+    },
+    {
+      "word_id": "word-en-soft-drink",
+      "word_text": "soft drink",
+      "score": 89.17500000000001,
+      "activation": 0.0,
+      "resistance": 1.6440000000000001,
+      "reason": "CEFR A2 (target), high concreteness"
+    },
+    {
+      "word_id": "word-en-cab",
+      "word_text": "cab",
+      "score": 89.10000000000001,
+      "activation": 0.0,
+      "resistance": 1.6480000000000001,
+      "reason": "CEFR A2 (target), high concreteness"
+    },
+    {
+      "word_id": "word-en-motorway",
+      "word_text": "motorway",
+      "score": 89.10000000000001,
+      "activation": 0.0,
+      "resistance": 1.6480000000000001,
+      "reason": "CEFR A2 (target), high concreteness"
+    },
+    {
+      "word_id": "word-en-receipt",
+      "word_text": "receipt",
+      "score": 88.95000000000002,
+      "activation": 0.0,
+      "resistance": 1.6560000000000001,
+      "reason": "CEFR A2 (target), high concreteness"
+    },
+    {
+      "word_id": "word-en-runner",
+      "word_text": "runner",
+      "score": 88.95000000000002,
+      "activation": 0.0,
+      "resistance": 1.6560000000000001,
+      "reason": "CEFR A2 (target), high concreteness"
+    },
+    {
+      "word_id": "word-en-scissors",
+      "word_text": "scissors",
+      "score": 88.875,
+      "activation": 0.0,
+      "resistance": 1.6600000000000001,
+      "reason": "CEFR A2 (target), high concreteness"
+    },
+    {
+      "word_id": "word-en-guidebook",
+      "word_text": "guidebook",
+      "score": 88.72500000000001,
+      "activation": 0.0,
+      "resistance": 1.6680000000000001,
+      "reason": "CEFR A2 (target), high concreteness"
+    },
+    {
+      "word_id": "word-en-champagne",
+      "word_text": "champagne",
+      "score": 88.65,
+      "activation": 0.0,
+      "resistance": 1.6720000000000002,
+      "reason": "CEFR A2 (target), high concreteness"
+    },
+    {
+      "word_id": "word-en-drugstore",
+      "word_text": "drugstore",
+      "score": 88.65,
+      "activation": 0.0,
+      "resistance": 1.6720000000000002,
+      "reason": "CEFR A2 (target), high concreteness"
+    }
+  ],
+  "statistics": {
+    "total_words_in_graph": 18003,
+    "words_with_mastery": 1482,
+    "graph_nodes": 18005,
+    "graph_edges": 474,
+    "concept_hubs": 0,
+    "tag_clusters": 2
+  }
+}

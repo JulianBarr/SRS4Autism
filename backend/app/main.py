@@ -738,6 +738,8 @@ def find_learning_frontier(mastered_words: List[str], target_level: int = 1, top
         mental_age: Mental age for AoA filtering (e.g., 7.0 for a 7-year-old)
     """
     # Step 1: Get all words with HSK levels, pinyin, concreteness, and AoA
+    # Only include words that have HSK levels (HSK 1-7 vocabulary)
+    # Make pinyin optional since not all words have it
     sparql = f"""
     PREFIX srs-kg: <http://srs4autism.com/schema/>
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -745,8 +747,8 @@ def find_learning_frontier(mastered_words: List[str], target_level: int = 1, top
     SELECT ?word ?word_text ?pinyin ?hsk ?concreteness ?aoa WHERE {{
         ?word a srs-kg:Word ;
               srs-kg:text ?word_text ;
-              srs-kg:pinyin ?pinyin ;
               srs-kg:hskLevel ?hsk .
+        OPTIONAL {{ ?word srs-kg:pinyin ?pinyin }}
         OPTIONAL {{ ?word srs-kg:concreteness ?concreteness }}
         OPTIONAL {{ ?word srs-kg:ageOfAcquisition ?aoa }}
     }}
@@ -2851,19 +2853,25 @@ async def get_grammar_points(cefr_level: Optional[str] = None, language: Optiona
                 explanation = binding.get('explanation', {}).get('value', '')
                 cefr = binding.get('cefr', {}).get('value', '')
                 
-                # Use English label as primary, fallback to Chinese if no English
-                label = label_en or label_zh
+                # For English grammar, use English label; for Chinese, prefer Chinese label
+                if language == "en":
+                    label = label_en or label_zh  # English grammar: prefer English label
+                else:
+                    label = label_zh or label_en  # Chinese grammar: prefer Chinese label
                 
                 if label:
                     # Get first example sentence for this grammar point
-                    example_chinese = ''
+                    # For English grammar, look for English examples; for Chinese, look for Chinese examples
+                    example_text = ''
+                    example_lang = 'en' if language == 'en' else 'zh'
                     try:
+                        # First try hasExample (grammar point -> sentence)
                         example_sparql = f"""
                         PREFIX srs-kg: <http://srs4autism.com/schema/>
                         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-                        SELECT ?example_chinese WHERE {{
+                        SELECT ?example_text WHERE {{
                             <{gp_uri}> srs-kg:hasExample ?example .
-                            ?example rdfs:label ?example_chinese . FILTER(LANG(?example_chinese) = "zh")
+                            ?example rdfs:label ?example_text . FILTER(LANG(?example_text) = "{example_lang}")
                         }}
                         LIMIT 1
                         """
@@ -2871,19 +2879,48 @@ async def get_grammar_points(cefr_level: Optional[str] = None, language: Optiona
                         if example_results and 'results' in example_results:
                             bindings = example_results.get('results', {}).get('bindings', [])
                             if bindings:
-                                example_chinese = bindings[0].get('example_chinese', {}).get('value', '')
+                                example_text = bindings[0].get('example_text', {}).get('value', '')
+                        
+                        # If no result, try reverse relationship (sentence -> grammar point)
+                        if not example_text:
+                            example_sparql_reverse = f"""
+                            PREFIX srs-kg: <http://srs4autism.com/schema/>
+                            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                            SELECT ?example_text WHERE {{
+                                ?example srs-kg:demonstratesGrammar <{gp_uri}> .
+                                ?example rdfs:label ?example_text . FILTER(LANG(?example_text) = "{example_lang}")
+                            }}
+                            LIMIT 1
+                            """
+                            example_results_reverse = query_sparql(example_sparql_reverse, output_format="application/sparql-results+json")
+                            if example_results_reverse and 'results' in example_results_reverse:
+                                bindings = example_results_reverse.get('results', {}).get('bindings', [])
+                                if bindings:
+                                    example_text = bindings[0].get('example_text', {}).get('value', '')
                     except:
                         pass  # If example query fails, just continue without example
                     
-                    grammar_points.append({
+                    # For English grammar, don't include Chinese translation; for Chinese, include it
+                    grammar_point_data = {
                         'gp_uri': gp_uri,  # Include URI for updating
                         'grammar_point': label,
-                        'grammar_point_zh': label_zh,  # Chinese translation
                         'structure': structure,
                         'explanation': explanation,
                         'cefr_level': cefr,
-                        'example_chinese': example_chinese  # First example sentence in Chinese
-                    })
+                    }
+                    
+                    if language == "en":
+                        # English grammar: use example_text for English examples
+                        grammar_point_data['example'] = example_text
+                        # Only include Chinese translation if it exists (for bilingual display)
+                        if label_zh:
+                            grammar_point_data['grammar_point_zh'] = label_zh
+                    else:
+                        # Chinese grammar: use example_chinese for Chinese examples
+                        grammar_point_data['example_chinese'] = example_text
+                        grammar_point_data['grammar_point_zh'] = label_zh  # Chinese translation
+                    
+                    grammar_points.append(grammar_point_data)
             except Exception as e:
                 continue
         
@@ -3100,8 +3137,10 @@ async def get_grammar_recommendations(request: GrammarRecommendationRequest):
                     score += 10
                 
                 # Get example sentence
+                # Try both hasExample (forward) and demonstratesGrammar (reverse) relationships
                 example_chinese = ''
                 try:
+                    # First try hasExample (grammar point -> sentence)
                     example_sparql = f"""
                     PREFIX srs-kg: <http://srs4autism.com/schema/>
                     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -3116,6 +3155,23 @@ async def get_grammar_recommendations(request: GrammarRecommendationRequest):
                         bindings = example_results.get('results', {}).get('bindings', [])
                         if bindings:
                             example_chinese = bindings[0].get('example_chinese', {}).get('value', '')
+                    
+                    # If no result, try reverse relationship (sentence -> grammar point)
+                    if not example_chinese:
+                        example_sparql_reverse = f"""
+                        PREFIX srs-kg: <http://srs4autism.com/schema/>
+                        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                        SELECT ?example_chinese WHERE {{
+                            ?example srs-kg:demonstratesGrammar <{gp_uri}> .
+                            ?example rdfs:label ?example_chinese . FILTER(LANG(?example_chinese) = "zh")
+                        }}
+                        LIMIT 1
+                        """
+                        example_results_reverse = query_sparql(example_sparql_reverse, output_format="application/sparql-results+json")
+                        if example_results_reverse and 'results' in example_results_reverse:
+                            bindings = example_results_reverse.get('results', {}).get('bindings', [])
+                            if bindings:
+                                example_chinese = bindings[0].get('example_chinese', {}).get('value', '')
                 except:
                     pass
                 

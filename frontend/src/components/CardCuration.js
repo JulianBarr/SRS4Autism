@@ -6,6 +6,163 @@ import RichTextEditor from './RichTextEditor';
 
 const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
+const CardImagePreview = ({ card }) => {
+  const [imageData, setImageData] = useState(card?.image_data || null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [requestKey, setRequestKey] = useState(0);
+
+  const hasImageData = Boolean(card?.has_image_data);
+  const isPlaceholder = card?.is_placeholder;
+
+  React.useEffect(() => {
+    setImageData(card?.image_data || null);
+    setError('');
+    setLoading(false);
+  }, [card?.id, card?.image_data]);
+
+  React.useEffect(() => {
+    let cancelled = false;
+
+    if (!card || !hasImageData || imageData) {
+      return;
+    }
+
+    const fetchImageData = async () => {
+      setLoading(true);
+      setError('');
+      try {
+        const response = await axios.get(`${API_BASE}/cards/${card.id}/image-data`);
+        if (!cancelled) {
+          setImageData(response.data?.image_data || null);
+        }
+      } catch (err) {
+        if (!cancelled) {
+          const message = err.response?.data?.detail || 'Failed to load image';
+          setError(message);
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchImageData();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [card?.id, hasImageData, requestKey]);
+
+  const handleRetry = () => {
+    setRequestKey((prev) => prev + 1);
+  };
+
+  if (!card) {
+    return null;
+  }
+
+  const hasDescriptionOnly = !hasImageData && Boolean(card.image_description);
+
+  if (!hasImageData && !hasDescriptionOnly) {
+    return null;
+  }
+
+  const backgroundColor = isPlaceholder ? '#fff3cd' : hasImageData ? '#f8f9fa' : '#fff3cd';
+  const borderColor = isPlaceholder ? '#ffeaa7' : '#dee2e6';
+  const titleColor = isPlaceholder || !hasImageData ? '#856404' : '#495057';
+  const titleText = isPlaceholder
+    ? '🎨 Image Description (Placeholder)'
+    : hasImageData
+      ? '🎨 Generated Image:'
+      : '🎨 Image Description:';
+
+  return (
+    <div
+      className="generated-image"
+      style={{
+        marginTop: '15px',
+        padding: '10px',
+        background: backgroundColor,
+        borderRadius: '8px',
+        border: `1px solid ${borderColor}`
+      }}
+    >
+      <h5 style={{ margin: '0 0 10px 0', color: titleColor }}>
+        {titleText}
+      </h5>
+
+      {hasImageData && (
+        <>
+          {loading && (
+            <div style={{ fontSize: '12px', color: '#6c757d', marginBottom: '8px' }}>
+              Loading image...
+            </div>
+          )}
+          {!loading && error && (
+            <div style={{ fontSize: '12px', color: '#dc3545', marginBottom: '8px' }}>
+              <strong>Error:</strong> {error}
+              <button
+                type="button"
+                onClick={handleRetry}
+                style={{
+                  marginLeft: '8px',
+                  fontSize: '12px',
+                  padding: '4px 8px',
+                  cursor: 'pointer'
+                }}
+              >
+                Retry
+              </button>
+            </div>
+          )}
+          {!loading && !error && imageData && (
+            <img
+              src={imageData}
+              alt="Generated for flashcard"
+              style={{
+                maxWidth: '100%',
+                height: 'auto',
+                maxHeight: '200px',
+                objectFit: 'contain',
+                borderRadius: '8px',
+                border: '1px solid #ddd',
+                marginBottom: '10px',
+                display: 'block',
+                marginLeft: 'auto',
+                marginRight: 'auto'
+              }}
+            />
+          )}
+        </>
+      )}
+
+      {card.image_description && (
+        <div style={{ fontSize: '12px', color: isPlaceholder ? '#856404' : '#6c757d' }}>
+          <strong>Description:</strong> {card.image_description}
+        </div>
+      )}
+
+      {isPlaceholder && (
+        <div
+          style={{
+            marginTop: '10px',
+            padding: '8px',
+            background: '#e9ecef',
+            borderRadius: '4px',
+            fontSize: '11px',
+            color: '#6c757d'
+          }}
+        >
+          <strong>Note:</strong> This is a placeholder. To generate actual images, integrate with an
+          image generation service like DALL-E 3, Midjourney, or Stable Diffusion.
+        </div>
+      )}
+    </div>
+  );
+};
+
 const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
   const { t } = useLanguage();
   const [selectedCards, setSelectedCards] = useState([]);
@@ -260,56 +417,30 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
       return renderEditForm(card);
     }
 
-    // Show generated image if available
-    const renderGeneratedImage = () => {
-      if (card.image_generated && card.image_data) {
-        const isPlaceholder = card.is_placeholder;
-        return (
-          <div className="generated-image" style={{marginTop: '15px', padding: '10px', background: isPlaceholder ? '#fff3cd' : '#f8f9fa', borderRadius: '8px', border: `1px solid ${isPlaceholder ? '#ffeaa7' : '#dee2e6'}`}}>
-            <h5 style={{margin: '0 0 10px 0', color: isPlaceholder ? '#856404' : '#495057'}}>
-              {isPlaceholder ? '🎨 Image Description (Placeholder)' : '🎨 Generated Image:'}
-            </h5>
-            {!isPlaceholder && (
-              <img 
-                src={card.image_data} 
-                alt="Generated for flashcard" 
-                style={{ 
-                  maxWidth: '100%', 
-                  height: 'auto', 
-                  maxHeight: '200px',
-                  objectFit: 'contain',
-                  borderRadius: '8px', 
-                  border: '1px solid #ddd', 
-                  marginBottom: '10px',
-                  display: 'block',
-                  margin: '0 auto 10px auto'
-                }}
-              />
-            )}
-            {card.image_description && (
-              <div className="image-description" style={{fontSize: '12px', color: isPlaceholder ? '#856404' : '#6c757d'}}>
-                <strong>Description:</strong> {card.image_description}
-              </div>
-            )}
-            {isPlaceholder && (
-              <div style={{marginTop: '10px', padding: '8px', background: '#e9ecef', borderRadius: '4px', fontSize: '11px', color: '#6c757d'}}>
-                <strong>Note:</strong> This is a placeholder. To generate actual images, integrate with an image generation service like DALL-E 3, Midjourney, or Stable Diffusion.
-              </div>
-            )}
-          </div>
-        );
-      } else if (card.image_description && !card.image_generated) {
-        return (
-          <div className="image-description-only" style={{marginTop: '15px', padding: '10px', background: '#fff3cd', borderRadius: '8px', border: '1px solid #ffeaa7'}}>
-            <h5 style={{margin: '0 0 10px 0', color: '#856404'}}>🎨 Image Description:</h5>
-            <p style={{margin: '0 0 5px 0', fontStyle: 'italic'}}>{card.image_description}</p>
-            {card.image_error && (
-              <p style={{margin: '0', color: '#dc3545', fontSize: '12px'}}><strong>Error:</strong> {card.image_error}</p>
-            )}
-          </div>
-        );
+    const renderRemarks = () => {
+      const remarks = card.field__Remarks || card.field__remarks;
+      if (!remarks || !remarks.trim()) {
+        return null;
       }
-      return null;
+      return (
+        <div
+          className="card-remarks"
+          style={{
+            marginTop: '12px',
+            padding: '10px',
+            background: '#f0f4ff',
+            border: '1px solid #cfe2ff',
+            borderRadius: '8px',
+            fontSize: '12px',
+            color: '#1d3557'
+          }}
+        >
+          <strong style={{display: 'block', marginBottom: '6px'}}>CUMA Remarks</strong>
+          <div style={{whiteSpace: 'pre-line', lineHeight: 1.5}}>
+            {remarks}
+          </div>
+        </div>
+      );
     };
 
     switch (card.card_type) {
@@ -325,7 +456,8 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
               <strong>{t('back')}:</strong> 
               <div dangerouslySetInnerHTML={{__html: card.back}} />
             </div>
-            {renderGeneratedImage()}
+            <CardImagePreview card={card} />
+            {renderRemarks()}
           </div>
         );
       case 'basic_reverse':
@@ -341,13 +473,14 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
               <div dangerouslySetInnerHTML={{__html: card.back}} />
             </div>
             <div className="note">{t('worksBoothWays')}</div>
-            {renderGeneratedImage()}
+            <CardImagePreview card={card} />
+            {renderRemarks()}
           </div>
         );
       case 'interactive_cloze':
         return (
           <div className="card-preview">
-            <h4>Interactive Cloze Card</h4>
+            <h4>CUMA - Interactive Cloze Card</h4>
             <div 
               className="cloze-text" 
               dangerouslySetInnerHTML={{__html: card.text_field || card.cloze_text}}
@@ -359,7 +492,8 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
               </div>
             )}
             <div className="note">Click blanks to reveal (uses [[c1::answer]] syntax)</div>
-            {renderGeneratedImage()}
+            <CardImagePreview card={card} />
+            {renderRemarks()}
           </div>
         );
       case 'cloze':
@@ -368,11 +502,18 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
             <h4>{t('clozeCard')}</h4>
             <div className="cloze-text">{card.cloze_text}</div>
             <div className="note">{t('missingWordHidden')}</div>
-            {renderGeneratedImage()}
+            <CardImagePreview card={card} />
+            {renderRemarks()}
           </div>
         );
       default:
-        return <div>Unknown card type: {card.card_type}</div>;
+        return (
+          <div className="card-preview">
+            <h4>{card.card_type}</h4>
+            <CardImagePreview card={card} />
+            {renderRemarks()}
+          </div>
+        );
     }
   };
 

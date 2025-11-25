@@ -950,11 +950,16 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
                 <div className="detail-row">
                   <strong>{t('passiveLanguageLevel')}:</strong> {profile.passive_language_level || t('notSpecified')}
                 </div>
-                {profile.raw_input && (
-                  <div className="detail-row">
-                    <strong>{t('additionalNotes')}:</strong> {profile.raw_input}
-                  </div>
-                )}
+                <div className="detail-row" style={{
+                  marginTop: '10px',
+                  padding: '10px',
+                  backgroundColor: '#f0f4ff',
+                  border: '1px solid #cfe2ff',
+                  borderRadius: '8px',
+                  whiteSpace: 'pre-line'
+                }}>
+                  <strong>{t('additionalNotes')}:</strong> {profile.raw_input ? profile.raw_input : <span style={{ color: '#999', fontStyle: 'italic' }}>{t('noAdditionalNotes') || 'No additional notes'}</span>}
+                </div>
               </div>
             </div>
           ))

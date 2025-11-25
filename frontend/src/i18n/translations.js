@@ -93,6 +93,7 @@ export const translations = {
     notSpecified: "Not specified",
     noneSpecified: "None specified",
     additionalNotes: "Additional Notes",
+    noAdditionalNotes: "No additional notes",
     noProfilesYet: "No profiles created yet.",
     
     // Status
@@ -271,6 +272,7 @@ export const translations = {
     notSpecified: "未指定",
     noneSpecified: "未指定",
     additionalNotes: "附加说明",
+    noAdditionalNotes: "无附加说明",
     noProfilesYet: "尚未创建档案。",
     
     // Status
@@ -373,6 +375,7 @@ export const translations = {
     notSpecified: "未指定",
     noneSpecified: "未指定",
     additionalNotes: "附加说明",
+    noAdditionalNotes: "无附加说明",
     noProfilesYet: "尚未创建档案。",
     
     // Status

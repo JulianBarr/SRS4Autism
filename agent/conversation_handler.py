@@ -19,11 +19,13 @@ class ConversationHandler:
             if api_key:
                 genai.configure(api_key=api_key)
         
-        # Initialize the model for text generation
-        self.model = genai.GenerativeModel('models/gemini-2.0-flash-exp')
+        # Initialize the model for text generation - upgraded to Gemini 2.5 Flash
+        self.model = genai.GenerativeModel('models/gemini-2.5-flash')
         
-        # Initialize the model for image generation
-        self.image_model = genai.GenerativeModel('models/gemini-2.0-flash-exp-image-generation')
+        # Initialize the model for image generation - will try multiple models at generation time
+        # Models are tried in order: gemini-2.5-flash-image, then gemini-2.0-flash-exp-image-generation
+        # Note: For Imagen 4, we may need to use Vertex AI API instead
+        self.image_model = None  # Will be created dynamically during generation
         
         # Image generation is always enabled with Gemini
         self.image_generation_enabled = True
@@ -247,15 +249,10 @@ Generate the image description now:"""
             return f"A simple, colorful illustration showing the concept from the flashcard: '{card_content.get('front', '')}' - '{card_content.get('back', '')}'. The image should be child-friendly, educational, and visually engaging with bright colors and clear, simple shapes."
     
     def generate_actual_image(self, image_description: str, user_request: str = "") -> Dict[str, Any]:
-        """Generate an image using Gemini 2.0 Flash Image Generation model."""
+        """Generate an image using Gemini 2.5 Flash Image Generation model (Nano Banana) or Imagen 4."""
         
-        try:
-            print(f"\n🎨 GENERATING IMAGE WITH GEMINI 2.0 FLASH IMAGE GENERATION:")
-            print(f"Description: {image_description}")
-            print(f"User Request: {user_request}")
-            
-            # Create a more specific prompt for Gemini image generation
-            gemini_prompt = f"""Create a simple, child-friendly illustration for an educational flashcard.
+        # Create a more specific prompt for Gemini image generation
+        gemini_prompt = f"""Create a simple, child-friendly illustration for an educational flashcard.
 
 Description: {image_description}
 
@@ -269,90 +266,110 @@ Requirements:
 
 Generate an image that matches this description exactly."""
 
-            print(f"Prompt: {gemini_prompt}")
-            
-            # Use Gemini's image generation model with proper configuration
-            response = self.image_model.generate_content(
-                gemini_prompt,
-                generation_config={
-                    "response_modalities": ["TEXT", "IMAGE"],
-                    "temperature": 0.7,
-                    "max_output_tokens": 8192,
-                }
-            )
-            
-            print(f"Response type: {type(response)}")
-            print(f"Response parts: {len(response.parts) if hasattr(response, 'parts') else 'No parts'}")
-            
-            # Check if response contains an image
-            if hasattr(response, 'parts') and response.parts:
-                for i, part in enumerate(response.parts):
-                    print(f"Part {i}: {type(part)}")
-                    if hasattr(part, 'inline_data') and part.inline_data:
-                        print(f"Found image data in part {i}")
-                        # Extract image data
-                        image_data = part.inline_data.data
-                        mime_type = part.inline_data.mime_type
-                        
-                        # Convert to base64 data URL
-                        base64_data = base64.b64encode(image_data).decode('utf-8')
-                        data_url = f"data:{mime_type};base64,{base64_data}"
-                        
-                        return {
-                            "success": True,
-                            "error": None,
-                            "image_url": None,  # Gemini doesn't provide URLs
-                            "image_data": data_url,
-                            "prompt_used": gemini_prompt,
-                            "is_placeholder": False
-                        }
-                    elif hasattr(part, 'text') and part.text:
-                        print(f"Part {i} text: {part.text[:100]}...")
-            
-            # If no image was generated, try a different approach
-            print("No image found in response, trying fallback approach...")
-            fallback_prompt = f"Generate an image: {image_description}"
-            fallback_response = self.image_model.generate_content(
-                fallback_prompt,
-                generation_config={
-                    "response_modalities": ["TEXT", "IMAGE"],
-                    "temperature": 0.7,
-                }
-            )
-            
-            if hasattr(fallback_response, 'parts') and fallback_response.parts:
-                for i, part in enumerate(fallback_response.parts):
-                    print(f"Fallback part {i}: {type(part)}")
-                    if hasattr(part, 'inline_data') and part.inline_data:
-                        print(f"Found image data in fallback part {i}")
-                        image_data = part.inline_data.data
-                        mime_type = part.inline_data.mime_type
-                        base64_data = base64.b64encode(image_data).decode('utf-8')
-                        data_url = f"data:{mime_type};base64,{base64_data}"
-                        
-                        return {
-                            "success": True,
-                            "error": None,
-                            "image_url": None,
-                            "image_data": data_url,
-                            "prompt_used": fallback_prompt,
-                            "is_placeholder": False
-                        }
-            
-            # If still no image, return error with detailed info
-            print("No image generated by Gemini")
-            return {
-                "success": False,
-                "error": f"Gemini did not generate an image. Response had {len(response.parts) if hasattr(response, 'parts') else 0} parts. The model may not support image generation or the prompt needs adjustment.",
-                "image_url": None,
-                "image_data": None
-            }
+        print(f"Prompt: {gemini_prompt}")
+        
+        # Try different model names in order of preference
+        model_names_to_try = [
+            ('models/gemini-2.5-flash-image', 'Gemini 2.5 Flash Image'),
+            ('models/gemini-2.0-flash-exp-image-generation', 'Gemini 2.0 Flash Exp Image Generation'),
+        ]
+        
+        for model_name, model_desc in model_names_to_try:
+            try:
+                print(f"\n🎨 GENERATING IMAGE WITH {model_desc}:")
+                print(f"Description: {image_description}")
+                print(f"User Request: {user_request}")
                 
-        except Exception as e:
-            print(f"Image generation error: {e}")
-            return {
-                "success": False,
-                "error": f"Image generation failed: {str(e)}",
-                "image_url": None,
-                "image_data": None
-            }
+                # Create model instance for this attempt
+                image_model = genai.GenerativeModel(model_name)
+                
+                # Use Gemini's image generation model with proper configuration
+                response = image_model.generate_content(
+                    gemini_prompt,
+                    generation_config={
+                        "response_modalities": ["TEXT", "IMAGE"],
+                        "temperature": 0.7,
+                        "max_output_tokens": 8192,
+                    }
+                )
+            
+                print(f"Response type: {type(response)}")
+                print(f"Response parts: {len(response.parts) if hasattr(response, 'parts') else 'No parts'}")
+                
+                # Check if response contains an image
+                if hasattr(response, 'parts') and response.parts:
+                    for i, part in enumerate(response.parts):
+                        print(f"Part {i}: {type(part)}")
+                        if hasattr(part, 'inline_data') and part.inline_data:
+                            print(f"Found image data in part {i}")
+                            # Extract image data
+                            image_data = part.inline_data.data
+                            mime_type = part.inline_data.mime_type
+                            
+                            # Convert to base64 data URL
+                            base64_data = base64.b64encode(image_data).decode('utf-8')
+                            data_url = f"data:{mime_type};base64,{base64_data}"
+                            
+                            return {
+                                "success": True,
+                                "error": None,
+                                "image_url": None,  # Gemini doesn't provide URLs
+                                "image_data": data_url,
+                                "prompt_used": gemini_prompt,
+                                "is_placeholder": False
+                            }
+                        elif hasattr(part, 'text') and part.text:
+                            print(f"Part {i} text: {part.text[:100]}...")
+                
+                # If no image was generated, try a different approach
+                print("No image found in response, trying fallback approach...")
+                fallback_prompt = f"Generate an image: {image_description}"
+                fallback_response = image_model.generate_content(
+                    fallback_prompt,
+                    generation_config={
+                        "response_modalities": ["TEXT", "IMAGE"],
+                        "temperature": 0.7,
+                    }
+                )
+                
+                if hasattr(fallback_response, 'parts') and fallback_response.parts:
+                    for i, part in enumerate(fallback_response.parts):
+                        print(f"Fallback part {i}: {type(part)}")
+                        if hasattr(part, 'inline_data') and part.inline_data:
+                            print(f"Found image data in fallback part {i}")
+                            image_data = part.inline_data.data
+                            mime_type = part.inline_data.mime_type
+                            base64_data = base64.b64encode(image_data).decode('utf-8')
+                            data_url = f"data:{mime_type};base64,{base64_data}"
+                            
+                            return {
+                                "success": True,
+                                "error": None,
+                                "image_url": None,
+                                "image_data": data_url,
+                                "prompt_used": fallback_prompt,
+                                "is_placeholder": False
+                            }
+                
+                # If still no image, try next model
+                print(f"⚠️  {model_desc} did not generate an image, trying next model...")
+                continue
+                
+            except Exception as e:
+                error_msg = str(e)
+                print(f"⚠️  Error with {model_desc}: {error_msg}")
+                # If it's a 404 (model not found), try next model
+                if "404" in error_msg or "not found" in error_msg.lower():
+                    print(f"   Model {model_name} not available, trying next option...")
+                    continue
+                else:
+                    # For other errors, try next model but log the error
+                    continue
+        
+        # If all models failed, return error
+        return {
+            "success": False,
+            "error": f"Image generation failed: None of the available models could generate an image. Please check that you have access to Gemini image generation models or consider using Vertex AI Imagen 4.",
+            "image_url": None,
+            "image_data": None
+        }

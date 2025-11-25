@@ -29,6 +29,7 @@ sys.path.insert(0, str(project_root))
 # Configuration
 DATA_DIR = project_root / 'data' / 'content_db'
 KG_FILES = [
+    project_root / 'knowledge_graph' / 'world_model_cwn.ttl.backup',  # Check backup first (has examples)
     project_root / 'knowledge_graph' / 'world_model_cwn.ttl',
     project_root / 'knowledge_graph' / 'world_model.ttl',
     project_root / 'knowledge_graph' / 'world_model_merged.ttl'

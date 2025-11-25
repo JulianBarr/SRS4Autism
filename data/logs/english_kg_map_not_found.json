@@ -1,0 +1,2713 @@
+{
+  "skipped": [
+    {
+      "note_id": 1554034928037,
+      "front": "<img src=\"sparks.gif\" />",
+      "back": "Sparks",
+      "word": "Sparks",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1557608855083,
+      "front": "<img src=\"juggling (1).gif\" />",
+      "back": "Juggling",
+      "word": "Juggling",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1587782430490,
+      "front": "<img src=\"屏幕快照 2020-04-25 上午10.40.21.png\" />",
+      "back": "Lego blocks",
+      "word": "Lego blocks",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1590962675686,
+      "front": "<img src=\"abacus.jpg\" />",
+      "back": "Abacus",
+      "word": "Abacus",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1593123868367,
+      "front": "<img src=\"segway.jpg\">",
+      "back": "Segway",
+      "word": "Segway",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1711877231601,
+      "front": "擅长",
+      "back": "(be) good at",
+      "word": "(be) good at",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1734839899112,
+      "front": "<img src=\"paste-915e059d8775a3465fed6e80aff7c9eb290a0736.jpg\"><br>铝罐",
+      "back": "Aluminum cans",
+      "word": "Aluminum cans",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1756000300903,
+      "front": "<img src=\"paste-6df9da87d8a88299e2bf809d80b406ca28581583.jpg\"><br>健身",
+      "back": "Work out",
+      "word": "Work out",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1659444350854,
+      "front": "<img src=\"Screen Shot 2022-08-02 at 8.45.13 PM.png\">",
+      "back": "Darts",
+      "word": "Darts",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1711781888615,
+      "front": "<img src=\"paste-3d78a9abb4fe7de9d067c42cb8701f92f7be3f0d.jpg\">",
+      "back": "Spoiled children",
+      "word": "Spoiled children",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1556534698568,
+      "front": "<img src=\"lookup.png\" />",
+      "back": "Look up",
+      "word": "Look up",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1710559897094,
+      "front": "<img src=\"NWvcdcNs4y-1.jpg\">",
+      "back": "Sales assistant",
+      "word": "Sales assistant",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1717807119891,
+      "front": "<img src=\"paste-8a404cd6c513d1e605f7fbee762daf6560ac4ae6.jpg\">",
+      "back": "Tug of war",
+      "word": "Tug of war",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1749649008233,
+      "front": "<img src=\"paste-1c879646930021bcf355000ae6e02fd0c9d79a1c.jpg\"><br>不听话的",
+      "back": "Disobedient",
+      "word": "Disobedient",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1752564403926,
+      "front": "<img src=\"paste-88674027169926d839e46ac46ccb61eff98a56a7.jpg\"><br>悄悄溜走",
+      "back": "Sneak off",
+      "word": "Sneak off",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1754739898649,
+      "front": "<img src=\"paste-cec7ae182b8707e211f605e1693612032a7111c3.jpg\"><img src=\"paste-0d68c260792bb2458ebe1d258fa3a976f75d96b8.jpg\"><br>节俭的",
+      "back": "Thrifty",
+      "word": "Thrifty",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1755912561054,
+      "front": "<img src=\"paste-973ab7476d90e48e116e29930b757a95bbfffee0.jpg\"><br>牙线",
+      "back": "Dental Floss",
+      "word": "Dental Floss",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1659530155643,
+      "front": "<img src=\"Screen Shot 2022-08-03 at 8.29.54 PM.png\">",
+      "back": "Sit up",
+      "word": "Sit up",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1544957663594,
+      "front": "<img src=\"red_wine.png\" />",
+      "back": "Red wine",
+      "word": "Red wine",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1598767839084,
+      "front": "<img src=\"Tableware (1).jpg\">",
+      "back": "Tableware",
+      "word": "Tableware",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1598913485024,
+      "front": "<img src=\"thunderbolt.jpg\">",
+      "back": "Thunderbolt",
+      "word": "Thunderbolt",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1709097692123,
+      "front": "<img src=\"shut.gif\">",
+      "back": "Shut the door",
+      "word": "Shut the door",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1717075204647,
+      "front": "<img src=\"paste-e0e68e26d65529ccd0b3e401e18cb74eaa623c6d.jpg\"><br>出发",
+      "back": "Set out",
+      "word": "Set out",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1733919603996,
+      "front": "<img src=\"paste-09df671080822bf4f28e6e2804f4a354a618fd52.jpg\"><br>胳肢窝",
+      "back": "Armpit",
+      "word": "Armpit",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1661044560019,
+      "front": "<img src=\"Screen Shot 2022-08-21 at 9.14.39 AM.png\">",
+      "back": "Baggage claim",
+      "word": "Baggage claim",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1664581182241,
+      "front": "<img src=\"paste-2eecaa60de90df1726202396831d70bae680c0a0.jpg\">",
+      "back": "Carousel",
+      "word": "Carousel",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1717906934522,
+      "front": "<img src=\"paste-db7fd93fc53cb9c58d9ea03346d0fda267bccb16.jpg\"><br>塞满的",
+      "back": "Crammed",
+      "word": "Crammed",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1734008768421,
+      "front": "<img src=\"paste-5cbb3e1a6c55284df83b3380e86be64228768064.jpg\"><br>坍塌、塌方",
+      "back": "Cave in",
+      "word": "Cave in",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1755337671733,
+      "front": "<img src=\"paste-517cce7c2b6f2b6c0520c9b864f352d67bdd8ece.jpg\"><br>破布、旧布",
+      "back": "Rags",
+      "word": "Rags",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1756010792737,
+      "front": "<img src=\"paste-a80de9336f2867886c5a07fc8fae1bcb4ea0206c.jpg\"><br>棉被、羽绒被",
+      "back": "Comforter",
+      "word": "Comforter",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1588458074072,
+      "front": "<img src=\"屏幕快照 2020-05-03 上午6.21.07.png\">",
+      "back": "Spoke",
+      "word": "Spoke",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1599779343358,
+      "front": "<img src=\"cat-fight-a-dog.jpg\">",
+      "back": "Spat",
+      "word": "Spat",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1659444481508,
+      "front": "<img src=\"Screen Shot 2022-08-02 at 8.47.43 PM.png\">",
+      "back": "Souvenirs",
+      "word": "Souvenirs",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1665017564166,
+      "front": "<img src=\"Common_decimals_oqmy8w.jpg\">",
+      "back": "Decimal",
+      "word": "Decimal",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1713704393612,
+      "front": "<img src=\"paste-d72e7a48a469da678086e36e4720408123cf77fa.jpg\">",
+      "back": "Cutlery",
+      "word": "Cutlery",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1735444050709,
+      "front": "<img src=\"come_to.gif\"><br>苏醒、恢复知觉",
+      "back": "Come to",
+      "word": "Come to",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1598583526588,
+      "front": "<img src=\"spoiled_bicycle.jpg\">",
+      "back": "Spoiled bicycle",
+      "word": "Spoiled bicycle",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1735715644004,
+      "front": "<img src=\"paste-2bd13a39f4d37b015d61e4ad19455c58d2d81e5f.jpg\"><br>发电机",
+      "back": "Generator",
+      "word": "Generator",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1749979207553,
+      "front": "<img src=\"paste-96c601360b20745210ac159a7af4581e7972c1c9.jpg\"><br>嫁接",
+      "back": "Grafting",
+      "word": "Grafting",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1612353263564,
+      "front": "<img src=\"paste-df70461a16ef0fba844213009d9b2cd062eb7815.jpg\">",
+      "back": "Vehicles",
+      "word": "Vehicles",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1746013761060,
+      "front": "<img src=\"tick.gif\"><br>滴答",
+      "back": "Ticktock",
+      "word": "Ticktock",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1664855540176,
+      "front": "<img src=\".jpg.jpg\">",
+      "back": "Juicer",
+      "word": "Juicer",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1722124495396,
+      "front": "<img src=\"paste-b52cf20ca8363b6b5b704869cbc4aa3fe08b8c5e.jpg\">",
+      "back": "Bacteria",
+      "word": "Bacteria",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1743902126873,
+      "front": "<img src=\"paste-d3a1b76ba8234c92ec92584dc68aa6801d6ea1eb.jpg\"><img src=\"paste-6b82edf05dfab1ad1e6259595f6cf13a6f1be52b.jpg\"><br>打颤、喋喋不休、唠叨个没玩",
+      "back": "Chattering",
+      "word": "Chattering",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1542836929088,
+      "front": "<img src=\"greater_than.png\" />",
+      "back": "Greater than",
+      "word": "Greater than",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1603603714589,
+      "front": "<img src=\"instruction_manual.png\">",
+      "back": "Instruction manual",
+      "word": "Instruction manual",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1613108594219,
+      "front": "<img src=\"paste-29cd43fc63008732659fa01670b068e1b7b6b4fa.jpg\">",
+      "back": "Hair salon",
+      "word": "Hair salon",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1539210170720,
+      "front": "<img src=\"snacks2.jpg\" />",
+      "back": "Snacks",
+      "word": "Snacks",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1590194921795,
+      "front": "<img src=\"300px-Parallelograms-300x167.png\">",
+      "back": "Parallelogram",
+      "word": "Parallelogram",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1659233634465,
+      "front": "<img src=\"Screen Shot 2022-07-31 at 10.13.35 AM.png\">",
+      "back": "Sandpit",
+      "word": "Sandpit",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1734602803779,
+      "front": "<img src=\"paste-ec7e961e5bee5216344e1372a3fdb7efa348e667.jpg\"><br>两手空空的",
+      "back": "Empty handed",
+      "word": "Empty handed",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1740790319212,
+      "front": "<img src=\"paste-d9efd55caaf4549d107b16e02be9f5fc21caace5.jpg\"><br>余火、余烬",
+      "back": "Ember",
+      "word": "Ember",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1751772301062,
+      "front": "<img src=\"paste-ac2e6897630fb27511156e36ebc6a126ee1d1e7b.jpg\"><br>烂泥、污泥、淤泥",
+      "back": "Sludge",
+      "word": "Sludge",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1591623637592,
+      "front": "<img src=\"1200px-Rhombus.svg.png\">",
+      "back": "Rhombus",
+      "word": "Rhombus",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1563921356995,
+      "front": "<img src=\"Screen Shot 2019-07-24 at 6.33.00 AM.png\" />",
+      "back": "Lag behind",
+      "word": "Lag behind",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1753539046878,
+      "front": "<img src=\"paste-784ed9903af14fd6993da591bf3870b3bd639470.jpg\"><br>鸿沟、峡谷",
+      "back": "Chasm",
+      "word": "Chasm",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1535585248411,
+      "front": "<img src=\"dragon_fruit.jpg\" />",
+      "back": "Dragon Fruit",
+      "word": "Dragon Fruit",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1547813651836,
+      "front": "<img src=\"paste-178279797492928.jpg\" />",
+      "back": "Phone booth",
+      "word": "Phone booth",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1613740352114,
+      "front": "<img src=\"paste-438d43e10fe354d199a8e0f39c5de8bc7ec04059.jpg\">",
+      "back": "Overhead bridge",
+      "word": "Overhead bridge",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1711877247207,
+      "front": "不擅长",
+      "back": "（be) poor at",
+      "word": "（be) poor at",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1736552908589,
+      "front": "<img src=\"paste-a4f2a65123118c920455080b3a0a31b5964d3dab.jpg\"><br>蛹",
+      "back": "Pupa",
+      "word": "Pupa",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1747440456520,
+      "front": "<img src=\"paste-18d18f4a0ea721b398ce4169d6744c8a84362ff6.jpg\"><br>柔软洁白的白云",
+      "back": "Puffy cloud",
+      "word": "Puffy cloud",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1747440698480,
+      "front": "<img src=\"paste-763a0b4a7cb04d96181dd7048d2de14a6df02e19.jpg\"><br>荆棘",
+      "back": "Bramble",
+      "word": "Bramble",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1536917650703,
+      "front": "<img src=\"cigarette.jpg\" />",
+      "back": "Cigarette&nbsp;",
+      "word": "Cigarette&nbsp",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1613895882378,
+      "front": "<img src=\"paste-3998b212e6eca51ca823a407c8a4fd7fac9d49c4.jpg\">",
+      "back": "Look after",
+      "word": "Look after",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1663469361798,
+      "front": "<img src=\"paste-a59122ff0a1d23440b8c6fcc358d326fde262cc0.jpg\">",
+      "back": "Cattail",
+      "word": "Cattail",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1664108518481,
+      "front": "<img src=\"tape_dispenser.webp\">",
+      "back": "Tape dispenser",
+      "word": "Tape dispenser",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1728176177211,
+      "front": "<img src=\"paste-66650c0b9402590465ca7caf1b259fdd2fa3da31.jpg\"><br>悬挂着",
+      "back": "Dangling",
+      "word": "Dangling",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1556704067610,
+      "front": "<img src=\"worn_out.png\" />",
+      "back": "Worn out",
+      "word": "Worn out",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1600035636466,
+      "front": "<img src=\"budha.gif\">",
+      "back": "Buddha",
+      "word": "Buddha",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1664754839314,
+      "front": "<img src=\"saliva.jpg\">",
+      "back": "Saliva",
+      "word": "Saliva",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1716008633105,
+      "front": "<img src=\"paste-fc427330e0881fe4d432c3e2e00a7acd09dc12f9.jpg\"><br>画廊、美术馆",
+      "back": "Art gallery",
+      "word": "Art gallery",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1735907062327,
+      "front": "<img src=\"paste-a0ef461c30b644569237f0acbd237c451906d34a.jpg\"><img src=\"paste-44569b2fcec911b2c1f51d1193d967c48e866a01.jpg\"><br>坏脾气的、爱抱怨的",
+      "back": "Grumpy",
+      "word": "Grumpy",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1590101378959,
+      "front": "<img src=\"屏幕快照 2020-05-22 上午6.49.30.png\">",
+      "back": "Divide evenly",
+      "word": "Divide evenly",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1740183710522,
+      "front": "<img src=\"paste-29cc46daf6797c9af4ba25924e366dc326325fe9.jpg\">",
+      "back": "Shooting star",
+      "word": "Shooting star",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1749256930342,
+      "front": "<img src=\"paste-bcbdaa6e5f88bdb9b6479f0f46520a0faa567cef.jpg\"><br>气喘吁吁",
+      "back": "Panting",
+      "word": "Panting",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1545771278715,
+      "front": "<img src=\"stinky.jpg\" />",
+      "back": "Stinky",
+      "word": "Stinky",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1735128943849,
+      "front": "<img src=\"paste-0a39328c91bdefcd70d2b729dcdbef93ed7ba835.jpg\"><br>豪华车",
+      "back": "Luxurious car",
+      "word": "Luxurious car",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1545451191466,
+      "front": "<img src=\"chicken_wrap.jpg\" />",
+      "back": "Chicken wrap",
+      "word": "Chicken wrap",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1589629154412,
+      "front": "<img src=\"屏幕快照 2020-05-16 下午7.42.13.png\" />",
+      "back": "Divisor",
+      "word": "Divisor",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1661675072063,
+      "front": "<img src=\"paste-242271c06576448321bdd839551acb0c94af6212.jpg\">",
+      "back": "Siblings",
+      "word": "Siblings",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1554030899215,
+      "front": "<img src=\"vine.jpg\" />",
+      "back": "Vine",
+      "word": "Vine",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1715778467161,
+      "front": "<img src=\"paste-379a9609447a64c31dcd51e91db5a579183ef1dc.jpg\"><br>小气鬼、吝啬鬼",
+      "back": "Miser",
+      "word": "Miser",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1740283043607,
+      "front": "<img src=\"paste-699cfed91251033511c6e6ae519dc7f1a60cb6db.jpg\"><img src=\"paste-cf4acf179ba83d3016b288dc1d49d2b0b151fb64.jpg\"><br>巨大的",
+      "back": "Humongous",
+      "word": "Humongous",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1552816335722,
+      "front": "<img src=\"synonyms.png\" />",
+      "back": "Synonyms",
+      "word": "Synonyms",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1594128419752,
+      "front": "<img src=\"hardware_store.jpg\">",
+      "back": "Hardware store",
+      "word": "Hardware store",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1562591719838,
+      "front": "<img src=\"look_for.png\" />",
+      "back": "Look for",
+      "word": "Look for",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1737948901343,
+      "front": "<img src=\"paste-fd886770d74f2cd130fcbf873bfa9cd421492664.jpg\"><img src=\"paste-8dbecf6aca262bea29c0f0e9146ee4a5a4b9eb2e.jpg\"><br>恶作剧",
+      "back": "Prank",
+      "word": "Prank",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1541943071173,
+      "front": "<img src=\"grain.jpg\" />",
+      "back": "Grains",
+      "word": "Grains",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1664108445743,
+      "front": "<img src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Chicken_Nuggets.jpg/800px-Chicken_Nuggets.jpg\"><img src=\"Chicken_Nuggets.jpeg\">",
+      "back": "Chicken nugget",
+      "word": "Chicken nugget",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1753712544158,
+      "front": "<img src=\"paste-4034bb59bfe45dbfb50b14fc7f1888c01c0eb167.jpg\"><br>骨髓",
+      "back": "Bone marrow",
+      "word": "Bone marrow",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1743209729891,
+      "front": "<img src=\"paste-413780fe2a109d49d76cccead5e078b5a2231087.jpg\"><br>湿透了",
+      "back": "Sopping wet",
+      "word": "Sopping wet",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1749270336341,
+      "front": "<img src=\"paste-ddaba38fde091f3a87b2c6d414cd472a233a92e7.jpg\">",
+      "back": "Niblet",
+      "word": "Niblet",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1596667129327,
+      "front": "减法",
+      "back": "subtraction",
+      "word": "subtraction",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1662862257852,
+      "front": "<img src=\"icicle.jpeg\">",
+      "back": "Icicle",
+      "word": "Icicle",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1586682607911,
+      "front": "<img src=\"屏幕快照 2020-04-12 下午5.09.43.png\" />",
+      "back": "hour hand",
+      "word": "hour hand",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1592400959666,
+      "front": "<img src=\"cement_truck.jpg\" />",
+      "back": "Cement truck",
+      "word": "Cement truck",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1596405066328,
+      "front": "<img src=\"屏幕快照 2020-08-03 上午5.50.17.png\">",
+      "back": "Spacesuit",
+      "word": "Spacesuit",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1551342394313,
+      "front": "<img src=\"hood.jpg\" />",
+      "back": "Hoodie",
+      "word": "Hoodie",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1660137817023,
+      "front": "<img src=\"asteroid.webp\">",
+      "back": "Asteroid",
+      "word": "Asteroid",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1741478296149,
+      "front": "<img src=\"paste-ca1d252a58e950776b97b39c6dd720da6a39152c.jpg\"><br>拼盘",
+      "back": "Platter",
+      "word": "Platter",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1742599574556,
+      "front": "<img src=\"paste-f4858e6de7e15f16d2c59a6175b04ce37a0e4bd7.jpg\"><img src=\"paste-e5ca539e04ee793b60e82cdfffea373546c04770.jpg\"><img src=\"paste-b11f7e8af5c2d99b196be7f0750c8ca0f91f5cca.jpg\"><br>搅拌、恶心、反胃",
+      "back": "Churning",
+      "word": "Churning",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1593988184226,
+      "front": "<img src=\"61CyweE4mOL._AC_UX342_.jpg\">",
+      "back": "Face mask",
+      "word": "Face mask",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1665881108366,
+      "front": "<img src=\"30870e7d-Singapore-Cable-Car-Skypass.webp\">",
+      "back": "Cable car",
+      "word": "Cable car",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1712222394230,
+      "front": "<img src=\"paste-655e326f6c09c81423303b493323d9e6c8849c8d.jpg\">",
+      "back": "Woollen clothes",
+      "word": "Woollen clothes",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1716299884879,
+      "front": "<img src=\"paste-c335913483bcf05bbdb0d91791083cc508490990.jpg\">",
+      "back": "Put away",
+      "word": "Put away",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1752282269589,
+      "front": "<img src=\"paste-0974f51db401dfd4ff3102a2e413685cc3868f2e.jpg\"><img src=\"paste-25f68ef0aeee4e0e636171ea48b729f2fff9d39a.jpg\"><br>宁静、平静",
+      "back": "Serenity",
+      "word": "Serenity",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1601505281537,
+      "front": "<img src=\"屏幕快照 2020-10-01 上午6.34.24.png\">",
+      "back": "Cursor[sound:googletts-840bfc72-1373bc0e-835ed370-7506619c-214a120f.mp3]",
+      "word": "Cursor[sound:googletts-840bfc72-1373bc0e-835ed370-7506619c-214a120f.mp3]",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1734602693913,
+      "front": "<img src=\"paste-7ad1374b54419330b3ddac7b0f1ceb5a1ee9a964.jpg\">",
+      "back": "Well rounded",
+      "word": "Well rounded",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1584227668626,
+      "front": "<img src=\"paste-fe04075324ca82c18c041de8f741eb41a82a687d.jpg\">",
+      "back": "Slippers",
+      "word": "Slippers",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1538832711683,
+      "front": "<img src=\"Screen Shot 2018-10-06 at 9.35.45 PM.png\" />",
+      "back": "It hurts.",
+      "word": "It hurts",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1660137976625,
+      "front": "<img src=\"Satelite.jpeg\">",
+      "back": "Satelite",
+      "word": "Satelite",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1555324555107,
+      "front": "<img src=\"deliver_letters.jpg\" />",
+      "back": "Deliver letters",
+      "word": "Deliver letters",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1613740267398,
+      "front": "<img src=\"paste-908e6185aeb7a619d785a1d1bab59cb63011b8b0.jpg\">",
+      "back": "Chicken coop",
+      "word": "Chicken coop",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1660828521605,
+      "front": "<img src=\"Screen Shot 2022-08-18 at 9.15.00 PM.png\">",
+      "back": "Javelin",
+      "word": "Javelin",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1664854555183,
+      "front": "<img src=\"ASSOS_16.78.02.10_11.jpg\">",
+      "back": "Flip-flops",
+      "word": "Flip-flops",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1742008511237,
+      "front": "<img src=\"paste-bb49d1698f46532435a033d9e2b9fe3f6a798b42.jpg\"><br>炎热、热死人",
+      "back": "Sweltering",
+      "word": "Sweltering",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1543614437762,
+      "front": "<img src=\"class_schedule.png\" />",
+      "back": "Class schedule",
+      "word": "Class schedule",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1601455112861,
+      "front": "<img src=\"composition.png\">",
+      "back": "Composition[sound:googletts-0f7d4e65-3e87c3df-f3985109-ac33ac0a-0b03cf52.mp3]",
+      "word": "Composition[sound:googletts-0f7d4e65-3e87c3df-f3985109-ac33ac0a-0b03cf52.mp3]",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1662183911216,
+      "front": "<img src=\"155746675-an-indian-rural-scene-showing-a-farmer-ploughing-in-the-field.jpg\">",
+      "back": "Plough",
+      "word": "Plough",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1717312268935,
+      "front": "<img src=\"swap_seats.gif\"><br>交换座位",
+      "back": "Swap seats",
+      "word": "Swap seats",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1555853497027,
+      "front": "<img src=\"chatting.gif\" />",
+      "back": "Chatting",
+      "word": "Chatting",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1586991496732,
+      "front": "<img src=\"Piano_staff.png\" />",
+      "back": "Stave",
+      "word": "Stave",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1749257552593,
+      "front": "<img src=\"paste-dd19f0ca5241b73cc9ab93abb2a9e0def0c43576.jpg\"><img src=\"paste-1069184bd60d1f545d9ca185d5465614849b5cae.jpg\"><br>大声的吃喝、呼噜呼噜的吃",
+      "back": "Slurp",
+      "word": "Slurp",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1601331746556,
+      "front": "<img src=\"屏幕快照 2020-09-29 上午6.20.49.png\">",
+      "back": "Subject pronoun",
+      "word": "Subject pronoun",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1658754643219,
+      "front": "<img src=\"Screen Shot 2022-07-25 at 9.05.06 PM.png\">",
+      "back": "Overcast",
+      "word": "Overcast",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1660371383472,
+      "front": "<img src=\"green-bell-peppers_variety-page.png\">",
+      "back": "Green pepper",
+      "word": "Green pepper",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1712150375966,
+      "front": "宁愿",
+      "back": "would rather",
+      "word": "would rather",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1552121439788,
+      "front": "<img src=\"transparent.png\" />",
+      "back": "Transparent cups",
+      "word": "Transparent cups",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1564095040203,
+      "front": "<img src=\"flag_hoisting.jpg\" />",
+      "back": "Flag hoisting",
+      "word": "Flag hoisting",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1748045599371,
+      "front": "<img src=\"paste-0475677c5b1780443a7dc3bbc7db7596bf00b058.jpg\"><br>滚开",
+      "back": "Get lost",
+      "word": "Get lost",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1535203506499,
+      "front": "<img src=\"mangosteen.jpg\" />",
+      "back": "Mangosteen",
+      "word": "Mangosteen",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1584659493908,
+      "front": "<img src=\"paste-2091649073332.jpg\" />",
+      "back": "Yoghurt",
+      "word": "Yoghurt",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1746012189965,
+      "front": "<img src=\"paste-9f7619896753627042d08b2d1a7566db21461fe3.jpg\"><br>喊叫",
+      "back": "Holler",
+      "word": "Holler",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1545340726109,
+      "front": "<img src=\"lead.png\" />",
+      "back": "Lead[sound:rec1545340770.mp3]",
+      "word": "Lead[sound:rec1545340770.mp3]",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1748044389992,
+      "front": "<img src=\"paste-1a2b341d4cf65f3f1e67747eaeb269b2852685b3.jpg\"><br>坍塌",
+      "back": "Crumbling Tower",
+      "word": "Crumbling Tower",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1713009260115,
+      "front": "<img src=\"paste-25f58306230ae19059b128d2f424b4c14c92d440.jpg\">",
+      "back": "Exam result",
+      "word": "Exam result",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1556534805522,
+      "front": "<img src=\"cross_out.png\" />",
+      "back": "Cross out",
+      "word": "Cross out",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1728271771513,
+      "front": "<img src=\"paste-a049bdbec419167695753236dd915fb84ab0a9a5.jpg\"><br>哨兵、守卫",
+      "back": "Sentinel",
+      "word": "Sentinel",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1662037437244,
+      "front": "<img src=\"https://www.floraqueen.com/blog/wp-content/uploads/2020/03/shutterstock_1478818358.jpg\">",
+      "back": "Florist",
+      "word": "Florist",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1733030674308,
+      "front": "<img src=\"paste-cc9b605e91470a82ff86f55186263c4cc5ea85c2.jpg\"><br>吊桥",
+      "back": "Drawbridge",
+      "word": "Drawbridge",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1662275707265,
+      "front": "<img src=\"Screen Shot 2022-09-04 at 3.14.35 PM.png\">",
+      "back": "Protractor",
+      "word": "Protractor",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1715432030210,
+      "front": "<img src=\"paste-309ace9a97b817c9fa1e8a7bc0a040f9075e5d50.jpg\"><br>厨房用具、炊具",
+      "back": "Utensils",
+      "word": "Utensils",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1715437748890,
+      "front": "<img src=\"paste-ea45d146bedabf154d59c3d4ea934f6c8e007ed6.jpg\"><br>翻、倾覆",
+      "back": "Capsize",
+      "word": "Capsize",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1751101662772,
+      "front": "<img src=\"paste-cd69e24cff922102c4b7b3b766f73449c607d2d6.jpg\"><br>假牙",
+      "back": "Denture",
+      "word": "Denture",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1557178553716,
+      "front": "<img src=\"Screen Shot 2019-05-07 at 5.36.25 AM.png\" />",
+      "back": "Keep away",
+      "word": "Keep away",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1586682622387,
+      "front": "<img src=\"屏幕快照 2020-04-12 下午5.11.13.png\" />",
+      "back": "minute hand",
+      "word": "minute hand",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1541976286144,
+      "front": "<img src=\"pine_tree.jpg\" />",
+      "back": "Pine tree",
+      "word": "Pine tree",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1659444155352,
+      "front": "<img src=\"Screen Shot 2022-08-02 at 8.40.45 PM.png\">",
+      "back": "insect repellent",
+      "word": "insect repellent",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1751537595042,
+      "front": "<img src=\"paste-a2fbed5edac30b321079fe9fd5cda6da9c1b84a0.jpg\"><br>深渊",
+      "back": "Abyss",
+      "word": "Abyss",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1558183423310,
+      "front": "<img src=\"drenched.jpg\" />",
+      "back": "Drenched",
+      "word": "Drenched",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1592001634801,
+      "front": "<img src=\"dodgem.jpg\" />",
+      "back": "Dodgem",
+      "word": "Dodgem",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1748044828916,
+      "front": "<img src=\"paste-b8485fc45192296f515b0fb95ea94c59913f95d3.jpg\"><img src=\"paste-08bd47f69b9e6015d2031591d35fdac1e221ecb8.jpg\"><br>脸红了、害羞了",
+      "back": "Blushing",
+      "word": "Blushing",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1662862127427,
+      "front": "<img src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/George_the_amazing_guinea_pig.jpg/1200px-George_the_amazing_guinea_pig.jpg\"><img src=\"George_the_amazing_guinea_pig.jpeg\">",
+      "back": "Guinea pig",
+      "word": "Guinea pig",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1534758939167,
+      "front": "<img src=\"durian-fruit-500x500.jpg\" />",
+      "back": "Durian",
+      "word": "Durian",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1593045158054,
+      "front": "<img src=\"300px-Mammal_Diversity_2011.png\">",
+      "back": "Mammal",
+      "word": "Mammal",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1538560657241,
+      "front": "<img src=\"Screen Shot 2018-10-03 at 5.57.09 PM.png\">",
+      "back": "My aunt",
+      "word": "My aunt",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1594850798073,
+      "front": "<img src=\"屏幕快照 2020-07-16 上午6.11.24.png\">",
+      "back": "America",
+      "word": "America",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1735352124464,
+      "front": "<img src=\"paste-a2be4157b3930a34a546971d74c7834895e88fc4.jpg\"><br>候鸟迁徙",
+      "back": "Bird migration",
+      "word": "Bird migration",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1753273814331,
+      "front": "<img src=\"paste-a290fdac2d653f630b8b6b42343d8463ef2f9430.jpg\"><br>姓名牌、姓名标签",
+      "back": "Name tag",
+      "word": "Name tag",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1554847126417,
+      "front": "<img src=\"stapler.jpeg\" />",
+      "back": "Stapler",
+      "word": "Stapler",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1601159643164,
+      "front": "<img src=\"屏幕快照 2020-09-27 上午6.33.55.png\">",
+      "back": "Ring finger",
+      "word": "Ring finger",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1538401312255,
+      "front": "<img src=\"shopping_list.jpg\" />",
+      "back": "Shopping list",
+      "word": "Shopping list",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1593263090922,
+      "front": "<img src=\"107753781-set-of-car-parts-isolated-on-white-background-3d.jpg\">",
+      "back": "Car parts",
+      "word": "Car parts",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1664929965410,
+      "front": "<img src=\"bugler-playing-last-post-at-funeral-of-welsh-guards-soldier-veteran-B8RHAB.jpg\">",
+      "back": "Bugle",
+      "word": "Bugle",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1751796549096,
+      "front": "<img src=\"note-taking-gif-1.gif\">",
+      "back": "Take notes",
+      "word": "Take notes",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1536619398221,
+      "front": "<img src=\"leak.jpeg\" />",
+      "back": "Leaking",
+      "word": "Leaking",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1736598122396,
+      "front": "<img src=\"back_up.gif\">",
+      "back": "Back up",
+      "word": "Back up",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1592184567761,
+      "front": "<img src=\"banyan.jpg\" />",
+      "back": "Banyan",
+      "word": "Banyan",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1660371443571,
+      "front": "<img src=\"Screen Shot 2022-08-13 at 2.17.10 PM.png\">",
+      "back": "Kebab",
+      "word": "Kebab",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1732318578731,
+      "front": "<img src=\"paste-a3219791d54d669d08843c2e34e183f952131966.jpg\"><br>翻白眼",
+      "back": "She is rolling her eyes.",
+      "word": "She is rolling her eyes",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1613531626275,
+      "front": "<img src=\"paste-48eda2c29784ea19a6627b73efa2d8cb75989962.jpg\">",
+      "back": "Rough surface",
+      "word": "Rough surface",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1538950483421,
+      "front": "<img src=\"stirring.gif\">",
+      "back": "Stir the coffee",
+      "word": "Stir the coffee",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1556543565895,
+      "front": "<img src=\"checklist.jpeg\" />",
+      "back": "Checklist",
+      "word": "Checklist",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1589687748423,
+      "front": "<img src=\"right-angles.svg\">",
+      "back": "right angles",
+      "word": "right angles",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1599257622645,
+      "front": "<img src=\"fall_off.jpg\">",
+      "back": "Fall off",
+      "word": "Fall off",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1613033700473,
+      "front": "<img src=\"paste-2416b8e6db74d57e4b803d7505e41188cf6aec47.jpg\">",
+      "back": "Chinese new year",
+      "word": "Chinese new year",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1739615347709,
+      "front": "<img src=\"paste-a5316d3ca951bd25f91a998d4e24bc4089eb19d5.jpg\">",
+      "back": "Car brands",
+      "word": "Car brands",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1542837184548,
+      "front": "<img src=\"less_than.png\" />",
+      "back": "Less than",
+      "word": "Less than",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1557751806854,
+      "front": "<img src=\"red_packet.jpg\" />",
+      "back": "Red packet",
+      "word": "Red packet",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1562304961753,
+      "front": "<img src=\"public_places.jpg\" />",
+      "back": "Public places",
+      "word": "Public places",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1552116842913,
+      "front": "<img src=\"center.jpg\" />",
+      "back": "Center of the target",
+      "word": "Center of the target",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1599856981072,
+      "front": "<img src=\"used-the-rancher-and-heart-of-stone.jpg\">",
+      "back": "Treble clef",
+      "word": "Treble clef",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1662275643428,
+      "front": "<img src=\"test-tubes-all-you-need-to-know-2.jpg\">",
+      "back": "Test tube",
+      "word": "Test tube",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1662557332441,
+      "front": "<img src=\"Screen Shot 2022-09-07 at 9.28.40 PM.png\">",
+      "back": "Nostrils",
+      "word": "Nostrils",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1712283569492,
+      "front": "<img src=\"paste-6f1e2e0b156ca599be0c23147b664246d120d10c.jpg\"><br>农作物，庄稼",
+      "back": "Crops",
+      "word": "Crops",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1551962542117,
+      "front": "<img src=\"frying_an_egg.gif\" />",
+      "back": "Frying an egg",
+      "word": "Frying an egg",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1603891817768,
+      "front": "<img src=\"clay.webp\">",
+      "back": "Clay",
+      "word": "Clay",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1662037618003,
+      "front": "<img src=\"Screen Shot 2022-09-01 at 9.06.40 PM.png\">",
+      "back": "Pigsty",
+      "word": "Pigsty",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1743726818467,
+      "front": "<img src=\"paste-d750d9fcdb7954ee2ed22bd5bf6aa09f496acb0e.jpg\"><img src=\"paste-14074ee23bd0d7b19f4c7b82acb06a01e886786c.jpg\"><br>预言",
+      "back": "Prophecy",
+      "word": "Prophecy",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1539467462645,
+      "front": "<img src=\"Screen Shot 2018-10-14 at 5.50.40 AM.png\" />",
+      "back": "Physical education",
+      "word": "Physical education",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1590875726248,
+      "front": "<img src=\"屏幕快照 2020-05-31 上午5.55.12.png\">",
+      "back": "Video website",
+      "word": "Video website",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1665099205892,
+      "front": "<img src=\"paste-05c5579cfa8de07edf6ad154b5118295c0e1df38.png\">",
+      "back": "National symbols",
+      "word": "National symbols",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1749879789481,
+      "front": "<img src=\"paste-be4a30bcad0a87e755afcc5c4713f2f13c30c7fe.jpg\"><img src=\"paste-de543bf9c839870fad860349a7d0e9ec680d0388.jpg\"><br>意志力",
+      "back": "Willpower",
+      "word": "Willpower",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1598769489780,
+      "front": "<img src=\"Dog-kibble.jpg\">",
+      "back": "Kibble",
+      "word": "Kibble",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1544738470235,
+      "front": "<img src=\"photo_frame.png\" />",
+      "back": "Photo frame",
+      "word": "Photo frame",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1555551434405,
+      "front": "<img src=\"chores.jpg\" />",
+      "back": "doing chores",
+      "word": "doing chores",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1613108419677,
+      "front": "<img src=\"limping.gif\">",
+      "back": "Limping",
+      "word": "Limping",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1717223520094,
+      "front": "<img src=\"paste-c6285cd3faafb1c56ab000a5da2de61db64b8a6c.jpg\">",
+      "back": "A shabby house",
+      "word": "A shabby house",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1733661151690,
+      "front": "<img src=\"paste-11c1376990de9d4c3b89411a9bdfd2ea9531132f.jpg\"><br>红细胞",
+      "back": "Red blood cell",
+      "word": "Red blood cell",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1597532395662,
+      "front": "<img src=\"bean_curd.jpg\">",
+      "back": "Bean curd",
+      "word": "Bean curd",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1601474414179,
+      "front": "<img src=\"crumb.jpg\">",
+      "back": "Crumb[sound:googletts-e65b3c15-d92afa1f-52efe52e-d8715e7b-2cfe29b9.mp3]",
+      "word": "Crumb[sound:googletts-e65b3c15-d92afa1f-52efe52e-d8715e7b-2cfe29b9.mp3]",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1735965118870,
+      "front": "<img src=\"paste-65e7db808f10643c01a9fd7055339698769baa02.jpg\">",
+      "back": "Expiry date",
+      "word": "Expiry date",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1538255804905,
+      "front": "<img src=\"wake_up.jpg\">",
+      "back": "Wake up",
+      "word": "Wake up",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1659233560915,
+      "front": "<img src=\"Screen Shot 2022-07-31 at 10.10.24 AM.png\">",
+      "back": "Sunblock",
+      "word": "Sunblock",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1736652387670,
+      "front": "<img src=\"paste-b5f34215dde2a8919fca346ae9b95934d580a2e4.jpg\">",
+      "back": "Evergreen trees",
+      "word": "Evergreen trees",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1536100826557,
+      "front": "<img src=\"gecko.jpg\" />",
+      "back": "Gecko",
+      "word": "Gecko",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1736050384183,
+      "front": "<img src=\"paste-800cc6083577199efac593600375eaf56c49284a.jpg\"><br>粉刺、痘痘",
+      "back": "Pimple",
+      "word": "Pimple",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1613220721773,
+      "front": "<img src=\"automatic_door.gif\">",
+      "back": "Automatic door",
+      "word": "Automatic door",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1534322313771,
+      "front": "<img src=\"gas_station.jpg\" />",
+      "back": "Gas station",
+      "word": "Gas station",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1589714476731,
+      "front": "<img src=\"body_lotion.jpg\">",
+      "back": "Body lotion",
+      "word": "Body lotion",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1601640001645,
+      "front": "<img src=\"protection_pads.jpg\">",
+      "back": "Protection pads",
+      "word": "Protection pads",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1733661094223,
+      "front": "<img src=\"paste-ba485ce0084cf046ff1d0943ebb0d189642b14f0.jpg\"><br>血管",
+      "back": "Blood vessel",
+      "word": "Blood vessel",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1535204129923,
+      "front": "<img src=\"kiwi_fruit.jpg\" />",
+      "back": "Kiwi fruit",
+      "word": "Kiwi fruit",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1542150188521,
+      "front": "<img src=\"tools.jpg\" />",
+      "back": "Tools",
+      "word": "Tools",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1733660251759,
+      "front": "<img src=\"paste-1f83c00c476efe51d68e5ca2fe7f06dc74c56841.jpg\"><br>胸腔",
+      "back": "Rib cage",
+      "word": "Rib cage",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1716025419407,
+      "front": "<img src=\"paste-c7f01747670e65d235a5283694f6dce536a86373.jpg\"><br>空位",
+      "back": "A vacant chair",
+      "word": "A vacant chair",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1662183239579,
+      "front": "<img src=\"singer-sewing-machine-no-103-1-1914_original.png\">",
+      "back": "Sewing machine",
+      "word": "Sewing machine",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1660371151571,
+      "front": "<img src=\"Screen Shot 2022-08-13 at 2.11.37 PM.png\">",
+      "back": "Gone off",
+      "word": "Gone off",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1737777962111,
+      "front": "<img src=\"paste-505d85319d05fd1be7429642ed226615ad981036.jpg\"><img src=\"paste-5cf7117bb5ba9c18a70891c842d62d275761e085.jpg\"><br>坠子、坠饰",
+      "back": "Pendant",
+      "word": "Pendant",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1739605295478,
+      "front": "<img src=\"paste-f3e7d9579066293c80618485342574b0e287ae5a.jpg\">",
+      "back": "Negative numbers",
+      "word": "Negative numbers",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1545451249780,
+      "front": "<img src=\"a_column.png\" />",
+      "back": "A column",
+      "word": "A column",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1595082641708,
+      "front": "<img src=\"notes.jpg\">",
+      "back": "Notes",
+      "word": "Notes",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1614493889734,
+      "front": "<img src=\"paste-d3e3128d9aec42482ee64a8d6afdeb2b8261aba4.jpg\">",
+      "back": "Rubberband",
+      "word": "Rubberband",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1730506178204,
+      "front": "<img src=\"paste-dcd6331b91f4a2eff4bc35424bc87c58c2cb6560.jpg\">",
+      "back": "Embarassing",
+      "word": "Embarassing",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1750466998589,
+      "front": "<img src=\"paste-8151cf5b304c641c789bc8b513a2a6b355c41e62.jpg\"><br>触须",
+      "back": "Tentacles",
+      "word": "Tentacles",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1553258427038,
+      "front": "<img src=\"pebbles.jpg\" />",
+      "back": "Pebbles",
+      "word": "Pebbles",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1554034963581,
+      "front": "<img src=\"calm_down.gif\" />",
+      "back": "Calm down",
+      "word": "Calm down",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1545686996677,
+      "front": "<img src=\"trace_letters.png\" />",
+      "back": "Trace the letter A",
+      "word": "Trace the letter A",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1713009292613,
+      "front": "<img src=\"paste-46409d961aa8f28f19adf3d0c6be258bcbcffa45.jpg\"><br>音乐欣赏",
+      "back": "Music appreciation",
+      "word": "Music appreciation",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1558083200948,
+      "front": "<img src=\"neighbours.jpeg\" />",
+      "back": "Neighbour",
+      "word": "Neighbour",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1597875018448,
+      "front": "<img src=\"屏幕快照 2020-08-20 上午6.10.06.png\">",
+      "back": "Trapezoid",
+      "word": "Trapezoid",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1600558931941,
+      "front": "<img src=\"whole-note-icon-250.png\">",
+      "back": "Whole note",
+      "word": "Whole note",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1615598759401,
+      "front": "<img src=\"paste-338081762c8d08430604088ffb345ed2e4479a1d.jpg\">",
+      "back": "Soccer fans",
+      "word": "Soccer fans",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1535978696790,
+      "front": "<img src=\"sisters.png\" />",
+      "back": "Sisters",
+      "word": "Sisters",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1658555526554,
+      "front": "<img src=\"Screen Shot 2022-07-23 at 1.51.45 PM.png\">",
+      "back": "Grater",
+      "word": "Grater",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1540039220786,
+      "front": "<img src=\"Screen Shot 2018-10-20 at 8.39.45 PM.png\" />",
+      "back": "Lots of",
+      "word": "Lots of",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1712281727766,
+      "front": "<img src=\"paste-01a23a89eac6e10d8d57f27b1c56f846a29a7e3a.jpg\">",
+      "back": "Fire drill",
+      "word": "Fire drill",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1545451205678,
+      "front": "<img src=\"exam_paper.png\">",
+      "back": "Exam paper",
+      "word": "Exam paper",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1555577286375,
+      "front": "<img src=\"pyjamas (1).png\" />",
+      "back": "Pyjamas",
+      "word": "Pyjamas",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1559344869392,
+      "front": "<img src=\"ingredients.jpg\" />",
+      "back": "Ingredients",
+      "word": "Ingredients",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1736652445316,
+      "front": "<img src=\"paste-023fd92d9e23f07b54db7bedc5768b6796a139ad.jpg\"><br>落叶树",
+      "back": "Deciduous trees",
+      "word": "Deciduous trees",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1600559031218,
+      "front": "<img src=\"whole_rest.png\">",
+      "back": "Whole rest",
+      "word": "Whole rest",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1589687905867,
+      "front": "<img src=\"acute-angles.svg\">",
+      "back": "acute angles",
+      "word": "acute angles",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1709369965289,
+      "front": "<img src=\"paste-76d6cd49a59ce4602b1d1cba4e1165495c35575f.jpg\">",
+      "back": "Arrival hall",
+      "word": "Arrival hall",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1665099060619,
+      "front": "<img src=\"Screen Shot 2022-10-07 at 7.30.03 AM.png\">",
+      "back": "Statue of liberty",
+      "word": "Statue of liberty",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1749257414165,
+      "front": "<img src=\"paste-4ae10ab789437d2d53612fe50e77dcdec90df0b5.jpg\"><br>奶昔",
+      "back": "Smoothie",
+      "word": "Smoothie",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1540257965874,
+      "front": "<img src=\"gas_stove.jpg\" />",
+      "back": "Gas stove",
+      "word": "Gas stove",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1716012913436,
+      "front": "<img src=\"paste-714ffe1e80b0c830a506ac0734a4aad8b9431c5a.jpg\"><br>变味的、不新鲜的",
+      "back": "Stale bread",
+      "word": "Stale bread",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1613271120847,
+      "front": "<img src=\"屏幕快照 2021-02-14 上午10.51.53.png\">",
+      "back": "Famous people",
+      "word": "Famous people",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1716641778235,
+      "front": "<img src=\"paste-f491e1aff955f862768ee5ea90b5a9eec481a28f.jpg\"><br>漱口水",
+      "back": "Mouthwash",
+      "word": "Mouthwash",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1572732478482,
+      "front": "<img src=\"magnifier.png\" />",
+      "back": "Magnifier",
+      "word": "Magnifier",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1717222890471,
+      "front": "<img src=\"paste-58d26c20abfc5a0802c096bfa03b25bff2884013.jpg\"><br>温馨的",
+      "back": "Cosy",
+      "word": "Cosy",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1538127117474,
+      "front": "<img src=\"walking_along_the_line.jpg\" />",
+      "back": "Walking along the line",
+      "word": "Walking along the line",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1598051472771,
+      "front": "<img src=\"enery_sources.jpg\">",
+      "back": "Energy sources",
+      "word": "Energy sources",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1535715484681,
+      "front": "<img src=\"1ed4403b5a1ef9dc2d571730fab6fd2e.jpeg\" />",
+      "back": "Parents",
+      "word": "Parents",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1562981075400,
+      "front": "<img src=\"a_real_mouse.png\" />",
+      "back": "A real mouse",
+      "word": "A real mouse",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1714528302040,
+      "front": "<img src=\"paste-ba9240e8dfa9c3d454b8d5ce91cd26a03ac28d76.jpg\"><br>剪断",
+      "back": "Snip",
+      "word": "Snip",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1746617738856,
+      "front": "<img src=\"paste-a664c00104123b022b47f6047cfe42631cca4d3a.jpg\"><br>浮潜",
+      "back": "Snorkeling",
+      "word": "Snorkeling",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1544270846276,
+      "front": "<img src=\"safari_park.jpeg\" />",
+      "back": "Safari park",
+      "word": "Safari park",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1554847148702,
+      "front": "<img src=\"road_blocks.png\" />",
+      "back": "Road blocks",
+      "word": "Road blocks",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1709548073898,
+      "front": "<img src=\"paste-38af895a75c9829434eb4d026852400a76c53656.jpg\">",
+      "back": "Donation box",
+      "word": "Donation box",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1535585260484,
+      "front": "<img src=\"page_number.jpg\" />",
+      "back": "Page number",
+      "word": "Page number",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1741478794876,
+      "front": "<img src=\"paste-9b2dd59f7fdf56c5f782fc215693d16aab938d28.jpg\"><br>瞎编的、假想的",
+      "back": "Make believe",
+      "word": "Make believe",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1552612475911,
+      "front": "<img src=\"holding_hands.jpeg\" />",
+      "back": "Holding hands",
+      "word": "Holding hands",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1715422383934,
+      "front": "<img src=\"paste-eda2633b647a539471d6cd6d17d00fe0c414957a.jpg\"><br>命令",
+      "back": "Order/Command",
+      "word": "Order/Command",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1557490069295,
+      "front": "<img src=\"snoring.gif\" />",
+      "back": "Snoring",
+      "word": "Snoring",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1594821512409,
+      "front": "<img src=\"pelican.jpeg\">",
+      "back": "Pelican",
+      "word": "Pelican",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1620215379796,
+      "front": "<img src=\"paste-028a8b7f0a590f791fafcfa45fdba09e10051fba.jpg\">",
+      "back": "Buggy",
+      "word": "Buggy",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1613895766115,
+      "front": "<img src=\"paste-92cd6de4966ec6031b4b3a0ebd76acd60e0a061b.jpg\">",
+      "back": "Wrinkles",
+      "word": "Wrinkles",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1714999282628,
+      "front": "<img src=\"paste-9a69e3ac7f1c3f6fb84e24b5627efd5aa872d992.jpg\"><br>整数",
+      "back": "Integer",
+      "word": "Integer",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1601331813207,
+      "front": "<img src=\"屏幕快照 2020-09-29 上午6.22.16.png\">",
+      "back": "Adjective pronoun",
+      "word": "Adjective pronoun",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1594681024002,
+      "front": "<img src=\"lasso.gif\">",
+      "back": "Lasso",
+      "word": "Lasso",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1589694565583,
+      "front": "<img src=\"obtuse-angles.svg\">",
+      "back": "Obtuse angles",
+      "word": "Obtuse angles",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1658754657522,
+      "front": "<img src=\"Screen Shot 2022-07-25 at 9.07.04 PM.png\">",
+      "back": "Heat wave",
+      "word": "Heat wave",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1585453653345,
+      "front": "<img src=\"paste-897648165051.jpg\" />",
+      "back": "carton box",
+      "word": "carton box",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1613905328618,
+      "front": "<img src=\"paste-a0fdc162338fe5cbd68e5d85f5cdc81011a394a2.jpg\">",
+      "back": "Walrus",
+      "word": "Walrus",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1716381341314,
+      "front": "<img src=\"paste-8b0ff415a8511a723decf74c724fd6b2186ad8a2.jpg\">",
+      "back": "On duty",
+      "word": "On duty",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1588284303732,
+      "front": "<img src=\"slam_dunk.gif\" />",
+      "back": "Slam dunk",
+      "word": "Slam dunk",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1611973613055,
+      "front": "<img src=\"paste-db265148385a4a50b13cc0386d495a83c1c90bc6.jpg\">",
+      "back": "Distracted",
+      "word": "Distracted",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1659530928163,
+      "front": "<img src=\"Screen Shot 2022-08-03 at 8.48.20 PM.png\">",
+      "back": "Push up",
+      "word": "Push up",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1659752184332,
+      "front": "<img src=\"Screen Shot 2022-08-06 at 10.15.49 AM.png\">",
+      "back": "Breaststroke",
+      "word": "Breaststroke",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1541508255471,
+      "front": "<img src=\"flashing.gif\" />",
+      "back": "Flashing",
+      "word": "Flashing",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1595082628664,
+      "front": "<img src=\"coins.jpg\">",
+      "back": "Coins",
+      "word": "Coins",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1535374249254,
+      "front": "<img src=\"beads.jpeg\" />",
+      "back": "Beads",
+      "word": "Beads",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1544621972014,
+      "front": "<img src=\"be_careful.png\" />",
+      "back": "Be careful",
+      "word": "Be careful",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1599951096151,
+      "front": "<img src=\"acrobatics_troupe.jpeg\">",
+      "back": "Acrobatic troupe",
+      "word": "Acrobatic troupe",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1601098633969,
+      "front": "<img src=\"index_finger.jpg\">",
+      "back": "Index finger",
+      "word": "Index finger",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1613521675441,
+      "front": "<img src=\"paste-9c4385c6e5891ef38d0d39e2b7dfa6720beae427.jpg\">",
+      "back": "Dustpan",
+      "word": "Dustpan",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1544566461287,
+      "front": "<img src=\"magic_wand.png\" />",
+      "back": "Magic wand",
+      "word": "Magic wand",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1613225434574,
+      "front": "<img src=\"photo.jpg\">",
+      "back": "Comic book",
+      "word": "Comic book",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1748053930260,
+      "front": "<img src=\"paste-d1eb25b877f3838a0deea1cefd46a2eccaf76f67.jpg\"><br>树瘤",
+      "back": "Gnarl",
+      "word": "Gnarl",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1594680970795,
+      "front": "<img src=\"屏幕快照 2020-07-14 上午6.56.50.png\">",
+      "back": "Twig",
+      "word": "Twig",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1659754960394,
+      "front": "<img src=\"Cuboid.png\">",
+      "back": "Cuboid",
+      "word": "Cuboid",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1540039422812,
+      "front": "<img src=\"puddle.jpg\" />",
+      "back": "Puddle",
+      "word": "Puddle",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1563576334653,
+      "front": "<img src=\"look_around.gif\" />",
+      "back": "Look around",
+      "word": "Look around",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1599857012808,
+      "front": "<img src=\"869px-Bass_clef.svg.png\">",
+      "back": "Bass clef",
+      "word": "Bass clef",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1542751091179,
+      "front": "<img src=\"run_away.png\" />",
+      "back": "Run away",
+      "word": "Run away",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1543612838931,
+      "front": "<img src=\"blocking.png\" />",
+      "back": "Blocking the way",
+      "word": "Blocking the way",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1737270725827,
+      "front": "<img src=\"paste-e4ac5e5a814260dff71888455ecba10cb9b5809c.jpg\">",
+      "back": "Arch of triumph",
+      "word": "Arch of triumph",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1746013922334,
+      "front": "<img src=\"paste-4857b96864620ab87e1cfe09009d096e80b26e18.jpg\"><img src=\"paste-8c43d1370a230031b89304b8f745965ae74eb385.jpg\"><br>打气、鼓舞",
+      "back": "Pep talk",
+      "word": "Pep talk",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1597155142004,
+      "front": "<img src=\"a_bumpy_road.jpg\">",
+      "back": "A bumpy road",
+      "word": "A bumpy road",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1538560686490,
+      "front": "<img src=\"Screen Shot 2018-10-03 at 5.56.45 PM.png\">",
+      "back": "My grandfather",
+      "word": "My grandfather",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1600211674650,
+      "front": "<img src=\"dry_off (1).gif\">",
+      "back": "Shake off",
+      "word": "Shake off",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1665885944950,
+      "front": "<img src=\"index.php\">",
+      "back": "Kitchen ventilator",
+      "word": "Kitchen ventilator",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1563837195222,
+      "front": "<img src=\"beanpod.jpg\" />",
+      "back": "Beanpod",
+      "word": "Beanpod",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1735906549853,
+      "front": "<img src=\"paste-9550aeade12cc7efb010006132b4bffe787055a6.jpg\">",
+      "back": "Hailstone",
+      "word": "Hailstone",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1534391821386,
+      "front": "<img src=\"rotten.png\" />",
+      "back": "A rotten apple",
+      "word": "A rotten apple",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1542233080128,
+      "front": "<img src=\"air_pump.jpg\" />",
+      "back": "Air pump",
+      "word": "Air pump",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1546692466157,
+      "front": "<img src=\"winter_spring_summer_fall.jpg\" />",
+      "back": "Four seasons",
+      "word": "Four seasons",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1598674068493,
+      "front": "<img src=\"dried-raisins-black-thompso-select-1S-1840.jpg\">",
+      "back": "raisins",
+      "word": "raisins",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1598395293365,
+      "front": "<img src=\"waste-food.jpeg\">",
+      "back": "Waste food",
+      "word": "Waste food",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1595195949211,
+      "front": "<img src=\"great_wall.jpeg\">",
+      "back": "The great wall",
+      "word": "The great wall",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1599779330480,
+      "front": "<img src=\"granate.jpeg\">",
+      "back": "Granate",
+      "word": "Granate",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1534391392139,
+      "front": "<img src=\"fresh.png\" />",
+      "back": "A fresh apple",
+      "word": "A fresh apple",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1613896227313,
+      "front": "<img src=\"blow_out (1).gif\">",
+      "back": "Blow out",
+      "word": "Blow out",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1712221903665,
+      "front": "一开始，起先",
+      "back": "at first",
+      "word": "at first",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1596869790310,
+      "front": "<img src=\"屏幕快照 2020-08-08 下午2.57.42.png\">",
+      "back": "Grizzly bear",
+      "word": "Grizzly bear",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1609544240709,
+      "front": "<img src=\"herbivore.jpeg\">",
+      "back": "Herbivore",
+      "word": "Herbivore",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1587254864605,
+      "front": "<img src=\"屏幕快照 2020-04-19 上午8.07.34.png\" />",
+      "back": "Earphone",
+      "word": "Earphone",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1599367069890,
+      "front": "<img src=\"metronome.jpg\">",
+      "back": "Metronome",
+      "word": "Metronome",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1709369863275,
+      "front": "<img src=\"paste-d6e07b0bfde1e6bf3e8feb5ad2d009dc347878a7.jpg\">",
+      "back": "Departure hall",
+      "word": "Departure hall",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1711790631891,
+      "front": "<img src=\"paste-46ed654a8e390825451db54b04d611e03017da85.jpg\">",
+      "back": "A sore throat",
+      "word": "A sore throat",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1712407164074,
+      "front": "<img src=\"paste-a00c6c042d8cc0522c46bbd6732c834b60cd621f.jpg\">",
+      "back": "Hose reel",
+      "word": "Hose reel",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1664108555680,
+      "front": "<img src=\"lotus-drawing-09.jpg\">",
+      "back": "Lotus",
+      "word": "Lotus",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1544271015117,
+      "front": "<img src=\"屏幕快照 2018-12-08 下午8.12.09.png\" />",
+      "back": "Lion cub",
+      "word": "Lion cub",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1565617319491,
+      "front": "<img src=\"typhoon.gif\" /><img src=\"shutterstock_263341361-390x285.jpg\" />",
+      "back": "Cancelled",
+      "word": "Cancelled",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1545451230741,
+      "front": "<img src=\"a_row.png\" />",
+      "back": "A row",
+      "word": "A row",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1602716652396,
+      "front": "<img src=\"pomelo.webp\">",
+      "back": "Pomelo",
+      "word": "Pomelo",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1712924651948,
+      "front": "<img src=\"paste-950a500ad7bb3e3d6ccbf98648fd45d71b601e89.jpg\">",
+      "back": "Emotions",
+      "word": "Emotions",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1614516687515,
+      "front": "<img src=\"paste-982c784fc4b0627e1ad1eafc52fb908efade3903.jpg\">",
+      "back": "Bulky luggages",
+      "word": "Bulky luggages",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1592280609859,
+      "front": "<img src=\"palm_tree.jpg\">",
+      "back": "Palm tree",
+      "word": "Palm tree",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1593119987296,
+      "front": "<img src=\"屏幕快照 2020-06-26 上午5.19.41.png\">",
+      "back": "Archery",
+      "word": "Archery",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1731223950839,
+      "front": "<img src=\"paste-c7d7e33d3ebea517d27f7f4b33f79210b7351077.jpg\"><br>玉米秆",
+      "back": "Corn stalk",
+      "word": "Corn stalk",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1594429129736,
+      "front": "<img src=\"centipede.jpg\">",
+      "back": "Centipede",
+      "word": "Centipede",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1553336081325,
+      "front": "<img src=\"fluffy_animals.png\">",
+      "back": "Fluffy animals",
+      "word": "Fluffy animals",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1554035293155,
+      "front": "<img src=\"dim_room.jpg\" />",
+      "back": "A dim room",
+      "word": "A dim room",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1709889595213,
+      "front": "<img src=\"paste-b04b3403fbb711158d508ce6323bbc1c1b8e29b9.jpg\">",
+      "back": "Solve a rubik",
+      "word": "Solve a rubik",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1586991449441,
+      "front": "<img src=\"下载.png\" />",
+      "back": "musical notes",
+      "word": "musical notes",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1710051466664,
+      "front": "<img src=\"paste-2832783538f3e22644446f5f467b6a934fac45b3.jpg\">",
+      "back": "Volunteers",
+      "word": "Volunteers",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1601503806151,
+      "front": "<img src=\"quail.jpg\">",
+      "back": "quail[sound:googletts-251d9579-6383b693-4b24c26d-d8678ccb-4dde70bf.mp3]",
+      "word": "quail[sound:googletts-251d9579-6383b693-4b24c26d-d8678ccb-4dde70bf.mp3]",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1601512659313,
+      "front": "<img src=\"contents.png\">",
+      "back": "Contents",
+      "word": "Contents",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1600558903882,
+      "front": "<img src=\"quarter_note.jpeg\">",
+      "back": "Quarter note",
+      "word": "Quarter note",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1713704206250,
+      "front": "<img src=\"paste-d12e481c9105bc92dee38255071abf241841ea4b.jpg\"><br>A ___ of milk",
+      "back": "A carton of milk",
+      "word": "A carton of milk",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1557996370943,
+      "front": "<img src=\"den.jpg\" />",
+      "back": "Wolf den",
+      "word": "Wolf den",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1542019736393,
+      "front": "<img src=\"practise.gif\" />",
+      "back": "Practise",
+      "word": "Practise",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1534759112113,
+      "front": "<img src=\"lychee.jpg\" />",
+      "back": "Lychee",
+      "word": "Lychee",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1600211542463,
+      "front": "<img src=\"omelette.jpg\">",
+      "back": "Omelette",
+      "word": "Omelette",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1534547310866,
+      "front": "<img src=\"Screen Shot 2018-08-18 at 7.09.26 AM.png\" />",
+      "back": "Tourists",
+      "word": "Tourists",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1535978654391,
+      "front": "<img src=\"brothers.png\" />",
+      "back": "Brothers",
+      "word": "Brothers",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1595195892350,
+      "front": "<img src=\"hotpot.jpeg\">",
+      "back": "Hotpot",
+      "word": "Hotpot",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1586583282952,
+      "front": "<img src=\"divided_by.png\" />",
+      "back": "divided by",
+      "word": "divided by",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1596579960928,
+      "front": "<img src=\"屏幕快照 2020-08-05 上午6.27.36.png\">",
+      "back": "Paint brush",
+      "word": "Paint brush",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1712281907323,
+      "front": "<img src=\"paste-b0742e38532131ac2460ca895ea2d01e539b367f.jpg\">",
+      "back": "Double-decker bus",
+      "word": "Double-decker bus",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1593555745900,
+      "front": "<img src=\"dairy-farmers-milk-dump-lead-600x480.jpg\">",
+      "back": "Dairy farm",
+      "word": "Dairy farm",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1606001555110,
+      "front": "<img src=\"屏幕快照 2019-10-27 上午7.37.33.png\">",
+      "back": "Get stuck",
+      "word": "Get stuck",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1612485444372,
+      "front": "<img src=\"paste-42d722d05c288eb65e070dd55522fd019b8ce545.jpg\">",
+      "back": "Even number",
+      "word": "Even number",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1543530781150,
+      "front": "<img src=\"fishing_pole.jpg\" />",
+      "back": "Fishing pole",
+      "word": "Fishing pole",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1552088777149,
+      "front": "<img src=\"kneel.gif\" />",
+      "back": "Kneel down",
+      "word": "Kneel down",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1551339012058,
+      "front": "<img src=\"in_the_middle.png\" />",
+      "back": "In the middle",
+      "word": "In the middle",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1613033681225,
+      "front": "<img src=\"paste-e73290b07de35e9aaad4e0f6fc61ba737dfd1f08.jpg\">",
+      "back": "Dumpling",
+      "word": "Dumpling",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1598395050421,
+      "front": "<img src=\"trip-over-24915380.jpg\">",
+      "back": "Trip over",
+      "word": "Trip over",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1620215510337,
+      "front": "<img src=\"paste-0fb1b16134a3f24f952d12744859f3045dde9206.jpg\">",
+      "back": "Traffic signals",
+      "word": "Traffic signals",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1553307494875,
+      "front": "<img src=\"tadpole2.jpg\" />",
+      "back": "Tadpole",
+      "word": "Tadpole",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1534832031181,
+      "front": "<img src=\"Colorful coral reef.jpg.824x0_q71_crop-scale.jpg\" />",
+      "back": "Coral reef",
+      "word": "Coral reef",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1565438912389,
+      "front": "<img src=\"light_bulb.jpeg\" />",
+      "back": "Light bulb",
+      "word": "Light bulb",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1593556005785,
+      "front": "<img src=\"sugarcane.jpg\">",
+      "back": "Sugarcane",
+      "word": "Sugarcane",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1565437398729,
+      "front": "<img src=\"typhoon.gif\" />",
+      "back": "Typhoon",
+      "word": "Typhoon",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1613037928667,
+      "front": "<img src=\"paste-b5653e5cdb451abfafbf00d3ccee6b6f4b9af4d4.jpg\">",
+      "back": "Dragon dance",
+      "word": "Dragon dance",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1599377776641,
+      "front": "<img src=\"屏幕快照 2020-09-06 下午3.40.55.png\">",
+      "back": "Aloe vera",
+      "word": "Aloe vera",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1599345665783,
+      "front": "<img src=\"street_dance.jpg\">",
+      "back": "Street dance",
+      "word": "Street dance",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1601452231769,
+      "front": "<img src=\"屏幕快照 2020-08-09 上午6.26.09.png\">",
+      "back": "Reading comprehension",
+      "word": "Reading comprehension",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1558836207546,
+      "front": "<img src=\"show_off.png\" />",
+      "back": "Show off",
+      "word": "Show off",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1598309819246,
+      "front": "<img src=\"information_desk.jpg\">",
+      "back": "Information desk",
+      "word": "Information desk",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1598150062802,
+      "front": "<img src=\"lean_against_wall.jpg\">",
+      "back": "Lean against the wall",
+      "word": "Lean against the wall",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1592739730089,
+      "front": "<img src=\"basketball_player.jpg\">",
+      "back": "Basketball player",
+      "word": "Basketball player",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1600118968893,
+      "front": "<img src=\"tissue_paper.jpg\">",
+      "back": "Tissue paper",
+      "word": "Tissue paper",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1609668451254,
+      "front": "<img src=\"strawberry-lime-yogurt-popsicles2.jpg\">",
+      "back": "Popsicle",
+      "word": "Popsicle",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1563576321939,
+      "front": "<img src=\"come_over.gif\" />",
+      "back": "Come over",
+      "word": "Come over",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1595686015343,
+      "front": "<img src=\"red-boarding-pass-vector-23944263.jpg\">",
+      "back": "Boarding pass",
+      "word": "Boarding pass",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1541281295872,
+      "front": "<img src=\"reach.png\" />",
+      "back": "cannot&nbsp;<font color=\"#ff0000\">reach</font> it.",
+      "word": "cannot&nbsp;reach it",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1600118933111,
+      "front": "<img src=\"swimming_goggles.png\">",
+      "back": "Swimming goggles",
+      "word": "Swimming goggles",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1609557831347,
+      "front": "<img src=\"roller_coaster.jpg\">",
+      "back": "Roller coaster",
+      "word": "Roller coaster",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1557995902645,
+      "front": "<img src=\"good_habits.jpeg\" />",
+      "back": "Good habits",
+      "word": "Good habits",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1543280903323,
+      "front": "<img src=\"hamster.jpg\" />",
+      "back": "Hamster",
+      "word": "Hamster",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1583878513136,
+      "front": "<img src=\"屏幕快照 2020-03-10 下午9.30.18.png\">",
+      "back": "Koala<div>[sound:googletts-de662aa7-ff2f4149-8d0be16d-3860ed61-28b2ace4.mp3]<br></div>",
+      "word": "Koala[sound:googletts-de662aa7-ff2f4149-8d0be16d-3860ed61-28b2ace4.mp3]",
+      "reason": "Word not found in KG"
+    },
+    {
+      "note_id": 1591392132369,
+      "front": "<img src=\"art_class.jpg\">",
+      "back": "Art class",
+      "word": "Art class",
+      "reason": "Word not found in KG"
+    }
+  ]
+}

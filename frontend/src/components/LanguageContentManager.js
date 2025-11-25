@@ -796,7 +796,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
             <button onClick={() => setShowMasteredGrammarManager(false)} style={{
               position: 'absolute', top: '10px', right: '10px', border: 'none', background: 'none', fontSize: '24px', cursor: 'pointer'
             }}>×</button>
-            <MasteredGrammarManager profile={profile} onUpdate={onProfileUpdate} />
+            <MasteredGrammarManager profile={profile} onUpdate={onProfileUpdate} grammarLanguage={selectedLanguage} />
           </div>
         </div>
       )}

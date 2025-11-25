@@ -268,13 +268,26 @@ def populate_grammar():
     print(f"  Sentences added: {sentence_count}")
     print(f"  Word links created: {word_link_count}")
     
+    # Use utility function for backup and save
     try:
-        graph.serialize(destination=KG_FILE, format="turtle")
-        print(f"\n✅ Successfully saved updated graph to '{KG_FILE}'")
-        print(f"   Total triples: {len(graph)}")
-    except Exception as e:
-        print(f"\n❌ ERROR saving graph: {e}")
-        sys.exit(1)
+        from kg_utils import save_graph_with_backup
+        if not save_graph_with_backup(graph, KG_FILE, create_timestamped=True):
+            sys.exit(1)
+    except ImportError:
+        # Fallback if utility not available
+        import shutil
+        backup_file = f"{KG_FILE}.backup"
+        if os.path.exists(KG_FILE):
+            shutil.copy2(KG_FILE, backup_file)
+            print(f"  ✅ Created backup: {backup_file}")
+        
+        try:
+            graph.serialize(destination=KG_FILE, format="turtle")
+            print(f"\n✅ Successfully saved updated graph to '{KG_FILE}'")
+            print(f"   Total triples: {len(graph)}")
+        except Exception as e:
+            print(f"\n❌ ERROR saving graph: {e}")
+            sys.exit(1)
 
 
 if __name__ == "__main__":
