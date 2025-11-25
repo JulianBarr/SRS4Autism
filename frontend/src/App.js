@@ -153,7 +153,13 @@ function App() {
               className={activeTab === 'main' ? 'active' : ''}
               onClick={() => setActiveTab('main')}
             >
-              {t('mainWorkflow') || 'Curriculum'}
+              {t('mainWorkflow')}
+            </button>
+            <button 
+              className={activeTab === 'content' ? 'active' : ''}
+              onClick={() => setActiveTab('content')}
+            >
+              {t('contentManagement') || (language === 'en' ? 'Content Management' : '内容管理')}
             </button>
             <button 
               className={activeTab === 'profiles' ? 'active' : ''}
@@ -173,6 +179,25 @@ function App() {
 
       <main className="container">
         {activeTab === 'main' && (
+          <div className="main-workflow">
+            <div className="workflow-left">
+              <ChatAssistant 
+                profiles={profiles}
+                currentProfile={currentProfile}
+                onNewCard={handleNewCard}
+              />
+            </div>
+            <div className="workflow-right">
+              <CardCuration 
+                cards={cards}
+                onApproveCard={handleApproveCard}
+                onRefresh={loadData}
+              />
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'content' && (
           <div>
             {/* Content Category Navigation */}
             <ContentCategoryNav 
@@ -180,25 +205,7 @@ function App() {
               onCategoryChange={setActiveCategory}
             />
             
-            {/* Main Workflow - Chat & Card Curation (always visible) */}
-            <div className="main-workflow">
-              <div className="workflow-left">
-                <ChatAssistant 
-                  profiles={profiles}
-                  currentProfile={currentProfile}
-                  onNewCard={handleNewCard}
-                />
-              </div>
-              <div className="workflow-right">
-                <CardCuration 
-                  cards={cards}
-                  onApproveCard={handleApproveCard}
-                  onRefresh={loadData}
-                />
-              </div>
-            </div>
-            
-            {/* Category Content (below chat) */}
+            {/* Category Content */}
             {activeCategory === 'language' && (
                <div style={{ marginTop: '20px', padding: '20px', backgroundColor: '#f5f5f5', borderRadius: '8px' }}>
                   <LanguageContentManager 
@@ -230,6 +237,7 @@ function App() {
             )}
           </div>
         )}
+
         {activeTab === 'profiles' && (
           <ChildProfileSettings 
             profiles={profiles}

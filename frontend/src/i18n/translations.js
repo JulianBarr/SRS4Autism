@@ -5,6 +5,7 @@ export const translations = {
     
     // Tabs
     mainWorkflow: "Main Workflow",
+    contentManagement: "Content Management",
     chatAssistant: "Chat Assistant",
     cardCuration: "Card Curation",
     profiles: "Profiles",
@@ -165,6 +166,7 @@ export const translations = {
     
     // Tabs
     mainWorkflow: "主要工作流程",
+    contentManagement: "内容管理",
     chatAssistant: "聊天助手",
     cardCuration: "卡片管理",
     profiles: "用户档案",
