@@ -2800,6 +2800,9 @@ async def get_grammar_points(cefr_level: Optional[str] = None, language: Optiona
         # Use OPTIONAL for properties that might be missing, and handle language-tagged literals
         # Get both English and Chinese labels, and first example sentence (only one per grammar point)
         # First get all grammar points with their properties
+        # Build CEFR level filter if specified
+        cefr_filter = f'FILTER(?cefr = "{cefr_level}")' if cefr_level else ''
+        
         sparql = f"""
         PREFIX srs-kg: <http://srs4autism.com/schema/>
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -2812,19 +2815,13 @@ async def get_grammar_points(cefr_level: Optional[str] = None, language: Optiona
             OPTIONAL {{ ?gp_uri srs-kg:explanation ?explanation }}
             OPTIONAL {{ ?gp_uri srs-kg:cefrLevel ?cefr }}
             {language_filter}
+            {cefr_filter}
         }}
         ORDER BY ?cefr ?label_en
         """
         
-        if cefr_level:
-            # Filter by CEFR level
-            sparql = sparql.replace(
-                "ORDER BY ?cefr ?label_en",
-                f"""
-                FILTER(?cefr = "{cefr_level}")
-                ORDER BY ?cefr ?label_en
-                """
-            )
+        # Clean up query string (remove extra whitespace)
+        sparql = ' '.join(sparql.split())
         
         # Query Fuseki
         results = query_sparql(sparql, output_format="application/sparql-results+json")

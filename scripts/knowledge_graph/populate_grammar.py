@@ -46,17 +46,17 @@ INST = Namespace("http://srs4autism.com/instance/")
 
 
 def generate_slug(text):
-    """Generate a URL-safe slug from text."""
+    """Generate a URL-safe slug from text.
+    
+    Uses URL encoding for special characters to ensure valid URIs.
+    """
     if not text:
         return "unknown"
-    # Always URL-encode to ensure valid URIs
-    # Replace spaces and special chars with hyphens, then URL-encode
-    slug = re.sub(r'[^\w\s-]', '', text.lower())
-    slug = re.sub(r'[-\s]+', '-', slug)
-    slug = slug.strip('-')
-    # URL-encode the final slug
-    slug = quote(slug, safe='')
-    return slug[:100]  # Increase length limit for longer grammar point names
+    # URL encode the text to handle special characters, parentheses, quotes, etc.
+    # This ensures valid URIs even with special characters
+    encoded = quote(str(text), safe='')
+    # Limit length to avoid extremely long URIs
+    return encoded[:200]
 
 
 def load_existing_words(graph):
