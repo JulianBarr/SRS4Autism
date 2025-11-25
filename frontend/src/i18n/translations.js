@@ -157,7 +157,15 @@ export const translations = {
     chineseGrammar: "Chinese Grammar",
     englishGrammar: "English Grammar",
     tip: "Tip",
-    languageTip: "Manage vocabulary and grammar recommendations in the Profiles tab"
+    languageTip: "Manage vocabulary and grammar recommendations in the Profiles tab",
+    selectLanguage: "Select Language",
+    selectContentType: "Select Content Type",
+    character: "Character",
+    word: "Word",
+    grammar: "Grammar",
+    pragmatics: "Pragmatics",
+    manageMastered: "Manage Mastered",
+    getRecommendations: "Get Recommendations"
   },
   
   zh: {
@@ -423,7 +431,15 @@ export const translations = {
     chineseGrammar: "中文语法",
     englishGrammar: "英语语法",
     tip: "提示",
-    languageTip: "请前往「用户档案」标签页管理词汇和语法推荐功能"
+    languageTip: "请前往「用户档案」标签页管理词汇和语法推荐功能",
+    selectLanguage: "选择语言",
+    selectContentType: "选择内容类型",
+    character: "汉字",
+    word: "词汇",
+    grammar: "语法",
+    pragmatics: "语用",
+    manageMastered: "管理已掌握",
+    getRecommendations: "获取推荐"
   }
 };
 

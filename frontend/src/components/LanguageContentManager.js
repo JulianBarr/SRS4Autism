@@ -4,11 +4,16 @@ import { useLanguage } from '../i18n/LanguageContext';
 import MasteredWordsManager from './MasteredWordsManager';
 import MasteredEnglishWordsManager from './MasteredEnglishWordsManager';
 import MasteredGrammarManager from './MasteredGrammarManager';
+import theme from '../styles/theme';
 
 const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
 const LanguageContentManager = ({ profile, onProfileUpdate }) => {
   const { t } = useLanguage();
+  
+  // Hierarchy: Language -> Content Type -> Actions
+  const [selectedLanguage, setSelectedLanguage] = useState('zh'); // 'zh' or 'en'
+  const [selectedContentType, setSelectedContentType] = useState('word'); // 'character', 'word', 'grammar', 'pragmatics'
   
   // Chinese Word Recommendations State
   const [showRecommendations, setShowRecommendations] = useState(false);
@@ -42,7 +47,6 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
   const [loadingGrammarRecommendations, setLoadingGrammarRecommendations] = useState(false);
   const [selectedGrammarRecommendations, setSelectedGrammarRecommendations] = useState(new Set());
   const [savingMasteredGrammar, setSavingMasteredGrammar] = useState(false);
-  const [grammarLanguage, setGrammarLanguage] = useState('zh');
 
   // Cleanup on unmount
   useEffect(() => {
@@ -66,15 +70,79 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
 
   if (!profile) {
     return (
-      <div style={{ padding: '20px', textAlign: 'center', color: '#666' }}>
+      <div style={{ padding: '20px', textAlign: 'center', color: theme.ui.text.secondary }}>
         <p>{t('pleaseSelectProfile') || "Please select a child profile to view language content."}</p>
       </div>
     );
   }
 
-  // --- Chinese Recommendations ---
+  // Content types available per language
+  const getContentTypes = (lang) => {
+    if (lang === 'zh') {
+      return [
+        { id: 'character', label: t('character') || 'Character', icon: '字' },
+        { id: 'word', label: t('word') || 'Word', icon: '词' },
+        { id: 'grammar', label: t('grammar') || 'Grammar', icon: '语法' },
+        { id: 'pragmatics', label: t('pragmatics') || 'Pragmatics', icon: '语用' }
+      ];
+    } else { // English
+      return [
+        { id: 'word', label: t('word') || 'Word', icon: 'Word' },
+        { id: 'grammar', label: t('grammar') || 'Grammar', icon: 'Grammar' },
+        { id: 'pragmatics', label: t('pragmatics') || 'Pragmatics', icon: 'Pragmatics' }
+      ];
+    }
+  };
 
-  const handleGetRecommendations = async (weight = null) => {
+  // Handle actions based on language and content type
+  const handleManageMastered = () => {
+    if (selectedLanguage === 'zh') {
+      if (selectedContentType === 'word') {
+        setShowMasteredWordsManager(true);
+      } else if (selectedContentType === 'grammar') {
+        setShowMasteredGrammarManager(true);
+      } else if (selectedContentType === 'character') {
+        // Character management (Chinese only) - can reuse word manager or create new one
+        setShowMasteredWordsManager(true);
+      } else {
+        // Pragmatics - placeholder
+        alert('Pragmatics management coming soon');
+      }
+    } else { // English
+      if (selectedContentType === 'word') {
+        setShowMasteredEnglishWordsManager(true);
+      } else if (selectedContentType === 'grammar') {
+        setShowMasteredGrammarManager(true);
+      } else {
+        // Pragmatics - placeholder
+        alert('Pragmatics management coming soon');
+      }
+    }
+  };
+
+  const handleGetRecommendations = () => {
+    if (selectedLanguage === 'zh') {
+      if (selectedContentType === 'word') {
+        handleGetChineseWordRecommendations();
+      } else if (selectedContentType === 'grammar') {
+        handleGetGrammarRecommendations('zh');
+      } else {
+        alert(`${selectedContentType} recommendations coming soon`);
+      }
+    } else { // English
+      if (selectedContentType === 'word') {
+        handleGetEnglishWordRecommendations();
+      } else if (selectedContentType === 'grammar') {
+        handleGetGrammarRecommendations('en');
+      } else {
+        alert(`${selectedContentType} recommendations coming soon`);
+      }
+    }
+  };
+
+  // --- Chinese Word Recommendations ---
+
+  const handleGetChineseWordRecommendations = async (weight = null) => {
     setLoadingRecommendations(true);
     setSelectedRecommendations(new Set());
     
@@ -143,9 +211,9 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
     }
   };
 
-  // --- English Recommendations ---
+  // --- English Word Recommendations ---
 
-  const handleGetEnglishRecommendations = async (sliderPos = null) => {
+  const handleGetEnglishWordRecommendations = async (sliderPos = null) => {
     if (englishRecommendationsAbortController.current) {
       englishRecommendationsAbortController.current.abort();
     }
@@ -220,18 +288,12 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
       
       await axios.put(`${API_BASE}/profiles/${profile.name}`, updatedProfile);
       if (onProfileUpdate) {
-        await onProfileUpdate(); // Wait for update
-        // Re-fetch recommendations to reflect changes
-        // Note: We can't easily re-fetch here without the updated profile object from the parent
-        // Ideally onProfileUpdate returns the updated profile or we rely on props updating
+        await onProfileUpdate();
       }
       
       const addedCount = selectedEnglishRecommendations.size;
       setSelectedEnglishRecommendations(new Set());
       alert(`✅ Successfully added ${addedCount} word(s) to mastered English words list!`);
-      
-      // Trigger re-fetch if profile updates prop, otherwise we might need to manually handle it
-      // For now, we rely on parent updating the profile prop
     } catch (error) {
       console.error('Error adding English words to mastered list:', error);
       alert('Failed to add words to mastered list.');
@@ -245,7 +307,6 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
   const handleGetGrammarRecommendations = async (lang = 'zh') => {
     setLoadingGrammarRecommendations(true);
     setSelectedGrammarRecommendations(new Set());
-    setGrammarLanguage(lang);
     
     try {
       const mastered_grammar_array = profile.mastered_grammar 
@@ -310,58 +371,146 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
     }
   };
 
+  const contentTypes = getContentTypes(selectedLanguage);
+  const isCharacterAvailable = selectedLanguage === 'zh' && selectedContentType === 'character';
+  const isLoading = (selectedContentType === 'word' && selectedLanguage === 'zh' && loadingRecommendations) ||
+                    (selectedContentType === 'word' && selectedLanguage === 'en' && loadingEnglishRecommendations) ||
+                    (selectedContentType === 'grammar' && loadingGrammarRecommendations);
+
   return (
-    <div style={{ padding: '20px' }}>
-      {/* Action Buttons */}
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '20px' }}>
-        <button 
-          onClick={() => setShowMasteredWordsManager(true)}
-          className="btn"
-        >
-          📝 {t('manageMasteredWords')} ({t('chineseVocabulary')})
-        </button>
-        <button 
-          onClick={() => setShowMasteredEnglishWordsManager(true)}
-          className="btn"
-        >
-          📝 {t('manageMasteredEnglishWords')}
-        </button>
-        <button 
-          onClick={() => setShowMasteredGrammarManager(true)}
-          className="btn"
-        >
-          📖 {t('manageMasteredGrammar')}
-        </button>
-      </div>
-      
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '20px' }}>
-        <button 
-          onClick={() => handleGetRecommendations()}
-          className="btn"
-          disabled={loadingRecommendations}
-        >
-          {loadingRecommendations ? t('loading') || 'Loading...' : `📚 ${t('getWordRecommendations')} (${t('chineseVocabulary')})`}
-        </button>
-        <button 
-          onClick={() => handleGetEnglishRecommendations()}
-          className="btn"
-          disabled={loadingEnglishRecommendations}
-        >
-          {loadingEnglishRecommendations ? t('loading') || 'Loading...' : `📚 ${t('getWordRecommendations')} (${t('englishVocabulary')})`}
-        </button>
-        <button 
-          onClick={() => handleGetGrammarRecommendations()}
-          className="btn"
-          disabled={loadingGrammarRecommendations}
-        >
-          {loadingGrammarRecommendations ? t('loading') || 'Loading...' : `📖 ${t('getGrammarRecommendations')}`}
-        </button>
+    <div style={{ padding: theme.spacing.lg }}>
+      {/* Level 1: Language Selection */}
+      <div style={{ marginBottom: theme.spacing.lg }}>
+        <h3 style={{ marginBottom: theme.spacing.md, color: theme.ui.text.primary }}>
+          {t('selectLanguage') || 'Select Language'}
+        </h3>
+        <div style={{ display: 'flex', gap: theme.spacing.sm }}>
+          <button
+            onClick={() => {
+              setSelectedLanguage('zh');
+              // Reset content type if switching to English and character was selected
+              if (selectedContentType === 'character') {
+                setSelectedContentType('word');
+              }
+            }}
+            style={{
+              padding: `${theme.spacing.sm} ${theme.spacing.md}`,
+              border: `2px solid ${selectedLanguage === 'zh' ? theme.categories.language.primary : theme.ui.border}`,
+              backgroundColor: selectedLanguage === 'zh' ? theme.categories.language.background : theme.ui.background,
+              color: selectedLanguage === 'zh' ? theme.categories.language.primary : theme.ui.text.primary,
+              borderRadius: theme.borderRadius.md,
+              cursor: 'pointer',
+              fontSize: '16px',
+              fontWeight: selectedLanguage === 'zh' ? '600' : '400',
+              transition: 'all 0.2s'
+            }}
+          >
+            中文 (Chinese)
+          </button>
+          <button
+            onClick={() => {
+              setSelectedLanguage('en');
+              // Reset content type if character was selected (English doesn't have characters)
+              if (selectedContentType === 'character') {
+                setSelectedContentType('word');
+              }
+            }}
+            style={{
+              padding: `${theme.spacing.sm} ${theme.spacing.md}`,
+              border: `2px solid ${selectedLanguage === 'en' ? theme.categories.language.primary : theme.ui.border}`,
+              backgroundColor: selectedLanguage === 'en' ? theme.categories.language.background : theme.ui.background,
+              color: selectedLanguage === 'en' ? theme.categories.language.primary : theme.ui.text.primary,
+              borderRadius: theme.borderRadius.md,
+              cursor: 'pointer',
+              fontSize: '16px',
+              fontWeight: selectedLanguage === 'en' ? '600' : '400',
+              transition: 'all 0.2s'
+            }}
+          >
+            English
+          </button>
+        </div>
       </div>
 
-      {/* Modals - Using the same structure as ProfileManager but adapted */}
-      
-      {/* Chinese Recommendations Modal */}
-      {showRecommendations && (
+      {/* Level 2: Content Type Selection */}
+      <div style={{ marginBottom: theme.spacing.lg }}>
+        <h3 style={{ marginBottom: theme.spacing.md, color: theme.ui.text.primary }}>
+          {t('selectContentType') || 'Select Content Type'}
+        </h3>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: theme.spacing.sm }}>
+          {contentTypes.map(type => (
+            <button
+              key={type.id}
+              onClick={() => setSelectedContentType(type.id)}
+              style={{
+                padding: `${theme.spacing.sm} ${theme.spacing.md}`,
+                border: `2px solid ${selectedContentType === type.id ? theme.categories.language.primary : theme.ui.border}`,
+                backgroundColor: selectedContentType === type.id ? theme.categories.language.background : theme.ui.background,
+                color: selectedContentType === type.id ? theme.categories.language.primary : theme.ui.text.primary,
+                borderRadius: theme.borderRadius.md,
+                cursor: 'pointer',
+                fontSize: '14px',
+                fontWeight: selectedContentType === type.id ? '600' : '400',
+                transition: 'all 0.2s'
+              }}
+            >
+              {type.icon} {type.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Level 3: Actions */}
+      <div style={{ 
+        padding: theme.spacing.lg, 
+        backgroundColor: theme.ui.backgrounds.surface, 
+        borderRadius: theme.borderRadius.lg,
+        border: `1px solid ${theme.ui.border}`
+      }}>
+        <h3 style={{ marginBottom: theme.spacing.md, color: theme.ui.text.primary }}>
+          {selectedLanguage === 'zh' ? '中文' : 'English'} - {contentTypes.find(t => t.id === selectedContentType)?.label}
+        </h3>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: theme.spacing.md }}>
+          <button
+            onClick={handleManageMastered}
+            className="btn"
+            style={{
+              backgroundColor: theme.actions.secondary,
+              color: theme.ui.text.inverse,
+              padding: `${theme.spacing.sm} ${theme.spacing.md}`,
+              borderRadius: theme.borderRadius.md,
+              border: 'none',
+              cursor: 'pointer',
+              fontSize: '14px',
+              fontWeight: '500'
+            }}
+          >
+            📝 {t('manageMastered') || 'Manage Mastered'}
+          </button>
+          <button
+            onClick={handleGetRecommendations}
+            className="btn"
+            disabled={isLoading}
+            style={{
+              backgroundColor: isLoading ? theme.ui.backgrounds.disabled : theme.actions.primary,
+              color: theme.ui.text.inverse,
+              padding: `${theme.spacing.sm} ${theme.spacing.md}`,
+              borderRadius: theme.borderRadius.md,
+              border: 'none',
+              cursor: isLoading ? 'not-allowed' : 'pointer',
+              fontSize: '14px',
+              fontWeight: '500',
+              opacity: isLoading ? 0.6 : 1
+            }}
+          >
+            {isLoading ? (t('loading') || 'Loading...') : `📚 ${t('getRecommendations') || 'Get Recommendations'}`}
+          </button>
+        </div>
+      </div>
+
+      {/* Modals - Keep existing modal code but adapt for hierarchy */}
+      {/* Chinese Word Recommendations Modal */}
+      {showRecommendations && selectedContentType === 'word' && selectedLanguage === 'zh' && (
         <div className="modal-overlay" style={{
           position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
           backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex',
@@ -374,7 +523,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
             <button onClick={() => setShowRecommendations(false)} style={{
               position: 'absolute', top: '10px', right: '10px', border: 'none', background: 'none', fontSize: '24px', cursor: 'pointer'
             }}>×</button>
-            <h2>📚 {t('wordRecommendations')}</h2>
+            <h2>📚 {t('wordRecommendations')} - {t('chineseVocabulary')}</h2>
             
             {/* Concreteness Weight Control */}
             <div style={{ marginBottom: '20px', padding: '15px', backgroundColor: '#f5f5f5', borderRadius: '8px', border: '1px solid #ddd' }}>
@@ -388,13 +537,12 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
                   onChange={(e) => {
                     const newWeight = parseFloat(e.target.value);
                     setConcretenessWeight(newWeight);
-                    handleGetRecommendations(newWeight);
+                    handleGetChineseWordRecommendations(newWeight);
                   }}
                   style={{ flex: 1, cursor: 'pointer' }}
                 />
                 <span style={{ fontSize: '12px', color: '#666', minWidth: '100px', textAlign: 'right' }}>Concreteness Only</span>
               </div>
-              {/* ... simplified label ... */}
             </div>
             
             {recommendations.length === 0 ? (
@@ -408,7 +556,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
                       onClick={handleAddSelectedToMastered}
                       disabled={savingMasteredWords}
                       className="btn"
-                      style={{ backgroundColor: '#4CAF50', color: 'white' }}
+                      style={{ backgroundColor: theme.actions.success, color: 'white' }}
                     >
                       {savingMasteredWords ? `💾 ${t('saving')}` : `✓ ${t('addSelected')} (${selectedRecommendations.size})`}
                     </button>
@@ -430,7 +578,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
                           <div>
                             <div style={{ fontWeight: 'bold' }}>
                               {rec.word} {rec.pinyin && <span style={{ color: '#666', fontSize: '0.9em' }}>({rec.pinyin})</span>}
-                              {isAlreadyMastered && <span style={{ fontSize: '12px', color: '#ff9800', marginLeft: '8px' }}>({t('alreadyMastered')})</span>}
+                              {isAlreadyMastered && <span style={{ fontSize: '12px', color: theme.status.alreadyMastered, marginLeft: '8px' }}>({t('alreadyMastered')})</span>}
                             </div>
                             <div style={{ fontSize: '0.8em', color: '#888' }}>
                               HSK: {rec.hsk} | Score: {typeof rec.score === 'number' ? rec.score.toFixed(1) : rec.score}
@@ -447,8 +595,8 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
         </div>
       )}
 
-      {/* English Recommendations Modal */}
-      {showEnglishRecommendations && (
+      {/* English Word Recommendations Modal */}
+      {showEnglishRecommendations && selectedContentType === 'word' && selectedLanguage === 'en' && (
         <div className="modal-overlay" style={{
           position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
           backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex',
@@ -461,7 +609,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
             <button onClick={() => setShowEnglishRecommendations(false)} style={{
               position: 'absolute', top: '10px', right: '10px', border: 'none', background: 'none', fontSize: '24px', cursor: 'pointer'
             }}>×</button>
-            <h2>📚 {t('englishRecommendations')}</h2>
+            <h2>📚 {t('wordRecommendations')} - {t('englishVocabulary')}</h2>
             
             <div style={{ marginBottom: '20px', padding: '15px', backgroundColor: '#f5f5f5', borderRadius: '8px', border: '1px solid #ddd' }}>
               <label style={{ display: 'block', marginBottom: '10px', fontWeight: 'bold', fontSize: '14px' }}>
@@ -476,7 +624,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
                     setEnglishSliderPosition(newPos);
                     if (sliderDebounceTimer.current) clearTimeout(sliderDebounceTimer.current);
                     sliderDebounceTimer.current = setTimeout(() => {
-                      handleGetEnglishRecommendations(newPos);
+                      handleGetEnglishWordRecommendations(newPos);
                     }, 300);
                   }}
                   style={{ flex: 1, cursor: 'pointer' }}
@@ -496,7 +644,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
                       onClick={handleAddSelectedEnglishToMastered}
                       disabled={savingMasteredEnglishWords}
                       className="btn"
-                      style={{ backgroundColor: '#4CAF50', color: 'white' }}
+                      style={{ backgroundColor: theme.actions.success, color: 'white' }}
                     >
                       {savingMasteredEnglishWords ? `💾 ${t('saving')}` : `✓ ${t('addSelected')} (${selectedEnglishRecommendations.size})`}
                     </button>
@@ -518,7 +666,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
                           <div>
                             <div style={{ fontWeight: 'bold' }}>
                               {rec.word}
-                              {isAlreadyMastered && <span style={{ fontSize: '12px', color: '#ff9800', marginLeft: '8px' }}>({t('alreadyMastered')})</span>}
+                              {isAlreadyMastered && <span style={{ fontSize: '12px', color: theme.status.alreadyMastered, marginLeft: '8px' }}>({t('alreadyMastered')})</span>}
                             </div>
                             <div style={{ fontSize: '0.8em', color: '#888' }}>
                               CEFR: {rec.cefr_level || '-'} | Score: {rec.score?.toFixed(2)}
@@ -536,7 +684,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
       )}
 
       {/* Grammar Recommendations Modal */}
-      {showGrammarRecommendations && (
+      {showGrammarRecommendations && selectedContentType === 'grammar' && (
         <div className="modal-overlay" style={{
           position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
           backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex',
@@ -549,16 +697,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
             <button onClick={() => setShowGrammarRecommendations(false)} style={{
               position: 'absolute', top: '10px', right: '10px', border: 'none', background: 'none', fontSize: '24px', cursor: 'pointer'
             }}>×</button>
-            <h2>📖 {t('grammarRecommendations')} ({grammarLanguage === 'en' ? t('englishGrammar') : t('chineseGrammar')})</h2>
-            
-            <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
-               <button onClick={() => handleGetGrammarRecommendations('zh')} className="btn" style={{
-                 backgroundColor: grammarLanguage === 'zh' ? '#1976d2' : '#e0e0e0', color: grammarLanguage === 'zh' ? 'white' : '#333'
-               }}>中文</button>
-               <button onClick={() => handleGetGrammarRecommendations('en')} className="btn" style={{
-                 backgroundColor: grammarLanguage === 'en' ? '#1976d2' : '#e0e0e0', color: grammarLanguage === 'en' ? 'white' : '#333'
-               }}>English</button>
-            </div>
+            <h2>📖 {t('grammarRecommendations')} ({selectedLanguage === 'en' ? t('englishGrammar') : t('chineseGrammar')})</h2>
 
             {grammarRecommendations.length === 0 ? (
               <p>No grammar recommendations available.</p>
@@ -571,7 +710,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
                       onClick={handleAddSelectedGrammarToMastered}
                       disabled={savingMasteredGrammar}
                       className="btn"
-                      style={{ backgroundColor: '#4CAF50', color: 'white' }}
+                      style={{ backgroundColor: theme.actions.success, color: 'white' }}
                     >
                       {savingMasteredGrammar ? `💾 ${t('saving')}` : `✓ ${t('addSelected')} (${selectedGrammarRecommendations.size})`}
                     </button>
@@ -592,8 +731,8 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
                           />
                           <div>
                             <div style={{ fontWeight: 'bold' }}>
-                              {grammarLanguage === 'en' ? rec.grammar_point : (rec.grammar_point_zh || rec.grammar_point)}
-                              {isAlreadyMastered && <span style={{ fontSize: '12px', color: '#ff9800', marginLeft: '8px' }}>({t('alreadyMastered')})</span>}
+                              {selectedLanguage === 'en' ? rec.grammar_point : (rec.grammar_point_zh || rec.grammar_point)}
+                              {isAlreadyMastered && <span style={{ fontSize: '12px', color: theme.status.alreadyMastered, marginLeft: '8px' }}>({t('alreadyMastered')})</span>}
                             </div>
                             <div style={{ fontSize: '0.8em', color: '#888' }}>
                               {rec.structure}
@@ -611,7 +750,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
       )}
 
       {/* Mastered Managers Modals */}
-      {showMasteredWordsManager && (
+      {showMasteredWordsManager && selectedContentType === 'word' && selectedLanguage === 'zh' && (
         <div className="modal-overlay" style={{
           position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
           backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex',
@@ -628,7 +767,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
         </div>
       )}
 
-      {showMasteredEnglishWordsManager && (
+      {showMasteredEnglishWordsManager && selectedContentType === 'word' && selectedLanguage === 'en' && (
          <div className="modal-overlay" style={{
           position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
           backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex',
@@ -645,7 +784,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
         </div>
       )}
 
-      {showMasteredGrammarManager && (
+      {showMasteredGrammarManager && selectedContentType === 'grammar' && (
          <div className="modal-overlay" style={{
           position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
           backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex',
@@ -667,4 +806,3 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
 };
 
 export default LanguageContentManager;
-
