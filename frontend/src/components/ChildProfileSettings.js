@@ -10,6 +10,7 @@ const ChildProfileSettings = ({ profiles, onProfilesChange }) => {
   const [editingProfile, setEditingProfile] = useState(null);
   const [interestsInput, setInterestsInput] = useState('');
   const [charactersInput, setCharactersInput] = useState('');
+  const [saving, setSaving] = useState(false);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -45,15 +46,35 @@ const ChildProfileSettings = ({ profiles, onProfilesChange }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (saving) return; // Prevent double submission
+    
+    setSaving(true);
     try {
+      // Test backend connectivity first
+      try {
+        await axios.get(`${API_BASE}/profiles`, { timeout: 5000 });
+      } catch (connectError) {
+        throw new Error(`Cannot connect to backend at ${API_BASE}. Please ensure the backend server is running on port 8000.`);
+      }
+      
       const interests = interestsInput.split(',').map(item => item.trim()).filter(item => item);
       const character_roster = charactersInput.split(',').map(item => item.trim()).filter(item => item);
       
+      // Ensure all required fields have values (empty strings are acceptable)
       const profileData = {
-        ...formData,
-        interests,
-        character_roster,
-        mental_age: formData.mental_age ? parseFloat(formData.mental_age) : null
+        name: formData.name || '',
+        dob: formData.dob || '',
+        gender: formData.gender || '',
+        address: formData.address || '',
+        school: formData.school || '',
+        neighborhood: formData.neighborhood || '',
+        interests: interests || [],
+        character_roster: character_roster || [],
+        verbal_fluency: formData.verbal_fluency || null,
+        passive_language_level: formData.passive_language_level || null,
+        mental_age: formData.mental_age ? parseFloat(formData.mental_age) : null,
+        raw_input: formData.raw_input || null,
+        extracted_data: formData.extracted_data || {}
       };
       
       if (editingProfile) {
@@ -61,13 +82,21 @@ const ChildProfileSettings = ({ profiles, onProfilesChange }) => {
         // We need to find the existing profile to merge
         const existing = profiles.find(p => p.name === editingProfile);
         if (existing) {
-            profileData.mastered_words = existing.mastered_words;
-            profileData.mastered_english_words = existing.mastered_english_words;
-            profileData.mastered_grammar = existing.mastered_grammar;
+            profileData.mastered_words = existing.mastered_words || '';
+            profileData.mastered_english_words = existing.mastered_english_words || '';
+            profileData.mastered_grammar = existing.mastered_grammar || '';
         }
 
-        await axios.put(`${API_BASE}/profiles/${editingProfile}`, profileData);
+        console.log('Updating profile:', editingProfile, profileData);
+        console.log('Request URL:', `${API_BASE}/profiles/${editingProfile}`);
+        await axios.put(`${API_BASE}/profiles/${editingProfile}`, profileData, {
+          timeout: 10000,
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
       } else {
+        console.log('Creating profile:', profileData);
         await axios.post(`${API_BASE}/profiles`, profileData);
       }
       
@@ -75,8 +104,28 @@ const ChildProfileSettings = ({ profiles, onProfilesChange }) => {
       onProfilesChange(response.data);
       
       resetForm();
+      alert(editingProfile ? (t('profileUpdated') || 'Profile updated successfully!') : (t('profileCreated') || 'Profile created successfully!'));
     } catch (error) {
       console.error('Error saving profile:', error);
+      console.error('Error response:', error.response?.data);
+      console.error('Error request:', {
+        url: error.config?.url,
+        method: error.config?.method,
+        data: error.config?.data
+      });
+      
+      let errorMessage = 'Unknown error';
+      if (error.code === 'ERR_NETWORK' || error.message === 'Network Error') {
+        errorMessage = `Network error: Cannot connect to backend at ${API_BASE}. Please check if the backend server is running.`;
+      } else if (error.response) {
+        errorMessage = error.response.data?.detail || error.response.data?.message || `HTTP ${error.response.status}: ${error.response.statusText}`;
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+      
+      alert(`Failed to ${editingProfile ? 'update' : 'create'} profile: ${errorMessage}`);
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -199,8 +248,10 @@ const ChildProfileSettings = ({ profiles, onProfilesChange }) => {
             </div>
 
             <div className="form-actions">
-              <button type="submit" className="btn">{editingProfile ? t('updateProfile') : t('createProfile')}</button>
-              <button type="button" onClick={resetForm} className="btn btn-secondary">{t('cancel')}</button>
+              <button type="submit" className="btn" disabled={saving}>
+                {saving ? (t('saving') || 'Saving...') : (editingProfile ? t('updateProfile') : t('createProfile'))}
+              </button>
+              <button type="button" onClick={resetForm} className="btn btn-secondary" disabled={saving}>{t('cancel')}</button>
             </div>
           </form>
         </div>

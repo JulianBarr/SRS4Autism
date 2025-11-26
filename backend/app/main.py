@@ -134,6 +134,23 @@ class EnglishRecommendationRequest(BaseModel):
     # Note: CEFR is now a hard filter (not a weight), only showing current level and +1
     mental_age: Optional[float] = None  # Mental age for AoA filtering (e.g., 7.0 for a 7-year-old)
 
+class PPRRecommendationRequest(BaseModel):
+    """Request for PPR-based English word recommendations."""
+    profile_id: str
+    mastered_words: Optional[List[str]] = None  # If None, loaded from database
+    exclude_words: Optional[List[str]] = None
+    # PPR configuration
+    alpha: Optional[float] = 0.5  # PPR teleport probability
+    beta_ppr: Optional[float] = 1.0  # Weight for log-transformed PPR
+    beta_concreteness: Optional[float] = 0.8  # Weight for z-scored concreteness
+    beta_frequency: Optional[float] = 0.3  # Weight for log-transformed frequency
+    beta_aoa_penalty: Optional[float] = 2.0  # Weight for AoA penalty
+    beta_intercept: Optional[float] = 0.0  # Intercept term
+    mental_age: Optional[float] = 8.0  # Mental age for AoA filtering
+    aoa_buffer: Optional[float] = 2.0  # Buffer years beyond mental age
+    exclude_multiword: Optional[bool] = True  # Filter out multi-word phrases
+    top_n: Optional[int] = 50  # Number of recommendations
+
 class GrammarRecommendationRequest(BaseModel):
     mastered_grammar: List[str]
     profile_id: str
@@ -1146,6 +1163,9 @@ async def get_profile(profile_id: str, db: Session = Depends(get_db)):
 @app.put("/profiles/{profile_id}", response_model=ChildProfile)
 async def update_profile(profile_id: str, updated_profile: ChildProfile, db: Session = Depends(get_db)):
     """Update profile in database"""
+    print(f"\n📝 Updating profile: {profile_id}")
+    print(f"   Received data: name={updated_profile.name}, mental_age={updated_profile.mental_age}")
+    
     # Find profile by ID or name
     profile = ProfileService.get_by_id(db, profile_id)
     if not profile:
@@ -1157,10 +1177,16 @@ async def update_profile(profile_id: str, updated_profile: ChildProfile, db: Ses
                 break
     
     if not profile:
+        print(f"   ❌ Profile not found: {profile_id}")
         raise HTTPException(status_code=404, detail="Profile not found")
+    
+    print(f"   ✅ Found profile: {profile.name} (id: {profile_id})")
     
     # Prepare data for database
     profile_data = updated_profile.dict()
+    
+    # Remove id field - we don't update the ID, and it might be None which causes constraint errors
+    profile_data.pop('id', None)
     
     # Split mastered words into lists
     mastered_words_str = profile_data.pop('mastered_words', '') or ''
@@ -1172,6 +1198,7 @@ async def update_profile(profile_id: str, updated_profile: ChildProfile, db: Ses
     profile_data['mastered_grammar_list'] = [g.strip() for g in mastered_grammar_str.split(',') if g.strip()]
     
     updated = ProfileService.update(db, profile_id, profile_data)
+    print(f"   ✅ Profile updated successfully")
     return ProfileService.profile_to_dict(db, updated)
 
 @app.delete("/profiles/{profile_id}")
@@ -2504,6 +2531,96 @@ async def get_english_recommendations(request: EnglishRecommendationRequest):
         import traceback
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=f"Error getting English recommendations: {str(e)}")
+
+
+@app.post("/kg/ppr-recommendations")
+async def get_ppr_recommendations(request: PPRRecommendationRequest):
+    """
+    Get English vocabulary recommendations using Personalized PageRank (PPR) algorithm.
+    
+    Uses semantic similarity graph, mastered words, and probability-based scoring.
+    Returns top N words to learn next based on PPR scores combined with concreteness,
+    frequency, and age of acquisition.
+    """
+    try:
+        print(f"\n📚 Getting PPR recommendations for profile '{request.profile_id}'")
+        
+        # Import PPR service
+        import sys
+        sys.path.insert(0, str(PROJECT_ROOT / "backend"))
+        from services.ppr_recommender_service import get_ppr_service
+        
+        # Load mastered words from database if not provided
+        mastered_words = request.mastered_words
+        if not mastered_words:
+            db = next(get_db())
+            try:
+                mastered_words = ProfileService.get_mastered_words(db, request.profile_id, 'en')
+                print(f"   📘 Loaded {len(mastered_words)} mastered words from database")
+            finally:
+                db.close()
+        
+        if not mastered_words:
+            return {
+                "recommendations": [],
+                "message": "No mastered words found. Add some words to get recommendations."
+            }
+        
+        # Build configuration from request
+        config = {}
+        if request.alpha is not None:
+            config["alpha"] = request.alpha
+        if request.beta_ppr is not None:
+            config["beta_ppr"] = request.beta_ppr
+        if request.beta_concreteness is not None:
+            config["beta_concreteness"] = request.beta_concreteness
+        if request.beta_frequency is not None:
+            config["beta_frequency"] = request.beta_frequency
+        if request.beta_aoa_penalty is not None:
+            config["beta_aoa_penalty"] = request.beta_aoa_penalty
+        if request.beta_intercept is not None:
+            config["beta_intercept"] = request.beta_intercept
+        if request.mental_age is not None:
+            config["mental_age"] = request.mental_age
+        if request.aoa_buffer is not None:
+            config["aoa_buffer"] = request.aoa_buffer
+        if request.exclude_multiword is not None:
+            config["exclude_multiword"] = request.exclude_multiword
+        if request.top_n is not None:
+            config["top_n"] = request.top_n
+        
+        # Get PPR service (lazy-loaded singleton)
+        similarity_file = PROJECT_ROOT / "data" / "content_db" / "english_word_similarity.json"
+        kg_file = PROJECT_ROOT / "knowledge_graph" / "world_model_english.ttl"
+        
+        service = get_ppr_service(
+            similarity_file=similarity_file,
+            kg_file=kg_file,
+            config=config
+        )
+        
+        # Get recommendations
+        recommendations = service.get_recommendations(
+            mastered_words=mastered_words,
+            profile_id=request.profile_id,
+            exclude_words=request.exclude_words,
+            **config
+        )
+        
+        print(f"   ✅ Found {len(recommendations)} recommendations")
+        
+        return {
+            "recommendations": recommendations,
+            "message": f"Found {len(recommendations)} recommendations",
+            "config_used": config
+        }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Error getting PPR recommendations: {str(e)}")
 
 
 @app.post("/agentic/plan")

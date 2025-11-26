@@ -105,7 +105,38 @@ def build_similarity(
     print(f"✅ Retained {len(vectors)} words with vectors "
           f"(dropped {len(texts) - len(vectors)})")
 
-    matrix = np.vstack(vectors).astype("float32")
+    # Detect and filter hash-based vectors (identical vectors from spaCy fallback)
+    # Hash-based vectors are identical across many words, causing false similarity=1.0
+    print("🔍 Detecting hash-based vectors (spaCy fallback vectors)...")
+    matrix_raw = np.vstack(vectors).astype("float32")
+    
+    # Find unique vectors (hash-based vectors will be identical)
+    unique_vectors = {}
+    hash_based_indices = set()
+    
+    for idx, vec in enumerate(matrix_raw):
+        # Create a hash-like key from the vector (rounded to detect near-identical)
+        vec_key = tuple(np.round(vec, decimals=2))
+        if vec_key in unique_vectors:
+            # This vector is identical to a previous one - likely hash-based
+            hash_based_indices.add(idx)
+            hash_based_indices.add(unique_vectors[vec_key])
+        else:
+            unique_vectors[vec_key] = idx
+    
+    if hash_based_indices:
+        print(f"⚠️  WARNING: Found {len(hash_based_indices)} words with hash-based vectors")
+        print(f"   These will be excluded to prevent false similarity=1.0 matches")
+        print(f"   Consider using 'en_core_web_lg' model for better vector coverage")
+        
+        # Filter out hash-based vectors
+        valid_indices = [i for i in range(len(vectors)) if i not in hash_based_indices]
+        matrix_raw = matrix_raw[valid_indices]
+        filtered_node_ids = [filtered_node_ids[i] for i in valid_indices]
+        filtered_labels = [filtered_labels[i] for i in valid_indices]
+        print(f"✅ Filtered to {len(filtered_node_ids)} words with unique vectors")
+    
+    matrix = matrix_raw
     norms = np.linalg.norm(matrix, axis=1, keepdims=True)
     matrix = matrix / (norms + 1e-8)
 
@@ -171,7 +202,8 @@ def main():
     parser = argparse.ArgumentParser(
         description="Build spaCy-based semantic similarity data for English words")
     parser.add_argument("--model", default="en_core_web_md",
-                        help="spaCy model name (default: en_core_web_md)")
+                        help="spaCy model name (default: en_core_web_md). "
+                             "NOTE: 'en_core_web_lg' has better vector coverage and fewer hash-based fallbacks")
     parser.add_argument("--threshold", type=float, default=0.65,
                         help="Minimum cosine similarity to keep an edge")
     parser.add_argument("--top-k", type=int, default=10,

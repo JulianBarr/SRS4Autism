@@ -33,6 +33,7 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
   const [concretenessWeight, setConcretenessWeight] = useState(0.5); // Weight for concreteness (0.0-1.0), default 0.5
   // Slider: 0.0 = Max Frequency (Utility), 1.0 = Max Concreteness (Ease)
   const [englishSliderPosition, setEnglishSliderPosition] = useState(0.5); // Default 0.5 = balanced
+  const [usePPRAlgorithm, setUsePPRAlgorithm] = useState(false); // Toggle between PPR and old algorithm
   const [showMasteredEnglishWordsManager, setShowMasteredEnglishWordsManager] = useState(false);
   const [selectedProfileForMasteredEnglishWords, setSelectedProfileForMasteredEnglishWords] = useState(null);
   const [masteredEnglishWordsInput, setMasteredEnglishWordsInput] = useState('');
@@ -276,7 +277,7 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
     });
   };
 
-  const handleGetEnglishRecommendations = async (profile, sliderPos = null) => {
+  const handleGetEnglishRecommendations = async (profile, sliderPos = null, algorithmType = null) => {
     // Cancel any pending request
     if (englishRecommendationsAbortController.current) {
       englishRecommendationsAbortController.current.abort();
@@ -296,6 +297,8 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
     // Use provided slider position or current state
     // Slider: 0.0 = Max Frequency (Utility), 1.0 = Max Concreteness (Ease)
     const sliderValue = sliderPos !== null ? sliderPos : englishSliderPosition;
+    // Use provided algorithm type or current state
+    const usePPR = algorithmType !== null ? algorithmType : usePPRAlgorithm;
     
     try {
       // Convert mastered_english_words string to array for the API
@@ -303,23 +306,44 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
       
       console.log(`[Request ${currentRequestId}] Getting English recommendations with ${mastered_words_array.length} mastered words`);
       console.log(`  Slider position: ${sliderValue.toFixed(2)} (0.0=Frequency/Utility, 1.0=Concreteness/Ease)`);
+      console.log(`  Algorithm: ${usePPR ? 'PPR' : 'Learning Frontier'}`);
       
       // Get mental age from profile (if available)
       const mentalAge = profile.mental_age ? parseFloat(profile.mental_age) : null;
       
       // Add timestamp to prevent caching
-      const response = await axios.post(`${API_BASE}/kg/english-recommendations?t=${Date.now()}`, {
-        mastered_words: mastered_words_array,
-        profile_id: profile.id || profile.name,
-        concreteness_weight: sliderValue,  // This is now the slider position, not a weight
-        mental_age: mentalAge  // Pass mental age for AoA filtering
-      }, {
+      let response;
+      if (usePPR) {
+        // Use PPR algorithm
+        response = await axios.post(`${API_BASE}/kg/ppr-recommendations?t=${Date.now()}`, {
+          profile_id: profile.id || profile.name,
+          mastered_words: mastered_words_array.length > 0 ? mastered_words_array : undefined,
+          mental_age: mentalAge || 8.0,
+          beta_concreteness: sliderValue * 0.8 + 0.2, // Map 0-1 to 0.2-1.0
+          beta_frequency: (1 - sliderValue) * 0.3 + 0.1, // Map 0-1 to 0.1-0.4
+          top_n: 50
+        }, {
+          headers: {
+            'Cache-Control': 'no-cache',
+            'Pragma': 'no-cache'
+          },
+          signal: abortController.signal
+        });
+      } else {
+        // Use old algorithm
+        response = await axios.post(`${API_BASE}/kg/english-recommendations?t=${Date.now()}`, {
+          mastered_words: mastered_words_array,
+          profile_id: profile.id || profile.name,
+          concreteness_weight: sliderValue,  // This is now the slider position, not a weight
+          mental_age: mentalAge  // Pass mental age for AoA filtering
+        }, {
         headers: {
           'Cache-Control': 'no-cache',
           'Pragma': 'no-cache'
         },
         signal: abortController.signal  // Allow cancellation
-      });
+        });
+      }
       
       // Check if this is still the latest request (ignore stale responses)
       if (currentRequestId !== englishRecommendationsRequestId.current) {
@@ -359,7 +383,8 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
         return;
       }
       console.error(`[Request ${currentRequestId}] Error getting English recommendations:`, error);
-      alert('Failed to get English recommendations. Please check if the knowledge graph server is running.');
+      const errorMessage = error.response?.data?.detail || error.message || 'Unknown error';
+      alert(`Failed to get English recommendations: ${errorMessage}`);
     } finally {
       // Only update loading state if this is still the latest request
       if (currentRequestId === englishRecommendationsRequestId.current) {
@@ -1515,6 +1540,36 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
               </p>
             )}
             
+            {/* PPR Algorithm Toggle */}
+            <div style={{ marginBottom: '15px', padding: '12px', backgroundColor: '#e8f4f8', borderRadius: '8px', border: '1px solid #b3d9e6' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' }}>
+                <input
+                  type="checkbox"
+                  checked={usePPRAlgorithm}
+                  onChange={(e) => {
+                    const newValue = e.target.checked;
+                    setUsePPRAlgorithm(newValue);
+                    // Refetch recommendations with new algorithm
+                    // Pass the new value directly to avoid state timing issues
+                    if (selectedProfileForEnglishRecommendations) {
+                      setTimeout(() => {
+                        handleGetEnglishRecommendations(selectedProfileForEnglishRecommendations, englishSliderPosition, newValue);
+                      }, 100);
+                    }
+                  }}
+                  style={{ cursor: 'pointer' }}
+                />
+                <span style={{ fontWeight: 'bold', fontSize: '14px' }}>
+                  🧠 Use PPR Algorithm (Personalized PageRank)
+                </span>
+              </label>
+              <div style={{ fontSize: '12px', color: '#666', marginTop: '5px', marginLeft: '24px' }}>
+                {usePPRAlgorithm 
+                  ? 'Using probability-based PPR with semantic similarity, concreteness, frequency, and AoA'
+                  : 'Using Learning Frontier algorithm with CEFR levels and concreteness scoring'}
+              </div>
+            </div>
+            
             {/* Recommendation Balance Control for English */}
             <div style={{ 
               marginBottom: '20px', 
@@ -1644,19 +1699,42 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
                               <span style={{ fontWeight: 'bold', color: '#4CAF50' }}>
                                 #{idx + 1}
                               </span>
-                              {' '}CEFR Level: {rec.cefr_level || '-'} | Score: {typeof rec.score === 'number' ? rec.score.toFixed(2) : rec.score}
-                              {typeof rec.concreteness === 'number' && (
-                                <span style={{ marginLeft: '8px', color: '#1976d2' }}>
-                                  | Concreteness: {rec.concreteness.toFixed(2)}
-                                </span>
-                              )}
-                              {(rec.frequency_rank || typeof rec.frequency === 'number') && (
-                                <span style={{ marginLeft: '8px', color: '#6d4c41' }}>
-                                  | Frequency rank: {rec.frequency_rank ?? '—'}
-                                  {typeof rec.frequency === 'number' && (
-                                    <span> (freq: {rec.frequency.toFixed(0)})</span>
+                              {usePPRAlgorithm ? (
+                                <>
+                                  {' '}P(Recommend): {(rec.score * 100).toFixed(1)}%
+                                  {typeof rec.concreteness === 'number' && (
+                                    <span style={{ marginLeft: '8px', color: '#1976d2' }}>
+                                      | Concreteness: {rec.concreteness.toFixed(1)}
+                                    </span>
                                   )}
-                                </span>
+                                  {typeof rec.age_of_acquisition === 'number' && (
+                                    <span style={{ marginLeft: '8px', color: '#9c27b0' }}>
+                                      | AoA: {rec.age_of_acquisition.toFixed(1)}
+                                    </span>
+                                  )}
+                                  {rec.frequency_rank && (
+                                    <span style={{ marginLeft: '8px', color: '#6d4c41' }}>
+                                      | Freq rank: {rec.frequency_rank}
+                                    </span>
+                                  )}
+                                </>
+                              ) : (
+                                <>
+                                  {' '}CEFR Level: {rec.cefr_level || '-'} | Score: {typeof rec.score === 'number' ? rec.score.toFixed(2) : rec.score}
+                                  {typeof rec.concreteness === 'number' && (
+                                    <span style={{ marginLeft: '8px', color: '#1976d2' }}>
+                                      | Concreteness: {rec.concreteness.toFixed(2)}
+                                    </span>
+                                  )}
+                                  {(rec.frequency_rank || typeof rec.frequency === 'number') && (
+                                    <span style={{ marginLeft: '8px', color: '#6d4c41' }}>
+                                      | Frequency rank: {rec.frequency_rank ?? '—'}
+                                      {typeof rec.frequency === 'number' && (
+                                        <span> (freq: {rec.frequency.toFixed(0)})</span>
+                                      )}
+                                    </span>
+                                  )}
+                                </>
                               )}
                               {rec.concreteness_score !== undefined && (
                                 <span style={{ marginLeft: '8px', color: '#9c27b0', fontSize: '11px' }}>

@@ -36,6 +36,22 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
   const [savingMasteredEnglishWords, setSavingMasteredEnglishWords] = useState(false);
   const [englishSliderPosition, setEnglishSliderPosition] = useState(0.5);
   const [recommendationsKey, setRecommendationsKey] = useState(0);
+  const [usePPRAlgorithm, setUsePPRAlgorithm] = useState(false); // Toggle between PPR and old algorithm
+  
+  // PPR Algorithm Configuration State
+  const [pprConfig, setPprConfig] = useState({
+    beta_ppr: 1.0,
+    beta_concreteness: 0.8,
+    beta_frequency: 0.3,
+    beta_aoa_penalty: 2.0,
+    beta_intercept: 0.0,
+    alpha: 0.5,
+    mental_age: null, // Will use profile.mental_age if available
+    aoa_buffer: 0.0,
+    top_n: 50,
+    exclude_multiword: false
+  });
+  const [showPprConfig, setShowPprConfig] = useState(false);
   
   const englishRecommendationsAbortController = useRef(null);
   const englishRecommendationsRequestId = useRef(0);
@@ -59,6 +75,13 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
       }
     };
   }, []);
+
+  // Initialize mental_age from profile when available
+  useEffect(() => {
+    if (profile && profile.mental_age && pprConfig.mental_age === null) {
+      setPprConfig(prev => ({ ...prev, mental_age: parseFloat(profile.mental_age) }));
+    }
+  }, [profile]);
 
   const parseMasteredEnglishWords = (text) => {
     if (!text) return [];
@@ -213,7 +236,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
 
   // --- English Word Recommendations ---
 
-  const handleGetEnglishWordRecommendations = async (sliderPos = null) => {
+  const handleGetEnglishWordRecommendations = async (sliderPos = null, algorithmType = null) => {
     if (englishRecommendationsAbortController.current) {
       englishRecommendationsAbortController.current.abort();
     }
@@ -226,12 +249,38 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
     setSelectedEnglishRecommendations(new Set());
     
     const sliderValue = sliderPos !== null ? sliderPos : englishSliderPosition;
+    // Use provided algorithm type or current state
+    const usePPR = algorithmType !== null ? algorithmType : usePPRAlgorithm;
     
     try {
       const mastered_words_array = parseMasteredEnglishWords(profile.mastered_english_words);
       const mentalAge = profile.mental_age ? parseFloat(profile.mental_age) : null;
       
-      const response = await axios.post(`${API_BASE}/kg/english-recommendations?t=${Date.now()}`, {
+      let response;
+      if (usePPR) {
+        // Use PPR algorithm with configurable parameters
+        const requestConfig = {
+          profile_id: profile.id || profile.name,
+          mastered_words: mastered_words_array.length > 0 ? mastered_words_array : undefined,
+          mental_age: pprConfig.mental_age !== null ? pprConfig.mental_age : (mentalAge || 8.0),
+          beta_ppr: pprConfig.beta_ppr,
+          beta_concreteness: pprConfig.beta_concreteness,
+          beta_frequency: pprConfig.beta_frequency,
+          beta_aoa_penalty: pprConfig.beta_aoa_penalty,
+          beta_intercept: pprConfig.beta_intercept,
+          alpha: pprConfig.alpha,
+          aoa_buffer: pprConfig.aoa_buffer,
+          top_n: pprConfig.top_n,
+          exclude_multiword: pprConfig.exclude_multiword
+        };
+        
+        response = await axios.post(`${API_BASE}/kg/ppr-recommendations?t=${Date.now()}`, requestConfig, {
+          headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' },
+          signal: abortController.signal
+        });
+      } else {
+        // Use old algorithm
+        response = await axios.post(`${API_BASE}/kg/english-recommendations?t=${Date.now()}`, {
         mastered_words: mastered_words_array,
         profile_id: profile.id || profile.name,
         concreteness_weight: sliderValue,
@@ -240,6 +289,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
         headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' },
         signal: abortController.signal
       });
+      }
       
       if (currentRequestId !== englishRecommendationsRequestId.current) return;
       
@@ -253,7 +303,8 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
       if (error.name === 'CanceledError' || error.message === 'canceled') return;
       if (currentRequestId !== englishRecommendationsRequestId.current) return;
       console.error('Error getting English recommendations:', error);
-      alert('Failed to get English recommendations.');
+      const errorMessage = error.response?.data?.detail || error.message || 'Unknown error';
+      alert(`Failed to get English recommendations: ${errorMessage}`);
     } finally {
       if (currentRequestId === englishRecommendationsRequestId.current) {
         setLoadingEnglishRecommendations(false);
@@ -385,7 +436,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
           {t('selectLanguage') || 'Select Language'}
         </h3>
         <div style={{ display: 'flex', gap: theme.spacing.sm }}>
-          <button
+        <button 
             onClick={() => {
               setSelectedLanguage('zh');
               // Reset content type if switching to English and character was selected
@@ -406,8 +457,8 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
             }}
           >
             中文 (Chinese)
-          </button>
-          <button
+        </button>
+        <button 
             onClick={() => {
               setSelectedLanguage('en');
               // Reset content type if character was selected (English doesn't have characters)
@@ -428,7 +479,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
             }}
           >
             English
-          </button>
+        </button>
         </div>
       </div>
 
@@ -439,7 +490,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
         </h3>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: theme.spacing.sm }}>
           {contentTypes.map(type => (
-            <button
+        <button 
               key={type.id}
               onClick={() => setSelectedContentType(type.id)}
               style={{
@@ -455,11 +506,11 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
               }}
             >
               {type.icon} {type.label}
-            </button>
+        </button>
           ))}
         </div>
       </div>
-
+      
       {/* Level 3: Actions */}
       <div style={{ 
         padding: theme.spacing.lg, 
@@ -471,9 +522,9 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
           {selectedLanguage === 'zh' ? '中文' : 'English'} - {contentTypes.find(t => t.id === selectedContentType)?.label}
         </h3>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: theme.spacing.md }}>
-          <button
+        <button 
             onClick={handleManageMastered}
-            className="btn"
+          className="btn"
             style={{
               backgroundColor: theme.actions.secondary,
               color: theme.ui.text.inverse,
@@ -486,10 +537,10 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
             }}
           >
             📝 {t('manageMastered') || 'Manage Mastered'}
-          </button>
-          <button
+        </button>
+        <button 
             onClick={handleGetRecommendations}
-            className="btn"
+          className="btn"
             disabled={isLoading}
             style={{
               backgroundColor: isLoading ? theme.ui.backgrounds.disabled : theme.actions.primary,
@@ -504,7 +555,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
             }}
           >
             {isLoading ? (t('loading') || 'Loading...') : `📚 ${t('getRecommendations') || 'Get Recommendations'}`}
-          </button>
+        </button>
         </div>
       </div>
 
@@ -611,6 +662,241 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
             }}>×</button>
             <h2>📚 {t('wordRecommendations')} - {t('englishVocabulary')}</h2>
             
+            <div style={{ marginBottom: '15px', padding: '12px', backgroundColor: '#e8f4f8', borderRadius: '8px', border: '1px solid #b3d9e6' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' }}>
+                <input
+                  type="checkbox"
+                  checked={usePPRAlgorithm}
+                  onChange={(e) => {
+                    const newValue = e.target.checked;
+                    setUsePPRAlgorithm(newValue);
+                    // Refetch recommendations with new algorithm
+                    // Pass the new value directly to avoid state timing issues
+                    setTimeout(() => {
+                      handleGetEnglishWordRecommendations(englishSliderPosition, newValue);
+                    }, 100);
+                  }}
+                  style={{ cursor: 'pointer' }}
+                />
+                <span style={{ fontWeight: 'bold', fontSize: '14px' }}>
+                  🧠 Use PPR Algorithm (Personalized PageRank)
+                </span>
+              </label>
+              <div style={{ fontSize: '12px', color: '#666', marginTop: '5px', marginLeft: '24px' }}>
+                {usePPRAlgorithm 
+                  ? 'Using probability-based PPR with semantic similarity, concreteness, frequency, and AoA'
+                  : 'Using Learning Frontier algorithm with CEFR levels and concreteness scoring'}
+              </div>
+              {usePPRAlgorithm && (
+                <div style={{ marginTop: '10px', marginLeft: '24px' }}>
+                  <button
+                    type="button"
+                    onClick={() => setShowPprConfig(!showPprConfig)}
+                    style={{
+                      fontSize: '12px',
+                      padding: '4px 8px',
+                      backgroundColor: showPprConfig ? '#4CAF50' : '#2196F3',
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '4px',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    {showPprConfig ? '▼ Hide Configuration' : '▶ Show Configuration'}
+                  </button>
+                </div>
+              )}
+            </div>
+            
+            {usePPRAlgorithm && showPprConfig && (
+              <div style={{ marginBottom: '20px', padding: '15px', backgroundColor: '#f0f8ff', borderRadius: '8px', border: '1px solid #b3d9e6' }}>
+                <h4 style={{ marginTop: 0, marginBottom: '15px', fontSize: '14px', fontWeight: 'bold' }}>
+                  ⚙️ PPR Algorithm Configuration
+                </h4>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
+                  <div>
+                    <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px', fontWeight: 'bold' }}>
+                      β PPR (Semantic Weight): {pprConfig.beta_ppr.toFixed(2)}
+                    </label>
+                    <input
+                      type="range"
+                      min="0"
+                      max="3"
+                      step="0.1"
+                      value={pprConfig.beta_ppr}
+                      onChange={(e) => {
+                        const newValue = parseFloat(e.target.value);
+                        setPprConfig(prev => ({ ...prev, beta_ppr: newValue }));
+                        setTimeout(() => handleGetEnglishWordRecommendations(), 300);
+                      }}
+                      style={{ width: '100%' }}
+                    />
+                  </div>
+                  <div>
+                    <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px', fontWeight: 'bold' }}>
+                      β Concreteness: {pprConfig.beta_concreteness.toFixed(2)}
+                    </label>
+                    <input
+                      type="range"
+                      min="0"
+                      max="3"
+                      step="0.1"
+                      value={pprConfig.beta_concreteness}
+                      onChange={(e) => {
+                        const newValue = parseFloat(e.target.value);
+                        setPprConfig(prev => ({ ...prev, beta_concreteness: newValue }));
+                        setTimeout(() => handleGetEnglishWordRecommendations(), 300);
+                      }}
+                      style={{ width: '100%' }}
+                    />
+                  </div>
+                  <div>
+                    <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px', fontWeight: 'bold' }}>
+                      β Frequency: {pprConfig.beta_frequency.toFixed(2)}
+                    </label>
+                    <input
+                      type="range"
+                      min="0"
+                      max="3"
+                      step="0.1"
+                      value={pprConfig.beta_frequency}
+                      onChange={(e) => {
+                        const newValue = parseFloat(e.target.value);
+                        setPprConfig(prev => ({ ...prev, beta_frequency: newValue }));
+                        setTimeout(() => handleGetEnglishWordRecommendations(), 300);
+                      }}
+                      style={{ width: '100%' }}
+                    />
+                  </div>
+                  <div>
+                    <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px', fontWeight: 'bold' }}>
+                      β AoA Penalty: {pprConfig.beta_aoa_penalty.toFixed(2)}
+                    </label>
+                    <input
+                      type="range"
+                      min="0"
+                      max="5"
+                      step="0.1"
+                      value={pprConfig.beta_aoa_penalty}
+                      onChange={(e) => {
+                        const newValue = parseFloat(e.target.value);
+                        setPprConfig(prev => ({ ...prev, beta_aoa_penalty: newValue }));
+                        setTimeout(() => handleGetEnglishWordRecommendations(), 300);
+                      }}
+                      style={{ width: '100%' }}
+                    />
+                  </div>
+                  <div>
+                    <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px', fontWeight: 'bold' }}>
+                      β Intercept: {pprConfig.beta_intercept.toFixed(2)}
+                    </label>
+                    <input
+                      type="range"
+                      min="-2"
+                      max="2"
+                      step="0.1"
+                      value={pprConfig.beta_intercept}
+                      onChange={(e) => {
+                        const newValue = parseFloat(e.target.value);
+                        setPprConfig(prev => ({ ...prev, beta_intercept: newValue }));
+                        setTimeout(() => handleGetEnglishWordRecommendations(), 300);
+                      }}
+                      style={{ width: '100%' }}
+                    />
+                  </div>
+                  <div>
+                    <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px', fontWeight: 'bold' }}>
+                      α (Teleport Probability): {pprConfig.alpha.toFixed(2)}
+                    </label>
+                    <input
+                      type="range"
+                      min="0"
+                      max="1"
+                      step="0.05"
+                      value={pprConfig.alpha}
+                      onChange={(e) => {
+                        const newValue = parseFloat(e.target.value);
+                        setPprConfig(prev => ({ ...prev, alpha: newValue }));
+                        setTimeout(() => handleGetEnglishWordRecommendations(), 300);
+                      }}
+                      style={{ width: '100%' }}
+                    />
+                  </div>
+                  <div>
+                    <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px', fontWeight: 'bold' }}>
+                      Mental Age: {pprConfig.mental_age !== null ? pprConfig.mental_age.toFixed(1) : (profile.mental_age || 'Profile default')}
+                    </label>
+                    <input
+                      type="number"
+                      min="1"
+                      max="18"
+                      step="0.5"
+                      value={pprConfig.mental_age !== null ? pprConfig.mental_age : ''}
+                      onChange={(e) => {
+                        const newValue = e.target.value === '' ? null : parseFloat(e.target.value);
+                        setPprConfig(prev => ({ ...prev, mental_age: newValue }));
+                        setTimeout(() => handleGetEnglishWordRecommendations(), 300);
+                      }}
+                      placeholder={profile.mental_age ? `Profile: ${profile.mental_age}` : 'Use profile default'}
+                      style={{ width: '100%', padding: '4px' }}
+                    />
+                  </div>
+                  <div>
+                    <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px', fontWeight: 'bold' }}>
+                      AoA Buffer: {pprConfig.aoa_buffer.toFixed(1)}
+                    </label>
+                    <input
+                      type="range"
+                      min="0"
+                      max="3"
+                      step="0.1"
+                      value={pprConfig.aoa_buffer}
+                      onChange={(e) => {
+                        const newValue = parseFloat(e.target.value);
+                        setPprConfig(prev => ({ ...prev, aoa_buffer: newValue }));
+                        setTimeout(() => handleGetEnglishWordRecommendations(), 300);
+                      }}
+                      style={{ width: '100%' }}
+                    />
+                  </div>
+                  <div>
+                    <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px', fontWeight: 'bold' }}>
+                      Top N Results: {pprConfig.top_n}
+                    </label>
+                    <input
+                      type="number"
+                      min="10"
+                      max="200"
+                      step="10"
+                      value={pprConfig.top_n}
+                      onChange={(e) => {
+                        const newValue = parseInt(e.target.value);
+                        setPprConfig(prev => ({ ...prev, top_n: newValue }));
+                        setTimeout(() => handleGetEnglishWordRecommendations(), 300);
+                      }}
+                      style={{ width: '100%', padding: '4px' }}
+                    />
+                  </div>
+                  <div style={{ gridColumn: '1 / -1' }}>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' }}>
+                      <input
+                        type="checkbox"
+                        checked={pprConfig.exclude_multiword}
+                        onChange={(e) => {
+                          setPprConfig(prev => ({ ...prev, exclude_multiword: e.target.checked }));
+                          setTimeout(() => handleGetEnglishWordRecommendations(), 300);
+                        }}
+                      />
+                      <span style={{ fontSize: '12px', fontWeight: 'bold' }}>
+                        Exclude Multi-word Phrases (e.g., "ice hockey", "chewing gum")
+                      </span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            )}
+            
+            {!usePPRAlgorithm && (
             <div style={{ marginBottom: '20px', padding: '15px', backgroundColor: '#f5f5f5', borderRadius: '8px', border: '1px solid #ddd' }}>
               <label style={{ display: 'block', marginBottom: '10px', fontWeight: 'bold', fontSize: '14px' }}>
                 ⚖️ Recommendation Balance (English):
@@ -624,7 +910,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
                     setEnglishSliderPosition(newPos);
                     if (sliderDebounceTimer.current) clearTimeout(sliderDebounceTimer.current);
                     sliderDebounceTimer.current = setTimeout(() => {
-                      handleGetEnglishWordRecommendations(newPos);
+                        handleGetEnglishWordRecommendations(newPos);
                     }, 300);
                   }}
                   style={{ flex: 1, cursor: 'pointer' }}
@@ -632,13 +918,16 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
                 <span style={{ fontSize: '12px', color: '#666', minWidth: '120px', textAlign: 'right' }}>Concreteness (Ease)</span>
               </div>
             </div>
+            )}
 
             {englishRecommendations.length === 0 ? (
               <p>{t('noRecommendations')}. {t('pleaseAddMasteredEnglishWords')}</p>
             ) : (
               <div>
                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
-                  <p style={{ color: '#666', margin: 0 }}>Next 50 words to learn:</p>
+                  <p style={{ color: '#666', margin: 0 }}>
+                    Next {usePPRAlgorithm ? pprConfig.top_n : 50} words to learn:
+                  </p>
                   {selectedEnglishRecommendations.size > 0 && (
                     <button
                       onClick={handleAddSelectedEnglishToMastered}
@@ -669,7 +958,17 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
                               {isAlreadyMastered && <span style={{ fontSize: '12px', color: theme.status.alreadyMastered, marginLeft: '8px' }}>({t('alreadyMastered')})</span>}
                             </div>
                             <div style={{ fontSize: '0.8em', color: '#888' }}>
+                              {usePPRAlgorithm ? (
+                                <>
+                                  P(Recommend): {(rec.score * 100).toFixed(1)}% | 
+                                  Concreteness: {rec.concreteness?.toFixed(1) || '-'} | 
+                                  AoA: {rec.age_of_acquisition?.toFixed(1) || '-'}
+                                </>
+                              ) : (
+                                <>
                               CEFR: {rec.cefr_level || '-'} | Score: {rec.score?.toFixed(2)}
+                                </>
+                              )}
                             </div>
                           </div>
                         </label>
