@@ -156,3 +156,25 @@ class AuditLog(Base):
     def __repr__(self):
         return f"<AuditLog(id={self.id}, table='{self.table_name}', action='{self.action}')>"
 
+
+class CharacterRecognitionNote(Base):
+    """Character recognition notes extracted from apkg file"""
+    __tablename__ = 'character_recognition_notes'
+    
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    note_id = Column(String, nullable=False, unique=True)  # Original Anki note ID
+    character = Column(String, nullable=False)  # The Chinese character
+    display_order = Column(Integer, nullable=False)  # Order in which characters should be displayed
+    fields = Column(Text, nullable=False)  # JSON object storing all note fields
+    created_at = Column(DateTime, default=func.now())
+    
+    # Constraints
+    __table_args__ = (
+        Index('idx_char_recog_note_id', 'note_id'),
+        Index('idx_char_recog_character', 'character'),
+        Index('idx_char_recog_order', 'display_order'),
+    )
+    
+    def __repr__(self):
+        return f"<CharacterRecognitionNote(note_id='{self.note_id}', character='{self.character}', order={self.display_order})>"
+

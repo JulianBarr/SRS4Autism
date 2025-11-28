@@ -26,3 +26,4 @@ echo ""
 echo "Or open the log file:"
 echo "  open /Users/maxent/src/SRS4Autism/data/logs/backend.log"
 
+

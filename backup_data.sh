@@ -25,3 +25,4 @@ echo "To restore:"
 echo "  tar -xzf data/backups/${TIMESTAMP}.tar.gz -C data/backups/"
 echo "  cp data/backups/${TIMESTAMP}/child_profiles.json data/profiles/"
 
+

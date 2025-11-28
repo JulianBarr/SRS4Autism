@@ -213,3 +213,4 @@ Each content category has its own color:
 <Badge status="synced">Synced</Badge>
 ```
 
+

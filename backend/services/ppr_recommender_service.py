@@ -209,6 +209,12 @@ class PPRRecommenderService:
         
         # Score candidates
         candidates = []
+        mental_age = config.get("mental_age")
+        aoa_buffer = config.get("aoa_buffer", 0.0)
+        words_with_aoa = 0
+        words_filtered_by_aoa = 0
+        aoa_penalties_applied = []
+        
         for node_id, raw_score in scores.items():
             # Normalize node ID
             normalized_id = _normalize_node_id(node_id)
@@ -228,19 +234,27 @@ class PPRRecommenderService:
                 if " " in label or "-" in label:
                     continue
             
+            # Track AoA data availability
+            if meta.age_of_acquisition is not None:
+                words_with_aoa += 1
+            
             # Filter by AoA
             if (
-                config.get("mental_age") is not None
+                mental_age is not None
                 and meta.age_of_acquisition is not None
-                and meta.age_of_acquisition > config["mental_age"] + config["aoa_buffer"]
+                and meta.age_of_acquisition > mental_age + aoa_buffer
             ):
+                words_filtered_by_aoa += 1
                 continue
             
             # Transform features
             ppr_transformed = transform_ppr(raw_score)
             conc_transformed = transform_concreteness(meta.concreteness)
             freq_transformed = transform_frequency(meta.frequency_rank)
-            aoa_penalty = calculate_aoa_penalty(meta.age_of_acquisition, config.get("mental_age"))
+            aoa_penalty = calculate_aoa_penalty(meta.age_of_acquisition, mental_age)
+            
+            if aoa_penalty > 0:
+                aoa_penalties_applied.append(aoa_penalty)
             
             # Calculate logit z-score
             z = (
@@ -267,6 +281,18 @@ class PPRRecommenderService:
                 "age_of_acquisition": meta.age_of_acquisition,
                 "frequency_rank": meta.frequency_rank,
             })
+        
+        # Log AoA statistics
+        if mental_age is not None:
+            print(f"   🧠 Mental age: {mental_age}, AoA buffer: {aoa_buffer}")
+            print(f"   📊 Words with AoA data: {words_with_aoa}/{len(candidates) + words_filtered_by_aoa}")
+            print(f"   🚫 Words filtered by AoA: {words_filtered_by_aoa}")
+            if aoa_penalties_applied:
+                avg_penalty = sum(aoa_penalties_applied) / len(aoa_penalties_applied)
+                max_penalty = max(aoa_penalties_applied)
+                print(f"   ⚠️  AoA penalties applied: {len(aoa_penalties_applied)} words, avg={avg_penalty:.2f}, max={max_penalty:.2f}")
+            else:
+                print(f"   ⚠️  No AoA penalties applied (all words have AoA <= mental_age or no AoA data)")
         
         # Sort by score
         candidates.sort(key=lambda x: x["score"], reverse=True)

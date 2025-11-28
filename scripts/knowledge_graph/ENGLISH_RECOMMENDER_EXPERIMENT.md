@@ -136,3 +136,4 @@ To test if the recommendations are useful:
 3. Confirm that words sharing concepts with mastered words appear in recommendations
 4. Validate that recommendations are in the "i+1" zone (not too easy, not too hard)
 
+

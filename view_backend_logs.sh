@@ -29,3 +29,4 @@ echo ""
 echo "Current process info:"
 ps -p $BACKEND_PID -o pid,ppid,tty,command
 
+

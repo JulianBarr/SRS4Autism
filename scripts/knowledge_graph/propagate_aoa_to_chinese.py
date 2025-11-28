@@ -33,11 +33,21 @@ except ImportError:
     print("Please install it with: pip install rdflib")
     sys.exit(1)
 
+# Import CC-CEDICT loader
+try:
+    from scripts.knowledge_graph.load_cc_cedict import (
+        find_cedict_file, load_cedict_file, get_english_translations
+    )
+except ImportError:
+    print("⚠️  Warning: Could not import CC-CEDICT loader")
+    print("   Make sure load_cc_cedict.py is in the same directory")
+
 # Configuration
 DATA_DIR = project_root / 'data' / 'content_db'
 KG_FILE = project_root / 'knowledge_graph' / 'world_model_merged.ttl'
 ONTOLOGY_FILE = project_root / 'knowledge_graph' / 'ontology' / 'srs_schema.ttl'
 AOA_FILE = Path('/Users/maxent/src/lingfeat/lingfeat/_LexicoSemantic/resources/AoAKuperman.csv')
+CEDICT_FILE = project_root / 'data' / 'content_db' / 'cedict_1_0_ts_utf-8_mdbg.txt'
 
 # RDF Namespaces
 SRS_KG = Namespace("http://srs4autism.com/schema/")
@@ -120,9 +130,10 @@ def extract_english_words_from_definition(definition: str) -> List[str]:
     return english_words
 
 
-def find_chinese_words_with_translations(graph: Graph) -> Dict[str, Dict]:
+def find_chinese_words_with_translations(graph: Graph, cedict_data: Optional[Dict] = None) -> Dict[str, Dict]:
     """
     Find all Chinese words and their English translations.
+    Uses CEDICT as primary source, falls back to KG definitions and concept links.
     
     Returns:
         Dict mapping word_uri -> {
@@ -161,7 +172,14 @@ def find_chinese_words_with_translations(graph: Graph) -> Dict[str, Dict]:
         
         english_words = []
         
-        # Get English definition directly
+        # PRIMARY: Get English translations from CEDICT
+        if cedict_data:
+            cedict_translations = get_english_translations(cedict_data, chinese_label)
+            for translation in cedict_translations:
+                # Extract individual words from translations
+                english_words.extend(extract_english_words_from_definition(translation))
+        
+        # FALLBACK 1: Get English definition directly from KG
         definitions = list(graph.objects(word_uri_ref, SRS_KG.definition))
         for definition in definitions:
             def_lang = getattr(definition, 'language', None)
@@ -169,7 +187,7 @@ def find_chinese_words_with_translations(graph: Graph) -> Dict[str, Dict]:
                 definition_str = str(definition)
                 english_words.extend(extract_english_words_from_definition(definition_str))
         
-        # Get English words through concept links
+        # FALLBACK 2: Get English words through concept links
         concepts = list(graph.objects(word_uri_ref, SRS_KG.means))
         for concept_uri in concepts:
             # Find English words that mean the same concept
@@ -304,12 +322,34 @@ def main():
             print(f"⚠️  Warning: Could not parse schema: {e}")
     print()
     
+    # Load CC-CEDICT for translation lookup
+    print("Loading CC-CEDICT dictionary for translation lookup...")
+    cedict_data = None
+    cedict_file = find_cedict_file() if 'find_cedict_file' in globals() else None
+    if not cedict_file and CEDICT_FILE.exists():
+        cedict_file = CEDICT_FILE
+    
+    if cedict_file and cedict_file.exists():
+        try:
+            cedict_data = load_cedict_file(cedict_file)
+            if cedict_data:
+                print(f"✅ Loaded CC-CEDICT with {len(cedict_data)} entries")
+            else:
+                print("⚠️  Failed to load CC-CEDICT data")
+        except Exception as e:
+            print(f"⚠️  Error loading CC-CEDICT: {e}")
+    else:
+        print("⚠️  CC-CEDICT file not found. Will only use KG definitions and concept links.")
+        print(f"   Expected location: {CEDICT_FILE}")
+    
+    print()
+    
     # Find Chinese words with translations
-    chinese_words = find_chinese_words_with_translations(graph)
+    chinese_words = find_chinese_words_with_translations(graph, cedict_data=cedict_data)
     
     if not chinese_words:
         print("⚠️  No Chinese words with English translations found.")
-        print("   Make sure the knowledge graph has been populated with Chinese words and their English definitions.")
+        print("   Make sure the knowledge graph has been populated with Chinese words.")
         sys.exit(0)
     
     print()

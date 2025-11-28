@@ -119,11 +119,11 @@ function App() {
               <h1>{t('appTitle')}</h1>
             </div>
             
-            {/* Profile Selector */}
-            <div style={{ marginLeft: '20px', flex: 1 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginLeft: 'auto' }}>
+              {/* Profile Selector */}
               {profiles.length > 0 && (
-                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                   <span style={{ marginRight: '10px', color: '#666', fontSize: '0.9em' }}>Current Child:</span>
+                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                   <span style={{ fontSize: '1.2em' }}>🧒</span>
                    <select 
                      value={currentProfile?.name || ''}
                      onChange={(e) => {
@@ -138,15 +138,15 @@ function App() {
                    </select>
                  </div>
               )}
-            </div>
 
-            <button 
-              className="language-toggle"
-              onClick={toggleLanguage}
-              title={language === 'en' ? '切换到中文' : 'Switch to English'}
-            >
-              {language === 'en' ? '中文' : 'English'}
-            </button>
+              <button 
+                className="language-toggle"
+                onClick={toggleLanguage}
+                title={language === 'en' ? '切换到中文' : 'Switch to English'}
+              >
+                {language === 'en' ? '中文' : 'English'}
+              </button>
+            </div>
           </div>
           <nav className="tab-nav">
             <button 

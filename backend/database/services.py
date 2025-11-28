@@ -257,3 +257,4 @@ class ChatService:
         db.refresh(message)
         return message
 
+

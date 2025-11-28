@@ -4,6 +4,7 @@ import { useLanguage } from '../i18n/LanguageContext';
 import MasteredWordsManager from './MasteredWordsManager';
 import MasteredEnglishWordsManager from './MasteredEnglishWordsManager';
 import MasteredGrammarManager from './MasteredGrammarManager';
+import CharacterRecognition from './CharacterRecognition';
 import theme from '../styles/theme';
 
 const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
@@ -22,6 +23,22 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
   const [selectedRecommendations, setSelectedRecommendations] = useState(new Set());
   const [savingMasteredWords, setSavingMasteredWords] = useState(false);
   const [concretenessWeight, setConcretenessWeight] = useState(0.5);
+  const [useChinesePPRAlgorithm, setUseChinesePPRAlgorithm] = useState(false); // Toggle between PPR and old algorithm for Chinese
+  
+  // Chinese PPR Algorithm Configuration State
+  const [chinesePprConfig, setChinesePprConfig] = useState({
+    beta_ppr: 1.0,
+    beta_concreteness: 0.8,
+    beta_frequency: 0.3,
+    beta_aoa_penalty: 2.0,
+    beta_intercept: 0.0,
+    alpha: 0.5,
+    mental_age: null, // Will use profile.mental_age if available
+    aoa_buffer: 0.0,
+    top_n: 50,
+    exclude_multiword: false
+  });
+  const [showChinesePprConfig, setShowChinesePprConfig] = useState(false);
   
   // Mastered Managers State
   const [showMasteredWordsManager, setShowMasteredWordsManager] = useState(false);
@@ -76,7 +93,18 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
     };
   }, []);
 
-  // Initialize mental_age from profile when available
+  // Initialize mental_age from profile when available (for both English and Chinese)
+  useEffect(() => {
+    if (profile?.mental_age) {
+      const mentalAge = parseFloat(profile.mental_age);
+      if (!isNaN(mentalAge)) {
+        setPprConfig(prev => ({ ...prev, mental_age: mentalAge }));
+        setChinesePprConfig(prev => ({ ...prev, mental_age: mentalAge }));
+      }
+    }
+  }, [profile?.mental_age]);
+  
+  // Initialize mental_age from profile when available (old - keep for backward compatibility)
   useEffect(() => {
     if (profile && profile.mental_age && pprConfig.mental_age === null) {
       setPprConfig(prev => ({ ...prev, mental_age: parseFloat(profile.mental_age) }));
@@ -103,16 +131,16 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
   const getContentTypes = (lang) => {
     if (lang === 'zh') {
       return [
-        { id: 'character', label: t('character') || 'Character', icon: '字' },
-        { id: 'word', label: t('word') || 'Word', icon: '词' },
-        { id: 'grammar', label: t('grammar') || 'Grammar', icon: '语法' },
-        { id: 'pragmatics', label: t('pragmatics') || 'Pragmatics', icon: '语用' }
+        { id: 'character', label: '汉字', icon: '汉字' },
+        { id: 'word', label: '词汇', icon: '词汇' },
+        { id: 'grammar', label: '语法', icon: '语法' },
+        { id: 'pragmatics', label: '语用', icon: '语用' }
       ];
     } else { // English
       return [
-        { id: 'word', label: t('word') || 'Word', icon: 'Word' },
-        { id: 'grammar', label: t('grammar') || 'Grammar', icon: 'Grammar' },
-        { id: 'pragmatics', label: t('pragmatics') || 'Pragmatics', icon: 'Pragmatics' }
+        { id: 'word', label: '词汇', icon: '词汇' },
+        { id: 'grammar', label: '语法', icon: '语法' },
+        { id: 'pragmatics', label: '语用', icon: '语用' }
       ];
     }
   };
@@ -165,28 +193,56 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
 
   // --- Chinese Word Recommendations ---
 
-  const handleGetChineseWordRecommendations = async (weight = null) => {
+  const handleGetChineseWordRecommendations = async (weight = null, algorithmType = null) => {
     setLoadingRecommendations(true);
     setSelectedRecommendations(new Set());
     
     const weightToUse = weight !== null ? weight : concretenessWeight;
+    // Use provided algorithm type or current state
+    const usePPR = algorithmType !== null ? algorithmType : useChinesePPRAlgorithm;
     
     try {
       const mastered_words_array = profile.mastered_words 
         ? profile.mastered_words.split(/[,\s，]+/).filter(w => w.trim())
         : [];
       
-      const response = await axios.post(`${API_BASE}/kg/recommendations`, {
-        mastered_words: mastered_words_array,
-        profile_id: profile.id || profile.name,
-        concreteness_weight: weightToUse
-      });
+      let response;
+      if (usePPR) {
+        // Use Chinese PPR algorithm with configurable parameters
+        const mentalAge = profile.mental_age ? parseFloat(profile.mental_age) : null;
+        const requestConfig = {
+          profile_id: profile.id || profile.name,
+          mastered_words: mastered_words_array.length > 0 ? mastered_words_array : undefined,
+          mental_age: chinesePprConfig.mental_age !== null ? chinesePprConfig.mental_age : (mentalAge || 8.0),
+          beta_ppr: chinesePprConfig.beta_ppr,
+          beta_concreteness: chinesePprConfig.beta_concreteness,
+          beta_frequency: chinesePprConfig.beta_frequency,
+          beta_aoa_penalty: chinesePprConfig.beta_aoa_penalty,
+          beta_intercept: chinesePprConfig.beta_intercept,
+          alpha: chinesePprConfig.alpha,
+          aoa_buffer: chinesePprConfig.aoa_buffer,
+          top_n: chinesePprConfig.top_n,
+          exclude_multiword: chinesePprConfig.exclude_multiword
+        };
+        
+        response = await axios.post(`${API_BASE}/kg/chinese-ppr-recommendations?t=${Date.now()}`, requestConfig, {
+          headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' }
+        });
+      } else {
+        // Use old algorithm
+        response = await axios.post(`${API_BASE}/kg/recommendations`, {
+          mastered_words: mastered_words_array,
+          profile_id: profile.id || profile.name,
+          concreteness_weight: weightToUse
+        });
+      }
       
       setRecommendations(response.data.recommendations || []);
       setShowRecommendations(true);
     } catch (error) {
-      console.error('Error getting recommendations:', error);
-      alert('Failed to get recommendations. Please check if the knowledge graph server is running.');
+      console.error('Error getting Chinese recommendations:', error);
+      const errorMsg = error.response?.data?.detail || error.message || 'Failed to get recommendations.';
+      alert(`获取推荐失败: ${errorMsg}`);
     } finally {
       setLoadingRecommendations(false);
     }
@@ -433,7 +489,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
       {/* Level 1: Language Selection */}
       <div style={{ marginBottom: theme.spacing.lg }}>
         <h3 style={{ marginBottom: theme.spacing.md, color: theme.ui.text.primary }}>
-          {t('selectLanguage') || 'Select Language'}
+          选择语言
         </h3>
         <div style={{ display: 'flex', gap: theme.spacing.sm }}>
         <button 
@@ -456,7 +512,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
               transition: 'all 0.2s'
             }}
           >
-            中文 (Chinese)
+            中文
         </button>
         <button 
             onClick={() => {
@@ -478,7 +534,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
               transition: 'all 0.2s'
             }}
           >
-            English
+            英文
         </button>
         </div>
       </div>
@@ -486,7 +542,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
       {/* Level 2: Content Type Selection */}
       <div style={{ marginBottom: theme.spacing.lg }}>
         <h3 style={{ marginBottom: theme.spacing.md, color: theme.ui.text.primary }}>
-          {t('selectContentType') || 'Select Content Type'}
+          选择内容类型
         </h3>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: theme.spacing.sm }}>
           {contentTypes.map(type => (
@@ -505,7 +561,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
                 transition: 'all 0.2s'
               }}
             >
-              {type.icon} {type.label}
+              {type.label}
         </button>
           ))}
         </div>
@@ -519,44 +575,50 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
         border: `1px solid ${theme.ui.border}`
       }}>
         <h3 style={{ marginBottom: theme.spacing.md, color: theme.ui.text.primary }}>
-          {selectedLanguage === 'zh' ? '中文' : 'English'} - {contentTypes.find(t => t.id === selectedContentType)?.label}
+          {selectedLanguage === 'zh' ? '中文' : '英文'} - {contentTypes.find(t => t.id === selectedContentType)?.label}
         </h3>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: theme.spacing.md }}>
-        <button 
-            onClick={handleManageMastered}
-          className="btn"
-            style={{
-              backgroundColor: theme.actions.secondary,
-              color: theme.ui.text.inverse,
-              padding: `${theme.spacing.sm} ${theme.spacing.md}`,
-              borderRadius: theme.borderRadius.md,
-              border: 'none',
-              cursor: 'pointer',
-              fontSize: '14px',
-              fontWeight: '500'
-            }}
-          >
-            📝 {t('manageMastered') || 'Manage Mastered'}
-        </button>
-        <button 
-            onClick={handleGetRecommendations}
-          className="btn"
-            disabled={isLoading}
-            style={{
-              backgroundColor: isLoading ? theme.ui.backgrounds.disabled : theme.actions.primary,
-              color: theme.ui.text.inverse,
-              padding: `${theme.spacing.sm} ${theme.spacing.md}`,
-              borderRadius: theme.borderRadius.md,
-              border: 'none',
-              cursor: isLoading ? 'not-allowed' : 'pointer',
-              fontSize: '14px',
-              fontWeight: '500',
-              opacity: isLoading ? 0.6 : 1
-            }}
-          >
-            {isLoading ? (t('loading') || 'Loading...') : `📚 ${t('getRecommendations') || 'Get Recommendations'}`}
-        </button>
-        </div>
+        
+        {/* Character Recognition - Show directly in content area */}
+        {selectedContentType === 'character' && selectedLanguage === 'zh' ? (
+          <CharacterRecognition profile={profile} onProfileUpdate={onProfileUpdate} />
+        ) : (
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: theme.spacing.md }}>
+            <button 
+              onClick={handleManageMastered}
+              className="btn"
+              style={{
+                backgroundColor: theme.actions.secondary,
+                color: theme.ui.text.inverse,
+                padding: `${theme.spacing.sm} ${theme.spacing.md}`,
+                borderRadius: theme.borderRadius.md,
+                border: 'none',
+                cursor: 'pointer',
+                fontSize: '14px',
+                fontWeight: '500'
+              }}
+            >
+              📝 {t('manageMastered') || 'Manage Mastered'}
+            </button>
+            <button 
+              onClick={handleGetRecommendations}
+              className="btn"
+              disabled={isLoading}
+              style={{
+                backgroundColor: isLoading ? theme.ui.backgrounds.disabled : theme.actions.primary,
+                color: theme.ui.text.inverse,
+                padding: `${theme.spacing.sm} ${theme.spacing.md}`,
+                borderRadius: theme.borderRadius.md,
+                border: 'none',
+                cursor: isLoading ? 'not-allowed' : 'pointer',
+                fontSize: '14px',
+                fontWeight: '500',
+                opacity: isLoading ? 0.6 : 1
+              }}
+            >
+              {isLoading ? '加载中...' : '📚 获取推荐'}
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Modals - Keep existing modal code but adapt for hierarchy */}
@@ -574,34 +636,140 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
             <button onClick={() => setShowRecommendations(false)} style={{
               position: 'absolute', top: '10px', right: '10px', border: 'none', background: 'none', fontSize: '24px', cursor: 'pointer'
             }}>×</button>
-            <h2>📚 {t('wordRecommendations')} - {t('chineseVocabulary')}</h2>
+            <h2>📚 词汇推荐 - 中文</h2>
             
-            {/* Concreteness Weight Control */}
-            <div style={{ marginBottom: '20px', padding: '15px', backgroundColor: '#f5f5f5', borderRadius: '8px', border: '1px solid #ddd' }}>
-              <label style={{ display: 'block', marginBottom: '10px', fontWeight: 'bold', fontSize: '14px' }}>
-                ⚖️ Recommendation Balance:
-              </label>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                <span style={{ fontSize: '12px', color: '#666', minWidth: '100px' }}>HSK Level Only</span>
+            {/* PPR Algorithm Toggle */}
+            <div style={{ marginBottom: '15px', padding: '12px', backgroundColor: '#e8f4f8', borderRadius: '8px', border: '1px solid #b3d9e6' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' }}>
                 <input
-                  type="range" min="0" max="1" step="0.1" value={concretenessWeight}
+                  type="checkbox"
+                  checked={useChinesePPRAlgorithm}
                   onChange={(e) => {
-                    const newWeight = parseFloat(e.target.value);
-                    setConcretenessWeight(newWeight);
-                    handleGetChineseWordRecommendations(newWeight);
+                    setUseChinesePPRAlgorithm(e.target.checked);
+                    handleGetChineseWordRecommendations(null, e.target.checked);
                   }}
-                  style={{ flex: 1, cursor: 'pointer' }}
+                  style={{ cursor: 'pointer' }}
                 />
-                <span style={{ fontSize: '12px', color: '#666', minWidth: '100px', textAlign: 'right' }}>Concreteness Only</span>
+                <span style={{ fontWeight: 'bold', fontSize: '14px' }}>
+                  🧠 使用PPR算法 (个性化页面排名)
+                </span>
+              </label>
+              <div style={{ fontSize: '12px', color: '#666', marginTop: '5px', marginLeft: '24px' }}>
+                {useChinesePPRAlgorithm 
+                  ? '使用基于概率的PPR算法，结合语义相似度、具体性、频率和AoA'
+                  : '使用学习前沿算法，基于HSK级别和具体性评分'}
               </div>
             </div>
+            
+            {/* PPR Configuration Panel (when PPR is enabled) */}
+            {useChinesePPRAlgorithm && (
+              <div style={{ marginBottom: '15px', padding: '12px', backgroundColor: '#f9f9f9', borderRadius: '8px', border: '1px solid #ddd' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                  <span style={{ fontWeight: 'bold', fontSize: '13px' }}>PPR算法配置</span>
+                  <button
+                    onClick={() => setShowChinesePprConfig(!showChinesePprConfig)}
+                    style={{
+                      padding: '2px 8px',
+                      fontSize: '11px',
+                      backgroundColor: '#e0e0e0',
+                      border: 'none',
+                      borderRadius: '4px',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    {showChinesePprConfig ? '收起' : '展开'}
+                  </button>
+                </div>
+                {showChinesePprConfig && (
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', fontSize: '12px' }}>
+                    <div>
+                      <label>语义权重 (β_ppr): <input type="number" step="0.1" value={chinesePprConfig.beta_ppr} onChange={(e) => setChinesePprConfig({...chinesePprConfig, beta_ppr: parseFloat(e.target.value)})} style={{ width: '60px', marginLeft: '5px' }} /></label>
+                    </div>
+                    <div>
+                      <label>具体性 (β_conc): <input type="number" step="0.1" value={chinesePprConfig.beta_concreteness} onChange={(e) => setChinesePprConfig({...chinesePprConfig, beta_concreteness: parseFloat(e.target.value)})} style={{ width: '60px', marginLeft: '5px' }} /></label>
+                    </div>
+                    <div>
+                      <label>频率 (β_freq): <input type="number" step="0.1" value={chinesePprConfig.beta_frequency} onChange={(e) => setChinesePprConfig({...chinesePprConfig, beta_frequency: parseFloat(e.target.value)})} style={{ width: '60px', marginLeft: '5px' }} /></label>
+                    </div>
+                    <div>
+                      <label>AoA惩罚 (β_aoa): <input type="number" step="0.1" value={chinesePprConfig.beta_aoa_penalty} onChange={(e) => setChinesePprConfig({...chinesePprConfig, beta_aoa_penalty: parseFloat(e.target.value)})} style={{ width: '60px', marginLeft: '5px' }} /></label>
+                    </div>
+                    <div>
+                      <label>截距 (β₀): <input type="number" step="0.1" value={chinesePprConfig.beta_intercept} onChange={(e) => setChinesePprConfig({...chinesePprConfig, beta_intercept: parseFloat(e.target.value)})} style={{ width: '60px', marginLeft: '5px' }} /></label>
+                    </div>
+                    <div>
+                      <label>传送概率 (α): <input type="number" step="0.1" min="0" max="1" value={chinesePprConfig.alpha} onChange={(e) => setChinesePprConfig({...chinesePprConfig, alpha: parseFloat(e.target.value)})} style={{ width: '60px', marginLeft: '5px' }} /></label>
+                    </div>
+                    <div>
+                      <label>心智年龄: <input type="number" step="0.5" value={chinesePprConfig.mental_age || ''} onChange={(e) => setChinesePprConfig({...chinesePprConfig, mental_age: e.target.value ? parseFloat(e.target.value) : null})} style={{ width: '60px', marginLeft: '5px' }} /></label>
+                    </div>
+                    <div>
+                      <label>AoA缓冲: <input type="number" step="0.5" value={chinesePprConfig.aoa_buffer} onChange={(e) => setChinesePprConfig({...chinesePprConfig, aoa_buffer: parseFloat(e.target.value)})} style={{ width: '60px', marginLeft: '5px' }} /></label>
+                    </div>
+                    <div>
+                      <label>推荐数量: <input type="number" step="5" min="10" max="200" value={chinesePprConfig.top_n} onChange={(e) => setChinesePprConfig({...chinesePprConfig, top_n: parseInt(e.target.value)})} style={{ width: '60px', marginLeft: '5px' }} /></label>
+                    </div>
+                    <div>
+                      <label style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                        <input type="checkbox" checked={chinesePprConfig.exclude_multiword} onChange={(e) => setChinesePprConfig({...chinesePprConfig, exclude_multiword: e.target.checked})} />
+                        排除多词短语
+                      </label>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+            
+            {/* Concreteness Weight Control (only show when PPR is disabled) */}
+            {!useChinesePPRAlgorithm && (
+              <div style={{ marginBottom: '20px', padding: '15px', backgroundColor: '#f5f5f5', borderRadius: '8px', border: '1px solid #ddd' }}>
+                <label style={{ display: 'block', marginBottom: '10px', fontWeight: 'bold', fontSize: '14px' }}>
+                  ⚖️ 推荐平衡：
+                </label>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                  <span style={{ fontSize: '12px', color: '#666', minWidth: '100px' }}>仅HSK级别</span>
+                  <input
+                    type="range" min="0" max="1" step="0.1" value={concretenessWeight}
+                    onChange={(e) => {
+                      const newWeight = parseFloat(e.target.value);
+                      setConcretenessWeight(newWeight);
+                      handleGetChineseWordRecommendations(newWeight, false);
+                    }}
+                    style={{ flex: 1, cursor: 'pointer' }}
+                  />
+                  <span style={{ fontSize: '12px', color: '#666', minWidth: '100px', textAlign: 'right' }}>仅具体性</span>
+                </div>
+              </div>
+            )}
             
             {recommendations.length === 0 ? (
               <p>{t('noRecommendations')}. {t('pleaseAddMasteredWords')}</p>
             ) : (
               <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
-                  <p style={{ color: '#666', margin: 0 }}>Next 50 words to learn:</p>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <p style={{ color: '#666', margin: 0 }}>接下来要学习的{useChinesePPRAlgorithm ? chinesePprConfig.top_n : 50}个词：</p>
+                    <button
+                      onClick={() => handleGetChineseWordRecommendations()}
+                      disabled={loadingRecommendations}
+                      className="btn"
+                      style={{
+                        padding: '4px 12px',
+                        fontSize: '12px',
+                        backgroundColor: loadingRecommendations ? '#ccc' : '#2196F3',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '4px',
+                        cursor: loadingRecommendations ? 'not-allowed' : 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '5px'
+                      }}
+                      title="使用当前配置刷新推荐"
+                    >
+                      {loadingRecommendations ? '⏳' : '🔄'} {loadingRecommendations ? '加载中...' : '刷新'}
+                    </button>
+                  </div>
                   {selectedRecommendations.size > 0 && (
                     <button
                       onClick={handleAddSelectedToMastered}
@@ -632,7 +800,20 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
                               {isAlreadyMastered && <span style={{ fontSize: '12px', color: theme.status.alreadyMastered, marginLeft: '8px' }}>({t('alreadyMastered')})</span>}
                             </div>
                             <div style={{ fontSize: '0.8em', color: '#888' }}>
-                              HSK: {rec.hsk} | Score: {typeof rec.score === 'number' ? rec.score.toFixed(1) : rec.score}
+                              {useChinesePPRAlgorithm ? (
+                                <>
+                                  P(推荐): {(rec.score * 100).toFixed(1)}% |
+                                  {rec.log_ppr !== undefined && ` log(PPR): ${rec.log_ppr.toFixed(2)} |`}
+                                  {rec.z_concreteness !== undefined && ` Z(具体): ${rec.z_concreteness.toFixed(2)} |`}
+                                  {rec.log_frequency !== undefined && ` log(频率): ${rec.log_frequency.toFixed(2)} |`}
+                                  {rec.aoa_penalty !== undefined && rec.aoa_penalty > 0 && ` AoA惩罚: ${rec.aoa_penalty.toFixed(1)} |`}
+                                  {rec.hsk_level && ` HSK: ${rec.hsk_level}`}
+                                </>
+                              ) : (
+                                <>
+                                  HSK: {rec.hsk} | Score: {typeof rec.score === 'number' ? rec.score.toFixed(1) : rec.score}
+                                </>
+                              )}
                             </div>
                           </div>
                         </label>
@@ -660,7 +841,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
             <button onClick={() => setShowEnglishRecommendations(false)} style={{
               position: 'absolute', top: '10px', right: '10px', border: 'none', background: 'none', fontSize: '24px', cursor: 'pointer'
             }}>×</button>
-            <h2>📚 {t('wordRecommendations')} - {t('englishVocabulary')}</h2>
+            <h2>📚 词汇推荐 - 英文</h2>
             
             <div style={{ marginBottom: '15px', padding: '12px', backgroundColor: '#e8f4f8', borderRadius: '8px', border: '1px solid #b3d9e6' }}>
               <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' }}>
@@ -679,13 +860,13 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
                   style={{ cursor: 'pointer' }}
                 />
                 <span style={{ fontWeight: 'bold', fontSize: '14px' }}>
-                  🧠 Use PPR Algorithm (Personalized PageRank)
+                  🧠 使用PPR算法（个性化页面排名）
                 </span>
               </label>
               <div style={{ fontSize: '12px', color: '#666', marginTop: '5px', marginLeft: '24px' }}>
                 {usePPRAlgorithm 
-                  ? 'Using probability-based PPR with semantic similarity, concreteness, frequency, and AoA'
-                  : 'Using Learning Frontier algorithm with CEFR levels and concreteness scoring'}
+                  ? '使用基于概率的PPR算法，结合语义相似度、具体性、频率和习得年龄'
+                  : '使用学习前沿算法，结合CEFR级别和具体性评分'}
               </div>
               {usePPRAlgorithm && (
                 <div style={{ marginTop: '10px', marginLeft: '24px' }}>
@@ -702,7 +883,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
                       cursor: 'pointer'
                     }}
                   >
-                    {showPprConfig ? '▼ Hide Configuration' : '▶ Show Configuration'}
+                    {showPprConfig ? '▼ 隐藏配置' : '▶ 显示配置'}
                   </button>
                 </div>
               )}
@@ -711,12 +892,12 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
             {usePPRAlgorithm && showPprConfig && (
               <div style={{ marginBottom: '20px', padding: '15px', backgroundColor: '#f0f8ff', borderRadius: '8px', border: '1px solid #b3d9e6' }}>
                 <h4 style={{ marginTop: 0, marginBottom: '15px', fontSize: '14px', fontWeight: 'bold' }}>
-                  ⚙️ PPR Algorithm Configuration
+                  ⚙️ PPR算法配置
                 </h4>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
                   <div>
                     <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px', fontWeight: 'bold' }}>
-                      β PPR (Semantic Weight): {pprConfig.beta_ppr.toFixed(2)}
+                      β PPR (语义权重): {pprConfig.beta_ppr.toFixed(2)}
                     </label>
                     <input
                       type="range"
@@ -734,7 +915,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
                   </div>
                   <div>
                     <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px', fontWeight: 'bold' }}>
-                      β Concreteness: {pprConfig.beta_concreteness.toFixed(2)}
+                      β 具体性: {pprConfig.beta_concreteness.toFixed(2)}
                     </label>
                     <input
                       type="range"
@@ -752,7 +933,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
                   </div>
                   <div>
                     <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px', fontWeight: 'bold' }}>
-                      β Frequency: {pprConfig.beta_frequency.toFixed(2)}
+                      β 频率: {pprConfig.beta_frequency.toFixed(2)}
                     </label>
                     <input
                       type="range"
@@ -770,7 +951,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
                   </div>
                   <div>
                     <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px', fontWeight: 'bold' }}>
-                      β AoA Penalty: {pprConfig.beta_aoa_penalty.toFixed(2)}
+                      β 习得年龄惩罚: {pprConfig.beta_aoa_penalty.toFixed(2)}
                     </label>
                     <input
                       type="range"
@@ -788,7 +969,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
                   </div>
                   <div>
                     <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px', fontWeight: 'bold' }}>
-                      β Intercept: {pprConfig.beta_intercept.toFixed(2)}
+                      β 截距: {pprConfig.beta_intercept.toFixed(2)}
                     </label>
                     <input
                       type="range"
@@ -806,7 +987,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
                   </div>
                   <div>
                     <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px', fontWeight: 'bold' }}>
-                      α (Teleport Probability): {pprConfig.alpha.toFixed(2)}
+                      α (跳转概率): {pprConfig.alpha.toFixed(2)}
                     </label>
                     <input
                       type="range"
@@ -824,7 +1005,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
                   </div>
                   <div>
                     <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px', fontWeight: 'bold' }}>
-                      Mental Age: {pprConfig.mental_age !== null ? pprConfig.mental_age.toFixed(1) : (profile.mental_age || 'Profile default')}
+                      心理年龄: {pprConfig.mental_age !== null ? pprConfig.mental_age.toFixed(1) : (profile.mental_age || '使用档案默认值')}
                     </label>
                     <input
                       type="number"
@@ -837,13 +1018,13 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
                         setPprConfig(prev => ({ ...prev, mental_age: newValue }));
                         setTimeout(() => handleGetEnglishWordRecommendations(), 300);
                       }}
-                      placeholder={profile.mental_age ? `Profile: ${profile.mental_age}` : 'Use profile default'}
+                      placeholder={profile.mental_age ? `档案: ${profile.mental_age}` : '使用档案默认值'}
                       style={{ width: '100%', padding: '4px' }}
                     />
                   </div>
                   <div>
                     <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px', fontWeight: 'bold' }}>
-                      AoA Buffer: {pprConfig.aoa_buffer.toFixed(1)}
+                      AoA缓冲: {pprConfig.aoa_buffer.toFixed(1)}
                     </label>
                     <input
                       type="range"
@@ -861,7 +1042,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
                   </div>
                   <div>
                     <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px', fontWeight: 'bold' }}>
-                      Top N Results: {pprConfig.top_n}
+                      前N个结果: {pprConfig.top_n}
                     </label>
                     <input
                       type="number"
@@ -888,7 +1069,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
                         }}
                       />
                       <span style={{ fontSize: '12px', fontWeight: 'bold' }}>
-                        Exclude Multi-word Phrases (e.g., "ice hockey", "chewing gum")
+                        排除多词短语（例如："ice hockey"、"chewing gum"）
                       </span>
                     </label>
                   </div>
@@ -899,10 +1080,10 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
             {!usePPRAlgorithm && (
             <div style={{ marginBottom: '20px', padding: '15px', backgroundColor: '#f5f5f5', borderRadius: '8px', border: '1px solid #ddd' }}>
               <label style={{ display: 'block', marginBottom: '10px', fontWeight: 'bold', fontSize: '14px' }}>
-                ⚖️ Recommendation Balance (English):
+                ⚖️ 推荐平衡（英文）：
               </label>
               <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                <span style={{ fontSize: '12px', color: '#666', minWidth: '120px' }}>Frequency (Utility)</span>
+                <span style={{ fontSize: '12px', color: '#666', minWidth: '120px' }}>频率（实用性）</span>
                 <input
                   type="range" min="0" max="1" step="0.1" value={englishSliderPosition}
                   onChange={(e) => {
@@ -915,7 +1096,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
                   }}
                   style={{ flex: 1, cursor: 'pointer' }}
                 />
-                <span style={{ fontSize: '12px', color: '#666', minWidth: '120px', textAlign: 'right' }}>Concreteness (Ease)</span>
+                <span style={{ fontSize: '12px', color: '#666', minWidth: '120px', textAlign: 'right' }}>具体性（易学性）</span>
               </div>
             </div>
             )}
@@ -925,9 +1106,31 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
             ) : (
               <div>
                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
-                  <p style={{ color: '#666', margin: 0 }}>
-                    Next {usePPRAlgorithm ? pprConfig.top_n : 50} words to learn:
-                  </p>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <p style={{ color: '#666', margin: 0 }}>
+                      接下来要学习的{usePPRAlgorithm ? pprConfig.top_n : 50}个词：
+                    </p>
+                    <button
+                      onClick={() => handleGetEnglishWordRecommendations()}
+                      disabled={loadingEnglishRecommendations}
+                      className="btn"
+                      style={{
+                        padding: '4px 12px',
+                        fontSize: '12px',
+                        backgroundColor: loadingEnglishRecommendations ? '#ccc' : '#2196F3',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '4px',
+                        cursor: loadingEnglishRecommendations ? 'not-allowed' : 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '5px'
+                      }}
+                      title="使用当前配置刷新推荐"
+                    >
+                      {loadingEnglishRecommendations ? '⏳' : '🔄'} {loadingEnglishRecommendations ? '加载中...' : '刷新'}
+                    </button>
+                  </div>
                   {selectedEnglishRecommendations.size > 0 && (
                     <button
                       onClick={handleAddSelectedEnglishToMastered}
@@ -996,14 +1199,36 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
             <button onClick={() => setShowGrammarRecommendations(false)} style={{
               position: 'absolute', top: '10px', right: '10px', border: 'none', background: 'none', fontSize: '24px', cursor: 'pointer'
             }}>×</button>
-            <h2>📖 {t('grammarRecommendations')} ({selectedLanguage === 'en' ? t('englishGrammar') : t('chineseGrammar')})</h2>
+            <h2>📖 语法推荐 ({selectedLanguage === 'en' ? '英文' : '中文'})</h2>
 
             {grammarRecommendations.length === 0 ? (
-              <p>No grammar recommendations available.</p>
+              <p>暂无语法推荐。</p>
             ) : (
               <div>
                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
-                  <p style={{ color: '#666', margin: 0 }}>Next 50 grammar points:</p>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <p style={{ color: '#666', margin: 0 }}>接下来要学习的50个语法点：</p>
+                    <button
+                      onClick={() => handleGetGrammarRecommendations(selectedLanguage)}
+                      disabled={loadingGrammarRecommendations}
+                      className="btn"
+                      style={{
+                        padding: '4px 12px',
+                        fontSize: '12px',
+                        backgroundColor: loadingGrammarRecommendations ? '#ccc' : '#2196F3',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '4px',
+                        cursor: loadingGrammarRecommendations ? 'not-allowed' : 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '5px'
+                      }}
+                      title="使用当前配置刷新推荐"
+                    >
+                      {loadingGrammarRecommendations ? '⏳' : '🔄'} {loadingGrammarRecommendations ? '加载中...' : '刷新'}
+                    </button>
+                  </div>
                   {selectedGrammarRecommendations.size > 0 && (
                     <button
                       onClick={handleAddSelectedGrammarToMastered}

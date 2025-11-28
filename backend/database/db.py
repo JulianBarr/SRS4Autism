@@ -158,3 +158,4 @@ if __name__ == "__main__":
     # Initialize database if run directly
     init_db()
 
+

@@ -17,6 +17,10 @@ import unicodedata
 from functools import lru_cache
 from pathlib import Path
 import math
+import tempfile
+import zipfile
+import shutil
+import re
 
 # Database imports
 import sys
@@ -150,6 +154,24 @@ class PPRRecommendationRequest(BaseModel):
     aoa_buffer: Optional[float] = 2.0  # Buffer years beyond mental age
     exclude_multiword: Optional[bool] = True  # Filter out multi-word phrases
     top_n: Optional[int] = 50  # Number of recommendations
+
+class ChinesePPRRecommendationRequest(BaseModel):
+    """Request for PPR-based Chinese word recommendations."""
+    profile_id: str
+    mastered_words: Optional[List[str]] = None  # If None, loaded from database
+    exclude_words: Optional[List[str]] = None
+    # PPR configuration (same as English)
+    alpha: Optional[float] = 0.5
+    beta_ppr: Optional[float] = 1.0
+    beta_concreteness: Optional[float] = 0.8
+    beta_frequency: Optional[float] = 0.3
+    beta_aoa_penalty: Optional[float] = 2.0
+    beta_intercept: Optional[float] = 0.0
+    mental_age: Optional[float] = 8.0
+    aoa_buffer: Optional[float] = 2.0
+    exclude_multiword: Optional[bool] = True
+    top_n: Optional[int] = 50
+    max_hsk_level: Optional[int] = 6
 
 class GrammarRecommendationRequest(BaseModel):
     mastered_grammar: List[str]
@@ -2623,6 +2645,96 @@ async def get_ppr_recommendations(request: PPRRecommendationRequest):
         raise HTTPException(status_code=500, detail=f"Error getting PPR recommendations: {str(e)}")
 
 
+@app.post("/kg/chinese-ppr-recommendations")
+async def get_chinese_ppr_recommendations(request: ChinesePPRRecommendationRequest):
+    """
+    Get Chinese vocabulary recommendations using Personalized PageRank (PPR) algorithm.
+    
+    Uses semantic similarity graph, mastered words, and probability-based scoring.
+    Returns top N words to learn next based on PPR scores combined with concreteness,
+    frequency, and age of acquisition.
+    """
+    try:
+        print(f"\n📚 Getting Chinese PPR recommendations for profile '{request.profile_id}'")
+        
+        # Import Chinese PPR service
+        import sys
+        sys.path.insert(0, str(PROJECT_ROOT / "backend"))
+        from services.chinese_ppr_recommender_service import get_chinese_ppr_service
+        
+        # Load mastered words from database if not provided
+        mastered_words = request.mastered_words
+        if not mastered_words:
+            db = next(get_db())
+            try:
+                mastered_words = ProfileService.get_mastered_words(db, request.profile_id, 'zh')
+                print(f"   📘 Loaded {len(mastered_words)} mastered Chinese words from database")
+            finally:
+                db.close()
+        
+        if not mastered_words:
+            return {
+                "recommendations": [],
+                "message": "No mastered words found. Add some words to get recommendations."
+            }
+        
+        # Build configuration from request
+        config = {}
+        if request.alpha is not None:
+            config["alpha"] = request.alpha
+        if request.beta_ppr is not None:
+            config["beta_ppr"] = request.beta_ppr
+        if request.beta_concreteness is not None:
+            config["beta_concreteness"] = request.beta_concreteness
+        if request.beta_frequency is not None:
+            config["beta_frequency"] = request.beta_frequency
+        if request.beta_aoa_penalty is not None:
+            config["beta_aoa_penalty"] = request.beta_aoa_penalty
+        if request.beta_intercept is not None:
+            config["beta_intercept"] = request.beta_intercept
+        if request.mental_age is not None:
+            config["mental_age"] = request.mental_age
+        if request.aoa_buffer is not None:
+            config["aoa_buffer"] = request.aoa_buffer
+        if request.exclude_multiword is not None:
+            config["exclude_multiword"] = request.exclude_multiword
+        if request.top_n is not None:
+            config["top_n"] = request.top_n
+        
+        # Get Chinese PPR service (lazy-loaded singleton)
+        similarity_file = PROJECT_ROOT / "data" / "content_db" / "chinese_word_similarity.json"
+        kg_file = PROJECT_ROOT / "knowledge_graph" / "world_model_cwn.ttl"
+        
+        service = get_chinese_ppr_service(
+            similarity_file=similarity_file,
+            kg_file=kg_file,
+            config=config
+        )
+        
+        # Get recommendations
+        recommendations = service.get_recommendations(
+            mastered_words=mastered_words,
+            profile_id=request.profile_id,
+            exclude_words=request.exclude_words,
+            **config
+        )
+        
+        print(f"   ✅ Found {len(recommendations)} Chinese recommendations")
+        
+        return {
+            "recommendations": recommendations,
+            "message": f"Found {len(recommendations)} recommendations",
+            "config_used": config
+        }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Error getting Chinese PPR recommendations: {str(e)}")
+
+
 @app.post("/agentic/plan")
 async def agentic_plan(request: AgenticPlanRequest):
     """
@@ -3321,6 +3433,466 @@ async def get_grammar_recommendations(request: GrammarRecommendationRequest):
         raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error getting grammar recommendations: {str(e)}")
+
+# Character Recognition endpoints
+@app.get("/character-recognition/notes")
+async def get_character_recognition_notes(profile_id: str):
+    """
+    Get character recognition notes from database.
+    Filters out mastered characters.
+    Maintains the original order from the apkg file.
+    """
+    try:
+        from database.models import CharacterRecognitionNote
+        
+        # Get mastered characters (separate list with language='character')
+        db = next(get_db())
+        try:
+            # Get mastered characters from separate list
+            mastered_chars = set(ProfileService.get_mastered_words(db, profile_id, 'character'))
+            
+            # Get all notes from database, ordered by display_order
+            db_notes = db.query(CharacterRecognitionNote).order_by(CharacterRecognitionNote.display_order).all()
+            
+            # Convert to API format and filter mastered
+            notes = []
+            for db_note in db_notes:
+                # Filter out mastered characters
+                if db_note.character in mastered_chars:
+                    continue
+                
+                # Parse fields JSON
+                note_fields = json.loads(db_note.fields) if db_note.fields else {}
+                
+                note_data = {
+                    'note_id': db_note.note_id,
+                    'character': db_note.character,
+                    'fields': note_fields
+                }
+                notes.append(note_data)
+        finally:
+            db.close()
+        
+        print(f"📚 Loaded {len(notes)} character recognition notes from database (filtered {len(mastered_chars)} mastered)")
+        
+        return {
+            "notes": notes,
+            "total": len(notes),
+            "mastered_filtered": len(mastered_chars)
+        }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Error loading character recognition notes: {str(e)}")
+
+@app.post("/character-recognition/sync")
+async def sync_character_recognition_notes(request: Dict[str, Any]):
+    """
+    Sync character recognition notes to Anki.
+    Creates 7 cards per note:
+    1. Concept (picture) => Character
+    2. Character => Concept (picture) (reverse)
+    3. MCQ (Pick Char) - Concept => Character
+    4. MCQ (Pick Pic) - Character => Concept
+    5-7. Word1, Word2, Word3 - MCQ cloze completion
+    
+    Also extracts media files from apkg and copies them to media directory.
+    """
+    try:
+        import sys
+        import os
+        import shutil
+        import re
+        sys.path.append(os.path.join(os.path.dirname(__file__), '../../'))
+        from anki_integration.anki_connect import AnkiConnect
+        
+        profile_id = request.get("profile_id")
+        note_ids = request.get("note_ids", [])
+        deck_name = request.get("deck_name", "识字")
+        
+        if not profile_id:
+            raise HTTPException(status_code=400, detail="profile_id is required")
+        
+        if not note_ids:
+            raise HTTPException(status_code=400, detail="note_ids is required")
+        
+        apkg_path = PROJECT_ROOT / "data" / "content_db" / "语言语文__识字__全部.apkg"
+        
+        # Extract media files from apkg
+        media_dir = PROJECT_ROOT / "media" / "character_recognition"
+        media_dir.mkdir(parents=True, exist_ok=True)
+        
+        media_map = {}  # Map original filename to new path
+        
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmpdir_path = Path(tmpdir)
+            
+            # Extract .apkg (it's a zip file)
+            with zipfile.ZipFile(apkg_path, 'r') as zip_ref:
+                zip_ref.extractall(tmpdir_path)
+            
+            # Copy media files to media directory
+            # Note: In some apkg files, media might be stored differently
+            media_source = tmpdir_path / "media"
+            if media_source.exists() and media_source.is_dir():
+                try:
+                    print(f"📁 Extracting media files from apkg...")
+                    for media_file in media_source.iterdir():
+                        if media_file.is_file():
+                            # Copy to media directory
+                            dest_file = media_dir / media_file.name
+                            if not dest_file.exists():  # Don't overwrite existing files
+                                shutil.copy2(media_file, dest_file)
+                                print(f"  ✅ Copied {media_file.name}")
+                            else:
+                                print(f"  ℹ️  {media_file.name} already exists, skipping")
+                            # Map original filename to URL path
+                            media_map[media_file.name] = f"/media/character_recognition/{media_file.name}"
+                except Exception as e:
+                    print(f"⚠️  Warning: Could not extract media files: {e}")
+            else:
+                # Try to find media files in the zip directly
+                try:
+                    with zipfile.ZipFile(apkg_path, 'r') as zip_ref:
+                        media_files = [f for f in zip_ref.namelist() if f.startswith('media/') and not f.endswith('/')]
+                        if media_files:
+                            print(f"📁 Extracting {len(media_files)} media files from apkg...")
+                            for media_path in media_files:
+                                filename = Path(media_path).name
+                                if filename:  # Skip directories
+                                    dest_file = media_dir / filename
+                                    if not dest_file.exists():
+                                        with zip_ref.open(media_path) as source_file:
+                                            with open(dest_file, 'wb') as dest:
+                                                shutil.copyfileobj(source_file, dest)
+                                        print(f"  ✅ Extracted {filename}")
+                                    # Map original filename to URL path
+                                    media_map[filename] = f"/media/character_recognition/{filename}"
+                except Exception as e:
+                    print(f"⚠️  Warning: Could not extract media files from zip: {e}")
+            
+        # Get the notes from the database
+        from database.models import CharacterRecognitionNote
+        
+        db = next(get_db())
+        try:
+            # Get notes from database
+            db_notes = db.query(CharacterRecognitionNote).filter(
+                CharacterRecognitionNote.note_id.in_(note_ids)
+            ).order_by(CharacterRecognitionNote.display_order).all()
+            
+            notes_to_sync = []
+            for db_note in db_notes:
+                note_fields = json.loads(db_note.fields) if db_note.fields else {}
+                notes_to_sync.append({
+                    'note_id': db_note.note_id,
+                    'character': db_note.character,
+                    'fields': note_fields
+                })
+        finally:
+            db.close()
+        
+        if not notes_to_sync:
+            raise HTTPException(status_code=404, detail="No notes found to sync")
+        
+        # Initialize AnkiConnect client
+        anki = AnkiConnect()
+        
+        # Check connection
+        if not anki.ping():
+            raise HTTPException(
+                status_code=503,
+                detail="Cannot connect to Anki. Make sure Anki is running with AnkiConnect add-on installed."
+            )
+        
+        # Create deck if it doesn't exist
+        try:
+            anki.create_deck(deck_name)
+        except:
+            pass  # Deck might already exist
+        
+        # Step 1: Collect all image files referenced in the notes and upload them to Anki
+        # Following Media file management.md naming convention: cm_[Type]_[ContentID]_[Variant].[ext]
+        # For character recognition: cm_char_[sanitized_original_name].[ext]
+        anki_media_map = {}  # Maps original filename to Anki media filename
+        media_dir = PROJECT_ROOT / "media" / "character_recognition"
+        
+        def extract_image_filenames_from_html(html_content: str) -> set:
+            """Extract all image filenames from HTML content (extract filename from any path)"""
+            if not html_content:
+                return set()
+            
+            filenames = set()
+            # Pattern to match <img src="..."> or <img src='...'>
+            pattern = r'<img[^>]*src=["\']([^"\']+)["\'][^>]*>'
+            
+            for match in re.finditer(pattern, html_content):
+                src_value = match.group(1)
+                # Skip URLs
+                if src_value.startswith('http'):
+                    continue
+                
+                # Extract just the filename (remove any path, including /media/character_recognition/)
+                # Handle both absolute paths (/media/...) and relative paths
+                filename = src_value.strip()
+                if '/' in filename:
+                    # Get the last component (filename)
+                    filename = Path(filename).name
+                filename = filename.strip()
+                
+                if filename:  # Only add non-empty filenames
+                    filenames.add(filename)
+            
+            return filenames
+        
+        # Collect all unique image filenames from all notes
+        all_image_filenames = set()
+        for note in notes_to_sync:
+            fields = note['fields']
+            for field_value in fields.values():
+                if field_value and isinstance(field_value, str):
+                    all_image_filenames.update(extract_image_filenames_from_html(field_value))
+        
+        # Upload each image file to Anki with namespaced naming
+        import base64
+        import hashlib
+        
+        PROJECT_PREFIX = "cm"  # Following the naming convention from Media file management.md
+        
+        # Track file hashes to avoid uploading duplicates
+        uploaded_hashes = {}  # Maps content_hash -> anki_filename (for duplicate detection)
+        
+        for original_filename in all_image_filenames:
+            source_file = media_dir / original_filename
+            if not source_file.exists():
+                print(f"⚠️  Warning: Media file not found: {original_filename}")
+                continue
+            
+            try:
+                # Read file
+                with open(source_file, 'rb') as f:
+                    file_data = f.read()
+                
+                # Calculate content hash to detect duplicates
+                content_hash = hashlib.md5(file_data).hexdigest()
+                
+                # Check if we've already uploaded this exact file
+                if content_hash in uploaded_hashes:
+                    # Reuse the existing Anki filename
+                    anki_media_map[original_filename] = uploaded_hashes[content_hash]
+                    print(f"  ℹ️  Reusing {original_filename} → {uploaded_hashes[content_hash]} (duplicate)")
+                    continue
+                
+                # Generate Anki filename: cm_char_[sanitized_original_name].[ext]
+                # Sanitize: remove special chars, keep alphanumeric, underscore, dash, dot
+                # Keep the extension
+                file_ext = Path(original_filename).suffix
+                file_stem = Path(original_filename).stem
+                # Sanitize stem: replace non-alphanumeric with underscore (except dash and underscore)
+                sanitized_stem = re.sub(r'[^a-zA-Z0-9_-]', '_', file_stem)
+                # Limit length to avoid issues
+                if len(sanitized_stem) > 50:
+                    sanitized_stem = sanitized_stem[:50]
+                
+                # Always include short hash for uniqueness and to avoid collisions
+                # Format: cm_char_[sanitized_name]_[8char_hash].[ext]
+                short_hash = content_hash[:8]
+                anki_filename = f"{PROJECT_PREFIX}_char_{sanitized_stem}_{short_hash}{file_ext}"
+                
+                # Encode to base64 for AnkiConnect
+                base64_data = base64.b64encode(file_data).decode('utf-8')
+                
+                # Upload to Anki
+                stored_filename = anki.store_media_file(anki_filename, base64_data)
+                anki_media_map[original_filename] = stored_filename
+                uploaded_hashes[content_hash] = stored_filename
+                print(f"  ✅ Uploaded {original_filename} → {stored_filename}")
+                
+            except Exception as e:
+                print(f"  ⚠️  Failed to upload {original_filename}: {e}")
+                # Fallback: use original filename (might cause conflicts, but better than nothing)
+                anki_media_map[original_filename] = original_filename
+        
+        # Step 2: Update HTML to reference Anki media filenames (just filename, no path)
+        # Anki does NOT support subdirectories - all files must be in collection.media root
+        def update_image_references_to_anki(html_content: str, character: str) -> str:
+            """Update image references to use Anki media filenames (no paths, just filename)
+            
+            Replaces paths like /media/character_recognition/I2.png with just cm_char_I2_a1b2c3d4.png
+            """
+            if not html_content:
+                return html_content
+            
+            # Pattern to match <img src="..."> or <img src='...'>
+            pattern = r'<img[^>]*src=["\']([^"\']+)["\'][^>]*>'
+            
+            def replace_img(match):
+                img_tag = match.group(0)
+                src_value = match.group(1)
+                
+                # Skip URLs
+                if src_value.startswith('http'):
+                    return img_tag
+                
+                # Extract just the filename (remove any path, including /media/character_recognition/)
+                # Handle both absolute paths (/media/...) and relative paths
+                filename = src_value.strip()
+                if '/' in filename:
+                    # Get the last component (filename) - this handles /media/character_recognition/I2.png
+                    filename = Path(filename).name
+                filename = filename.strip()
+                
+                # Look up in anki_media_map (maps original filename like "I2.png" to Anki filename)
+                if filename in anki_media_map:
+                    anki_filename = anki_media_map[filename]
+                    # Replace the entire src value with just the Anki filename (no path, no subdirectory)
+                    # This ensures Anki can find the file in collection.media root
+                    # Example: /media/character_recognition/I2.png -> cm_char_I2_a1b2c3d4.png
+                    new_img_tag = re.sub(
+                        r'src=["\']([^"\']+)["\']',
+                        f'src="{anki_filename}"',
+                        img_tag,
+                        count=1
+                    )
+                    print(f"  🔄 Replaced image: {src_value} -> {anki_filename}")
+                    return new_img_tag
+                else:
+                    # If not in map, try to extract and warn
+                    print(f"  ⚠️  Warning: Image filename '{filename}' (from '{src_value}') not found in uploaded media map")
+                    print(f"     Available keys: {list(anki_media_map.keys())[:5]}...")
+                
+                return img_tag
+            
+            return re.sub(pattern, replace_img, html_content)
+        
+        # Create cards for each note
+        cards_created = 0
+        errors = []
+        
+        for note in notes_to_sync:
+            try:
+                fields = note['fields']
+                character = note['character']
+                
+                # Update all fields to use Anki media filenames
+                processed_fields = {}
+                for field_name, field_value in fields.items():
+                    if field_value and isinstance(field_value, str):
+                        processed_fields[field_name] = update_image_references_to_anki(field_value, character)
+                    else:
+                        processed_fields[field_name] = field_value or ""
+                
+                # Build _KG_Map (map cards to knowledge points)
+                # Link to character knowledge point in KG
+                kg_map = {
+                    "knowledge_points": [
+                        {
+                            "type": "character",
+                            "character": character,
+                            "note_id": str(note['note_id'])
+                        }
+                    ],
+                    "card_type": "character_recognition"
+                }
+                kg_map_json = json.dumps(kg_map, ensure_ascii=False)
+                
+                # Add _KG_Map and _Remarks to the fields
+                processed_fields["_KG_Map"] = kg_map_json
+                if "_Remarks" not in processed_fields:
+                    processed_fields["_Remarks"] = f"Character Recognition - {character}"
+                
+                # Create ONE note - the note type template will create 7 cards
+                note_type = "CUMA - Chinese Recognition"
+                note_id = anki.add_note(deck_name, note_type, processed_fields)
+                cards_created += 7  # The note type creates 7 cards
+                
+            except Exception as e:
+                errors.append({
+                    "note_id": note.get('note_id', 'unknown'),
+                    "character": note.get('character', 'unknown'),
+                    "error": str(e)
+                })
+        
+        notes_synced_successfully = len(notes_to_sync) - len(errors)
+        print(f"✅ Synced {notes_synced_successfully} notes (creating {cards_created} cards) from {len(notes_to_sync)} notes to deck '{deck_name}'")
+        if errors:
+            print(f"⚠️  {len(errors)} errors occurred")
+        
+        return {
+            "message": f"Synced {notes_synced_successfully} notes successfully",
+            "cards_created": cards_created,
+            "notes_synced": notes_synced_successfully,
+            "errors": errors
+        }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Error syncing character recognition notes: {str(e)}")
+
+@app.post("/character-recognition/master")
+async def mark_character_mastered(request: Dict[str, Any]):
+    """
+    Mark a character as mastered (adds to separate mastered characters list).
+    """
+    try:
+        profile_id = request.get("profile_id")
+        characters = request.get("characters", [])
+        
+        if not profile_id:
+            raise HTTPException(status_code=400, detail="profile_id is required")
+        
+        if not characters:
+            raise HTTPException(status_code=400, detail="characters list is required")
+        
+        db = next(get_db())
+        try:
+            from database.models import MasteredWord
+            
+            added_count = 0
+            for char in characters:
+                if not char or not char.strip():
+                    continue
+                
+                char_clean = char.strip()
+                
+                # Check if already mastered
+                existing = db.query(MasteredWord).filter_by(
+                    profile_id=profile_id,
+                    word=char_clean,
+                    language='character'
+                ).first()
+                
+                if not existing:
+                    mastered_char = MasteredWord(
+                        profile_id=profile_id,
+                        word=char_clean,
+                        language='character'
+                    )
+                    db.add(mastered_char)
+                    added_count += 1
+            
+            db.commit()
+            
+            return {
+                "message": f"Marked {added_count} character(s) as mastered",
+                "added": added_count,
+                "total": len(characters)
+            }
+        finally:
+            db.close()
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Error marking characters as mastered: {str(e)}")
 
 # Mount static files for serving images
 # Images are stored in media/visual_images/ relative to project root

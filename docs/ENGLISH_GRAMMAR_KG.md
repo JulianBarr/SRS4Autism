@@ -294,3 +294,4 @@ SELECT (COUNT(?gp) as ?count) WHERE {
 
 Your English grammar KG is now complete and ready for use in recommendation and content generation! 🎉
 
+

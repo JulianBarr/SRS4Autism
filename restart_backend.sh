@@ -17,3 +17,4 @@ echo "Backend started with PID: $BACKEND_PID"
 echo "Logs: data/logs/backend.log"
 echo "View with: tail -f data/logs/backend.log"
 
+

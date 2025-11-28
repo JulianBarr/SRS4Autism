@@ -239,3 +239,4 @@ export default StatusBadge;
 4. **Scalability**: Easy to add new colors or themes
 5. **Developer Experience**: Clear semantic naming makes code more readable
 
+

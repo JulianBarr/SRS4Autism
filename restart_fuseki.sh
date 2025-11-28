@@ -18,3 +18,4 @@ sleep 5
 # Test if it's working
 curl -s http://localhost:3030 > /dev/null && echo "✅ Fuseki is running!" || echo "⚠️  Fuseki may still be starting..."
 
+
