@@ -50,7 +50,7 @@ const TemplateManager = () => {
       handleCancel();
     } catch (error) {
       console.error('Error saving template:', error);
-      alert('Failed to save template');
+      alert(t('failedToSaveTemplate'));
     }
   };
 
@@ -65,7 +65,7 @@ const TemplateManager = () => {
   };
 
   const handleDelete = async (templateId) => {
-    if (window.confirm('Are you sure you want to delete this template?')) {
+    if (window.confirm(t('areYouSureDeleteTemplate'))) {
       try {
         await axios.delete(`${API_BASE}/templates/${templateId}`);
         loadTemplates();
@@ -83,73 +83,60 @@ const TemplateManager = () => {
 
   return (
     <div className="card">
-      <h2>Prompt Templates</h2>
-      <p>Define custom templates to guide the AI in generating specific types of flashcards.</p>
+      <h2>{t('promptTemplates')}</h2>
+      <p>{t('promptTemplatesDescription')}</p>
 
       <div className="profiles-header">
         <button onClick={() => setShowForm(true)} className="btn">
-          Add New Template
+          {t('addNewTemplate')}
         </button>
       </div>
 
       {showForm && (
         <div className="card">
-          <h3>{editingTemplate ? 'Edit Template' : 'Add New Template'}</h3>
+          <h3>{editingTemplate ? t('editTemplate') : t('addNewTemplate')}</h3>
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label>Template Name *</label>
+              <label>{t('templateName')} *</label>
               <input
                 type="text"
                 value={formData.name}
                 onChange={(e) => setFormData({...formData, name: e.target.value})}
-                placeholder="e.g., Sentence Builder, Vocabulary with Examples"
+                placeholder={t('templateNamePlaceholder')}
                 required
               />
             </div>
 
             <div className="form-group">
-              <label>Description</label>
+              <label>{t('templateDescription')}</label>
               <input
                 type="text"
                 value={formData.description}
                 onChange={(e) => setFormData({...formData, description: e.target.value})}
-                placeholder="Brief description of what this template does"
+                placeholder={t('templateDescriptionPlaceholder')}
               />
             </div>
 
             <div className="form-group">
-              <label>Template Instructions *</label>
+              <label>{t('templateInstructions')} *</label>
               <textarea
                 value={formData.template_text}
                 onChange={(e) => setFormData({...formData, template_text: e.target.value})}
                 rows="10"
-                placeholder={`Free-form instructions and examples for the AI:
-
-Example:
-Create interactive cloze cards for sentence practice.
-
-Format:
-- Use [[c1::word]] syntax for blanks
-- Include Chinese translation in parentheses
-- Add pinyin for Chinese words
-
-Example card:
-The [[c1::sky]] is [[c2::blue]]. 天空 (tiānkōng) 是蓝色的。
-
-Make cards engaging and age-appropriate.`}
+                placeholder={t('templateInstructionsPlaceholder')}
                 required
               />
               <small style={{color: '#666', fontSize: '12px'}}>
-                Provide examples, format preferences, and any specific instructions for the AI.
+                {t('templateInstructionsHint')}
               </small>
             </div>
 
             <div className="form-actions">
               <button type="submit" className="btn">
-                {editingTemplate ? 'Update Template' : 'Create Template'}
+                {editingTemplate ? t('updateTemplate') : t('createTemplate')}
               </button>
               <button type="button" onClick={handleCancel} className="btn btn-secondary">
-                Cancel
+                {t('cancel')}
               </button>
             </div>
           </form>
@@ -158,7 +145,7 @@ Make cards engaging and age-appropriate.`}
 
       <div className="profiles-list">
         {templates.length === 0 ? (
-          <p>No templates created yet.</p>
+          <p>{t('noTemplatesYet')}</p>
         ) : (
           templates.map(template => (
             <div key={template.id} className="profile-card">
@@ -166,25 +153,25 @@ Make cards engaging and age-appropriate.`}
                 <h3>{template.name}</h3>
                 <div className="profile-actions">
                   <button onClick={() => handleEdit(template)} className="btn btn-secondary">
-                    Edit
+                    {t('edit')}
                   </button>
                   <button onClick={() => handleDelete(template.id)} className="btn btn-secondary">
-                    Delete
+                    {t('delete')}
                   </button>
                 </div>
               </div>
               <div className="profile-details">
                 {template.description && (
                   <div className="detail-row">
-                    <strong>Description:</strong> {template.description}
+                    <strong>{t('templateDescription')}:</strong> {template.description}
                   </div>
                 )}
                 <div className="detail-row template-preview">
-                  <strong>Instructions:</strong>
+                  <strong>{t('templateInstructions')}:</strong>
                   <pre>{template.template_text}</pre>
                 </div>
                 <div className="detail-row">
-                  <strong>Usage:</strong> 
+                  <strong>{t('templateUsage')}:</strong> 
                   <code>@template:{template.name.replace(/\s+/g, '_')}</code>
                 </div>
               </div>

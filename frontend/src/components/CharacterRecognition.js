@@ -313,7 +313,10 @@ const CharacterRecognition = ({ profile, onProfileUpdate }) => {
                           }}>
                             {fieldValue ? (
                               fieldValue.includes('<img') || fieldValue.includes('<div') ? (
-                                <div dangerouslySetInnerHTML={{ __html: fieldValue }} />
+                                <div 
+                                  dangerouslySetInnerHTML={{ __html: fieldValue }}
+                                  className="char-preview-img-container"
+                                />
                               ) : (
                                 fieldValue
                               )

@@ -25,6 +25,13 @@ function App() {
     loadData();
   }, []);
 
+  // Scroll to top when switching to workbench tab
+  useEffect(() => {
+    if (activeTab === 'main') {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+  }, [activeTab]);
+
   // Ensure currentProfile is valid when profiles change
   useEffect(() => {
     if (profiles.length > 0) {
@@ -116,7 +123,7 @@ function App() {
                   onError={() => setLogoError(true)}
                 />
               )}
-              <h1>{t('appTitle')}</h1>
+              <h1 data-lang={language}>{t('appTitle')}</h1>
             </div>
             
             <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginLeft: 'auto' }}>
@@ -143,8 +150,19 @@ function App() {
                 className="language-toggle"
                 onClick={toggleLanguage}
                 title={language === 'en' ? '切换到中文' : 'Switch to English'}
+                style={{
+                  background: 'transparent',
+                  border: 'none',
+                  fontSize: '24px',
+                  cursor: 'pointer',
+                  padding: '4px 8px',
+                  borderRadius: '4px',
+                  transition: 'background 0.2s'
+                }}
+                onMouseEnter={(e) => e.target.style.background = '#f0f0f0'}
+                onMouseLeave={(e) => e.target.style.background = 'transparent'}
               >
-                {language === 'en' ? '中文' : 'English'}
+                {language === 'en' ? '🇨🇳' : '🇺🇸'}
               </button>
             </div>
           </div>

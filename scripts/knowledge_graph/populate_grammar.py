@@ -280,14 +280,14 @@ def populate_grammar():
         if os.path.exists(KG_FILE):
             shutil.copy2(KG_FILE, backup_file)
             print(f"  ✅ Created backup: {backup_file}")
-        
-        try:
-            graph.serialize(destination=KG_FILE, format="turtle")
-            print(f"\n✅ Successfully saved updated graph to '{KG_FILE}'")
-            print(f"   Total triples: {len(graph)}")
-        except Exception as e:
-            print(f"\n❌ ERROR saving graph: {e}")
-            sys.exit(1)
+    
+    try:
+        graph.serialize(destination=KG_FILE, format="turtle")
+        print(f"\n✅ Successfully saved updated graph to '{KG_FILE}'")
+        print(f"   Total triples: {len(graph)}")
+    except Exception as e:
+        print(f"\n❌ ERROR saving graph: {e}")
+        sys.exit(1)
 
 
 if __name__ == "__main__":

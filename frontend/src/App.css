@@ -46,6 +46,29 @@
   font-weight: 600;
 }
 
+/* Fun font for English title */
+.app-header h1[data-lang="en"] {
+  font-family: 'Comic Neue', 'Comic Sans MS', 'Marker Felt', 'Chalkboard SE', cursive;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Fun font for Chinese title */
+.app-header h1[data-lang="zh"] {
+  font-family: 'ZCOOL QingKe HuangYou', 'Ma Shan Zheng', 'STKaiti', 'KaiTi', '楷体', cursive;
+  font-weight: 400;
+  letter-spacing: 2px;
+  background: linear-gradient(135deg, #4a5568 0%, #2d3748 50%, #1a202c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .language-toggle {
   background: #007bff;
   color: white;
@@ -114,6 +137,44 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
+}
+
+/* Chinese Button Alignment - 4 characters or 2 characters justified */
+.chinese-btn-text {
+  width: 4em; /* Width of 4 characters */
+  text-align-last: justify; /* Spreads 2 chars to edges */
+  display: inline-block;
+}
+
+/* Character Management Image Limits */
+.char-preview-img {
+  max-width: 100px;
+  max-height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.char-preview-img-container img {
+  max-width: 100px;
+  max-height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin: 4px;
+}
+
+/* Selection Controls - All in one row */
+.selection-controls {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 8px;
+  align-items: center;
+  overflow-x: auto;
+  padding: 8px 0;
+}
+
+.selection-controls button {
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 /* Responsive design */

@@ -19,6 +19,7 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
   const [expandedMentionGroups, setExpandedMentionGroups] = useState({});
   const [expandedMessages, setExpandedMessages] = useState(new Set());
   const messagesEndRef = useRef(null);
+  const messagesContainerRef = useRef(null);
   const inputRef = useRef(null);
 
   const getProfileSlug = (profile) => {
@@ -32,11 +33,17 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
   };
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    // Only scroll within the chat messages container, not the whole page
+    if (messagesContainerRef.current && messagesEndRef.current) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+    }
   };
 
   useEffect(() => {
-    scrollToBottom();
+    // Only auto-scroll if there are messages and we're not at the top
+    if (messages.length > 0) {
+      scrollToBottom();
+    }
   }, [messages]);
 
   useEffect(() => {
@@ -509,7 +516,7 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
       </div>
       
       <div className="chat-container">
-        <div className="chat-messages">
+        <div className="chat-messages" ref={messagesContainerRef}>
           {messages.length === 0 ? (
             <div className="welcome-message">
               <p>{t('welcomeMessage')}</p>

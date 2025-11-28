@@ -223,8 +223,9 @@ class ChinesePPRRecommenderService:
     
     def load_kg_metadata(self, kg_file: Optional[Path] = None) -> None:
         """Load Chinese word metadata from KG file or Fuseki."""
-        if self.word_metadata is not None:
-            return  # Already loaded
+        # Always reload if kg_file is provided (to pick up updates)
+        if self.word_metadata is not None and kg_file is None:
+            return  # Already loaded and no new file provided
         
         if kg_file:
             print(f"📚 Loading Chinese word metadata from {kg_file}...")
@@ -328,6 +329,27 @@ class ChinesePPRRecommenderService:
             else 1.5
         )
         
+        # Calculate frequency statistics for normalization
+        all_freq_ranks = [
+            -math.log10(meta.frequency_rank + 1)
+            for meta in self.word_metadata.values()
+            if meta.frequency_rank is not None and meta.frequency_rank > 0
+        ]
+        all_freq_values = [
+            math.log10(meta.frequency_value + 1)
+            for meta in self.word_metadata.values()
+            if meta.frequency_value is not None and meta.frequency_value > 0
+        ]
+        all_freq_transformed = all_freq_ranks + all_freq_values
+        freq_mean = sum(all_freq_transformed) / len(all_freq_transformed) if all_freq_transformed else 0.0
+        freq_std = (
+            math.sqrt(
+                sum((f - freq_mean) ** 2 for f in all_freq_transformed) / len(all_freq_transformed)
+            )
+            if len(all_freq_transformed) > 1
+            else 1.0
+        )
+        
         def transform_ppr(raw_ppr: float) -> float:
             return (math.log10(raw_ppr + 1e-10) - ppr_mean) / ppr_std if ppr_std > 0 else 0.0
         
@@ -338,9 +360,14 @@ class ChinesePPRRecommenderService:
         
         def transform_frequency(rank: Optional[int], freq_value: Optional[float]) -> float:
             if rank and rank > 0:
-                return -math.log10(rank + 1)
+                raw = -math.log10(rank + 1)
+                # Normalize: higher frequency (lower rank) should give positive boost
+                return (raw - freq_mean) / freq_std if freq_std > 0 else 0.0
             if freq_value and freq_value > 0:
-                return math.log10(freq_value + 1)
+                raw = math.log10(freq_value + 1)
+                # Normalize: higher frequency should give positive boost
+                return (raw - freq_mean) / freq_std if freq_std > 0 else 0.0
+            # Missing frequency: use mean (neutral) instead of 0 to avoid penalizing
             return 0.0
         
         def calculate_aoa_penalty(aoa: Optional[float], mental_age: Optional[float]) -> float:
@@ -438,6 +465,14 @@ class ChinesePPRRecommenderService:
                 "age_of_acquisition": meta.age_of_acquisition,
             })
         
+        # Log frequency statistics
+        words_with_freq = sum(1 for c in candidates if c.get('frequency_rank') is not None or c.get('log_frequency', 0) != 0.0)
+        print(f"   📊 Frequency data: {words_with_freq}/{len(candidates)} words have frequency data")
+        if words_with_freq > 0:
+            sample_with_freq = [c for c in candidates[:5] if c.get('frequency_rank') is not None]
+            if sample_with_freq:
+                print(f"   📊 Sample frequency data: {sample_with_freq[0].get('word')} - rank={sample_with_freq[0].get('frequency_rank')}, log_freq={sample_with_freq[0].get('log_frequency', 0):.2f}")
+        
         # Log AoA statistics
         if mental_age is not None:
             print(f"   🧠 Mental age: {mental_age}, AoA buffer: {aoa_buffer}")
@@ -469,29 +504,60 @@ def get_chinese_ppr_service(
     """Get or create global Chinese PPR service instance."""
     global _chinese_service_instance
     
+    if similarity_file is None:
+        similarity_file = PROJECT_ROOT / "data" / "content_db" / "chinese_word_similarity.json"
+    if kg_file is None:
+        # Use merged KG to ensure AoA/frequency metadata is available
+        kg_file = PROJECT_ROOT / "knowledge_graph" / "world_model_merged.ttl"
+    
+    # Ensure paths are absolute
+    similarity_file = similarity_file.resolve()
+    kg_file = kg_file.resolve()
+    
+    # Check if files exist
+    if not similarity_file.exists():
+        raise FileNotFoundError(f"Similarity file not found: {similarity_file}")
+    if not kg_file.exists():
+        raise FileNotFoundError(f"KG file not found: {kg_file}")
+    
+    # Check if we need to recreate the instance (if kg_file changed or instance doesn't exist)
+    # If kg_file is explicitly provided and different from cached, reset the instance
+    # Also check file modification time to detect updates
+    should_reset = False
     if _chinese_service_instance is None:
-        if similarity_file is None:
-            similarity_file = PROJECT_ROOT / "data" / "content_db" / "chinese_word_similarity.json"
-        if kg_file is None:
-            # Use merged KG to ensure AoA/frequency metadata is available
-            kg_file = PROJECT_ROOT / "knowledge_graph" / "world_model_merged.ttl"
-        
-        # Ensure paths are absolute
-        similarity_file = similarity_file.resolve()
-        kg_file = kg_file.resolve()
-        
-        # Check if files exist
-        if not similarity_file.exists():
-            raise FileNotFoundError(f"Similarity file not found: {similarity_file}")
-        if not kg_file.exists():
-            raise FileNotFoundError(f"KG file not found: {kg_file}")
-        
+        # No instance exists, create new one
+        pass
+    elif not hasattr(_chinese_service_instance, '_kg_file'):
+        # Instance exists but doesn't have _kg_file attribute (old instance), reset it
+        should_reset = True
+    elif _chinese_service_instance._kg_file != kg_file:
+        # Instance exists but kg_file changed, reset it
+        should_reset = True
+    elif hasattr(_chinese_service_instance, '_kg_file_mtime'):
+        # Check if file modification time changed (file was updated)
+        try:
+            current_mtime = kg_file.stat().st_mtime
+            if current_mtime != _chinese_service_instance._kg_file_mtime:
+                should_reset = True
+        except (OSError, AttributeError):
+            pass
+    
+    if should_reset:
+        _chinese_service_instance = None
+    
+    if _chinese_service_instance is None:
         try:
             _chinese_service_instance = ChinesePPRRecommenderService(
                 similarity_file=similarity_file,
                 config=config
             )
             _chinese_service_instance.load_kg_metadata(kg_file=kg_file)
+            # Store the kg_file path and modification time so we can detect changes
+            _chinese_service_instance._kg_file = kg_file
+            try:
+                _chinese_service_instance._kg_file_mtime = kg_file.stat().st_mtime
+            except (OSError, AttributeError):
+                _chinese_service_instance._kg_file_mtime = None
         except Exception as e:
             # Reset instance on error so it can be retried
             _chinese_service_instance = None

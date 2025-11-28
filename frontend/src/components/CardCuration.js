@@ -665,17 +665,18 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
       {/* Selection Controls */}
       <div className="card">
         <h3>{t('selectionControls')}</h3>
-        <div className="selection-controls">
-          <button onClick={handleSelectAll} className="btn btn-secondary">
+        <div className="selection-controls" style={{display: 'flex', flexWrap: 'nowrap', gap: '8px', alignItems: 'center'}}>
+          <button onClick={handleSelectAll} className="btn btn-secondary" style={{whiteSpace: 'nowrap'}}>
             {t('selectAllPending')}
           </button>
-          <button onClick={handleDeselectAll} className="btn btn-secondary">
+          <button onClick={handleDeselectAll} className="btn btn-secondary" style={{whiteSpace: 'nowrap'}}>
             {t('deselectAll')}
           </button>
           <button 
             onClick={handleApproveSelected} 
             className="btn btn-success"
             disabled={selectedCards.length === 0}
+            style={{whiteSpace: 'nowrap'}}
           >
             {t('approveSelected')} ({selectedCards.length})
           </button>
@@ -683,8 +684,10 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
             onClick={handleDeleteSelected} 
             className="btn btn-danger"
             disabled={selectedCards.length === 0}
+            style={{whiteSpace: 'nowrap'}}
+            title="Delete Selected"
           >
-            {t('deleteSelected')} ({selectedCards.length})
+            🗑️ {selectedCards.length > 0 ? `(${selectedCards.length})` : ''}
           </button>
           <button 
             onClick={() => handleSyncToAnki(false)} 
@@ -742,23 +745,41 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
         <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
           <h3>{t('pendingCards')} ({pendingCards.length})</h3>
           {totalPages > 1 && (
-            <div className="pagination">
+            <div className="pagination" style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
               <button 
                 onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                 disabled={currentPage === 1}
                 className="btn btn-secondary"
+                style={{
+                  padding: '6px 12px',
+                  minWidth: '40px',
+                  fontSize: '18px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+                title="Previous page"
               >
-                ← Prev
+                ‹
               </button>
-              <span style={{margin: '0 15px'}}>
-                Page {currentPage} of {totalPages}
+              <span style={{margin: '0 10px', fontSize: '14px'}}>
+                {currentPage} / {totalPages}
               </span>
               <button 
                 onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
                 disabled={currentPage === totalPages}
                 className="btn btn-secondary"
+                style={{
+                  padding: '6px 12px',
+                  minWidth: '40px',
+                  fontSize: '18px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+                title="Next page"
               >
-                Next →
+                ›
               </button>
             </div>
           )}

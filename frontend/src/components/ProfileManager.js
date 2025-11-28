@@ -332,17 +332,17 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
       } else {
         // Use old algorithm
         response = await axios.post(`${API_BASE}/kg/english-recommendations?t=${Date.now()}`, {
-          mastered_words: mastered_words_array,
-          profile_id: profile.id || profile.name,
-          concreteness_weight: sliderValue,  // This is now the slider position, not a weight
-          mental_age: mentalAge  // Pass mental age for AoA filtering
-        }, {
+        mastered_words: mastered_words_array,
+        profile_id: profile.id || profile.name,
+        concreteness_weight: sliderValue,  // This is now the slider position, not a weight
+        mental_age: mentalAge  // Pass mental age for AoA filtering
+      }, {
         headers: {
           'Cache-Control': 'no-cache',
           'Pragma': 'no-cache'
         },
         signal: abortController.signal  // Allow cancellation
-        });
+      });
       }
       
       // Check if this is still the latest request (ignore stale responses)
@@ -984,7 +984,7 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
                   whiteSpace: 'pre-line'
                 }}>
                   <strong>{t('additionalNotes')}:</strong> {profile.raw_input ? profile.raw_input : <span style={{ color: '#999', fontStyle: 'italic' }}>{t('noAdditionalNotes') || 'No additional notes'}</span>}
-                </div>
+                  </div>
               </div>
             </div>
           ))
@@ -1720,19 +1720,19 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
                                 </>
                               ) : (
                                 <>
-                                  {' '}CEFR Level: {rec.cefr_level || '-'} | Score: {typeof rec.score === 'number' ? rec.score.toFixed(2) : rec.score}
-                                  {typeof rec.concreteness === 'number' && (
-                                    <span style={{ marginLeft: '8px', color: '#1976d2' }}>
-                                      | Concreteness: {rec.concreteness.toFixed(2)}
-                                    </span>
+                              {' '}CEFR Level: {rec.cefr_level || '-'} | Score: {typeof rec.score === 'number' ? rec.score.toFixed(2) : rec.score}
+                              {typeof rec.concreteness === 'number' && (
+                                <span style={{ marginLeft: '8px', color: '#1976d2' }}>
+                                  | Concreteness: {rec.concreteness.toFixed(2)}
+                                </span>
+                              )}
+                              {(rec.frequency_rank || typeof rec.frequency === 'number') && (
+                                <span style={{ marginLeft: '8px', color: '#6d4c41' }}>
+                                  | Frequency rank: {rec.frequency_rank ?? '—'}
+                                  {typeof rec.frequency === 'number' && (
+                                    <span> (freq: {rec.frequency.toFixed(0)})</span>
                                   )}
-                                  {(rec.frequency_rank || typeof rec.frequency === 'number') && (
-                                    <span style={{ marginLeft: '8px', color: '#6d4c41' }}>
-                                      | Frequency rank: {rec.frequency_rank ?? '—'}
-                                      {typeof rec.frequency === 'number' && (
-                                        <span> (freq: {rec.frequency.toFixed(0)})</span>
-                                      )}
-                                    </span>
+                                </span>
                                   )}
                                 </>
                               )}
