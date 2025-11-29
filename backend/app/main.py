@@ -178,6 +178,24 @@ class GrammarRecommendationRequest(BaseModel):
     profile_id: str
     language: Optional[str] = "zh"  # "zh" for Chinese, "en" for English
 
+class IntegratedRecommendationRequest(BaseModel):
+    """Request for integrated recommendations (PPR + ZPD + Campaign Manager)."""
+    profile_id: str
+    language: Optional[str] = "zh"  # "zh" for Chinese, "en" for English
+    mastered_words: Optional[List[str]] = None  # If None, loaded from database
+    # PPR configuration overrides (optional)
+    alpha: Optional[float] = None
+    beta_ppr: Optional[float] = None
+    beta_concreteness: Optional[float] = None
+    beta_frequency: Optional[float] = None
+    beta_aoa_penalty: Optional[float] = None
+    beta_intercept: Optional[float] = None
+    mental_age: Optional[float] = None
+    aoa_buffer: Optional[float] = None
+    exclude_multiword: Optional[bool] = None
+    top_n: Optional[int] = None
+    max_hsk_level: Optional[int] = None  # For Chinese only
+
 class WordRecommendation(BaseModel):
     word: str
     pinyin: str
@@ -2734,6 +2752,110 @@ async def get_chinese_ppr_recommendations(request: ChinesePPRRecommendationReque
         import traceback
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=f"Error getting Chinese PPR recommendations: {str(e)}")
+
+
+@app.post("/recommendations/integrated")
+async def get_integrated_recommendations(
+    request: IntegratedRecommendationRequest,
+    db: Session = Depends(get_db)
+):
+    """
+    Get integrated recommendations using three-stage funnel:
+    1. Candidate Generation: PPR + ZPD Filter
+    2. Campaign Manager: Inventory Logic (allocates slots based on profile ratios)
+    3. Synergy Matcher: (skipped for now)
+    
+    Returns recommendations allocated according to profile's daily capacity and target ratios.
+    """
+    try:
+        print(f"\n🎯 Getting integrated recommendations for profile '{request.profile_id}'")
+        
+        # Get profile
+        profile = ProfileService.get_by_id(db, request.profile_id)
+        if not profile:
+            raise HTTPException(status_code=404, detail=f"Profile '{request.profile_id}' not found")
+        
+        # Import integrated recommender service
+        import sys
+        sys.path.insert(0, str(PROJECT_ROOT / "backend"))
+        from services.integrated_recommender_service import IntegratedRecommenderService
+        
+        # Initialize integrated recommender
+        recommender = IntegratedRecommenderService(profile, db)
+        
+        # Build PPR config overrides
+        ppr_config = {}
+        if request.alpha is not None:
+            ppr_config["alpha"] = request.alpha
+        if request.beta_ppr is not None:
+            ppr_config["beta_ppr"] = request.beta_ppr
+        if request.beta_concreteness is not None:
+            ppr_config["beta_concreteness"] = request.beta_concreteness
+        if request.beta_frequency is not None:
+            ppr_config["beta_frequency"] = request.beta_frequency
+        if request.beta_aoa_penalty is not None:
+            ppr_config["beta_aoa_penalty"] = request.beta_aoa_penalty
+        if request.beta_intercept is not None:
+            ppr_config["beta_intercept"] = request.beta_intercept
+        if request.mental_age is not None:
+            ppr_config["mental_age"] = request.mental_age
+        if request.aoa_buffer is not None:
+            ppr_config["aoa_buffer"] = request.aoa_buffer
+        if request.exclude_multiword is not None:
+            ppr_config["exclude_multiword"] = request.exclude_multiword
+        if request.top_n is not None:
+            ppr_config["top_n"] = request.top_n
+        if request.max_hsk_level is not None and request.language == "zh":
+            ppr_config["max_hsk_level"] = request.max_hsk_level
+        
+        # Get recommendations
+        recommendations = recommender.get_recommendations(
+            language=request.language,
+            mastered_words=request.mastered_words,
+            **ppr_config
+        )
+        
+        # Convert to dict format for JSON response
+        recommendations_dict = [
+            {
+                "node_id": rec.node_id,
+                "label": rec.label,
+                "content_type": rec.content_type,
+                "language": rec.language,
+                "score": rec.score,
+                "ppr_score": rec.ppr_score,
+                "zpd_score": rec.zpd_score,
+                "mastery": rec.mastery,
+                "hsk_level": rec.hsk_level,
+                "cefr_level": rec.cefr_level,
+                "prerequisites": rec.prerequisites or [],
+                "missing_prereqs": rec.missing_prereqs or []
+            }
+            for rec in recommendations
+        ]
+        
+        print(f"   ✅ Found {len(recommendations)} integrated recommendations")
+        print(f"   📊 Allocation: {recommender.vocab_slots} vocab, {recommender.grammar_slots} grammar")
+        print(f"   📊 Ratios: {recommender.vocab_ratio:.1%} vocab, {recommender.grammar_ratio:.1%} grammar")
+        
+        return {
+            "recommendations": recommendations_dict,
+            "allocation": {
+                "daily_capacity": recommender.daily_capacity,
+                "vocab_slots": recommender.vocab_slots,
+                "grammar_slots": recommender.grammar_slots,
+                "vocab_ratio": recommender.vocab_ratio,
+                "grammar_ratio": recommender.grammar_ratio
+            },
+            "message": f"Found {len(recommendations)} recommendations"
+        }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Error getting integrated recommendations: {str(e)}")
 
 
 @app.post("/agentic/plan")

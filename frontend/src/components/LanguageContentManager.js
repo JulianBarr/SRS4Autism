@@ -82,6 +82,13 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
   const [selectedGrammarRecommendations, setSelectedGrammarRecommendations] = useState(new Set());
   const [savingMasteredGrammar, setSavingMasteredGrammar] = useState(false);
 
+  // Integrated Recommendations State (PPR + ZPD + Campaign Manager)
+  const [showIntegratedRecommendations, setShowIntegratedRecommendations] = useState(false);
+  const [integratedRecommendations, setIntegratedRecommendations] = useState([]);
+  const [loadingIntegratedRecommendations, setLoadingIntegratedRecommendations] = useState(false);
+  const [selectedIntegratedRecommendations, setSelectedIntegratedRecommendations] = useState(new Set());
+  const [allocationInfo, setAllocationInfo] = useState(null);
+
   // Cleanup on unmount
   useEffect(() => {
     return () => {
@@ -479,6 +486,97 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
     }
   };
 
+  // --- Integrated Recommendations (PPR + ZPD + Campaign Manager) ---
+
+  const handleGetIntegratedRecommendations = async () => {
+    setLoadingIntegratedRecommendations(true);
+    setSelectedIntegratedRecommendations(new Set());
+    
+    try {
+      const response = await axios.post(`${API_BASE}/recommendations/integrated`, {
+        profile_id: profile.id || profile.name,
+        language: selectedLanguage
+      });
+      
+      setIntegratedRecommendations(response.data.recommendations || []);
+      setAllocationInfo(response.data.allocation || null);
+      setShowIntegratedRecommendations(true);
+    } catch (error) {
+      console.error('Error getting integrated recommendations:', error);
+      alert(`Failed to get integrated recommendations: ${error.response?.data?.detail || error.message}`);
+    } finally {
+      setLoadingIntegratedRecommendations(false);
+    }
+  };
+
+  const handleToggleIntegratedRecommendation = (nodeId) => {
+    setSelectedIntegratedRecommendations(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(nodeId)) {
+        newSet.delete(nodeId);
+      } else {
+        newSet.add(nodeId);
+      }
+      return newSet;
+    });
+  };
+
+  const handleAddSelectedIntegratedToMastered = async () => {
+    if (selectedIntegratedRecommendations.size === 0) return;
+
+    const selectedRecs = integratedRecommendations.filter(rec => 
+      selectedIntegratedRecommendations.has(rec.node_id)
+    );
+    
+    const vocabRecs = selectedRecs.filter(rec => rec.content_type === 'vocab');
+    const grammarRecs = selectedRecs.filter(rec => rec.content_type === 'grammar');
+
+    try {
+      // Add vocabulary words
+      if (vocabRecs.length > 0) {
+        const currentMastered = selectedLanguage === 'zh'
+          ? (profile.mastered_words ? profile.mastered_words.split(/[,\s，]+/).filter(w => w.trim()) : [])
+          : (profile.mastered_english_words ? profile.mastered_english_words.split(/[,\s，]+/).filter(w => w.trim()) : []);
+        
+        const newWords = vocabRecs.map(rec => rec.label);
+        const newMastered = [...new Set([...currentMastered, ...newWords])];
+        
+        const updatedProfile = {
+          ...profile,
+          [selectedLanguage === 'zh' ? 'mastered_words' : 'mastered_english_words']: newMastered.join(', ')
+        };
+        
+        await axios.put(`${API_BASE}/profiles/${profile.name}`, updatedProfile);
+      }
+
+      // Add grammar points
+      if (grammarRecs.length > 0) {
+        const currentMastered = profile.mastered_grammar 
+          ? profile.mastered_grammar.split(',').map(g => g.trim()).filter(g => g)
+          : [];
+        
+        const newGrammar = grammarRecs.map(rec => rec.node_id);
+        const newMastered = [...new Set([...currentMastered, ...newGrammar])];
+        
+        const updatedProfile = {
+          ...profile,
+          mastered_grammar: newMastered.join(',')
+        };
+        
+        await axios.put(`${API_BASE}/profiles/${profile.name}`, updatedProfile);
+      }
+
+      if (onProfileUpdate) onProfileUpdate();
+      
+      const addedCount = selectedIntegratedRecommendations.size;
+      setSelectedIntegratedRecommendations(new Set());
+      alert(`✅ Successfully added ${addedCount} item(s) to mastered list! (${vocabRecs.length} vocab, ${grammarRecs.length} grammar)`);
+    } catch (error) {
+      console.error('Error adding integrated recommendations to mastered list:', error);
+      alert('Failed to add items to mastered list.');
+    }
+  };
+
   const contentTypes = getContentTypes(selectedLanguage);
   const isCharacterAvailable = selectedLanguage === 'zh' && selectedContentType === 'character';
   const isLoading = (selectedContentType === 'word' && selectedLanguage === 'zh' && loadingRecommendations) ||
@@ -634,6 +732,26 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
               >
                 {isLoading ? t('loading') : `📚 ${t('getRecommendations')}`}
         </button>
+        {(selectedContentType === 'word' || selectedContentType === 'grammar') && (
+        <button 
+                onClick={handleGetIntegratedRecommendations}
+          className="btn"
+                disabled={loadingIntegratedRecommendations}
+                style={{
+                  backgroundColor: loadingIntegratedRecommendations ? theme.ui.backgrounds.disabled : '#9C27B0',
+                  color: theme.ui.text.inverse,
+                  padding: `${theme.spacing.sm} ${theme.spacing.md}`,
+                  borderRadius: theme.borderRadius.md,
+                  border: 'none',
+                  cursor: loadingIntegratedRecommendations ? 'not-allowed' : 'pointer',
+                  fontSize: '14px',
+                  fontWeight: '500',
+                  opacity: loadingIntegratedRecommendations ? 0.6 : 1
+                }}
+              >
+                {loadingIntegratedRecommendations ? t('loading') : '🎯 Integrated Recommendations'}
+        </button>
+        )}
             </>
           )}
         </div>
@@ -1197,6 +1315,132 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
                     );
                   })}
                 </ol>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Integrated Recommendations Modal */}
+      {showIntegratedRecommendations && (
+        <div className="modal-overlay" style={{
+          position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+          backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex',
+          alignItems: 'center', justifyContent: 'center', zIndex: 1000
+        }}>
+          <div className="modal-content" style={{
+            backgroundColor: 'white', padding: '30px', borderRadius: '8px',
+            maxWidth: '800px', maxHeight: '80vh', overflow: 'auto', position: 'relative'
+          }}>
+            <button onClick={() => setShowIntegratedRecommendations(false)} style={{
+              position: 'absolute', top: '10px', right: '10px', border: 'none', background: 'none', fontSize: '24px', cursor: 'pointer'
+            }}>×</button>
+            <h2>🎯 Integrated Recommendations ({selectedLanguage === 'en' ? t('english') : t('chinese')})</h2>
+            
+            {allocationInfo && (
+              <div style={{ 
+                backgroundColor: '#f0f0f0', 
+                padding: '15px', 
+                borderRadius: '8px', 
+                marginBottom: '20px',
+                fontSize: '14px'
+              }}>
+                <strong>📊 Allocation:</strong> {allocationInfo.daily_capacity} total slots
+                <br />
+                <span style={{ color: '#2196F3' }}>📚 Vocabulary: {allocationInfo.vocab_slots} slots ({Math.round(allocationInfo.vocab_ratio * 100)}%)</span>
+                <br />
+                <span style={{ color: '#9C27B0' }}>📖 Grammar: {allocationInfo.grammar_slots} slots ({Math.round(allocationInfo.grammar_ratio * 100)}%)</span>
+              </div>
+            )}
+
+            {integratedRecommendations.length === 0 ? (
+              <p>No integrated recommendations available.</p>
+            ) : (
+              <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <p style={{ color: '#666', margin: 0 }}>
+                      {integratedRecommendations.length} recommendations (PPR + ZPD filtered)
+                    </p>
+                    <button
+                      onClick={handleGetIntegratedRecommendations}
+                      disabled={loadingIntegratedRecommendations}
+                      className="btn"
+                      style={{
+                        padding: '4px 12px',
+                        fontSize: '12px',
+                        backgroundColor: loadingIntegratedRecommendations ? '#ccc' : '#9C27B0',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '4px',
+                        cursor: loadingIntegratedRecommendations ? 'not-allowed' : 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '5px'
+                      }}
+                    >
+                      {loadingIntegratedRecommendations ? '⏳' : '🔄'} {loadingIntegratedRecommendations ? 'Loading...' : 'Refresh'}
+                    </button>
+                  </div>
+                  {selectedIntegratedRecommendations.size > 0 && (
+                    <button
+                      onClick={handleAddSelectedIntegratedToMastered}
+                      className="btn"
+                      style={{ backgroundColor: theme.actions.success, color: 'white' }}
+                    >
+                      ✓ Add Selected ({selectedIntegratedRecommendations.size})
+                    </button>
+                  )}
+                </div>
+                
+                {/* Group by content type */}
+                {['vocab', 'grammar'].map(contentType => {
+                  const recs = integratedRecommendations.filter(rec => rec.content_type === contentType);
+                  if (recs.length === 0) return null;
+                  
+                  return (
+                    <div key={contentType} style={{ marginBottom: '30px' }}>
+                      <h3 style={{ 
+                        color: contentType === 'vocab' ? '#2196F3' : '#9C27B0',
+                        borderBottom: `2px solid ${contentType === 'vocab' ? '#2196F3' : '#9C27B0'}`,
+                        paddingBottom: '5px',
+                        marginBottom: '15px'
+                      }}>
+                        {contentType === 'vocab' ? '📚 Vocabulary' : '📖 Grammar'} ({recs.length})
+                      </h3>
+                      <ol style={{ paddingLeft: '20px' }}>
+                        {recs.map((rec, idx) => {
+                          const isSelected = selectedIntegratedRecommendations.has(rec.node_id);
+                          
+                          return (
+                            <li key={`${rec.node_id}-${idx}`} style={{ marginBottom: '15px' }}>
+                              <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+                                <input
+                                  type="checkbox"
+                                  checked={isSelected}
+                                  onChange={() => handleToggleIntegratedRecommendation(rec.node_id)}
+                                  style={{ marginRight: '10px' }}
+                                />
+                                <div style={{ flex: 1 }}>
+                                  <div style={{ fontWeight: 'bold' }}>
+                                    {rec.label}
+                                  </div>
+                                  <div style={{ fontSize: '0.8em', color: '#888', marginTop: '5px' }}>
+                                    Score: {rec.score?.toFixed(3) || 'N/A'} | 
+                                    Mastery: {(rec.mastery * 100).toFixed(1)}% |
+                                    {rec.hsk_level && ` HSK ${rec.hsk_level}`}
+                                    {rec.cefr_level && ` CEFR ${rec.cefr_level}`}
+                                    {rec.prerequisites && rec.prerequisites.length > 0 && ` | Prereqs: ${rec.prerequisites.length}`}
+                                  </div>
+                                </div>
+                              </label>
+                            </li>
+                          );
+                        })}
+                      </ol>
+                    </div>
+                  );
+                })}
               </div>
             )}
           </div>

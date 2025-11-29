@@ -29,6 +29,10 @@ class Profile(Base):
     mental_age = Column(Float)
     raw_input = Column(Text)
     extracted_data = Column(Text)  # JSON object stored as text
+    # Recommender configuration (per-child attention inventory)
+    recommender_daily_capacity = Column(Integer, default=20)  # Daily attention slots
+    recommender_vocab_ratio = Column(Float, default=0.5)  # Target ratio for vocabulary (0.0-1.0)
+    recommender_grammar_ratio = Column(Float, default=0.5)  # Target ratio for grammar (0.0-1.0)
     created_at = Column(DateTime, default=func.now())
     updated_at = Column(DateTime, default=func.now(), onupdate=func.now())
     

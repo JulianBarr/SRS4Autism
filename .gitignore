@@ -78,3 +78,34 @@ Thumbs.db
 # Logs
 *.log
 
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Knowledge graph files (large TTL files)
+knowledge_graph/*.ttl
+knowledge_graph/*.ttl.backup
+knowledge_graph/*.ttl.pre_*
+
+# Backup directories
+data/backups/
+**/backups/
+
+# Large archive files
+*.tar.gz
+*.zip
+*.jar
+
+# Apache Jena Fuseki (large binary)
+apache-jena-fuseki-4.9.0/
+
+# Large JSON data files
+data/content_db/approved_cards.json
+data/content_db/chat_history.json
+data/content_db/*.apkg
+data/content_db/*.pdf
+
+# Temporary extraction directories
+temp_anki_extract/
+
