@@ -5,6 +5,8 @@ import MasteredWordsManager from './MasteredWordsManager';
 import MasteredEnglishWordsManager from './MasteredEnglishWordsManager';
 import MasteredGrammarManager from './MasteredGrammarManager';
 import CharacterRecognition from './CharacterRecognition';
+import ChineseWordRecognition from './ChineseWordRecognition';
+import EnglishWordRecognition from './EnglishWordRecognition';
 import theme from '../styles/theme';
 
 const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
@@ -45,6 +47,27 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
   const [showMasteredEnglishWordsManager, setShowMasteredEnglishWordsManager] = useState(false);
   const [showMasteredGrammarManager, setShowMasteredGrammarManager] = useState(false);
   const [showCharacterRecognition, setShowCharacterRecognition] = useState(false);
+  const [showChineseWordRecognition, setShowChineseWordRecognition] = useState(false);
+  const [showEnglishWordRecognition, setShowEnglishWordRecognition] = useState(false);
+
+  // Listen for custom event to open word recognition from Mario's World
+  useEffect(() => {
+    const handleOpenWordRecognition = (event) => {
+      const language = event.detail?.language || 'zh';
+      setSelectedLanguage(language);
+      setSelectedContentType('word');
+      if (language === 'zh') {
+        setShowChineseWordRecognition(true);
+      } else if (language === 'en') {
+        setShowEnglishWordRecognition(true);
+      }
+    };
+    
+    window.addEventListener('openWordRecognition', handleOpenWordRecognition);
+    return () => {
+      window.removeEventListener('openWordRecognition', handleOpenWordRecognition);
+    };
+  }, []);
   
   // English Word Recommendations State
   const [showEnglishRecommendations, setShowEnglishRecommendations] = useState(false);
@@ -750,6 +773,24 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
                 }}
               >
                 {loadingIntegratedRecommendations ? t('loading') : '🎯 Integrated Recommendations'}
+        </button>
+        )}
+        {selectedContentType === 'word' && selectedLanguage === 'zh' && (
+        <button 
+              onClick={() => setShowChineseWordRecognition(true)}
+          className="btn"
+              style={{
+                backgroundColor: theme.actions.secondary,
+                color: theme.ui.text.inverse,
+                padding: `${theme.spacing.sm} ${theme.spacing.md}`,
+                borderRadius: theme.borderRadius.md,
+                border: 'none',
+                cursor: 'pointer',
+                fontSize: '14px',
+                fontWeight: '500'
+              }}
+            >
+              📝 {t('manageWordRecognition')}
         </button>
         )}
             </>
@@ -1601,6 +1642,42 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
               position: 'absolute', top: '10px', right: '10px', border: 'none', background: 'none', fontSize: '24px', cursor: 'pointer', zIndex: 1001
             }}>×</button>
             <CharacterRecognition profile={profile} onProfileUpdate={onProfileUpdate} />
+          </div>
+        </div>
+      )}
+
+      {/* Chinese Word Recognition Modal */}
+      {showChineseWordRecognition && selectedContentType === 'word' && selectedLanguage === 'zh' && (
+        <div className="modal-overlay" style={{
+          position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+          backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex',
+          alignItems: 'center', justifyContent: 'center', zIndex: 1000
+        }}>
+          <div className="modal-content" style={{
+            backgroundColor: 'white', padding: '20px', borderRadius: '8px', width: '90%', maxWidth: '1200px', maxHeight: '90vh', overflow: 'auto', position: 'relative'
+          }}>
+            <button onClick={() => setShowChineseWordRecognition(false)} style={{
+              position: 'absolute', top: '10px', right: '10px', border: 'none', background: 'none', fontSize: '24px', cursor: 'pointer', zIndex: 1001
+            }}>×</button>
+            <ChineseWordRecognition profile={profile} onProfileUpdate={onProfileUpdate} />
+          </div>
+        </div>
+      )}
+
+      {/* English Word Recognition Modal */}
+      {showEnglishWordRecognition && selectedContentType === 'word' && selectedLanguage === 'en' && (
+        <div className="modal-overlay" style={{
+          position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+          backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex',
+          alignItems: 'center', justifyContent: 'center', zIndex: 1000
+        }}>
+          <div className="modal-content" style={{
+            backgroundColor: 'white', padding: '20px', borderRadius: '8px', width: '90%', maxWidth: '1200px', maxHeight: '90vh', overflow: 'auto', position: 'relative'
+          }}>
+            <button onClick={() => setShowEnglishWordRecognition(false)} style={{
+              position: 'absolute', top: '10px', right: '10px', border: 'none', background: 'none', fontSize: '24px', cursor: 'pointer', zIndex: 1001
+            }}>×</button>
+            <EnglishWordRecognition profile={profile} onProfileUpdate={onProfileUpdate} />
           </div>
         </div>
       )}

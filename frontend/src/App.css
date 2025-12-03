@@ -154,12 +154,46 @@
   border-radius: 8px;
 }
 
-.char-preview-img-container img {
-  max-width: 100px;
-  max-height: 100px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin: 4px;
+.char-preview-img-container img,
+.word-preview-img-container img {
+    max-width: 100px;
+    max-height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin: 4px;
+}
+
+/* Mario's World Animations */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) translateX(0);
+    }
+    33% {
+        transform: translateY(-10px) translateX(10px);
+    }
+    66% {
+        transform: translateY(5px) translateX(-5px);
+    }
 }
 
 /* Selection Controls - All in one row */

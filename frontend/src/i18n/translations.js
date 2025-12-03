@@ -6,6 +6,7 @@ export const translations = {
     // Tabs
     mainWorkflow: "Workspace",
     contentManagement: "Content Management",
+    mariosWorld: "Mario's World",
     chatAssistant: "Chat Assistant",
     cardCuration: "Card Curation",
     profiles: "Profiles",
@@ -234,6 +235,7 @@ export const translations = {
     // Tabs
     mainWorkflow: "工作台",
     contentManagement: "内容管理",
+    mariosWorld: "马力世界",
     chatAssistant: "聊天助手",
     cardCuration: "卡片管理",
     profiles: "用户档案",

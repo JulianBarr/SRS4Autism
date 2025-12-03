@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Form, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
@@ -40,6 +40,71 @@ except Exception:
     pass
 
 app = FastAPI(title="Curious Mario API", version="1.0.0")
+
+# ============================================================================
+# KG_Map Helper Functions (Following Strict Schema from Knowledge Tracking Spec)
+# ============================================================================
+
+def build_kg_map_strict(card_mappings: Dict[str, List[Dict[str, Any]]]) -> str:
+    """
+    Build _KG_Map JSON following the strict schema from Knowledge Tracking Specification.
+    
+    Schema:
+    {
+      "0": [
+        { "kp": "word-en-apple", "skill": "sound_to_concept", "weight": 1.0 }
+      ],
+      "1": [
+        { "kp": "word-en-apple", "skill": "concept_to_sound", "weight": 1.0 }
+      ]
+    }
+    
+    Args:
+        card_mappings: Dict mapping card index (as string "0", "1", etc.) to list of KnowledgeTrace dicts.
+                      Each KnowledgeTrace must have: kp (str), skill (str), weight (float, optional), context (str, optional)
+    
+    Returns:
+        JSON string for _KG_Map field
+    
+    Valid Skill IDs (from Section 3):
+    - Cognitive Layer: concept_to_sound, sound_to_concept
+    - Literacy Layer: form_to_sound, sound_to_form, phonics_decoding, pinyin_assembly
+    - Comprehension Layer: form_to_concept, concept_to_form
+    """
+    # Validate skill IDs
+    VALID_SKILLS = {
+        # Cognitive Layer
+        "concept_to_sound", "sound_to_concept",
+        # Literacy Layer
+        "form_to_sound", "sound_to_form", "phonics_decoding", "pinyin_assembly",
+        # Comprehension Layer
+        "form_to_concept", "concept_to_form"
+    }
+    
+    validated_map = {}
+    for card_index, traces in card_mappings.items():
+        validated_traces = []
+        for trace in traces:
+            if "kp" not in trace or "skill" not in trace:
+                raise ValueError(f"KnowledgeTrace must have 'kp' and 'skill' fields: {trace}")
+            
+            skill = trace["skill"]
+            if skill not in VALID_SKILLS:
+                raise ValueError(f"Invalid skill ID '{skill}'. Must be one of: {sorted(VALID_SKILLS)}")
+            
+            validated_trace = {
+                "kp": trace["kp"],
+                "skill": skill,
+                "weight": trace.get("weight", 1.0),
+            }
+            if "context" in trace:
+                validated_trace["context"] = trace["context"]
+            
+            validated_traces.append(validated_trace)
+        
+        validated_map[str(card_index)] = validated_traces
+    
+    return json.dumps(validated_map, ensure_ascii=False)
 
 # Initialize database on startup
 @app.on_event("startup")
@@ -3908,19 +3973,28 @@ async def sync_character_recognition_notes(request: Dict[str, Any]):
                     else:
                         processed_fields[field_name] = field_value or ""
                 
-                # Build _KG_Map (map cards to knowledge points)
-                # Link to character knowledge point in KG
-                kg_map = {
-                    "knowledge_points": [
-                        {
-                            "type": "character",
-                            "character": character,
-                            "note_id": str(note['note_id'])
-                        }
-                    ],
-                    "card_type": "character_recognition"
+                # Build _KG_Map following strict schema (Section 4 of Knowledge Tracking Spec)
+                # Character recognition creates 7 cards (indices 0-6):
+                # Card 0: Concept (picture) => Character (form_to_concept)
+                # Card 1: Character => Concept (concept_to_form)
+                # Card 2: MCQ Pick Char - Concept => Character (form_to_concept)
+                # Card 3: MCQ Pick Pic - Character => Concept (concept_to_form)
+                # Cards 4-6: Word examples with character cloze (form_to_concept)
+                
+                # For now, map all cards to the character knowledge point
+                # TODO: Map individual cards to specific skills based on card type
+                char_kp = f"char-zh-{character}"  # Knowledge point URI for the character
+                
+                card_mappings = {
+                    "0": [{"kp": char_kp, "skill": "form_to_concept", "weight": 1.0}],  # Picture => Character
+                    "1": [{"kp": char_kp, "skill": "concept_to_form", "weight": 1.0}],  # Character => Picture
+                    "2": [{"kp": char_kp, "skill": "form_to_concept", "weight": 0.8}],  # MCQ Pick Char (hint available)
+                    "3": [{"kp": char_kp, "skill": "concept_to_form", "weight": 0.8}],  # MCQ Pick Pic (hint available)
+                    "4": [{"kp": char_kp, "skill": "form_to_concept", "weight": 0.6}],  # Word example 1 (context)
+                    "5": [{"kp": char_kp, "skill": "form_to_concept", "weight": 0.6}],  # Word example 2 (context)
+                    "6": [{"kp": char_kp, "skill": "form_to_concept", "weight": 0.6}],  # Word example 3 (context)
                 }
-                kg_map_json = json.dumps(kg_map, ensure_ascii=False)
+                kg_map_json = build_kg_map_strict(card_mappings)
                 
                 # Add _KG_Map and _Remarks to the fields
                 processed_fields["_KG_Map"] = kg_map_json
@@ -4016,6 +4090,541 @@ async def mark_character_mastered(request: Dict[str, Any]):
         import traceback
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=f"Error marking characters as mastered: {str(e)}")
+
+
+@app.get("/word-recognition/notes")
+async def get_chinese_word_recognition_notes(profile_id: str):
+    """
+    Get Chinese word recognition notes from database.
+    Filters out mastered words.
+    Maintains the original order from the apkg file.
+    """
+    try:
+        from database.models import ChineseWordRecognitionNote
+        
+        # Get mastered words (Chinese)
+        db = next(get_db())
+        try:
+            # Get mastered Chinese words
+            mastered_words = set(ProfileService.get_mastered_words(db, profile_id, 'zh'))
+            
+            # Get all notes from database, ordered by display_order
+            db_notes = db.query(ChineseWordRecognitionNote).order_by(ChineseWordRecognitionNote.display_order).all()
+            
+            # Convert to API format and filter mastered
+            notes = []
+            for db_note in db_notes:
+                # Filter out mastered words
+                if db_note.word in mastered_words:
+                    continue
+                
+                # Parse fields JSON
+                note_fields = json.loads(db_note.fields) if db_note.fields else {}
+                
+                note_data = {
+                    'note_id': db_note.note_id,
+                    'word': db_note.word,
+                    'concept': db_note.concept,
+                    'fields': note_fields
+                }
+                notes.append(note_data)
+        finally:
+            db.close()
+        
+        print(f"📚 Loaded {len(notes)} Chinese word recognition notes from database (filtered {len(mastered_words)} mastered)")
+        
+        return {
+            "notes": notes,
+            "total": len(notes),
+            "mastered_filtered": len(mastered_words)
+        }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Error loading Chinese word recognition notes: {str(e)}")
+
+
+@app.post("/word-recognition/add-custom")
+async def add_custom_word_recognition(
+    word: str = Form(...),
+    concept: str = Form(...),
+    pinyin: str = Form(""),
+    bopomofo: str = Form(""),
+    image: UploadFile = File(None)
+):
+    """
+    Add a custom word to the Chinese word recognition database.
+    
+    Args:
+        word: Chinese word
+        concept: English concept
+        pinyin: Pinyin pronunciation (optional)
+        bopomofo: Bopomofo/Zhuyin pronunciation (optional)
+        image: Image file (optional)
+    """
+    try:
+        import uuid
+        import shutil
+        from database.models import ChineseWordRecognitionNote
+        from database.db import get_db
+        
+        # Generate unique note ID
+        note_id = f"custom_{uuid.uuid4().hex[:12]}"
+        
+        # Prepare fields
+        fields = {
+            'Word': word,
+            'Concept': concept,
+            'Pinyin': pinyin,
+            'Bopomofo': bopomofo,
+            'Image': '',
+            'Audio': ''
+        }
+        
+        # Handle image upload if provided
+        if image and image.filename:
+            # Save image to media directory
+            media_dir = PROJECT_ROOT / "media" / "chinese_word_recognition"
+            media_dir.mkdir(parents=True, exist_ok=True)
+            
+            # Generate safe filename
+            file_ext = Path(image.filename).suffix
+            safe_filename = f"custom_{word}_{uuid.uuid4().hex[:8]}{file_ext}"
+            image_path = media_dir / safe_filename
+            
+            # Save file
+            with open(image_path, "wb") as buffer:
+                shutil.copyfileobj(image.file, buffer)
+            
+            # Update fields with image reference
+            fields['Image'] = f'<img src="/media/chinese_word_recognition/{safe_filename}" alt="{concept}">'
+            print(f"   📷 Saved custom image: {safe_filename}")
+        
+        # Get the highest display_order and add 1
+        db = next(get_db())
+        try:
+            max_order = db.query(ChineseWordRecognitionNote).count()
+            display_order = max_order + 1
+            
+            # Create database entry
+            new_note = ChineseWordRecognitionNote(
+                note_id=note_id,
+                word=word,
+                concept=concept,
+                display_order=display_order,
+                fields=json.dumps(fields, ensure_ascii=False)
+            )
+            
+            db.add(new_note)
+            db.commit()
+            
+            print(f"✅ Added custom word: {word} ({concept})")
+            
+            return {
+                "message": "Custom word added successfully",
+                "note_id": note_id,
+                "word": word,
+                "concept": concept
+            }
+        finally:
+            db.close()
+    
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Error adding custom word: {str(e)}")
+
+
+@app.post("/chinese-naming/sync")
+async def sync_chinese_naming_notes(request: Dict[str, Any]):
+    """
+    Sync Chinese naming notes to Anki using "CUMA - Chinese Naming v2" note type.
+    
+    Based on Layer 0 design:
+    - Uses Initial (声母), Medial (介音), Toned Final (韵母+声调) components
+    - Click-based interface (not drag-and-drop)
+    - No Chinese characters displayed (reduces cognitive load)
+    - Each component has a distractor
+    - Components are color-coded
+    
+    Creates cards for verbal training focusing on:
+    - Concept (picture) => Pinyin construction (Initial + Medial + Final)
+    - Audio => Pinyin construction
+    """
+    try:
+        import sys
+        import os
+        import re
+        import base64
+        import hashlib
+        import random
+        sys.path.append(os.path.join(os.path.dirname(__file__), '../../'))
+        from anki_integration.anki_connect import AnkiConnect
+        from database.models import ChineseWordRecognitionNote, MasteredWord
+        from database.db import get_db
+        from scripts.knowledge_graph.pinyin_parser import parse_pinyin, PINYIN_INITIALS, PINYIN_MEDIALS, PINYIN_FINALS
+        
+        profile_id = request.get("profile_id")
+        note_ids = request.get("note_ids", [])
+        deck_name = request.get("deck_name", "中文命名")
+        config = request.get("config", "simplified")  # "simplified" or "traditional"
+        
+        if not profile_id:
+            raise HTTPException(status_code=400, detail="profile_id is required")
+        
+        if not note_ids:
+            raise HTTPException(status_code=400, detail="note_ids is required")
+        
+        # Get the notes from the database
+        db = next(get_db())
+        try:
+            db_notes = db.query(ChineseWordRecognitionNote).filter(
+                ChineseWordRecognitionNote.note_id.in_(note_ids)
+            ).order_by(ChineseWordRecognitionNote.display_order).all()
+            
+            notes_to_sync = []
+            for db_note in db_notes:
+                note_fields = json.loads(db_note.fields) if db_note.fields else {}
+                notes_to_sync.append({
+                    'note_id': db_note.note_id,
+                    'word': db_note.word,
+                    'concept': db_note.concept,
+                    'fields': note_fields
+                })
+        finally:
+            db.close()
+        
+        if not notes_to_sync:
+            raise HTTPException(status_code=404, detail="No notes found to sync")
+        
+        # Initialize AnkiConnect client
+        anki = AnkiConnect()
+        
+        # Check connection
+        if not anki.ping():
+            raise HTTPException(
+                status_code=503,
+                detail="Cannot connect to Anki. Make sure Anki is running with AnkiConnect add-on installed."
+            )
+        
+        # Create deck if it doesn't exist
+        try:
+            anki.create_deck(deck_name)
+        except:
+            pass  # Deck might already exist
+        
+        # Handle media files (images and audio)
+        MEDIA_DIR = PROJECT_ROOT / "media" / "chinese_word_recognition"
+        PROJECT_PREFIX = "cm"
+        anki_media_map = {}
+        uploaded_hashes = {}
+        
+        # Collect all media filenames (images and audio)
+        all_image_filenames = set()
+        all_audio_filenames = set()
+        
+        for note in notes_to_sync:
+            fields = note['fields']
+            for field_value in fields.values():
+                if field_value and isinstance(field_value, str):
+                    # Extract image filenames
+                    img_pattern = r'<img[^>]*src=["\']([^"\']+)["\'][^>]*>'
+                    for match in re.finditer(img_pattern, field_value):
+                        src_value = match.group(1)
+                        if not src_value.startswith('http'):
+                            all_image_filenames.add(Path(src_value).name)
+                    
+                    # Extract audio filenames from [sound:...] tags
+                    audio_pattern = r'\[sound:([^\]]+)\]'
+                    for match in re.finditer(audio_pattern, field_value):
+                        audio_filename = match.group(1)
+                        all_audio_filenames.add(audio_filename)
+        
+        # Upload images
+        for original_filename in all_image_filenames:
+            source_file = MEDIA_DIR / original_filename
+            if not source_file.exists():
+                print(f"⚠️  Warning: Image file not found: {original_filename}")
+                continue
+            
+            try:
+                with open(source_file, 'rb') as f:
+                    file_data = f.read()
+                
+                content_hash = hashlib.md5(file_data).hexdigest()
+                
+                if content_hash in uploaded_hashes:
+                    anki_media_map[original_filename] = uploaded_hashes[content_hash]
+                    continue
+                
+                file_ext = Path(original_filename).suffix
+                file_stem = Path(original_filename).stem
+                sanitized_stem = re.sub(r'[^a-zA-Z0-9_-]', '_', file_stem)
+                if len(sanitized_stem) > 50:
+                    sanitized_stem = sanitized_stem[:50]
+                
+                short_hash = content_hash[:8]
+                anki_filename = f"{PROJECT_PREFIX}_word_{sanitized_stem}_{short_hash}{file_ext}"
+                
+                base64_data = base64.b64encode(file_data).decode('utf-8')
+                stored_filename = anki.store_media_file(anki_filename, base64_data)
+                anki_media_map[original_filename] = stored_filename
+                uploaded_hashes[content_hash] = stored_filename
+                
+            except Exception as e:
+                print(f"  ⚠️  Failed to upload {original_filename}: {e}")
+                anki_media_map[original_filename] = original_filename
+        
+        # Upload audio files
+        for original_filename in all_audio_filenames:
+            source_file = MEDIA_DIR / original_filename
+            if not source_file.exists():
+                print(f"⚠️  Warning: Audio file not found: {original_filename}")
+                continue
+            
+            try:
+                with open(source_file, 'rb') as f:
+                    file_data = f.read()
+                
+                content_hash = hashlib.md5(file_data).hexdigest()
+                
+                if content_hash in uploaded_hashes:
+                    anki_media_map[original_filename] = uploaded_hashes[content_hash]
+                    print(f"  ℹ️  Reusing {original_filename} → {uploaded_hashes[content_hash]} (duplicate)")
+                    continue
+                
+                file_ext = Path(original_filename).suffix
+                file_stem = Path(original_filename).stem
+                sanitized_stem = re.sub(r'[^a-zA-Z0-9_-]', '_', file_stem)
+                if len(sanitized_stem) > 50:
+                    sanitized_stem = sanitized_stem[:50]
+                
+                short_hash = content_hash[:8]
+                anki_filename = f"{PROJECT_PREFIX}_audio_{sanitized_stem}_{short_hash}{file_ext}"
+                
+                base64_data = base64.b64encode(file_data).decode('utf-8')
+                stored_filename = anki.store_media_file(anki_filename, base64_data)
+                anki_media_map[original_filename] = stored_filename
+                uploaded_hashes[content_hash] = stored_filename
+                print(f"  ✅ Uploaded audio: {original_filename} → {stored_filename}")
+                
+            except Exception as e:
+                print(f"  ⚠️  Failed to upload {original_filename}: {e}")
+                anki_media_map[original_filename] = original_filename
+        
+        # Update media references (images and audio)
+        def update_media_references(content: str) -> str:
+            if not content:
+                return content
+            
+            # Update image references
+            img_pattern = r'<img[^>]*src=["\']([^"\']+)["\'][^>]*>'
+            def replace_img(match):
+                img_tag = match.group(0)
+                src_value = match.group(1)
+                if src_value.startswith('http'):
+                    return img_tag
+                filename = Path(src_value).name
+                if filename in anki_media_map:
+                    anki_filename = anki_media_map[filename]
+                    return re.sub(r'src=["\']([^"\']+)["\']', f'src="{anki_filename}"', img_tag, count=1)
+                return img_tag
+            
+            # Update audio references [sound:...]
+            audio_pattern = r'\[sound:([^\]]+)\]'
+            def replace_audio(match):
+                original_filename = match.group(1)
+                if original_filename in anki_media_map:
+                    anki_filename = anki_media_map[original_filename]
+                    return f"[sound:{anki_filename}]"
+                return match.group(0)
+            
+            content = re.sub(img_pattern, replace_img, content)
+            content = re.sub(audio_pattern, replace_audio, content)
+            return content
+        
+        # Generate notes with pinyin decomposition
+        cards_created = 0
+        errors = []
+        
+        for note in notes_to_sync:
+            try:
+                fields = note['fields']
+                word = note['word']
+                concept = note['concept']
+                
+                # Get pinyin from fields
+                pinyin_raw = fields.get('Pinyin', '').strip()
+                if not pinyin_raw:
+                    # Try to extract from other fields or skip
+                    print(f"⚠️  Warning: No pinyin found for word '{word}', skipping")
+                    continue
+                
+                # Parse pinyin (handle multiple syllables - keep word as whole unit)
+                syllable_pinyins = pinyin_raw.split()
+                if not syllable_pinyins:
+                    syllable_pinyins = [pinyin_raw]
+                
+                # Limit to 3 syllables (as per template design)
+                if len(syllable_pinyins) > 3:
+                    print(f"⚠️  Warning: Word '{word}' has {len(syllable_pinyins)} syllables, truncating to 3")
+                    syllable_pinyins = syllable_pinyins[:3]
+                
+                # Get image and audio (shared across all cards)
+                image_html = fields.get('Image', '') or fields.get('image', '')
+                image_html = update_media_references(image_html)
+                audio_html = fields.get('Audio', '') or fields.get('audio', '')
+                audio_html = update_media_references(audio_html)
+                
+                # For CUMA - Chinese Naming v2: Create ONE note per word with ALL syllables
+                # The note will generate 2 cards (Easy and Harder) that progressively go through all syllables
+                
+                # Prepare fields for all syllables (up to 3)
+                anki_note_fields = {
+                    'Concept': concept,
+                    'Image': image_html,
+                    'Audio': audio_html,
+                    'FullPinyin': pinyin_raw,
+                    'TotalSyllables': str(len(syllable_pinyins)),
+                    'Config': config,
+                }
+                
+                # Generate syllable options and component options for each syllable
+                for syllable_idx, syllable_pinyin in enumerate(syllable_pinyins):
+                    # Parse pinyin into components
+                    pinyin_components = parse_pinyin(syllable_pinyin)
+                    
+                    # Generate syllable distractors for Easy mode
+                    syllable_options = [syllable_pinyin]
+                    available_syllables = [
+                        'mā', 'má', 'mǎ', 'mà',
+                        'shī', 'shí', 'shǐ', 'shì',
+                        'zī', 'zí', 'zǐ', 'zì', 'zi',
+                        'lóng', 'lǒng', 'lòng',
+                        'xióng', 'xiǒng', 'xiòng'
+                    ]
+                    available_syllables = [s for s in available_syllables if s != syllable_pinyin]
+                    if available_syllables:
+                        syllable_options.extend(random.sample(available_syllables, min(3, len(available_syllables))))
+                    random.shuffle(syllable_options)
+                    
+                    # Generate component distractors for Harder mode
+                    initial_options = [pinyin_components['initial']] if pinyin_components['initial'] else []
+                    medial_options = [pinyin_components['medial']] if pinyin_components['medial'] else []
+                    final_options = [pinyin_components['toned_final']] if pinyin_components['toned_final'] else []
+                    
+                    if pinyin_components['initial']:
+                        available_initials = [i for i in PINYIN_INITIALS if i != pinyin_components['initial']]
+                        if available_initials:
+                            initial_options.append(random.choice(available_initials))
+                    
+                    if pinyin_components['medial']:
+                        available_medials = [m for m in PINYIN_MEDIALS if m != pinyin_components['medial']]
+                        if available_medials:
+                            medial_options.append(random.choice(available_medials))
+                    
+                    if pinyin_components['toned_final']:
+                        available_finals = [f for f in PINYIN_FINALS if f != pinyin_components['final']]
+                        if available_finals:
+                            distractor_final = random.choice(available_finals)
+                            from scripts.knowledge_graph.pinyin_parser import add_tone_to_final
+                            distractor_toned = add_tone_to_final(distractor_final, pinyin_components['tone'])
+                            final_options.append(distractor_toned)
+                    
+                    random.shuffle(initial_options)
+                    random.shuffle(medial_options)
+                    random.shuffle(final_options)
+                    
+                    # Add fields for this syllable (Syllable1, Syllable2, or Syllable3)
+                    syl_num = syllable_idx + 1
+                    anki_note_fields[f'Syllable{syl_num}'] = syllable_pinyin
+                    anki_note_fields[f'Syllable{syl_num}Option1'] = syllable_options[0] if len(syllable_options) > 0 else ''
+                    anki_note_fields[f'Syllable{syl_num}Option2'] = syllable_options[1] if len(syllable_options) > 1 else ''
+                    anki_note_fields[f'Syllable{syl_num}Option3'] = syllable_options[2] if len(syllable_options) > 2 else ''
+                    anki_note_fields[f'Syllable{syl_num}Option4'] = syllable_options[3] if len(syllable_options) > 3 else ''
+                    
+                    anki_note_fields[f'Initial{syl_num}'] = pinyin_components['initial'] or ''
+                    anki_note_fields[f'Initial{syl_num}Option1'] = initial_options[0] if len(initial_options) > 0 else ''
+                    anki_note_fields[f'Initial{syl_num}Option2'] = initial_options[1] if len(initial_options) > 1 else ''
+                    
+                    anki_note_fields[f'Medial{syl_num}'] = pinyin_components['medial'] or ''
+                    anki_note_fields[f'Medial{syl_num}Option1'] = medial_options[0] if len(medial_options) > 0 else ''
+                    anki_note_fields[f'Medial{syl_num}Option2'] = medial_options[1] if len(medial_options) > 1 else ''
+                    
+                    anki_note_fields[f'TonedFinal{syl_num}'] = pinyin_components['toned_final'] or ''
+                    anki_note_fields[f'TonedFinal{syl_num}Option1'] = final_options[0] if len(final_options) > 0 else ''
+                    anki_note_fields[f'TonedFinal{syl_num}Option2'] = final_options[1] if len(final_options) > 1 else ''
+                
+                # Fill empty fields for unused syllables (if word has < 3 syllables)
+                for syl_num in range(len(syllable_pinyins) + 1, 4):
+                    anki_note_fields[f'Syllable{syl_num}'] = ''
+                    anki_note_fields[f'Syllable{syl_num}Option1'] = ''
+                    anki_note_fields[f'Syllable{syl_num}Option2'] = ''
+                    anki_note_fields[f'Syllable{syl_num}Option3'] = ''
+                    anki_note_fields[f'Syllable{syl_num}Option4'] = ''
+                    anki_note_fields[f'Initial{syl_num}'] = ''
+                    anki_note_fields[f'Initial{syl_num}Option1'] = ''
+                    anki_note_fields[f'Initial{syl_num}Option2'] = ''
+                    anki_note_fields[f'Medial{syl_num}'] = ''
+                    anki_note_fields[f'Medial{syl_num}Option1'] = ''
+                    anki_note_fields[f'Medial{syl_num}Option2'] = ''
+                    anki_note_fields[f'TonedFinal{syl_num}'] = ''
+                    anki_note_fields[f'TonedFinal{syl_num}Option1'] = ''
+                    anki_note_fields[f'TonedFinal{syl_num}Option2'] = ''
+                
+                # Build _KG_Map following strict schema (Section 4 of Knowledge Tracking Spec)
+                # Chinese Naming v2 creates 2 cards:
+                # Card 0 (Easy): Concept (picture) => Pinyin syllable selection (concept_to_sound)
+                # Card 1 (Harder): Audio => Pinyin component construction (pinyin_assembly)
+                
+                word_kp = f"word-zh-{word}"  # Knowledge point URI for the word
+                
+                card_mappings = {
+                    "0": [{"kp": word_kp, "skill": "concept_to_sound", "weight": 1.0}],  # Easy: Picture => Pinyin selection
+                    "1": [{"kp": word_kp, "skill": "pinyin_assembly", "weight": 1.0}],   # Harder: Audio => Component construction
+                }
+                anki_note_fields["_KG_Map"] = build_kg_map_strict(card_mappings)
+                anki_note_fields["_Remarks"] = f"Chinese Naming v2 - {word} ({concept})"
+                
+                # Create ONE note (which will generate 2 cards: Easy and Harder)
+                note_type = "CUMA - Chinese Naming v2"
+                anki.add_note(deck_name, note_type, anki_note_fields)
+                cards_created += 2  # The note type creates 2 cards
+                
+                # Note: Do NOT auto-mark as mastered
+                # Caregiver will manually manage the mastered list using "标记为已掌握" button
+                
+            except Exception as e:
+                errors.append({
+                    "note_id": note.get('note_id', 'unknown'),
+                    "word": note.get('word', 'unknown'),
+                    "error": str(e)
+                })
+                import traceback
+                traceback.print_exc()
+        
+        notes_synced_successfully = len(notes_to_sync) - len(errors)
+        print(f"✅ Synced {notes_synced_successfully} notes (creating {cards_created} cards) to deck '{deck_name}'")
+        if errors:
+            print(f"⚠️  {len(errors)} errors occurred")
+        
+        return {
+            "message": f"Synced {notes_synced_successfully} notes successfully",
+            "cards_created": cards_created,
+            "notes_synced": notes_synced_successfully,
+            "errors": errors
+        }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Error syncing Chinese naming notes: {str(e)}")
+
 
 # Mount static files for serving images
 # Images are stored in media/visual_images/ relative to project root

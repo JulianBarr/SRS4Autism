@@ -123,26 +123,28 @@ def find_word(word_text: str, word_map: Dict[str, Tuple[str, str]], lowercase_ma
 
 
 def build_kg_map(word_id: str, concept_id: str) -> str:
-    """Return JSON string for the directional _KG_Map."""
-    kg_map = [
-        {
-            "card_index": 1,
-            "kg_link": {
-                "source": concept_id,
-                "target": word_id,
-                "relation": "concept_to_word",
-            },
-        },
-        {
-            "card_index": 2,
-            "kg_link": {
-                "source": word_id,
-                "target": concept_id,
-                "relation": "word_to_concept",
-            },
-        },
-    ]
-    return json.dumps(kg_map, ensure_ascii=False, separators=(",", ":"))
+    """
+    Build _KG_Map JSON following strict schema from Knowledge Tracking Specification.
+    
+    Schema:
+    {
+      "0": [
+        { "kp": "word-en-apple", "skill": "sound_to_concept", "weight": 1.0 }
+      ],
+      "1": [
+        { "kp": "word-en-apple", "skill": "concept_to_sound", "weight": 1.0 }
+      ]
+    }
+    
+    For "CUMA - Basic (and reversed card)" note type:
+    - Card 0: Front (word) => Back (concept) = sound_to_concept (Hear word, select picture)
+    - Card 1: Back (concept) => Front (word) = concept_to_sound (See picture, say word)
+    """
+    card_mappings = {
+        "0": [{"kp": word_id, "skill": "sound_to_concept", "weight": 1.0}],  # Card 1: Word => Concept
+        "1": [{"kp": word_id, "skill": "concept_to_sound", "weight": 1.0}],  # Card 2: Concept => Word
+    }
+    return json.dumps(card_mappings, ensure_ascii=False, separators=(",", ":"))
 
 
 def main():

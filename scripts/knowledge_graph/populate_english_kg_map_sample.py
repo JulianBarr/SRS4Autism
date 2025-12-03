@@ -171,35 +171,35 @@ def find_word_in_kg(word_text: str, word_to_concept_map: Dict[str, Tuple[str, st
     return None
 
 
-def build_kg_map(word_id: str, concept_id: str) -> List[Dict[str, Any]]:
+def build_kg_map(word_id: str, concept_id: str) -> Dict[str, List[Dict[str, Any]]]:
     """
-    Build _KG_Map JSON structure for "CUMA - Basic (and reversed card)".
+    Build _KG_Map JSON structure following strict schema from Knowledge Tracking Specification.
+    
+    Schema:
+    {
+      "0": [
+        { "kp": "word-en-apple", "skill": "sound_to_concept", "weight": 1.0 }
+      ],
+      "1": [
+        { "kp": "word-en-apple", "skill": "concept_to_sound", "weight": 1.0 }
+      ]
+    }
+    
+    For "CUMA - Basic (and reversed card)" note type:
+    - Card 0: Front (word) => Back (concept) = sound_to_concept (Hear word, select picture)
+    - Card 1: Back (concept) => Front (word) = concept_to_sound (See picture, say word)
     
     Args:
         word_id: Word KG ID (e.g., "word-en-cat")
-        concept_id: Concept KG ID (e.g., "concept-cat")
+        concept_id: Concept KG ID (e.g., "concept-cat") - unused but kept for compatibility
     
     Returns:
-        List of dicts describing each card's KG link
+        Dict mapping card index (string) to list of KnowledgeTrace dicts
     """
-    return [
-        {
-            "card_index": 1,
-            "kg_link": {
-                "source": concept_id,
-                "target": word_id,
-                "relation": "concept_to_word"
-            }
-        },
-        {
-            "card_index": 2,
-            "kg_link": {
-                "source": word_id,
-                "target": concept_id,
-                "relation": "word_to_concept"
-            }
-        }
-    ]
+    return {
+        "0": [{"kp": word_id, "skill": "sound_to_concept", "weight": 1.0}],  # Card 1: Word => Concept
+        "1": [{"kp": word_id, "skill": "concept_to_sound", "weight": 1.0}],  # Card 2: Concept => Word
+    }
 
 
 def main():
@@ -283,7 +283,8 @@ def main():
                 "extracted_word": word_text,
                 "word_id": word_id,
                 "concept_id": concept_id,
-                "kg_map": kg_map
+                "kg_map": kg_map,  # Already a dict, will be serialized when needed
+                "kg_map_json": json.dumps(kg_map, ensure_ascii=False)  # JSON string for Anki
             })
         else:
             no_matches.append({

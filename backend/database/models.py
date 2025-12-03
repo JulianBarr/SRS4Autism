@@ -182,3 +182,51 @@ class CharacterRecognitionNote(Base):
     def __repr__(self):
         return f"<CharacterRecognitionNote(note_id='{self.note_id}', character='{self.character}', order={self.display_order})>"
 
+
+class ChineseWordRecognitionNote(Base):
+    """Chinese word recognition notes extracted from apkg file (concept <=> word mapping)"""
+    __tablename__ = 'chinese_word_recognition_notes'
+    
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    note_id = Column(String, nullable=False, unique=True)  # Original Anki note ID
+    word = Column(String, nullable=False)  # The Chinese word
+    concept = Column(String, nullable=False)  # The English concept
+    display_order = Column(Integer, nullable=False)  # Order in which words should be displayed
+    fields = Column(Text, nullable=False)  # JSON object storing all note fields
+    created_at = Column(DateTime, default=func.now())
+    
+    # Constraints
+    __table_args__ = (
+        Index('idx_word_recog_note_id', 'note_id'),
+        Index('idx_word_recog_word', 'word'),
+        Index('idx_word_recog_concept', 'concept'),
+        Index('idx_word_recog_order', 'display_order'),
+    )
+    
+    def __repr__(self):
+        return f"<ChineseWordRecognitionNote(note_id='{self.note_id}', word='{self.word}', concept='{self.concept}', order={self.display_order})>"
+
+
+class EnglishWordRecognitionNote(Base):
+    """English word recognition notes (concept <=> word mapping for naming)"""
+    __tablename__ = 'english_word_recognition_notes'
+    
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    note_id = Column(String, nullable=False, unique=True)  # Generated note ID
+    word = Column(String, nullable=False)  # The English word (same as concept for naming)
+    concept = Column(String, nullable=False)  # The concept (same as word for naming)
+    display_order = Column(Integer, nullable=False)  # Order in which words should be displayed
+    fields = Column(Text, nullable=False)  # JSON object storing all note fields
+    created_at = Column(DateTime, default=func.now())
+    
+    # Constraints
+    __table_args__ = (
+        Index('idx_eng_word_recog_note_id', 'note_id'),
+        Index('idx_eng_word_recog_word', 'word'),
+        Index('idx_eng_word_recog_concept', 'concept'),
+        Index('idx_eng_word_recog_order', 'display_order'),
+    )
+    
+    def __repr__(self):
+        return f"<EnglishWordRecognitionNote(note_id='{self.note_id}', word='{self.word}', concept='{self.concept}', order={self.display_order})>"
+

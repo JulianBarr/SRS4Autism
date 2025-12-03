@@ -6,6 +6,7 @@ import ChildProfileSettings from './components/ChildProfileSettings';
 import LanguageContentManager from './components/LanguageContentManager';
 import TemplateManager from './components/TemplateManager';
 import ContentCategoryNav from './components/ContentCategoryNav';
+import MariosWorld from './components/MariosWorld';
 import { useLanguage } from './i18n/LanguageContext';
 import './App.css';
 
@@ -180,6 +181,12 @@ function App() {
               {t('contentManagement') || (language === 'en' ? 'Content Management' : '内容管理')}
             </button>
             <button 
+              className={activeTab === 'mariosWorld' ? 'active' : ''}
+              onClick={() => setActiveTab('mariosWorld')}
+            >
+              {t('mariosWorld') || (language === 'en' ? "Mario's World" : '马力世界')}
+            </button>
+            <button 
               className={activeTab === 'profiles' ? 'active' : ''}
               onClick={() => setActiveTab('profiles')}
             >
@@ -264,6 +271,28 @@ function App() {
         )}
         {activeTab === 'templates' && (
           <TemplateManager />
+        )}
+
+        {activeTab === 'mariosWorld' && (
+          <MariosWorld 
+            profile={currentProfile}
+            onNavigateToContent={(action) => {
+              // Navigate to content management tab
+              setActiveTab('content');
+              setActiveCategory('language');
+              // Store action to trigger after navigation
+              if (action === 'word-recognition-zh') {
+                // Use setTimeout to ensure tab switch completes first
+                setTimeout(() => {
+                  window.dispatchEvent(new CustomEvent('openWordRecognition', { detail: { language: 'zh' } }));
+                }, 100);
+              } else if (action === 'word-recognition-en') {
+                setTimeout(() => {
+                  window.dispatchEvent(new CustomEvent('openWordRecognition', { detail: { language: 'en' } }));
+                }, 100);
+              }
+            }}
+          />
         )}
       </main>
     </div>
