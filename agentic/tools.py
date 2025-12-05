@@ -52,10 +52,20 @@ class AgentTools:
         """
         try:
             recommender = self._get_recommender()
-            mastery_vector = recommender.build_mastery_vector()
-            return mastery_vector
+            # Add timeout protection using threading (works in FastAPI)
+            from concurrent.futures import ThreadPoolExecutor, TimeoutError as FutureTimeoutError
+            
+            with ThreadPoolExecutor(max_workers=1) as executor:
+                future = executor.submit(recommender.build_mastery_vector)
+                try:
+                    mastery_vector = future.result(timeout=30)  # 30 second timeout
+                    return mastery_vector
+                except FutureTimeoutError:
+                    print("⚠️  build_mastery_vector() timed out after 30 seconds, returning empty vector")
+                    return {}
         except Exception as e:
             # If Anki is not available, return empty vector
+            print(f"⚠️  Error querying mastery vector: {e}")
             return {}
 
     def query_world_model(self, topic: Optional[str] = None, node_id: Optional[str] = None) -> Dict[str, Any]:
@@ -114,9 +124,11 @@ class AgentTools:
             
             params = urlencode({"query": sparql})
             url = f"{self._kg_endpoint}?{params}"
-            response = requests.get(url, headers={"Accept": "application/sparql-results+json"}, timeout=10)
+            response = requests.get(url, headers={"Accept": "application/sparql-results+json"}, timeout=15)
             response.raise_for_status()
             return response.json()
+        except requests.exceptions.Timeout:
+            return {"error": "Knowledge graph query timed out after 15 seconds", "data": {}}
         except Exception as e:
             return {"error": str(e), "data": {}}
 
@@ -159,7 +171,27 @@ class AgentTools:
             recommender = self._get_recommender()
             
             # Generate recommendations (recommender builds mastery vector internally)
-            exploratory, remedial, mastery_vector = recommender.generate_recommendations()
+            # Add timeout protection using threading (works in FastAPI)
+            from concurrent.futures import ThreadPoolExecutor, TimeoutError as FutureTimeoutError
+            
+            with ThreadPoolExecutor(max_workers=1) as executor:
+                future = executor.submit(recommender.generate_recommendations)
+                try:
+                    exploratory, remedial, mastery_vector = future.result(timeout=60)  # 60 second timeout
+                except FutureTimeoutError:
+                    print("⚠️  generate_recommendations() timed out after 60 seconds")
+                    # Return a safe fallback response
+                    return {
+                        "decision": "REVIEW",
+                        "plan_title": "Unable to generate recommendations (timeout)",
+                        "learning_task": "rest",
+                        "task_details": {},
+                        "recommendations": [],
+                        "mastery_summary": {
+                            "total_tracked": 0,
+                            "mastered_count": 0,
+                        },
+                    }
             
             # Determine decision based on recommendations
             if remedial:

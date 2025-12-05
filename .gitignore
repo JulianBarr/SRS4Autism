@@ -63,6 +63,7 @@ config/credentials.json
 # Media
 media/
 images/
+data/content_db/jpgs/
 
 # Obsidian notes (exclude the entire Zettelkasten workspace)
 /Users/maxent/Documents/obsidian/Slip-box/Zettelkasten/SRS4Autism

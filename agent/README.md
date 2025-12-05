@@ -25,3 +25,5 @@ The agent acts as a bridge between:
 
 It finds the most effective path to help the child's internal model grow and align with the external world.
 
+
+

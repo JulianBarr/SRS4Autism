@@ -213,6 +213,53 @@ class EnglishWordRecognitionNote(Base):
     
     id = Column(Integer, primary_key=True, autoincrement=True)
     note_id = Column(String, nullable=False, unique=True)  # Generated note ID
+
+
+class PinyinElementNote(Base):
+    """Pinyin element notes (initial or final) - teaching cards"""
+    __tablename__ = 'pinyin_element_notes'
+    
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    note_id = Column(String, nullable=False, unique=True)  # Original Anki note ID
+    element = Column(String, nullable=False)  # The pinyin element (initial or final)
+    element_type = Column(String, nullable=False)  # "initial" or "final"
+    display_order = Column(Integer, nullable=False)  # Order in which elements should be displayed
+    fields = Column(Text, nullable=False)  # JSON object storing all note fields
+    created_at = Column(DateTime, default=func.now())
+    
+    # Constraints
+    __table_args__ = (
+        Index('idx_pinyin_elem_note_id', 'note_id'),
+        Index('idx_pinyin_elem_element', 'element'),
+        Index('idx_pinyin_elem_order', 'display_order'),
+    )
+    
+    def __repr__(self):
+        return f"<PinyinElementNote(note_id='{self.note_id}', element='{self.element}', type='{self.element_type}', order={self.display_order})>"
+
+
+class PinyinSyllableNote(Base):
+    """Pinyin syllable notes - whole syllable with 5 cards"""
+    __tablename__ = 'pinyin_syllable_notes'
+    
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    note_id = Column(String, nullable=False, unique=True)  # Original Anki note ID
+    syllable = Column(String, nullable=False)  # The pinyin syllable (e.g., "ma1", "shi2")
+    word = Column(String, nullable=False)  # The Chinese word (from WordHanzi field)
+    concept = Column(String, nullable=False)  # The concept/meaning (from WordPicture or derived)
+    display_order = Column(Integer, nullable=False)  # Order in which syllables should be displayed
+    fields = Column(Text, nullable=False)  # JSON object storing all note fields
+    created_at = Column(DateTime, default=func.now())
+    
+    # Constraints
+    __table_args__ = (
+        Index('idx_pinyin_syl_note_id', 'note_id'),
+        Index('idx_pinyin_syl_syllable', 'syllable'),
+        Index('idx_pinyin_syl_order', 'display_order'),
+    )
+    
+    def __repr__(self):
+        return f"<PinyinSyllableNote(note_id='{self.note_id}', syllable='{self.syllable}', word='{self.word}', order={self.display_order})>"
     word = Column(String, nullable=False)  # The English word (same as concept for naming)
     concept = Column(String, nullable=False)  # The concept (same as word for naming)
     display_order = Column(Integer, nullable=False)  # Order in which words should be displayed

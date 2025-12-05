@@ -155,3 +155,5 @@ All data is stored in JSON files:
 3. Integrate with external APIs
 4. Add context awareness features
 
+
+

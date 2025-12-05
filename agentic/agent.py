@@ -54,13 +54,19 @@ class AgenticPlanner:
         This is the "best effort prior" of the child's cognitive state.
         """
         # 1. Query mastery vector (from Anki review history)
+        print("  📊 Querying mastery vector from Anki...")
         mastery_vector = self.tools.query_mastery_vector(user_id)
+        print(f"  ✅ Mastery vector: {len(mastery_vector)} nodes")
         
         # 2. Query world model (knowledge graph)
+        print(f"  🌐 Querying knowledge graph{' for topic: ' + topic if topic else ''}...")
         kg_context = self.tools.query_world_model(topic=topic)
+        print("  ✅ Knowledge graph context retrieved")
         
         # 3. Query user profile
+        print("  👤 Querying user profile...")
         profile = self.tools.query_user_profile(user_id, self.memory)
+        print("  ✅ User profile retrieved")
         
         # Synthesize the prior
         cognitive_prior = {
@@ -97,13 +103,17 @@ class AgenticPlanner:
         resolved_level = learner_level or profile.get("level") or "novice"
         
         # STEP 1: Synthesize cognitive prior
+        print("🔍 Step 1: Synthesizing cognitive prior...")
         cognitive_prior = self.synthesize_cognitive_prior(user_id, topic)
+        print(f"✅ Cognitive prior synthesized: {len(cognitive_prior.get('mastery_vector', {}))} nodes tracked")
         
         # STEP 2: Call recommender with the prior
+        print("🎯 Step 2: Calling recommender to determine next learning step...")
         recommendation_plan = self.tools.call_recommender(
             user_id=user_id,
             cognitive_prior=cognitive_prior,
         )
+        print(f"✅ Recommender returned: {recommendation_plan.get('decision', 'UNKNOWN')} - {recommendation_plan.get('plan_title', 'No plan')}")
         
         # STEP 3: Generate rationale based on the synthesis
         mastery_summary = cognitive_prior.get("mastery_summary", {})

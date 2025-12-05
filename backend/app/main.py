@@ -491,6 +491,15 @@ def split_tag_annotations(tags: List[Any]) -> (List[str], List[str]):
     """Separate descriptive annotations from machine-friendly tags."""
     clean_tags: List[str] = []
     annotations: List[str] = []
+    
+    # Handle case where tags is a string (comma-separated or single tag)
+    if isinstance(tags, str):
+        # Split comma-separated string into list
+        tags = [t.strip() for t in tags.split(',') if t.strip()]
+    elif not isinstance(tags, (list, tuple)):
+        # If it's not a string or list, convert to list
+        tags = [tags] if tags else []
+    
     for tag in tags or []:
         if tag is None:
             continue
@@ -4624,6 +4633,270 @@ async def sync_chinese_naming_notes(request: Dict[str, Any]):
         import traceback
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=f"Error syncing Chinese naming notes: {str(e)}")
+
+
+# ============================================================================
+# Pinyin Learning endpoints
+# ============================================================================
+
+@app.get("/pinyin/elements")
+async def get_pinyin_elements(profile_id: str):
+    """
+    Get Pinyin element notes (initial/final teaching cards) from database.
+    """
+    try:
+        from database.models import PinyinElementNote
+        
+        db = next(get_db())
+        try:
+            # Get all element notes, ordered by display_order
+            db_notes = db.query(PinyinElementNote).order_by(PinyinElementNote.display_order).all()
+            
+            # Convert to API format
+            notes = []
+            for db_note in db_notes:
+                # Parse fields JSON
+                note_fields = json.loads(db_note.fields) if db_note.fields else {}
+                
+                note_data = {
+                    'note_id': db_note.note_id,
+                    'element': db_note.element,
+                    'element_type': db_note.element_type,
+                    'fields': note_fields
+                }
+                notes.append(note_data)
+        finally:
+            db.close()
+        
+        print(f"📚 Loaded {len(notes)} pinyin element notes from database")
+        
+        return {
+            "notes": notes,
+            "total": len(notes)
+        }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Error loading pinyin element notes: {str(e)}")
+
+
+@app.get("/pinyin/syllables")
+async def get_pinyin_syllables(profile_id: str):
+    """
+    Get Pinyin syllable notes from database.
+    """
+    try:
+        from database.models import PinyinSyllableNote
+        
+        db = next(get_db())
+        try:
+            # Get all syllable notes, ordered by display_order
+            db_notes = db.query(PinyinSyllableNote).order_by(PinyinSyllableNote.display_order).all()
+            
+            # Convert to API format
+            notes = []
+            for db_note in db_notes:
+                # Parse fields JSON
+                note_fields = json.loads(db_note.fields) if db_note.fields else {}
+                
+                note_data = {
+                    'note_id': db_note.note_id,
+                    'syllable': db_note.syllable,
+                    'word': db_note.word,
+                    'concept': db_note.concept,
+                    'fields': note_fields
+                }
+                notes.append(note_data)
+        finally:
+            db.close()
+        
+        print(f"📚 Loaded {len(notes)} pinyin syllable notes from database")
+        
+        return {
+            "notes": notes,
+            "total": len(notes)
+        }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Error loading pinyin syllable notes: {str(e)}")
+
+
+@app.post("/pinyin/sync")
+async def sync_pinyin_notes(request: Dict[str, Any]):
+    """
+    Sync pinyin notes (elements and/or syllables) to Anki.
+    Both types are synced to the same deck, preserving the order from display_order.
+    """
+    try:
+        import sys
+        import os
+        sys.path.append(os.path.join(os.path.dirname(__file__), '../../'))
+        from anki_integration.anki_connect import AnkiConnect
+        from database.models import PinyinElementNote, PinyinSyllableNote
+        from database.db import get_db
+        
+        profile_id = request.get("profile_id")
+        element_note_ids = request.get("element_note_ids", [])
+        syllable_note_ids = request.get("syllable_note_ids", [])
+        deck_name = request.get("deck_name", "拼音")
+        
+        # Support legacy API format
+        if not element_note_ids and not syllable_note_ids:
+            note_ids = request.get("note_ids", [])
+            note_type = request.get("note_type")
+            if note_type == "element":
+                element_note_ids = note_ids
+            elif note_type == "syllable":
+                syllable_note_ids = note_ids
+        
+        if not profile_id:
+            raise HTTPException(status_code=400, detail="profile_id is required")
+        
+        if not element_note_ids and not syllable_note_ids:
+            raise HTTPException(status_code=400, detail="At least one note_id is required")
+        
+        # Get notes from database, preserving order
+        db = next(get_db())
+        try:
+            all_notes = []
+            
+            # Get element notes ordered by display_order
+            if element_note_ids:
+                element_notes = db.query(PinyinElementNote).filter(
+                    PinyinElementNote.note_id.in_(element_note_ids)
+                ).order_by(PinyinElementNote.display_order).all()
+                for db_note in element_notes:
+                    note_fields = json.loads(db_note.fields) if db_note.fields else {}
+                    all_notes.append({
+                        'note_id': db_note.note_id,
+                        'type': 'element',
+                        'display_order': db_note.display_order,
+                        'fields': note_fields,
+                        'element': db_note.element
+                    })
+            
+            # Get syllable notes ordered by display_order
+            if syllable_note_ids:
+                syllable_notes = db.query(PinyinSyllableNote).filter(
+                    PinyinSyllableNote.note_id.in_(syllable_note_ids)
+                ).order_by(PinyinSyllableNote.display_order).all()
+                for db_note in syllable_notes:
+                    note_fields = json.loads(db_note.fields) if db_note.fields else {}
+                    all_notes.append({
+                        'note_id': db_note.note_id,
+                        'type': 'syllable',
+                        'display_order': db_note.display_order,
+                        'fields': note_fields,
+                        'syllable': db_note.syllable
+                    })
+            
+            # Sort all notes by display_order to preserve .apkg order
+            all_notes.sort(key=lambda x: x['display_order'])
+        finally:
+            db.close()
+        
+        if not all_notes:
+            return {
+                "message": "No notes found to sync",
+                "cards_created": 0,
+                "notes_synced": 0
+            }
+        
+        # Connect to Anki
+        anki = AnkiConnect()
+        if not anki.ping():
+            raise HTTPException(status_code=500, detail="AnkiConnect not available")
+        
+        # Sync to Anki in order
+        cards_created = 0
+        notes_synced = 0
+        errors = []
+        
+        for note in all_notes:
+            try:
+                fields = note['fields']
+                note_type = note['type']
+                
+                # Build Anki note fields
+                anki_note_fields = {}
+                for field_name, field_value in fields.items():
+                    if field_value:
+                        anki_note_fields[field_name] = field_value
+                    else:
+                        anki_note_fields[field_name] = ""
+                
+                # Build _KG_Map following strict schema
+                if note_type == "element":
+                    element = fields.get('Element', '') or note.get('element', '')
+                    element_kp = f"pinyin-element-{element}"
+                    # Element cards are teaching cards - map to appropriate skill
+                    card_mappings = {
+                        "0": [{"kp": element_kp, "skill": "form_to_sound", "weight": 1.0}],  # Element => Sound
+                    }
+                    anki_note_type = "CUMA - Pinyin Element"
+                    cards_per_note = 1
+                else:  # syllable
+                    syllable = fields.get('Syllable', '') or note.get('syllable', '')
+                    syllable_kp = f"pinyin-syllable-{syllable}"
+                    # Syllable has 6 cards (indices 0-5):
+                    # Card 0: Element Card
+                    # Card 1: Word to Pinyin (sound_to_form)
+                    # Card 2: MCQ Recent (sound_to_form with hint)
+                    # Card 3: MCQ Tone (sound_to_form with hint)
+                    # Card 4: MCQ Confusor (sound_to_form with hint)
+                    # Card 5: Pinyin to Word (form_to_sound)
+                    card_mappings = {
+                        "0": [{"kp": syllable_kp, "skill": "form_to_sound", "weight": 1.0}],  # Element Card
+                        "1": [{"kp": syllable_kp, "skill": "sound_to_form", "weight": 1.0}],  # Word to Pinyin
+                        "2": [{"kp": syllable_kp, "skill": "sound_to_form", "weight": 0.8}],  # MCQ Recent
+                        "3": [{"kp": syllable_kp, "skill": "sound_to_form", "weight": 0.8}],  # MCQ Tone
+                        "4": [{"kp": syllable_kp, "skill": "sound_to_form", "weight": 0.8}],  # MCQ Confusor
+                        "5": [{"kp": syllable_kp, "skill": "form_to_sound", "weight": 1.0}],  # Pinyin to Word
+                    }
+                    anki_note_type = "CUMA - Pinyin Syllable"
+                    cards_per_note = 6
+                
+                anki_note_fields["_KG_Map"] = build_kg_map_strict(card_mappings)
+                
+                # Create note in Anki
+                anki.add_note(deck_name, anki_note_type, anki_note_fields)
+                
+                cards_created += cards_per_note
+                notes_synced += 1
+                
+            except Exception as e:
+                errors.append({
+                    "note_id": note.get('note_id', 'unknown'),
+                    "error": str(e)
+                })
+                import traceback
+                traceback.print_exc()
+        
+        notes_synced_successfully = len(all_notes) - len(errors)
+        print(f"✅ Synced {notes_synced_successfully} pinyin notes (creating {cards_created} cards) to deck '{deck_name}'")
+        if errors:
+            print(f"⚠️  {len(errors)} errors occurred")
+        
+        return {
+            "message": f"Synced {notes_synced_successfully} notes successfully",
+            "cards_created": cards_created,
+            "notes_synced": notes_synced_successfully,
+            "errors": errors
+        }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Error syncing pinyin notes: {str(e)}")
 
 
 # Mount static files for serving images

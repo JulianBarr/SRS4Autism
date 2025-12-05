@@ -1,0 +1,35 @@
+{
+  "element_note": {
+    "note_id": "sample_element_a",
+    "element": "a",
+    "element_type": "final",
+    "display_order": 0,
+    "fields": {
+      "Element": "a",
+      "ExampleChar": "啊",
+      "Picture": "<img src=\"ahh.png\">",
+      "Tone1": "ā",
+      "Tone2": "á",
+      "Tone3": "ǎ",
+      "Tone4": "à",
+      "_Remarks": "Sample element note for review",
+      "_KG_Map": "{\"0\": [{\"kp\": \"pinyin-element-a\", \"skill\": \"form_to_sound\", \"weight\": 1.0}]}"
+    }
+  },
+  "syllable_note": {
+    "note_id": "sample_syllable_ma1",
+    "syllable": "mā",
+    "word": "妈",
+    "concept": "Mother",
+    "display_order": 1,
+    "fields": {
+      "ElementToLearn": "a",
+      "Syllable": "mā",
+      "WordPinyin": "mā mā",
+      "WordHanzi": "妈妈",
+      "WordPicture": "<img src=\"mommy.png\">",
+      "_Remarks": "Sample syllable note for review",
+      "_KG_Map": "{\"0\": [{\"kp\": \"pinyin-syllable-ma1\", \"skill\": \"form_to_sound\", \"weight\": 1.0}], \"1\": [{\"kp\": \"pinyin-syllable-ma1\", \"skill\": \"sound_to_form\", \"weight\": 1.0}], \"2\": [{\"kp\": \"pinyin-syllable-ma1\", \"skill\": \"sound_to_form\", \"weight\": 0.8}], \"3\": [{\"kp\": \"pinyin-syllable-ma1\", \"skill\": \"sound_to_form\", \"weight\": 0.8}], \"4\": [{\"kp\": \"pinyin-syllable-ma1\", \"skill\": \"sound_to_form\", \"weight\": 0.8}], \"5\": [{\"kp\": \"pinyin-syllable-ma1\", \"skill\": \"form_to_sound\", \"weight\": 1.0}]}"
+    }
+  }
+}

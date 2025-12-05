@@ -1,0 +1,174 @@
+# CUMA - Pinyin Element Note Type
+# Teaching card for pinyin elements (initials/finals)
+
+## Fields (current):
+Element, ExampleChar, Picture, Tone1, Tone2, Tone3, Tone4, _Remarks, _KG_Map
+
+## Card Template:
+
+### Front Template:
+<div class="pinyin-element-card">
+  <div class="element-display">
+    <div class="main-element">{{Element}}</div>
+    {{#ExampleChar}}
+    <div class="example-char">{{ExampleChar}}</div>
+    {{/ExampleChar}}
+  </div>
+  
+  {{#Picture}}
+  <div class="picture">{{Picture}}</div>
+  {{/Picture}}
+  
+  <div class="tones-display">
+    <div class="tone-item">
+      <span class="tone-mark">{{Tone1}}</span>
+      <span class="tone-number">1</span>
+    </div>
+    <div class="tone-item">
+      <span class="tone-mark">{{Tone2}}</span>
+      <span class="tone-number">2</span>
+    </div>
+    <div class="tone-item">
+      <span class="tone-mark">{{Tone3}}</span>
+      <span class="tone-number">3</span>
+    </div>
+    <div class="tone-item">
+      <span class="tone-mark">{{Tone4}}</span>
+      <span class="tone-number">4</span>
+    </div>
+  </div>
+  
+  <div class="audio-controls">
+    <button onclick="playAudioSequence()" class="play-btn">▶️ 播放</button>
+    <button onclick="replayAudio()" class="replay-btn">🔄 重播</button>
+  </div>
+  
+  <div id="audio-sequence" style="display: none;">
+    [sound:{{Element}}1.mp3] [sound:{{Element}}1.mp3] [sound:{{Element}}2.mp3] [sound:{{Element}}3.mp3] [sound:{{Element}}4.mp3] [sound:{{Element}}.mp3]
+  </div>
+</div>
+
+<script>
+let audioSequence = null;
+let currentAudioIndex = 0;
+
+function playAudioSequence() {
+  const audioDiv = document.getElementById('audio-sequence');
+  if (audioDiv) {
+    // Trigger Anki's audio playback
+    const audioTags = audioDiv.innerHTML.trim();
+    // Anki will automatically play [sound:...] tags
+    audioDiv.style.display = 'block';
+    setTimeout(() => {
+      audioDiv.style.display = 'none';
+    }, 100);
+  }
+}
+
+function replayAudio() {
+  playAudioSequence();
+}
+</script>
+
+### Back Template:
+{{FrontSide}}
+
+<hr id="answer">
+
+<div class="answer-section">
+  <p><strong>Element:</strong> {{Element}}</p>
+  <p><strong>Example:</strong> {{ExampleChar}}</p>
+</div>
+
+### Styling:
+.pinyin-element-card {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  text-align: center;
+}
+
+.element-display {
+  margin-bottom: 20px;
+}
+
+.main-element {
+  font-size: 72px;
+  font-weight: bold;
+  color: #2196F3;
+  margin-bottom: 10px;
+}
+
+.example-char {
+  font-size: 48px;
+  color: #666;
+}
+
+.picture {
+  margin: 20px 0;
+}
+
+.picture img {
+  max-width: 300px;
+  max-height: 300px;
+  border-radius: 8px;
+}
+
+.tones-display {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 30px 0;
+  flex-wrap: wrap;
+}
+
+.tone-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  min-width: 80px;
+}
+
+.tone-mark {
+  font-size: 48px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.tone-number {
+  font-size: 18px;
+  color: #666;
+}
+
+.audio-controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.play-btn, .replay-btn {
+  padding: 12px 24px;
+  font-size: 16px;
+  border: 2px solid #2196F3;
+  border-radius: 8px;
+  background-color: white;
+  color: #2196F3;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.play-btn:hover, .replay-btn:hover {
+  background-color: #2196F3;
+  color: white;
+}
+
+.answer-section {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f0f8ff;
+  border-radius: 8px;
+}

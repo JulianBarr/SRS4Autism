@@ -7,6 +7,9 @@ import LanguageContentManager from './components/LanguageContentManager';
 import TemplateManager from './components/TemplateManager';
 import ContentCategoryNav from './components/ContentCategoryNav';
 import MariosWorld from './components/MariosWorld';
+import ChineseWordRecognition from './components/ChineseWordRecognition';
+import EnglishWordRecognition from './components/EnglishWordRecognition';
+import PinyinLearning from './components/PinyinLearning';
 import { useLanguage } from './i18n/LanguageContext';
 import './App.css';
 
@@ -16,6 +19,10 @@ function App() {
   const { language, toggleLanguage, t } = useLanguage();
   const [activeTab, setActiveTab] = useState('main');
   const [activeCategory, setActiveCategory] = useState('language'); // Content category
+  const [activeContentView, setActiveContentView] = useState(null); // Track specific content view (e.g., 'pinyin-learning')
+  const [showPinyinModal, setShowPinyinModal] = useState(false); // Modal state for Pinyin Learning
+  const [cognitionLanguage, setCognitionLanguage] = useState(null); // 'zh' or 'en' for Cognition Cove
+  const [cognitionContentType, setCognitionContentType] = useState(null); // Content type based on language
   const [profiles, setProfiles] = useState([]);
   const [currentProfile, setCurrentProfile] = useState(null);
   const [cards, setCards] = useState([]);
@@ -290,9 +297,355 @@ function App() {
                 setTimeout(() => {
                   window.dispatchEvent(new CustomEvent('openWordRecognition', { detail: { language: 'en' } }));
                 }, 100);
+              } else if (action === 'pinyin-learning') {
+                // Show pinyin learning modal - set to Chinese and Pinyin directly
+                setCognitionLanguage('zh');
+                setCognitionContentType('pinyin');
+                setShowPinyinModal(true);
               }
             }}
           />
+        )}
+
+        {/* Cognition Cove Modal */}
+        {showPinyinModal && (
+          <div style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 1000,
+            padding: '20px'
+          }} onClick={() => {
+            setShowPinyinModal(false);
+            setCognitionLanguage(null);
+            setCognitionContentType(null);
+          }}>
+            <div style={{
+              backgroundColor: 'white',
+              borderRadius: '24px',
+              maxWidth: '1200px',
+              width: '100%',
+              maxHeight: '90vh',
+              overflow: 'auto',
+              boxShadow: '0 20px 60px rgba(0,0,0,0.3)',
+              position: 'relative'
+            }} onClick={(e) => e.stopPropagation()}>
+              {/* Header */}
+              <div style={{
+                background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                padding: '32px',
+                borderRadius: '24px 24px 0 0',
+                position: 'relative',
+                overflow: 'hidden'
+              }}>
+                <div style={{
+                  position: 'absolute',
+                  top: '-50px',
+                  right: '-50px',
+                  width: '200px',
+                  height: '200px',
+                  backgroundColor: 'rgba(255,255,255,0.1)',
+                  borderRadius: '50%',
+                  filter: 'blur(40px)'
+                }}></div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', position: 'relative', zIndex: 10 }}>
+                  <div>
+                    <div style={{ fontSize: '12px', fontWeight: 'bold', color: 'rgba(255,255,255,0.8)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px' }}>
+                      Cognition Cove
+                    </div>
+                    <h2 style={{ fontSize: '36px', fontWeight: 'bold', color: 'white', marginBottom: '8px' }}>
+                      {language === 'zh' ? '基础认知' : 'Basic Cognition'}
+                    </h2>
+                    <p style={{ fontSize: '16px', color: 'rgba(255,255,255,0.9)', fontWeight: '500' }}>
+                      {language === 'zh' 
+                        ? '基础认知：命名、颜色、数字' 
+                        : 'Foundations: Naming, Colors, Numbers'}
+                    </p>
+                  </div>
+                </div>
+                <button 
+                  onClick={() => {
+                    setShowPinyinModal(false);
+                    setCognitionLanguage(null);
+                    setCognitionContentType(null);
+                  }}
+                  style={{
+                    position: 'absolute',
+                    top: '16px',
+                    right: '16px',
+                    backgroundColor: 'rgba(255,255,255,0.3)',
+                    border: 'none',
+                    borderRadius: '50%',
+                    width: '40px',
+                    height: '40px',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '24px',
+                    color: 'white',
+                    zIndex: 20
+                  }}
+                >
+                  ×
+                </button>
+              </div>
+
+              {/* Content */}
+              <div style={{ padding: '32px', backgroundColor: '#f9fafb' }}>
+                {!cognitionLanguage ? (
+                  /* Level 1: Language Selection */
+                  <div>
+                    <h3 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '20px', color: '#1f2937' }}>
+                      {language === 'zh' ? '选择语言' : 'Select Language'}
+                    </h3>
+                    <div style={{ display: 'flex', gap: '20px', marginTop: '30px' }}>
+                      <button
+                        onClick={() => setCognitionLanguage('zh')}
+                        style={{
+                          flex: 1,
+                          padding: '24px',
+                          fontSize: '20px',
+                          fontWeight: 'bold',
+                          border: '2px solid #10b981',
+                          borderRadius: '12px',
+                          backgroundColor: '#f0fdf4',
+                          color: '#10b981',
+                          cursor: 'pointer',
+                          transition: 'all 0.2s'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = '#dcfce7';
+                          e.currentTarget.style.transform = 'scale(1.02)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = '#f0fdf4';
+                          e.currentTarget.style.transform = 'scale(1)';
+                        }}
+                      >
+                        {language === 'zh' ? '中文' : 'Chinese'}
+                      </button>
+                      <button
+                        onClick={() => setCognitionLanguage('en')}
+                        style={{
+                          flex: 1,
+                          padding: '24px',
+                          fontSize: '20px',
+                          fontWeight: 'bold',
+                          border: '2px solid #10b981',
+                          borderRadius: '12px',
+                          backgroundColor: '#f0fdf4',
+                          color: '#10b981',
+                          cursor: 'pointer',
+                          transition: 'all 0.2s'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = '#dcfce7';
+                          e.currentTarget.style.transform = 'scale(1.02)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = '#f0fdf4';
+                          e.currentTarget.style.transform = 'scale(1)';
+                        }}
+                      >
+                        {language === 'zh' ? '英文' : 'English'}
+                      </button>
+                    </div>
+                  </div>
+                ) : !cognitionContentType ? (
+                  /* Level 2: Content Type Selection */
+                  <div>
+                    <button
+                      onClick={() => setCognitionLanguage(null)}
+                      style={{
+                        marginBottom: '20px',
+                        padding: '8px 16px',
+                        fontSize: '14px',
+                        border: '1px solid #ddd',
+                        borderRadius: '6px',
+                        backgroundColor: 'white',
+                        cursor: 'pointer',
+                        color: '#666'
+                      }}
+                    >
+                      ← {language === 'zh' ? '返回' : 'Back'}
+                    </button>
+                    <h3 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '20px', color: '#1f2937' }}>
+                      {language === 'zh' ? '选择内容类型' : 'Select Content Type'}
+                    </h3>
+                    <div style={{ display: 'flex', gap: '20px', marginTop: '30px', flexWrap: 'wrap' }}>
+                      {cognitionLanguage === 'zh' ? (
+                        <>
+                          <button
+                            onClick={() => setCognitionContentType('naming')}
+                            style={{
+                              flex: '1 1 45%',
+                              minWidth: '200px',
+                              padding: '24px',
+                              fontSize: '20px',
+                              fontWeight: 'bold',
+                              border: '2px solid #10b981',
+                              borderRadius: '12px',
+                              backgroundColor: '#f0fdf4',
+                              color: '#10b981',
+                              cursor: 'pointer',
+                              transition: 'all 0.2s'
+                            }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.backgroundColor = '#dcfce7';
+                              e.currentTarget.style.transform = 'scale(1.02)';
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.backgroundColor = '#f0fdf4';
+                              e.currentTarget.style.transform = 'scale(1)';
+                            }}
+                          >
+                            基础命名
+                          </button>
+                          <button
+                            onClick={() => setCognitionContentType('pinyin')}
+                            style={{
+                              flex: '1 1 45%',
+                              minWidth: '200px',
+                              padding: '24px',
+                              fontSize: '20px',
+                              fontWeight: 'bold',
+                              border: '2px solid #10b981',
+                              borderRadius: '12px',
+                              backgroundColor: '#f0fdf4',
+                              color: '#10b981',
+                              cursor: 'pointer',
+                              transition: 'all 0.2s'
+                            }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.backgroundColor = '#dcfce7';
+                              e.currentTarget.style.transform = 'scale(1.02)';
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.backgroundColor = '#f0fdf4';
+                              e.currentTarget.style.transform = 'scale(1)';
+                            }}
+                          >
+                            基础拼音
+                          </button>
+                        </>
+                      ) : (
+                        <>
+                          <button
+                            onClick={() => setCognitionContentType('naming')}
+                            style={{
+                              flex: '1 1 45%',
+                              minWidth: '200px',
+                              padding: '24px',
+                              fontSize: '20px',
+                              fontWeight: 'bold',
+                              border: '2px solid #10b981',
+                              borderRadius: '12px',
+                              backgroundColor: '#f0fdf4',
+                              color: '#10b981',
+                              cursor: 'pointer',
+                              transition: 'all 0.2s'
+                            }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.backgroundColor = '#dcfce7';
+                              e.currentTarget.style.transform = 'scale(1.02)';
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.backgroundColor = '#f0fdf4';
+                              e.currentTarget.style.transform = 'scale(1)';
+                            }}
+                          >
+                            Naming
+                          </button>
+                          <button
+                            onClick={() => setCognitionContentType('phonics')}
+                            style={{
+                              flex: '1 1 45%',
+                              minWidth: '200px',
+                              padding: '24px',
+                              fontSize: '20px',
+                              fontWeight: 'bold',
+                              border: '2px solid #10b981',
+                              borderRadius: '12px',
+                              backgroundColor: '#f0fdf4',
+                              color: '#10b981',
+                              cursor: 'pointer',
+                              transition: 'all 0.2s'
+                            }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.backgroundColor = '#dcfce7';
+                              e.currentTarget.style.transform = 'scale(1.02)';
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.backgroundColor = '#f0fdf4';
+                              e.currentTarget.style.transform = 'scale(1)';
+                            }}
+                          >
+                            Phonics
+                          </button>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                ) : (
+                  /* Level 3: Actual Content Component */
+                  <div>
+                    <button
+                      onClick={() => {
+                        setCognitionContentType(null);
+                      }}
+                      style={{
+                        marginBottom: '20px',
+                        padding: '8px 16px',
+                        fontSize: '14px',
+                        border: '1px solid #ddd',
+                        borderRadius: '6px',
+                        backgroundColor: 'white',
+                        cursor: 'pointer',
+                        color: '#666'
+                      }}
+                    >
+                      ← {language === 'zh' ? '返回' : 'Back'}
+                    </button>
+                    {cognitionLanguage === 'zh' && cognitionContentType === 'naming' && (
+                      <ChineseWordRecognition 
+                        profile={currentProfile} 
+                        onProfileUpdate={loadData}
+                      />
+                    )}
+                    {cognitionLanguage === 'zh' && cognitionContentType === 'pinyin' && (
+                      <PinyinLearning 
+                        profile={currentProfile} 
+                        onProfileUpdate={loadData}
+                      />
+                    )}
+                    {cognitionLanguage === 'en' && cognitionContentType === 'naming' && (
+                      <EnglishWordRecognition 
+                        profile={currentProfile} 
+                        onProfileUpdate={loadData}
+                      />
+                    )}
+                    {cognitionLanguage === 'en' && cognitionContentType === 'phonics' && (
+                      <div style={{ padding: '40px', textAlign: 'center' }}>
+                        <h3 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '20px', color: '#1f2937' }}>
+                          Phonics Learning
+                        </h3>
+                        <p style={{ color: '#666', fontSize: '16px' }}>
+                          Phonics learning feature coming soon...
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
         )}
       </main>
     </div>

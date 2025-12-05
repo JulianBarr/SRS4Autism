@@ -1,0 +1,26 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../cc-cedict-1.0.3"
+		},
+		{
+			"path": "../CwnGraph"
+		},
+		{
+			"path": "../complete-hsk-vocabulary"
+		},
+		{
+			"path": "../olp-en-cefrj"
+		},
+		{
+			"path": "../lingfeat"
+		},
+		{
+			"path": "../../Documents/obsidian/Slip-box/Zettelkasten/S4A"
+		}
+	],
+	"settings": {}
+}

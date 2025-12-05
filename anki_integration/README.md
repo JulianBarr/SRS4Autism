@@ -149,3 +149,5 @@ AnkiConnect only accepts connections from localhost by default. If you need remo
 - [AnkiConnect GitHub](https://github.com/FooSoft/anki-connect)
 - [AnkiConnect Add-on Page](https://ankiweb.net/shared/info/2055492159)
 - [Anki Manual](https://docs.ankiweb.net/)
+
+

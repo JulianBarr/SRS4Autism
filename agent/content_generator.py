@@ -632,3 +632,5 @@ class ContentGenerator:
         words = prompt.split()[:3]
         return " ".join(words)
 
+
+

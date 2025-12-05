@@ -14,6 +14,8 @@ import theme from '../styles/theme';
 const MariosWorld = ({ profile, onNavigateToContent }) => {
   const { t, language } = useLanguage();
   const [activeIsland, setActiveIsland] = useState(null);
+  const [cognitionLanguage, setCognitionLanguage] = useState(null); // 'zh' or 'en' for Cognition Cove
+  const [cognitionContentType, setCognitionContentType] = useState(null); // Content type based on language
 
   // Map image path - update this to the actual path of your map image
   const mapImagePath = '/marios-world-map.png'; // Place in public folder
@@ -170,7 +172,11 @@ const MariosWorld = ({ profile, onNavigateToContent }) => {
               </div>
             </div>
             <button 
-              onClick={() => setActiveIsland(null)}
+              onClick={() => {
+                setActiveIsland(null);
+                setCognitionLanguage(null);
+                setCognitionContentType(null);
+              }}
               style={{
                 position: 'absolute',
                 top: '16px',
@@ -276,104 +282,243 @@ const MariosWorld = ({ profile, onNavigateToContent }) => {
               <h3 style={{ fontSize: '16px', fontWeight: 'bold', color: '#1f2937', marginBottom: '16px' }}>
                 {language === 'zh' ? '操作' : 'Actions'}
               </h3>
-              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-                {/* Special actions for Cognition Cove - link to naming/word recognition */}
-                {activeIsland.id === 'cognition' && onNavigateToContent && (
-                  <>
-                    <button style={{
-                      padding: '12px 24px',
-                      backgroundColor: '#f59e0b',
-                      color: 'white',
-                      border: 'none',
-                      borderRadius: '12px',
-                      fontSize: '14px',
-                      fontWeight: 'bold',
-                      cursor: 'pointer',
-                      boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                      transition: 'all 0.2s',
-                      marginRight: '8px'
-                    }} onMouseEnter={(e) => {
-                      e.target.style.transform = 'translateY(-2px)';
-                      e.target.style.boxShadow = '0 6px 12px rgba(0,0,0,0.15)';
-                    }} onMouseLeave={(e) => {
-                      e.target.style.transform = 'translateY(0)';
-                      e.target.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
-                    }} onClick={() => {
-                      setActiveIsland(null);
-                      onNavigateToContent('word-recognition-zh');
-                    }}>
-                      {language === 'zh' ? '📝 词汇识别 (中文)' : '📝 Word Recognition (Chinese)'}
-                    </button>
-                    <button style={{
-                      padding: '12px 24px',
-                      backgroundColor: '#3b82f6',
-                      color: 'white',
-                      border: 'none',
-                      borderRadius: '12px',
-                      fontSize: '14px',
-                      fontWeight: 'bold',
-                      cursor: 'pointer',
-                      boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                      transition: 'all 0.2s'
-                    }} onMouseEnter={(e) => {
-                      e.target.style.transform = 'translateY(-2px)';
-                      e.target.style.boxShadow = '0 6px 12px rgba(0,0,0,0.15)';
-                    }} onMouseLeave={(e) => {
-                      e.target.style.transform = 'translateY(0)';
-                      e.target.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
-                    }} onClick={() => {
-                      setActiveIsland(null);
-                      onNavigateToContent('word-recognition-en');
-                    }}>
-                      {language === 'zh' ? '📝 词汇识别 (英文)' : '📝 Word Recognition (English)'}
-                    </button>
-                  </>
-                )}
-                <button style={{
-                  padding: '12px 24px',
-                  backgroundColor: theme.categories.language.primary,
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '12px',
-                  fontSize: '14px',
-                  fontWeight: 'bold',
-                  cursor: 'pointer',
-                  boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                  transition: 'all 0.2s'
-                }} onMouseEnter={(e) => {
-                  e.target.style.transform = 'translateY(-2px)';
-                  e.target.style.boxShadow = '0 6px 12px rgba(0,0,0,0.15)';
-                }} onMouseLeave={(e) => {
-                  e.target.style.transform = 'translateY(0)';
-                  e.target.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
-                }}>
-                  {language === 'zh' ? '📊 查看详情' : '📊 View Details'}
-                </button>
-                <button style={{
-                  padding: '12px 24px',
-                  backgroundColor: '#8b5cf6',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '12px',
-                  fontSize: '14px',
-                  fontWeight: 'bold',
-                  cursor: 'pointer',
-                  boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                  transition: 'all 0.2s'
-                }} onMouseEnter={(e) => {
-                  e.target.style.transform = 'translateY(-2px)';
-                  e.target.style.boxShadow = '0 6px 12px rgba(0,0,0,0.15)';
-                }} onMouseLeave={(e) => {
-                  e.target.style.transform = 'translateY(0)';
-                  e.target.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
-                }}>
-                  {language === 'zh' ? '✨ 生成新任务' : '✨ Generate New Quest'}
-                </button>
+              {/* Special two-level navigation for Cognition Cove */}
+              {activeIsland.id === 'cognition' && onNavigateToContent ? (
+                <div>
+                  {!cognitionLanguage ? (
+                    /* Level 1: Language Selection */
+                    <div>
+                      <h4 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '16px', color: '#374151' }}>
+                        {language === 'zh' ? '选择语言' : 'Select Language'}
+                      </h4>
+                      <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                        <button style={{
+                          flex: '1 1 45%',
+                          minWidth: '150px',
+                          padding: '16px 24px',
+                          backgroundColor: '#f0fdf4',
+                          color: '#10b981',
+                          border: '2px solid #10b981',
+                          borderRadius: '12px',
+                          fontSize: '16px',
+                          fontWeight: 'bold',
+                          cursor: 'pointer',
+                          transition: 'all 0.2s'
+                        }} onMouseEnter={(e) => {
+                          e.target.style.backgroundColor = '#dcfce7';
+                          e.target.style.transform = 'scale(1.02)';
+                        }} onMouseLeave={(e) => {
+                          e.target.style.backgroundColor = '#f0fdf4';
+                          e.target.style.transform = 'scale(1)';
+                        }} onClick={() => setCognitionLanguage('zh')}>
+                          {language === 'zh' ? '中文' : 'Chinese'}
+                        </button>
+                        <button style={{
+                          flex: '1 1 45%',
+                          minWidth: '150px',
+                          padding: '16px 24px',
+                          backgroundColor: '#f0fdf4',
+                          color: '#10b981',
+                          border: '2px solid #10b981',
+                          borderRadius: '12px',
+                          fontSize: '16px',
+                          fontWeight: 'bold',
+                          cursor: 'pointer',
+                          transition: 'all 0.2s'
+                        }} onMouseEnter={(e) => {
+                          e.target.style.backgroundColor = '#dcfce7';
+                          e.target.style.transform = 'scale(1.02)';
+                        }} onMouseLeave={(e) => {
+                          e.target.style.backgroundColor = '#f0fdf4';
+                          e.target.style.transform = 'scale(1)';
+                        }} onClick={() => setCognitionLanguage('en')}>
+                          {language === 'zh' ? '英文' : 'English'}
+                        </button>
+                      </div>
+                    </div>
+                  ) : !cognitionContentType ? (
+                    /* Level 2: Content Type Selection */
+                    <div>
+                      <button style={{
+                        marginBottom: '16px',
+                        padding: '8px 16px',
+                        fontSize: '14px',
+                        border: '1px solid #ddd',
+                        borderRadius: '6px',
+                        backgroundColor: 'white',
+                        cursor: 'pointer',
+                        color: '#666'
+                      }} onClick={() => setCognitionLanguage(null)}>
+                        ← {language === 'zh' ? '返回' : 'Back'}
+                      </button>
+                      <h4 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '16px', color: '#374151' }}>
+                        {language === 'zh' ? '选择内容类型' : 'Select Content Type'}
+                      </h4>
+                      <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                        {cognitionLanguage === 'zh' ? (
+                          <>
+                            <button style={{
+                              flex: '1 1 45%',
+                              minWidth: '150px',
+                              padding: '16px 24px',
+                              backgroundColor: '#fef3c7',
+                              color: '#f59e0b',
+                              border: '2px solid #f59e0b',
+                              borderRadius: '12px',
+                              fontSize: '16px',
+                              fontWeight: 'bold',
+                              cursor: 'pointer',
+                              transition: 'all 0.2s'
+                            }} onMouseEnter={(e) => {
+                              e.target.style.backgroundColor = '#fde68a';
+                              e.target.style.transform = 'scale(1.02)';
+                            }} onMouseLeave={(e) => {
+                              e.target.style.backgroundColor = '#fef3c7';
+                              e.target.style.transform = 'scale(1)';
+                            }} onClick={() => {
+                              setActiveIsland(null);
+                              setCognitionLanguage(null);
+                              setCognitionContentType(null);
+                              onNavigateToContent('word-recognition-zh');
+                            }}>
+                              基础命名
+                            </button>
+                            <button style={{
+                              flex: '1 1 45%',
+                              minWidth: '150px',
+                              padding: '16px 24px',
+                              backgroundColor: '#dcfce7',
+                              color: '#10b981',
+                              border: '2px solid #10b981',
+                              borderRadius: '12px',
+                              fontSize: '16px',
+                              fontWeight: 'bold',
+                              cursor: 'pointer',
+                              transition: 'all 0.2s'
+                            }} onMouseEnter={(e) => {
+                              e.target.style.backgroundColor = '#bbf7d0';
+                              e.target.style.transform = 'scale(1.02)';
+                            }} onMouseLeave={(e) => {
+                              e.target.style.backgroundColor = '#dcfce7';
+                              e.target.style.transform = 'scale(1)';
+                            }} onClick={() => {
+                              setActiveIsland(null);
+                              // Don't reset state here - let App.js handle it
+                              onNavigateToContent('pinyin-learning');
+                            }}>
+                              基础拼音
+                            </button>
+                          </>
+                        ) : (
+                          <>
+                            <button style={{
+                              flex: '1 1 45%',
+                              minWidth: '150px',
+                              padding: '16px 24px',
+                              backgroundColor: '#dbeafe',
+                              color: '#3b82f6',
+                              border: '2px solid #3b82f6',
+                              borderRadius: '12px',
+                              fontSize: '16px',
+                              fontWeight: 'bold',
+                              cursor: 'pointer',
+                              transition: 'all 0.2s'
+                            }} onMouseEnter={(e) => {
+                              e.target.style.backgroundColor = '#bfdbfe';
+                              e.target.style.transform = 'scale(1.02)';
+                            }} onMouseLeave={(e) => {
+                              e.target.style.backgroundColor = '#dbeafe';
+                              e.target.style.transform = 'scale(1)';
+                            }} onClick={() => {
+                              setActiveIsland(null);
+                              setCognitionLanguage(null);
+                              setCognitionContentType(null);
+                              onNavigateToContent('word-recognition-en');
+                            }}>
+                              Naming
+                            </button>
+                            <button style={{
+                              flex: '1 1 45%',
+                              minWidth: '150px',
+                              padding: '16px 24px',
+                              backgroundColor: '#f3e8ff',
+                              color: '#8b5cf6',
+                              border: '2px solid #8b5cf6',
+                              borderRadius: '12px',
+                              fontSize: '16px',
+                              fontWeight: 'bold',
+                              cursor: 'pointer',
+                              transition: 'all 0.2s'
+                            }} onMouseEnter={(e) => {
+                              e.target.style.backgroundColor = '#e9d5ff';
+                              e.target.style.transform = 'scale(1.02)';
+                            }} onMouseLeave={(e) => {
+                              e.target.style.backgroundColor = '#f3e8ff';
+                              e.target.style.transform = 'scale(1)';
+                            }} onClick={() => {
+                              setActiveIsland(null);
+                              setCognitionLanguage(null);
+                              setCognitionContentType(null);
+                              // TODO: Add phonics navigation when ready
+                              alert(language === 'zh' ? 'Phonics功能即将推出' : 'Phonics feature coming soon');
+                            }}>
+                              Phonics
+                            </button>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  ) : null}
+                </div>
+              ) : (
+                /* Default actions for other islands */
+                <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                  <button style={{
+                    padding: '12px 24px',
+                    backgroundColor: theme.categories.language.primary,
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '12px',
+                    fontSize: '14px',
+                    fontWeight: 'bold',
+                    cursor: 'pointer',
+                    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                    transition: 'all 0.2s'
+                  }} onMouseEnter={(e) => {
+                    e.target.style.transform = 'translateY(-2px)';
+                    e.target.style.boxShadow = '0 6px 12px rgba(0,0,0,0.15)';
+                  }} onMouseLeave={(e) => {
+                    e.target.style.transform = 'translateY(0)';
+                    e.target.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+                  }}>
+                    {language === 'zh' ? '📊 查看详情' : '📊 View Details'}
+                  </button>
+                  <button style={{
+                    padding: '12px 24px',
+                    backgroundColor: '#8b5cf6',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '12px',
+                    fontSize: '14px',
+                    fontWeight: 'bold',
+                    cursor: 'pointer',
+                    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                    transition: 'all 0.2s'
+                  }} onMouseEnter={(e) => {
+                    e.target.style.transform = 'translateY(-2px)';
+                    e.target.style.boxShadow = '0 6px 12px rgba(0,0,0,0.15)';
+                  }} onMouseLeave={(e) => {
+                    e.target.style.transform = 'translateY(0)';
+                    e.target.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+                  }}>
+                    {language === 'zh' ? '✨ 生成新任务' : '✨ Generate New Quest'}
+                  </button>
+                </div>
+              )}
               </div>
             </div>
           </div>
         </div>
-      </div>
     );
   };
 

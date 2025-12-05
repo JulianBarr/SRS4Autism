@@ -1,0 +1,61 @@
+Pattern,Category,AnchorWord,ExampleWords,KG_ID,Skill
+a,Short Vowel,bat,"hat, cat, bag, dad, man",phonics-a,phonics_decoding
+ai,Vowel Team,rain,"tail, wait, train, pain",phonics-ai,phonics_decoding
+all,Consonant Digraph/Blend,ball,"mall, wall, tall, fall, small",phonics-all,phonics_decoding
+ar,Consonant Digraph/Blend,car,"dark, park, farm, far, bar",phonics-ar,phonics_decoding
+au,Vowel Team,,,phonics-au,phonics_decoding
+aw,Vowel Team,crawl,"draw, saw, paw, jaw, hawk",phonics-aw,phonics_decoding
+ay,Vowel Team,,,phonics-ay,phonics_decoding
+b,Consonant,,,phonics-b,phonics_decoding
+c,Consonant,,,phonics-c,phonics_decoding
+ch,Consonant Digraph/Blend,chicken,"chips, chin, chop, such, much",phonics-ch,phonics_decoding
+ck,Consonant Digraph/Blend,duck,"kick, clock, lock, neck, back",phonics-ck,phonics_decoding
+d,Consonant,,,phonics-d,phonics_decoding
+dr,Consonant Digraph/Blend,drink,"wardrobe, drum, drop, drag, dress",phonics-dr,phonics_decoding
+e,Short Vowel,he,"she, be, me, we",phonics-e,phonics_decoding
+ea,Vowel Team,leaf,"sea, teacher, read, eat, tea",phonics-ea,phonics_decoding
+ed,Consonant Digraph/Blend,,,phonics-ed,phonics_decoding
+ee,Vowel Team,bee,"sleep, sheep, see, teeth, sweep",phonics-ee,phonics_decoding
+er,Consonant Digraph/Blend,teacher,"water, scooter, sister, under, burger",phonics-er,phonics_decoding
+ew,Vowel Team,,,phonics-ew,phonics_decoding
+f,Consonant,,,phonics-f,phonics_decoding
+g,Consonant,,,phonics-g,phonics_decoding
+h,Consonant,,,phonics-h,phonics_decoding
+i,Short Vowel,pig,"big, dig, hit, kid, if",phonics-i,phonics_decoding
+ir,Consonant Digraph/Blend,bird,"girl, dirty, third",phonics-ir,phonics_decoding
+j,Consonant,,,phonics-j,phonics_decoding
+k,Consonant,,,phonics-k,phonics_decoding
+kn,Consonant Digraph/Blend,,,phonics-kn,phonics_decoding
+l,Consonant,,,phonics-l,phonics_decoding
+le,Consonant Digraph/Blend,,,phonics-le,phonics_decoding
+m,Consonant,,,phonics-m,phonics_decoding
+n,Consonant,,,phonics-n,phonics_decoding
+ng,Consonant Digraph/Blend,wing,"sing, long, ring",phonics-ng,phonics_decoding
+o,Short Vowel,dog,"fox, box, hot, not, nod",phonics-o,phonics_decoding
+oa,Vowel Team,boat,"goat, soap, road, coat",phonics-oa,phonics_decoding
+oi,Vowel Team,,,phonics-oi,phonics_decoding
+oo,Vowel Team,book,"look, cook, good, foot, too",phonics-oo,phonics_decoding
+or,Consonant Digraph/Blend,or,"for, fork, horse, short, corn",phonics-or,phonics_decoding
+ou,Vowel Team,you,four,phonics-ou,phonics_decoding
+ow,Vowel Team,cow,"down, brown, how, now",phonics-ow,phonics_decoding
+oy,Vowel Team,boy,"toy, joy, oyster",phonics-oy,phonics_decoding
+p,Consonant,,,phonics-p,phonics_decoding
+ph,Consonant Digraph/Blend,,,phonics-ph,phonics_decoding
+q,Consonant,,,phonics-q,phonics_decoding
+r,Consonant,,,phonics-r,phonics_decoding
+s,Consonant,,,phonics-s,phonics_decoding
+sh,Consonant Digraph/Blend,fish,"ship, sheep, short",phonics-sh,phonics_decoding
+t,Consonant,,,phonics-t,phonics_decoding
+tch,Consonant Digraph/Blend,switch,"watch, catch, fetch, witch",phonics-tch,phonics_decoding
+th,Consonant Digraph/Blend,bath,"three, throw, thumb, teeth",phonics-th,phonics_decoding
+tion,Consonant Digraph/Blend,,,phonics-tion,phonics_decoding
+tr,Consonant Digraph/Blend,tree,"truck, train, trick, treat, try",phonics-tr,phonics_decoding
+u,Short Vowel,duck,"bus, cup, hug, run, sun",phonics-u,phonics_decoding
+ul,Consonant Digraph/Blend,,,phonics-ul,phonics_decoding
+ur,Consonant Digraph/Blend,,,phonics-ur,phonics_decoding
+v,Consonant,,,phonics-v,phonics_decoding
+w,Consonant,,,phonics-w,phonics_decoding
+wh,Consonant Digraph/Blend,what,"where, when, why, which",phonics-wh,phonics_decoding
+x,Consonant,,,phonics-x,phonics_decoding
+y,Consonant,my,"by, buy, guy, shy, fly",phonics-y,phonics_decoding
+z,Consonant,,,phonics-z,phonics_decoding
