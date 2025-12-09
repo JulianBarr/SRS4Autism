@@ -5146,6 +5146,99 @@ async def find_and_rename_image(request: Dict[str, Any]):
         return {"error": str(e), "image_file": ""}
 
 
+@app.get("/pinyin/english-vocab-suggestions")
+async def get_english_vocab_suggestions_for_pending():
+    """Get English vocabulary-based suggestions for pending pinyin syllables."""
+    import json
+    try:
+        matches_file = PROJECT_ROOT / "data" / "pending_syllable_english_matches.json"
+        if not matches_file.exists():
+            return {"matches": {}, "message": "No matches file found."}
+        with open(matches_file, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        return {
+            "matches": data.get("matches", {}),
+            "total_pending": data.get("total_pending", 0),
+            "matched": data.get("matched", 0),
+            "generated_at": data.get("generated_at", "")
+        }
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return {"matches": {}, "error": str(e)}
+
+
+@app.post("/pinyin/find-and-rename-image")
+async def find_and_rename_image(request: Dict[str, Any]):
+    """Find the image for a Chinese word and rename it to the English word."""
+    import shutil
+    from pathlib import Path
+    
+    chinese_word = request.get("chinese_word", "").strip()
+    english_word = request.get("english_word", "").strip().lower().replace(" ", "_")
+    
+    if not chinese_word or not english_word:
+        raise HTTPException(status_code=400, detail="chinese_word and english_word are required")
+    
+    try:
+        word_info = get_word_knowledge(chinese_word)
+        image_path = word_info.get("image_path") if word_info else None
+        
+        if not image_path:
+            word_image_map = get_word_image_map()
+            image_path = word_image_map.get(chinese_word)
+        
+        if not image_path:
+            return {"error": f"No image found for Chinese word: {chinese_word}", "image_file": ""}
+        
+        media_dirs = [
+            PROJECT_ROOT / "media" / "visual_images",
+            PROJECT_ROOT / "media" / "images",
+            PROJECT_ROOT / "media" / "pinyin",
+            PROJECT_ROOT / "media",
+        ]
+        
+        source_file = None
+        original_ext = None
+        
+        for media_dir in media_dirs:
+            potential_paths = [
+                media_dir / image_path,
+                media_dir / Path(image_path).name,
+                PROJECT_ROOT / image_path.lstrip("/"),
+            ]
+            
+            for path in potential_paths:
+                if path.exists() and path.is_file():
+                    source_file = path
+                    original_ext = source_file.suffix
+                    break
+            
+            if source_file:
+                break
+        
+        if not source_file:
+            return {"error": f"Image file not found: {image_path}", "image_file": ""}
+        
+        new_filename = f"{english_word}{original_ext}"
+        target_dir = PROJECT_ROOT / "media" / "pinyin"
+        target_dir.mkdir(parents=True, exist_ok=True)
+        target_file = target_dir / new_filename
+        
+        shutil.copy2(source_file, target_file)
+        
+        return {
+            "image_file": new_filename,
+            "original_path": str(source_file.relative_to(PROJECT_ROOT)),
+            "new_path": str(target_file.relative_to(PROJECT_ROOT))
+        }
+    
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return {"error": str(e), "image_file": ""}
+
+
 @app.put("/pinyin/gap-fill-suggestions")
 async def save_pinyin_gap_fill_suggestions(request: Dict[str, Any]):
     """
