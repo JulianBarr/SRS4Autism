@@ -125,10 +125,62 @@ const PinyinGapFillSuggestions = ({ profile, onProfileUpdate }) => {
   const [message, setMessage] = useState(null);
   // Track which image path alternative is being tried for each image to prevent infinite loops
   const [imagePathIndices, setImagePathIndices] = useState(new Map());
+  const [englishVocabSuggestions, setEnglishVocabSuggestions] = useState({});
+  const [selectedEnglishVocab, setSelectedEnglishVocab] = useState({}); // {syllable: {chinese, english, pinyin, concreteness}}
 
   useEffect(() => {
     loadSuggestions();
+    loadEnglishVocabSuggestions();
   }, []);
+
+  const loadEnglishVocabSuggestions = async () => {
+    try {
+      const response = await axios.get(`${API_BASE}/pinyin/english-vocab-suggestions`);
+      setEnglishVocabSuggestions(response.data.matches || {});
+    } catch (error) {
+      console.error('Error loading English vocab suggestions:', error);
+    }
+  };
+
+  const handleEnglishVocabSelection = async (syllable, selection) => {
+    setSelectedEnglishVocab(prev => ({
+      ...prev,
+      [syllable]: selection
+    }));
+    
+    // Find and rename the image for this word
+    let imageFile = '';
+    try {
+      const imageResponse = await axios.post(`${API_BASE}/pinyin/find-and-rename-image`, {
+        chinese_word: selection.chinese,
+        english_word: selection.english
+      });
+      
+      if (imageResponse.data.image_file) {
+        imageFile = imageResponse.data.image_file;
+      } else if (imageResponse.data.error) {
+        console.warn(`Could not find/rename image for ${selection.chinese}:`, imageResponse.data.error);
+      }
+    } catch (error) {
+      console.error('Error finding/renaming image:', error);
+      // Continue anyway - image is optional
+    }
+    
+    // Update the suggestion in the main list
+    const index = suggestions.findIndex(s => s.Syllable === syllable);
+    if (index !== -1) {
+      const updated = [...suggestions];
+      updated[index] = {
+        ...updated[index],
+        'Suggested Word': selection.chinese,
+        'Word Pinyin': selection.pinyin,
+        'Image File': imageFile || updated[index]['Image File'] || '',
+        'Has Image': imageFile ? 'Yes' : (updated[index]['Has Image'] || 'No'),
+        'approved': '' // Clear approval so user can review the change
+      };
+      setSuggestions(updated);
+    }
+  };
 
   const loadSuggestions = async () => {
     setLoading(true);
@@ -583,7 +635,60 @@ const PinyinGapFillSuggestions = ({ profile, onProfileUpdate }) => {
                         placeholder="输入汉字"
                       />
                     ) : (
-                      suggestion['Suggested Word'] || 'NONE'
+                      <>
+                        {/* Show English vocab suggestions if available (for ALL items, not just NONE) */}
+                        {englishVocabSuggestions[suggestion.Syllable] ? (
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                            <div style={{ fontSize: '11px', color: '#666', marginBottom: '4px', fontWeight: 'bold' }}>
+                              {suggestion['Suggested Word'] && suggestion['Suggested Word'] !== 'NONE' ? (
+                                <span style={{ color: '#ff9800' }}>当前: {suggestion['Suggested Word']}</span>
+                              ) : (
+                                <span style={{ color: '#f44336' }}>待选择</span>
+                              )}
+                            </div>
+                            {englishVocabSuggestions[suggestion.Syllable].map((option, idx) => (
+                              <label
+                                key={idx}
+                                style={{
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  gap: '8px',
+                                  padding: '6px',
+                                  borderRadius: '4px',
+                                  backgroundColor: selectedEnglishVocab[suggestion.Syllable]?.chinese === option.chinese ? '#e3f2fd' : 'transparent',
+                                  cursor: 'pointer',
+                                  border: option.chinese === suggestion['Suggested Word'] ? '2px solid #ff9800' : '1px solid transparent'
+                                }}
+                              >
+                                <input
+                                  type="radio"
+                                  name={`vocab-${suggestion.Syllable}`}
+                                  checked={selectedEnglishVocab[suggestion.Syllable]?.chinese === option.chinese}
+                                  onChange={() => handleEnglishVocabSelection(suggestion.Syllable, option)}
+                                />
+                                <span style={{ fontSize: '12px' }}>
+                                  <strong>{option.chinese}</strong> ({option.pinyin}) - {option.english}
+                                  {option.concreteness > 0 && (
+                                    <span style={{ color: '#4CAF50', marginLeft: '4px' }}>
+                                      [Concreteness: {option.concreteness.toFixed(2)}]
+                                    </span>
+                                  )}
+                                  {option.chinese === suggestion['Suggested Word'] && (
+                                    <span style={{ color: '#ff9800', marginLeft: '4px', fontWeight: 'bold' }}>(当前)</span>
+                                  )}
+                                </span>
+                              </label>
+                            ))}
+                          </div>
+                        ) : (
+                          // No English vocab suggestions available
+                          suggestion['Suggested Word'] && suggestion['Suggested Word'] !== 'NONE' ? (
+                            suggestion['Suggested Word']
+                          ) : (
+                            'NONE'
+                          )
+                        )}
+                      </>
                     )}
                   </td>
                   <td style={{ padding: '12px', border: '1px solid #ddd' }}>

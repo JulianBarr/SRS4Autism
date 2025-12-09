@@ -1,0 +1,3179 @@
+{
+  "matches": {
+    "bao": [
+      {
+        "english": "leopard",
+        "chinese": "豹",
+        "pinyin": "hua1 bao4",
+        "matched_syllable": "bao",
+        "concreteness": 5.0
+      },
+      {
+        "english": "croissant",
+        "chinese": "羊角面包",
+        "pinyin": "yang2 jiao3 mian4 bao1",
+        "matched_syllable": "bao",
+        "concreteness": 4.96
+      },
+      {
+        "english": "backpack",
+        "chinese": "背包",
+        "pinyin": "bei1 bao1",
+        "matched_syllable": "bao",
+        "concreteness": 4.96
+      }
+    ],
+    "biao": [
+      {
+        "english": "javelin",
+        "chinese": "标枪",
+        "pinyin": "biao1 qiang1",
+        "matched_syllable": "biao",
+        "concreteness": 4.9
+      },
+      {
+        "english": "darts",
+        "chinese": "飞镖",
+        "pinyin": "fei1 biao1",
+        "matched_syllable": "biao",
+        "concreteness": 4.83
+      },
+      {
+        "english": "sign",
+        "chinese": "符号",
+        "pinyin": "biao1 dian3 fu2 hao4",
+        "matched_syllable": "biao",
+        "concreteness": 4.62
+      }
+    ],
+    "bie": [
+      {
+        "english": "pin",
+        "chinese": "别针",
+        "pinyin": "bie2 zhen1",
+        "matched_syllable": "bie",
+        "concreteness": 4.92
+      },
+      {
+        "english": "exam",
+        "chinese": "考试",
+        "pinyin": "zhen1 bie2 kao3 shi4",
+        "matched_syllable": "bie",
+        "concreteness": 4.48
+      },
+      {
+        "english": "category",
+        "chinese": "类别",
+        "pinyin": "lei4 bie2",
+        "matched_syllable": "bie",
+        "concreteness": 2.82
+      }
+    ],
+    "bu": [
+      {
+        "english": "eagle",
+        "chinese": "鹰",
+        "pinyin": "bu4 jian4 tu4 zi5 bu4 sa1 ying1",
+        "matched_syllable": "bu",
+        "concreteness": 5.0
+      },
+      {
+        "english": "pig",
+        "chinese": "猪",
+        "pinyin": "bu4 pa4 shen2 yi1 yang4 de5 dui4 shou3 , jiu4 pa4 zhu1 yi1 yang4 de5 dui4 you3",
+        "matched_syllable": "bu",
+        "concreteness": 5.0
+      },
+      {
+        "english": "tree",
+        "chinese": "树",
+        "pinyin": "zhi3 jian4 shu4 mu4 , bu4 jian4 sen1 lin2",
+        "matched_syllable": "bu",
+        "concreteness": 5.0
+      }
+    ],
+    "ceng": [
+      {
+        "english": "layer",
+        "chinese": "层",
+        "pinyin": "yi1 ceng2",
+        "matched_syllable": "ceng",
+        "concreteness": 3.52
+      }
+    ],
+    "chang": [
+      {
+        "english": "flute",
+        "chinese": "长笛",
+        "pinyin": "chang2 di2",
+        "matched_syllable": "chang",
+        "concreteness": 5.0
+      },
+      {
+        "english": "sausage",
+        "chinese": "香肠",
+        "pinyin": "xiang1 chang2",
+        "matched_syllable": "chang",
+        "concreteness": 4.88
+      },
+      {
+        "english": "bench",
+        "chinese": "长椅",
+        "pinyin": "chang2 yi3",
+        "matched_syllable": "chang",
+        "concreteness": 4.87
+      }
+    ],
+    "chao": [
+      {
+        "english": "nest",
+        "chinese": "巢",
+        "pinyin": "qing1 chao2",
+        "matched_syllable": "chao",
+        "concreteness": 4.86
+      },
+      {
+        "english": "hive",
+        "chinese": "蜂巢",
+        "pinyin": "feng1 chao2",
+        "matched_syllable": "chao",
+        "concreteness": 4.83
+      },
+      {
+        "english": "wok",
+        "chinese": "炒锅",
+        "pinyin": "chao3 guo1",
+        "matched_syllable": "chao",
+        "concreteness": 4.57
+      }
+    ],
+    "chen": [
+      {
+        "english": "sink",
+        "chinese": "下沉",
+        "pinyin": "xia4 chen2",
+        "matched_syllable": "chen",
+        "concreteness": 4.74
+      },
+      {
+        "english": "dust",
+        "chinese": "灰尘",
+        "pinyin": "hui1 chen2",
+        "matched_syllable": "chen",
+        "concreteness": 4.4
+      },
+      {
+        "english": "bazaar",
+        "chinese": "市场",
+        "pinyin": "xia4 chen2 shi4 chang3",
+        "matched_syllable": "chen",
+        "concreteness": 3.63
+      }
+    ],
+    "chuang": [
+      {
+        "english": "trampoline",
+        "chinese": "蹦床",
+        "pinyin": "beng4 chuang2",
+        "matched_syllable": "chuang",
+        "concreteness": 5.0
+      },
+      {
+        "english": "bed",
+        "chinese": "床",
+        "pinyin": "shang4 xia4 chuang2",
+        "matched_syllable": "chuang",
+        "concreteness": 5.0
+      },
+      {
+        "english": "mattress",
+        "chinese": "床垫",
+        "pinyin": "chuang2 dian4",
+        "matched_syllable": "chuang",
+        "concreteness": 5.0
+      }
+    ],
+    "chun": [
+      {
+        "english": "lip",
+        "chinese": "唇",
+        "pinyin": "chun2 she2",
+        "matched_syllable": "chun",
+        "concreteness": 4.96
+      },
+      {
+        "english": "glaze",
+        "chinese": "釉",
+        "pinyin": "chun2 you4",
+        "matched_syllable": "chun",
+        "concreteness": 4.0
+      },
+      {
+        "english": "spring",
+        "chinese": "春天",
+        "pinyin": "chun1 tian1",
+        "matched_syllable": "chun",
+        "concreteness": 3.89
+      }
+    ],
+    "cong": [
+      {
+        "english": "jungle",
+        "chinese": "丛林",
+        "pinyin": "cong2 lin2",
+        "matched_syllable": "cong",
+        "concreteness": 4.66
+      },
+      {
+        "english": "twenty",
+        "chinese": "二十",
+        "pinyin": "yi1 bu4 er4 shi2 si4 shi3 , bu4 zhi1 cong2 he2 shuo1 qi3",
+        "matched_syllable": "cong",
+        "concreteness": 3.67
+      },
+      {
+        "english": "fourteen",
+        "chinese": "十四",
+        "pinyin": "yi1 bu4 er4 shi2 si4 shi3 , bu4 zhi1 cong2 he2 shuo1 qi3",
+        "matched_syllable": "cong",
+        "concreteness": 3.04
+      }
+    ],
+    "cu": [
+      {
+        "english": "vinegar",
+        "chinese": "醋",
+        "pinyin": "cu4 suan1",
+        "matched_syllable": "cu",
+        "concreteness": 4.89
+      },
+      {
+        "english": "blushing",
+        "chinese": "脸红",
+        "pinyin": "lian3 hong2 bo2 zi5 cu1",
+        "matched_syllable": "cu",
+        "concreteness": 3.72
+      },
+      {
+        "english": "urge",
+        "chinese": "敦促",
+        "pinyin": "dun1 cu4",
+        "matched_syllable": "cu",
+        "concreteness": 1.93
+      }
+    ],
+    "cui": [
+      {
+        "english": "lullaby",
+        "chinese": "催眠曲",
+        "pinyin": "cui1 mian2 qu3",
+        "matched_syllable": "cui",
+        "concreteness": 3.83
+      }
+    ],
+    "cuo": [
+      {
+        "english": "measure",
+        "chinese": "措施",
+        "pinyin": "cuo4 shi1",
+        "matched_syllable": "cuo",
+        "concreteness": 3.59
+      },
+      {
+        "english": "error",
+        "chinese": "错误",
+        "pinyin": "cuo4 wu4",
+        "matched_syllable": "cuo",
+        "concreteness": 2.68
+      },
+      {
+        "english": "miss",
+        "chinese": "错过",
+        "pinyin": "cuo4 guo4",
+        "matched_syllable": "cuo",
+        "concreteness": 2.54
+      }
+    ],
+    "dai": [
+      {
+        "english": "belt",
+        "chinese": "腰带",
+        "pinyin": "yao1 dai4",
+        "matched_syllable": "dai",
+        "concreteness": 4.9
+      },
+      {
+        "english": "tape",
+        "chinese": "磁带",
+        "pinyin": "he2 shi4 lu4 yin1 ci2 dai4",
+        "matched_syllable": "dai",
+        "concreteness": 4.9
+      },
+      {
+        "english": "glasses",
+        "chinese": "眼镜",
+        "pinyin": "dai4 mao4 yan3 jing4",
+        "matched_syllable": "dai",
+        "concreteness": 4.9
+      }
+    ],
+    "dang": [
+      {
+        "english": "intestine",
+        "chinese": "肠",
+        "pinyin": "hui2 chang2 dang4 qi4",
+        "matched_syllable": "dang",
+        "concreteness": 4.55
+      },
+      {
+        "english": "document",
+        "chinese": "文档",
+        "pinyin": "wen2 dang4",
+        "matched_syllable": "dang",
+        "concreteness": 4.41
+      },
+      {
+        "english": "rather",
+        "chinese": "相当",
+        "pinyin": "xiang1 dang1",
+        "matched_syllable": "dang",
+        "concreteness": 1.48
+      }
+    ],
+    "dao": [
+      {
+        "english": "island",
+        "chinese": "岛",
+        "pinyin": "dao3",
+        "matched_syllable": "dao",
+        "concreteness": 4.96
+      },
+      {
+        "english": "camel",
+        "chinese": "骆驼",
+        "pinyin": "ya1 si3 luo4 tuo5 de5 zui4 hou4 yi1 gen1 dao4 cao3",
+        "matched_syllable": "dao",
+        "concreteness": 4.93
+      },
+      {
+        "english": "knife",
+        "chinese": "刀",
+        "pinyin": "yi1 dao1 liang3 duan4",
+        "matched_syllable": "dao",
+        "concreteness": 4.9
+      }
+    ],
+    "dian": [
+      {
+        "english": "tv",
+        "chinese": "电视",
+        "pinyin": "Zhong1 guo2 Zhong1 yang1 Dian4 shi4 tai2",
+        "matched_syllable": "dian",
+        "concreteness": 5.0
+      },
+      {
+        "english": "flashlight",
+        "chinese": "手电筒",
+        "pinyin": "shou3 dian4 tong3",
+        "matched_syllable": "dian",
+        "concreteness": 5.0
+      },
+      {
+        "english": "mattress",
+        "chinese": "床垫",
+        "pinyin": "chuang2 dian4",
+        "matched_syllable": "dian",
+        "concreteness": 5.0
+      }
+    ],
+    "diao": [
+      {
+        "english": "bird",
+        "chinese": "鸟",
+        "pinyin": "diao3 ren2",
+        "matched_syllable": "diao",
+        "concreteness": 5.0
+      },
+      {
+        "english": "arrow",
+        "chinese": "箭",
+        "pinyin": "yi1 jian4 shuang1 diao1",
+        "matched_syllable": "diao",
+        "concreteness": 4.97
+      },
+      {
+        "english": "statue",
+        "chinese": "雕像",
+        "pinyin": "diao1 xiang4",
+        "matched_syllable": "diao",
+        "concreteness": 4.93
+      }
+    ],
+    "die": [
+      {
+        "english": "butterfly",
+        "chinese": "蝴蝶",
+        "pinyin": "hu2 die2",
+        "matched_syllable": "die",
+        "concreteness": 4.93
+      },
+      {
+        "english": "spy",
+        "chinese": "间谍",
+        "pinyin": "jian4 die2",
+        "matched_syllable": "die",
+        "concreteness": 4.14
+      },
+      {
+        "english": "fold",
+        "chinese": "折叠",
+        "pinyin": "zhe2 die2",
+        "matched_syllable": "die",
+        "concreteness": 4.13
+      }
+    ],
+    "dun": [
+      {
+        "english": "shield",
+        "chinese": "盾",
+        "pinyin": "U dun4",
+        "matched_syllable": "dun",
+        "concreteness": 4.66
+      },
+      {
+        "english": "dance",
+        "chinese": "舞蹈",
+        "pinyin": "Heng1 ding1 dun4 wu3 dao3 zheng4",
+        "matched_syllable": "dun",
+        "concreteness": 4.32
+      },
+      {
+        "english": "squat",
+        "chinese": "蹲",
+        "pinyin": "dun1",
+        "matched_syllable": "dun",
+        "concreteness": 4.32
+      }
+    ],
+    "fang": [
+      {
+        "english": "house",
+        "chinese": "房子",
+        "pinyin": "fang2 zi5",
+        "matched_syllable": "fang",
+        "concreteness": 5.0
+      },
+      {
+        "english": "kitchen",
+        "chinese": "厨房",
+        "pinyin": "chu2 fang2",
+        "matched_syllable": "fang",
+        "concreteness": 4.97
+      },
+      {
+        "english": "sword",
+        "chinese": "剑",
+        "pinyin": "shang4 fang1 bao3 jian4",
+        "matched_syllable": "fang",
+        "concreteness": 4.93
+      }
+    ],
+    "fo": [
+      {
+        "english": "monk",
+        "chinese": "僧",
+        "pinyin": "bu4 kan4 seng1 mian4 kan4 fo2 mian4",
+        "matched_syllable": "fo",
+        "concreteness": 4.35
+      },
+      {
+        "english": "buddha",
+        "chinese": "佛",
+        "pinyin": "Fo2 ye5",
+        "matched_syllable": "fo",
+        "concreteness": 0.0
+      }
+    ],
+    "fou": [
+      {
+        "english": "deny",
+        "chinese": "否定",
+        "pinyin": "fou3 ding4",
+        "matched_syllable": "fou",
+        "concreteness": 2.2
+      }
+    ],
+    "ga": [
+      {
+        "english": "rice",
+        "chinese": "米",
+        "pinyin": "ao4 mi3 ga1",
+        "matched_syllable": "ga",
+        "concreteness": 4.86
+      },
+      {
+        "english": "limb",
+        "chinese": "肢",
+        "pinyin": "ga1 zhi5 wo1",
+        "matched_syllable": "ga",
+        "concreteness": 4.64
+      }
+    ],
+    "gan": [
+      {
+        "english": "bean",
+        "chinese": "豆",
+        "pinyin": "gan1 bian1 si4 ji4 dou4",
+        "matched_syllable": "gan",
+        "concreteness": 5.0
+      },
+      {
+        "english": "oil",
+        "chinese": "油",
+        "pinyin": "san1 suan1 gan1 you2 zhi3",
+        "matched_syllable": "gan",
+        "concreteness": 4.93
+      },
+      {
+        "english": "ginger",
+        "chinese": "姜",
+        "pinyin": "gan1 jiang1",
+        "matched_syllable": "gan",
+        "concreteness": 4.92
+      }
+    ],
+    "gang": [
+      {
+        "english": "piano",
+        "chinese": "钢琴",
+        "pinyin": "jia1 liao4 gang1 qin2",
+        "matched_syllable": "gang",
+        "concreteness": 4.9
+      },
+      {
+        "english": "hall",
+        "chinese": "大厅",
+        "pinyin": "chu1 gang3 da4 ting1",
+        "matched_syllable": "gang",
+        "concreteness": 4.67
+      },
+      {
+        "english": "port",
+        "chinese": "港口",
+        "pinyin": "Shang4 hai3 Zhen4 hua2 Gang3 kou3 Ji1 xie4",
+        "matched_syllable": "gang",
+        "concreteness": 4.41
+      }
+    ],
+    "gu": [
+      {
+        "english": "skeleton",
+        "chinese": "骨骼",
+        "pinyin": "wai4 gu3 ge2",
+        "matched_syllable": "gu",
+        "concreteness": 4.97
+      },
+      {
+        "english": "steak",
+        "chinese": "牛排",
+        "pinyin": "ding1 gu3 niu2 pai2",
+        "matched_syllable": "gu",
+        "concreteness": 4.96
+      },
+      {
+        "english": "drum",
+        "chinese": "鼓",
+        "pinyin": "yi1 gu3 zuo4 qi4",
+        "matched_syllable": "gu",
+        "concreteness": 4.96
+      }
+    ],
+    "gua": [
+      {
+        "english": "camera",
+        "chinese": "相机",
+        "pinyin": "sha3 gua1 xiang4 ji1",
+        "matched_syllable": "gua",
+        "concreteness": 5.0
+      },
+      {
+        "english": "peg",
+        "chinese": "挂钩",
+        "pinyin": "gua4 gou1",
+        "matched_syllable": "gua",
+        "concreteness": 4.93
+      },
+      {
+        "english": "watermelon",
+        "chinese": "西瓜",
+        "pinyin": "xi1 gua1",
+        "matched_syllable": "gua",
+        "concreteness": 4.89
+      }
+    ],
+    "guai": [
+      {
+        "english": "crutch",
+        "chinese": "拐杖",
+        "pinyin": "guai3 zhang4",
+        "matched_syllable": "guai",
+        "concreteness": 4.5
+      },
+      {
+        "english": "disobedient",
+        "chinese": "忤",
+        "pinyin": "guai1 wu3",
+        "matched_syllable": "guai",
+        "concreteness": 2.19
+      },
+      {
+        "english": "eerie",
+        "chinese": "怪异",
+        "pinyin": "guai4 yi4",
+        "matched_syllable": "guai",
+        "concreteness": 1.63
+      }
+    ],
+    "hang": [
+      {
+        "english": "spacesuit",
+        "chinese": "宇航服",
+        "pinyin": "yu3 hang2 fu2",
+        "matched_syllable": "hang",
+        "concreteness": 4.96
+      },
+      {
+        "english": "bank",
+        "chinese": "银行",
+        "pinyin": "Shang4 hai3 Pu3 dong1 Fa1 zhan3 Yin2 hang2",
+        "matched_syllable": "hang",
+        "concreteness": 4.78
+      },
+      {
+        "english": "astronaut",
+        "chinese": "宇航员",
+        "pinyin": "yu3 hang2 yuan2",
+        "matched_syllable": "hang",
+        "concreteness": 4.75
+      }
+    ],
+    "hei": [
+      {
+        "english": "chimpanzee",
+        "chinese": "黑猩猩",
+        "pinyin": "wo1 hei1 xing1 xing5",
+        "matched_syllable": "hei",
+        "concreteness": 4.96
+      }
+    ],
+    "hen": [
+      {
+        "english": "scar",
+        "chinese": "瘢痕",
+        "pinyin": "ban1 hen2",
+        "matched_syllable": "hen",
+        "concreteness": 4.74
+      },
+      {
+        "english": "scratch",
+        "chinese": "划痕",
+        "pinyin": "hua2 hen2",
+        "matched_syllable": "hen",
+        "concreteness": 4.16
+      },
+      {
+        "english": "trace",
+        "chinese": "痕迹",
+        "pinyin": "bu4 luo4 hen2 ji4",
+        "matched_syllable": "hen",
+        "concreteness": 3.66
+      }
+    ],
+    "huan": [
+      {
+        "english": "swap",
+        "chinese": "交换",
+        "pinyin": "bu4 deng3 jia4 jiao1 huan4",
+        "matched_syllable": "huan",
+        "concreteness": 3.85
+      },
+      {
+        "english": "math",
+        "chinese": "数学",
+        "pinyin": "jiao1 huan4 dai4 shu4 xue2",
+        "matched_syllable": "huan",
+        "concreteness": 3.15
+      },
+      {
+        "english": "wake",
+        "chinese": "唤醒",
+        "pinyin": "huan4 xing3",
+        "matched_syllable": "huan",
+        "concreteness": 3.11
+      }
+    ],
+    "huang": [
+      {
+        "english": "throat",
+        "chinese": "喉",
+        "pinyin": "huang2 hou2",
+        "matched_syllable": "huang",
+        "concreteness": 4.97
+      },
+      {
+        "english": "cucumber",
+        "chinese": "黄瓜",
+        "pinyin": "huang2 gua1",
+        "matched_syllable": "huang",
+        "concreteness": 4.83
+      },
+      {
+        "english": "yolk",
+        "chinese": "蛋黄",
+        "pinyin": "dan4 huang2 su4",
+        "matched_syllable": "huang",
+        "concreteness": 4.78
+      }
+    ],
+    "hui": [
+      {
+        "english": "beak",
+        "chinese": "喙",
+        "pinyin": "hui4",
+        "matched_syllable": "hui",
+        "concreteness": 4.96
+      },
+      {
+        "english": "badge",
+        "chinese": "徽章",
+        "pinyin": "hui1 zhang1",
+        "matched_syllable": "hui",
+        "concreteness": 4.93
+      },
+      {
+        "english": "feather",
+        "chinese": "羽毛",
+        "pinyin": "Guo2 ji4 Yu3 mao2 qiu2 Lian2 he2 hui4",
+        "matched_syllable": "hui",
+        "concreteness": 4.9
+      }
+    ],
+    "jiao": [
+      {
+        "english": "banana",
+        "chinese": "香蕉",
+        "pinyin": "xiang1 jiao1",
+        "matched_syllable": "jiao",
+        "concreteness": 5.0
+      },
+      {
+        "english": "plank",
+        "chinese": "板",
+        "pinyin": "jiao4 ban3",
+        "matched_syllable": "jiao",
+        "concreteness": 5.0
+      },
+      {
+        "english": "croissant",
+        "chinese": "羊角面包",
+        "pinyin": "yang2 jiao3 mian4 bao1",
+        "matched_syllable": "jiao",
+        "concreteness": 4.96
+      }
+    ],
+    "jie": [
+      {
+        "english": "eyelash",
+        "chinese": "睫毛",
+        "pinyin": "yan3 jie2 mao2",
+        "matched_syllable": "jie",
+        "concreteness": 5.0
+      },
+      {
+        "english": "map",
+        "chinese": "地图",
+        "pinyin": "shi4 jie4 di4 tu2",
+        "matched_syllable": "jie",
+        "concreteness": 4.93
+      },
+      {
+        "english": "knot",
+        "chinese": "结",
+        "pinyin": "jie2 gun4",
+        "matched_syllable": "jie",
+        "concreteness": 4.87
+      }
+    ],
+    "jue": [
+      {
+        "english": "donkey",
+        "chinese": "驴",
+        "pinyin": "ren2 jia1 qian1 lu:2 ni3 ba2 jue2",
+        "matched_syllable": "jue",
+        "concreteness": 5.0
+      },
+      {
+        "english": "digger",
+        "chinese": "挖掘机",
+        "pinyin": "wa1 jue2 ji1",
+        "matched_syllable": "jue",
+        "concreteness": 4.29
+      },
+      {
+        "english": "sever",
+        "chinese": "断绝",
+        "pinyin": "duan4 jue2",
+        "matched_syllable": "jue",
+        "concreteness": 4.0
+      }
+    ],
+    "kan": [
+      {
+        "english": "monk",
+        "chinese": "僧",
+        "pinyin": "bu4 kan4 seng1 mian4 kan4 fo2 mian4",
+        "matched_syllable": "kan",
+        "concreteness": 4.35
+      },
+      {
+        "english": "gatekeeper",
+        "chinese": "看门人",
+        "pinyin": "kan1 men2 ren2",
+        "matched_syllable": "kan",
+        "concreteness": 4.21
+      },
+      {
+        "english": "story",
+        "chinese": "故事",
+        "pinyin": "Kan3 te4 bo2 lei2 Gu4 shi4 Ji2",
+        "matched_syllable": "kan",
+        "concreteness": 3.3
+      }
+    ],
+    "kang": [
+      {
+        "english": "resist",
+        "chinese": "抵抗",
+        "pinyin": "bu4 di3 kang4 zhu3 yi4",
+        "matched_syllable": "kang",
+        "concreteness": 2.78
+      }
+    ],
+    "kua": [
+      {
+        "english": "stride",
+        "chinese": "跨步",
+        "pinyin": "kua4 bu4",
+        "matched_syllable": "kua",
+        "concreteness": 3.81
+      }
+    ],
+    "kuan": [
+      {
+        "english": "dolphin",
+        "chinese": "海豚",
+        "pinyin": "kuan1 wen3 hai3 tun2",
+        "matched_syllable": "kuan",
+        "concreteness": 4.96
+      },
+      {
+        "english": "width",
+        "chinese": "宽度",
+        "pinyin": "kuan1 du4",
+        "matched_syllable": "kuan",
+        "concreteness": 3.64
+      },
+      {
+        "english": "donation",
+        "chinese": "捐款",
+        "pinyin": "juan1 kuan3 zhe3",
+        "matched_syllable": "kuan",
+        "concreteness": 3.32
+      }
+    ],
+    "kuang": [
+      {
+        "english": "frame",
+        "chinese": "框架",
+        "pinyin": "kuang4 jia4",
+        "matched_syllable": "kuang",
+        "concreteness": 4.3
+      },
+      {
+        "english": "miner",
+        "chinese": "矿工",
+        "pinyin": "kuang4 gong1",
+        "matched_syllable": "kuang",
+        "concreteness": 4.3
+      }
+    ],
+    "kuo": [
+      {
+        "english": "weapon",
+        "chinese": "武器",
+        "pinyin": "Bu4 Kuo4 san4 He2 wu3 qi4 Tiao2 yue1",
+        "matched_syllable": "kuo",
+        "concreteness": 4.76
+      },
+      {
+        "english": "silhouette",
+        "chinese": "轮廓",
+        "pinyin": "sheng1 diao4 lun2 kuo4",
+        "matched_syllable": "kuo",
+        "concreteness": 4.57
+      },
+      {
+        "english": "expand",
+        "chinese": "扩张",
+        "pinyin": "kuo4 zhang1",
+        "matched_syllable": "kuo",
+        "concreteness": 3.36
+      }
+    ],
+    "liang": [
+      {
+        "english": "knife",
+        "chinese": "刀",
+        "pinyin": "yi1 dao1 liang3 duan4",
+        "matched_syllable": "liang",
+        "concreteness": 4.9
+      },
+      {
+        "english": "moon",
+        "chinese": "月亮",
+        "pinyin": "yue4 liang5",
+        "matched_syllable": "liang",
+        "concreteness": 4.9
+      },
+      {
+        "english": "cobbler",
+        "chinese": "皮匠",
+        "pinyin": "san1 ge4 chou4 pi2 jiang5 , sheng4 guo4 yi1 ge4 Zhu1 ge3 Liang4",
+        "matched_syllable": "liang",
+        "concreteness": 4.53
+      }
+    ],
+    "lou": [
+      {
+        "english": "stairs",
+        "chinese": "楼梯",
+        "pinyin": "lou2 ti1",
+        "matched_syllable": "lou",
+        "concreteness": 5.0
+      },
+      {
+        "english": "apartment",
+        "chinese": "公寓",
+        "pinyin": "gong1 yu4 lou2",
+        "matched_syllable": "lou",
+        "concreteness": 4.9
+      },
+      {
+        "english": "funnel",
+        "chinese": "漏斗",
+        "pinyin": "lou4 dou3",
+        "matched_syllable": "lou",
+        "concreteness": 4.52
+      }
+    ],
+    "mai": [
+      {
+        "english": "wheat",
+        "chinese": "小麦",
+        "pinyin": "xiao3 mai4",
+        "matched_syllable": "mai",
+        "concreteness": 4.89
+      },
+      {
+        "english": "microphone",
+        "chinese": "麦克风",
+        "pinyin": "mai4 ke4 feng1",
+        "matched_syllable": "mai",
+        "concreteness": 4.88
+      },
+      {
+        "english": "hammer",
+        "chinese": "锤",
+        "pinyin": "yi1 chui2 zi5 mai3 mai4",
+        "matched_syllable": "mai",
+        "concreteness": 4.77
+      }
+    ],
+    "meng": [
+      {
+        "english": "overcast",
+        "chinese": "灰蒙蒙",
+        "pinyin": "hui1 meng1 meng1",
+        "matched_syllable": "meng",
+        "concreteness": 4.04
+      },
+      {
+        "english": "pounce",
+        "chinese": "猛扑",
+        "pinyin": "meng3 pu1",
+        "matched_syllable": "meng",
+        "concreteness": 3.66
+      },
+      {
+        "english": "swoop",
+        "chinese": "猛扑",
+        "pinyin": "meng3 pu1",
+        "matched_syllable": "meng",
+        "concreteness": 3.19
+      }
+    ],
+    "miao": [
+      {
+        "english": "seedling",
+        "chinese": "幼苗",
+        "pinyin": "you4 miao2",
+        "matched_syllable": "miao",
+        "concreteness": 4.56
+      },
+      {
+        "english": "scan",
+        "chinese": "扫描",
+        "pinyin": "sao3 miao2",
+        "matched_syllable": "miao",
+        "concreteness": 3.48
+      }
+    ],
+    "ming": [
+      {
+        "english": "cemetery",
+        "chinese": "公墓",
+        "pinyin": "Ba1 bao3 shan1 Ge2 ming4 Gong1 mu4",
+        "matched_syllable": "ming",
+        "concreteness": 4.93
+      },
+      {
+        "english": "vitamin",
+        "chinese": "维他命",
+        "pinyin": "wei2 ta1 ming4",
+        "matched_syllable": "ming",
+        "concreteness": 4.48
+      },
+      {
+        "english": "autograph",
+        "chinese": "签名",
+        "pinyin": "qian1 ming2",
+        "matched_syllable": "ming",
+        "concreteness": 4.23
+      }
+    ],
+    "mo": [
+      {
+        "english": "motorcycle",
+        "chinese": "摩托车",
+        "pinyin": "pian1 san1 lun2 mo2 tuo1 che1",
+        "matched_syllable": "mo",
+        "concreteness": 4.97
+      },
+      {
+        "english": "soap",
+        "chinese": "肥皂",
+        "pinyin": "fei2 zao4 mo4",
+        "matched_syllable": "mo",
+        "concreteness": 4.93
+      },
+      {
+        "english": "desert",
+        "chinese": "沙漠",
+        "pinyin": "sha1 mo4",
+        "matched_syllable": "mo",
+        "concreteness": 4.86
+      }
+    ],
+    "na": [
+      {
+        "english": "cashier",
+        "chinese": "出纳员",
+        "pinyin": "chu1 na4 yuan2",
+        "matched_syllable": "na",
+        "concreteness": 4.89
+      },
+      {
+        "english": "fetch",
+        "chinese": "拿来",
+        "pinyin": "na2 lai2",
+        "matched_syllable": "na",
+        "concreteness": 3.42
+      },
+      {
+        "english": "take",
+        "chinese": "拿",
+        "pinyin": "na2 dao4",
+        "matched_syllable": "na",
+        "concreteness": 3.06
+      }
+    ],
+    "nang": [
+      {
+        "english": "capsule",
+        "chinese": "胶囊",
+        "pinyin": "jiao1 nang2",
+        "matched_syllable": "nang",
+        "concreteness": 4.52
+      }
+    ],
+    "nei": [
+      {
+        "english": "underwear",
+        "chinese": "内衣",
+        "pinyin": "nei4 yi1",
+        "matched_syllable": "nei",
+        "concreteness": 4.96
+      },
+      {
+        "english": "wrench",
+        "chinese": "扳手",
+        "pinyin": "nei4 liu4 jiao3 ban1 shou3",
+        "matched_syllable": "nei",
+        "concreteness": 4.93
+      },
+      {
+        "english": "cabinet",
+        "chinese": "内阁",
+        "pinyin": "nei4 ge2",
+        "matched_syllable": "nei",
+        "concreteness": 4.89
+      }
+    ],
+    "nian": [
+      {
+        "english": "snake",
+        "chinese": "蛇",
+        "pinyin": "yi1 nian2 bei4 she2 yao3 , shi2 nian2 pa4 jing3 sheng2",
+        "matched_syllable": "nian",
+        "concreteness": 5.0
+      },
+      {
+        "english": "clay",
+        "chinese": "黏土",
+        "pinyin": "nian2 tu3",
+        "matched_syllable": "nian",
+        "concreteness": 4.93
+      },
+      {
+        "english": "monument",
+        "chinese": "纪念碑",
+        "pinyin": "Ren2 min2 Ying1 xiong2 Ji4 nian4 bei1",
+        "matched_syllable": "nian",
+        "concreteness": 4.58
+      }
+    ],
+    "ning": [
+      {
+        "english": "gel",
+        "chinese": "凝胶",
+        "pinyin": "ning2 jiao1",
+        "matched_syllable": "ning",
+        "concreteness": 4.72
+      },
+      {
+        "english": "serenity",
+        "chinese": "宁静",
+        "pinyin": "ning2 jing4",
+        "matched_syllable": "ning",
+        "concreteness": 1.62
+      }
+    ],
+    "niu": [
+      {
+        "english": "jeans",
+        "chinese": "牛仔裤",
+        "pinyin": "niu2 zai3 ku4",
+        "matched_syllable": "niu",
+        "concreteness": 5.0
+      },
+      {
+        "english": "button",
+        "chinese": "按钮",
+        "pinyin": "an4 niu3",
+        "matched_syllable": "niu",
+        "concreteness": 4.96
+      },
+      {
+        "english": "cow",
+        "chinese": "奶牛",
+        "pinyin": "nai3 niu2",
+        "matched_syllable": "niu",
+        "concreteness": 4.96
+      }
+    ],
+    "nong": [
+      {
+        "english": "stain",
+        "chinese": "弄脏",
+        "pinyin": "nong4 zang1",
+        "matched_syllable": "nong",
+        "concreteness": 4.59
+      },
+      {
+        "english": "farm",
+        "chinese": "农场",
+        "pinyin": "Dong4 wu4 Nong2 chang3",
+        "matched_syllable": "nong",
+        "concreteness": 4.59
+      },
+      {
+        "english": "farmer",
+        "chinese": "农民",
+        "pinyin": "nong2 min2 gong1",
+        "matched_syllable": "nong",
+        "concreteness": 4.54
+      }
+    ],
+    "nu": [
+      {
+        "english": "bawl",
+        "chinese": "呶",
+        "pinyin": "nu3",
+        "matched_syllable": "nu",
+        "concreteness": 3.52
+      },
+      {
+        "english": "huff",
+        "chinese": "怒气冲冲",
+        "pinyin": "nu4 qi4 chong1 chong1",
+        "matched_syllable": "nu",
+        "concreteness": 3.32
+      },
+      {
+        "english": "rage",
+        "chinese": "愤怒",
+        "pinyin": "fen4 nu4",
+        "matched_syllable": "nu",
+        "concreteness": 3.13
+      }
+    ],
+    "nuo": [
+      {
+        "english": "coward",
+        "chinese": "懦夫",
+        "pinyin": "nuo4 fu1",
+        "matched_syllable": "nuo",
+        "concreteness": 2.93
+      },
+      {
+        "english": "wimp",
+        "chinese": "懦夫",
+        "pinyin": "nuo4 fu1",
+        "matched_syllable": "nuo",
+        "concreteness": 2.9
+      },
+      {
+        "english": "promise",
+        "chinese": "承诺",
+        "pinyin": "cheng2 nuo4",
+        "matched_syllable": "nuo",
+        "concreteness": 2.09
+      }
+    ],
+    "pai": [
+      {
+        "english": "steak",
+        "chinese": "牛排",
+        "pinyin": "ding1 gu3 niu2 pai2",
+        "matched_syllable": "pai",
+        "concreteness": 4.96
+      },
+      {
+        "english": "volleyball",
+        "chinese": "排球",
+        "pinyin": "pai2 qiu2",
+        "matched_syllable": "pai",
+        "concreteness": 4.93
+      },
+      {
+        "english": "slap",
+        "chinese": "拍击",
+        "pinyin": "pai1 ji1",
+        "matched_syllable": "pai",
+        "concreteness": 4.72
+      }
+    ],
+    "pang": [
+      {
+        "english": "crab",
+        "chinese": "螃蟹",
+        "pinyin": "pang2 xie4",
+        "matched_syllable": "pang",
+        "concreteness": 4.9
+      },
+      {
+        "english": "pound",
+        "chinese": "磅",
+        "pinyin": "pang2",
+        "matched_syllable": "pang",
+        "concreteness": 4.61
+      },
+      {
+        "english": "eat",
+        "chinese": "吃",
+        "pinyin": "yi1 kou3 chi1 bu4 cheng2 pang4 zi5",
+        "matched_syllable": "pang",
+        "concreteness": 4.44
+      }
+    ],
+    "pao": [
+      {
+        "english": "lamp",
+        "chinese": "灯",
+        "pinyin": "deng1 pao4",
+        "matched_syllable": "pao",
+        "concreteness": 4.97
+      },
+      {
+        "english": "bulb",
+        "chinese": "电灯泡",
+        "pinyin": "dian4 deng1 pao4",
+        "matched_syllable": "pao",
+        "concreteness": 4.93
+      },
+      {
+        "english": "treadmill",
+        "chinese": "跑步机",
+        "pinyin": "pao3 bu4 ji1",
+        "matched_syllable": "pao",
+        "concreteness": 4.93
+      }
+    ],
+    "pei": [
+      {
+        "english": "match",
+        "chinese": "匹配",
+        "pinyin": "pi3 pei4",
+        "matched_syllable": "pei",
+        "concreteness": 4.14
+      },
+      {
+        "english": "appliances",
+        "chinese": "电器",
+        "pinyin": "pei4 dian4 qi4",
+        "matched_syllable": "pei",
+        "concreteness": 0.0
+      }
+    ],
+    "piao": [
+      {
+        "english": "ladybug",
+        "chinese": "瓢虫",
+        "pinyin": "qi1 xing1 piao2 chong2",
+        "matched_syllable": "piao",
+        "concreteness": 4.92
+      },
+      {
+        "english": "stamp",
+        "chinese": "邮票",
+        "pinyin": "you2 piao4",
+        "matched_syllable": "piao",
+        "concreteness": 4.7
+      },
+      {
+        "english": "ticket",
+        "chinese": "票",
+        "pinyin": "san1 lian2 shi4 fa1 piao4",
+        "matched_syllable": "piao",
+        "concreteness": 4.7
+      }
+    ],
+    "pin": [
+      {
+        "english": "platter",
+        "chinese": "拼盘",
+        "pinyin": "pin1 pan2",
+        "matched_syllable": "pin",
+        "concreteness": 4.93
+      },
+      {
+        "english": "pot",
+        "chinese": "锅",
+        "pinyin": "yi1 pin3 guo1",
+        "matched_syllable": "pin",
+        "concreteness": 4.81
+      },
+      {
+        "english": "medicine",
+        "chinese": "药品",
+        "pinyin": "zhuan1 li4 yao4 pin3",
+        "matched_syllable": "pin",
+        "concreteness": 4.79
+      }
+    ],
+    "ping": [
+      {
+        "english": "apple",
+        "chinese": "苹果",
+        "pinyin": "ping2 guo3 li2",
+        "matched_syllable": "ping",
+        "concreteness": 5.0
+      },
+      {
+        "english": "vase",
+        "chinese": "花瓶",
+        "pinyin": "hua1 ping2",
+        "matched_syllable": "ping",
+        "concreteness": 5.0
+      },
+      {
+        "english": "computer",
+        "chinese": "电脑",
+        "pinyin": "Ping2 guo3 dian4 nao3",
+        "matched_syllable": "ping",
+        "concreteness": 4.93
+      }
+    ],
+    "pu": [
+      {
+        "english": "grape",
+        "chinese": "葡萄",
+        "pinyin": "Pu2 tao2 ya2 ren2",
+        "matched_syllable": "pu",
+        "concreteness": 5.0
+      },
+      {
+        "english": "waterfall",
+        "chinese": "瀑布",
+        "pinyin": "xiao3 pu4 bu4",
+        "matched_syllable": "pu",
+        "concreteness": 4.9
+      },
+      {
+        "english": "wine",
+        "chinese": "葡萄酒",
+        "pinyin": "pu2 tao5 jiu3",
+        "matched_syllable": "pu",
+        "concreteness": 4.79
+      }
+    ],
+    "qian": [
+      {
+        "english": "donkey",
+        "chinese": "驴",
+        "pinyin": "ren2 jia1 qian1 lu:2 ni3 ba2 jue2",
+        "matched_syllable": "qian",
+        "concreteness": 5.0
+      },
+      {
+        "english": "toothpick",
+        "chinese": "牙签",
+        "pinyin": "ya2 qian1",
+        "matched_syllable": "qian",
+        "concreteness": 4.93
+      },
+      {
+        "english": "pliers",
+        "chinese": "钳",
+        "pinyin": "qian2 zi5",
+        "matched_syllable": "qian",
+        "concreteness": 4.93
+      }
+    ],
+    "qiang": [
+      {
+        "english": "javelin",
+        "chinese": "标枪",
+        "pinyin": "biao1 qiang1",
+        "matched_syllable": "qiang",
+        "concreteness": 4.9
+      },
+      {
+        "english": "pistol",
+        "chinese": "手枪",
+        "pinyin": "shou3 qiang1",
+        "matched_syllable": "qiang",
+        "concreteness": 4.89
+      },
+      {
+        "english": "spine",
+        "chinese": "脊柱",
+        "pinyin": "qiang2 zhi2 xing4 ji3 zhu4 yan2",
+        "matched_syllable": "qiang",
+        "concreteness": 4.88
+      }
+    ],
+    "qiao": [
+      {
+        "english": "bridge",
+        "chinese": "桥",
+        "pinyin": "H qiao2",
+        "matched_syllable": "qiao",
+        "concreteness": 4.97
+      },
+      {
+        "english": "seesaw",
+        "chinese": "跷跷板",
+        "pinyin": "qiao1 qiao1 ban3",
+        "matched_syllable": "qiao",
+        "concreteness": 4.92
+      },
+      {
+        "english": "drawbridge",
+        "chinese": "吊桥",
+        "pinyin": "diao4 qiao2",
+        "matched_syllable": "qiao",
+        "concreteness": 4.89
+      }
+    ],
+    "qie": [
+      {
+        "english": "ketchup",
+        "chinese": "番茄酱",
+        "pinyin": "fan1 qie2 jiang4",
+        "matched_syllable": "qie",
+        "concreteness": 5.0
+      },
+      {
+        "english": "eggplant",
+        "chinese": "茄子",
+        "pinyin": "shao1 qie2 zi5",
+        "matched_syllable": "qie",
+        "concreteness": 4.97
+      },
+      {
+        "english": "cut",
+        "chinese": "切",
+        "pinyin": "yi1 dao1 qie1",
+        "matched_syllable": "qie",
+        "concreteness": 4.55
+      }
+    ],
+    "qing": [
+      {
+        "english": "frog",
+        "chinese": "青蛙",
+        "pinyin": "qing1 wa1",
+        "matched_syllable": "qing",
+        "concreteness": 5.0
+      },
+      {
+        "english": "clock",
+        "chinese": "钟",
+        "pinyin": "yi1 jian4 zhong1 qing2",
+        "matched_syllable": "qing",
+        "concreteness": 5.0
+      },
+      {
+        "english": "bell",
+        "chinese": "钟",
+        "pinyin": "yi1 jian4 zhong1 qing2",
+        "matched_syllable": "qing",
+        "concreteness": 4.96
+      }
+    ],
+    "quan": [
+      {
+        "english": "wreath",
+        "chinese": "花圈",
+        "pinyin": "hua1 quan1",
+        "matched_syllable": "quan",
+        "concreteness": 4.93
+      },
+      {
+        "english": "fist",
+        "chinese": "拳头",
+        "pinyin": "quan2 tou5",
+        "matched_syllable": "quan",
+        "concreteness": 4.93
+      },
+      {
+        "english": "cereal",
+        "chinese": "谷物",
+        "pinyin": "quan2 gu3 wu4",
+        "matched_syllable": "quan",
+        "concreteness": 4.83
+      }
+    ],
+    "que": [
+      {
+        "english": "peacock",
+        "chinese": "孔雀",
+        "pinyin": "kong3 que4",
+        "matched_syllable": "que",
+        "concreteness": 5.0
+      },
+      {
+        "english": "chisel",
+        "chinese": "凿",
+        "pinyin": "que4 zao2",
+        "matched_syllable": "que",
+        "concreteness": 4.63
+      },
+      {
+        "english": "thunderbolt",
+        "chinese": "霹雳",
+        "pinyin": "lie4 que1 pi1 li4",
+        "matched_syllable": "que",
+        "concreteness": 4.28
+      }
+    ],
+    "qun": [
+      {
+        "english": "dress",
+        "chinese": "裙子",
+        "pinyin": "qun2 zi5",
+        "matched_syllable": "qun",
+        "concreteness": 4.93
+      },
+      {
+        "english": "apron",
+        "chinese": "围裙",
+        "pinyin": "wei2 qun2",
+        "matched_syllable": "qun",
+        "concreteness": 4.87
+      },
+      {
+        "english": "skirt",
+        "chinese": "裙子",
+        "pinyin": "qun2 zi5",
+        "matched_syllable": "qun",
+        "concreteness": 4.82
+      }
+    ],
+    "ran": [
+      {
+        "english": "flask",
+        "chinese": "烧瓶",
+        "pinyin": "ran2 shao1 ping2",
+        "matched_syllable": "ran",
+        "concreteness": 4.79
+      },
+      {
+        "english": "breathe",
+        "chinese": "呼吸",
+        "pinyin": "shang4 hu1 xi1 dao4 gan3 ran3",
+        "matched_syllable": "ran",
+        "concreteness": 4.07
+      },
+      {
+        "english": "ignite",
+        "chinese": "点燃",
+        "pinyin": "dian3 ran2",
+        "matched_syllable": "ran",
+        "concreteness": 4.04
+      }
+    ],
+    "rang": [
+      {
+        "english": "soil",
+        "chinese": "土壤",
+        "pinyin": "tu3 rang3",
+        "matched_syllable": "rang",
+        "concreteness": 4.87
+      },
+      {
+        "english": "budge",
+        "chinese": "让步",
+        "pinyin": "rang4 bu4",
+        "matched_syllable": "rang",
+        "concreteness": 2.65
+      }
+    ],
+    "rao": [
+      {
+        "english": "disturb",
+        "chinese": "打扰",
+        "pinyin": "da3 rao3",
+        "matched_syllable": "rao",
+        "concreteness": 3.04
+      },
+      {
+        "english": "bother",
+        "chinese": "打扰",
+        "pinyin": "da3 rao3",
+        "matched_syllable": "rao",
+        "concreteness": 2.0
+      }
+    ],
+    "reng": [
+      {
+        "english": "throw",
+        "chinese": "扔",
+        "pinyin": "reng1 xia4",
+        "matched_syllable": "reng",
+        "concreteness": 4.04
+      }
+    ],
+    "rong": [
+      {
+        "english": "container",
+        "chinese": "容器",
+        "pinyin": "rong2 qi4",
+        "matched_syllable": "rong",
+        "concreteness": 4.85
+      },
+      {
+        "english": "length",
+        "chinese": "长度",
+        "pinyin": "rong3 chang2 du4",
+        "matched_syllable": "rong",
+        "concreteness": 4.07
+      },
+      {
+        "english": "melt",
+        "chinese": "熔化",
+        "pinyin": "rong2 hua4",
+        "matched_syllable": "rong",
+        "concreteness": 3.96
+      }
+    ],
+    "ru": [
+      {
+        "english": "worm",
+        "chinese": "蠕虫",
+        "pinyin": "ru2 chong2",
+        "matched_syllable": "ru",
+        "concreteness": 4.9
+      },
+      {
+        "english": "juice",
+        "chinese": "汁",
+        "pinyin": "ru3 zhi1",
+        "matched_syllable": "ru",
+        "concreteness": 4.89
+      },
+      {
+        "english": "hamster",
+        "chinese": "仓鼠",
+        "pinyin": "zhu1 ru2 cang1 shu3",
+        "matched_syllable": "ru",
+        "concreteness": 4.86
+      }
+    ],
+    "ruan": [
+      {
+        "english": "hose",
+        "chinese": "软管",
+        "pinyin": "ruan3 guan3",
+        "matched_syllable": "ruan",
+        "concreteness": 4.87
+      },
+      {
+        "english": "ooze",
+        "chinese": "软泥",
+        "pinyin": "ruan3 ni2",
+        "matched_syllable": "ruan",
+        "concreteness": 4.0
+      }
+    ],
+    "rui": [
+      {
+        "english": "sharpen",
+        "chinese": "锐化",
+        "pinyin": "rui4 hua4",
+        "matched_syllable": "rui",
+        "concreteness": 3.72
+      }
+    ],
+    "ruo": [
+      {
+        "english": "nymph",
+        "chinese": "若虫",
+        "pinyin": "ruo4 chong2",
+        "matched_syllable": "ruo",
+        "concreteness": 3.58
+      },
+      {
+        "english": "feeble",
+        "chinese": "微弱",
+        "pinyin": "wei1 ruo4",
+        "matched_syllable": "ruo",
+        "concreteness": 2.59
+      },
+      {
+        "english": "cicada",
+        "chinese": "蝉",
+        "pinyin": "jin4 ruo4 han2 chan2",
+        "matched_syllable": "ruo",
+        "concreteness": 0.0
+      }
+    ],
+    "sa": [
+      {
+        "english": "eagle",
+        "chinese": "鹰",
+        "pinyin": "bu4 jian4 tu4 zi5 bu4 sa1 ying1",
+        "matched_syllable": "sa",
+        "concreteness": 5.0
+      },
+      {
+        "english": "pee",
+        "chinese": "撒尿",
+        "pinyin": "sa1 niao4",
+        "matched_syllable": "sa",
+        "concreteness": 4.72
+      },
+      {
+        "english": "spill",
+        "chinese": "洒",
+        "pinyin": "sa3 bu4",
+        "matched_syllable": "sa",
+        "concreteness": 4.07
+      }
+    ],
+    "sai": [
+      {
+        "english": "gill",
+        "chinese": "鳃",
+        "pinyin": "qi1 sai1 man2",
+        "matched_syllable": "sai",
+        "concreteness": 4.33
+      },
+      {
+        "english": "competition",
+        "chinese": "竞赛",
+        "pinyin": "jing4 sai4 zhe3",
+        "matched_syllable": "sai",
+        "concreteness": 3.86
+      },
+      {
+        "english": "segway",
+        "chinese": "赛格威",
+        "pinyin": "Sai4 ge2 wei1",
+        "matched_syllable": "sai",
+        "concreteness": 0.0
+      }
+    ],
+    "seng": [
+      {
+        "english": "monk",
+        "chinese": "僧",
+        "pinyin": "bu4 kan4 seng1 mian4 kan4 fo2 mian4",
+        "matched_syllable": "seng",
+        "concreteness": 4.35
+      }
+    ],
+    "shai": [
+      {
+        "english": "filter",
+        "chinese": "筛选",
+        "pinyin": "shai1 xuan3",
+        "matched_syllable": "shai",
+        "concreteness": 4.59
+      },
+      {
+        "english": "sunblock",
+        "chinese": "防晒霜",
+        "pinyin": "fang2 shai4 shuang1",
+        "matched_syllable": "shai",
+        "concreteness": 0.0
+      }
+    ],
+    "shang": [
+      {
+        "english": "bed",
+        "chinese": "床",
+        "pinyin": "shang4 xia4 chuang2",
+        "matched_syllable": "shang",
+        "concreteness": 5.0
+      },
+      {
+        "english": "sword",
+        "chinese": "剑",
+        "pinyin": "shang4 fang1 bao3 jian4",
+        "matched_syllable": "shang",
+        "concreteness": 4.93
+      },
+      {
+        "english": "theater",
+        "chinese": "剧院",
+        "pinyin": "Shang4 hai3 Da4 ju4 yuan4",
+        "matched_syllable": "shang",
+        "concreteness": 4.92
+      }
+    ],
+    "shao": [
+      {
+        "english": "eggplant",
+        "chinese": "茄子",
+        "pinyin": "shao1 qie2 zi5",
+        "matched_syllable": "shao",
+        "concreteness": 4.97
+      },
+      {
+        "english": "spoon",
+        "chinese": "勺子",
+        "pinyin": "shao2 zi5",
+        "matched_syllable": "shao",
+        "concreteness": 4.96
+      },
+      {
+        "english": "flask",
+        "chinese": "烧瓶",
+        "pinyin": "ran2 shao1 ping2",
+        "matched_syllable": "shao",
+        "concreteness": 4.79
+      }
+    ],
+    "shen": [
+      {
+        "english": "pig",
+        "chinese": "猪",
+        "pinyin": "bu4 pa4 shen2 yi1 yang4 de5 dui4 shou3 , jiu4 pa4 zhu1 yi1 yang4 de5 dui4 you3",
+        "matched_syllable": "shen",
+        "concreteness": 5.0
+      },
+      {
+        "english": "horn",
+        "chinese": "喇叭",
+        "pinyin": "shen1 suo1 la3 ba5",
+        "matched_syllable": "shen",
+        "concreteness": 5.0
+      },
+      {
+        "english": "trumpet",
+        "chinese": "喇叭",
+        "pinyin": "shen1 suo1 la3 ba5",
+        "matched_syllable": "shen",
+        "concreteness": 4.86
+      }
+    ],
+    "sheng": [
+      {
+        "english": "snake",
+        "chinese": "蛇",
+        "pinyin": "yi1 nian2 bei4 she2 yao3 , shi2 nian2 pa4 jing3 sheng2",
+        "matched_syllable": "sheng",
+        "concreteness": 5.0
+      },
+      {
+        "english": "restroom",
+        "chinese": "卫生间",
+        "pinyin": "wei4 sheng1 jian1",
+        "matched_syllable": "sheng",
+        "concreteness": 4.93
+      },
+      {
+        "english": "peanut",
+        "chinese": "花生",
+        "pinyin": "hua1 sheng1",
+        "matched_syllable": "sheng",
+        "concreteness": 4.89
+      }
+    ],
+    "shua": [
+      {
+        "english": "toothbrush",
+        "chinese": "牙刷",
+        "pinyin": "ya2 shua1",
+        "matched_syllable": "shua",
+        "concreteness": 5.0
+      },
+      {
+        "english": "brush",
+        "chinese": "刷子",
+        "pinyin": "shua1 zi5",
+        "matched_syllable": "shua",
+        "concreteness": 4.54
+      }
+    ],
+    "shuan": [
+      {
+        "english": "bolt",
+        "chinese": "螺栓",
+        "pinyin": "luo2 shuan1",
+        "matched_syllable": "shuan",
+        "concreteness": 4.67
+      }
+    ],
+    "shuang": [
+      {
+        "english": "binoculars",
+        "chinese": "双筒望远镜",
+        "pinyin": "shuang1 tong3 wang4 yuan3 jing4",
+        "matched_syllable": "shuang",
+        "concreteness": 5.0
+      },
+      {
+        "english": "arrow",
+        "chinese": "箭",
+        "pinyin": "yi1 jian4 shuang1 diao1",
+        "matched_syllable": "shuang",
+        "concreteness": 4.97
+      },
+      {
+        "english": "frost",
+        "chinese": "霜",
+        "pinyin": "shuang1 xue3",
+        "matched_syllable": "shuang",
+        "concreteness": 4.56
+      }
+    ],
+    "shun": [
+      {
+        "english": "windmill",
+        "chinese": "风车",
+        "pinyin": "shun4 feng1 che1",
+        "matched_syllable": "shun",
+        "concreteness": 4.89
+      },
+      {
+        "english": "rudder",
+        "chinese": "舵",
+        "pinyin": "shun4 feng1 zhuan3 duo4",
+        "matched_syllable": "shun",
+        "concreteness": 4.72
+      }
+    ],
+    "song": [
+      {
+        "english": "squirrel",
+        "chinese": "松鼠",
+        "pinyin": "song1 shu3",
+        "matched_syllable": "song",
+        "concreteness": 4.89
+      },
+      {
+        "english": "hospital",
+        "chinese": "医院",
+        "pinyin": "hou4 song4 yi1 yuan4",
+        "matched_syllable": "song",
+        "concreteness": 4.64
+      },
+      {
+        "english": "pine",
+        "chinese": "松树",
+        "pinyin": "song1 shu4",
+        "matched_syllable": "song",
+        "concreteness": 4.37
+      }
+    ],
+    "sou": [
+      {
+        "english": "cough",
+        "chinese": "咳嗽",
+        "pinyin": "ke2 sou5",
+        "matched_syllable": "sou",
+        "concreteness": 4.36
+      },
+      {
+        "english": "search",
+        "chinese": "搜索",
+        "pinyin": "ren2 rou4 sou1 suo3",
+        "matched_syllable": "sou",
+        "concreteness": 3.0
+      },
+      {
+        "english": "rancid",
+        "chinese": "馊",
+        "pinyin": "sou1",
+        "matched_syllable": "sou",
+        "concreteness": 2.97
+      }
+    ],
+    "su": [
+      {
+        "english": "sculpture",
+        "chinese": "雕塑",
+        "pinyin": "diao1 su4",
+        "matched_syllable": "su",
+        "concreteness": 4.79
+      },
+      {
+        "english": "yolk",
+        "chinese": "蛋黄",
+        "pinyin": "dan4 huang2 su4",
+        "matched_syllable": "su",
+        "concreteness": 4.78
+      },
+      {
+        "english": "poppy",
+        "chinese": "罂粟",
+        "pinyin": "ying1 su4",
+        "matched_syllable": "su",
+        "concreteness": 4.69
+      }
+    ],
+    "suan": [
+      {
+        "english": "lime",
+        "chinese": "酸橙",
+        "pinyin": "suan1 cheng2",
+        "matched_syllable": "suan",
+        "concreteness": 4.96
+      },
+      {
+        "english": "oil",
+        "chinese": "油",
+        "pinyin": "san1 suan1 gan1 you2 zhi3",
+        "matched_syllable": "suan",
+        "concreteness": 4.93
+      },
+      {
+        "english": "vinegar",
+        "chinese": "醋",
+        "pinyin": "cu4 suan1",
+        "matched_syllable": "suan",
+        "concreteness": 4.89
+      }
+    ],
+    "sui": [
+      {
+        "english": "gravel",
+        "chinese": "碎石",
+        "pinyin": "sui4 shi2",
+        "matched_syllable": "sui",
+        "concreteness": 5.0
+      },
+      {
+        "english": "tunnel",
+        "chinese": "隧道",
+        "pinyin": "sui4 dao4",
+        "matched_syllable": "sui",
+        "concreteness": 4.82
+      },
+      {
+        "english": "marrow",
+        "chinese": "骨髓",
+        "pinyin": "duo1 fa1 xing4 gu3 sui3 liu2",
+        "matched_syllable": "sui",
+        "concreteness": 4.48
+      }
+    ],
+    "sun": [
+      {
+        "english": "grandson",
+        "chinese": "孙子",
+        "pinyin": "gui1 sun1 zi5",
+        "matched_syllable": "sun",
+        "concreteness": 4.3
+      },
+      {
+        "english": "damage",
+        "chinese": "损害",
+        "pinyin": "sun3 hai4",
+        "matched_syllable": "sun",
+        "concreteness": 3.2
+      }
+    ],
+    "tan": [
+      {
+        "english": "blanket",
+        "chinese": "毯子",
+        "pinyin": "tan3 zi5",
+        "matched_syllable": "tan",
+        "concreteness": 5.0
+      },
+      {
+        "english": "charcoal",
+        "chinese": "木炭",
+        "pinyin": "mu4 tan4",
+        "matched_syllable": "tan",
+        "concreteness": 4.85
+      },
+      {
+        "english": "tank",
+        "chinese": "坦克",
+        "pinyin": "fan3 tan3 ke4",
+        "matched_syllable": "tan",
+        "concreteness": 4.8
+      }
+    ],
+    "tang": [
+      {
+        "english": "lollipop",
+        "chinese": "棒糖",
+        "pinyin": "bang4 bang4 tang2",
+        "matched_syllable": "tang",
+        "concreteness": 4.96
+      },
+      {
+        "english": "pond",
+        "chinese": "池塘",
+        "pinyin": "chi2 tang2",
+        "matched_syllable": "tang",
+        "concreteness": 4.9
+      },
+      {
+        "english": "sugarcane",
+        "chinese": "蔗",
+        "pinyin": "san1 lu:4 zhe4 tang2",
+        "matched_syllable": "tang",
+        "concreteness": 4.89
+      }
+    ],
+    "teng": [
+      {
+        "english": "vine",
+        "chinese": "藤",
+        "pinyin": "teng2 man4",
+        "matched_syllable": "teng",
+        "concreteness": 4.86
+      },
+      {
+        "english": "boiling",
+        "chinese": "沸腾",
+        "pinyin": "min2 yuan4 fei4 teng2",
+        "matched_syllable": "teng",
+        "concreteness": 4.39
+      },
+      {
+        "english": "toss",
+        "chinese": "折腾",
+        "pinyin": "zhe1 teng5",
+        "matched_syllable": "teng",
+        "concreteness": 3.96
+      }
+    ],
+    "ti": [
+      {
+        "english": "ladder",
+        "chinese": "梯子",
+        "pinyin": "ti1 zi5",
+        "matched_syllable": "ti",
+        "concreteness": 5.0
+      },
+      {
+        "english": "stairs",
+        "chinese": "楼梯",
+        "pinyin": "lou2 ti1",
+        "matched_syllable": "ti",
+        "concreteness": 5.0
+      },
+      {
+        "english": "escalator",
+        "chinese": "自动扶梯",
+        "pinyin": "zi4 dong4 fu2 ti1",
+        "matched_syllable": "ti",
+        "concreteness": 5.0
+      }
+    ],
+    "tian": [
+      {
+        "english": "swan",
+        "chinese": "天鹅",
+        "pinyin": "da4 tian1 e2",
+        "matched_syllable": "tian",
+        "concreteness": 4.96
+      },
+      {
+        "english": "dessert",
+        "chinese": "甜点",
+        "pinyin": "tian2 dian3",
+        "matched_syllable": "tian",
+        "concreteness": 4.93
+      },
+      {
+        "english": "ceiling",
+        "chinese": "天花板",
+        "pinyin": "tian1 hua1 ban3",
+        "matched_syllable": "tian",
+        "concreteness": 4.85
+      }
+    ],
+    "tiao": [
+      {
+        "english": "noodles",
+        "chinese": "面条",
+        "pinyin": "mian4 tiao2",
+        "matched_syllable": "tiao",
+        "concreteness": 4.96
+      },
+      {
+        "english": "flea",
+        "chinese": "跳蚤",
+        "pinyin": "tiao4 zao5",
+        "matched_syllable": "tiao",
+        "concreteness": 4.89
+      },
+      {
+        "english": "weapon",
+        "chinese": "武器",
+        "pinyin": "Bu4 Kuo4 san4 He2 wu3 qi4 Tiao2 yue1",
+        "matched_syllable": "tiao",
+        "concreteness": 4.76
+      }
+    ],
+    "tong": [
+      {
+        "english": "binoculars",
+        "chinese": "双筒望远镜",
+        "pinyin": "shuang1 tong3 wang4 yuan3 jing4",
+        "matched_syllable": "tong",
+        "concreteness": 5.0
+      },
+      {
+        "english": "cage",
+        "chinese": "笼",
+        "pinyin": "long3 tong3",
+        "matched_syllable": "tong",
+        "concreteness": 5.0
+      },
+      {
+        "english": "flashlight",
+        "chinese": "手电筒",
+        "pinyin": "shou3 dian4 tong3",
+        "matched_syllable": "tong",
+        "concreteness": 5.0
+      }
+    ],
+    "tuan": [
+      {
+        "english": "dough",
+        "chinese": "面团",
+        "pinyin": "sheng1 mian4 tuan2",
+        "matched_syllable": "tuan",
+        "concreteness": 4.79
+      },
+      {
+        "english": "fire",
+        "chinese": "火",
+        "pinyin": "yi1 tuan2 huo3",
+        "matched_syllable": "tuan",
+        "concreteness": 4.68
+      },
+      {
+        "english": "circus",
+        "chinese": "马戏团",
+        "pinyin": "ma3 xi4 tuan2",
+        "matched_syllable": "tuan",
+        "concreteness": 4.43
+      }
+    ],
+    "tui": [
+      {
+        "english": "thigh",
+        "chinese": "大腿",
+        "pinyin": "da4 tui3",
+        "matched_syllable": "tui",
+        "concreteness": 4.9
+      },
+      {
+        "english": "bulldozer",
+        "chinese": "推土机",
+        "pinyin": "tui1 tu3 ji1",
+        "matched_syllable": "tui",
+        "concreteness": 4.9
+      },
+      {
+        "english": "trolley",
+        "chinese": "手推车",
+        "pinyin": "shou3 tui1 che1",
+        "matched_syllable": "tui",
+        "concreteness": 4.73
+      }
+    ],
+    "tuo": [
+      {
+        "english": "tractor",
+        "chinese": "拖拉机",
+        "pinyin": "tuo1 la1 ji1",
+        "matched_syllable": "tuo",
+        "concreteness": 5.0
+      },
+      {
+        "english": "mop",
+        "chinese": "拖把",
+        "pinyin": "tuo1 ba3",
+        "matched_syllable": "tuo",
+        "concreteness": 4.97
+      },
+      {
+        "english": "motorcycle",
+        "chinese": "摩托车",
+        "pinyin": "pian1 san1 lun2 mo2 tuo1 che1",
+        "matched_syllable": "tuo",
+        "concreteness": 4.97
+      }
+    ],
+    "wan": [
+      {
+        "english": "wrist",
+        "chinese": "手腕",
+        "pinyin": "shou3 wan4",
+        "matched_syllable": "wan",
+        "concreteness": 4.93
+      },
+      {
+        "english": "bowl",
+        "chinese": "碗",
+        "pinyin": "wan3",
+        "matched_syllable": "wan",
+        "concreteness": 4.87
+      },
+      {
+        "english": "pill",
+        "chinese": "丸",
+        "pinyin": "yao2 tou2 wan2",
+        "matched_syllable": "wan",
+        "concreteness": 4.72
+      }
+    ],
+    "wei": [
+      {
+        "english": "scarf",
+        "chinese": "围巾",
+        "pinyin": "wei2 jin1",
+        "matched_syllable": "wei",
+        "concreteness": 4.97
+      },
+      {
+        "english": "tail",
+        "chinese": "尾巴",
+        "pinyin": "tuo1 wei3 ba5",
+        "matched_syllable": "wei",
+        "concreteness": 4.96
+      },
+      {
+        "english": "hedgehog",
+        "chinese": "刺猬",
+        "pinyin": "ci4 wei5",
+        "matched_syllable": "wei",
+        "concreteness": 4.93
+      }
+    ],
+    "wen": [
+      {
+        "english": "dolphin",
+        "chinese": "海豚",
+        "pinyin": "kuan1 wen3 hai3 tun2",
+        "matched_syllable": "wen",
+        "concreteness": 4.96
+      },
+      {
+        "english": "thermometer",
+        "chinese": "温度计",
+        "pinyin": "wen1 du4 ji4",
+        "matched_syllable": "wen",
+        "concreteness": 4.96
+      },
+      {
+        "english": "paper",
+        "chinese": "纸",
+        "pinyin": "yi1 zhi3 kong1 wen2",
+        "matched_syllable": "wen",
+        "concreteness": 4.93
+      }
+    ],
+    "weng": [
+      {
+        "english": "buzzing",
+        "chinese": "嗡嗡声",
+        "pinyin": "weng1 weng1 sheng1",
+        "matched_syllable": "weng",
+        "concreteness": 3.5
+      }
+    ],
+    "xian": [
+      {
+        "english": "kite",
+        "chinese": "风筝",
+        "pinyin": "duan4 xian4 feng1 zheng1",
+        "matched_syllable": "xian",
+        "concreteness": 5.0
+      },
+      {
+        "english": "cactus",
+        "chinese": "仙人掌",
+        "pinyin": "xian1 ren2 zhang3",
+        "matched_syllable": "xian",
+        "concreteness": 5.0
+      },
+      {
+        "english": "moss",
+        "chinese": "苔藓",
+        "pinyin": "tai2 xian3",
+        "matched_syllable": "xian",
+        "concreteness": 4.9
+      }
+    ],
+    "xiang": [
+      {
+        "english": "walrus",
+        "chinese": "海象",
+        "pinyin": "hai3 xiang4",
+        "matched_syllable": "xiang",
+        "concreteness": 5.0
+      },
+      {
+        "english": "banana",
+        "chinese": "香蕉",
+        "pinyin": "xiang1 jiao1",
+        "matched_syllable": "xiang",
+        "concreteness": 5.0
+      },
+      {
+        "english": "elephant",
+        "chinese": "大象",
+        "pinyin": "da4 xiang4",
+        "matched_syllable": "xiang",
+        "concreteness": 5.0
+      }
+    ],
+    "xiong": [
+      {
+        "english": "chest",
+        "chinese": "胸部",
+        "pinyin": "xiong1 bu4",
+        "matched_syllable": "xiong",
+        "concreteness": 4.93
+      },
+      {
+        "english": "bear",
+        "chinese": "熊",
+        "pinyin": "xiong2 bao1",
+        "matched_syllable": "xiong",
+        "concreteness": 4.88
+      },
+      {
+        "english": "teddy",
+        "chinese": "泰迪熊",
+        "pinyin": "tai4 di2 xiong2",
+        "matched_syllable": "xiong",
+        "concreteness": 4.78
+      }
+    ],
+    "xu": [
+      {
+        "english": "beard",
+        "chinese": "胡须",
+        "pinyin": "ba1 zi4 hu2 xu1",
+        "matched_syllable": "xu",
+        "concreteness": 4.96
+      },
+      {
+        "english": "whisker",
+        "chinese": "胡须",
+        "pinyin": "ba1 zi4 hu2 xu1",
+        "matched_syllable": "xu",
+        "concreteness": 4.7
+      },
+      {
+        "english": "shaver",
+        "chinese": "剃须刀",
+        "pinyin": "ti4 xu1 dao1",
+        "matched_syllable": "xu",
+        "concreteness": 4.35
+      }
+    ],
+    "xuan": [
+      {
+        "english": "carousel",
+        "chinese": "旋转木马",
+        "pinyin": "xuan2 zhuan3 mu4 ma3",
+        "matched_syllable": "xuan",
+        "concreteness": 4.93
+      },
+      {
+        "english": "cliff",
+        "chinese": "悬崖",
+        "pinyin": "xuan2 ya2",
+        "matched_syllable": "xuan",
+        "concreteness": 4.71
+      },
+      {
+        "english": "filter",
+        "chinese": "筛选",
+        "pinyin": "shai1 xuan3",
+        "matched_syllable": "xuan",
+        "concreteness": 4.59
+      }
+    ],
+    "xun": [
+      {
+        "english": "bacon",
+        "chinese": "熏肉",
+        "pinyin": "xun1 rou4",
+        "matched_syllable": "xun",
+        "concreteness": 4.9
+      },
+      {
+        "english": "medal",
+        "chinese": "勋章",
+        "pinyin": "xun1 zhang1",
+        "matched_syllable": "xun",
+        "concreteness": 4.89
+      },
+      {
+        "english": "push",
+        "chinese": "推",
+        "pinyin": "tui1 xun2",
+        "matched_syllable": "xun",
+        "concreteness": 4.21
+      }
+    ],
+    "ye": [
+      {
+        "english": "leaf",
+        "chinese": "叶子",
+        "pinyin": "ye4 zi5",
+        "matched_syllable": "ye",
+        "concreteness": 5.0
+      },
+      {
+        "english": "page",
+        "chinese": "页",
+        "pinyin": "shang4 yi1 ye4",
+        "matched_syllable": "ye",
+        "concreteness": 4.9
+      },
+      {
+        "english": "saliva",
+        "chinese": "唾液",
+        "pinyin": "tuo4 ye4",
+        "matched_syllable": "ye",
+        "concreteness": 4.89
+      }
+    ],
+    "ying": [
+      {
+        "english": "eagle",
+        "chinese": "鹰",
+        "pinyin": "bu4 jian4 tu4 zi5 bu4 sa1 ying1",
+        "matched_syllable": "ying",
+        "concreteness": 5.0
+      },
+      {
+        "english": "flower",
+        "chinese": "花",
+        "pinyin": "Ying1 hua1 guo2",
+        "matched_syllable": "ying",
+        "concreteness": 5.0
+      },
+      {
+        "english": "parrot",
+        "chinese": "鹦鹉",
+        "pinyin": "Ya4 li4 shan1 da4 ying1 wu3",
+        "matched_syllable": "ying",
+        "concreteness": 5.0
+      }
+    ],
+    "yong": [
+      {
+        "english": "swimming",
+        "chinese": "游泳",
+        "pinyin": "you2 yong3 quan1",
+        "matched_syllable": "yong",
+        "concreteness": 4.44
+      },
+      {
+        "english": "swim",
+        "chinese": "游泳",
+        "pinyin": "you2 yong3 quan1",
+        "matched_syllable": "yong",
+        "concreteness": 4.43
+      },
+      {
+        "english": "breaststroke",
+        "chinese": "蛙泳",
+        "pinyin": "wa1 yong3",
+        "matched_syllable": "yong",
+        "concreteness": 4.27
+      }
+    ],
+    "yu": [
+      {
+        "english": "tulip",
+        "chinese": "郁金香",
+        "pinyin": "yu4 jin1 xiang1",
+        "matched_syllable": "yu",
+        "concreteness": 5.0
+      },
+      {
+        "english": "corn",
+        "chinese": "玉米",
+        "pinyin": "yu4 mi3",
+        "matched_syllable": "yu",
+        "concreteness": 4.96
+      },
+      {
+        "english": "spacesuit",
+        "chinese": "宇航服",
+        "pinyin": "yu3 hang2 fu2",
+        "matched_syllable": "yu",
+        "concreteness": 4.96
+      }
+    ],
+    "yue": [
+      {
+        "english": "moon",
+        "chinese": "月亮",
+        "pinyin": "yue4 liang5",
+        "matched_syllable": "yue",
+        "concreteness": 4.9
+      },
+      {
+        "english": "weapon",
+        "chinese": "武器",
+        "pinyin": "Bu4 Kuo4 san4 He2 wu3 qi4 Tiao2 yue1",
+        "matched_syllable": "yue",
+        "concreteness": 4.76
+      },
+      {
+        "english": "letter",
+        "chinese": "信",
+        "pinyin": "yue4 xin4",
+        "matched_syllable": "yue",
+        "concreteness": 4.7
+      }
+    ],
+    "za": [
+      {
+        "english": "magazine",
+        "chinese": "杂志",
+        "pinyin": "za2 zhi4",
+        "matched_syllable": "za",
+        "concreteness": 5.0
+      },
+      {
+        "english": "weed",
+        "chinese": "杂草",
+        "pinyin": "za2 cao3",
+        "matched_syllable": "za",
+        "concreteness": 4.9
+      },
+      {
+        "english": "grocery",
+        "chinese": "杂货店",
+        "pinyin": "za2 huo4 dian4",
+        "matched_syllable": "za",
+        "concreteness": 4.31
+      }
+    ],
+    "zan": [
+      {
+        "english": "praise",
+        "chinese": "称赞",
+        "pinyin": "man3 kou3 cheng1 zan4",
+        "matched_syllable": "zan",
+        "concreteness": 2.61
+      },
+      {
+        "english": "pause",
+        "chinese": "暂停",
+        "pinyin": "zan4 ting2",
+        "matched_syllable": "zan",
+        "concreteness": 2.38
+      }
+    ],
+    "zang": [
+      {
+        "english": "stain",
+        "chinese": "弄脏",
+        "pinyin": "nong4 zang1",
+        "matched_syllable": "zang",
+        "concreteness": 4.59
+      },
+      {
+        "english": "smudge",
+        "chinese": "弄脏",
+        "pinyin": "nong4 zang1",
+        "matched_syllable": "zang",
+        "concreteness": 4.5
+      },
+      {
+        "english": "funeral",
+        "chinese": "葬礼",
+        "pinyin": "zang4 li3",
+        "matched_syllable": "zang",
+        "concreteness": 3.83
+      }
+    ],
+    "ze": [
+      {
+        "english": "swamp",
+        "chinese": "沼泽",
+        "pinyin": "zhao3 ze2",
+        "matched_syllable": "ze",
+        "concreteness": 4.96
+      },
+      {
+        "english": "choose",
+        "chinese": "选择",
+        "pinyin": "bu4 jia1 xuan3 ze2",
+        "matched_syllable": "ze",
+        "concreteness": 2.62
+      },
+      {
+        "english": "select",
+        "chinese": "选择",
+        "pinyin": "bu4 jia1 xuan3 ze2",
+        "matched_syllable": "ze",
+        "concreteness": 2.48
+      }
+    ],
+    "zei": [
+      {
+        "english": "burglar",
+        "chinese": "窃贼",
+        "pinyin": "qie4 zei2",
+        "matched_syllable": "zei",
+        "concreteness": 4.44
+      },
+      {
+        "english": "thief",
+        "chinese": "贼",
+        "pinyin": "zei2 si3",
+        "matched_syllable": "zei",
+        "concreteness": 4.37
+      }
+    ],
+    "zha": [
+      {
+        "english": "blinking",
+        "chinese": "眨眼",
+        "pinyin": "zha3 yan3",
+        "matched_syllable": "zha",
+        "concreteness": 4.85
+      },
+      {
+        "english": "bomb",
+        "chinese": "炸弹",
+        "pinyin": "hong2 se4 zha4 dan4",
+        "matched_syllable": "zha",
+        "concreteness": 4.84
+      },
+      {
+        "english": "fence",
+        "chinese": "栅栏",
+        "pinyin": "zha4 lan2",
+        "matched_syllable": "zha",
+        "concreteness": 4.82
+      }
+    ],
+    "zhai": [
+      {
+        "english": "foam",
+        "chinese": "泡沫",
+        "pinyin": "zhu4 zhai2 pao4 mo4",
+        "matched_syllable": "zhai",
+        "concreteness": 4.85
+      },
+      {
+        "english": "certificate",
+        "chinese": "证书",
+        "pinyin": "zhai4 wu4 zheng4 shu1",
+        "matched_syllable": "zhai",
+        "concreteness": 4.59
+      },
+      {
+        "english": "pluck",
+        "chinese": "采摘",
+        "pinyin": "cai3 zhai1",
+        "matched_syllable": "zhai",
+        "concreteness": 4.0
+      }
+    ],
+    "zhan": [
+      {
+        "english": "bus",
+        "chinese": "公共汽车",
+        "pinyin": "gong1 gong4 qi4 che1 zhan4",
+        "matched_syllable": "zhan",
+        "concreteness": 4.9
+      },
+      {
+        "english": "floor",
+        "chinese": "地面",
+        "pinyin": "zhan4 di4 mian4 ji5",
+        "matched_syllable": "zhan",
+        "concreteness": 4.8
+      },
+      {
+        "english": "bank",
+        "chinese": "银行",
+        "pinyin": "Shang4 hai3 Pu3 dong1 Fa1 zhan3 Yin2 hang2",
+        "matched_syllable": "zhan",
+        "concreteness": 4.78
+      }
+    ],
+    "zhao": [
+      {
+        "english": "passport",
+        "chinese": "护照",
+        "pinyin": "hu4 zhao4",
+        "matched_syllable": "zhao",
+        "concreteness": 5.0
+      },
+      {
+        "english": "swamp",
+        "chinese": "沼泽",
+        "pinyin": "zhao3 ze2",
+        "matched_syllable": "zhao",
+        "concreteness": 4.96
+      },
+      {
+        "english": "photo",
+        "chinese": "照片",
+        "pinyin": "dan1 se4 zhao4 pian4",
+        "matched_syllable": "zhao",
+        "concreteness": 4.93
+      }
+    ],
+    "zhe": [
+      {
+        "english": "sugarcane",
+        "chinese": "蔗",
+        "pinyin": "san1 lu:4 zhe4 tang2",
+        "matched_syllable": "zhe",
+        "concreteness": 4.89
+      },
+      {
+        "english": "cane",
+        "chinese": "甘蔗",
+        "pinyin": "gan1 zhe5",
+        "matched_syllable": "zhe",
+        "concreteness": 4.87
+      },
+      {
+        "english": "ruler",
+        "chinese": "统治者",
+        "pinyin": "tong3 zhi4 zhe3",
+        "matched_syllable": "zhe",
+        "concreteness": 4.66
+      }
+    ],
+    "zheng": [
+      {
+        "english": "kite",
+        "chinese": "风筝",
+        "pinyin": "duan4 xian4 feng1 zheng1",
+        "matched_syllable": "zheng",
+        "concreteness": 5.0
+      },
+      {
+        "english": "china",
+        "chinese": "中国",
+        "pinyin": "yi1 ge4 Zhong1 guo2 zheng4 ce4",
+        "matched_syllable": "zheng",
+        "concreteness": 4.79
+      },
+      {
+        "english": "certificate",
+        "chinese": "证书",
+        "pinyin": "zhai4 wu4 zheng4 shu1",
+        "matched_syllable": "zheng",
+        "concreteness": 4.59
+      }
+    ],
+    "zhong": [
+      {
+        "english": "tv",
+        "chinese": "电视",
+        "pinyin": "Zhong1 guo2 Zhong1 yang1 Dian4 shi4 tai2",
+        "matched_syllable": "zhong",
+        "concreteness": 5.0
+      },
+      {
+        "english": "clock",
+        "chinese": "钟",
+        "pinyin": "yi1 jian4 zhong1 qing2",
+        "matched_syllable": "zhong",
+        "concreteness": 5.0
+      },
+      {
+        "english": "flour",
+        "chinese": "面粉",
+        "pinyin": "zhong1 jin1 mian4 fen3",
+        "matched_syllable": "zhong",
+        "concreteness": 4.97
+      }
+    ],
+    "zhou": [
+      {
+        "english": "river",
+        "chinese": "河",
+        "pinyin": "Qi1 he2 zhou1",
+        "matched_syllable": "zhou",
+        "concreteness": 4.89
+      },
+      {
+        "english": "broom",
+        "chinese": "扫帚",
+        "pinyin": "sao4 zhou5 xing1",
+        "matched_syllable": "zhou",
+        "concreteness": 4.89
+      },
+      {
+        "english": "mouse",
+        "chinese": "老鼠",
+        "pinyin": "yi1 li4 lao3 shu3 shi3 huai4 le5 yi1 guo1 zhou1",
+        "matched_syllable": "zhou",
+        "concreteness": 4.83
+      }
+    ],
+    "zhua": [
+      {
+        "english": "hair",
+        "chinese": "头发",
+        "pinyin": "tou2 fa5 hu2 zi5 yi1 ba3 zhua1",
+        "matched_syllable": "zhua",
+        "concreteness": 4.97
+      },
+      {
+        "english": "paw",
+        "chinese": "爪子",
+        "pinyin": "zhua3 zi5",
+        "matched_syllable": "zhua",
+        "concreteness": 4.3
+      },
+      {
+        "english": "catch",
+        "chinese": "抓住",
+        "pinyin": "zhua1 zhu4",
+        "matched_syllable": "zhua",
+        "concreteness": 4.11
+      }
+    ],
+    "zhuan": [
+      {
+        "english": "carousel",
+        "chinese": "旋转木马",
+        "pinyin": "xuan2 zhuan3 mu4 ma3",
+        "matched_syllable": "zhuan",
+        "concreteness": 4.93
+      },
+      {
+        "english": "brick",
+        "chinese": "砖",
+        "pinyin": "zhuan1",
+        "matched_syllable": "zhuan",
+        "concreteness": 4.83
+      },
+      {
+        "english": "medicine",
+        "chinese": "药品",
+        "pinyin": "zhuan1 li4 yao4 pin3",
+        "matched_syllable": "zhuan",
+        "concreteness": 4.79
+      }
+    ],
+    "zhuang": [
+      {
+        "english": "suit",
+        "chinese": "套装",
+        "pinyin": "tao4 zhuang1",
+        "matched_syllable": "zhuang",
+        "concreteness": 4.97
+      },
+      {
+        "english": "dresser",
+        "chinese": "梳妆台",
+        "pinyin": "shu1 zhuang1 tai2",
+        "matched_syllable": "zhuang",
+        "concreteness": 4.96
+      },
+      {
+        "english": "village",
+        "chinese": "村庄",
+        "pinyin": "cun1 zhuang1",
+        "matched_syllable": "zhuang",
+        "concreteness": 4.89
+      }
+    ],
+    "zhui": [
+      {
+        "english": "cone",
+        "chinese": "锥体",
+        "pinyin": "yuan2 zhui1 ti3",
+        "matched_syllable": "zhui",
+        "concreteness": 4.86
+      },
+      {
+        "english": "pendant",
+        "chinese": "吊坠",
+        "pinyin": "diao4 zhui4",
+        "matched_syllable": "zhui",
+        "concreteness": 4.75
+      },
+      {
+        "english": "chase",
+        "chinese": "追赶",
+        "pinyin": "zhui1 gan3",
+        "matched_syllable": "zhui",
+        "concreteness": 3.48
+      }
+    ],
+    "zhun": [
+      {
+        "english": "size",
+        "chinese": "尺寸",
+        "pinyin": "biao1 zhun3 chi3 cun4",
+        "matched_syllable": "zhun",
+        "concreteness": 3.13
+      },
+      {
+        "english": "prepare",
+        "chinese": "准备",
+        "pinyin": "zhun3 bei4",
+        "matched_syllable": "zhun",
+        "concreteness": 2.36
+      },
+      {
+        "english": "punctual",
+        "chinese": "准时",
+        "pinyin": "biao1 zhun3 shi2",
+        "matched_syllable": "zhun",
+        "concreteness": 1.87
+      }
+    ],
+    "zhuo": [
+      {
+        "english": "table",
+        "chinese": "桌子",
+        "pinyin": "zhuo1 zi5",
+        "matched_syllable": "zhuo",
+        "concreteness": 4.9
+      },
+      {
+        "english": "desk",
+        "chinese": "桌子",
+        "pinyin": "zhuo1 zi5",
+        "matched_syllable": "zhuo",
+        "concreteness": 4.87
+      },
+      {
+        "english": "peck",
+        "chinese": "啄",
+        "pinyin": "san1 zhi3 zhuo2 mu4 niao3",
+        "matched_syllable": "zhuo",
+        "concreteness": 4.16
+      }
+    ],
+    "zong": [
+      {
+        "english": "palm",
+        "chinese": "棕榈",
+        "pinyin": "zong1 lu:2",
+        "matched_syllable": "zong",
+        "concreteness": 4.83
+      },
+      {
+        "english": "mane",
+        "chinese": "鬃毛",
+        "pinyin": "zong1 mao2",
+        "matched_syllable": "zong",
+        "concreteness": 4.73
+      },
+      {
+        "english": "trail",
+        "chinese": "踪迹",
+        "pinyin": "zong1 ji4",
+        "matched_syllable": "zong",
+        "concreteness": 4.46
+      }
+    ],
+    "zuan": [
+      {
+        "english": "drill",
+        "chinese": "钻头",
+        "pinyin": "zuan4 tou2",
+        "matched_syllable": "zuan",
+        "concreteness": 4.4
+      }
+    ],
+    "zun": [
+      {
+        "english": "respect",
+        "chinese": "尊重",
+        "pinyin": "zun1 zhong4",
+        "matched_syllable": "zun",
+        "concreteness": 2.04
+      }
+    ]
+  },
+  "total_pending": 175,
+  "matched": 151,
+  "generated_at": "1765271132.5617542"
+}

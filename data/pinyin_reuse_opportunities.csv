@@ -1,0 +1,731 @@
+WordHanzi,WordPinyin,TargetSyllable,TargetElement,ExistingElements,HasImage,ImageFile,Priority
+一列火车,yī liè huǒ che,yi,y,ie,Yes,train.png,High
+一列火车,yī liè huǒ che,yi,i,ie,Yes,train.png,High
+一列火车,yī liè huǒ che,lie,l,ie,Yes,train.png,High
+一列火车,yī liè huǒ che,lie,e,ie,Yes,train.png,High
+一列火车,yī liè huǒ che,huo,h,ie,Yes,train.png,High
+一列火车,yī liè huǒ che,huo,o,ie,Yes,train.png,High
+一列火车,yī liè huǒ che,che,ch,ie,Yes,train.png,High
+一列火车,yī liè huǒ che,che,e,ie,Yes,train.png,High
+一半,yī bàn,yi,y,an,Yes,half.jpg,High
+一半,yī bàn,yi,i,an,Yes,half.jpg,High
+一家人,yì jiā rén,yi,y,j,Yes,family.png,High
+一家人,yì jiā rén,yi,i,j,Yes,family.png,High
+一家人,yì jiā rén,jia,a,j,Yes,family.png,High
+一家人,yì jiā rén,ren,r,j,Yes,family.png,High
+一家人,yì jiā rén,ren,en,j,Yes,family.png,High
+一张纸,yī zhāng zhǐ,yi,y,zh,Yes,paper.jpg,High
+一张纸,yī zhāng zhǐ,yi,i,zh,Yes,paper.jpg,High
+一张纸,yī zhāng zhǐ,zhang,ang,zh,Yes,paper.jpg,High
+一张纸,yī zhāng zhǐ,zhi,i,zh,Yes,paper.jpg,High
+一本书,yī běn shū,yi,y,"b, en",Yes,book.jpeg,High
+一本书,yī běn shū,yi,i,"b, en",Yes,book.jpeg,High
+一本书,yī běn shū,shu,sh,"b, en",Yes,book.jpeg,High
+一本书,yī běn shū,shu,u,"b, en",Yes,book.jpeg,High
+七,qī,qi,i,q,Yes,7.jpg,High
+三角形,sān jiǎo xíng,jiao,j,"an, s",Yes,triangle.png,High
+三角形,sān jiǎo xíng,jiao,ao,"an, s",Yes,triangle.png,High
+三角形,sān jiǎo xíng,xing,x,"an, s",Yes,triangle.png,High
+三角形,sān jiǎo xíng,xing,ing,"an, s",Yes,triangle.png,High
+丛林,cóng lín,cong,c,in,Yes,jungle.jpg,High
+丛林,cóng lín,cong,ong,in,Yes,jungle.jpg,High
+丛林,cóng lín,lin,l,in,Yes,jungle.jpg,High
+举手,jǔ shǒu,ju,u,j,Yes,raise_hand.png,High
+举手,jǔ shǒu,shou,sh,j,Yes,raise_hand.png,High
+举手,jǔ shǒu,shou,ou,j,Yes,raise_hand.png,High
+乌龟,wū guī,wu,u,"ui, w",Yes,tortoise.jpg,High
+乌龟,wū guī,gui,g,"ui, w",Yes,tortoise.jpg,High
+乌龟,wū guī,gui,i,"ui, w",Yes,tortoise.jpg,High
+九,jiǔ,jiu,j,iu,Yes,9.png,High
+九,jiǔ,jiu,u,iu,Yes,9.png,High
+五,wǔ,wu,u,w,Yes,5.jpg,High
+亲亲,qīnqīn,qinqin,q,in,Yes,kiss.jpg,High
+亲亲,qīnqīn,qinqin,inqin,in,Yes,kiss.jpg,High
+人行道,rén xíng dào,ren,en,r,Yes,pavement.png,High
+人行道,rén xíng dào,xing,x,r,Yes,pavement.png,High
+人行道,rén xíng dào,xing,ing,r,Yes,pavement.png,High
+人行道,rén xíng dào,dao,d,r,Yes,pavement.png,High
+人行道,rén xíng dào,dao,ao,r,Yes,pavement.png,High
+今天,jīn tiān,jin,j,an,Yes,today.jpg,High
+今天,jīn tiān,jin,in,an,Yes,today.jpg,High
+信封,xìn fēng,xin,x,in,Yes,envelope.jpg,High
+信封,xìn fēng,feng,f,in,Yes,envelope.jpg,High
+信封,xìn fēng,feng,eng,in,Yes,envelope.jpg,High
+修公路,xiū gōng lù,xiu,x,iu,Yes,building_a_road.jpg,High
+修公路,xiū gōng lù,xiu,u,iu,Yes,building_a_road.jpg,High
+修公路,xiū gōng lù,gong,g,iu,Yes,building_a_road.jpg,High
+修公路,xiū gōng lù,gong,ong,iu,Yes,building_a_road.jpg,High
+修公路,xiū gōng lù,lu,l,iu,Yes,building_a_road.jpg,High
+修公路,xiū gōng lù,lu,u,iu,Yes,building_a_road.jpg,High
+假发,jiǎ fà,jia,a,j,Yes,wig.jpeg,High
+假发,jiǎ fà,fa,f,j,Yes,wig.jpeg,High
+假发,jiǎ fà,fa,a,j,Yes,wig.jpeg,High
+兔子,tù zi,tu,t,u,Yes,rabbit.png,High
+兔子,tù zi,zi,z,u,Yes,rabbit.png,High
+兔子,tù zi,zi,i,u,Yes,rabbit.png,High
+公交车,gōng jiāo chē,gong,g,ch,Yes,bus.png,High
+公交车,gōng jiāo chē,gong,ong,ch,Yes,bus.png,High
+公交车,gōng jiāo chē,jiao,j,ch,Yes,bus.png,High
+公交车,gōng jiāo chē,jiao,ao,ch,Yes,bus.png,High
+公交车,gōng jiāo chē,che,e,ch,Yes,bus.png,High
+公园,gōng yuán,gong,g,y,Yes,park.jpg,High
+公园,gōng yuán,gong,ong,y,Yes,park.jpg,High
+公园,gōng yuán,yuan,an,y,Yes,park.jpg,High
+公路,gōng lù,gong,g,u,Yes,road.jpeg,High
+公路,gōng lù,gong,ong,u,Yes,road.jpeg,High
+公鸡,gōng jī,gong,g,j,Yes,singing_rooster.jpg,High
+公鸡,gōng jī,gong,ong,j,Yes,singing_rooster.jpg,High
+公鸡,gōng jī,ji,i,j,Yes,singing_rooster.jpg,High
+六,liù,liu,l,iu,Yes,6.jpg,High
+六,liù,liu,u,iu,Yes,6.jpg,High
+写字,xiě zì,xie,x,ie,Yes,write.png,High
+写字,xiě zì,xie,e,ie,Yes,write.png,High
+写字,xiě zì,zi,z,ie,Yes,write.png,High
+写字,xiě zì,zi,i,ie,Yes,write.png,High
+农民,nóng mín,min,m,"in, ong",Yes,farmer.jpg,High
+冷,lěng,leng,l,w,Yes,cold.png,High
+冷,lěng,leng,eng,w,Yes,cold.png,High
+出口,chū kǒu,chu,ch,ou,Yes,exit.png,High
+出口,chū kǒu,chu,u,ou,Yes,exit.png,High
+分数,fēn shù,shu,sh,en,Yes,exam_score.jpg,High
+分数,fēn shù,shu,u,en,Yes,exam_score.jpg,High
+创可贴,chuàng kě tiē,chuang,ch,ie,Yes,band_aid.png,High
+创可贴,chuàng kě tiē,chuang,ang,ie,Yes,band_aid.png,High
+创可贴,chuàng kě tiē,ke,k,ie,Yes,band_aid.png,High
+创可贴,chuàng kě tiē,ke,e,ie,Yes,band_aid.png,High
+创可贴,chuàng kě tiē,tie,t,ie,Yes,band_aid.png,High
+创可贴,chuàng kě tiē,tie,e,ie,Yes,band_aid.png,High
+制作,zhì zuò,zhi,zh,z,Yes,make.jpg,High
+制作,zhì zuò,zhi,i,z,Yes,make.jpg,High
+制作,zhì zuò,zuo,o,z,Yes,make.jpg,High
+刺猬,cì wèi,ci,i,c,Yes,hedgehog.jpg,High
+刺猬,cì wèi,wei,w,c,Yes,hedgehog.jpg,High
+刺猬,cì wèi,wei,ei,c,Yes,hedgehog.jpg,High
+剪刀,jiǎn dāo,jian,an,j,Yes,scissors.jpg,High
+剪刀,jiǎn dāo,dao,d,j,Yes,scissors.jpg,High
+剪刀,jiǎn dāo,dao,ao,j,Yes,scissors.jpg,High
+动物园,dòng wù yuán,dong,d,y,Yes,zoo.png,High
+动物园,dòng wù yuán,dong,ong,y,Yes,zoo.png,High
+动物园,dòng wù yuán,wu,w,y,Yes,zoo.png,High
+动物园,dòng wù yuán,wu,u,y,Yes,zoo.png,High
+动物园,dòng wù yuán,yuan,an,y,Yes,zoo.png,High
+勺子,shá ozi,sha,sh,ao,Yes,spoon.jpg,High
+勺子,shá ozi,sha,a,ao,Yes,spoon.jpg,High
+勺子,shá ozi,ozi,ozi,ao,Yes,spoon.jpg,High
+包菜,bāo cài,bao,b,"ai, c",Yes,cabbage.png,High
+包菜,bāo cài,bao,ao,"ai, c",Yes,cabbage.png,High
+卡车,kǎ chē,ka,k,e,Yes,truck.png,High
+卡车,kǎ chē,ka,a,e,Yes,truck.png,High
+卡车,kǎ chē,che,ch,e,Yes,truck.png,High
+厕所,cè suǒ,suo,s,e,Yes,public_toilet.jpg,High
+厕所,cè suǒ,suo,o,e,Yes,public_toilet.jpg,High
+厨房,chú fáng,chu,u,ch,Yes,kitchen.jpg,High
+厨房,chú fáng,fang,f,ch,Yes,kitchen.jpg,High
+厨房,chú fáng,fang,ang,ch,Yes,kitchen.jpg,High
+去,qù,qu,u,q,Yes,go2.png,High
+叉子,chā zi,cha,a,ch,Yes,fork.gif,High
+叉子,chā zi,zi,z,ch,Yes,fork.gif,High
+叉子,chā zi,zi,i,ch,Yes,fork.gif,High
+双手,shuāng shǒu,shou,sh,ang,Yes,hands.jpg,High
+双手,shuāng shǒu,shou,ou,ang,Yes,hands.jpg,High
+发怒,fā nù,fa,f,u,Yes,mad.png,High
+发怒,fā nù,fa,a,u,Yes,mad.png,High
+变化,biàn huà,hua,h,an,Yes,change.png,High
+变化,biàn huà,hua,a,an,Yes,change.png,High
+可乐,kě lè,ke,k,e,Yes,coke.jpg,High
+可乐,kě lè,le,l,e,Yes,coke.jpg,High
+吃饭,chī fàn,chi,i,ch,Yes,eat.jpeg,High
+吃饭,chī fàn,fan,f,ch,Yes,eat.jpeg,High
+吃饭,chī fàn,fan,an,ch,Yes,eat.jpeg,High
+同学,tóng xué,xue,x,ong,Yes,classmate.jpg,High
+同学,tóng xué,xue,e,ong,Yes,classmate.jpg,High
+向日葵,xiàng rì kuí,xiang,x,ui,Yes,sunflower.jpeg,High
+向日葵,xiàng rì kuí,xiang,ang,ui,Yes,sunflower.jpeg,High
+向日葵,xiàng rì kuí,ri,r,ui,Yes,sunflower.jpeg,High
+向日葵,xiàng rì kuí,ri,i,ui,Yes,sunflower.jpeg,High
+向日葵,xiàng rì kuí,kui,k,ui,Yes,sunflower.jpeg,High
+向日葵,xiàng rì kuí,kui,i,ui,Yes,sunflower.jpeg,High
+听,tīng,ting,t,w,Yes,listen.png,High
+听,tīng,ting,ing,w,Yes,listen.png,High
+哭了,kū le,ku,k,u,Yes,cry.jpg,High
+哭了,kū le,le,l,u,Yes,cry.jpg,High
+哭了,kū le,le,e,u,Yes,cry.jpg,High
+唱歌,chàng gē,chang,ch,e,Yes,singing.jpg,High
+唱歌,chàng gē,chang,ang,e,Yes,singing.jpg,High
+唱歌,chàng gē,ge,g,e,Yes,singing.jpg,High
+商店,shāng diàn,shang,sh,an,Yes,shop_store.png,High
+商店,shāng diàn,shang,ang,an,Yes,shop_store.png,High
+喝水,hē shuǐ,he,h,e,Yes,drink.jpg,High
+喝水,hē shuǐ,shui,sh,e,Yes,drink.jpg,High
+喝水,hē shuǐ,shui,i,e,Yes,drink.jpg,High
+喷泉,pēn quán,quan,q,"en, p",Yes,fountain.jpg,High
+喷泉,pēn quán,quan,an,"en, p",Yes,fountain.jpg,High
+嘴巴,zuǐ ba,zui,i,z,Yes,mouth.jpeg,High
+嘴巴,zuǐ ba,ba,b,z,Yes,mouth.jpeg,High
+嘴巴,zuǐ ba,ba,a,z,Yes,mouth.jpeg,High
+四,sì,si,i,s,Yes,4.jpg,High
+困难,kùnnan,kunnan,k,an,Yes,hard2.png,High
+困难,kùnnan,kunnan,unnan,an,Yes,hard2.png,High
+国王,guó wáng,guo,g,w,Yes,king.gif,High
+国王,guó wáng,guo,o,w,Yes,king.gif,High
+国王,guó wáng,wang,ang,w,Yes,king.gif,High
+圣诞树,shèng dàn shù,sheng,sh,u,Yes,xmas_tree.jpg,High
+圣诞树,shèng dàn shù,sheng,eng,u,Yes,xmas_tree.jpg,High
+圣诞树,shèng dàn shù,dan,d,u,Yes,xmas_tree.jpg,High
+圣诞树,shèng dàn shù,dan,an,u,Yes,xmas_tree.jpg,High
+圣诞树,shèng dàn shù,shu,sh,u,Yes,xmas_tree.jpg,High
+圣诞老人,shèng dàn lǎo rén,sheng,sh,"en, r",Yes,santa.png,High
+圣诞老人,shèng dàn lǎo rén,sheng,eng,"en, r",Yes,santa.png,High
+圣诞老人,shèng dàn lǎo rén,dan,d,"en, r",Yes,santa.png,High
+圣诞老人,shèng dàn lǎo rén,dan,an,"en, r",Yes,santa.png,High
+圣诞老人,shèng dàn lǎo rén,lao,l,"en, r",Yes,santa.png,High
+圣诞老人,shèng dàn lǎo rén,lao,ao,"en, r",Yes,santa.png,High
+在下面,zài xià miàn,zai,z,x,Yes,under.png,High
+在下面,zài xià miàn,zai,ai,x,Yes,under.png,High
+在下面,zài xià miàn,xia,a,x,Yes,under.png,High
+在下面,zài xià miàn,mian,m,x,Yes,under.png,High
+在下面,zài xià miàn,mian,an,x,Yes,under.png,High
+在后面,zài hòu miàn,zai,z,ou,Yes,behind.jpg,High
+在后面,zài hòu miàn,zai,ai,ou,Yes,behind.jpg,High
+在后面,zài hòu miàn,hou,h,ou,Yes,behind.jpg,High
+在后面,zài hòu miàn,mian,m,ou,Yes,behind.jpg,High
+在后面,zài hòu miàn,mian,an,ou,Yes,behind.jpg,High
+在外面,zài wài miàn,zai,z,ai,Yes,out.png,High
+在外面,zài wài miàn,wai,w,ai,Yes,out.png,High
+在外面,zài wài miàn,mian,m,ai,Yes,out.png,High
+在外面,zài wài miàn,mian,an,ai,Yes,out.png,High
+地板,dì bǎn,ban,b,"d, i",Yes,floor.jpeg,High
+地板,dì bǎn,ban,an,"d, i",Yes,floor.jpeg,High
+地铁,dì tiě,di,d,ie,Yes,subway.jpg,High
+地铁,dì tiě,di,i,ie,Yes,subway.jpg,High
+地铁,dì tiě,tie,t,ie,Yes,subway.jpg,High
+地铁,dì tiě,tie,e,ie,Yes,subway.jpg,High
+坏了,huài le,le,l,ai,Yes,bad_broken.png,High
+坏了,huài le,le,e,ai,Yes,bad_broken.png,High
+坐下,zuò xià,zuo,z,o,Yes,sit_down.jpeg,High
+坐下,zuò xià,xia,x,o,Yes,sit_down.jpeg,High
+坐下,zuò xià,xia,a,o,Yes,sit_down.jpeg,High
+城堡,chéng bǎo,bao,b,eng,Yes,castle.png,High
+城堡,chéng bǎo,bao,ao,eng,Yes,castle.png,High
+士兵,shì bīng,shi,sh,"b, w",Yes,soldier.jpg,High
+士兵,shì bīng,shi,i,"b, w",Yes,soldier.jpg,High
+士兵,shì bīng,bing,ing,"b, w",Yes,soldier.jpg,High
+声音,shēng yīn,yin,y,eng,Yes,sound.jpg,High
+声音,shēng yīn,yin,in,eng,Yes,sound.jpg,High
+夜里,yè li,li,l,e,Yes,nighttime.jpg,High
+夜里,yè li,li,i,e,Yes,nighttime.jpg,High
+大楼,dàlóu,dalóu,d,ou,Yes,building.png,High
+大楼,dàlóu,dalóu,alou,ou,Yes,building.png,High
+大海,dà hǎi,da,d,ai,Yes,sea.jpg,High
+大海,dà hǎi,da,a,ai,Yes,sea.jpg,High
+大海,dà hǎi,hai,h,ai,Yes,sea.jpg,High
+大虾,dà xiā,da,d,x,Yes,prawn.jpg,High
+大虾,dà xiā,da,a,x,Yes,prawn.jpg,High
+大虾,dà xiā,xia,a,x,Yes,prawn.jpg,High
+大门,dà mén,da,d,en,Yes,gate.jpg,High
+大门,dà mén,da,a,en,Yes,gate.jpg,High
+大风,dà fēng,da,d,w,Yes,windy.jpg,High
+大风,dà fēng,da,a,w,Yes,windy.jpg,High
+大风,dà fēng,feng,f,w,Yes,windy.jpg,High
+大风,dà fēng,feng,eng,w,Yes,windy.jpg,High
+天空,tiān kōng,tian,t,w,Yes,sky.png,High
+天空,tiān kōng,tian,an,w,Yes,sky.png,High
+天空,tiān kōng,kong,k,w,Yes,sky.png,High
+天空,tiān kōng,kong,ong,w,Yes,sky.png,High
+太阳,tài yáng,tai,t,ai,Yes,sun.jpeg,High
+太阳,tài yáng,yang,y,ai,Yes,sun.jpeg,High
+太阳,tài yáng,yang,ang,ai,Yes,sun.jpeg,High
+头,tóu,tou,t,ou,Yes,head.jpg,High
+女孩,nv hái,hai,h,v,Yes,girl.jpg,High
+女孩,nv hái,hai,ai,v,Yes,girl.jpg,High
+奶瓶,nǎi píng,nai,n,ai,Yes,milk_bottle.png,High
+奶瓶,nǎi píng,ping,p,ai,Yes,milk_bottle.png,High
+奶瓶,nǎi píng,ping,ing,ai,Yes,milk_bottle.png,High
+好朋友,hǎo péng yǒu,hao,h,"p, w",Yes,friends.jpg,High
+好朋友,hǎo péng yǒu,hao,ao,"p, w",Yes,friends.jpg,High
+好朋友,hǎo péng yǒu,peng,eng,"p, w",Yes,friends.jpg,High
+好朋友,hǎo péng yǒu,you,y,"p, w",Yes,friends.jpg,High
+好朋友,hǎo péng yǒu,you,ou,"p, w",Yes,friends.jpg,High
+妈妈,mā mā,ma,m,a,Yes,mommy.png,High
+妈妈,mā mā,ma,m,a,Yes,mommy.png,High
+学习,xué xí,xue,e,x,Yes,study.png,High
+学习,xué xí,xi,i,x,Yes,study.png,High
+宝藏,bǎo zàng,zang,z,ao,Yes,treasure.jpeg,High
+宝藏,bǎo zàng,zang,ang,ao,Yes,treasure.jpeg,High
+宾馆,bīn guǎn,guan,g,in,Yes,hotel.jpg,High
+宾馆,bīn guǎn,guan,an,in,Yes,hotel.jpg,High
+富人,fù rén,ren,r,u,Yes,rich.png,High
+富人,fù rén,ren,en,u,Yes,rich.png,High
+小,xiǎo,xiao,x,ao,Yes,small.png,High
+小偷,xiǎo tōu,xiao,x,ou,Yes,thief.jpeg,High
+小偷,xiǎo tōu,xiao,ao,ou,Yes,thief.jpeg,High
+小偷,xiǎo tōu,tou,t,ou,Yes,thief.jpeg,High
+小姑娘,xiǎo gū niang,xiao,x,ang,Yes,girl.jpg,High
+小姑娘,xiǎo gū niang,xiao,ao,ang,Yes,girl.jpg,High
+小姑娘,xiǎo gū niang,gu,g,ang,Yes,girl.jpg,High
+小姑娘,xiǎo gū niang,gu,u,ang,Yes,girl.jpg,High
+小毛驴,xiǎo máo lv,xiao,x,v,Yes,donkey.jpg,High
+小毛驴,xiǎo máo lv,xiao,ao,v,Yes,donkey.jpg,High
+小毛驴,xiǎo máo lv,mao,m,v,Yes,donkey.jpg,High
+小毛驴,xiǎo máo lv,mao,ao,v,Yes,donkey.jpg,High
+屏幕,píng mù,ping,p,u,Yes,screen.png,High
+屏幕,píng mù,ping,ing,u,Yes,screen.png,High
+山羊,shān yáng,shan,sh,y,Yes,goat.gif,High
+山羊,shān yáng,shan,an,y,Yes,goat.gif,High
+山羊,shān yáng,yang,ang,y,Yes,goat.gif,High
+工人,gōng rén,gong,g,w,Yes,worker.png,High
+工人,gōng rén,gong,ong,w,Yes,worker.png,High
+工人,gōng rén,ren,r,w,Yes,worker.png,High
+工人,gōng rén,ren,en,w,Yes,worker.png,High
+帐篷,zhàng péng,zhang,ang,zh,Yes,tent.png,High
+帐篷,zhàng péng,peng,p,zh,Yes,tent.png,High
+帐篷,zhàng péng,peng,eng,zh,Yes,tent.png,High
+平衡车,pínghéng chē,píngheng,p,eng,Yes,segway.jpg,High
+平衡车,pínghéng chē,píngheng,ingheng,eng,Yes,segway.jpg,High
+平衡车,pínghéng chē,che,ch,eng,Yes,segway.jpg,High
+平衡车,pínghéng chē,che,e,eng,Yes,segway.jpg,High
+座位,zuò wèi,zuo,z,ei,Yes,seat.jpg,High
+座位,zuò wèi,zuo,o,ei,Yes,seat.jpg,High
+开门,kāi mén,kai,k,ai,Yes,open.jpeg,High
+开门,kāi mén,men,m,ai,Yes,open.jpeg,High
+开门,kāi mén,men,en,ai,Yes,open.jpeg,High
+影子,yǐng zi,zi,z,ing,Yes,shadow.jpg,High
+影子,yǐng zi,zi,i,ing,Yes,shadow.jpg,High
+心形,xīn xíng,xin,x,in,Yes,heart.jpg,High
+心形,xīn xíng,xing,x,in,Yes,heart.jpg,High
+心形,xīn xíng,xing,ing,in,Yes,heart.jpg,High
+恐龙,kǒng lóng,kong,k,w,Yes,dinosaur.jpg,High
+恐龙,kǒng lóng,kong,ong,w,Yes,dinosaur.jpg,High
+恐龙,kǒng lóng,long,l,w,Yes,dinosaur.jpg,High
+恐龙,kǒng lóng,long,ong,w,Yes,dinosaur.jpg,High
+我,wǒ,wo,o,w,Yes,I2.png,High
+手,shǒu,shou,sh,ou,Yes,hands.jpg,High
+手表,shǒu biǎo,shou,sh,ao,Yes,watch.jpg,High
+手表,shǒu biǎo,shou,ou,ao,Yes,watch.jpg,High
+打哈欠,dǎ hā qiàn,da,d,a,Yes,yawning.jpg,High
+打哈欠,dǎ hā qiàn,qian,q,a,Yes,yawning.jpg,High
+打哈欠,dǎ hā qiàn,qian,an,a,Yes,yawning.jpg,High
+扫地,sǎo dì,sao,ao,s,Yes,sweep.gif,High
+扫地,sǎo dì,di,d,s,Yes,sweep.gif,High
+扫地,sǎo dì,di,i,s,Yes,sweep.gif,High
+抽屉,chōuti,chouti,ch,ou,Yes,drawer.jpg,High
+抽屉,chōuti,chouti,outi,ou,Yes,drawer.jpg,High
+拉,lā,la,l,a,Yes,pull.jpg,High
+拔萝卜,bá luó bo,luo,l,"a, b",Yes,pull_carrot.jpeg,High
+拔萝卜,bá luó bo,luo,o,"a, b",Yes,pull_carrot.jpeg,High
+拔萝卜,bá luó bo,bo,o,"a, b",Yes,pull_carrot.jpeg,High
+排队,pái duì,pai,p,"d, ui",Yes,queue.jpg,High
+排队,pái duì,pai,ai,"d, ui",Yes,queue.jpg,High
+排队,pái duì,dui,i,"d, ui",Yes,queue.jpg,High
+摔倒,shuāi dǎo,shuai,sh,ai,Yes,fall2.jpg,High
+摔倒,shuāi dǎo,dao,d,ai,Yes,fall2.jpg,High
+摔倒,shuāi dǎo,dao,ao,ai,Yes,fall2.jpg,High
+撕纸,sī zhǐ,si,i,s,Yes,tear.png,High
+撕纸,sī zhǐ,zhi,zh,s,Yes,tear.png,High
+撕纸,sī zhǐ,zhi,i,s,Yes,tear.png,High
+数字,shù zì,zi,i,"sh, u, z",Yes,number2.jpg,High
+数数,shǔ shù,shu,u,sh,Yes,count.jpg,High
+数数,shǔ shù,shu,u,sh,Yes,count.jpg,High
+新年,xīn nián,xin,x,an,Yes,new_year.jpg,High
+新年,xīn nián,xin,in,an,Yes,new_year.jpg,High
+日历,rì lì,li,l,"i, r",Yes,calendar2.png,High
+早晨,zǎo chén,zao,z,en,Yes,morning.png,High
+早晨,zǎo chén,zao,ao,en,Yes,morning.png,High
+星星,xīng xīng,xing,x,w,Yes,star.png,High
+星星,xīng xīng,xing,ing,w,Yes,star.png,High
+星星,xīng xīng,xing,x,w,Yes,star.png,High
+星星,xīng xīng,xing,ing,w,Yes,star.png,High
+春天,chūn tiān,tian,t,un,Yes,spring.jpg,High
+春天,chūn tiān,tian,an,un,Yes,spring.jpg,High
+晚霞,wǎn xiá,wan,w,x,Yes,sunset_glow.jpg,High
+晚霞,wǎn xiá,wan,an,x,Yes,sunset_glow.jpg,High
+晚霞,wǎn xiá,xia,a,x,Yes,sunset_glow.jpg,High
+曲别针,qū bié zhēn,qu,u,q,Yes,clip.jpg,High
+曲别针,qū bié zhēn,bie,b,q,Yes,clip.jpg,High
+曲别针,qū bié zhēn,bie,e,q,Yes,clip.jpg,High
+曲别针,qū bié zhēn,zhen,zh,q,Yes,clip.jpg,High
+曲别针,qū bié zhēn,zhen,en,q,Yes,clip.jpg,High
+村庄,cūn zhuāng,cun,un,c,Yes,village.jpg,High
+村庄,cūn zhuāng,zhuang,zh,c,Yes,village.jpg,High
+村庄,cūn zhuāng,zhuang,ang,c,Yes,village.jpg,High
+来,lái,lai,l,ai,Yes,come.jpg,High
+板擦,bǎn cā,ban,b,c,Yes,whiteboard_eraser.jpg,High
+板擦,bǎn cā,ban,an,c,Yes,whiteboard_eraser.jpg,High
+板擦,bǎn cā,ca,a,c,Yes,whiteboard_eraser.jpg,High
+枕头,zhěn tóu,tou,t,"en, zh",Yes,pillow.jpg,High
+枕头,zhěn tóu,tou,ou,"en, zh",Yes,pillow.jpg,High
+果汁,guǒ zhī,guo,g,zh,Yes,juice.jpeg,High
+果汁,guǒ zhī,guo,o,zh,Yes,juice.jpeg,High
+果汁,guǒ zhī,zhi,i,zh,Yes,juice.jpeg,High
+果酱,guǒ jiàng,guo,g,j,Yes,jam.jpg,High
+果酱,guǒ jiàng,guo,o,j,Yes,jam.jpg,High
+果酱,guǒ jiàng,jiang,ang,j,Yes,jam.jpg,High
+树根,shù gēn,shu,sh,en,Yes,root.jpeg,High
+树根,shù gēn,shu,u,en,Yes,root.jpeg,High
+树根,shù gēn,gen,g,en,Yes,root.jpeg,High
+桃子,táo zi,tao,t,ao,Yes,peach.jpg,High
+桃子,táo zi,zi,z,ao,Yes,peach.jpg,High
+桃子,táo zi,zi,i,ao,Yes,peach.jpg,High
+桌子,zhuō zi,zi,z,o,Yes,table.png,High
+桌子,zhuō zi,zi,i,o,Yes,table.png,High
+桔子,jú zi,ju,u,j,Yes,mandarin_orange.jpg,High
+桔子,jú zi,zi,z,j,Yes,mandarin_orange.jpg,High
+桔子,jú zi,zi,i,j,Yes,mandarin_orange.jpg,High
+森林,sēn lín,lin,l,en,Yes,thick_forest.jpeg,High
+森林,sēn lín,lin,in,en,Yes,thick_forest.jpeg,High
+水滴,shuǐ dī,shui,sh,ui,Yes,water.jpeg,High
+水滴,shuǐ dī,shui,i,ui,Yes,water.jpeg,High
+水滴,shuǐ dī,di,d,ui,Yes,water.jpeg,High
+水滴,shuǐ dī,di,i,ui,Yes,water.jpeg,High
+汽车,qì chē,qi,i,"ch, q",Yes,car.jpeg,High
+汽车,qì chē,che,e,"ch, q",Yes,car.jpeg,High
+沙发,shā fā,fa,f,"a, sh",Yes,couch.jpg,High
+河,hé,he,h,e,Yes,river.jpg,High
+洗手,xǐ shǒu,xi,i,x,Yes,wash_hands.jpg,High
+洗手,xǐ shǒu,shou,sh,x,Yes,wash_hands.jpg,High
+洗手,xǐ shǒu,shou,ou,x,Yes,wash_hands.jpg,High
+洗手盆,xǐ shǒu pén,xi,x,"en, p",Yes,basin.jpeg,High
+洗手盆,xǐ shǒu pén,xi,i,"en, p",Yes,basin.jpeg,High
+洗手盆,xǐ shǒu pén,shou,sh,"en, p",Yes,basin.jpeg,High
+洗手盆,xǐ shǒu pén,shou,ou,"en, p",Yes,basin.jpeg,High
+洗澡,xǐ zǎo,xi,i,x,Yes,bath.jpg,High
+洗澡,xǐ zǎo,zao,z,x,Yes,bath.jpg,High
+洗澡,xǐ zǎo,zao,ao,x,Yes,bath.jpg,High
+洞,dòng,dong,ong,"d, w",Yes,hole.jpg,High
+海豚,hǎi tún,hai,h,un,Yes,dolphin.jpg,High
+海豚,hǎi tún,hai,ai,un,Yes,dolphin.jpg,High
+海豚,hǎi tún,tun,t,un,Yes,dolphin.jpg,High
+游乐场,yóu lè chǎng,you,y,e,Yes,playground.jpeg,High
+游乐场,yóu lè chǎng,you,ou,e,Yes,playground.jpeg,High
+游乐场,yóu lè chǎng,le,l,e,Yes,playground.jpeg,High
+游乐场,yóu lè chǎng,chang,ch,e,Yes,playground.jpeg,High
+游乐场,yóu lè chǎng,chang,ang,e,Yes,playground.jpeg,High
+游戏,yóu xì,you,y,x,Yes,game.png,High
+游戏,yóu xì,you,ou,x,Yes,game.png,High
+游戏,yóu xì,xi,i,x,Yes,game.png,High
+游泳,yóu yǒng,you,y,ou,Yes,swim.jpg,High
+游泳,yóu yǒng,yong,y,ou,Yes,swim.jpg,High
+游泳,yóu yǒng,yong,ong,ou,Yes,swim.jpg,High
+滚动,gǔn dòng,gun,g,un,Yes,rolling.jpg,High
+滚动,gǔn dòng,dong,d,un,Yes,rolling.jpg,High
+滚动,gǔn dòng,dong,ong,un,Yes,rolling.jpg,High
+漂亮,piào liang,liang,l,ao,Yes,beautiful_1.jpg,High
+漂亮,piào liang,liang,ang,ao,Yes,beautiful_1.jpg,High
+火柴,huǒ chái,huo,h,ai,Yes,light_a_match.gif,High
+火柴,huǒ chái,huo,o,ai,Yes,light_a_match.gif,High
+灯塔,dēng tǎ,deng,d,a,Yes,lighthouse.jpg,High
+灯塔,dēng tǎ,deng,eng,a,Yes,lighthouse.jpg,High
+灯塔,dēng tǎ,ta,t,a,Yes,lighthouse.jpg,High
+烤鸡,kǎo jī,kao,k,ao,Yes,grilled_chicken.jpeg,High
+烤鸡,kǎo jī,ji,j,ao,Yes,grilled_chicken.jpeg,High
+烤鸡,kǎo jī,ji,i,ao,Yes,grilled_chicken.jpeg,High
+热狗,rè gǒu,gou,g,"e, r",Yes,hotdog.jpg,High
+热狗,rè gǒu,gou,ou,"e, r",Yes,hotdog.jpg,High
+熊,Xióng,Xiong,x,ong,Yes,bear.jpg,High
+爬树,pá shù,shu,sh,"a, p",Yes,climb.png,High
+爬树,pá shù,shu,u,"a, p",Yes,climb.png,High
+牙刷,yá shuā,ya,y,a,Yes,toothbrush.jpg,High
+牛,Niú,Niu,n,u,Yes,cow.png,High
+狗,gǒu,gou,g,ou,Yes,dog.png,High
+狮子,shī zi,shi,i,sh,Yes,lion.png,High
+狮子,shī zi,zi,z,sh,Yes,lion.png,High
+狮子,shī zi,zi,i,sh,Yes,lion.png,High
+狼,láng,lang,l,w,Yes,wolf.jpg,High
+狼,láng,lang,ang,w,Yes,wolf.jpg,High
+猪,zhū,zhu,u,zh,Yes,pig.jpg,High
+猴子,hóu zi,hou,h,ou,Yes,monkey.png,High
+猴子,hóu zi,zi,z,ou,Yes,monkey.png,High
+猴子,hóu zi,zi,i,ou,Yes,monkey.png,High
+玫瑰,méi guī,mei,m,ei,Yes,rose.jpg,High
+玫瑰,méi guī,gui,g,ei,Yes,rose.jpg,High
+玫瑰,méi guī,gui,i,ei,Yes,rose.jpg,High
+瓢虫,piáo chóng,piao,p,ong,Yes,ladybug.jpg,High
+瓢虫,piáo chóng,piao,ao,ong,Yes,ladybug.jpg,High
+生气,shēng qì,sheng,sh,q,Yes,mad.png,High
+生气,shēng qì,sheng,eng,q,Yes,mad.png,High
+生气,shēng qì,qi,i,q,Yes,mad.png,High
+生病了,shēng bìng le,sheng,sh,"b, w",Yes,sick.jpg,High
+生病了,shēng bìng le,sheng,eng,"b, w",Yes,sick.jpg,High
+生病了,shēng bìng le,bing,ing,"b, w",Yes,sick.jpg,High
+生病了,shēng bìng le,le,l,"b, w",Yes,sick.jpg,High
+生病了,shēng bìng le,le,e,"b, w",Yes,sick.jpg,High
+白云,bái yún,bai,b,un,Yes,cloud.jpg,High
+白云,bái yún,bai,ai,un,Yes,cloud.jpg,High
+白云,bái yún,yun,y,un,Yes,cloud.jpg,High
+白色,bái sè,se,s,"ai, b",Yes,white.png,High
+白色,bái sè,se,e,"ai, b",Yes,white.png,High
+白雪公主,bái xuě gōng zhǔ,bai,b,x,Yes,snowwhite.jpg,High
+白雪公主,bái xuě gōng zhǔ,bai,ai,x,Yes,snowwhite.jpg,High
+白雪公主,bái xuě gōng zhǔ,xue,e,x,Yes,snowwhite.jpg,High
+白雪公主,bái xuě gōng zhǔ,gong,g,x,Yes,snowwhite.jpg,High
+白雪公主,bái xuě gōng zhǔ,gong,ong,x,Yes,snowwhite.jpg,High
+白雪公主,bái xuě gōng zhǔ,zhu,zh,x,Yes,snowwhite.jpg,High
+白雪公主,bái xuě gōng zhǔ,zhu,u,x,Yes,snowwhite.jpg,High
+盘子,pán zi,zi,z,"an, p",Yes,plate.jpg,High
+盘子,pán zi,zi,i,"an, p",Yes,plate.jpg,High
+眼睛,yǎn jīng,yan,an,y,Yes,eye.jpg,High
+眼睛,yǎn jīng,jing,j,y,Yes,eye.jpg,High
+眼睛,yǎn jīng,jing,ing,y,Yes,eye.jpg,High
+睡觉,shuì jiào,shui,sh,ui,Yes,sleep.jpg,High
+睡觉,shuì jiào,shui,i,ui,Yes,sleep.jpg,High
+睡觉,shuì jiào,jiao,j,ui,Yes,sleep.jpg,High
+睡觉,shuì jiào,jiao,ao,ui,Yes,sleep.jpg,High
+知了,zhī liǎo,zhi,zh,ao,Yes,cicada2.jpg,High
+知了,zhī liǎo,zhi,i,ao,Yes,cicada2.jpg,High
+硬币,yìng bì,ying,y,"b, i",Yes,coin.jpg,High
+硬币,yìng bì,ying,ing,"b, i",Yes,coin.jpg,High
+秋天,qiū tiān,qiu,q,iu,Yes,autumn.jpg,High
+秋天,qiū tiān,qiu,u,iu,Yes,autumn.jpg,High
+秋天,qiū tiān,tian,t,iu,Yes,autumn.jpg,High
+秋天,qiū tiān,tian,an,iu,Yes,autumn.jpg,High
+种子,zhǒng zi,zi,z,ong,Yes,seed.jpg,High
+种子,zhǒng zi,zi,i,ong,Yes,seed.jpg,High
+竹子,zhú zi,zhu,u,zh,Yes,bamboo.jpg,High
+竹子,zhú zi,zi,z,zh,Yes,bamboo.jpg,High
+竹子,zhú zi,zi,i,zh,Yes,bamboo.jpg,High
+等待,děng dài,deng,d,ai,Yes,wait2.jpg,High
+等待,děng dài,deng,eng,ai,Yes,wait2.jpg,High
+筷子,kuài zi,kuai,k,ai,Yes,chopsticks.jpg,High
+筷子,kuài zi,zi,z,ai,Yes,chopsticks.jpg,High
+筷子,kuài zi,zi,i,ai,Yes,chopsticks.jpg,High
+篮球,lán qiú,lan,l,"an, iu",Yes,basketball.gif,High
+篮球,lán qiú,qiu,q,"an, iu",Yes,basketball.gif,High
+篮球,lán qiú,qiu,u,"an, iu",Yes,basketball.gif,High
+簸箕,bò ji,ji,j,"b, o",Yes,dustpan.jpg,High
+簸箕,bò ji,ji,i,"b, o",Yes,dustpan.jpg,High
+米饭,mǐ fàn,fan,f,"an, i",Yes,rice.jpg,High
+紫色,zǐ sè,zi,i,z,Yes,purple.jpg,High
+紫色,zǐ sè,se,s,z,Yes,purple.jpg,High
+紫色,zǐ sè,se,e,z,Yes,purple.jpg,High
+红枣,hóng zǎo,hong,h,ao,Yes,red_date.jpg,High
+红枣,hóng zǎo,hong,ong,ao,Yes,red_date.jpg,High
+红枣,hóng zǎo,zao,z,ao,Yes,red_date.jpg,High
+红色,hóng sè,hong,h,w,Yes,red.jpg,High
+红色,hóng sè,hong,ong,w,Yes,red.jpg,High
+红色,hóng sè,se,s,w,Yes,red.jpg,High
+红色,hóng sè,se,e,w,Yes,red.jpg,High
+给,gěi,gei,g,ei,Yes,give.png,High
+绵羊,mián yáng,mian,m,w,Yes,sheep.jpg,High
+绵羊,mián yáng,mian,an,w,Yes,sheep.jpg,High
+绵羊,mián yáng,yang,y,w,Yes,sheep.jpg,High
+绵羊,mián yáng,yang,ang,w,Yes,sheep.jpg,High
+绿色,lv sè,se,s,v,Yes,green.jpg,High
+绿色,lv sè,se,e,v,Yes,green.jpg,High
+网,wǎng,wang,ang,w,Yes,net.jpeg,High
+羽毛,yǔ máo,yu,y,ao,Yes,feather.jpg,High
+羽毛,yǔ máo,yu,u,ao,Yes,feather.jpg,High
+老人,lǎo rén,ren,r,ao,Yes,old.png,High
+老人,lǎo rén,ren,en,ao,Yes,old.png,High
+老婆婆,lǎo pó pó,lao,l,"o, p",Yes,grandma.jpeg,High
+老婆婆,lǎo pó pó,lao,ao,"o, p",Yes,grandma.jpeg,High
+老师,lǎo shī,lao,l,sh,Yes,teacher.jpg,High
+老师,lǎo shī,lao,ao,sh,Yes,teacher.jpg,High
+老师,lǎo shī,shi,i,sh,Yes,teacher.jpg,High
+老虎,lǎo hǔ,lao,l,u,Yes,tiger.jpg,High
+老虎,lǎo hǔ,lao,ao,u,Yes,tiger.jpg,High
+老虎,lǎo hǔ,hu,h,u,Yes,tiger.jpg,High
+老鼠,lǎo shǔ,lao,l,u,Yes,mouse.jpg,High
+老鼠,lǎo shǔ,lao,ao,u,Yes,mouse.jpg,High
+老鼠,lǎo shǔ,shu,sh,u,Yes,mouse.jpg,High
+肥皂,féi zào,fei,f,ao,Yes,soap.jpg,High
+肥皂,féi zào,fei,ei,ao,Yes,soap.jpg,High
+肥皂,féi zào,zao,z,ao,Yes,soap.jpg,High
+肯德基,kěn dé jī,ken,k,en,Yes,kfc.jpg,High
+肯德基,kěn dé jī,de,d,en,Yes,kfc.jpg,High
+肯德基,kěn dé jī,de,e,en,Yes,kfc.jpg,High
+肯德基,kěn dé jī,ji,j,en,Yes,kfc.jpg,High
+肯德基,kěn dé jī,ji,i,en,Yes,kfc.jpg,High
+胡萝卜,hú luó bo,hu,h,o,Yes,carrot.png,High
+胡萝卜,hú luó bo,hu,u,o,Yes,carrot.png,High
+胡萝卜,hú luó bo,luo,l,o,Yes,carrot.png,High
+胡萝卜,hú luó bo,bo,b,o,Yes,carrot.png,High
+能,Néng,Neng,n,eng,Yes,can.png,High
+脖子,bó zi,zi,z,"b, o",Yes,neck.png,High
+脖子,bó zi,zi,i,"b, o",Yes,neck.png,High
+自行车,zì xíng chē,zi,i,z,Yes,bike.png,High
+自行车,zì xíng chē,xing,x,z,Yes,bike.png,High
+自行车,zì xíng chē,xing,ing,z,Yes,bike.png,High
+自行车,zì xíng chē,che,ch,z,Yes,bike.png,High
+自行车,zì xíng chē,che,e,z,Yes,bike.png,High
+船,chuán,chuan,ch,an,Yes,ship.png,High
+花儿,huā r,r,r,a,Yes,flower.jpg,High
+花朵,huā duǒ,hua,h,o,Yes,flower.jpg,High
+花朵,huā duǒ,hua,a,o,Yes,flower.jpg,High
+苹果,píng guǒ,ping,p,o,Yes,apple.png,High
+苹果,píng guǒ,ping,ing,o,Yes,apple.png,High
+苹果,píng guǒ,guo,g,o,Yes,apple.png,High
+草,cǎo,cao,c,ao,Yes,grass.gif,High
+草莓,cǎo méi,cao,ao,c,Yes,strawberry.gif,High
+草莓,cǎo méi,mei,m,c,Yes,strawberry.gif,High
+草莓,cǎo méi,mei,ei,c,Yes,strawberry.gif,High
+菠萝,bō luó,luo,l,"b, o",Yes,pineapple.jpg,High
+葱油饼,cōng yóu bǐng,cong,c,"b, w",Yes,congyoubing.jpg,High
+葱油饼,cōng yóu bǐng,cong,ong,"b, w",Yes,congyoubing.jpg,High
+葱油饼,cōng yóu bǐng,you,y,"b, w",Yes,congyoubing.jpg,High
+葱油饼,cōng yóu bǐng,you,ou,"b, w",Yes,congyoubing.jpg,High
+葱油饼,cōng yóu bǐng,bing,ing,"b, w",Yes,congyoubing.jpg,High
+蓝色,lán sè,lan,l,"an, s",Yes,blue.png,High
+蓝色,lán sè,se,e,"an, s",Yes,blue.png,High
+薯条,shǔ tiáo,shu,u,sh,Yes,fries.png,High
+薯条,shǔ tiáo,tiao,t,sh,Yes,fries.png,High
+薯条,shǔ tiáo,tiao,ao,sh,Yes,fries.png,High
+薯片,shǔ piàn,shu,u,sh,Yes,chips.jpg,High
+薯片,shǔ piàn,pian,p,sh,Yes,chips.jpg,High
+薯片,shǔ piàn,pian,an,sh,Yes,chips.jpg,High
+蜘蛛,zhī zhū,zhi,i,zh,Yes,spider.jpg,High
+蜘蛛,zhī zhū,zhu,u,zh,Yes,spider.jpg,High
+蜜蜂,mì fēng,mi,m,w,Yes,bee.png,High
+蜜蜂,mì fēng,mi,i,w,Yes,bee.png,High
+蜜蜂,mì fēng,feng,f,w,Yes,bee.png,High
+蜜蜂,mì fēng,feng,eng,w,Yes,bee.png,High
+蝌蚪,kē dǒu,ke,k,e,Yes,tadpole.jpg,High
+蝌蚪,kē dǒu,dou,d,e,Yes,tadpole.jpg,High
+蝌蚪,kē dǒu,dou,ou,e,Yes,tadpole.jpg,High
+衣服,yī fu,yi,i,y,Yes,t-shirt.png,High
+衣服,yī fu,fu,f,y,Yes,t-shirt.png,High
+衣服,yī fu,fu,u,y,Yes,t-shirt.png,High
+衣柜,yī guì,yi,y,ui,Yes,wardrobe.jpg,High
+衣柜,yī guì,yi,i,ui,Yes,wardrobe.jpg,High
+衣柜,yī guì,gui,g,ui,Yes,wardrobe.jpg,High
+衣柜,yī guì,gui,i,ui,Yes,wardrobe.jpg,High
+西瓜,xī guā,xi,i,"a, x",Yes,watermelon.png,High
+西瓜皮,xī guā pí,xi,x,"i, p",Yes,watermelon_skin.jpg,High
+西瓜皮,xī guā pí,gua,g,"i, p",Yes,watermelon_skin.jpg,High
+西瓜皮,xī guā pí,gua,a,"i, p",Yes,watermelon_skin.jpg,High
+要,yào,yao,ao,y,Yes,want2.png,High
+解放军,jiě fàng jūn,jie,j,un,Yes,pla.jpeg,High
+解放军,jiě fàng jūn,jie,e,un,Yes,pla.jpeg,High
+解放军,jiě fàng jūn,fang,f,un,Yes,pla.jpeg,High
+解放军,jiě fàng jūn,fang,ang,un,Yes,pla.jpeg,High
+解放军,jiě fàng jūn,jun,j,un,Yes,pla.jpeg,High
+语文,yǔ wén,yu,y,en,Yes,chinese_language.jpg,High
+语文,yǔ wén,yu,u,en,Yes,chinese_language.jpg,High
+说话,shuō huà,shuo,sh,o,Yes,said.png,High
+说话,shuō huà,hua,h,o,Yes,said.png,High
+说话,shuō huà,hua,a,o,Yes,said.png,High
+读书,dú shū,shu,sh,"d, u",Yes,read.jpeg,High
+谁,shéi,shei,sh,ei,Yes,who2.png,High
+贝壳,bèi ké,ke,k,"b, ei",Yes,shell.jpg,High
+贝壳,bèi ké,ke,e,"b, ei",Yes,shell.jpg,High
+走,zǒu,zou,ou,z,Yes,walk.gif,High
+起床,qǐ chuáng,qi,i,q,Yes,get_up.png,High
+起床,qǐ chuáng,chuang,ch,q,Yes,get_up.png,High
+起床,qǐ chuáng,chuang,ang,q,Yes,get_up.png,High
+足球,zú qiú,zu,u,z,Yes,football.png,High
+足球,zú qiú,qiu,q,z,Yes,football.png,High
+足球,zú qiú,qiu,u,z,Yes,football.png,High
+跌倒,diē dǎo,dao,d,e,Yes,fall2.jpg,High
+跌倒,diē dǎo,dao,ao,e,Yes,fall2.jpg,High
+蹦蹦跳跳,bèng bèng tiào tiào,beng,eng,"b, w",Yes,jump.png,High
+蹦蹦跳跳,bèng bèng tiào tiào,beng,eng,"b, w",Yes,jump.png,High
+蹦蹦跳跳,bèng bèng tiào tiào,tiao,t,"b, w",Yes,jump.png,High
+蹦蹦跳跳,bèng bèng tiào tiào,tiao,ao,"b, w",Yes,jump.png,High
+蹦蹦跳跳,bèng bèng tiào tiào,tiao,t,"b, w",Yes,jump.png,High
+蹦蹦跳跳,bèng bèng tiào tiào,tiao,ao,"b, w",Yes,jump.png,High
+身体,shēn tǐ,ti,t,en,Yes,body.png,High
+身体,shēn tǐ,ti,i,en,Yes,body.png,High
+轮滑鞋,lún huá xié,lun,l,un,Yes,roller_blade.jpg,High
+轮滑鞋,lún huá xié,hua,h,un,Yes,roller_blade.jpg,High
+轮滑鞋,lún huá xié,hua,a,un,Yes,roller_blade.jpg,High
+轮滑鞋,lún huá xié,xie,x,un,Yes,roller_blade.jpg,High
+轮滑鞋,lún huá xié,xie,e,un,Yes,roller_blade.jpg,High
+轮船,lún chuán,lun,l,un,Yes,ship.png,High
+轮船,lún chuán,chuan,ch,un,Yes,ship.png,High
+轮船,lún chuán,chuan,an,un,Yes,ship.png,High
+这里,zhè lǐ,li,l,e,Yes,here.png,High
+这里,zhè lǐ,li,i,e,Yes,here.png,High
+遛狗,liù gǒu,liu,l,iu,Yes,walk_a_dog.jpg,High
+遛狗,liù gǒu,liu,u,iu,Yes,walk_a_dog.jpg,High
+遛狗,liù gǒu,gou,g,iu,Yes,walk_a_dog.jpg,High
+遛狗,liù gǒu,gou,ou,iu,Yes,walk_a_dog.jpg,High
+金币,jīn bì,jin,j,in,Yes,gold_coin.png,High
+金币,jīn bì,bi,b,in,Yes,gold_coin.png,High
+金币,jīn bì,bi,i,in,Yes,gold_coin.png,High
+金银财宝,jīn yín cái bǎo,jin,j,in,Yes,treasure.jpeg,High
+金银财宝,jīn yín cái bǎo,yin,y,in,Yes,treasure.jpeg,High
+金银财宝,jīn yín cái bǎo,cai,c,in,Yes,treasure.jpeg,High
+金银财宝,jīn yín cái bǎo,cai,ai,in,Yes,treasure.jpeg,High
+金银财宝,jīn yín cái bǎo,bao,b,in,Yes,treasure.jpeg,High
+金银财宝,jīn yín cái bǎo,bao,ao,in,Yes,treasure.jpeg,High
+钉子,dīng zi,zi,z,ing,Yes,iron_nails.jpeg,High
+钉子,dīng zi,zi,i,ing,Yes,iron_nails.jpeg,High
+铃铛,líng dang,ling,l,w,Yes,bell.jpg,High
+铃铛,líng dang,ling,ing,w,Yes,bell.jpg,High
+铃铛,líng dang,dang,d,w,Yes,bell.jpg,High
+铃铛,líng dang,dang,ang,w,Yes,bell.jpg,High
+铅笔,qiān bǐ,qian,q,"b, i",Yes,pencil.jpg,High
+铅笔,qiān bǐ,qian,an,"b, i",Yes,pencil.jpg,High
+锅,guō,guo,g,o,Yes,wok.png,High
+锅盖,guō gài,guo,g,ai,Yes,cover.jpg,High
+锅盖,guō gài,guo,o,ai,Yes,cover.jpg,High
+锅盖,guō gài,gai,g,ai,Yes,cover.jpg,High
+错,Cuò,Cuo,c,o,Yes,wrong.jpg,High
+镊子,niē zi,nie,n,ie,Yes,tweezer.jpg,High
+镊子,niē zi,nie,e,ie,Yes,tweezer.jpg,High
+镊子,niē zi,zi,z,ie,Yes,tweezer.jpg,High
+镊子,niē zi,zi,i,ie,Yes,tweezer.jpg,High
+镜子,jìng zi,jing,j,w,Yes,mirror.jpg,High
+镜子,jìng zi,jing,ing,w,Yes,mirror.jpg,High
+镜子,jìng zi,zi,z,w,Yes,mirror.jpg,High
+镜子,jìng zi,zi,i,w,Yes,mirror.jpg,High
+长颈鹿,cháng jǐng lù,jing,j,ang,Yes,long_neck.jpg,High
+长颈鹿,cháng jǐng lù,jing,ing,ang,Yes,long_neck.jpg,High
+长颈鹿,cháng jǐng lù,lu,l,ang,Yes,long_neck.jpg,High
+长颈鹿,cháng jǐng lù,lu,u,ang,Yes,long_neck.jpg,High
+闹钟,nào zhōng,zhong,zh,ao,Yes,alarm_clock.gif,High
+闹钟,nào zhōng,zhong,ong,ao,Yes,alarm_clock.gif,High
+雨伞,yǔ sǎn,yu,y,s,Yes,umbrella.png,High
+雨伞,yǔ sǎn,yu,u,s,Yes,umbrella.png,High
+雨伞,yǔ sǎn,san,an,s,Yes,umbrella.png,High
+雷电,léi diàn,lei,l,ei,Yes,thunder.jpeg,High
+雷电,léi diàn,dian,d,ei,Yes,thunder.jpeg,High
+雷电,léi diàn,dian,an,ei,Yes,thunder.jpeg,High
+青蛙,qīng wā,qing,q,"a, w",Yes,frog.png,High
+青蛙,qīng wā,qing,ing,"a, w",Yes,frog.png,High
+面条,miàn tiáo,tiao,t,an,Yes,noodles.jpg,High
+面条,miàn tiáo,tiao,ao,an,Yes,noodles.jpg,High
+飞机,fēi jī,fei,f,ei,Yes,plane.png,High
+飞机,fēi jī,ji,j,ei,Yes,plane.png,High
+飞机,fēi jī,ji,i,ei,Yes,plane.png,High
+餐厅,cān tīng,can,c,an,Yes,restaurant.jpg,High
+餐厅,cān tīng,ting,t,an,Yes,restaurant.jpg,High
+餐厅,cān tīng,ting,ing,an,Yes,restaurant.jpg,High
+餐巾纸,cān jin zhǐ,can,an,c,Yes,tissue.jpg,High
+餐巾纸,cān jin zhǐ,jin,j,c,Yes,tissue.jpg,High
+餐巾纸,cān jin zhǐ,jin,in,c,Yes,tissue.jpg,High
+餐巾纸,cān jin zhǐ,zhi,zh,c,Yes,tissue.jpg,High
+餐巾纸,cān jin zhǐ,zhi,i,c,Yes,tissue.jpg,High
+饭铲,fàn chǎn,fan,f,an,Yes,rice_paddle.jpg,High
+饭铲,fàn chǎn,chan,ch,an,Yes,rice_paddle.jpg,High
+馄饨,hún tun,hun,h,un,Yes,huntun.jpg,High
+馄饨,hún tun,tun,t,un,Yes,huntun.jpg,High
+马,mǎ,ma,m,a,Yes,horse.png,High
+骑车,qí chē,qi,i,q,Yes,cycling.jpg,High
+骑车,qí chē,che,ch,q,Yes,cycling.jpg,High
+骑车,qí chē,che,e,q,Yes,cycling.jpg,High
+骨头,gǔ tou,tou,t,u,Yes,bone.jpg,High
+骨头,gǔ tou,tou,ou,u,Yes,bone.jpg,High
+高山,gāo shān,gao,g,an,Yes,mountain.jpg,High
+高山,gāo shān,gao,ao,an,Yes,mountain.jpg,High
+高山,gāo shān,shan,sh,an,Yes,mountain.jpg,High
+高楼,gāo lóu,gao,g,ao,Yes,building.png,High
+高楼,gāo lóu,lou,l,ao,Yes,building.png,High
+高楼,gāo lóu,lou,ou,ao,Yes,building.png,High
+鲨鱼,shā yú,yu,y,"a, sh",Yes,shark.jpeg,High
+鲨鱼,shā yú,yu,u,"a, sh",Yes,shark.jpeg,High
+鸡肉卷,jī ròu juǎn,ji,j,an,Yes,chicken_wrap.jpg,High
+鸡肉卷,jī ròu juǎn,ji,i,an,Yes,chicken_wrap.jpg,High
+鸡肉卷,jī ròu juǎn,rou,r,an,Yes,chicken_wrap.jpg,High
+鸡肉卷,jī ròu juǎn,rou,ou,an,Yes,chicken_wrap.jpg,High
+鸡蛋,jī dàn,ji,j,an,Yes,eggs.jpeg,High
+鸡蛋,jī dàn,ji,i,an,Yes,eggs.jpeg,High
+鸭子,yā zi,ya,a,y,Yes,duck.jpg,High
+鸭子,yā zi,zi,z,y,Yes,duck.jpg,High
+鸭子,yā zi,zi,i,y,Yes,duck.jpg,High
+鸽子,gē zi,ge,g,"e, z",Yes,pigeon.jpg,High
+黄,Huáng,Huang,h,ang,Yes,yellow.jpg,High
+黑色,hēi sè,se,s,ei,Yes,black.png,High
+黑色,hēi sè,se,e,ei,Yes,black.png,High
+鼻子,bí zi,zi,z,"b, i",Yes,nose.gif,High
+龙,lóng,long,l,w,Yes,dragon.png,High
+龙,lóng,long,ong,w,Yes,dragon.png,High
