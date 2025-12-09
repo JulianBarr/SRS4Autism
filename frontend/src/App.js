@@ -10,6 +10,7 @@ import MariosWorld from './components/MariosWorld';
 import ChineseWordRecognition from './components/ChineseWordRecognition';
 import EnglishWordRecognition from './components/EnglishWordRecognition';
 import PinyinLearning from './components/PinyinLearning';
+import PinyinGapFillAdmin from './components/PinyinGapFillAdmin';
 import { useLanguage } from './i18n/LanguageContext';
 import './App.css';
 
@@ -17,6 +18,12 @@ const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
 function App() {
   const { language, toggleLanguage, t } = useLanguage();
+  
+  // Check if we're on the admin route
+  const isAdminRoute = window.location.pathname === '/admin/pinyin-gap-fill' || 
+                       window.location.pathname.startsWith('/admin/pinyin-gap-fill');
+  
+  // All hooks must be called before any conditional returns
   const [activeTab, setActiveTab] = useState('main');
   const [activeCategory, setActiveCategory] = useState('language'); // Content category
   const [activeContentView, setActiveContentView] = useState(null); // Track specific content view (e.g., 'pinyin-learning')
@@ -106,6 +113,11 @@ function App() {
       console.error('Error approving card:', error);
     }
   };
+
+  // If admin route, render admin interface (after all hooks)
+  if (isAdminRoute) {
+    return <PinyinGapFillAdmin />;
+  }
 
   if (loading) {
                 return (

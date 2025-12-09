@@ -96,19 +96,40 @@ def add_tone_to_final(final: str, tone: Optional[int]) -> str:
     1. If final has 'a', mark 'a'
     2. Else if final has 'o', mark 'o'
     3. Else if final has 'e', mark 'e'
-    4. Else if final has 'i', mark 'i'
-    5. Else if final has 'u', mark 'u'
-    6. Else if final has 'ü', mark 'ü'
+    4. Special case: If final has both 'i' and 'u' together, mark the second one (i u 并列标在后)
+       - Examples: 'iu' -> 'iú' (tone on u), 'ui' -> 'uí' (tone on i)
+    5. Else if final has 'i', mark 'i'
+    6. Else if final has 'u', mark 'u'
+    7. Else if final has 'ü', mark 'ü'
     
     Examples:
         ('ang', 4) -> 'àng'
         ('ou', 2) -> 'óu'
+        ('iu', 2) -> 'iú'  (i u together, tone on second)
+        ('ui', 2) -> 'uí'  (i u together, tone on second)
         ('i', 1) -> 'ī'
     """
     if not tone or tone < 1 or tone > 4:
         return final
     
-    # Priority order for tone placement
+    # Special case: i and u together (i u 并列标在后)
+    # Check for 'iu' or 'ui' patterns
+    if 'iu' in final:
+        # Tone goes on 'u' (the second one)
+        mark = TONE_MARKS.get('u', [])[tone - 1]
+        if mark:
+            # Replace the 'u' in 'iu' with the tone mark
+            final = final.replace('iu', 'i' + mark, 1)
+            return final
+    elif 'ui' in final:
+        # Tone goes on 'i' (the second one)
+        mark = TONE_MARKS.get('i', [])[tone - 1]
+        if mark:
+            # Replace the 'i' in 'ui' with the tone mark
+            final = final.replace('ui', 'u' + mark, 1)
+            return final
+    
+    # Regular priority order for tone placement
     vowels_priority = ['a', 'o', 'e', 'i', 'u', 'ü', 'A', 'O', 'E', 'I', 'U', 'Ü']
     
     for vowel in vowels_priority:

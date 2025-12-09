@@ -616,6 +616,69 @@ def _fetch_word_info_via_llm(word: str) -> Dict[str, Any]:
         return {}
 
 
+def fix_iu_ui_tone_placement(pinyin: str) -> str:
+    """
+    Fix pinyin tone marks to follow 'i u 并列标在后' rule.
+    When i and u appear together:
+    - 'iu' -> tone should be on 'u' (e.g., 'liú' not 'líu')
+    - 'ui' -> tone should be on 'i' (e.g., 'guì' not 'gúi')
+    
+    Returns corrected pinyin.
+    """
+    if not pinyin:
+        return pinyin
+    
+    import re
+    from scripts.knowledge_graph.pinyin_parser import TONE_MARKS, extract_tone, add_tone_to_final
+    
+    # Split into syllables (space-separated)
+    syllables = pinyin.split()
+    fixed_syllables = []
+    
+    for syllable in syllables:
+        # Extract tone from syllable
+        syllable_no_tone, tone = extract_tone(syllable)
+        
+        if not tone:
+            fixed_syllables.append(syllable)
+            continue
+        
+        # Check for 'iu' pattern - tone should be on 'u' (the latter)
+        if 'iu' in syllable_no_tone.lower():
+            # Check if tone is currently on 'i' (wrong)
+            i_tones = ['ī', 'í', 'ǐ', 'ì', 'Ī', 'Í', 'Ǐ', 'Ì']
+            has_tone_on_i = any(i_tone in syllable for i_tone in i_tones)
+            
+            if has_tone_on_i:
+                # Wrong: tone is on i, should be on u
+                # Use add_tone_to_final which follows the i u 并列标在后 rule
+                fixed = add_tone_to_final(syllable_no_tone, tone)
+                fixed_syllables.append(fixed)
+            else:
+                # Tone is already on u or correct, keep as is
+                fixed_syllables.append(syllable)
+        
+        # Check for 'ui' pattern - tone should be on 'i' (the latter)
+        elif 'ui' in syllable_no_tone.lower():
+            # Check if tone is currently on 'u' (wrong)
+            u_tones = ['ū', 'ú', 'ǔ', 'ù', 'Ū', 'Ú', 'Ǔ', 'Ù']
+            has_tone_on_u = any(u_tone in syllable for u_tone in u_tones)
+            
+            if has_tone_on_u:
+                # Wrong: tone is on u, should be on i
+                # Use add_tone_to_final which follows the i u 并列标在后 rule
+                fixed = add_tone_to_final(syllable_no_tone, tone)
+                fixed_syllables.append(fixed)
+            else:
+                # Tone is already on i or correct, keep as is
+                fixed_syllables.append(syllable)
+        else:
+            # No iu/ui pattern, keep as is
+            fixed_syllables.append(syllable)
+    
+    return ' '.join(fixed_syllables)
+
+
 def get_word_knowledge(word: str) -> Dict[str, Any]:
     """Combine knowledge graph data, cache, and LLM fallback for a Chinese word."""
     info = fetch_word_knowledge_points(word) or {}
@@ -4640,35 +4703,29 @@ async def sync_chinese_naming_notes(request: Dict[str, Any]):
 # ============================================================================
 
 @app.get("/pinyin/elements")
-async def get_pinyin_elements(profile_id: str):
+async def get_pinyin_elements(profile_id: str, db: Session = Depends(get_db)):
     """
     Get Pinyin element notes (initial/final teaching cards) from database.
     """
     try:
         from database.models import PinyinElementNote
         
-        db = next(get_db())
-        try:
-            # Get all element notes, ordered by display_order
-            db_notes = db.query(PinyinElementNote).order_by(PinyinElementNote.display_order).all()
-            
-            # Convert to API format
-            notes = []
-            for db_note in db_notes:
-                # Parse fields JSON
-                note_fields = json.loads(db_note.fields) if db_note.fields else {}
-                
-                note_data = {
-                    'note_id': db_note.note_id,
-                    'element': db_note.element,
-                    'element_type': db_note.element_type,
-                    'fields': note_fields
-                }
-                notes.append(note_data)
-        finally:
-            db.close()
+        # Get all element notes, ordered by display_order
+        db_notes = db.query(PinyinElementNote).order_by(PinyinElementNote.display_order).all()
         
-        print(f"📚 Loaded {len(notes)} pinyin element notes from database")
+        # Convert to API format
+        notes = []
+        for db_note in db_notes:
+            # Parse fields JSON
+            note_fields = json.loads(db_note.fields) if db_note.fields else {}
+            
+            note_data = {
+                'note_id': db_note.note_id,
+                'element': db_note.element,
+                'element_type': db_note.element_type,
+                'fields': note_fields
+            }
+            notes.append(note_data)
         
         return {
             "notes": notes,
@@ -4684,34 +4741,30 @@ async def get_pinyin_elements(profile_id: str):
 
 
 @app.get("/pinyin/syllables")
-async def get_pinyin_syllables(profile_id: str):
+async def get_pinyin_syllables(profile_id: str, db: Session = Depends(get_db)):
     """
     Get Pinyin syllable notes from database.
     """
     try:
         from database.models import PinyinSyllableNote
         
-        db = next(get_db())
-        try:
-            # Get all syllable notes, ordered by display_order
-            db_notes = db.query(PinyinSyllableNote).order_by(PinyinSyllableNote.display_order).all()
+        # Get all syllable notes, ordered by display_order
+        db_notes = db.query(PinyinSyllableNote).order_by(PinyinSyllableNote.display_order).all()
+        
+        # Convert to API format
+        notes = []
+        for db_note in db_notes:
+            # Parse fields JSON
+            note_fields = json.loads(db_note.fields) if db_note.fields else {}
             
-            # Convert to API format
-            notes = []
-            for db_note in db_notes:
-                # Parse fields JSON
-                note_fields = json.loads(db_note.fields) if db_note.fields else {}
-                
-                note_data = {
-                    'note_id': db_note.note_id,
-                    'syllable': db_note.syllable,
-                    'word': db_note.word,
-                    'concept': db_note.concept,
-                    'fields': note_fields
-                }
-                notes.append(note_data)
-        finally:
-            db.close()
+            note_data = {
+                'note_id': db_note.note_id,
+                'syllable': db_note.syllable,
+                'word': db_note.word,
+                'concept': db_note.concept,
+                'fields': note_fields
+            }
+            notes.append(note_data)
         
         print(f"📚 Loaded {len(notes)} pinyin syllable notes from database")
         
@@ -4897,6 +4950,499 @@ async def sync_pinyin_notes(request: Dict[str, Any]):
         import traceback
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=f"Error syncing pinyin notes: {str(e)}")
+
+
+@app.get("/pinyin/word-info")
+async def get_pinyin_for_word(word: str):
+    """
+    Get pinyin and other info for a Chinese word from the knowledge graph.
+    Ensures pinyin follows 'i u 并列标在后' rule.
+    
+    Uses get_word_knowledge which includes KG lookup, cache, and LLM fallback if needed.
+    Runs in executor with timeout to prevent hanging.
+    """
+    import asyncio
+    try:
+        if not word or not word.strip():
+            raise HTTPException(status_code=400, detail="word parameter is required")
+        
+        word_stripped = word.strip()
+        
+        # Use get_word_knowledge but run it in executor with timeout to prevent hanging
+        # This includes KG lookup, cache, and LLM fallback if needed
+        loop = asyncio.get_event_loop()
+        try:
+            word_info = await asyncio.wait_for(
+                loop.run_in_executor(None, lambda: get_word_knowledge(word_stripped)),
+                timeout=8.0  # 8 second timeout for LLM call if needed
+            )
+        except asyncio.TimeoutError:
+            # If timeout, fall back to KG + cache only (no LLM)
+            print(f"⚠️ [word-info] Timeout for '{word_stripped}', using KG+cache only")
+            info = fetch_word_knowledge_points(word_stripped) or {}
+            pronunciations: List[str] = list(dict.fromkeys(info.get("pronunciations") or []))
+            meanings: List[str] = list(dict.fromkeys(info.get("meanings") or []))
+            hsk_level = info.get("hsk_level")
+            
+            # Check cache
+            cached = _word_kp_cache.get(word_stripped) or {}
+            cache_pinyin = cached.get("pinyin")
+            cache_meaning = cached.get("meaning") or cached.get("meaning_en")
+            cache_pron_list = cached.get("pronunciations") or []
+            cache_meaning_list = cached.get("meanings") or []
+            cache_hsk = cached.get("hsk_level")
+            
+            # Merge cache data
+            for val in [cache_pinyin] + cache_pron_list:
+                if val and val not in pronunciations:
+                    pronunciations.append(val)
+            for val in [cache_meaning] + cache_meaning_list:
+                if val and val not in meanings:
+                    meanings.append(val)
+            if not hsk_level and cache_hsk:
+                hsk_level = cache_hsk
+            
+            word_info = {
+                "pronunciations": pronunciations,
+                "meanings": meanings,
+                "hsk_level": hsk_level
+            }
+        
+        # Extract pinyin (use first pronunciation if available)
+        pinyin = None
+        if word_info.get("pronunciations"):
+            pinyin = word_info["pronunciations"][0]
+            # Fix tone placement for iu/ui patterns
+            pinyin = fix_iu_ui_tone_placement(pinyin)
+        
+        # Also fix pronunciations list
+        fixed_pronunciations = [fix_iu_ui_tone_placement(p) for p in word_info.get("pronunciations", [])]
+        
+        return {
+            "word": word.strip(),
+            "pinyin": pinyin,
+            "pronunciations": fixed_pronunciations,
+            "meanings": word_info.get("meanings", []),
+            "hsk_level": word_info.get("hsk_level")
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Error getting word info: {str(e)}")
+
+
+@app.get("/pinyin/gap-fill-suggestions")
+async def get_pinyin_gap_fill_suggestions():
+    """
+    Get pinyin gap fill suggestions from the CSV file.
+    """
+    import asyncio
+    try:
+        suggestions_file = PROJECT_ROOT / "data" / "pinyin_gap_fill_suggestions.csv"
+        
+        if not suggestions_file.exists():
+            raise HTTPException(status_code=404, detail="Suggestions file not found. Please run find_best_pinyin_words.py first.")
+        
+        # Run file I/O in thread executor to avoid blocking event loop
+        def read_csv_file():
+            suggestions = []
+            with open(suggestions_file, 'r', encoding='utf-8') as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    suggestions.append(dict(row))
+            return suggestions
+        
+        loop = asyncio.get_event_loop()
+        suggestions = await loop.run_in_executor(None, read_csv_file)
+        
+        return {
+            "suggestions": suggestions,
+            "total": len(suggestions)
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Error loading suggestions: {str(e)}")
+
+
+@app.put("/pinyin/gap-fill-suggestions")
+async def save_pinyin_gap_fill_suggestions(request: Dict[str, Any]):
+    """
+    Save approved/edited pinyin gap fill suggestions.
+    """
+    import asyncio
+    try:
+        suggestions_file = PROJECT_ROOT / "data" / "pinyin_gap_fill_suggestions.csv"
+        approved_suggestions = request.get("suggestions", [])
+        
+        if not approved_suggestions:
+            return {"message": "No suggestions to save", "saved": 0}
+        
+        print(f"💾 [SAVE] Starting save of {len(approved_suggestions)} suggestions to CSV...")
+        print(f"💾 [SAVE] File path: {suggestions_file}")
+        
+        # Load existing suggestions
+        print(f"💾 [SAVE] Loading existing suggestions from CSV...")
+        existing_suggestions = {}
+        if suggestions_file.exists():
+            try:
+                with open(suggestions_file, 'r', encoding='utf-8') as f:
+                    reader = csv.DictReader(f)
+                    row_count = 0
+                    for row in reader:
+                        syllable = row.get('Syllable')
+                        if syllable:
+                            existing_suggestions[syllable] = dict(row)
+                            row_count += 1
+                    print(f"💾 [SAVE] Loaded {row_count} existing suggestions")
+            except Exception as e:
+                print(f"⚠️ [SAVE] Error reading existing suggestions: {e}")
+                import traceback
+                traceback.print_exc()
+                # Continue with empty dict if read fails
+        
+        # Update with approved/edited suggestions
+        print(f"💾 [SAVE] Updating {len(approved_suggestions)} suggestions...")
+        for suggestion in approved_suggestions:
+            syllable = suggestion.get('Syllable')
+            if syllable:
+                # Ensure all fields are properly preserved, especially Image File
+                image_file = suggestion.get('Image File', '') or ''
+                if image_file and str(image_file).strip():
+                    suggestion['Has Image'] = 'Yes'
+                    suggestion['Image File'] = str(image_file).strip()
+                else:
+                    suggestion['Has Image'] = 'No'
+                    suggestion['Image File'] = ''
+                
+                if syllable in existing_suggestions:
+                    existing_suggestions[syllable].update(suggestion)
+                else:
+                    existing_suggestions[syllable] = suggestion
+                
+                print(f"💾 [SAVE] Updated syllable '{syllable}': Image File = '{suggestion.get('Image File', '')}', Has Image = '{suggestion.get('Has Image', '')}'")
+        
+        # Save back to CSV
+        if existing_suggestions:
+            fieldnames = ['Syllable', 'Suggested Word', 'Word Pinyin', 'HSK Level', 
+                         'Frequency Rank', 'Has Image', 'Image File', 'Concreteness', 
+                         'AoA', 'Num Syllables', 'Score', 'approved']
+            
+            # Write to a temporary file first, then rename (atomic operation)
+            import tempfile
+            import shutil
+            temp_file = suggestions_file.with_suffix('.tmp')
+            
+            try:
+                print(f"📝 [SAVE] Writing to temp file: {temp_file}")
+                # Run file I/O in thread executor to avoid blocking event loop
+                import asyncio
+                
+                def write_csv_file():
+                    with open(temp_file, 'w', encoding='utf-8', newline='') as f:
+                        writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction='ignore')
+                        writer.writeheader()
+                        print(f"📝 [SAVE] Writing {len(existing_suggestions)} suggestions...")
+                        for suggestion in existing_suggestions.values():
+                            writer.writerow(suggestion)
+                    print(f"📝 [SAVE] Temp file written successfully")
+                
+                # Run in executor with timeout
+                loop = asyncio.get_event_loop()
+                await asyncio.wait_for(
+                    loop.run_in_executor(None, write_csv_file),
+                    timeout=30.0  # 30 second timeout for file write
+                )
+                
+                print(f"📝 [SAVE] Renaming temp file to: {suggestions_file}")
+                # Atomic rename - also run in executor
+                await loop.run_in_executor(
+                    None,
+                    lambda: shutil.move(str(temp_file), str(suggestions_file))
+                )
+                print(f"✅ [SAVE] Successfully saved {len(existing_suggestions)} suggestions")
+            except Exception as e:
+                # Clean up temp file on error
+                if temp_file.exists():
+                    temp_file.unlink()
+                raise
+        
+        return {
+            "message": f"Saved {len(approved_suggestions)} suggestions",
+            "saved": len(approved_suggestions)
+        }
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Error saving suggestions: {str(e)}")
+
+
+def generate_tone_variations(syllable: str) -> list:
+    """
+    Generate all 4 tone variations of a syllable.
+    Example: 'zhen' -> ['zhēn', 'zhén', 'zhěn', 'zhèn']
+    """
+    from scripts.knowledge_graph.pinyin_parser import extract_tone, add_tone_to_final
+    
+    syllable_no_tone, _ = extract_tone(syllable)
+    if not syllable_no_tone:
+        return ['', '', '', '']
+    
+    variations = []
+    for tone in [1, 2, 3, 4]:
+        toned = add_tone_to_final(syllable_no_tone, tone)
+        variations.append(toned)
+    return variations
+
+
+def generate_confusors(syllable: str) -> list:
+    """
+    Generate confusor syllables (similar syllables that might be confused).
+    Based on pattern: change initial to b/p and vary tones.
+    """
+    from scripts.knowledge_graph.pinyin_parser import extract_tone, add_tone_to_final
+    
+    syllable_no_tone, _ = extract_tone(syllable)
+    if not syllable_no_tone or len(syllable_no_tone) < 2:
+        return ['', '', '']
+    
+    # Extract initial and final
+    initial = syllable_no_tone[0]
+    final = syllable_no_tone[1:] if len(syllable_no_tone) > 1 else ''
+    
+    # Generate confusors: b+final (tone 1), p+final (tone 2), original with different tone
+    confusors = []
+    if final:
+        confusors.append(add_tone_to_final('b' + final, 1))
+        confusors.append(add_tone_to_final('p' + final, 2))
+    else:
+        confusors.append(add_tone_to_final('ba', 1))
+        confusors.append(add_tone_to_final('pa', 2))
+    
+    # Third confusor: original syllable with tone 3 or 4 (if original wasn't tone 3)
+    original_toned = add_tone_to_final(syllable_no_tone, 3)
+    if original_toned == syllable:
+        original_toned = add_tone_to_final(syllable_no_tone, 4)
+    confusors.append(original_toned)
+    
+    return confusors
+
+
+def get_element_to_learn(syllable: str) -> str:
+    """
+    Determine ElementToLearn from syllable.
+    For syllable cards, ElementToLearn is typically the final (韵母).
+    Example: 'zhen' -> 'en' (final)
+    """
+    from scripts.knowledge_graph.pinyin_parser import parse_pinyin, extract_tone
+    
+    syllable_no_tone, _ = extract_tone(syllable)
+    if not syllable_no_tone:
+        return ''
+    
+    parsed = parse_pinyin(syllable_no_tone)
+    # ElementToLearn is the final (韵母)
+    return parsed.get('final', '') or ''
+
+
+def generate_word_audio(word: str) -> str:
+    """
+    Generate WordAudio field in format: [sound:cm_tts_zh_<word>.mp3]
+    """
+    if not word:
+        return ''
+    return f"[sound:cm_tts_zh_{word}.mp3]"
+
+
+@app.post("/pinyin/apply-suggestions")
+async def apply_pinyin_suggestions(request: Dict[str, Any]):
+    """
+    Apply approved pinyin suggestions to the pinyin deck database.
+    Creates new PinyinSyllableNote entries for approved suggestions.
+    """
+    try:
+        from database.models import PinyinSyllableNote
+        from database.db import get_db
+        
+        suggestions = request.get("suggestions", [])
+        profile_id = request.get("profile_id")
+        
+        if not suggestions:
+            raise HTTPException(status_code=400, detail="No suggestions provided")
+        
+        if not profile_id:
+            raise HTTPException(status_code=400, detail="profile_id is required")
+        
+        from database.db import get_db_session
+        
+        created_count = 0
+        updated_count = 0
+        errors = []
+        
+        with get_db_session() as db:
+            # Get the highest display_order to append new notes
+            max_order = db.query(PinyinSyllableNote.display_order).order_by(
+                PinyinSyllableNote.display_order.desc()
+            ).first()
+            next_order = (max_order[0] if max_order else 0) + 1
+            
+            for suggestion in suggestions:
+                try:
+                    # Handle both CSV field names (from frontend) and direct field names
+                    syllable = suggestion.get('Syllable') or suggestion.get('syllable', '')
+                    word = suggestion.get('Suggested Word') or suggestion.get('word', '')
+                    pinyin = suggestion.get('Word Pinyin') or suggestion.get('pinyin', '')
+                    image_file = suggestion.get('Image File') or suggestion.get('image_file', '')
+                    
+                    if not syllable or not word or word == 'NONE':
+                        continue
+                    
+                    # Check if note already exists for this syllable AND word combination
+                    # This prevents duplicates when same syllable is used for different words
+                    existing = db.query(PinyinSyllableNote).filter(
+                        PinyinSyllableNote.syllable == syllable,
+                        PinyinSyllableNote.word == word
+                    ).first()
+                    
+                    # If not found by syllable+word, check by syllable only (for backward compatibility)
+                    if not existing:
+                        existing = db.query(PinyinSyllableNote).filter(
+                            PinyinSyllableNote.syllable == syllable
+                        ).first()
+                    
+                    # Fetch concept from knowledge graph
+                    concept = word  # Default to word if concept not found
+                    try:
+                        word_info = get_word_knowledge(word)
+                        if word_info.get("meanings"):
+                            # Use first English meaning as concept
+                            concept = word_info["meanings"][0]
+                        elif word_info.get("pronunciations"):
+                            # Fallback: use word itself
+                            concept = word
+                    except Exception:
+                        # If KG lookup fails, use word as concept
+                        concept = word
+                    
+                    if existing:
+                        # Update existing note (idempotent - safe to apply multiple times)
+                        existing.word = word
+                        existing.concept = concept
+                        fields = json.loads(existing.fields) if existing.fields else {}
+                        
+                        # Update basic fields
+                        if pinyin:
+                            fields['WordPinyin'] = fix_iu_ui_tone_placement(pinyin)
+                        fields['WordHanzi'] = word
+                        
+                        # Update image if provided
+                        if image_file:
+                            fields['WordPicture'] = f'<img src="{image_file}">'
+                        
+                        # Generate missing fields if they don't exist
+                        if not fields.get('Tone1') or not fields.get('Tone2') or not fields.get('Tone3') or not fields.get('Tone4'):
+                            tone_variations = generate_tone_variations(syllable)
+                            if not fields.get('Tone1'):
+                                fields['Tone1'] = tone_variations[0] if len(tone_variations) > 0 else ''
+                            if not fields.get('Tone2'):
+                                fields['Tone2'] = tone_variations[1] if len(tone_variations) > 1 else ''
+                            if not fields.get('Tone3'):
+                                fields['Tone3'] = tone_variations[2] if len(tone_variations) > 2 else ''
+                            if not fields.get('Tone4'):
+                                fields['Tone4'] = tone_variations[3] if len(tone_variations) > 3 else ''
+                        
+                        if not fields.get('Confusor1') or not fields.get('Confusor2') or not fields.get('Confusor3'):
+                            confusors = generate_confusors(syllable)
+                            if not fields.get('Confusor1'):
+                                fields['Confusor1'] = confusors[0] if len(confusors) > 0 else ''
+                                fields['ConfusorPicture1'] = ''
+                            if not fields.get('Confusor2'):
+                                fields['Confusor2'] = confusors[1] if len(confusors) > 1 else ''
+                                fields['ConfusorPicture2'] = ''
+                            if not fields.get('Confusor3'):
+                                fields['Confusor3'] = confusors[2] if len(confusors) > 2 else ''
+                                fields['ConfusorPicture3'] = ''
+                        
+                        if not fields.get('ElementToLearn'):
+                            fields['ElementToLearn'] = get_element_to_learn(syllable)
+                        
+                        if not fields.get('WordAudio'):
+                            fields['WordAudio'] = generate_word_audio(word)
+                        
+                        existing.fields = json.dumps(fields, ensure_ascii=False)
+                        updated_count += 1
+                    else:
+                        # Create new note
+                        # Fix tone placement for iu/ui patterns in pinyin
+                        fixed_pinyin = fix_iu_ui_tone_placement(pinyin or '') if pinyin else ''
+                        
+                        # Generate all required fields
+                        tone_variations = generate_tone_variations(syllable)
+                        confusors = generate_confusors(syllable)
+                        element_to_learn = get_element_to_learn(syllable)
+                        word_audio = generate_word_audio(word)
+                        
+                        # Format WordPicture as HTML img tag if image_file exists
+                        word_picture = ''
+                        if image_file:
+                            word_picture = f'<img src="{image_file}">'
+                        
+                        fields = {
+                            'ElementToLearn': element_to_learn,
+                            'Syllable': syllable,
+                            'WordPinyin': fixed_pinyin,
+                            'WordHanzi': word,
+                            'WordPicture': word_picture,
+                            'WordAudio': word_audio,
+                            'Tone1': tone_variations[0] if len(tone_variations) > 0 else '',
+                            'Tone2': tone_variations[1] if len(tone_variations) > 1 else '',
+                            'Tone3': tone_variations[2] if len(tone_variations) > 2 else '',
+                            'Tone4': tone_variations[3] if len(tone_variations) > 3 else '',
+                            'Confusor1': confusors[0] if len(confusors) > 0 else '',
+                            'ConfusorPicture1': '',
+                            'Confusor2': confusors[1] if len(confusors) > 1 else '',
+                            'ConfusorPicture2': '',
+                            'Confusor3': confusors[2] if len(confusors) > 2 else '',
+                            'ConfusorPicture3': '',
+                            '_Remarks': '',
+                            '_KG_Map': '{}'
+                        }
+                        
+                        new_note = PinyinSyllableNote(
+                            note_id=f"syllable_{syllable}_{next_order}",
+                            syllable=syllable,
+                            word=word,
+                            concept=concept,
+                            fields=json.dumps(fields, ensure_ascii=False),
+                            display_order=next_order
+                        )
+                        
+                        db.add(new_note)
+                        next_order += 1
+                        created_count += 1
+                
+                except Exception as e:
+                    errors.append(f"Error processing {suggestion.get('syllable', 'unknown')}: {str(e)}")
+                    continue
+        
+        return {
+            "message": f"Applied {len(suggestions)} suggestions ({created_count} created, {updated_count} updated)",
+            "created": created_count,
+            "updated": updated_count,
+            "total": len(suggestions),
+            "errors": errors
+        }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Error applying suggestions: {str(e)}")
 
 
 # Mount static files for serving images

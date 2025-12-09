@@ -1,0 +1,40 @@
+.pinyin-gap-fill-admin {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 20px;
+}
+
+.admin-header {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.admin-header h1 {
+  margin: 0 0 10px 0;
+  color: #1f2937;
+  font-size: 32px;
+}
+
+.admin-subtitle {
+  color: #6b7280;
+  font-size: 18px;
+  margin: 0 0 15px 0;
+}
+
+.admin-description {
+  color: #9ca3af;
+  font-size: 14px;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.admin-content {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+

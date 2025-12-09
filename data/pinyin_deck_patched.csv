@@ -1,0 +1,549 @@
+#separator:tab
+#html:true
+Element	a	啊	"<img src=""ahh.png"">"	ā	á	ǎ	à	Teaching card for Lips & Simple Vowels stage	"{""0"": [{""kp"": ""pinyin-element-a"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage1_Lips
+Element	b	播	"<img src=""sowing.gif"">"	bō	bó	bǒ	bò	Teaching card for Lips & Simple Vowels stage	"{""0"": [{""kp"": ""pinyin-element-b"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage1_Lips
+Element	o	喔	"<img src=""singing_rooster.jpg"">"	ō	ó	ǒ	ò	Teaching card for Lips & Simple Vowels stage	"{""0"": [{""kp"": ""pinyin-element-o"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage1_Lips
+Element	p	婆婆	"<img src=""grandma.jpeg"">"	pō	pó	pǒ	pò	Teaching card for Lips & Simple Vowels stage	"{""0"": [{""kp"": ""pinyin-element-p"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage1_Lips
+Element	e	鹅	"<img src=""goose.jpeg"">"	ē	é	ě	è	Teaching card for Lips & Simple Vowels stage	"{""0"": [{""kp"": ""pinyin-element-e"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage1_Lips
+Element	m	摸	"<img src=""touch.jpeg"">"	mō	mó	mǒ	mò	Teaching card for Lips & Simple Vowels stage	"{""0"": [{""kp"": ""pinyin-element-m"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage1_Lips
+Element	i	衣	"<img src=""t-shirt.png"">"	ī	í	ǐ	ì	Teaching card for Lips & Simple Vowels stage	"{""0"": [{""kp"": ""pinyin-element-i"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage1_Lips
+Element	f	佛	"<img src=""buddha.jpg"">"	fō	fó	fǒ	fò	Teaching card for Lips & Simple Vowels stage	"{""0"": [{""kp"": ""pinyin-element-f"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage1_Lips
+Element	u	乌龟	"<img src=""tortoise.jpg"">"	ū	ú	ǔ	ù	Teaching card for Lips & Simple Vowels stage	"{""0"": [{""kp"": ""pinyin-element-u"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage1_Lips
+Element	ai	小矮人	"<img src=""dwarf.jpg"">"	āi	ái	ǎi	ài	Teaching card for Tip of Tongue stage	"{""0"": [{""kp"": ""pinyin-element-ai"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage2_Tip
+Element	d	德	"<img src=""germany.png"">"	dē	dé	dě	dè	Teaching card for Tip of Tongue stage	"{""0"": [{""kp"": ""pinyin-element-d"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage2_Tip
+Element	ei	诶	"<img src=""man_chopping_wood.jpg"">"	ēi	éi	ěi	èi	Teaching card for Tip of Tongue stage	"{""0"": [{""kp"": ""pinyin-element-ei"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage2_Tip
+Element	t	特	"<img src=""tesla_trump.png"">"	tē	té	tě	tè	Teaching card for Tip of Tongue stage	"{""0"": [{""kp"": ""pinyin-element-t"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage2_Tip
+Element	ao	袄	"<img src=""ao.jpg"">"	āo	áo	ǎo	ào	Teaching card for Tip of Tongue stage	"{""0"": [{""kp"": ""pinyin-element-ao"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage2_Tip
+Element	n							Teaching card for Tip of Tongue stage	"{""0"": [{""kp"": ""pinyin-element-n"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage2_Tip
+Element	ou	海鸥	"<img src=""seagull.jpeg"">"	ōu	óu	ǒu	òu	Teaching card for Tip of Tongue stage	"{""0"": [{""kp"": ""pinyin-element-ou"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage2_Tip
+Element	l	勒	"<img src=""xuanyalema.png"">"	lē	lé	lě	lè	Teaching card for Tip of Tongue stage	"{""0"": [{""kp"": ""pinyin-element-l"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage2_Tip
+Element	an	安全帽	"<img src=""safety_helmet.jpg"">"	ān	án	ǎn	àn	Teaching card for Root of Tongue stage	"{""0"": [{""kp"": ""pinyin-element-an"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage3_Root
+Element	g							Teaching card for Root of Tongue stage	"{""0"": [{""kp"": ""pinyin-element-g"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage3_Root
+Element	en	摁	"<img src=""en.png"">"	ēn	én	ěn	èn	Teaching card for Root of Tongue stage	"{""0"": [{""kp"": ""pinyin-element-en"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage3_Root
+Element	k	渴	"<img src=""thirsty.png"">"	kē	ké	kě	kè	Teaching card for Root of Tongue stage	"{""0"": [{""kp"": ""pinyin-element-k"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage3_Root
+Element	in	脚印	"<img src=""foot_print.png"">"	īn	ín	ǐn	ìn	Teaching card for Root of Tongue stage	"{""0"": [{""kp"": ""pinyin-element-in"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage3_Root
+Element	h	喝	"<img src=""drink.jpg"">"	hē	hé	hě	hè	Teaching card for Root of Tongue stage	"{""0"": [{""kp"": ""pinyin-element-h"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage3_Root
+Element	un	蚊子	"<img src=""mosquito.png"">"	ūn	ún	ǔn	ùn	Teaching card for Root of Tongue stage	"{""0"": [{""kp"": ""pinyin-element-un"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage3_Root
+Element	ang	昂	"<img src=""ang2.png"">"	āng	áng	ǎng	àng	Teaching card for Teeth & Curl stage	"{""0"": [{""kp"": ""pinyin-element-ang"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage4_TeethCurl
+Element	z	字母	"<img src=""letters.jpeg"">"	zī	zí	zǐ	zì	Teaching card for Teeth & Curl stage	"{""0"": [{""kp"": ""pinyin-element-z"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage4_TeethCurl
+Element	eng	哼	"<img src=""humming.png"">"	ēng	éng	ěng	èng	Teaching card for Teeth & Curl stage	"{""0"": [{""kp"": ""pinyin-element-eng"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage4_TeethCurl
+Element	c	刺猬	"<img src=""hedgehog.jpg"">"	cī	cí	cǐ	cì	Teaching card for Teeth & Curl stage	"{""0"": [{""kp"": ""pinyin-element-c"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage4_TeethCurl
+Element	ing	鹰	"<img src=""eagle.jpeg"">"	īng	íng	ǐng	ìng	Teaching card for Teeth & Curl stage	"{""0"": [{""kp"": ""pinyin-element-ing"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage4_TeethCurl
+Element	s	撕	"<img src=""tear.png"">"	sī	sí	sǐ	sì	Teaching card for Teeth & Curl stage	"{""0"": [{""kp"": ""pinyin-element-s"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage4_TeethCurl
+Element	ong	嗡	"<img src=""buzzing.png"">"	ōng	óng	ǒng	òng	Teaching card for Teeth & Curl stage	"{""0"": [{""kp"": ""pinyin-element-ong"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage4_TeethCurl
+Element	zh	蜘蛛	"<img src=""spider.jpg"">"	zhī	zhí	zhǐ	zhì	Teaching card for Teeth & Curl stage	"{""0"": [{""kp"": ""pinyin-element-zh"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage4_TeethCurl
+Element	er			ēr	ér	ěr	èr	Teaching card for Teeth & Curl stage	"{""0"": [{""kp"": ""pinyin-element-er"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage_Unknown
+Element	ch	吃	"<img src=""eat.jpeg"">"	chī	chí	chǐ	chì	Teaching card for Teeth & Curl stage	"{""0"": [{""kp"": ""pinyin-element-ch"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage4_TeethCurl
+Element	sh	狮子	"<img src=""lion.png"">"	shī	shí	shǐ	shì	Teaching card for Teeth & Curl stage	"{""0"": [{""kp"": ""pinyin-element-sh"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage4_TeethCurl
+Element	r	日	"<img src=""sun.jpeg"">"	rī	rí	rǐ	rì	Teaching card for Teeth & Curl stage	"{""0"": [{""kp"": ""pinyin-element-r"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage4_TeethCurl
+Element	ü			ǖ	ǘ	ǚ	ǜ	Teaching card for Magic Palatals stage	"{""0"": [{""kp"": ""pinyin-element-\u00fc"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage1_Lips
+Element	j	鸡	"<img src=""grilled_chicken.jpeg"">"	jī	jí	jǐ	jì	Teaching card for Magic Palatals stage	"{""0"": [{""kp"": ""pinyin-element-j"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage5_Magic
+Element	ia			iā	iá	iǎ	ià	Teaching card for Magic Palatals stage	"{""0"": [{""kp"": ""pinyin-element-ia"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage5_Magic
+Element	q	七	"<img src=""7.jpg"">"	qī	qí	qǐ	qì	Teaching card for Magic Palatals stage	"{""0"": [{""kp"": ""pinyin-element-q"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage5_Magic
+Element	ie	椰子树	"<img src=""coconut_tree.gif"">"	iē	ié	iě	iè	Teaching card for Magic Palatals stage	"{""0"": [{""kp"": ""pinyin-element-ie"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage5_Magic
+Element	x	西瓜	"<img src=""watermelon.png"">"	xī	xí	xǐ	xì	Teaching card for Magic Palatals stage	"{""0"": [{""kp"": ""pinyin-element-x"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage5_Magic
+Element	iao			iāo	iáo	iǎo	iào	Teaching card for Magic Palatals stage	"{""0"": [{""kp"": ""pinyin-element-iao"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage5_Magic
+Element	y	衣服	"<img src=""t-shirt.png"">"	yī	yí	yǐ	yì	Teaching card for Magic Palatals stage	"{""0"": [{""kp"": ""pinyin-element-y"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage5_Magic
+Element	iu	游泳	"<img src=""swim.jpg"">"	īu	íu	ǐu	ìu	Teaching card for Magic Palatals stage	"{""0"": [{""kp"": ""pinyin-element-iu"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage2_Tip
+Element	w	乌龟	"<img src=""tortoise.jpg"">"	wū	wú	wǔ	wù	Teaching card for Magic Palatals stage	"{""0"": [{""kp"": ""pinyin-element-w"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage5_Magic
+Element	ian			iān	ián	iǎn	iàn	Teaching card for Magic Palatals stage	"{""0"": [{""kp"": ""pinyin-element-ian"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage5_Magic
+Element	iang			iāng	iáng	iǎng	iàng	Teaching card for Magic Palatals stage	"{""0"": [{""kp"": ""pinyin-element-iang"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage5_Magic
+Element	iong			iōng	ióng	iǒng	iòng	Teaching card for Magic Palatals stage	"{""0"": [{""kp"": ""pinyin-element-iong"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage5_Magic
+Element	ua			uā	uá	uǎ	uà	Teaching card for Magic Palatals stage	"{""0"": [{""kp"": ""pinyin-element-ua"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage5_Magic
+Element	uo			uō	uó	uǒ	uò	Teaching card for Magic Palatals stage	"{""0"": [{""kp"": ""pinyin-element-uo"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage5_Magic
+Element	uai			uāi	uái	uǎi	uài	Teaching card for Magic Palatals stage	"{""0"": [{""kp"": ""pinyin-element-uai"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage5_Magic
+Element	ui	围巾	"<img src=""scarf.jpg"">"	uī	uí	uǐ	uì	Teaching card for Magic Palatals stage	"{""0"": [{""kp"": ""pinyin-element-ui"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage2_Tip
+Element	uan			uān	uán	uǎn	uàn	Teaching card for Magic Palatals stage	"{""0"": [{""kp"": ""pinyin-element-uan"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage5_Magic
+Element	uang			uāng	uáng	uǎng	uàng	Teaching card for Magic Palatals stage	"{""0"": [{""kp"": ""pinyin-element-uang"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage5_Magic
+Element	ue			uē	ué	uě	uè	Teaching card for Magic Palatals stage	"{""0"": [{""kp"": ""pinyin-element-ue"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage5_Magic
+Element	üe			üē	üé	üě	üè	Teaching card for Magic Palatals stage	"{""0"": [{""kp"": ""pinyin-element-\u00fce"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage5_Magic
+Element	üan			üān	üán	üǎn	üàn	Teaching card for Magic Palatals stage	"{""0"": [{""kp"": ""pinyin-element-\u00fcan"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage5_Magic
+Element	ün			ǖn	ǘn	ǚn	ǜn	Teaching card for Magic Palatals stage	"{""0"": [{""kp"": ""pinyin-element-\u00fcn"", ""skill"": ""form_to_sound"", ""weight"": 1.0}]}"	Stage3_Root
+Syllable	a	mā	mā mā	妈妈	"<img src=""mommy.png"">"			Stage1_Lips
+Syllable	a	fā	shā fā	沙发	"<img src=""couch.jpg"">"			Stage1_Lips
+Syllable	a	bá	bá luó bo	拔萝卜	"<img src=""pull_carrot.jpeg"">"			Stage1_Lips
+Syllable	a	pá	pá shù	爬树	"<img src=""climb.png"">"			Stage1_Lips
+Syllable	a	mǎ	mǎ	马	"<img src=""horse.png"">"			Stage1_Lips
+Syllable	a	bà	bà bà	爸爸	"<img src=""ZhouHui.png"">"			Stage1_Lips
+Syllable	b	bá	bá luó bo	拔萝卜	"<img src=""pull_carrot.jpeg"">"			Stage1_Lips
+Syllable	b	bà	bà bà	爸爸	"<img src=""ZhouHui.png"">"			Stage1_Lips
+Syllable	b	bō	bō luó	菠萝	"<img src=""pineapple.jpg"">"			Stage1_Lips
+Syllable	b	bó	bó zi	脖子	"<img src=""neck.png"">"			Stage1_Lips
+Syllable	b	bò	bò ji	簸箕	"<img src=""dustpan.jpg"">"			Stage1_Lips
+Syllable	b	bí	bí zi	鼻子	"<img src=""nose.gif"">"			Stage1_Lips
+Syllable	b	bǐ	qiān bǐ	铅笔	"<img src=""pencil.jpg"">"			Stage1_Lips
+Syllable	b	bì	yìng bì	硬币	"<img src=""coin.jpg"">"			Stage1_Lips
+Syllable	o	bō	bō luó	菠萝	"<img src=""pineapple.jpg"">"			Stage1_Lips
+Syllable	o	bó	bó zi	脖子	"<img src=""neck.png"">"			Stage1_Lips
+Syllable	o	pó	lǎo pó pó	老婆婆	"<img src=""grandma.jpeg"">"			Stage1_Lips
+Syllable	o	bò	bò ji	簸箕	"<img src=""dustpan.jpg"">"			Stage1_Lips
+Syllable	p	pá	pá shù	爬树	"<img src=""climb.png"">"			Stage1_Lips
+Syllable	p	pó	lǎo pó pó	老婆婆	"<img src=""grandma.jpeg"">"			Stage1_Lips
+Syllable	p	pí	xī guā pí	西瓜皮	"<img src=""watermelon_skin.jpg"">"			Stage1_Lips
+Syllable	i	pí	xī guā pí	西瓜皮	"<img src=""watermelon_skin.jpg"">"			Stage1_Lips
+Syllable	i	bí	bí zi	鼻子	"<img src=""nose.gif"">"			Stage1_Lips
+Syllable	i	bǐ	qiān bǐ	铅笔	"<img src=""pencil.jpg"">"			Stage1_Lips
+Syllable	i	bì	yìng bì	硬币	"<img src=""coin.jpg"">"			Stage1_Lips
+Syllable	ai	lái	lái	来	"<img src=""come.jpg"">"			Stage2_Tip
+Syllable	ai	nǎi	nǎi píng	奶瓶	"<img src=""milk_bottle.png"">"			Stage2_Tip
+Syllable	ai	tài	tài yáng	太阳	"<img src=""sun.jpeg"">"			Stage2_Tip
+Syllable	ei	léi	léi diàn	雷电	"<img src=""thunder.jpeg"">"			Stage2_Tip
+Syllable	ao	táo	táo zi	桃子	"<img src=""peach.jpg"">"			Stage2_Tip
+Syllable	ou	tōu	xiǎo tōu	小偷	"<img src=""thief.jpeg"">"			Stage2_Tip
+Syllable	ou	tóu	tóu	头	"<img src=""head.jpg"">"			Stage2_Tip
+Syllable	en	gēn	shù gēn	树根	"<img src=""root.jpeg"">"			Stage3_Root
+Syllable	en	kěn	kěn dé jī	肯德基	"<img src=""kfc.jpg"">"			Stage3_Root
+Syllable	un	hún	hún tun	馄饨	"<img src=""huntun.jpg"">"			Stage3_Root
+Syllable	un	gǔn	gǔn dòng	滚动	"<img src=""rolling.jpg"">"			Stage3_Root
+Syllable	zh	zhàng	zhàng péng	帐篷	"<img src=""tent.png"">"			Stage4_TeethCurl
+Syllable	j	jī	gōng jī	公鸡	"<img src=""singing_rooster.jpg"">"			Stage5_Magic
+Syllable	j	jú	jú zi	桔子	"<img src=""mandarin_orange.jpg"">"			Stage5_Magic
+Syllable	j	jǔ	jǔ shǒu	举手	"<img src=""raise_hand.png"">"			Stage5_Magic
+Syllable	q	qī	qī	七	"<img src=""7.jpg"">"			Stage5_Magic
+Syllable	q	qí	qí chē	骑车	"<img src=""cycling.jpg"">"			Stage5_Magic
+Syllable	q	qǐ	qǐ chuáng	起床	"<img src=""get_up.png"">"			Stage5_Magic
+Syllable	q	qì	shēng qì	生气	"<img src=""mad.png"">"			Stage5_Magic
+Syllable	q	qì	qì chē	汽车	"<img src=""car.jpeg"">"			Stage5_Magic
+Syllable	q	qù	qù	去	"<img src=""go2.png"">"			Stage5_Magic
+Syllable	q	qū	qū bié zhēn	曲别针	"<img src=""clip.jpg"">"			Stage5_Magic
+Syllable	x	xī	xī guā	西瓜	"<img src=""watermelon.png"">"			Stage5_Magic
+Syllable	x	xí	xué xí	学习	"<img src=""study.png"">"			Stage5_Magic
+Syllable	x	xǐ	xǐ shǒu	洗手	"<img src=""wash_hands.jpg"">"			Stage5_Magic
+Syllable	x	xǐ	xǐ zǎo	洗澡	"<img src=""bath.jpg"">"			Stage5_Magic
+Syllable	x	xì	yóu xì	游戏	"<img src=""game.png"">"			Stage5_Magic
+Syllable	y	yī	yī fu	衣服	"<img src=""t-shirt.png"">"			Stage5_Magic
+Syllable	iu	xīu	xīu gōng lù	修公路	"<img src=""building_a_road.jpg"">"			Stage2_Tip
+Syllable	iu	qīu	qīu tiān	秋天	"<img src=""autumn.jpg"">"			Stage2_Tip
+Syllable	iu	qíu	lán qíu	篮球	"<img src=""basketball.gif"">"			Stage2_Tip
+Syllable	iu	jǐu	jǐu	九	"<img src=""9.png"">"			Stage2_Tip
+Syllable	w	wū	wū guī	乌龟	"<img src=""tortoise.jpg"">"			Stage5_Magic
+Syllable	w	wǔ	wǔ	五	"<img src=""5.jpg"">"			Stage5_Magic
+Syllable	a	wā	qīng wā	青蛙	"<img src=""frog.png"">"			Stage1_Lips
+Syllable	a	lā	lā	拉	"<img src=""pull.jpg"">"			Stage1_Lips
+Syllable	a	shā	shā yú	鲨鱼	"<img src=""shark.jpeg"">"			Stage1_Lips
+Syllable	a	tǎ	dēng tǎ	灯塔	"<img src=""lighthouse.jpg"">"			Stage1_Lips
+Syllable	a	dà	dà	大	"<img src=""big.png"">"			Stage1_Lips
+Syllable	ai	kāi	kāi mén	开门	"<img src=""open.jpeg"">"			Stage2_Tip
+Syllable	ai	shuāi	shuāi dǎo	摔倒	"<img src=""fall2.jpg"">"			Stage2_Tip
+Syllable	ai	bái	bái sè	白色	"<img src=""white.png"">"			Stage2_Tip
+Syllable	ai	hǎi	dà hǎi	大海	"<img src=""sea.jpg"">"			Stage2_Tip
+Syllable	ai	wài	zài wài miàn	在外面	"<img src=""out.png"">"			Stage2_Tip
+Syllable	ai	gài	guō gài	锅盖	"<img src=""coüer.jpg"">"			Stage2_Tip
+Syllable	ai	kuài	kuài zi	筷子	"<img src=""chopsticks.jpg"">"			Stage2_Tip
+Syllable	ai	cài	bāo cài	包菜	"<img src=""cabbage.png"">"			Stage2_Tip
+Syllable	an	cān	cān tīng	餐厅	"<img src=""restaurant.jpg"">"			Stage3_Root
+Syllable	an	sān	sān jiǎo xíng	三角形	"<img src=""triangle.png"">"			Stage3_Root
+Syllable	an	pán	pán zi	盘子	"<img src=""plate.jpg"">"			Stage3_Root
+Syllable	an	lán	lán qíu	篮球	"<img src=""basketball.gif"">"			Stage3_Root
+Syllable	an	lán	lán sè	蓝色	"<img src=""blue.png"">"			Stage3_Root
+Syllable	an	chuán	chuán	船	"<img src=""ship.png"">"			Stage3_Root
+Syllable	an	shān	gāo shān	高山	"<img src=""mountain.jpg"">"			Stage3_Root
+Syllable	an	chǎn	fàn chǎn	饭铲	"<img src=""rice_paddle.jpg"">"			Stage3_Root
+Syllable	an	fàn	mǐ fàn	米饭	"<img src=""rice.jpg"">"			Stage3_Root
+Syllable	ao	gāo	gāo lóu	高楼	"<img src=""building.png"">"			Stage2_Tip
+Syllable	ao	kǎo	kǎo jī	烤鸡	"<img src=""grilled_chicken.jpeg"">"			Stage2_Tip
+Syllable	ao	zǎo	hóng zǎo	红枣	"<img src=""red_date.jpg"">"			Stage2_Tip
+Syllable	ao	xiǎo	xiǎo	小	"<img src=""small.png"">"			Stage2_Tip
+Syllable	ao	cǎo	cǎo	草	"<img src=""grass.gif"">"			Stage2_Tip
+Syllable	ao	zào	féi zào	肥皂	"<img src=""soap.jpg"">"			Stage2_Tip
+Syllable	b	bái	bái sè	白色	"<img src=""white.png"">"			Stage1_Lips
+Syllable	b	bèi	bèi ké	贝壳	"<img src=""shell.jpg"">"			Stage1_Lips
+Syllable	b	běn	yī běn shū	一本书	"<img src=""book.jpeg"">"			Stage1_Lips
+Syllable	b	bāng	bāng máng	帮忙	"<img src=""help2.png"">"			Stage1_Lips
+Syllable	b	bèng	bèng bèng tiào tiào	蹦蹦跳跳	"<img src=""jump.png"">"			Stage1_Lips
+Syllable	b	bīng	shì bīng	士兵	"<img src=""soldier.jpg"">"			Stage1_Lips
+Syllable	b	bǐng	cōng yóu bǐng	葱油饼	"<img src=""congyoubing.jpg"">"			Stage1_Lips
+Syllable	b	bìng	shēng bìng le	生病了	"<img src=""sick.jpg"">"			Stage1_Lips
+Syllable	c	cūn	cūn zhuāng	村庄	"<img src=""üillage.jpg"">"			Stage4_TeethCurl
+Syllable	c	cā	bǎn cā	板擦	"<img src=""whiteboard_eraser.jpg"">"			Stage4_TeethCurl
+Syllable	c	cān	cān jin zhǐ	餐巾纸	"<img src=""tissue.jpg"">"			Stage4_TeethCurl
+Syllable	c	cǎo	cǎo méi	草莓	"<img src=""strawberry.gif"">"			Stage4_TeethCurl
+Syllable	c	cài	bāo cài	包菜	"<img src=""cabbage.png"">"			Stage4_TeethCurl
+Syllable	c	cì	cì wèi	刺猬	"<img src=""hedgehog.jpg"">"			Stage4_TeethCurl
+Syllable	ch	chī	chī fàn	吃饭	"<img src=""eat.jpeg"">"			Stage4_TeethCurl
+Syllable	ch	chē	gōng jiāo chē	公交车	"<img src=""bus.png"">"			Stage4_TeethCurl
+Syllable	ch	chē	qì chē	汽车	"<img src=""car.jpeg"">"			Stage4_TeethCurl
+Syllable	ch	chú	chú fáng	厨房	"<img src=""kitchen.jpg"">"			Stage4_TeethCurl
+Syllable	ch	chā	chā zi	叉子	"<img src=""fork.gif"">"			Stage4_TeethCurl
+Syllable	d	dà	dà	大	"<img src=""big.png"">"			Stage2_Tip
+Syllable	d	dì	dì bǎn	地板	"<img src=""floor.jpeg"">"			Stage2_Tip
+Syllable	d	dú	dú shū	读书	"<img src=""read.jpeg"">"			Stage2_Tip
+Syllable	d	duì	pái duì	排队	"<img src=""queue.jpg"">"			Stage2_Tip
+Syllable	d	dòng	dòng	洞	"<img src=""hole.jpg"">"			Stage2_Tip
+Syllable	e	gē	gē zi	鸽子	"<img src=""pigeon.jpg"">"			Stage1_Lips
+Syllable	e	gē	chàng gē	唱歌	"<img src=""singing.jpg"">"			Stage1_Lips
+Syllable	e	kē	kē dǒu	蝌蚪	"<img src=""tadpole.jpg"">"			Stage1_Lips
+Syllable	e	hē	hē shuǐ	喝水	"<img src=""drink.jpg"">"			Stage1_Lips
+Syllable	e	chē	kǎ chē	卡车	"<img src=""truck.png"">"			Stage1_Lips
+Syllable	e	hé	hé	河	"<img src=""riüer.jpg"">"			Stage1_Lips
+Syllable	e	shé	shé	蛇	"<img src=""snake.jpg"">"			Stage1_Lips
+Syllable	e	kě	kě lè	可乐	"<img src=""coke.jpg"">"			Stage1_Lips
+Syllable	e	rè	rè gǒu	热狗	"<img src=""hotdog.jpg"">"			Stage1_Lips
+Syllable	e	lè	yóu lè chǎng	游乐场	"<img src=""playground.jpeg"">"			Stage1_Lips
+Syllable	ei	fēi	fēi jī	飞机	"<img src=""plane.png"">"			Stage2_Tip
+Syllable	ei	shéi	shéi	谁	"<img src=""who2.png"">"			Stage2_Tip
+Syllable	ei	méi	méi guī	玫瑰	"<img src=""rose.jpg"">"			Stage2_Tip
+Syllable	ei	gěi	gěi	给	"<img src=""giüe.png"">"			Stage2_Tip
+Syllable	ei	bèi	bèi ké	贝壳	"<img src=""shell.jpg"">"			Stage2_Tip
+Syllable	en	pēn	pēn quán	喷泉	"<img src=""fountain.jpg"">"			Stage3_Root
+Syllable	en	pén	xǐ shǒu pén	洗手盆	"<img src=""basin.jpeg"">"			Stage3_Root
+Syllable	en	rén	shèng dàn lǎo rén	圣诞老人	"<img src=""santa.png"">"			Stage3_Root
+Syllable	en	běn	yī běn shū	一本书	"<img src=""book.jpeg"">"			Stage3_Root
+Syllable	en	zhěn	zhěn tóu	枕头	"<img src=""pillow.jpg"">"			Stage3_Root
+Syllable	i	dì	dì bǎn	地板	"<img src=""floor.jpeg"">"			Stage1_Lips
+Syllable	i	lì	rì lì	日历	"<img src=""calendar2.png"">"			Stage1_Lips
+Syllable	ie	liè	yī liè huǒ che	一列火车	"<img src=""train.png"">"			Stage5_Magic
+Syllable	ie	tiē	chuàng kě tiē	创可贴	"<img src=""band_aid.png"">"			Stage5_Magic
+Syllable	ie	tiě	dì tiě	地铁	"<img src=""subway.jpg"">"			Stage5_Magic
+Syllable	ie	niē	niē zi	镊子	"<img src=""tweezer.jpg"">"			Stage5_Magic
+Syllable	ie	xiě	xiě zì	写字	"<img src=""write.png"">"			Stage5_Magic
+Syllable	in	xīn	xīn xíng	心形	"<img src=""heart.jpg"">"			Stage3_Root
+Syllable	in	jīn	jīn bì	金币	"<img src=""gold_coin.png"">"			Stage3_Root
+Syllable	in	yín	jīn yín cái bǎo	金银财宝	"<img src=""treasure.jpeg"">"			Stage3_Root
+Syllable	in	mín	nóng mín	农民	"<img src=""farmer.jpg"">"			Stage3_Root
+Syllable	in	xìn	xìn fēng	信封	"<img src=""enüelope.jpg"">"			Stage3_Root
+Syllable	in	lín	cóng lín	丛林	"<img src=""jungle.jpg"">"			Stage3_Root
+Syllable	iu	lìu	lìu	六	"<img src=""6.jpg"">"			Stage2_Tip
+Syllable	iu	lìu	lìu gǒu	遛狗	"<img src=""walk_a_dog.jpg"">"			Stage2_Tip
+Syllable	j	jiā	yì jiā rén	一家人	"<img src=""family.png"">"			Stage5_Magic
+Syllable	j	jiǎ	jiǎ fà	假发	"<img src=""wig.jpeg"">"			Stage5_Magic
+Syllable	j	jiàng	guǒ jiàng	果酱	"<img src=""jam.jpg"">"			Stage5_Magic
+Syllable	j	jiǎn	jiǎn dāo	剪刀	"<img src=""scissors.jpg"">"			Stage5_Magic
+Syllable	o	shuō	shuō huà	说话	"<img src=""said.png"">"			Stage1_Lips
+Syllable	o	guō	guō	锅	"<img src=""wok.png"">"			Stage1_Lips
+Syllable	o	luó	hú luó bo	胡萝卜	"<img src=""carrot.png"">"			Stage1_Lips
+Syllable	o	guǒ	píng guǒ	苹果	"<img src=""apple.png"">"			Stage1_Lips
+Syllable	o	suǒ	suǒ	锁	"<img src=""lock.jpg"">"			Stage1_Lips
+Syllable	o	zuò	zuò xià	坐下	"<img src=""sit_down.jpeg"">"			Stage1_Lips
+Syllable	ou	hóu	hóu zi	猴子	"<img src=""monkey.png"">"			Stage2_Tip
+Syllable	ou	shǒu	shǒu	手	"<img src=""hands.jpg"">"			Stage2_Tip
+Syllable	ou	gǒu	gǒu	狗	"<img src=""dog.png"">"			Stage2_Tip
+Syllable	ou	yóu	yóu yǒng	游泳	"<img src=""swim.jpg"">"			Stage2_Tip
+Syllable	ou	hòu	zài hòu miàn	在后面	"<img src=""behind.jpg"">"			Stage2_Tip
+Syllable	p	pán	pán zi	盘子	"<img src=""plate.jpg"">"			Stage1_Lips
+Syllable	p	pēn	pēn quán	喷泉	"<img src=""fountain.jpg"">"			Stage1_Lips
+Syllable	p	pén	xǐ shǒu pén	洗手盆	"<img src=""basin.jpeg"">"			Stage1_Lips
+Syllable	p	péng	hǎo péng yǒu	好朋友	"<img src=""friends.jpg"">"			Stage1_Lips
+Syllable	r	rì	rì lì	日历	"<img src=""calendar2.png"">"			Stage4_TeethCurl
+Syllable	r	rè	rè gǒu	热狗	"<img src=""hotdog.jpg"">"			Stage4_TeethCurl
+Syllable	r	rén	rén xíng dào	人行道	"<img src=""paüement.png"">"			Stage4_TeethCurl
+Syllable	r	rén	shèng dàn lǎo rén	圣诞老人	"<img src=""santa.png"">"			Stage4_TeethCurl
+Syllable	s	sī	sī zhǐ	撕纸	"<img src=""tear.png"">"			Stage4_TeethCurl
+Syllable	s	sān	sān jiǎo xíng	三角形	"<img src=""triangle.png"">"			Stage4_TeethCurl
+Syllable	s	sǎo	sǎo dì	扫地	"<img src=""sweep.gif"">"			Stage4_TeethCurl
+Syllable	s	suǒ	suǒ	锁	"<img src=""lock.jpg"">"			Stage4_TeethCurl
+Syllable	s	sǎn	yǔ sǎn	雨伞	"<img src=""umbrella.png"">"			Stage4_TeethCurl
+Syllable	s	sì	sì	四	"<img src=""4.jpg"">"			Stage4_TeethCurl
+Syllable	s	sè	lán sè	蓝色	"<img src=""blue.png"">"			Stage4_TeethCurl
+Syllable	sh	shī	lǎo shī	老师	"<img src=""teacher.jpg"">"			Stage4_TeethCurl
+Syllable	sh	shī	shī zi	狮子	"<img src=""lion.png"">"			Stage4_TeethCurl
+Syllable	sh	shū	shū	书	"<img src=""book.jpeg"">"			Stage4_TeethCurl
+Syllable	sh	shé	shé	蛇	"<img src=""snake.jpg"">"			Stage4_TeethCurl
+Syllable	sh	shā	shā yú	鲨鱼	"<img src=""shark.jpeg"">"			Stage4_TeethCurl
+Syllable	sh	shā	shā fā	沙发	"<img src=""couch.jpg"">"			Stage4_TeethCurl
+Syllable	sh	shǔ	shǔ tiáo	薯条	"<img src=""fries.png"">"			Stage4_TeethCurl
+Syllable	sh	shǔ	shǔ piàn	薯片	"<img src=""chips.jpg"">"			Stage4_TeethCurl
+Syllable	sh	shù	shù zì	数字	"<img src=""number2.jpg"">"			Stage4_TeethCurl
+Syllable	sh	shù	shǔ shù	数数	"<img src=""count.jpg"">"			Stage4_TeethCurl
+Syllable	u	shū	shū	书	"<img src=""book.jpeg"">"			Stage1_Lips
+Syllable	u	kū	kū le	哭了	"<img src=""cry.jpg"">"			Stage1_Lips
+Syllable	u	dú	dú shū	读书	"<img src=""read.jpeg"">"			Stage1_Lips
+Syllable	u	shǔ	lǎo shǔ	老鼠	"<img src=""mouse.jpg"">"			Stage1_Lips
+Syllable	u	hǔ	lǎo hǔ	老虎	"<img src=""tiger.jpg"">"			Stage1_Lips
+Syllable	u	shù	shù zì	数字	"<img src=""number2.jpg"">"			Stage1_Lips
+Syllable	u	shù	shèng dàn shù	圣诞树	"<img src=""xmas_tree.jpg"">"			Stage1_Lips
+Syllable	u	tù	tù zi	兔子	"<img src=""rabbit.png"">"			Stage1_Lips
+Syllable	ui	guī	wū guī	乌龟	"<img src=""tortoise.jpg"">"			Stage2_Tip
+Syllable	ui	kuí	xiàng rì kuí	向日葵	"<img src=""sunflower.jpeg"">"			Stage2_Tip
+Syllable	ui	shuǐ	shuǐ dī	水滴	"<img src=""water.jpeg"">"			Stage2_Tip
+Syllable	ui	duì	pái duì	排队	"<img src=""queue.jpg"">"			Stage2_Tip
+Syllable	ui	guì	yī guì	衣柜	"<img src=""wardrobe.jpg"">"			Stage2_Tip
+Syllable	ui	shuì	shuì jiào	睡觉	"<img src=""sleep.jpg"">"			Stage2_Tip
+Syllable	un	jūn	jiě fàng jūn	解放军	"<img src=""pla.jpeg"">"			Stage3_Root
+Syllable	un	lún	lún huá xié	轮滑鞋	"<img src=""roller_blade.jpg"">"			Stage3_Root
+Syllable	un	lún	lún chuán	轮船	"<img src=""ship.png"">"			Stage3_Root
+Syllable	un	tún	hǎi tún	海豚	"<img src=""dolphin.jpg"">"			Stage3_Root
+Syllable	un	yún	bái yún	白云	"<img src=""cloud.jpg"">"			Stage3_Root
+Syllable	ü	lü	lü sè	绿色	"<img src=""green.jpg"">"			Stage1_Lips
+Syllable	ü	nü	nü hái	女孩	"<img src=""girl.jpg"">"			Stage1_Lips
+Syllable	ü	lü	xiǎo máo lü	小毛驴	"<img src=""donkey.jpg"">"			Stage1_Lips
+Syllable	w	wā	qīng wā	青蛙	"<img src=""frog.png"">"			Stage5_Magic
+Syllable	w	wáng	guó wáng	国王	"<img src=""king.gif"">"			Stage5_Magic
+Syllable	w	wǎng	wǎng	网	"<img src=""net.jpeg"">"			Stage5_Magic
+Syllable	w	wǒ	wǒ	我	"<img src=""I2.png"">"			Stage5_Magic
+Syllable	w	bāng	bāng máng	帮忙	"<img src=""help2.png"">"			Stage5_Magic
+Syllable	w	yáng	mián yáng	绵羊	"<img src=""sheep.jpg"">"			Stage5_Magic
+Syllable	w	láng	láng	狼	"<img src=""wolf.jpg"">"			Stage5_Magic
+Syllable	w	wǎng	wǎng	网	"<img src=""net.jpeg"">"			Stage5_Magic
+Syllable	w	fēng	mì fēng	蜜蜂	"<img src=""bee.png"">"			Stage5_Magic
+Syllable	w	fēng	dà fēng	大风	"<img src=""windy.jpg"">"			Stage5_Magic
+Syllable	w	péng	hǎo péng yǒu	好朋友	"<img src=""friends.jpg"">"			Stage5_Magic
+Syllable	w	lěng	lěng	冷	"<img src=""cold.png"">"			Stage5_Magic
+Syllable	w	bèng	bèng bèng tiào tiào	蹦蹦跳跳	"<img src=""jump.png"">"			Stage5_Magic
+Syllable	w	xīng	xīng xīng	星星	"<img src=""star.png"">"			Stage5_Magic
+Syllable	w	tīng	tīng	听	"<img src=""listen.png"">"			Stage5_Magic
+Syllable	w	bīng	shì bīng	士兵	"<img src=""soldier.jpg"">"			Stage5_Magic
+Syllable	w	líng	líng dang	铃铛	"<img src=""bell.jpg"">"			Stage5_Magic
+Syllable	w	bǐng	cōng yóu bǐng	葱油饼	"<img src=""congyoubing.jpg"">"			Stage5_Magic
+Syllable	w	bìng	shēng bìng le	生病了	"<img src=""sick.jpg"">"			Stage5_Magic
+Syllable	w	jìng	jìng zi	镜子	"<img src=""mirror.jpg"">"			Stage5_Magic
+Syllable	w	kōng	tiān kōng	天空	"<img src=""sky.png"">"			Stage5_Magic
+Syllable	w	gōng	gōng rén	工人	"<img src=""worker.png"">"			Stage5_Magic
+Syllable	w	hóng	hóng sè	红色	"<img src=""red.jpg"">"			Stage5_Magic
+Syllable	w	lóng	lóng	龙	"<img src=""dragon.png"">"			Stage5_Magic
+Syllable	w	kǒng	kǒng lóng	恐龙	"<img src=""dinosaur.jpg"">"			Stage5_Magic
+Syllable	w	dòng	dòng	洞	"<img src=""hole.jpg"">"			Stage5_Magic
+Syllable	x	xuě	bái xuě gōng zhǔ	白雪公主	"<img src=""snowwhite.jpg"">"			Stage5_Magic
+Syllable	x	xià	zài xià miàn	在下面	"<img src=""under.png"">"			Stage5_Magic
+Syllable	x	xiā	dà xiā	大虾	"<img src=""prawn.jpg"">"			Stage5_Magic
+Syllable	x	xiá	wǎn xiá	晚霞	"<img src=""sunset_glow.jpg"">"			Stage5_Magic
+Syllable	y	yā	yā zi	鸭子	"<img src=""duck.jpg"">"			Stage5_Magic
+Syllable	y	yáng	shān yáng	山羊	"<img src=""goat.gif"">"			Stage5_Magic
+Syllable	y	yuán	gōng yuán	公园	"<img src=""park.jpg"">"			Stage5_Magic
+Syllable	y	yuán	dòng wù yuán	动物园	"<img src=""zoo.png"">"			Stage5_Magic
+Syllable	y	yǎn	yǎn jīng	眼睛	"<img src=""eye.jpg"">"			Stage5_Magic
+Syllable	y	yào	yào	要	"<img src=""want2.png"">"			Stage5_Magic
+Syllable	z	zi	gē zi	鸽子	"<img src=""pigeon.jpg"">"			Stage4_TeethCurl
+Syllable	z	zú	zú qíu	足球	"<img src=""football.png"">"			Stage4_TeethCurl
+Syllable	z	zǒu	zǒu	走	"<img src=""walk.gif"">"			Stage4_TeethCurl
+Syllable	z	zuǐ	zuǐ ba	嘴巴	"<img src=""mouth.jpeg"">"			Stage4_TeethCurl
+Syllable	z	zǐ	zǐ sè	紫色	"<img src=""purple.jpg"">"			Stage4_TeethCurl
+Syllable	z	zì	shù zì	数字	"<img src=""number2.jpg"">"			Stage4_TeethCurl
+Syllable	z	zì	zì xíng chē	自行车	"<img src=""bike.png"">"			Stage4_TeethCurl
+Syllable	z	zuò	zhì zuò	制作	"<img src=""make.jpg"">"			Stage4_TeethCurl
+Syllable	zh	zhī	zhī zhū	蜘蛛	"<img src=""spider.jpg"">"			Stage4_TeethCurl
+Syllable	zh	zhī	guǒ zhī	果汁	"<img src=""juice.jpeg"">"			Stage4_TeethCurl
+Syllable	zh	zhǐ	yī zhāng zhǐ	一张纸	"<img src=""paper.jpg"">"			Stage4_TeethCurl
+Syllable	zh	zhú	zhú zi	竹子	"<img src=""bamboo.jpg"">"			Stage4_TeethCurl
+Syllable	zh	zhū	zhū	猪	"<img src=""pig.jpg"">"			Stage4_TeethCurl
+Syllable	zh	zhěn	zhěn tóu	枕头	"<img src=""pillow.jpg"">"			Stage4_TeethCurl
+Syllable	b	bu	bu [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage1_Lips
+Syllable	b	bao	bao [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage1_Lips
+Syllable	b	bie	bie [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage1_Lips
+Syllable	b	ban	ban [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage1_Lips
+Syllable	b	bin	bin [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage1_Lips
+Syllable	b	biao	biao [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage1_Lips
+Syllable	b	bian	bian [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage1_Lips
+Syllable	p	pu	pu [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage1_Lips
+Syllable	p	pai	pai [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage1_Lips
+Syllable	p	pei	pei [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage1_Lips
+Syllable	p	pao	pao [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage1_Lips
+Syllable	p	pie	pie [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage1_Lips
+Syllable	p	pin	pin [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage1_Lips
+Syllable	p	pang	pang [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage1_Lips
+Syllable	p	ping	ping [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage1_Lips
+Syllable	p	piao	piao [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage1_Lips
+Syllable	p	pian	pian [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage1_Lips
+Syllable	m	mo	mo [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage1_Lips
+Syllable	m	mi	mi [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage1_Lips
+Syllable	m	mu	mu [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage1_Lips
+Syllable	m	mai	mai [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage1_Lips
+Syllable	m	mao	mao [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage1_Lips
+Syllable	m	mou	mou [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage1_Lips
+Syllable	m	miu	miu [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage1_Lips
+Syllable	m	mie	mie [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage1_Lips
+Syllable	m	man	man [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage1_Lips
+Syllable	m	men	men [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage1_Lips
+Syllable	m	mang	mang [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage1_Lips
+Syllable	m	meng	meng [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage1_Lips
+Syllable	m	ming	ming [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage1_Lips
+Syllable	m	miao	miao [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage1_Lips
+Syllable	m	mian	mian [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage1_Lips
+Syllable	f	fo	fo [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage1_Lips
+Syllable	f	fu	fu [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage1_Lips
+Syllable	f	fou	fou [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage1_Lips
+Syllable	f	fen	fen [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage1_Lips
+Syllable	f	fang	fang [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage1_Lips
+Syllable	d	dai	dai [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	d	dei	dei [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	d	dao	dao [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	d	dou	dou [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	d	diu	diu [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	d	die	die [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	d	dan	dan [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	d	dun	dun [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	d	dang	dang [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	d	ding	ding [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	d	duo	duo [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	d	duan	duan [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	d	diao	diao [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	d	dian	dian [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	t	ti	ti [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	t	tui	tui [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	t	tan	tan [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	t	tang	tang [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	t	teng	teng [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	t	tong	tong [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	t	tuo	tuo [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	t	tuan	tuan [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	t	tiao	tiao [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	t	tian	tian [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	n	na	na [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	n	ni	ni [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	n	nu	nu [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	n	nei	nei [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	n	nao	nao [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	n	nou	nou [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	n	niu	niu [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	n	nüe	nüe [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	n	nan	nan [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	n	nen	nen [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	n	nin	nin [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	n	nang	nang [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	n	neng	neng [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	n	ning	ning [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	n	nong	nong [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	n	nuo	nuo [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	n	nuan	nuan [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	n	niang	niang [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	n	niao	niao [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	n	nian	nian [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	l	lo	lo [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	l	lu	lu [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	l	lao	lao [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	l	lou	lou [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	l	lüe	lüe [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	l	luan	luan [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	l	liang	liang [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	l	liao	liao [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	l	lian	lian [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage2_Tip
+Syllable	g	ga	ga [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage3_Root
+Syllable	g	gu	gu [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage3_Root
+Syllable	g	gan	gan [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage3_Root
+Syllable	g	gang	gang [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage3_Root
+Syllable	g	geng	geng [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage3_Root
+Syllable	g	gua	gua [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage3_Root
+Syllable	g	guai	guai [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage3_Root
+Syllable	g	guan	guan [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage3_Root
+Syllable	g	guang	guang [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage3_Root
+Syllable	k	ka	ka [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage3_Root
+Syllable	k	kou	kou [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage3_Root
+Syllable	k	kan	kan [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage3_Root
+Syllable	k	kun	kun [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage3_Root
+Syllable	k	kang	kang [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage3_Root
+Syllable	k	keng	keng [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage3_Root
+Syllable	k	kua	kua [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage3_Root
+Syllable	k	kuo	kuo [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage3_Root
+Syllable	k	kuan	kuan [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage3_Root
+Syllable	k	kuang	kuang [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage3_Root
+Syllable	h	ha	ha [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage3_Root
+Syllable	h	hei	hei [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage3_Root
+Syllable	h	hui	hui [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage3_Root
+Syllable	h	hao	hao [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage3_Root
+Syllable	h	han	han [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage3_Root
+Syllable	h	hen	hen [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage3_Root
+Syllable	h	hang	hang [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage3_Root
+Syllable	h	heng	heng [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage3_Root
+Syllable	h	hua	hua [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage3_Root
+Syllable	h	huo	huo [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage3_Root
+Syllable	h	huai	huai [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage3_Root
+Syllable	h	huan	huan [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage3_Root
+Syllable	h	huang	huang [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage3_Root
+Syllable	z	za	za [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	z	ze	ze [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	z	zei	zei [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	z	zan	zan [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	z	zun	zun [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	z	zang	zang [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	z	zeng	zeng [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	z	zong	zong [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	z	zuan	zuan [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	c	ce	ce [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	c	cu	cu [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	c	cui	cui [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	c	cou	cou [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	c	cang	cang [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	c	ceng	ceng [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	c	cong	cong [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	c	cuo	cuo [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	c	cuan	cuan [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	s	sa	sa [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	s	su	su [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	s	sai	sai [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	s	sui	sui [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	s	sou	sou [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	s	sen	sen [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	s	sun	sun [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	s	sang	sang [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	s	seng	seng [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	s	song	song [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	s	suan	suan [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	zh	zha	zha [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	zh	zhe	zhe [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	zh	zhai	zhai [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	zh	zhui	zhui [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	zh	zhao	zhao [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	zh	zhou	zhou [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	zh	zhan	zhan [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	zh	zhun	zhun [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	zh	zheng	zheng [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	zh	zhong	zhong [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	zh	zhua	zhua [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	zh	zhuo	zhuo [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	zh	zhuai	zhuai [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	zh	zhuan	zhuan [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	zh	zhuang	zhuang [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	ch	chai	chai [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	ch	chui	chui [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	ch	chao	chao [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	ch	chou	chou [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	ch	chen	chen [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	ch	chun	chun [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	ch	chang	chang [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	ch	cheng	cheng [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	ch	chong	chong [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	ch	chuo	chuo [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	ch	chuai	chuai [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	ch	chuang	chuang [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	sh	shai	shai [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	sh	shao	shao [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	sh	shen	shen [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	sh	shun	shun [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	sh	shang	shang [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	sh	sheng	sheng [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	sh	shua	shua [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	sh	shuan	shuan [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	sh	shuang	shuang [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	r	ru	ru [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	r	rui	rui [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	r	rao	rao [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	r	rou	rou [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	r	ran	ran [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	r	run	run [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	r	rang	rang [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	r	reng	reng [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	r	rong	rong [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	r	ruo	ruo [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	r	ruan	ruan [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage4_TeethCurl
+Syllable	y	yo	yo [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage5_Magic
+Syllable	y	ye	ye [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage5_Magic
+Syllable	y	yu	yu [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage5_Magic
+Syllable	y	yue	yue [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage5_Magic
+Syllable	y	ying	ying [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage5_Magic
+Syllable	y	yong	yong [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage5_Magic
+Syllable	w	wei	wei [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage5_Magic
+Syllable	w	wan	wan [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage5_Magic
+Syllable	w	wen	wen [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage5_Magic
+Syllable	w	weng	weng [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage5_Magic
+Syllable	j	jie	jie [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage5_Magic
+Syllable	j	jue	jue [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage5_Magic
+Syllable	j	juan	juan [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage5_Magic
+Syllable	j	jiong	jiong [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage5_Magic
+Syllable	j	jiao	jiao [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage5_Magic
+Syllable	q	qie	qie [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage5_Magic
+Syllable	q	que	que [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage5_Magic
+Syllable	q	qin	qin [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage5_Magic
+Syllable	q	qun	qun [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage5_Magic
+Syllable	q	qing	qing [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage5_Magic
+Syllable	q	qia	qia [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage5_Magic
+Syllable	q	quan	quan [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage5_Magic
+Syllable	q	qiang	qiang [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage5_Magic
+Syllable	q	qiong	qiong [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage5_Magic
+Syllable	q	qiao	qiao [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage5_Magic
+Syllable	q	qian	qian [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage5_Magic
+Syllable	x	xu	xu [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage5_Magic
+Syllable	x	xun	xun [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage5_Magic
+Syllable	x	xuan	xuan [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage5_Magic
+Syllable	x	xiang	xiang [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage5_Magic
+Syllable	x	xiong	xiong [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage5_Magic
+Syllable	x	xian	xian [MISSING]	[缺失]	[MISSING]	Auto-generated Missing Combo	{}	Status::Missing Stage5_Magic

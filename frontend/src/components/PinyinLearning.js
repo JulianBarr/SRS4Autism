@@ -4,6 +4,54 @@ import axios from 'axios';
 const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
 /**
+ * Image component with fallback paths (similar to PinyinGapFillSuggestions)
+ */
+const ImageWithFallback = ({ src, alt, style, className }) => {
+  const [currentPathIndex, setCurrentPathIndex] = React.useState(0);
+  const [imageKey, setImageKey] = React.useState(0);
+  
+  // Extract filename from src (could be just filename or full path)
+  const filename = src.includes('/') ? src.split('/').pop() : src;
+  
+  // List of alternative paths to try
+  const alternativePaths = [
+    `${API_BASE}/media/visual_images/${filename}`,
+    `${API_BASE}/media/pinyin/${filename}`,
+    `${API_BASE}/media/character_recognition/${filename}`,
+    `${API_BASE}/media/chinese_word_recognition/${filename}`,
+    `${API_BASE}/media/images/${filename}`,
+    `${API_BASE}/media/${filename}`,
+    `${API_BASE}/${filename}`
+  ];
+  
+  const currentSrc = alternativePaths[currentPathIndex] || alternativePaths[0];
+  
+  const handleError = () => {
+    if (currentPathIndex < alternativePaths.length - 1) {
+      setCurrentPathIndex(currentPathIndex + 1);
+      setImageKey(imageKey + 1); // Force re-render
+    }
+  };
+  
+  const handleLoad = (e) => {
+    e.target.style.display = 'block';
+    e.target.style.visibility = 'visible';
+  };
+  
+  return (
+    <img
+      key={`${filename}-${imageKey}-${currentPathIndex}`}
+      src={currentSrc}
+      alt={alt}
+      style={style}
+      className={className}
+      onError={handleError}
+      onLoad={handleLoad}
+    />
+  );
+};
+
+/**
  * Pinyin Learning Component
  * 
  * Manages two types of pinyin notes:
@@ -36,19 +84,30 @@ const PinyinLearning = ({ profile, onProfileUpdate }) => {
     try {
       if (activeTab === 'elements') {
         const response = await axios.get(`${API_BASE}/pinyin/elements`, {
-          params: { profile_id: profile.id }
+          params: { profile_id: profile.id },
+          timeout: 10000 // 10 second timeout
         });
         setElementNotes(response.data.notes || []);
       } else {
         const response = await axios.get(`${API_BASE}/pinyin/syllables`, {
-          params: { profile_id: profile.id }
+          params: { profile_id: profile.id },
+          timeout: 10000 // 10 second timeout
         });
         setSyllableNotes(response.data.notes || []);
       }
       setSyncResult(null);
     } catch (error) {
       console.error('Error loading pinyin notes:', error);
-      alert(`加载失败: ${error.response?.data?.detail || error.message}`);
+      const errorMsg = error.code === 'ECONNABORTED' 
+        ? '请求超时，请检查后端服务是否正常运行'
+        : error.response?.data?.detail || error.message;
+      alert(`加载失败: ${errorMsg}`);
+      // Set empty arrays on error to prevent infinite loading
+      if (activeTab === 'elements') {
+        setElementNotes([]);
+      } else {
+        setSyllableNotes([]);
+      }
     } finally {
       setLoading(false);
     }
@@ -141,33 +200,36 @@ const PinyinLearning = ({ profile, onProfileUpdate }) => {
       return <span style={{ color: '#999', fontStyle: 'italic' }}>（空）</span>;
     }
     
-    // If it's HTML (contains img or div tags), fix image paths and render as HTML
-    if (fieldValue.includes('<img') || fieldValue.includes('<div')) {
-      // Fix image src paths to point to backend media directory
-      let fixedHtml = fieldValue;
-      // Replace relative image paths with full backend URLs
-      // Match img tags with src attribute (flexible spacing)
-      fixedHtml = fixedHtml.replace(
-        /<img([^>]*?)\s+src=["']([^"']+)["']([^>]*)>/gi,
-        (match, before, src, after) => {
-          // Skip if already a full URL
-          if (src.startsWith('http') || src.startsWith('data:') || src.startsWith('/media')) {
-            // If it's /media, prepend API_BASE
-            if (src.startsWith('/media')) {
-              return `<img${before} src="${API_BASE}${src}"${after}>`;
-            }
-            return match;
-          }
-          // Convert relative path to backend media URL
-          const filename = src.split('/').pop(); // Get just the filename
-          const fullUrl = `${API_BASE}/media/pinyin/${filename}`;
-          return `<img${before} src="${fullUrl}"${after}>`;
-        }
-      );
-      
+    // If it's HTML (contains img or div tags), extract image src and use ImageWithFallback
+    if (fieldValue.includes('<img')) {
+      // Extract image src from HTML
+      const imgMatch = fieldValue.match(/<img[^>]*\s+src=["']([^"']+)["'][^>]*>/i);
+      if (imgMatch) {
+        const imgSrc = imgMatch[1];
+        // Extract filename (could be just filename or full path)
+        const filename = imgSrc.includes('/') ? imgSrc.split('/').pop() : imgSrc;
+        
+        return (
+          <div className="word-preview-img-container">
+            <ImageWithFallback
+              src={filename}
+              alt={fieldName}
+              style={{
+                maxWidth: '100px',
+                maxHeight: '100px',
+                borderRadius: '4px',
+                border: '1px solid #ddd',
+                objectFit: 'contain',
+                backgroundColor: '#f5f5f5'
+              }}
+            />
+          </div>
+        );
+      }
+      // Fallback: render as HTML if we can't extract src
       return (
         <div 
-          dangerouslySetInnerHTML={{ __html: fixedHtml }}
+          dangerouslySetInnerHTML={{ __html: fieldValue }}
           className="word-preview-img-container"
         />
       );
@@ -181,74 +243,63 @@ const PinyinLearning = ({ profile, onProfileUpdate }) => {
                                 (!fieldValue.includes(' ') && fieldValue.length < 100);
       
       if (looksLikeFilename) {
-        // Try different paths for the image
-        // 1. If it's already a full URL or path, use it as-is
-        // 2. Try /media/pinyin/ (where pinyin images are stored)
-        // 3. Try /media/visual_images/ (for other images)
-        // 4. Try direct filename (for Anki media files)
-        let imageSrc = fieldValue;
-        if (!fieldValue.startsWith('http') && !fieldValue.startsWith('/')) {
-          // Try pinyin media path first (most likely for pinyin notes)
-          imageSrc = `${API_BASE}/media/pinyin/${fieldValue}`;
-        } else if (fieldValue.startsWith('/') && !fieldValue.startsWith('/media')) {
-          // If it's a relative path, prepend /media/pinyin/
-          imageSrc = `${API_BASE}/media/pinyin${fieldValue}`;
-        } else if (fieldValue.startsWith('/media')) {
-          // If it already has /media, just prepend API_BASE
-          imageSrc = `${API_BASE}${fieldValue}`;
-        }
+        // Extract filename (remove any path)
+        const filename = fieldValue.includes('/') ? fieldValue.split('/').pop() : fieldValue;
         
         return (
           <div style={{ position: 'relative' }}>
-            <img 
-              src={imageSrc}
+            <ImageWithFallback
+              src={filename}
               alt={fieldName}
               style={{
-                maxWidth: '200px',
-                maxHeight: '200px',
+                maxWidth: '100px',
+                maxHeight: '100px',
                 borderRadius: '4px',
                 border: '1px solid #ddd',
                 objectFit: 'contain',
                 backgroundColor: '#f5f5f5'
               }}
-              onError={(e) => {
-                // Try alternative paths if first attempt fails
-                const currentSrc = e.target.src;
-                const filename = fieldValue.includes('/') ? fieldValue.split('/').pop() : fieldValue;
-                
-                // Try alternative paths
-                const alternatives = [
-                  `${API_BASE}/media/visual_images/${filename}`,
-                  `${API_BASE}/media/${filename}`,
-                  `/${filename}`,
-                  filename
-                ];
-                
-                const currentIndex = alternatives.indexOf(currentSrc);
-                if (currentIndex < alternatives.length - 1) {
-                  // Try next alternative
-                  e.target.src = alternatives[currentIndex + 1];
-                } else {
-                  // All alternatives failed, show fallback text
-                  const parent = e.target.parentNode;
-                  e.target.style.display = 'none';
-                  if (!parent.querySelector('.image-fallback')) {
-                    const span = document.createElement('span');
-                    span.className = 'image-fallback';
-                    span.style.cssText = 'color: #666; font-size: 0.9em; font-style: italic;';
-                    span.textContent = `[图片: ${fieldValue}]`;
-                    parent.appendChild(span);
-                  }
-                }
-              }}
             />
           </div>
         );
       }
+      
+      // If not a filename, try to render as HTML
+      if (fieldValue.includes('<img')) {
+        const imgMatch = fieldValue.match(/<img[^>]*\s+src=["']([^"']+)["'][^>]*>/i);
+        if (imgMatch) {
+          const imgSrc = imgMatch[1];
+          const filename = imgSrc.includes('/') ? imgSrc.split('/').pop() : imgSrc;
+          return (
+            <div style={{ position: 'relative' }}>
+              <ImageWithFallback
+                src={filename}
+                alt={fieldName}
+                style={{
+                  maxWidth: '100px',
+                  maxHeight: '100px',
+                  borderRadius: '4px',
+                  border: '1px solid #ddd',
+                  objectFit: 'contain',
+                  backgroundColor: '#f5f5f5'
+                }}
+              />
+            </div>
+          );
+        }
+      }
+      
+      // Fallback: return as plain text or HTML
+      return (
+        <div 
+          dangerouslySetInnerHTML={{ __html: fieldValue }}
+          style={{ wordBreak: 'break-word' }}
+        />
+      );
     }
     
-    // Otherwise, render as plain text
-    return <span>{fieldValue}</span>;
+    // Default: return as plain text
+    return <span style={{ wordBreak: 'break-word' }}>{fieldValue}</span>;
   };
 
   const renderNoteCard = (note) => {
@@ -473,21 +524,22 @@ const PinyinLearning = ({ profile, onProfileUpdate }) => {
       </div>
 
       {/* Display count info */}
-      {!showMastered && masteredItems.size > 0 && (
-        <div style={{ 
-          padding: '8px 12px', 
-          marginBottom: '15px', 
-          backgroundColor: '#e3f2fd', 
-          borderRadius: '4px',
-          fontSize: '0.9em',
-          color: '#1976d2'
-        }}>
-          已隐藏 {masteredItems.size} 个已掌握项目。勾选上方"显示已掌握"可查看全部。
-        </div>
-      )}
+      <>
+          {!showMastered && masteredItems.size > 0 && (
+            <div style={{ 
+              padding: '8px 12px', 
+              marginBottom: '15px', 
+              backgroundColor: '#e3f2fd', 
+              borderRadius: '4px',
+              fontSize: '0.9em',
+              color: '#1976d2'
+            }}>
+              已隐藏 {masteredItems.size} 个已掌握项目。勾选上方"显示已掌握"可查看全部。
+            </div>
+          )}
 
-      {/* Filter and Action buttons */}
-      <div style={{ display: 'flex', gap: '10px', marginBottom: '20px', alignItems: 'center', flexWrap: 'wrap' }}>
+          {/* Filter and Action buttons */}
+          <div style={{ display: 'flex', gap: '10px', marginBottom: '20px', alignItems: 'center', flexWrap: 'wrap' }}>
         <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
           <input
             type="checkbox"
@@ -548,19 +600,21 @@ const PinyinLearning = ({ profile, onProfileUpdate }) => {
             </div>
           )}
         </div>
-      )}
+          )}
 
-      {/* Notes list */}
-      {loading ? (
-        <div>加载中...</div>
-      ) : currentNotes.length === 0 ? (
-        <div style={{ padding: '20px', textAlign: 'center', color: '#666' }}>
-          没有找到笔记
-        </div>
-      ) : (
-        <div>
-          {currentNotes.map(note => renderNoteCard(note))}
-        </div>
+          {/* Notes list */}
+          {loading ? (
+            <div>加载中...</div>
+          ) : currentNotes.length === 0 ? (
+            <div style={{ padding: '20px', textAlign: 'center', color: '#666' }}>
+              没有找到笔记
+            </div>
+          ) : (
+            <div>
+              {currentNotes.map(note => renderNoteCard(note))}
+            </div>
+          )}
+        </>
       )}
     </div>
   );
