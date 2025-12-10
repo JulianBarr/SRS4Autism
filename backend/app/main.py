@@ -5410,13 +5410,15 @@ async def apply_pinyin_suggestions(request: Dict[str, Any]):
         from database.db import get_db
         
         suggestions = request.get("suggestions", [])
+        # profile_id is not used - notes are created in shared table accessible by all profiles
+        # Keeping for backward compatibility but not required
         profile_id = request.get("profile_id")
         
         if not suggestions:
             raise HTTPException(status_code=400, detail="No suggestions provided")
         
-        if not profile_id:
-            raise HTTPException(status_code=400, detail="profile_id is required")
+        # Note: profile_id is not required - pinyin suggestions are shared across all profiles
+        # Each profile can filter from this basic list when syncing to Anki
         
         from database.db import get_db_session
         

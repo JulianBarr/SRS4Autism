@@ -546,9 +546,10 @@ const PinyinGapFillSuggestions = ({ profile, onProfileUpdate }) => {
         }));
 
       // Apply endpoint is in the main backend (port 8000) because it needs database access
+      // Notes are created in shared table accessible by all profiles (profile_id not needed)
       await axios.post(`${MAIN_API_BASE}/pinyin/apply-suggestions`, {
-        suggestions: approvedSuggestions,
-        profile_id: profile?.id
+        suggestions: approvedSuggestions
+        // profile_id not needed - data preparation is for all profiles
       });
 
       setMessage({ type: 'success', text: `成功应用 ${approvedSuggestions.length} 条建议到拼音牌组！` });
