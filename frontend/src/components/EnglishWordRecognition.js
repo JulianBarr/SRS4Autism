@@ -288,3 +288,4 @@ const EnglishWordRecognition = ({ profile, onProfileUpdate }) => {
 export default EnglishWordRecognition;
 
 
+

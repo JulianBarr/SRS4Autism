@@ -3154,6 +3154,10 @@ async def get_cefr_vocabulary(cefr_level: Optional[str] = None):
 _word_image_cache = None
 _word_image_cache_time = None
 
+# Cache for pinyin gap fill suggestions
+_pinyin_suggestions_cache = None
+_pinyin_suggestions_cache_mtime = None
+
 def get_word_image_map():
     """Load word->image mapping from TTL file (cached, much faster than full graph)."""
     global _word_image_cache, _word_image_cache_time
@@ -5036,143 +5040,68 @@ async def get_pinyin_for_word(word: str):
 @app.get("/pinyin/gap-fill-suggestions")
 async def get_pinyin_gap_fill_suggestions():
     """
-    Get pinyin gap fill suggestions from the CSV file.
+    Get pinyin gap fill suggestions.
+    OPTIMIZED: Removed asyncio executor for simple file IO to prevent thread starvation.
     """
-    import asyncio
+    global _pinyin_suggestions_cache, _pinyin_suggestions_cache_mtime
+    import time
+    
+    t_start = time.time()
     try:
         suggestions_file = PROJECT_ROOT / "data" / "pinyin_gap_fill_suggestions.csv"
+        print(f"🔍 [GET] Request received. Checking: {suggestions_file}")
         
         if not suggestions_file.exists():
+            print(f"❌ [GET] File not found: {suggestions_file}")
             raise HTTPException(status_code=404, detail="Suggestions file not found. Please run find_best_pinyin_words.py first.")
         
-        # Run file I/O in thread executor to avoid blocking event loop
-        def read_csv_file():
+        # Check file stats (blocking but fast)
+        file_stats = suggestions_file.stat()
+        current_mtime = file_stats.st_mtime
+        file_size = file_stats.st_size
+        
+        print(f"📂 [GET] File found. Size: {file_size} bytes. Cache mtime: {_pinyin_suggestions_cache_mtime} vs Current: {current_mtime}")
+        
+        # Refresh cache if needed
+        if _pinyin_suggestions_cache is None or _pinyin_suggestions_cache_mtime != current_mtime:
+            print("🔄 [GET] Cache stale. Reading CSV synchronously...")
+            
+            # DIRECT READ (No Executor): Removes complexity and deadlock risk
             suggestions = []
             with open(suggestions_file, 'r', encoding='utf-8') as f:
                 reader = csv.DictReader(f)
                 for row in reader:
                     suggestions.append(dict(row))
-            return suggestions
+            
+            _pinyin_suggestions_cache = suggestions
+            _pinyin_suggestions_cache_mtime = current_mtime
+            print(f"✅ [GET] CSV Read complete. Loaded {len(suggestions)} rows.")
+        else:
+            print("⚡ [GET] Serving from cache.")
         
-        loop = asyncio.get_event_loop()
-        suggestions = await loop.run_in_executor(None, read_csv_file)
+        duration = (time.time() - t_start) * 1000
+        print(f"🚀 [GET] Completed in {duration:.2f}ms")
         
         return {
-            "suggestions": suggestions,
-            "total": len(suggestions)
+            "suggestions": _pinyin_suggestions_cache,
+            "total": len(_pinyin_suggestions_cache)
         }
     except HTTPException:
         raise
     except Exception as e:
         import traceback
+        print(f"🔥 [GET] Critical Error: {str(e)}")
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=f"Error loading suggestions: {str(e)}")
-
-
-@app.post("/pinyin/find-and-rename-image")
-async def find_and_rename_image(request: Dict[str, Any]):
-    """Find the image for a Chinese word and rename it to the English word."""
-    import shutil
-    from pathlib import Path
-    
-    chinese_word = request.get("chinese_word", "").strip()
-    english_word = request.get("english_word", "").strip().lower().replace(" ", "_")
-    
-    if not chinese_word or not english_word:
-        raise HTTPException(status_code=400, detail="chinese_word and english_word are required")
-    
-    try:
-        # Get word info to find the image
-        word_info = get_word_knowledge(chinese_word)
-        image_path = word_info.get("image_path") if word_info else None
-        
-        if not image_path:
-            # Try to find image using word-image cache
-            word_image_map = get_word_image_map()
-            image_path = word_image_map.get(chinese_word)
-        
-        if not image_path:
-            return {"error": f"No image found for Chinese word: {chinese_word}", "image_file": ""}
-        
-        # Check common media directories
-        media_dirs = [
-            PROJECT_ROOT / "media" / "visual_images",
-            PROJECT_ROOT / "media" / "images",
-            PROJECT_ROOT / "media" / "pinyin",
-            PROJECT_ROOT / "media",
-        ]
-        
-        source_file = None
-        original_ext = None
-        
-        # Try to find the source file
-        for media_dir in media_dirs:
-            potential_paths = [
-                media_dir / image_path,
-                media_dir / Path(image_path).name,
-                PROJECT_ROOT / image_path.lstrip("/"),
-            ]
-            
-            for path in potential_paths:
-                if path.exists() and path.is_file():
-                    source_file = path
-                    original_ext = source_file.suffix
-                    break
-            
-            if source_file:
-                break
-        
-        if not source_file:
-            return {"error": f"Image file not found: {image_path}", "image_file": ""}
-        
-        # Create new filename: {english_word}.{ext}
-        new_filename = f"{english_word}{original_ext}"
-        target_dir = PROJECT_ROOT / "media" / "pinyin"
-        target_dir.mkdir(parents=True, exist_ok=True)
-        target_file = target_dir / new_filename
-        
-        # Copy (don't move, in case original is used elsewhere)
-        shutil.copy2(source_file, target_file)
-        
-        return {
-            "image_file": new_filename,
-            "original_path": str(source_file.relative_to(PROJECT_ROOT)),
-            "new_path": str(target_file.relative_to(PROJECT_ROOT))
-        }
-    
-    except Exception as e:
-        import traceback
-        traceback.print_exc()
-        return {"error": str(e), "image_file": ""}
-
-
-@app.get("/pinyin/english-vocab-suggestions")
-async def get_english_vocab_suggestions_for_pending():
-    """Get English vocabulary-based suggestions for pending pinyin syllables."""
-    import json
-    try:
-        matches_file = PROJECT_ROOT / "data" / "pending_syllable_english_matches.json"
-        if not matches_file.exists():
-            return {"matches": {}, "message": "No matches file found."}
-        with open(matches_file, 'r', encoding='utf-8') as f:
-            data = json.load(f)
-        return {
-            "matches": data.get("matches", {}),
-            "total_pending": data.get("total_pending", 0),
-            "matched": data.get("matched", 0),
-            "generated_at": data.get("generated_at", "")
-        }
-    except Exception as e:
-        import traceback
-        traceback.print_exc()
-        return {"matches": {}, "error": str(e)}
 
 
 @app.put("/pinyin/gap-fill-suggestions")
 async def save_pinyin_gap_fill_suggestions(request: Dict[str, Any]):
     """
     Save approved/edited pinyin gap fill suggestions.
+    Invalidates cache after saving.
     """
+    global _pinyin_suggestions_cache, _pinyin_suggestions_cache_mtime
     import asyncio
     try:
         suggestions_file = PROJECT_ROOT / "data" / "pinyin_gap_fill_suggestions.csv"
@@ -5270,6 +5199,10 @@ async def save_pinyin_gap_fill_suggestions(request: Dict[str, Any]):
                     temp_file.unlink()
                 raise
         
+        # Invalidate cache so next GET request will reload fresh data
+        _pinyin_suggestions_cache = None
+        _pinyin_suggestions_cache_mtime = None
+        
         return {
             "message": f"Saved {len(approved_suggestions)} suggestions",
             "saved": len(approved_suggestions)
@@ -5278,6 +5211,115 @@ async def save_pinyin_gap_fill_suggestions(request: Dict[str, Any]):
         import traceback
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=f"Error saving suggestions: {str(e)}")
+
+
+@app.get("/pinyin/english-vocab-suggestions")
+async def get_english_vocab_suggestions_for_pending():
+    """
+    Get English vocabulary-based suggestions for pending pinyin syllables.
+    Loads pre-computed matches from JSON file (generated by match_pending_syllables_english_vocab.py).
+    Returns up to 3 suggestions per syllable with radio button options.
+    """
+    import json
+    
+    try:
+        # Load pre-computed matches from JSON file
+        matches_file = PROJECT_ROOT / "data" / "pending_syllable_english_matches.json"
+        
+        if not matches_file.exists():
+            return {"matches": {}, "message": "No matches file found. Run match_pending_syllables_english_vocab.py first."}
+        
+        with open(matches_file, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        
+        return {
+            "matches": data.get("matches", {}),
+            "total_pending": data.get("total_pending", 0),
+            "matched": data.get("matched", 0),
+            "generated_at": data.get("generated_at", "")
+        }
+    
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return {"matches": {}, "error": str(e)}
+
+
+@app.post("/pinyin/find-and-rename-image")
+async def find_and_rename_image(request: Dict[str, Any]):
+    """
+    Find the image for a Chinese word and rename it to the English word.
+    Returns the new image filename.
+    """
+    import shutil
+    from pathlib import Path
+    
+    chinese_word = request.get("chinese_word", "").strip()
+    english_word = request.get("english_word", "").strip().lower().replace(" ", "_")
+    
+    if not chinese_word or not english_word:
+        raise HTTPException(status_code=400, detail="chinese_word and english_word are required")
+    
+    try:
+        # Find image using word-image cache (fast, no LLM calls)
+        word_image_map = get_word_image_map()
+        image_path = word_image_map.get(chinese_word)
+        
+        if not image_path:
+            return {"error": f"No image found for Chinese word: {chinese_word}", "image_file": ""}
+        
+        # image_path might be relative or absolute
+        # Check common media directories
+        media_dirs = [
+            PROJECT_ROOT / "media" / "visual_images",
+            PROJECT_ROOT / "media" / "images",
+            PROJECT_ROOT / "media" / "pinyin",
+            PROJECT_ROOT / "media",
+        ]
+        
+        source_file = None
+        original_ext = None
+        
+        # Try to find the source file
+        for media_dir in media_dirs:
+            # image_path might be just filename or relative path
+            potential_paths = [
+                media_dir / image_path,
+                media_dir / Path(image_path).name,
+                PROJECT_ROOT / image_path.lstrip("/"),
+            ]
+            
+            for path in potential_paths:
+                if path.exists() and path.is_file():
+                    source_file = path
+                    original_ext = source_file.suffix
+                    break
+            
+            if source_file:
+                break
+        
+        if not source_file:
+            return {"error": f"Image file not found: {image_path}", "image_file": ""}
+        
+        # Create new filename: {english_word}.{ext}
+        new_filename = f"{english_word}{original_ext}"
+        target_dir = PROJECT_ROOT / "media" / "pinyin"  # Use pinyin directory for these images
+        target_dir.mkdir(parents=True, exist_ok=True)
+        target_file = target_dir / new_filename
+        
+        # Copy (don't move, in case original is used elsewhere)
+        shutil.copy2(source_file, target_file)
+        
+        return {
+            "image_file": new_filename,
+            "original_path": str(source_file.relative_to(PROJECT_ROOT)),
+            "new_path": str(target_file.relative_to(PROJECT_ROOT))
+        }
+    
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return {"error": str(e), "image_file": ""}
 
 
 def generate_tone_variations(syllable: str) -> list:

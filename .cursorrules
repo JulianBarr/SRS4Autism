@@ -1,0 +1,120 @@
+# Cursor Rules for SRS4Autism Project
+
+## Project Overview
+SRS4Autism is a spaced repetition learning system with:
+- FastAPI backend
+- React frontend
+- Anki integration
+- Knowledge graph (Jena Fuseki, TTL/RDF)
+- Agentic components with Gemini AI
+- SQLAlchemy database
+
+## Code Style & Best Practices
+
+### Python
+- Follow PEP 8 style guidelines
+- Use type hints for function parameters and return values
+- Prefer pathlib.Path over os.path
+- Use f-strings for string formatting
+- Keep functions focused and single-purpose
+- Add docstrings for public functions and classes
+- Use `Optional[Type]` from typing for nullable values
+
+### FastAPI
+- Use Pydantic models for request/response validation
+- Include proper HTTP status codes (200, 201, 400, 404, 500, etc.)
+- Use dependency injection with `Depends()` for database sessions
+- Document endpoints with descriptive docstrings
+- Use async/await for I/O operations when appropriate
+- Handle errors gracefully with HTTPException
+
+### Database
+- Use SQLAlchemy ORM models
+- Access database through service layer (database/services/)
+- Always use session context managers or dependency injection
+- Commit transactions explicitly when needed
+- Use transactions for operations that must be atomic
+
+### File Organization
+- Keep backend logic in `backend/app/`
+- Put database models in `database/`
+- Service layer in `database/services/`
+- Utility functions in `backend/utils/`
+- Keep agentic code in `agentic/` and `agent/`
+- Knowledge graph scripts in `knowledge_graph/`
+- Content processing scripts in `scripts/`
+
+### Imports
+- Group imports: standard library, third-party, local
+- Use absolute imports from project root
+- Avoid circular dependencies
+
+## Project-Specific Guidelines
+
+### Knowledge Graph
+- Follow strict schema for `_KG_Map` JSON structures
+- Use directional `kg_link` structure for CUMA English cards
+- Log unmatched words for later Wikidata lookup
+- TTL files should be well-formatted and validated
+
+### Anki Integration
+- Templates in `anki_integration/templates/`
+- Use AnkiConnect API through `anki_integration/anki_connect.py`
+- Maintain card type consistency with Anki deck structure
+
+### Agentic Components
+- Use `AgenticPlanner`, `AgentMemory`, `PrincipleStore`, and `AgentTools`
+- Load environment variables from `gemini.env`
+- Handle API errors gracefully when calling external services
+
+### Content Management
+- Chinese content in `content/01-chinese/`
+- English content in `content/02-english/`
+- Math/logic in `content/03-math-and-logic/`
+- Common knowledge in `content/04-common-knowledge/`
+
+## Error Handling
+- Always catch specific exceptions, not bare `except:`
+- Log errors with appropriate context
+- Return meaningful error messages to API clients
+- Use HTTPException for API errors with descriptive messages
+
+## Testing
+- Write unit tests for business logic
+- Integration tests in `tests/integration/`
+- E2E tests in `tests/e2e/`
+- Test edge cases and error conditions
+
+## Security
+- Never commit sensitive credentials (use .env files)
+- Validate and sanitize all user inputs
+- Use parameterized queries for database operations
+- Follow least privilege principle for file operations
+
+## Performance
+- Use `@lru_cache` for expensive computations when appropriate
+- Avoid N+1 queries in database operations
+- Consider async operations for I/O-bound tasks
+- Profile code before optimizing
+
+## Documentation
+- Update relevant markdown files in `docs/` when making architectural changes
+- Include code comments for complex logic
+- Keep README files updated
+
+## Git Workflow
+- Commit related changes together
+- Write clear commit messages
+- Don't commit generated files or temporary scripts
+
+## Common Patterns
+- Use context managers for file operations
+- Prefer list/dict comprehensions when readable
+- Use dataclasses or Pydantic models for data structures
+- Validate inputs early in function execution
+
+## Engineering rules
+- Always start the backend in root directory instead of backend/ directory
+- Always activate venv
+- Use gtimeout as timeout command, it's located at /usr/local/bin
+
