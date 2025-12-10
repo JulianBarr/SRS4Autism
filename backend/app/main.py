@@ -5458,22 +5458,11 @@ async def apply_pinyin_suggestions(request: Dict[str, Any]):
                         ).first()
                     
                     # Fetch concept from knowledge graph
-                    # For batch operations, skip LLM calls (too slow) - just use word as concept
-                    concept = word  # Default to word if concept not found
-                    try:
-                        # Use a lightweight lookup that skips LLM (much faster for batch operations)
-                        # Only use KG + cache, no LLM fallback
-                        word_info = fetch_word_knowledge_points(word) or {}
-                        meanings = word_info.get("meanings", [])
-                        if meanings:
-                            # Use first English meaning as concept
-                            concept = meanings[0]
-                        else:
-                            # Fallback: use word itself
-                            concept = word
-                    except Exception:
-                        # If KG lookup fails, use word as concept
-                        concept = word
+                    # For batch operations, skip both LLM and KG SPARQL queries (too slow)
+                    # KG queries can take 10s each if Fuseki is slow/unavailable
+                    # For 210 suggestions, this could be 35+ minutes!
+                    # Just use word as concept - can be updated later if needed
+                    concept = word  # Use word itself as concept for batch operations
                     
                     if existing:
                         # Update existing note (idempotent - safe to apply multiple times)
