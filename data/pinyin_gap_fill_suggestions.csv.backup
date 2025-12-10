@@ -3,15 +3,15 @@ ban,一半,yī bàn,1,10557,Yes,half.jpg,1.72,7.4,2,-3210.54,True
 bao,宝藏,bǎo zàng,4,5079,Yes,treasure.jpeg,1.62,7.6,2,-2959.79,False
 bian,变化,biàn huà,1,687,Yes,change.png,2.14,4.9,2,-3026.63,True
 biao,手表,shǒu biǎo,3,2323,Yes,watch.jpg,2.39,4.0,2,-2711.27,False
-bie,类别,lèi bié,-,62,Yes,category.png,2.82,12.2,1,-2715.79,True
+bie,别,Bié,1,62,Yes,dont.jpeg,2.82,12.2,1,-2715.79,
 bin,宾馆,bīn guǎn,5,4892,Yes,hotel.jpg,4.00,8.3,2,-162.91,False
 bu,跑步,pǎo bù,3,5221,Yes,run.png,1.43,4.0,2,-3190.98,False
 cang,藏,cáng,6,4375,Yes,hide.gif,1.63,11.1,2,-1220.06,True
 ce,厕所,cè suǒ,5,11150,Yes,public_toilet.jpg,1.63,7.3,1,-2958.69,True
-ceng,层,yī céng,-,9425,Yes,layer_1.jpg,3.52,10.3,2,-2111.56,True
+ceng,层面,céng miàn,6,9425,Yes,plane.png,2.86,10.3,2,-2111.56,
 chai,火柴,huǒ chái,5,9620,Yes,light_a_match.gif,3.46,4.0,2,-1975.54,True
 chang,长颈鹿,cháng jǐng lù,2,294,Yes,long_neck.jpg,1.71,4.2,1,-3250.57,False
-chao,炒锅,chǎo guō,-,1194,Yes,wok.png,4.57,10.5,1,-2372.88,True
+chao,朝,Cháo,3,1194,Yes,morning.png,3.14,10.5,1,-2372.88,
 chen,早晨,zǎo chén,2,2366,Yes,morning.png,2.25,5.3,2,-2867.66,False
 cheng,城堡,chéng bǎo,3,14331,Yes,castle.png,1.81,4.0,2,-2999.77,True
 chong,瓢虫,piáo chóng,1,641,Yes,ladybug.jpg,1.75,4.0,1,-1833.44,True
@@ -21,68 +21,68 @@ chuang,床,chuáng,1,516,Yes,bed.jpg,1.63,11.7,1,-1816.15,False
 chui,吹灭,chuī miè,2,1493,Yes,blow_out.gif,3.74,4.0,1,-2238.35,True
 chun,春天,chūn tiān,2,4359,Yes,spring.jpg,3.89,5.5,2,-2045.56,False
 chuo,戳,chuō,-,-,Yes,poke.gif,-,-,-,-,True
-cong,丛林,cóng lín,-,4748,Yes,jungle.jpg,4.66,4.0,2,-3091.03,True
+cong,从事,cóng shì,3,4748,Yes,handle2.jpg,1.63,4.0,2,-3091.03,
 cou,NONE,-,-,-,No,,-,-,-,-,
-cu,醋,cù suān,-,10375,Yes,vinegar.jpg,4.89,4.0,2,-1420.46,True
+cu,促使,cù shǐ,4,10375,No,,1.77,4.0,2,-1420.46,
 cuan,NONE,-,-,-,No,,-,-,-,-,
 cui,干脆,gān cuì,5,3557,No,,3.39,7.9,2,-471.44,
 cuo,错,Cuò,1,122,Yes,wrong.jpg,1.83,5.8,1,-3275.19,False
 dai,等待,děng dài,5,551,Yes,wait2.jpg,2.00,5.4,1,-2793.84,False
 dan,鸡蛋,jī dàn,4,7418,Yes,eggs.jpeg,2.79,4.0,1,-2511.76,True
 dang,当,dāng,2,146,Yes,bell.jpg,2.46,7.6,1,-2841.69,
-dao,岛,dǎo,-,5583,Yes,island.jpg,4.96,4.0,2,-3290.94,True
+dao,等到,děng dào,2,5583,Yes,wait2.jpg,1.43,4.0,2,-3290.94,
 dei,NONE,-,-,-,No,,-,-,-,-,
 dian,商店,shāng diàn,1,2051,Yes,shop_store.png,4.31,4.8,2,-1943.19,False
-diao,雕像,diāo xiàng,-,4151,Yes,statue.jpg,4.93,2.9,1,-2718.68,True
+diao,吊,diào,6,4151,Yes,hang2.jpg,2.00,2.9,1,-2718.68,
 die,跌倒,diē dǎo,6,6754,Yes,fall2.jpg,3.71,4.0,1,-1852.82,False
 ding,钉子,dīng zi,3,2163,Yes,iron_nails.jpeg,2.21,4.0,1,-2903.28,True
 diu,乱丢,luàn diū,5,766,Yes,litter.png,2.25,4.0,1,-2683.42,True
 dou,豆,dòu,4,1514,Yes,bean.jpg,2.07,4.0,2,-2771.35,True
 duan,锻炼,duàn liàn,4,4301,Yes,exercise.jpg,2.07,4.0,2,-2771.07,True
-dun,盾,U dùn,-,1219,Yes,shield.png,4.66,11.8,1,-2599.58,True
+dun,顿,dùn,3,1219,Yes,out.png,2.66,11.8,1,-2599.58,
 duo,花朵,huā duǒ,5,4831,Yes,flower.jpg,1.63,11.7,1,-2915.72,True
 fang,放,fàng,1,216,Yes,put.png,2.04,4.0,1,-3188.48,False
 fen,分数,fēn shù,2,6545,Yes,exam_score.jpg,3.00,6.5,2,-2480.55,True
 fo,佛,fó,6,4453,Yes,buddha.jpg,4.04,11.7,1,-1610.75,False
 fou,是否,shì fǒu,4,521,No,,1.59,7.1,2,-1479.85,
 fu,富人,fù rén,3,3642,Yes,rich.png,1.63,6.2,1,-3170.94,True
-ga,米,ào mǐ gā,-,-,Yes,rice.jpg,4.86,-,-,-,
+ga,NONE,-,-,-,No,,-,-,-,-,
 gan,不敢当,bù gǎn dāng,5,33662,Yes,you.jpg,2.28,8.1,3,-2520.03,
-gang,港口,Shàng hǎi Zhèn huá Gǎng kǒu Jī xiè,-,538,Yes,port.jpg,4.41,7.0,2,-3170.85,True
+gang,刚才,gāng cái,2,538,Yes,now.png,1.61,7.0,2,-3170.85,
 geng,变更,biàn gēng,6,15060,Yes,change.png,3.07,4.0,2,-2069.99,
 gu,骨头,gǔ tou,4,2331,Yes,bone.jpg,2.36,9.7,2,-2568.37,False
 gua,西瓜,xī guā,4,11429,Yes,watermelon.png,4.89,4.2,2,-1357.66,False
-guai,拐杖,guǎi zhàng,-,683,Yes,crutch.png,4.5,4.6,1,-1542.13,True
+guai,怪,guài,4,683,No,,1.72,4.6,1,-1542.13,
 guan,关,guān,3,1898,Yes,close.png,1.70,7.4,2,-3022.11,True
 guang,光,guāng,3,828,Yes,light2.png,1.42,5.0,1,-3288.42,True
 ha,打哈欠,dǎ hā qiàn,3,2498,Yes,yawning.jpg,3.96,-,2,-265.75,True
 han,汗,hàn,1,21317,Yes,sweat.jpg,2.35,-,2,-2768.87,True
-hang,银行,Shàng hǎi Pǔ dōng Fā zhǎn Yín háng,-,12201,Yes,bank.jpg,4.78,4.0,3,-2887.98,True
+hang,排行榜,pái háng bǎng,6,12201,Yes,table.png,1.43,4.0,3,-2887.98,
 hao,好,hǎo,1,10,Yes,good.svg,1.64,9.2,1,-3336.40,True
 hei,黑色,hēi sè,2,2380,Yes,black.png,3.76,3.6,2,-2130.16,False
-hen,瘢痕,bān hén,-,22,Yes,scar.png,4.74,7.4,1,-1958.60,True
+hen,很,hěn,1,22,No,,1.43,7.4,1,-1958.60,
 heng,平衡车,pínghéng chē,6,3432,Yes,segway.jpg,2.89,12.7,2,-573.96,True
 hua,花儿,huā r,3,2350,Yes,flower.jpg,1.63,4.0,1,-3193.26,True
 huai,坏了,huài le,1,433,Yes,bad_broken.png,3.71,2.8,1,-2365.06,True
 huan,换,huàn,2,512,Yes,switch.jpg,2.74,4.0,1,-2738.45,
 huang,黄,Huáng,2,2462,Yes,yellow.jpg,2.79,12.2,1,-2630.25,False
-hui,徽章,huī zhāng,-,427,Yes,badge.png,4.93,4.0,2,-2621.46,True
+hui,回去,huí qu,1,427,Yes,back2.jpg,2.97,4.0,2,-2621.46,
 huo,火,huǒ,3,882,Yes,fire.jpg,2.41,10.3,1,-2740.11,True
 jiao,脚,jiǎo,2,813,Yes,foot.jpg,1.63,6.7,1,-3266.42,False
-jie,睫毛,yǎn jié máo,-,7109,Yes,eyelash.png,5,4.0,2,-2990.49,True
+jie,外界,wài jiè,5,7109,Yes,world.png,1.43,4.0,2,-2990.49,
 jiong,NONE,-,-,-,No,,-,-,-,-,
 juan,鸡肉卷,jī ròu juǎn,6,7316,Yes,chicken_wrap.jpg,2.41,4.0,2,-2400.77,True
-jue,挖掘机,wā jué jī,-,3178,Yes,digger.png,4.29,7.9,2,-2751.48,True
+jue,决不,jué bù,5,3178,Yes,can.png,1.83,7.9,2,-2751.48,
 ka,卡片,kǎ piàn,2,889,Yes,card.png,4.32,6.4,1,-1924.21,True
 kan,看,kān,1,50,Yes,see.png,2.96,4.0,1,-2728.49,False
-kang,抵抗,bù dǐ kàng zhǔ yì,-,1317,Yes,resist.jpg,2.78,7.6,2,-1329.77,True
+kang,健康,jiàn kāng,2,1317,No,,2.28,7.6,2,-1329.77,
 keng,坑,kēng,-,-,Yes,pit.JPG,-,-,-,-,True
 kou,出口,chū kǒu,1,758,Yes,exit.png,1.63,10.6,1,-3327.42,True
 kua,跨,kuà,6,6013,No,,3.07,4.0,1,-672.90,
-kuan,宽度,kuān dù,-,20617,Yes,width.png,3.64,4.0,2,-2509.44,True
-kuang,矿工,kuàng gōng,-,1489,Yes,miner.jpg,4.3,7.6,1,-2221.75,True
+kuan,汇款,huì kuǎn,5,20617,Yes,money.jpg,2.39,4.0,2,-2509.44,
+kuang,狂,kuáng,5,1489,Yes,mad.png,3.10,7.6,1,-2221.75,
 kun,困,kùn,3,1765,Yes,sleepy.jpg,2.08,4.0,1,-1468.32,True
-kuo,轮廓,shēng diào lún kuò,-,16573,Yes,silhouette_1.jpg,4.57,4.0,2,-1144.84,True
+kuo,概括,gài kuò,4,16573,No,,2.32,4.0,2,-1144.84,
 lao,老人,lǎo rén,3,12085,Yes,old.png,1.43,4.0,3,-3187.99,True
 lian,锻炼,duàn liàn,4,4301,Yes,exercise.jpg,2.07,4.0,2,-2771.07,True
 liang,月亮,yuè liang,2,4506,Yes,moon.jpg,1.43,4.0,2,-3290.75,False
@@ -97,21 +97,21 @@ man,慢,màn,1,1042,Yes,slow.png,3.28,4.2,1,-2566.40,True
 mang,帮忙,bāng máng,1,579,Yes,help2.png,2.07,4.0,2,-3071.44,True
 mao,羽毛,yǔ máo,1,1372,Yes,feather.jpg,2.07,4.9,1,-3163.56,True
 men,大门,dà mén,2,3493,Yes,gate.jpg,1.43,6.8,2,-3262.25,True
-meng,猛扑,měng pū,-,2830,Yes,pounce.jpg,3.66,9.5,1,-1592.72,True
+meng,蒙,méng,6,2830,Yes,cover.jpg,4.12,9.5,1,-1592.72,
 mi,米饭,mǐ fàn,3,1863,Yes,rice.jpg,1.96,5.2,1,-3015.61,True
 mian,面条,miàn tiáo,3,833,Yes,noodles.jpg,1.43,4.3,2,-3187.42,True
-miao,幼苗,yòu miáo,-,9815,Yes,seedling.jpg,4.56,7.5,2,-1230.02,True
+miao,巧妙,qiǎo miào,6,9815,No,,1.68,7.5,2,-1230.02,
 mie,吹灭,chuī miè,6,3841,Yes,blow_out.gif,2.73,4.0,1,-843.12,True
-ming,签名,qiān míng,-,175,Yes,autograph_1.jpg,4.23,5.8,2,-3052.98,True
+ming,明白,míng bai,1,175,Yes,clear.png,2.07,5.8,2,-3052.98,
 miu,NONE,-,-,-,No,,-,-,-,-,
-mo,沙漠,shā mò,-,557,Yes,desert.jpeg,4.86,3.6,1,-3207.14,True
+mo,万,mò,2,557,Yes,10.jpg,1.81,3.6,1,-3207.14,
 mou,某,mǒu,3,1164,No,,1.52,2.9,1,-1758.98,
 mu,屏幕,píng mù,5,40377,Yes,screen.png,1.43,4.0,2,-2987.16,True
 na,那,Nā,1,26,Yes,beautiful_1.jpg,1.35,11.7,1,-3456.20,
 nan,困难,kùnnan,1,345,Yes,hard2.png,2.21,3.9,1,-3104.07,True
-nang,胶囊,jiāo náng,-,-,Yes,capsule.jpg,4.52,-,-,-,False
+nang,NONE,-,-,-,No,,-,-,-,-,
 nao,闹钟,nào zhōng,4,2058,Yes,alarm_clock.gif,3.56,15.4,1,-2013.99,True
-nei,内衣,nèi yī,-,1816,Yes,underwear.jpeg,4.96,5.2,2,-1634.12,True
+nei,内心,nèi xīn,3,1816,Yes,heart.jpg,4.52,5.2,2,-1634.12,
 nen,NONE,-,-,-,No,,-,-,-,-,
 neng,能,Néng,1,30,Yes,can.png,2.79,4.0,1,-2813.50,True
 ni,你,nǐ,1,46,Yes,you.jpg,4.11,4.3,2,-2047.50,True
@@ -125,107 +125,107 @@ nong,农民,nóng mín,3,6600,Yes,farmer.jpg,3.96,4.7,2,-1917.94,False
 nou,NONE,-,-,-,No,,-,-,-,-,
 nu,发怒,fā nù,6,11634,Yes,mad.png,2.53,4.0,2,-2340.34,False
 nuan,暖和,nuǎn huo,3,6336,No,,2.18,4.0,2,-1315.87,
-nuo,懦夫,nuò fū,-,1990,Yes,coward.jpg,2.93,4.0,2,-1061.30,True
+nuo,承诺,chéng nuò,6,1990,No,,2.09,4.0,2,-1061.30,
 nüe,NONE,-,-,-,No,,-,-,-,-,
-pai,牛排,dīng gǔ niú pái,-,12201,Yes,steak.jpeg,4.96,4.0,3,-2887.98,True
+pai,排行榜,pái háng bǎng,6,12201,Yes,table.png,1.43,4.0,3,-2887.98,
 pang,旁边,páng biān,1,1356,No,,2.59,4.7,2,-1303.66,
 pao,跑步,pǎo bù,3,5221,Yes,run.png,1.43,4.0,2,-3190.98,False
-pei,匹配,pǐ pèi,-,6030,Yes,match.png,4.14,4.0,2,-2235.90,True
+pei,培训,péi xùn,4,6030,Yes,train.png,3.14,4.0,2,-2235.90,
 pian,卡片,kǎ piàn,2,693,Yes,card.png,3.46,3.7,1,-2380.73,True
 piao,漂亮,piào liang,2,323,Yes,beautiful_1.jpg,2.16,4.1,2,-2925.07,False
 pie,NONE,-,-,-,No,,-,-,-,-,
-pin,拼盘,pīn pán,-,21220,Yes,platter.jpg,4.93,2.9,2,-2224.98,True
-ping,苹果,píng guǒ lí,-,2211,Yes,apple.png,5,5.7,1,-3275.98,True
+pin,成品,chéng pǐn,6,21220,Yes,finished.png,2.78,2.9,2,-2224.98,
+ping,平,Píng,2,2211,Yes,equal.jpg,1.63,5.7,1,-3275.98,
 pu,铺,pù,6,4967,Yes,bed.jpg,4.32,6.8,1,-1519.00,
 qia,恰当,qià dàng,6,6287,No,,1.93,9.2,2,-1088.77,
-qian,牙签,yá qiān,-,169,Yes,toothpick.jpg,4.93,7.2,1,-3086.38,True
+qian,前,qián,1,169,Yes,first.png,2.18,7.2,1,-3086.38,
 qiang,墙,qiáng,2,1620,Yes,wall.jpg,2.10,4.0,1,-3058.34,False
-qiao,跷跷板,qiāo qiāo bǎn,-,689,Yes,seesaw.jpg,4.92,4.0,1,-1848.43,True
-qie,番茄酱,fān qié jiàng,-,722,Yes,ketchup.jpg,5,4.6,2,-1640.23,True
+qiao,瞧,qiáo,5,689,Yes,see.png,3.92,4.0,1,-1848.43,
+qie,并且,bìng qiě,3,722,No,,1.52,4.6,2,-1640.23,
 qin,亲亲,qīnqīn,3,1312,Yes,kiss.jpg,3.20,8.4,1,-2363.97,True
-qing,青蛙,qīng wā,-,142,Yes,frog.png,5,3.5,1,-3393.19,True
+qing,请,qǐng,1,142,Yes,ask.png,1.64,3.5,1,-3393.19,
 qiong,穷人,qióng rén,4,5815,Yes,people.jpg,1.43,4.0,2,-3090.62,
-quan,拳头,quán tou5,-,3023,Yes,fist.png,4.93,4.0,2,-3290.90,True
-que,孔雀,kǒng què,-,365,Yes,peacock.png,5,8.2,2,-2828.96,True
-qun,围裙,wéi qún,-,7444,Yes,apron.jpg,4.87,4.0,2,-635.46,True
-ran,点燃,diǎn rán,-,1109,Yes,ignite.gif,4.04,2.7,2,-2778.69,True
-rang,土壤,tǔ rǎng,-,41,Yes,soil.png,4.87,3.7,1,-1896.10,True
-rao,打扰,dǎ rǎo,-,3469,Yes,disturb.png,3.04,4.0,2,-1341.15,True
+quan,全身,quán shēn,2,3023,Yes,body.png,1.43,4.0,2,-3290.90,
+que,确定,què dìng,3,365,Yes,make.jpg,2.07,8.2,2,-2828.96,
+qun,群众,qún zhòng,5,7444,No,,3.14,4.0,2,-635.46,
+ran,不然,bù rán,4,1109,Yes,no.png,2.08,2.7,2,-2778.69,
+rang,让,ràng,2,41,No,,1.43,3.7,1,-1896.10,
+rao,困扰,kùn rǎo,5,3469,No,,1.73,4.0,2,-1341.15,
 reng,扔,rēng,5,753,Yes,throw.jpg,4.04,4.0,1,-1788.42,False
-rong,容器,róng qì,-,627,Yes,container.png,4.85,12.5,2,-1430.94,True
+rong,容易,róng yì,3,627,No,,1.78,12.5,2,-1430.94,
 rou,肉,ròu,1,1184,Yes,meat.jpeg,4.30,8.3,1,-514.88,True
-ru,蠕虫,rú chóng,-,3629,Yes,worm.jpeg,4.9,8.6,2,-3059.54,True
-ruan,软泥,ruǎn ní,-,3743,Yes,ooze.jpg,4,4.0,1,-368.13,True
-rui,锐化,ruì huà,-,-,Yes,sharpen.gif,3.72,-,-,-,
+ru,如今,rú jīn,4,3629,Yes,now.png,1.40,8.6,2,-3059.54,
+ruan,软,ruǎn,5,3743,No,,3.88,4.0,1,-368.13,
+rui,NONE,-,-,-,No,,-,-,-,-,
 run,利润,lì rùn,5,6286,No,,-,-,2,1454.63,
-ruo,微弱,wēi ruò,-,1703,Yes,feeble.jpg,2.59,3.7,1,-2835.93,True
+ruo,若,ruò,6,1703,Yes,like.png,1.75,3.7,1,-2835.93,
 sa,洒,sǎ,5,4927,No,,4.07,4.0,1,-273.01,
-sai,鳃,qī sāi mán,-,1601,Yes,gill.jpg,4.33,2.9,1,-1178.94,True
+sai,塞,Sāi,6,1601,No,,2.08,2.9,1,-1178.94,
 sang,丧失,sàng shī,6,4961,No,,2.25,4.0,2,-981.00,
 sen,森林,sēn lín,-,-,Yes,thick_forest.jpeg,-,-,-,-,True
-seng,僧,bù kàn sēng miàn kàn fó miàn,-,-,Yes,monk.jpg,4.35,-,-,-,False
-shai,防晒霜,fáng shài shuāng,-,4593,Yes,sunblock.png,-,11.7,1,-405.74,True
+seng,NONE,-,-,-,No,,-,-,-,-,
+shai,晒,shài,4,4593,No,,3.85,11.7,1,-405.74,
 shang,路上,lù shang,1,1212,Yes,road.jpeg,1.43,4.0,2,-3390.78,
 shao,勺子,shá ozi,6,11894,Yes,spoon.jpg,1.63,2.5,1,-2906.81,False
 shen,身体,shēn tǐ,1,460,Yes,body.png,1.43,4.0,2,-3390.55,False
 sheng,声音,shēng yīn,5,729,Yes,sound.jpg,1.63,3.7,1,-2995.73,False
 shua,牙刷,yá shuā,4,8356,Yes,toothbrush.jpg,5.00,4.3,2,-1301.86,False
-shuan,螺栓,luó shuān,-,-,Yes,bolt.png,4.67,-,-,-,False
+shuan,NONE,-,-,-,No,,-,-,-,-,
 shuang,双手,shuāng shǒu,5,4022,Yes,hands.jpg,2.97,4.8,2,-2212.90,False
 shun,顺,shùn,6,3103,Yes,follow.jpg,2.67,4.0,1,-2373.19,
-song,松鼠,sōng shǔ,-,1561,Yes,squirrel.jpg,4.89,4.0,2,-2825.34,True
-sou,咳嗽,ké sou5,-,2434,Yes,cough.gif,4.36,2.9,2,-1401.86,True
-su,雕塑,diāo sù,-,3988,Yes,sculpture.png,4.79,8.6,2,-2099.40,True
+song,轻松,qīng sōng,4,1561,Yes,lamp.jpeg,1.96,4.0,2,-2825.34,
+sou,搜索,sōu suǒ,5,2434,No,,1.63,2.9,2,-1401.86,
+su,迅速,xùn sù,4,3988,Yes,fast.png,3.32,8.6,2,-2099.40,
 suan,总算,zǒng suàn,5,3519,Yes,long_neck.jpg,3.04,4.0,2,-2185.25,
-sui,碎石,suì shí,-,1405,Yes,gravel.jpg,5,4.0,1,-3008.36,True
-sun,孙子,guī sūn zi5,-,7226,Yes,grandson.png,4.3,4.0,2,-895.78,True
-tan,木炭,mù tàn,-,11134,Yes,charcoal.jpg,4.85,4.0,2,-970.39,True
-tang,棒糖,bàng bàng táng,-,1295,Yes,lollipop.jpg,4.96,4.0,1,-2353.37,True
-teng,藤,téng màn,-,22487,Yes,vine.jpg,4.86,4.0,2,-2889.25,True
-ti,自动扶梯,zì dòng fú tī,-,7237,Yes,escalator.jpg,5,14.3,2,-2336.98,True
+sui,随,Suí,3,1405,Yes,follow.jpg,2.00,4.0,1,-3008.36,
+sun,损害,sǔn hài,5,7226,No,,2.62,4.0,2,-895.78,
+tan,探讨,tàn tǎo,6,11134,No,,2.27,4.0,2,-970.39,
+tang,躺,tǎng,4,1295,Yes,down.png,3.11,4.0,1,-2353.37,
+teng,心疼,xīn téng,5,22487,Yes,love2.jpg,1.63,4.0,2,-2889.25,
+ti,整体,zhěng tǐ,3,7237,Yes,body.png,2.93,14.3,2,-2336.98,
 tian,今天,jīn tiān,1,174,Yes,today.jpg,1.43,4.0,2,-3391.18,False
 tiao,跳,tiào,3,404,Yes,jump.png,4.07,4.0,1,-1973.46,False
 tong,同学,tóng xué,1,2391,Yes,classmate.jpg,2.64,4.0,2,-2786.26,False
-tuan,面团,shēng miàn tuán,-,2279,Yes,dough.jpg,4.79,8.5,1,-1902.77,True
+tuan,团,tuán,3,2279,Yes,ball.png,4.12,8.5,1,-1902.77,
 tui,腿,tuǐ,2,840,Yes,leg.jpg,2.72,6.2,1,-2726.22,False
-tuo,拖拉机,tuō lā jī,-,4095,Yes,tractor.jpeg,5,4.0,2,-1851.09,True
-wan,手腕,shǒu wàn,-,1709,Yes,wrist.png,4.93,3.6,2,-2945.03,True
+tuo,脱离,tuō lí,5,4095,Yes,medicine.jpg,3.71,4.0,2,-1851.09,
+wan,千万,qiān wàn,3,1709,Yes,10.jpg,1.93,3.6,2,-2945.03,
 wei,座位,zuò wèi,2,239,Yes,seat.jpg,1.63,8.7,1,-3245.78,False
 wen,语文,yǔ wén,1,9441,Yes,chinese_language.jpg,2.35,-,2,-2770.06,False
-weng,嗡嗡声,wēng wēng shēng,-,-,Yes,buzzing.png,3.5,-,-,-,True
-xian,苔藓,tái xiǎn,-,860,Yes,moss.jpeg,4.9,4.4,2,-3187.01,True
-xiang,海象,hǎi xiàng,-,1855,Yes,walrus.jpg,5,3.7,1,-3295.61,True
+weng,NONE,-,-,-,No,,-,-,-,-,
+xian,首先,shǒu xiān,3,860,Yes,first.png,1.43,4.4,2,-3187.01,
+xiang,响,xiǎng,2,1855,Yes,sound.jpg,1.63,3.7,1,-3295.61,
 xiong,熊,Xióng,5,1785,Yes,bear.jpg,2.79,3.6,1,-2417.02,False
-xu,胡须,bā zì hú xū,-,5365,Yes,beard.jpg,4.96,4.0,2,-2945.96,True
-xuan,旋转木马,xuán zhuǎn mù mǎ,-,10457,Yes,carousel.jpg,4.93,4.0,2,-1390.45,True
-xun,勋章,xūn zhāng,-,6030,Yes,medal.jpg,4.89,4.0,2,-2235.90,True
+xu,必需,bì xū,5,5365,Yes,need.png,1.52,4.0,2,-2945.96,
+xuan,选拔,xuǎn bá,6,10457,No,,1.43,4.0,2,-1390.45,
+xun,培训,péi xùn,4,6030,Yes,train.png,3.14,4.0,2,-2235.90,
 ye,夜里,yè li,2,5569,Yes,nighttime.jpg,1.43,6.8,2,-3262.44,False
 ying,影子,yǐng zi,4,5237,Yes,shadow.jpg,1.97,10.3,2,-2757.28,False
 yo,NONE,-,-,-,No,,-,-,-,-,
-yong,游泳,yóu yǒng quān,-,806,Yes,swim.jpg,4.43,3.6,2,-3070.32,True
-yu,宇航服,yǔ háng fú,-,21317,Yes,spacesuit.png,4.96,-,2,-2768.87,True
+yong,不用,bù yòng,1,806,Yes,need.png,2.08,3.6,2,-3070.32,
+yu,汉语,Hàn yǔ,1,21317,Yes,chinese_language.jpg,2.35,-,2,-2768.87,
 yue,月亮,yuè liang,2,4506,Yes,moon.jpg,1.43,4.0,2,-3290.75,False
-za,杂草,zá cǎo,-,1517,Yes,weed.png,4.9,11.2,2,-1353.75,True
-zan,称赞,mǎn kǒu chēng zàn,-,2774,Yes,praise.png,2.61,5.0,1,-1882.32,True
-zang,弄脏,nòng zāng,-,1818,Yes,stain.jpg,4.59,4.5,1,-2337.32,True
-ze,沼泽,zhǎo zé,-,771,Yes,swamp.jpg,4.96,4.0,2,-1591.42,True
-zei,窃贼,qiè zéi,-,-,Yes,burglar.jpg,4.44,-,-,-,True
+za,复杂,fù zá,3,1517,No,,1.96,11.2,2,-1353.75,
+zan,咱,zán,2,2774,No,,1.43,5.0,1,-1882.32,
+zang,脏,zàng,2,1818,Yes,dirty_hands.jpg,3.53,4.5,1,-2337.32,
+ze,负责,fù zé,3,771,No,,1.63,4.0,2,-1591.42,
+zei,NONE,-,-,-,No,,-,-,-,-,
 zeng,曾,Zēng,4,643,No,,2.18,5.3,1,-1305.34,
-zha,炸弹,hóng sè zhà dàn,-,1619,Yes,bomb.gif,4.84,4.0,1,-1838.34,True
-zhai,采摘,cǎi zhāi,-,6106,Yes,pluck_1.jpg,4,10.4,1,-782.99,False
+zha,炸,zhá,6,1619,Yes,deep.png,3.74,4.0,1,-1838.34,
+zhai,债,zhài,6,6106,No,,2.72,10.4,1,-782.99,
 zhan,战斗,zhàn dòu,4,1514,Yes,fight2.jpeg,2.07,4.0,2,-2771.35,
-zhao,沼泽,zhǎo zé,-,94,Yes,swamp.jpg,4.96,4.0,1,-3393.49,True
+zhao,找,zhǎo,1,94,Yes,see.png,1.63,4.0,1,-3393.49,
 zhe,这里,zhè lǐ,1,76,Yes,here.png,2.10,3.7,2,-3058.59,False
-zheng,证书,zhài wù zhèng shū,-,2357,Yes,certificate_1.jpg,4.59,4.0,2,-3091.26,True
+zheng,争取,zhēng qǔ,3,2357,Yes,fight2.jpeg,1.63,4.0,2,-3091.26,
 zhong,种子,zhǒng zi,3,247,Yes,seed.jpg,1.63,4.0,1,-3193.48,False
 zhou,周,Zhōu,2,375,Yes,circle.png,2.46,3.7,1,-2881.26,
-zhua,爪子,zhuǎ zi5,-,407,Yes,paw.jpg,4.3,4.0,1,-2078.46,True
+zhua,抓,zhuā,3,407,Yes,catch.jpg,3.86,4.0,1,-2078.46,
 zhuai,转,zhuǎi,3,660,Yes,change.png,3.44,3.1,1,-2297.33,
-zhuan,旋转木马,xuán zhuǎn mù mǎ,-,4132,Yes,carousel.jpg,4.93,4.0,2,-2701.09,True
-zhuang,村庄,cūn zhuāng,-,3584,Yes,village.jpg,4.89,9.7,2,-2583.94,True
-zhui,吊坠,diào zhuì,-,10429,Yes,pendant_1.jpg,4.75,4.0,2,-2470.46,True
-zhun,准备,zhǔn bèi,-,1288,Yes,prepare.png,2.36,3.7,1,-1645.97,True
+zhuan,转变,zhuǎn biàn,3,4132,Yes,change.png,2.41,4.0,2,-2701.09,
+zhuang,时装,shí zhuāng,6,3584,Yes,t-shirt.png,1.93,9.7,2,-2583.94,
+zhui,追究,zhuī jiū,6,10429,Yes,see.png,2.27,4.0,2,-2470.46,
+zhun,准,zhǔn,3,1288,No,,1.73,3.7,1,-1645.97,
 zhuo,桌子,zhuō zi,1,1651,Yes,table.png,4.90,5.6,2,-1640.23,False
-zong,鬃毛,zōng máo,-,2111,Yes,mane.png,4.73,3.7,2,-2618.89,True
+zong,总之,zǒng zhī,4,2111,Yes,short.jpg,2.38,3.7,2,-2618.89,
 zuan,钻,zuàn,6,3090,Yes,drill.gif,2.96,11.7,1,-2150.89,False
-zun,尊重,zūn zhòng,-,2185,Yes,respect_1.jpg,2.04,4.0,2,-1291.28,True
+zun,尊敬,zūn jìng,5,2185,No,,1.83,4.0,2,-1291.28,

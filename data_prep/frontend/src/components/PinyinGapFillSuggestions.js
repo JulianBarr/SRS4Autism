@@ -330,16 +330,51 @@ const PinyinGapFillSuggestions = ({ profile, onProfileUpdate }) => {
     setSuggestions(updated);
     
     // Auto-select this item so it can be saved
-    // This ensures the user's English vocab selection is included when they click "Save selection"
     const newSelected = new Set(selectedSuggestions);
     newSelected.add(suggestionIndex);
     setSelectedSuggestions(newSelected);
     
-    // Show a message that the selection was updated and will be saved
-    setMessage({ 
-      type: 'success', 
-      text: `已更新 ${syllable}: ${selectedMatch.chinese} (${selectedMatch.english}). 请点击"保存选择"以保存更改。` 
-    });
+    // AUTO-SAVE: Immediately save this single suggestion to prevent data loss
+    // This ensures user's work is saved right away, not just when they click "Save selection"
+    try {
+      const singleSuggestionToSave = {
+        [updatedSuggestion.Syllable]: updatedSuggestion
+      };
+      
+      // Save to backend immediately
+      await axios.put(`${API_BASE}/pinyin/gap-fill-suggestions`, {
+        suggestions: [updatedSuggestion]
+      }, {
+        timeout: 5000
+      });
+      
+      // Also backup to localStorage as safety net
+      try {
+        const backup = JSON.parse(localStorage.getItem('pinyin_suggestions_backup') || '{}');
+        backup[updatedSuggestion.Syllable] = {
+          ...updatedSuggestion,
+          saved_at: new Date().toISOString()
+        };
+        localStorage.setItem('pinyin_suggestions_backup', JSON.stringify(backup));
+      } catch (e) {
+        // localStorage backup failed - not critical
+      }
+      
+      setMessage({ 
+        type: 'success', 
+        text: `✅ 已保存: ${syllable} → ${selectedMatch.chinese} (${selectedMatch.english})` 
+      });
+      
+      // Reload to get fresh data from backend
+      await loadSuggestions();
+    } catch (error) {
+      console.error('Auto-save failed:', error);
+      // If auto-save fails, still show message and select the item
+      setMessage({ 
+        type: 'warning', 
+        text: `已更新 ${syllable}: ${selectedMatch.chinese}. 请点击"保存选择"以保存更改。` 
+      });
+    }
   };
 
   const loadSuggestions = async () => {
