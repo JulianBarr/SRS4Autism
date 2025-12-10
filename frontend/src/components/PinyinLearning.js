@@ -146,6 +146,16 @@ const PinyinLearning = ({ profile, onProfileUpdate }) => {
     setSelectedNotes(newSelected);
   };
 
+  const selectAllVisible = () => {
+    // Select all currently visible notes (respects filter)
+    const allVisibleIds = new Set(currentNotes.map(note => note.note_id));
+    setSelectedNotes(allVisibleIds);
+  };
+
+  const clearSelection = () => {
+    setSelectedNotes(new Set());
+  };
+
   const toggleExpandNote = (noteId) => {
     setExpandedNote(expandedNote === noteId ? null : noteId);
   };
@@ -600,6 +610,36 @@ const PinyinLearning = ({ profile, onProfileUpdate }) => {
           />
           <span>显示已掌握 ({masteredItems.size})</span>
         </label>
+        <button
+          onClick={selectAllVisible}
+          disabled={currentNotes.length === 0}
+          style={{
+            padding: '8px 16px',
+            backgroundColor: currentNotes.length > 0 ? '#2196f3' : '#ccc',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: currentNotes.length > 0 ? 'pointer' : 'not-allowed',
+            fontSize: '14px'
+          }}
+        >
+          全选 ({currentNotes.length})
+        </button>
+        <button
+          onClick={clearSelection}
+          disabled={selectedNotes.size === 0}
+          style={{
+            padding: '8px 16px',
+            backgroundColor: selectedNotes.size > 0 ? '#ff9800' : '#ccc',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: selectedNotes.size > 0 ? 'pointer' : 'not-allowed',
+            fontSize: '14px'
+          }}
+        >
+          清除选择
+        </button>
         <div style={{ flex: 1 }}></div>
         <button
           onClick={deleteSelectedNotes}
