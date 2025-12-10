@@ -903,6 +903,12 @@ def query_sparql(sparql_query: str, output_format: str = "text/csv"):
         if output_format == "application/sparql-results+json":
             return response.json()
         return response.text
+    except requests.exceptions.ConnectionError as e:
+        # More helpful error message when Fuseki is not running
+        raise HTTPException(
+            status_code=503, 
+            detail=f"Knowledge graph server (Jena Fuseki) is not running. Please start it with: bash restart_fuseki.sh (Error: {str(e)})"
+        )
     except requests.exceptions.RequestException as e:
         raise HTTPException(status_code=503, detail=f"Knowledge graph server unavailable: {str(e)}")
 
