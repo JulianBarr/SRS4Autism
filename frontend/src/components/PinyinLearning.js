@@ -74,28 +74,30 @@ const PinyinLearning = ({ profile, onProfileUpdate }) => {
 
   useEffect(() => {
     if (profile?.id) {
-      loadNotes();
+      loadAllNotes();
     }
-  }, [profile?.id, activeTab]);
+  }, [profile?.id]); // Load both types when profile changes, not when tab changes
 
-  const loadNotes = async () => {
+  const loadAllNotes = async () => {
     if (!profile?.id) return;
     
     setLoading(true);
     try {
-      if (activeTab === 'elements') {
-        const response = await axios.get(`${API_BASE}/pinyin/elements`, {
+      // Load both element and syllable notes regardless of active tab
+      // This allows selecting from both tabs simultaneously
+      const [elementsResponse, syllablesResponse] = await Promise.all([
+        axios.get(`${API_BASE}/pinyin/elements`, {
           params: { profile_id: profile.id },
-          timeout: 10000 // 10 second timeout
-        });
-        setElementNotes(response.data.notes || []);
-      } else {
-        const response = await axios.get(`${API_BASE}/pinyin/syllables`, {
+          timeout: 10000
+        }),
+        axios.get(`${API_BASE}/pinyin/syllables`, {
           params: { profile_id: profile.id },
-          timeout: 10000 // 10 second timeout
-        });
-        setSyllableNotes(response.data.notes || []);
-      }
+          timeout: 10000
+        })
+      ]);
+      
+      setElementNotes(elementsResponse.data.notes || []);
+      setSyllableNotes(syllablesResponse.data.notes || []);
       setSyncResult(null);
     } catch (error) {
       console.error('Error loading pinyin notes:', error);
@@ -104,11 +106,8 @@ const PinyinLearning = ({ profile, onProfileUpdate }) => {
         : error.response?.data?.detail || error.message;
       alert(`加载失败: ${errorMsg}`);
       // Set empty arrays on error to prevent infinite loading
-      if (activeTab === 'elements') {
-        setElementNotes([]);
-      } else {
-        setSyllableNotes([]);
-      }
+      setElementNotes([]);
+      setSyllableNotes([]);
     } finally {
       setLoading(false);
     }
@@ -135,6 +134,14 @@ const PinyinLearning = ({ profile, onProfileUpdate }) => {
         const identifier = activeTab === 'elements' ? note.element : note.syllable;
         return !masteredItems.has(identifier);
       });
+
+  // Calculate selection counts from both tabs
+  const selectedElementCount = Array.from(selectedNotes).filter(id => 
+    elementNotes.some(n => n.note_id === id)
+  ).length;
+  const selectedSyllableCount = Array.from(selectedNotes).filter(id => 
+    syllableNotes.some(n => n.note_id === id)
+  ).length;
 
   const toggleNoteSelection = (noteId) => {
     const newSelected = new Set(selectedNotes);
@@ -201,7 +208,7 @@ const PinyinLearning = ({ profile, onProfileUpdate }) => {
       setSelectedNotes(new Set());
       
       // Reload notes
-      loadNotes();
+      loadAllNotes();
     } catch (error) {
       console.error('Error deleting notes:', error);
       const errorMsg = error.response?.data?.detail || error.message;
@@ -245,7 +252,7 @@ const PinyinLearning = ({ profile, onProfileUpdate }) => {
       setSelectedNotes(new Set());
       
       // Reload notes
-      loadNotes();
+      loadAllNotes();
     } catch (error) {
       console.error('Error syncing pinyin notes:', error);
       const errorMsg = error.response?.data?.detail || error.message;
@@ -671,7 +678,7 @@ const PinyinLearning = ({ profile, onProfileUpdate }) => {
           {syncing ? '同步中...' : `同步到 Anki (${selectedNotes.size} 个)`}
         </button>
         <button
-          onClick={loadNotes}
+          onClick={loadAllNotes}
           disabled={loading}
           style={{
             padding: '10px 20px',
