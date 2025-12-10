@@ -4876,11 +4876,132 @@ async def delete_pinyin_syllables_batch(request: Dict[str, Any], db: Session = D
         raise HTTPException(status_code=500, detail=f"Error deleting pinyin syllable notes: {str(e)}")
 
 
+def get_pinyin_curriculum_stage(element_or_syllable: str, note_type: str, element_type: str = None) -> tuple:
+    """
+    Determine curriculum stage for pinyin element or syllable based on 5-stage curriculum.
+    Returns (stage, sub_order) tuple for sorting:
+    - stage: 1-5 (curriculum stage)
+    - sub_order: 0 for initials, 1 for finals, 2 for syllables within same stage
+    
+    Curriculum stages:
+    1. Lips & Simple Vowels: b, p, m, f + a, o, e, i, u
+    2. Tip of Tongue: d, t, n, l + ai, ei, ao, ou
+    3. Root of Tongue: g, k, h + an, en, in, un
+    4. Teeth & Curl: z, c, s, zh, ch, sh, r + ang, eng, ing, ong, er
+    5. Magic Palatals: j, q, x, y, w + compound finals
+    """
+    # Stage mappings
+    STAGE_1_INITIALS = {'b', 'p', 'm', 'f'}
+    STAGE_1_FINALS = {'a', 'o', 'e', 'i', 'u'}
+    
+    STAGE_2_INITIALS = {'d', 't', 'n', 'l'}
+    STAGE_2_FINALS = {'ai', 'ei', 'ao', 'ou'}
+    
+    STAGE_3_INITIALS = {'g', 'k', 'h'}
+    STAGE_3_FINALS = {'an', 'en', 'in', 'un'}
+    
+    STAGE_4_INITIALS = {'z', 'c', 's', 'zh', 'ch', 'sh', 'r'}
+    STAGE_4_FINALS = {'ang', 'eng', 'ing', 'ong', 'er'}
+    
+    STAGE_5_INITIALS = {'j', 'q', 'x', 'y', 'w'}
+    STAGE_5_FINALS = {'ia', 'ie', 'iao', 'iu', 'ian', 'iang', 'iong', 'ua', 'uo', 'uai', 'ui', 
+                      'uan', 'uang', 'ue', 'üe', 'üan', 'ün', 'ü'}  # ü variants
+    
+    if note_type == 'element':
+        if element_type == 'initial':
+            if element_or_syllable in STAGE_1_INITIALS:
+                return (1, 0)  # stage, initial comes first
+            elif element_or_syllable in STAGE_2_INITIALS:
+                return (2, 0)
+            elif element_or_syllable in STAGE_3_INITIALS:
+                return (3, 0)
+            elif element_or_syllable in STAGE_4_INITIALS:
+                return (4, 0)
+            elif element_or_syllable in STAGE_5_INITIALS:
+                return (5, 0)
+        elif element_type == 'final':
+            element_lower = element_or_syllable.lower()
+            if element_lower in STAGE_1_FINALS:
+                return (1, 1)  # stage, final comes after initial
+            elif element_lower in STAGE_2_FINALS:
+                return (2, 1)
+            elif element_lower in STAGE_3_FINALS:
+                return (3, 1)
+            elif element_lower in STAGE_4_FINALS:
+                return (4, 1)
+            elif element_lower in STAGE_5_FINALS or any(f in element_lower for f in STAGE_5_FINALS):
+                return (5, 1)
+        # Default: put unknown elements at end
+        return (99, 0)
+    
+    elif note_type == 'syllable':
+        # Parse syllable to extract initial and final
+        try:
+            from scripts.knowledge_graph.pinyin_parser import parse_pinyin, extract_tone
+            
+            # Remove tone from syllable
+            syllable_no_tone, _ = extract_tone(element_or_syllable)
+            parsed = parse_pinyin(syllable_no_tone)
+            
+            initial = parsed.get('initial') or ''
+            # Combine medial + final if both exist, otherwise use just final
+            final = parsed.get('final') or ''
+            if parsed.get('medial'):
+                final = parsed.get('medial', '') + final if final else parsed.get('medial', '')
+        except Exception:
+            # Fallback: simple extraction if parser fails
+            initial = ''
+            final = element_or_syllable
+        
+        # Determine stage based on initial and final (use the higher stage)
+        initial_stage = 99
+        final_stage = 99
+        
+        if initial:
+            if initial in STAGE_1_INITIALS:
+                initial_stage = 1
+            elif initial in STAGE_2_INITIALS:
+                initial_stage = 2
+            elif initial in STAGE_3_INITIALS:
+                initial_stage = 3
+            elif initial in STAGE_4_INITIALS:
+                initial_stage = 4
+            elif initial in STAGE_5_INITIALS:
+                initial_stage = 5
+        
+        if final:
+            final_lower = final.lower()
+            if final_lower in STAGE_1_FINALS:
+                final_stage = 1
+            elif final_lower in STAGE_2_FINALS:
+                final_stage = 2
+            elif final_lower in STAGE_3_FINALS:
+                final_stage = 3
+            elif final_lower in STAGE_4_FINALS:
+                final_stage = 4
+            elif final_lower in STAGE_5_FINALS or any(f in final_lower for f in STAGE_5_FINALS):
+                final_stage = 5
+        
+        # Use the maximum stage (syllables appear after both initial and final are taught)
+        stage = max(initial_stage, final_stage)
+        if stage == 99:
+            stage = 6  # Unknown syllables go to end
+        
+        return (stage, 2)  # syllables come after elements (initial=0, final=1, syllable=2)
+    
+    return (99, 0)
+
+
 @app.post("/pinyin/sync")
 async def sync_pinyin_notes(request: Dict[str, Any]):
     """
     Sync pinyin notes (elements and/or syllables) to Anki.
-    Both types are synced to the same deck, preserving the order from display_order.
+    Combines both types in a single deck, ordered by 5-stage curriculum, then by display_order.
+    
+    Curriculum order:
+    1. Stage 1 elements (initials, then finals) → Stage 1 syllables
+    2. Stage 2 elements (initials, then finals) → Stage 2 syllables
+    3. ... and so on
     """
     try:
         import sys
@@ -4910,43 +5031,64 @@ async def sync_pinyin_notes(request: Dict[str, Any]):
         if not element_note_ids and not syllable_note_ids:
             raise HTTPException(status_code=400, detail="At least one note_id is required")
         
-        # Get notes from database, preserving order
+        # Get notes from database
         db = next(get_db())
         try:
             all_notes = []
             
-            # Get element notes ordered by display_order
+            # Get element notes
             if element_note_ids:
                 element_notes = db.query(PinyinElementNote).filter(
                     PinyinElementNote.note_id.in_(element_note_ids)
-                ).order_by(PinyinElementNote.display_order).all()
+                ).all()
                 for db_note in element_notes:
                     note_fields = json.loads(db_note.fields) if db_note.fields else {}
+                    # Get curriculum stage for this element
+                    stage, sub_order = get_pinyin_curriculum_stage(
+                        db_note.element, 
+                        'element', 
+                        db_note.element_type
+                    )
                     all_notes.append({
                         'note_id': db_note.note_id,
                         'type': 'element',
                         'display_order': db_note.display_order,
                         'fields': note_fields,
-                        'element': db_note.element
+                        'element': db_note.element,
+                        'element_type': db_note.element_type,
+                        'curriculum_stage': stage,
+                        'curriculum_sub_order': sub_order
                     })
             
-            # Get syllable notes ordered by display_order
+            # Get syllable notes
             if syllable_note_ids:
                 syllable_notes = db.query(PinyinSyllableNote).filter(
                     PinyinSyllableNote.note_id.in_(syllable_note_ids)
-                ).order_by(PinyinSyllableNote.display_order).all()
+                ).all()
                 for db_note in syllable_notes:
                     note_fields = json.loads(db_note.fields) if db_note.fields else {}
+                    # Get curriculum stage for this syllable
+                    stage, sub_order = get_pinyin_curriculum_stage(
+                        db_note.syllable,
+                        'syllable'
+                    )
                     all_notes.append({
                         'note_id': db_note.note_id,
                         'type': 'syllable',
                         'display_order': db_note.display_order,
                         'fields': note_fields,
-                        'syllable': db_note.syllable
+                        'syllable': db_note.syllable,
+                        'curriculum_stage': stage,
+                        'curriculum_sub_order': sub_order
                     })
             
-            # Sort all notes by display_order to preserve .apkg order
-            all_notes.sort(key=lambda x: x['display_order'])
+            # Sort by curriculum stage (primary), then sub_order (initials before finals before syllables), 
+            # then display_order (preserve original order within same stage/type)
+            all_notes.sort(key=lambda x: (
+                x.get('curriculum_stage', 99),
+                x.get('curriculum_sub_order', 2),
+                x.get('display_order', 999999)
+            ))
         finally:
             db.close()
         
