@@ -497,6 +497,56 @@ const PinyinGapFillSuggestions = ({ profile, onProfileUpdate }) => {
     };
     setSuggestions(updated);
     setEditingSuggestion(null);
+    
+    // AUTO-SAVE: Immediately save the edit to prevent data loss on refresh
+    try {
+      // Remove the 'index' field before sending (not part of CSV schema)
+      const cleaned = { ...updatedSuggestion };
+      delete cleaned.index;
+      
+      // Ensure Image File is properly formatted
+      if (cleaned['Image File']) {
+        cleaned['Image File'] = String(cleaned['Image File']).trim();
+        cleaned['Has Image'] = cleaned['Image File'] ? 'Yes' : 'No';
+      } else {
+        cleaned['Has Image'] = 'No';
+        cleaned['Image File'] = '';
+      }
+      
+      // Save to backend immediately
+      await axios.put(`${API_BASE}/pinyin/gap-fill-suggestions`, {
+        suggestions: [cleaned]
+      }, {
+        timeout: 5000
+      });
+      
+      // Backup to localStorage
+      try {
+        const backup = JSON.parse(localStorage.getItem('pinyin_suggestions_backup') || '{}');
+        backup[cleaned.Syllable] = {
+          ...cleaned,
+          saved_at: new Date().toISOString()
+        };
+        localStorage.setItem('pinyin_suggestions_backup', JSON.stringify(backup));
+      } catch (e) {
+        // localStorage backup failed - not critical
+      }
+      
+      setMessage({ 
+        type: 'success', 
+        text: `✅ 已保存编辑: ${cleaned.Syllable} → ${cleaned['Suggested Word']}` 
+      });
+      
+      // Reload to get fresh data
+      await loadSuggestions();
+    } catch (error) {
+      console.error('Auto-save edit failed:', error);
+      // If auto-save fails, still update local state and show warning
+      setMessage({ 
+        type: 'warning', 
+        text: `编辑已更新，但保存失败。请勾选此项并点击"保存选择"以确保保存。` 
+      });
+    }
   };
 
   const handleCancelEdit = () => {
