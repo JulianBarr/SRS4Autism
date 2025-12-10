@@ -605,6 +605,27 @@ const PinyinLearning = ({ profile, onProfileUpdate }) => {
           已隐藏 {masteredItems.size} 个已掌握项目。勾选上方"显示已掌握"可查看全部。
         </div>
       )}
+      
+      {/* Selection info - show counts from both tabs */}
+      {selectedNotes.size > 0 && (
+        <div style={{ 
+          padding: '8px 12px', 
+          marginBottom: '15px', 
+          backgroundColor: '#fff3cd', 
+          borderRadius: '4px',
+          fontSize: '0.9em',
+          color: '#856404',
+          border: '1px solid #ffc107'
+        }}>
+          <strong>已选择 {selectedNotes.size} 个项目：</strong>
+          {selectedElementCount > 0 && <span> {selectedElementCount} 个元素</span>}
+          {selectedElementCount > 0 && selectedSyllableCount > 0 && <span> + </span>}
+          {selectedSyllableCount > 0 && <span> {selectedSyllableCount} 个音节</span>}
+          <span style={{ marginLeft: '10px', fontSize: '0.85em' }}>
+            (可在两个标签页之间切换选择)
+          </span>
+        </div>
+      )}
 
       {/* Filter and Action buttons */}
       <div style={{ display: 'flex', gap: '10px', marginBottom: '20px', alignItems: 'center', flexWrap: 'wrap' }}>
