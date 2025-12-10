@@ -108,6 +108,99 @@ const normalizePinyin = (pinyin) => {
 };
 
 /**
+ * Convert numbered pinyin to tone-marked pinyin
+ * Example: "hua1 bao4" -> "huā bào"
+ */
+const convertNumberedPinyinToToneMarks = (pinyin) => {
+  if (!pinyin || typeof pinyin !== 'string') return pinyin;
+  
+  // Tone mark maps: vowel -> [tone1, tone2, tone3, tone4]
+  const TONE_MARKS = {
+    'a': ['ā', 'á', 'ǎ', 'à'],
+    'o': ['ō', 'ó', 'ǒ', 'ò'],
+    'e': ['ē', 'é', 'ě', 'è'],
+    'i': ['ī', 'í', 'ǐ', 'ì'],
+    'u': ['ū', 'ú', 'ǔ', 'ù'],
+    'ü': ['ǖ', 'ǘ', 'ǚ', 'ǜ'],
+    'A': ['Ā', 'Á', 'Ǎ', 'À'],
+    'O': ['Ō', 'Ó', 'Ǒ', 'Ò'],
+    'E': ['Ē', 'É', 'Ě', 'È'],
+    'I': ['Ī', 'Í', 'Ǐ', 'Ì'],
+    'U': ['Ū', 'Ú', 'Ǔ', 'Ù'],
+    'Ü': ['Ǖ', 'Ǘ', 'Ǚ', 'Ǜ']
+  };
+  
+  // Split by spaces and process each syllable
+  return pinyin.split(/\s+/).map(syllable => {
+    // Extract tone number (1-4) from end of syllable
+    const toneMatch = syllable.match(/([1-4])$/);
+    if (!toneMatch) {
+      return syllable; // No tone number, return as is
+    }
+    
+    const tone = parseInt(toneMatch[1]);
+    const syllableWithoutTone = syllable.slice(0, -1);
+    const syllableLower = syllableWithoutTone.toLowerCase();
+    
+    // Special case: i and u together (i u 并列标在后)
+    // For 'iu', tone goes on 'u' (the second one)
+    // For 'ui', tone goes on 'i' (the second one)
+    if (syllableLower.includes('iu')) {
+      const mark = TONE_MARKS['u'][tone - 1];
+      if (mark) {
+        // Find position of 'iu' and replace 'u' with tone mark
+        const iuIndex = syllableLower.indexOf('iu');
+        const uIndex = iuIndex + 1;
+        const beforeU = syllableWithoutTone.substring(0, uIndex);
+        const afterU = syllableWithoutTone.substring(uIndex + 1);
+        // Preserve case
+        const uChar = syllableWithoutTone[uIndex];
+        const markToUse = uChar === 'U' ? TONE_MARKS['U'][tone - 1] : mark;
+        return beforeU + markToUse + afterU;
+      }
+    } else if (syllableLower.includes('ui')) {
+      const mark = TONE_MARKS['i'][tone - 1];
+      if (mark) {
+        // Find position of 'ui' and replace 'i' with tone mark
+        const uiIndex = syllableLower.indexOf('ui');
+        const iIndex = uiIndex + 1;
+        const beforeI = syllableWithoutTone.substring(0, iIndex);
+        const afterI = syllableWithoutTone.substring(iIndex + 1);
+        // Preserve case
+        const iChar = syllableWithoutTone[iIndex];
+        const markToUse = iChar === 'I' ? TONE_MARKS['I'][tone - 1] : mark;
+        return beforeI + markToUse + afterI;
+      }
+    }
+    
+    // Regular priority order: a > o > e > i > u > ü
+    const vowels_priority = ['a', 'o', 'e', 'i', 'u', 'ü', 'A', 'O', 'E', 'I', 'U', 'Ü'];
+    
+    for (const vowel of vowels_priority) {
+      if (syllableWithoutTone.includes(vowel)) {
+        const mark = TONE_MARKS[vowel.toLowerCase()][tone - 1];
+        if (mark) {
+          // Replace first occurrence of vowel with tone mark (preserve case)
+          const vowelIndex = syllableWithoutTone.indexOf(vowel);
+          if (vowelIndex !== -1) {
+            const beforeVowel = syllableWithoutTone.substring(0, vowelIndex);
+            const afterVowel = syllableWithoutTone.substring(vowelIndex + 1);
+            // Preserve case: if vowel is uppercase, use uppercase mark
+            const markToUse = (vowel === vowel.toUpperCase() && TONE_MARKS[vowel] && TONE_MARKS[vowel][tone - 1]) 
+              ? TONE_MARKS[vowel][tone - 1] 
+              : mark;
+            return beforeVowel + markToUse + afterVowel;
+          }
+        }
+      }
+    }
+    
+    // No vowel found to mark, return original without tone number
+    return syllableWithoutTone;
+  }).join(' ');
+};
+
+/**
  * Image preview component for English vocab suggestions
  */
 const EnglishVocabImagePreview = ({ englishWord }) => {
@@ -214,12 +307,15 @@ const PinyinGapFillSuggestions = ({ profile, onProfileUpdate }) => {
       // Continue without image - will try to find it later
     }
     
+    // Convert numbered pinyin to tone-marked pinyin
+    const pinyinWithTones = convertNumberedPinyinToToneMarks(selectedMatch.pinyin);
+    
     // Update the suggestion with the selected English vocab match (REPLACES old suggestion)
     const updated = [...suggestions];
     const updatedSuggestion = {
       ...suggestion,
       'Suggested Word': selectedMatch.chinese,
-      'Word Pinyin': selectedMatch.pinyin,
+      'Word Pinyin': normalizePinyin(pinyinWithTones), // Convert to tone marks and normalize spacing
       'HSK Level': '-', // Will be updated if available
       'Concreteness': selectedMatch.concreteness ? String(selectedMatch.concreteness) : '-',
       'Has Image': imageFile ? 'Yes' : 'No',
@@ -699,6 +795,7 @@ const PinyinGapFillSuggestions = ({ profile, onProfileUpdate }) => {
                             {englishVocabSuggestions[suggestion.Syllable].slice(0, 3).map((match, idx) => {
                               const isSelected = suggestion['Suggested Word'] === match.chinese;
                               const englishWord = match.english.toLowerCase().replace(/[^a-z0-9]+/g, '_');
+                              const pinyinDisplay = convertNumberedPinyinToToneMarks(match.pinyin);
                               return (
                                 <label
                                   key={idx}
@@ -722,7 +819,7 @@ const PinyinGapFillSuggestions = ({ profile, onProfileUpdate }) => {
                                     style={{ margin: 0 }}
                                   />
                                   <span style={{ flex: 1 }}>
-                                    <strong>{match.english}</strong> → {match.chinese} ({match.pinyin})
+                                    <strong>{match.english}</strong> → {match.chinese} ({pinyinDisplay})
                                   </span>
                                   {/* Show image preview if available - use backend to find actual filename */}
                                   <EnglishVocabImagePreview englishWord={match.english} />
