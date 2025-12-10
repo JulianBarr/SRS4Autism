@@ -111,9 +111,9 @@ const normalizePinyin = (pinyin) => {
  * Image preview component for English vocab suggestions
  */
 const EnglishVocabImagePreview = ({ englishWord }) => {
-  const [imageFile, setImageFile] = React.useState(null);
+  const [imageFile, setImageFile] = useState(null);
   
-  React.useEffect(() => {
+  useEffect(() => {
     // Fetch the actual image filename from backend
     axios.get(`${API_BASE}/pinyin/find-image-by-english-word`, {
       params: { english_word: englishWord },
