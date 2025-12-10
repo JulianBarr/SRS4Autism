@@ -229,7 +229,7 @@ const PinyinLearning = ({ profile, onProfileUpdate }) => {
 
     try {
       // Collect notes from both tabs - separate element and syllable note IDs
-      // This allows syncing both types together in the same deck, preserving .apkg order
+      // This allows syncing both types together in the same deck, ordered by 5-stage curriculum
       const elementNoteIds = Array.from(selectedNotes).filter(id => 
         elementNotes.some(n => n.note_id === id)
       );
@@ -237,7 +237,14 @@ const PinyinLearning = ({ profile, onProfileUpdate }) => {
         syllableNotes.some(n => n.note_id === id)
       );
 
-      // Sync both types together in the same deck, preserving order from display_order
+      // Verify we have something to sync
+      if (elementNoteIds.length === 0 && syllableNoteIds.length === 0) {
+        alert('请先选择要同步的笔记');
+        return;
+      }
+
+      // Sync both types together in the same deck, ordered by 5-stage curriculum
+      // Order: Stage 1 initials → Stage 1 finals → Stage 1 syllables → Stage 2 initials → ...
       const response = await axios.post(`${API_BASE}/pinyin/sync`, {
         profile_id: profile.id,
         element_note_ids: elementNoteIds,
@@ -246,7 +253,23 @@ const PinyinLearning = ({ profile, onProfileUpdate }) => {
       });
 
       setSyncResult(response.data);
-      alert(`✅ 成功同步 ${response.data.notes_synced} 个笔记，创建了 ${response.data.cards_created} 张卡片`);
+      
+      // Show detailed success message
+      let successMsg = `✅ 成功同步 ${response.data.notes_synced} 个笔记，创建了 ${response.data.cards_created} 张卡片`;
+      if (elementNoteIds.length > 0 && syllableNoteIds.length > 0) {
+        successMsg += `\n\n包含: ${elementNoteIds.length} 个元素 + ${syllableNoteIds.length} 个音节`;
+        successMsg += `\n已按5阶段课程顺序排列:`;
+        successMsg += `\n  阶段1: b,p,m,f + a,o,e,i,u`;
+        successMsg += `\n  阶段2: d,t,n,l + ai,ei,ao,ou`;
+        successMsg += `\n  阶段3: g,k,h + an,en,in,un`;
+        successMsg += `\n  阶段4: z,c,s,zh,ch,sh,r + ang,eng,ing,ong,er`;
+        successMsg += `\n  阶段5: j,q,x,y,w + 复合韵母`;
+      } else if (elementNoteIds.length > 0) {
+        successMsg += `\n\n包含: ${elementNoteIds.length} 个元素`;
+      } else if (syllableNoteIds.length > 0) {
+        successMsg += `\n\n包含: ${syllableNoteIds.length} 个音节`;
+      }
+      alert(successMsg);
       
       // Clear selection
       setSelectedNotes(new Set());
@@ -696,7 +719,20 @@ const PinyinLearning = ({ profile, onProfileUpdate }) => {
             cursor: selectedNotes.size > 0 ? 'pointer' : 'not-allowed'
           }}
         >
-          {syncing ? '同步中...' : `同步到 Anki (${selectedNotes.size} 个)`}
+          {syncing ? '同步中...' : (() => {
+            const elementCount = selectedElementCount;
+            const syllableCount = selectedSyllableCount;
+            
+            if (elementCount > 0 && syllableCount > 0) {
+              return `同步到 Anki (${elementCount}元素+${syllableCount}音节)`;
+            } else if (elementCount > 0) {
+              return `同步到 Anki (${elementCount}个元素)`;
+            } else if (syllableCount > 0) {
+              return `同步到 Anki (${syllableCount}个音节)`;
+            } else {
+              return `同步到 Anki (${selectedNotes.size} 个)`;
+            }
+          })()}
         </button>
         <button
           onClick={loadAllNotes}
