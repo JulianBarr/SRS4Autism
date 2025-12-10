@@ -108,6 +108,46 @@ const normalizePinyin = (pinyin) => {
 };
 
 /**
+ * Image preview component for English vocab suggestions
+ */
+const EnglishVocabImagePreview = ({ englishWord }) => {
+  const [imageFile, setImageFile] = React.useState(null);
+  
+  React.useEffect(() => {
+    // Fetch the actual image filename from backend
+    axios.get(`${API_BASE}/pinyin/find-image-by-english-word`, {
+      params: { english_word: englishWord },
+      timeout: 2000
+    })
+    .then(response => {
+      if (response.data.image_file) {
+        setImageFile(response.data.image_file);
+      }
+    })
+    .catch(() => {
+      // Image not found - that's ok
+    });
+  }, [englishWord]);
+  
+  if (!imageFile) return null;
+  
+  return (
+    <img
+      src={`${API_BASE}/media/pinyin/${imageFile}`}
+      alt={englishWord}
+      style={{
+        width: '24px',
+        height: '24px',
+        objectFit: 'cover',
+        borderRadius: '2px',
+        display: 'block'
+      }}
+      onError={(e) => { e.target.style.display = 'none'; }}
+    />
+  );
+};
+
+/**
  * Pinyin Gap Fill Suggestions Component
  * 
  * Allows users to review, edit, and approve suggestions for filling missing pinyin syllables.
@@ -125,10 +165,77 @@ const PinyinGapFillSuggestions = ({ profile, onProfileUpdate }) => {
   const [message, setMessage] = useState(null);
   // Track which image path alternative is being tried for each image to prevent infinite loops
   const [imagePathIndices, setImagePathIndices] = useState(new Map());
+  // English vocabulary suggestions
+  const [englishVocabSuggestions, setEnglishVocabSuggestions] = useState({});
+  const [loadingEnglishVocab, setLoadingEnglishVocab] = useState(false);
 
   useEffect(() => {
     loadSuggestions();
+    loadEnglishVocabSuggestions();
   }, []);
+
+  const loadEnglishVocabSuggestions = async () => {
+    setLoadingEnglishVocab(true);
+    try {
+      const response = await axios.get(`${API_BASE}/pinyin/english-vocab-suggestions`, {
+        timeout: 10000
+      });
+      setEnglishVocabSuggestions(response.data.matches || {});
+    } catch (error) {
+      console.error('Error loading English vocab suggestions:', error);
+      // Don't show error to user - just continue without suggestions
+    } finally {
+      setLoadingEnglishVocab(false);
+    }
+  };
+
+  const handleEnglishVocabSelection = async (syllable, selectedMatch) => {
+    // Only allow selection for pending items (not approved)
+    const suggestionIndex = suggestions.findIndex(s => s.Syllable === syllable);
+    if (suggestionIndex === -1) return;
+    
+    const suggestion = suggestions[suggestionIndex];
+    
+    // Skip if already approved
+    if (suggestion.approved) {
+      return;
+    }
+    
+    // Find the image file for this English word in media/pinyin/
+    let imageFile = '';
+    try {
+      const imageResponse = await axios.get(`${API_BASE}/pinyin/find-image-by-english-word`, {
+        params: { english_word: selectedMatch.english },
+        timeout: 3000
+      });
+      imageFile = imageResponse.data.image_file || '';
+    } catch (error) {
+      console.error('Error finding image:', error);
+      // Continue without image - will try to find it later
+    }
+    
+    // Update the suggestion with the selected English vocab match (REPLACES old suggestion)
+    const updated = [...suggestions];
+    const updatedSuggestion = {
+      ...suggestion,
+      'Suggested Word': selectedMatch.chinese,
+      'Word Pinyin': selectedMatch.pinyin,
+      'HSK Level': '-', // Will be updated if available
+      'Concreteness': selectedMatch.concreteness ? String(selectedMatch.concreteness) : '-',
+      'Has Image': imageFile ? 'Yes' : 'No',
+      'Image File': imageFile,
+      'approved': '', // Clear approval status so user can review
+      edited: true
+    };
+    
+    updated[suggestionIndex] = updatedSuggestion;
+    setSuggestions(updated);
+    
+    // Clear selection since we replaced the suggestion
+    const newSelected = new Set(selectedSuggestions);
+    newSelected.delete(suggestionIndex);
+    setSelectedSuggestions(newSelected);
+  };
 
   const loadSuggestions = async () => {
     setLoading(true);
@@ -583,7 +690,48 @@ const PinyinGapFillSuggestions = ({ profile, onProfileUpdate }) => {
                         placeholder="输入汉字"
                       />
                     ) : (
-                      suggestion['Suggested Word'] || 'NONE'
+                      <div>
+                        {suggestion['Suggested Word'] || 'NONE'}
+                        {/* Show English vocab suggestions only for pending items (not approved) */}
+                        {!suggestion.approved && englishVocabSuggestions[suggestion.Syllable] && (
+                          <div style={{ marginTop: '8px', padding: '8px', backgroundColor: '#f0f8ff', borderRadius: '4px', fontSize: '11px' }}>
+                            <div style={{ fontWeight: 'bold', marginBottom: '4px' }}>English Suggestions:</div>
+                            {englishVocabSuggestions[suggestion.Syllable].slice(0, 3).map((match, idx) => {
+                              const isSelected = suggestion['Suggested Word'] === match.chinese;
+                              const englishWord = match.english.toLowerCase().replace(/[^a-z0-9]+/g, '_');
+                              return (
+                                <label
+                                  key={idx}
+                                  style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '6px',
+                                    marginBottom: '4px',
+                                    cursor: 'pointer',
+                                    padding: '4px',
+                                    borderRadius: '3px',
+                                    backgroundColor: isSelected ? '#e3f2fd' : 'transparent',
+                                    border: isSelected ? '1px solid #2196F3' : '1px solid transparent'
+                                  }}
+                                >
+                                  <input
+                                    type="radio"
+                                    name={`english-vocab-${suggestion.Syllable}`}
+                                    checked={isSelected}
+                                    onChange={() => handleEnglishVocabSelection(suggestion.Syllable, match)}
+                                    style={{ margin: 0 }}
+                                  />
+                                  <span style={{ flex: 1 }}>
+                                    <strong>{match.english}</strong> → {match.chinese} ({match.pinyin})
+                                  </span>
+                                  {/* Show image preview if available - use backend to find actual filename */}
+                                  <EnglishVocabImagePreview englishWord={match.english} />
+                                </label>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </div>
                     )}
                   </td>
                   <td style={{ padding: '12px', border: '1px solid #ddd' }}>

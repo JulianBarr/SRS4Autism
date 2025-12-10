@@ -245,6 +245,44 @@ async def get_english_vocab_suggestions_for_pending():
         return {"matches": {}, "error": str(e)}
 
 
+@app.get("/pinyin/find-image-by-english-word")
+async def find_image_by_english_word(english_word: str):
+    """
+    Find the image file for an English word in media/pinyin/ directory.
+    Returns the filename with extension, or empty string if not found.
+    """
+    try:
+        english_word_clean = english_word.lower().strip().replace(" ", "_")
+        # Remove special characters except underscore and hyphen
+        import re
+        english_word_clean = re.sub(r'[^a-z0-9_-]', '', english_word_clean)
+        
+        pinyin_dir = PROJECT_ROOT / "media" / "pinyin"
+        if not pinyin_dir.exists():
+            return {"image_file": ""}
+        
+        # Try common extensions
+        extensions = ['.jpg', '.jpeg', '.png', '.gif']
+        for ext in extensions:
+            # Try exact match
+            test_file = pinyin_dir / f"{english_word_clean}{ext}"
+            if test_file.exists():
+                return {"image_file": test_file.name}
+            
+            # Try with _1, _2, etc. (for multiple images)
+            for i in range(1, 10):
+                test_file = pinyin_dir / f"{english_word_clean}_{i}{ext}"
+                if test_file.exists():
+                    return {"image_file": test_file.name}
+        
+        return {"image_file": ""}
+    
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return {"image_file": "", "error": str(e)}
+
+
 # Mount static files for serving images
 # Images are stored in media/ relative to project root
 media_dir = PROJECT_ROOT / "media"
