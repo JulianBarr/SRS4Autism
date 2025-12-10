@@ -155,8 +155,10 @@ const PinyinLearning = ({ profile, onProfileUpdate }) => {
 
   const selectAllVisible = () => {
     // Select all currently visible notes (respects filter)
+    // Merge with existing selection to allow cross-tab selection
     const allVisibleIds = new Set(currentNotes.map(note => note.note_id));
-    setSelectedNotes(allVisibleIds);
+    const mergedSelection = new Set([...selectedNotes, ...allVisibleIds]);
+    setSelectedNotes(mergedSelection);
   };
 
   const clearSelection = () => {
