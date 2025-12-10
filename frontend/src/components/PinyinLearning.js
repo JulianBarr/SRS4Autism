@@ -576,22 +576,21 @@ const PinyinLearning = ({ profile, onProfileUpdate }) => {
       </div>
 
       {/* Display count info */}
-      <>
-          {!showMastered && masteredItems.size > 0 && (
-            <div style={{ 
-              padding: '8px 12px', 
-              marginBottom: '15px', 
-              backgroundColor: '#e3f2fd', 
-              borderRadius: '4px',
-              fontSize: '0.9em',
-              color: '#1976d2'
-            }}>
-              已隐藏 {masteredItems.size} 个已掌握项目。勾选上方"显示已掌握"可查看全部。
-            </div>
-          )}
+      {!showMastered && masteredItems.size > 0 && (
+        <div style={{ 
+          padding: '8px 12px', 
+          marginBottom: '15px', 
+          backgroundColor: '#e3f2fd', 
+          borderRadius: '4px',
+          fontSize: '0.9em',
+          color: '#1976d2'
+        }}>
+          已隐藏 {masteredItems.size} 个已掌握项目。勾选上方"显示已掌握"可查看全部。
+        </div>
+      )}
 
-          {/* Filter and Action buttons */}
-          <div style={{ display: 'flex', gap: '10px', marginBottom: '20px', alignItems: 'center', flexWrap: 'wrap' }}>
+      {/* Filter and Action buttons */}
+      <div style={{ display: 'flex', gap: '10px', marginBottom: '20px', alignItems: 'center', flexWrap: 'wrap' }}>
         <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
           <input
             type="checkbox"
@@ -667,21 +666,19 @@ const PinyinLearning = ({ profile, onProfileUpdate }) => {
             </div>
           )}
         </div>
-          )}
+      )}
 
-          {/* Notes list */}
-          {loading ? (
-            <div>加载中...</div>
-          ) : currentNotes.length === 0 ? (
-            <div style={{ padding: '20px', textAlign: 'center', color: '#666' }}>
-              没有找到笔记
-            </div>
-          ) : (
-            <div>
-              {currentNotes.map(note => renderNoteCard(note))}
-            </div>
-          )}
-        </>
+      {/* Notes list */}
+      {loading ? (
+        <div>加载中...</div>
+      ) : currentNotes.length === 0 ? (
+        <div style={{ padding: '20px', textAlign: 'center', color: '#666' }}>
+          没有找到笔记
+        </div>
+      ) : (
+        <div>
+          {currentNotes.map(note => renderNoteCard(note))}
+        </div>
       )}
     </div>
   );
