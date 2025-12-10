@@ -1,0 +1,82 @@
+{
+  "recovery_items": [
+    {
+      "syllable": "ga",
+      "action": "auto_select",
+      "match": {
+        "english": "rice",
+        "chinese": "米",
+        "pinyin": "ao4 mi3 ga1",
+        "matched_syllable": "ga",
+        "concreteness": 4.86
+      }
+    },
+    {
+      "syllable": "nang",
+      "action": "auto_select",
+      "match": {
+        "english": "capsule",
+        "chinese": "胶囊",
+        "pinyin": "jiao1 nang2",
+        "matched_syllable": "nang",
+        "concreteness": 4.52
+      }
+    },
+    {
+      "syllable": "rui",
+      "action": "auto_select",
+      "match": {
+        "english": "sharpen",
+        "chinese": "锐化",
+        "pinyin": "rui4 hua4",
+        "matched_syllable": "rui",
+        "concreteness": 3.72
+      }
+    },
+    {
+      "syllable": "seng",
+      "action": "auto_select",
+      "match": {
+        "english": "monk",
+        "chinese": "僧",
+        "pinyin": "bu4 kan4 seng1 mian4 kan4 fo2 mian4",
+        "matched_syllable": "seng",
+        "concreteness": 4.35
+      }
+    },
+    {
+      "syllable": "shuan",
+      "action": "auto_select",
+      "match": {
+        "english": "bolt",
+        "chinese": "螺栓",
+        "pinyin": "luo2 shuan1",
+        "matched_syllable": "shuan",
+        "concreteness": 4.67
+      }
+    },
+    {
+      "syllable": "weng",
+      "action": "auto_select",
+      "match": {
+        "english": "buzzing",
+        "chinese": "嗡嗡声",
+        "pinyin": "weng1 weng1 sheng1",
+        "matched_syllable": "weng",
+        "concreteness": 3.5
+      }
+    },
+    {
+      "syllable": "zei",
+      "action": "auto_select",
+      "match": {
+        "english": "burglar",
+        "chinese": "窃贼",
+        "pinyin": "qie4 zei2",
+        "matched_syllable": "zei",
+        "concreteness": 4.44
+      }
+    }
+  ],
+  "created_at": "unknown"
+}

@@ -329,10 +329,17 @@ const PinyinGapFillSuggestions = ({ profile, onProfileUpdate }) => {
     updated[suggestionIndex] = updatedSuggestion;
     setSuggestions(updated);
     
-    // Clear selection since we replaced the suggestion
+    // Auto-select this item so it can be saved
+    // This ensures the user's English vocab selection is included when they click "Save selection"
     const newSelected = new Set(selectedSuggestions);
-    newSelected.delete(suggestionIndex);
+    newSelected.add(suggestionIndex);
     setSelectedSuggestions(newSelected);
+    
+    // Show a message that the selection was updated and will be saved
+    setMessage({ 
+      type: 'success', 
+      text: `已更新 ${syllable}: ${selectedMatch.chinese} (${selectedMatch.english}). 请点击"保存选择"以保存更改。` 
+    });
   };
 
   const loadSuggestions = async () => {
