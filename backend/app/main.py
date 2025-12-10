@@ -5427,35 +5427,65 @@ async def apply_pinyin_suggestions(request: Dict[str, Any]):
         errors = []
         
         with get_db_session() as db:
+            # OPTIMIZATION: Batch fetch all existing notes in ONE query instead of N queries in loop
+            # Collect all unique syllables from suggestions
+            target_syllables = set()
+            suggestion_data = []  # Store processed suggestion data
+            
+            for suggestion in suggestions:
+                syllable = suggestion.get('Syllable') or suggestion.get('syllable', '')
+                word = suggestion.get('Suggested Word') or suggestion.get('word', '')
+                
+                if not syllable or not word or word == 'NONE':
+                    continue
+                
+                target_syllables.add(syllable)
+                suggestion_data.append({
+                    'syllable': syllable,
+                    'word': word,
+                    'pinyin': suggestion.get('Word Pinyin') or suggestion.get('pinyin', ''),
+                    'image_file': suggestion.get('Image File') or suggestion.get('image_file', ''),
+                    'original': suggestion  # Keep original for error messages
+                })
+            
+            # Fetch all existing notes for these syllables in ONE query
+            existing_notes = []
+            if target_syllables:
+                existing_notes = db.query(PinyinSyllableNote).filter(
+                    PinyinSyllableNote.syllable.in_(target_syllables)
+                ).all()
+            
+            # Create lookup dictionaries for O(1) access
+            # Map: (syllable, word) -> Note Object (exact match)
+            exact_match_map = {
+                (note.syllable, note.word): note 
+                for note in existing_notes
+            }
+            
+            # Map: syllable -> Note Object (for backward compatibility fallback)
+            # Use the first note found for each syllable (maintains backward compat behavior)
+            syllable_fallback_map = {}
+            for note in existing_notes:
+                if note.syllable not in syllable_fallback_map:
+                    syllable_fallback_map[note.syllable] = note
+            
             # Get the highest display_order to append new notes
             max_order = db.query(PinyinSyllableNote.display_order).order_by(
                 PinyinSyllableNote.display_order.desc()
             ).first()
             next_order = (max_order[0] if max_order else 0) + 1
             
-            for suggestion in suggestions:
+            for suggestion_info in suggestion_data:
                 try:
-                    # Handle both CSV field names (from frontend) and direct field names
-                    syllable = suggestion.get('Syllable') or suggestion.get('syllable', '')
-                    word = suggestion.get('Suggested Word') or suggestion.get('word', '')
-                    pinyin = suggestion.get('Word Pinyin') or suggestion.get('pinyin', '')
-                    image_file = suggestion.get('Image File') or suggestion.get('image_file', '')
+                    syllable = suggestion_info['syllable']
+                    word = suggestion_info['word']
+                    pinyin = suggestion_info['pinyin']
+                    image_file = suggestion_info['image_file']
                     
-                    if not syllable or not word or word == 'NONE':
-                        continue
-                    
-                    # Check if note already exists for this syllable AND word combination
-                    # This prevents duplicates when same syllable is used for different words
-                    existing = db.query(PinyinSyllableNote).filter(
-                        PinyinSyllableNote.syllable == syllable,
-                        PinyinSyllableNote.word == word
-                    ).first()
-                    
-                    # If not found by syllable+word, check by syllable only (for backward compatibility)
+                    # OPTIMIZATION: In-memory lookup instead of database query
+                    existing = exact_match_map.get((syllable, word))
                     if not existing:
-                        existing = db.query(PinyinSyllableNote).filter(
-                            PinyinSyllableNote.syllable == syllable
-                        ).first()
+                        existing = syllable_fallback_map.get(syllable)
                     
                     # Fetch concept from knowledge graph
                     # For batch operations, skip both LLM and KG SPARQL queries (too slow)
@@ -5558,11 +5588,18 @@ async def apply_pinyin_suggestions(request: Dict[str, Any]):
                         )
                         
                         db.add(new_note)
+                        
+                        # Update local maps to prevent duplicates if input list has same syllable twice
+                        exact_match_map[(syllable, word)] = new_note
+                        if syllable not in syllable_fallback_map:
+                            syllable_fallback_map[syllable] = new_note
+                        
                         next_order += 1
                         created_count += 1
                 
                 except Exception as e:
-                    errors.append(f"Error processing {suggestion.get('syllable', 'unknown')}: {str(e)}")
+                    syllable = suggestion_info.get('syllable', 'unknown')
+                    errors.append(f"Error processing {syllable}: {str(e)}")
                     continue
         
         return {
