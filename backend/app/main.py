@@ -4944,10 +4944,18 @@ def get_pinyin_curriculum_stage(element_or_syllable: str, note_type: str, elemen
             parsed = parse_pinyin(syllable_no_tone)
             
             initial = parsed.get('initial') or ''
-            # Combine medial + final if both exist, otherwise use just final
-            final = parsed.get('final') or ''
-            if parsed.get('medial'):
-                final = parsed.get('medial', '') + final if final else parsed.get('medial', '')
+            # Build final: combine medial + final (e.g., juan = j + uan = j + u + an)
+            medial = parsed.get('medial') or ''
+            final_part = parsed.get('final') or ''
+            final = medial + final_part if final_part else medial
+            
+            # Handle special case: if no final was parsed but we have remaining, use it
+            if not final and syllable_no_tone:
+                # Simple fallback: remove initial from syllable
+                if initial and syllable_no_tone.startswith(initial):
+                    final = syllable_no_tone[len(initial):]
+                else:
+                    final = syllable_no_tone
         except Exception:
             # Fallback: simple extraction if parser fails
             initial = ''
