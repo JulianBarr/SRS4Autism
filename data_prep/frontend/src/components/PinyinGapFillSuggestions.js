@@ -2,6 +2,8 @@ import React, { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 
 const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8001';
+// Main backend for operations that require database access (like applying suggestions)
+const MAIN_API_BASE = process.env.REACT_APP_MAIN_API_URL || 'http://localhost:8000';
 
 /**
  * Normalize pinyin to ensure spaces between syllables.
@@ -543,7 +545,8 @@ const PinyinGapFillSuggestions = ({ profile, onProfileUpdate }) => {
           aoa: s.AoA !== '-' ? parseFloat(s.AoA) : null
         }));
 
-      await axios.post(`${API_BASE}/pinyin/apply-suggestions`, {
+      // Apply endpoint is in the main backend (port 8000) because it needs database access
+      await axios.post(`${MAIN_API_BASE}/pinyin/apply-suggestions`, {
         suggestions: approvedSuggestions,
         profile_id: profile?.id
       });
