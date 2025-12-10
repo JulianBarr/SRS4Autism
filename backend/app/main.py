@@ -4979,16 +4979,24 @@ def get_pinyin_curriculum_stage(element_or_syllable: str, note_type: str, elemen
         
         if final:
             final_lower = final.lower()
-            if final_lower in STAGE_1_FINALS:
-                final_stage = 1
-            elif final_lower in STAGE_2_FINALS:
-                final_stage = 2
-            elif final_lower in STAGE_3_FINALS:
-                final_stage = 3
-            elif final_lower in STAGE_4_FINALS:
-                final_stage = 4
-            elif final_lower in STAGE_5_FINALS or any(f in final_lower for f in STAGE_5_FINALS):
-                final_stage = 5
+            # Check Stage 5 first (longer compound finals like 'uan', 'iang')
+            # Sort by length descending to match longer finals first
+            stage5_matched = False
+            for stage5_final in sorted(STAGE_5_FINALS, key=len, reverse=True):
+                if final_lower == stage5_final or final_lower.endswith(stage5_final) or stage5_final in final_lower:
+                    final_stage = 5
+                    stage5_matched = True
+                    break
+            
+            if not stage5_matched:
+                if final_lower in STAGE_1_FINALS:
+                    final_stage = 1
+                elif final_lower in STAGE_2_FINALS:
+                    final_stage = 2
+                elif final_lower in STAGE_3_FINALS:
+                    final_stage = 3
+                elif final_lower in STAGE_4_FINALS:
+                    final_stage = 4
         
         # Use the maximum stage (syllables appear after both initial and final are taught)
         stage = max(initial_stage, final_stage)
