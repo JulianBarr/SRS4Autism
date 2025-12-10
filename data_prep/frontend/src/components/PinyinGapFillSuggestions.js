@@ -545,7 +545,22 @@ const PinyinGapFillSuggestions = ({ profile, onProfileUpdate }) => {
         timeout: 10000 // 10 second timeout
       });
       
-      setMessage({ type: 'success', text: `已保存 ${approvedSuggestions.length} 条建议` });
+      // Backup to localStorage after successful save
+      try {
+        const backup = JSON.parse(localStorage.getItem('pinyin_suggestions_backup') || '{}');
+        approvedSuggestions.forEach(s => {
+          backup[s.Syllable] = {
+            ...s,
+            saved_at: new Date().toISOString()
+          };
+        });
+        localStorage.setItem('pinyin_suggestions_backup', JSON.stringify(backup));
+      } catch (e) {
+        // localStorage backup failed - not critical
+        console.warn('localStorage backup failed:', e);
+      }
+      
+      setMessage({ type: 'success', text: `✅ 已保存 ${approvedSuggestions.length} 条建议 (已备份)` });
       // Reload suggestions to get updated data
       // Reset image path indices so images start fresh from first path
       setImagePathIndices(new Map());
