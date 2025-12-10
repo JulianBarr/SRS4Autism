@@ -4785,6 +4785,97 @@ async def get_pinyin_syllables(profile_id: str, db: Session = Depends(get_db)):
         raise HTTPException(status_code=500, detail=f"Error loading pinyin syllable notes: {str(e)}")
 
 
+@app.delete("/pinyin/syllables/{note_id}")
+async def delete_pinyin_syllable(note_id: str, db: Session = Depends(get_db)):
+    """
+    Delete a pinyin syllable note by note_id.
+    """
+    try:
+        from database.models import PinyinSyllableNote
+        
+        # Find the note
+        note = db.query(PinyinSyllableNote).filter(
+            PinyinSyllableNote.note_id == note_id
+        ).first()
+        
+        if not note:
+            raise HTTPException(status_code=404, detail=f"Pinyin syllable note not found: {note_id}")
+        
+        # Delete the note
+        db.delete(note)
+        db.commit()
+        
+        print(f"🗑️  Deleted pinyin syllable note: {note_id} (syllable: {note.syllable}, word: {note.word})")
+        
+        return {
+            "message": f"Successfully deleted pinyin syllable note: {note_id}",
+            "deleted_note": {
+                "note_id": note_id,
+                "syllable": note.syllable,
+                "word": note.word
+            }
+        }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        db.rollback()
+        raise HTTPException(status_code=500, detail=f"Error deleting pinyin syllable note: {str(e)}")
+
+
+@app.delete("/pinyin/syllables")
+async def delete_pinyin_syllables_batch(request: Dict[str, Any], db: Session = Depends(get_db)):
+    """
+    Delete multiple pinyin syllable notes by note_ids.
+    """
+    try:
+        from database.models import PinyinSyllableNote
+        
+        note_ids = request.get("note_ids", [])
+        if not note_ids:
+            raise HTTPException(status_code=400, detail="note_ids array is required")
+        
+        # Find all notes
+        notes = db.query(PinyinSyllableNote).filter(
+            PinyinSyllableNote.note_id.in_(note_ids)
+        ).all()
+        
+        if not notes:
+            return {
+                "message": "No notes found to delete",
+                "deleted_count": 0
+            }
+        
+        deleted_info = []
+        for note in notes:
+            deleted_info.append({
+                "note_id": note.note_id,
+                "syllable": note.syllable,
+                "word": note.word
+            })
+            db.delete(note)
+        
+        db.commit()
+        
+        print(f"🗑️  Deleted {len(notes)} pinyin syllable notes")
+        
+        return {
+            "message": f"Successfully deleted {len(notes)} pinyin syllable notes",
+            "deleted_count": len(notes),
+            "deleted_notes": deleted_info
+        }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        db.rollback()
+        raise HTTPException(status_code=500, detail=f"Error deleting pinyin syllable notes: {str(e)}")
+
+
 @app.post("/pinyin/sync")
 async def sync_pinyin_notes(request: Dict[str, Any]):
     """

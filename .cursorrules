@@ -117,4 +117,5 @@ SRS4Autism is a spaced repetition learning system with:
 - Always start the backend in root directory instead of backend/ directory
 - Always activate venv
 - Use gtimeout as timeout command, it's located at /usr/local/bin
+- Always use exit code to verify a successful restart
 

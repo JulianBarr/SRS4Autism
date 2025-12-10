@@ -69,6 +69,7 @@ const PinyinLearning = ({ profile, onProfileUpdate }) => {
   const [expandedNote, setExpandedNote] = useState(null);
   const [syncing, setSyncing] = useState(false);
   const [syncResult, setSyncResult] = useState(null);
+  const [deleting, setDeleting] = useState(false);
   const [showMastered, setShowMastered] = useState(false); // Filter toggle for mastered items
 
   useEffect(() => {
@@ -147,6 +148,57 @@ const PinyinLearning = ({ profile, onProfileUpdate }) => {
 
   const toggleExpandNote = (noteId) => {
     setExpandedNote(expandedNote === noteId ? null : noteId);
+  };
+
+  const deleteSelectedNotes = async () => {
+    if (selectedNotes.size === 0) {
+      alert('请先选择要删除的笔记');
+      return;
+    }
+
+    if (!window.confirm(`确定要删除 ${selectedNotes.size} 个笔记吗？此操作不可撤销。`)) {
+      return;
+    }
+
+    setDeleting(true);
+    try {
+      const noteIds = Array.from(selectedNotes);
+      
+      // Filter by active tab
+      const notesToDelete = activeTab === 'elements' 
+        ? noteIds.filter(id => elementNotes.some(n => n.note_id === id))
+        : noteIds.filter(id => syllableNotes.some(n => n.note_id === id));
+
+      if (notesToDelete.length === 0) {
+        alert('没有找到要删除的笔记');
+        return;
+      }
+
+      // Delete syllable notes
+      if (activeTab === 'syllables') {
+        const response = await axios.delete(`${API_BASE}/pinyin/syllables`, {
+          data: { note_ids: notesToDelete },
+          timeout: 10000
+        });
+        alert(`✅ 成功删除 ${response.data.deleted_count} 个拼音音节笔记`);
+      } else {
+        // For elements, we'd need a similar endpoint - for now just show message
+        alert('删除拼音元素功能暂未实现，请删除拼音音节');
+        return;
+      }
+
+      // Clear selection
+      setSelectedNotes(new Set());
+      
+      // Reload notes
+      loadNotes();
+    } catch (error) {
+      console.error('Error deleting notes:', error);
+      const errorMsg = error.response?.data?.detail || error.message;
+      alert(`删除失败: ${errorMsg}`);
+    } finally {
+      setDeleting(false);
+    }
   };
 
   const syncToAnki = async () => {
@@ -550,6 +602,21 @@ const PinyinLearning = ({ profile, onProfileUpdate }) => {
           <span>显示已掌握 ({masteredItems.size})</span>
         </label>
         <div style={{ flex: 1 }}></div>
+        <button
+          onClick={deleteSelectedNotes}
+          disabled={selectedNotes.size === 0 || deleting}
+          style={{
+            padding: '10px 20px',
+            backgroundColor: selectedNotes.size > 0 ? '#f44336' : '#ccc',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: selectedNotes.size > 0 ? 'pointer' : 'not-allowed',
+            marginRight: '10px'
+          }}
+        >
+          {deleting ? '删除中...' : `删除选中 (${selectedNotes.size} 个)`}
+        </button>
         <button
           onClick={syncToAnki}
           disabled={selectedNotes.size === 0 || syncing}
