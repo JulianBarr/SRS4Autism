@@ -5458,13 +5458,17 @@ async def apply_pinyin_suggestions(request: Dict[str, Any]):
                         ).first()
                     
                     # Fetch concept from knowledge graph
+                    # For batch operations, skip LLM calls (too slow) - just use word as concept
                     concept = word  # Default to word if concept not found
                     try:
-                        word_info = get_word_knowledge(word)
-                        if word_info.get("meanings"):
+                        # Use a lightweight lookup that skips LLM (much faster for batch operations)
+                        # Only use KG + cache, no LLM fallback
+                        word_info = fetch_word_knowledge_points(word) or {}
+                        meanings = word_info.get("meanings", [])
+                        if meanings:
                             # Use first English meaning as concept
-                            concept = word_info["meanings"][0]
-                        elif word_info.get("pronunciations"):
+                            concept = meanings[0]
+                        else:
                             # Fallback: use word itself
                             concept = word
                     except Exception:
