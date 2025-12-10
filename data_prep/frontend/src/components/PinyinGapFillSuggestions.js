@@ -394,8 +394,39 @@ const PinyinGapFillSuggestions = ({ profile, onProfileUpdate }) => {
       }));
       
       setSuggestions(suggestionsWithStatus);
+      
+      // Backup loaded data to localStorage as safety net
+      try {
+        const backup = {};
+        suggestionsWithStatus.forEach(s => {
+          if (s['Suggested Word'] && s['Suggested Word'] !== 'NONE') {
+            backup[s.Syllable] = {
+              ...s,
+              saved_at: new Date().toISOString()
+            };
+          }
+        });
+        localStorage.setItem('pinyin_suggestions_backup', JSON.stringify(backup));
+      } catch (e) {
+        // localStorage backup failed - not critical
+        console.warn('localStorage backup failed:', e);
+      }
     } catch (error) {
       console.error('Error loading suggestions:', error);
+      
+      // Try to load from localStorage backup if backend fails
+      try {
+        const backup = JSON.parse(localStorage.getItem('pinyin_suggestions_backup') || '{}');
+        if (Object.keys(backup).length > 0) {
+          setMessage({ 
+            type: 'warning', 
+            text: `⚠️ 后端加载失败，有 ${Object.keys(backup).length} 项本地备份。请刷新页面重试。` 
+          });
+        }
+      } catch (e) {
+        // Backup load also failed
+      }
+      
       setMessage({ type: 'error', text: `加载失败: ${error.response?.data?.detail || error.message}` });
     } finally {
       setLoading(false);
