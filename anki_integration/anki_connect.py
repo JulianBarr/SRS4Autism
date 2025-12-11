@@ -166,7 +166,7 @@ class AnkiConnect:
         return self._invoke("createDeck", {"deck": deck_name})
     
     def add_note(self, deck_name: str, model_name: str, fields: Dict[str, str], 
-                 tags: List[str] = None) -> int:
+                 tags: List[str] = None, allow_duplicate: bool = True) -> int:
         """
         Add a note to Anki.
         
@@ -175,6 +175,7 @@ class AnkiConnect:
             model_name: Note type (e.g., "Basic", "Cloze")
             fields: Dictionary of field names to values
             tags: List of tags to add
+            allow_duplicate: If True, allows creating duplicate notes (default: True)
             
         Returns:
             Note ID
@@ -183,7 +184,10 @@ class AnkiConnect:
             "deckName": deck_name,
             "modelName": model_name,
             "fields": fields,
-            "tags": tags or []
+            "tags": tags or [],
+            "options": {
+                "allowDuplicate": allow_duplicate
+            }
         }
         
         return self._invoke("addNote", {"note": note})

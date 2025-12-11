@@ -1,0 +1,140 @@
+# Note ID System Explanation
+
+## Overview
+
+The note_id system in CUMA has two layers that don't directly map to each other, which causes the duplicate errors you're seeing.
+
+## Two Different ID Systems
+
+### 1. CUMA Database `note_id` (String)
+
+**Location**: Stored in CUMA's SQLite database (`pinyin_element_notes.note_id` and `pinyin_syllable_notes.note_id`)
+
+**Format**:
+- **From .apkg files**: Uses Anki's original internal note ID as a string
+  - Example: `"1764908698037"` (from Anki's `notes.id` column)
+- **Created via `apply-suggestions`**: Uses custom format
+  - Example: `"syllable_ma_123"` (format: `syllable_{syllable}_{display_order}`)
+
+**Purpose**: 
+- Internal reference within CUMA database
+- Used to identify notes when syncing to Anki
+- **NOT passed to Anki** when creating notes
+
+**Code Reference**:
+```python
+# From extract_pinyin_from_apkg.py line 231:
+'note_id': str(note_id),  # Anki's internal ID from apkg
+
+# From apply_pinyin_suggestions (main.py line 5837):
+note_id=f"syllable_{syllable}_{next_order}",  # Custom format
+```
+
+### 2. Anki's Internal `note_id` (Integer)
+
+**Location**: Stored in Anki's collection database (`notes.id`)
+
+**Format**: 
+- Large integer (timestamp-based)
+- Example: `1764908698037`
+
+**Purpose**:
+- Anki's internal identifier
+- Generated automatically by Anki when you call `addNote` via AnkiConnect
+- **NOT controllable** from CUMA
+
+**How Anki Determines Duplicates**:
+- Anki uses the **first field** (sort field) to detect duplicates, NOT the note_id
+- For "CUMA - Pinyin Element": First field is `Element`
+- For "CUMA - Pinyin Syllable": First field is `Syllable`
+- If you try to create a note with the same first field value, Anki rejects it as duplicate
+
+## The Problem: Why Duplicates Occur
+
+### Current Sync Flow
+
+1. **CUMA Database** stores note with `note_id = "1764908698037"` (from original apkg)
+2. **User selects notes** to sync (using CUMA `note_id`s)
+3. **Sync function** (`/pinyin/sync`) retrieves notes from CUMA database
+4. **AnkiConnect.add_note()** is called with note fields
+5. **Anki generates NEW internal ID** (e.g., `1764908700123`) - different from CUMA's `note_id`
+6. **If same content already exists in Anki**, Anki rejects it as duplicate based on first field
+
+### Why This Happens
+
+- **CUMA's `note_id` is NOT used by Anki** - it's only for CUMA's internal tracking
+- **Anki doesn't know about CUMA's `note_id`** - it only sees the note fields
+- **Same note synced twice** = Same first field value = Anki rejects as duplicate
+- **No tracking** between CUMA `note_id` and Anki's internal `note_id`
+
+## Example Scenario
+
+### Scenario 1: Note from .apkg file
+
+1. Original .apkg has note with Anki ID: `1764908698037`
+2. Extracted to CUMA database with `note_id = "1764908698037"`
+3. User syncs to Anki
+4. Anki creates new note with ID: `1764908700123` (different!)
+5. User syncs same note again
+6. Anki sees duplicate `Syllable` field value → **Rejects as duplicate**
+
+### Scenario 2: Note created via `apply-suggestions`
+
+1. Created in CUMA with `note_id = "syllable_ma_123"`
+2. User syncs to Anki
+3. Anki creates new note with ID: `1764908700456`
+4. User syncs same note again
+5. Anki sees duplicate `Syllable` field value → **Rejects as duplicate**
+
+## Data Preparation Tool
+
+The data preparation tool (`data_prep/`) doesn't have its own note_id system. It:
+- Reads from CSV files (`pinyin_gap_fill_suggestions.csv`)
+- Uses CUMA's backend API to apply suggestions
+- Creates notes in CUMA database using the same note_id system
+
+## The "Self-Conflicting" Issue
+
+The note_ids like `1764908698037` appear "self-conflicting" because:
+
+1. They're **Anki's original IDs** from the .apkg file
+2. But when syncing, **Anki generates new IDs**
+3. So the same note has:
+   - CUMA `note_id`: `"1764908698037"` (from original apkg)
+   - Anki's actual ID: `1764908700123` (newly generated)
+4. These don't match, causing confusion
+
+## Solution (Implemented)
+
+### Allow Duplicates in AnkiConnect
+- Modified `add_note` method in `anki_integration/anki_connect.py`
+- Added `allowDuplicate: true` option to AnkiConnect payload
+- Default behavior: `allow_duplicate=True` (allows duplicates)
+- This matches Anki Desktop behavior where duplicates are allowed (with warning)
+
+**Implementation**:
+```python
+note = {
+    "deckName": deck_name,
+    "modelName": model_name,
+    "fields": fields,
+    "tags": tags or [],
+    "options": {
+        "allowDuplicate": True  # Allow duplicates (matches Desktop behavior)
+    }
+}
+```
+
+## Current Behavior
+
+- ✅ **Duplicates now allowed** - `allowDuplicate: true` is set in AnkiConnect requests
+- ✅ **Matches Desktop behavior** - Same as clicking "Add anyway" in Anki Desktop
+- ⚠️ **No tracking** between CUMA note_id and Anki's internal ID (duplicates are allowed, so this is acceptable)
+
+## Summary
+
+- **CUMA `note_id`**: Internal reference, not used by Anki
+- **Anki `note_id`**: Generated by Anki, not controllable from CUMA
+- **Duplicates detected by**: First field value (Element/Syllable), not note_id
+- **The conflict**: Same note content = duplicate error, regardless of CUMA's note_id
+
