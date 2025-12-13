@@ -80,6 +80,15 @@ def split_tags_for_annotations(raw_tags: List[Any]) -> (List[str], List[str]):
     """Separate clean tags from descriptive annotations."""
     keep_tags: List[str] = []
     annotations: List[str] = []
+    
+    # Handle case where tags is a string (comma-separated or single tag)
+    if isinstance(raw_tags, str):
+        # Split comma-separated string into list
+        raw_tags = [t.strip() for t in raw_tags.split(',') if t.strip()]
+    elif not isinstance(raw_tags, (list, tuple)):
+        # If it's not a string or list, convert to list
+        raw_tags = [raw_tags] if raw_tags else []
+    
     for tag in raw_tags or []:
         if tag is None:
             continue

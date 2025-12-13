@@ -113,9 +113,17 @@ SRS4Autism is a spaced repetition learning system with:
 - Use dataclasses or Pydantic models for data structures
 - Validate inputs early in function execution
 
+
+
+# PINYIN & CHINESE TEXT
+- If the user mentions **Pinyin**, **Tones**, **Pronunciation**, or **Chinese Text Processing**:
+    1. **MUST READ:** `/skills/pinyin_standard.md`
+    2. **MUST CHECK:** `/backend/app/utils/pinyin_utils.py` before writing new code.
+    3. **CONSTRAINT:** Do not write custom regex for tones. Import `get_standard_pinyin` from `utils`.
 ## Engineering rules
 - Always start the backend in root directory instead of backend/ directory
 - Always activate venv
 - Use gtimeout as timeout command, it's located at /usr/local/bin
 - Always use exit code to verify a successful restart
+
 

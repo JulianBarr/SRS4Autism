@@ -166,6 +166,17 @@ const CardImagePreview = ({ card }) => {
 const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
   const { t } = useLanguage();
   const [selectedCards, setSelectedCards] = useState([]);
+  
+  // Helper function to normalize tags - ensure it's always an array
+  const normalizeTags = (tags) => {
+    if (!tags) return [];
+    if (Array.isArray(tags)) return tags;
+    if (typeof tags === 'string') {
+      // Handle comma-separated string or single string
+      return tags.split(',').map(t => t.trim()).filter(t => t);
+    }
+    return [];
+  };
   const [ankiProfiles, setAnkiProfiles] = useState([]);
   const [selectedDeck, setSelectedDeck] = useState(() => {
     // Load last selected deck from localStorage
@@ -812,7 +823,7 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
                   </span>
                   {getStatusBadge(card.status)}
                   <span className="card-tags">
-                    {card.tags.map(tag => (
+                    {normalizeTags(card.tags).map(tag => (
                       <span key={tag} className="tag">#{tag}</span>
                     ))}
                   </span>
@@ -894,7 +905,7 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
                   </span>
                   {getStatusBadge(card.status)}
                   <span className="card-tags">
-                    {card.tags.map(tag => (
+                    {normalizeTags(card.tags).map(tag => (
                       <span key={tag} className="tag">#{tag}</span>
                     ))}
                   </span>
@@ -976,7 +987,7 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
                   </span>
                   {getStatusBadge(card.status)}
                   <span className="card-tags">
-                    {card.tags.map(tag => (
+                    {normalizeTags(card.tags).map(tag => (
                       <span key={tag} className="tag">#{tag}</span>
                     ))}
                   </span>

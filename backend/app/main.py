@@ -1408,9 +1408,17 @@ async def get_cards():
     cards = load_json_file(CARDS_FILE, [])
     # Normalize tags field - convert string to list if needed
     for card in cards:
-        if isinstance(card.get('tags'), str):
+        tags = card.get('tags')
+        # Ensure tags is always a list
+        if tags is None:
+            tags = []
+        elif isinstance(tags, str):
             # Split comma-separated string into list
-            card['tags'] = [t.strip() for t in card['tags'].split(',') if t.strip()]
+            tags = [t.strip() for t in tags.split(',') if t.strip()]
+        elif not isinstance(tags, (list, tuple)):
+            # Convert other types to list
+            tags = [str(tags)] if tags else []
+        card['tags'] = tags
         clean_tags, extracted_annotations = split_tag_annotations(card.get("tags", []))
         card['tags'] = clean_tags
         if extracted_annotations:
@@ -5012,8 +5020,7 @@ def get_pinyin_curriculum_stage(element_or_syllable: str, note_type: str, elemen
         return (stage, 2)  # syllables come after elements (initial=0, final=1, syllable=2)
     
     return (99, 0)
-
-
+print("🔥🔥🔥 LOADING PINYIN ROUTE 🔥🔥🔥")
 @app.post("/pinyin/sync")
 async def sync_pinyin_notes(request: Dict[str, Any]):
     """
@@ -5126,6 +5133,243 @@ async def sync_pinyin_notes(request: Dict[str, Any]):
         if not anki.ping():
             raise HTTPException(status_code=500, detail="AnkiConnect not available")
         
+        # Handle media files (images and audio)
+        import base64
+        import hashlib
+        import re
+        
+        MEDIA_DIR = PROJECT_ROOT / "media" / "pinyin"
+        PROJECT_PREFIX = "cm"
+        anki_media_map = {}  # Maps original filename to Anki media filename
+        uploaded_hashes = {}  # Maps content_hash -> anki_filename (for duplicate detection)
+        
+        # Collect all media filenames (images and audio) from all notes
+        all_image_filenames = set()
+        all_audio_filenames = set()
+        
+        def extract_media_from_fields(fields: dict):
+            """Extract image and audio filenames from note fields."""
+            for field_name, field_value in fields.items():
+                if not field_value or not isinstance(field_value, str):
+                    continue
+                
+                # Extract image filenames from <img src="..."> tags
+                img_pattern = r'<img[^>]*src=["\']([^"\']+)["\'][^>]*>'
+                for match in re.finditer(img_pattern, field_value):
+                    src_value = match.group(1)
+                    if not src_value.startswith('http') and not src_value.startswith('data:'):
+                        # Extract filename (remove path)
+                        filename = Path(src_value).name
+                        if filename:
+                            all_image_filenames.add(filename)
+                
+                # Extract image filenames from plain filename fields (Picture, WordPicture, etc.)
+                if field_name in ['Picture', 'WordPicture', 'ConfusorPicture1', 'ConfusorPicture2', 'ConfusorPicture3']:
+                    if field_value and not field_value.startswith('<img') and not field_value.startswith('http') and not field_value.startswith('data:'):
+                        filename = Path(field_value).name
+                        if filename:
+                            all_image_filenames.add(filename)
+                
+                # Extract audio filenames from [sound:...] tags
+                audio_pattern = r'\[sound:([^\]]+)\]'
+                for match in re.finditer(audio_pattern, field_value):
+                    audio_filename = match.group(1)
+                    all_audio_filenames.add(audio_filename)
+                
+                # Extract audio filenames from plain filename fields (WordAudio, etc.)
+                if field_name in ['WordAudio', 'Audio']:
+                    if field_value and not field_value.startswith('[sound:') and not field_value.startswith('http'):
+                        filename = Path(field_value).name
+                        if filename:
+                            all_audio_filenames.add(filename)
+        
+        # Collect media files from all notes
+        for note in all_notes:
+            extract_media_from_fields(note['fields'])
+        
+        # Upload image files
+        for original_filename in all_image_filenames:
+            # Try multiple possible locations
+            possible_paths = [
+                MEDIA_DIR / original_filename,
+                PROJECT_ROOT / "media" / original_filename,
+                PROJECT_ROOT / "media" / "pinyin" / original_filename,
+            ]
+            
+            source_file = None
+            for path in possible_paths:
+                if path.exists():
+                    source_file = path
+                    break
+            
+            if not source_file:
+                print(f"⚠️  Warning: Image file not found: {original_filename}")
+                continue
+            
+            try:
+                with open(source_file, 'rb') as f:
+                    file_data = f.read()
+                
+                content_hash = hashlib.md5(file_data).hexdigest()
+                
+                # Check if we've already uploaded this file (by content hash)
+                if content_hash in uploaded_hashes:
+                    anki_media_map[original_filename] = uploaded_hashes[content_hash]
+                    continue
+                
+                # Generate Anki media filename
+                file_ext = Path(original_filename).suffix
+                file_stem = Path(original_filename).stem
+                sanitized_stem = re.sub(r'[^a-zA-Z0-9_-]', '_', file_stem)
+                if len(sanitized_stem) > 50:
+                    sanitized_stem = sanitized_stem[:50]
+                
+                short_hash = content_hash[:8]
+                anki_filename = f"{PROJECT_PREFIX}_pinyin_{sanitized_stem}_{short_hash}{file_ext}"
+                
+                # Upload to Anki
+                base64_data = base64.b64encode(file_data).decode('utf-8')
+                stored_filename = anki.store_media_file(anki_filename, base64_data)
+                anki_media_map[original_filename] = stored_filename
+                uploaded_hashes[content_hash] = stored_filename
+                print(f"  ✅ Uploaded image: {original_filename} → {stored_filename}")
+                
+            except Exception as e:
+                print(f"  ⚠️  Failed to upload {original_filename}: {e}")
+                anki_media_map[original_filename] = original_filename
+        
+        # Upload audio files
+        for original_filename in all_audio_filenames:
+            # Try multiple possible locations
+            possible_paths = [
+                MEDIA_DIR / original_filename,
+                PROJECT_ROOT / "media" / original_filename,
+                PROJECT_ROOT / "media" / "pinyin" / original_filename,
+            ]
+            
+            source_file = None
+            for path in possible_paths:
+                if path.exists():
+                    source_file = path
+                    break
+            
+            if not source_file:
+                print(f"⚠️  Warning: Audio file not found: {original_filename}")
+                continue
+            
+            try:
+                with open(source_file, 'rb') as f:
+                    file_data = f.read()
+                
+                content_hash = hashlib.md5(file_data).hexdigest()
+                
+                # Check if we've already uploaded this file
+                if content_hash in uploaded_hashes:
+                    anki_media_map[original_filename] = uploaded_hashes[content_hash]
+                    continue
+                
+                # Generate Anki media filename
+                file_ext = Path(original_filename).suffix
+                file_stem = Path(original_filename).stem
+                sanitized_stem = re.sub(r'[^a-zA-Z0-9_-]', '_', file_stem)
+                if len(sanitized_stem) > 50:
+                    sanitized_stem = sanitized_stem[:50]
+                
+                short_hash = content_hash[:8]
+                anki_filename = f"{PROJECT_PREFIX}_audio_{sanitized_stem}_{short_hash}{file_ext}"
+                
+                # Upload to Anki
+                base64_data = base64.b64encode(file_data).decode('utf-8')
+                stored_filename = anki.store_media_file(anki_filename, base64_data)
+                anki_media_map[original_filename] = stored_filename
+                uploaded_hashes[content_hash] = stored_filename
+                print(f"  ✅ Uploaded audio: {original_filename} → {stored_filename}")
+                
+            except Exception as e:
+                print(f"  ⚠️  Failed to upload {original_filename}: {e}")
+                anki_media_map[original_filename] = original_filename
+        
+        # Function to normalize and update media references in fields
+        def normalize_and_update_media(field_name: str, field_value: str) -> str:
+            """Normalize image fields to <img src=...> format and update media references."""
+            if not field_value:
+                return ""
+            
+            # Handle image fields
+            if field_name in ['Picture', 'WordPicture', 'ConfusorPicture1', 'ConfusorPicture2', 'ConfusorPicture3']:
+                # If it's already an img tag, update the src
+                if '<img' in field_value:
+                    img_pattern = r'<img[^>]*src=["\']([^"\']+)["\'][^>]*>'
+                    def replace_img(match):
+                        img_tag = match.group(0)
+                        src_value = match.group(1)
+                        if src_value.startswith('http') or src_value.startswith('data:'):
+                            return img_tag
+                        filename = Path(src_value).name
+                        if filename in anki_media_map:
+                            anki_filename = anki_media_map[filename]
+                            return re.sub(r'src=["\']([^"\']+)["\']', f'src="{anki_filename}"', img_tag, count=1)
+                        return img_tag
+                    return re.sub(img_pattern, replace_img, field_value)
+                else:
+                    # Convert plain filename to <img src=...> format
+                    filename = Path(field_value).name
+                    if filename in anki_media_map:
+                        anki_filename = anki_media_map[filename]
+                        return f'<img src="{anki_filename}">'
+                    elif filename:
+                        return f'<img src="{filename}">'
+                    return ""
+            
+            # Handle audio fields
+            if field_name in ['WordAudio', 'Audio']:
+                # If it's already a [sound:...] tag, update it
+                if '[sound:' in field_value:
+                    audio_pattern = r'\[sound:([^\]]+)\]'
+                    def replace_audio(match):
+                        original_filename = match.group(1)
+                        if original_filename in anki_media_map:
+                            anki_filename = anki_media_map[original_filename]
+                            return f"[sound:{anki_filename}]"
+                        return match.group(0)
+                    return re.sub(audio_pattern, replace_audio, field_value)
+                else:
+                    # Convert plain filename to [sound:...] format
+                    filename = Path(field_value).name
+                    if filename in anki_media_map:
+                        anki_filename = anki_media_map[filename]
+                        return f"[sound:{anki_filename}]"
+                    elif filename:
+                        return f"[sound:{filename}]"
+                    return ""
+            
+            # For other fields, update any embedded media references
+            # Update image references in HTML
+            img_pattern = r'<img[^>]*src=["\']([^"\']+)["\'][^>]*>'
+            def replace_img(match):
+                img_tag = match.group(0)
+                src_value = match.group(1)
+                if src_value.startswith('http') or src_value.startswith('data:'):
+                    return img_tag
+                filename = Path(src_value).name
+                if filename in anki_media_map:
+                    anki_filename = anki_media_map[filename]
+                    return re.sub(r'src=["\']([^"\']+)["\']', f'src="{anki_filename}"', img_tag, count=1)
+                return img_tag
+            
+            # Update audio references
+            audio_pattern = r'\[sound:([^\]]+)\]'
+            def replace_audio(match):
+                original_filename = match.group(1)
+                if original_filename in anki_media_map:
+                    anki_filename = anki_media_map[original_filename]
+                    return f"[sound:{anki_filename}]"
+                return match.group(0)
+            
+            result = re.sub(img_pattern, replace_img, field_value)
+            result = re.sub(audio_pattern, replace_audio, result)
+            return result
+        
         # Sync to Anki in order
         cards_created = 0
         notes_synced = 0
@@ -5136,11 +5380,13 @@ async def sync_pinyin_notes(request: Dict[str, Any]):
                 fields = note['fields']
                 note_type = note['type']
                 
-                # Build Anki note fields
+                # Build Anki note fields with normalized media references
                 anki_note_fields = {}
                 for field_name, field_value in fields.items():
                     if field_value:
-                        anki_note_fields[field_name] = field_value
+                        # Normalize and update media references
+                        normalized_value = normalize_and_update_media(field_name, field_value)
+                        anki_note_fields[field_name] = normalized_value
                     else:
                         anki_note_fields[field_name] = ""
                 
@@ -5388,11 +5634,134 @@ async def save_pinyin_gap_fill_suggestions(request: Dict[str, Any]):
                 traceback.print_exc()
                 # Continue with empty dict if read fails
         
+        # Normalize pinyin function
+        def normalize_pinyin_for_save(pinyin: str, word: str = None) -> str:
+            """
+            Normalize pinyin to proper format with tone marks and space separation.
+            If word is provided and pinyin is missing/incorrect, try to fetch from knowledge graph.
+            """
+            if not pinyin or not isinstance(pinyin, str):
+                pinyin = ''
+            
+            pinyin = pinyin.strip()
+            
+            # If pinyin is empty or doesn't have proper tone marks, try to get from word
+            if word and word.strip():
+                word_stripped = word.strip()
+                # Check if pinyin needs updating (empty or missing tone marks)
+                has_tone_marks = any(mark in pinyin for mark in ['ā', 'á', 'ǎ', 'à', 'ē', 'é', 'ě', 'è', 
+                                                                  'ī', 'í', 'ǐ', 'ì', 'ō', 'ó', 'ǒ', 'ò', 
+                                                                  'ū', 'ú', 'ǔ', 'ù', 'ǖ', 'ǘ', 'ǚ', 'ǜ'])
+                
+                if not pinyin or not has_tone_marks:
+                    try:
+                        word_info = get_word_knowledge(word_stripped)
+                        pronunciations = word_info.get("pronunciations", [])
+                        if pronunciations and pronunciations[0]:
+                            pinyin = pronunciations[0]
+                            print(f"💾 [SAVE] Fetched pinyin for '{word_stripped}': '{pinyin}'")
+                    except Exception as e:
+                        print(f"⚠️ [SAVE] Could not fetch pinyin for '{word_stripped}': {e}")
+            
+            if not pinyin:
+                return ''
+            
+            # Normalize: ensure space separation and proper formatting
+            # Remove extra whitespace and normalize to single spaces
+            pinyin = ' '.join(pinyin.split())
+            
+            # Apply fix_iu_ui_tone_placement to ensure correct tone placement
+            try:
+                pinyin = fix_iu_ui_tone_placement(pinyin)
+            except Exception as e:
+                print(f"⚠️ [SAVE] Could not apply tone placement fix: {e}")
+            
+            return pinyin
+        
         # Update with approved/edited suggestions
         print(f"💾 [SAVE] Updating {len(approved_suggestions)} suggestions...")
         for suggestion in approved_suggestions:
             syllable = suggestion.get('Syllable')
             if syllable:
+                # Auto-update pinyin from Chinese word
+                word = suggestion.get('Suggested Word', '').strip()
+                current_pinyin = suggestion.get('Word Pinyin', '').strip()
+                
+                # Always fetch pinyin from the Chinese word if word is provided
+                if word and word != 'NONE':
+                    try:
+                        # Use the word-info endpoint logic which already handles normalization
+                        word_stripped = word.strip()
+                        word_info = get_word_knowledge(word_stripped)
+                        pronunciations = word_info.get("pronunciations", [])
+                        if pronunciations and pronunciations[0]:
+                            fetched_pinyin = pronunciations[0]
+                            
+                            # Add spaces between syllables if missing
+                            # Use a simple heuristic: split after tone marks when followed by initials
+                            # This is a best-effort approach - for perfect results, use the frontend normalization
+                            import re
+                            if ' ' not in fetched_pinyin:
+                                # Simple pattern: after a tone mark + letters, if we see an initial consonant
+                                # that's followed by a vowel (indicating new syllable), split there
+                                
+                                # Pattern: (tone_mark + letters) + (initial + vowel_with_tone)
+                                # This matches: syllable ending + new syllable starting
+                                
+                                # First pass: handle ng endings (ang, eng, ong) - these are complete
+                                fetched_pinyin = re.sub(r'([āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ][a-zü]*?ng)([bpmfdtnlgkhjqxzcsrzhchshyw][a-zü]*?[āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ])', r'\1 \2', fetched_pinyin, flags=re.IGNORECASE)
+                                
+                                # Second pass: handle n/r endings (but check it's not part of ng)
+                                fetched_pinyin = re.sub(r'([āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ][a-zü]*?[nr])(?![g])([bpmfdtnlgkhjqxzcsrzhchshyw][a-zü]*?[āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ])', r'\1 \2', fetched_pinyin, flags=re.IGNORECASE)
+                                
+                                # Third pass: handle syllables ending with just tone mark (including compound finals like ao, ou, ai, ei)
+                                # Pattern: tone_mark + initial + (letters containing tone_mark)
+                                fetched_pinyin = re.sub(r'([āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ])([bpmfdtnlgkhjqxzcsrzhchshyw][a-zü]*?[āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ])', r'\1 \2', fetched_pinyin, flags=re.IGNORECASE)
+                                
+                                # Additional pass: handle cases where tone mark is in compound final (ao, ou, etc.)
+                                # and is followed by initial + vowel with tone
+                                fetched_pinyin = re.sub(r'([āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ][a-zü]*?[a-zü])([bpmfdtnlgkhjqxzcsrzhchshyw][a-zü]*?[āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ])', r'\1 \2', fetched_pinyin, flags=re.IGNORECASE)
+                                
+                                # Iterative pass: keep splitting until no more changes (handles multi-syllable words)
+                                prev_pinyin = ''
+                                while prev_pinyin != fetched_pinyin:
+                                    prev_pinyin = fetched_pinyin
+                                    # Split after any tone mark when followed by initial + vowel with tone
+                                    fetched_pinyin = re.sub(r'([āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ][a-zü]*?)([bpmfdtnlgkhjqxzcsrzhchshyw][a-zü]*?[āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ])', r'\1 \2', fetched_pinyin, flags=re.IGNORECASE)
+                                
+                                # Handle two-character initials (zh, ch, sh)
+                                fetched_pinyin = re.sub(r'([āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ][a-zü]*?)\s*(zh|ch|sh)([a-zü]*?[āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ])', r'\1 \2\3', fetched_pinyin, flags=re.IGNORECASE)
+                                
+                                # Clean up: if we accidentally split "an" + "g" (should be "ang"), fix it
+                                fetched_pinyin = re.sub(r'([āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ][a-zü]*?[nr])\s+([g])([a-zü]*?[āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ])', r'\1\2\3', fetched_pinyin, flags=re.IGNORECASE)
+                            
+                            # Normalize: ensure single spaces and trim
+                            normalized_pinyin = ' '.join(fetched_pinyin.split()).strip()
+                            
+                            # Apply tone placement fix
+                            try:
+                                normalized_pinyin = fix_iu_ui_tone_placement(normalized_pinyin)
+                            except:
+                                pass
+                            
+                            suggestion['Word Pinyin'] = normalized_pinyin
+                            print(f"💾 [SAVE] Auto-updated pinyin for '{syllable}' (word: '{word}'): '{current_pinyin}' → '{normalized_pinyin}'")
+                        else:
+                            print(f"⚠️ [SAVE] No pinyin found for word '{word}'")
+                    except Exception as e:
+                        print(f"⚠️ [SAVE] Could not fetch pinyin for word '{word}': {e}")
+                        # If fetch fails, still try to normalize existing pinyin
+                        if current_pinyin:
+                            normalized_pinyin = normalize_pinyin_for_save(current_pinyin, None)
+                            if normalized_pinyin:
+                                suggestion['Word Pinyin'] = normalized_pinyin
+                else:
+                    # No word provided, just normalize existing pinyin
+                    if current_pinyin:
+                        normalized_pinyin = normalize_pinyin_for_save(current_pinyin, None)
+                        if normalized_pinyin:
+                            suggestion['Word Pinyin'] = normalized_pinyin
+                
                 # Ensure all fields are properly preserved, especially Image File
                 image_file = suggestion.get('Image File', '') or ''
                 if image_file and str(image_file).strip():

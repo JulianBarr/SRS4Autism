@@ -222,7 +222,7 @@ def check_image_via_cedict(chinese_word: str, cedict_data: dict, pics_map: dict)
         translation_underscore = translation_clean.replace(' ', '_')
         if translation_underscore in pics_map:
             return (True, pics_map[translation_underscore])
-        
+    
         # PRIORITY 3: For multi-word phrases, only match meaningful words (not stop words)
         # Only split if it's a 2-3 word phrase (longer phrases are less likely to match)
         if len(words) <= 3:
@@ -306,22 +306,22 @@ def find_best_candidate(all_words: list, target_syllable: str, pics_map: dict, c
     for word_data in all_words:
         text = word_data['text']
         pinyin_raw = word_data['pinyin_raw']
-                # Normalize and check if word actually contains the target syllable
-        cleaned_pinyin = clean_pinyin(pinyin_raw)
-        # Split by space for multi-syllable words
-        syllables = cleaned_pinyin.split()
+            # Normalize and check if word actually contains the target syllable
+            cleaned_pinyin = clean_pinyin(pinyin_raw)
+            # Split by space for multi-syllable words
+            syllables = cleaned_pinyin.split()
                 # EXACT MATCHING ONLY - no partial matching
         # Check if target syllable exactly matches one of the syllables
-        found = False
+                found = False
         syllable_position = -1  # Track position of matching syllable
         for i, syl in enumerate(syllables):
             if syl == target_clean or syl == target_normalized:
-                found = True
+                        found = True
                 syllable_position = i  # 0 = first syllable, 1 = second, etc.
-                break
+                        break
         
-        if not found:
-            continue
+                if not found:
+                    continue
                 # Extract fields
         freq = word_data['freq']
         hsk = word_data['hsk']
@@ -343,8 +343,8 @@ def find_best_candidate(all_words: list, target_syllable: str, pics_map: dict, c
             image_file = image_file_from_cedict
         else:
             image_file = image_file_from_kg
-                # Scoring: lower score = better
-        score = 0
+            # Scoring: lower score = better
+            score = 0
                 # PRIORITY 1: Concreteness (highest weight, higher = better)
         # Scale 1-5, so subtract (5 - concreteness) * 500
         # This gives concreteness 5 = -2000 points, concreteness 1 = 0 points
@@ -354,43 +354,43 @@ def find_best_candidate(all_words: list, target_syllable: str, pics_map: dict, c
         # Penalty for missing concreteness data
             score += 1000
                 # PRIORITY 2: Image availability (huge bonus)
-        if has_image:
+            if has_image:
             score -= 1500
                 # PRIORITY 3: HSK: lower is better (HSK 1 = 0 points, HSK 6 = 500 points)
         score += (hsk - 1) * 100
                 # PRIORITY 4: AoA: lower is better (learned earlier)
         # Subtract points for early acquisition (e.g., AoA 3 = -120 points)
-        if aoa < 99:
-            score -= (15 - aoa) * 10  # Early words (AoA 3-7) get big bonus
+            if aoa < 99:
+                score -= (15 - aoa) * 10  # Early words (AoA 3-7) get big bonus
         else:
         # Small penalty for missing AoA
             score += 50
                 # PRIORITY 5: Frequency: only as tiebreaker (lower rank = better, more frequent)
         # Much smaller weight than concreteness
         score += freq / 10000
-                # Word length: prefer shorter words for pinyin examples
+            # Word length: prefer shorter words for pinyin examples
         score += len(text) * 2
-                # Prefer single-syllable words (best for pinyin learning)
-        if len(syllables) == 1:
+            # Prefer single-syllable words (best for pinyin learning)
+            if len(syllables) == 1:
             score -= 100
                 # PRIORITY: Prefer words where target syllable is FIRST (most prominent for learning)
         if syllable_position == 0:
             score -= 200  # Big bonus for first syllable position
         elif syllable_position > 0:
             score += syllable_position * 50  # Small penalty for later positions
-        
-        candidates.append({
-        'word': text,
-        'pinyin': pinyin_raw,
-        'score': score,
-        'hsk': hsk,
-        'freq': freq,
-        'has_image': has_image,
-        'image_file': image_file,
-        'concreteness': concreteness,
-        'aoa': aoa,
-        'num_syllables': len(syllables)
-        })
+            
+            candidates.append({
+                'word': text,
+                'pinyin': pinyin_raw,
+                'score': score,
+                'hsk': hsk,
+                'freq': freq,
+                'has_image': has_image,
+                'image_file': image_file,
+                'concreteness': concreteness,
+                'aoa': aoa,
+                'num_syllables': len(syllables)
+            })
     
     # Sort by score (ascending = best first)
     candidates.sort(key=lambda x: x['score'])

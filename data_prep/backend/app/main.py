@@ -139,11 +139,138 @@ async def save_pinyin_gap_fill_suggestions(request: Dict[str, Any]):
                 traceback.print_exc()
                 # Continue with empty dict if read fails
         
+        # Import get_word_knowledge and fix_iu_ui_tone_placement from main backend
+        import sys
+        sys.path.insert(0, str(PROJECT_ROOT / "backend"))
+        try:
+            from app.main import get_word_knowledge, fix_iu_ui_tone_placement
+        except ImportError:
+            print("⚠️ [SAVE] Could not import from main backend, pinyin auto-update will be limited")
+            get_word_knowledge = None
+            fix_iu_ui_tone_placement = None
+        
+        # Normalize pinyin function
+        def normalize_pinyin_for_save(pinyin: str, word: str = None) -> str:
+            """
+            Normalize pinyin to proper format with tone marks and space separation.
+            If word is provided and pinyin is missing/incorrect, try to fetch from knowledge graph.
+            """
+            if not pinyin or not isinstance(pinyin, str):
+                pinyin = ''
+            
+            pinyin = pinyin.strip()
+            
+            # If pinyin is empty or doesn't have proper tone marks, try to get from word
+            if word and word.strip() and get_word_knowledge:
+                word_stripped = word.strip()
+                # Check if pinyin needs updating (empty or missing tone marks)
+                has_tone_marks = any(mark in pinyin for mark in ['ā', 'á', 'ǎ', 'à', 'ē', 'é', 'ě', 'è', 
+                                                                  'ī', 'í', 'ǐ', 'ì', 'ō', 'ó', 'ǒ', 'ò', 
+                                                                  'ū', 'ú', 'ǔ', 'ù', 'ǖ', 'ǘ', 'ǚ', 'ǜ'])
+                
+                if not pinyin or not has_tone_marks:
+                    try:
+                        word_info = get_word_knowledge(word_stripped)
+                        pronunciations = word_info.get("pronunciations", [])
+                        if pronunciations and pronunciations[0]:
+                            pinyin = pronunciations[0]
+                            print(f"💾 [SAVE] Fetched pinyin for '{word_stripped}': '{pinyin}'")
+                    except Exception as e:
+                        print(f"⚠️ [SAVE] Could not fetch pinyin for '{word_stripped}': {e}")
+            
+            if not pinyin:
+                return ''
+            
+            # Normalize: ensure space separation and proper formatting
+            # Remove extra whitespace and normalize to single spaces
+            pinyin = ' '.join(pinyin.split())
+            
+            # Apply fix_iu_ui_tone_placement to ensure correct tone placement
+            if fix_iu_ui_tone_placement:
+                try:
+                    pinyin = fix_iu_ui_tone_placement(pinyin)
+                except Exception as e:
+                    print(f"⚠️ [SAVE] Could not apply tone placement fix: {e}")
+            
+            return pinyin
+        
         # Update with approved/edited suggestions
         print(f"💾 [SAVE] Updating {len(approved_suggestions)} suggestions...")
         for suggestion in approved_suggestions:
             syllable = suggestion.get('Syllable')
             if syllable:
+                # Auto-update pinyin from Chinese word
+                word = suggestion.get('Suggested Word', '').strip()
+                current_pinyin = suggestion.get('Word Pinyin', '').strip()
+                
+                # Always fetch pinyin from the Chinese word if word is provided
+                if word and word != 'NONE':
+                    try:
+                        if get_word_knowledge:
+                            word_info = get_word_knowledge(word)
+                            pronunciations = word_info.get("pronunciations", [])
+                            if pronunciations and pronunciations[0]:
+                                fetched_pinyin = pronunciations[0]
+                                
+                                # Add spaces between syllables if missing
+                                # Use iterative approach with cleanup to handle edge cases
+                                import re
+                                if ' ' not in fetched_pinyin:
+                                    # Pass 1: Split after tone mark + ng (complete final like ang, eng, ong)
+                                    fetched_pinyin = re.sub(r'([āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ][a-zü]*?ng)([bpmfdtnlgkhjqxzcsrzhchshyw][a-zü]*?[āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ])', r'\1 \2', fetched_pinyin, flags=re.IGNORECASE)
+                                    
+                                    # Pass 2: Split after tone mark + n/r (but check it's not part of ng)
+                                    fetched_pinyin = re.sub(r'([āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ][a-zü]*?[nr])(?![g])([bpmfdtnlgkhjqxzcsrzhchshyw][a-zü]*?[āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ])', r'\1 \2', fetched_pinyin, flags=re.IGNORECASE)
+                                    
+                                    # Pass 3: Split after tone mark (no final ending) before initial
+                                    fetched_pinyin = re.sub(r'([āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ])([bpmfdtnlgkhjqxzcsrzhchshyw][a-zü]*?[āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ])', r'\1 \2', fetched_pinyin, flags=re.IGNORECASE)
+                                    
+                                    # Additional pass: handle cases where tone mark is in compound final (ao, ou, etc.)
+                                    fetched_pinyin = re.sub(r'([āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ][a-zü]*?[a-zü])([bpmfdtnlgkhjqxzcsrzhchshyw][a-zü]*?[āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ])', r'\1 \2', fetched_pinyin, flags=re.IGNORECASE)
+                                    
+                                    # Iterative pass: keep splitting until no more changes (handles multi-syllable words)
+                                    prev_pinyin = ''
+                                    while prev_pinyin != fetched_pinyin:
+                                        prev_pinyin = fetched_pinyin
+                                        # Split after any tone mark when followed by initial + vowel with tone
+                                        fetched_pinyin = re.sub(r'([āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ][a-zü]*?)([bpmfdtnlgkhjqxzcsrzhchshyw][a-zü]*?[āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ])', r'\1 \2', fetched_pinyin, flags=re.IGNORECASE)
+                                    
+                                    # Handle two-character initials (zh, ch, sh)
+                                    fetched_pinyin = re.sub(r'([āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ][a-zü]*?)\s*(zh|ch|sh)([a-zü]*?[āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ])', r'\1 \2\3', fetched_pinyin, flags=re.IGNORECASE)
+                                    
+                                    # Clean up: if we accidentally split "an" + "g" (should be "ang"), fix it
+                                    fetched_pinyin = re.sub(r'([āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ][a-zü]*?[nr])\s+([g])([a-zü]*?[āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ])', r'\1\2\3', fetched_pinyin, flags=re.IGNORECASE)
+                                
+                                # Normalize: ensure single spaces and trim
+                                normalized_pinyin = ' '.join(fetched_pinyin.split()).strip()
+                                
+                                # Apply tone placement fix
+                                if fix_iu_ui_tone_placement:
+                                    try:
+                                        normalized_pinyin = fix_iu_ui_tone_placement(normalized_pinyin)
+                                    except:
+                                        pass
+                                
+                                suggestion['Word Pinyin'] = normalized_pinyin
+                                print(f"💾 [SAVE] Auto-updated pinyin for '{syllable}' (word: '{word}'): '{current_pinyin}' → '{normalized_pinyin}'")
+                            else:
+                                print(f"⚠️ [SAVE] No pinyin found for word '{word}'")
+                        else:
+                            print(f"⚠️ [SAVE] get_word_knowledge not available")
+                    except Exception as e:
+                        print(f"⚠️ [SAVE] Could not fetch pinyin for word '{word}': {e}")
+                        # If fetch fails, still try to normalize existing pinyin
+                        if current_pinyin:
+                            normalized_pinyin = normalize_pinyin_for_save(current_pinyin, None)
+                            if normalized_pinyin:
+                                suggestion['Word Pinyin'] = normalized_pinyin
+                else:
+                    # No word provided, just normalize existing pinyin
+                    if current_pinyin:
+                        normalized_pinyin = normalize_pinyin_for_save(current_pinyin, None)
+                        if normalized_pinyin:
+                            suggestion['Word Pinyin'] = normalized_pinyin
+                
                 # Ensure all fields are properly preserved, especially Image File
                 image_file = suggestion.get('Image File', '') or ''
                 if image_file and str(image_file).strip():
@@ -243,6 +370,41 @@ async def get_english_vocab_suggestions_for_pending():
         import traceback
         traceback.print_exc()
         return {"matches": {}, "error": str(e)}
+
+
+@app.get("/pinyin/word-info")
+async def get_word_info(word: str):
+    """
+    Get pinyin and other info for a Chinese word.
+    Used by frontend to auto-update pinyin when editing suggestions.
+    """
+    try:
+        # Import get_word_knowledge from main backend
+        import sys
+        sys.path.insert(0, str(PROJECT_ROOT / "backend"))
+        try:
+            from app.main import get_word_knowledge
+        except ImportError:
+            return {"pinyin": "", "hsk_level": None, "error": "Could not import get_word_knowledge"}
+        
+        if not word or not word.strip():
+            return {"pinyin": "", "hsk_level": None}
+        
+        word_stripped = word.strip()
+        word_info = get_word_knowledge(word_stripped)
+        
+        pronunciations = word_info.get("pronunciations", [])
+        pinyin = pronunciations[0] if pronunciations else ""
+        hsk_level = word_info.get("hsk_level")
+        
+        return {
+            "pinyin": pinyin,
+            "hsk_level": hsk_level
+        }
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return {"pinyin": "", "hsk_level": None, "error": str(e)}
 
 
 @app.get("/pinyin/find-image-by-english-word")
