@@ -1,0 +1,56 @@
+# --- System & Dependency Directories ---
+.git/
+.svn/
+.hg/
+venv/
+.venv/
+env/
+__pycache__/
+node_modules/
+.idea/
+.vscode/
+
+# --- Large Data Files (CRITICAL for Budget) ---
+# Prevent reading massive dataset dumps
+*.json
+*.jsonl
+*.csv
+*.tsv
+*.sql
+*.xml
+*.parquet
+*.pkl
+*.pickle
+
+# --- Knowledge Graph & Ontology Specific ---
+# Graph dumps are often huge text files
+*.ttl
+*.nt
+*.rdf
+*.owl
+*.n3
+
+# --- Anki & Media Assets ---
+# You are working with images/audio for flashcards;
+# The AI doesn't need to "read" the binary data of thousands of files.
+*.apkg
+*.colpkg
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.mp3
+*.wav
+*.mp4
+collection.media/
+
+# --- Build & Dist ---
+dist/
+build/
+*.egg-info/
+
+# --- Logs & Temp ---
+*.log
+*.tmp
+temp/
+logs/

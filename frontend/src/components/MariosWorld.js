@@ -470,6 +470,104 @@ const MariosWorld = ({ profile, onNavigateToContent }) => {
                     </div>
                   ) : null}
                 </div>
+              ) : activeIsland.id === 'literacy' ? (
+                /* Symbol City (Literacy) specific actions */
+                <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                  <button style={{
+                    padding: '12px 24px',
+                    backgroundColor: '#8b5cf6',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '12px',
+                    fontSize: '14px',
+                    fontWeight: 'bold',
+                    cursor: 'pointer',
+                    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                    transition: 'all 0.2s'
+                  }} onMouseEnter={(e) => {
+                    e.target.style.transform = 'translateY(-2px)';
+                    e.target.style.boxShadow = '0 6px 12px rgba(0,0,0,0.15)';
+                  }} onMouseLeave={(e) => {
+                    e.target.style.transform = 'translateY(0)';
+                    e.target.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+                  }} onClick={() => {
+                    if (onNavigateToContent) {
+                      setActiveIsland(null);
+                      onNavigateToContent('logic-city');
+                    }
+                  }}>
+                    {language === 'zh' ? '🏛️ 逻辑城市词汇' : '🏛️ Logic City Vocabulary'}
+                  </button>
+                  <button style={{
+                    padding: '12px 24px',
+                    backgroundColor: theme.categories.language.primary,
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '12px',
+                    fontSize: '14px',
+                    fontWeight: 'bold',
+                    cursor: 'pointer',
+                    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                    transition: 'all 0.2s'
+                  }} onMouseEnter={(e) => {
+                    e.target.style.transform = 'translateY(-2px)';
+                    e.target.style.boxShadow = '0 6px 12px rgba(0,0,0,0.15)';
+                  }} onMouseLeave={(e) => {
+                    e.target.style.transform = 'translateY(0)';
+                    e.target.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+                  }}>
+                    {language === 'zh' ? '✨ 生成新任务' : '✨ Generate New Quest'}
+                  </button>
+                </div>
+              ) : activeIsland.id === 'logic' ? (
+                /* Logic Lab specific actions */
+                <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                  <button style={{
+                    padding: '12px 24px',
+                    backgroundColor: '#8b5cf6',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '12px',
+                    fontSize: '14px',
+                    fontWeight: 'bold',
+                    cursor: 'pointer',
+                    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                    transition: 'all 0.2s'
+                  }} onMouseEnter={(e) => {
+                    e.target.style.transform = 'translateY(-2px)';
+                    e.target.style.boxShadow = '0 6px 12px rgba(0,0,0,0.15)';
+                  }} onMouseLeave={(e) => {
+                    e.target.style.transform = 'translateY(0)';
+                    e.target.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+                  }} onClick={() => {
+                    if (onNavigateToContent) {
+                      setActiveIsland(null);
+                      onNavigateToContent('logic-city');
+                    }
+                  }}>
+                    {language === 'zh' ? '🏛️ 逻辑城市词汇' : '🏛️ Logic City Vocabulary'}
+                  </button>
+                  <button style={{
+                    padding: '12px 24px',
+                    backgroundColor: theme.categories.language.primary,
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '12px',
+                    fontSize: '14px',
+                    fontWeight: 'bold',
+                    cursor: 'pointer',
+                    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                    transition: 'all 0.2s'
+                  }} onMouseEnter={(e) => {
+                    e.target.style.transform = 'translateY(-2px)';
+                    e.target.style.boxShadow = '0 6px 12px rgba(0,0,0,0.15)';
+                  }} onMouseLeave={(e) => {
+                    e.target.style.transform = 'translateY(0)';
+                    e.target.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+                  }}>
+                    {language === 'zh' ? '✨ 生成新任务' : '✨ Generate New Quest'}
+                  </button>
+                </div>
               ) : (
                 /* Default actions for other islands */
                 <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>

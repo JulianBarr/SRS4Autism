@@ -893,12 +893,13 @@ def build_cuma_remarks(card: Dict[str, Any], context_tags: List[Dict[str, Any]])
 # Knowledge Graph Configuration
 FUSEKI_ENDPOINT = "http://localhost:3030/srs4autism/query"
 
-def query_sparql(sparql_query: str, output_format: str = "text/csv"):
+def query_sparql(sparql_query: str, output_format: str = "text/csv", timeout: int = 30):
     """Execute a SPARQL query against Jena Fuseki."""
     try:
-        params = urlencode({"query": sparql_query})
-        url = f"{FUSEKI_ENDPOINT}?{params}"
-        response = requests.get(url, headers={"Accept": output_format}, timeout=10)
+        # Use POST for large queries (more reliable than GET with long URLs)
+        headers = {"Accept": output_format, "Content-Type": "application/x-www-form-urlencoded"}
+        data = {"query": sparql_query}
+        response = requests.post(FUSEKI_ENDPOINT, data=data, headers=headers, timeout=timeout)
         response.raise_for_status()
         if output_format == "application/sparql-results+json":
             return response.json()
@@ -3284,6 +3285,211 @@ async def get_word_images(request: Dict[str, Any]):
         traceback.print_exc()
         # Return empty dict on error (graceful degradation)
         return {word: None for word in request.get("words", [])}
+
+# Logic City Vocabulary endpoint
+class LogicCityWord(BaseModel):
+    english: str
+    chinese: Optional[str] = None
+    pinyin: Optional[str] = None
+    image_path: Optional[str] = None
+
+def fetch_logic_city_vocabulary(page: int = 1, page_size: int = 50) -> List[LogicCityWord]:
+    """
+    Query Fuseki SPARQL endpoint for words tagged with learningTheme="Logic City".
+    Uses optimized pagination to prevent timeouts.
+    
+    Args:
+        page: Page number (1-indexed)
+        page_size: Number of items per page (default 50)
+    
+    Returns:
+        List of vocabulary items with English, Chinese, pinyin, and image paths.
+    """
+    offset = (page - 1) * page_size
+    
+    # Optimized query: First select word nodes, then fetch details
+    # This prevents combinatorial explosion from multiple OPTIONAL joins
+    query = f"""
+    PREFIX srs-kg: <http://srs4autism.com/schema/>
+    
+    SELECT ?englishWord ?chineseWord ?pinyin ?imagePath WHERE {{
+        {{
+            # Sub-query: Select English word nodes first (with pagination)
+            SELECT ?w WHERE {{
+                ?w a srs-kg:Word ;
+                   srs-kg:learningTheme "Logic City" ;
+                   srs-kg:text ?text .
+                FILTER (lang(?text) = "en" || REGEX(STR(?w), "word-en-"))
+            }}
+            ORDER BY ?text
+            LIMIT {page_size}
+            OFFSET {offset}
+        }}
+        
+        # Get English word text
+        ?w srs-kg:text ?englishWord .
+        FILTER (lang(?englishWord) = "en" || REGEX(STR(?w), "word-en-"))
+        
+        # Get concept
+        ?w srs-kg:means ?concept .
+        
+        # Find Chinese words linked to the same concept
+        OPTIONAL {{
+            ?chineseWordNode a srs-kg:Word ;
+                            srs-kg:text ?chineseWord ;
+                            srs-kg:means ?concept .
+            FILTER (lang(?chineseWord) = "zh" || REGEX(STR(?chineseWordNode), "word-zh-"))
+            
+            # Get pinyin if available (try direct property first)
+            OPTIONAL {{
+                ?chineseWordNode srs-kg:pinyin ?pinyin .
+            }}
+        }}
+        
+        # Get image visualization from concept
+        OPTIONAL {{
+            ?concept srs-kg:hasVisualization ?imageNode .
+            ?imageNode srs-kg:imageFilePath ?imagePath .
+        }}
+    }}
+    ORDER BY ?englishWord
+    """
+    
+    try:
+        result = query_sparql(query, output_format="application/sparql-results+json", timeout=30)
+        if not result:
+            print("⚠️  Logic City query returned no result")
+            return []
+        
+        if "results" not in result:
+            print(f"⚠️  Logic City query result missing 'results' key: {result.keys() if isinstance(result, dict) else type(result)}")
+            return []
+        
+        bindings = result.get("results", {}).get("bindings", [])
+        
+        vocabulary = []
+        seen_english = set()  # Deduplicate by English word
+        
+        for binding in bindings:
+            english = binding.get("englishWord", {}).get("value", "").strip()
+            if not english or english.lower() in seen_english:
+                continue
+            
+            seen_english.add(english.lower())
+            
+            chinese = None
+            if "chineseWord" in binding:
+                chinese = binding["chineseWord"].get("value", "").strip()
+            
+            pinyin = None
+            if "pinyin" in binding:
+                pinyin = binding["pinyin"].get("value", "").strip()
+            
+            image_path = None
+            if "imagePath" in binding:
+                img_path = binding["imagePath"].get("value", "").strip()
+                # Convert to URL path (ensure it starts with /media)
+                if img_path:
+                    # Handle paths like "content/media/images/..." -> "/media/images/..."
+                    if img_path.startswith("content/media/"):
+                        image_path = f"/media/{img_path.replace('content/media/', '')}"
+                    elif img_path.startswith("/content/media/"):
+                        image_path = f"/media/{img_path.replace('/content/media/', '')}"
+                    elif not img_path.startswith('/'):
+                        image_path = f"/media/{img_path}"
+                    else:
+                        image_path = img_path
+                    
+                    # Try to resolve actual file location by searching multiple directories
+                    # Extract filename and base name for matching
+                    filename_with_ext = Path(image_path).name
+                    filename_base = Path(filename_with_ext).stem.lower()  # Base name, lowercase for matching
+                    
+                    # Extract first word from filename (e.g., "april_flowers_butterflies" -> "april")
+                    # This helps match "april_flowers_butterflies.jpg" to "april.png"
+                    first_word = filename_base.split('_')[0] if '_' in filename_base else filename_base
+                    
+                    # Search in common media directories
+                    media_dirs = [
+                        PROJECT_ROOT / "media" / "images",
+                        PROJECT_ROOT / "media" / "visual_images", 
+                        PROJECT_ROOT / "media" / "pinyin",
+                        PROJECT_ROOT / "media"
+                    ]
+                    
+                    found = False
+                    # First try exact filename match
+                    for media_dir in media_dirs:
+                        if not media_dir.exists():
+                            continue
+                        potential_path = media_dir / filename_with_ext
+                        if potential_path.exists() and potential_path.is_file():
+                            rel_path = potential_path.relative_to(PROJECT_ROOT)
+                            image_path = f"/{rel_path.as_posix()}"
+                            found = True
+                            break
+                    
+                    # If not found, try matching by first word (e.g., "april" matches "april.png")
+                    if not found:
+                        for media_dir in media_dirs:
+                            if not media_dir.exists():
+                                continue
+                            try:
+                                # Search for files matching the first word (case-insensitive)
+                                for file in media_dir.iterdir():
+                                    if file.is_file():
+                                        file_base = file.stem.lower()
+                                        file_first_word = file_base.split('_')[0] if '_' in file_base else file_base
+                                        
+                                        # Match if first word matches and it's an image file
+                                        if file_first_word == first_word and file.suffix.lower() in ['.jpg', '.jpeg', '.png', '.gif', '.webp']:
+                                            rel_path = file.relative_to(PROJECT_ROOT)
+                                            image_path = f"/{rel_path.as_posix()}"
+                                            found = True
+                                            break
+                                if found:
+                                    break
+                            except (PermissionError, OSError):
+                                continue
+                    
+                    # If still not found, keep original path (will show fallback in UI)
+            
+            vocabulary.append(LogicCityWord(
+                english=english,
+                chinese=chinese,
+                pinyin=pinyin,
+                image_path=image_path
+            ))
+        
+        return vocabulary
+    
+    except HTTPException:
+        # Re-raise HTTP exceptions (like 503)
+        raise
+    except Exception as e:
+        print(f"❌ Error querying Logic City vocabulary: {e}")
+        import traceback
+        traceback.print_exc()
+        # Return empty list on error (graceful degradation)
+        return []
+
+@app.get("/literacy/logic-city", response_model=List[LogicCityWord])
+async def get_logic_city_vocabulary(page: int = 1, page_size: int = 50):
+    """
+    Get vocabulary items tagged with learningTheme="Logic City" with pagination.
+    
+    Args:
+        page: Page number (1-indexed, default: 1)
+        page_size: Items per page (default: 50, max: 100)
+    
+    Returns:
+        List of vocabulary items with English, Chinese, pinyin, and associated images.
+    """
+    # Limit page_size to prevent abuse
+    page_size = min(max(1, page_size), 100)
+    page = max(1, page)
+    
+    return fetch_logic_city_vocabulary(page=page, page_size=page_size)
 
 # Get grammar points for mastered grammar management
 @app.get("/vocabulary/grammar")

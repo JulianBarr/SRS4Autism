@@ -24,7 +24,7 @@ chuo,戳,chuō,-,-,Yes,poke.gif,-,-,-,-,True
 cong,丛林,cóng lín,-,4748,Yes,jungle.jpg,4.66,4.0,2,-3091.03,True
 cou,NONE,-,-,-,No,,-,-,-,-,
 cu,醋,cù,-,10375,Yes,vinegar.jpg,4.89,4.0,2,-1420.46,True
-cuan,NONE,-,-,-,No,,-,-,-,-,
+cuan,蹿,cuān,-,-,Yes,scurry.png,-,-,-,-,False
 cui,催眠曲,cuī mián qǔ,-,3557,Yes,lullaby.jpg,3.83,7.9,2,-471.44,True
 cuo,错,cuò,1,122,Yes,wrong.jpg,1.83,5.8,1,-3275.19,False
 dai,等待,děng dài,5,551,Yes,wait2.jpg,2.00,5.4,1,-2793.84,False
@@ -124,9 +124,9 @@ niu,牛,niú,3,1407,Yes,cow.png,2.79,4.7,1,-2605.66,False
 nong,农民,nóng mín,3,6600,Yes,farmer.jpg,3.96,4.7,2,-1917.94,False
 nou,NONE,-,-,-,No,,-,-,-,-,
 nu,发怒,fā nù,6,11634,Yes,mad.png,2.53,4.0,2,-2340.34,False
-nuan,暖和,nuǎn huo,3,6336,No,,2.18,4.0,2,-1315.87,
+nuan,暖和,nuǎn huo,3,6336,Yes,warm.png,2.18,4.0,2,-1315.87,False
 nuo,懦夫,nuò fū,-,1990,Yes,coward.jpg,2.93,4.0,2,-1061.30,True
-nüe,NONE,-,-,-,No,,-,-,-,-,
+nüe,虐待,nüè dài,-,-,Yes,torture.jpg,-,-,-,-,False
 pai,牛排,niú pái,-,12201,Yes,steak.jpeg,4.96,4.0,3,-2887.98,True
 pang,螃蟹,páng xiè,-,1356,Yes,crab.jpeg,4.9,4.7,2,-1303.66,False
 pao,跑步,pǎo bù,3,5221,Yes,run.png,1.43,4.0,2,-3190.98,False
@@ -157,7 +157,7 @@ rou,肉,ròu,1,1184,Yes,meat.jpeg,4.30,8.3,1,-514.88,True
 ru,蠕虫,rú chóng,-,3629,Yes,worm.jpeg,4.9,8.6,2,-3059.54,True
 ruan,软泥,ruǎn ní,-,3743,Yes,ooze.jpg,4,4.0,1,-368.13,True
 rui,锐化,ruì huà,-,-,Yes,sharpen.gif,3.72,-,-,-,
-run,利润,lì rùn,5,6286,No,,-,-,2,1454.63,
+run,湿润,shī rùn,5,6286,Yes,shirun.png,-,-,2,1454.63,False
 ruo,虚弱,xū ruò,-,1703,Yes,feeble.jpg,2.59,3.7,1,-2835.93,True
 sa,洒,sǎ,5,4927,Yes,spill.jpg,4.07,4.0,1,-273.01,False
 sai,鳃,sāi,-,1601,Yes,gill.jpg,4.33,2.9,1,-1178.94,True

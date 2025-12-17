@@ -11,6 +11,7 @@ import ChineseWordRecognition from './components/ChineseWordRecognition';
 import EnglishWordRecognition from './components/EnglishWordRecognition';
 import PinyinLearning from './components/PinyinLearning';
 import PinyinGapFillAdmin from './components/PinyinGapFillAdmin';
+import LogicCityGallery from './components/widgets/LogicCityGallery';
 import { useLanguage } from './i18n/LanguageContext';
 import './App.css';
 
@@ -314,9 +315,40 @@ function App() {
                 setCognitionLanguage('zh');
                 setCognitionContentType('pinyin');
                 setShowPinyinModal(true);
+              } else if (action === 'logic-city') {
+                // Navigate to Logic City vocabulary gallery
+                setActiveTab('content');
+                setActiveCategory('language');
+                setActiveContentView('logic-city');
               }
             }}
           />
+        )}
+
+        {/* Logic City Vocabulary View */}
+        {activeContentView === 'logic-city' && (
+          <div style={{ padding: '24px', maxWidth: '1400px', margin: '0 auto' }}>
+            <button
+              onClick={() => {
+                setActiveContentView(null);
+                setActiveTab('mariosWorld');
+              }}
+              style={{
+                marginBottom: '16px',
+                padding: '8px 16px',
+                backgroundColor: '#6b7280',
+                color: 'white',
+                border: 'none',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                fontSize: '14px',
+                fontWeight: '500'
+              }}
+            >
+              ← {language === 'zh' ? '返回' : 'Back to Mario\'s World'}
+            </button>
+            <LogicCityGallery />
+          </div>
         )}
 
         {/* Cognition Cove Modal */}
