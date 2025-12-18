@@ -12,6 +12,7 @@ import EnglishWordRecognition from './components/EnglishWordRecognition';
 import PinyinLearning from './components/PinyinLearning';
 import PinyinGapFillAdmin from './components/PinyinGapFillAdmin';
 import LogicCityGallery from './components/widgets/LogicCityGallery';
+import LogicCityManager from './components/widgets/LogicCityManager';
 import { useLanguage } from './i18n/LanguageContext';
 import './App.css';
 
@@ -31,6 +32,8 @@ function App() {
   const [showPinyinModal, setShowPinyinModal] = useState(false); // Modal state for Pinyin Learning
   const [cognitionLanguage, setCognitionLanguage] = useState(null); // 'zh' or 'en' for Cognition Cove
   const [cognitionContentType, setCognitionContentType] = useState(null); // Content type based on language
+  const [showLogicCityModal, setShowLogicCityModal] = useState(false); // Modal state for Logic City
+  const [logicCityContentType, setLogicCityContentType] = useState(null); // Content type for Logic City ('vocab-advanced', etc.)
   const [profiles, setProfiles] = useState([]);
   const [currentProfile, setCurrentProfile] = useState(null);
   const [cards, setCards] = useState([]);
@@ -320,6 +323,10 @@ function App() {
                 setActiveTab('content');
                 setActiveCategory('language');
                 setActiveContentView('logic-city');
+              } else if (action === 'logic-city-vocab-advanced') {
+                // Show Logic City modal with Advanced Vocabulary
+                setLogicCityContentType('vocab-advanced');
+                setShowLogicCityModal(true);
               }
             }}
           />
@@ -348,6 +355,145 @@ function App() {
               ← {language === 'zh' ? '返回' : 'Back to Mario\'s World'}
             </button>
             <LogicCityGallery />
+          </div>
+        )}
+
+        {/* Logic City Modal */}
+        {showLogicCityModal && (
+          <div style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 1000,
+            padding: '20px'
+          }} onClick={() => {
+            setShowLogicCityModal(false);
+            setLogicCityContentType(null);
+          }}>
+            <div style={{
+              backgroundColor: 'white',
+              borderRadius: '24px',
+              maxWidth: '1400px',
+              width: '100%',
+              maxHeight: '90vh',
+              overflow: 'auto',
+              boxShadow: '0 20px 60px rgba(0,0,0,0.3)',
+              position: 'relative'
+            }} onClick={(e) => e.stopPropagation()}>
+              {/* Header */}
+              <div style={{
+                background: 'linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%)',
+                padding: '32px',
+                borderRadius: '24px 24px 0 0',
+                position: 'relative',
+                overflow: 'hidden'
+              }}>
+                <div style={{
+                  position: 'absolute',
+                  top: '-50px',
+                  right: '-50px',
+                  width: '200px',
+                  height: '200px',
+                  backgroundColor: 'rgba(255,255,255,0.1)',
+                  borderRadius: '50%',
+                  filter: 'blur(40px)'
+                }}></div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', position: 'relative', zIndex: 10 }}>
+                  <div>
+                    <div style={{ fontSize: '12px', fontWeight: 'bold', color: 'rgba(255,255,255,0.8)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px' }}>
+                      Logic City
+                    </div>
+                    <h2 style={{ fontSize: '36px', fontWeight: 'bold', color: 'white', marginBottom: '8px' }}>
+                      {language === 'zh' ? '逻辑城市' : 'Logic City'}
+                    </h2>
+                    <p style={{ fontSize: '16px', color: 'rgba(255,255,255,0.9)', fontWeight: '500' }}>
+                      {language === 'zh' 
+                        ? '结构与逻辑：词汇进阶管理' 
+                        : 'Structure & Logic: Advanced Vocabulary Management'}
+                    </p>
+                  </div>
+                </div>
+                <button 
+                  onClick={() => {
+                    setShowLogicCityModal(false);
+                    setLogicCityContentType(null);
+                  }}
+                  style={{
+                    position: 'absolute',
+                    top: '16px',
+                    right: '16px',
+                    backgroundColor: 'rgba(255,255,255,0.3)',
+                    border: 'none',
+                    borderRadius: '50%',
+                    width: '40px',
+                    height: '40px',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '24px',
+                    color: 'white',
+                    zIndex: 20
+                  }}
+                >
+                  ×
+                </button>
+              </div>
+
+              {/* Content */}
+              <div style={{ padding: '32px', backgroundColor: '#f9fafb' }}>
+                {logicCityContentType === 'vocab-advanced' ? (
+                  <LogicCityManager 
+                    profile={currentProfile}
+                    onClose={() => {
+                      setShowLogicCityModal(false);
+                      setLogicCityContentType(null);
+                    }}
+                  />
+                ) : (
+                  /* Level 1: Content Type Selection */
+                  <div>
+                    <h3 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '20px', color: '#1f2937' }}>
+                      {language === 'zh' ? '选择内容类型' : 'Select Content Type'}
+                    </h3>
+                    <div style={{ display: 'flex', gap: '20px', marginTop: '30px', flexWrap: 'wrap' }}>
+                      <button
+                        onClick={() => setLogicCityContentType('vocab-advanced')}
+                        style={{
+                          flex: '1 1 45%',
+                          minWidth: '200px',
+                          padding: '24px',
+                          fontSize: '20px',
+                          fontWeight: 'bold',
+                          border: '2px solid #8b5cf6',
+                          borderRadius: '12px',
+                          backgroundColor: '#f3e8ff',
+                          color: '#8b5cf6',
+                          cursor: 'pointer',
+                          transition: 'all 0.2s'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = '#e9d5ff';
+                          e.currentTarget.style.transform = 'scale(1.02)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = '#f3e8ff';
+                          e.currentTarget.style.transform = 'scale(1)';
+                        }}
+                      >
+                        {language === 'zh' ? '📚 词汇进阶' : '📚 Advanced Vocabulary'}
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         )}
 

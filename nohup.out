@@ -1,0 +1,7 @@
+INFO:     Will watch for changes in these directories: ['/Users/maxent/src/SRS4Autism']
+ERROR:    [Errno 48] Address already in use
+✅ GEMINI_API_KEY loaded: AIzaSyBcQI...
+✅ Image generation enabled with Gemini 2.5 Pro
+Starting Curious Mario API server on 0.0.0.0:8000
+📝 Backend logs will be written to: /Users/maxent/src/SRS4Autism/data/logs/backend.log
+Make sure to set GEMINI_API_KEY in your .env file for AI features

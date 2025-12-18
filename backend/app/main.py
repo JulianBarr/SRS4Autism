@@ -41,6 +41,20 @@ except Exception:
 
 app = FastAPI(title="Curious Mario API", version="1.0.0")
 
+# Include routers
+try:
+    from .routers import literacy
+    app.include_router(literacy.router)
+except ImportError:
+    # Fallback for absolute import
+    import sys
+    from pathlib import Path
+    routers_path = Path(__file__).parent / "routers"
+    if routers_path.exists():
+        sys.path.insert(0, str(Path(__file__).parent))
+        from routers import literacy
+        app.include_router(literacy.router)
+
 # ============================================================================
 # KG_Map Helper Functions (Following Strict Schema from Knowledge Tracking Spec)
 # ============================================================================
@@ -6453,6 +6467,11 @@ async def apply_pinyin_suggestions(request: Dict[str, Any]):
 media_dir = PROJECT_ROOT / "media"
 if media_dir.exists():
     app.mount("/media", StaticFiles(directory=str(media_dir)), name="media")
+
+# Mount the content directory so files in ./content/media/images/ are accessible
+content_dir = PROJECT_ROOT / "content"
+if content_dir.exists():
+    app.mount("/content", StaticFiles(directory=str(content_dir)), name="content")
 
 if __name__ == "__main__":
     import uvicorn
