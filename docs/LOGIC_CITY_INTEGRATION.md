@@ -116,3 +116,4 @@ The component uses the existing theme system (`frontend/src/styles/theme.js`) an
 3. Test the API endpoint: `curl http://localhost:8000/literacy/logic-city`
 4. Verify images are accessible: `curl http://localhost:8000/media/visual_images/[filename]`
 
+

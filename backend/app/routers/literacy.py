@@ -12,10 +12,20 @@ import json
 import re
 from html import unescape
 import sys
+import base64
+import hashlib
 
 # Add project root to path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
+
+# Try to import pypinyin for correct pinyin generation
+try:
+    from pypinyin import pinyin as get_pinyin, Style
+    HAS_PYPINYIN = True
+except ImportError:
+    HAS_PYPINYIN = False
+    print("⚠️ pypinyin not found. Pinyin generation may be inaccurate. Install with: pip install pypinyin")
 
 from database.db import get_db
 from database.services import ProfileService
@@ -361,7 +371,7 @@ async def get_logic_city_vocab(
         detail_query = f"""
         PREFIX srs-kg: <http://srs4autism.com/schema/>
         
-        SELECT ?wordUri ?chineseWord ?pinyin ?imagePath WHERE {{
+        SELECT ?wordUri ?chineseWord ?imagePath WHERE {{
             VALUES ?wordUri {{ {uri_values} }}
             
             ?wordUri a srs-kg:Word .
@@ -370,17 +380,13 @@ async def get_logic_city_vocab(
             OPTIONAL {{
                 ?wordUri srs-kg:means ?concept .
                 
-                # Find Chinese words linked to the same concept
+                # FIXED: Find Chinese word SPECIFIC to this theme to avoid polysemy collisions
                 OPTIONAL {{
                     ?chineseWordNode a srs-kg:Word ;
                                     srs-kg:text ?chineseWord ;
-                                    srs-kg:means ?concept .
+                                    srs-kg:means ?concept ;
+                                    srs-kg:learningTheme "Logic City" .
                     FILTER (lang(?chineseWord) = "zh")
-                    
-                    # Get pinyin if available
-                    OPTIONAL {{
-                        ?chineseWordNode srs-kg:pinyin ?pinyin .
-                    }}
                 }}
                 
                 # Get image visualization from concept
@@ -413,11 +419,14 @@ async def get_logic_city_vocab(
                     if chinese:
                         detail_map[word_uri]['chinese'] = chinese
                 
-                # Pinyin
-                if "pinyin" in binding:
-                    pinyin = binding["pinyin"].get("value", "").strip()
-                    if pinyin:
-                        detail_map[word_uri]['pinyin'] = pinyin
+                        # FIXED: Generate Pinyin in Python to guarantee correct order
+                        if HAS_PYPINYIN:
+                            # Generate pinyin: [['niú'], ['zǎi'], ['kù']] -> "niú zǎi kù"
+                            py_list = get_pinyin(chinese, style=Style.TONE)
+                            flat_py = " ".join([item[0] for item in py_list])
+                            detail_map[word_uri]['pinyin'] = flat_py
+                        else:
+                            detail_map[word_uri]['pinyin'] = ""  # Fallback
                 
                 # Image path - resolve with fallback directories
                 if "imagePath" in binding:
@@ -544,6 +553,112 @@ async def update_logic_city_vocab(
         raise HTTPException(status_code=500, detail=f"Error updating vocabulary item: {str(e)}")
 
 
+def ensure_cuma_basic_model(anki: AnkiConnect) -> None:
+    """
+    Ensure the "CUMA - Chinese Vocabulary" note model exists in Anki.
+    Creates it if it doesn't exist.
+    
+    Args:
+        anki: AnkiConnect client instance
+    """
+    model_name = "CUMA - Chinese Vocabulary"
+    fields = ["Concept", "Chinese", "Pinyin", "Image", "Audio"]
+    
+    # Check if model exists
+    model_names = anki._invoke("modelNames", {})
+    
+    if model_name not in model_names:
+        print(f"📝 Creating note model: {model_name}")
+        
+        # Basic CSS for the model
+        css = """
+.card {
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    text-align: center;
+    color: #333;
+    background-color: #fff;
+}
+"""
+        
+        # Simple card template: Front shows Concept, Back shows Chinese, Pinyin, Image
+        card_templates = [
+            {
+                "Name": "Card 1",
+                "Front": "{{Concept}}",
+                "Back": "{{Chinese}}<br>{{Pinyin}}<br>{{Image}}<br>{{Audio}}"
+            }
+        ]
+        
+        # Create the model
+        anki._invoke("createModel", {
+            "modelName": model_name,
+            "inOrderFields": fields,
+            "css": css,
+            "cardTemplates": card_templates
+        })
+        print(f"✅ Created note model: {model_name}")
+    else:
+        print(f"✅ Note model already exists: {model_name}")
+        
+        # Ensure all required fields exist
+        existing_fields = anki._invoke("modelFieldNames", {"modelName": model_name})
+        for field in fields:
+            if field not in existing_fields:
+                print(f"  Adding missing field: {field}")
+                anki._invoke("modelFieldAdd", {
+                    "modelName": model_name,
+                    "fieldName": field
+                })
+
+
+def find_image_file(image_path: str) -> Optional[Path]:
+    """
+    Find the actual image file on disk given a path from the knowledge graph.
+    
+    Args:
+        image_path: Path from knowledge graph (e.g., "/media/images/virtue.jpg")
+    
+    Returns:
+        Path to the actual file if found, None otherwise
+    """
+    if not image_path:
+        return None
+    
+    # Normalize the path
+    if image_path.startswith("/media/"):
+        image_path = image_path[7:]  # Remove leading /media/
+    elif image_path.startswith("content/media/"):
+        image_path = image_path.replace("content/media/", "")
+    
+    # Try multiple possible locations
+    media_dirs = [
+        PROJECT_ROOT / "content" / "media" / "images",
+        PROJECT_ROOT / "media" / "images",
+        PROJECT_ROOT / "media" / "visual_images",
+        PROJECT_ROOT / "media" / "pinyin",
+        PROJECT_ROOT / "media"
+    ]
+    
+    filename = Path(image_path).name
+    
+    for media_dir in media_dirs:
+        if not media_dir.exists():
+            continue
+        potential_path = media_dir / filename
+        if potential_path.exists() and potential_path.is_file():
+            return potential_path
+    
+    # Try with the full path if it's a relative path
+    if not Path(image_path).is_absolute():
+        for media_dir in media_dirs:
+            potential_path = media_dir / image_path
+            if potential_path.exists() and potential_path.is_file():
+                return potential_path
+    
+    return None
+
+
 @router.post("/logic-city/sync")
 async def sync_logic_city_to_anki(
     request: Dict[str, Any]
@@ -558,7 +673,7 @@ async def sync_logic_city_to_anki(
         }
     
     Returns:
-        Sync results
+        Sync results with counts of added and updated cards
     """
     try:
         word_ids = request.get("word_ids", [])
@@ -576,15 +691,238 @@ async def sync_logic_city_to_anki(
                 detail="Cannot connect to Anki. Make sure Anki is running with AnkiConnect add-on installed."
             )
         
-        # TODO: Implement actual sync logic
-        # 1. Fetch vocabulary items for word_ids
-        # 2. Create/update Anki notes with custom_image_path, pinyin, notes
-        # 3. Use AnkiConnect to sync
+        # Ensure deck exists
+        try:
+            anki.create_deck(deck_name)
+        except:
+            pass  # Deck might already exist
+        
+        # Ensure "CUMA - Chinese Vocabulary" model exists
+        ensure_cuma_basic_model(anki)
+        
+        # Use the exact model name
+        MODEL_NAME = "CUMA - Chinese Vocabulary"
+        
+        # Use the exact model name
+        MODEL_NAME = "CUMA - Chinese Vocabulary"
+        
+        # ============================================================
+        # STEP 1: Fetch vocabulary data for word_ids
+        # ============================================================
+        print(f"📊 Fetching data for {len(word_ids)} words...")
+        
+        # Build URIs from word_ids
+        word_uris = [f"http://srs4autism.com/schema/{word_id}" for word_id in word_ids]
+        uri_values = " ".join([f"<{uri}>" for uri in word_uris])
+        
+        # Query to get English word, Chinese, and Image
+        detail_query = f"""
+        PREFIX srs-kg: <http://srs4autism.com/schema/>
+        
+        SELECT ?wordUri ?englishWord ?chineseWord ?imagePath WHERE {{
+            VALUES ?wordUri {{ {uri_values} }}
+            
+            ?wordUri a srs-kg:Word ;
+                     srs-kg:text ?englishWord .
+            FILTER (lang(?englishWord) = "en")
+            
+            # Get concept
+            OPTIONAL {{
+                ?wordUri srs-kg:means ?concept .
+                
+                # FIXED: Find Chinese word SPECIFIC to this theme to avoid polysemy collisions
+                OPTIONAL {{
+                    ?chineseWordNode a srs-kg:Word ;
+                                    srs-kg:text ?chineseWord ;
+                                    srs-kg:means ?concept ;
+                                    srs-kg:learningTheme "Logic City" .
+                    FILTER (lang(?chineseWord) = "zh")
+                }}
+                
+                # Get image visualization from concept
+                OPTIONAL {{
+                    ?concept srs-kg:hasVisualization ?imageNode .
+                    ?imageNode srs-kg:imageFilePath ?imagePath .
+                }}
+            }}
+        }}
+        """
+        
+        detail_result = query_sparql(detail_query, timeout=60)
+        
+        if not detail_result or "results" not in detail_result:
+            raise HTTPException(status_code=500, detail="Failed to fetch vocabulary data from knowledge graph")
+        
+        # Build word data map
+        word_data_map = {}
+        detail_bindings = detail_result.get("results", {}).get("bindings", [])
+        
+        for binding in detail_bindings:
+            word_uri = binding.get("wordUri", {}).get("value", "")
+            if not word_uri:
+                continue
+            
+            english = binding.get("englishWord", {}).get("value", "").strip()
+            if not english:
+                continue
+            
+            if word_uri not in word_data_map:
+                word_data_map[word_uri] = {
+                    "english": english,
+                    "chinese": None,
+                    "pinyin": None,
+                    "image_path": None
+                }
+            
+            # Chinese
+            if "chineseWord" in binding:
+                chinese = binding["chineseWord"].get("value", "").strip()
+                if chinese:
+                    word_data_map[word_uri]["chinese"] = chinese
+                    
+                    # FIXED: Generate Pinyin in Python to guarantee correct order
+                    if HAS_PYPINYIN:
+                        # Generate pinyin: [['niú'], ['zǎi'], ['kù']] -> "niú zǎi kù"
+                        py_list = get_pinyin(chinese, style=Style.TONE)
+                        flat_py = " ".join([item[0] for item in py_list])
+                        word_data_map[word_uri]["pinyin"] = flat_py
+                    else:
+                        word_data_map[word_uri]["pinyin"] = ""  # Fallback
+            
+            # Image path
+            if "imagePath" in binding:
+                img_path = binding["imagePath"].get("value", "").strip()
+                if img_path:
+                    # Convert to URL path format
+                    if img_path.startswith("content/media/"):
+                        image_path = f"/media/{img_path.replace('content/media/', '')}"
+                    elif img_path.startswith("/content/media/"):
+                        image_path = f"/media/{img_path.replace('/content/media/', '')}"
+                    elif not img_path.startswith('/'):
+                        image_path = f"/media/{img_path}"
+                    else:
+                        image_path = img_path
+                    
+                    word_data_map[word_uri]["image_path"] = image_path
+        
+        print(f"✅ Fetched data for {len(word_data_map)} words")
+        
+        # ============================================================
+        # STEP 2: Process images and sync to Anki
+        # ============================================================
+        added_count = 0
+        updated_count = 0
+        errors = []
+        
+        # Track uploaded images to avoid duplicates
+        uploaded_hashes = {}  # Maps content_hash -> anki_filename
+        anki_media_map = {}  # Maps original path -> anki_filename
+        
+        for word_uri, data in word_data_map.items():
+            try:
+                english = data["english"]
+                chinese = data.get("chinese") or ""
+                pinyin = data.get("pinyin") or ""
+                image_path = data.get("image_path")
+                
+                # Process image if available
+                image_html = ""
+                if image_path:
+                    # Find the actual file on disk
+                    image_file = find_image_file(image_path)
+                    
+                    if image_file and image_file.exists():
+                        try:
+                            # Read file
+                            with open(image_file, 'rb') as f:
+                                file_data = f.read()
+                            
+                            # Calculate content hash
+                            content_hash = hashlib.md5(file_data).hexdigest()
+                            
+                            # Check if we've already uploaded this file
+                            if content_hash in uploaded_hashes:
+                                anki_filename = uploaded_hashes[content_hash]
+                            else:
+                                # Generate Anki filename: cm_logic_[sanitized_name]_[hash].[ext]
+                                file_ext = image_file.suffix
+                                file_stem = image_file.stem
+                                sanitized_stem = re.sub(r'[^a-zA-Z0-9_-]', '_', file_stem)
+                                if len(sanitized_stem) > 50:
+                                    sanitized_stem = sanitized_stem[:50]
+                                
+                                short_hash = content_hash[:8]
+                                anki_filename = f"cm_logic_{sanitized_stem}_{short_hash}{file_ext}"
+                                
+                                # Base64 encode
+                                base64_data = base64.b64encode(file_data).decode('utf-8')
+                                
+                                # Upload to Anki
+                                stored_filename = anki.store_media_file(anki_filename, base64_data)
+                                uploaded_hashes[content_hash] = stored_filename
+                                anki_filename = stored_filename
+                            
+                            anki_media_map[image_path] = anki_filename
+                            image_html = f'<img src="{anki_filename}">'
+                            
+                        except Exception as e:
+                            print(f"⚠️  Warning: Failed to process image {image_path}: {e}")
+                            # Continue without image
+                    else:
+                        print(f"⚠️  Warning: Image file not found: {image_path}")
+                
+                # Build Anki note fields - map 'english' variable to 'Concept' field
+                fields = {
+                    "Concept": english,  # Use "Concept" instead of "English"
+                    "Chinese": chinese,
+                    "Pinyin": pinyin,
+                    "Image": image_html,
+                    "Audio": ""  # Audio field is empty for now
+                }
+                
+                # Check if note already exists - query using "Concept" field
+                # Escape double quotes in English word for Anki query
+                escaped_english = english.replace('"', '\\"')
+                query = f'deck:"{deck_name}" Concept:"{escaped_english}"'
+                existing_note_ids = anki._invoke("findNotes", {"query": query})
+                
+                if existing_note_ids:
+                    # Update existing note
+                    note_id = existing_note_ids[0]  # Use first match
+                    anki._invoke("updateNoteFields", {
+                        "note": {
+                            "id": note_id,
+                            "fields": fields
+                        }
+                    })
+                    updated_count += 1
+                    print(f"  ✅ Updated: {english}")
+                else:
+                    # Add new note - use exact model name
+                    note_id = anki.add_note(
+                        deck_name=deck_name,
+                        model_name=MODEL_NAME,
+                        fields=fields,
+                        tags=["CUMA", "LogicCity"],
+                        allow_duplicate=False
+                    )
+                    if note_id:
+                        added_count += 1
+                        print(f"  ✅ Added: {english}")
+                    else:
+                        errors.append(f"Failed to add note for {english}")
+            
+            except Exception as e:
+                error_msg = f"Error processing {data.get('english', 'unknown')}: {str(e)}"
+                print(f"  ❌ {error_msg}")
+                errors.append(error_msg)
         
         return {
-            "message": f"Sync initiated for {len(word_ids)} words",
-            "word_ids": word_ids,
-            "deck_name": deck_name
+            "message": f"Sync completed for {len(word_ids)} words",
+            "added": added_count,
+            "updated": updated_count,
+            "errors": errors,
+            "total_processed": added_count + updated_count
         }
     
     except HTTPException:

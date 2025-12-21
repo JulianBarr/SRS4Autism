@@ -17,7 +17,7 @@ except ImportError:
 SCRIPT_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = SCRIPT_DIR.parent.parent  # Go up: scripts -> analysis -> root
 
-print ("Project root",PROJECT_ROOT)
+print
 
 # SEARCH for the file if we aren't sure where it is
 POSSIBLE_PATHS = [

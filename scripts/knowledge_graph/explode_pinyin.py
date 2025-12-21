@@ -1,128 +1,198 @@
 import sys
-import zipfile
-import sqlite3
-import tempfile
-import re
+import urllib.parse
 from pathlib import Path
-from rdflib import Graph, Namespace, Literal, RDF
+from rdflib import Graph, Namespace, RDF, Literal
 
-# Force real-time output
+# Force Output buffering
 sys.stdout.reconfigure(line_buffering=True)
 
+try:
+    from pypinyin import pinyin, Style
+except ImportError:
+    print("❌ Error: Missing libraries. Run: pip install rdflib pypinyin")
+    sys.exit(1)
+
 # --- CONFIGURATION ---
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
-# We prioritize 'complete' as it has the pinyin/images, but fallback to final if needed
-KG_PATH = BASE_DIR / "knowledge_graph" / "world_model_complete.ttl"
-if not KG_PATH.exists():
-    KG_PATH = BASE_DIR / "knowledge_graph" / "world_model_final.ttl"
+SCRIPT_DIR = Path(__file__).resolve().parent
+PROJECT_ROOT = SCRIPT_DIR.parent.parent
+# Using the complete file as source and destination
+INPUT_FILE = PROJECT_ROOT / "knowledge_graph" / "world_model_complete.ttl"
+OUTPUT_FILE = PROJECT_ROOT / "knowledge_graph" / "world_model_complete.ttl"
 
-DECK_PATH = BASE_DIR / "data" / "content_db" / "English__Vocabulary__2. Level 2.apkg"
-SRS_KG = Namespace("http://srs4autism.com/schema/")
+# --- CACHE (The Speed Secret) ---
+# We store created URIs here to avoid re-creating them thousands of times
+uri_cache = {}
 
-def clean_text(text):
-    if not text: return ""
-    text = re.sub(r'<[^>]+>', '', text) # No HTML
-    text = re.sub(r'\[.*?\]', '', text) # No Sound tags
-    return text.strip().lower()
-
-def tag_vocabulary():
-    print("--- STARTING HIGH-PERFORMANCE TAGGING ---")
-    print(f"Target Graph: {KG_PATH.name}")
+def get_cached_uri(namespace, raw_string):
+    """
+    Returns a URIRef from cache if it exists, otherwise creates and caches it.
+    """
+    if not raw_string:
+        return None
     
-    if not DECK_PATH.exists():
-        print(f"❌ Deck not found: {DECK_PATH}")
+    clean_str = raw_string.strip()
+    if not clean_str:
+        return None
+        
+    cache_key = (namespace, clean_str)
+    if cache_key in uri_cache:
+        return uri_cache[cache_key]
+    
+    # Create new
+    safe_suffix = urllib.parse.quote(clean_str)
+    uri = namespace[safe_suffix]
+    
+    # Store
+    uri_cache[cache_key] = uri
+    return uri
+
+def run_pinyin_explosion():
+    print(f"--- STARTING OPTIMIZED PINYIN EXPLOSION ---")
+    print(f"Target: {INPUT_FILE.name}")
+
+    if not INPUT_FILE.exists():
+        print(f"❌ File not found: {INPUT_FILE}")
         return
 
-    # 1. LOAD GRAPH
-    print("[1/5] Loading Graph (~45s)...")
+    # 1. Load Graph
+    print("[1/4] Loading Graph (This is the slowest part, please wait)...")
     g = Graph()
-    g.parse(KG_PATH, format="turtle")
+    g.parse(INPUT_FILE, format="turtle")
+    SRS_KG = Namespace("http://srs4autism.com/schema/")
     print(f"      Loaded {len(g)} triples.")
 
-    # 2. BUILD INDEXES (The Speed Secret)
-    # We map data into Python dicts so we never have to query the graph in the loop
-    print("[2/5] Indexing Graph (Building 'Phone Book')...")
-    
-    # Map: "apple" -> [URI_Apple_En, URI_Apple_Zh]
-    text_to_nodes = {}
-    # Map: Concept_URI -> [Word_URI_1, Word_URI_2] (For inheritance)
-    concept_to_words = {}
-    
-    # Iterate ALL words once
-    for w_uri in g.subjects(RDF.type, SRS_KG.Word):
-        # Index Text
-        text_val = g.value(w_uri, SRS_KG.text)
-        if text_val:
-            clean_t = str(text_val).strip().lower()
-            if clean_t not in text_to_nodes:
-                text_to_nodes[clean_t] = []
-            text_to_nodes[clean_t].append(w_uri)
-        
-        # Index Concept (for finding synonyms/translations)
-        concept_uri = g.value(w_uri, SRS_KG.means)
-        if concept_uri:
-            if concept_uri not in concept_to_words:
-                concept_to_words[concept_uri] = []
-            concept_to_words[concept_uri].append(w_uri)
-
-    print(f"      Indexed {len(text_to_nodes)} unique words.")
-
-    # 3. EXTRACT ANKI WORDS
-    print("[3/5] Extracting words from Anki Deck...")
-    anki_words = set()
-    with tempfile.TemporaryDirectory() as tmpdir:
-        with zipfile.ZipFile(DECK_PATH, 'r') as z:
-            z.extractall(tmpdir)
-            db_path = Path(tmpdir) / "collection.anki2"
-            conn = sqlite3.connect(db_path)
-            cursor = conn.cursor()
-            cursor.execute("SELECT flds FROM notes")
-            for row in cursor.fetchall():
-                fields = row[0].split('\x1f')
-                if len(fields) > 1:
-                    clean = clean_text(fields[1]) # Field 1 is Back
-                    if clean: anki_words.add(clean)
-            conn.close()
-    
-    target_list = list(anki_words)
-    print(f"      Found {len(target_list)} unique words in deck.")
-
-    # 4. TAGGING (Instant Lookup)
-    print("[4/5] Applying Tags...")
     triples_to_add = []
+    triples_to_remove = []
     
-    for i, word in enumerate(target_list):
-        # Progress Report every 100 items
-        if i % 100 == 0:
-            print(f"      Progress: {i}/{len(target_list)}...", end='\r')
-            
-        # O(1) Lookup
-        matching_nodes = text_to_nodes.get(word, [])
-        
-        for node in matching_nodes:
-            # A. Tag the English Word
-            triples_to_add.append((node, SRS_KG.learningTheme, Literal("Logic City")))
-            triples_to_add.append((node, SRS_KG.learningLevel, Literal(2)))
-            
-            # B. Inheritance (Find Chinese/Siblings via Concept Index)
-            # We use the index we built, avoiding graph queries
-            concept = g.value(node, SRS_KG.means) # This is fast enough for single lookup
-            if concept and concept in concept_to_words:
-                siblings = concept_to_words[concept]
-                for sibling in siblings:
-                    if sibling != node:
-                        triples_to_add.append((sibling, SRS_KG.learningTheme, Literal("Logic City")))
-                        triples_to_add.append((sibling, SRS_KG.learningLevel, Literal(2)))
+    # 2. Query Words
+    print("[2/4] Scanning for Chinese words...")
+    q_words = """
+    PREFIX srs-kg: <http://srs4autism.com/schema/>
+    SELECT ?w ?label ?old_pinyin WHERE {
+        ?w a srs-kg:Word ;
+           srs-kg:text ?label .
+        OPTIONAL { ?w srs-kg:pinyin ?old_pinyin }
+        FILTER (lang(?label) = "zh")
+    }
+    """
+    
+    # Convert query result to list to avoid keeping generator open
+    rows = list(g.query(q_words))
+    total_words = len(rows)
+    print(f"      Found {total_words} Chinese words to process.")
 
-    print(f"\n      Generated {len(triples_to_add)} new tags.")
+    # Pre-cache Tone URIs (Fixed set)
+    tone_nodes = {
+        1: SRS_KG["tone-1"],
+        2: SRS_KG["tone-2"],
+        3: SRS_KG["tone-3"],
+        4: SRS_KG["tone-4"],
+        5: SRS_KG["tone-5"],
+    }
 
-    # 5. SAVE
-    print("[5/5] Saving Graph...")
-    for t in triples_to_add:
-        g.add(t)
+    # 3. Processing Loop
+    print("[3/4] Generating Pinyin Nodes...")
+    
+    for count, row in enumerate(rows):
+        if count % 200 == 0:
+            print(f"      Progress: {count}/{total_words}...", end='\r')
+
+        word_uri = row.w
+        text = str(row.label)
         
-    g.serialize(destination=KG_PATH, format="turtle")
+        # Mark old string-based pinyin for deletion
+        if row.old_pinyin:
+            triples_to_remove.append((word_uri, SRS_KG.pinyin, row.old_pinyin))
+
+        # Generate Pinyin Data
+        # We fetch all styles at once to avoid re-parsing logic inside loop
+        py_list_num = pinyin(text, style=Style.TONE3, errors='ignore')
+        py_list_display = pinyin(text, style=Style.TONE, errors='ignore')
+        py_list_init = pinyin(text, style=Style.INITIALS, strict=False, errors='ignore')
+        py_list_final = pinyin(text, style=Style.FINALS, strict=False, errors='ignore')
+
+        # Iterate through syllables
+        limit = min(len(py_list_num), len(py_list_display))
+        
+        for i in range(limit):
+            py_str_num = py_list_num[i][0]
+            py_display = py_list_display[i][0]
+            initial = py_list_init[i][0] if i < len(py_list_init) else ""
+            final = py_list_final[i][0] if i < len(py_list_final) else ""
+            
+            # Detect Tone
+            tone_num = 5
+            base_syllable = py_str_num
+            
+            if py_str_num and py_str_num[-1].isdigit():
+                try:
+                    tone_num = int(py_str_num[-1])
+                    base_syllable = py_str_num[:-1] 
+                except ValueError:
+                    pass
+
+            # --- NODE CREATION (Cached) ---
+            
+            # 1. Syllable Node
+            syllable_id = f"pinyin-{base_syllable}{tone_num}"
+            syllable_uri = get_cached_uri(SRS_KG, syllable_id)
+            
+            if not syllable_uri: continue
+
+            # Link Word -> Syllable
+            triples_to_add.append((word_uri, SRS_KG.hasPinyin, syllable_uri))
+            
+            # Syllable Properties
+            triples_to_add.append((syllable_uri, RDF.type, SRS_KG.PinyinSyllable))
+            triples_to_add.append((syllable_uri, SRS_KG.displayText, Literal(py_display)))
+            
+            # 2. Initial Node
+            if initial:
+                initial_id = f"initial-{initial}"
+                initial_uri = get_cached_uri(SRS_KG, initial_id)
+                if initial_uri:
+                    triples_to_add.append((syllable_uri, SRS_KG.hasInitial, initial_uri))
+                    # Only add type definitions if we haven't seen this URI before
+                    # (Though adding duplicates to a set is fine, avoiding it saves memory)
+                    triples_to_add.append((initial_uri, RDF.type, SRS_KG.Initial))
+                    triples_to_add.append((initial_uri, SRS_KG.text, Literal(initial)))
+
+            # 3. Final Node
+            if final:
+                final_id = f"final-{final}"
+                final_uri = get_cached_uri(SRS_KG, final_id)
+                if final_uri:
+                    triples_to_add.append((syllable_uri, SRS_KG.hasFinal, final_uri))
+                    triples_to_add.append((final_uri, RDF.type, SRS_KG.Final))
+                    triples_to_add.append((final_uri, SRS_KG.text, Literal(final)))
+
+            # 4. Tone Node (Pre-cached)
+            tone_uri = tone_nodes.get(tone_num, tone_nodes[5])
+            triples_to_add.append((syllable_uri, SRS_KG.hasTone, tone_uri))
+            # We assume Tone Nodes are defined statically in ontology, 
+            # but adding type here ensures safety.
+            triples_to_add.append((tone_uri, RDF.type, SRS_KG.Tone))
+            triples_to_add.append((tone_uri, SRS_KG.value, Literal(tone_num)))
+
+    print(f"\n      Generated {len(triples_to_add)} new triples.")
+
+    # 4. Applying Changes (Bulk)
+    print("[4/4] Updating Graph (Bulk Operation)...")
+    
+    if triples_to_remove:
+        # rdflib doesn't have a fast bulk remove, so we loop, 
+        # but this list is usually small
+        for t in triples_to_remove:
+            g.remove(t)
+            
+    # Bulk Add (Much faster than looping)
+    if triples_to_add:
+        for t in triples_to_add:
+            g.add(t)
+
+    print(f"      Saving to {OUTPUT_FILE.name}...")
+    g.serialize(destination=OUTPUT_FILE, format="turtle")
     print("✅ Done.")
 
 if __name__ == "__main__":
-    tag_vocabulary()
+    run_pinyin_explosion()
