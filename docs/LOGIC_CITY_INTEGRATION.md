@@ -117,3 +117,4 @@ The component uses the existing theme system (`frontend/src/styles/theme.js`) an
 4. Verify images are accessible: `curl http://localhost:8000/media/visual_images/[filename]`
 
 
+

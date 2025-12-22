@@ -277,16 +277,37 @@ async def get_logic_city_vocab(
         # Get original Anki order
         anki_order = get_anki_original_order()
         
+#        # ============================================================
+#        # STEP 1: Light Scan - Get only English words and URIs
+#        # ============================================================
+#        light_query = """
+#        PREFIX srs-kg: <http://srs4autism.com/schema/>
+#        
+#        SELECT DISTINCT ?wordUri ?englishWord WHERE {
+#            ?wordUri a srs-kg:Word ;
+#                   srs-kg:learningTheme "Logic City" ;
+#                   srs-kg:text ?englishWord .
+#            FILTER (lang(?englishWord) = "en")
+#        }
+#        """
         # ============================================================
-        # STEP 1: Light Scan - Get only English words and URIs
+        # STEP 1: Light Scan - Get English words via TAGGED Chinese words
         # ============================================================
         light_query = """
         PREFIX srs-kg: <http://srs4autism.com/schema/>
-        
+
         SELECT DISTINCT ?wordUri ?englishWord WHERE {
+            # 1. Find the TAGGED Chinese Node (The Anchor)
+            ?zhNode srs-kg:learningTheme "Logic City" .
+
+            # 2. Go up to the Concept
+            ?zhNode srs-kg:means ?concept .
+
+            # 3. Find the English Word connected to that same concept
             ?wordUri a srs-kg:Word ;
-                   srs-kg:learningTheme "Logic City" ;
-                   srs-kg:text ?englishWord .
+                     srs-kg:means ?concept ;
+                     srs-kg:text ?englishWord .
+
             FILTER (lang(?englishWord) = "en")
         }
         """

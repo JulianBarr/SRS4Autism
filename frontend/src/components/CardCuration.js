@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import { useLanguage } from '../i18n/LanguageContext';
 import SearchableDropdown from './SearchableDropdown';
@@ -166,6 +166,7 @@ const CardImagePreview = ({ card }) => {
 const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
   const { t } = useLanguage();
   const [selectedCards, setSelectedCards] = useState([]);
+  const masterCheckboxRef = useRef(null);
   
   // Helper function to normalize tags - ensure it's always an array
   const normalizeTags = (tags) => {
@@ -246,13 +247,48 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
     );
   };
 
-  const handleSelectAll = () => {
-    const pendingCards = cards.filter(card => card.status === 'pending');
-    setSelectedCards(pendingCards.map(card => card.id));
+  const handleToggleAllVisible = () => {
+    // Calculate visible cards based on current page
+    const sortedCards = [...cards].sort((a, b) => {
+      const dateA = new Date(a.created_at);
+      const dateB = new Date(b.created_at);
+      return dateB - dateA;
+    });
+    const pendingCards = sortedCards.filter(card => card.status === 'pending');
+    const indexOfLastCard = currentPage * cardsPerPage;
+    const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+    const visibleCards = pendingCards.slice(indexOfFirstCard, indexOfLastCard);
+    const visibleCardIds = visibleCards.map(card => card.id);
+    const allSelected = visibleCardIds.length > 0 && visibleCardIds.every(id => selectedCards.includes(id));
+    
+    if (allSelected) {
+      // Deselect all visible cards
+      setSelectedCards(prev => prev.filter(id => !visibleCardIds.includes(id)));
+    } else {
+      // Select all visible cards
+      setSelectedCards(prev => [...new Set([...prev, ...visibleCardIds])]);
+    }
   };
 
-  const handleDeselectAll = () => {
-    setSelectedCards([]);
+  const handleSelectAllPending = () => {
+    const sortedCards = [...cards].sort((a, b) => {
+      const dateA = new Date(a.created_at);
+      const dateB = new Date(b.created_at);
+      return dateB - dateA;
+    });
+    const allPendingCards = sortedCards.filter(card => card.status === 'pending');
+    const allPendingIds = allPendingCards.map(card => card.id);
+    
+    // Check if all pending are already selected
+    const allSelected = allPendingIds.length > 0 && allPendingIds.every(id => selectedCards.includes(id));
+    
+    if (allSelected) {
+      // Deselect all pending cards
+      setSelectedCards(prev => prev.filter(id => !allPendingIds.includes(id)));
+    } else {
+      // Select all pending cards (across all pages)
+      setSelectedCards(prev => [...new Set([...prev, ...allPendingIds])]);
+    }
   };
 
   const handleApproveSelected = async () => {
@@ -277,7 +313,26 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
   };
 
   const handleDeleteSelected = async () => {
-    if (!window.confirm(`Are you sure you want to delete ${selectedCards.length} card(s)?`)) {
+    const sortedCards = [...cards].sort((a, b) => {
+      const dateA = new Date(a.created_at);
+      const dateB = new Date(b.created_at);
+      return dateB - dateA;
+    });
+    const allPendingCards = sortedCards.filter(card => card.status === 'pending');
+    const allPendingIds = allPendingCards.map(card => card.id);
+    const allPendingSelected = allPendingIds.length > 0 && 
+      selectedCards.length === allPendingIds.length &&
+      allPendingIds.every(id => selectedCards.includes(id));
+    
+    let confirmMessage = `Are you sure you want to delete ${selectedCards.length} card(s)?`;
+    
+    if (allPendingSelected) {
+      confirmMessage = `⚠️ WARNING: You are about to delete ALL ${selectedCards.length} pending cards!\n\nThis action cannot be undone. Are you absolutely sure?`;
+    } else if (selectedCards.length >= 10) {
+      confirmMessage = `⚠️ You are about to delete ${selectedCards.length} cards.\n\nThis action cannot be undone. Are you sure?`;
+    }
+    
+    if (!window.confirm(confirmMessage)) {
       return;
     }
     
@@ -632,6 +687,24 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
   const currentPendingCards = pendingCards.slice(indexOfFirstCard, indexOfLastCard);
   const totalPages = Math.ceil(pendingCards.length / cardsPerPage);
   
+  // Calculate master checkbox state
+  const visibleCardIds = currentPendingCards.map(card => card.id);
+  const selectedVisibleCount = visibleCardIds.filter(id => selectedCards.includes(id)).length;
+  const allVisibleSelected = visibleCardIds.length > 0 && selectedVisibleCount === visibleCardIds.length;
+  const someVisibleSelected = selectedVisibleCount > 0 && selectedVisibleCount < visibleCardIds.length;
+  
+  // Calculate if all pending cards are selected (for "Select All Pending" button)
+  const allPendingIds = pendingCards.map(card => card.id);
+  const allPendingSelected = allPendingIds.length > 0 && 
+    allPendingIds.every(id => selectedCards.includes(id));
+  
+  // Update master checkbox indeterminate state
+  useEffect(() => {
+    if (masterCheckboxRef.current) {
+      masterCheckboxRef.current.indeterminate = someVisibleSelected;
+    }
+  }, [someVisibleSelected, selectedCards, currentPendingCards]);
+  
   // Check if sync button should be enabled
   const canSync = selectedCards.length > 0 && selectedDeck;
   const hasApprovedSelected = cards.filter(card => 
@@ -677,12 +750,6 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
       <div className="card">
         <h3>{t('selectionControls')}</h3>
         <div className="selection-controls" style={{display: 'flex', flexWrap: 'nowrap', gap: '8px', alignItems: 'center'}}>
-          <button onClick={handleSelectAll} className="btn btn-secondary" style={{whiteSpace: 'nowrap'}}>
-            {t('selectAllPending')}
-          </button>
-          <button onClick={handleDeselectAll} className="btn btn-secondary" style={{whiteSpace: 'nowrap'}}>
-            {t('deselectAll')}
-          </button>
           <button 
             onClick={handleApproveSelected} 
             className="btn btn-success"
@@ -754,7 +821,40 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
       {/* Pending Cards */}
       <div className="card">
         <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-          <h3>{t('pendingCards')} ({pendingCards.length})</h3>
+          <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
+            <input
+              ref={masterCheckboxRef}
+              type="checkbox"
+              checked={allVisibleSelected}
+              onChange={handleToggleAllVisible}
+              style={{
+                width: '18px',
+                height: '18px',
+                cursor: 'pointer'
+              }}
+              title={
+                allVisibleSelected 
+                  ? 'Deselect all visible cards'
+                  : someVisibleSelected
+                    ? 'Select all visible cards'
+                    : 'Select all visible cards'
+              }
+            />
+            <h3 style={{margin: 0}}>{t('pendingCards')} ({pendingCards.length})</h3>
+            <button 
+              onClick={handleSelectAllPending} 
+              className="btn btn-secondary"
+              style={{
+                whiteSpace: 'nowrap',
+                padding: '6px 12px',
+                fontSize: '14px',
+                marginLeft: '10px'
+              }}
+              title={allPendingSelected ? '取消全选' : '全选所有待处理卡片'}
+            >
+              {allPendingSelected ? '取消' : '全选'}
+            </button>
+          </div>
           {totalPages > 1 && (
             <div className="pagination" style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
               <button 
