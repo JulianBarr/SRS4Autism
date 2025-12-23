@@ -187,8 +187,10 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
   const [editingCard, setEditingCard] = useState(null);
   const [editForm, setEditForm] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
+  const [currentPageSynced, setCurrentPageSynced] = useState(1);
   const [cardsPerPage] = useState(10);
   const [imageGenerationState, setImageGenerationState] = useState({});
+  const [expandedCards, setExpandedCards] = useState(new Set());
 
   React.useEffect(() => {
     loadAnkiProfiles();
@@ -418,6 +420,18 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
     window.dispatchEvent(new CustomEvent('card-id-clicked', { detail: `#${cardId.slice(-6)}` }));
   };
 
+  const toggleCardExpansion = (cardId) => {
+    setExpandedCards(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(cardId)) {
+        newSet.delete(cardId);
+      } else {
+        newSet.add(cardId);
+      }
+      return newSet;
+    });
+  };
+
   const handleSyncToAnki = async (forceResync = false) => {
     console.log('🔵 Sync to Anki clicked! Force resync:', forceResync);
     console.log('Selected deck:', selectedDeck, 'Type:', typeof selectedDeck, 'Truthy?:', !!selectedDeck);
@@ -472,6 +486,58 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
       }
       
       alert(errorMessage);
+    }
+  };
+
+  const renderCompactPreview = (card) => {
+    // Show only the essential question/sentence content
+    switch (card.card_type) {
+      case 'basic':
+      case 'basic_reverse':
+        const frontContent = card.front || '';
+        // Strip HTML tags for compact view, but keep text content
+        const frontText = frontContent.replace(/<[^>]*>/g, '').trim() || '(No front content)';
+        return (
+          <div className="card-preview-compact" style={{ padding: '4px 0', fontSize: '15px', lineHeight: '1.5', color: '#495057' }}>
+            <strong style={{ color: '#6c757d', marginRight: '6px' }}>{t('front')}:</strong>
+            <span style={{ 
+              display: '-webkit-box',
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: 'vertical',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis'
+            }}>
+              {frontText}
+            </span>
+          </div>
+        );
+      case 'interactive_cloze':
+      case 'cloze':
+        const textContent = card.text_field || card.cloze_text || '';
+        // Strip HTML tags first
+        let textOnly = textContent.replace(/<[^>]*>/g, '');
+        // Replace cloze markers [[c1::answer]] with [answer] to show the actual word
+        textOnly = textOnly.replace(/\[\[c\d+::([^\]]+)\]\]/g, '[$1]');
+        textOnly = textOnly.trim() || '(No text content)';
+        return (
+          <div className="card-preview-compact" style={{ padding: '4px 0', fontSize: '15px', lineHeight: '1.5', color: '#495057' }}>
+            <span style={{ 
+              display: '-webkit-box',
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: 'vertical',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis'
+            }}>
+              {textOnly}
+            </span>
+          </div>
+        );
+      default:
+        return (
+          <div className="card-preview-compact" style={{ padding: '4px 0', fontSize: '15px', color: '#6c757d' }}>
+            {card.card_type || 'Unknown card type'}
+          </div>
+        );
     }
   };
 
@@ -687,6 +753,12 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
   const currentPendingCards = pendingCards.slice(indexOfFirstCard, indexOfLastCard);
   const totalPages = Math.ceil(pendingCards.length / cardsPerPage);
   
+  // Pagination for synced cards
+  const indexOfLastSyncedCard = currentPageSynced * cardsPerPage;
+  const indexOfFirstSyncedCard = indexOfLastSyncedCard - cardsPerPage;
+  const currentSyncedCards = syncedCards.slice(indexOfFirstSyncedCard, indexOfLastSyncedCard);
+  const totalPagesSynced = Math.ceil(syncedCards.length / cardsPerPage);
+  
   // Calculate master checkbox state
   const visibleCardIds = currentPendingCards.map(card => card.id);
   const selectedVisibleCount = visibleCardIds.filter(id => selectedCards.includes(id)).length;
@@ -899,77 +971,108 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
           <p>{t('noPendingCards')}</p>
         ) : (
           <div className="cards-list">
-            {currentPendingCards.map(card => (
-              <div key={card.id} className="card-item">
-                <div className="card-header">
-                  <input
-                    type="checkbox"
-                    checked={selectedCards.includes(card.id)}
-                    onChange={() => handleCardSelect(card.id)}
-                  />
-                  <span 
-                    className="card-id"
-                    onClick={() => handleCardIdClick(card.id)}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(event) => {
-                      if (event.key === 'Enter' || event.key === ' ') {
-                        event.preventDefault();
-                        handleCardIdClick(card.id);
-                      }
-                    }}
-                  >
-                    #{card.id.slice(-6)}
-                  </span>
-                  {getStatusBadge(card.status)}
-                  <span className="card-tags">
-                    {normalizeTags(card.tags).map(tag => (
-                      <span key={tag} className="tag">#{tag}</span>
-                    ))}
-                  </span>
+            {currentPendingCards.map(card => {
+              const isExpanded = expandedCards.has(card.id);
+              const isEditing = editingCard === card.id;
+              
+              return (
+                <div key={card.id} className="card-item" style={{ marginBottom: '12px', border: '1px solid #dee2e6', borderRadius: '6px', padding: '12px' }}>
+                  <div className="card-header" style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                    <input
+                      type="checkbox"
+                      checked={selectedCards.includes(card.id)}
+                      onChange={() => handleCardSelect(card.id)}
+                      style={{ width: '18px', height: '18px', cursor: 'pointer' }}
+                    />
+                    <span 
+                      className="card-id"
+                      onClick={() => handleCardIdClick(card.id)}
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(event) => {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                          event.preventDefault();
+                          handleCardIdClick(card.id);
+                        }
+                      }}
+                      style={{ cursor: 'pointer', fontWeight: 'bold', color: '#007bff' }}
+                    >
+                      #{card.id.slice(-6)}
+                    </span>
+                    {getStatusBadge(card.status)}
+                    {isExpanded && (
+                      <span className="card-tags" style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+                        {normalizeTags(card.tags).map(tag => (
+                          <span key={tag} className="tag" style={{ fontSize: '11px', padding: '2px 6px', background: '#e9ecef', borderRadius: '3px' }}>#{tag}</span>
+                        ))}
+                      </span>
+                    )}
+                    {editingCard !== card.id && (
+                      <div className="card-actions" style={{ marginLeft: 'auto', display: 'flex', gap: '6px', alignItems: 'center' }}>
+                        <button 
+                          onClick={() => handleGenerateImage(card.id)}
+                          className="btn btn-secondary"
+                          disabled={imageGenerationState[card.id]?.loading}
+                          style={{ fontSize: '12px', padding: '4px 8px', whiteSpace: 'nowrap' }}
+                        >
+                          {imageGenerationState[card.id]?.loading ? t('generatingImage') : t('generateImage')}
+                        </button>
+                        <button 
+                          onClick={() => handleEditCard(card)}
+                          className="btn btn-secondary"
+                          style={{ fontSize: '12px', padding: '4px 8px', whiteSpace: 'nowrap' }}
+                        >
+                          {t('edit')}
+                        </button>
+                        <button 
+                          onClick={() => onApproveCard(card.id)}
+                          className="btn btn-success"
+                          style={{ fontSize: '12px', padding: '4px 8px', whiteSpace: 'nowrap' }}
+                        >
+                          {t('approve')}
+                        </button>
+                        <button 
+                          onClick={() => handleDeleteCard(card.id)}
+                          className="btn btn-danger"
+                          style={{ fontSize: '12px', padding: '4px 8px', whiteSpace: 'nowrap' }}
+                        >
+                          {t('delete')}
+                        </button>
+                      </div>
+                    )}
+                    <button
+                      onClick={() => toggleCardExpansion(card.id)}
+                      style={{
+                        background: 'none',
+                        border: 'none',
+                        cursor: 'pointer',
+                        fontSize: '16px',
+                        padding: '4px 8px',
+                        color: '#6c757d',
+                        display: 'flex',
+                        alignItems: 'center'
+                      }}
+                      title={isExpanded ? 'Collapse' : 'Expand'}
+                    >
+                      {isExpanded ? '▼' : '▶'}
+                    </button>
+                  </div>
+                  {!isExpanded && !isEditing && renderCompactPreview(card)}
+                  {isExpanded && renderCardPreview(card)}
+                  {isEditing && renderEditForm(card)}
+                  {imageGenerationState[card.id]?.success && imageGenerationState[card.id]?.message && (
+                    <div style={{marginTop: '10px', color: '#28a745', fontSize: '12px'}}>
+                      {imageGenerationState[card.id].message}
+                    </div>
+                  )}
+                  {imageGenerationState[card.id]?.error && (
+                    <div style={{marginTop: '10px', color: '#dc3545', fontSize: '12px'}}>
+                      {imageGenerationState[card.id].error}
+                    </div>
+                  )}
                 </div>
-                {renderCardPreview(card)}
-                {editingCard !== card.id && (
-                  <div className="card-actions">
-                    <button 
-                      onClick={() => handleGenerateImage(card.id)}
-                      className="btn btn-secondary"
-                      disabled={imageGenerationState[card.id]?.loading}
-                    >
-                      {imageGenerationState[card.id]?.loading ? t('generatingImage') : t('generateImage')}
-                    </button>
-                    <button 
-                      onClick={() => handleEditCard(card)}
-                      className="btn btn-secondary"
-                    >
-                      {t('edit')}
-                    </button>
-                    <button 
-                      onClick={() => onApproveCard(card.id)}
-                      className="btn btn-success"
-                    >
-                      {t('approve')}
-                    </button>
-                    <button 
-                      onClick={() => handleDeleteCard(card.id)}
-                      className="btn btn-danger"
-                    >
-                      {t('delete')}
-                    </button>
-                  </div>
-                )}
-                {imageGenerationState[card.id]?.success && imageGenerationState[card.id]?.message && (
-                  <div style={{marginTop: '10px', color: '#28a745', fontSize: '12px'}}>
-                    {imageGenerationState[card.id].message}
-                  </div>
-                )}
-                {imageGenerationState[card.id]?.error && (
-                  <div style={{marginTop: '10px', color: '#dc3545', fontSize: '12px'}}>
-                    {imageGenerationState[card.id].error}
-                  </div>
-                )}
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>
@@ -981,46 +1084,72 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
           <p>{t('noApprovedCards')}</p>
         ) : (
           <div className="cards-list">
-            {approvedCards.map(card => (
-              <div key={card.id} className="card-item">
-                <div className="card-header">
-                  <input
-                    type="checkbox"
-                    checked={selectedCards.includes(card.id)}
-                    onChange={() => handleCardSelect(card.id)}
-                  />
-                  <span 
-                    className="card-id"
-                    onClick={() => handleCardIdClick(card.id)}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(event) => {
-                      if (event.key === 'Enter' || event.key === ' ') {
-                        event.preventDefault();
-                        handleCardIdClick(card.id);
-                      }
-                    }}
-                  >
-                    #{card.id.slice(-6)}
-                  </span>
-                  {getStatusBadge(card.status)}
-                  <span className="card-tags">
-                    {normalizeTags(card.tags).map(tag => (
-                      <span key={tag} className="tag">#{tag}</span>
-                    ))}
-                  </span>
+            {approvedCards.map(card => {
+              const isExpanded = expandedCards.has(card.id);
+              
+              return (
+                <div key={card.id} className="card-item" style={{ marginBottom: '12px', border: '1px solid #dee2e6', borderRadius: '6px', padding: '12px' }}>
+                  <div className="card-header" style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                    <input
+                      type="checkbox"
+                      checked={selectedCards.includes(card.id)}
+                      onChange={() => handleCardSelect(card.id)}
+                      style={{ width: '18px', height: '18px', cursor: 'pointer' }}
+                    />
+                    <span 
+                      className="card-id"
+                      onClick={() => handleCardIdClick(card.id)}
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(event) => {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                          event.preventDefault();
+                          handleCardIdClick(card.id);
+                        }
+                      }}
+                      style={{ cursor: 'pointer', fontWeight: 'bold', color: '#007bff' }}
+                    >
+                      #{card.id.slice(-6)}
+                    </span>
+                    {getStatusBadge(card.status)}
+                    {isExpanded && (
+                      <span className="card-tags" style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+                        {normalizeTags(card.tags).map(tag => (
+                          <span key={tag} className="tag" style={{ fontSize: '11px', padding: '2px 6px', background: '#e9ecef', borderRadius: '3px' }}>#{tag}</span>
+                        ))}
+                      </span>
+                    )}
+                    <div className="card-actions" style={{ marginLeft: 'auto', display: 'flex', gap: '6px', alignItems: 'center' }}>
+                      <button 
+                        onClick={() => handleDeleteCard(card.id)}
+                        className="btn btn-danger"
+                        style={{ fontSize: '12px', padding: '4px 8px', whiteSpace: 'nowrap' }}
+                      >
+                        {t('delete')}
+                      </button>
+                    </div>
+                    <button
+                      onClick={() => toggleCardExpansion(card.id)}
+                      style={{
+                        background: 'none',
+                        border: 'none',
+                        cursor: 'pointer',
+                        fontSize: '16px',
+                        padding: '4px 8px',
+                        color: '#6c757d',
+                        display: 'flex',
+                        alignItems: 'center'
+                      }}
+                      title={isExpanded ? 'Collapse' : 'Expand'}
+                    >
+                      {isExpanded ? '▼' : '▶'}
+                    </button>
+                  </div>
+                  {!isExpanded && renderCompactPreview(card)}
+                  {isExpanded && renderCardPreview(card)}
                 </div>
-                {renderCardPreview(card)}
-                <div className="card-actions">
-                  <button 
-                    onClick={() => handleDeleteCard(card.id)}
-                    className="btn btn-danger"
-                  >
-                    {t('delete')}
-                  </button>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>
@@ -1028,7 +1157,48 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
       {/* Synced Cards */}
       {syncedCards.length > 0 && (
         <div className="card">
-          <h3>✅ {t('syncedCards')} ({syncedCards.length})</h3>
+          <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+            <h3 style={{margin: 0}}>✅ {t('syncedCards')} ({syncedCards.length})</h3>
+            {totalPagesSynced > 1 && (
+              <div className="pagination" style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
+                <button 
+                  onClick={() => setCurrentPageSynced(prev => Math.max(1, prev - 1))}
+                  disabled={currentPageSynced === 1}
+                  className="btn btn-secondary"
+                  style={{
+                    padding: '6px 12px',
+                    minWidth: '40px',
+                    fontSize: '18px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}
+                  title="Previous page"
+                >
+                  ‹
+                </button>
+                <span style={{margin: '0 10px', fontSize: '14px'}}>
+                  {currentPageSynced} / {totalPagesSynced}
+                </span>
+                <button 
+                  onClick={() => setCurrentPageSynced(prev => Math.min(totalPagesSynced, prev + 1))}
+                  disabled={currentPageSynced === totalPagesSynced}
+                  className="btn btn-secondary"
+                  style={{
+                    padding: '6px 12px',
+                    minWidth: '40px',
+                    fontSize: '18px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}
+                  title="Next page"
+                >
+                  ›
+                </button>
+              </div>
+            )}
+          </div>
           <p>{t('syncedSuccessfully')}</p>
           
           {/* Selection controls for synced cards */}
@@ -1056,53 +1226,78 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
           </div>
           
           <div className="cards-list">
-            {syncedCards.map(card => (
-              <div key={card.id} className="card-item">
-                <div className="card-header">
-                  <input
-                    type="checkbox"
-                    checked={selectedCards.includes(card.id)}
-                    onChange={(e) => {
-                      if (e.target.checked) {
-                        setSelectedCards([...selectedCards, card.id]);
-                      } else {
-                        setSelectedCards(selectedCards.filter(id => id !== card.id));
-                      }
-                    }}
-                    style={{marginRight: '10px', transform: 'scale(1.2)'}}
-                  />
-                  <span 
-                    className="card-id"
-                    onClick={() => handleCardIdClick(card.id)}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(event) => {
-                      if (event.key === 'Enter' || event.key === ' ') {
-                        event.preventDefault();
-                        handleCardIdClick(card.id);
-                      }
-                    }}
-                  >
-                    #{card.id.slice(-6)}
-                  </span>
-                  {getStatusBadge(card.status)}
-                  <span className="card-tags">
-                    {normalizeTags(card.tags).map(tag => (
-                      <span key={tag} className="tag">#{tag}</span>
-                    ))}
-                  </span>
+            {currentSyncedCards.map(card => {
+              const isExpanded = expandedCards.has(card.id);
+              
+              return (
+                <div key={card.id} className="card-item" style={{ marginBottom: '12px', border: '1px solid #dee2e6', borderRadius: '6px', padding: '12px' }}>
+                  <div className="card-header" style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                    <input
+                      type="checkbox"
+                      checked={selectedCards.includes(card.id)}
+                      onChange={(e) => {
+                        if (e.target.checked) {
+                          setSelectedCards([...selectedCards, card.id]);
+                        } else {
+                          setSelectedCards(selectedCards.filter(id => id !== card.id));
+                        }
+                      }}
+                      style={{ width: '18px', height: '18px', cursor: 'pointer' }}
+                    />
+                    <span 
+                      className="card-id"
+                      onClick={() => handleCardIdClick(card.id)}
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(event) => {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                          event.preventDefault();
+                          handleCardIdClick(card.id);
+                        }
+                      }}
+                      style={{ cursor: 'pointer', fontWeight: 'bold', color: '#007bff' }}
+                    >
+                      #{card.id.slice(-6)}
+                    </span>
+                    {getStatusBadge(card.status)}
+                    {isExpanded && (
+                      <span className="card-tags" style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+                        {normalizeTags(card.tags).map(tag => (
+                          <span key={tag} className="tag" style={{ fontSize: '11px', padding: '2px 6px', background: '#e9ecef', borderRadius: '3px' }}>#{tag}</span>
+                        ))}
+                      </span>
+                    )}
+                    <div className="card-actions" style={{ marginLeft: 'auto', display: 'flex', gap: '6px', alignItems: 'center' }}>
+                      <button 
+                        onClick={() => handleDeleteCard(card.id)}
+                        className="btn btn-danger"
+                        style={{ fontSize: '12px', padding: '4px 8px', whiteSpace: 'nowrap' }}
+                      >
+                        {t('delete')}
+                      </button>
+                    </div>
+                    <button
+                      onClick={() => toggleCardExpansion(card.id)}
+                      style={{
+                        background: 'none',
+                        border: 'none',
+                        cursor: 'pointer',
+                        fontSize: '16px',
+                        padding: '4px 8px',
+                        color: '#6c757d',
+                        display: 'flex',
+                        alignItems: 'center'
+                      }}
+                      title={isExpanded ? 'Collapse' : 'Expand'}
+                    >
+                      {isExpanded ? '▼' : '▶'}
+                    </button>
+                  </div>
+                  {!isExpanded && renderCompactPreview(card)}
+                  {isExpanded && renderCardPreview(card)}
                 </div>
-                {renderCardPreview(card)}
-                <div className="card-actions">
-                  <button 
-                    onClick={() => handleDeleteCard(card.id)}
-                    className="btn btn-danger"
-                  >
-                    {t('delete')}
-                  </button>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       )}
