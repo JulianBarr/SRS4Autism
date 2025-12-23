@@ -167,6 +167,7 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
   const { t } = useLanguage();
   const [selectedCards, setSelectedCards] = useState([]);
   const masterCheckboxRef = useRef(null);
+  const [activeTab, setActiveTab] = useState('pending'); // 'pending', 'approved', 'synced'
   
   // Helper function to normalize tags - ensure it's always an array
   const normalizeTags = (tags) => {
@@ -187,6 +188,7 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
   const [editingCard, setEditingCard] = useState(null);
   const [editForm, setEditForm] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
+  const [currentPageApproved, setCurrentPageApproved] = useState(1);
   const [currentPageSynced, setCurrentPageSynced] = useState(1);
   const [cardsPerPage] = useState(10);
   const [imageGenerationState, setImageGenerationState] = useState({});
@@ -250,17 +252,7 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
   };
 
   const handleToggleAllVisible = () => {
-    // Calculate visible cards based on current page
-    const sortedCards = [...cards].sort((a, b) => {
-      const dateA = new Date(a.created_at);
-      const dateB = new Date(b.created_at);
-      return dateB - dateA;
-    });
-    const pendingCards = sortedCards.filter(card => card.status === 'pending');
-    const indexOfLastCard = currentPage * cardsPerPage;
-    const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-    const visibleCards = pendingCards.slice(indexOfFirstCard, indexOfLastCard);
-    const visibleCardIds = visibleCards.map(card => card.id);
+    const visibleCardIds = currentCards.map(card => card.id);
     const allSelected = visibleCardIds.length > 0 && visibleCardIds.every(id => selectedCards.includes(id));
     
     if (allSelected) {
@@ -269,6 +261,19 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
     } else {
       // Select all visible cards
       setSelectedCards(prev => [...new Set([...prev, ...visibleCardIds])]);
+    }
+  };
+
+  const handleSelectAllInTab = () => {
+    const allTabCardIds = currentTabCards.map(card => card.id);
+    const allSelected = allTabCardIds.length > 0 && allTabCardIds.every(id => selectedCards.includes(id));
+    
+    if (allSelected) {
+      // Deselect all cards in current tab
+      setSelectedCards(prev => prev.filter(id => !allTabCardIds.includes(id)));
+    } else {
+      // Select all cards in current tab (across all pages)
+      setSelectedCards(prev => [...new Set([...prev, ...allTabCardIds])]);
     }
   };
 
@@ -736,6 +741,13 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
     );
   };
 
+  // Reset pagination when switching tabs
+  useEffect(() => {
+    setCurrentPage(1);
+    setCurrentPageApproved(1);
+    setCurrentPageSynced(1);
+  }, [activeTab]);
+
   // Sort cards by created_at descending (latest first)
   const sortedCards = [...cards].sort((a, b) => {
     const dateA = new Date(a.created_at);
@@ -747,25 +759,66 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
   const approvedCards = sortedCards.filter(card => card.status === 'approved');
   const syncedCards = sortedCards.filter(card => card.status === 'synced');
   
-  // Pagination for pending cards
-  const indexOfLastCard = currentPage * cardsPerPage;
+  // Get current tab's cards and pagination
+  const getCurrentTabCards = () => {
+    switch (activeTab) {
+      case 'pending':
+        return pendingCards;
+      case 'approved':
+        return approvedCards;
+      case 'synced':
+        return syncedCards;
+      default:
+        return [];
+    }
+  };
+
+  const getCurrentPage = () => {
+    switch (activeTab) {
+      case 'pending':
+        return currentPage;
+      case 'approved':
+        return currentPageApproved;
+      case 'synced':
+        return currentPageSynced;
+      default:
+        return 1;
+    }
+  };
+
+  const setCurrentPageForTab = (page) => {
+    switch (activeTab) {
+      case 'pending':
+        setCurrentPage(page);
+        break;
+      case 'approved':
+        setCurrentPageApproved(page);
+        break;
+      case 'synced':
+        setCurrentPageSynced(page);
+        break;
+    }
+  };
+
+  const currentTabCards = getCurrentTabCards();
+  const currentPageForTab = getCurrentPage();
+  const indexOfLastCard = currentPageForTab * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-  const currentPendingCards = pendingCards.slice(indexOfFirstCard, indexOfLastCard);
-  const totalPages = Math.ceil(pendingCards.length / cardsPerPage);
+  const currentCards = currentTabCards.slice(indexOfFirstCard, indexOfLastCard);
+  const totalPages = Math.ceil(currentTabCards.length / cardsPerPage);
   
-  // Pagination for synced cards
-  const indexOfLastSyncedCard = currentPageSynced * cardsPerPage;
-  const indexOfFirstSyncedCard = indexOfLastSyncedCard - cardsPerPage;
-  const currentSyncedCards = syncedCards.slice(indexOfFirstSyncedCard, indexOfLastSyncedCard);
-  const totalPagesSynced = Math.ceil(syncedCards.length / cardsPerPage);
-  
-  // Calculate master checkbox state
-  const visibleCardIds = currentPendingCards.map(card => card.id);
+  // Calculate master checkbox state for current tab
+  const visibleCardIds = currentCards.map(card => card.id);
   const selectedVisibleCount = visibleCardIds.filter(id => selectedCards.includes(id)).length;
   const allVisibleSelected = visibleCardIds.length > 0 && selectedVisibleCount === visibleCardIds.length;
   const someVisibleSelected = selectedVisibleCount > 0 && selectedVisibleCount < visibleCardIds.length;
   
-  // Calculate if all pending cards are selected (for "Select All Pending" button)
+  // Calculate if all cards in current tab are selected
+  const allTabCardIds = currentTabCards.map(card => card.id);
+  const allTabSelected = allTabCardIds.length > 0 && 
+    allTabCardIds.every(id => selectedCards.includes(id));
+  
+  // For backward compatibility with pending-specific logic
   const allPendingIds = pendingCards.map(card => card.id);
   const allPendingSelected = allPendingIds.length > 0 && 
     allPendingIds.every(id => selectedCards.includes(id));
@@ -775,7 +828,7 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
     if (masterCheckboxRef.current) {
       masterCheckboxRef.current.indeterminate = someVisibleSelected;
     }
-  }, [someVisibleSelected, selectedCards, currentPendingCards]);
+  }, [someVisibleSelected, selectedCards, currentCards]);
   
   // Check if sync button should be enabled
   const canSync = selectedCards.length > 0 && selectedDeck;
@@ -890,280 +943,100 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
         )}
       </div>
 
-      {/* Pending Cards */}
+      {/* Card List with Tabs */}
       <div className="card">
-        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-          <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
-            <input
-              ref={masterCheckboxRef}
-              type="checkbox"
-              checked={allVisibleSelected}
-              onChange={handleToggleAllVisible}
-              style={{
-                width: '18px',
-                height: '18px',
-                cursor: 'pointer'
-              }}
-              title={
-                allVisibleSelected 
-                  ? 'Deselect all visible cards'
-                  : someVisibleSelected
-                    ? 'Select all visible cards'
-                    : 'Select all visible cards'
-              }
-            />
-            <h3 style={{margin: 0}}>{t('pendingCards')} ({pendingCards.length})</h3>
-            <button 
-              onClick={handleSelectAllPending} 
-              className="btn btn-secondary"
-              style={{
-                whiteSpace: 'nowrap',
-                padding: '6px 12px',
-                fontSize: '14px',
-                marginLeft: '10px'
-              }}
-              title={allPendingSelected ? '取消全选' : '全选所有待处理卡片'}
-            >
-              {allPendingSelected ? '取消' : '全选'}
-            </button>
-          </div>
-          {totalPages > 1 && (
-            <div className="pagination" style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
+        {/* Tabs */}
+        <div style={{ display: 'flex', gap: '10px', marginBottom: '20px', borderBottom: '2px solid #ddd' }}>
+          <button
+            onClick={() => setActiveTab('pending')}
+            style={{
+              padding: '10px 20px',
+              border: 'none',
+              borderBottom: activeTab === 'pending' ? '3px solid #2196f3' : '3px solid transparent',
+              backgroundColor: 'transparent',
+              cursor: 'pointer',
+              fontWeight: activeTab === 'pending' ? 'bold' : 'normal',
+              fontSize: '16px'
+            }}
+          >
+            待处理 ({pendingCards.length})
+          </button>
+          <button
+            onClick={() => setActiveTab('approved')}
+            style={{
+              padding: '10px 20px',
+              border: 'none',
+              borderBottom: activeTab === 'approved' ? '3px solid #2196f3' : '3px solid transparent',
+              backgroundColor: 'transparent',
+              cursor: 'pointer',
+              fontWeight: activeTab === 'approved' ? 'bold' : 'normal',
+              fontSize: '16px'
+            }}
+          >
+            已批准 ({approvedCards.length})
+          </button>
+          <button
+            onClick={() => setActiveTab('synced')}
+            style={{
+              padding: '10px 20px',
+              border: 'none',
+              borderBottom: activeTab === 'synced' ? '3px solid #2196f3' : '3px solid transparent',
+              backgroundColor: 'transparent',
+              cursor: 'pointer',
+              fontWeight: activeTab === 'synced' ? 'bold' : 'normal',
+              fontSize: '16px'
+            }}
+          >
+            已同步 ({syncedCards.length})
+          </button>
+        </div>
+
+        {/* Tab Content */}
+        <div>
+          <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px'}}>
+            <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
+              <input
+                ref={masterCheckboxRef}
+                type="checkbox"
+                checked={allVisibleSelected}
+                onChange={handleToggleAllVisible}
+                style={{
+                  width: '18px',
+                  height: '18px',
+                  cursor: 'pointer'
+                }}
+                title={
+                  allVisibleSelected 
+                    ? 'Deselect all visible cards'
+                    : someVisibleSelected
+                      ? 'Select all visible cards'
+                      : 'Select all visible cards'
+                }
+              />
+              <h3 style={{margin: 0}}>
+                {activeTab === 'pending' && t('pendingCards')}
+                {activeTab === 'approved' && t('approvedCards')}
+                {activeTab === 'synced' && t('syncedCards')}
+              </h3>
               <button 
-                onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
-                disabled={currentPage === 1}
+                onClick={handleSelectAllInTab} 
                 className="btn btn-secondary"
                 style={{
+                  whiteSpace: 'nowrap',
                   padding: '6px 12px',
-                  minWidth: '40px',
-                  fontSize: '18px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
+                  fontSize: '14px',
+                  marginLeft: '10px'
                 }}
-                title="Previous page"
+                title={allTabSelected ? '取消全选' : '全选所有卡片'}
               >
-                ‹
-              </button>
-              <span style={{margin: '0 10px', fontSize: '14px'}}>
-                {currentPage} / {totalPages}
-              </span>
-              <button 
-                onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
-                disabled={currentPage === totalPages}
-                className="btn btn-secondary"
-                style={{
-                  padding: '6px 12px',
-                  minWidth: '40px',
-                  fontSize: '18px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-                title="Next page"
-              >
-                ›
+                {allTabSelected ? '取消' : '全选'}
               </button>
             </div>
-          )}
-        </div>
-        {pendingCards.length === 0 ? (
-          <p>{t('noPendingCards')}</p>
-        ) : (
-          <div className="cards-list">
-            {currentPendingCards.map(card => {
-              const isExpanded = expandedCards.has(card.id);
-              const isEditing = editingCard === card.id;
-              
-              return (
-                <div key={card.id} className="card-item" style={{ marginBottom: '12px', border: '1px solid #dee2e6', borderRadius: '6px', padding: '12px' }}>
-                  <div className="card-header" style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
-                    <input
-                      type="checkbox"
-                      checked={selectedCards.includes(card.id)}
-                      onChange={() => handleCardSelect(card.id)}
-                      style={{ width: '18px', height: '18px', cursor: 'pointer' }}
-                    />
-                    <span 
-                      className="card-id"
-                      onClick={() => handleCardIdClick(card.id)}
-                      role="button"
-                      tabIndex={0}
-                      onKeyDown={(event) => {
-                        if (event.key === 'Enter' || event.key === ' ') {
-                          event.preventDefault();
-                          handleCardIdClick(card.id);
-                        }
-                      }}
-                      style={{ cursor: 'pointer', fontWeight: 'bold', color: '#007bff' }}
-                    >
-                      #{card.id.slice(-6)}
-                    </span>
-                    {getStatusBadge(card.status)}
-                    {isExpanded && (
-                      <span className="card-tags" style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
-                        {normalizeTags(card.tags).map(tag => (
-                          <span key={tag} className="tag" style={{ fontSize: '11px', padding: '2px 6px', background: '#e9ecef', borderRadius: '3px' }}>#{tag}</span>
-                        ))}
-                      </span>
-                    )}
-                    {editingCard !== card.id && (
-                      <div className="card-actions" style={{ marginLeft: 'auto', display: 'flex', gap: '6px', alignItems: 'center' }}>
-                        <button 
-                          onClick={() => handleGenerateImage(card.id)}
-                          className="btn btn-secondary"
-                          disabled={imageGenerationState[card.id]?.loading}
-                          style={{ fontSize: '12px', padding: '4px 8px', whiteSpace: 'nowrap' }}
-                        >
-                          {imageGenerationState[card.id]?.loading ? t('generatingImage') : t('generateImage')}
-                        </button>
-                        <button 
-                          onClick={() => handleEditCard(card)}
-                          className="btn btn-secondary"
-                          style={{ fontSize: '12px', padding: '4px 8px', whiteSpace: 'nowrap' }}
-                        >
-                          {t('edit')}
-                        </button>
-                        <button 
-                          onClick={() => onApproveCard(card.id)}
-                          className="btn btn-success"
-                          style={{ fontSize: '12px', padding: '4px 8px', whiteSpace: 'nowrap' }}
-                        >
-                          {t('approve')}
-                        </button>
-                        <button 
-                          onClick={() => handleDeleteCard(card.id)}
-                          className="btn btn-danger"
-                          style={{ fontSize: '12px', padding: '4px 8px', whiteSpace: 'nowrap' }}
-                        >
-                          {t('delete')}
-                        </button>
-                      </div>
-                    )}
-                    <button
-                      onClick={() => toggleCardExpansion(card.id)}
-                      style={{
-                        background: 'none',
-                        border: 'none',
-                        cursor: 'pointer',
-                        fontSize: '16px',
-                        padding: '4px 8px',
-                        color: '#6c757d',
-                        display: 'flex',
-                        alignItems: 'center'
-                      }}
-                      title={isExpanded ? 'Collapse' : 'Expand'}
-                    >
-                      {isExpanded ? '▼' : '▶'}
-                    </button>
-                  </div>
-                  {!isExpanded && !isEditing && renderCompactPreview(card)}
-                  {isExpanded && renderCardPreview(card)}
-                  {isEditing && renderEditForm(card)}
-                  {imageGenerationState[card.id]?.success && imageGenerationState[card.id]?.message && (
-                    <div style={{marginTop: '10px', color: '#28a745', fontSize: '12px'}}>
-                      {imageGenerationState[card.id].message}
-                    </div>
-                  )}
-                  {imageGenerationState[card.id]?.error && (
-                    <div style={{marginTop: '10px', color: '#dc3545', fontSize: '12px'}}>
-                      {imageGenerationState[card.id].error}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        )}
-      </div>
-
-      {/* Approved Cards */}
-      <div className="card">
-        <h3>{t('approvedCards')} ({approvedCards.length})</h3>
-        {approvedCards.length === 0 ? (
-          <p>{t('noApprovedCards')}</p>
-        ) : (
-          <div className="cards-list">
-            {approvedCards.map(card => {
-              const isExpanded = expandedCards.has(card.id);
-              
-              return (
-                <div key={card.id} className="card-item" style={{ marginBottom: '12px', border: '1px solid #dee2e6', borderRadius: '6px', padding: '12px' }}>
-                  <div className="card-header" style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
-                    <input
-                      type="checkbox"
-                      checked={selectedCards.includes(card.id)}
-                      onChange={() => handleCardSelect(card.id)}
-                      style={{ width: '18px', height: '18px', cursor: 'pointer' }}
-                    />
-                    <span 
-                      className="card-id"
-                      onClick={() => handleCardIdClick(card.id)}
-                      role="button"
-                      tabIndex={0}
-                      onKeyDown={(event) => {
-                        if (event.key === 'Enter' || event.key === ' ') {
-                          event.preventDefault();
-                          handleCardIdClick(card.id);
-                        }
-                      }}
-                      style={{ cursor: 'pointer', fontWeight: 'bold', color: '#007bff' }}
-                    >
-                      #{card.id.slice(-6)}
-                    </span>
-                    {getStatusBadge(card.status)}
-                    {isExpanded && (
-                      <span className="card-tags" style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
-                        {normalizeTags(card.tags).map(tag => (
-                          <span key={tag} className="tag" style={{ fontSize: '11px', padding: '2px 6px', background: '#e9ecef', borderRadius: '3px' }}>#{tag}</span>
-                        ))}
-                      </span>
-                    )}
-                    <div className="card-actions" style={{ marginLeft: 'auto', display: 'flex', gap: '6px', alignItems: 'center' }}>
-                      <button 
-                        onClick={() => handleDeleteCard(card.id)}
-                        className="btn btn-danger"
-                        style={{ fontSize: '12px', padding: '4px 8px', whiteSpace: 'nowrap' }}
-                      >
-                        {t('delete')}
-                      </button>
-                    </div>
-                    <button
-                      onClick={() => toggleCardExpansion(card.id)}
-                      style={{
-                        background: 'none',
-                        border: 'none',
-                        cursor: 'pointer',
-                        fontSize: '16px',
-                        padding: '4px 8px',
-                        color: '#6c757d',
-                        display: 'flex',
-                        alignItems: 'center'
-                      }}
-                      title={isExpanded ? 'Collapse' : 'Expand'}
-                    >
-                      {isExpanded ? '▼' : '▶'}
-                    </button>
-                  </div>
-                  {!isExpanded && renderCompactPreview(card)}
-                  {isExpanded && renderCardPreview(card)}
-                </div>
-              );
-            })}
-          </div>
-        )}
-      </div>
-
-      {/* Synced Cards */}
-      {syncedCards.length > 0 && (
-        <div className="card">
-          <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-            <h3 style={{margin: 0}}>✅ {t('syncedCards')} ({syncedCards.length})</h3>
-            {totalPagesSynced > 1 && (
+            {totalPages > 1 && (
               <div className="pagination" style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
                 <button 
-                  onClick={() => setCurrentPageSynced(prev => Math.max(1, prev - 1))}
-                  disabled={currentPageSynced === 1}
+                  onClick={() => setCurrentPageForTab(Math.max(1, currentPageForTab - 1))}
+                  disabled={currentPageForTab === 1}
                   className="btn btn-secondary"
                   style={{
                     padding: '6px 12px',
@@ -1178,11 +1051,11 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
                   ‹
                 </button>
                 <span style={{margin: '0 10px', fontSize: '14px'}}>
-                  {currentPageSynced} / {totalPagesSynced}
+                  {currentPageForTab} / {totalPages}
                 </span>
                 <button 
-                  onClick={() => setCurrentPageSynced(prev => Math.min(totalPagesSynced, prev + 1))}
-                  disabled={currentPageSynced === totalPagesSynced}
+                  onClick={() => setCurrentPageForTab(Math.min(totalPages, currentPageForTab + 1))}
+                  disabled={currentPageForTab === totalPages}
                   className="btn btn-secondary"
                   style={{
                     padding: '6px 12px',
@@ -1199,108 +1072,125 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
               </div>
             )}
           </div>
-          <p>{t('syncedSuccessfully')}</p>
-          
-          {/* Selection controls for synced cards */}
-          <div style={{marginBottom: '15px', display: 'flex', gap: '10px', alignItems: 'center'}}>
-            <button 
-              onClick={() => {
-                const allSyncedIds = syncedCards.map(c => c.id);
-                const allSelected = allSyncedIds.every(id => selectedCards.includes(id));
-                if (allSelected) {
-                  // Deselect all synced cards
-                  setSelectedCards(selectedCards.filter(id => !allSyncedIds.includes(id)));
-                } else {
-                  // Select all synced cards
-                  setSelectedCards([...new Set([...selectedCards, ...allSyncedIds])]);
-                }
-              }}
-              className="btn btn-secondary"
-              style={{fontSize: '14px', padding: '5px 10px'}}
-            >
-              {syncedCards.every(c => selectedCards.includes(c.id)) ? '☑️ Deselect All' : '☐ Select All'}
-            </button>
-            <span style={{fontSize: '14px', color: '#666'}}>
-              {selectedCards.filter(id => syncedCards.find(c => c.id === id)).length} of {syncedCards.length} selected
-            </span>
-          </div>
-          
-          <div className="cards-list">
-            {currentSyncedCards.map(card => {
-              const isExpanded = expandedCards.has(card.id);
-              
-              return (
-                <div key={card.id} className="card-item" style={{ marginBottom: '12px', border: '1px solid #dee2e6', borderRadius: '6px', padding: '12px' }}>
-                  <div className="card-header" style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
-                    <input
-                      type="checkbox"
-                      checked={selectedCards.includes(card.id)}
-                      onChange={(e) => {
-                        if (e.target.checked) {
-                          setSelectedCards([...selectedCards, card.id]);
-                        } else {
-                          setSelectedCards(selectedCards.filter(id => id !== card.id));
-                        }
-                      }}
-                      style={{ width: '18px', height: '18px', cursor: 'pointer' }}
-                    />
-                    <span 
-                      className="card-id"
-                      onClick={() => handleCardIdClick(card.id)}
-                      role="button"
-                      tabIndex={0}
-                      onKeyDown={(event) => {
-                        if (event.key === 'Enter' || event.key === ' ') {
-                          event.preventDefault();
-                          handleCardIdClick(card.id);
-                        }
-                      }}
-                      style={{ cursor: 'pointer', fontWeight: 'bold', color: '#007bff' }}
-                    >
-                      #{card.id.slice(-6)}
-                    </span>
-                    {getStatusBadge(card.status)}
-                    {isExpanded && (
-                      <span className="card-tags" style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
-                        {normalizeTags(card.tags).map(tag => (
-                          <span key={tag} className="tag" style={{ fontSize: '11px', padding: '2px 6px', background: '#e9ecef', borderRadius: '3px' }}>#{tag}</span>
-                        ))}
-                      </span>
-                    )}
-                    <div className="card-actions" style={{ marginLeft: 'auto', display: 'flex', gap: '6px', alignItems: 'center' }}>
-                      <button 
-                        onClick={() => handleDeleteCard(card.id)}
-                        className="btn btn-danger"
-                        style={{ fontSize: '12px', padding: '4px 8px', whiteSpace: 'nowrap' }}
+
+          {currentTabCards.length === 0 ? (
+            <p>
+              {activeTab === 'pending' && t('noPendingCards')}
+              {activeTab === 'approved' && t('noApprovedCards')}
+              {activeTab === 'synced' && t('syncedSuccessfully')}
+            </p>
+          ) : (
+            <div className="cards-list">
+              {currentCards.map(card => {
+                const isExpanded = expandedCards.has(card.id);
+                const isEditing = editingCard === card.id;
+                
+                return (
+                  <div key={card.id} className="card-item" style={{ marginBottom: '12px', border: '1px solid #dee2e6', borderRadius: '6px', padding: '12px' }}>
+                    <div className="card-header" style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                      <input
+                        type="checkbox"
+                        checked={selectedCards.includes(card.id)}
+                        onChange={() => handleCardSelect(card.id)}
+                        style={{ width: '18px', height: '18px', cursor: 'pointer' }}
+                      />
+                      <span 
+                        className="card-id"
+                        onClick={() => handleCardIdClick(card.id)}
+                        role="button"
+                        tabIndex={0}
+                        onKeyDown={(event) => {
+                          if (event.key === 'Enter' || event.key === ' ') {
+                            event.preventDefault();
+                            handleCardIdClick(card.id);
+                          }
+                        }}
+                        style={{ cursor: 'pointer', fontWeight: 'bold', color: '#007bff' }}
                       >
-                        {t('delete')}
+                        #{card.id.slice(-6)}
+                      </span>
+                      {getStatusBadge(card.status)}
+                      {isExpanded && (
+                        <span className="card-tags" style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+                          {normalizeTags(card.tags).map(tag => (
+                            <span key={tag} className="tag" style={{ fontSize: '11px', padding: '2px 6px', background: '#e9ecef', borderRadius: '3px' }}>#{tag}</span>
+                          ))}
+                        </span>
+                      )}
+                      {editingCard !== card.id && (
+                        <div className="card-actions" style={{ marginLeft: 'auto', display: 'flex', gap: '6px', alignItems: 'center' }}>
+                          {activeTab === 'pending' && (
+                            <>
+                              <button 
+                                onClick={() => handleGenerateImage(card.id)}
+                                className="btn btn-secondary"
+                                disabled={imageGenerationState[card.id]?.loading}
+                                style={{ fontSize: '12px', padding: '4px 8px', whiteSpace: 'nowrap' }}
+                              >
+                                {imageGenerationState[card.id]?.loading ? t('generatingImage') : t('generateImage')}
+                              </button>
+                              <button 
+                                onClick={() => handleEditCard(card)}
+                                className="btn btn-secondary"
+                                style={{ fontSize: '12px', padding: '4px 8px', whiteSpace: 'nowrap' }}
+                              >
+                                {t('edit')}
+                              </button>
+                              <button 
+                                onClick={() => onApproveCard(card.id)}
+                                className="btn btn-success"
+                                style={{ fontSize: '12px', padding: '4px 8px', whiteSpace: 'nowrap' }}
+                              >
+                                {t('approve')}
+                              </button>
+                            </>
+                          )}
+                          <button 
+                            onClick={() => handleDeleteCard(card.id)}
+                            className="btn btn-danger"
+                            style={{ fontSize: '12px', padding: '4px 8px', whiteSpace: 'nowrap' }}
+                          >
+                            {t('delete')}
+                          </button>
+                        </div>
+                      )}
+                      <button
+                        onClick={() => toggleCardExpansion(card.id)}
+                        style={{
+                          background: 'none',
+                          border: 'none',
+                          cursor: 'pointer',
+                          fontSize: '16px',
+                          padding: '4px 8px',
+                          color: '#6c757d',
+                          display: 'flex',
+                          alignItems: 'center'
+                        }}
+                        title={isExpanded ? 'Collapse' : 'Expand'}
+                      >
+                        {isExpanded ? '▼' : '▶'}
                       </button>
                     </div>
-                    <button
-                      onClick={() => toggleCardExpansion(card.id)}
-                      style={{
-                        background: 'none',
-                        border: 'none',
-                        cursor: 'pointer',
-                        fontSize: '16px',
-                        padding: '4px 8px',
-                        color: '#6c757d',
-                        display: 'flex',
-                        alignItems: 'center'
-                      }}
-                      title={isExpanded ? 'Collapse' : 'Expand'}
-                    >
-                      {isExpanded ? '▼' : '▶'}
-                    </button>
+                    {!isExpanded && !isEditing && renderCompactPreview(card)}
+                    {isExpanded && renderCardPreview(card)}
+                    {isEditing && renderEditForm(card)}
+                    {imageGenerationState[card.id]?.success && imageGenerationState[card.id]?.message && (
+                      <div style={{marginTop: '10px', color: '#28a745', fontSize: '12px'}}>
+                        {imageGenerationState[card.id].message}
+                      </div>
+                    )}
+                    {imageGenerationState[card.id]?.error && (
+                      <div style={{marginTop: '10px', color: '#dc3545', fontSize: '12px'}}>
+                        {imageGenerationState[card.id].error}
+                      </div>
+                    )}
                   </div>
-                  {!isExpanded && renderCompactPreview(card)}
-                  {isExpanded && renderCardPreview(card)}
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 };
