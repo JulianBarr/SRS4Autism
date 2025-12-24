@@ -518,10 +518,10 @@ const MariosWorld = ({ profile, onNavigateToContent }) => {
                   }} onClick={() => {
                     if (onNavigateToContent) {
                       setActiveIsland(null);
-                      onNavigateToContent('logic-city');
+                      onNavigateToContent('logic-city-character-recognition');
                     }
                   }}>
-                    {language === 'zh' ? '🏛️ 逻辑城市词汇' : '🏛️ Logic City Vocabulary'}
+                    {language === 'zh' ? '🔤 汉字识认' : '🔤 Character Recognition'}
                   </button>
                   <button style={{
                     padding: '12px 24px',
@@ -567,10 +567,10 @@ const MariosWorld = ({ profile, onNavigateToContent }) => {
                   }} onClick={() => {
                     if (onNavigateToContent) {
                       setActiveIsland(null);
-                      onNavigateToContent('logic-city');
+                      onNavigateToContent('logic-city-character-recognition');
                     }
                   }}>
-                    {language === 'zh' ? '🏛️ 逻辑城市词汇' : '🏛️ Logic City Vocabulary'}
+                    {language === 'zh' ? '🔤 汉字识认' : '🔤 Character Recognition'}
                   </button>
                   <button style={{
                     padding: '12px 24px',

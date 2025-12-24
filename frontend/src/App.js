@@ -13,6 +13,7 @@ import PinyinLearning from './components/PinyinLearning';
 import PinyinGapFillAdmin from './components/PinyinGapFillAdmin';
 import LogicCityGallery from './components/widgets/LogicCityGallery';
 import LogicCityManager from './components/widgets/LogicCityManager';
+import CharacterRecognition from './components/CharacterRecognition';
 import { useLanguage } from './i18n/LanguageContext';
 import './App.css';
 
@@ -327,6 +328,10 @@ function App() {
                 // Show Logic City modal with Advanced Vocabulary
                 setLogicCityContentType('vocab-advanced');
                 setShowLogicCityModal(true);
+              } else if (action === 'logic-city-character-recognition') {
+                // Show Logic City modal with Character Recognition
+                setLogicCityContentType('character-recognition');
+                setShowLogicCityModal(true);
               }
             }}
           />
@@ -454,6 +459,13 @@ function App() {
                     onClose={() => {
                       setShowLogicCityModal(false);
                       setLogicCityContentType(null);
+                    }}
+                  />
+                ) : logicCityContentType === 'character-recognition' ? (
+                  <CharacterRecognition 
+                    profile={currentProfile}
+                    onProfileUpdate={() => {
+                      // Refresh profile if needed
                     }}
                   />
                 ) : (
