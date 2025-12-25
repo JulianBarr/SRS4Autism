@@ -503,7 +503,7 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
         // Strip HTML tags for compact view, but keep text content
         const frontText = frontContent.replace(/<[^>]*>/g, '').trim() || '(No front content)';
         return (
-          <div className="card-preview-compact" style={{ padding: '4px 0', fontSize: '15px', lineHeight: '1.5', color: '#495057' }}>
+          <div className="card-preview-compact" style={{ padding: '4px 0', fontSize: '18px', lineHeight: '1.75', color: '#495057' }}>
             <strong style={{ color: '#6c757d', marginRight: '6px' }}>{t('front')}:</strong>
             <span style={{ 
               display: '-webkit-box',
@@ -525,7 +525,7 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
         textOnly = textOnly.replace(/\[\[c\d+::([^\]]+)\]\]/g, '[$1]');
         textOnly = textOnly.trim() || '(No text content)';
         return (
-          <div className="card-preview-compact" style={{ padding: '4px 0', fontSize: '15px', lineHeight: '1.5', color: '#495057' }}>
+          <div className="card-preview-compact" style={{ padding: '4px 0', fontSize: '18px', lineHeight: '1.75', color: '#495057' }}>
             <span style={{ 
               display: '-webkit-box',
               WebkitLineClamp: 2,
@@ -539,7 +539,7 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
         );
       default:
         return (
-          <div className="card-preview-compact" style={{ padding: '4px 0', fontSize: '15px', color: '#6c757d' }}>
+          <div className="card-preview-compact" style={{ padding: '4px 0', fontSize: '18px', lineHeight: '1.75', color: '#6c757d' }}>
             {card.card_type || 'Unknown card type'}
           </div>
         );
@@ -890,7 +890,7 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
             style={{whiteSpace: 'nowrap'}}
             title="Delete Selected"
           >
-            🗑️ {selectedCards.length > 0 ? `(${selectedCards.length})` : ''}
+            🗑️ {t('deleteSelected')} ({selectedCards.length})
           </button>
           <button 
             onClick={() => handleSyncToAnki(false)} 
