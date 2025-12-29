@@ -36,7 +36,7 @@ DEFAULT_CONFIG = {
     "min_similarity": 0.0,
     "exclude_multiword": True,
     "top_n": 50,
-    "max_hsk_level": 6,
+    "max_hsk_level": 4,
 }
 
 

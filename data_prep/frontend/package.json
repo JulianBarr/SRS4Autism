@@ -4,10 +4,11 @@
   "description": "Data Preparation Frontend - Separate from Curious Mario",
   "private": true,
   "dependencies": {
+    "axios": "^1.6.0",
+    "lucide-react": "^0.562.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "axios": "^1.6.0"
+    "react-scripts": "5.0.1"
   },
   "scripts": {
     "start": "PORT=3001 react-scripts start",
@@ -33,4 +34,3 @@
     ]
   }
 }
-

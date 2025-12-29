@@ -8,6 +8,7 @@ import CharacterRecognition from './CharacterRecognition';
 import ChineseWordRecognition from './ChineseWordRecognition';
 import EnglishWordRecognition from './EnglishWordRecognition';
 import PinyinLearning from './PinyinLearning';
+import RecommendationSmartConfig from './RecommendationSmartConfig';
 import theme from '../styles/theme';
 
 const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
@@ -39,9 +40,13 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
     mental_age: null, // Will use profile.mental_age if available
     aoa_buffer: 0.0,
     top_n: 50,
-    exclude_multiword: false
+    exclude_multiword: false,
+    max_hsk_level: 4 // Default max HSK level
   });
   const [showChinesePprConfig, setShowChinesePprConfig] = useState(false);
+  
+  // Calculate current HSK level from recommendations (fallback to 1)
+  const [currentHSKLevel, setCurrentHSKLevel] = useState(1);
   
   // Mastered Managers State
   const [showMasteredWordsManager, setShowMasteredWordsManager] = useState(false);
@@ -254,7 +259,8 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
           alpha: chinesePprConfig.alpha,
           aoa_buffer: chinesePprConfig.aoa_buffer,
           top_n: chinesePprConfig.top_n,
-          exclude_multiword: chinesePprConfig.exclude_multiword
+          exclude_multiword: chinesePprConfig.exclude_multiword,
+          max_hsk_level: chinesePprConfig.max_hsk_level
         };
         
         response = await axios.post(`${API_BASE}/kg/chinese-ppr-recommendations?t=${Date.now()}`, requestConfig, {
@@ -269,8 +275,20 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
       });
       }
       
-      setRecommendations(response.data.recommendations || []);
+      const recs = response.data.recommendations || [];
+      setRecommendations(recs);
       setShowRecommendations(true);
+      
+      // Try to infer current HSK level from recommendations (use the most common HSK level)
+      if (recs.length > 0) {
+        const hskLevels = recs.map(r => r.hsk || r.hsk_level).filter(Boolean);
+        if (hskLevels.length > 0) {
+          const mostCommonLevel = hskLevels.sort((a, b) => 
+            hskLevels.filter(v => v === a).length - hskLevels.filter(v => v === b).length
+          ).pop();
+          setCurrentHSKLevel(mostCommonLevel);
+        }
+      }
     } catch (error) {
       console.error('Error getting Chinese recommendations:', error);
       const errorMsg = error.response?.data?.detail || error.message || 'Failed to get recommendations.';
@@ -841,61 +859,34 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
             
             {/* PPR Configuration Panel (when PPR is enabled) */}
             {useChinesePPRAlgorithm && (
-              <div style={{ marginBottom: '15px', padding: '12px', backgroundColor: '#f9f9f9', borderRadius: '8px', border: '1px solid #ddd' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                  <span style={{ fontWeight: 'bold', fontSize: '13px' }}>{t('smartRecommendationConfig')}</span>
-                  <button
-                    onClick={() => setShowChinesePprConfig(!showChinesePprConfig)}
-                    style={{
-                      padding: '2px 8px',
-                      fontSize: '11px',
-                      backgroundColor: '#e0e0e0',
-                      border: 'none',
-                      borderRadius: '4px',
-                      cursor: 'pointer'
-                    }}
-                  >
-                    {showChinesePprConfig ? t('collapse') : t('expand')}
-                  </button>
-                </div>
-                {showChinesePprConfig && (
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', fontSize: '12px' }}>
-                    <div>
-                      <label>{t('semanticWeight')}: <input type="number" step="0.1" value={chinesePprConfig.beta_ppr} onChange={(e) => setChinesePprConfig({...chinesePprConfig, beta_ppr: parseFloat(e.target.value)})} style={{ width: '60px', marginLeft: '5px' }} /></label>
-                    </div>
-                    <div>
-                      <label>{t('concreteness')}: <input type="number" step="0.1" value={chinesePprConfig.beta_concreteness} onChange={(e) => setChinesePprConfig({...chinesePprConfig, beta_concreteness: parseFloat(e.target.value)})} style={{ width: '60px', marginLeft: '5px' }} /></label>
-                    </div>
-                    <div>
-                      <label>{t('frequency')}: <input type="number" step="0.1" value={chinesePprConfig.beta_frequency} onChange={(e) => setChinesePprConfig({...chinesePprConfig, beta_frequency: parseFloat(e.target.value)})} style={{ width: '60px', marginLeft: '5px' }} /></label>
-                    </div>
-                    <div>
-                      <label>{t('acquisitionAge')}: <input type="number" step="0.1" value={chinesePprConfig.beta_aoa_penalty} onChange={(e) => setChinesePprConfig({...chinesePprConfig, beta_aoa_penalty: parseFloat(e.target.value)})} style={{ width: '60px', marginLeft: '5px' }} /></label>
-                    </div>
-                    <div>
-                      <label>{t('baseScore')}: <input type="number" step="0.1" value={chinesePprConfig.beta_intercept} onChange={(e) => setChinesePprConfig({...chinesePprConfig, beta_intercept: parseFloat(e.target.value)})} style={{ width: '60px', marginLeft: '5px' }} /></label>
-                    </div>
-                    <div>
-                      <label>{t('diversity')}: <input type="number" step="0.1" min="0" max="1" value={chinesePprConfig.alpha} onChange={(e) => setChinesePprConfig({...chinesePprConfig, alpha: parseFloat(e.target.value)})} style={{ width: '60px', marginLeft: '5px' }} /></label>
-                    </div>
-                    <div>
-                      <label>{t('mentalAge')}: <input type="number" step="0.5" value={chinesePprConfig.mental_age || ''} onChange={(e) => setChinesePprConfig({...chinesePprConfig, mental_age: e.target.value ? parseFloat(e.target.value) : null})} style={{ width: '60px', marginLeft: '5px' }} /></label>
-                    </div>
-                    <div>
-                      <label>{t('ageBuffer')}: <input type="number" step="0.5" value={chinesePprConfig.aoa_buffer} onChange={(e) => setChinesePprConfig({...chinesePprConfig, aoa_buffer: parseFloat(e.target.value)})} style={{ width: '60px', marginLeft: '5px' }} /></label>
-                    </div>
-                    <div>
-                      <label>{t('numberOfRecommendations')}: <input type="number" step="5" min="10" max="200" value={chinesePprConfig.top_n} onChange={(e) => setChinesePprConfig({...chinesePprConfig, top_n: parseInt(e.target.value)})} style={{ width: '60px', marginLeft: '5px' }} /></label>
-                    </div>
-                    <div>
-                      <label style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                        <input type="checkbox" checked={chinesePprConfig.exclude_multiword} onChange={(e) => setChinesePprConfig({...chinesePprConfig, exclude_multiword: e.target.checked})} />
-                        排除多词短语
-                      </label>
-                    </div>
-                  </div>
-                )}
-              </div>
+              <RecommendationSmartConfig
+                currentLevel={currentHSKLevel}
+                initialConfig={{
+                  beta_ppr: chinesePprConfig.beta_ppr,
+                  beta_concreteness: chinesePprConfig.beta_concreteness,
+                  beta_frequency: chinesePprConfig.beta_frequency,
+                  beta_aoa_penalty: chinesePprConfig.beta_aoa_penalty,
+                  alpha: chinesePprConfig.alpha,
+                  max_hsk_level: chinesePprConfig.max_hsk_level || 4,
+                  top_n: chinesePprConfig.top_n,
+                  mental_age: chinesePprConfig.mental_age !== null ? chinesePprConfig.mental_age : (profile.mental_age || 8.0)
+                }}
+                onConfigChange={(newConfig) => {
+                  setChinesePprConfig(prev => ({
+                    ...prev,
+                    beta_ppr: newConfig.beta_ppr,
+                    beta_concreteness: newConfig.beta_concreteness,
+                    beta_frequency: newConfig.beta_frequency,
+                    beta_aoa_penalty: newConfig.beta_aoa_penalty,
+                    alpha: newConfig.alpha,
+                    max_hsk_level: newConfig.max_hsk_level,
+                    top_n: newConfig.top_n,
+                    mental_age: newConfig.mental_age
+                  }));
+                  // Auto-refresh recommendations when config changes
+                  setTimeout(() => handleGetChineseWordRecommendations(null, true), 300);
+                }}
+              />
             )}
             
             {/* Concreteness Weight Control (only show when PPR is disabled) */}

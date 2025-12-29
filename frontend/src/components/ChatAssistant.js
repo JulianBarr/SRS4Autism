@@ -467,8 +467,17 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
     });
   };
 
-  const formatMessage = (message) => {
+  const formatMessage = (message, isExpanded = false) => {
     let content = message.content;
+    
+    // For card generation messages, show only first line when collapsed
+    const isCardGeneration = content.includes('✨ 成功为您生成了');
+    if (isCardGeneration && !isExpanded) {
+      const firstLineEnd = content.indexOf('\n');
+      if (firstLineEnd > 0) {
+        content = content.substring(0, firstLineEnd);
+      }
+    }
     
     // Helper function to escape special regex characters
     const escapeRegex = (str) => {
@@ -536,15 +545,19 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
                 >
                   <div 
                     dangerouslySetInnerHTML={{ 
-                      __html: formatMessage(message) 
+                      __html: formatMessage(message, expandedMessages.has(message.id)) 
                     }} 
                   />
-                  {message.content.length > 400 && (
+                  {(message.content.length > 400 || message.content.includes('✨ 成功为您生成了')) && (
                     <div 
                       className="show-more-toggle"
                       onClick={() => toggleMessageExpand(message.id)}
                     >
-                      {expandedMessages.has(message.id) ? 'Show less ▲' : 'Show more ▼'}
+                      {message.content.includes('✨ 成功为您生成了') ? (
+                        expandedMessages.has(message.id) ? '收起 ▲' : '查看详情 ▼'
+                      ) : (
+                        expandedMessages.has(message.id) ? 'Show less ▲' : 'Show more ▼'
+                      )}
                     </div>
                   )}
                   <div className="message-time">

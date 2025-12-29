@@ -127,6 +127,18 @@ async def startup_event():
     print("📊 Initializing database...")
     init_db()
     print("✅ Database ready!")
+    
+    # Initialize literacy cache (Anki order + sorted vocab list)
+    try:
+        from .routers.literacy import initialize_literacy_cache
+        initialize_literacy_cache()
+    except ImportError:
+        # Fallback for absolute import
+        from routers.literacy import initialize_literacy_cache
+        initialize_literacy_cache()
+    except Exception as e:
+        print(f"⚠️  Warning: Failed to initialize literacy cache: {e}")
+        # Continue startup even if cache init fails
 
 # CORS middleware for frontend communication
 app.add_middleware(
@@ -1874,11 +1886,25 @@ async def _handle_card_generation(message: ChatMessage, context_tags: List[Dict[
             existing_cards.append(card)
         save_json_file(CARDS_FILE, existing_cards)
         
-        # Create response message
-        response_content = f"✨ Generated {len(cards)} flashcard(s) from your request!\n\n"
-        response_content += f"📝 Created {len([c for c in cards if c['card_type'] == 'basic'])} basic, "
-        response_content += f"{len([c for c in cards if c['card_type'] == 'basic_reverse'])} reverse, "
-        response_content += f"and {len([c for c in cards if c['card_type'] == 'cloze'])} cloze cards.\n\n"
+        # Create simple response message with expandable details
+        card_count = len(cards)
+        response_content = f"✨ 成功为您生成了 {card_count} 张卡片！\n\n"
+        
+        # Add details section (will be collapsed by frontend)
+        basic_count = len([c for c in cards if c['card_type'] == 'basic'])
+        reverse_count = len([c for c in cards if c['card_type'] == 'basic_reverse'])
+        cloze_count = len([c for c in cards if c['card_type'] == 'cloze'])
+        
+        details = []
+        if basic_count > 0:
+            details.append(f"{basic_count} 张基础卡片")
+        if reverse_count > 0:
+            details.append(f"{reverse_count} 张反向卡片")
+        if cloze_count > 0:
+            details.append(f"{cloze_count} 张完形填空卡片")
+        
+        if details:
+            response_content += f"📝 包含：{', '.join(details)}\n\n"
         
         if context_tags:
             # For display, show profile name instead of ID
@@ -1888,9 +1914,9 @@ async def _handle_card_generation(message: ChatMessage, context_tags: List[Dict[
                     tag_strings.append(f"profile={child_profile.get('name')}")
                 else:
                     tag_strings.append(f"{t['type']}={t['value']}")
-            response_content += f"🎯 Applied context: {', '.join(tag_strings)}\n\n"
+            response_content += f"🎯 应用上下文：{', '.join(tag_strings)}\n\n"
         
-        response_content += "👉 Review and approve them in the Card Curation tab!"
+        response_content += "👉 请在「卡片审核」标签页中查看并批准这些卡片！"
         
         return response_content
         
