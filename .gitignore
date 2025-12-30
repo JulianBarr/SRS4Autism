@@ -111,3 +111,4 @@ data/content_db/*.pdf
 # Temporary extraction directories
 temp_anki_extract/
 
+knowledge_graph_backup_*

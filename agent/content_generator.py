@@ -1,7 +1,10 @@
 import google.generativeai as genai
 import json
+import hashlib
+import mimetypes
 from typing import List, Dict, Any, Optional
 from datetime import datetime
+from pathlib import Path
 import uuid
 import os
 import re
@@ -122,6 +125,12 @@ class ContentGenerator:
         
         # Initialize the model - upgraded to Gemini 2.5 Flash
         self.model = genai.GenerativeModel('models/gemini-2.5-flash')
+        
+        # Set up media objects directory for hash-based storage
+        # PROJECT_ROOT is typically the parent of agent/ directory
+        self.PROJECT_ROOT = Path(__file__).resolve().parent.parent
+        self.MEDIA_OBJECTS_DIR = self.PROJECT_ROOT / "content" / "media" / "objects"
+        self.MEDIA_OBJECTS_DIR.mkdir(parents=True, exist_ok=True)
 
     def _resolve_note_type_name(self, value: Optional[str]) -> Optional[str]:
         """Resolve incoming note type strings to canonical CUMA-prefixed names."""
@@ -640,6 +649,52 @@ class ContentGenerator:
         # Fallback: return first few words
         words = prompt.split()[:3]
         return " ".join(words)
+    
+    def _save_hashed_image(self, image_data: bytes, mime_type: str = "image/jpeg") -> str:
+        """
+        Save image data to hash-based filename in MEDIA_OBJECTS_DIR.
+        
+        Args:
+            image_data: Raw image bytes
+            mime_type: MIME type of the image (e.g., "image/jpeg", "image/png")
+            
+        Returns:
+            Filename in format "{hash}.{ext}" (e.g., "a1b2c3d4e5f6.jpg")
+        """
+        # Calculate SHA256 hash (first 12 chars)
+        sha256_hash = hashlib.sha256(image_data).hexdigest()[:12]
+        
+        # Determine canonical extension from MIME type
+        ext_map = {
+            "image/jpeg": ".jpg",
+            "image/jpg": ".jpg",
+            "image/png": ".png",
+            "image/webp": ".webp",
+            "image/gif": ".gif",
+            "image/svg+xml": ".svg"
+        }
+        
+        canonical_ext = ext_map.get(mime_type.lower())
+        if not canonical_ext:
+            # Fallback: try to guess from mimetypes module
+            guessed_ext = mimetypes.guess_extension(mime_type)
+            if guessed_ext:
+                canonical_ext = guessed_ext
+            else:
+                # Default to .jpg if unknown
+                canonical_ext = ".jpg"
+        
+        # Create filename
+        filename = f"{sha256_hash}{canonical_ext}"
+        file_path = self.MEDIA_OBJECTS_DIR / filename
+        
+        # Check if file already exists (deduplication)
+        if not file_path.exists():
+            # Write the file
+            with open(file_path, 'wb') as f:
+                f.write(image_data)
+        
+        return filename
 
 
 

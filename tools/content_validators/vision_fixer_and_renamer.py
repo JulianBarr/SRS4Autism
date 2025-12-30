@@ -32,7 +32,7 @@ model = genai.GenerativeModel("gemini-2.0-flash")
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 INPUT_KG = BASE_DIR / "knowledge_graph" / "world_model_with_images.ttl"
 OUTPUT_REPORT = BASE_DIR / "logs" / "vision_cleanup_report.csv"
-MEDIA_DIR = BASE_DIR / "content" / "media" / "images"
+MEDIA_DIR = BASE_DIR / "content" / "media" / "objects"  # Updated to hash-based storage
 
 SRS_KG = Namespace("http://srs4autism.com/schema/")
 

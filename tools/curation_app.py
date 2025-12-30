@@ -7,7 +7,7 @@ from pathlib import Path
 # --- CONFIGURATION ---
 BASE_DIR = Path(__file__).resolve().parent.parent
 CSV_PATH = BASE_DIR / "logs" / "vision_cleanup_report.csv"
-IMAGE_DIR = BASE_DIR / "content" / "media" / "images"
+IMAGE_DIR = BASE_DIR / "content" / "media" / "objects"  # Updated to hash-based storage
 
 st.set_page_config(layout="wide", page_title="CUMA Curation Deck")
 
@@ -129,6 +129,9 @@ with col1:
     image_filename = current_row['Old_Filename']
     image_path = IMAGE_DIR / image_filename
     
+    # Show info about hash-based storage
+    st.info("ℹ️ **Hash-based storage**: Files are stored with hash-based names (e.g., `8f4b2e19.jpg`). 'Renaming' only adds a searchable alias in the knowledge graph.")
+    
     if image_path.exists():
         try:
             img = Image.open(image_path)
@@ -148,9 +151,10 @@ with col2:
                   value=current_row['Chinese'], 
                   key=f"zh_{current_idx}")
     
-    st.text_input("New Filename", 
+    st.text_input("Searchable Alias (Optional)", 
                   value=corrected_filename, # <--- We show the FIXED version here
-                  key=f"fn_{current_idx}")
+                  key=f"fn_{current_idx}",
+                  help="This adds a searchable alias in the knowledge graph. The physical file keeps its hash-based name (e.g., 8f4b2e19.jpg) and is NOT renamed on disk.")
     
     st.checkbox("Image matches Word?", 
                 value=(current_row['Match?'] == 'True'), 

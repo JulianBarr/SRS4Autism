@@ -22,6 +22,7 @@ import hashlib
 import itertools
 import time
 import threading
+import csv
 
 # Pinyin Library Check
 try:
@@ -243,6 +244,10 @@ def find_image_file(image_path: str) -> Optional[Path]:
     
     # Define explicit search paths based on the user's project structure
     media_dirs = [
+        # ADD THIS LINE FIRST:
+        PROJECT_ROOT / "content" / "media" / "objects",
+
+        #Legacy
         PROJECT_ROOT / "content" / "media" / "images",        # Primary match for your structure
         PROJECT_ROOT / "content" / "media" / "visual_images",
         PROJECT_ROOT / "media" / "images",
@@ -258,6 +263,62 @@ def find_image_file(image_path: str) -> Optional[Path]:
             
     print(f"⚠️ Image not found: {filename} (Checked {len(media_dirs)} dirs)")
     return None
+# --- GATEKEEPER CONFIG ---
+CURATION_REPORT_PATH = PROJECT_ROOT / "logs" / "vision_cleanup_report.csv"
+
+def _load_curation_blocklist() -> Dict[str, bool]:
+    """
+    Loads the curation report to determine which words to BLOCK.
+
+    Returns a set of words to hide.
+
+    Logic:
+    - If a word is NOT in this list, it is considered "Auto-Passed" by AI.
+    - We only BLOCK words that you explicitly reviewed and marked for deletion.
+    """
+    if not CURATION_REPORT_PATH.exists():
+        print(f"⚠️ Gatekeeper: Report not found at {CURATION_REPORT_PATH}. Showing ALL.")
+        return set()
+
+    blocklist = set()
+
+    try:
+        with open(CURATION_REPORT_PATH, 'r', encoding='utf-8') as f:
+            content = f.read()
+            # Handle Excel BOM if present
+            if content.startswith('\ufeff'): content = content[1:]
+
+            reader = csv.DictReader(content.splitlines())
+
+            for row in reader:
+                english_word = row.get('English_Word', '').strip().lower()
+                if not english_word: continue
+
+                # Check columns case-insensitively
+                reviewed = row.get('Reviewed', '').strip().lower() == 'true'
+                match_status = row.get('Match?', '').strip().lower() == 'true'
+                new_filename = row.get('New_Filename', '').strip()
+
+                # BLOCK CONDITION:
+                # You reviewed it AND (You said it's not a match OR You explicitly wrote DELETE)
+                # Note: If you provided a valid filename correction, we do NOT block it.
+                is_rejected = (not match_status) or (new_filename.upper() == 'DELETE')
+
+                if reviewed and is_rejected:
+                    # If you corrected it with a valid filename, don't block.
+                    # e.g. New_Filename = "correct_apple.jpg" -> Keep it.
+                    # e.g. New_Filename = "DELETE" -> Block it.
+                    if new_filename and new_filename.upper() != 'DELETE':
+                        continue
+
+                    blocklist.add(english_word)
+
+        print(f"🛡️  Gatekeeper Active: Blocking {len(blocklist)} explicitly deleted words.")
+        return blocklist
+
+    except Exception as e:
+        print(f"❌ Gatekeeper Error: {e}")
+        return set()
 
 def _build_sorted_vocab_cache(sort_order: str = "interleaved") -> List[Dict[str, Any]]:
     """
@@ -265,74 +326,74 @@ def _build_sorted_vocab_cache(sort_order: str = "interleaved") -> List[Dict[str,
     This is expensive and should be cached.
     """
     anki_order = get_anki_original_order()
-    
-    # Optimized query: Use SAMPLE instead of COUNT to avoid expensive aggregation
+
+    # 1. LOAD THE BLOCKLIST
+    blocklist = _load_curation_blocklist()
+
+    # Optimized query
     light_query = """
     PREFIX srs-kg: <http://srs4autism.com/schema/>
-    
     SELECT DISTINCT ?wordUri ?englishWord (SAMPLE(?imageNode) AS ?exampleImage) WHERE {
-        # 1. Find the Tagged Chinese Node
-        ?zhNode srs-kg:learningTheme "Logic City" ;
-                srs-kg:means ?concept .
-        
-        # 2. Find the English Word for that concept
-        ?wordUri a srs-kg:Word ;
-                 srs-kg:means ?concept ;
-                 srs-kg:text ?englishWord .
+        ?zhNode srs-kg:learningTheme "Logic City" ; srs-kg:means ?concept .
+        ?wordUri a srs-kg:Word ; srs-kg:means ?concept ; srs-kg:text ?englishWord .
         FILTER (lang(?englishWord) = "en")
-        
-        # 3. Check for Images (to determine Concrete vs Abstract)
         OPTIONAL { ?concept srs-kg:hasVisualization ?imageNode }
     } GROUP BY ?wordUri ?englishWord
     """
-    
+
     light_result = query_sparql(light_query)
     bindings = light_result.get("results", {}).get("bindings", [])
-    
+
     # Bucketing
     concrete_list = []
     abstract_list = []
     seen = set()
-    
+
     for b in bindings:
         english = b['englishWord']['value'].strip()
-        if english.lower() in seen: continue
-        seen.add(english.lower())
-        
+        english_lower = english.lower()
+
+        # 2. CHECK BLOCKLIST (Explicit Deletions)
+        if english_lower in blocklist:
+            continue
+
+        # 3. CHECK HALLUCINATIONS (The "Smoke" Check)
+        # If it's not in the original Anki deck list, it's a generated ghost. Block it.
+        if english_lower not in anki_order:
+            continue
+
+        if english_lower in seen: continue
+        seen.add(english_lower)
+
         word_uri = b['wordUri']['value']
-        # Heuristic: If it has an image in the graph, it's Concrete
         has_image = 'exampleImage' in b and b['exampleImage'].get('value')
-        
+
         item = {
             'word_uri': word_uri,
             'word_id': word_uri.split('/')[-1],
             'english': english,
             'word_type': 'Concrete' if has_image else 'Abstract',
-            'anki_order': anki_order.get(english.lower(), 999999)
+            'anki_order': anki_order.get(english_lower, 999999)
         }
-        
+
         if item['word_type'] == 'Concrete':
             concrete_list.append(item)
         else:
             abstract_list.append(item)
-    
+
     # Sorting Strategy
     final_list = []
     if sort_order == "interleaved":
-        # Sort internally by Anki ID first
         concrete_list.sort(key=lambda x: x['anki_order'])
         abstract_list.sort(key=lambda x: x['anki_order'])
-        
-        # Interleave: C, A, C, A...
         for c, a in itertools.zip_longest(concrete_list, abstract_list):
             if c: final_list.append(c)
             if a: final_list.append(a)
     else:
         final_list = concrete_list + abstract_list
         final_list.sort(key=lambda x: x['anki_order'])
-    
-    return final_list
 
+    return final_list
 def get_sorted_vocab_cache(force_refresh: bool = False, sort_order: str = "interleaved") -> List[Dict[str, Any]]:
     """
     Get the sorted vocabulary cache, rebuilding if necessary.

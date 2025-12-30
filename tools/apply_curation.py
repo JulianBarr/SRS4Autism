@@ -1,6 +1,5 @@
 import sys
 import csv
-import shutil
 import os
 import urllib.parse
 from pathlib import Path
@@ -12,7 +11,7 @@ sys.stdout.reconfigure(line_buffering=True)
 # --- CONFIGURATION ---
 BASE_DIR = Path(__file__).resolve().parent.parent
 CSV_PATH = BASE_DIR / "logs" / "vision_cleanup_report.csv"
-MEDIA_DIR = BASE_DIR / "content" / "media" / "images"
+MEDIA_DIR = BASE_DIR / "content" / "media" / "objects"  # Updated to hash-based storage
 KG_PATH = BASE_DIR / "knowledge_graph" / "world_model_with_images.ttl"
 OUTPUT_KG = BASE_DIR / "knowledge_graph" / "world_model_chinese_enriched.ttl"
 
@@ -97,24 +96,30 @@ def apply_changes():
                 deleted += 1
                 continue
 
-            # --- ACTION 2: RENAME ---
+            # --- ACTION 2: ADD ALIAS (Metadata Only) ---
+            # With hash-based storage, we do NOT rename files on disk.
+            # Instead, we add the "new filename" as metadata (originalName/alias) in the KG.
             if old_name != new_name and new_name:
-                # Disk
-                old_path = MEDIA_DIR / old_name
-                new_path = MEDIA_DIR / new_name
-                if old_path.exists():
-                    shutil.move(old_path, new_path)
-                    renamed += 1
+                # NO FILE RENAMING - Files keep their hash-based names (e.g., 8f4b2e19.jpg)
+                # The old_name IS the hash filename, and it stays that way on disk.
                 
-                # Graph
+                # Graph: Add originalName/alias metadata (do NOT change imageFileName)
                 img_uri = file_to_uri.get(old_name)
                 if img_uri:
-                    # Update properties
-                    g.set((img_uri, SRS_KG.imageFileName, Literal(new_name)))
-                    g.set((img_uri, SRS_KG.imageFilePath, Literal(f"content/media/images/{new_name}")))
-                    # Update Index for future lookups (if needed)
-                    file_to_uri[new_name] = img_uri 
-                    # del file_to_uri[old_name] # Optional cleanup
+                    # Keep imageFileName pointing to the hash filename (old_name)
+                    # Add originalName with the user-friendly alias (new_name)
+                    existing_original = g.value(img_uri, SRS_KG.originalName)
+                    if existing_original is None:
+                        # Add originalName if it doesn't exist
+                        g.add((img_uri, SRS_KG.originalName, Literal(new_name)))
+                    else:
+                        # Update existing originalName
+                        g.set((img_uri, SRS_KG.originalName, Literal(new_name)))
+                    
+                    # Also update imageFilePath to point to objects directory
+                    g.set((img_uri, SRS_KG.imageFilePath, Literal(f"content/media/objects/{old_name}")))
+                    
+                    renamed += 1  # Count as "renamed" for reporting (even though it's just metadata)
 
             # --- ACTION 3: CHINESE VOCAB ---
             if chinese_text:
@@ -140,7 +145,7 @@ def apply_changes():
 
     print(f"\n\n--- SUMMARY ---")
     print(f"Total Rows:      {count}")
-    print(f"Files Renamed:   {renamed}")
+    print(f"Aliases Added:   {renamed} (metadata only, files unchanged)")
     print(f"Files Deleted:   {deleted}")
     print(f"Chinese Words:   {chinese_added}")
     

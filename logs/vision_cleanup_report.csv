@@ -1,4 +1,15 @@
 English_Word,Old_Filename,New_Filename,Chinese,Match?,Reason,Reviewed
+cigarette,,DELETE,,True,Ghost card,True
+addition,,DELETE,,True,Ghost card,True
+quantity,,DELETE,,True,Ghost card,True
+begin,,DELETE,,True,Ghost card,True
+correct,,DELETE,,True,Ghost card,True
+difficult,,DELETE,,True,Ghost card,True
+meaning,,DELETE,,True,Ghost card,True
+million,,DELETE,,True,Ghost card,True
+fair,,DELETE,,True,Ghost card,True
+translate,,DELETE,,True,Ghost card,True
+extra,,DELETE,,True,Ghost card,True
 about,about.png,teletubbies_peppa_christmas.png,关于,True,"The image shows three different items: Teletubbies, Peppa Pig and Christmas themes. This is not about anything specific.",True
 above,above.jpg,above_ball_above_cube.jpg,在上面,True,,True
 absent,absent.gif,absent_sick_student.jpg,缺席,True,,False

@@ -1540,7 +1540,11 @@ async def generate_card_image(card_id: str, request: CardImageRequest):
     
     try:
         from agent.conversation_handler import ConversationHandler
+        from agent.content_generator import ContentGenerator
+        import base64
+        
         conversation_handler = ConversationHandler()
+        content_generator = ContentGenerator()
         
         primary_text = (
             sanitized_card.get("text_field")
@@ -1568,14 +1572,51 @@ async def generate_card_image(card_id: str, request: CardImageRequest):
         card["is_placeholder"] = image_result.get("is_placeholder", False)
         card["image_prompt"] = image_result.get("prompt_used")
         card["image_url"] = image_result.get("image_url")
-        card["image_data"] = image_result.get("image_data")
         
         image_html = None
+        image_filename = None
+        
         if image_result.get("success") and image_result.get("image_data"):
-            image_html = (
-                f'<img src="{image_result["image_data"]}" alt="Generated image" '
-                'style="max-width: 100%; height: auto; margin: 0 0 10px 0; border-radius: 8px; border: 1px solid #dee2e6;" />'
-            )
+            # Extract base64 data from data URL
+            image_data_url = image_result.get("image_data")
+            
+            # Parse data URL: data:image/jpeg;base64,<data>
+            if image_data_url and image_data_url.startswith("data:"):
+                try:
+                    # Extract MIME type and base64 data
+                    header, encoded = image_data_url.split(",", 1)
+                    mime_type = header.split(";")[0].split(":")[1]  # Extract "image/jpeg" from "data:image/jpeg;base64"
+                    
+                    # Decode base64 to bytes
+                    image_bytes = base64.b64decode(encoded)
+                    
+                    # Save using hash-based method
+                    image_filename = content_generator._save_hashed_image(image_bytes, mime_type)
+                    
+                    # Store filename instead of base64 data URL
+                    card["image_data"] = image_filename
+                    
+                    # Create HTML with file path (served from /static/media/)
+                    image_path = f"/static/media/{image_filename}"
+                    image_html = (
+                        f'<img src="{image_path}" alt="Generated image" '
+                        'style="max-width: 100%; height: auto; margin: 0 0 10px 0; border-radius: 8px; border: 1px solid #dee2e6;" />'
+                    )
+                except Exception as e:
+                    print(f"Error processing image data: {e}")
+                    # Fallback to original data URL if processing fails
+                    card["image_data"] = image_data_url
+                    image_html = (
+                        f'<img src="{image_data_url}" alt="Generated image" '
+                        'style="max-width: 100%; height: auto; margin: 0 0 10px 0; border-radius: 8px; border: 1px solid #dee2e6;" />'
+                    )
+            else:
+                # Not a data URL, use as-is
+                card["image_data"] = image_data_url
+                image_html = (
+                    f'<img src="{image_data_url}" alt="Generated image" '
+                    'style="max-width: 100%; height: auto; margin: 0 0 10px 0; border-radius: 8px; border: 1px solid #dee2e6;" />'
+                )
             
             position = (request.position or "front").lower()
             location = (request.location or "before").lower()
@@ -1948,7 +1989,11 @@ async def _handle_image_generation(message: ChatMessage, context_tags: List[Dict
         
         # Use the conversation handler to generate image description
         from agent.conversation_handler import ConversationHandler
+        from agent.content_generator import ContentGenerator
+        import base64
+        
         conversation_handler = ConversationHandler()
+        content_generator = ContentGenerator()
         
         # Generate image description first
         image_description = conversation_handler._generate_image_description(
@@ -1967,13 +2012,45 @@ async def _handle_image_generation(message: ChatMessage, context_tags: List[Dict
         target_card["image_description"] = image_description
         target_card["image_prompt"] = image_prompt
         
+        image_filename = None
+        if image_result.get("success") and image_result.get("image_data"):
+            # Extract base64 data from data URL
+            image_data_url = image_result.get("image_data")
+            
+            # Parse data URL: data:image/jpeg;base64,<data>
+            if image_data_url and image_data_url.startswith("data:"):
+                try:
+                    # Extract MIME type and base64 data
+                    header, encoded = image_data_url.split(",", 1)
+                    mime_type = header.split(";")[0].split(":")[1]  # Extract "image/jpeg" from "data:image/jpeg;base64"
+                    
+                    # Decode base64 to bytes
+                    image_bytes = base64.b64decode(encoded)
+                    
+                    # Save using hash-based method
+                    image_filename = content_generator._save_hashed_image(image_bytes, mime_type)
+                    
+                    # Store filename instead of base64 data URL
+                    target_card["image_data"] = image_filename
+                except Exception as e:
+                    print(f"Error processing image data in chat handler: {e}")
+                    # Fallback to original data URL if processing fails
+                    target_card["image_data"] = image_data_url
+        
         if image_result["success"]:
             # Don't automatically add to card - show in chat first
             if image_result.get("is_placeholder", False):
                 return f"🖼️ **Generated Image Description:**\n\n{image_description}\n\n⚠️ **Note:** This is a placeholder image. To generate actual images, integrate with an image generation service like DALL-E 3, Midjourney, or Stable Diffusion.\n\n💡 **Instructions:** {image_result.get('instructions', '')}\n\n**To add this image to a card, please specify:**\n- Which card (by ID or 'last card')\n- Front or back\n- Before or after the text"
             else:
                 # Show the image in chat with options
-                return f"🖼️ **Generated Image:**\n\n![Generated Image]({image_result['image_data']})\n\n**Image Description:**\n{image_description}\n\n**To add this image to a card, please specify:**\n- Which card (by ID or 'last card')\n- Front or back\n- Before or after the text\n\n**Example commands:**\n- 'Add this image to the last card, front, before text'\n- 'Insert image to card #123, back, after text'"
+                if image_filename:
+                    image_path = f"/static/media/{image_filename}"
+                    image_markdown = f"![Generated Image]({image_path})"
+                else:
+                    # Fallback to data URL if filename not available
+                    image_markdown = f"![Generated Image]({image_result.get('image_data', '')})"
+                
+                return f"🖼️ **Generated Image:**\n\n{image_markdown}\n\n**Image Description:**\n{image_description}\n\n**To add this image to a card, please specify:**\n- Which card (by ID or 'last card')\n- Front or back\n- Before or after the text\n\n**Example commands:**\n- 'Add this image to the last card, front, before text'\n- 'Insert image to card #123, back, after text'"
         else:
             # Fallback to description only
             target_card["image_generated"] = False
@@ -3428,15 +3505,26 @@ def fetch_logic_city_vocabulary(page: int = 1, page_size: int = 50) -> List[Logi
             image_path = None
             if "imagePath" in binding:
                 img_path = binding["imagePath"].get("value", "").strip()
-                # Convert to URL path (ensure it starts with /media)
+                # Convert to URL path (hash-based storage: files in content/media/objects/)
                 if img_path:
-                    # Handle paths like "content/media/images/..." -> "/media/images/..."
-                    if img_path.startswith("content/media/"):
-                        image_path = f"/media/{img_path.replace('content/media/', '')}"
+                    # Handle paths like "content/media/objects/..." or "content/media/images/..." -> "/static/media/..."
+                    if img_path.startswith("content/media/objects/"):
+                        # Hash-based storage: extract filename and serve from /static/media/
+                        filename = Path(img_path).name
+                        image_path = f"/static/media/{filename}"
+                    elif img_path.startswith("/content/media/objects/"):
+                        filename = Path(img_path).name
+                        image_path = f"/static/media/{filename}"
+                    elif img_path.startswith("content/media/"):
+                        # Legacy path: extract filename and serve from /static/media/
+                        filename = Path(img_path).name
+                        image_path = f"/static/media/{filename}"
                     elif img_path.startswith("/content/media/"):
-                        image_path = f"/media/{img_path.replace('/content/media/', '')}"
+                        filename = Path(img_path).name
+                        image_path = f"/static/media/{filename}"
                     elif not img_path.startswith('/'):
-                        image_path = f"/media/{img_path}"
+                        # Just a filename: serve from /static/media/
+                        image_path = f"/static/media/{img_path}"
                     else:
                         image_path = img_path
                     
@@ -3449,12 +3537,13 @@ def fetch_logic_city_vocabulary(page: int = 1, page_size: int = 50) -> List[Logi
                     # This helps match "april_flowers_butterflies.jpg" to "april.png"
                     first_word = filename_base.split('_')[0] if '_' in filename_base else filename_base
                     
-                    # Search in common media directories
+                    # Search in hash-based storage first, then legacy directories (for backward compatibility)
                     media_dirs = [
-                        PROJECT_ROOT / "media" / "images",
-                        PROJECT_ROOT / "media" / "visual_images", 
-                        PROJECT_ROOT / "media" / "pinyin",
-                        PROJECT_ROOT / "media"
+                        PROJECT_ROOT / "content" / "media" / "objects",  # Hash-based storage (primary)
+                        PROJECT_ROOT / "media" / "images",  # Legacy
+                        PROJECT_ROOT / "media" / "visual_images",  # Legacy
+                        PROJECT_ROOT / "media" / "pinyin",  # Legacy
+                        PROJECT_ROOT / "media"  # Legacy
                     ]
                     
                     found = False
@@ -3464,8 +3553,13 @@ def fetch_logic_city_vocabulary(page: int = 1, page_size: int = 50) -> List[Logi
                             continue
                         potential_path = media_dir / filename_with_ext
                         if potential_path.exists() and potential_path.is_file():
-                            rel_path = potential_path.relative_to(PROJECT_ROOT)
-                            image_path = f"/{rel_path.as_posix()}"
+                            # If found in hash-based storage, use /static/media/ path
+                            if media_dir == PROJECT_ROOT / "content" / "media" / "objects":
+                                image_path = f"/static/media/{filename_with_ext}"
+                            else:
+                                # Legacy paths: use relative path
+                                rel_path = potential_path.relative_to(PROJECT_ROOT)
+                                image_path = f"/{rel_path.as_posix()}"
                             found = True
                             break
                     
@@ -3483,8 +3577,13 @@ def fetch_logic_city_vocabulary(page: int = 1, page_size: int = 50) -> List[Logi
                                         
                                         # Match if first word matches and it's an image file
                                         if file_first_word == first_word and file.suffix.lower() in ['.jpg', '.jpeg', '.png', '.gif', '.webp']:
-                                            rel_path = file.relative_to(PROJECT_ROOT)
-                                            image_path = f"/{rel_path.as_posix()}"
+                                            # If found in hash-based storage, use /static/media/ path
+                                            if media_dir == PROJECT_ROOT / "content" / "media" / "objects":
+                                                image_path = f"/static/media/{file.name}"
+                                            else:
+                                                # Legacy paths: use relative path
+                                                rel_path = file.relative_to(PROJECT_ROOT)
+                                                image_path = f"/{rel_path.as_posix()}"
                                             found = True
                                             break
                                 if found:
@@ -4046,8 +4145,9 @@ async def sync_character_recognition_notes(request: Dict[str, Any]):
         apkg_path = PROJECT_ROOT / "data" / "content_db" / "语言语文__识字__全部.apkg"
         
         # Extract media files from apkg
-        media_dir = PROJECT_ROOT / "media" / "character_recognition"
-        media_dir.mkdir(parents=True, exist_ok=True)
+        # Hash-based storage: Files are in content/media/objects/
+        # Note: We don't create this directory here as it should already exist from migration
+        media_dir = PROJECT_ROOT / "content" / "media" / "objects"
         
         media_map = {}  # Map original filename to new path
         
@@ -4073,8 +4173,9 @@ async def sync_character_recognition_notes(request: Dict[str, Any]):
                                 print(f"  ✅ Copied {media_file.name}")
                             else:
                                 print(f"  ℹ️  {media_file.name} already exists, skipping")
-                            # Map original filename to URL path
-                            media_map[media_file.name] = f"/media/character_recognition/{media_file.name}"
+                            # Map original filename to URL path (hash-based storage)
+                            # Files are in content/media/objects/, served at /static/media/
+                            media_map[media_file.name] = f"/static/media/{media_file.name}"
                 except Exception as e:
                     print(f"⚠️  Warning: Could not extract media files: {e}")
             else:
@@ -4093,8 +4194,9 @@ async def sync_character_recognition_notes(request: Dict[str, Any]):
                                             with open(dest_file, 'wb') as dest:
                                                 shutil.copyfileobj(source_file, dest)
                                         print(f"  ✅ Extracted {filename}")
-                                    # Map original filename to URL path
-                                    media_map[filename] = f"/media/character_recognition/{filename}"
+                                    # Map original filename to URL path (hash-based storage)
+                                    # Files are in content/media/objects/, served at /static/media/
+                                    media_map[filename] = f"/static/media/{filename}"
                 except Exception as e:
                     print(f"⚠️  Warning: Could not extract media files from zip: {e}")
             
@@ -4141,8 +4243,9 @@ async def sync_character_recognition_notes(request: Dict[str, Any]):
         # Step 1: Collect all image files referenced in the notes and upload them to Anki
         # Following Media file management.md naming convention: cm_[Type]_[ContentID]_[Variant].[ext]
         # For character recognition: cm_char_[sanitized_original_name].[ext]
+        # Hash-based storage: Files are in content/media/objects/
         anki_media_map = {}  # Maps original filename to Anki media filename
-        media_dir = PROJECT_ROOT / "media" / "character_recognition"
+        media_dir = PROJECT_ROOT / "content" / "media" / "objects"  # Updated to hash-based storage
         
         def extract_image_filenames_from_html(html_content: str) -> set:
             """Extract all image filenames from HTML content (extract filename from any path)"""
@@ -4522,8 +4625,8 @@ async def add_custom_word_recognition(
         
         # Handle image upload if provided
         if image and image.filename:
-            # Save image to media directory
-            media_dir = PROJECT_ROOT / "media" / "chinese_word_recognition"
+            # Hash-based storage: Save to content/media/objects/
+            media_dir = PROJECT_ROOT / "content" / "media" / "objects"
             media_dir.mkdir(parents=True, exist_ok=True)
             
             # Generate safe filename
@@ -4653,7 +4756,8 @@ async def sync_chinese_naming_notes(request: Dict[str, Any]):
             pass  # Deck might already exist
         
         # Handle media files (images and audio)
-        MEDIA_DIR = PROJECT_ROOT / "media" / "chinese_word_recognition"
+        # Hash-based storage: Files are in content/media/objects/
+        MEDIA_DIR = PROJECT_ROOT / "content" / "media" / "objects"
         PROJECT_PREFIX = "cm"
         anki_media_map = {}
         uploaded_hashes = {}
@@ -5384,7 +5488,8 @@ async def sync_pinyin_notes(request: Dict[str, Any]):
         import hashlib
         import re
         
-        MEDIA_DIR = PROJECT_ROOT / "media" / "pinyin"
+        # Hash-based storage: Files are in content/media/objects/
+        MEDIA_DIR = PROJECT_ROOT / "content" / "media" / "objects"
         PROJECT_PREFIX = "cm"
         anki_media_map = {}  # Maps original filename to Anki media filename
         uploaded_hashes = {}  # Maps content_hash -> anki_filename (for duplicate detection)
@@ -6489,12 +6594,18 @@ async def apply_pinyin_suggestions(request: Dict[str, Any]):
 
 
 # Mount static files for serving images
-# Images are stored in media/visual_images/ relative to project root
+# Hash-based storage: All media files are in content/media/objects/
+media_objects_dir = PROJECT_ROOT / "content" / "media" / "objects"
+if media_objects_dir.exists():
+    app.mount("/static/media", StaticFiles(directory=str(media_objects_dir)), name="static_media")
+    print(f"📂 Media mounted at: /static/media -> {media_objects_dir}")
+
+# Also mount legacy media directory for backward compatibility
 media_dir = PROJECT_ROOT / "media"
 if media_dir.exists():
     app.mount("/media", StaticFiles(directory=str(media_dir)), name="media")
 
-# Mount the content directory so files in ./content/media/images/ are accessible
+# Mount the content directory so files in ./content/ are accessible
 content_dir = PROJECT_ROOT / "content"
 if content_dir.exists():
     app.mount("/content", StaticFiles(directory=str(content_dir)), name="content")
