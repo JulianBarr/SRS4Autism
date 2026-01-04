@@ -244,8 +244,7 @@ def find_image_file(image_path: str) -> Optional[Path]:
     
     # Define explicit search paths based on the user's project structure
     media_dirs = [
-        # ADD THIS LINE FIRST:
-        PROJECT_ROOT / "content" / "media" / "objects",
+        PROJECT_ROOT / "content" / "media" / "objects",  # <--- ADD THIS
 
         #Legacy
         PROJECT_ROOT / "content" / "media" / "images",        # Primary match for your structure
