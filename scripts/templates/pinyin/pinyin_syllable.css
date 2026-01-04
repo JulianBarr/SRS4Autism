@@ -1,0 +1,130 @@
+/* --- Base Layout --- */
+.card { font-family: Arial, sans-serif; text-align: center; }
+.pinyin-syllable-card { padding: 10px; max-width: 100%; margin: 0 auto; }
+
+/* --- Typography --- */
+.word-hanzi { font-size: 64px; font-weight: bold; color: #333; margin: 10px 0; }
+.syllable-pinyin { font-size: 56px; font-weight: bold; color: #2196F3; margin: 10px 0; }
+
+/* --- MCQ Buttons (Compact) --- */
+.mcq-options {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.mcq-option {
+  font-size: 42px !important;
+  font-weight: bold !important;
+  line-height: 1.2 !important;
+  padding: 10px 20px !important;
+  min-width: 100px;
+  border: 3px solid #ccc;
+  border-radius: 8px;
+  background-color: white;
+  color: #333;
+  cursor: pointer;
+  appearance: none; -webkit-appearance: none;
+}
+.mcq-option:active { transform: scale(0.95); }
+
+/* --- Selection States --- */
+.mcq-option.selected {
+  background-color: #4CAF50 !important;
+  color: white !important;
+  border-color: #2E7D32 !important;
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
+}
+.mcq-option.wrong {
+  background-color: #F44336 !important;
+  color: white !important;
+  border-color: #C62828 !important;
+}
+
+/* --- Answer Section (THE FIX) --- */
+.answer-section { 
+  margin-top: 20px; 
+  padding: 15px; 
+  background-color: #f0f8ff; 
+  border-radius: 8px; 
+}
+
+.correct-answer { 
+  /* Increased size for better readability */
+  font-size: 64px; 
+  font-weight: bold; 
+  color: #4CAF50;
+  line-height: 1.2;
+  display: block; /* Ensure it takes up its own line */
+  margin: 10px 0;
+}
+
+/* --- Picture MCQ Layout (Square, Contain) --- */
+.mcq-picture-options {
+  display: flex;
+  justify-content: center;
+  /* align-items: stretch; removed - aspect-ratio handles height now */
+  gap: 10px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.mcq-picture-option {
+  /* Layout: Fit 4 per row */
+  flex: 1 1 0; 
+  max-width: 22%; /* Slightly under 25% to account for gaps */
+  
+  /* Shape: FORCE SQUARE */
+  aspect-ratio: 1 / 1;
+  
+  /* Spacing inside the border */
+  padding: 8px;
+
+  cursor: pointer;
+  border: 3px solid #ddd; /* Default border */
+  border-radius: 8px;
+  background-color: white;
+  transition: all 0.2s;
+  
+  /* Center content */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* The Image itself */
+.mcq-picture-option img {
+  width: 100%;
+  height: 100%;
+  /* CRITICAL: Ensure whole picture is seen, no cropping */
+  object-fit: contain; 
+  border-radius: 4px;
+  display: block;
+}
+
+/* Selection States */
+.mcq-picture-option.selected {
+  border-color: #4CAF50 !important;
+  background-color: #e8f5e9;
+  border-width: 4px;
+}
+
+.mcq-picture-option.wrong {
+  border-color: #F44336 !important;
+  opacity: 0.6;
+  border-width: 4px;
+}
+
+/* --- Dark Mode --- */
+.nightMode .card { background-color: #2f2f2f; color: #e0e0e0; }
+.nightMode .mcq-option { background-color: #424242; color: #e0e0e0; border-color: #616161; }
+.nightMode .word-hanzi { color: #ffffff; }
+.nightMode .mcq-option.selected { background-color: #388E3C !important; }
+.nightMode .answer-section { background-color: #3a3a3a; color: #d0d0d0; }
+.nightMode .mcq-picture-option {
+  background-color: #333;
+  border-color: #555;
+}
+.nightMode .mcq-picture-option.selected { border-color: #388E3C !important; background-color: #1b5e20; }

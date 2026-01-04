@@ -1,0 +1,64 @@
+{{#ElementToLearn}}
+<div class="pinyin-syllable-card">
+  <div class="pinyin-display">
+    <p class="syllable-pinyin">{{Syllable}}</p>
+  </div>
+  
+  <div class="mcq-picture-options" id="mcq-pinyin-to-word-front">
+    {{#WordPicture}}
+    <div class="mcq-picture-option" data-correct="true" data-value="correct">
+      {{WordPicture}}
+    </div>
+    {{/WordPicture}}
+    {{#ConfusorPicture1}}
+    <div class="mcq-picture-option" data-correct="false" data-value="confusor1">
+      {{ConfusorPicture1}}
+    </div>
+    {{/ConfusorPicture1}}
+    {{#ConfusorPicture2}}
+    <div class="mcq-picture-option" data-correct="false" data-value="confusor2">
+      {{ConfusorPicture2}}
+    </div>
+    {{/ConfusorPicture2}}
+    {{#ConfusorPicture3}}
+    <div class="mcq-picture-option" data-correct="false" data-value="confusor3">
+      {{ConfusorPicture3}}
+    </div>
+    {{/ConfusorPicture3}}
+  </div>
+</div>
+
+<script>
+(function() {
+  // CRITICAL FIX: Only add click handlers if we are NOT on the back side.
+  // The element with id="answer" only exists on the Back Template.
+  if (!document.getElementById('answer')) {
+    setTimeout(function() {
+      const options = document.querySelectorAll('#mcq-pinyin-to-word-front .mcq-picture-option');
+      
+      options.forEach(function(option) {
+        option.addEventListener('click', function() {
+          const isCorrect = this.getAttribute('data-correct') === 'true';
+          
+          options.forEach(function(opt) {
+            opt.classList.remove('selected', 'wrong');
+          });
+          
+          if (isCorrect) {
+            this.classList.add('selected');
+            if(typeof pycmd !== "undefined") { pycmd("ans"); }
+          } else {
+            this.classList.add('wrong');
+            options.forEach(function(opt) {
+              if (opt.getAttribute('data-correct') === 'true') {
+                opt.classList.add('selected');
+              }
+            });
+          }
+        });
+      });
+    }, 100);
+  }
+})();
+</script>
+{{/ElementToLearn}}

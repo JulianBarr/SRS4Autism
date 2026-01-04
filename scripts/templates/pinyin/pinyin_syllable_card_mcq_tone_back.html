@@ -1,0 +1,31 @@
+{{FrontSide}}
+
+<hr id="answer">
+
+<script>
+(function() {
+  const container = document.getElementById('mcq-tone-front');
+  if (!container) return;
+  
+  const options = container.querySelectorAll('.mcq-option');
+  const correctAnswer = '{{Syllable}}';
+  
+  // Disable all buttons
+  options.forEach(btn => {
+    btn.disabled = true;
+    btn.style.pointerEvents = 'none';
+    
+    // Remove all event listeners by cloning
+    const newBtn = btn.cloneNode(true);
+    btn.parentNode.replaceChild(newBtn, btn);
+  });
+  
+  // Highlight correct answer
+  const newOptions = container.querySelectorAll('.mcq-option');
+  newOptions.forEach(btn => {
+    if (btn.textContent.trim() === correctAnswer) {
+      btn.classList.add('selected');
+    }
+  });
+})();
+</script>

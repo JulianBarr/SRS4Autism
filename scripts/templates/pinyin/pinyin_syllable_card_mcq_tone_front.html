@@ -1,0 +1,51 @@
+{{#ElementToLearn}}
+{{WordAudio}}
+
+<div class="pinyin-syllable-card">
+  {{#WordPicture}}<div class="word-picture">{{WordPicture}}</div>{{/WordPicture}}
+  <div class="word-display"><p class="word-hanzi">{{WordHanzi}}</p></div>
+  
+  <div class="mcq-options" id="mcq-tone-front">
+    <button class="mcq-option" data-value="tone1">{{Tone1}}</button>
+    <button class="mcq-option" data-value="tone2">{{Tone2}}</button>
+    <button class="mcq-option" data-value="tone3">{{Tone3}}</button>
+    <button class="mcq-option" data-value="tone4">{{Tone4}}</button>
+  </div>
+</div>
+
+<script>
+(function() {
+  const container = document.getElementById('mcq-tone-front');
+  
+  // CRITICAL FIX: Only shuffle if we are NOT on the back side.
+  // The element with id="answer" only exists on the Back Template.
+  if (!document.getElementById('answer')) {
+    for (let i = container.children.length; i >= 0; i--) {
+      container.appendChild(container.children[Math.random() * i | 0]);
+    }
+  }
+  
+  const options = container.querySelectorAll('.mcq-option');
+  const correctAnswer = '{{Syllable}}';
+  
+  options.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const selectedText = this.textContent.trim();
+      const isCorrect = (selectedText === correctAnswer);
+      options.forEach(opt => opt.classList.remove('selected', 'wrong'));
+      
+      if (isCorrect) {
+        this.classList.add('selected');
+        if(typeof pycmd !== "undefined") { pycmd("ans"); }
+      } else {
+        this.classList.add('wrong');
+        // Highlight real answer
+        options.forEach(opt => {
+          if (opt.textContent.trim() === correctAnswer) opt.classList.add('selected');
+        });
+      }
+    });
+  });
+})();
+</script>
+{{/ElementToLearn}}

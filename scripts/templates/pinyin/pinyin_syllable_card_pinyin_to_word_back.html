@@ -1,0 +1,23 @@
+{{#ElementToLearn}}{{FrontSide}}
+
+<hr id="answer">
+
+<div class="answer-section">
+  <p><strong>正确答案:</strong> <span class="correct-answer">{{WordHanzi}}</span></p>
+  <p><strong>拼音:</strong> {{WordPinyin}}</p>
+</div>
+
+<script>
+(function() {
+  setTimeout(function() {
+    // Highlight the correct image on the back side
+    const options = document.querySelectorAll('#mcq-pinyin-to-word-front .mcq-picture-option');
+    options.forEach(function(option) {
+      if (option.getAttribute('data-correct') === 'true') {
+        option.classList.add('selected');
+      }
+    });
+  }, 100);
+})();
+</script>
+{{/ElementToLearn}}

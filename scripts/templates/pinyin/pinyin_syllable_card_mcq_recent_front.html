@@ -1,0 +1,53 @@
+{{#ElementToLearn}}
+<!-- Play WordAudio when front card loads -->
+{{WordAudio}}
+
+<div class="pinyin-syllable-card">
+  {{#WordPicture}}
+  <div class="word-picture">{{WordPicture}}</div>
+  {{/WordPicture}}
+  
+  <div class="word-display">
+    <p class="word-hanzi">{{WordHanzi}}</p>
+  </div>
+  
+  <div class="mcq-options" id="mcq-recent-front">
+    <button class="mcq-option" data-correct="{{Syllable}}" data-value="{{Syllable}}">{{Syllable}}</button>
+    <button class="mcq-option" data-correct="{{Syllable}}" data-value="mē">mē</button>
+    <button class="mcq-option" data-correct="{{Syllable}}" data-value="mō">mō</button>
+  </div>
+</div>
+
+<script>
+(function() {
+  window.ankiPinyinMCQRecent = ['{{Syllable}}', 'mē', 'mō'];
+  
+  setTimeout(function() {
+    const options = document.querySelectorAll('#mcq-recent-front .mcq-option');
+    const correctAnswer = '{{Syllable}}';
+    
+    options.forEach(function(button) {
+      button.addEventListener('click', function() {
+        const selected = this.getAttribute('data-value');
+        const isCorrect = (selected === correctAnswer);
+        
+        options.forEach(function(opt) {
+          opt.classList.remove('selected', 'wrong');
+        });
+        
+        if (isCorrect) {
+          this.classList.add('selected');
+        } else {
+          this.classList.add('wrong');
+          options.forEach(function(opt) {
+            if (opt.getAttribute('data-value') === correctAnswer) {
+              opt.classList.add('selected');
+            }
+          });
+        }
+      });
+    });
+  }, 100);
+})();
+</script>
+{{/ElementToLearn}}

@@ -1,0 +1,6 @@
+.card { font-family: Arial, sans-serif; text-align: center; }
+.pinyin-element { font-size: 120pt; font-weight: bold; }
+.example-char { font-size: 90pt; font-family: "KaiTi", "BiauKai", "DFKai-SB", serif; }
+.tones-table { margin: 20px auto; }
+.tones-table td { font-size: 32pt; padding: 10px 20px; }
+img { max-height: 250px; width: auto; }
