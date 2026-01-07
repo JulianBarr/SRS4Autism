@@ -23,6 +23,9 @@
 		},
 		{
 			"path": "../syng"
+		},
+		{
+			"path": "../mp3-chinese-pinyin-sound"
 		}
 	],
 	"settings": {}

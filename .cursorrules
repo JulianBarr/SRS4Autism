@@ -28,6 +28,16 @@ SRS4Autism is a spaced repetition learning system with:
 - Use async/await for I/O operations when appropriate
 - Handle errors gracefully with HTTPException
 
+### JavaScript (Anki Cards & Frontend)
+**CRITICAL: Anki's WebView persists the `window` object. To prevent "Zombie State" bugs:**
+- **IIFE Enforcement:** ALL card JavaScript must be wrapped in an IIFE: `(function() { ... })();`.
+- **No Globals:** Do not declare variables in the global scope.
+- **Namespacing:** If HTML buttons need to call JS, expose them via a specific namespace:
+  ```javascript
+  var api = { play: function() { ... } };
+  window.srsPinyin = api;
+  ```
+
 ### Database
 - Use SQLAlchemy ORM models
 - Access database through service layer (database/services/)

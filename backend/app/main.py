@@ -5370,6 +5370,67 @@ def get_pinyin_curriculum_stage(element_or_syllable: str, note_type: str, elemen
         return (stage, 2)  # syllables come after elements (initial=0, final=1, syllable=2)
     
     return (99, 0)
+
+# --- NEW PINYIN SORTING LOGIC ---
+# Strict Teaching Order: Simple Finals -> Initials -> Compound Finals
+CURRICULUM_SEQUENCE = [
+    # STAGE 1: The Basics (Simple Finals then Lips)
+    'a', 'o', 'e', 'i', 'u', 'ü', 
+    'b', 'p', 'm', 'f',
+    
+    # STAGE 2: Tip of Tongue
+    'd', 't', 'n', 'l',
+    'ai', 'ei', 'ao', 'ou',
+    
+    # STAGE 3: Root of Tongue
+    'g', 'k', 'h',
+    'an', 'en', 'in', 'un',
+    
+    # STAGE 4: Teeth & Curl
+    'z', 'c', 's', 
+    'zh', 'ch', 'sh', 'r',
+    'ang', 'eng', 'ing', 'ong', 'er',
+    
+    # STAGE 5: Magic Palatals & Compounds
+    'j', 'q', 'x', 'y', 'w',
+    'ia', 'ie', 'iao', 'iu', 'ian', 'iang', 'iong', 
+    'ua', 'uo', 'uai', 'ui', 'uan', 'uang', 
+    'ue', 'üe', 'üan', 'ün'
+]
+
+# Lookup map for O(1) speed
+CURRICULUM_MAP = {val: i for i, val in enumerate(CURRICULUM_SEQUENCE)}
+
+def get_pinyin_sort_key(note_dict):
+    """
+    Returns sort key: (Curriculum_Index, Is_Syllable, Display_Order)
+    1. Curriculum_Index: Ensures 'a' comes before 'b'
+    2. Is_Syllable: Ensures 'a' element card (0) comes before 'ma' syllable card (1)
+    3. Display_Order: Tie-breaker for manual ordering
+    """
+    note_type = note_dict.get('type')
+    fields = note_dict.get('fields', {})
+    display_order = note_dict.get('display_order', 999999)
+
+    # Determine the "Anchor" (the pinyin element this card belongs to)
+    anchor = ''
+    if note_type == 'element':
+        anchor = note_dict.get('element', '').lower()
+        is_syllable = 0
+    else:
+        # Syllable cards anchor to 'ElementToLearn' (e.g., 'ma' anchors to 'a')
+        anchor = fields.get('ElementToLearn', '').lower()
+        # Fallback: if ElementToLearn is missing, guess from the syllable
+        if not anchor:
+            syllable = note_dict.get('syllable', '').strip()
+            if syllable:
+                # Simple heuristic: last char is often the simple final
+                anchor = syllable[-1]
+        is_syllable = 1
+        
+    curriculum_index = CURRICULUM_MAP.get(anchor, 999)
+    return (curriculum_index, is_syllable, display_order)
+
 print("🔥🔥🔥 LOADING PINYIN ROUTE 🔥🔥🔥")
 @app.post("/pinyin/sync")
 async def sync_pinyin_notes(request: Dict[str, Any]):
@@ -5461,13 +5522,9 @@ async def sync_pinyin_notes(request: Dict[str, Any]):
                         'curriculum_sub_order': sub_order
                     })
             
-            # Sort by curriculum stage (primary), then sub_order (initials before finals before syllables), 
-            # then display_order (preserve original order within same stage/type)
-            all_notes.sort(key=lambda x: (
-                x.get('curriculum_stage', 99),
-                x.get('curriculum_sub_order', 2),
-                x.get('display_order', 999999)
-            ))
+            # Sort using strict Pinyin curriculum order
+            # Ensures correct order: 'a' element before 'b' element, element cards before syllable cards
+            all_notes.sort(key=get_pinyin_sort_key)
         finally:
             db.close()
         
@@ -5674,24 +5731,24 @@ async def sync_pinyin_notes(request: Dict[str, Any]):
             
             # Handle audio fields
             if field_name in ['WordAudio', 'Audio']:
-                # If it's already a [sound:...] tag, update it
+                # Extract filename from [sound:...] tag if present, or use plain filename
                 if '[sound:' in field_value:
                     audio_pattern = r'\[sound:([^\]]+)\]'
-                    def replace_audio(match):
+                    match = re.search(audio_pattern, field_value)
+                    if match:
                         original_filename = match.group(1)
+                        # Return plain filename (mapped if available)
                         if original_filename in anki_media_map:
-                            anki_filename = anki_media_map[original_filename]
-                            return f"[sound:{anki_filename}]"
-                        return match.group(0)
-                    return re.sub(audio_pattern, replace_audio, field_value)
+                            return anki_media_map[original_filename]
+                        return original_filename
+                    return ""
                 else:
-                    # Convert plain filename to [sound:...] format
+                    # Already a plain filename, just update mapping if needed
                     filename = Path(field_value).name
                     if filename in anki_media_map:
-                        anki_filename = anki_media_map[filename]
-                        return f"[sound:{anki_filename}]"
+                        return anki_media_map[filename]
                     elif filename:
-                        return f"[sound:{filename}]"
+                        return filename
                     return ""
             
             # For other fields, update any embedded media references
@@ -6367,11 +6424,11 @@ def get_element_to_learn(syllable: str) -> str:
 
 def generate_word_audio(word: str) -> str:
     """
-    Generate WordAudio field in format: [sound:cm_tts_zh_<word>.mp3]
+    Generate WordAudio field with plain filename: cm_tts_zh_<word>.mp3
     """
     if not word:
         return ''
-    return f"[sound:cm_tts_zh_{word}.mp3]"
+    return f"cm_tts_zh_{word}.mp3"
 
 
 @app.post("/pinyin/apply-suggestions")
