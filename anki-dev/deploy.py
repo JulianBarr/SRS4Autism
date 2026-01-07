@@ -22,9 +22,9 @@ MODELS = {
     "CUMA - Pinyin Element": {
         "css_file": "pinyin_element.css",
         "fields": [
-            "Element", "ExampleChar", "Picture", 
-            "Tone1", "Tone2", "Tone3", "Tone4", 
-            "_Remarks", "_KG_Map", "Tags"
+            "Element", "ExampleChar", "Picture",
+            "Tone1", "Tone2","Tone3","Tone4",
+            "_Remarks", "_KG_Map" 
         ],
         "card_templates": {
             "Element Card": {
@@ -36,31 +36,26 @@ MODELS = {
     "CUMA - Pinyin Syllable": {
         "css_file": "pinyin_syllable.css",
         "fields": [
-            "Element", "ExampleChar", "Picture",
-            "Tone1", "Tone2", "Tone3", "Tone4",
+            "ElementToLearn", "Syllable",
             "WordPinyin", "WordHanzi", "WordPicture", "WordAudio",
             "_Remarks", "_KG_Map", "Tags"
         ],
         "card_templates": {
-            "MCQ Confusor": {
-                "front": "pinyin_syllable_card_mcq_confusor_front.html",
-                "back": "pinyin_syllable_card_mcq_confusor_back.html"
-            },
-            "MCQ Recent": {
-                "front": "pinyin_syllable_card_mcq_recent_front.html",
-                "back": "pinyin_syllable_card_mcq_recent_back.html"
-            },
-            "MCQ Tone": {
-                "front": "pinyin_syllable_card_mcq_tone_front.html",
-                "back": "pinyin_syllable_card_mcq_tone_back.html"
-            },
-            "Pinyin to Word": {
+            "01 - Pinyin to Word": {
                 "front": "pinyin_syllable_card_pinyin_to_word_front.html",
                 "back": "pinyin_syllable_card_pinyin_to_word_back.html"
             },
-            "Word to Pinyin": {
-                "front": "pinyin_syllable_card_word_to_pinyin_front.html",
-                "back": "pinyin_syllable_card_word_to_pinyin_back.html"
+            "02 - MCQ Recent": {
+                "front": "pinyin_syllable_card_mcq_recent_front.html",
+                "back": "pinyin_syllable_card_mcq_recent_back.html"
+            },
+            "03 - MCQ Confusor": {
+                "front": "pinyin_syllable_card_mcq_confusor_front.html",
+                "back": "pinyin_syllable_card_mcq_confusor_back.html"
+            },
+            "04 - MCQ Tone": {
+                "front": "pinyin_syllable_card_mcq_tone_front.html",
+                "back": "pinyin_syllable_card_mcq_tone_back.html"
             }
         }
     }

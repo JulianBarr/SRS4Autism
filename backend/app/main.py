@@ -6541,29 +6541,7 @@ async def apply_pinyin_suggestions(request: Dict[str, Any]):
                         if image_file:
                             fields['WordPicture'] = f'<img src="{image_file}">'
                         
-                        # Generate missing fields if they don't exist
-                        if not fields.get('Tone1') or not fields.get('Tone2') or not fields.get('Tone3') or not fields.get('Tone4'):
-                            tone_variations = generate_tone_variations(syllable)
-                            if not fields.get('Tone1'):
-                                fields['Tone1'] = tone_variations[0] if len(tone_variations) > 0 else ''
-                            if not fields.get('Tone2'):
-                                fields['Tone2'] = tone_variations[1] if len(tone_variations) > 1 else ''
-                            if not fields.get('Tone3'):
-                                fields['Tone3'] = tone_variations[2] if len(tone_variations) > 2 else ''
-                            if not fields.get('Tone4'):
-                                fields['Tone4'] = tone_variations[3] if len(tone_variations) > 3 else ''
-                        
-                        if not fields.get('Confusor1') or not fields.get('Confusor2') or not fields.get('Confusor3'):
-                            confusors = generate_confusors(syllable)
-                            if not fields.get('Confusor1'):
-                                fields['Confusor1'] = confusors[0] if len(confusors) > 0 else ''
-                                fields['ConfusorPicture1'] = ''
-                            if not fields.get('Confusor2'):
-                                fields['Confusor2'] = confusors[1] if len(confusors) > 1 else ''
-                                fields['ConfusorPicture2'] = ''
-                            if not fields.get('Confusor3'):
-                                fields['Confusor3'] = confusors[2] if len(confusors) > 2 else ''
-                                fields['ConfusorPicture3'] = ''
+                        # Note: Tone1-4 fields are now obsolete - generated dynamically on frontend
                         
                         if not fields.get('ElementToLearn'):
                             fields['ElementToLearn'] = get_element_to_learn(syllable)
@@ -6579,8 +6557,7 @@ async def apply_pinyin_suggestions(request: Dict[str, Any]):
                         fixed_pinyin = fix_iu_ui_tone_placement(pinyin or '') if pinyin else ''
                         
                         # Generate all required fields
-                        tone_variations = generate_tone_variations(syllable)
-                        confusors = generate_confusors(syllable)
+                        # Note: Tone1-4 fields are now obsolete - generated dynamically on frontend
                         element_to_learn = get_element_to_learn(syllable)
                         word_audio = generate_word_audio(word)
                         
@@ -6596,16 +6573,6 @@ async def apply_pinyin_suggestions(request: Dict[str, Any]):
                             'WordHanzi': word,
                             'WordPicture': word_picture,
                             'WordAudio': word_audio,
-                            'Tone1': tone_variations[0] if len(tone_variations) > 0 else '',
-                            'Tone2': tone_variations[1] if len(tone_variations) > 1 else '',
-                            'Tone3': tone_variations[2] if len(tone_variations) > 2 else '',
-                            'Tone4': tone_variations[3] if len(tone_variations) > 3 else '',
-                            'Confusor1': confusors[0] if len(confusors) > 0 else '',
-                            'ConfusorPicture1': '',
-                            'Confusor2': confusors[1] if len(confusors) > 1 else '',
-                            'ConfusorPicture2': '',
-                            'Confusor3': confusors[2] if len(confusors) > 2 else '',
-                            'ConfusorPicture3': '',
                             '_Remarks': '',
                             '_KG_Map': '{}'
                         }

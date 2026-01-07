@@ -4,14 +4,45 @@
 
 <script>
 (function() {
+  // Read data safely from hidden DOM elements
+  const correctSyllableEl = document.getElementById('data-correct-syllable');
   const container = document.getElementById('mcq-tone-front');
-  if (!container) return;
+  if (!correctSyllableEl || !container) return;
   
-  const options = container.querySelectorAll('.mcq-option');
-  const correctAnswer = '{{Syllable}}';
+  const correctAnswer = correctSyllableEl.innerText.trim();
+  
+  // Deterministic seeded random generator (same as front)
+  let seed = 0;
+  const seedString = correctAnswer;
+  for (let i = 0; i < seedString.length; i++) {
+    seed = (seed + seedString.charCodeAt(i)) % 100000;
+  }
+  const seededRandom = function() {
+    var x = Math.sin(seed++) * 10000;
+    return x - Math.floor(x);
+  };
+  
+  // Fisher-Yates shuffle with seeded random
+  function shuffleArray(array) {
+    const shuffled = array.slice();
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(seededRandom() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  }
+  
+  const options = Array.from(container.querySelectorAll('.mcq-option'));
+  
+  // Apply same shuffle as front to maintain order
+  const shuffled = shuffleArray(options);
+  shuffled.forEach(btn => container.appendChild(btn));
+  
+  // Re-query after shuffle
+  const finalOptions = container.querySelectorAll('.mcq-option');
   
   // Disable all buttons
-  options.forEach(btn => {
+  finalOptions.forEach(btn => {
     btn.disabled = true;
     btn.style.pointerEvents = 'none';
     
@@ -23,7 +54,8 @@
   // Highlight correct answer
   const newOptions = container.querySelectorAll('.mcq-option');
   newOptions.forEach(btn => {
-    if (btn.textContent.trim() === correctAnswer) {
+    const syllable = btn.getAttribute('data-syllable');
+    if (syllable === correctAnswer) {
       btn.classList.add('selected');
     }
   });
