@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Form, File, UploadFile
+from fastapi import FastAPI, HTTPException, Form, File, UploadFile, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
@@ -33,6 +33,7 @@ from fastapi import Depends
 
 from agentic import AgenticPlanner, AgentMemory, PrincipleStore, AgentTools
 import google.generativeai as genai
+from openai import OpenAI
 try:
     from dotenv import load_dotenv
     load_dotenv()
@@ -403,6 +404,73 @@ def _save_word_kp_cache():
         save_json_file(WORD_KP_CACHE_FILE, _word_kp_cache)
     except Exception as exc:
         print(f"⚠️ Failed to save word knowledge cache: {exc}")
+
+
+def get_llm_client_from_request(request: Request):
+    """
+    Creates an LLM client (OpenAI-compatible) based on request headers.
+    Headers: X-LLM-Provider, X-LLM-Key, X-LLM-Base-URL
+    """
+    provider = request.headers.get("X-LLM-Provider", "gemini").lower()
+    api_key = request.headers.get("X-LLM-Key")
+    base_url = request.headers.get("X-LLM-Base-URL")
+
+    # Handle DeepSeek / OpenAI
+    if provider in ["deepseek", "openai"]:
+        # Fallback to env vars if header is missing
+        if not api_key:
+            api_key = os.getenv("DEEPSEEK_API_KEY") if provider == "deepseek" else os.getenv("OPENAI_API_KEY")
+        
+        # Default Base URLs
+        if not base_url:
+            base_url = "https://api.deepseek.com" if provider == "deepseek" else None
+        
+        if api_key:
+            try:
+                return OpenAI(api_key=api_key, base_url=base_url)
+            except Exception as e:
+                print(f"Client init failed: {e}")
+        return None
+    return _genai_model  # Default fallback
+
+
+def _run_director_agent(prompt: str, client=None) -> str:
+    """
+    Run the director agent with an optional client.
+    If client is an OpenAI instance, use client.chat.completions.create.
+    If client is None or a Gemini object, use _genai_model.generate_content.
+    
+    Args:
+        prompt: The prompt to send to the LLM
+        client: Optional OpenAI client or None/Gemini model
+        
+    Returns:
+        Generated text content
+    """
+    # Check if client is an OpenAI instance
+    if client is not None and isinstance(client, OpenAI):
+        try:
+            response = client.chat.completions.create(
+                model="gpt-4o-mini",  # Default model, can be made configurable
+                messages=[
+                    {"role": "user", "content": prompt}
+                ]
+            )
+            return response.choices[0].message.content
+        except Exception as e:
+            print(f"OpenAI client error: {e}")
+            # Fallback to Gemini if OpenAI fails
+            if _genai_model:
+                response = _genai_model.generate_content(prompt)
+                return response.text
+            raise
+    
+    # Use Gemini (default or fallback)
+    if _genai_model:
+        response = _genai_model.generate_content(prompt)
+        return response.text
+    else:
+        raise Exception("No LLM client available. Please configure GEMINI_API_KEY or provide X-LLM-Key header.")
 
 
 # Initialize Agentic components (lazy instantiation ensures compatibility with existing code)
@@ -1526,7 +1594,7 @@ async def delete_card(card_id: str):
     return {"message": "Card deleted successfully"}
 
 @app.post("/cards/{card_id}/generate-image")
-async def generate_card_image(card_id: str, request: CardImageRequest):
+async def generate_card_image(card_id: str, request: CardImageRequest, req: Request):
     cards = load_json_file(CARDS_FILE, [])
     card_index = next((idx for idx, card in enumerate(cards) if card.get("id") == card_id), None)
     
@@ -1548,6 +1616,9 @@ async def generate_card_image(card_id: str, request: CardImageRequest):
         from agent.content_generator import ContentGenerator
         import base64
         
+        # Get LLM client from request headers (stateless configuration)
+        llm_client = get_llm_client_from_request(req)
+        
         # Get image model from request (config.image_model or direct image_model field)
         image_model = None
         if request.config and request.config.get("image_model"):
@@ -1568,11 +1639,63 @@ async def generate_card_image(card_id: str, request: CardImageRequest):
         )
         user_request = request.user_request or f"Generate an illustration for this flashcard content: {primary_text}"
         
-        image_description = conversation_handler._generate_image_description(
-            card_content=sanitized_card,
-            user_request=user_request,
-            child_profile=None
-        )
+        # Build image description prompt (same as ConversationHandler._generate_image_description)
+        context_str = "No specific context available"  # child_profile is None in this endpoint
+        prompt = f"""You are an expert at creating detailed image descriptions for educational flashcards for children with autism.
+
+**Child Context:**
+{context_str}
+
+**Flashcard Content:**
+Front: {sanitized_card.get('front', '')}
+Back: {sanitized_card.get('back', '')}
+Card Type: {sanitized_card.get('card_type', 'basic')}
+
+**User Request:**
+{user_request}
+
+**Instructions:**
+Create a detailed, vivid description of an image that would be perfect for this flashcard. The image should be:
+
+1. **Child-friendly**: Simple, colorful, and engaging for a child with autism
+2. **Educational**: Clearly illustrates the concept being taught
+3. **Appropriate**: Age-appropriate and culturally sensitive
+4. **Visual**: Rich in visual details that can be easily rendered
+5. **Inclusive**: Consider the child's interests and character preferences
+
+**Image Description Guidelines:**
+- Be specific about colors, shapes, and composition
+- Include details about the setting, characters, and objects
+- Make it vivid and easy to visualize
+- Keep it simple but engaging
+- Consider the child's interests if mentioned
+
+**Output:**
+Provide a detailed image description that an artist could use to create the perfect illustration for this flashcard. Be specific about visual elements, colors, composition, and style.
+
+**Example Format:**
+"A simple, colorful illustration showing [main subject] in [setting]. The image features [key elements] with [color scheme]. The style should be [artistic style] with [specific details]."
+
+Generate the image description now:"""
+        
+        # Use _run_director_agent with the stateless client
+        try:
+            print("\n" + "="*80)
+            print("🎨 IMAGE GENERATION - SENDING TO LLM:")
+            print("-"*80)
+            print(prompt)
+            print("="*80 + "\n")
+            
+            image_description = _run_director_agent(prompt, client=llm_client)
+            
+            print("\n" + "="*80)
+            print("🎨 IMAGE DESCRIPTION GENERATED:")
+            print("-"*80)
+            print(image_description)
+            print("="*80 + "\n")
+        except Exception as e:
+            print(f"Image description generation error: {e}")
+            image_description = f"A simple, colorful illustration showing the concept from the flashcard: '{sanitized_card.get('front', '')}' - '{sanitized_card.get('back', '')}'. The image should be child-friendly, educational, and visually engaging with bright colors and clear, simple shapes."
         
         image_result = conversation_handler.generate_actual_image(
             image_description=image_description,
