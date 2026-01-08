@@ -18,6 +18,10 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
   const [lastIntent, setLastIntent] = useState(null);
   const [expandedMentionGroups, setExpandedMentionGroups] = useState({});
   const [expandedMessages, setExpandedMessages] = useState(new Set());
+  const [availableModels, setAvailableModels] = useState({ card_models: [], image_models: [] });
+  const [selectedCardModel, setSelectedCardModel] = useState(null);
+  const [selectedImageModel, setSelectedImageModel] = useState(null);
+  const [showModelSettings, setShowModelSettings] = useState(false);
   const messagesEndRef = useRef(null);
   const messagesContainerRef = useRef(null);
   const inputRef = useRef(null);
@@ -70,6 +74,7 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
     loadChatHistory();
     loadNoteTypes();
     loadTemplates();
+    loadAvailableModels();
   }, []);
 
   const loadChatHistory = async () => {
@@ -106,6 +111,40 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
     } catch (error) {
       console.error('Error loading templates:', error);
       setTemplates([]);
+    }
+  };
+
+  const loadAvailableModels = async () => {
+    try {
+      const response = await axios.get(`${API_BASE}/config/models`);
+      setAvailableModels(response.data || { card_models: [], image_models: [] });
+      
+      // Load saved selections from localStorage
+      const savedCardModel = localStorage.getItem('selectedCardModel');
+      const savedImageModel = localStorage.getItem('selectedImageModel');
+      
+      // Set default selections (first model in each category) or use saved
+      if (response.data?.card_models?.length > 0) {
+        if (savedCardModel && response.data.card_models.find(m => m.id === savedCardModel)) {
+          setSelectedCardModel(savedCardModel);
+        } else if (!selectedCardModel) {
+          const defaultModel = response.data.card_models[0].id;
+          setSelectedCardModel(defaultModel);
+          localStorage.setItem('selectedCardModel', defaultModel);
+        }
+      }
+      if (response.data?.image_models?.length > 0) {
+        if (savedImageModel && response.data.image_models.find(m => m.id === savedImageModel)) {
+          setSelectedImageModel(savedImageModel);
+        } else if (!selectedImageModel) {
+          const defaultModel = response.data.image_models[0].id;
+          setSelectedImageModel(defaultModel);
+          localStorage.setItem('selectedImageModel', defaultModel);
+        }
+      }
+    } catch (error) {
+      console.error('Error loading available models:', error);
+      setAvailableModels({ card_models: [], image_models: [] });
     }
   };
 
@@ -354,12 +393,22 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
 
+    // Build config object if models are selected
+    const config = {};
+    if (selectedCardModel) {
+      config.card_model = selectedCardModel;
+    }
+    if (selectedImageModel) {
+      config.image_model = selectedImageModel;
+    }
+
     const userMessage = {
       id: Date.now().toString(),
       content: input,
       role: 'user',
       timestamp: new Date().toISOString(),
-      mentions: extractMentions(input)
+      mentions: extractMentions(input),
+      ...(Object.keys(config).length > 0 && { config })
     };
 
     setMessages(prev => [...prev, userMessage]);
@@ -517,12 +566,97 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
             </div>
           )}
         </div>
-        {messages.length > 0 && (
-          <button onClick={handleClearHistory} className="btn btn-secondary clear-history-btn">
-            {t('clearHistory')}
+        <div style={{display: 'flex', gap: '10px', alignItems: 'center'}}>
+          <button 
+            onClick={() => setShowModelSettings(!showModelSettings)} 
+            className="btn btn-secondary"
+            style={{fontSize: '0.9em', padding: '6px 12px'}}
+            title="AI Model Settings"
+          >
+            ⚙️ Models
           </button>
-        )}
+          {messages.length > 0 && (
+            <button onClick={handleClearHistory} className="btn btn-secondary clear-history-btn">
+              {t('clearHistory')}
+            </button>
+          )}
+        </div>
       </div>
+      
+      {/* Model Selection Panel */}
+      {showModelSettings && (
+        <div style={{
+          marginBottom: '15px',
+          padding: '15px',
+          backgroundColor: '#f8f9fa',
+          borderRadius: '8px',
+          border: '1px solid #dee2e6'
+        }}>
+          <h4 style={{marginTop: 0, marginBottom: '10px'}}>🤖 AI Model Configuration</h4>
+          <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px'}}>
+            <div>
+              <label style={{display: 'block', marginBottom: '5px', fontWeight: 'bold', fontSize: '0.9em'}}>
+                Card Generation Model:
+              </label>
+              <select
+                value={selectedCardModel || ''}
+                onChange={(e) => {
+                  setSelectedCardModel(e.target.value);
+                  localStorage.setItem('selectedCardModel', e.target.value);
+                }}
+                style={{
+                  width: '100%',
+                  padding: '8px',
+                  borderRadius: '4px',
+                  border: '1px solid #ced4da',
+                  fontSize: '0.9em'
+                }}
+              >
+                {availableModels.card_models.map(model => (
+                  <option key={model.id} value={model.id}>
+                    {model.name} ({model.provider})
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label style={{display: 'block', marginBottom: '5px', fontWeight: 'bold', fontSize: '0.9em'}}>
+                Image Generation Model:
+              </label>
+              <select
+                value={selectedImageModel || ''}
+                onChange={(e) => {
+                  setSelectedImageModel(e.target.value);
+                  localStorage.setItem('selectedImageModel', e.target.value);
+                }}
+                style={{
+                  width: '100%',
+                  padding: '8px',
+                  borderRadius: '4px',
+                  border: '1px solid #ced4da',
+                  fontSize: '0.9em'
+                }}
+              >
+                {availableModels.image_models.map(model => (
+                  <option key={model.id} value={model.id}>
+                    {model.name} ({model.provider})
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <div style={{marginTop: '10px', fontSize: '0.85em', color: '#6c757d'}}>
+            <strong>Selected:</strong> {selectedCardModel && (
+              <span>Card: {availableModels.card_models.find(m => m.id === selectedCardModel)?.name || selectedCardModel}</span>
+            )}
+            {selectedCardModel && selectedImageModel && ' | '}
+            {selectedImageModel && (
+              <span>Image: {availableModels.image_models.find(m => m.id === selectedImageModel)?.name || selectedImageModel}</span>
+            )}
+            {!selectedCardModel && !selectedImageModel && 'Using default models'}
+          </div>
+        </div>
+      )}
       
       <div className="chat-container">
         <div className="chat-messages" ref={messagesContainerRef}>

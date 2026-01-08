@@ -14,7 +14,8 @@ import csv
 import io
 import re
 import unicodedata
-from functools import lru_cache
+from functools import lru_cache, partial
+import asyncio
 from pathlib import Path
 import math
 import tempfile
@@ -193,6 +194,8 @@ class CardImageRequest(BaseModel):
     position: Optional[str] = "front"
     location: Optional[str] = "after"
     user_request: Optional[str] = None
+    config: Optional[Dict[str, str]] = None  # Optional model configuration: {"image_model": "..."}
+    image_model: Optional[str] = None  # Direct image model ID (for convenience)
 
 class ChatMessage(BaseModel):
     id: str
@@ -200,6 +203,7 @@ class ChatMessage(BaseModel):
     role: str  # "user" or "assistant"
     timestamp: datetime
     mentions: List[str] = []
+    config: Optional[Dict[str, str]] = None  # Optional model configuration: {"card_model": "...", "image_model": "..."}
 
 class AnkiProfile(BaseModel):
     name: str
@@ -322,6 +326,7 @@ ANKI_PROFILES_FILE = str(PROJECT_ROOT / "data" / "profiles" / "anki_profiles.jso
 CHAT_HISTORY_FILE = str(PROJECT_ROOT / "data" / "content_db" / "chat_history.json")
 PROMPT_TEMPLATES_FILE = str(PROJECT_ROOT / "data" / "profiles" / "prompt_templates.json")
 WORD_KP_CACHE_FILE = str(PROJECT_ROOT / "data" / "content_db" / "word_kp_cache.json")
+MODEL_CONFIG_FILE = str(PROJECT_ROOT / "config" / "model_config.json")
 ENGLISH_SIMILARITY_FILE = PROJECT_ROOT / "data" / "content_db" / "english_word_similarity.json"
 
 # Ensure data directories exist
@@ -1543,7 +1548,15 @@ async def generate_card_image(card_id: str, request: CardImageRequest):
         from agent.content_generator import ContentGenerator
         import base64
         
-        conversation_handler = ConversationHandler()
+        # Get image model from request (config.image_model or direct image_model field)
+        image_model = None
+        if request.config and request.config.get("image_model"):
+            image_model = request.config.get("image_model")
+        elif request.image_model:
+            image_model = request.image_model
+        
+        # Initialize handlers with image model configuration
+        conversation_handler = ConversationHandler(image_model=image_model)
         content_generator = ContentGenerator()
         
         primary_text = (
@@ -1660,6 +1673,16 @@ async def generate_card_image(card_id: str, request: CardImageRequest):
         print(f"Image generation endpoint error: {e}")
         raise HTTPException(status_code=500, detail=f"Failed to generate image: {str(e)}")
 
+# Configuration endpoints
+@app.get("/config/models")
+async def get_available_models():
+    """Get available AI models for card and image generation."""
+    model_config = load_json_file(MODEL_CONFIG_FILE, {
+        "card_models": [],
+        "image_models": []
+    })
+    return model_config
+
 # Chat endpoints
 @app.get("/chat/history", response_model=List[ChatMessage])
 async def get_chat_history():
@@ -1691,10 +1714,13 @@ async def send_message(message: ChatMessage):
             from agent.conversation_handler import ConversationHandler
             from agent.content_generator import ContentGenerator
             
-            # Initialize handlers
+            # Initialize handlers with model configuration from message
+            card_model = message.config.get("card_model") if message.config else None
+            image_model = message.config.get("image_model") if message.config else None
+            
             intent_detector = IntentDetector()
-            conversation_handler = ConversationHandler()
-            generator = ContentGenerator()
+            conversation_handler = ConversationHandler(card_model=card_model, image_model=image_model)
+            generator = ContentGenerator(card_model=card_model)
             
             # Parse @mentions from the message
             context_tags = parse_context_tags(message.content, message.mentions)
@@ -1911,11 +1937,17 @@ async def _handle_card_generation(message: ChatMessage, context_tags: List[Dict[
                     print(f"❌ Template not found: {template_value}")
         
         # Use the flexible agent method
-        cards = generator.generate_from_prompt(
-            user_prompt=message.content,
-            context_tags=context_tags,
-            child_profile=child_profile,
-            prompt_template=prompt_template
+        # Run the blocking LLM call in a thread pool to avoid blocking the event loop
+        loop = asyncio.get_event_loop()
+        cards = await loop.run_in_executor(
+            None,
+            partial(
+                generator.generate_from_prompt,
+                user_prompt=message.content,
+                context_tags=context_tags,
+                child_profile=child_profile,
+                prompt_template=prompt_template
+            )
         )
         
         # Save generated cards
@@ -1992,8 +2024,12 @@ async def _handle_image_generation(message: ChatMessage, context_tags: List[Dict
         from agent.content_generator import ContentGenerator
         import base64
         
-        conversation_handler = ConversationHandler()
-        content_generator = ContentGenerator()
+        # Get model configuration from message
+        card_model = message.config.get("card_model") if message.config else None
+        image_model = message.config.get("image_model") if message.config else None
+        
+        conversation_handler = ConversationHandler(card_model=card_model, image_model=image_model)
+        content_generator = ContentGenerator(card_model=card_model)
         
         # Generate image description first
         image_description = conversation_handler._generate_image_description(

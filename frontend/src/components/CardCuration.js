@@ -392,10 +392,20 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
     }));
 
     try {
-      const response = await axios.post(`${API_BASE}/cards/${cardId}/generate-image`, {
+      // Get selected image model from localStorage (set by ChatAssistant)
+      const selectedImageModel = localStorage.getItem('selectedImageModel');
+      
+      const requestBody = {
         position,
         location: 'before'
-      });
+      };
+      
+      // Include image_model if one is selected
+      if (selectedImageModel) {
+        requestBody.image_model = selectedImageModel;
+      }
+      
+      const response = await axios.post(`${API_BASE}/cards/${cardId}/generate-image`, requestBody);
 
       const message = response.data?.message || '';
       setImageGenerationState(prev => ({

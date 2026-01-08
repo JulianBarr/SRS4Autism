@@ -8,6 +8,10 @@ from pathlib import Path
 import uuid
 import os
 import re
+try:
+    from openai import OpenAI
+except ImportError:
+    OpenAI = None
 
 # Canonical note type names with CUMA prefix
 DEFAULT_NOTE_TYPES = {
@@ -114,23 +118,107 @@ class ContentGenerator:
     with @mentions to inject context (child profile, interests, grammar points, etc.)
     """
     
-    def __init__(self, api_key: str = None):
-        if api_key:
-            genai.configure(api_key=api_key)
-        else:
-            # Try to get from environment
-            api_key = os.getenv("GEMINI_API_KEY")
-            if api_key:
-                genai.configure(api_key=api_key)
-        
-        # Initialize the model - upgraded to Gemini 2.5 Flash
-        self.model = genai.GenerativeModel('models/gemini-2.5-flash')
-        
+    def __init__(self, api_key: str = None, card_model: Optional[str] = None):
         # Set up media objects directory for hash-based storage
         # PROJECT_ROOT is typically the parent of agent/ directory
         self.PROJECT_ROOT = Path(__file__).resolve().parent.parent
         self.MEDIA_OBJECTS_DIR = self.PROJECT_ROOT / "content" / "media" / "objects"
         self.MEDIA_OBJECTS_DIR.mkdir(parents=True, exist_ok=True)
+        
+        # Load model configuration
+        model_config_path = self.PROJECT_ROOT / "config" / "model_config.json"
+        model_config = {}
+        if model_config_path.exists():
+            with open(model_config_path, 'r') as f:
+                model_config = json.load(f)
+        
+        self.card_model_id = card_model or "gemini-2.5-flash"
+        
+        # Find model config for the selected model
+        self.model_config = None
+        for model in model_config.get("card_models", []):
+            if model["id"] == self.card_model_id:
+                self.model_config = model
+                break
+        
+        # Initialize based on provider
+        provider = self.model_config.get("provider", "google") if self.model_config else "google"
+        
+        if provider == "google":
+            # Initialize Gemini
+            if api_key:
+                genai.configure(api_key=api_key)
+            else:
+                # Try to get from environment
+                api_key = os.getenv("GEMINI_API_KEY")
+                if api_key:
+                    genai.configure(api_key=api_key)
+            
+            # Map model IDs to actual Gemini model names
+            model_map = {
+                "gemini-3-pro-preview": "models/gemini-3-pro-preview",
+                "gemini-2.0-flash": "models/gemini-2.0-flash",
+                "gemini-2.5-flash": "models/gemini-2.5-flash",
+            }
+            
+            model_name = model_map.get(self.card_model_id, self.card_model_id)
+            if not model_name.startswith("models/"):
+                model_name = f"models/{model_name}"
+            self.model = genai.GenerativeModel(model_name)
+            self.openai_client = None
+            
+        elif provider in ["deepseek", "alibaba"]:
+            # Initialize OpenAI-compatible client for DeepSeek/Qwen
+            if OpenAI is None:
+                raise ImportError("openai package is required for DeepSeek/Qwen models. Install with: pip install openai")
+            
+            api_key_env = "DEEPSEEK_API_KEY" if provider == "deepseek" else "DASHSCOPE_API_KEY"
+            model_api_key = os.getenv(api_key_env)
+            
+            if not model_api_key:
+                raise ValueError(f"{api_key_env} environment variable is required for {provider} models")
+            
+            base_url = self.model_config.get("base_url")
+            if not base_url:
+                raise ValueError(f"base_url not configured for model {self.card_model_id}")
+            
+            self.openai_client = OpenAI(
+                api_key=model_api_key,
+                base_url=base_url
+            )
+            self.model = None  # Not using Gemini model
+        else:
+            raise ValueError(f"Unsupported provider: {provider}")
+        
+        self.provider = provider
+    
+    def _generate_content(self, prompt: str) -> str:
+        """
+        Generate content using the configured model (Gemini, DeepSeek, or Qwen).
+        
+        Args:
+            prompt: The prompt to send to the model
+            
+        Returns:
+            Generated text content
+        """
+        if self.provider == "google":
+            # Use Gemini
+            response = self.model.generate_content(prompt)
+            return response.text
+        elif self.provider in ["deepseek", "alibaba"]:
+            # Use OpenAI-compatible API
+            model_name = self.model_config.get("model_name", self.card_model_id)
+            response = self.openai_client.chat.completions.create(
+                model=model_name,
+                messages=[
+                    {"role": "user", "content": prompt}
+                ],
+                temperature=0.7
+            )
+            return response.choices[0].message.content
+        else:
+            raise ValueError(f"Unsupported provider: {self.provider}")
 
     def _resolve_note_type_name(self, value: Optional[str]) -> Optional[str]:
         """Resolve incoming note type strings to canonical CUMA-prefixed names."""
@@ -168,16 +256,15 @@ class ContentGenerator:
         
         try:
             print("\n" + "="*80)
-            print("🤖 SENDING TO GEMINI:")
+            print(f"🤖 SENDING TO {self.provider.upper()} ({self.card_model_id}):")
             print("-"*80)
             print(system_prompt)
             print("="*80 + "\n")
             
-            response = self.model.generate_content(system_prompt)
-            content = response.text
+            content = self._generate_content(system_prompt)
             
             print("\n" + "="*80)
-            print("✨ GEMINI RESPONSE:")
+            print(f"✨ {self.provider.upper()} RESPONSE:")
             print("-"*80)
             print(content)
             print("="*80 + "\n")
@@ -445,8 +532,7 @@ class ContentGenerator:
         """
         
         try:
-            response = self.model.generate_content(prompt)
-            content = response.text
+            content = self._generate_content(prompt)
             
             # Clean up the response to extract JSON
             if "```json" in content:
@@ -500,8 +586,7 @@ class ContentGenerator:
         """
         
         try:
-            response = self.model.generate_content(prompt)
-            content = response.text
+            content = self._generate_content(prompt)
             
             # Clean up the response to extract JSON
             if "```json" in content:
@@ -553,8 +638,7 @@ class ContentGenerator:
         """
         
         try:
-            response = self.model.generate_content(prompt)
-            content = response.text
+            content = self._generate_content(prompt)
             
             # Clean up the response to extract JSON
             if "```json" in content:

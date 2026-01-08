@@ -1,8 +1,11 @@
 import google.generativeai as genai
 import os
 import base64
+import json
+import requests
 from typing import Dict, List, Any, Optional
 from datetime import datetime
+from pathlib import Path
 
 class ConversationHandler:
     """
@@ -10,7 +13,15 @@ class ConversationHandler:
     Provides helpful responses about the system, learning tips, and general chat.
     """
     
-    def __init__(self, api_key: str = None):
+    def __init__(self, api_key: str = None, card_model: Optional[str] = None, image_model: Optional[str] = None):
+        # Load model configuration
+        PROJECT_ROOT = Path(__file__).resolve().parent.parent
+        model_config_path = PROJECT_ROOT / "config" / "model_config.json"
+        model_config = {}
+        if model_config_path.exists():
+            with open(model_config_path, 'r') as f:
+                model_config = json.load(f)
+        
         if api_key:
             genai.configure(api_key=api_key)
         else:
@@ -19,15 +30,32 @@ class ConversationHandler:
             if api_key:
                 genai.configure(api_key=api_key)
         
-        # Initialize the model for text generation - upgraded to Gemini 2.5 Flash
-        self.model = genai.GenerativeModel('models/gemini-2.5-flash')
+        # Map model IDs to actual Gemini model names
+        self._model_map = {
+            "gemini-3-pro-preview": "models/gemini-3-pro-preview",
+            "gemini-2.0-flash": "models/gemini-2.0-flash",
+            "gemini-2.5-flash": "models/gemini-2.5-flash",
+        }
         
-        # Initialize the model for image generation - will try multiple models at generation time
-        # Models are tried in order: gemini-2.5-flash-image, then gemini-2.0-flash-exp-image-generation
-        # Note: For Imagen 4, we may need to use Vertex AI API instead
-        self.image_model = None  # Will be created dynamically during generation
+        # Initialize the model for text generation
+        model_name = self._model_map.get(card_model, card_model) if card_model else "models/gemini-2.5-flash"
+        if model_name and not model_name.startswith("models/"):
+            model_name = f"models/{model_name}"
+        self.model = genai.GenerativeModel(model_name)
+        self.card_model_id = card_model
         
-        # Image generation is always enabled with Gemini
+        # Store image model configuration
+        self.image_model_id = image_model
+        
+        # Find image model config
+        self.image_model_config = None
+        if self.image_model_id:
+            for model in model_config.get("image_models", []):
+                if model["id"] == self.image_model_id:
+                    self.image_model_config = model
+                    break
+        
+        # Image generation is always enabled
         self.image_generation_enabled = True
     
     def handle_conversation(self, message: str, context_tags: List[Dict[str, Any]] = None, 
@@ -249,7 +277,20 @@ Generate the image description now:"""
             return f"A simple, colorful illustration showing the concept from the flashcard: '{card_content.get('front', '')}' - '{card_content.get('back', '')}'. The image should be child-friendly, educational, and visually engaging with bright colors and clear, simple shapes."
     
     def generate_actual_image(self, image_description: str, user_request: str = "") -> Dict[str, Any]:
-        """Generate an image using Gemini 2.5 Flash Image Generation model (Nano Banana) or Imagen 4."""
+        """Generate an image using the configured image model or fallback to default models."""
+        
+        # Check if using SiliconFlow models
+        if self.image_model_config and self.image_model_config.get("provider") == "siliconflow":
+            return self._generate_siliconflow_image(image_description, user_request)
+        
+        # Check if using Gemini 3 native multimodal model (Nano Banana)
+        if self.image_model_id and (
+            self.image_model_id == "gemini-3-pro-image-preview" or
+            (self.image_model_id.startswith("gemini-") and "-image-" in self.image_model_id)
+        ):
+            return self._generate_gemini3_native_image(image_description, user_request)
+        
+        # Create a more specific prompt for Gemini image generation
         
         # Create a more specific prompt for Gemini image generation
         gemini_prompt = f"""Create a simple, child-friendly illustration for an educational flashcard.
@@ -268,11 +309,29 @@ Generate an image that matches this description exactly."""
 
         print(f"Prompt: {gemini_prompt}")
         
-        # Try different model names in order of preference
-        model_names_to_try = [
+        # Map image model IDs to actual Gemini model names
+        image_model_map = {
+            "gemini-3-pro-image-preview": "models/gemini-3-pro-image-preview",
+            "gemini-2.5-flash-image": "models/gemini-2.5-flash-image",
+            "gemini-2.0-flash-exp-image-generation": "models/gemini-2.0-flash-exp-image-generation",
+            "imagen-4.0-generate-001": "models/imagen-4.0-generate-001",  # Note: May require Vertex AI
+        }
+        
+        # Build list of models to try
+        model_names_to_try = []
+        
+        # If a specific image model is configured, try it first
+        if self.image_model_id and self.image_model_config and self.image_model_config.get("provider") == "google":
+            mapped_name = image_model_map.get(self.image_model_id, self.image_model_id)
+            if not mapped_name.startswith("models/"):
+                mapped_name = f"models/{mapped_name}"
+            model_names_to_try.append((mapped_name, f"Configured: {self.image_model_id}"))
+        
+        # Add fallback models
+        model_names_to_try.extend([
             ('models/gemini-2.5-flash-image', 'Gemini 2.5 Flash Image'),
             ('models/gemini-2.0-flash-exp-image-generation', 'Gemini 2.0 Flash Exp Image Generation'),
-        ]
+        ])
         
         for model_name, model_desc in model_names_to_try:
             try:
@@ -373,3 +432,245 @@ Generate an image that matches this description exactly."""
             "image_url": None,
             "image_data": None
         }
+    
+    def _generate_gemini3_native_image(self, image_description: str, user_request: str = "") -> Dict[str, Any]:
+        """Generate an image using Gemini 3 native multimodal model (Nano Banana).
+        
+        This uses the standard generate_content method with response_modalities=["IMAGE"],
+        NOT the legacy Imagen API.
+        """
+        # Map model ID to actual model name
+        model_name_map = {
+            "gemini-3-pro-image-preview": "models/gemini-3-pro-image-preview",
+        }
+        
+        model_name = model_name_map.get(self.image_model_id, self.image_model_id)
+        if not model_name.startswith("models/"):
+            model_name = f"models/{model_name}"
+        
+        # Build prompt combining description and user request
+        full_prompt = f"""Create a simple, child-friendly illustration for an educational flashcard.
+
+Description: {image_description}
+{f"Additional request: {user_request}" if user_request else ""}
+
+Requirements:
+- Style: clean, colorful, simple shapes
+- Suitable for children with autism
+- No text in the image
+- Clear, bold outlines
+- Bright, engaging colors
+- Simple composition with single focus
+
+Generate an image that matches this description exactly."""
+        
+        try:
+            print(f"\n🎨 GENERATING IMAGE WITH GEMINI 3 NATIVE MULTIMODAL ({self.image_model_id}):")
+            print(f"DEBUG: Using NATIVE MULTIMODAL flow for {self.image_model_id}")
+            print(f"Model: {model_name}")
+            print(f"Description: {image_description}")
+            print(f"User Request: {user_request}")
+            
+            # 1. Use standard GenerativeModel, NOT ImageGenerationModel
+            model = genai.GenerativeModel(model_name)
+            
+            # 2. Call standard generate_content with response_modalities=["IMAGE"]
+            response = model.generate_content(
+                full_prompt,
+                generation_config={
+                    "response_modalities": ["IMAGE"],  # Request only image, not text
+                    "temperature": 0.7,
+                }
+            )
+            
+            print(f"Response type: {type(response)}")
+            print(f"Response parts: {len(response.parts) if hasattr(response, 'parts') else 'No parts'}")
+            
+            # 3. Extract Image from Response Parts
+            # The image is not in response.text, but in response.parts
+            image_data = None
+            mime_type = None
+            
+            if hasattr(response, 'parts') and response.parts:
+                for i, part in enumerate(response.parts):
+                    print(f"Part {i}: {type(part)}")
+                    print(f"  Part attributes: {dir(part)}")
+                    
+                    # Check for inline_data (Gemini SDK format)
+                    if hasattr(part, 'inline_data') and part.inline_data:
+                        print(f"  Found inline_data in part {i}")
+                        image_data = part.inline_data.data
+                        mime_type = part.inline_data.mime_type
+                        break
+                    
+                    # Check for bytes attribute (alternative format)
+                    if hasattr(part, 'bytes') and part.bytes:
+                        print(f"  Found bytes in part {i}")
+                        image_data = part.bytes
+                        # Try to detect mime type from part attributes
+                        if hasattr(part, 'mime_type'):
+                            mime_type = part.mime_type
+                        else:
+                            mime_type = "image/png"  # Default
+                        break
+                    
+                    # Check for mime_type attribute that starts with 'image/'
+                    if hasattr(part, 'mime_type') and part.mime_type and part.mime_type.startswith('image/'):
+                        print(f"  Found image mime_type in part {i}: {part.mime_type}")
+                        # Try to get data from various possible attributes
+                        if hasattr(part, 'data'):
+                            image_data = part.data
+                            mime_type = part.mime_type
+                            break
+                        elif hasattr(part, 'content'):
+                            image_data = part.content
+                            mime_type = part.mime_type
+                            break
+                    
+                    # Check for text (might contain base64 or other info)
+                    if hasattr(part, 'text') and part.text:
+                        print(f"  Part {i} text: {part.text[:100]}...")
+            
+            if not image_data:
+                raise Exception("Gemini 3 did not return an image part. Check response.parts for available data.")
+            
+            # 4. Convert to base64 data URL
+            if isinstance(image_data, str):
+                # If it's already a data URL, use it
+                if image_data.startswith("data:"):
+                    data_url = image_data
+                else:
+                    # Assume it's base64 encoded
+                    base64_data = image_data
+                    mime_type = mime_type or "image/png"
+                    data_url = f"data:{mime_type};base64,{base64_data}"
+            else:
+                # Convert bytes to base64
+                base64_data = base64.b64encode(image_data).decode('utf-8')
+                mime_type = mime_type or "image/png"
+                data_url = f"data:{mime_type};base64,{base64_data}"
+            
+            print(f"✅ Successfully extracted image (mime_type: {mime_type}, size: {len(image_data) if isinstance(image_data, bytes) else 'N/A'} bytes)")
+            
+            return {
+                "success": True,
+                "error": None,
+                "image_url": None,  # Gemini doesn't provide URLs
+                "image_data": data_url,
+                "prompt_used": full_prompt,
+                "is_placeholder": False
+            }
+            
+        except Exception as e:
+            error_msg = str(e)
+            print(f"⚠️  Error with Gemini 3 native multimodal: {error_msg}")
+            import traceback
+            traceback.print_exc()
+            return {
+                "success": False,
+                "error": f"Gemini 3 native image generation failed: {error_msg}",
+                "image_url": None,
+                "image_data": None
+            }
+    
+    def _generate_siliconflow_image(self, image_description: str, user_request: str = "") -> Dict[str, Any]:
+        """Generate an image using SiliconFlow API (Kolors or Hunyuan)."""
+        
+        # Check for API key
+        api_key = os.getenv("SILICONFLOW_API_KEY")
+        if not api_key:
+            return {
+                "success": False,
+                "error": "SILICONFLOW_API_KEY environment variable is required for SiliconFlow image models",
+                "image_url": None,
+                "image_data": None
+            }
+        
+        # Get API URL and model name from config
+        api_url = self.image_model_config.get("api_url")
+        model_name = self.image_model_config.get("model_name")
+        
+        if not api_url or not model_name:
+            return {
+                "success": False,
+                "error": f"API configuration missing for model {self.image_model_id}",
+                "image_url": None,
+                "image_data": None
+            }
+        
+        # Build prompt combining description and user request
+        full_prompt = image_description
+        if user_request:
+            full_prompt = f"{full_prompt}. {user_request}"
+        
+        try:
+            print(f"\n🎨 GENERATING IMAGE WITH SILICONFLOW ({model_name}):")
+            print(f"Description: {image_description}")
+            print(f"User Request: {user_request}")
+            
+            # Make API request
+            headers = {
+                "Authorization": f"Bearer {api_key}",
+                "Content-Type": "application/json"
+            }
+            
+            payload = {
+                "model": model_name,
+                "prompt": full_prompt,
+                "n": 1,
+                "size": "1024x1024"
+            }
+            
+            response = requests.post(api_url, json=payload, headers=headers, timeout=60)
+            response.raise_for_status()
+            
+            result = response.json()
+            
+            # Extract image URL from response
+            if "data" in result and len(result["data"]) > 0:
+                image_url = result["data"][0].get("url")
+                
+                if image_url:
+                    # Download the image and convert to base64 data URL
+                    img_response = requests.get(image_url, timeout=30)
+                    img_response.raise_for_status()
+                    image_data = img_response.content
+                    mime_type = "image/png"  # Default, could detect from response headers
+                    
+                    base64_data = base64.b64encode(image_data).decode('utf-8')
+                    data_url = f"data:{mime_type};base64,{base64_data}"
+                    
+                    return {
+                        "success": True,
+                        "error": None,
+                        "image_url": image_url,
+                        "image_data": data_url,
+                        "prompt_used": full_prompt,
+                        "is_placeholder": False
+                    }
+            
+            return {
+                "success": False,
+                "error": "No image URL in SiliconFlow response",
+                "image_url": None,
+                "image_data": None
+            }
+            
+        except requests.exceptions.RequestException as e:
+            error_msg = str(e)
+            print(f"⚠️  SiliconFlow API error: {error_msg}")
+            return {
+                "success": False,
+                "error": f"SiliconFlow API error: {error_msg}",
+                "image_url": None,
+                "image_data": None
+            }
+        except Exception as e:
+            error_msg = str(e)
+            print(f"⚠️  Unexpected error with SiliconFlow: {error_msg}")
+            return {
+                "success": False,
+                "error": f"Unexpected error: {error_msg}",
+                "image_url": None,
+                "image_data": None
+            }
