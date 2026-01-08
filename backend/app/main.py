@@ -2378,16 +2378,16 @@ async def get_anki_note_types():
 async def sync_to_anki(request: Dict[str, Any]):
     """
     Sync cards to Anki via AnkiConnect.
-    
-    Request body:
-        {
-            "deck_name": "My Deck",
-            "card_ids": ["id1", "id2", ...]
-        }
+    Handles media processing: uploads local images to Anki and rewrites HTML src paths.
     """
     try:
         import sys
         import os
+        import re
+        import base64
+        import shutil
+        from pathlib import Path
+        
         sys.path.append(os.path.join(os.path.dirname(__file__), '../../'))
         from anki_integration.anki_connect import AnkiConnect
         
@@ -2402,7 +2402,7 @@ async def sync_to_anki(request: Dict[str, Any]):
         
         # Get cards from database
         all_cards = load_json_file(CARDS_FILE, [])
-        cards_to_sync = [card for card in all_cards if card["id"] in card_ids]
+        cards_to_sync = [dict(card) for card in all_cards if card["id"] in card_ids]  # Make a copy to modify
         
         if not cards_to_sync:
             raise HTTPException(status_code=404, detail="No cards found to sync")
@@ -2410,24 +2410,104 @@ async def sync_to_anki(request: Dict[str, Any]):
         # Initialize AnkiConnect client
         anki = AnkiConnect()
         
-        # Check connection
         if not anki.ping():
             raise HTTPException(
                 status_code=503, 
                 detail="Cannot connect to Anki. Make sure Anki is running with AnkiConnect add-on installed."
             )
         
-        # Prepare cards (ensure remarks computed and tags normalized)
+        # --- MEDIA PROCESSING LOGIC ---
+        # Directory where CUMA stores generated images
+        MEDIA_DIR = PROJECT_ROOT / "content" / "media" / "objects"
+        
+        # Cache for uploaded files to avoid re-uploading duplicates
+        uploaded_media_cache = {}
+
+        def process_html_content(html_content: str) -> str:
+            """
+            Scans HTML for local images, uploads them to Anki, and rewrites the src attribute.
+            /static/media/foo.png -> foo.png
+            """
+            if not html_content:
+                return html_content
+
+            # Regex to find <img src="..."> tags
+            img_pattern = r'(<img[^>]+src=["\'])([^"\']+)(["\'][^>]*>)'
+            
+            def replace_image_src(match):
+                prefix, src, suffix = match.groups()
+                
+                # Skip external URLs (http/https) or data URIs
+                if src.startswith(('http:', 'https:', 'data:')):
+                    return match.group(0)
+                
+                # Extract filename from path (e.g., /static/media/abc.png -> abc.png)
+                filename = Path(src).name
+                
+                # Check if we've already processed this file in this batch
+                if filename in uploaded_media_cache:
+                    return f'{prefix}{filename}{suffix}'
+                
+                # Look for the file in CUMA's media directories
+                # 1. Try the hash-based object storage (primary)
+                source_file = MEDIA_DIR / filename
+                
+                # 2. Fallback to legacy paths if not found
+                if not source_file.exists():
+                    legacy_paths = [
+                        PROJECT_ROOT / "media" / filename,
+                        PROJECT_ROOT / "media" / "visual_images" / filename,
+                        PROJECT_ROOT / "media" / "images" / filename,
+                    ]
+                    for path in legacy_paths:
+                        if path.exists():
+                            source_file = path
+                            break
+                
+                if source_file and source_file.exists():
+                    try:
+                        # Read and upload to Anki
+                        with open(source_file, 'rb') as f:
+                            file_data = f.read()
+                            base64_data = base64.b64encode(file_data).decode('utf-8')
+                            
+                        # Upload using AnkiConnect (returns the filename used by Anki)
+                        stored_filename = anki.store_media_file(filename, base64_data)
+                        
+                        print(f"  ✅ Uploaded media to Anki: {filename} -> {stored_filename}")
+                        uploaded_media_cache[filename] = stored_filename
+                        
+                        # Return the tag with the simple filename (no path)
+                        return f'{prefix}{stored_filename}{suffix}'
+                    except Exception as e:
+                        print(f"  ⚠️ Failed to upload media {filename}: {e}")
+                        return match.group(0) # Return original on failure
+                else:
+                    print(f"  ⚠️ Local media file not found: {filename}")
+                    return match.group(0)
+
+            # Perform the substitution
+            return re.sub(img_pattern, replace_image_src, html_content)
+
+        # Process all cards before syncing
+        print(f"🔄 Preparing {len(cards_to_sync)} cards for sync (checking media)...")
+        
         for card in cards_to_sync:
+            # 1. Process media in all rich-text fields
+            # CUMA cards use these fields
+            fields_to_process = ['front', 'back', 'text_field', 'extra_field', 'cloze_text']
+            
+            for field in fields_to_process:
+                if field in card and card[field]:
+                    card[field] = process_html_content(card[field])
+            
+            # 2. Build Remarks (same as before)
             remarks = build_cuma_remarks(card, [])
             card["field__Remarks"] = remarks or ""
             card.pop("field__Remarks_annotations", None)
         
         # Sync cards
-        print(f"🔄 Syncing {len(cards_to_sync)} cards to deck '{deck_name}'...")
-        for card in cards_to_sync:
-            print(f"  - Card {card['id']}: {card.get('card_type')} (status: {card.get('status')})")
-        
+        print(f"🚀 Sending cards to AnkiConnect...")
         results = anki.sync_cards(deck_name, cards_to_sync)
         
         print(f"✅ Sync results: {results['total']} total, {len(results['success'])} success, {len(results['failed'])} failed")
@@ -2451,6 +2531,8 @@ async def sync_to_anki(request: Dict[str, Any]):
     except ImportError as e:
         raise HTTPException(status_code=500, detail=f"AnkiConnect module not found: {e}")
     except Exception as e:
+        import traceback
+        traceback.print_exc()
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/kg/recommendations")
