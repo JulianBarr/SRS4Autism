@@ -13,7 +13,9 @@ import PinyinLearning from './components/PinyinLearning';
 import PinyinGapFillAdmin from './components/PinyinGapFillAdmin';
 import LogicCityGallery from './components/widgets/LogicCityGallery';
 import LogicCityManager from './components/widgets/LogicCityManager';
+import PinyinTypingManager from './components/widgets/PinyinTypingManager';
 import CharacterRecognition from './components/CharacterRecognition';
+import SettingsModal from './components/SettingsModal';
 import { useLanguage } from './i18n/LanguageContext';
 import './App.css';
 
@@ -40,6 +42,7 @@ function App() {
   const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(true);
   const [logoError, setLogoError] = useState(false);
+  const [showSettingsModal, setShowSettingsModal] = useState(false);
 
   useEffect(() => {
     loadData();
@@ -189,6 +192,27 @@ function App() {
               >
                 {language === 'en' ? '🇨🇳' : '🇺🇸'}
               </button>
+              
+              <button 
+                onClick={() => setShowSettingsModal(true)}
+                title={language === 'en' ? 'Settings' : '设置'}
+                style={{
+                  background: 'transparent',
+                  border: 'none',
+                  fontSize: '20px',
+                  cursor: 'pointer',
+                  padding: '4px 8px',
+                  borderRadius: '4px',
+                  transition: 'background 0.2s',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+                onMouseEnter={(e) => e.target.style.background = '#f0f0f0'}
+                onMouseLeave={(e) => e.target.style.background = 'transparent'}
+              >
+                ⚙️
+              </button>
             </div>
           </div>
           <nav className="tab-nav">
@@ -332,6 +356,10 @@ function App() {
                 // Show Logic City modal with Character Recognition
                 setLogicCityContentType('character-recognition');
                 setShowLogicCityModal(true);
+              } else if (action === 'pinyin-typing-level2') {
+                // Show Logic City modal with Pinyin Typing management
+                setLogicCityContentType('pinyin-typing');
+                setShowLogicCityModal(true);
               }
             }}
           />
@@ -468,6 +496,14 @@ function App() {
                       // Refresh profile if needed
                     }}
                   />
+                ) : logicCityContentType === 'pinyin-typing' ? (
+                  <PinyinTypingManager 
+                    profile={currentProfile}
+                    onClose={() => {
+                      setShowLogicCityModal(false);
+                      setLogicCityContentType(null);
+                    }}
+                  />
                 ) : (
                   /* Level 1: Content Type Selection */
                   <div>
@@ -500,6 +536,32 @@ function App() {
                         }}
                       >
                         {language === 'zh' ? '📚 词汇进阶' : '📚 Advanced Vocabulary'}
+                      </button>
+                      <button
+                        onClick={() => setLogicCityContentType('pinyin-typing')}
+                        style={{
+                          flex: '1 1 45%',
+                          minWidth: '200px',
+                          padding: '24px',
+                          fontSize: '20px',
+                          fontWeight: 'bold',
+                          border: '2px solid #10b981',
+                          borderRadius: '12px',
+                          backgroundColor: '#d1fae5',
+                          color: '#059669',
+                          cursor: 'pointer',
+                          transition: 'all 0.2s'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = '#a7f3d0';
+                          e.currentTarget.style.transform = 'scale(1.02)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = '#d1fae5';
+                          e.currentTarget.style.transform = 'scale(1)';
+                        }}
+                      >
+                        {language === 'zh' ? '⌨️ 拼音打字学校' : '⌨️ Pinyin Typing School'}
                       </button>
                     </div>
                   </div>
@@ -850,6 +912,12 @@ function App() {
           </div>
         )}
       </main>
+
+      {/* Settings Modal */}
+      <SettingsModal 
+        isOpen={showSettingsModal} 
+        onClose={() => setShowSettingsModal(false)} 
+      />
     </div>
   );
 }

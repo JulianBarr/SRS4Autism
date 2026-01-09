@@ -543,6 +543,31 @@ const MariosWorld = ({ profile, onNavigateToContent }) => {
                   }}>
                     {language === 'zh' ? '✨ 生成新任务' : '✨ Generate New Quest'}
                   </button>
+                  <button style={{
+                    padding: '12px 24px',
+                    backgroundColor: '#10b981',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '12px',
+                    fontSize: '14px',
+                    fontWeight: 'bold',
+                    cursor: 'pointer',
+                    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                    transition: 'all 0.2s'
+                  }} onMouseEnter={(e) => {
+                    e.target.style.transform = 'translateY(-2px)';
+                    e.target.style.boxShadow = '0 6px 12px rgba(0,0,0,0.15)';
+                  }} onMouseLeave={(e) => {
+                    e.target.style.transform = 'translateY(0)';
+                    e.target.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+                  }} onClick={() => {
+                    if (onNavigateToContent) {
+                      setActiveIsland(null);
+                      onNavigateToContent('pinyin-typing-level2');
+                    }
+                  }}>
+                    {language === 'zh' ? '⌨️ 拼音打字 Level 2' : '⌨️ Pinyin Typing Level 2'}
+                  </button>
                 </div>
               ) : activeIsland.id === 'logic' ? (
                 /* Logic Lab specific actions */
@@ -571,6 +596,31 @@ const MariosWorld = ({ profile, onNavigateToContent }) => {
                     }
                   }}>
                     {language === 'zh' ? '🔤 汉字识认' : '🔤 Character Recognition'}
+                  </button>
+                  <button style={{
+                    padding: '12px 24px',
+                    backgroundColor: '#10b981',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '12px',
+                    fontSize: '14px',
+                    fontWeight: 'bold',
+                    cursor: 'pointer',
+                    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                    transition: 'all 0.2s'
+                  }} onMouseEnter={(e) => {
+                    e.target.style.transform = 'translateY(-2px)';
+                    e.target.style.boxShadow = '0 6px 12px rgba(0,0,0,0.15)';
+                  }} onMouseLeave={(e) => {
+                    e.target.style.transform = 'translateY(0)';
+                    e.target.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+                  }} onClick={() => {
+                    if (onNavigateToContent) {
+                      setActiveIsland(null);
+                      onNavigateToContent('pinyin-typing-level2');
+                    }
+                  }}>
+                    {language === 'zh' ? '⌨️ 拼音打字 Level 2' : '⌨️ Pinyin Typing Level 2'}
                   </button>
                   <button style={{
                     padding: '12px 24px',

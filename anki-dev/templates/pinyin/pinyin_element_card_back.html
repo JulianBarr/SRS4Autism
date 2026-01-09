@@ -1,0 +1,143 @@
+<div class="card-container">
+
+    <div class="hero-container">
+        <div class="hero-element">{{Element}}</div>
+    </div>
+
+    <div class="example-group">
+        {{#Picture}}
+        <div class="example-picture">
+            {{Picture}}
+        </div>
+        {{/Picture}}
+        {{#ExampleChar}}
+        <div class="example-char">{{ExampleChar}}</div>
+        {{/ExampleChar}}
+    </div>
+
+    <div class="tones-section">
+        <div class="tones-grid">
+            <div id="tone-1" class="tone-box" onclick="playSingle(1)">
+                <div class="pinyin-text">{{Tone1}}</div>
+            </div>
+            <div id="tone-2" class="tone-box" onclick="playSingle(2)">
+                <div class="pinyin-text">{{Tone2}}</div>
+            </div>
+            <div id="tone-3" class="tone-box" onclick="playSingle(3)">
+                <div class="pinyin-text">{{Tone3}}</div>
+            </div>
+            <div id="tone-4" class="tone-box" onclick="playSingle(4)">
+                <div class="pinyin-text">{{Tone4}}</div>
+            </div>
+        </div>
+
+        <button class="karaoke-btn" onclick="playSequence()">
+            ▶ Play Sequence
+        </button>
+    </div>
+
+</div>
+
+<script>
+    // --- 1. MAPPING ---
+    var pinyinMap = {
+        "b": "bo", "p": "po", "m": "mo", "f": "fo",
+        "d": "de", "t": "te", "n": "ne", "l": "le",
+        "g": "ge", "k": "ke", "h": "he",
+        "j": "ji", "q": "qi", "x": "xi",
+        "z": "zi", "c": "ci", "s": "si",
+        "zh": "zhi", "ch": "chi", "sh": "shi", "r": "ri",
+        "y": "yi", "w": "wu",
+        "i": "yi", "in": "yin", "ing": "ying", "iu": "you",
+        "u": "wu", "ui": "wei", "un": "wen", "ong": "weng",
+        "ü": "yu", "v": "yu", "ue": "yue", "üe": "yue", "ün": "yun", "üan": "yuan",
+        // Mapped finals
+        "ian": "yan", "iang": "yang", "iao": "yao", "ie": "ye", "iong": "yong",
+        "ua": "wa", "uo": "wo", "uai": "wai", "uan": "wan", "uang": "wang", "uen": "wen", "ueng": "weng"
+    };
+
+    // --- 2. CLEANUP & INIT ---
+    // Strip any HTML tags from Anki field just in case (e.g. <div>p</div>)
+    var div = document.createElement("div");
+    div.innerHTML = "{{Element}}";
+    var rawElement = (div.textContent || div.innerText || "").trim();
+
+    var mappedBase = pinyinMap[rawElement] || rawElement;
+    var currentAudio = null;
+
+    // --- 3. PLAYBACK ENGINE (ROBUST) ---
+    
+    async function playSingle(toneNum) {
+        highlight(toneNum);
+        await smartPlay(toneNum);
+        unhighlight(toneNum);
+    }
+
+    async function playSequence() {
+        for (let i = 1; i <= 4; i++) {
+            highlight(i);
+            await smartPlay(i);
+            unhighlight(i);
+            await new Promise(r => setTimeout(r, 150));
+        }
+    }
+
+    // Try Standard Name first, then Raw Name
+    async function smartPlay(toneNum) {
+        // Option A: Mapped (e.g. _yang1.mp3)
+        var fileA = "_" + mappedBase + toneNum + ".mp3";
+        // Option B: Raw (e.g. _iang1.mp3) - Only needed if different
+        var fileB = (mappedBase !== rawElement) ? "_" + rawElement + toneNum + ".mp3" : null;
+
+        // Try A
+        var success = await playFile(fileA);
+        
+        // If A failed and B exists, Try B
+        if (!success && fileB) {
+            console.log("Standard file missing ("+fileA+"), trying fallback: " + fileB);
+            await playFile(fileB);
+        }
+    }
+
+    function playFile(filename) {
+        return new Promise((resolve) => {
+            if(currentAudio) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+            }
+            
+            var audio = new Audio(filename);
+            
+            // Success Listener
+            audio.onended = function() { resolve(true); };
+            
+            // Error Listener
+            audio.onerror = function() { 
+                console.log("Could not load: " + filename);
+                resolve(false); 
+            };
+            
+            // Attempt Play
+            var playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    // Playback started
+                })
+                .catch(error => {
+                    resolve(false);
+                });
+            }
+        });
+    }
+
+    function highlight(num) {
+        document.querySelectorAll('.tone-box').forEach(el => el.classList.remove('active'));
+        var el = document.getElementById('tone-' + num);
+        if(el) el.classList.add('active');
+    }
+
+    function unhighlight(num) {
+        var el = document.getElementById('tone-' + num);
+        if(el) el.classList.remove('active');
+    }
+</script>

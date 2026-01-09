@@ -1,0 +1,251 @@
+<script src="_pinyin_db.js"></script>
+
+{{#ElementToLearn}}
+<!-- Hidden data elements (safe from JavaScript syntax errors) -->
+<div id="data-correct-syllable" style="display:none;">{{Syllable}}</div>
+<div id="data-word-audio" style="display:none;">{{WordAudio}}</div>
+
+{{#WordAudio}}
+<div class="audio-wrapper">
+  <audio id="player-word" controls autoplay preload="auto" src="{{WordAudio}}"></audio>
+</div>
+{{/WordAudio}}
+
+<div class="pinyin-syllable-card">
+  {{#WordPicture}}
+  <div class="word-picture">{{WordPicture}}</div>
+  {{/WordPicture}}
+  
+  <div class="word-display">
+    <p class="word-hanzi">{{WordHanzi}}</p>
+  </div>
+  
+  <div class="mcq-options" id="mcq-recent-front">
+    <!-- Options will be generated dynamically by JavaScript -->
+  </div>
+</div>
+
+<script>
+(function() {
+  // Read data safely from hidden DOM elements
+  const correctSyllableEl = document.getElementById('data-correct-syllable');
+  const wordAudioEl = document.getElementById('data-word-audio');
+  const container = document.getElementById('mcq-recent-front');
+  
+  if (!correctSyllableEl || !container) return;
+  
+  const correctAnswer = correctSyllableEl.innerText.trim();
+  
+  // Step 1: Grab raw innerHTML from hidden div (handles both [sound:] and <audio> tags)
+  const wordAudioRaw = wordAudioEl ? wordAudioEl.innerHTML.trim() : '';
+  
+  // Step 2: Use regex to extract filename ending in .mp3
+  const mp3Regex = /([a-zA-Z0-9_\-\.]+\.mp3)/i;
+  const match = wordAudioRaw.match(mp3Regex);
+  const cleanFilename = match ? match[1] : '';
+  
+  // Deterministic seeded random generator based on {{Syllable}}
+  let seed = 0;
+  const seedString = correctAnswer;
+  for (let i = 0; i < seedString.length; i++) {
+    seed = (seed + seedString.charCodeAt(i)) % 100000;
+  }
+  const seededRandom = function() {
+    var x = Math.sin(seed++) * 10000;
+    return x - Math.floor(x);
+  };
+  
+  // Fisher-Yates shuffle with seeded random
+  function shuffleArray(array) {
+    const shuffled = array.slice();
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(seededRandom() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  }
+  
+  // Function to find current card index in PINYIN_DB with loose matching
+  function findCurrentCardIndex(db, cleanFilename) {
+    if (!cleanFilename) return -1;
+    
+    for (let i = 0; i < db.length; i++) {
+      const item = db[i];
+      // Loose match: check if id or audio contains the filename or vice versa
+      if (item.id && item.audio) {
+        if (item.id.includes(cleanFilename) || cleanFilename.includes(item.id) ||
+            item.audio.includes(cleanFilename) || cleanFilename.includes(item.audio)) {
+          return i;
+        }
+      }
+    }
+    return -1;
+  }
+  
+  // Function to select recent neighbors (3 preceding or following)
+  function selectRecentNeighbors(db, currentIndex, correctSyllable) {
+    const selected = [];
+    const seen = new Set([correctSyllable]);
+    
+    // Goal: Select 3 distinct distractors immediately before the current card
+    // Boundary check: If index < 3, look forward instead
+    if (currentIndex >= 3) {
+      // Look backward: i-1, i-2, i-3
+      for (let i = currentIndex - 1; i >= 0 && selected.length < 3; i--) {
+        const item = db[i];
+        if (item.syllable && !seen.has(item.syllable)) {
+          selected.push(item.syllable);
+          seen.add(item.syllable);
+        }
+      }
+    } else {
+      // Look forward: i+1, i+2, i+3, etc.
+      for (let i = currentIndex + 1; i < db.length && selected.length < 3; i++) {
+        const item = db[i];
+        if (item.syllable && !seen.has(item.syllable)) {
+          selected.push(item.syllable);
+          seen.add(item.syllable);
+        }
+      }
+    }
+    
+    return selected;
+  }
+  
+  // Fallback: Select random distractors using seeded random
+  function selectRandomDistractors(db, correctSyllable, count) {
+    const available = db
+      .map(item => item.syllable)
+      .filter(syllable => syllable && syllable !== correctSyllable);
+    
+    // Remove duplicates
+    const uniqueSyllables = [...new Set(available)];
+    
+    if (uniqueSyllables.length < count) {
+      return uniqueSyllables;
+    }
+    
+    const selected = [];
+    const candidates = uniqueSyllables.slice();
+    
+    for (let i = 0; i < count && candidates.length > 0; i++) {
+      const index = Math.floor(seededRandom() * candidates.length);
+      selected.push(candidates[index]);
+      candidates.splice(index, 1);
+    }
+    
+    return selected;
+  }
+  
+  // Function to generate and render options
+  function generateOptions() {
+    // Wait for PINYIN_DB to be available
+    if (typeof window === 'undefined' || !window.PINYIN_DB || !Array.isArray(window.PINYIN_DB)) {
+      return false; // Signal that DB is not ready
+    }
+    
+    const db = window.PINYIN_DB;
+    let distractors = [];
+    let currentIndex = -1;
+    
+    // Try to find current card and get recent neighbors
+    if (cleanFilename) {
+      currentIndex = findCurrentCardIndex(db, cleanFilename);
+      
+      if (currentIndex >= 0) {
+        // Found current card, get recent neighbors
+        distractors = selectRecentNeighbors(db, currentIndex, correctAnswer);
+      }
+    }
+    
+    // Fallback to random if we don't have 3 recent neighbors
+    if (distractors.length < 3) {
+      distractors = selectRandomDistractors(db, correctAnswer, 3);
+    }
+    
+    // Create option objects: correct answer + distractors
+    const options = [
+      { syllable: correctAnswer, isCorrect: true },
+      ...distractors.map(syllable => ({
+        syllable: syllable,
+        isCorrect: false
+      }))
+    ];
+    
+    // Create button elements
+    const buttons = options.map(option => {
+      const btn = document.createElement('button');
+      btn.className = 'mcq-option';
+      btn.setAttribute('data-value', option.syllable);
+      btn.setAttribute('data-correct', option.isCorrect ? 'true' : 'false');
+      btn.textContent = option.syllable;
+      return btn;
+    });
+    
+    // Clear container
+    container.innerHTML = '';
+    
+    // Shuffle using seeded random
+    const shuffled = shuffleArray(buttons);
+    shuffled.forEach(btn => container.appendChild(btn));
+    
+    // Re-query after shuffle
+    const finalOptions = container.querySelectorAll('.mcq-option');
+    
+    // Only add click handlers if we're on the front side
+    if (!document.getElementById('answer')) {
+      finalOptions.forEach(button => {
+        button.addEventListener('click', function() {
+          const selected = this.getAttribute('data-value');
+          const isCorrect = (selected === correctAnswer);
+          
+          finalOptions.forEach(opt => opt.classList.remove('selected', 'wrong'));
+          
+          if (isCorrect) {
+            this.classList.add('selected');
+            if(typeof pycmd !== "undefined") { pycmd("ans"); }
+          } else {
+            this.classList.add('wrong');
+            // Highlight real answer
+            finalOptions.forEach(opt => {
+              if (opt.getAttribute('data-value') === correctAnswer) {
+                opt.classList.add('selected');
+              }
+            });
+          }
+        });
+      });
+    }
+    
+    return true; // Signal success
+  }
+  
+  // Try to generate options, with retry logic
+  let attempts = 0;
+  const maxAttempts = 40; // 40 * 50ms = 2 seconds
+  
+  function tryGenerate() {
+    attempts++;
+    
+    if (generateOptions()) {
+      return; // Success!
+    }
+    
+    // If we've tried for 2 seconds, try fallback
+    if (attempts >= maxAttempts) {
+      // Last attempt with fallback
+      if (typeof window !== 'undefined' && window.PINYIN_DB && Array.isArray(window.PINYIN_DB)) {
+        generateOptions(); // Force one more try
+      }
+      return;
+    }
+    
+    // Retry after a short delay
+    setTimeout(tryGenerate, 50);
+  }
+  
+  // Start trying to generate options
+  tryGenerate();
+})();
+</script>
+{{/ElementToLearn}}

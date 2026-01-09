@@ -1,0 +1,213 @@
+{{#ElementToLearn}}
+<!-- Hidden data elements (safe from JavaScript syntax errors) -->
+<div id="data-correct-syllable" style="display:none;">{{Syllable}}</div>
+
+{{#WordAudio}}
+<div class="audio-wrapper">
+  <audio id="player-word" controls autoplay preload="auto" src="{{WordAudio}}"></audio>
+</div>
+{{/WordAudio}}
+
+<div class="pinyin-syllable-card">
+  {{#WordPicture}}<div class="word-picture">{{WordPicture}}</div>{{/WordPicture}}
+  <div class="word-display"><p class="word-hanzi">{{WordHanzi}}</p></div>
+  
+  <div class="mcq-options" id="mcq-tone-front">
+    <!-- Options will be generated dynamically by JavaScript -->
+  </div>
+</div>
+
+<script>
+(function() {
+  // Read data safely from hidden DOM elements
+  const correctSyllableEl = document.getElementById('data-correct-syllable');
+  const container = document.getElementById('mcq-tone-front');
+  if (!correctSyllableEl || !container) return;
+  
+  const correctAnswer = correctSyllableEl.innerText.trim();
+  
+  // Tone marks mapping
+  const TONE_MARKS = {
+    'a': ['ā', 'á', 'ǎ', 'à'],
+    'e': ['ē', 'é', 'ě', 'è'],
+    'i': ['ī', 'í', 'ǐ', 'ì'],
+    'o': ['ō', 'ó', 'ǒ', 'ò'],
+    'u': ['ū', 'ú', 'ǔ', 'ù'],
+    'ü': ['ǖ', 'ǘ', 'ǚ', 'ǜ'],
+    'v': ['ǖ', 'ǘ', 'ǚ', 'ǜ'], // 'v' is treated as 'ü'
+    'A': ['Ā', 'Á', 'Ǎ', 'À'],
+    'E': ['Ē', 'É', 'Ě', 'È'],
+    'I': ['Ī', 'Í', 'Ǐ', 'Ì'],
+    'O': ['Ō', 'Ó', 'Ǒ', 'Ò'],
+    'U': ['Ū', 'Ú', 'Ǔ', 'Ù'],
+    'Ü': ['Ǖ', 'Ǘ', 'Ǚ', 'Ǜ'],
+    'V': ['Ǖ', 'Ǘ', 'Ǚ', 'Ǜ']
+  };
+  
+  // Normalize syllable to remove current tone (get the "base")
+  function stripTone(syllable) {
+    if (!syllable) return '';
+    // Normalize to NFD (decomposed form) to separate base characters from combining marks
+    const normalized = syllable.normalize('NFD');
+    // Remove combining marks (tone marks are combining diacritical marks)
+    const stripped = normalized.replace(/[\u0300-\u036f]/g, '');
+    return stripped;
+  }
+  
+  // Generate 4 tone options for a syllable
+  function generateToneOptions(syllable) {
+    if (!syllable) return ['', '', '', ''];
+    
+    // Get base syllable without tone
+    const base = stripTone(syllable);
+    const baseLower = base.toLowerCase();
+    
+    // Identify the "Tone Vowel" based on Pinyin rules
+    let toneVowel = null;
+    let toneVowelIndex = -1;
+    let toneVowelChar = '';
+    
+    // Priority 1: a, o, e (in that order)
+    if (baseLower.includes('a')) {
+      toneVowelIndex = baseLower.indexOf('a');
+      toneVowelChar = base[toneVowelIndex];
+      toneVowel = toneVowelChar.toLowerCase() === 'a' ? 'a' : 'A';
+    } else if (baseLower.includes('o')) {
+      toneVowelIndex = baseLower.indexOf('o');
+      toneVowelChar = base[toneVowelIndex];
+      toneVowel = toneVowelChar.toLowerCase() === 'o' ? 'o' : 'O';
+    } else if (baseLower.includes('e')) {
+      toneVowelIndex = baseLower.indexOf('e');
+      toneVowelChar = base[toneVowelIndex];
+      toneVowel = toneVowelChar.toLowerCase() === 'e' ? 'e' : 'E';
+    } else {
+      // Priority 2: Special cases for iu/ui
+      if (baseLower.includes('iu')) {
+        // For 'iu', mark the 'u' (second vowel)
+        const iuIndex = baseLower.indexOf('iu');
+        toneVowelIndex = iuIndex + 1;
+        toneVowelChar = base[toneVowelIndex];
+        toneVowel = toneVowelChar.toLowerCase() === 'u' ? 'u' : 'U';
+      } else if (baseLower.includes('ui')) {
+        // For 'ui', mark the 'i' (second vowel)
+        const uiIndex = baseLower.indexOf('ui');
+        toneVowelIndex = uiIndex + 1;
+        toneVowelChar = base[toneVowelIndex];
+        toneVowel = toneVowelChar.toLowerCase() === 'i' ? 'i' : 'I';
+      } else {
+        // Priority 3: Last vowel (i, u, ü/v)
+        const vowels = ['i', 'u', 'ü', 'v', 'I', 'U', 'Ü', 'V'];
+        let lastVowelIndex = -1;
+        for (let i = base.length - 1; i >= 0; i--) {
+          const char = base[i];
+          if (vowels.includes(char)) {
+            lastVowelIndex = i;
+            toneVowelChar = char;
+            toneVowel = char.toLowerCase() === 'v' ? 'ü' : (char.toLowerCase() === 'V' ? 'Ü' : char.toLowerCase());
+            break;
+          }
+        }
+        if (lastVowelIndex >= 0) {
+          toneVowelIndex = lastVowelIndex;
+        }
+      }
+    }
+    
+    // If no tone vowel found, return empty array
+    if (toneVowelIndex < 0 || !toneVowel) {
+      return ['', '', '', ''];
+    }
+    
+    // Get tone marks for this vowel
+    const marks = TONE_MARKS[toneVowel];
+    if (!marks) {
+      return ['', '', '', ''];
+    }
+    
+    // Generate 4 tonal variants
+    const variations = [];
+    for (let tone = 1; tone <= 4; tone++) {
+      const mark = marks[tone - 1];
+      if (mark) {
+        // Replace the tone vowel with the tone mark
+        const before = base.substring(0, toneVowelIndex);
+        const after = base.substring(toneVowelIndex + 1);
+        variations.push(before + mark + after);
+      } else {
+        variations.push('');
+      }
+    }
+    
+    return variations;
+  }
+  
+  // Deterministic seeded random generator
+  let seed = 0;
+  const seedString = correctAnswer;
+  for (let i = 0; i < seedString.length; i++) {
+    seed = (seed + seedString.charCodeAt(i)) % 100000;
+  }
+  const seededRandom = function() {
+    var x = Math.sin(seed++) * 10000;
+    return x - Math.floor(x);
+  };
+  
+  // Fisher-Yates shuffle with seeded random
+  function shuffleArray(array) {
+    const shuffled = array.slice();
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(seededRandom() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  }
+  
+  // Generate tone options
+  const toneOptions = generateToneOptions(correctAnswer);
+  
+  // Create button elements
+  const buttons = toneOptions.map((toneOption, index) => {
+    const btn = document.createElement('button');
+    btn.className = 'mcq-option';
+    btn.setAttribute('data-value', `tone${index + 1}`);
+    btn.setAttribute('data-syllable', toneOption);
+    btn.textContent = toneOption;
+    return btn;
+  });
+  
+  // Only shuffle if we are NOT on the back side
+  if (!document.getElementById('answer')) {
+    const shuffled = shuffleArray(buttons);
+    shuffled.forEach(btn => container.appendChild(btn));
+  } else {
+    // On back side, append in same order (will be re-shuffled by back template)
+    buttons.forEach(btn => container.appendChild(btn));
+  }
+  
+  // Re-query after potential shuffle
+  const finalOptions = container.querySelectorAll('.mcq-option');
+  
+  // Only add click handlers if we're on the front side
+  if (!document.getElementById('answer')) {
+    finalOptions.forEach(btn => {
+      btn.addEventListener('click', function() {
+        const selectedSyllable = this.getAttribute('data-syllable');
+        const isCorrect = (selectedSyllable === correctAnswer);
+        finalOptions.forEach(opt => opt.classList.remove('selected', 'wrong'));
+        
+        if (isCorrect) {
+          this.classList.add('selected');
+          if(typeof pycmd !== "undefined") { pycmd("ans"); }
+        } else {
+          this.classList.add('wrong');
+          // Highlight real answer
+          finalOptions.forEach(opt => {
+            if (opt.getAttribute('data-syllable') === correctAnswer) opt.classList.add('selected');
+          });
+        }
+      });
+    });
+  }
+})();
+</script>
+{{/ElementToLearn}}

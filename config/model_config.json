@@ -1,0 +1,76 @@
+{
+  "card_models": [
+    {
+      "id": "gemini-3-pro-preview",
+      "name": "Gemini 3 Pro (New)",
+      "provider": "google"
+    },
+    {
+      "id": "gemini-2.0-flash",
+      "name": "Gemini 2.0 Flash (Fast)",
+      "provider": "google"
+    },
+    {
+      "id": "gemini-2.5-flash",
+      "name": "Gemini 2.5 Flash (Current)",
+      "provider": "google"
+    },
+    {
+      "id": "deepseek-chat",
+      "name": "DeepSeek V3",
+      "provider": "deepseek",
+      "base_url": "https://api.deepseek.com",
+      "model_name": "deepseek-chat"
+    },
+    {
+      "id": "deepseek-reasoner",
+      "name": "DeepSeek R1 (Thinking)",
+      "provider": "deepseek",
+      "base_url": "https://api.deepseek.com",
+      "model_name": "deepseek-reasoner"
+    },
+    {
+      "id": "qwen-max",
+      "name": "Qwen 2.5 Max",
+      "provider": "alibaba",
+      "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+      "model_name": "qwen-max"
+    }
+  ],
+  "image_models": [
+    {
+      "id": "gemini-3-pro-image-preview",
+      "name": "Nano Banana Pro (Gemini 3 Native)",
+      "provider": "google"
+    },
+    {
+      "id": "gemini-2.5-flash-image",
+      "name": "Gemini 2.5 Flash Image",
+      "provider": "google"
+    },
+    {
+      "id": "gemini-2.0-flash-exp-image-generation",
+      "name": "Gemini 2.0 Flash Exp Image",
+      "provider": "google"
+    },
+    {
+      "id": "imagen-4.0-generate-001",
+      "name": "Imagen 4 (Dedicated)",
+      "provider": "google"
+    },
+    {
+      "id": "hunyuan-image",
+      "name": "Tencent Hunyuan",
+      "provider": "siliconflow",
+      "api_url": "https://api.siliconflow.cn/v1/images/generations",
+      "model_name": "Tencent/HunyuanImage"
+    },
+    {
+      "id": "kolors",
+      "name": "Kuaishou Kolors",
+      "provider": "siliconflow",
+      "api_url": "https://api.siliconflow.cn/v1/images/generations",
+      "model_name": "Kuaishou/Kolors"
+    }
+  ]
+}

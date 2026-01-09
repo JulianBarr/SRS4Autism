@@ -136,4 +136,22 @@ SRS4Autism is a spaced repetition learning system with:
 - Use gtimeout as timeout command, it's located at /usr/local/bin
 - Always use exit code to verify a successful restart
 
+## UI Rules
+- Let the "X" (close) in the modal freeze while scrolling
+# CUMA Project Rules
 
+## Media & File Naming
+- **Strategy:** Pure Content-Addressable Storage.
+- **Format:** Filenames must be exactly 12-character hexadecimal hashes (e.g., `5f29a2dff705.jpg`).
+- **Forbidden:**
+  - DO NOT use prefixes (e.g., `cm_`, `proj_`).
+  - DO NOT use semantic tags in filenames (e.g., `_pinyin_`).
+- **Anki Sync:**
+  - The filename in Anki must match the local filename exactly.
+  - This allows for 1:1 two-way syncing without filename transformation logic.
+
+## Database
+- Treat the SQLite database as the single source of truth for file paths.
+
+## Data preparation
+- Data preparation may be in json format, they should be loaded to a db table for CUMA

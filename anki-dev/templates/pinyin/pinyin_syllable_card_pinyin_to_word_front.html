@@ -1,0 +1,231 @@
+<script src="_pinyin_db.js"></script>
+
+{{#ElementToLearn}}
+<!-- Hidden data elements (safe from JavaScript syntax errors) -->
+<div id="data-correct-pic" style="display:none;">{{WordPicture}}</div>
+<div id="data-correct-syllable" style="display:none;">{{Syllable}}</div>
+
+<div class="pinyin-syllable-card">
+  <div class="pinyin-display">
+    <p class="syllable-pinyin">{{Syllable}}</p>
+  </div>
+  
+  <div id="mcq-container" class="mcq-picture-options">
+    <!-- Options will be generated dynamically by JavaScript -->
+  </div>
+</div>
+
+<script>
+(function() {
+  // Read data safely from hidden DOM elements
+  const correctPicEl = document.getElementById('data-correct-pic');
+  const correctSyllableEl = document.getElementById('data-correct-syllable');
+  const container = document.getElementById('mcq-container');
+  
+  if (!correctPicEl || !correctSyllableEl || !container) return;
+  
+  const correctPicture = correctPicEl.innerHTML.trim();
+  const correctAnswer = correctSyllableEl.innerText.trim();
+  
+  // Deterministic seeded random generator based on {{Syllable}}
+  let seed = 0;
+  const seedString = correctAnswer;
+  for (let i = 0; i < seedString.length; i++) {
+    seed = (seed + seedString.charCodeAt(i)) % 100000;
+  }
+  const seededRandom = function() {
+    var x = Math.sin(seed++) * 10000;
+    return x - Math.floor(x);
+  };
+  
+  // Fisher-Yates shuffle with seeded random
+  function shuffleArray(array) {
+    const shuffled = array.slice();
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(seededRandom() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  }
+  
+  // Function to select distractor images from PINYIN_DB
+  function selectDistractorImages(db, correctSyllable, count) {
+    // Filter out the correct answer and get entries with pictures
+    const available = db
+      .filter(item => item.syllable && item.syllable !== correctSyllable && item.pic)
+      .map(item => ({ syllable: item.syllable, pic: item.pic }));
+    
+    // Remove duplicates based on syllable
+    const seen = new Set();
+    const unique = available.filter(item => {
+      if (seen.has(item.syllable)) {
+        return false;
+      }
+      seen.add(item.syllable);
+      return true;
+    });
+    
+    // If we don't have enough distractors, return what we have
+    if (unique.length < count) {
+      return unique;
+    }
+    
+    // Select random distractors using seeded random
+    const selected = [];
+    const candidates = unique.slice();
+    
+    for (let i = 0; i < count && candidates.length > 0; i++) {
+      const index = Math.floor(seededRandom() * candidates.length);
+      selected.push(candidates[index]);
+      candidates.splice(index, 1);
+    }
+    
+    return selected;
+  }
+  
+  // Fallback: Render just the correct answer centered
+  function renderFallback() {
+    container.innerHTML = '';
+    const div = document.createElement('div');
+    div.className = 'mcq-picture-option';
+    div.setAttribute('data-correct', 'true');
+    div.setAttribute('data-value', correctAnswer);
+    div.innerHTML = correctPicture;
+    div.style.margin = '0 auto';
+    div.style.maxWidth = '300px';
+    container.appendChild(div);
+    
+    // Add click handler for fallback
+    if (!document.getElementById('answer')) {
+      div.addEventListener('click', function() {
+        this.classList.add('selected');
+        if(typeof pycmd !== "undefined") { pycmd("ans"); }
+      });
+    }
+  }
+  
+  // Function to generate and render options
+  function generateOptions() {
+    // Check if PINYIN_DB is available
+    if (typeof window === 'undefined' || !window.PINYIN_DB || !Array.isArray(window.PINYIN_DB)) {
+      return false; // Signal that DB is not ready
+    }
+    
+    const db = window.PINYIN_DB;
+    
+    // Select 3 distractor images from DB
+    const distractorImages = selectDistractorImages(db, correctAnswer, 3);
+    
+    // Create option objects: correct answer + distractors
+    const options = [
+      { 
+        syllable: correctAnswer, 
+        pic: correctPicture, 
+        isCorrect: true 
+      },
+      ...distractorImages.map(item => ({
+        syllable: item.syllable,
+        pic: item.pic,
+        isCorrect: false
+      }))
+    ];
+    
+    // Create image button elements
+    const buttons = options.map(option => {
+      const div = document.createElement('div');
+      div.className = 'mcq-picture-option';
+      div.setAttribute('data-correct', option.isCorrect ? 'true' : 'false');
+      div.setAttribute('data-value', option.syllable);
+      
+      // Insert the picture HTML
+      if (option.isCorrect) {
+        // Use the HTML we grabbed from the hidden div (already an <img> tag)
+        div.innerHTML = correctPicture;
+      } else {
+        // Create img tag from database pic field
+        const img = document.createElement('img');
+        img.src = option.pic;
+        img.style.maxWidth = '100%';
+        img.style.height = 'auto';
+        div.appendChild(img);
+      }
+      
+      return div;
+    });
+    
+    // Clear container
+    container.innerHTML = '';
+    
+    // Shuffle using seeded random
+    const shuffled = shuffleArray(buttons);
+    shuffled.forEach(btn => container.appendChild(btn));
+    
+    // Re-query after shuffle
+    const finalOptions = container.querySelectorAll('.mcq-picture-option');
+    
+    // Only add click handlers if we're on the front side
+    if (!document.getElementById('answer')) {
+      finalOptions.forEach(option => {
+        option.addEventListener('click', function() {
+          const isCorrect = this.getAttribute('data-correct') === 'true';
+          
+          finalOptions.forEach(opt => opt.classList.remove('selected', 'wrong'));
+          
+          if (isCorrect) {
+            this.classList.add('selected');
+            if(typeof pycmd !== "undefined") { pycmd("ans"); }
+          } else {
+            this.classList.add('wrong');
+            // Highlight real answer
+            finalOptions.forEach(opt => {
+              if (opt.getAttribute('data-correct') === 'true') {
+                opt.classList.add('selected');
+              }
+            });
+          }
+        });
+      });
+    }
+    
+    return true; // Signal success
+  }
+  
+  // Try to generate options, with fallback after 2 seconds
+  let attempts = 0;
+  const maxAttempts = 40; // 40 * 50ms = 2 seconds
+  let fallbackTimeout = null;
+  
+  function tryGenerate() {
+    attempts++;
+    
+    if (generateOptions()) {
+      // Success! Clear any pending fallback
+      if (fallbackTimeout) {
+        clearTimeout(fallbackTimeout);
+        fallbackTimeout = null;
+      }
+      return;
+    }
+    
+    // If we've tried for 2 seconds, render fallback
+    if (attempts >= maxAttempts) {
+      renderFallback();
+      return;
+    }
+    
+    // Retry after a short delay
+    setTimeout(tryGenerate, 50);
+  }
+  
+  // Set fallback timeout (2 seconds)
+  fallbackTimeout = setTimeout(function() {
+    if (container.querySelectorAll('.mcq-picture-option').length === 0) {
+      renderFallback();
+    }
+  }, 2000);
+  
+  // Start trying to generate options
+  tryGenerate();
+})();
+</script>
+{{/ElementToLearn}}

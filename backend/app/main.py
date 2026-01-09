@@ -122,6 +122,57 @@ def build_kg_map_strict(card_mappings: Dict[str, List[Dict[str, Any]]]) -> str:
     
     return json.dumps(validated_map, ensure_ascii=False)
 
+# ============================================================================
+# Pure Hash Media File Naming Strategy
+# ============================================================================
+
+def get_pure_hash_filename(original_filename: str, file_data: bytes) -> str:
+    """
+    Pure Hash strategy for media files: use 12-char hash filenames without prefixes.
+    
+    Logic:
+    1. If the source filename matches hash regex (^[a-fA-F0-9]{12}\.\w+$), use it AS IS
+    2. If it's a legacy name, generate a clean 12-char hash identifier from content
+    
+    Args:
+        original_filename: The original filename (may be hash or legacy name)
+        file_data: The file content bytes (used to generate hash for legacy names)
+    
+    Returns:
+        Pure hash filename in format: {12-char-hex-hash}.{ext}
+        Example: "5f29a2dff705.jpg"
+    """
+    import hashlib
+    
+    # Check if filename already matches pure hash pattern: 12 hex chars + extension
+    hash_pattern = re.compile(r'^[a-fA-F0-9]{12}\.\w+$', re.IGNORECASE)
+    
+    if hash_pattern.match(original_filename):
+        # Already a pure hash filename, use as-is
+        return original_filename
+    
+    # Legacy filename: generate 12-char hash from content
+    # Use MD5 (consistent with existing code) and take first 12 chars
+    content_hash = hashlib.md5(file_data).hexdigest()[:12]
+    
+    # Get extension from original filename
+    file_ext = Path(original_filename).suffix.lower()
+    
+    # Normalize .jpeg to .jpg
+    if file_ext == ".jpeg":
+        file_ext = ".jpg"
+    
+    # Ensure extension starts with dot
+    if not file_ext.startswith('.'):
+        file_ext = f".{file_ext}"
+    
+    # If no extension, default to empty string (will result in just the hash)
+    if not file_ext:
+        file_ext = ""
+    
+    # Return pure hash filename
+    return f"{content_hash}{file_ext}"
+
 # Initialize database on startup
 @app.on_event("startup")
 async def startup_event():
@@ -434,26 +485,61 @@ def get_llm_client_from_request(request: Request):
     return _genai_model  # Default fallback
 
 
-def _run_director_agent(prompt: str, client=None) -> str:
+def _run_director_agent(card_front: str, card_back: str, client=None, style_guide: str = "Modern 3D Animation Style (Pixar/Disney style), vibrant lighting, high fidelity, highly detailed, 8k resolution") -> str:
     """
-    Run the director agent with an optional client.
+    Run the director agent to generate image descriptions with an optional client.
     If client is an OpenAI instance, use client.chat.completions.create.
     If client is None or a Gemini object, use _genai_model.generate_content.
     
     Args:
-        prompt: The prompt to send to the LLM
+        card_front: The front content of the flashcard
+        card_back: The back content of the flashcard
         client: Optional OpenAI client or None/Gemini model
+        style_guide: Art style guide for image generation (default: Modern 3D Animation Style)
         
     Returns:
-        Generated text content
+        Generated image description text
     """
+    # Build system instruction with style guide
+    system_instruction = f"""You are an expert at creating detailed image descriptions for educational flashcards for children with autism.
+
+**Flashcard Content:**
+Front: {card_front}
+Back: {card_back}
+
+**Instructions:**
+Create a detailed, vivid description of an image that would be perfect for this flashcard. The image should be:
+
+1. **Educational**: Clearly illustrates the concept being taught
+2. **Appropriate**: Age-appropriate and culturally sensitive
+3. **Visual**: Rich in visual details that can be easily rendered
+4. **Inclusive**: Consider the child's interests and character preferences
+
+**STYLE GUIDE:**
+- Art Style: {style_guide}.
+- Lighting: Cinematic, warm, volumetric lighting.
+- Detail: Rich textures (e.g., fur, fabric), expressive faces.
+- Composition: Dynamic angles, depth of field.
+- Mood: Cheerful, magical, encouraging.
+
+**Image Description Guidelines:**
+- Be specific about colors, shapes, and composition
+- Include details about the setting, characters, and objects
+- Make it vivid and easy to visualize
+- Consider the child's interests if mentioned
+
+**Output:**
+Provide a detailed image description that an artist could use to create the perfect illustration for this flashcard. Be specific about visual elements, colors, composition, and style.
+
+Generate the image description now:"""
+    
     # Check if client is an OpenAI instance
     if client is not None and isinstance(client, OpenAI):
         try:
             response = client.chat.completions.create(
                 model="gpt-4o-mini",  # Default model, can be made configurable
                 messages=[
-                    {"role": "user", "content": prompt}
+                    {"role": "user", "content": system_instruction}
                 ]
             )
             return response.choices[0].message.content
@@ -461,16 +547,23 @@ def _run_director_agent(prompt: str, client=None) -> str:
             print(f"OpenAI client error: {e}")
             # Fallback to Gemini if OpenAI fails
             if _genai_model:
-                response = _genai_model.generate_content(prompt)
+                response = _genai_model.generate_content(system_instruction)
                 return response.text
-            raise
+            # Fallback return if all else fails
+            return f"A high-quality, {style_guide} illustration of: {card_front}. Cinematic lighting, 8k."
     
     # Use Gemini (default or fallback)
     if _genai_model:
-        response = _genai_model.generate_content(prompt)
-        return response.text
+        try:
+            response = _genai_model.generate_content(system_instruction)
+            return response.text
+        except Exception as e:
+            print(f"Gemini client error: {e}")
+            # Fallback return if generation fails
+            return f"A high-quality, {style_guide} illustration of: {card_front}. Cinematic lighting, 8k."
     else:
-        raise Exception("No LLM client available. Please configure GEMINI_API_KEY or provide X-LLM-Key header.")
+        # Fallback return if no client available
+        return f"A high-quality, {style_guide} illustration of: {card_front}. Cinematic lighting, 8k."
 
 
 # Initialize Agentic components (lazy instantiation ensures compatibility with existing code)
@@ -1639,46 +1732,39 @@ async def generate_card_image(card_id: str, request: CardImageRequest, req: Requ
         )
         user_request = request.user_request or f"Generate an illustration for this flashcard content: {primary_text}"
         
-        # Build image description prompt (same as ConversationHandler._generate_image_description)
+        # Force high-fidelity 3D style by changing persona to Art Director
         context_str = "No specific context available"  # child_profile is None in this endpoint
-        prompt = f"""You are an expert at creating detailed image descriptions for educational flashcards for children with autism.
+        prompt = f"""You are a Lead Texture Artist & Lighter for a high-budget animated feature film (Pixar/Disney style).
 
-**Child Context:**
+**Context:**
 {context_str}
 
-**Flashcard Content:**
-Front: {sanitized_card.get('front', '')}
-Back: {sanitized_card.get('back', '')}
-Card Type: {sanitized_card.get('card_type', 'basic')}
+**Scene Content:**
+Subject: {sanitized_card.get('front', '')}
+Action/Detail: {sanitized_card.get('back', '')}
 
 **User Request:**
 {user_request}
 
-**Instructions:**
-Create a detailed, vivid description of an image that would be perfect for this flashcard. The image should be:
+**YOUR TASK:**
+Write a vivid, highly detailed rendering prompt for Unreal Engine 5.
 
-1. **Child-friendly**: Simple, colorful, and engaging for a child with autism
-2. **Educational**: Clearly illustrates the concept being taught
-3. **Appropriate**: Age-appropriate and culturally sensitive
-4. **Visual**: Rich in visual details that can be easily rendered
-5. **Inclusive**: Consider the child's interests and character preferences
+**STYLE RULES (STRICT):**
+1. **Art Style**: 3D CGI Render, Stylized Realism (like Zootopia, Frozen).
+2. **Lighting**: Cinematic volumetric lighting, rim lighting to separate subject from background, soft shadows.
+3. **Texture & Material**: High fidelity. Describe the "fluffiness" of fur, the "sheen" of fabric, the "subsurface scattering" of skin.
+4. **Camera**: Use a 85mm portrait lens effect with a soft depth-of-field (blurred background).
 
-**Image Description Guidelines:**
-- Be specific about colors, shapes, and composition
-- Include details about the setting, characters, and objects
-- Make it vivid and easy to visualize
-- Keep it simple but engaging
-- Consider the child's interests if mentioned
+**CRITICAL INSTRUCTIONS:**
+- Do NOT mention "flashcard", "simple", "flat", or "vector".
+- Treat this as a movie still frame.
+- Make the characters expressive and alive.
 
 **Output:**
-Provide a detailed image description that an artist could use to create the perfect illustration for this flashcard. Be specific about visual elements, colors, composition, and style.
-
-**Example Format:**
-"A simple, colorful illustration showing [main subject] in [setting]. The image features [key elements] with [color scheme]. The style should be [artistic style] with [specific details]."
-
-Generate the image description now:"""
+Return ONLY the raw prompt string. Start with: "A stunning 3D render of..."
+"""
         
-        # Use _run_director_agent with the stateless client
+        # Generate image description using LLM with high-fidelity 3D style prompt
         try:
             print("\n" + "="*80)
             print("🎨 IMAGE GENERATION - SENDING TO LLM:")
@@ -1686,7 +1772,20 @@ Generate the image description now:"""
             print(prompt)
             print("="*80 + "\n")
             
-            image_description = _run_director_agent(prompt, client=llm_client)
+            # Call LLM with the prompt
+            if llm_client is not None and isinstance(llm_client, OpenAI):
+                response = llm_client.chat.completions.create(
+                    model="gpt-4o-mini",
+                    messages=[
+                        {"role": "user", "content": prompt}
+                    ]
+                )
+                image_description = response.choices[0].message.content
+            elif _genai_model:
+                response = _genai_model.generate_content(prompt)
+                image_description = response.text
+            else:
+                raise Exception("No LLM client available. Please configure GEMINI_API_KEY or provide X-LLM-Key header.")
             
             print("\n" + "="*80)
             print("🎨 IMAGE DESCRIPTION GENERATED:")
@@ -1695,7 +1794,8 @@ Generate the image description now:"""
             print("="*80 + "\n")
         except Exception as e:
             print(f"Image description generation error: {e}")
-            image_description = f"A simple, colorful illustration showing the concept from the flashcard: '{sanitized_card.get('front', '')}' - '{sanitized_card.get('back', '')}'. The image should be child-friendly, educational, and visually engaging with bright colors and clear, simple shapes."
+            # Fallback with high-fidelity 3D style
+            image_description = f"A stunning 3D render of {sanitized_card.get('front', '')}. 3D CGI Render, Stylized Realism (like Zootopia, Frozen), cinematic volumetric lighting, rim lighting, high-fidelity textures with subsurface scattering, 85mm portrait lens effect with soft depth-of-field."
         
         image_result = conversation_handler.generate_actual_image(
             image_description=image_description,
@@ -4482,8 +4582,7 @@ async def sync_character_recognition_notes(request: Dict[str, Any]):
             pass  # Deck might already exist
         
         # Step 1: Collect all image files referenced in the notes and upload them to Anki
-        # Following Media file management.md naming convention: cm_[Type]_[ContentID]_[Variant].[ext]
-        # For character recognition: cm_char_[sanitized_original_name].[ext]
+        # Pure Hash strategy: Use 12-char hash filenames without prefixes
         # Hash-based storage: Files are in content/media/objects/
         anki_media_map = {}  # Maps original filename to Anki media filename
         media_dir = PROJECT_ROOT / "content" / "media" / "objects"  # Updated to hash-based storage
@@ -4524,11 +4623,9 @@ async def sync_character_recognition_notes(request: Dict[str, Any]):
                 if field_value and isinstance(field_value, str):
                     all_image_filenames.update(extract_image_filenames_from_html(field_value))
         
-        # Upload each image file to Anki with namespaced naming
+        # Upload each image file to Anki with Pure Hash naming
         import base64
         import hashlib
-        
-        PROJECT_PREFIX = "cm"  # Following the naming convention from Media file management.md
         
         # Track file hashes to avoid uploading duplicates
         uploaded_hashes = {}  # Maps content_hash -> anki_filename (for duplicate detection)
@@ -4554,21 +4651,9 @@ async def sync_character_recognition_notes(request: Dict[str, Any]):
                     print(f"  ℹ️  Reusing {original_filename} → {uploaded_hashes[content_hash]} (duplicate)")
                     continue
                 
-                # Generate Anki filename: cm_char_[sanitized_original_name].[ext]
-                # Sanitize: remove special chars, keep alphanumeric, underscore, dash, dot
-                # Keep the extension
-                file_ext = Path(original_filename).suffix
-                file_stem = Path(original_filename).stem
-                # Sanitize stem: replace non-alphanumeric with underscore (except dash and underscore)
-                sanitized_stem = re.sub(r'[^a-zA-Z0-9_-]', '_', file_stem)
-                # Limit length to avoid issues
-                if len(sanitized_stem) > 50:
-                    sanitized_stem = sanitized_stem[:50]
-                
-                # Always include short hash for uniqueness and to avoid collisions
-                # Format: cm_char_[sanitized_name]_[8char_hash].[ext]
-                short_hash = content_hash[:8]
-                anki_filename = f"{PROJECT_PREFIX}_char_{sanitized_stem}_{short_hash}{file_ext}"
+                # Generate Pure Hash filename (no prefixes)
+                # If filename matches hash pattern, use as-is; otherwise generate from content
+                anki_filename = get_pure_hash_filename(original_filename, file_data)
                 
                 # Encode to base64 for AnkiConnect
                 base64_data = base64.b64encode(file_data).decode('utf-8')
@@ -4589,7 +4674,7 @@ async def sync_character_recognition_notes(request: Dict[str, Any]):
         def update_image_references_to_anki(html_content: str, character: str) -> str:
             """Update image references to use Anki media filenames (no paths, just filename)
             
-            Replaces paths like /media/character_recognition/I2.png with just cm_char_I2_a1b2c3d4.png
+            Replaces paths like /media/character_recognition/I2.png with pure hash filenames (e.g., 5f29a2dff705.png)
             """
             if not html_content:
                 return html_content
@@ -4618,7 +4703,7 @@ async def sync_character_recognition_notes(request: Dict[str, Any]):
                     anki_filename = anki_media_map[filename]
                     # Replace the entire src value with just the Anki filename (no path, no subdirectory)
                     # This ensures Anki can find the file in collection.media root
-                    # Example: /media/character_recognition/I2.png -> cm_char_I2_a1b2c3d4.png
+                    # Example: /media/character_recognition/I2.png -> 5f29a2dff705.png (pure hash)
                     new_img_tag = re.sub(
                         r'src=["\']([^"\']+)["\']',
                         f'src="{anki_filename}"',
@@ -4997,9 +5082,9 @@ async def sync_chinese_naming_notes(request: Dict[str, Any]):
             pass  # Deck might already exist
         
         # Handle media files (images and audio)
+        # Pure Hash strategy: Use 12-char hash filenames without prefixes
         # Hash-based storage: Files are in content/media/objects/
         MEDIA_DIR = PROJECT_ROOT / "content" / "media" / "objects"
-        PROJECT_PREFIX = "cm"
         anki_media_map = {}
         uploaded_hashes = {}
         
@@ -5039,21 +5124,17 @@ async def sync_chinese_naming_notes(request: Dict[str, Any]):
                 
                 if content_hash in uploaded_hashes:
                     anki_media_map[original_filename] = uploaded_hashes[content_hash]
+                    print(f"  ℹ️  Reusing {original_filename} → {uploaded_hashes[content_hash]} (duplicate)")
                     continue
                 
-                file_ext = Path(original_filename).suffix
-                file_stem = Path(original_filename).stem
-                sanitized_stem = re.sub(r'[^a-zA-Z0-9_-]', '_', file_stem)
-                if len(sanitized_stem) > 50:
-                    sanitized_stem = sanitized_stem[:50]
-                
-                short_hash = content_hash[:8]
-                anki_filename = f"{PROJECT_PREFIX}_word_{sanitized_stem}_{short_hash}{file_ext}"
+                # Generate Pure Hash filename (no prefixes)
+                anki_filename = get_pure_hash_filename(original_filename, file_data)
                 
                 base64_data = base64.b64encode(file_data).decode('utf-8')
                 stored_filename = anki.store_media_file(anki_filename, base64_data)
                 anki_media_map[original_filename] = stored_filename
                 uploaded_hashes[content_hash] = stored_filename
+                print(f"  ✅ Uploaded image: {original_filename} → {stored_filename}")
                 
             except Exception as e:
                 print(f"  ⚠️  Failed to upload {original_filename}: {e}")
@@ -5077,14 +5158,8 @@ async def sync_chinese_naming_notes(request: Dict[str, Any]):
                     print(f"  ℹ️  Reusing {original_filename} → {uploaded_hashes[content_hash]} (duplicate)")
                     continue
                 
-                file_ext = Path(original_filename).suffix
-                file_stem = Path(original_filename).stem
-                sanitized_stem = re.sub(r'[^a-zA-Z0-9_-]', '_', file_stem)
-                if len(sanitized_stem) > 50:
-                    sanitized_stem = sanitized_stem[:50]
-                
-                short_hash = content_hash[:8]
-                anki_filename = f"{PROJECT_PREFIX}_audio_{sanitized_stem}_{short_hash}{file_ext}"
+                # Generate Pure Hash filename (no prefixes)
+                anki_filename = get_pure_hash_filename(original_filename, file_data)
                 
                 base64_data = base64.b64encode(file_data).decode('utf-8')
                 stored_filename = anki.store_media_file(anki_filename, base64_data)
@@ -5388,6 +5463,155 @@ async def get_pinyin_syllables(profile_id: str, db: Session = Depends(get_db)):
         import traceback
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=f"Error loading pinyin syllable notes: {str(e)}")
+
+
+@app.get("/api/typing-course/lesson/{lesson_id}")
+async def get_typing_course_lesson(lesson_id: str):
+    """
+    Get typing course lesson data from data/cloze_typing_course.json.
+    Returns the array of items for the specified lesson ID.
+    """
+    try:
+        course_file = PROJECT_ROOT / "data" / "cloze_typing_course.json"
+        if not course_file.exists():
+            raise HTTPException(
+                status_code=404, 
+                detail="Typing course file not found. Please ensure data/cloze_typing_course.json exists."
+            )
+        
+        with open(course_file, 'r', encoding='utf-8') as f:
+            course_data = json.load(f)
+        
+        lesson_items = course_data.get(lesson_id, [])
+        
+        if not lesson_items:
+            raise HTTPException(
+                status_code=404,
+                detail=f"Lesson {lesson_id} not found in course data"
+            )
+        
+        return lesson_items
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(
+            status_code=500, 
+            detail=f"Error loading typing course lesson: {str(e)}"
+        )
+
+
+@app.get("/api/typing-course")
+async def get_typing_course():
+    """
+    Get all typing course data (all lessons).
+    """
+    try:
+        course_file = PROJECT_ROOT / "data" / "cloze_typing_course.json"
+        if not course_file.exists():
+            raise HTTPException(
+                status_code=404, 
+                detail="Typing course file not found. Please ensure data/cloze_typing_course.json exists."
+            )
+        
+        with open(course_file, 'r', encoding='utf-8') as f:
+            course_data = json.load(f)
+        
+        return course_data
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(
+            status_code=500, 
+            detail=f"Error loading typing course: {str(e)}"
+        )
+
+
+@app.post("/api/typing-course/sync")
+async def sync_typing_course_to_anki(request: Dict[str, Any] = None):
+    """
+    Sync typing course to Anki via Anki-Connect.
+    First ensures Anki environment is set up, then syncs all notes.
+    """
+    try:
+        import subprocess
+        from pathlib import Path
+        
+        course_file = PROJECT_ROOT / "data" / "cloze_typing_course.json"
+        if not course_file.exists():
+            raise HTTPException(
+                status_code=404,
+                detail="Typing course file not found. Please ensure data/cloze_typing_course.json exists."
+            )
+        
+        # Step 1: Setup Anki environment (deck and note type)
+        setup_script = PROJECT_ROOT / "scripts" / "setup_anki_env.py"
+        if not setup_script.exists():
+            raise HTTPException(
+                status_code=500,
+                detail="Setup script not found: scripts/setup_anki_env.py"
+            )
+        
+        print("Running Anki environment setup...")
+        setup_result = subprocess.run(
+            [sys.executable, str(setup_script)],
+            capture_output=True,
+            text=True,
+            cwd=str(PROJECT_ROOT)
+        )
+        
+        if setup_result.returncode != 0:
+            raise HTTPException(
+                status_code=500,
+                detail=f"Anki environment setup failed: {setup_result.stderr or setup_result.stdout}"
+            )
+        
+        # Step 2: Sync notes to Anki
+        sync_script = PROJECT_ROOT / "scripts" / "sync_typing_to_anki.py"
+        if not sync_script.exists():
+            raise HTTPException(
+                status_code=500,
+                detail="Sync script not found: scripts/sync_typing_to_anki.py"
+            )
+        
+        print("Syncing notes to Anki...")
+        sync_result = subprocess.run(
+            [sys.executable, str(sync_script)],
+            capture_output=True,
+            text=True,
+            cwd=str(PROJECT_ROOT)
+        )
+        
+        if sync_result.returncode != 0:
+            raise HTTPException(
+                status_code=500,
+                detail=f"Sync failed: {sync_result.stderr or sync_result.stdout}"
+            )
+        
+        return {
+            "message": "Successfully synced typing course to Anki via Anki-Connect",
+            "details": {
+                "setup_output": setup_result.stdout,
+                "sync_output": sync_result.stdout,
+                "setup_stderr": setup_result.stderr if setup_result.stderr else None,
+                "sync_stderr": sync_result.stderr if sync_result.stderr else None
+            }
+        }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(
+            status_code=500,
+            detail=f"Error syncing typing course to Anki: {str(e)}"
+        )
 
 
 @app.delete("/pinyin/syllables/{note_id}")
@@ -5786,9 +6010,9 @@ async def sync_pinyin_notes(request: Dict[str, Any]):
         import hashlib
         import re
         
+        # Pure Hash strategy: Use 12-char hash filenames without prefixes
         # Hash-based storage: Files are in content/media/objects/
         MEDIA_DIR = PROJECT_ROOT / "content" / "media" / "objects"
-        PROJECT_PREFIX = "cm"
         anki_media_map = {}  # Maps original filename to Anki media filename
         uploaded_hashes = {}  # Maps content_hash -> anki_filename (for duplicate detection)
         
@@ -5864,17 +6088,11 @@ async def sync_pinyin_notes(request: Dict[str, Any]):
                 # Check if we've already uploaded this file (by content hash)
                 if content_hash in uploaded_hashes:
                     anki_media_map[original_filename] = uploaded_hashes[content_hash]
+                    print(f"  ℹ️  Reusing {original_filename} → {uploaded_hashes[content_hash]} (duplicate)")
                     continue
                 
-                # Generate Anki media filename
-                file_ext = Path(original_filename).suffix
-                file_stem = Path(original_filename).stem
-                sanitized_stem = re.sub(r'[^a-zA-Z0-9_-]', '_', file_stem)
-                if len(sanitized_stem) > 50:
-                    sanitized_stem = sanitized_stem[:50]
-                
-                short_hash = content_hash[:8]
-                anki_filename = f"{PROJECT_PREFIX}_pinyin_{sanitized_stem}_{short_hash}{file_ext}"
+                # Generate Pure Hash filename (no prefixes)
+                anki_filename = get_pure_hash_filename(original_filename, file_data)
                 
                 # Upload to Anki
                 base64_data = base64.b64encode(file_data).decode('utf-8')
@@ -5915,17 +6133,11 @@ async def sync_pinyin_notes(request: Dict[str, Any]):
                 # Check if we've already uploaded this file
                 if content_hash in uploaded_hashes:
                     anki_media_map[original_filename] = uploaded_hashes[content_hash]
+                    print(f"  ℹ️  Reusing {original_filename} → {uploaded_hashes[content_hash]} (duplicate)")
                     continue
                 
-                # Generate Anki media filename
-                file_ext = Path(original_filename).suffix
-                file_stem = Path(original_filename).stem
-                sanitized_stem = re.sub(r'[^a-zA-Z0-9_-]', '_', file_stem)
-                if len(sanitized_stem) > 50:
-                    sanitized_stem = sanitized_stem[:50]
-                
-                short_hash = content_hash[:8]
-                anki_filename = f"{PROJECT_PREFIX}_audio_{sanitized_stem}_{short_hash}{file_ext}"
+                # Generate Pure Hash filename (no prefixes)
+                anki_filename = get_pure_hash_filename(original_filename, file_data)
                 
                 # Upload to Anki
                 base64_data = base64.b64encode(file_data).decode('utf-8')

@@ -1,0 +1,338 @@
+<script src="_pinyin_db.js"></script>
+
+{{#ElementToLearn}}
+<!-- Hidden data elements (safe from JavaScript syntax errors) -->
+<div id="data-correct-syllable" style="display:none;">{{Syllable}}</div>
+
+{{#WordAudio}}
+<div class="audio-wrapper">
+  <audio id="player-word" controls autoplay preload="auto" src="{{WordAudio}}"></audio>
+</div>
+{{/WordAudio}}
+
+<div class="pinyin-syllable-card">
+  {{#WordPicture}}<div class="word-picture">{{WordPicture}}</div>{{/WordPicture}}
+  <div class="word-display"><p class="word-hanzi">{{WordHanzi}}</p></div>
+  
+  <div id="mcq-container" class="mcq-options">
+    <!-- Options will be generated dynamically by JavaScript -->
+  </div>
+</div>
+
+<script>
+(function() {
+  // Read data safely from hidden DOM elements
+  const correctSyllableEl = document.getElementById('data-correct-syllable');
+  const container = document.getElementById('mcq-container');
+  if (!correctSyllableEl || !container) return;
+  
+  const correctAnswer = correctSyllableEl.innerText.trim();
+  
+  // Expanded Confusion Groups
+  const CONFUSION_GROUPS = {
+    // Initials
+    'b': ['p', 'd', 'q'], 'p': ['b', 'd', 'q'],
+    'd': ['b', 'p', 'q', 't'], 'q': ['p', 'b', 'd'],
+    'n': ['l', 'm'], 'l': ['n', 'r'],
+    'm': ['n', 'f'], 'f': ['h', 'm'],
+    'z': ['zh', 'c', 's'], 'c': ['ch', 'z', 's'], 's': ['sh', 'z', 'c'],
+    'zh': ['z', 'ch', 'sh', 'r'], 'ch': ['c', 'zh', 'sh'], 'sh': ['s', 'zh', 'ch'],
+    'j': ['q', 'x'], 'q': ['j', 'x'], 'x': ['j', 'q', 'sh'],
+    'g': ['k', 'h'], 'k': ['g', 'h'], 'h': ['f', 'g', 'k'],
+    't': ['d', 'p'], 'r': ['l', 'zh'],
+    // Finals
+    'a': ['ai', 'ao', 'e'],
+    'e': ['ei', 'ie', 'a'],
+    'i': ['ui', 'iu', 'ü'],
+    'u': ['ü', 'ou'], 'ü': ['u', 'i'],
+    'ai': ['ei', 'ao', 'an'], 'ei': ['ai', 'en', 'ie'],
+    'ao': ['ou', 'ai'], 'ou': ['uo', 'ao', 'u'],
+    'an': ['ang', 'en', 'uan'], 'en': ['eng', 'an', 'in'],
+    'ang': ['an', 'eng', 'ong'], 'eng': ['en', 'ing', 'ang'],
+    'in': ['ing', 'en'], 'ing': ['in', 'eng'],
+    'ong': ['eng', 'ang', 'iong'],
+    'uo': ['ou', 'ua'], 'ua': ['uo', 'uai'],
+    'ie': ['ei', 'e'], 'iu': ['ui', 'i'],
+    'uan': ['an', 'uang'], 'uang': ['uan', 'ang'],
+    'iong': ['ong', 'ing']
+  };
+  
+  // Deterministic seeded random generator based on {{Syllable}}
+  let seed = 0;
+  const seedString = correctAnswer;
+  for (let i = 0; i < seedString.length; i++) {
+    seed = (seed + seedString.charCodeAt(i)) % 100000;
+  }
+  const seededRandom = function() {
+    var x = Math.sin(seed++) * 10000;
+    return x - Math.floor(x);
+  };
+  
+  // Fisher-Yates shuffle with seeded random
+  function shuffleArray(array) {
+    const shuffled = array.slice();
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(seededRandom() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  }
+  
+  // Normalization Helper: Strip tones from syllable
+  function stripTone(syllable) {
+    if (!syllable) return '';
+    // Normalize to NFD (decomposed form) to separate base characters from combining marks
+    const normalized = syllable.normalize('NFD');
+    // Remove combining marks (tone marks are combining diacritical marks)
+    const stripped = normalized.replace(/[\u0300-\u036f]/g, '');
+    return stripped.toLowerCase();
+  }
+  
+  // Parse syllable into initial and final (without tone)
+  function parseSyllable(syllable) {
+    const noTone = stripTone(syllable);
+    
+    // Known initials (longest first for proper matching)
+    const initials = ['zh', 'ch', 'sh', 'b', 'p', 'm', 'f', 'd', 't', 'n', 'l', 
+                      'g', 'k', 'h', 'j', 'q', 'x', 'z', 'c', 's', 'r', 'y', 'w'];
+    
+    let initial = '';
+    let final = noTone;
+    
+    // Find initial (try longest first)
+    for (const init of initials) {
+      if (noTone.startsWith(init)) {
+        initial = init;
+        final = noTone.substring(init.length);
+        break;
+      }
+    }
+    
+    return { initial: initial, final: final, original: syllable };
+  }
+  
+  // Extract tone from syllable
+  function extractTone(syllable) {
+    if (!syllable) return null;
+    const normalized = syllable.normalize('NFD');
+    // Check for tone marks (combining diacritical marks)
+    const toneMap = {
+      '\u0304': 1, // macron (first tone)
+      '\u0301': 2, // acute (second tone)
+      '\u030C': 3, // caron (third tone)
+      '\u0300': 4  // grave (fourth tone)
+    };
+    
+    for (let i = 0; i < normalized.length; i++) {
+      const char = normalized[i];
+      if (toneMap[char]) {
+        return toneMap[char];
+      }
+    }
+    return null;
+  }
+  
+  // Add tone to syllable (simple version - adds tone mark to first vowel)
+  function addTone(syllable, tone) {
+    if (!tone || !syllable) return syllable;
+    
+    const toneMarks = {
+      1: { 'a': 'ā', 'e': 'ē', 'i': 'ī', 'o': 'ō', 'u': 'ū', 'ü': 'ǖ' },
+      2: { 'a': 'á', 'e': 'é', 'i': 'í', 'o': 'ó', 'u': 'ú', 'ü': 'ǘ' },
+      3: { 'a': 'ǎ', 'e': 'ě', 'i': 'ǐ', 'o': 'ǒ', 'u': 'ǔ', 'ü': 'ǚ' },
+      4: { 'a': 'à', 'e': 'è', 'i': 'ì', 'o': 'ò', 'u': 'ù', 'ü': 'ǜ' }
+    };
+    
+    const marks = toneMarks[tone];
+    if (!marks) return syllable;
+    
+    // Find first vowel and add tone
+    const vowels = ['a', 'e', 'i', 'o', 'u', 'ü'];
+    for (let i = 0; i < syllable.length; i++) {
+      const char = syllable[i].toLowerCase();
+      if (vowels.includes(char) && marks[char]) {
+        return syllable.substring(0, i) + marks[char] + syllable.substring(i + 1);
+      }
+    }
+    
+    return syllable;
+  }
+  
+  // Generate phonetic confusors by swapping initials/finals
+  function generatePhoneticConfusors(correctSyllable, db, count) {
+    const parsed = parseSyllable(correctSyllable);
+    const tone = extractTone(correctSyllable);
+    const confusors = [];
+    const seen = new Set([correctSyllable]);
+    
+    // Get confusion candidates for initial
+    const initialConfusors = CONFUSION_GROUPS[parsed.initial] || [];
+    // Get confusion candidates for final
+    const finalConfusors = CONFUSION_GROUPS[parsed.final] || [];
+    
+    // Strategy: Alternate between swapping initial and final
+    let swapInitial = true;
+    let initialIndex = 0;
+    let finalIndex = 0;
+    
+    while (confusors.length < count && (initialIndex < initialConfusors.length || finalIndex < finalConfusors.length)) {
+      let newSyllable = '';
+      
+      if (swapInitial && initialIndex < initialConfusors.length) {
+        // Swap initial
+        const newInitial = initialConfusors[initialIndex];
+        newSyllable = newInitial + parsed.final;
+        initialIndex++;
+      } else if (finalIndex < finalConfusors.length) {
+        // Swap final
+        const newFinal = finalConfusors[finalIndex];
+        newSyllable = parsed.initial + newFinal;
+        finalIndex++;
+      } else {
+        break;
+      }
+      
+      // Add tone back
+      if (tone) {
+        newSyllable = addTone(newSyllable, tone);
+      }
+      
+      // Check if this syllable exists in database and is unique
+      if (!seen.has(newSyllable)) {
+        const existsInDb = db.some(item => {
+          const itemNoTone = stripTone(item.syllable);
+          const newNoTone = stripTone(newSyllable);
+          return itemNoTone === newNoTone;
+        });
+        
+        if (existsInDb) {
+          // Find the actual syllable from DB (with correct tone)
+          const dbItem = db.find(item => {
+          const itemNoTone = stripTone(item.syllable);
+          const newNoTone = stripTone(newSyllable);
+          return itemNoTone === newNoTone;
+        });
+          if (dbItem && !seen.has(dbItem.syllable)) {
+            confusors.push(dbItem.syllable);
+            seen.add(dbItem.syllable);
+          }
+        }
+      }
+      
+      swapInitial = !swapInitial; // Alternate
+    }
+    
+    // If we still need more, use random from DB
+    if (confusors.length < count) {
+      const available = db
+        .map(item => item.syllable)
+        .filter(s => s && !seen.has(s));
+      
+      const unique = [...new Set(available)];
+      const needed = count - confusors.length;
+      
+      for (let i = 0; i < needed && unique.length > 0; i++) {
+        const index = Math.floor(seededRandom() * unique.length);
+        confusors.push(unique[index]);
+        seen.add(unique[index]);
+        unique.splice(index, 1);
+      }
+    }
+    
+    return confusors.slice(0, count);
+  }
+  
+  // Function to generate and render options
+  function generateOptions() {
+    // Wait for PINYIN_DB to be available
+    if (typeof window === 'undefined' || !window.PINYIN_DB || !Array.isArray(window.PINYIN_DB)) {
+      return false; // Signal that DB is not ready
+    }
+    
+    const db = window.PINYIN_DB;
+    
+    // Generate phonetic confusors
+    const distractors = generatePhoneticConfusors(correctAnswer, db, 3);
+    
+    // Create option objects: correct answer + distractors
+    const options = [
+      { syllable: correctAnswer, isCorrect: true },
+      ...distractors.map(syllable => ({
+        syllable: syllable,
+        isCorrect: false
+      }))
+    ];
+    
+    // Create button elements
+    const buttons = options.map(option => {
+      const btn = document.createElement('button');
+      btn.className = 'mcq-option';
+      btn.setAttribute('data-value', option.syllable);
+      btn.setAttribute('data-correct', option.isCorrect ? 'true' : 'false');
+      btn.textContent = option.syllable;
+      return btn;
+    });
+    
+    // Clear container
+    container.innerHTML = '';
+    
+    // Shuffle using seeded random
+    const shuffled = shuffleArray(buttons);
+    shuffled.forEach(btn => container.appendChild(btn));
+  
+    // Re-query after shuffle
+  const finalOptions = container.querySelectorAll('.mcq-option');
+  
+    // Only add click handlers if we're on the front side
+    if (!document.getElementById('answer')) {
+  finalOptions.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const isCorrect = (this.getAttribute('data-value') === correctAnswer);
+      finalOptions.forEach(opt => opt.classList.remove('selected', 'wrong'));
+      
+      if (isCorrect) {
+        this.classList.add('selected');
+        if(typeof pycmd !== "undefined") { pycmd("ans"); }
+      } else {
+        this.classList.add('wrong');
+        // Highlight real answer
+        finalOptions.forEach(opt => {
+          if (opt.getAttribute('data-value') === correctAnswer) opt.classList.add('selected');
+        });
+      }
+    });
+  });
+    }
+    
+    return true; // Signal success
+  }
+  
+  // Try to generate options, with retry logic
+  let attempts = 0;
+  const maxAttempts = 40; // 40 * 50ms = 2 seconds
+  
+  function tryGenerate() {
+    attempts++;
+    
+    if (generateOptions()) {
+      return; // Success!
+    }
+    
+    // If we've tried for 2 seconds, try fallback
+    if (attempts >= maxAttempts) {
+      // Last attempt with fallback
+      if (typeof window !== 'undefined' && window.PINYIN_DB && Array.isArray(window.PINYIN_DB)) {
+        generateOptions(); // Force one more try
+      }
+      return;
+    }
+    
+    // Retry after a short delay
+    setTimeout(tryGenerate, 50);
+  }
+  
+  // Start trying to generate options
+  tryGenerate();
+})();
+</script>
+{{/ElementToLearn}}

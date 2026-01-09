@@ -395,6 +395,11 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
       // Get selected image model from localStorage (set by ChatAssistant)
       const selectedImageModel = localStorage.getItem('selectedImageModel');
       
+      // Get LLM configuration from localStorage
+      const llmProvider = localStorage.getItem('llm_provider') || 'gemini';
+      const llmKey = localStorage.getItem('llm_key') || '';
+      const llmBaseUrl = localStorage.getItem('llm_base_url') || '';
+      
       const requestBody = {
         position,
         location: 'before'
@@ -405,7 +410,18 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
         requestBody.image_model = selectedImageModel;
       }
       
-      const response = await axios.post(`${API_BASE}/cards/${cardId}/generate-image`, requestBody);
+      // Prepare headers with LLM configuration
+      const headers = {
+        'X-LLM-Provider': llmProvider,
+        'X-LLM-Key': llmKey,
+        'X-LLM-Base-URL': llmBaseUrl
+      };
+      
+      const response = await axios.post(
+        `${API_BASE}/cards/${cardId}/generate-image`, 
+        requestBody,
+        { headers }
+      );
 
       const message = response.data?.message || '';
       setImageGenerationState(prev => ({

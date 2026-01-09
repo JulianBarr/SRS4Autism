@@ -1,0 +1,42 @@
+<div class="typing-card">
+  {{#Image}}
+  <div class="image-container">
+    {{Image}}
+  </div>
+  {{/Image}}
+  
+  <div class="pinyin-prompt">
+    <div class="full-pinyin-display" id="pinyinDisplay">
+      <!-- JavaScript will replace the target syllable with [...] -->
+      {{FullPinyinRaw}}
+    </div>
+    <div class="target-info">
+      <small>Type the syllable at position {{TargetIndex}}</small>
+    </div>
+  </div>
+  
+  {{#Audio}}
+  <div class="audio-container">
+    {{Audio}}
+  </div>
+  {{/Audio}}
+</div>
+
+<script>
+(function() {
+  // Mask the target syllable in the pinyin display
+  var fullPinyin = '{{FullPinyinRaw}}';
+  var targetIndex = parseInt('{{TargetIndex}}');
+  var syllables = fullPinyin.split(/\s+/);
+  
+  if (targetIndex >= 0 && targetIndex < syllables.length) {
+    syllables[targetIndex] = '[____]';
+  }
+  
+  var display = document.getElementById('pinyinDisplay');
+  if (display) {
+    display.textContent = syllables.join(' ');
+  }
+})();
+</script>
+

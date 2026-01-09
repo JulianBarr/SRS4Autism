@@ -1,0 +1,146 @@
+/* BASE LAYOUT */
+.card-container {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #2b2b2b;
+    color: #e0e0e0;
+    padding: 20px;
+    max-width: 500px; /* Slightly tighter width for focus */
+    margin: 0 auto;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 1. HERO SECTION (Center Stage) */
+.hero-container {
+    margin: 10px 0 30px 0;
+    text-align: center;
+}
+
+.hero-element {
+    font-size: 140px !important; /* MASSIVE */
+    line-height: 1.1;
+    font-weight: 800;
+    color: #ffd700; /* Gold */
+    text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+/* 2. PICTURE CONTAINER (Front Template) */
+.picture-container {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.picture-container img {
+    height: 120px;
+    width: auto;
+    border-radius: 8px;
+    border: 1px solid #555;
+}
+
+/* 3. EXAMPLE GROUP (Back Template) */
+.example-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+    width: 100%;
+}
+
+.example-picture {
+    text-align: center;
+}
+
+.example-picture img {
+    height: 120px !important;
+    width: auto !important;
+    border-radius: 8px;
+    border: 1px solid #555;
+}
+
+.example-char {
+    font-size: 2rem !important;
+    font-family: "KaiTi", "BiauKai", serif;
+    color: #888 !important; /* Gray, low prominence */
+    text-align: center;
+}
+
+/* 4. TONES SECTION (Bottom) */
+.tones-section {
+    width: 100%;
+    background-color: #363636; /* Slightly lighter bg box */
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.tones-grid {
+    display: flex;
+    justify-content: space-between; /* Spread them out nicely */
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.tone-box {
+    flex: 1; /* Equal width */
+    background-color: #2b2b2b;
+    border: 2px solid #444;
+    border-radius: 8px;
+    padding: 12px 0;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.1s ease;
+}
+
+.tone-box:hover {
+    border-color: #888;
+    background-color: #333;
+}
+
+/* ACTIVE STATE (Karaoke Highlight) */
+.tone-box.active {
+    background-color: #2e7d32; /* Green */
+    border-color: #4caf50;
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.pinyin-text {
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+}
+
+/* CONTROLS */
+.karaoke-btn {
+    width: 100%;
+    padding: 12px;
+    background: #1976d2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.karaoke-btn:hover {
+    background: #1565c0;
+}
+
+.karaoke-btn:active {
+    transform: translateY(1px);
+}
+
+/* MCQ BUTTON FIX (Global) */
+.mcq-option {
+    font-size: 64px !important;
+    line-height: 1.2 !important;
+    min-height: 100px !important;
+    padding: 20px 30px !important;
+    margin: 10px !important;
+    border-radius: 15px !important;
+    font-family: Arial, sans-serif !important;
+}
