@@ -1,0 +1,57 @@
+.simple-hands-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  margin: 24px 0;
+  padding: 20px;
+  background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+  border-radius: 12px;
+  border: 2px solid #e5e7eb;
+}
+
+.hand-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.hand-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.hand-svg {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.finger-path {
+  transition: fill 0.3s ease;
+}
+
+.finger-path.active {
+  filter: drop-shadow(0 0 8px #3b82f6);
+  stroke-width: 3;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .simple-hands-container {
+    gap: 30px;
+    padding: 16px;
+  }
+
+  .hand-svg {
+    width: 180px;
+    height: 90px;
+  }
+
+  .hand-label {
+    font-size: 12px;
+  }
+}
+

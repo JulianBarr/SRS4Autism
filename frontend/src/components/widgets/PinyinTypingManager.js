@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLanguage } from '../../i18n/LanguageContext';
+import KeyboardTutorModal from '../KeyboardTutorModal';
+import PinyinTypingModal from '../PinyinTypingModal';
 
 const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
@@ -18,6 +20,9 @@ const PinyinTypingManager = ({ profile, onClose }) => {
   const [syncing, setSyncing] = useState(false);
   const [syncStatus, setSyncStatus] = useState(null);
   const [expandedLessons, setExpandedLessons] = useState(new Set());
+  const [showTutorModal, setShowTutorModal] = useState(false);
+  const [showGameModal, setShowGameModal] = useState(false);
+  const [selectedLessonId, setSelectedLessonId] = useState(null);
 
   useEffect(() => {
     loadCourseData();
@@ -115,6 +120,43 @@ const PinyinTypingManager = ({ profile, onClose }) => {
     });
   };
 
+  const checkTutorialCompleted = (lessonId) => {
+    return localStorage.getItem(`tutorialCompleted_${lessonId}`) === 'true';
+  };
+
+  const handleStartLesson = (lessonId, e) => {
+    e.stopPropagation(); // Prevent expanding/collapsing the lesson
+    
+    setSelectedLessonId(lessonId);
+    
+    // Check if tutorial is completed
+    if (checkTutorialCompleted(lessonId)) {
+      // Tutorial already completed, go straight to game
+      setShowGameModal(true);
+    } else {
+      // Tutorial not completed, show tutor first
+      setShowTutorModal(true);
+    }
+  };
+
+  const handleTutorComplete = () => {
+    setShowTutorModal(false);
+    // Tutorial completed, now show the game
+    if (selectedLessonId) {
+      setShowGameModal(true);
+    }
+  };
+
+  const handleGameClose = () => {
+    setShowGameModal(false);
+    setSelectedLessonId(null);
+  };
+
+  const handleTutorClose = () => {
+    setShowTutorModal(false);
+    setSelectedLessonId(null);
+  };
+
   if (loading) {
     return (
       <div style={{ padding: '40px', textAlign: 'center' }}>
@@ -176,8 +218,71 @@ const PinyinTypingManager = ({ profile, onClose }) => {
   const lessonIds = Object.keys(courseData).sort((a, b) => parseInt(a) - parseInt(b));
 
   return (
-    <div style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto' }}>
-      {/* Header */}
+    <>
+      {/* Keyboard Tutor Modal */}
+      {showTutorModal && selectedLessonId && (
+        <KeyboardTutorModal
+          lessonId={selectedLessonId}
+          onClose={handleTutorClose}
+          onComplete={handleTutorComplete}
+        />
+      )}
+
+      {/* Pinyin Typing Game Modal */}
+      {showGameModal && selectedLessonId && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(0, 0, 0, 0.7)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 1000,
+          padding: '20px'
+        }}>
+          <div style={{
+            background: 'white',
+            borderRadius: '16px',
+            padding: '32px',
+            maxWidth: '900px',
+            width: '100%',
+            maxHeight: '90vh',
+            overflowY: 'auto',
+            position: 'relative'
+          }}>
+            <button
+              onClick={handleGameClose}
+              style={{
+                position: 'absolute',
+                top: '16px',
+                right: '16px',
+                width: '40px',
+                height: '40px',
+                borderRadius: '50%',
+                border: 'none',
+                backgroundColor: '#f3f4f6',
+                color: '#6b7280',
+                fontSize: '24px',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                zIndex: 1001
+              }}
+            >
+              ×
+            </button>
+            <PinyinTypingModal
+              lessonId={selectedLessonId}
+              onClose={handleGameClose}
+            />
+          </div>
+        </div>
+      )}
+
+      <div style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto' }}>
+        {/* Header */}
       <div style={{ marginBottom: '24px' }}>
         <h2 style={{ 
           fontSize: '28px', 
@@ -303,18 +408,48 @@ const PinyinTypingManager = ({ profile, onClose }) => {
                   }
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1 }}>
                   <span style={{ fontSize: '20px' }}>
                     {isExpanded ? '▼' : '▶'}
                   </span>
-                  <div>
+                  <div style={{ flex: 1 }}>
                     <div style={{ fontSize: '18px', fontWeight: 'bold', color: '#1f2937' }}>
                       {language === 'zh' ? '课程' : 'Lesson'} {lessonId}
                     </div>
                     <div style={{ fontSize: '14px', color: '#6b7280', marginTop: '2px' }}>
                       {items.length} {language === 'zh' ? '个词' : 'words'}
+                      {checkTutorialCompleted(lessonId) && (
+                        <span style={{ marginLeft: '12px', color: '#10b981', fontSize: '12px' }}>
+                          ✓ {language === 'zh' ? '指法已通过' : 'Tutorial Passed'}
+                        </span>
+                      )}
                     </div>
                   </div>
+                  <button
+                    onClick={(e) => handleStartLesson(lessonId, e)}
+                    style={{
+                      padding: '10px 20px',
+                      fontSize: '14px',
+                      fontWeight: 'bold',
+                      backgroundColor: '#8b5cf6',
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '8px',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s',
+                      whiteSpace: 'nowrap'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.target.style.backgroundColor = '#7c3aed';
+                      e.target.style.transform = 'translateY(-2px)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.backgroundColor = '#8b5cf6';
+                      e.target.style.transform = 'translateY(0)';
+                    }}
+                  >
+                    {language === 'zh' ? '🎮 开始游戏' : '🎮 Start Lesson'}
+                  </button>
                 </div>
               </div>
 
@@ -422,6 +557,7 @@ const PinyinTypingManager = ({ profile, onClose }) => {
         })}
       </div>
     </div>
+    </>
   );
 };
 

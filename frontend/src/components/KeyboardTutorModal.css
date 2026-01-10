@@ -1,0 +1,328 @@
+.keyboard-tutor-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.keyboard-tutor-modal {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  max-width: 900px;
+  width: 100%;
+  height: 85vh;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.close-button {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #6b7280;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  z-index: 1001;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  /* Keep button fixed while scrolling modal content */
+}
+
+.close-button:hover {
+  background-color: #f3f4f6;
+  color: #1f2937;
+  transform: scale(1.1);
+}
+
+.tutor-header {
+  text-align: center;
+  margin-bottom: 12px;
+  flex-shrink: 0;
+}
+
+.tutor-header h2 {
+  font-size: 20px;
+  margin: 0 0 4px 0;
+}
+
+.tutor-header p {
+  font-size: 14px;
+  margin: 0;
+}
+
+.progress-bar-container {
+  width: 100%;
+  height: 6px;
+  background-color: #e5e7eb;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  transition: width 0.3s ease;
+  border-radius: 4px;
+}
+
+.finger-hint {
+  text-align: center;
+  margin-bottom: 8px;
+  padding: 8px 12px;
+  background-color: #f0f9ff;
+  border-radius: 8px;
+  border: 2px solid #bae6fd;
+  flex-shrink: 0;
+}
+
+.finger-hint span {
+  font-size: 16px;
+}
+
+.drill-sequence {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  flex-wrap: wrap;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+  padding: 12px;
+  background-color: #f9fafb;
+  border-radius: 8px;
+  min-height: 60px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.drill-char {
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  color: #6b7280;
+  border: 2px solid transparent;
+}
+
+.drill-char.current {
+  color: #1f2937;
+  background-color: #dbeafe;
+  border-color: #3b82f6;
+  transform: scale(1.2);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.drill-char.completed {
+  color: #10b981;
+  background-color: #d1fae5;
+}
+
+.keyboard-visual {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  padding: 12px;
+  background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+  border-radius: 8px;
+  border: 2px solid #e5e7eb;
+  transition: transform 0.3s ease;
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.keyboard-visual.shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+.keyboard-row {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+  align-items: stretch;
+  width: 100%;
+  max-width: 800px;
+}
+
+.key {
+  width: 50px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  user-select: none;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.key:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.key.highlighted {
+  border-width: 2px;
+}
+
+.key.space-key {
+  /* Spacebar specific styling */
+  min-width: 300px;
+  max-width: 400px;
+  width: 60%;
+  height: 40px;
+  flex-grow: 1;
+}
+
+.key.active {
+  background-color: #3b82f6 !important;
+  color: white !important;
+  border: 3px solid #2563eb !important;
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-10px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(10px);
+  }
+}
+
+.completion-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  z-index: 100;
+  animation: fadeIn 0.3s ease;
+}
+
+.completion-content {
+  text-align: center;
+  padding: 40px;
+}
+
+.start-game-button {
+  padding: 16px 48px;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+  transition: all 0.2s;
+}
+
+.start-game-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.5);
+}
+
+.start-game-button:active {
+  transform: translateY(0);
+}
+
+.instructions {
+  text-align: center;
+  padding: 16px;
+  background-color: #f9fafb;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+/* Hand Overlay Placeholder */
+.hand-overlay {
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+  height: 200px;
+  pointer-events: none;
+  z-index: 10;
+  /* Placeholder for hand image - can add background-image here */
+  /* background-image: url('/path/to/hand-image.png'); */
+  /* background-size: contain; */
+  /* background-repeat: no-repeat; */
+  /* background-position: center; */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .keyboard-tutor-modal {
+    padding: 24px;
+  }
+
+  .drill-sequence {
+    font-size: 36px;
+  }
+
+  .key {
+    width: 40px;
+    height: 40px;
+    font-size: 14px;
+  }
+
+  .key.active {
+    font-size: 18px;
+  }
+}
+
