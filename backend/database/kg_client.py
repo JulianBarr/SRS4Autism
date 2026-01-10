@@ -2,11 +2,12 @@
 Knowledge Graph Client for abstracting SPARQL query execution.
 
 This module provides a unified interface for querying the knowledge graph,
-supporting both Fuseki and Oxigraph backends.
+using an embedded Oxigraph store.
 """
 
-import requests
+import pyoxigraph as oxigraph
 from typing import Dict, Any, Optional
+from pathlib import Path
 from backend.config import settings
 
 
@@ -25,11 +26,14 @@ class KnowledgeGraphQueryError(KnowledgeGraphError):
     pass
 
 
+# Global store instance to prevent multiple locks on the same store
+_global_store = None
+_global_store_path = None
+
+
 class KnowledgeGraphClient:
     """
-    Client for executing SPARQL queries against a knowledge graph endpoint.
-
-    Supports both Fuseki and Oxigraph backends by abstracting the HTTP layer.
+    Client for executing SPARQL queries against an embedded Oxigraph store.
 
     Example:
         >>> client = KnowledgeGraphClient()
@@ -38,20 +42,72 @@ class KnowledgeGraphClient:
         >>> bindings = results.get("results", {}).get("bindings", [])
     """
 
-    def __init__(self, endpoint_url: Optional[str] = None, timeout: int = 30):
+    def __init__(self, store_path: Optional[str] = None, timeout: int = 30):
         """
-        Initialize the knowledge graph client.
+        Initialize the knowledge graph client with an embedded Oxigraph store.
+
+        Uses a global store instance to avoid locking issues when multiple clients
+        access the same store path.
 
         Args:
-            endpoint_url: SPARQL endpoint URL. If None, uses settings.fuseki_url
-            timeout: Request timeout in seconds (default: 30)
+            store_path: Path to the Oxigraph store directory. If None, uses settings.kg_store_path
+            timeout: Deprecated parameter kept for backward compatibility (no longer used with embedded store)
         """
-        self.endpoint_url = endpoint_url or settings.fuseki_url
-        self.timeout = timeout
+        global _global_store, _global_store_path
+
+        self.store_path = store_path or settings.kg_store_path
+        self.timeout = timeout  # Kept for backward compatibility but not used with embedded Oxigraph
+        # Backward compatibility: provide endpoint_url property for logging
+        self.endpoint_url = f"oxigraph://{self.store_path}"
+
+        try:
+            # Use global store instance if same path, otherwise create new one
+            if _global_store is None or _global_store_path != self.store_path:
+                # Ensure the directory exists
+                Path(self.store_path).mkdir(parents=True, exist_ok=True)
+                _global_store = oxigraph.Store(path=self.store_path)
+                _global_store_path = self.store_path
+
+            self.store = _global_store
+        except Exception as e:
+            raise KnowledgeGraphConnectionError(
+                f"Failed to initialize Oxigraph store at {self.store_path}: {str(e)}"
+            ) from e
+
+    def load_file(self, file_path: str, format=None) -> None:
+        """
+        Load RDF data from a file into the store.
+
+        Args:
+            file_path: Path to the RDF file to load
+            format: RdfFormat for the file. If None, format is guessed from file extension.
+                   Common formats: RdfFormat.TURTLE, RdfFormat.RDF_XML, RdfFormat.N_TRIPLES
+
+        Raises:
+            KnowledgeGraphError: If loading fails
+
+        Example:
+            >>> client = KnowledgeGraphClient()
+            >>> client.load_file("knowledge_graph/world_model.ttl")
+        """
+        try:
+            # Use path parameter - pyoxigraph can handle the file directly
+            self.store.load(path=file_path, format=format)
+        except FileNotFoundError as e:
+            raise KnowledgeGraphError(
+                f"File not found: {file_path}"
+            ) from e
+        except Exception as e:
+            raise KnowledgeGraphError(
+                f"Failed to load file {file_path}: {str(e)}"
+            ) from e
 
     def query(self, sparql_query: str) -> Dict[str, Any]:
         """
-        Execute a SPARQL query and return the results.
+        Execute a SPARQL query and return the results in SPARQL JSON format.
+
+        This method converts Oxigraph's native results into the same JSON format
+        that Fuseki returns, ensuring frontend compatibility.
 
         Args:
             sparql_query: SPARQL query string
@@ -60,7 +116,6 @@ class KnowledgeGraphClient:
             Dictionary containing query results in SPARQL JSON format
 
         Raises:
-            KnowledgeGraphConnectionError: If connection to endpoint fails
             KnowledgeGraphQueryError: If query execution fails
 
         Example:
@@ -75,46 +130,60 @@ class KnowledgeGraphClient:
             >>> results = client.query(query)
         """
         try:
-            # Bypass proxy for localhost/127.0.0.1 to avoid Privoxy issues
-            proxies = {
-                'http': None,
-                'https': None,
-            } if 'localhost' in self.endpoint_url or '127.0.0.1' in self.endpoint_url else None
+            results = self.store.query(sparql_query)
 
-            response = requests.post(
-                self.endpoint_url,
-                data={"query": sparql_query},
-                headers={"Accept": "application/sparql-results+json"},
-                timeout=self.timeout,
-                proxies=proxies,
-            )
-            response.raise_for_status()
-            return response.json()
+            # Handle ASK queries - pyoxigraph returns a QueryBoolean object
+            if hasattr(results, '__bool__'):
+                return {"boolean": bool(results)}
 
-        except requests.exceptions.Timeout as e:
-            raise KnowledgeGraphConnectionError(
-                f"Timeout connecting to knowledge graph at {self.endpoint_url}"
-            ) from e
+            # Handle SELECT queries
+            # Oxigraph returns a QuerySolutions object for SELECT queries
+            # Get variable names from the QuerySolutions object
+            variables = [var.value for var in results.variables]
+            bindings_list = []
 
-        except requests.exceptions.ConnectionError as e:
-            raise KnowledgeGraphConnectionError(
-                f"Failed to connect to knowledge graph at {self.endpoint_url}"
-            ) from e
+            for solution in results:
+                binding = {}
+                for var_name in variables:
+                    value = solution[var_name]
+                    if value is not None:
+                        binding[var_name] = self._convert_term_to_json(value)
 
-        except requests.exceptions.HTTPError as e:
+                bindings_list.append(binding)
+
+            return {
+                "head": {"vars": variables},
+                "results": {"bindings": bindings_list}
+            }
+
+        except Exception as e:
             raise KnowledgeGraphQueryError(
-                f"Query execution failed with status {response.status_code}: {response.text}"
+                f"Query execution failed: {str(e)}"
             ) from e
 
-        except requests.exceptions.RequestException as e:
-            raise KnowledgeGraphError(
-                f"Unexpected error querying knowledge graph: {str(e)}"
-            ) from e
+    def _convert_term_to_json(self, term) -> Dict[str, str]:
+        """
+        Convert an Oxigraph term to SPARQL JSON format.
 
-        except ValueError as e:
-            raise KnowledgeGraphQueryError(
-                f"Failed to parse JSON response from knowledge graph"
-            ) from e
+        Args:
+            term: Oxigraph term (NamedNode, Literal, or BlankNode)
+
+        Returns:
+            Dictionary with 'type' and 'value' keys, matching SPARQL JSON format
+        """
+        if isinstance(term, oxigraph.NamedNode):
+            return {"type": "uri", "value": str(term.value)}
+        elif isinstance(term, oxigraph.Literal):
+            result = {"type": "literal", "value": str(term.value)}
+            if term.language:
+                result["xml:lang"] = term.language
+            elif term.datatype and str(term.datatype.value) != "http://www.w3.org/2001/XMLSchema#string":
+                result["datatype"] = str(term.datatype.value)
+            return result
+        elif isinstance(term, oxigraph.BlankNode):
+            return {"type": "bnode", "value": str(term.value)}
+        else:
+            return {"type": "literal", "value": str(term)}
 
     def query_bindings(self, sparql_query: str) -> list[Dict[str, Any]]:
         """
@@ -138,10 +207,10 @@ class KnowledgeGraphClient:
 
     def health_check(self) -> bool:
         """
-        Check if the knowledge graph endpoint is accessible.
+        Check if the knowledge graph store is accessible.
 
         Returns:
-            True if endpoint is accessible, False otherwise
+            True if store is accessible, False otherwise
         """
         try:
             # Simple ASK query to test connectivity

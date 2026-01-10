@@ -112,3 +112,5 @@ data/content_db/*.pdf
 temp_anki_extract/
 
 knowledge_graph_backup_*
+cuma_knowledge_graph/
+backend/cuma_knowledge_graph/

@@ -15,11 +15,14 @@ from typing import Optional
 class Settings(BaseSettings):
     """Application settings with environment variable support."""
 
-    # Fuseki/Knowledge Graph Configuration
+    # Fuseki/Knowledge Graph Configuration (deprecated, use KG_STORE_PATH instead)
     fuseki_url: str = "http://localhost:3030/srs4autism/query"
     fuseki_host: str = "localhost"
     fuseki_port: int = 3030
     fuseki_dataset: str = "srs4autism"
+
+    # Oxigraph Configuration
+    kg_store_path: str = "./cuma_knowledge_graph"
 
     # Database Configuration
     database_url: Optional[str] = None

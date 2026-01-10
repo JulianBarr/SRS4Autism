@@ -348,7 +348,7 @@ class KnowledgeGraphService:
 
     def __init__(self, config: RecommenderConfig):
         self.config = config
-        self.kg_client = KnowledgeGraphClient(endpoint_url=config.fuseki_endpoint)
+        self.kg_client = KnowledgeGraphClient()  # Now uses Oxigraph embedded store
 
     def fetch_nodes(self) -> Dict[str, KnowledgeNode]:
         node_types = " ".join(self.config.node_types)
