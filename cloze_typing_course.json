@@ -1,0 +1,6178 @@
+{
+  "1": [
+    {
+      "hanzi": "沙发",
+      "target_syllable": "fa",
+      "target_index": 1,
+      "full_pinyin_raw": "shā fā",
+      "audio": "c8570438d865.mp3",
+      "image": "<img src=\"e47fc4f845ca.jpg\">"
+    },
+    {
+      "hanzi": "发怒",
+      "target_syllable": "fa",
+      "target_index": 0,
+      "full_pinyin_raw": "fā nù",
+      "audio": "cm_tts_zh_发怒.mp3",
+      "image": "<img src=\"754ee9970ed3.png\">"
+    },
+    {
+      "hanzi": "假发",
+      "target_syllable": "fa",
+      "target_index": 1,
+      "full_pinyin_raw": "jiǎ fà",
+      "audio": "abf372da9fb4.mp3",
+      "image": "<img src=\"e981edf94671.jpg\">"
+    }
+  ],
+  "2": [
+    {
+      "hanzi": "大",
+      "target_syllable": "da",
+      "target_index": 0,
+      "full_pinyin_raw": "dà",
+      "audio": "3a4ebbb9c3c9.mp3",
+      "image": "<img src=\"cef0a2d5d132.png\">"
+    },
+    {
+      "hanzi": "大楼",
+      "target_syllable": "da",
+      "target_index": 0,
+      "full_pinyin_raw": "dà lóu",
+      "audio": "cm_tts_zh_大楼.mp3",
+      "image": "<img src=\"bdd74784a8d5.png\">"
+    },
+    {
+      "hanzi": "大海",
+      "target_syllable": "da",
+      "target_index": 0,
+      "full_pinyin_raw": "dà hǎi",
+      "audio": "003ec642e659.mp3",
+      "image": "<img src=\"f89233215447.jpg\">"
+    },
+    {
+      "hanzi": "打哈欠",
+      "target_syllable": "da",
+      "target_index": 0,
+      "full_pinyin_raw": "dǎ hā qiàn",
+      "audio": "cm_tts_zh_打哈欠.mp3",
+      "image": "<img src=\"9f24d1605d4c.jpg\">"
+    },
+    {
+      "hanzi": "大门",
+      "target_syllable": "da",
+      "target_index": 0,
+      "full_pinyin_raw": "dà mén",
+      "audio": "cm_tts_zh_大门.mp3",
+      "image": "<img src=\"75a61c0ecf6e.jpg\">"
+    },
+    {
+      "hanzi": "打扰",
+      "target_syllable": "da",
+      "target_index": 0,
+      "full_pinyin_raw": "dǎ rǎo",
+      "audio": "cm_tts_zh_打扰.mp3",
+      "image": "<img src=\"/media/objects/8d9fe18531f8.png\">"
+    },
+    {
+      "hanzi": "大风",
+      "target_syllable": "da",
+      "target_index": 0,
+      "full_pinyin_raw": "dà fēng",
+      "audio": "c8a103947c90.mp3",
+      "image": "<img src=\"38f65445747f.jpg\">"
+    },
+    {
+      "hanzi": "大虾",
+      "target_syllable": "da",
+      "target_index": 0,
+      "full_pinyin_raw": "dà xiā",
+      "audio": "6fddc0c822fa.mp3",
+      "image": "<img src=\"6aec90810e0d.jpg\">"
+    }
+  ],
+  "3": [
+    {
+      "hanzi": "肯德基",
+      "target_syllable": "de",
+      "target_index": 1,
+      "full_pinyin_raw": "kěn dé jī",
+      "audio": "29600249eac6.mp3",
+      "image": "<img src=\"51073d81a396.jpg\">"
+    }
+  ],
+  "4": [
+    {
+      "hanzi": "地板",
+      "target_syllable": "di",
+      "target_index": 0,
+      "full_pinyin_raw": "dì bǎn",
+      "audio": "73c41c12e82e.mp3",
+      "image": "<img src=\"99d5fde4bc5b.jpg\">"
+    },
+    {
+      "hanzi": "等待",
+      "target_syllable": "dai",
+      "target_index": 1,
+      "full_pinyin_raw": "děng dài",
+      "audio": "cm_tts_zh_等待.mp3",
+      "image": "<img src=\"fbc6b79be624.jpg\">"
+    },
+    {
+      "hanzi": "飞机",
+      "target_syllable": "fei",
+      "target_index": 0,
+      "full_pinyin_raw": "fēi jī",
+      "audio": "8c138db049cb.mp3",
+      "image": "<img src=\"74576f08cdc8.png\">"
+    },
+    {
+      "hanzi": "肥皂",
+      "target_syllable": "fei",
+      "target_index": 0,
+      "full_pinyin_raw": "féi zào",
+      "audio": "5d5bdb257a42.mp3",
+      "image": "<img src=\"db8e7e5418ad.jpg\">"
+    },
+    {
+      "hanzi": "扫地",
+      "target_syllable": "di",
+      "target_index": 1,
+      "full_pinyin_raw": "sǎo dì",
+      "audio": "50a1559955de.mp3",
+      "image": "<img src=\"7ab92418f20c.gif\">"
+    },
+    {
+      "hanzi": "抵抗",
+      "target_syllable": "di",
+      "target_index": 0,
+      "full_pinyin_raw": "dǐ kàng",
+      "audio": "cm_tts_zh_抵抗.mp3",
+      "image": "<img src=\"0a50dc43bfdb.jpg\">"
+    },
+    {
+      "hanzi": "地铁",
+      "target_syllable": "di",
+      "target_index": 0,
+      "full_pinyin_raw": "dì tiě",
+      "audio": "688763032cc5.mp3",
+      "image": "<img src=\"5c70392e539a.jpg\">"
+    },
+    {
+      "hanzi": "跌倒",
+      "target_syllable": "die",
+      "target_index": 0,
+      "full_pinyin_raw": "diē dǎo",
+      "audio": "cm_tts_zh_跌倒.mp3",
+      "image": "<img src=\"3e6efed038b8.jpg\">"
+    },
+    {
+      "hanzi": "水滴",
+      "target_syllable": "di",
+      "target_index": 1,
+      "full_pinyin_raw": "shuǐ dī",
+      "audio": "e075eac6d05a.mp3",
+      "image": "<img src=\"473a5041bcab.jpg\">"
+    }
+  ],
+  "5": [
+    {
+      "hanzi": "富人",
+      "target_syllable": "fu",
+      "target_index": 0,
+      "full_pinyin_raw": "fù rén",
+      "audio": "cm_tts_zh_富人.mp3",
+      "image": "<img src=\"aaba81ba99d9.png\">"
+    },
+    {
+      "hanzi": "读书",
+      "target_syllable": "du",
+      "target_index": 0,
+      "full_pinyin_raw": "dú shū",
+      "audio": "2b314fc45c52.mp3",
+      "image": "<img src=\"bcd6f3a0d35b.jpg\">"
+    },
+    {
+      "hanzi": "自动扶梯",
+      "target_syllable": "fu",
+      "target_index": 2,
+      "full_pinyin_raw": "zì dòng fú tī",
+      "audio": "cm_tts_zh_自动扶梯.mp3",
+      "image": "<img src=\"efea2bb464ff.jpg\">"
+    },
+    {
+      "hanzi": "衣服",
+      "target_syllable": "fu",
+      "target_index": 1,
+      "full_pinyin_raw": "yī fu",
+      "audio": "eff67fec82b9.mp3",
+      "image": "<img src=\"a8fa391c57fd.png\">"
+    },
+    {
+      "hanzi": "宇航服",
+      "target_syllable": "fu",
+      "target_index": 2,
+      "full_pinyin_raw": "yǔ háng fú",
+      "audio": "cm_tts_zh_宇航服.mp3",
+      "image": "<img src=\"bb200095956c.png\">"
+    },
+    {
+      "hanzi": "乱丢",
+      "target_syllable": "diu",
+      "target_index": 1,
+      "full_pinyin_raw": "luàn diū",
+      "audio": "cm_tts_zh_乱丢.mp3",
+      "image": "<img src=\"/media/objects/60ab71b22c68.png\">"
+    },
+    {
+      "hanzi": "懦夫",
+      "target_syllable": "fu",
+      "target_index": 1,
+      "full_pinyin_raw": "nuò fū",
+      "audio": "cm_tts_zh_懦夫.mp3",
+      "image": "<img src=\"f52f2ca95bdc.jpg\">"
+    },
+    {
+      "hanzi": "排队",
+      "target_syllable": "dui",
+      "target_index": 1,
+      "full_pinyin_raw": "pái duì",
+      "audio": "1a3ad19a1bd0.mp3",
+      "image": "<img src=\"b70c4566a4e8.jpg\">"
+    },
+    {
+      "hanzi": "宽度",
+      "target_syllable": "du",
+      "target_index": 1,
+      "full_pinyin_raw": "kuān dù",
+      "audio": "cm_tts_zh_宽度.mp3",
+      "image": "<img src=\"/media/objects/f39f3ddee0fa.png\">"
+    }
+  ],
+  "6": [
+    {
+      "hanzi": "白色",
+      "target_syllable": "se",
+      "target_index": 1,
+      "full_pinyin_raw": "bái sè",
+      "audio": "aa0ce59fd1a5.mp3",
+      "image": "<img src=\"47207fdb5cbd.png\">"
+    },
+    {
+      "hanzi": "黑色",
+      "target_syllable": "se",
+      "target_index": 1,
+      "full_pinyin_raw": "hēi sè",
+      "audio": "cm_tts_zh_黑色.mp3",
+      "image": "<img src=\"956faee0a8ec.png\">"
+    },
+    {
+      "hanzi": "蓝色",
+      "target_syllable": "se",
+      "target_index": 1,
+      "full_pinyin_raw": "lán sè",
+      "audio": "d57617fca2b6.mp3",
+      "image": "<img src=\"d2e89b835391.png\">"
+    },
+    {
+      "hanzi": "紫色",
+      "target_syllable": "se",
+      "target_index": 1,
+      "full_pinyin_raw": "zǐ sè",
+      "audio": "474ce50a355a.mp3",
+      "image": "<img src=\"7050dd00d63e.jpg\">"
+    },
+    {
+      "hanzi": "撕纸",
+      "target_syllable": "si",
+      "target_index": 0,
+      "full_pinyin_raw": "sī zhǐ",
+      "audio": "f92d0552a33c.mp3",
+      "image": "<img src=\"e2319b942768.png\">"
+    },
+    {
+      "hanzi": "四",
+      "target_syllable": "si",
+      "target_index": 0,
+      "full_pinyin_raw": "sì",
+      "audio": "8bef45c988aa.mp3",
+      "image": "<img src=\"f4d4352888e1.jpg\">"
+    },
+    {
+      "hanzi": "鳃",
+      "target_syllable": "sai",
+      "target_index": 0,
+      "full_pinyin_raw": "sāi",
+      "audio": "cm_tts_zh_鳃.mp3",
+      "image": "<img src=\"66e009741006.jpg\">"
+    },
+    {
+      "hanzi": "雕塑",
+      "target_syllable": "su",
+      "target_index": 1,
+      "full_pinyin_raw": "diāo sù",
+      "audio": "cm_tts_zh_雕塑.mp3",
+      "image": "<img src=\"/media/objects/da4f2d550923.png\">"
+    },
+    {
+      "hanzi": "洒",
+      "target_syllable": "sa",
+      "target_index": 0,
+      "full_pinyin_raw": "sǎ",
+      "audio": "cm_tts_zh_洒.mp3",
+      "image": ""
+    },
+    {
+      "hanzi": "红色",
+      "target_syllable": "se",
+      "target_index": 1,
+      "full_pinyin_raw": "hóng sè",
+      "audio": "c4436f6fd9ad.mp3",
+      "image": "<img src=\"eaa3b822e137.jpg\">"
+    },
+    {
+      "hanzi": "碎石",
+      "target_syllable": "sui",
+      "target_index": 0,
+      "full_pinyin_raw": "suì shí",
+      "audio": "cm_tts_zh_碎石.mp3",
+      "image": "<img src=\"70a9663bb81c.jpg\">"
+    }
+  ],
+  "7": [
+    {
+      "hanzi": "游乐场",
+      "target_syllable": "le",
+      "target_index": 1,
+      "full_pinyin_raw": "yóu lè chǎng",
+      "audio": "29c502c7fdb4.mp3",
+      "image": "<img src=\"a27b3acb43b7.jpg\">"
+    },
+    {
+      "hanzi": "绿色",
+      "target_syllable": "luse",
+      "target_index": 0,
+      "full_pinyin_raw": "lǜsè",
+      "audio": "c0ff0a5b68f9.mp3",
+      "image": "<img src=\"e3a6b1d42883.jpg\">"
+    },
+    {
+      "hanzi": "拉",
+      "target_syllable": "la",
+      "target_index": 0,
+      "full_pinyin_raw": "lā",
+      "audio": "7b96422f4b8a.mp3",
+      "image": "<img src=\"13b037231816.jpg\">"
+    },
+    {
+      "hanzi": "日历",
+      "target_syllable": "li",
+      "target_index": 1,
+      "full_pinyin_raw": "rì lì",
+      "audio": "94a49815426a.mp3",
+      "image": "<img src=\"53eec40dc1e6.png\">"
+    },
+    {
+      "hanzi": "小毛驴",
+      "target_syllable": "lu",
+      "target_index": 2,
+      "full_pinyin_raw": "xiǎo máo lǘ",
+      "audio": "1eb88d33c9b1.mp3",
+      "image": "<img src=\"8e0132a7c7d2.jpg\">"
+    },
+    {
+      "hanzi": "公路",
+      "target_syllable": "lu",
+      "target_index": 1,
+      "full_pinyin_raw": "gōng lù",
+      "audio": "cm_tts_zh_公路.mp3",
+      "image": "<img src=\"6ef1d041e579.jpg\">"
+    },
+    {
+      "hanzi": "来",
+      "target_syllable": "lai",
+      "target_index": 0,
+      "full_pinyin_raw": "lái",
+      "audio": "0c0a152d2fd5.mp3",
+      "image": "<img src=\"23e543123706.jpg\">"
+    },
+    {
+      "hanzi": "雷电",
+      "target_syllable": "lei",
+      "target_index": 0,
+      "full_pinyin_raw": "léi diàn",
+      "audio": "5e69cb8c8069.mp3",
+      "image": "<img src=\"8681259f321e.jpg\">"
+    },
+    {
+      "hanzi": "可乐",
+      "target_syllable": "le",
+      "target_index": 1,
+      "full_pinyin_raw": "kě lè",
+      "audio": "1e2c3d2a472c.mp3",
+      "image": "<img src=\"41f4e94872be.jpg\">"
+    },
+    {
+      "hanzi": "哭了",
+      "target_syllable": "le",
+      "target_index": 1,
+      "full_pinyin_raw": "kū le",
+      "audio": "355cce02a998.mp3",
+      "image": "<img src=\"d335814ccfed.jpg\">"
+    },
+    {
+      "hanzi": "这里",
+      "target_syllable": "li",
+      "target_index": 1,
+      "full_pinyin_raw": "zhè lǐ",
+      "audio": "cm_tts_zh_这里.mp3",
+      "image": "<img src=\"bd774b0b9e71.png\">"
+    },
+    {
+      "hanzi": "长颈鹿",
+      "target_syllable": "lu",
+      "target_index": 2,
+      "full_pinyin_raw": "cháng jǐng lù",
+      "audio": "cm_tts_zh_长颈鹿.mp3",
+      "image": "<img src=\"ff68d85cd4ff.jpg\">"
+    },
+    {
+      "hanzi": "生病了",
+      "target_syllable": "le",
+      "target_index": 2,
+      "full_pinyin_raw": "shēng bìng le",
+      "audio": "72672f135b1a.mp3",
+      "image": "<img src=\"8b8f220d5465.jpg\">"
+    },
+    {
+      "hanzi": "夜里",
+      "target_syllable": "li",
+      "target_index": 1,
+      "full_pinyin_raw": "yè li",
+      "audio": "cm_tts_zh_夜里.mp3",
+      "image": "<img src=\"b409ba217b81.jpg\">"
+    },
+    {
+      "hanzi": "一列火车",
+      "target_syllable": "lie",
+      "target_index": 1,
+      "full_pinyin_raw": "yī liè huǒ che",
+      "audio": "b5157e6c0591.mp3",
+      "image": "<img src=\"/media/objects/a4078e6d7b40.png\">"
+    },
+    {
+      "hanzi": "类别",
+      "target_syllable": "lei",
+      "target_index": 0,
+      "full_pinyin_raw": "lèi bié",
+      "audio": "cm_tts_zh_类别.mp3",
+      "image": "<img src=\"/media/objects/0dd13ea7b0df.png\">"
+    },
+    {
+      "hanzi": "修公路",
+      "target_syllable": "lu",
+      "target_index": 2,
+      "full_pinyin_raw": "xiū gōng lù",
+      "audio": "89d80db5c198.mp3",
+      "image": "<img src=\"5373472ba77a.jpg\">"
+    },
+    {
+      "hanzi": "六",
+      "target_syllable": "liu",
+      "target_index": 0,
+      "full_pinyin_raw": "liù",
+      "audio": "1be7114a8503.mp3",
+      "image": "<img src=\"f0abd272a3eb.jpg\">"
+    },
+    {
+      "hanzi": "遛狗",
+      "target_syllable": "liu",
+      "target_index": 0,
+      "full_pinyin_raw": "liù gǒu",
+      "audio": "0376ccd70ccc.mp3",
+      "image": "<img src=\"5b097d7d8825.jpg\">"
+    },
+    {
+      "hanzi": "拖拉机",
+      "target_syllable": "la",
+      "target_index": 1,
+      "full_pinyin_raw": "tuō lā jī",
+      "audio": "cm_tts_zh_拖拉机.mp3",
+      "image": "<img src=\"48792733f983.jpg\">"
+    },
+    {
+      "hanzi": "坏了",
+      "target_syllable": "le",
+      "target_index": 1,
+      "full_pinyin_raw": "huài le",
+      "audio": "cm_tts_zh_坏了.mp3",
+      "image": "<img src=\"f0e5aab41766.png\">"
+    }
+  ],
+  "8": [
+    {
+      "hanzi": "鸽子",
+      "target_syllable": "ge",
+      "target_index": 0,
+      "full_pinyin_raw": "gē zi",
+      "audio": "9f141ca596cd.mp3",
+      "image": "<img src=\"59069cdd71d8.jpg\">"
+    },
+    {
+      "hanzi": "西瓜皮",
+      "target_syllable": "gua",
+      "target_index": 1,
+      "full_pinyin_raw": "xī guā pí",
+      "audio": "92a48fa4e353.mp3",
+      "image": "<img src=\"9f49e16bcd9b.jpg\">"
+    },
+    {
+      "hanzi": "玫瑰",
+      "target_syllable": "gui",
+      "target_index": 1,
+      "full_pinyin_raw": "méi guī",
+      "audio": "5f05d85f6281.mp3",
+      "image": "<img src=\"db70dcc41543.jpg\">"
+    },
+    {
+      "hanzi": "锅盖",
+      "target_syllable": "gai",
+      "target_index": 1,
+      "full_pinyin_raw": "guō gài",
+      "audio": "0d92ec477662.mp3",
+      "image": "<img src=\"e02e7cf576cc.jpg\">"
+    },
+    {
+      "hanzi": "唱歌",
+      "target_syllable": "ge",
+      "target_index": 1,
+      "full_pinyin_raw": "chàng gē",
+      "audio": "537f3878595b.mp3",
+      "image": "<img src=\"561fe9eece02.jpg\">"
+    },
+    {
+      "hanzi": "给",
+      "target_syllable": "gei",
+      "target_index": 0,
+      "full_pinyin_raw": "gěi",
+      "audio": "b9c6be8c0ce2.mp3",
+      "image": "<img src=\"99dfa9ee07b6.png\">"
+    },
+    {
+      "hanzi": "骨头",
+      "target_syllable": "gu",
+      "target_index": 0,
+      "full_pinyin_raw": "gǔ tou",
+      "audio": "cm_tts_zh_骨头.mp3",
+      "image": "<img src=\"c5f0d04a0470.jpg\">"
+    },
+    {
+      "hanzi": "西瓜",
+      "target_syllable": "gua",
+      "target_index": 1,
+      "full_pinyin_raw": "xī guā",
+      "audio": "59c6cd1becf7.mp3",
+      "image": "<img src=\"57d64422a154.png\">"
+    },
+    {
+      "hanzi": "乌龟",
+      "target_syllable": "gui",
+      "target_index": 1,
+      "full_pinyin_raw": "wū guī",
+      "audio": "f4f6c1fec596.mp3",
+      "image": "<img src=\"3b1b66cba802.jpg\">"
+    },
+    {
+      "hanzi": "小姑娘",
+      "target_syllable": "gu",
+      "target_index": 1,
+      "full_pinyin_raw": "xiǎo gū niang",
+      "audio": "cm_tts_zh_小姑娘.mp3",
+      "image": "<img src=\"11a2f1d52cb0.jpg\">"
+    },
+    {
+      "hanzi": "拐杖",
+      "target_syllable": "guai",
+      "target_index": 0,
+      "full_pinyin_raw": "guǎi zhàng",
+      "audio": "cm_tts_zh_拐杖.mp3",
+      "image": "<img src=\"/media/objects/076200325719.png\">"
+    },
+    {
+      "hanzi": "衣柜",
+      "target_syllable": "gui",
+      "target_index": 1,
+      "full_pinyin_raw": "yī guì",
+      "audio": "6fd2a09a7b1b.mp3",
+      "image": "<img src=\"0a5fee41018c.jpg\">"
+    }
+  ],
+  "9": [
+    {
+      "hanzi": "女孩",
+      "target_syllable": "hai",
+      "target_index": 1,
+      "full_pinyin_raw": "nǚ hái",
+      "audio": "d22b4b43036a.mp3",
+      "image": "<img src=\"11a2f1d52cb0.jpg\">"
+    },
+    {
+      "hanzi": "爬树",
+      "target_syllable": "shu",
+      "target_index": 1,
+      "full_pinyin_raw": "pá shù",
+      "audio": "f7bb8a6e699e.mp3",
+      "image": "<img src=\"843ab95ca2c7.png\">"
+    },
+    {
+      "hanzi": "沙漠",
+      "target_syllable": "sha",
+      "target_index": 0,
+      "full_pinyin_raw": "shā mò",
+      "audio": "cm_tts_zh_沙漠.mp3",
+      "image": "<img src=\"62ede878d698.jpg\">"
+    },
+    {
+      "hanzi": "沙发",
+      "target_syllable": "sha",
+      "target_index": 0,
+      "full_pinyin_raw": "shā fā",
+      "audio": "c8570438d865.mp3",
+      "image": "<img src=\"e47fc4f845ca.jpg\">"
+    },
+    {
+      "hanzi": "读书",
+      "target_syllable": "shu",
+      "target_index": 1,
+      "full_pinyin_raw": "dú shū",
+      "audio": "2b314fc45c52.mp3",
+      "image": "<img src=\"bcd6f3a0d35b.jpg\">"
+    },
+    {
+      "hanzi": "大海",
+      "target_syllable": "hai",
+      "target_index": 1,
+      "full_pinyin_raw": "dà hǎi",
+      "audio": "003ec642e659.mp3",
+      "image": "<img src=\"f89233215447.jpg\">"
+    },
+    {
+      "hanzi": "喝水",
+      "target_syllable": "he",
+      "target_index": 0,
+      "full_pinyin_raw": "hē shuǐ",
+      "audio": "c1e631295f41.mp3",
+      "image": "<img src=\"11907de5e107.jpg\">"
+    },
+    {
+      "hanzi": "喝水",
+      "target_syllable": "shui",
+      "target_index": 1,
+      "full_pinyin_raw": "hē shuǐ",
+      "audio": "c1e631295f41.mp3",
+      "image": "<img src=\"11907de5e107.jpg\">"
+    },
+    {
+      "hanzi": "河",
+      "target_syllable": "he",
+      "target_index": 0,
+      "full_pinyin_raw": "hé",
+      "audio": "14b0976c1055.mp3",
+      "image": "<img src=\"dfbec66c8740.jpg\">"
+    },
+    {
+      "hanzi": "老虎",
+      "target_syllable": "hu",
+      "target_index": 1,
+      "full_pinyin_raw": "lǎo hǔ",
+      "audio": "684c0b0abdd1.mp3",
+      "image": "<img src=\"f7ebd136b79b.jpg\">"
+    },
+    {
+      "hanzi": "打哈欠",
+      "target_syllable": "ha",
+      "target_index": 1,
+      "full_pinyin_raw": "dǎ hā qiàn",
+      "audio": "cm_tts_zh_打哈欠.mp3",
+      "image": "<img src=\"9f24d1605d4c.jpg\">"
+    },
+    {
+      "hanzi": "黑色",
+      "target_syllable": "hei",
+      "target_index": 0,
+      "full_pinyin_raw": "hēi sè",
+      "audio": "cm_tts_zh_黑色.mp3",
+      "image": "<img src=\"956faee0a8ec.png\">"
+    },
+    {
+      "hanzi": "树根",
+      "target_syllable": "shu",
+      "target_index": 0,
+      "full_pinyin_raw": "shù gēn",
+      "audio": "fd637ade9810.mp3",
+      "image": "<img src=\"1bd5245bae0e.jpg\">"
+    },
+    {
+      "hanzi": "一本书",
+      "target_syllable": "shu",
+      "target_index": 2,
+      "full_pinyin_raw": "yī běn shū",
+      "audio": "f65114007744.mp3",
+      "image": "<img src=\"404075a82b61.jpg\">"
+    },
+    {
+      "hanzi": "分数",
+      "target_syllable": "shu",
+      "target_index": 1,
+      "full_pinyin_raw": "fēn shù",
+      "audio": "cm_tts_zh_分数.mp3",
+      "image": "<img src=\"0cb5b96130bb.jpg\">"
+    },
+    {
+      "hanzi": "轮滑鞋",
+      "target_syllable": "hua",
+      "target_index": 1,
+      "full_pinyin_raw": "lún huá xié",
+      "audio": "5c770579d2fc.mp3",
+      "image": "<img src=\"59ca18741cae.jpg\">"
+    },
+    {
+      "hanzi": "海豚",
+      "target_syllable": "hai",
+      "target_index": 0,
+      "full_pinyin_raw": "hǎi tún",
+      "audio": "09bb7c639a3b.mp3",
+      "image": "<img src=\"93b66f8e8a57.jpg\">"
+    },
+    {
+      "hanzi": "数字",
+      "target_syllable": "shu",
+      "target_index": 0,
+      "full_pinyin_raw": "shù zì",
+      "audio": "124a176e8104.mp3",
+      "image": "<img src=\"9a795d6aac37.jpg\">"
+    },
+    {
+      "hanzi": "鲨鱼",
+      "target_syllable": "sha",
+      "target_index": 0,
+      "full_pinyin_raw": "shā yú",
+      "audio": "331d6343fd5e.mp3",
+      "image": "<img src=\"747a69d23aac.jpg\">"
+    },
+    {
+      "hanzi": "蛇",
+      "target_syllable": "she",
+      "target_index": 0,
+      "full_pinyin_raw": "shé",
+      "audio": "7be65dcf7cfa.mp3",
+      "image": "<img src=\"5712180b966e.jpg\">"
+    },
+    {
+      "hanzi": "谁",
+      "target_syllable": "shei",
+      "target_index": 0,
+      "full_pinyin_raw": "shéi",
+      "audio": "2809223878a6.mp3",
+      "image": "<img src=\"e839d174c6c7.png\">"
+    },
+    {
+      "hanzi": "老师",
+      "target_syllable": "shi",
+      "target_index": 1,
+      "full_pinyin_raw": "lǎo shī",
+      "audio": "5a82ab4b4c59.mp3",
+      "image": "<img src=\"01927404ca51.jpg\">"
+    },
+    {
+      "hanzi": "狮子",
+      "target_syllable": "shi",
+      "target_index": 0,
+      "full_pinyin_raw": "shī zi",
+      "audio": "9175a7fd6d68.mp3",
+      "image": "<img src=\"f87ea3cea714.png\">"
+    },
+    {
+      "hanzi": "书",
+      "target_syllable": "shu",
+      "target_index": 0,
+      "full_pinyin_raw": "shū",
+      "audio": "d0ba7ae14172.mp3",
+      "image": "<img src=\"404075a82b61.jpg\">"
+    },
+    {
+      "hanzi": "薯条",
+      "target_syllable": "shu",
+      "target_index": 0,
+      "full_pinyin_raw": "shǔ tiáo",
+      "audio": "8fdc5dcf224e.mp3",
+      "image": "<img src=\"2d9298e2a9f9.png\">"
+    },
+    {
+      "hanzi": "薯片",
+      "target_syllable": "shu",
+      "target_index": 0,
+      "full_pinyin_raw": "shǔ piàn",
+      "audio": "f062815791c0.mp3",
+      "image": "<img src=\"a0e30b281cca.jpg\">"
+    },
+    {
+      "hanzi": "数数",
+      "target_syllable": "shu",
+      "target_index": 0,
+      "full_pinyin_raw": "shǔ shù",
+      "audio": "073208125dc6.mp3",
+      "image": "<img src=\"756ee908a63b.jpg\">"
+    },
+    {
+      "hanzi": "数数",
+      "target_syllable": "shu",
+      "target_index": 1,
+      "full_pinyin_raw": "shǔ shù",
+      "audio": "073208125dc6.mp3",
+      "image": "<img src=\"756ee908a63b.jpg\">"
+    },
+    {
+      "hanzi": "老鼠",
+      "target_syllable": "shu",
+      "target_index": 1,
+      "full_pinyin_raw": "lǎo shǔ",
+      "audio": "bcffee2f5388.mp3",
+      "image": "<img src=\"8a27de33ca87.jpg\">"
+    },
+    {
+      "hanzi": "圣诞树",
+      "target_syllable": "shu",
+      "target_index": 2,
+      "full_pinyin_raw": "shèng dàn shù",
+      "audio": "60751c648c94.mp3",
+      "image": "<img src=\"b928512a3bbe.jpg\">"
+    },
+    {
+      "hanzi": "防晒霜",
+      "target_syllable": "shai",
+      "target_index": 1,
+      "full_pinyin_raw": "fáng shài shuāng",
+      "audio": "cm_tts_zh_防晒霜.mp3",
+      "image": "<img src=\"5ddf0f40d000.png\">"
+    },
+    {
+      "hanzi": "证书",
+      "target_syllable": "shu",
+      "target_index": 3,
+      "full_pinyin_raw": "zhài wù zhèng shū",
+      "audio": "cm_tts_zh_证书.mp3",
+      "image": "<img src=\"5009c20494e6.jpg\">"
+    },
+    {
+      "hanzi": "士兵",
+      "target_syllable": "shi",
+      "target_index": 0,
+      "full_pinyin_raw": "shì bīng",
+      "audio": "d32766ec83e2.mp3",
+      "image": "<img src=\"d44d14ebeee7.jpg\">"
+    },
+    {
+      "hanzi": "松鼠",
+      "target_syllable": "shu",
+      "target_index": 1,
+      "full_pinyin_raw": "sōng shǔ",
+      "audio": "cm_tts_zh_松鼠.mp3",
+      "image": "<img src=\"9ea74f83429e.jpg\">"
+    },
+    {
+      "hanzi": "胡须",
+      "target_syllable": "hu",
+      "target_index": 0,
+      "full_pinyin_raw": "hú xū",
+      "audio": "cm_tts_zh_胡须.mp3",
+      "image": "<img src=\"f821b352d840.jpg\">"
+    },
+    {
+      "hanzi": "变化",
+      "target_syllable": "hua",
+      "target_index": 1,
+      "full_pinyin_raw": "biàn huà",
+      "audio": "cm_tts_zh_变化.mp3",
+      "image": "<img src=\"/media/objects/b5fe95040b6a.png\">"
+    },
+    {
+      "hanzi": "海象",
+      "target_syllable": "hai",
+      "target_index": 0,
+      "full_pinyin_raw": "hǎi xiàng",
+      "audio": "cm_tts_zh_海象.mp3",
+      "image": "<img src=\"15c2ed335a07.jpg\">"
+    },
+    {
+      "hanzi": "牙刷",
+      "target_syllable": "shua",
+      "target_index": 1,
+      "full_pinyin_raw": "yá shuā",
+      "audio": "cm_tts_zh_牙刷.mp3",
+      "image": "<img src=\"9478bc168419.jpg\">"
+    },
+    {
+      "hanzi": "花儿",
+      "target_syllable": "hua",
+      "target_index": 0,
+      "full_pinyin_raw": "huā r",
+      "audio": "cm_tts_zh_花儿.mp3",
+      "image": "<img src=\"0b7041708ed1.jpg\">"
+    },
+    {
+      "hanzi": "说话",
+      "target_syllable": "hua",
+      "target_index": 1,
+      "full_pinyin_raw": "shuō huà",
+      "audio": "2b902fd5d9e7.mp3",
+      "image": "<img src=\"00edaf22df85.png\">"
+    },
+    {
+      "hanzi": "胡萝卜",
+      "target_syllable": "hu",
+      "target_index": 0,
+      "full_pinyin_raw": "hú luó bo",
+      "audio": "166af158aa15.mp3",
+      "image": "<img src=\"4b463962972a.png\">"
+    },
+    {
+      "hanzi": "花朵",
+      "target_syllable": "hua",
+      "target_index": 0,
+      "full_pinyin_raw": "huā duǒ",
+      "audio": "cm_tts_zh_花朵.mp3",
+      "image": "<img src=\"0b7041708ed1.jpg\">"
+    },
+    {
+      "hanzi": "摔倒",
+      "target_syllable": "shuai",
+      "target_index": 0,
+      "full_pinyin_raw": "shuāi dǎo",
+      "audio": "a0ee911de268.mp3",
+      "image": "<img src=\"3e6efed038b8.jpg\">"
+    },
+    {
+      "hanzi": "坏了",
+      "target_syllable": "huai",
+      "target_index": 0,
+      "full_pinyin_raw": "huài le",
+      "audio": "cm_tts_zh_坏了.mp3",
+      "image": "<img src=\"f0e5aab41766.png\">"
+    },
+    {
+      "hanzi": "水滴",
+      "target_syllable": "shui",
+      "target_index": 0,
+      "full_pinyin_raw": "shuǐ dī",
+      "audio": "e075eac6d05a.mp3",
+      "image": "<img src=\"473a5041bcab.jpg\">"
+    },
+    {
+      "hanzi": "睡觉",
+      "target_syllable": "shui",
+      "target_index": 0,
+      "full_pinyin_raw": "shuì jiào",
+      "audio": "886f264f0579.mp3",
+      "image": "<img src=\"d4cd6893334e.jpg\">"
+    },
+    {
+      "hanzi": "徽章",
+      "target_syllable": "hui",
+      "target_index": 0,
+      "full_pinyin_raw": "huī zhāng",
+      "audio": "cm_tts_zh_徽章.mp3",
+      "image": "<img src=\"/media/objects/a179e1e76a52.png\">"
+    },
+    {
+      "hanzi": "碎石",
+      "target_syllable": "shi",
+      "target_index": 1,
+      "full_pinyin_raw": "suì shí",
+      "audio": "cm_tts_zh_碎石.mp3",
+      "image": "<img src=\"70a9663bb81c.jpg\">"
+    }
+  ],
+  "10": [
+    {
+      "hanzi": "簸箕",
+      "target_syllable": "ji",
+      "target_index": 1,
+      "full_pinyin_raw": "bò ji",
+      "audio": "4ef02cc24789.mp3",
+      "image": "<img src=\"11672fbcfdd5.jpg\">"
+    },
+    {
+      "hanzi": "飞机",
+      "target_syllable": "ji",
+      "target_index": 1,
+      "full_pinyin_raw": "fēi jī",
+      "audio": "8c138db049cb.mp3",
+      "image": "<img src=\"74576f08cdc8.png\">"
+    },
+    {
+      "hanzi": "烤鸡",
+      "target_syllable": "ji",
+      "target_index": 1,
+      "full_pinyin_raw": "kǎo jī",
+      "audio": "fe8b08d2f559.mp3",
+      "image": "<img src=\"4b1105d771c1.jpg\">"
+    },
+    {
+      "hanzi": "鸡蛋",
+      "target_syllable": "ji",
+      "target_index": 0,
+      "full_pinyin_raw": "jī dàn",
+      "audio": "cm_tts_zh_鸡蛋.mp3",
+      "image": "<img src=\"20ff99ae763d.jpg\">"
+    },
+    {
+      "hanzi": "肯德基",
+      "target_syllable": "ji",
+      "target_index": 2,
+      "full_pinyin_raw": "kěn dé jī",
+      "audio": "29600249eac6.mp3",
+      "image": "<img src=\"51073d81a396.jpg\">"
+    },
+    {
+      "hanzi": "公鸡",
+      "target_syllable": "ji",
+      "target_index": 1,
+      "full_pinyin_raw": "gōng jī",
+      "audio": "d558d8e2a5c1.mp3",
+      "image": "<img src=\"7423f2e05238.jpg\">"
+    },
+    {
+      "hanzi": "桔子",
+      "target_syllable": "ju",
+      "target_index": 0,
+      "full_pinyin_raw": "jú zi",
+      "audio": "3897e8606e14.mp3",
+      "image": "<img src=\"c4edf6978c39.jpg\">"
+    },
+    {
+      "hanzi": "举手",
+      "target_syllable": "ju",
+      "target_index": 0,
+      "full_pinyin_raw": "jǔ shǒu",
+      "audio": "cc9ba021165c.mp3",
+      "image": "<img src=\"b73a45704466.png\">"
+    },
+    {
+      "hanzi": "解放军",
+      "target_syllable": "jie",
+      "target_index": 0,
+      "full_pinyin_raw": "jiě fàng jūn",
+      "audio": "4f135ee39f57.mp3",
+      "image": "<img src=\"2708de039e24.jpg\">"
+    },
+    {
+      "hanzi": "一家人",
+      "target_syllable": "jia",
+      "target_index": 1,
+      "full_pinyin_raw": "yì jiā rén",
+      "audio": "aa4f98ce43cb.mp3",
+      "image": "<img src=\"2d782880ec21.png\">"
+    },
+    {
+      "hanzi": "假发",
+      "target_syllable": "jia",
+      "target_index": 0,
+      "full_pinyin_raw": "jiǎ fà",
+      "audio": "abf372da9fb4.mp3",
+      "image": "<img src=\"e981edf94671.jpg\">"
+    },
+    {
+      "hanzi": "睫毛",
+      "target_syllable": "jie",
+      "target_index": 0,
+      "full_pinyin_raw": "jié máo",
+      "audio": "cm_tts_zh_睫毛.mp3",
+      "image": "<img src=\"/media/objects/e9c93c149b0a.png\">"
+    },
+    {
+      "hanzi": "九",
+      "target_syllable": "jiu",
+      "target_index": 0,
+      "full_pinyin_raw": "jiǔ",
+      "audio": "a7027c5d3d5a.mp3",
+      "image": "<img src=\"9edb73e6589e.png\">"
+    },
+    {
+      "hanzi": "拖拉机",
+      "target_syllable": "ji",
+      "target_index": 2,
+      "full_pinyin_raw": "tuō lā jī",
+      "audio": "cm_tts_zh_拖拉机.mp3",
+      "image": "<img src=\"48792733f983.jpg\">"
+    },
+    {
+      "hanzi": "鸡肉卷",
+      "target_syllable": "ji",
+      "target_index": 0,
+      "full_pinyin_raw": "jī ròu juǎn",
+      "audio": "cm_tts_zh_鸡肉卷.mp3",
+      "image": "<img src=\"f29dbbbc4020.jpg\">"
+    },
+    {
+      "hanzi": "挖掘机",
+      "target_syllable": "jue",
+      "target_index": 1,
+      "full_pinyin_raw": "wā jué jī",
+      "audio": "cm_tts_zh_挖掘机.mp3",
+      "image": "<img src=\"/media/objects/287fd5935de0.png\">"
+    },
+    {
+      "hanzi": "挖掘机",
+      "target_syllable": "ji",
+      "target_index": 2,
+      "full_pinyin_raw": "wā jué jī",
+      "audio": "cm_tts_zh_挖掘机.mp3",
+      "image": "<img src=\"/media/objects/287fd5935de0.png\">"
+    }
+  ],
+  "11": [
+    {
+      "hanzi": "贝壳",
+      "target_syllable": "ke",
+      "target_index": 1,
+      "full_pinyin_raw": "bèi ké",
+      "audio": "3d5eeda4a43d.mp3",
+      "image": "<img src=\"8e1634a2e26d.jpg\">"
+    },
+    {
+      "hanzi": "开门",
+      "target_syllable": "kai",
+      "target_index": 0,
+      "full_pinyin_raw": "kāi mén",
+      "audio": "74eeba5ac684.mp3",
+      "image": "<img src=\"dd0b49ab6299.jpg\">"
+    },
+    {
+      "hanzi": "蝌蚪",
+      "target_syllable": "ke",
+      "target_index": 0,
+      "full_pinyin_raw": "kē dǒu",
+      "audio": "728ac2b9b61b.mp3",
+      "image": "<img src=\"49cbdab1e40b.jpg\">"
+    },
+    {
+      "hanzi": "可乐",
+      "target_syllable": "ke",
+      "target_index": 0,
+      "full_pinyin_raw": "kě lè",
+      "audio": "1e2c3d2a472c.mp3",
+      "image": "<img src=\"41f4e94872be.jpg\">"
+    },
+    {
+      "hanzi": "哭了",
+      "target_syllable": "ku",
+      "target_index": 0,
+      "full_pinyin_raw": "kū le",
+      "audio": "355cce02a998.mp3",
+      "image": "<img src=\"d335814ccfed.jpg\">"
+    },
+    {
+      "hanzi": "卡片",
+      "target_syllable": "ka",
+      "target_index": 0,
+      "full_pinyin_raw": "kǎ piàn",
+      "audio": "cm_tts_zh_卡片.mp3",
+      "image": "<img src=\"/media/objects/01cda4ca7fa6.png\">"
+    },
+    {
+      "hanzi": "咳嗽",
+      "target_syllable": "ke",
+      "target_index": 0,
+      "full_pinyin_raw": "ké sou",
+      "audio": "cm_tts_zh_咳嗽.mp3",
+      "image": "<img src=\"/media/objects/2eec89fb7424.gif\">"
+    },
+    {
+      "hanzi": "卡车",
+      "target_syllable": "ka",
+      "target_index": 0,
+      "full_pinyin_raw": "kǎ chē",
+      "audio": "931905fe579e.mp3",
+      "image": "<img src=\"13902aeea55e.png\">"
+    },
+    {
+      "hanzi": "创可贴",
+      "target_syllable": "ke",
+      "target_index": 1,
+      "full_pinyin_raw": "chuàng kě tiē",
+      "audio": "2c05febacb20.mp3",
+      "image": "<img src=\"7123c2616ba6.png\">"
+    },
+    {
+      "hanzi": "夸奖",
+      "target_syllable": "kua",
+      "target_index": 0,
+      "full_pinyin_raw": "kuā jiǎng",
+      "audio": "cm_tts_zh_夸奖.mp3",
+      "image": "<img src=\"/media/objects/74a5a6c2d12a.png\">"
+    },
+    {
+      "hanzi": "筷子",
+      "target_syllable": "kuai",
+      "target_index": 0,
+      "full_pinyin_raw": "kuài zi",
+      "audio": "c351d5406f12.mp3",
+      "image": "<img src=\"05a5016bcfbd.jpg\">"
+    },
+    {
+      "hanzi": "向日葵",
+      "target_syllable": "kui",
+      "target_index": 2,
+      "full_pinyin_raw": "xiàng rì kuí",
+      "audio": "6bc5242ce378.mp3",
+      "image": "<img src=\"4bca1c62fee7.jpg\">"
+    }
+  ],
+  "12": [
+    {
+      "hanzi": "女孩",
+      "target_syllable": "nu",
+      "target_index": 0,
+      "full_pinyin_raw": "nǚ hái",
+      "audio": "d22b4b43036a.mp3",
+      "image": "<img src=\"11a2f1d52cb0.jpg\">"
+    },
+    {
+      "hanzi": "米饭",
+      "target_syllable": "fan",
+      "target_index": 1,
+      "full_pinyin_raw": "mǐ fàn",
+      "audio": "e555b4f6830a.mp3",
+      "image": "<img src=\"7b1f40301a4b.jpg\">"
+    },
+    {
+      "hanzi": "灯塔",
+      "target_syllable": "deng",
+      "target_index": 0,
+      "full_pinyin_raw": "dēng tǎ",
+      "audio": "b397a91d1aa7.mp3",
+      "image": "<img src=\"8a4572f7c8d0.jpg\">"
+    },
+    {
+      "hanzi": "发怒",
+      "target_syllable": "nu",
+      "target_index": 1,
+      "full_pinyin_raw": "fā nù",
+      "audio": "cm_tts_zh_发怒.mp3",
+      "image": "<img src=\"754ee9970ed3.png\">"
+    },
+    {
+      "hanzi": "你",
+      "target_syllable": "ni",
+      "target_index": 0,
+      "full_pinyin_raw": "nǐ",
+      "audio": "cm_tts_zh_你.mp3",
+      "image": "<img src=\"7652d94e3db5.jpg\">"
+    },
+    {
+      "hanzi": "奶瓶",
+      "target_syllable": "nai",
+      "target_index": 0,
+      "full_pinyin_raw": "nǎi píng",
+      "audio": "b9f2ff3aa7c1.mp3",
+      "image": "<img src=\"b3f4fe89fc30.png\">"
+    },
+    {
+      "hanzi": "等待",
+      "target_syllable": "deng",
+      "target_index": 0,
+      "full_pinyin_raw": "děng dài",
+      "audio": "cm_tts_zh_等待.mp3",
+      "image": "<img src=\"fbc6b79be624.jpg\">"
+    },
+    {
+      "hanzi": "牛排",
+      "target_syllable": "niu",
+      "target_index": 0,
+      "full_pinyin_raw": "niú pái",
+      "audio": "cm_tts_zh_牛排.mp3",
+      "image": "<img src=\"e908fa0eb04d.jpg\">"
+    },
+    {
+      "hanzi": "雷电",
+      "target_syllable": "dian",
+      "target_index": 1,
+      "full_pinyin_raw": "léi diàn",
+      "audio": "5e69cb8c8069.mp3",
+      "image": "<img src=\"8681259f321e.jpg\">"
+    },
+    {
+      "hanzi": "内衣",
+      "target_syllable": "nei",
+      "target_index": 0,
+      "full_pinyin_raw": "nèi yī",
+      "audio": "cm_tts_zh_内衣.mp3",
+      "image": "<img src=\"3c2de2dd2b13.jpg\">"
+    },
+    {
+      "hanzi": "篮球",
+      "target_syllable": "lan",
+      "target_index": 0,
+      "full_pinyin_raw": "lán qiú",
+      "audio": "f2fba45c5d12.mp3",
+      "image": "<img src=\"47fdaeecaf67.gif\">"
+    },
+    {
+      "hanzi": "蓝色",
+      "target_syllable": "lan",
+      "target_index": 0,
+      "full_pinyin_raw": "lán sè",
+      "audio": "d57617fca2b6.mp3",
+      "image": "<img src=\"d2e89b835391.png\">"
+    },
+    {
+      "hanzi": "鸡蛋",
+      "target_syllable": "dan",
+      "target_index": 1,
+      "full_pinyin_raw": "jī dàn",
+      "audio": "cm_tts_zh_鸡蛋.mp3",
+      "image": "<img src=\"20ff99ae763d.jpg\">"
+    },
+    {
+      "hanzi": "汗",
+      "target_syllable": "han",
+      "target_index": 0,
+      "full_pinyin_raw": "hàn",
+      "audio": "cm_tts_zh_汗.mp3",
+      "image": "<img src=\"d3ed523eb69e.jpg\">"
+    },
+    {
+      "hanzi": "困难",
+      "target_syllable": "kun",
+      "target_index": 0,
+      "full_pinyin_raw": "kùn nan",
+      "audio": "cm_tts_zh_困难.mp3",
+      "image": "<img src=\"/media/objects/9064032d8042.png\">"
+    },
+    {
+      "hanzi": "困难",
+      "target_syllable": "nan",
+      "target_index": 1,
+      "full_pinyin_raw": "kùn nan",
+      "audio": "cm_tts_zh_困难.mp3",
+      "image": "<img src=\"/media/objects/9064032d8042.png\">"
+    },
+    {
+      "hanzi": "看",
+      "target_syllable": "kan",
+      "target_index": 0,
+      "full_pinyin_raw": "kān",
+      "audio": "cm_tts_zh_看.mp3",
+      "image": "<img src=\"7c50373df970.png\">"
+    },
+    {
+      "hanzi": "树根",
+      "target_syllable": "gen",
+      "target_index": 1,
+      "full_pinyin_raw": "shù gēn",
+      "audio": "fd637ade9810.mp3",
+      "image": "<img src=\"1bd5245bae0e.jpg\">"
+    },
+    {
+      "hanzi": "肯德基",
+      "target_syllable": "ken",
+      "target_index": 0,
+      "full_pinyin_raw": "kěn dé jī",
+      "audio": "29600249eac6.mp3",
+      "image": "<img src=\"51073d81a396.jpg\">"
+    },
+    {
+      "hanzi": "分数",
+      "target_syllable": "fen",
+      "target_index": 0,
+      "full_pinyin_raw": "fēn shù",
+      "audio": "cm_tts_zh_分数.mp3",
+      "image": "<img src=\"0cb5b96130bb.jpg\">"
+    },
+    {
+      "hanzi": "瘢痕",
+      "target_syllable": "hen",
+      "target_index": 1,
+      "full_pinyin_raw": "bān hén",
+      "audio": "cm_tts_zh_瘢痕.mp3",
+      "image": "<img src=\"/media/objects/d0181a1ad0a4.png\">"
+    },
+    {
+      "hanzi": "丛林",
+      "target_syllable": "lin",
+      "target_index": 1,
+      "full_pinyin_raw": "cóng lín",
+      "audio": "186424671461.mp3",
+      "image": "<img src=\"f38a7497c888.jpg\">"
+    },
+    {
+      "hanzi": "宾馆",
+      "target_syllable": "guan",
+      "target_index": 1,
+      "full_pinyin_raw": "bīn guǎn",
+      "audio": "cm_tts_zh_宾馆.mp3",
+      "image": "<img src=\"edfdd7b7827b.jpg\">"
+    },
+    {
+      "hanzi": "馄饨",
+      "target_syllable": "hun",
+      "target_index": 0,
+      "full_pinyin_raw": "hún tun",
+      "audio": "a6b9faeae0c9.mp3",
+      "image": "<img src=\"dd5f7b8646a4.jpg\">"
+    },
+    {
+      "hanzi": "滚动",
+      "target_syllable": "gun",
+      "target_index": 0,
+      "full_pinyin_raw": "gǔn dòng",
+      "audio": "c0355816567f.mp3",
+      "image": "<img src=\"33212e5fce9e.jpg\">"
+    },
+    {
+      "hanzi": "轮滑鞋",
+      "target_syllable": "lun",
+      "target_index": 0,
+      "full_pinyin_raw": "lún huá xié",
+      "audio": "5c770579d2fc.mp3",
+      "image": "<img src=\"59ca18741cae.jpg\">"
+    },
+    {
+      "hanzi": "轮船",
+      "target_syllable": "lun",
+      "target_index": 0,
+      "full_pinyin_raw": "lún chuán",
+      "audio": "8e48a894bbfd.mp3",
+      "image": "<img src=\"424a8f360a9d.png\">"
+    },
+    {
+      "hanzi": "困",
+      "target_syllable": "kun",
+      "target_index": 0,
+      "full_pinyin_raw": "kùn",
+      "audio": "cm_tts_zh_困.mp3",
+      "image": "<img src=\"9d65e7e0a9ee.jpg\">"
+    },
+    {
+      "hanzi": "盾",
+      "target_syllable": "dun",
+      "target_index": 0,
+      "full_pinyin_raw": "dùn",
+      "audio": "cm_tts_zh_盾.mp3",
+      "image": "<img src=\"/media/objects/3737573aeec6.png\">"
+    },
+    {
+      "hanzi": "餐巾纸",
+      "target_syllable": "jin",
+      "target_index": 1,
+      "full_pinyin_raw": "cān jin zhǐ",
+      "audio": "60796770a86b.mp3",
+      "image": "<img src=\"98d180061363.jpg\">"
+    },
+    {
+      "hanzi": "三角形",
+      "target_syllable": "san",
+      "target_index": 0,
+      "full_pinyin_raw": "sān jiǎo xíng",
+      "audio": "bf6216a6c83b.mp3",
+      "image": "<img src=\"0ef308add358.png\">"
+    },
+    {
+      "hanzi": "雨伞",
+      "target_syllable": "san",
+      "target_index": 1,
+      "full_pinyin_raw": "yǔ sǎn",
+      "audio": "738fd2b9941e.mp3",
+      "image": "<img src=\"af197e0955f7.png\">"
+    },
+    {
+      "hanzi": "森林",
+      "target_syllable": "sen",
+      "target_index": 0,
+      "full_pinyin_raw": "sēn lín",
+      "audio": "cm_tts_zh_森林.mp3",
+      "image": "<img src=\"ab183e8833f3.jpg\">"
+    },
+    {
+      "hanzi": "森林",
+      "target_syllable": "lin",
+      "target_index": 1,
+      "full_pinyin_raw": "sēn lín",
+      "audio": "cm_tts_zh_森林.mp3",
+      "image": "<img src=\"ab183e8833f3.jpg\">"
+    },
+    {
+      "hanzi": "孙子",
+      "target_syllable": "sun",
+      "target_index": 0,
+      "full_pinyin_raw": "sūn zi",
+      "audio": "cm_tts_zh_孙子.mp3",
+      "image": "<img src=\"/media/objects/ff6d335bfaa9.png\">"
+    },
+    {
+      "hanzi": "炸弹",
+      "target_syllable": "dan",
+      "target_index": 1,
+      "full_pinyin_raw": "zhà dàn",
+      "audio": "cm_tts_zh_炸弹.mp3",
+      "image": "<img src=\"/media/objects/11016ef89813.gif\">"
+    },
+    {
+      "hanzi": "饭铲",
+      "target_syllable": "fan",
+      "target_index": 0,
+      "full_pinyin_raw": "fàn chǎn",
+      "audio": "84d750003142.mp3",
+      "image": "<img src=\"e3d032008d8e.jpg\">"
+    },
+    {
+      "hanzi": "吃饭",
+      "target_syllable": "fan",
+      "target_index": 1,
+      "full_pinyin_raw": "chī fàn",
+      "audio": "67c8d61be971.mp3",
+      "image": "<img src=\"0ed6bebe6386.jpg\">"
+    },
+    {
+      "hanzi": "厨房",
+      "target_syllable": "fang",
+      "target_index": 1,
+      "full_pinyin_raw": "chú fáng",
+      "audio": "cd304aed0a10.mp3",
+      "image": "<img src=\"bc20e41754f7.jpg\">"
+    },
+    {
+      "hanzi": "高山",
+      "target_syllable": "shan",
+      "target_index": 1,
+      "full_pinyin_raw": "gāo shān",
+      "audio": "892888152762.mp3",
+      "image": "<img src=\"558499293788.jpg\">"
+    },
+    {
+      "hanzi": "圣诞树",
+      "target_syllable": "sheng",
+      "target_index": 0,
+      "full_pinyin_raw": "shèng dàn shù",
+      "audio": "60751c648c94.mp3",
+      "image": "<img src=\"b928512a3bbe.jpg\">"
+    },
+    {
+      "hanzi": "圣诞树",
+      "target_syllable": "dan",
+      "target_index": 1,
+      "full_pinyin_raw": "shèng dàn shù",
+      "audio": "60751c648c94.mp3",
+      "image": "<img src=\"b928512a3bbe.jpg\">"
+    },
+    {
+      "hanzi": "身体",
+      "target_syllable": "shen",
+      "target_index": 0,
+      "full_pinyin_raw": "shēn tǐ",
+      "audio": "cm_tts_zh_身体.mp3",
+      "image": "<img src=\"c858590e1583.png\">"
+    },
+    {
+      "hanzi": "防晒霜",
+      "target_syllable": "fang",
+      "target_index": 0,
+      "full_pinyin_raw": "fáng shài shuāng",
+      "audio": "cm_tts_zh_防晒霜.mp3",
+      "image": "<img src=\"5ddf0f40d000.png\">"
+    },
+    {
+      "hanzi": "防晒霜",
+      "target_syllable": "shuang",
+      "target_index": 2,
+      "full_pinyin_raw": "fáng shài shuāng",
+      "audio": "cm_tts_zh_防晒霜.mp3",
+      "image": "<img src=\"5ddf0f40d000.png\">"
+    },
+    {
+      "hanzi": "圣诞老人",
+      "target_syllable": "sheng",
+      "target_index": 0,
+      "full_pinyin_raw": "shèng dàn lǎo rén",
+      "audio": "2e8495773dcc.mp3",
+      "image": "<img src=\"b1d544c23570.png\">"
+    },
+    {
+      "hanzi": "圣诞老人",
+      "target_syllable": "dan",
+      "target_index": 1,
+      "full_pinyin_raw": "shèng dàn lǎo rén",
+      "audio": "2e8495773dcc.mp3",
+      "image": "<img src=\"b1d544c23570.png\">"
+    },
+    {
+      "hanzi": "点燃",
+      "target_syllable": "dian",
+      "target_index": 0,
+      "full_pinyin_raw": "diǎn rán",
+      "audio": "cm_tts_zh_点燃.mp3",
+      "image": "<img src=\"/media/objects/158010715a31.gif\">"
+    },
+    {
+      "hanzi": "狼",
+      "target_syllable": "lang",
+      "target_index": 0,
+      "full_pinyin_raw": "láng",
+      "audio": "e3ab3a0518f2.mp3",
+      "image": "<img src=\"1eac1ef6b9ac.jpg\">"
+    },
+    {
+      "hanzi": "长颈鹿",
+      "target_syllable": "jing",
+      "target_index": 1,
+      "full_pinyin_raw": "cháng jǐng lù",
+      "audio": "cm_tts_zh_长颈鹿.mp3",
+      "image": "<img src=\"ff68d85cd4ff.jpg\">"
+    },
+    {
+      "hanzi": "放",
+      "target_syllable": "fang",
+      "target_index": 0,
+      "full_pinyin_raw": "fàng",
+      "audio": "cm_tts_zh_放.mp3",
+      "image": "<img src=\"f586c9a1e3ff.png\">"
+    },
+    {
+      "hanzi": "港口",
+      "target_syllable": "gang",
+      "target_index": 0,
+      "full_pinyin_raw": "gǎng kǒu",
+      "audio": "cm_tts_zh_港口.mp3",
+      "image": "<img src=\"d3d911095965.jpg\">"
+    },
+    {
+      "hanzi": "银行",
+      "target_syllable": "hang",
+      "target_index": 1,
+      "full_pinyin_raw": "yín háng",
+      "audio": "cm_tts_zh_银行.mp3",
+      "image": "<img src=\"ed094e434016.jpg\">"
+    },
+    {
+      "hanzi": "抵抗",
+      "target_syllable": "kang",
+      "target_index": 1,
+      "full_pinyin_raw": "dǐ kàng",
+      "audio": "cm_tts_zh_抵抗.mp3",
+      "image": "<img src=\"0a50dc43bfdb.jpg\">"
+    },
+    {
+      "hanzi": "胶囊",
+      "target_syllable": "nang",
+      "target_index": 1,
+      "full_pinyin_raw": "jiāo náng",
+      "audio": "cm_tts_zh_胶囊.mp3",
+      "image": "<img src=\"cf39189686dc.jpg\">"
+    },
+    {
+      "hanzi": "蜜蜂",
+      "target_syllable": "feng",
+      "target_index": 1,
+      "full_pinyin_raw": "mì fēng",
+      "audio": "48fb6834157b.mp3",
+      "image": "<img src=\"b5126d3ddb5f.png\">"
+    },
+    {
+      "hanzi": "大风",
+      "target_syllable": "feng",
+      "target_index": 1,
+      "full_pinyin_raw": "dà fēng",
+      "audio": "c8a103947c90.mp3",
+      "image": "<img src=\"38f65445747f.jpg\">"
+    },
+    {
+      "hanzi": "冷",
+      "target_syllable": "leng",
+      "target_index": 0,
+      "full_pinyin_raw": "lěng",
+      "audio": "112977cb29b0.mp3",
+      "image": "<img src=\"355ef04cfc23.png\">"
+    },
+    {
+      "hanzi": "声音",
+      "target_syllable": "sheng",
+      "target_index": 0,
+      "full_pinyin_raw": "shēng yīn",
+      "audio": "cm_tts_zh_声音.mp3",
+      "image": "<img src=\"e6563d0ff9be.jpg\">"
+    },
+    {
+      "hanzi": "坑",
+      "target_syllable": "keng",
+      "target_index": 0,
+      "full_pinyin_raw": "kēng",
+      "audio": "cm_tts_zh_坑.mp3",
+      "image": "<img src=\"bf3716a0e523.jpg\">"
+    },
+    {
+      "hanzi": "能",
+      "target_syllable": "neng",
+      "target_index": 0,
+      "full_pinyin_raw": "néng",
+      "audio": "cm_tts_zh_能.mp3",
+      "image": "<img src=\"95f39159f405.png\">"
+    },
+    {
+      "hanzi": "平衡车",
+      "target_syllable": "heng",
+      "target_index": 1,
+      "full_pinyin_raw": "píng héng chē",
+      "audio": "cm_tts_zh_平衡车.mp3",
+      "image": "<img src=\"8a887685d9ef.jpg\">"
+    },
+    {
+      "hanzi": "僧",
+      "target_syllable": "seng",
+      "target_index": 0,
+      "full_pinyin_raw": "sēng",
+      "audio": "cm_tts_zh_僧.mp3",
+      "image": "<img src=\"246acac3ec07.jpg\">"
+    },
+    {
+      "hanzi": "生病了",
+      "target_syllable": "sheng",
+      "target_index": 0,
+      "full_pinyin_raw": "shēng bìng le",
+      "audio": "72672f135b1a.mp3",
+      "image": "<img src=\"8b8f220d5465.jpg\">"
+    },
+    {
+      "hanzi": "铃铛",
+      "target_syllable": "ling",
+      "target_index": 0,
+      "full_pinyin_raw": "líng dang",
+      "audio": "98d26953eba5.mp3",
+      "image": "<img src=\"577bfcd68496.jpg\">"
+    },
+    {
+      "hanzi": "铃铛",
+      "target_syllable": "dang",
+      "target_index": 1,
+      "full_pinyin_raw": "líng dang",
+      "audio": "98d26953eba5.mp3",
+      "image": "<img src=\"577bfcd68496.jpg\">"
+    },
+    {
+      "hanzi": "钉子",
+      "target_syllable": "ding",
+      "target_index": 0,
+      "full_pinyin_raw": "dīng zi",
+      "audio": "cm_tts_zh_钉子.mp3",
+      "image": "<img src=\"36da32cfa155.jpg\">"
+    },
+    {
+      "hanzi": "宁静",
+      "target_syllable": "ning",
+      "target_index": 0,
+      "full_pinyin_raw": "níng jìng",
+      "audio": "cm_tts_zh_宁静.mp3",
+      "image": ""
+    },
+    {
+      "hanzi": "宁静",
+      "target_syllable": "jing",
+      "target_index": 1,
+      "full_pinyin_raw": "níng jìng",
+      "audio": "cm_tts_zh_宁静.mp3",
+      "image": ""
+    },
+    {
+      "hanzi": "金币",
+      "target_syllable": "jin",
+      "target_index": 0,
+      "full_pinyin_raw": "jīn bì",
+      "audio": "0058461d57d2.mp3",
+      "image": "<img src=\"ab39a1a213c1.png\">"
+    },
+    {
+      "hanzi": "解放军",
+      "target_syllable": "fang",
+      "target_index": 1,
+      "full_pinyin_raw": "jiě fàng jūn",
+      "audio": "4f135ee39f57.mp3",
+      "image": "<img src=\"2708de039e24.jpg\">"
+    },
+    {
+      "hanzi": "解放军",
+      "target_syllable": "jun",
+      "target_index": 2,
+      "full_pinyin_raw": "jiě fàng jūn",
+      "audio": "4f135ee39f57.mp3",
+      "image": "<img src=\"2708de039e24.jpg\">"
+    },
+    {
+      "hanzi": "镜子",
+      "target_syllable": "jing",
+      "target_index": 0,
+      "full_pinyin_raw": "jìng zi",
+      "audio": "77270ca29b02.mp3",
+      "image": "<img src=\"8a1900aaba72.jpg\">"
+    },
+    {
+      "hanzi": "生气",
+      "target_syllable": "sheng",
+      "target_index": 0,
+      "full_pinyin_raw": "shēng qì",
+      "audio": "bef703c2f70e.mp3",
+      "image": "<img src=\"754ee9970ed3.png\">"
+    },
+    {
+      "hanzi": "信封",
+      "target_syllable": "feng",
+      "target_index": 1,
+      "full_pinyin_raw": "xìn fēng",
+      "audio": "b66c17895f0d.mp3",
+      "image": "<img src=\"bd65f32ab795.jpg\">"
+    },
+    {
+      "hanzi": "金银财宝",
+      "target_syllable": "jin",
+      "target_index": 0,
+      "full_pinyin_raw": "jīn yín cái bǎo",
+      "audio": "b746743ae3e2.mp3",
+      "image": "<img src=\"b5328e58f825.jpg\">"
+    },
+    {
+      "hanzi": "山羊",
+      "target_syllable": "shan",
+      "target_index": 0,
+      "full_pinyin_raw": "shān yáng",
+      "audio": "35effee34265.mp3",
+      "image": "<img src=\"cf3a1eb0a63b.gif\">"
+    },
+    {
+      "hanzi": "眼睛",
+      "target_syllable": "jing",
+      "target_index": 1,
+      "full_pinyin_raw": "yǎn jīng",
+      "audio": "67ef0e7909dc.mp3",
+      "image": "<img src=\"b6b0f1c7bedd.jpg\">"
+    },
+    {
+      "hanzi": "宇航服",
+      "target_syllable": "hang",
+      "target_index": 1,
+      "full_pinyin_raw": "yǔ háng fú",
+      "audio": "cm_tts_zh_宇航服.mp3",
+      "image": "<img src=\"bb200095956c.png\">"
+    },
+    {
+      "hanzi": "嗡嗡声",
+      "target_syllable": "sheng",
+      "target_index": 2,
+      "full_pinyin_raw": "wēng wēng shēng",
+      "audio": "cm_tts_zh_嗡嗡声.mp3",
+      "image": "<img src=\"0a7b25bb2c82.png\">"
+    },
+    {
+      "hanzi": "镊子",
+      "target_syllable": "nie",
+      "target_index": 0,
+      "full_pinyin_raw": "niē zi",
+      "audio": "081c63945453.mp3",
+      "image": "<img src=\"37b1e60ffa01.jpg\">"
+    },
+    {
+      "hanzi": "番茄酱",
+      "target_syllable": "fan",
+      "target_index": 0,
+      "full_pinyin_raw": "fān qié jiàng",
+      "audio": "cm_tts_zh_番茄酱.mp3",
+      "image": "<img src=\"38fd56ebbb89.jpg\">"
+    },
+    {
+      "hanzi": "番茄酱",
+      "target_syllable": "jiang",
+      "target_index": 2,
+      "full_pinyin_raw": "fān qié jiàng",
+      "audio": "cm_tts_zh_番茄酱.mp3",
+      "image": "<img src=\"38fd56ebbb89.jpg\">"
+    },
+    {
+      "hanzi": "漂亮",
+      "target_syllable": "liang",
+      "target_index": 1,
+      "full_pinyin_raw": "piào liang",
+      "audio": "cm_tts_zh_漂亮.mp3",
+      "image": "<img src=\"7c68e876557b.jpg\">"
+    },
+    {
+      "hanzi": "牛",
+      "target_syllable": "niu",
+      "target_index": 0,
+      "full_pinyin_raw": "niú",
+      "audio": "cm_tts_zh_牛.mp3",
+      "image": "<img src=\"3d2a31ed469b.png\">"
+    },
+    {
+      "hanzi": "乱丢",
+      "target_syllable": "luan",
+      "target_index": 0,
+      "full_pinyin_raw": "luàn diū",
+      "audio": "cm_tts_zh_乱丢.mp3",
+      "image": "<img src=\"/media/objects/60ab71b22c68.png\">"
+    },
+    {
+      "hanzi": "剪刀",
+      "target_syllable": "jian",
+      "target_index": 0,
+      "full_pinyin_raw": "jiǎn dāo",
+      "audio": "c74783383d17.mp3",
+      "image": "<img src=\"dbc12c475945.jpg\">"
+    },
+    {
+      "hanzi": "新年",
+      "target_syllable": "nian",
+      "target_index": 1,
+      "full_pinyin_raw": "xīn nián",
+      "audio": "cm_tts_zh_新年.mp3",
+      "image": "<img src=\"e81bb632f9ba.jpg\">"
+    },
+    {
+      "hanzi": "今天",
+      "target_syllable": "jin",
+      "target_index": 0,
+      "full_pinyin_raw": "jīn tiān",
+      "audio": "cm_tts_zh_今天.mp3",
+      "image": "<img src=\"4ba201868db6.jpg\">"
+    },
+    {
+      "hanzi": "锻炼",
+      "target_syllable": "duan",
+      "target_index": 0,
+      "full_pinyin_raw": "duàn liàn",
+      "audio": "cm_tts_zh_锻炼.mp3",
+      "image": "<img src=\"49a3f762f5fb.jpg\">"
+    },
+    {
+      "hanzi": "锻炼",
+      "target_syllable": "lian",
+      "target_index": 1,
+      "full_pinyin_raw": "duàn liàn",
+      "audio": "cm_tts_zh_锻炼.mp3",
+      "image": "<img src=\"49a3f762f5fb.jpg\">"
+    },
+    {
+      "hanzi": "商店",
+      "target_syllable": "shang",
+      "target_index": 0,
+      "full_pinyin_raw": "shāng diàn",
+      "audio": "cm_tts_zh_商店.mp3",
+      "image": "<img src=\"45cadbe3d67e.png\">"
+    },
+    {
+      "hanzi": "商店",
+      "target_syllable": "dian",
+      "target_index": 1,
+      "full_pinyin_raw": "shāng diàn",
+      "audio": "cm_tts_zh_商店.mp3",
+      "image": "<img src=\"45cadbe3d67e.png\">"
+    },
+    {
+      "hanzi": "果酱",
+      "target_syllable": "jiang",
+      "target_index": 1,
+      "full_pinyin_raw": "guǒ jiàng",
+      "audio": "f5dd8af62197.mp3",
+      "image": "<img src=\"d714282001a2.jpg\">"
+    },
+    {
+      "hanzi": "小姑娘",
+      "target_syllable": "niang",
+      "target_index": 2,
+      "full_pinyin_raw": "xiǎo gū niang",
+      "audio": "cm_tts_zh_小姑娘.mp3",
+      "image": "<img src=\"11a2f1d52cb0.jpg\">"
+    },
+    {
+      "hanzi": "月亮",
+      "target_syllable": "liang",
+      "target_index": 1,
+      "full_pinyin_raw": "yuè liang",
+      "audio": "cm_tts_zh_月亮.mp3",
+      "image": "<img src=\"4a2e87b00034.jpg\">"
+    },
+    {
+      "hanzi": "夸奖",
+      "target_syllable": "jiang",
+      "target_index": 1,
+      "full_pinyin_raw": "kuā jiǎng",
+      "audio": "cm_tts_zh_夸奖.mp3",
+      "image": "<img src=\"/media/objects/74a5a6c2d12a.png\">"
+    },
+    {
+      "hanzi": "轮廓",
+      "target_syllable": "lun",
+      "target_index": 0,
+      "full_pinyin_raw": "lún kuò",
+      "audio": "cm_tts_zh_轮廓.mp3",
+      "image": "<img src=\"9dfdb4051bb8.jpg\">"
+    },
+    {
+      "hanzi": "鸡肉卷",
+      "target_syllable": "juan",
+      "target_index": 2,
+      "full_pinyin_raw": "jī ròu juǎn",
+      "audio": "cm_tts_zh_鸡肉卷.mp3",
+      "image": "<img src=\"f29dbbbc4020.jpg\">"
+    },
+    {
+      "hanzi": "关",
+      "target_syllable": "guan",
+      "target_index": 0,
+      "full_pinyin_raw": "guān",
+      "audio": "cm_tts_zh_关.mp3",
+      "image": "<img src=\"0ae124b07b22.png\">"
+    },
+    {
+      "hanzi": "宽度",
+      "target_syllable": "kuan",
+      "target_index": 0,
+      "full_pinyin_raw": "kuān dù",
+      "audio": "cm_tts_zh_宽度.mp3",
+      "image": "<img src=\"/media/objects/f39f3ddee0fa.png\">"
+    },
+    {
+      "hanzi": "软泥",
+      "target_syllable": "ni",
+      "target_index": 1,
+      "full_pinyin_raw": "ruǎn ní",
+      "audio": "cm_tts_zh_软泥.mp3",
+      "image": "<img src=\"6ca9d01408c7.jpg\">"
+    },
+    {
+      "hanzi": "螺栓",
+      "target_syllable": "shuan",
+      "target_index": 1,
+      "full_pinyin_raw": "luó shuān",
+      "audio": "cm_tts_zh_螺栓.mp3",
+      "image": "<img src=\"/media/objects/b0ecea31a488.png\">"
+    },
+    {
+      "hanzi": "暖和",
+      "target_syllable": "nuan",
+      "target_index": 0,
+      "full_pinyin_raw": "nuǎn huo",
+      "audio": "cm_tts_zh_暖和.mp3",
+      "image": "<img src=\"0b5759efc5c7.png\">"
+    },
+    {
+      "hanzi": "双手",
+      "target_syllable": "shuang",
+      "target_index": 0,
+      "full_pinyin_raw": "shuāng shǒu",
+      "audio": "cm_tts_zh_双手.mp3",
+      "image": "<img src=\"fc43ec651103.jpg\">"
+    },
+    {
+      "hanzi": "光",
+      "target_syllable": "guang",
+      "target_index": 0,
+      "full_pinyin_raw": "guāng",
+      "audio": "cm_tts_zh_光.mp3",
+      "image": "<img src=\"/media/objects/cea434be6a8b.png\">"
+    },
+    {
+      "hanzi": "黄",
+      "target_syllable": "huang",
+      "target_index": 0,
+      "full_pinyin_raw": "huáng",
+      "audio": "cm_tts_zh_黄.mp3",
+      "image": "<img src=\"cf8d4505f666.jpg\">"
+    },
+    {
+      "hanzi": "矿工",
+      "target_syllable": "kuang",
+      "target_index": 0,
+      "full_pinyin_raw": "kuàng gōng",
+      "audio": "cm_tts_zh_矿工.mp3",
+      "image": "<img src=\"eed18a3a789f.jpg\">"
+    }
+  ],
+  "13": [
+    {
+      "hanzi": "拔萝卜",
+      "target_syllable": "luo",
+      "target_index": 1,
+      "full_pinyin_raw": "bá luó bo",
+      "audio": "37b88be78b99.mp3",
+      "image": "<img src=\"5f29a2dff705.jpg\">"
+    },
+    {
+      "hanzi": "菠萝",
+      "target_syllable": "luo",
+      "target_index": 1,
+      "full_pinyin_raw": "bō luó",
+      "audio": "a02d7df5ddbc.mp3",
+      "image": "<img src=\"6a886b9780f6.jpg\">"
+    },
+    {
+      "hanzi": "老婆婆",
+      "target_syllable": "lao",
+      "target_index": 0,
+      "full_pinyin_raw": "lǎo pó pó",
+      "audio": "cf10de607ed1.mp3",
+      "image": "<img src=\"46a59619a18a.jpg\">"
+    },
+    {
+      "hanzi": "佛",
+      "target_syllable": "fo",
+      "target_index": 0,
+      "full_pinyin_raw": "fó",
+      "audio": "cm_tts_zh_佛.mp3",
+      "image": "<img src=\"03575555c501.jpg\">"
+    },
+    {
+      "hanzi": "自动扶梯",
+      "target_syllable": "dong",
+      "target_index": 1,
+      "full_pinyin_raw": "zì dòng fú tī",
+      "audio": "cm_tts_zh_自动扶梯.mp3",
+      "image": "<img src=\"efea2bb464ff.jpg\">"
+    },
+    {
+      "hanzi": "公路",
+      "target_syllable": "gong",
+      "target_index": 0,
+      "full_pinyin_raw": "gōng lù",
+      "audio": "cm_tts_zh_公路.mp3",
+      "image": "<img src=\"6ef1d041e579.jpg\">"
+    },
+    {
+      "hanzi": "老人",
+      "target_syllable": "lao",
+      "target_index": 0,
+      "full_pinyin_raw": "lǎo rén",
+      "audio": "cm_tts_zh_老人.mp3",
+      "image": "<img src=\"41c8782368bb.png\">"
+    },
+    {
+      "hanzi": "闹钟",
+      "target_syllable": "nao",
+      "target_index": 0,
+      "full_pinyin_raw": "nào zhōng",
+      "audio": "cm_tts_zh_闹钟.mp3",
+      "image": "<img src=\"1477015f1014.gif\">"
+    },
+    {
+      "hanzi": "岛",
+      "target_syllable": "dao",
+      "target_index": 0,
+      "full_pinyin_raw": "dǎo",
+      "audio": "cm_tts_zh_岛.mp3",
+      "image": "<img src=\"774368d98f28.jpg\">"
+    },
+    {
+      "hanzi": "豆",
+      "target_syllable": "dou",
+      "target_index": 0,
+      "full_pinyin_raw": "dòu",
+      "audio": "cm_tts_zh_豆.mp3",
+      "image": "<img src=\"be6411065d3e.jpg\">"
+    },
+    {
+      "hanzi": "大楼",
+      "target_syllable": "lou",
+      "target_index": 1,
+      "full_pinyin_raw": "dà lóu",
+      "audio": "cm_tts_zh_大楼.mp3",
+      "image": "<img src=\"bdd74784a8d5.png\">"
+    },
+    {
+      "hanzi": "否认",
+      "target_syllable": "fou",
+      "target_index": 0,
+      "full_pinyin_raw": "fǒu rèn",
+      "audio": "cm_tts_zh_否认.mp3",
+      "image": "<img src=\"81d7a9fa059c.jpg\">"
+    },
+    {
+      "hanzi": "锅盖",
+      "target_syllable": "guo",
+      "target_index": 0,
+      "full_pinyin_raw": "guō gài",
+      "audio": "0d92ec477662.mp3",
+      "image": "<img src=\"e02e7cf576cc.jpg\">"
+    },
+    {
+      "hanzi": "高楼",
+      "target_syllable": "gao",
+      "target_index": 0,
+      "full_pinyin_raw": "gāo lóu",
+      "audio": "32bac34343f8.mp3",
+      "image": "<img src=\"bdd74784a8d5.png\">"
+    },
+    {
+      "hanzi": "高楼",
+      "target_syllable": "lou",
+      "target_index": 1,
+      "full_pinyin_raw": "gāo lóu",
+      "audio": "32bac34343f8.mp3",
+      "image": "<img src=\"bdd74784a8d5.png\">"
+    },
+    {
+      "hanzi": "狗",
+      "target_syllable": "gou",
+      "target_index": 0,
+      "full_pinyin_raw": "gǒu",
+      "audio": "f9c3ea2f3a00.mp3",
+      "image": "<img src=\"cc05ca066216.png\">"
+    },
+    {
+      "hanzi": "烤鸡",
+      "target_syllable": "kao",
+      "target_index": 0,
+      "full_pinyin_raw": "kǎo jī",
+      "audio": "fe8b08d2f559.mp3",
+      "image": "<img src=\"4b1105d771c1.jpg\">"
+    },
+    {
+      "hanzi": "蝌蚪",
+      "target_syllable": "dou",
+      "target_index": 1,
+      "full_pinyin_raw": "kē dǒu",
+      "audio": "728ac2b9b61b.mp3",
+      "image": "<img src=\"49cbdab1e40b.jpg\">"
+    },
+    {
+      "hanzi": "出口",
+      "target_syllable": "kou",
+      "target_index": 1,
+      "full_pinyin_raw": "chū kǒu",
+      "audio": "cm_tts_zh_出口.mp3",
+      "image": "<img src=\"/media/objects/c8e6c63dbfd8.png\">"
+    },
+    {
+      "hanzi": "猴子",
+      "target_syllable": "hou",
+      "target_index": 0,
+      "full_pinyin_raw": "hóu zi",
+      "audio": "2230a1d8b779.mp3",
+      "image": "<img src=\"cbad46bf9d66.png\">"
+    },
+    {
+      "hanzi": "在后面",
+      "target_syllable": "hou",
+      "target_index": 1,
+      "full_pinyin_raw": "zài hòu miàn",
+      "audio": "31bef829c18a.mp3",
+      "image": "<img src=\"0b935c14862e.jpg\">"
+    },
+    {
+      "hanzi": "老虎",
+      "target_syllable": "lao",
+      "target_index": 0,
+      "full_pinyin_raw": "lǎo hǔ",
+      "audio": "684c0b0abdd1.mp3",
+      "image": "<img src=\"f7ebd136b79b.jpg\">"
+    },
+    {
+      "hanzi": "好",
+      "target_syllable": "hao",
+      "target_index": 0,
+      "full_pinyin_raw": "hǎo",
+      "audio": "cm_tts_zh_好.mp3",
+      "image": "<img src=\"179f858497cb.svg\">"
+    },
+    {
+      "hanzi": "洗手盆",
+      "target_syllable": "shou",
+      "target_index": 1,
+      "full_pinyin_raw": "xǐ shǒu pén",
+      "audio": "37f0bf97588a.mp3",
+      "image": "<img src=\"ded41cec3af9.jpg\">"
+    },
+    {
+      "hanzi": "农民",
+      "target_syllable": "nong",
+      "target_index": 0,
+      "full_pinyin_raw": "nóng mín",
+      "audio": "d4bd493f207e.mp3",
+      "image": "<img src=\"e7e61cf90cd7.jpg\">"
+    },
+    {
+      "hanzi": "滚动",
+      "target_syllable": "dong",
+      "target_index": 1,
+      "full_pinyin_raw": "gǔn dòng",
+      "audio": "c0355816567f.mp3",
+      "image": "<img src=\"33212e5fce9e.jpg\">"
+    },
+    {
+      "hanzi": "红枣",
+      "target_syllable": "hong",
+      "target_index": 0,
+      "full_pinyin_raw": "hóng zǎo",
+      "audio": "57fc69acd4e5.mp3",
+      "image": "<img src=\"31bd41c37d3c.jpg\">"
+    },
+    {
+      "hanzi": "厕所",
+      "target_syllable": "suo",
+      "target_index": 1,
+      "full_pinyin_raw": "cè suǒ",
+      "audio": "cm_tts_zh_厕所.mp3",
+      "image": "<img src=\"3da0be7da109.jpg\">"
+    },
+    {
+      "hanzi": "三角形",
+      "target_syllable": "jiao",
+      "target_index": 1,
+      "full_pinyin_raw": "sān jiǎo xíng",
+      "audio": "bf6216a6c83b.mp3",
+      "image": "<img src=\"0ef308add358.png\">"
+    },
+    {
+      "hanzi": "扫地",
+      "target_syllable": "sao",
+      "target_index": 0,
+      "full_pinyin_raw": "sǎo dì",
+      "audio": "50a1559955de.mp3",
+      "image": "<img src=\"7ab92418f20c.gif\">"
+    },
+    {
+      "hanzi": "咳嗽",
+      "target_syllable": "sou",
+      "target_index": 1,
+      "full_pinyin_raw": "ké sou",
+      "audio": "cm_tts_zh_咳嗽.mp3",
+      "image": "<img src=\"/media/objects/2eec89fb7424.gif\">"
+    },
+    {
+      "hanzi": "雕塑",
+      "target_syllable": "diao",
+      "target_index": 0,
+      "full_pinyin_raw": "diāo sù",
+      "audio": "cm_tts_zh_雕塑.mp3",
+      "image": "<img src=\"/media/objects/da4f2d550923.png\">"
+    },
+    {
+      "hanzi": "果汁",
+      "target_syllable": "guo",
+      "target_index": 0,
+      "full_pinyin_raw": "guǒ zhī",
+      "audio": "cbeec6c89482.mp3",
+      "image": "<img src=\"a97c6771ae19.jpg\">"
+    },
+    {
+      "hanzi": "公交车",
+      "target_syllable": "gong",
+      "target_index": 0,
+      "full_pinyin_raw": "gōng jiāo chē",
+      "audio": "c66ada1e75b2.mp3",
+      "image": "<img src=\"c6f9bda91c8f.png\">"
+    },
+    {
+      "hanzi": "公交车",
+      "target_syllable": "jiao",
+      "target_index": 1,
+      "full_pinyin_raw": "gōng jiāo chē",
+      "audio": "c66ada1e75b2.mp3",
+      "image": "<img src=\"c6f9bda91c8f.png\">"
+    },
+    {
+      "hanzi": "火柴",
+      "target_syllable": "huo",
+      "target_index": 0,
+      "full_pinyin_raw": "huǒ chái",
+      "audio": "cm_tts_zh_火柴.mp3",
+      "image": "<img src=\"78224300f568.gif\">"
+    },
+    {
+      "hanzi": "炒锅",
+      "target_syllable": "guo",
+      "target_index": 1,
+      "full_pinyin_raw": "chǎo guō",
+      "audio": "cm_tts_zh_炒锅.mp3",
+      "image": "<img src=\"6469038957eb.png\">"
+    },
+    {
+      "hanzi": "高山",
+      "target_syllable": "gao",
+      "target_index": 0,
+      "full_pinyin_raw": "gāo shān",
+      "audio": "892888152762.mp3",
+      "image": "<img src=\"558499293788.jpg\">"
+    },
+    {
+      "hanzi": "手",
+      "target_syllable": "shou",
+      "target_index": 0,
+      "full_pinyin_raw": "shǒu",
+      "audio": "1e04bdfab5bb.mp3",
+      "image": "<img src=\"fc43ec651103.jpg\">"
+    },
+    {
+      "hanzi": "老师",
+      "target_syllable": "lao",
+      "target_index": 0,
+      "full_pinyin_raw": "lǎo shī",
+      "audio": "5a82ab4b4c59.mp3",
+      "image": "<img src=\"01927404ca51.jpg\">"
+    },
+    {
+      "hanzi": "老鼠",
+      "target_syllable": "lao",
+      "target_index": 0,
+      "full_pinyin_raw": "lǎo shǔ",
+      "audio": "bcffee2f5388.mp3",
+      "image": "<img src=\"8a27de33ca87.jpg\">"
+    },
+    {
+      "hanzi": "勺子",
+      "target_syllable": "shao",
+      "target_index": 0,
+      "full_pinyin_raw": "sháo zi",
+      "audio": "cm_tts_zh_勺子.mp3",
+      "image": "<img src=\"7ad71573646a.jpg\">"
+    },
+    {
+      "hanzi": "热狗",
+      "target_syllable": "gou",
+      "target_index": 1,
+      "full_pinyin_raw": "rè gǒu",
+      "audio": "d3c36afa6e7c.mp3",
+      "image": "<img src=\"a565cfbfeeef.jpg\">"
+    },
+    {
+      "hanzi": "圣诞老人",
+      "target_syllable": "lao",
+      "target_index": 2,
+      "full_pinyin_raw": "shèng dàn lǎo rén",
+      "audio": "2e8495773dcc.mp3",
+      "image": "<img src=\"b1d544c23570.png\">"
+    },
+    {
+      "hanzi": "人行道",
+      "target_syllable": "dao",
+      "target_index": 2,
+      "full_pinyin_raw": "rén xíng dào",
+      "audio": "6b2c273b5f5a.mp3",
+      "image": "<img src=\"843c96183e69.png\">"
+    },
+    {
+      "hanzi": "港口",
+      "target_syllable": "kou",
+      "target_index": 1,
+      "full_pinyin_raw": "gǎng kǒu",
+      "audio": "cm_tts_zh_港口.mp3",
+      "image": "<img src=\"d3d911095965.jpg\">"
+    },
+    {
+      "hanzi": "胶囊",
+      "target_syllable": "jiao",
+      "target_index": 0,
+      "full_pinyin_raw": "jiāo náng",
+      "audio": "cm_tts_zh_胶囊.mp3",
+      "image": "<img src=\"cf39189686dc.jpg\">"
+    },
+    {
+      "hanzi": "弄脏",
+      "target_syllable": "nong",
+      "target_index": 0,
+      "full_pinyin_raw": "nòng zāng",
+      "audio": "cm_tts_zh_弄脏.mp3",
+      "image": "<img src=\"7329f3d846ca.jpg\">"
+    },
+    {
+      "hanzi": "好朋友",
+      "target_syllable": "hao",
+      "target_index": 0,
+      "full_pinyin_raw": "hǎo péng yǒu",
+      "audio": "27b20b247d28.mp3",
+      "image": "<img src=\"2bc078616f5f.jpg\">"
+    },
+    {
+      "hanzi": "苹果",
+      "target_syllable": "guo",
+      "target_index": 1,
+      "full_pinyin_raw": "píng guǒ",
+      "audio": "1080a2172220.mp3",
+      "image": "<img src=\"f328bf5cd410.png\">"
+    },
+    {
+      "hanzi": "洞",
+      "target_syllable": "dong",
+      "target_index": 0,
+      "full_pinyin_raw": "dòng",
+      "audio": "81ec12e4fc8f.mp3",
+      "image": "<img src=\"538fb60424fd.jpg\">"
+    },
+    {
+      "hanzi": "天空",
+      "target_syllable": "kong",
+      "target_index": 1,
+      "full_pinyin_raw": "tiān kōng",
+      "audio": "1a07db53a7e7.mp3",
+      "image": "<img src=\"312601fd7073.png\">"
+    },
+    {
+      "hanzi": "工人",
+      "target_syllable": "gong",
+      "target_index": 0,
+      "full_pinyin_raw": "gōng rén",
+      "audio": "cfce1b9c1439.mp3",
+      "image": "<img src=\"2224cc112bb5.png\">"
+    },
+    {
+      "hanzi": "红色",
+      "target_syllable": "hong",
+      "target_index": 0,
+      "full_pinyin_raw": "hóng sè",
+      "audio": "c4436f6fd9ad.mp3",
+      "image": "<img src=\"eaa3b822e137.jpg\">"
+    },
+    {
+      "hanzi": "龙",
+      "target_syllable": "long",
+      "target_index": 0,
+      "full_pinyin_raw": "lóng",
+      "audio": "eb184a55f96e.mp3",
+      "image": "<img src=\"734dc532fbb6.png\">"
+    },
+    {
+      "hanzi": "恐龙",
+      "target_syllable": "kong",
+      "target_index": 0,
+      "full_pinyin_raw": "kǒng lóng",
+      "audio": "40428de57d67.mp3",
+      "image": "<img src=\"2d322871c05d.jpg\">"
+    },
+    {
+      "hanzi": "恐龙",
+      "target_syllable": "long",
+      "target_index": 1,
+      "full_pinyin_raw": "kǒng lóng",
+      "audio": "40428de57d67.mp3",
+      "image": "<img src=\"2d322871c05d.jpg\">"
+    },
+    {
+      "hanzi": "松鼠",
+      "target_syllable": "song",
+      "target_index": 0,
+      "full_pinyin_raw": "sōng shǔ",
+      "audio": "cm_tts_zh_松鼠.mp3",
+      "image": "<img src=\"9ea74f83429e.jpg\">"
+    },
+    {
+      "hanzi": "公鸡",
+      "target_syllable": "gong",
+      "target_index": 0,
+      "full_pinyin_raw": "gōng jī",
+      "audio": "d558d8e2a5c1.mp3",
+      "image": "<img src=\"7423f2e05238.jpg\">"
+    },
+    {
+      "hanzi": "举手",
+      "target_syllable": "shou",
+      "target_index": 1,
+      "full_pinyin_raw": "jǔ shǒu",
+      "audio": "cc9ba021165c.mp3",
+      "image": "<img src=\"b73a45704466.png\">"
+    },
+    {
+      "hanzi": "洗手",
+      "target_syllable": "shou",
+      "target_index": 1,
+      "full_pinyin_raw": "xǐ shǒu",
+      "audio": "93717cfdb93d.mp3",
+      "image": "<img src=\"eacde37bed48.jpg\">"
+    },
+    {
+      "hanzi": "国王",
+      "target_syllable": "guo",
+      "target_index": 0,
+      "full_pinyin_raw": "guó wáng",
+      "audio": "475c1f82e462.mp3",
+      "image": "<img src=\"1cc12ca2d02c.gif\">"
+    },
+    {
+      "hanzi": "手腕",
+      "target_syllable": "shou",
+      "target_index": 0,
+      "full_pinyin_raw": "shǒu wàn",
+      "audio": "cm_tts_zh_手腕.mp3",
+      "image": "<img src=\"/media/objects/deaf9af1daf6.png\">"
+    },
+    {
+      "hanzi": "一列火车",
+      "target_syllable": "huo",
+      "target_index": 2,
+      "full_pinyin_raw": "yī liè huǒ che",
+      "audio": "b5157e6c0591.mp3",
+      "image": "<img src=\"/media/objects/a4078e6d7b40.png\">"
+    },
+    {
+      "hanzi": "跌倒",
+      "target_syllable": "dao",
+      "target_index": 1,
+      "full_pinyin_raw": "diē dǎo",
+      "audio": "cm_tts_zh_跌倒.mp3",
+      "image": "<img src=\"3e6efed038b8.jpg\">"
+    },
+    {
+      "hanzi": "手表",
+      "target_syllable": "shou",
+      "target_index": 0,
+      "full_pinyin_raw": "shǒu biǎo",
+      "audio": "cm_tts_zh_手表.mp3",
+      "image": "<img src=\"d488c2a73dbe.jpg\">"
+    },
+    {
+      "hanzi": "鸟",
+      "target_syllable": "niao",
+      "target_index": 0,
+      "full_pinyin_raw": "niǎo",
+      "audio": "cm_tts_zh_鸟.mp3",
+      "image": "<img src=\"b7ed14e6ebdc.png\">"
+    },
+    {
+      "hanzi": "知了",
+      "target_syllable": "liao",
+      "target_index": 1,
+      "full_pinyin_raw": "zhī liǎo",
+      "audio": "cm_tts_zh_知了.mp3",
+      "image": "<img src=\"b372d8b53723.jpg\">"
+    },
+    {
+      "hanzi": "脚",
+      "target_syllable": "jiao",
+      "target_index": 0,
+      "full_pinyin_raw": "jiǎo",
+      "audio": "cm_tts_zh_脚.mp3",
+      "image": "<img src=\"c2e67d7de53b.jpg\">"
+    },
+    {
+      "hanzi": "雕像",
+      "target_syllable": "diao",
+      "target_index": 0,
+      "full_pinyin_raw": "diāo xiàng",
+      "audio": "cm_tts_zh_雕像.mp3",
+      "image": "<img src=\"2cf25405235a.jpg\">"
+    },
+    {
+      "hanzi": "修公路",
+      "target_syllable": "gong",
+      "target_index": 1,
+      "full_pinyin_raw": "xiū gōng lù",
+      "audio": "89d80db5c198.mp3",
+      "image": "<img src=\"5373472ba77a.jpg\">"
+    },
+    {
+      "hanzi": "遛狗",
+      "target_syllable": "gou",
+      "target_index": 1,
+      "full_pinyin_raw": "liù gǒu",
+      "audio": "0376ccd70ccc.mp3",
+      "image": "<img src=\"5b097d7d8825.jpg\">"
+    },
+    {
+      "hanzi": "剪刀",
+      "target_syllable": "dao",
+      "target_index": 1,
+      "full_pinyin_raw": "jiǎn dāo",
+      "audio": "c74783383d17.mp3",
+      "image": "<img src=\"dbc12c475945.jpg\">"
+    },
+    {
+      "hanzi": "果酱",
+      "target_syllable": "guo",
+      "target_index": 0,
+      "full_pinyin_raw": "guǒ jiàng",
+      "audio": "f5dd8af62197.mp3",
+      "image": "<img src=\"d714282001a2.jpg\">"
+    },
+    {
+      "hanzi": "说话",
+      "target_syllable": "shuo",
+      "target_index": 0,
+      "full_pinyin_raw": "shuō huà",
+      "audio": "2b902fd5d9e7.mp3",
+      "image": "<img src=\"00edaf22df85.png\">"
+    },
+    {
+      "hanzi": "锅",
+      "target_syllable": "guo",
+      "target_index": 0,
+      "full_pinyin_raw": "guō",
+      "audio": "ed2c9fd9da78.mp3",
+      "image": "<img src=\"6469038957eb.png\">"
+    },
+    {
+      "hanzi": "胡萝卜",
+      "target_syllable": "luo",
+      "target_index": 1,
+      "full_pinyin_raw": "hú luó bo",
+      "audio": "166af158aa15.mp3",
+      "image": "<img src=\"4b463962972a.png\">"
+    },
+    {
+      "hanzi": "锁",
+      "target_syllable": "suo",
+      "target_index": 0,
+      "full_pinyin_raw": "suǒ",
+      "audio": "6834e2191b45.mp3",
+      "image": "<img src=\"dff4baa6cafd.jpg\">"
+    },
+    {
+      "hanzi": "花朵",
+      "target_syllable": "duo",
+      "target_index": 1,
+      "full_pinyin_raw": "huā duǒ",
+      "audio": "cm_tts_zh_花朵.mp3",
+      "image": "<img src=\"0b7041708ed1.jpg\">"
+    },
+    {
+      "hanzi": "火",
+      "target_syllable": "huo",
+      "target_index": 0,
+      "full_pinyin_raw": "huǒ",
+      "audio": "cm_tts_zh_火.mp3",
+      "image": "<img src=\"6541197d49db.jpg\">"
+    },
+    {
+      "hanzi": "轮廓",
+      "target_syllable": "kuo",
+      "target_index": 1,
+      "full_pinyin_raw": "lún kuò",
+      "audio": "cm_tts_zh_轮廓.mp3",
+      "image": "<img src=\"9dfdb4051bb8.jpg\">"
+    },
+    {
+      "hanzi": "懦夫",
+      "target_syllable": "nuo",
+      "target_index": 0,
+      "full_pinyin_raw": "nuò fū",
+      "audio": "cm_tts_zh_懦夫.mp3",
+      "image": "<img src=\"f52f2ca95bdc.jpg\">"
+    },
+    {
+      "hanzi": "摔倒",
+      "target_syllable": "dao",
+      "target_index": 1,
+      "full_pinyin_raw": "shuāi dǎo",
+      "audio": "a0ee911de268.mp3",
+      "image": "<img src=\"3e6efed038b8.jpg\">"
+    },
+    {
+      "hanzi": "睡觉",
+      "target_syllable": "jiao",
+      "target_index": 1,
+      "full_pinyin_raw": "shuì jiào",
+      "audio": "886f264f0579.mp3",
+      "image": "<img src=\"d4cd6893334e.jpg\">"
+    },
+    {
+      "hanzi": "吊坠",
+      "target_syllable": "diao",
+      "target_index": 0,
+      "full_pinyin_raw": "diào zhuì",
+      "audio": "cm_tts_zh_吊坠.mp3",
+      "image": "<img src=\"55d272fe5f77.jpg\">"
+    },
+    {
+      "hanzi": "公园",
+      "target_syllable": "gong",
+      "target_index": 0,
+      "full_pinyin_raw": "gōng yuán",
+      "audio": "a4df4779b4ea.mp3",
+      "image": "<img src=\"f6ed16a6c671.jpg\">"
+    },
+    {
+      "hanzi": "动物园",
+      "target_syllable": "dong",
+      "target_index": 0,
+      "full_pinyin_raw": "dòng wù yuán",
+      "audio": "daaed0a92a45.mp3",
+      "image": "<img src=\"b37ad4f015f0.png\">"
+    },
+    {
+      "hanzi": "螺栓",
+      "target_syllable": "luo",
+      "target_index": 0,
+      "full_pinyin_raw": "luó shuān",
+      "audio": "cm_tts_zh_螺栓.mp3",
+      "image": "<img src=\"/media/objects/b0ecea31a488.png\">"
+    },
+    {
+      "hanzi": "暖和",
+      "target_syllable": "huo",
+      "target_index": 1,
+      "full_pinyin_raw": "nuǎn huo",
+      "audio": "cm_tts_zh_暖和.mp3",
+      "image": "<img src=\"0b5759efc5c7.png\">"
+    },
+    {
+      "hanzi": "双手",
+      "target_syllable": "shou",
+      "target_index": 1,
+      "full_pinyin_raw": "shuāng shǒu",
+      "audio": "cm_tts_zh_双手.mp3",
+      "image": "<img src=\"fc43ec651103.jpg\">"
+    },
+    {
+      "hanzi": "矿工",
+      "target_syllable": "gong",
+      "target_index": 1,
+      "full_pinyin_raw": "kuàng gōng",
+      "audio": "cm_tts_zh_矿工.mp3",
+      "image": "<img src=\"eed18a3a789f.jpg\">"
+    },
+    {
+      "hanzi": "白雪公主",
+      "target_syllable": "gong",
+      "target_index": 2,
+      "full_pinyin_raw": "bái xuě gōng zhǔ",
+      "audio": "dbe56f0f7106.mp3",
+      "image": "<img src=\"d8f339ba8ea5.jpg\">"
+    },
+    {
+      "hanzi": "孔雀",
+      "target_syllable": "kong",
+      "target_index": 0,
+      "full_pinyin_raw": "kǒng què",
+      "audio": "cm_tts_zh_孔雀.mp3",
+      "image": "<img src=\"fc468890987b.png\">"
+    }
+  ],
+  "14": [
+    {
+      "hanzi": "富人",
+      "target_syllable": "ren",
+      "target_index": 1,
+      "full_pinyin_raw": "fù rén",
+      "audio": "cm_tts_zh_富人.mp3",
+      "image": "<img src=\"aaba81ba99d9.png\">"
+    },
+    {
+      "hanzi": "日历",
+      "target_syllable": "ri",
+      "target_index": 0,
+      "full_pinyin_raw": "rì lì",
+      "audio": "94a49815426a.mp3",
+      "image": "<img src=\"53eec40dc1e6.png\">"
+    },
+    {
+      "hanzi": "老人",
+      "target_syllable": "ren",
+      "target_index": 1,
+      "full_pinyin_raw": "lǎo rén",
+      "audio": "cm_tts_zh_老人.mp3",
+      "image": "<img src=\"41c8782368bb.png\">"
+    },
+    {
+      "hanzi": "否认",
+      "target_syllable": "ren",
+      "target_index": 1,
+      "full_pinyin_raw": "fǒu rèn",
+      "audio": "cm_tts_zh_否认.mp3",
+      "image": "<img src=\"81d7a9fa059c.jpg\">"
+    },
+    {
+      "hanzi": "热狗",
+      "target_syllable": "re",
+      "target_index": 0,
+      "full_pinyin_raw": "rè gǒu",
+      "audio": "d3c36afa6e7c.mp3",
+      "image": "<img src=\"a565cfbfeeef.jpg\">"
+    },
+    {
+      "hanzi": "圣诞老人",
+      "target_syllable": "ren",
+      "target_index": 3,
+      "full_pinyin_raw": "shèng dàn lǎo rén",
+      "audio": "2e8495773dcc.mp3",
+      "image": "<img src=\"b1d544c23570.png\">"
+    },
+    {
+      "hanzi": "人行道",
+      "target_syllable": "ren",
+      "target_index": 0,
+      "full_pinyin_raw": "rén xíng dào",
+      "audio": "6b2c273b5f5a.mp3",
+      "image": "<img src=\"843c96183e69.png\">"
+    },
+    {
+      "hanzi": "肉",
+      "target_syllable": "rou",
+      "target_index": 0,
+      "full_pinyin_raw": "ròu",
+      "audio": "cm_tts_zh_肉.mp3",
+      "image": "<img src=\"46500f50a5c1.jpg\">"
+    },
+    {
+      "hanzi": "点燃",
+      "target_syllable": "ran",
+      "target_index": 1,
+      "full_pinyin_raw": "diǎn rán",
+      "audio": "cm_tts_zh_点燃.mp3",
+      "image": "<img src=\"/media/objects/158010715a31.gif\">"
+    },
+    {
+      "hanzi": "打扰",
+      "target_syllable": "rao",
+      "target_index": 1,
+      "full_pinyin_raw": "dǎ rǎo",
+      "audio": "cm_tts_zh_打扰.mp3",
+      "image": "<img src=\"/media/objects/8d9fe18531f8.png\">"
+    },
+    {
+      "hanzi": "蠕虫",
+      "target_syllable": "ru",
+      "target_index": 0,
+      "full_pinyin_raw": "rú chóng",
+      "audio": "cm_tts_zh_蠕虫.mp3",
+      "image": "<img src=\"9985b6e80375.jpg\">"
+    },
+    {
+      "hanzi": "土壤",
+      "target_syllable": "rang",
+      "target_index": 1,
+      "full_pinyin_raw": "tǔ rǎng",
+      "audio": "cm_tts_zh_土壤.mp3",
+      "image": "<img src=\"/media/objects/c8b4ee74abb7.png\">"
+    },
+    {
+      "hanzi": "扔",
+      "target_syllable": "reng",
+      "target_index": 0,
+      "full_pinyin_raw": "rēng",
+      "audio": "cm_tts_zh_扔.mp3",
+      "image": "<img src=\"1662d2807e62.jpg\">"
+    },
+    {
+      "hanzi": "工人",
+      "target_syllable": "ren",
+      "target_index": 1,
+      "full_pinyin_raw": "gōng rén",
+      "audio": "cfce1b9c1439.mp3",
+      "image": "<img src=\"2224cc112bb5.png\">"
+    },
+    {
+      "hanzi": "容器",
+      "target_syllable": "rong",
+      "target_index": 0,
+      "full_pinyin_raw": "róng qì",
+      "audio": "cm_tts_zh_容器.mp3",
+      "image": "<img src=\"/media/objects/f18b22854c6d.png\">"
+    },
+    {
+      "hanzi": "一家人",
+      "target_syllable": "ren",
+      "target_index": 2,
+      "full_pinyin_raw": "yì jiā rén",
+      "audio": "aa4f98ce43cb.mp3",
+      "image": "<img src=\"2d782880ec21.png\">"
+    },
+    {
+      "hanzi": "花儿",
+      "target_syllable": "r",
+      "target_index": 1,
+      "full_pinyin_raw": "huā r",
+      "audio": "cm_tts_zh_花儿.mp3",
+      "image": "<img src=\"0b7041708ed1.jpg\">"
+    },
+    {
+      "hanzi": "虚弱",
+      "target_syllable": "ruo",
+      "target_index": 1,
+      "full_pinyin_raw": "xū ruò",
+      "audio": "cm_tts_zh_微弱.mp3",
+      "image": "<img src=\"770cda7c0cea.jpg\">"
+    },
+    {
+      "hanzi": "向日葵",
+      "target_syllable": "ri",
+      "target_index": 1,
+      "full_pinyin_raw": "xiàng rì kuí",
+      "audio": "6bc5242ce378.mp3",
+      "image": "<img src=\"4bca1c62fee7.jpg\">"
+    },
+    {
+      "hanzi": "鸡肉卷",
+      "target_syllable": "rou",
+      "target_index": 1,
+      "full_pinyin_raw": "jī ròu juǎn",
+      "audio": "cm_tts_zh_鸡肉卷.mp3",
+      "image": "<img src=\"f29dbbbc4020.jpg\">"
+    },
+    {
+      "hanzi": "软泥",
+      "target_syllable": "ruan",
+      "target_index": 0,
+      "full_pinyin_raw": "ruǎn ní",
+      "audio": "cm_tts_zh_软泥.mp3",
+      "image": "<img src=\"6ca9d01408c7.jpg\">"
+    }
+  ],
+  "15": [
+    {
+      "hanzi": "葡萄",
+      "target_syllable": "tao",
+      "target_index": 1,
+      "full_pinyin_raw": "pú táo",
+      "audio": "cm_tts_zh_葡萄.mp3",
+      "image": "<img src=\"864cd50fbdf5.jpg\">"
+    },
+    {
+      "hanzi": "灯塔",
+      "target_syllable": "ta",
+      "target_index": 1,
+      "full_pinyin_raw": "dēng tǎ",
+      "audio": "b397a91d1aa7.mp3",
+      "image": "<img src=\"8a4572f7c8d0.jpg\">"
+    },
+    {
+      "hanzi": "兔子",
+      "target_syllable": "tu",
+      "target_index": 0,
+      "full_pinyin_raw": "tù zi",
+      "audio": "46ab3ed540d9.mp3",
+      "image": "<img src=\"f68e7ae80b48.png\">"
+    },
+    {
+      "hanzi": "自动扶梯",
+      "target_syllable": "ti",
+      "target_index": 3,
+      "full_pinyin_raw": "zì dòng fú tī",
+      "audio": "cm_tts_zh_自动扶梯.mp3",
+      "image": "<img src=\"efea2bb464ff.jpg\">"
+    },
+    {
+      "hanzi": "太阳",
+      "target_syllable": "tai",
+      "target_index": 0,
+      "full_pinyin_raw": "tài yáng",
+      "audio": "cb78fe7ceb4e.mp3",
+      "image": "<img src=\"9a2941478e33.jpg\">"
+    },
+    {
+      "hanzi": "桃子",
+      "target_syllable": "tao",
+      "target_index": 0,
+      "full_pinyin_raw": "táo zi",
+      "audio": "38d09d3535f7.mp3",
+      "image": "<img src=\"9b5762280cf0.jpg\">"
+    },
+    {
+      "hanzi": "小偷",
+      "target_syllable": "tou",
+      "target_index": 1,
+      "full_pinyin_raw": "xiǎo tōu",
+      "audio": "55d9e6b6ce56.mp3",
+      "image": "<img src=\"e15263cb78a8.jpg\">"
+    },
+    {
+      "hanzi": "头",
+      "target_syllable": "tou",
+      "target_index": 0,
+      "full_pinyin_raw": "tóu",
+      "audio": "d19039392a90.mp3",
+      "image": "<img src=\"398830fb01c9.jpg\">"
+    },
+    {
+      "hanzi": "骨头",
+      "target_syllable": "tou",
+      "target_index": 1,
+      "full_pinyin_raw": "gǔ tou",
+      "audio": "cm_tts_zh_骨头.mp3",
+      "image": "<img src=\"c5f0d04a0470.jpg\">"
+    },
+    {
+      "hanzi": "木炭",
+      "target_syllable": "tan",
+      "target_index": 1,
+      "full_pinyin_raw": "mù tàn",
+      "audio": "cm_tts_zh_木炭.mp3",
+      "image": "<img src=\"7d0a47f1578b.jpg\">"
+    },
+    {
+      "hanzi": "馄饨",
+      "target_syllable": "tun",
+      "target_index": 1,
+      "full_pinyin_raw": "hún tun",
+      "audio": "a6b9faeae0c9.mp3",
+      "image": "<img src=\"dd5f7b8646a4.jpg\">"
+    },
+    {
+      "hanzi": "海豚",
+      "target_syllable": "tun",
+      "target_index": 1,
+      "full_pinyin_raw": "hǎi tún",
+      "audio": "09bb7c639a3b.mp3",
+      "image": "<img src=\"93b66f8e8a57.jpg\">"
+    },
+    {
+      "hanzi": "餐厅",
+      "target_syllable": "ting",
+      "target_index": 1,
+      "full_pinyin_raw": "cān tīng",
+      "audio": "c7d5b31a6913.mp3",
+      "image": "<img src=\"e48bfacb4a6a.jpg\">"
+    },
+    {
+      "hanzi": "枕头",
+      "target_syllable": "tou",
+      "target_index": 1,
+      "full_pinyin_raw": "zhěn tóu",
+      "audio": "3ea0cfc9a2cd.mp3",
+      "image": "<img src=\"dcafaf6453c8.jpg\">"
+    },
+    {
+      "hanzi": "抽屉",
+      "target_syllable": "ti",
+      "target_index": 1,
+      "full_pinyin_raw": "chōu ti",
+      "audio": "cm_tts_zh_抽屉.mp3",
+      "image": "<img src=\"762df9c42439.jpg\">"
+    },
+    {
+      "hanzi": "春天",
+      "target_syllable": "tian",
+      "target_index": 1,
+      "full_pinyin_raw": "chūn tiān",
+      "audio": "cm_tts_zh_春天.mp3",
+      "image": "<img src=\"567f61ce9545.jpg\">"
+    },
+    {
+      "hanzi": "薯条",
+      "target_syllable": "tiao",
+      "target_index": 1,
+      "full_pinyin_raw": "shǔ tiáo",
+      "audio": "8fdc5dcf224e.mp3",
+      "image": "<img src=\"2d9298e2a9f9.png\">"
+    },
+    {
+      "hanzi": "身体",
+      "target_syllable": "ti",
+      "target_index": 1,
+      "full_pinyin_raw": "shēn tǐ",
+      "audio": "cm_tts_zh_身体.mp3",
+      "image": "<img src=\"c858590e1583.png\">"
+    },
+    {
+      "hanzi": "土壤",
+      "target_syllable": "tu",
+      "target_index": 0,
+      "full_pinyin_raw": "tǔ rǎng",
+      "audio": "cm_tts_zh_土壤.mp3",
+      "image": "<img src=\"/media/objects/c8b4ee74abb7.png\">"
+    },
+    {
+      "hanzi": "棒棒糖",
+      "target_syllable": "tang",
+      "target_index": 2,
+      "full_pinyin_raw": "bàng bàng táng",
+      "audio": "cm_tts_zh_棒糖.mp3",
+      "image": "<img src=\"2b5c69c1642b.jpg\">"
+    },
+    {
+      "hanzi": "蹦蹦跳跳",
+      "target_syllable": "tiao",
+      "target_index": 2,
+      "full_pinyin_raw": "bèng bèng tiào tiào",
+      "audio": "3c8acfe3d07e.mp3",
+      "image": "<img src=\"d45f45c74ba8.png\">"
+    },
+    {
+      "hanzi": "蹦蹦跳跳",
+      "target_syllable": "tiao",
+      "target_index": 3,
+      "full_pinyin_raw": "bèng bèng tiào tiào",
+      "audio": "3c8acfe3d07e.mp3",
+      "image": "<img src=\"d45f45c74ba8.png\">"
+    },
+    {
+      "hanzi": "藤",
+      "target_syllable": "teng",
+      "target_index": 0,
+      "full_pinyin_raw": "téng",
+      "audio": "cm_tts_zh_藤.mp3",
+      "image": "<img src=\"5c8f48c5e588.jpg\">"
+    },
+    {
+      "hanzi": "听",
+      "target_syllable": "ting",
+      "target_index": 0,
+      "full_pinyin_raw": "tīng",
+      "audio": "ed38cd92e456.mp3",
+      "image": "<img src=\"149c5df98640.png\">"
+    },
+    {
+      "hanzi": "天空",
+      "target_syllable": "tian",
+      "target_index": 0,
+      "full_pinyin_raw": "tiān kōng",
+      "audio": "1a07db53a7e7.mp3",
+      "image": "<img src=\"312601fd7073.png\">"
+    },
+    {
+      "hanzi": "同学",
+      "target_syllable": "tong",
+      "target_index": 0,
+      "full_pinyin_raw": "tóng xué",
+      "audio": "cm_tts_zh_同学.mp3",
+      "image": "<img src=\"fb974942ed22.jpg\">"
+    },
+    {
+      "hanzi": "创可贴",
+      "target_syllable": "tie",
+      "target_index": 2,
+      "full_pinyin_raw": "chuàng kě tiē",
+      "audio": "2c05febacb20.mp3",
+      "image": "<img src=\"7123c2616ba6.png\">"
+    },
+    {
+      "hanzi": "地铁",
+      "target_syllable": "tie",
+      "target_index": 1,
+      "full_pinyin_raw": "dì tiě",
+      "audio": "688763032cc5.mp3",
+      "image": "<img src=\"5c70392e539a.jpg\">"
+    },
+    {
+      "hanzi": "跳",
+      "target_syllable": "tiao",
+      "target_index": 0,
+      "full_pinyin_raw": "tiào",
+      "audio": "cm_tts_zh_跳.mp3",
+      "image": "<img src=\"d45f45c74ba8.png\">"
+    },
+    {
+      "hanzi": "秋天",
+      "target_syllable": "tian",
+      "target_index": 1,
+      "full_pinyin_raw": "qiū tiān",
+      "audio": "e5b9eb7d4651.mp3",
+      "image": "<img src=\"07832f9dc182.jpg\">"
+    },
+    {
+      "hanzi": "今天",
+      "target_syllable": "tian",
+      "target_index": 1,
+      "full_pinyin_raw": "jīn tiān",
+      "audio": "cm_tts_zh_今天.mp3",
+      "image": "<img src=\"4ba201868db6.jpg\">"
+    },
+    {
+      "hanzi": "面条",
+      "target_syllable": "tiao",
+      "target_index": 1,
+      "full_pinyin_raw": "miàn tiáo",
+      "audio": "cm_tts_zh_面条.mp3",
+      "image": "<img src=\"34e2458fe8cd.jpg\">"
+    },
+    {
+      "hanzi": "苔藓",
+      "target_syllable": "tai",
+      "target_index": 0,
+      "full_pinyin_raw": "tái xiǎn",
+      "audio": "cm_tts_zh_苔藓.mp3",
+      "image": "<img src=\"5083fd7bb1d9.jpg\">"
+    },
+    {
+      "hanzi": "拖拉机",
+      "target_syllable": "tuo",
+      "target_index": 0,
+      "full_pinyin_raw": "tuō lā jī",
+      "audio": "cm_tts_zh_拖拉机.mp3",
+      "image": "<img src=\"48792733f983.jpg\">"
+    },
+    {
+      "hanzi": "腿",
+      "target_syllable": "tui",
+      "target_index": 0,
+      "full_pinyin_raw": "tuǐ",
+      "audio": "cm_tts_zh_腿.mp3",
+      "image": "<img src=\"ee208c23ebfd.jpg\">"
+    },
+    {
+      "hanzi": "拳头",
+      "target_syllable": "tou",
+      "target_index": 1,
+      "full_pinyin_raw": "quán tou",
+      "audio": "cm_tts_zh_拳头.mp3",
+      "image": "<img src=\"/media/objects/9e0842e5e9eb.png\">"
+    },
+    {
+      "hanzi": "面团",
+      "target_syllable": "tuan",
+      "target_index": 1,
+      "full_pinyin_raw": "miàn tuán",
+      "audio": "cm_tts_zh_面团.mp3",
+      "image": "<img src=\"a7632e77463a.jpg\">"
+    }
+  ],
+  "16": [
+    {
+      "hanzi": "游乐场",
+      "target_syllable": "you",
+      "target_index": 0,
+      "full_pinyin_raw": "yóu lè chǎng",
+      "audio": "29c502c7fdb4.mp3",
+      "image": "<img src=\"a27b3acb43b7.jpg\">"
+    },
+    {
+      "hanzi": "硬币",
+      "target_syllable": "ying",
+      "target_index": 0,
+      "full_pinyin_raw": "yìng bì",
+      "audio": "60749fc4466e.mp3",
+      "image": "<img src=\"127dc4cb83b3.jpg\">"
+    },
+    {
+      "hanzi": "太阳",
+      "target_syllable": "yang",
+      "target_index": 1,
+      "full_pinyin_raw": "tài yáng",
+      "audio": "cb78fe7ceb4e.mp3",
+      "image": "<img src=\"9a2941478e33.jpg\">"
+    },
+    {
+      "hanzi": "内衣",
+      "target_syllable": "yi",
+      "target_index": 1,
+      "full_pinyin_raw": "nèi yī",
+      "audio": "cm_tts_zh_内衣.mp3",
+      "image": "<img src=\"3c2de2dd2b13.jpg\">"
+    },
+    {
+      "hanzi": "羽毛",
+      "target_syllable": "yu",
+      "target_index": 0,
+      "full_pinyin_raw": "yǔ máo",
+      "audio": "cm_tts_zh_羽毛.mp3",
+      "image": "<img src=\"4a76b9f80d15.jpg\">"
+    },
+    {
+      "hanzi": "一半",
+      "target_syllable": "yi",
+      "target_index": 0,
+      "full_pinyin_raw": "yī bàn",
+      "audio": "cm_tts_zh_一半.mp3",
+      "image": "<img src=\"effffdade3c9.jpg\">"
+    },
+    {
+      "hanzi": "一本书",
+      "target_syllable": "yi",
+      "target_index": 0,
+      "full_pinyin_raw": "yī běn shū",
+      "audio": "f65114007744.mp3",
+      "image": "<img src=\"404075a82b61.jpg\">"
+    },
+    {
+      "hanzi": "雨伞",
+      "target_syllable": "yu",
+      "target_index": 0,
+      "full_pinyin_raw": "yǔ sǎn",
+      "audio": "738fd2b9941e.mp3",
+      "image": "<img src=\"af197e0955f7.png\">"
+    },
+    {
+      "hanzi": "一张纸",
+      "target_syllable": "yi",
+      "target_index": 0,
+      "full_pinyin_raw": "yī zhāng zhǐ",
+      "audio": "a584fc6f5f27.mp3",
+      "image": "<img src=\"c3e285173e84.jpg\">"
+    },
+    {
+      "hanzi": "鲨鱼",
+      "target_syllable": "yu",
+      "target_index": 1,
+      "full_pinyin_raw": "shā yú",
+      "audio": "331d6343fd5e.mp3",
+      "image": "<img src=\"747a69d23aac.jpg\">"
+    },
+    {
+      "hanzi": "银行",
+      "target_syllable": "yin",
+      "target_index": 0,
+      "full_pinyin_raw": "yín háng",
+      "audio": "cm_tts_zh_银行.mp3",
+      "image": "<img src=\"ed094e434016.jpg\">"
+    },
+    {
+      "hanzi": "好朋友",
+      "target_syllable": "you",
+      "target_index": 2,
+      "full_pinyin_raw": "hǎo péng yǒu",
+      "audio": "27b20b247d28.mp3",
+      "image": "<img src=\"2bc078616f5f.jpg\">"
+    },
+    {
+      "hanzi": "声音",
+      "target_syllable": "yin",
+      "target_index": 1,
+      "full_pinyin_raw": "shēng yīn",
+      "audio": "cm_tts_zh_声音.mp3",
+      "image": "<img src=\"e6563d0ff9be.jpg\">"
+    },
+    {
+      "hanzi": "葱油饼",
+      "target_syllable": "you",
+      "target_index": 1,
+      "full_pinyin_raw": "cōng yóu bǐng",
+      "audio": "638bc08d8b56.mp3",
+      "image": "<img src=\"0d248a5fc763.jpg\">"
+    },
+    {
+      "hanzi": "游戏",
+      "target_syllable": "you",
+      "target_index": 0,
+      "full_pinyin_raw": "yóu xì",
+      "audio": "483b43f05437.mp3",
+      "image": "<img src=\"3f35608dd4ee.png\">"
+    },
+    {
+      "hanzi": "衣服",
+      "target_syllable": "yi",
+      "target_index": 0,
+      "full_pinyin_raw": "yī fu",
+      "audio": "eff67fec82b9.mp3",
+      "image": "<img src=\"a8fa391c57fd.png\">"
+    },
+    {
+      "hanzi": "金银财宝",
+      "target_syllable": "yin",
+      "target_index": 1,
+      "full_pinyin_raw": "jīn yín cái bǎo",
+      "audio": "b746743ae3e2.mp3",
+      "image": "<img src=\"b5328e58f825.jpg\">"
+    },
+    {
+      "hanzi": "游泳",
+      "target_syllable": "you",
+      "target_index": 0,
+      "full_pinyin_raw": "yóu yǒng",
+      "audio": "0c7b1e245210.mp3",
+      "image": "<img src=\"33e659757002.jpg\">"
+    },
+    {
+      "hanzi": "游泳",
+      "target_syllable": "yong",
+      "target_index": 1,
+      "full_pinyin_raw": "yóu yǒng",
+      "audio": "0c7b1e245210.mp3",
+      "image": "<img src=\"33e659757002.jpg\">"
+    },
+    {
+      "hanzi": "白云",
+      "target_syllable": "yun",
+      "target_index": 1,
+      "full_pinyin_raw": "bái yún",
+      "audio": "e252ca9d19b0.mp3",
+      "image": "<img src=\"7347be91428d.jpg\">"
+    },
+    {
+      "hanzi": "绵羊",
+      "target_syllable": "yang",
+      "target_index": 1,
+      "full_pinyin_raw": "mián yáng",
+      "audio": "48184aa2876e.mp3",
+      "image": "<img src=\"111ced0656a9.jpg\">"
+    },
+    {
+      "hanzi": "鸭子",
+      "target_syllable": "ya",
+      "target_index": 0,
+      "full_pinyin_raw": "yā zi",
+      "audio": "1e9db5c9757c.mp3",
+      "image": "<img src=\"ee89ecc6d714.jpg\">"
+    },
+    {
+      "hanzi": "山羊",
+      "target_syllable": "yang",
+      "target_index": 1,
+      "full_pinyin_raw": "shān yáng",
+      "audio": "35effee34265.mp3",
+      "image": "<img src=\"cf3a1eb0a63b.gif\">"
+    },
+    {
+      "hanzi": "眼睛",
+      "target_syllable": "yan",
+      "target_index": 0,
+      "full_pinyin_raw": "yǎn jīng",
+      "audio": "67ef0e7909dc.mp3",
+      "image": "<img src=\"b6b0f1c7bedd.jpg\">"
+    },
+    {
+      "hanzi": "要",
+      "target_syllable": "yao",
+      "target_index": 0,
+      "full_pinyin_raw": "yào",
+      "audio": "98aa0c754936.mp3",
+      "image": "<img src=\"4c3cd3a188e7.png\">"
+    },
+    {
+      "hanzi": "夜里",
+      "target_syllable": "ye",
+      "target_index": 0,
+      "full_pinyin_raw": "yè li",
+      "audio": "cm_tts_zh_夜里.mp3",
+      "image": "<img src=\"b409ba217b81.jpg\">"
+    },
+    {
+      "hanzi": "影子",
+      "target_syllable": "ying",
+      "target_index": 0,
+      "full_pinyin_raw": "yǐng zi",
+      "audio": "cm_tts_zh_影子.mp3",
+      "image": "<img src=\"80483be5bd86.jpg\">"
+    },
+    {
+      "hanzi": "宇航服",
+      "target_syllable": "yu",
+      "target_index": 0,
+      "full_pinyin_raw": "yǔ háng fú",
+      "audio": "cm_tts_zh_宇航服.mp3",
+      "image": "<img src=\"bb200095956c.png\">"
+    },
+    {
+      "hanzi": "语文",
+      "target_syllable": "yu",
+      "target_index": 0,
+      "full_pinyin_raw": "yǔ wén",
+      "audio": "cm_tts_zh_语文.mp3",
+      "image": "<img src=\"095231acadbd.jpg\">"
+    },
+    {
+      "hanzi": "一家人",
+      "target_syllable": "yi",
+      "target_index": 0,
+      "full_pinyin_raw": "yì jiā rén",
+      "audio": "aa4f98ce43cb.mp3",
+      "image": "<img src=\"2d782880ec21.png\">"
+    },
+    {
+      "hanzi": "一列火车",
+      "target_syllable": "yi",
+      "target_index": 0,
+      "full_pinyin_raw": "yī liè huǒ che",
+      "audio": "b5157e6c0591.mp3",
+      "image": "<img src=\"/media/objects/a4078e6d7b40.png\">"
+    },
+    {
+      "hanzi": "幼苗",
+      "target_syllable": "you",
+      "target_index": 0,
+      "full_pinyin_raw": "yòu miáo",
+      "audio": "cm_tts_zh_幼苗.mp3",
+      "image": "<img src=\"df852841fa9e.jpg\">"
+    },
+    {
+      "hanzi": "牙签",
+      "target_syllable": "ya",
+      "target_index": 0,
+      "full_pinyin_raw": "yá qiān",
+      "audio": "cm_tts_zh_牙签.mp3",
+      "image": "<img src=\"2cb159e60510.jpg\">"
+    },
+    {
+      "hanzi": "月亮",
+      "target_syllable": "yue",
+      "target_index": 0,
+      "full_pinyin_raw": "yuè liang",
+      "audio": "cm_tts_zh_月亮.mp3",
+      "image": "<img src=\"4a2e87b00034.jpg\">"
+    },
+    {
+      "hanzi": "牙刷",
+      "target_syllable": "ya",
+      "target_index": 0,
+      "full_pinyin_raw": "yá shuā",
+      "audio": "cm_tts_zh_牙刷.mp3",
+      "image": "<img src=\"9478bc168419.jpg\">"
+    },
+    {
+      "hanzi": "衣柜",
+      "target_syllable": "yi",
+      "target_index": 0,
+      "full_pinyin_raw": "yī guì",
+      "audio": "6fd2a09a7b1b.mp3",
+      "image": "<img src=\"0a5fee41018c.jpg\">"
+    },
+    {
+      "hanzi": "公园",
+      "target_syllable": "yuan",
+      "target_index": 1,
+      "full_pinyin_raw": "gōng yuán",
+      "audio": "a4df4779b4ea.mp3",
+      "image": "<img src=\"f6ed16a6c671.jpg\">"
+    },
+    {
+      "hanzi": "动物园",
+      "target_syllable": "yuan",
+      "target_index": 2,
+      "full_pinyin_raw": "dòng wù yuán",
+      "audio": "daaed0a92a45.mp3",
+      "image": "<img src=\"b37ad4f015f0.png\">"
+    }
+  ],
+  "17": [
+    {
+      "hanzi": "跑步",
+      "target_syllable": "pao",
+      "target_index": 0,
+      "full_pinyin_raw": "pǎo bù",
+      "audio": "cm_tts_zh_跑步.mp3",
+      "image": "<img src=\"b05e86140409.png\">"
+    },
+    {
+      "hanzi": "葡萄",
+      "target_syllable": "pu",
+      "target_index": 0,
+      "full_pinyin_raw": "pú táo",
+      "audio": "cm_tts_zh_葡萄.mp3",
+      "image": "<img src=\"864cd50fbdf5.jpg\">"
+    },
+    {
+      "hanzi": "爬树",
+      "target_syllable": "pa",
+      "target_index": 0,
+      "full_pinyin_raw": "pá shù",
+      "audio": "f7bb8a6e699e.mp3",
+      "image": "<img src=\"843ab95ca2c7.png\">"
+    },
+    {
+      "hanzi": "老婆婆",
+      "target_syllable": "po",
+      "target_index": 1,
+      "full_pinyin_raw": "lǎo pó pó",
+      "audio": "cf10de607ed1.mp3",
+      "image": "<img src=\"46a59619a18a.jpg\">"
+    },
+    {
+      "hanzi": "老婆婆",
+      "target_syllable": "po",
+      "target_index": 2,
+      "full_pinyin_raw": "lǎo pó pó",
+      "audio": "cf10de607ed1.mp3",
+      "image": "<img src=\"46a59619a18a.jpg\">"
+    },
+    {
+      "hanzi": "西瓜皮",
+      "target_syllable": "pi",
+      "target_index": 2,
+      "full_pinyin_raw": "xī guā pí",
+      "audio": "92a48fa4e353.mp3",
+      "image": "<img src=\"9f49e16bcd9b.jpg\">"
+    },
+    {
+      "hanzi": "屏幕",
+      "target_syllable": "ping",
+      "target_index": 0,
+      "full_pinyin_raw": "píng mù",
+      "audio": "cm_tts_zh_屏幕.mp3",
+      "image": "<img src=\"/media/objects/0fbdba99f02c.png\">"
+    },
+    {
+      "hanzi": "奶瓶",
+      "target_syllable": "ping",
+      "target_index": 1,
+      "full_pinyin_raw": "nǎi píng",
+      "audio": "b9f2ff3aa7c1.mp3",
+      "image": "<img src=\"b3f4fe89fc30.png\">"
+    },
+    {
+      "hanzi": "牛排",
+      "target_syllable": "pai",
+      "target_index": 1,
+      "full_pinyin_raw": "niú pái",
+      "audio": "cm_tts_zh_牛排.mp3",
+      "image": "<img src=\"e908fa0eb04d.jpg\">"
+    },
+    {
+      "hanzi": "匹配",
+      "target_syllable": "pi",
+      "target_index": 0,
+      "full_pinyin_raw": "pǐ pèi",
+      "audio": "cm_tts_zh_匹配.mp3",
+      "image": "<img src=\"/media/objects/b1383ed45a1c.png\">"
+    },
+    {
+      "hanzi": "匹配",
+      "target_syllable": "pei",
+      "target_index": 1,
+      "full_pinyin_raw": "pǐ pèi",
+      "audio": "cm_tts_zh_匹配.mp3",
+      "image": "<img src=\"/media/objects/b1383ed45a1c.png\">"
+    },
+    {
+      "hanzi": "卡片",
+      "target_syllable": "pian",
+      "target_index": 1,
+      "full_pinyin_raw": "kǎ piàn",
+      "audio": "cm_tts_zh_卡片.mp3",
+      "image": "<img src=\"/media/objects/01cda4ca7fa6.png\">"
+    },
+    {
+      "hanzi": "盘子",
+      "target_syllable": "pan",
+      "target_index": 0,
+      "full_pinyin_raw": "pán zi",
+      "audio": "07c16b2ac129.mp3",
+      "image": "<img src=\"ded08c011e1f.jpg\">"
+    },
+    {
+      "hanzi": "喷泉",
+      "target_syllable": "pen",
+      "target_index": 0,
+      "full_pinyin_raw": "pēn quán",
+      "audio": "100dd1086c60.mp3",
+      "image": "<img src=\"9f839d1156db.jpg\">"
+    },
+    {
+      "hanzi": "洗手盆",
+      "target_syllable": "pen",
+      "target_index": 2,
+      "full_pinyin_raw": "xǐ shǒu pén",
+      "audio": "37f0bf97588a.mp3",
+      "image": "<img src=\"ded41cec3af9.jpg\">"
+    },
+    {
+      "hanzi": "拼盘",
+      "target_syllable": "pin",
+      "target_index": 0,
+      "full_pinyin_raw": "pīn pán",
+      "audio": "cm_tts_zh_拼盘.mp3",
+      "image": "<img src=\"28421ac6d2a2.jpg\">"
+    },
+    {
+      "hanzi": "拼盘",
+      "target_syllable": "pan",
+      "target_index": 1,
+      "full_pinyin_raw": "pīn pán",
+      "audio": "cm_tts_zh_拼盘.mp3",
+      "image": "<img src=\"28421ac6d2a2.jpg\">"
+    },
+    {
+      "hanzi": "薯片",
+      "target_syllable": "pian",
+      "target_index": 1,
+      "full_pinyin_raw": "shǔ piàn",
+      "audio": "f062815791c0.mp3",
+      "image": "<img src=\"a0e30b281cca.jpg\">"
+    },
+    {
+      "hanzi": "帐篷",
+      "target_syllable": "peng",
+      "target_index": 1,
+      "full_pinyin_raw": "zhàng péng",
+      "audio": "f5f922f07b4f.mp3",
+      "image": "<img src=\"d4d4972a7d0e.png\">"
+    },
+    {
+      "hanzi": "好朋友",
+      "target_syllable": "peng",
+      "target_index": 1,
+      "full_pinyin_raw": "hǎo péng yǒu",
+      "audio": "27b20b247d28.mp3",
+      "image": "<img src=\"2bc078616f5f.jpg\">"
+    },
+    {
+      "hanzi": "平衡车",
+      "target_syllable": "ping",
+      "target_index": 0,
+      "full_pinyin_raw": "píng héng chē",
+      "audio": "cm_tts_zh_平衡车.mp3",
+      "image": "<img src=\"8a887685d9ef.jpg\">"
+    },
+    {
+      "hanzi": "猛扑",
+      "target_syllable": "pu",
+      "target_index": 1,
+      "full_pinyin_raw": "měng pū",
+      "audio": "cm_tts_zh_猛扑.mp3",
+      "image": "<img src=\"13e95acc525f.jpg\">"
+    },
+    {
+      "hanzi": "苹果",
+      "target_syllable": "ping",
+      "target_index": 0,
+      "full_pinyin_raw": "píng guǒ",
+      "audio": "1080a2172220.mp3",
+      "image": "<img src=\"f328bf5cd410.png\">"
+    },
+    {
+      "hanzi": "瓢虫",
+      "target_syllable": "piao",
+      "target_index": 0,
+      "full_pinyin_raw": "piáo chóng",
+      "audio": "cm_tts_zh_瓢虫.mp3",
+      "image": "<img src=\"06bd0d36dbd3.jpg\">"
+    },
+    {
+      "hanzi": "漂亮",
+      "target_syllable": "piao",
+      "target_index": 0,
+      "full_pinyin_raw": "piào liang",
+      "audio": "cm_tts_zh_漂亮.mp3",
+      "image": "<img src=\"7c68e876557b.jpg\">"
+    },
+    {
+      "hanzi": "排队",
+      "target_syllable": "pai",
+      "target_index": 0,
+      "full_pinyin_raw": "pái duì",
+      "audio": "1a3ad19a1bd0.mp3",
+      "image": "<img src=\"b70c4566a4e8.jpg\">"
+    }
+  ],
+  "18": [
+    {
+      "hanzi": "刺猬",
+      "target_syllable": "wei",
+      "target_index": 1,
+      "full_pinyin_raw": "cì wèi",
+      "audio": "ca330975a9ba.mp3",
+      "image": "<img src=\"aca5820eb894.jpg\">"
+    },
+    {
+      "hanzi": "证书",
+      "target_syllable": "wu",
+      "target_index": 1,
+      "full_pinyin_raw": "zhài wù zhèng shū",
+      "audio": "cm_tts_zh_证书.mp3",
+      "image": "<img src=\"5009c20494e6.jpg\">"
+    },
+    {
+      "hanzi": "青蛙",
+      "target_syllable": "wa",
+      "target_index": 1,
+      "full_pinyin_raw": "qīng wā",
+      "audio": "ceddcc1e8618.mp3",
+      "image": "<img src=\"d34f807aacc2.png\">"
+    },
+    {
+      "hanzi": "围裙",
+      "target_syllable": "wei",
+      "target_index": 0,
+      "full_pinyin_raw": "wéi qún",
+      "audio": "cm_tts_zh_围裙.mp3",
+      "image": "<img src=\"49b59f5e092a.jpg\">"
+    },
+    {
+      "hanzi": "乌龟",
+      "target_syllable": "wu",
+      "target_index": 0,
+      "full_pinyin_raw": "wū guī",
+      "audio": "f4f6c1fec596.mp3",
+      "image": "<img src=\"3b1b66cba802.jpg\">"
+    },
+    {
+      "hanzi": "五",
+      "target_syllable": "wu",
+      "target_index": 0,
+      "full_pinyin_raw": "wǔ",
+      "audio": "c81c9e5fe81a.mp3",
+      "image": "<img src=\"35fba3276c88.jpg\">"
+    },
+    {
+      "hanzi": "在外面",
+      "target_syllable": "wai",
+      "target_index": 1,
+      "full_pinyin_raw": "zài wài miàn",
+      "audio": "8165d8a80b25.mp3",
+      "image": "<img src=\"e5d161116c65.png\">"
+    },
+    {
+      "hanzi": "国王",
+      "target_syllable": "wang",
+      "target_index": 1,
+      "full_pinyin_raw": "guó wáng",
+      "audio": "475c1f82e462.mp3",
+      "image": "<img src=\"1cc12ca2d02c.gif\">"
+    },
+    {
+      "hanzi": "网",
+      "target_syllable": "wang",
+      "target_index": 0,
+      "full_pinyin_raw": "wǎng",
+      "audio": "810b453b2845.mp3",
+      "image": "<img src=\"9fb43adbef00.jpg\">"
+    },
+    {
+      "hanzi": "我",
+      "target_syllable": "wo",
+      "target_index": 0,
+      "full_pinyin_raw": "wǒ",
+      "audio": "0f671f7bc74c.mp3",
+      "image": "<img src=\"08f3da1d535f.png\">"
+    },
+    {
+      "hanzi": "座位",
+      "target_syllable": "wei",
+      "target_index": 1,
+      "full_pinyin_raw": "zuò wèi",
+      "audio": "cm_tts_zh_座位.mp3",
+      "image": "<img src=\"678e04acbb24.jpg\">"
+    },
+    {
+      "hanzi": "语文",
+      "target_syllable": "wen",
+      "target_index": 1,
+      "full_pinyin_raw": "yǔ wén",
+      "audio": "cm_tts_zh_语文.mp3",
+      "image": "<img src=\"095231acadbd.jpg\">"
+    },
+    {
+      "hanzi": "手腕",
+      "target_syllable": "wan",
+      "target_index": 1,
+      "full_pinyin_raw": "shǒu wàn",
+      "audio": "cm_tts_zh_手腕.mp3",
+      "image": "<img src=\"/media/objects/deaf9af1daf6.png\">"
+    },
+    {
+      "hanzi": "嗡嗡声",
+      "target_syllable": "weng",
+      "target_index": 0,
+      "full_pinyin_raw": "wēng wēng shēng",
+      "audio": "cm_tts_zh_嗡嗡声.mp3",
+      "image": "<img src=\"0a7b25bb2c82.png\">"
+    },
+    {
+      "hanzi": "嗡嗡声",
+      "target_syllable": "weng",
+      "target_index": 1,
+      "full_pinyin_raw": "wēng wēng shēng",
+      "audio": "cm_tts_zh_嗡嗡声.mp3",
+      "image": "<img src=\"0a7b25bb2c82.png\">"
+    },
+    {
+      "hanzi": "晚霞",
+      "target_syllable": "wan",
+      "target_index": 0,
+      "full_pinyin_raw": "wǎn xiá",
+      "audio": "c108df72ebb1.mp3",
+      "image": "<img src=\"f8c8f1daee40.jpg\">"
+    },
+    {
+      "hanzi": "动物园",
+      "target_syllable": "wu",
+      "target_index": 1,
+      "full_pinyin_raw": "dòng wù yuán",
+      "audio": "daaed0a92a45.mp3",
+      "image": "<img src=\"b37ad4f015f0.png\">"
+    },
+    {
+      "hanzi": "挖掘机",
+      "target_syllable": "wa",
+      "target_index": 0,
+      "full_pinyin_raw": "wā jué jī",
+      "audio": "cm_tts_zh_挖掘机.mp3",
+      "image": "<img src=\"/media/objects/287fd5935de0.png\">"
+    }
+  ],
+  "19": [
+    {
+      "hanzi": "铅笔",
+      "target_syllable": "qian",
+      "target_index": 0,
+      "full_pinyin_raw": "qiān bǐ",
+      "audio": "06f8cf6e26da.mp3",
+      "image": "<img src=\"92dd53750c93.jpg\">"
+    },
+    {
+      "hanzi": "打哈欠",
+      "target_syllable": "qian",
+      "target_index": 2,
+      "full_pinyin_raw": "dǎ hā qiàn",
+      "audio": "cm_tts_zh_打哈欠.mp3",
+      "image": "<img src=\"9f24d1605d4c.jpg\">"
+    },
+    {
+      "hanzi": "篮球",
+      "target_syllable": "qiu",
+      "target_index": 1,
+      "full_pinyin_raw": "lán qiú",
+      "audio": "f2fba45c5d12.mp3",
+      "image": "<img src=\"47fdaeecaf67.gif\">"
+    },
+    {
+      "hanzi": "喷泉",
+      "target_syllable": "quan",
+      "target_index": 1,
+      "full_pinyin_raw": "pēn quán",
+      "audio": "100dd1086c60.mp3",
+      "image": "<img src=\"9f839d1156db.jpg\">"
+    },
+    {
+      "hanzi": "足球",
+      "target_syllable": "qiu",
+      "target_index": 1,
+      "full_pinyin_raw": "zú qiú",
+      "audio": "0c455d3a9086.mp3",
+      "image": "<img src=\"b6d54dc4d0e1.png\">"
+    },
+    {
+      "hanzi": "窃贼",
+      "target_syllable": "qie",
+      "target_index": 0,
+      "full_pinyin_raw": "qiè zéi",
+      "audio": "cm_tts_zh_窃贼.mp3",
+      "image": "<img src=\"fd2cf107f7d1.jpg\">"
+    },
+    {
+      "hanzi": "汽车",
+      "target_syllable": "qi",
+      "target_index": 0,
+      "full_pinyin_raw": "qì chē",
+      "audio": "7c5ec87750be.mp3",
+      "image": "<img src=\"0e25c209e5fe.jpg\">"
+    },
+    {
+      "hanzi": "签名",
+      "target_syllable": "qian",
+      "target_index": 0,
+      "full_pinyin_raw": "qiān míng",
+      "audio": "cm_tts_zh_签名.mp3",
+      "image": "<img src=\"33b8068f5311.jpg\">"
+    },
+    {
+      "hanzi": "容器",
+      "target_syllable": "qi",
+      "target_index": 1,
+      "full_pinyin_raw": "róng qì",
+      "audio": "cm_tts_zh_容器.mp3",
+      "image": "<img src=\"/media/objects/f18b22854c6d.png\">"
+    },
+    {
+      "hanzi": "七",
+      "target_syllable": "qi",
+      "target_index": 0,
+      "full_pinyin_raw": "qī",
+      "audio": "71bbb5ba4e33.mp3",
+      "image": "<img src=\"46c9304fba85.jpg\">"
+    },
+    {
+      "hanzi": "骑车",
+      "target_syllable": "qi",
+      "target_index": 0,
+      "full_pinyin_raw": "qí chē",
+      "audio": "792ffd7986d9.mp3",
+      "image": "<img src=\"5198e2bd5aff.jpg\">"
+    },
+    {
+      "hanzi": "起床",
+      "target_syllable": "qi",
+      "target_index": 0,
+      "full_pinyin_raw": "qǐ chuáng",
+      "audio": "a7a3ecc0b324.mp3",
+      "image": "<img src=\"7c2572f7aa15.png\">"
+    },
+    {
+      "hanzi": "生气",
+      "target_syllable": "qi",
+      "target_index": 1,
+      "full_pinyin_raw": "shēng qì",
+      "audio": "bef703c2f70e.mp3",
+      "image": "<img src=\"754ee9970ed3.png\">"
+    },
+    {
+      "hanzi": "去",
+      "target_syllable": "qu",
+      "target_index": 0,
+      "full_pinyin_raw": "qù",
+      "audio": "cd8d9f35ae78.mp3",
+      "image": "<img src=\"3bf918181842.png\">"
+    },
+    {
+      "hanzi": "曲别针",
+      "target_syllable": "qu",
+      "target_index": 0,
+      "full_pinyin_raw": "qū bié zhēn",
+      "audio": "be30c22aceda.mp3",
+      "image": "<img src=\"774d1ea6d330.jpg\">"
+    },
+    {
+      "hanzi": "亲亲",
+      "target_syllable": "qin",
+      "target_index": 0,
+      "full_pinyin_raw": "qīn qīn",
+      "audio": "cm_tts_zh_亲亲.mp3",
+      "image": "<img src=\"16d89f20c40b.jpg\">"
+    },
+    {
+      "hanzi": "亲亲",
+      "target_syllable": "qin",
+      "target_index": 1,
+      "full_pinyin_raw": "qīn qīn",
+      "audio": "cm_tts_zh_亲亲.mp3",
+      "image": "<img src=\"16d89f20c40b.jpg\">"
+    },
+    {
+      "hanzi": "青蛙",
+      "target_syllable": "qing",
+      "target_index": 0,
+      "full_pinyin_raw": "qīng wā",
+      "audio": "ceddcc1e8618.mp3",
+      "image": "<img src=\"d34f807aacc2.png\">"
+    },
+    {
+      "hanzi": "围裙",
+      "target_syllable": "qun",
+      "target_index": 1,
+      "full_pinyin_raw": "wéi qún",
+      "audio": "cm_tts_zh_围裙.mp3",
+      "image": "<img src=\"49b59f5e092a.jpg\">"
+    },
+    {
+      "hanzi": "番茄酱",
+      "target_syllable": "qie",
+      "target_index": 1,
+      "full_pinyin_raw": "fān qié jiàng",
+      "audio": "cm_tts_zh_番茄酱.mp3",
+      "image": "<img src=\"38fd56ebbb89.jpg\">"
+    },
+    {
+      "hanzi": "跷跷板",
+      "target_syllable": "qiao",
+      "target_index": 0,
+      "full_pinyin_raw": "qiāo qiāo bǎn",
+      "audio": "cm_tts_zh_跷跷板.mp3",
+      "image": "<img src=\"6871531e9a93.jpg\">"
+    },
+    {
+      "hanzi": "跷跷板",
+      "target_syllable": "qiao",
+      "target_index": 1,
+      "full_pinyin_raw": "qiāo qiāo bǎn",
+      "audio": "cm_tts_zh_跷跷板.mp3",
+      "image": "<img src=\"6871531e9a93.jpg\">"
+    },
+    {
+      "hanzi": "秋天",
+      "target_syllable": "qiu",
+      "target_index": 0,
+      "full_pinyin_raw": "qiū tiān",
+      "audio": "e5b9eb7d4651.mp3",
+      "image": "<img src=\"07832f9dc182.jpg\">"
+    },
+    {
+      "hanzi": "牙签",
+      "target_syllable": "qian",
+      "target_index": 1,
+      "full_pinyin_raw": "yá qiān",
+      "audio": "cm_tts_zh_牙签.mp3",
+      "image": "<img src=\"2cb159e60510.jpg\">"
+    },
+    {
+      "hanzi": "墙",
+      "target_syllable": "qiang",
+      "target_index": 0,
+      "full_pinyin_raw": "qiáng",
+      "audio": "cm_tts_zh_墙.mp3",
+      "image": "<img src=\"621de9504271.jpg\">"
+    },
+    {
+      "hanzi": "催眠曲",
+      "target_syllable": "qu",
+      "target_index": 2,
+      "full_pinyin_raw": "cuī mián qǔ",
+      "audio": "cm_tts_zh_催眠曲.mp3",
+      "image": "<img src=\"862db6dcaf88.jpg\">"
+    },
+    {
+      "hanzi": "拳头",
+      "target_syllable": "quan",
+      "target_index": 0,
+      "full_pinyin_raw": "quán tou",
+      "audio": "cm_tts_zh_拳头.mp3",
+      "image": "<img src=\"/media/objects/9e0842e5e9eb.png\">"
+    },
+    {
+      "hanzi": "孔雀",
+      "target_syllable": "que",
+      "target_index": 1,
+      "full_pinyin_raw": "kǒng què",
+      "audio": "cm_tts_zh_孔雀.mp3",
+      "image": "<img src=\"fc468890987b.png\">"
+    }
+  ],
+  "20": [
+    {
+      "hanzi": "拔萝卜",
+      "target_syllable": "ba",
+      "target_index": 0,
+      "full_pinyin_raw": "bá luó bo",
+      "audio": "37b88be78b99.mp3",
+      "image": "<img src=\"5f29a2dff705.jpg\">"
+    },
+    {
+      "hanzi": "拔萝卜",
+      "target_syllable": "bo",
+      "target_index": 2,
+      "full_pinyin_raw": "bá luó bo",
+      "audio": "37b88be78b99.mp3",
+      "image": "<img src=\"5f29a2dff705.jpg\">"
+    },
+    {
+      "hanzi": "爸爸",
+      "target_syllable": "ba",
+      "target_index": 0,
+      "full_pinyin_raw": "bà bà",
+      "audio": "77fab35548df.mp3",
+      "image": "<img src=\"e203f860bd7f.png\">"
+    },
+    {
+      "hanzi": "爸爸",
+      "target_syllable": "ba",
+      "target_index": 1,
+      "full_pinyin_raw": "bà bà",
+      "audio": "77fab35548df.mp3",
+      "image": "<img src=\"e203f860bd7f.png\">"
+    },
+    {
+      "hanzi": "菠萝",
+      "target_syllable": "bo",
+      "target_index": 0,
+      "full_pinyin_raw": "bō luó",
+      "audio": "a02d7df5ddbc.mp3",
+      "image": "<img src=\"6a886b9780f6.jpg\">"
+    },
+    {
+      "hanzi": "脖子",
+      "target_syllable": "bo",
+      "target_index": 0,
+      "full_pinyin_raw": "bó zi",
+      "audio": "dbad155a0c29.mp3",
+      "image": "<img src=\"be7a9039d0da.png\">"
+    },
+    {
+      "hanzi": "鼻子",
+      "target_syllable": "bi",
+      "target_index": 0,
+      "full_pinyin_raw": "bí zi",
+      "audio": "779bc2b13389.mp3",
+      "image": "<img src=\"91d662abb8ce.gif\">"
+    },
+    {
+      "hanzi": "铅笔",
+      "target_syllable": "bi",
+      "target_index": 1,
+      "full_pinyin_raw": "qiān bǐ",
+      "audio": "06f8cf6e26da.mp3",
+      "image": "<img src=\"92dd53750c93.jpg\">"
+    },
+    {
+      "hanzi": "跑步",
+      "target_syllable": "bu",
+      "target_index": 1,
+      "full_pinyin_raw": "pǎo bù",
+      "audio": "cm_tts_zh_跑步.mp3",
+      "image": "<img src=\"b05e86140409.png\">"
+    },
+    {
+      "hanzi": "簸箕",
+      "target_syllable": "bo",
+      "target_index": 0,
+      "full_pinyin_raw": "bò ji",
+      "audio": "4ef02cc24789.mp3",
+      "image": "<img src=\"11672fbcfdd5.jpg\">"
+    },
+    {
+      "hanzi": "硬币",
+      "target_syllable": "bi",
+      "target_index": 1,
+      "full_pinyin_raw": "yìng bì",
+      "audio": "60749fc4466e.mp3",
+      "image": "<img src=\"127dc4cb83b3.jpg\">"
+    },
+    {
+      "hanzi": "地板",
+      "target_syllable": "ban",
+      "target_index": 1,
+      "full_pinyin_raw": "dì bǎn",
+      "audio": "73c41c12e82e.mp3",
+      "image": "<img src=\"99d5fde4bc5b.jpg\">"
+    },
+    {
+      "hanzi": "白色",
+      "target_syllable": "bai",
+      "target_index": 0,
+      "full_pinyin_raw": "bái sè",
+      "audio": "aa0ce59fd1a5.mp3",
+      "image": "<img src=\"47207fdb5cbd.png\">"
+    },
+    {
+      "hanzi": "贝壳",
+      "target_syllable": "bei",
+      "target_index": 0,
+      "full_pinyin_raw": "bèi ké",
+      "audio": "3d5eeda4a43d.mp3",
+      "image": "<img src=\"8e1634a2e26d.jpg\">"
+    },
+    {
+      "hanzi": "宝藏",
+      "target_syllable": "bao",
+      "target_index": 0,
+      "full_pinyin_raw": "bǎo zàng",
+      "audio": "cm_tts_zh_宝藏.mp3",
+      "image": "<img src=\"b5328e58f825.jpg\">"
+    },
+    {
+      "hanzi": "一半",
+      "target_syllable": "ban",
+      "target_index": 1,
+      "full_pinyin_raw": "yī bàn",
+      "audio": "cm_tts_zh_一半.mp3",
+      "image": "<img src=\"effffdade3c9.jpg\">"
+    },
+    {
+      "hanzi": "一本书",
+      "target_syllable": "ben",
+      "target_index": 1,
+      "full_pinyin_raw": "yī běn shū",
+      "audio": "f65114007744.mp3",
+      "image": "<img src=\"404075a82b61.jpg\">"
+    },
+    {
+      "hanzi": "瘢痕",
+      "target_syllable": "ban",
+      "target_index": 0,
+      "full_pinyin_raw": "bān hén",
+      "audio": "cm_tts_zh_瘢痕.mp3",
+      "image": "<img src=\"/media/objects/d0181a1ad0a4.png\">"
+    },
+    {
+      "hanzi": "宾馆",
+      "target_syllable": "bin",
+      "target_index": 0,
+      "full_pinyin_raw": "bīn guǎn",
+      "audio": "cm_tts_zh_宾馆.mp3",
+      "image": "<img src=\"edfdd7b7827b.jpg\">"
+    },
+    {
+      "hanzi": "包菜",
+      "target_syllable": "bao",
+      "target_index": 0,
+      "full_pinyin_raw": "bāo cài",
+      "audio": "023a614e3a75.mp3",
+      "image": "<img src=\"332a7b6ad545.png\">"
+    },
+    {
+      "hanzi": "板擦",
+      "target_syllable": "ban",
+      "target_index": 0,
+      "full_pinyin_raw": "bǎn cā",
+      "audio": "e966d648361d.mp3",
+      "image": "<img src=\"1d31fbbdba01.jpg\">"
+    },
+    {
+      "hanzi": "准备",
+      "target_syllable": "bei",
+      "target_index": 1,
+      "full_pinyin_raw": "zhǔn bèi",
+      "audio": "cm_tts_zh_准备.mp3",
+      "image": "<img src=\"/media/objects/5b83d18bcca9.png\">"
+    },
+    {
+      "hanzi": "帮忙",
+      "target_syllable": "bang",
+      "target_index": 0,
+      "full_pinyin_raw": "bāng máng",
+      "audio": "4076e7683670.mp3",
+      "image": "<img src=\"ebfebe2193e3.png\">"
+    },
+    {
+      "hanzi": "棒棒糖",
+      "target_syllable": "bang",
+      "target_index": 0,
+      "full_pinyin_raw": "bàng bàng táng",
+      "audio": "cm_tts_zh_棒糖.mp3",
+      "image": "<img src=\"2b5c69c1642b.jpg\">"
+    },
+    {
+      "hanzi": "棒棒糖",
+      "target_syllable": "bang",
+      "target_index": 1,
+      "full_pinyin_raw": "bàng bàng táng",
+      "audio": "cm_tts_zh_棒糖.mp3",
+      "image": "<img src=\"2b5c69c1642b.jpg\">"
+    },
+    {
+      "hanzi": "蹦蹦跳跳",
+      "target_syllable": "beng",
+      "target_index": 0,
+      "full_pinyin_raw": "bèng bèng tiào tiào",
+      "audio": "3c8acfe3d07e.mp3",
+      "image": "<img src=\"d45f45c74ba8.png\">"
+    },
+    {
+      "hanzi": "蹦蹦跳跳",
+      "target_syllable": "beng",
+      "target_index": 1,
+      "full_pinyin_raw": "bèng bèng tiào tiào",
+      "audio": "3c8acfe3d07e.mp3",
+      "image": "<img src=\"d45f45c74ba8.png\">"
+    },
+    {
+      "hanzi": "城堡",
+      "target_syllable": "bao",
+      "target_index": 1,
+      "full_pinyin_raw": "chéng bǎo",
+      "audio": "34b6e7dfd94f.mp3",
+      "image": "<img src=\"77323420bbdd.png\">"
+    },
+    {
+      "hanzi": "士兵",
+      "target_syllable": "bing",
+      "target_index": 1,
+      "full_pinyin_raw": "shì bīng",
+      "audio": "d32766ec83e2.mp3",
+      "image": "<img src=\"d44d14ebeee7.jpg\">"
+    },
+    {
+      "hanzi": "葱油饼",
+      "target_syllable": "bing",
+      "target_index": 2,
+      "full_pinyin_raw": "cōng yóu bǐng",
+      "audio": "638bc08d8b56.mp3",
+      "image": "<img src=\"0d248a5fc763.jpg\">"
+    },
+    {
+      "hanzi": "生病了",
+      "target_syllable": "bing",
+      "target_index": 1,
+      "full_pinyin_raw": "shēng bìng le",
+      "audio": "72672f135b1a.mp3",
+      "image": "<img src=\"8b8f220d5465.jpg\">"
+    },
+    {
+      "hanzi": "金币",
+      "target_syllable": "bi",
+      "target_index": 1,
+      "full_pinyin_raw": "jīn bì",
+      "audio": "0058461d57d2.mp3",
+      "image": "<img src=\"ab39a1a213c1.png\">"
+    },
+    {
+      "hanzi": "曲别针",
+      "target_syllable": "bie",
+      "target_index": 1,
+      "full_pinyin_raw": "qū bié zhēn",
+      "audio": "be30c22aceda.mp3",
+      "image": "<img src=\"774d1ea6d330.jpg\">"
+    },
+    {
+      "hanzi": "金银财宝",
+      "target_syllable": "bao",
+      "target_index": 3,
+      "full_pinyin_raw": "jīn yín cái bǎo",
+      "audio": "b746743ae3e2.mp3",
+      "image": "<img src=\"b5328e58f825.jpg\">"
+    },
+    {
+      "hanzi": "白云",
+      "target_syllable": "bai",
+      "target_index": 0,
+      "full_pinyin_raw": "bái yún",
+      "audio": "e252ca9d19b0.mp3",
+      "image": "<img src=\"7347be91428d.jpg\">"
+    },
+    {
+      "hanzi": "类别",
+      "target_syllable": "bie",
+      "target_index": 1,
+      "full_pinyin_raw": "lèi bié",
+      "audio": "cm_tts_zh_类别.mp3",
+      "image": "<img src=\"/media/objects/0dd13ea7b0df.png\">"
+    },
+    {
+      "hanzi": "手表",
+      "target_syllable": "biao",
+      "target_index": 1,
+      "full_pinyin_raw": "shǒu biǎo",
+      "audio": "cm_tts_zh_手表.mp3",
+      "image": "<img src=\"d488c2a73dbe.jpg\">"
+    },
+    {
+      "hanzi": "跷跷板",
+      "target_syllable": "ban",
+      "target_index": 2,
+      "full_pinyin_raw": "qiāo qiāo bǎn",
+      "audio": "cm_tts_zh_跷跷板.mp3",
+      "image": "<img src=\"6871531e9a93.jpg\">"
+    },
+    {
+      "hanzi": "变化",
+      "target_syllable": "bian",
+      "target_index": 0,
+      "full_pinyin_raw": "biàn huà",
+      "audio": "cm_tts_zh_变化.mp3",
+      "image": "<img src=\"/media/objects/b5fe95040b6a.png\">"
+    },
+    {
+      "hanzi": "胡萝卜",
+      "target_syllable": "bo",
+      "target_index": 2,
+      "full_pinyin_raw": "hú luó bo",
+      "audio": "166af158aa15.mp3",
+      "image": "<img src=\"4b463962972a.png\">"
+    },
+    {
+      "hanzi": "嘴巴",
+      "target_syllable": "ba",
+      "target_index": 1,
+      "full_pinyin_raw": "zuǐ ba",
+      "audio": "a0f733974c4f.mp3",
+      "image": "<img src=\"9f663b7ff7e0.jpg\">"
+    },
+    {
+      "hanzi": "白雪公主",
+      "target_syllable": "bai",
+      "target_index": 0,
+      "full_pinyin_raw": "bái xuě gōng zhǔ",
+      "audio": "dbe56f0f7106.mp3",
+      "image": "<img src=\"d8f339ba8ea5.jpg\">"
+    }
+  ],
+  "21": [
+    {
+      "hanzi": "妈妈",
+      "target_syllable": "ma",
+      "target_index": 0,
+      "full_pinyin_raw": "mā mā",
+      "audio": "a64f52332d8d.mp3",
+      "image": "<img src=\"bc3108c45574.png\">"
+    },
+    {
+      "hanzi": "妈妈",
+      "target_syllable": "ma",
+      "target_index": 1,
+      "full_pinyin_raw": "mā mā",
+      "audio": "a64f52332d8d.mp3",
+      "image": "<img src=\"bc3108c45574.png\">"
+    },
+    {
+      "hanzi": "马",
+      "target_syllable": "ma",
+      "target_index": 0,
+      "full_pinyin_raw": "mǎ",
+      "audio": "8fe2bb6b798e.mp3",
+      "image": "<img src=\"0ceb264d8624.png\">"
+    },
+    {
+      "hanzi": "米饭",
+      "target_syllable": "mi",
+      "target_index": 0,
+      "full_pinyin_raw": "mǐ fàn",
+      "audio": "e555b4f6830a.mp3",
+      "image": "<img src=\"7b1f40301a4b.jpg\">"
+    },
+    {
+      "hanzi": "屏幕",
+      "target_syllable": "mu",
+      "target_index": 1,
+      "full_pinyin_raw": "píng mù",
+      "audio": "cm_tts_zh_屏幕.mp3",
+      "image": "<img src=\"/media/objects/0fbdba99f02c.png\">"
+    },
+    {
+      "hanzi": "沙漠",
+      "target_syllable": "mo",
+      "target_index": 1,
+      "full_pinyin_raw": "shā mò",
+      "audio": "cm_tts_zh_沙漠.mp3",
+      "image": "<img src=\"62ede878d698.jpg\">"
+    },
+    {
+      "hanzi": "小毛驴",
+      "target_syllable": "mao",
+      "target_index": 1,
+      "full_pinyin_raw": "xiǎo máo lǘ",
+      "audio": "1eb88d33c9b1.mp3",
+      "image": "<img src=\"8e0132a7c7d2.jpg\">"
+    },
+    {
+      "hanzi": "买",
+      "target_syllable": "mai",
+      "target_index": 0,
+      "full_pinyin_raw": "mǎi",
+      "audio": "cm_tts_zh_买.mp3",
+      "image": "<img src=\"6f1e9e7dbcc1.gif\">"
+    },
+    {
+      "hanzi": "玫瑰",
+      "target_syllable": "mei",
+      "target_index": 0,
+      "full_pinyin_raw": "méi guī",
+      "audio": "5f05d85f6281.mp3",
+      "image": "<img src=\"db70dcc41543.jpg\">"
+    },
+    {
+      "hanzi": "羽毛",
+      "target_syllable": "mao",
+      "target_index": 1,
+      "full_pinyin_raw": "yǔ máo",
+      "audio": "cm_tts_zh_羽毛.mp3",
+      "image": "<img src=\"4a76b9f80d15.jpg\">"
+    },
+    {
+      "hanzi": "开门",
+      "target_syllable": "men",
+      "target_index": 1,
+      "full_pinyin_raw": "kāi mén",
+      "audio": "74eeba5ac684.mp3",
+      "image": "<img src=\"dd0b49ab6299.jpg\">"
+    },
+    {
+      "hanzi": "在后面",
+      "target_syllable": "mian",
+      "target_index": 2,
+      "full_pinyin_raw": "zài hòu miàn",
+      "audio": "31bef829c18a.mp3",
+      "image": "<img src=\"0b935c14862e.jpg\">"
+    },
+    {
+      "hanzi": "慢",
+      "target_syllable": "man",
+      "target_index": 0,
+      "full_pinyin_raw": "màn",
+      "audio": "cm_tts_zh_慢.mp3",
+      "image": "<img src=\"8734d7279c5b.png\">"
+    },
+    {
+      "hanzi": "木炭",
+      "target_syllable": "mu",
+      "target_index": 0,
+      "full_pinyin_raw": "mù tàn",
+      "audio": "cm_tts_zh_木炭.mp3",
+      "image": "<img src=\"7d0a47f1578b.jpg\">"
+    },
+    {
+      "hanzi": "大门",
+      "target_syllable": "men",
+      "target_index": 1,
+      "full_pinyin_raw": "dà mén",
+      "audio": "cm_tts_zh_大门.mp3",
+      "image": "<img src=\"75a61c0ecf6e.jpg\">"
+    },
+    {
+      "hanzi": "农民",
+      "target_syllable": "min",
+      "target_index": 1,
+      "full_pinyin_raw": "nóng mín",
+      "audio": "d4bd493f207e.mp3",
+      "image": "<img src=\"e7e61cf90cd7.jpg\">"
+    },
+    {
+      "hanzi": "草莓",
+      "target_syllable": "mei",
+      "target_index": 1,
+      "full_pinyin_raw": "cǎo méi",
+      "audio": "8389928c40af.mp3",
+      "image": "<img src=\"13114d3a4aef.gif\">"
+    },
+    {
+      "hanzi": "帮忙",
+      "target_syllable": "mang",
+      "target_index": 1,
+      "full_pinyin_raw": "bāng máng",
+      "audio": "4076e7683670.mp3",
+      "image": "<img src=\"ebfebe2193e3.png\">"
+    },
+    {
+      "hanzi": "蜜蜂",
+      "target_syllable": "mi",
+      "target_index": 0,
+      "full_pinyin_raw": "mì fēng",
+      "audio": "48fb6834157b.mp3",
+      "image": "<img src=\"b5126d3ddb5f.png\">"
+    },
+    {
+      "hanzi": "猛扑",
+      "target_syllable": "meng",
+      "target_index": 0,
+      "full_pinyin_raw": "měng pū",
+      "audio": "cm_tts_zh_猛扑.mp3",
+      "image": "<img src=\"13e95acc525f.jpg\">"
+    },
+    {
+      "hanzi": "签名",
+      "target_syllable": "ming",
+      "target_index": 1,
+      "full_pinyin_raw": "qiān míng",
+      "audio": "cm_tts_zh_签名.mp3",
+      "image": "<img src=\"33b8068f5311.jpg\">"
+    },
+    {
+      "hanzi": "鬃毛",
+      "target_syllable": "mao",
+      "target_index": 1,
+      "full_pinyin_raw": "zōng máo",
+      "audio": "cm_tts_zh_鬃毛.mp3",
+      "image": "<img src=\"/media/objects/f6793d77fb5a.png\">"
+    },
+    {
+      "hanzi": "绵羊",
+      "target_syllable": "mian",
+      "target_index": 0,
+      "full_pinyin_raw": "mián yáng",
+      "audio": "48184aa2876e.mp3",
+      "image": "<img src=\"111ced0656a9.jpg\">"
+    },
+    {
+      "hanzi": "在外面",
+      "target_syllable": "mian",
+      "target_index": 2,
+      "full_pinyin_raw": "zài wài miàn",
+      "audio": "8165d8a80b25.mp3",
+      "image": "<img src=\"e5d161116c65.png\">"
+    },
+    {
+      "hanzi": "在下面",
+      "target_syllable": "mian",
+      "target_index": 2,
+      "full_pinyin_raw": "zài xià miàn",
+      "audio": "8c96481556fa.mp3",
+      "image": "<img src=\"b9955b63c2e4.png\">"
+    },
+    {
+      "hanzi": "吹灭",
+      "target_syllable": "mie",
+      "target_index": 1,
+      "full_pinyin_raw": "chuī miè",
+      "audio": "cm_tts_zh_吹灭.mp3",
+      "image": "<img src=\"58dffd1d9368.gif\">"
+    },
+    {
+      "hanzi": "睫毛",
+      "target_syllable": "mao",
+      "target_index": 1,
+      "full_pinyin_raw": "jié máo",
+      "audio": "cm_tts_zh_睫毛.mp3",
+      "image": "<img src=\"/media/objects/e9c93c149b0a.png\">"
+    },
+    {
+      "hanzi": "幼苗",
+      "target_syllable": "miao",
+      "target_index": 1,
+      "full_pinyin_raw": "yòu miáo",
+      "audio": "cm_tts_zh_幼苗.mp3",
+      "image": "<img src=\"df852841fa9e.jpg\">"
+    },
+    {
+      "hanzi": "面条",
+      "target_syllable": "mian",
+      "target_index": 0,
+      "full_pinyin_raw": "miàn tiáo",
+      "audio": "cm_tts_zh_面条.mp3",
+      "image": "<img src=\"34e2458fe8cd.jpg\">"
+    },
+    {
+      "hanzi": "催眠曲",
+      "target_syllable": "mian",
+      "target_index": 1,
+      "full_pinyin_raw": "cuī mián qǔ",
+      "audio": "cm_tts_zh_催眠曲.mp3",
+      "image": "<img src=\"862db6dcaf88.jpg\">"
+    },
+    {
+      "hanzi": "面团",
+      "target_syllable": "mian",
+      "target_index": 0,
+      "full_pinyin_raw": "miàn tuán",
+      "audio": "cm_tts_zh_面团.mp3",
+      "image": "<img src=\"a7632e77463a.jpg\">"
+    },
+    {
+      "hanzi": "旋转木马",
+      "target_syllable": "mu",
+      "target_index": 2,
+      "full_pinyin_raw": "xuán zhuǎn mù mǎ",
+      "audio": "cm_tts_zh_旋转木马.mp3",
+      "image": "<img src=\"44b9fac8a9c3.jpg\">"
+    },
+    {
+      "hanzi": "旋转木马",
+      "target_syllable": "ma",
+      "target_index": 3,
+      "full_pinyin_raw": "xuán zhuǎn mù mǎ",
+      "audio": "cm_tts_zh_旋转木马.mp3",
+      "image": "<img src=\"44b9fac8a9c3.jpg\">"
+    }
+  ],
+  "22": [
+    {
+      "hanzi": "脖子",
+      "target_syllable": "zi",
+      "target_index": 1,
+      "full_pinyin_raw": "bó zi",
+      "audio": "dbad155a0c29.mp3",
+      "image": "<img src=\"be7a9039d0da.png\">"
+    },
+    {
+      "hanzi": "鸽子",
+      "target_syllable": "zi",
+      "target_index": 1,
+      "full_pinyin_raw": "gē zi",
+      "audio": "9f141ca596cd.mp3",
+      "image": "<img src=\"59069cdd71d8.jpg\">"
+    },
+    {
+      "hanzi": "鼻子",
+      "target_syllable": "zi",
+      "target_index": 1,
+      "full_pinyin_raw": "bí zi",
+      "audio": "779bc2b13389.mp3",
+      "image": "<img src=\"91d662abb8ce.gif\">"
+    },
+    {
+      "hanzi": "兔子",
+      "target_syllable": "zi",
+      "target_index": 1,
+      "full_pinyin_raw": "tù zi",
+      "audio": "46ab3ed540d9.mp3",
+      "image": "<img src=\"f68e7ae80b48.png\">"
+    },
+    {
+      "hanzi": "自动扶梯",
+      "target_syllable": "zi",
+      "target_index": 0,
+      "full_pinyin_raw": "zì dòng fú tī",
+      "audio": "cm_tts_zh_自动扶梯.mp3",
+      "image": "<img src=\"efea2bb464ff.jpg\">"
+    },
+    {
+      "hanzi": "桃子",
+      "target_syllable": "zi",
+      "target_index": 1,
+      "full_pinyin_raw": "táo zi",
+      "audio": "38d09d3535f7.mp3",
+      "image": "<img src=\"9b5762280cf0.jpg\">"
+    },
+    {
+      "hanzi": "闹钟",
+      "target_syllable": "zhong",
+      "target_index": 1,
+      "full_pinyin_raw": "nào zhōng",
+      "audio": "cm_tts_zh_闹钟.mp3",
+      "image": "<img src=\"1477015f1014.gif\">"
+    },
+    {
+      "hanzi": "宝藏",
+      "target_syllable": "zang",
+      "target_index": 1,
+      "full_pinyin_raw": "bǎo zàng",
+      "audio": "cm_tts_zh_宝藏.mp3",
+      "image": "<img src=\"b5328e58f825.jpg\">"
+    },
+    {
+      "hanzi": "猴子",
+      "target_syllable": "zi",
+      "target_index": 1,
+      "full_pinyin_raw": "hóu zi",
+      "audio": "2230a1d8b779.mp3",
+      "image": "<img src=\"cbad46bf9d66.png\">"
+    },
+    {
+      "hanzi": "在后面",
+      "target_syllable": "zai",
+      "target_index": 0,
+      "full_pinyin_raw": "zài hòu miàn",
+      "audio": "31bef829c18a.mp3",
+      "image": "<img src=\"0b935c14862e.jpg\">"
+    },
+    {
+      "hanzi": "盘子",
+      "target_syllable": "zi",
+      "target_index": 1,
+      "full_pinyin_raw": "pán zi",
+      "audio": "07c16b2ac129.mp3",
+      "image": "<img src=\"ded08c011e1f.jpg\">"
+    },
+    {
+      "hanzi": "红枣",
+      "target_syllable": "zao",
+      "target_index": 1,
+      "full_pinyin_raw": "hóng zǎo",
+      "audio": "57fc69acd4e5.mp3",
+      "image": "<img src=\"31bd41c37d3c.jpg\">"
+    },
+    {
+      "hanzi": "肥皂",
+      "target_syllable": "zao",
+      "target_index": 1,
+      "full_pinyin_raw": "féi zào",
+      "audio": "5d5bdb257a42.mp3",
+      "image": "<img src=\"db8e7e5418ad.jpg\">"
+    },
+    {
+      "hanzi": "足球",
+      "target_syllable": "zu",
+      "target_index": 0,
+      "full_pinyin_raw": "zú qiú",
+      "audio": "0c455d3a9086.mp3",
+      "image": "<img src=\"b6d54dc4d0e1.png\">"
+    },
+    {
+      "hanzi": "走",
+      "target_syllable": "zou",
+      "target_index": 0,
+      "full_pinyin_raw": "zǒu",
+      "audio": "9749d8a54199.mp3",
+      "image": "<img src=\"06570e31651f.gif\">"
+    },
+    {
+      "hanzi": "紫色",
+      "target_syllable": "zi",
+      "target_index": 0,
+      "full_pinyin_raw": "zǐ sè",
+      "audio": "474ce50a355a.mp3",
+      "image": "<img src=\"7050dd00d63e.jpg\">"
+    },
+    {
+      "hanzi": "数字",
+      "target_syllable": "zi",
+      "target_index": 1,
+      "full_pinyin_raw": "shù zì",
+      "audio": "124a176e8104.mp3",
+      "image": "<img src=\"9a795d6aac37.jpg\">"
+    },
+    {
+      "hanzi": "自行车",
+      "target_syllable": "zi",
+      "target_index": 0,
+      "full_pinyin_raw": "zì xíng chē",
+      "audio": "f0a27707d94b.mp3",
+      "image": "<img src=\"e0eec1a4c020.png\">"
+    },
+    {
+      "hanzi": "杂草",
+      "target_syllable": "za",
+      "target_index": 0,
+      "full_pinyin_raw": "zá cǎo",
+      "audio": "cm_tts_zh_杂草.mp3",
+      "image": "<img src=\"/media/objects/6bf12a0532fe.png\">"
+    },
+    {
+      "hanzi": "称赞",
+      "target_syllable": "zan",
+      "target_index": 1,
+      "full_pinyin_raw": "chēng zàn",
+      "audio": "cm_tts_zh_称赞.mp3",
+      "image": "<img src=\"/media/objects/74a5a6c2d12a.png\">"
+    },
+    {
+      "hanzi": "沼泽",
+      "target_syllable": "zhao",
+      "target_index": 0,
+      "full_pinyin_raw": "zhǎo zé",
+      "audio": "cm_tts_zh_沼泽.mp3",
+      "image": "<img src=\"c04450dab4e2.jpg\">"
+    },
+    {
+      "hanzi": "沼泽",
+      "target_syllable": "ze",
+      "target_index": 1,
+      "full_pinyin_raw": "zhǎo zé",
+      "audio": "cm_tts_zh_沼泽.mp3",
+      "image": "<img src=\"c04450dab4e2.jpg\">"
+    },
+    {
+      "hanzi": "窃贼",
+      "target_syllable": "zei",
+      "target_index": 1,
+      "full_pinyin_raw": "qiè zéi",
+      "audio": "cm_tts_zh_窃贼.mp3",
+      "image": "<img src=\"fd2cf107f7d1.jpg\">"
+    },
+    {
+      "hanzi": "尊重",
+      "target_syllable": "zun",
+      "target_index": 0,
+      "full_pinyin_raw": "zūn zhòng",
+      "audio": "cm_tts_zh_尊重.mp3",
+      "image": "<img src=\"a52be1dca952.jpg\">"
+    },
+    {
+      "hanzi": "尊重",
+      "target_syllable": "zhong",
+      "target_index": 1,
+      "full_pinyin_raw": "zūn zhòng",
+      "audio": "cm_tts_zh_尊重.mp3",
+      "image": "<img src=\"a52be1dca952.jpg\">"
+    },
+    {
+      "hanzi": "村庄",
+      "target_syllable": "zhuang",
+      "target_index": 1,
+      "full_pinyin_raw": "cūn zhuāng",
+      "audio": "57b6f8a9936d.mp3",
+      "image": "<img src=\"2304b6befca3.jpg\">"
+    },
+    {
+      "hanzi": "餐巾纸",
+      "target_syllable": "zhi",
+      "target_index": 2,
+      "full_pinyin_raw": "cān jin zhǐ",
+      "audio": "60796770a86b.mp3",
+      "image": "<img src=\"98d180061363.jpg\">"
+    },
+    {
+      "hanzi": "撕纸",
+      "target_syllable": "zhi",
+      "target_index": 1,
+      "full_pinyin_raw": "sī zhǐ",
+      "audio": "f92d0552a33c.mp3",
+      "image": "<img src=\"e2319b942768.png\">"
+    },
+    {
+      "hanzi": "孙子",
+      "target_syllable": "zi",
+      "target_index": 1,
+      "full_pinyin_raw": "sūn zi",
+      "audio": "cm_tts_zh_孙子.mp3",
+      "image": "<img src=\"/media/objects/ff6d335bfaa9.png\">"
+    },
+    {
+      "hanzi": "枕头",
+      "target_syllable": "zhen",
+      "target_index": 0,
+      "full_pinyin_raw": "zhěn tóu",
+      "audio": "3ea0cfc9a2cd.mp3",
+      "image": "<img src=\"dcafaf6453c8.jpg\">"
+    },
+    {
+      "hanzi": "蜘蛛",
+      "target_syllable": "zhi",
+      "target_index": 0,
+      "full_pinyin_raw": "zhī zhū",
+      "audio": "c0252729fed2.mp3",
+      "image": "<img src=\"83934e344fa6.jpg\">"
+    },
+    {
+      "hanzi": "蜘蛛",
+      "target_syllable": "zhu",
+      "target_index": 1,
+      "full_pinyin_raw": "zhī zhū",
+      "audio": "c0252729fed2.mp3",
+      "image": "<img src=\"83934e344fa6.jpg\">"
+    },
+    {
+      "hanzi": "果汁",
+      "target_syllable": "zhi",
+      "target_index": 1,
+      "full_pinyin_raw": "guǒ zhī",
+      "audio": "cbeec6c89482.mp3",
+      "image": "<img src=\"a97c6771ae19.jpg\">"
+    },
+    {
+      "hanzi": "一张纸",
+      "target_syllable": "zhang",
+      "target_index": 1,
+      "full_pinyin_raw": "yī zhāng zhǐ",
+      "audio": "a584fc6f5f27.mp3",
+      "image": "<img src=\"c3e285173e84.jpg\">"
+    },
+    {
+      "hanzi": "一张纸",
+      "target_syllable": "zhi",
+      "target_index": 2,
+      "full_pinyin_raw": "yī zhāng zhǐ",
+      "audio": "a584fc6f5f27.mp3",
+      "image": "<img src=\"c3e285173e84.jpg\">"
+    },
+    {
+      "hanzi": "竹子",
+      "target_syllable": "zhu",
+      "target_index": 0,
+      "full_pinyin_raw": "zhú zi",
+      "audio": "93a0c74f4a35.mp3",
+      "image": "<img src=\"3127d50dc403.jpg\">"
+    },
+    {
+      "hanzi": "竹子",
+      "target_syllable": "zi",
+      "target_index": 1,
+      "full_pinyin_raw": "zhú zi",
+      "audio": "93a0c74f4a35.mp3",
+      "image": "<img src=\"3127d50dc403.jpg\">"
+    },
+    {
+      "hanzi": "猪",
+      "target_syllable": "zhu",
+      "target_index": 0,
+      "full_pinyin_raw": "zhū",
+      "audio": "cfb4fdf09d3c.mp3",
+      "image": "<img src=\"2cc855f03e02.jpg\">"
+    },
+    {
+      "hanzi": "这里",
+      "target_syllable": "zhe",
+      "target_index": 0,
+      "full_pinyin_raw": "zhè lǐ",
+      "audio": "cm_tts_zh_这里.mp3",
+      "image": "<img src=\"bd774b0b9e71.png\">"
+    },
+    {
+      "hanzi": "炸弹",
+      "target_syllable": "zha",
+      "target_index": 0,
+      "full_pinyin_raw": "zhà dàn",
+      "audio": "cm_tts_zh_炸弹.mp3",
+      "image": "<img src=\"/media/objects/11016ef89813.gif\">"
+    },
+    {
+      "hanzi": "摘",
+      "target_syllable": "zhai",
+      "target_index": 0,
+      "full_pinyin_raw": "zhāi",
+      "audio": "cm_tts_zh_采摘.mp3",
+      "image": "<img src=\"d50bc8895db3.jpg\">"
+    },
+    {
+      "hanzi": "准备",
+      "target_syllable": "zhun",
+      "target_index": 0,
+      "full_pinyin_raw": "zhǔn bèi",
+      "audio": "cm_tts_zh_准备.mp3",
+      "image": "<img src=\"/media/objects/5b83d18bcca9.png\">"
+    },
+    {
+      "hanzi": "叉子",
+      "target_syllable": "zi",
+      "target_index": 1,
+      "full_pinyin_raw": "chā zi",
+      "audio": "ba2a805939e9.mp3",
+      "image": "<img src=\"f7a23cd443f7.gif\">"
+    },
+    {
+      "hanzi": "早晨",
+      "target_syllable": "zao",
+      "target_index": 0,
+      "full_pinyin_raw": "zǎo chén",
+      "audio": "cm_tts_zh_早晨.mp3",
+      "image": "<img src=\"b61e196621e3.png\">"
+    },
+    {
+      "hanzi": "狮子",
+      "target_syllable": "zi",
+      "target_index": 1,
+      "full_pinyin_raw": "shī zi",
+      "audio": "9175a7fd6d68.mp3",
+      "image": "<img src=\"f87ea3cea714.png\">"
+    },
+    {
+      "hanzi": "勺子",
+      "target_syllable": "zi",
+      "target_index": 1,
+      "full_pinyin_raw": "sháo zi",
+      "audio": "cm_tts_zh_勺子.mp3",
+      "image": "<img src=\"7ad71573646a.jpg\">"
+    },
+    {
+      "hanzi": "帐篷",
+      "target_syllable": "zhang",
+      "target_index": 0,
+      "full_pinyin_raw": "zhàng péng",
+      "audio": "f5f922f07b4f.mp3",
+      "image": "<img src=\"d4d4972a7d0e.png\">"
+    },
+    {
+      "hanzi": "弄脏",
+      "target_syllable": "zang",
+      "target_index": 1,
+      "full_pinyin_raw": "nòng zāng",
+      "audio": "cm_tts_zh_弄脏.mp3",
+      "image": "<img src=\"7329f3d846ca.jpg\">"
+    },
+    {
+      "hanzi": "证书",
+      "target_syllable": "zhai",
+      "target_index": 0,
+      "full_pinyin_raw": "zhài wù zhèng shū",
+      "audio": "cm_tts_zh_证书.mp3",
+      "image": "<img src=\"5009c20494e6.jpg\">"
+    },
+    {
+      "hanzi": "证书",
+      "target_syllable": "zheng",
+      "target_index": 2,
+      "full_pinyin_raw": "zhài wù zhèng shū",
+      "audio": "cm_tts_zh_证书.mp3",
+      "image": "<img src=\"5009c20494e6.jpg\">"
+    },
+    {
+      "hanzi": "钉子",
+      "target_syllable": "zi",
+      "target_index": 1,
+      "full_pinyin_raw": "dīng zi",
+      "audio": "cm_tts_zh_钉子.mp3",
+      "image": "<img src=\"36da32cfa155.jpg\">"
+    },
+    {
+      "hanzi": "种子",
+      "target_syllable": "zhong",
+      "target_index": 0,
+      "full_pinyin_raw": "zhǒng zi",
+      "audio": "cm_tts_zh_种子.mp3",
+      "image": "<img src=\"fbc02c4c0b16.jpg\">"
+    },
+    {
+      "hanzi": "种子",
+      "target_syllable": "zi",
+      "target_index": 1,
+      "full_pinyin_raw": "zhǒng zi",
+      "audio": "cm_tts_zh_种子.mp3",
+      "image": "<img src=\"fbc02c4c0b16.jpg\">"
+    },
+    {
+      "hanzi": "鬃毛",
+      "target_syllable": "zong",
+      "target_index": 0,
+      "full_pinyin_raw": "zōng máo",
+      "audio": "cm_tts_zh_鬃毛.mp3",
+      "image": "<img src=\"/media/objects/f6793d77fb5a.png\">"
+    },
+    {
+      "hanzi": "桔子",
+      "target_syllable": "zi",
+      "target_index": 1,
+      "full_pinyin_raw": "jú zi",
+      "audio": "3897e8606e14.mp3",
+      "image": "<img src=\"c4edf6978c39.jpg\">"
+    },
+    {
+      "hanzi": "镜子",
+      "target_syllable": "zi",
+      "target_index": 1,
+      "full_pinyin_raw": "jìng zi",
+      "audio": "77270ca29b02.mp3",
+      "image": "<img src=\"8a1900aaba72.jpg\">"
+    },
+    {
+      "hanzi": "曲别针",
+      "target_syllable": "zhen",
+      "target_index": 2,
+      "full_pinyin_raw": "qū bié zhēn",
+      "audio": "be30c22aceda.mp3",
+      "image": "<img src=\"774d1ea6d330.jpg\">"
+    },
+    {
+      "hanzi": "洗澡",
+      "target_syllable": "zao",
+      "target_index": 1,
+      "full_pinyin_raw": "xǐ zǎo",
+      "audio": "0df9873ea44d.mp3",
+      "image": "<img src=\"fd320a01316b.jpg\">"
+    },
+    {
+      "hanzi": "勋章",
+      "target_syllable": "zhang",
+      "target_index": 1,
+      "full_pinyin_raw": "xūn zhāng",
+      "audio": "cm_tts_zh_勋章.mp3",
+      "image": "<img src=\"52c4789d7894.jpg\">"
+    },
+    {
+      "hanzi": "鸭子",
+      "target_syllable": "zi",
+      "target_index": 1,
+      "full_pinyin_raw": "yā zi",
+      "audio": "1e9db5c9757c.mp3",
+      "image": "<img src=\"ee89ecc6d714.jpg\">"
+    },
+    {
+      "hanzi": "影子",
+      "target_syllable": "zi",
+      "target_index": 1,
+      "full_pinyin_raw": "yǐng zi",
+      "audio": "cm_tts_zh_影子.mp3",
+      "image": "<img src=\"80483be5bd86.jpg\">"
+    },
+    {
+      "hanzi": "在外面",
+      "target_syllable": "zai",
+      "target_index": 0,
+      "full_pinyin_raw": "zài wài miàn",
+      "audio": "8165d8a80b25.mp3",
+      "image": "<img src=\"e5d161116c65.png\">"
+    },
+    {
+      "hanzi": "座位",
+      "target_syllable": "zuo",
+      "target_index": 0,
+      "full_pinyin_raw": "zuò wèi",
+      "audio": "cm_tts_zh_座位.mp3",
+      "image": "<img src=\"678e04acbb24.jpg\">"
+    },
+    {
+      "hanzi": "在下面",
+      "target_syllable": "zai",
+      "target_index": 0,
+      "full_pinyin_raw": "zài xià miàn",
+      "audio": "8c96481556fa.mp3",
+      "image": "<img src=\"b9955b63c2e4.png\">"
+    },
+    {
+      "hanzi": "镊子",
+      "target_syllable": "zi",
+      "target_index": 1,
+      "full_pinyin_raw": "niē zi",
+      "audio": "081c63945453.mp3",
+      "image": "<img src=\"37b1e60ffa01.jpg\">"
+    },
+    {
+      "hanzi": "写字",
+      "target_syllable": "zi",
+      "target_index": 1,
+      "full_pinyin_raw": "xiě zì",
+      "audio": "663415693b15.mp3",
+      "image": "<img src=\"8f3d9bb22d3e.png\">"
+    },
+    {
+      "hanzi": "知了",
+      "target_syllable": "zhi",
+      "target_index": 0,
+      "full_pinyin_raw": "zhī liǎo",
+      "audio": "cm_tts_zh_知了.mp3",
+      "image": "<img src=\"b372d8b53723.jpg\">"
+    },
+    {
+      "hanzi": "爪子",
+      "target_syllable": "zhua",
+      "target_index": 0,
+      "full_pinyin_raw": "zhuǎ zi",
+      "audio": "cm_tts_zh_爪子.mp3",
+      "image": "<img src=\"6dc09dacdbc1.jpg\">"
+    },
+    {
+      "hanzi": "爪子",
+      "target_syllable": "zi",
+      "target_index": 1,
+      "full_pinyin_raw": "zhuǎ zi",
+      "audio": "cm_tts_zh_爪子.mp3",
+      "image": "<img src=\"6dc09dacdbc1.jpg\">"
+    },
+    {
+      "hanzi": "坐下",
+      "target_syllable": "zuo",
+      "target_index": 0,
+      "full_pinyin_raw": "zuò xià",
+      "audio": "7b12d7676516.mp3",
+      "image": "<img src=\"1940d1c2d633.jpg\">"
+    },
+    {
+      "hanzi": "制作",
+      "target_syllable": "zhi",
+      "target_index": 0,
+      "full_pinyin_raw": "zhì zuò",
+      "audio": "1810888857f2.mp3",
+      "image": "<img src=\"7dee0e85ea85.jpg\">"
+    },
+    {
+      "hanzi": "制作",
+      "target_syllable": "zuo",
+      "target_index": 1,
+      "full_pinyin_raw": "zhì zuò",
+      "audio": "1810888857f2.mp3",
+      "image": "<img src=\"7dee0e85ea85.jpg\">"
+    },
+    {
+      "hanzi": "桌子",
+      "target_syllable": "zhuo",
+      "target_index": 0,
+      "full_pinyin_raw": "zhuō zi",
+      "audio": "cm_tts_zh_桌子.mp3",
+      "image": "<img src=\"efec6f86f67c.png\">"
+    },
+    {
+      "hanzi": "桌子",
+      "target_syllable": "zi",
+      "target_index": 1,
+      "full_pinyin_raw": "zhuō zi",
+      "audio": "cm_tts_zh_桌子.mp3",
+      "image": "<img src=\"efec6f86f67c.png\">"
+    },
+    {
+      "hanzi": "筷子",
+      "target_syllable": "zi",
+      "target_index": 1,
+      "full_pinyin_raw": "kuài zi",
+      "audio": "c351d5406f12.mp3",
+      "image": "<img src=\"05a5016bcfbd.jpg\">"
+    },
+    {
+      "hanzi": "拐杖",
+      "target_syllable": "zhang",
+      "target_index": 1,
+      "full_pinyin_raw": "guǎi zhàng",
+      "audio": "cm_tts_zh_拐杖.mp3",
+      "image": "<img src=\"/media/objects/076200325719.png\">"
+    },
+    {
+      "hanzi": "嘴巴",
+      "target_syllable": "zui",
+      "target_index": 0,
+      "full_pinyin_raw": "zuǐ ba",
+      "audio": "a0f733974c4f.mp3",
+      "image": "<img src=\"9f663b7ff7e0.jpg\">"
+    },
+    {
+      "hanzi": "徽章",
+      "target_syllable": "zhang",
+      "target_index": 1,
+      "full_pinyin_raw": "huī zhāng",
+      "audio": "cm_tts_zh_徽章.mp3",
+      "image": "<img src=\"/media/objects/a179e1e76a52.png\">"
+    },
+    {
+      "hanzi": "吊坠",
+      "target_syllable": "zhui",
+      "target_index": 1,
+      "full_pinyin_raw": "diào zhuì",
+      "audio": "cm_tts_zh_吊坠.mp3",
+      "image": "<img src=\"55d272fe5f77.jpg\">"
+    },
+    {
+      "hanzi": "钻",
+      "target_syllable": "zuan",
+      "target_index": 0,
+      "full_pinyin_raw": "zuàn",
+      "audio": "cm_tts_zh_钻.mp3",
+      "image": "<img src=\"/media/objects/a113b7fe9e17.gif\">"
+    },
+    {
+      "hanzi": "旋转木马",
+      "target_syllable": "zhuan",
+      "target_index": 1,
+      "full_pinyin_raw": "xuán zhuǎn mù mǎ",
+      "audio": "cm_tts_zh_旋转木马.mp3",
+      "image": "<img src=\"44b9fac8a9c3.jpg\">"
+    },
+    {
+      "hanzi": "白雪公主",
+      "target_syllable": "zhu",
+      "target_index": 3,
+      "full_pinyin_raw": "bái xuě gōng zhǔ",
+      "audio": "dbe56f0f7106.mp3",
+      "image": "<img src=\"d8f339ba8ea5.jpg\">"
+    }
+  ],
+  "23": [
+    {
+      "hanzi": "西瓜皮",
+      "target_syllable": "xi",
+      "target_index": 0,
+      "full_pinyin_raw": "xī guā pí",
+      "audio": "92a48fa4e353.mp3",
+      "image": "<img src=\"9f49e16bcd9b.jpg\">"
+    },
+    {
+      "hanzi": "小毛驴",
+      "target_syllable": "xiao",
+      "target_index": 0,
+      "full_pinyin_raw": "xiǎo máo lǘ",
+      "audio": "1eb88d33c9b1.mp3",
+      "image": "<img src=\"8e0132a7c7d2.jpg\">"
+    },
+    {
+      "hanzi": "小偷",
+      "target_syllable": "xiao",
+      "target_index": 0,
+      "full_pinyin_raw": "xiǎo tōu",
+      "audio": "55d9e6b6ce56.mp3",
+      "image": "<img src=\"e15263cb78a8.jpg\">"
+    },
+    {
+      "hanzi": "洗手盆",
+      "target_syllable": "xi",
+      "target_index": 0,
+      "full_pinyin_raw": "xǐ shǒu pén",
+      "audio": "37f0bf97588a.mp3",
+      "image": "<img src=\"ded41cec3af9.jpg\">"
+    },
+    {
+      "hanzi": "轮滑鞋",
+      "target_syllable": "xie",
+      "target_index": 2,
+      "full_pinyin_raw": "lún huá xié",
+      "audio": "5c770579d2fc.mp3",
+      "image": "<img src=\"59ca18741cae.jpg\">"
+    },
+    {
+      "hanzi": "自行车",
+      "target_syllable": "xing",
+      "target_index": 1,
+      "full_pinyin_raw": "zì xíng chē",
+      "audio": "f0a27707d94b.mp3",
+      "image": "<img src=\"e0eec1a4c020.png\">"
+    },
+    {
+      "hanzi": "三角形",
+      "target_syllable": "xing",
+      "target_index": 2,
+      "full_pinyin_raw": "sān jiǎo xíng",
+      "audio": "bf6216a6c83b.mp3",
+      "image": "<img src=\"0ef308add358.png\">"
+    },
+    {
+      "hanzi": "人行道",
+      "target_syllable": "xing",
+      "target_index": 1,
+      "full_pinyin_raw": "rén xíng dào",
+      "audio": "6b2c273b5f5a.mp3",
+      "image": "<img src=\"843c96183e69.png\">"
+    },
+    {
+      "hanzi": "同学",
+      "target_syllable": "xue",
+      "target_index": 1,
+      "full_pinyin_raw": "tóng xué",
+      "audio": "cm_tts_zh_同学.mp3",
+      "image": "<img src=\"fb974942ed22.jpg\">"
+    },
+    {
+      "hanzi": "西瓜",
+      "target_syllable": "xi",
+      "target_index": 0,
+      "full_pinyin_raw": "xī guā",
+      "audio": "59c6cd1becf7.mp3",
+      "image": "<img src=\"57d64422a154.png\">"
+    },
+    {
+      "hanzi": "学习",
+      "target_syllable": "xue",
+      "target_index": 0,
+      "full_pinyin_raw": "xué xí",
+      "audio": "d409946a2a07.mp3",
+      "image": "<img src=\"63f179aed805.png\">"
+    },
+    {
+      "hanzi": "学习",
+      "target_syllable": "xi",
+      "target_index": 1,
+      "full_pinyin_raw": "xué xí",
+      "audio": "d409946a2a07.mp3",
+      "image": "<img src=\"63f179aed805.png\">"
+    },
+    {
+      "hanzi": "洗手",
+      "target_syllable": "xi",
+      "target_index": 0,
+      "full_pinyin_raw": "xǐ shǒu",
+      "audio": "93717cfdb93d.mp3",
+      "image": "<img src=\"eacde37bed48.jpg\">"
+    },
+    {
+      "hanzi": "洗澡",
+      "target_syllable": "xi",
+      "target_index": 0,
+      "full_pinyin_raw": "xǐ zǎo",
+      "audio": "0df9873ea44d.mp3",
+      "image": "<img src=\"fd320a01316b.jpg\">"
+    },
+    {
+      "hanzi": "游戏",
+      "target_syllable": "xi",
+      "target_index": 1,
+      "full_pinyin_raw": "yóu xì",
+      "audio": "483b43f05437.mp3",
+      "image": "<img src=\"3f35608dd4ee.png\">"
+    },
+    {
+      "hanzi": "心形",
+      "target_syllable": "xin",
+      "target_index": 0,
+      "full_pinyin_raw": "xīn xíng",
+      "audio": "9edd10d34369.mp3",
+      "image": "<img src=\"9904882bc58d.jpg\">"
+    },
+    {
+      "hanzi": "心形",
+      "target_syllable": "xing",
+      "target_index": 1,
+      "full_pinyin_raw": "xīn xíng",
+      "audio": "9edd10d34369.mp3",
+      "image": "<img src=\"9904882bc58d.jpg\">"
+    },
+    {
+      "hanzi": "信封",
+      "target_syllable": "xin",
+      "target_index": 0,
+      "full_pinyin_raw": "xìn fēng",
+      "audio": "b66c17895f0d.mp3",
+      "image": "<img src=\"bd65f32ab795.jpg\">"
+    },
+    {
+      "hanzi": "星星",
+      "target_syllable": "xing",
+      "target_index": 0,
+      "full_pinyin_raw": "xīng xīng",
+      "audio": "4c1cfebbeda2.mp3",
+      "image": "<img src=\"9a8d689f707d.png\">"
+    },
+    {
+      "hanzi": "星星",
+      "target_syllable": "xing",
+      "target_index": 1,
+      "full_pinyin_raw": "xīng xīng",
+      "audio": "4c1cfebbeda2.mp3",
+      "image": "<img src=\"9a8d689f707d.png\">"
+    },
+    {
+      "hanzi": "胡须",
+      "target_syllable": "xu",
+      "target_index": 1,
+      "full_pinyin_raw": "hú xū",
+      "audio": "cm_tts_zh_胡须.mp3",
+      "image": "<img src=\"f821b352d840.jpg\">"
+    },
+    {
+      "hanzi": "勋章",
+      "target_syllable": "xun",
+      "target_index": 0,
+      "full_pinyin_raw": "xūn zhāng",
+      "audio": "cm_tts_zh_勋章.mp3",
+      "image": "<img src=\"52c4789d7894.jpg\">"
+    },
+    {
+      "hanzi": "在下面",
+      "target_syllable": "xia",
+      "target_index": 1,
+      "full_pinyin_raw": "zài xià miàn",
+      "audio": "8c96481556fa.mp3",
+      "image": "<img src=\"b9955b63c2e4.png\">"
+    },
+    {
+      "hanzi": "大虾",
+      "target_syllable": "xia",
+      "target_index": 1,
+      "full_pinyin_raw": "dà xiā",
+      "audio": "6fddc0c822fa.mp3",
+      "image": "<img src=\"6aec90810e0d.jpg\">"
+    },
+    {
+      "hanzi": "晚霞",
+      "target_syllable": "xia",
+      "target_index": 1,
+      "full_pinyin_raw": "wǎn xiá",
+      "audio": "c108df72ebb1.mp3",
+      "image": "<img src=\"f8c8f1daee40.jpg\">"
+    },
+    {
+      "hanzi": "写字",
+      "target_syllable": "xie",
+      "target_index": 0,
+      "full_pinyin_raw": "xiě zì",
+      "audio": "663415693b15.mp3",
+      "image": "<img src=\"8f3d9bb22d3e.png\">"
+    },
+    {
+      "hanzi": "小",
+      "target_syllable": "xiao",
+      "target_index": 0,
+      "full_pinyin_raw": "xiǎo",
+      "audio": "15aec56c9ee3.mp3",
+      "image": "<img src=\"a20d7bd64ffd.png\">"
+    },
+    {
+      "hanzi": "雕像",
+      "target_syllable": "xiang",
+      "target_index": 1,
+      "full_pinyin_raw": "diāo xiàng",
+      "audio": "cm_tts_zh_雕像.mp3",
+      "image": "<img src=\"2cf25405235a.jpg\">"
+    },
+    {
+      "hanzi": "修公路",
+      "target_syllable": "xiu",
+      "target_index": 0,
+      "full_pinyin_raw": "xiū gōng lù",
+      "audio": "89d80db5c198.mp3",
+      "image": "<img src=\"5373472ba77a.jpg\">"
+    },
+    {
+      "hanzi": "新年",
+      "target_syllable": "xin",
+      "target_index": 0,
+      "full_pinyin_raw": "xīn nián",
+      "audio": "cm_tts_zh_新年.mp3",
+      "image": "<img src=\"e81bb632f9ba.jpg\">"
+    },
+    {
+      "hanzi": "苔藓",
+      "target_syllable": "xian",
+      "target_index": 1,
+      "full_pinyin_raw": "tái xiǎn",
+      "audio": "cm_tts_zh_苔藓.mp3",
+      "image": "<img src=\"5083fd7bb1d9.jpg\">"
+    },
+    {
+      "hanzi": "小姑娘",
+      "target_syllable": "xiao",
+      "target_index": 0,
+      "full_pinyin_raw": "xiǎo gū niang",
+      "audio": "cm_tts_zh_小姑娘.mp3",
+      "image": "<img src=\"11a2f1d52cb0.jpg\">"
+    },
+    {
+      "hanzi": "海象",
+      "target_syllable": "xiang",
+      "target_index": 1,
+      "full_pinyin_raw": "hǎi xiàng",
+      "audio": "cm_tts_zh_海象.mp3",
+      "image": "<img src=\"15c2ed335a07.jpg\">"
+    },
+    {
+      "hanzi": "熊",
+      "target_syllable": "xiong",
+      "target_index": 0,
+      "full_pinyin_raw": "Xióng",
+      "audio": "cm_tts_zh_熊.mp3",
+      "image": "<img src=\"c186465456d4.jpg\">"
+    },
+    {
+      "hanzi": "坐下",
+      "target_syllable": "xia",
+      "target_index": 1,
+      "full_pinyin_raw": "zuò xià",
+      "audio": "7b12d7676516.mp3",
+      "image": "<img src=\"1940d1c2d633.jpg\">"
+    },
+    {
+      "hanzi": "虚弱",
+      "target_syllable": "xu",
+      "target_index": 0,
+      "full_pinyin_raw": "xū ruò",
+      "audio": "cm_tts_zh_微弱.mp3",
+      "image": "<img src=\"770cda7c0cea.jpg\">"
+    },
+    {
+      "hanzi": "向日葵",
+      "target_syllable": "xiang",
+      "target_index": 0,
+      "full_pinyin_raw": "xiàng rì kuí",
+      "audio": "6bc5242ce378.mp3",
+      "image": "<img src=\"4bca1c62fee7.jpg\">"
+    },
+    {
+      "hanzi": "旋转木马",
+      "target_syllable": "xuan",
+      "target_index": 0,
+      "full_pinyin_raw": "xuán zhuǎn mù mǎ",
+      "audio": "cm_tts_zh_旋转木马.mp3",
+      "image": "<img src=\"44b9fac8a9c3.jpg\">"
+    },
+    {
+      "hanzi": "白雪公主",
+      "target_syllable": "xue",
+      "target_index": 1,
+      "full_pinyin_raw": "bái xuě gōng zhǔ",
+      "audio": "dbe56f0f7106.mp3",
+      "image": "<img src=\"d8f339ba8ea5.jpg\">"
+    }
+  ],
+  "24": [
+    {
+      "hanzi": "游乐场",
+      "target_syllable": "chang",
+      "target_index": 2,
+      "full_pinyin_raw": "yóu lè chǎng",
+      "audio": "29c502c7fdb4.mp3",
+      "image": "<img src=\"a27b3acb43b7.jpg\">"
+    },
+    {
+      "hanzi": "唱歌",
+      "target_syllable": "chang",
+      "target_index": 0,
+      "full_pinyin_raw": "chàng gē",
+      "audio": "537f3878595b.mp3",
+      "image": "<img src=\"561fe9eece02.jpg\">"
+    },
+    {
+      "hanzi": "出口",
+      "target_syllable": "chu",
+      "target_index": 0,
+      "full_pinyin_raw": "chū kǒu",
+      "audio": "cm_tts_zh_出口.mp3",
+      "image": "<img src=\"/media/objects/c8e6c63dbfd8.png\">"
+    },
+    {
+      "hanzi": "丛林",
+      "target_syllable": "cong",
+      "target_index": 0,
+      "full_pinyin_raw": "cóng lín",
+      "audio": "186424671461.mp3",
+      "image": "<img src=\"f38a7497c888.jpg\">"
+    },
+    {
+      "hanzi": "轮船",
+      "target_syllable": "chuan",
+      "target_index": 1,
+      "full_pinyin_raw": "lún chuán",
+      "audio": "8e48a894bbfd.mp3",
+      "image": "<img src=\"424a8f360a9d.png\">"
+    },
+    {
+      "hanzi": "自行车",
+      "target_syllable": "che",
+      "target_index": 2,
+      "full_pinyin_raw": "zì xíng chē",
+      "audio": "f0a27707d94b.mp3",
+      "image": "<img src=\"e0eec1a4c020.png\">"
+    },
+    {
+      "hanzi": "杂草",
+      "target_syllable": "cao",
+      "target_index": 1,
+      "full_pinyin_raw": "zá cǎo",
+      "audio": "cm_tts_zh_杂草.mp3",
+      "image": "<img src=\"/media/objects/6bf12a0532fe.png\">"
+    },
+    {
+      "hanzi": "称赞",
+      "target_syllable": "cheng",
+      "target_index": 0,
+      "full_pinyin_raw": "chēng zàn",
+      "audio": "cm_tts_zh_称赞.mp3",
+      "image": "<img src=\"/media/objects/74a5a6c2d12a.png\">"
+    },
+    {
+      "hanzi": "包菜",
+      "target_syllable": "cai",
+      "target_index": 1,
+      "full_pinyin_raw": "bāo cài",
+      "audio": "023a614e3a75.mp3",
+      "image": "<img src=\"332a7b6ad545.png\">"
+    },
+    {
+      "hanzi": "餐厅",
+      "target_syllable": "can",
+      "target_index": 0,
+      "full_pinyin_raw": "cān tīng",
+      "audio": "c7d5b31a6913.mp3",
+      "image": "<img src=\"e48bfacb4a6a.jpg\">"
+    },
+    {
+      "hanzi": "草",
+      "target_syllable": "cao",
+      "target_index": 0,
+      "full_pinyin_raw": "cǎo",
+      "audio": "a42d3fa283a7.mp3",
+      "image": "<img src=\"d24a8d0d27c8.gif\">"
+    },
+    {
+      "hanzi": "村庄",
+      "target_syllable": "cun",
+      "target_index": 0,
+      "full_pinyin_raw": "cūn zhuāng",
+      "audio": "57b6f8a9936d.mp3",
+      "image": "<img src=\"2304b6befca3.jpg\">"
+    },
+    {
+      "hanzi": "板擦",
+      "target_syllable": "ca",
+      "target_index": 1,
+      "full_pinyin_raw": "bǎn cā",
+      "audio": "e966d648361d.mp3",
+      "image": "<img src=\"1d31fbbdba01.jpg\">"
+    },
+    {
+      "hanzi": "餐巾纸",
+      "target_syllable": "can",
+      "target_index": 0,
+      "full_pinyin_raw": "cān jin zhǐ",
+      "audio": "60796770a86b.mp3",
+      "image": "<img src=\"98d180061363.jpg\">"
+    },
+    {
+      "hanzi": "草莓",
+      "target_syllable": "cao",
+      "target_index": 0,
+      "full_pinyin_raw": "cǎo méi",
+      "audio": "8389928c40af.mp3",
+      "image": "<img src=\"13114d3a4aef.gif\">"
+    },
+    {
+      "hanzi": "刺猬",
+      "target_syllable": "ci",
+      "target_index": 0,
+      "full_pinyin_raw": "cì wèi",
+      "audio": "ca330975a9ba.mp3",
+      "image": "<img src=\"aca5820eb894.jpg\">"
+    },
+    {
+      "hanzi": "厕所",
+      "target_syllable": "ce",
+      "target_index": 0,
+      "full_pinyin_raw": "cè suǒ",
+      "audio": "cm_tts_zh_厕所.mp3",
+      "image": "<img src=\"3da0be7da109.jpg\">"
+    },
+    {
+      "hanzi": "醋",
+      "target_syllable": "cu",
+      "target_index": 0,
+      "full_pinyin_raw": "cù",
+      "audio": "cm_tts_zh_醋.mp3",
+      "image": "<img src=\"c4f3dfb1d982.jpg\">"
+    },
+    {
+      "hanzi": "饭铲",
+      "target_syllable": "chan",
+      "target_index": 1,
+      "full_pinyin_raw": "fàn chǎn",
+      "audio": "84d750003142.mp3",
+      "image": "<img src=\"e3d032008d8e.jpg\">"
+    },
+    {
+      "hanzi": "吃饭",
+      "target_syllable": "chi",
+      "target_index": 0,
+      "full_pinyin_raw": "chī fàn",
+      "audio": "67c8d61be971.mp3",
+      "image": "<img src=\"0ed6bebe6386.jpg\">"
+    },
+    {
+      "hanzi": "公交车",
+      "target_syllable": "che",
+      "target_index": 2,
+      "full_pinyin_raw": "gōng jiāo chē",
+      "audio": "c66ada1e75b2.mp3",
+      "image": "<img src=\"c6f9bda91c8f.png\">"
+    },
+    {
+      "hanzi": "汽车",
+      "target_syllable": "che",
+      "target_index": 1,
+      "full_pinyin_raw": "qì chē",
+      "audio": "7c5ec87750be.mp3",
+      "image": "<img src=\"0e25c209e5fe.jpg\">"
+    },
+    {
+      "hanzi": "厨房",
+      "target_syllable": "chu",
+      "target_index": 0,
+      "full_pinyin_raw": "chú fáng",
+      "audio": "cd304aed0a10.mp3",
+      "image": "<img src=\"bc20e41754f7.jpg\">"
+    },
+    {
+      "hanzi": "叉子",
+      "target_syllable": "cha",
+      "target_index": 0,
+      "full_pinyin_raw": "chā zi",
+      "audio": "ba2a805939e9.mp3",
+      "image": "<img src=\"f7a23cd443f7.gif\">"
+    },
+    {
+      "hanzi": "卡车",
+      "target_syllable": "che",
+      "target_index": 1,
+      "full_pinyin_raw": "kǎ chē",
+      "audio": "931905fe579e.mp3",
+      "image": "<img src=\"13902aeea55e.png\">"
+    },
+    {
+      "hanzi": "火柴",
+      "target_syllable": "chai",
+      "target_index": 1,
+      "full_pinyin_raw": "huǒ chái",
+      "audio": "cm_tts_zh_火柴.mp3",
+      "image": "<img src=\"78224300f568.gif\">"
+    },
+    {
+      "hanzi": "抽屉",
+      "target_syllable": "chou",
+      "target_index": 0,
+      "full_pinyin_raw": "chōu ti",
+      "audio": "cm_tts_zh_抽屉.mp3",
+      "image": "<img src=\"762df9c42439.jpg\">"
+    },
+    {
+      "hanzi": "早晨",
+      "target_syllable": "chen",
+      "target_index": 1,
+      "full_pinyin_raw": "zǎo chén",
+      "audio": "cm_tts_zh_早晨.mp3",
+      "image": "<img src=\"b61e196621e3.png\">"
+    },
+    {
+      "hanzi": "春天",
+      "target_syllable": "chun",
+      "target_index": 0,
+      "full_pinyin_raw": "chūn tiān",
+      "audio": "cm_tts_zh_春天.mp3",
+      "image": "<img src=\"567f61ce9545.jpg\">"
+    },
+    {
+      "hanzi": "炒锅",
+      "target_syllable": "chao",
+      "target_index": 0,
+      "full_pinyin_raw": "chǎo guō",
+      "audio": "cm_tts_zh_炒锅.mp3",
+      "image": "<img src=\"6469038957eb.png\">"
+    },
+    {
+      "hanzi": "蠕虫",
+      "target_syllable": "chong",
+      "target_index": 1,
+      "full_pinyin_raw": "rú chóng",
+      "audio": "cm_tts_zh_蠕虫.mp3",
+      "image": "<img src=\"9985b6e80375.jpg\">"
+    },
+    {
+      "hanzi": "藏",
+      "target_syllable": "cang",
+      "target_index": 0,
+      "full_pinyin_raw": "cáng",
+      "audio": "cm_tts_zh_藏.mp3",
+      "image": "<img src=\"364cabbf745d.gif\">"
+    },
+    {
+      "hanzi": "长颈鹿",
+      "target_syllable": "chang",
+      "target_index": 0,
+      "full_pinyin_raw": "cháng jǐng lù",
+      "audio": "cm_tts_zh_长颈鹿.mp3",
+      "image": "<img src=\"ff68d85cd4ff.jpg\">"
+    },
+    {
+      "hanzi": "城堡",
+      "target_syllable": "cheng",
+      "target_index": 0,
+      "full_pinyin_raw": "chéng bǎo",
+      "audio": "34b6e7dfd94f.mp3",
+      "image": "<img src=\"77323420bbdd.png\">"
+    },
+    {
+      "hanzi": "平衡车",
+      "target_syllable": "che",
+      "target_index": 2,
+      "full_pinyin_raw": "píng héng chē",
+      "audio": "cm_tts_zh_平衡车.mp3",
+      "image": "<img src=\"8a887685d9ef.jpg\">"
+    },
+    {
+      "hanzi": "层",
+      "target_syllable": "ceng",
+      "target_index": 0,
+      "full_pinyin_raw": "céng",
+      "audio": "cm_tts_zh_层.mp3",
+      "image": "<img src=\"b1a460d16c5a.jpg\">"
+    },
+    {
+      "hanzi": "葱油饼",
+      "target_syllable": "cong",
+      "target_index": 0,
+      "full_pinyin_raw": "cōng yóu bǐng",
+      "audio": "638bc08d8b56.mp3",
+      "image": "<img src=\"0d248a5fc763.jpg\">"
+    },
+    {
+      "hanzi": "瓢虫",
+      "target_syllable": "chong",
+      "target_index": 1,
+      "full_pinyin_raw": "piáo chóng",
+      "audio": "cm_tts_zh_瓢虫.mp3",
+      "image": "<img src=\"06bd0d36dbd3.jpg\">"
+    },
+    {
+      "hanzi": "骑车",
+      "target_syllable": "che",
+      "target_index": 1,
+      "full_pinyin_raw": "qí chē",
+      "audio": "792ffd7986d9.mp3",
+      "image": "<img src=\"5198e2bd5aff.jpg\">"
+    },
+    {
+      "hanzi": "起床",
+      "target_syllable": "chuang",
+      "target_index": 1,
+      "full_pinyin_raw": "qǐ chuáng",
+      "audio": "a7a3ecc0b324.mp3",
+      "image": "<img src=\"7c2572f7aa15.png\">"
+    },
+    {
+      "hanzi": "金银财宝",
+      "target_syllable": "cai",
+      "target_index": 2,
+      "full_pinyin_raw": "jīn yín cái bǎo",
+      "audio": "b746743ae3e2.mp3",
+      "image": "<img src=\"b5328e58f825.jpg\">"
+    },
+    {
+      "hanzi": "一列火车",
+      "target_syllable": "che",
+      "target_index": 3,
+      "full_pinyin_raw": "yī liè huǒ che",
+      "audio": "b5157e6c0591.mp3",
+      "image": "<img src=\"/media/objects/a4078e6d7b40.png\">"
+    },
+    {
+      "hanzi": "创可贴",
+      "target_syllable": "chuang",
+      "target_index": 0,
+      "full_pinyin_raw": "chuàng kě tiē",
+      "audio": "2c05febacb20.mp3",
+      "image": "<img src=\"7123c2616ba6.png\">"
+    },
+    {
+      "hanzi": "吹灭",
+      "target_syllable": "chui",
+      "target_index": 0,
+      "full_pinyin_raw": "chuī miè",
+      "audio": "cm_tts_zh_吹灭.mp3",
+      "image": "<img src=\"58dffd1d9368.gif\">"
+    },
+    {
+      "hanzi": "戳",
+      "target_syllable": "chuo",
+      "target_index": 0,
+      "full_pinyin_raw": "chuō",
+      "audio": "cm_tts_zh_戳.mp3",
+      "image": "<img src=\"/media/objects/f38a60fe4557.gif\">"
+    },
+    {
+      "hanzi": "错",
+      "target_syllable": "cuo",
+      "target_index": 0,
+      "full_pinyin_raw": "cuò",
+      "audio": "cm_tts_zh_错.mp3",
+      "image": "<img src=\"f244b218e29e.jpg\">"
+    },
+    {
+      "hanzi": "催眠曲",
+      "target_syllable": "cui",
+      "target_index": 0,
+      "full_pinyin_raw": "cuī mián qǔ",
+      "audio": "cm_tts_zh_催眠曲.mp3",
+      "image": "<img src=\"862db6dcaf88.jpg\">"
+    },
+    {
+      "hanzi": "船",
+      "target_syllable": "chuan",
+      "target_index": 0,
+      "full_pinyin_raw": "chuán",
+      "audio": "f3cd326c39cf.mp3",
+      "image": "<img src=\"424a8f360a9d.png\">"
+    },
+    {
+      "hanzi": "蹿",
+      "target_syllable": "cuan",
+      "target_index": 0,
+      "full_pinyin_raw": "cuān",
+      "audio": "cm_tts_zh_蹿.mp3",
+      "image": "<img src=\"a9950e266cc8.png\">"
+    },
+    {
+      "hanzi": "床",
+      "target_syllable": "chuang",
+      "target_index": 0,
+      "full_pinyin_raw": "chuáng",
+      "audio": "cm_tts_zh_床.mp3",
+      "image": "<img src=\"3bc608ac774f.jpg\">"
+    }
+  ]
+}

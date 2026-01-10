@@ -28,9 +28,15 @@ import math
 import sys
 from dataclasses import dataclass, field
 from typing import Dict, Iterable, List, Optional, Tuple, Union
+from pathlib import Path
 
 import requests
 
+# Add project root to path for backend imports
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
+
+from backend.database.kg_client import KnowledgeGraphClient, KnowledgeGraphError
 from anki_integration.anki_connect import AnkiConnect
 
 
@@ -338,10 +344,11 @@ class MasteryVectorGenerator:
 
 
 class KnowledgeGraphService:
-    """Fetch node metadata from Jena Fuseki via SPARQL."""
+    """Fetch node metadata from knowledge graph via SPARQL."""
 
     def __init__(self, config: RecommenderConfig):
         self.config = config
+        self.kg_client = KnowledgeGraphClient(endpoint_url=config.fuseki_endpoint)
 
     def fetch_nodes(self) -> Dict[str, KnowledgeNode]:
         node_types = " ".join(self.config.node_types)
@@ -349,7 +356,7 @@ class KnowledgeGraphService:
         PREFIX srs-kg: <http://srs4autism.com/schema/>
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-        SELECT ?node ?label ?hsk ?cefr ?concreteness ?frequency ?freqRank ?prereq WHERE {{
+        SELECT ?node ?label ?hsk ?cefr ?concreteness ?frequency ?freqRank ?aoa ?prereq WHERE {{
             VALUES ?type {{ {node_types} }}
             ?node a ?type ;
                   rdfs:label ?label .
@@ -363,14 +370,10 @@ class KnowledgeGraphService:
         }}
         """
 
-        response = requests.post(
-            self.config.fuseki_endpoint,
-            data={"query": query},
-            headers={"Accept": "application/sparql-results+json"},
-            timeout=30,
-        )
-        response.raise_for_status()
-        data = response.json()
+        try:
+            data = self.kg_client.query(query)
+        except KnowledgeGraphError as e:
+            raise RuntimeError(f"Failed to fetch nodes from knowledge graph: {e}") from e
 
         nodes: Dict[str, KnowledgeNode] = {}
         for row in data.get("results", {}).get("bindings", []):
