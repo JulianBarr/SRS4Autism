@@ -14,6 +14,12 @@ from typing import Any, Dict, List, Optional
 
 from agent.content_generator import ContentGenerator
 from backend.config import settings
+from backend.database.kg_client import (
+    KnowledgeGraphClient,
+    KnowledgeGraphConnectionError,
+    KnowledgeGraphQueryError,
+    KnowledgeGraphError,
+)
 
 # Configure logging
 logger = logging.getLogger(__name__)
@@ -74,7 +80,7 @@ class AgentTools:
     def __init__(self) -> None:
         self.generator = ContentGenerator()
         self._recommender = None
-        self._kg_endpoint = settings.fuseki_url
+        self._kg_client = KnowledgeGraphClient(timeout=15)
 
     def _get_recommender(self):
         """Lazy load the recommender to avoid import issues."""
@@ -137,9 +143,6 @@ class AgentTools:
             KnowledgeGraphTimeoutError: If query takes longer than 15 seconds
             KnowledgeGraphError: If query fails for any other reason
         """
-        import requests
-        from urllib.parse import urlencode
-
         try:
             if node_id:
                 # Query specific node with prerequisites
@@ -183,20 +186,16 @@ class AgentTools:
                 """
                 logger.debug("Querying KG for general structure")
 
-            params = urlencode({"query": sparql})
-            url = f"{self._kg_endpoint}?{params}"
-            response = requests.get(url, headers={"Accept": "application/sparql-results+json"}, timeout=15)
-            response.raise_for_status()
-            result = response.json()
-            logger.info(f"Successfully queried KG (endpoint: {self._kg_endpoint})")
+            result = self._kg_client.query(sparql)
+            logger.info(f"Successfully queried KG (endpoint: {self._kg_client.endpoint_url})")
             return result
 
-        except requests.exceptions.Timeout as e:
-            logger.error(f"Knowledge graph query timed out after 15 seconds (endpoint: {self._kg_endpoint})")
+        except KnowledgeGraphConnectionError as e:
+            logger.error(f"Knowledge graph query timed out or connection failed: {e}")
             raise KnowledgeGraphTimeoutError(
-                f"Knowledge graph query timed out after 15 seconds (endpoint: {self._kg_endpoint})"
+                f"Knowledge graph query timed out after 15 seconds (endpoint: {self._kg_client.endpoint_url})"
             ) from e
-        except requests.exceptions.RequestException as e:
+        except (KnowledgeGraphQueryError, KnowledgeGraphError) as e:
             logger.error(f"Knowledge graph request failed: {e}", exc_info=True)
             raise KnowledgeGraphError(
                 f"Knowledge graph request failed: {str(e)}"
