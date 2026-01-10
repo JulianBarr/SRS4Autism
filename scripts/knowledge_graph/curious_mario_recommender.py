@@ -89,7 +89,7 @@ class Recommendation:
 class RecommenderConfig:
     """Configurable knobs for the heuristics."""
 
-    anki_query: str = '"_KG_Map":*'
+    anki_query: str = '_KG_Map:*'
     kg_field_name: str = "_KG_Map"
     fuseki_endpoint: str = "http://localhost:3030/srs4autism/query"
     node_types: Tuple[str, ...] = ("srs-kg:Word",)
@@ -727,7 +727,7 @@ class CuriousMarioRecommender:
 
 def main(argv: Optional[List[str]] = None) -> int:
     parser = argparse.ArgumentParser(description="Curious Mario recommender")
-    parser.add_argument("--anki-query", default='"_KG_Map":*', help="Anki search query to locate CUMA notes")
+    parser.add_argument("--anki-query", default='_KG_Map:*', help="Anki search query to locate CUMA notes")
     parser.add_argument("--kg-endpoint", default="http://localhost:3030/srs4autism/query", help="Fuseki SPARQL endpoint")
     parser.add_argument("--target-hsk", type=int, default=None, help="Target HSK level for exploratory recommendations (auto-detected if not specified)")
     parser.add_argument("--top", type=int, default=20, help="Number of recommendations to display")
