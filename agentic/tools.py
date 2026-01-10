@@ -9,9 +9,51 @@ The agent uses these tools to:
 5. Generate flashcards when needed
 """
 
+import logging
 from typing import Any, Dict, List, Optional
 
 from agent.content_generator import ContentGenerator
+
+# Configure logging
+logger = logging.getLogger(__name__)
+
+
+# Custom exceptions for better error handling
+class AgentToolsError(Exception):
+    """Base exception for AgentTools errors"""
+    pass
+
+
+class MasteryVectorError(AgentToolsError):
+    """Raised when mastery vector query fails"""
+    pass
+
+
+class MasteryVectorTimeoutError(MasteryVectorError):
+    """Raised when mastery vector query times out"""
+    pass
+
+
+class KnowledgeGraphError(AgentToolsError):
+    """Raised when knowledge graph query fails"""
+    pass
+
+
+class KnowledgeGraphTimeoutError(KnowledgeGraphError):
+    """Raised when knowledge graph query times out"""
+    pass
+
+
+class RecommenderError(AgentToolsError):
+    """Raised when recommender fails"""
+    pass
+
+
+class RecommenderTimeoutError(RecommenderError):
+    """Raised when recommender times out"""
+    pass
+
+
 # Lazy imports to avoid circular dependencies
 def _get_build_cuma_remarks():
     from backend.app.main import build_cuma_remarks
@@ -47,48 +89,63 @@ class AgentTools:
     def query_mastery_vector(self, user_id: str) -> Dict[str, float]:
         """
         Query the mastery vector for a user based on Anki review history.
-        
+
         Returns a dictionary mapping knowledge graph node IDs to mastery scores (0.0-1.0).
+
+        Raises:
+            MasteryVectorTimeoutError: If query takes longer than 30 seconds
+            MasteryVectorError: If query fails for any other reason
         """
         try:
             recommender = self._get_recommender()
             # Add timeout protection using threading (works in FastAPI)
             from concurrent.futures import ThreadPoolExecutor, TimeoutError as FutureTimeoutError
-            
+
             with ThreadPoolExecutor(max_workers=1) as executor:
                 future = executor.submit(recommender.build_mastery_vector)
                 try:
                     mastery_vector = future.result(timeout=30)  # 30 second timeout
+                    logger.info(f"Successfully retrieved mastery vector with {len(mastery_vector)} nodes for user {user_id}")
                     return mastery_vector
-                except FutureTimeoutError:
-                    print("⚠️  build_mastery_vector() timed out after 30 seconds, returning empty vector")
-                    return {}
+                except FutureTimeoutError as e:
+                    logger.error(f"Mastery vector query timed out after 30 seconds for user {user_id}")
+                    raise MasteryVectorTimeoutError(
+                        f"Mastery vector query timed out after 30 seconds for user {user_id}"
+                    ) from e
+        except MasteryVectorTimeoutError:
+            # Re-raise timeout errors as-is
+            raise
         except Exception as e:
-            # If Anki is not available, return empty vector
-            print(f"⚠️  Error querying mastery vector: {e}")
-            return {}
+            logger.error(f"Failed to query mastery vector for user {user_id}: {e}", exc_info=True)
+            raise MasteryVectorError(
+                f"Failed to query mastery vector for user {user_id}: {str(e)}"
+            ) from e
 
     def query_world_model(self, topic: Optional[str] = None, node_id: Optional[str] = None) -> Dict[str, Any]:
         """
         Query the knowledge graph (world model) for information about a topic or node.
-        
+
         Args:
             topic: Optional topic to query (e.g., "math", "chinese")
             node_id: Optional specific node ID to query
-            
+
         Returns:
             Dictionary with node information, dependencies, and structure
+
+        Raises:
+            KnowledgeGraphTimeoutError: If query takes longer than 15 seconds
+            KnowledgeGraphError: If query fails for any other reason
         """
+        import requests
+        from urllib.parse import urlencode
+
         try:
-            import requests
-            from urllib.parse import urlencode
-            
             if node_id:
                 # Query specific node with prerequisites
                 sparql = f"""
                 PREFIX srs-kg: <http://srs4autism.com/schema/>
                 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-                
+
                 SELECT ?node ?label ?hsk ?prereq WHERE {{
                     BIND(<http://srs4autism.com/schema/{node_id}> AS ?node)
                     ?node rdfs:label ?label .
@@ -96,12 +153,13 @@ class AgentTools:
                     OPTIONAL {{ ?node srs-kg:requiresPrerequisite ?prereq }}
                 }}
                 """
+                logger.debug(f"Querying KG for specific node: {node_id}")
             elif topic:
                 # Query nodes related to topic
                 sparql = f"""
                 PREFIX srs-kg: <http://srs4autism.com/schema/>
                 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-                
+
                 SELECT ?node ?label ?hsk ?prereq WHERE {{
                     ?node a srs-kg:Word ;
                           rdfs:label ?label .
@@ -111,26 +169,42 @@ class AgentTools:
                 }}
                 LIMIT 50
                 """
+                logger.debug(f"Querying KG for topic: {topic}")
             else:
                 # General query for structure
                 sparql = """
                 PREFIX srs-kg: <http://srs4autism.com/schema/>
                 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-                
+
                 SELECT (COUNT(?node) AS ?total_nodes) WHERE {
                     ?node a srs-kg:Word .
                 }
                 """
-            
+                logger.debug("Querying KG for general structure")
+
             params = urlencode({"query": sparql})
             url = f"{self._kg_endpoint}?{params}"
             response = requests.get(url, headers={"Accept": "application/sparql-results+json"}, timeout=15)
             response.raise_for_status()
-            return response.json()
-        except requests.exceptions.Timeout:
-            return {"error": "Knowledge graph query timed out after 15 seconds", "data": {}}
+            result = response.json()
+            logger.info(f"Successfully queried KG (endpoint: {self._kg_endpoint})")
+            return result
+
+        except requests.exceptions.Timeout as e:
+            logger.error(f"Knowledge graph query timed out after 15 seconds (endpoint: {self._kg_endpoint})")
+            raise KnowledgeGraphTimeoutError(
+                f"Knowledge graph query timed out after 15 seconds (endpoint: {self._kg_endpoint})"
+            ) from e
+        except requests.exceptions.RequestException as e:
+            logger.error(f"Knowledge graph request failed: {e}", exc_info=True)
+            raise KnowledgeGraphError(
+                f"Knowledge graph request failed: {str(e)}"
+            ) from e
         except Exception as e:
-            return {"error": str(e), "data": {}}
+            logger.error(f"Unexpected error querying knowledge graph: {e}", exc_info=True)
+            raise KnowledgeGraphError(
+                f"Unexpected error querying knowledge graph: {str(e)}"
+            ) from e
 
     def query_user_profile(self, user_id: str, memory) -> Dict[str, Any]:
         """
@@ -147,18 +221,18 @@ class AgentTools:
     ) -> Dict[str, Any]:
         """
         Call the recommender with a synthesized cognitive prior.
-        
+
         Note: The recommender builds its own mastery vector from Anki.
         The cognitive_prior is provided for context and future enhancements,
         but the recommender uses its own data sources.
-        
+
         Args:
             user_id: User identifier
             cognitive_prior: Dictionary containing:
                 - mastery_vector: Dict[str, float] - mastery scores by node ID (for reference)
                 - kg_context: Dict[str, Any] - knowledge graph context
                 - profile: Dict[str, Any] - user profile/preferences
-                
+
         Returns:
             Dictionary with recommendation plan:
                 - decision: str - "EXPLORATORY", "REMEDIAL", or "REVIEW"
@@ -166,21 +240,29 @@ class AgentTools:
                 - learning_task: str - type of task ("scaffold", "review", "rest")
                 - task_details: Dict - specific task parameters
                 - recommendations: List[Dict] - list of recommended nodes
+
+        Raises:
+            RecommenderTimeoutError: If recommender takes longer than 60 seconds
+            RecommenderError: If recommender fails for any other reason
+
+        Note:
+            On timeout, returns a safe fallback with decision="REVIEW" to allow graceful degradation.
+            Other errors will raise exceptions to signal true failures.
         """
         try:
             recommender = self._get_recommender()
-            
+
             # Generate recommendations (recommender builds mastery vector internally)
             # Add timeout protection using threading (works in FastAPI)
             from concurrent.futures import ThreadPoolExecutor, TimeoutError as FutureTimeoutError
-            
+
             with ThreadPoolExecutor(max_workers=1) as executor:
                 future = executor.submit(recommender.generate_recommendations)
                 try:
                     exploratory, remedial, mastery_vector = future.result(timeout=60)  # 60 second timeout
-                except FutureTimeoutError:
-                    print("⚠️  generate_recommendations() timed out after 60 seconds")
-                    # Return a safe fallback response
+                except FutureTimeoutError as e:
+                    logger.warning(f"Recommender timed out after 60 seconds for user {user_id}, returning fallback")
+                    # Return a safe fallback response for timeout (graceful degradation)
                     return {
                         "decision": "REVIEW",
                         "plan_title": "Unable to generate recommendations (timeout)",
@@ -191,6 +273,7 @@ class AgentTools:
                             "total_tracked": 0,
                             "mastered_count": 0,
                         },
+                        "timeout": True,  # Flag to indicate this is a timeout fallback
                     }
             
             # Determine decision based on recommendations
@@ -243,7 +326,7 @@ class AgentTools:
                 task_details = {"type": "review", "count": 10}
                 recommendations = []
             
-            return {
+            result = {
                 "decision": decision,
                 "plan_title": plan_title,
                 "learning_task": learning_task,
@@ -254,15 +337,14 @@ class AgentTools:
                     "mastered_count": sum(1 for v in mastery_vector.values() if v >= 0.85),
                 },
             }
+            logger.info(f"Successfully generated recommendations for user {user_id}: {decision} with {len(recommendations)} items")
+            return result
+
         except Exception as e:
-            return {
-                "error": str(e),
-                "decision": "ERROR",
-                "plan_title": "Unable to generate recommendations",
-                "learning_task": "rest",
-                "task_details": {},
-                "recommendations": [],
-            }
+            logger.error(f"Failed to generate recommendations for user {user_id}: {e}", exc_info=True)
+            raise RecommenderError(
+                f"Failed to generate recommendations for user {user_id}: {str(e)}"
+            ) from e
 
     def generate_flashcards(self, prompt: str, context_tags: Dict[str, Any], child_profile: Dict[str, Any]) -> Dict[str, Any]:
         """

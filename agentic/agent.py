@@ -1,9 +1,21 @@
 from dataclasses import dataclass
 from typing import Any, Dict, Optional
+import logging
 
 from .memory import AgentMemory
 from .principles import PrincipleStore
-from .tools import AgentTools
+from .tools import (
+    AgentTools,
+    MasteryVectorError,
+    MasteryVectorTimeoutError,
+    KnowledgeGraphError,
+    KnowledgeGraphTimeoutError,
+    RecommenderError,
+    RecommenderTimeoutError,
+)
+
+# Configure logging
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -50,18 +62,44 @@ class AgenticPlanner:
         - Mastery vector (what the child has mastered)
         - World model/KG (knowledge structure and dependencies)
         - User profile (preferences and learning style)
-        
+
         This is the "best effort prior" of the child's cognitive state.
+
+        Raises:
+            MasteryVectorError: If mastery vector query fails (non-timeout)
+            KnowledgeGraphError: If knowledge graph query fails (non-timeout)
         """
         # 1. Query mastery vector (from Anki review history)
         print("  📊 Querying mastery vector from Anki...")
-        mastery_vector = self.tools.query_mastery_vector(user_id)
-        print(f"  ✅ Mastery vector: {len(mastery_vector)} nodes")
-        
+        mastery_vector = {}
+        try:
+            mastery_vector = self.tools.query_mastery_vector(user_id)
+            print(f"  ✅ Mastery vector: {len(mastery_vector)} nodes")
+        except MasteryVectorTimeoutError as e:
+            # Graceful degradation for timeout - continue with empty vector
+            logger.warning(f"Mastery vector query timed out for user {user_id}, continuing with empty vector")
+            print(f"  ⚠️  Mastery vector: timeout, using empty vector")
+            mastery_vector = {}
+        except MasteryVectorError as e:
+            # Non-timeout error - re-raise to fail fast
+            logger.error(f"Mastery vector query failed for user {user_id}: {e}")
+            raise
+
         # 2. Query world model (knowledge graph)
         print(f"  🌐 Querying knowledge graph{' for topic: ' + topic if topic else ''}...")
-        kg_context = self.tools.query_world_model(topic=topic)
-        print("  ✅ Knowledge graph context retrieved")
+        kg_context = {}
+        try:
+            kg_context = self.tools.query_world_model(topic=topic)
+            print("  ✅ Knowledge graph context retrieved")
+        except KnowledgeGraphTimeoutError as e:
+            # Graceful degradation for timeout - continue with empty context
+            logger.warning(f"Knowledge graph query timed out for topic '{topic}', continuing with empty context")
+            print("  ⚠️  Knowledge graph: timeout, using empty context")
+            kg_context = {}
+        except KnowledgeGraphError as e:
+            # Non-timeout error - re-raise to fail fast
+            logger.error(f"Knowledge graph query failed for topic '{topic}': {e}")
+            raise
         
         # 3. Query user profile
         print("  👤 Querying user profile...")
@@ -104,16 +142,38 @@ class AgenticPlanner:
         
         # STEP 1: Synthesize cognitive prior
         print("🔍 Step 1: Synthesizing cognitive prior...")
-        cognitive_prior = self.synthesize_cognitive_prior(user_id, topic)
-        print(f"✅ Cognitive prior synthesized: {len(cognitive_prior.get('mastery_vector', {}))} nodes tracked")
-        
+        try:
+            cognitive_prior = self.synthesize_cognitive_prior(user_id, topic)
+            print(f"✅ Cognitive prior synthesized: {len(cognitive_prior.get('mastery_vector', {}))} nodes tracked")
+        except (MasteryVectorError, KnowledgeGraphError) as e:
+            # Critical service failure - re-raise to API layer
+            logger.error(f"Failed to synthesize cognitive prior for user {user_id}: {e}")
+            raise
+
         # STEP 2: Call recommender with the prior
         print("🎯 Step 2: Calling recommender to determine next learning step...")
-        recommendation_plan = self.tools.call_recommender(
-            user_id=user_id,
-            cognitive_prior=cognitive_prior,
-        )
-        print(f"✅ Recommender returned: {recommendation_plan.get('decision', 'UNKNOWN')} - {recommendation_plan.get('plan_title', 'No plan')}")
+        try:
+            recommendation_plan = self.tools.call_recommender(
+                user_id=user_id,
+                cognitive_prior=cognitive_prior,
+            )
+            print(f"✅ Recommender returned: {recommendation_plan.get('decision', 'UNKNOWN')} - {recommendation_plan.get('plan_title', 'No plan')}")
+        except RecommenderTimeoutError as e:
+            # Recommender already returns fallback for timeout, but catch just in case
+            logger.warning(f"Recommender timeout for user {user_id}, using fallback plan")
+            recommendation_plan = {
+                "decision": "REVIEW",
+                "plan_title": "Unable to generate recommendations (timeout)",
+                "learning_task": "rest",
+                "task_details": {},
+                "recommendations": [],
+                "timeout": True,
+            }
+            print("  ⚠️  Recommender: timeout, using fallback plan")
+        except RecommenderError as e:
+            # Non-timeout recommender error - re-raise to fail fast
+            logger.error(f"Recommender failed for user {user_id}: {e}")
+            raise
         
         # STEP 3: Generate rationale based on the synthesis
         mastery_summary = cognitive_prior.get("mastery_summary", {})
@@ -156,10 +216,11 @@ class AgenticPlanner:
         final_complexity = topic_complexity
         if not final_complexity:
             # Infer complexity from mastery levels
-            avg_mastery = (
-                sum(cognitive_prior["mastery_vector"].values()) / len(cognitive_prior["mastery_vector"])
-                if cognitive_prior["mastery_vector"] else 0.5
-            )
+            mastery_values = list(cognitive_prior.get("mastery_vector", {}).values())
+            if mastery_values:
+                avg_mastery = sum(mastery_values) / len(mastery_values)
+            else:
+                avg_mastery = 0.5  # Default for empty mastery vector
             if avg_mastery < 0.3:
                 final_complexity = "high"
             elif avg_mastery < 0.6:

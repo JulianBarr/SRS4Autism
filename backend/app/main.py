@@ -22,6 +22,7 @@ import tempfile
 import zipfile
 import shutil
 import re
+import logging
 
 # Database imports
 import sys
@@ -32,7 +33,15 @@ from sqlalchemy.orm import Session
 from fastapi import Depends
 
 from agentic import AgenticPlanner, AgentMemory, PrincipleStore, AgentTools
+from agentic.tools import (
+    MasteryVectorError,
+    KnowledgeGraphError,
+    RecommenderError,
+)
 import google.generativeai as genai
+
+# Configure logging
+logger = logging.getLogger(__name__)
 from openai import OpenAI
 try:
     from dotenv import load_dotenv
@@ -3472,37 +3481,59 @@ async def get_integrated_recommendations(
 async def agentic_plan(request: AgenticPlanRequest):
     """
     Entry point for the new Agentic Learning Agent.
-    
+
     This is a "learning agent" that:
     1. Synthesizes cognitive state (mastery, KG, profile)
     2. Determines WHAT to learn (via recommender)
     3. Returns a learning plan (not just cards)
-    
+
     The agent solves "what to learn" by integrating with the recommender system.
     Topic is optional - if not provided, the agent will determine the best learning
     content based on the child's cognitive state.
+
+    Raises:
+        HTTPException 503: If critical services (mastery vector, KG, recommender) fail
     """
-    planner = get_agentic_planner()
-    plan = planner.plan_learning_step(
-        user_id=request.user_id,
-        topic=request.topic,
-        learner_level=request.learner_level,
-        topic_complexity=request.topic_complexity,
-    )
-    response = {
-        "learner_level": plan.learner_level,
-        "topic": plan.topic,
-        "topic_complexity": plan.topic_complexity,
-        "scaffold_type": plan.scaffold_type,
-        "rationale": plan.rationale,
-        "cognitive_prior": {
-            "mastery_summary": plan.cognitive_prior.get("mastery_summary", {}),
-            "total_nodes": len(plan.cognitive_prior.get("mastery_vector", {})),
-        },
-        "recommendation_plan": plan.recommendation_plan,
-        "cards": plan.cards_payload.get("cards") if plan.cards_payload else None,
-    }
-    return response
+    try:
+        planner = get_agentic_planner()
+        plan = planner.plan_learning_step(
+            user_id=request.user_id,
+            topic=request.topic,
+            learner_level=request.learner_level,
+            topic_complexity=request.topic_complexity,
+        )
+        response = {
+            "learner_level": plan.learner_level,
+            "topic": plan.topic,
+            "topic_complexity": plan.topic_complexity,
+            "scaffold_type": plan.scaffold_type,
+            "rationale": plan.rationale,
+            "cognitive_prior": {
+                "mastery_summary": plan.cognitive_prior.get("mastery_summary", {}),
+                "total_nodes": len(plan.cognitive_prior.get("mastery_vector", {})),
+            },
+            "recommendation_plan": plan.recommendation_plan,
+            "cards": plan.cards_payload.get("cards") if plan.cards_payload else None,
+        }
+        return response
+
+    except (MasteryVectorError, KnowledgeGraphError, RecommenderError) as e:
+        # Critical service failure - return HTTP 503
+        logger.error(f"Agentic planner failed for user {request.user_id}: {e}", exc_info=True)
+        raise HTTPException(
+            status_code=503,
+            detail="Learning service temporarily unavailable. Please try again later."
+        )
+    except HTTPException:
+        # Re-raise HTTP exceptions as-is
+        raise
+    except Exception as e:
+        # Unexpected error - return HTTP 500
+        logger.error(f"Unexpected error in agentic planner for user {request.user_id}: {e}", exc_info=True)
+        raise HTTPException(
+            status_code=500,
+            detail="An unexpected error occurred. Please try again."
+        )
 
 # Get HSK vocabulary for mastered words management
 @app.get("/vocabulary/hsk")
