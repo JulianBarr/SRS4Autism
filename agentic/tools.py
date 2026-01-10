@@ -13,6 +13,7 @@ import logging
 from typing import Any, Dict, List, Optional
 
 from agent.content_generator import ContentGenerator
+from backend.config import settings
 
 # Configure logging
 logger = logging.getLogger(__name__)
@@ -73,7 +74,7 @@ class AgentTools:
     def __init__(self) -> None:
         self.generator = ContentGenerator()
         self._recommender = None
-        self._kg_endpoint = "http://localhost:3030/srs4autism/query"
+        self._kg_endpoint = settings.fuseki_url
 
     def _get_recommender(self):
         """Lazy load the recommender to avoid import issues."""
