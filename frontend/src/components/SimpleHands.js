@@ -159,3 +159,4 @@ const SimpleHands = ({ activeFinger }) => {
 
 export default SimpleHands;
 
+

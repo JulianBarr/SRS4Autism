@@ -279,31 +279,68 @@ class ChinesePPRRecommenderService:
     ) -> List[Dict[str, Any]]:
         """
         Get PPR-based Chinese word recommendations.
-        
+
         Args:
             mastered_words: List of mastered Chinese word texts
             profile_id: Optional profile ID (for logging)
             exclude_words: Optional list of words to exclude
             **override_config: Configuration overrides
-        
+
         Returns:
             List of recommendation dictionaries
         """
         # Merge config overrides
         config = {**self.config, **override_config}
-        
-        # Map mastered words to node IDs
-        matched_ids, unmatched = self.get_mastered_word_ids(mastered_words, profile_id)
-        
-        if not matched_ids:
-            return []
-        
-        if unmatched and len(unmatched) <= 10:
-            print(f"   ⚠️  {len(unmatched)} mastered words could not be mapped (e.g., {', '.join(unmatched[:5])})")
-        
+
+        # --- BUILD REVERSE LABEL LOOKUP ---
+        # Create label → node_id mapping from the similarity graph's labels
+        label_to_node = {label: node_id for node_id, label in self.labels.items()}
+
+        # --- ALIGN AND VALIDATE SEED NODES ---
+        # Map mastered words to graph nodes using the similarity graph's labels
+        seed_nodes = []
+        unmatched_words = []
+
+        for word in mastered_words:
+            word_stripped = word.strip()
+            if not word_stripped:
+                continue
+
+            # Try direct lookup in similarity graph labels
+            if word_stripped in label_to_node:
+                node_id = label_to_node[word_stripped]
+                seed_nodes.append(node_id)
+            else:
+                # Try without spaces for compound words
+                word_no_space = word_stripped.replace(' ', '')
+                if word_no_space in label_to_node:
+                    node_id = label_to_node[word_no_space]
+                    seed_nodes.append(node_id)
+                else:
+                    unmatched_words.append(word_stripped)
+
+        print(f"   📊 Seed validation: {len(seed_nodes)}/{len(mastered_words)} mastered words found in similarity graph")
+
+        if unmatched_words and len(unmatched_words) <= 10:
+            print(f"   ⚠️  {len(unmatched_words)} words not in similarity graph: {', '.join(unmatched_words[:5])}")
+
+        # --- COLD START FALLBACK ---
+        # If no seeds found, use top 5 most connected nodes as fallback
+        if not seed_nodes:
+            print(f"   ⚠️  WARNING: No mastered words overlap with graph. Using cold start fallback.")
+
+            # Calculate node degrees (most connected nodes)
+            node_degrees = [(node, self.graph.degree(node)) for node in self.graph.nodes()]
+            node_degrees.sort(key=lambda x: x[1], reverse=True)
+
+            # Use top 5 most connected nodes as seeds
+            seed_nodes = [node for node, _ in node_degrees[:5]]
+            print(f"   🌱 Cold start: Using top {len(seed_nodes)} most connected nodes as seeds")
+            print(f"   🌱 Fallback seeds: {seed_nodes}")
+
         # Build seed weights
-        seed_weights = {node_id: 1.0 for node_id in matched_ids}
-        
+        seed_weights = {node_id: 1.0 for node_id in seed_nodes}
+
         # Build personalization vector
         personalization = build_personalization_vector(self.graph, seed_weights)
         
@@ -375,13 +412,18 @@ class ChinesePPRRecommenderService:
                 return 0.0
             return max(0.0, aoa - mental_age)
         
-        # Build excluded node IDs
+        # Build excluded node IDs (using similarity graph node IDs)
         excluded_node_ids = set()
         if exclude_words:
             for word in exclude_words:
-                node_id = self.label_index.get(word.strip()) or self.label_index.get(word.strip().replace(" ", ""))
-                if node_id:
-                    excluded_node_ids.add(node_id)
+                word_stripped = word.strip()
+                # Look up in similarity graph labels (not metadata)
+                if word_stripped in label_to_node:
+                    excluded_node_ids.add(label_to_node[word_stripped])
+                else:
+                    word_no_space = word_stripped.replace(" ", "")
+                    if word_no_space in label_to_node:
+                        excluded_node_ids.add(label_to_node[word_no_space])
         
         mental_age = config.get("mental_age")
         aoa_buffer = config.get("aoa_buffer", 0.0)
@@ -393,13 +435,26 @@ class ChinesePPRRecommenderService:
         
         candidates = []
         for node_id, raw_ppr_score in scores.items():
-            # For Chinese, node IDs are already normalized
+            # Skip seeds
             if node_id in seed_weights:
                 continue
             if node_id in excluded_node_ids:
                 continue
-            
-            meta = self.word_metadata.get(node_id)
+
+            # Map graph node_id to metadata via label
+            # Graph uses 'word-学习', metadata uses 'word-zh-学习'
+            # Bridge via the label '学习'
+            label = self.labels.get(node_id)
+            if not label:
+                continue
+
+            # Look up metadata node ID via label
+            meta_node_id = self.label_index.get(label)
+            if not meta_node_id:
+                continue
+
+            # Get metadata
+            meta = self.word_metadata.get(meta_node_id)
             if not meta:
                 continue
             
@@ -508,7 +563,7 @@ def get_chinese_ppr_service(
         similarity_file = PROJECT_ROOT / "data" / "content_db" / "chinese_word_similarity.json"
     if kg_file is None:
         # Use merged KG to ensure AoA/frequency metadata is available
-        kg_file = PROJECT_ROOT / "knowledge_graph" / "world_model_merged.ttl"
+        kg_file = PROJECT_ROOT / "knowledge_graph" / "world_model_complete.ttl"
     
     # Ensure paths are absolute
     similarity_file = similarity_file.resolve()

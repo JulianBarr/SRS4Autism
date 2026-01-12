@@ -278,3 +278,4 @@ const SettingsModal = ({ isOpen, onClose }) => {
 
 export default SettingsModal;
 
+

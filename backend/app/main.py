@@ -3341,7 +3341,7 @@ async def get_chinese_ppr_recommendations(request: ChinesePPRRecommendationReque
         # Get Chinese PPR service (lazy-loaded singleton)
         similarity_file = PROJECT_ROOT / "data" / "content_db" / "chinese_word_similarity.json"
         # Use merged KG which now includes SUBTLEX-CH frequency data
-        kg_file = PROJECT_ROOT / "knowledge_graph" / "world_model_merged.ttl"
+        kg_file = PROJECT_ROOT / "knowledge_graph" / "world_model_complete.ttl"
         
         service = get_chinese_ppr_service(
             similarity_file=similarity_file,

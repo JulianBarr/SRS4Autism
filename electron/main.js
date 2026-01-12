@@ -2,6 +2,7 @@ const { app, BrowserWindow } = require('electron');
 const { spawn } = require('child_process');
 const path = require('path');
 const net = require('net');
+const fs = require('fs');
 
 let mainWindow;
 let backendProcess;
@@ -57,6 +58,18 @@ function startBackend() {
   return new Promise((resolve, reject) => {
     let backendPath;
 
+    // Define log path
+    const logDir = path.join(__dirname, '..', 'data', 'logs');
+    const logPath = path.join(logDir, 'backend.log');
+
+    // Ensure log directory exists
+    if (!fs.existsSync(logDir)) {
+      fs.mkdirSync(logDir, { recursive: true });
+    }
+
+    // Create write stream to log file (append mode)
+    const logStream = fs.createWriteStream(logPath, { flags: 'a' });
+
     if (isDev) {
       // In development, run the Python script directly
       backendPath = path.join(__dirname, '..', 'backend', 'run.py');
@@ -76,12 +89,18 @@ function startBackend() {
       });
     }
 
+    // Pipe stdout to both file and console
     backendProcess.stdout.on('data', (data) => {
-      console.log(`Backend stdout: ${data}`);
+      const output = data.toString();
+      console.log(`Backend stdout: ${output}`);
+      logStream.write(output);
     });
 
+    // Pipe stderr to both file and console
     backendProcess.stderr.on('data', (data) => {
-      console.error(`Backend stderr: ${data}`);
+      const output = data.toString();
+      console.error(`Backend stderr: ${output}`);
+      logStream.write(output);
     });
 
     backendProcess.on('error', (error) => {

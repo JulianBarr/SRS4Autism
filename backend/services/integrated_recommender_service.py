@@ -286,12 +286,11 @@ class IntegratedRecommenderService:
             return []
         
         # Get KG nodes for prerequisite checking
-        # Use Word node type for vocabulary
         vocab_config = RecommenderConfig(
             anki_query='_KG_Map:*',
             kg_field_name="_KG_Map",
             fuseki_endpoint="http://localhost:3030/srs4autism/query",
-            node_types=("srs-kg:Word",),  # Explicitly fetch Word nodes for vocabulary
+            node_types=("srs-kg:Word",),
             mastery_threshold=0.85,
             prereq_threshold=0.75,
             mental_age=self.profile.mental_age,
@@ -301,6 +300,18 @@ class IntegratedRecommenderService:
         
         print(f"   📊 KG has {len(nodes)} Word nodes")
         
+        # Fallback to metadata cache if KG is empty
+        use_metadata_fallback = len(nodes) == 0
+        metadata_valid_node_ids = set()
+        
+        if use_metadata_fallback:
+            print(f"   ⚠️  Live KG seems empty. Falling back to Metadata Cache for validation.")
+            if ppr_service.word_metadata:
+                metadata_valid_node_ids = set(ppr_service.word_metadata.keys())
+                print(f"   ✅ Using metadata cache with {len(metadata_valid_node_ids):,} words")
+            else:
+                print(f"   ⚠️  Metadata cache not loaded for PPR service")
+        
         # Apply ZPD filtering (prerequisites, mastery threshold)
         candidates = []
         skipped_no_node_id = 0
@@ -308,60 +319,123 @@ class IntegratedRecommenderService:
         skipped_no_node = 0
         skipped_prereqs = 0
         
+        # --- 🕵️‍♂️ DEBUG: VISUALIZE ID MISMATCH ---
+        print("\n🕵️‍♂️ DIAGNOSIS: ID Mismatch Check")
+        if ppr_recommendations:
+            test_id = ppr_recommendations[0].get("node_id", "")
+            print(f"👉 PPR ID: '{test_id}'")
+            if use_metadata_fallback and metadata_valid_node_ids:
+                 # Check logic without srs-kg prefix just in case
+                stripped_id = test_id.replace("srs-kg:", "")
+                zh_id = stripped_id.replace("word-", "word-zh-")
+                print(f"❓ Test (Stripped + -zh-): '{zh_id}' in Cache? -> {zh_id in metadata_valid_node_ids}")
+        print("--------------------------------------------------\n")
+        # ----------------------------------------
+        
         for rec in ppr_recommendations:
-            node_id = _normalize_kg_id(rec.get("node_id", ""))
+            raw_node_id = rec.get("node_id", "")
+            node_id = _normalize_kg_id(raw_node_id)
+            
             if not node_id:
                 skipped_no_node_id += 1
                 continue
             
-            # Check mastery
+            # 1. Check mastery (Fast Fail)
             mastery = mastery_vector.get(node_id, 0.0)
             if mastery >= self.zpd_recommender.config.mastery_threshold:
                 skipped_mastered += 1
-                continue  # Already mastered
-            
-            # Check prerequisites
-            node = nodes.get(node_id)
-            if not node:
-                skipped_no_node += 1
                 continue
-            
-            prereq_scores = [mastery_vector.get(pr, 0.0) for pr in node.prerequisites]
-            missing_prereqs = [
-                pr for pr, score in zip(node.prerequisites, prereq_scores)
-                if score < self.zpd_recommender.config.prereq_threshold
-            ]
-            
-            if missing_prereqs:
-                skipped_prereqs += 1
-                continue  # Prerequisites not met
-            
-            # Create integrated recommendation
-            # PPR service returns "score" not "final_score"
+
+            # 2. Validation & Prerequisite Check
+            node = None
+            missing_prereqs = []
+
+            if use_metadata_fallback:
+                # --- FIXED VALIDATION LOGIC ---
+                # The cache keys (e.g. 'word-zh-饭馆') lack the 'srs-kg:' prefix,
+                # but _normalize_kg_id ensures node_id has it (e.g. 'srs-kg:word-饭馆').
+                # We must handle both prefix stripping and the -zh- insertion.
+                
+                base_id = node_id.replace("srs-kg:", "") # Strip prefix if present
+                
+                found_id = None
+                
+                # Check 1: Base ID in cache?
+                if base_id in metadata_valid_node_ids:
+                    found_id = base_id
+                
+                # Check 2: Base ID + -zh- fix?
+                elif base_id.replace("word-", "word-zh-") in metadata_valid_node_ids:
+                    found_id = base_id.replace("word-", "word-zh-")
+                
+                # Check 3: Full ID in cache? (fallback)
+                elif node_id in metadata_valid_node_ids:
+                    found_id = node_id
+
+                if found_id:
+                    node_id = found_id # Success! Update ID to match cache
+                else:
+                    skipped_no_node += 1
+                    continue
+                # -----------------------------
+                
+                # Skip prerequisite checking when using fallback
+                node = None
+                missing_prereqs = []
+                
+            else:
+                # Use Live KG
+                node = nodes.get(node_id)
+                if not node:
+                    skipped_no_node += 1
+                    continue
+                
+                prereq_scores = [mastery_vector.get(pr, 0.0) for pr in node.prerequisites]
+                missing_prereqs = [
+                    pr for pr, score in zip(node.prerequisites, prereq_scores)
+                    if score < self.zpd_recommender.config.prereq_threshold
+                ]
+                
+                if missing_prereqs:
+                    skipped_prereqs += 1
+                    continue
+
+            # 3. Create Integrated Recommendation
             ppr_score = rec.get("score", rec.get("final_score", 0.0))
+            
+            # Robust label extraction
+            label = rec.get("word", rec.get("label", node_id))
+            if node:
+                label = node.label
+                hsk_level = node.hsk_level
+                cefr_level = node.cefr_level
+                prerequisites = node.prerequisites.copy()
+            else:
+                # Fallback data
+                hsk_level = None
+                cefr_level = None
+                prerequisites = []
+
             candidates.append(IntegratedRecommendation(
                 node_id=node_id,
-                label=rec.get("word", rec.get("label", node.label)),
+                label=label,
                 content_type="vocab",
                 language=language,
                 score=ppr_score,
                 ppr_score=ppr_score,
                 mastery=mastery,
-                hsk_level=node.hsk_level,
-                cefr_level=node.cefr_level,
-                prerequisites=node.prerequisites.copy() if node.prerequisites else [],
+                hsk_level=hsk_level,
+                cefr_level=cefr_level,
+                prerequisites=prerequisites,
                 missing_prereqs=missing_prereqs
             ))
         
         print(f"   ✅ After ZPD filtering: {len(candidates)} vocabulary candidates")
-        if skipped_no_node_id > 0:
-            print(f"      ⚠️  Skipped {skipped_no_node_id} (no node_id)")
-        if skipped_mastered > 0:
-            print(f"      ⚠️  Skipped {skipped_mastered} (already mastered)")
-        if skipped_no_node > 0:
-            print(f"      ⚠️  Skipped {skipped_no_node} (not found in KG)")
-        if skipped_prereqs > 0:
-            print(f"      ⚠️  Skipped {skipped_prereqs} (prerequisites not met)")
+        # --- PRINT THE REASONS FOR DROPPING CANDIDATES ---
+        if skipped_no_node_id > 0: print(f"      ⚠️  Skipped {skipped_no_node_id} (missing node_id)")
+        if skipped_mastered > 0: print(f"      ⚠️  Skipped {skipped_mastered} (already mastered)")
+        if skipped_no_node > 0: print(f"      ⚠️  Skipped {skipped_no_node} (not found in Metadata Cache)")
+        if skipped_prereqs > 0: print(f"      ⚠️  Skipped {skipped_prereqs} (prerequisites not met)")
         
         # Sort by score
         candidates.sort(key=lambda x: x.score, reverse=True)
@@ -372,10 +446,12 @@ class IntegratedRecommenderService:
         language: str,
         mastery_vector: Dict[str, float]
     ) -> List[IntegratedRecommendation]:
-        """Get grammar recommendations using ZPD heuristic (no PPR for grammar yet)."""
-        # Update config to fetch grammar points
+        """Get grammar recommendations using ZPD heuristic (with manual file fallback)."""
+        import re
+
+        # 1. Try Loading from Live Knowledge Graph (Fuseki)
         config = RecommenderConfig(
-            anki_query='_KG_Map:*',  # Anki search syntax: field_name:* (no quotes, colon is field separator)
+            anki_query='_KG_Map:*',
             kg_field_name="_KG_Map",
             fuseki_endpoint="http://localhost:3030/srs4autism/query",
             node_types=("srs-kg:GrammarPoint",),
@@ -383,34 +459,130 @@ class IntegratedRecommenderService:
             prereq_threshold=0.75,
             mental_age=self.profile.mental_age,
         )
-        
+
         kg_service = KnowledgeGraphService(config)
         nodes = kg_service.fetch_nodes()
-        
-        # Filter grammar points by ZPD criteria
+
+        # 2. FALLBACK: If Live KG is empty, parse the TTL file manually
+        if not nodes:
+            # Check class-level cache to avoid re-parsing
+            if hasattr(self.__class__, '_grammar_cache') and self.__class__._grammar_cache:
+                nodes = self.__class__._grammar_cache
+                print(f"   📊 Using Cached Grammar Nodes: {len(nodes)}")
+            else:
+                kg_file_path = PROJECT_ROOT / "knowledge_graph" / "world_model_complete.ttl"
+                print(f"   ⚠️  Live KG empty. Parsing grammar manually from {kg_file_path.name}...")
+
+                parsed_nodes = {}
+                current_id = None
+                # Simple container for node data
+                current_data = {"label": "Unknown", "prereqs": [], "cefr": "A1"}
+
+                # Duck-Type Class for Nodes
+                class FallbackNode:
+                    def __init__(self, label, prerequisites, cefr_level):
+                        self.label = label
+                        self.prerequisites = prerequisites
+                        self.cefr_level = cefr_level
+                        self.hsk_level = None
+
+                try:
+                    with open(kg_file_path, 'r', encoding='utf-8') as f:
+                        lines = f.readlines()
+
+                    for line in lines:
+                        line = line.strip()
+
+                        # 1. Detect Start of Grammar Point
+                        # Matches: srs-inst:gp-B1-142-Reduplication of adjectives a srs-kg:GrammarPoint ;
+                        if "a srs-kg:GrammarPoint" in line and line.startswith("srs-inst:"):
+                            # Save previous node if exists
+                            if current_id:
+                                parsed_nodes[current_id] = FallbackNode(
+                                    current_data["label"],
+                                    current_data["prereqs"],
+                                    current_data["cefr"]
+                                )
+
+                            # Extract ID (Everything before ' a srs-kg:GrammarPoint')
+                            # e.g. "srs-inst:gp-B1-142-Reduplication of adjectives"
+                            current_id = line.split(" a srs-kg:GrammarPoint")[0].strip()
+
+                            # Reset data (Use part of ID as default label)
+                            default_label = current_id.replace("srs-inst:", "")
+                            current_data = {"label": default_label, "prereqs": [], "cefr": "A1"}
+
+                        if current_id:
+                            # 2. Extract Label (Prefer English)
+                            # rdfs:label "Reduplication of adjectives"@en ;
+                            if "rdfs:label" in line:
+                                # Try to grab text inside quotes before @en
+                                lbl_match = re.search(r'"([^"]+)"@en', line)
+                                if lbl_match:
+                                    current_data["label"] = lbl_match.group(1)
+                                else:
+                                    # Fallback to any quoted string
+                                    lbl_match_any = re.search(r'"([^"]+)"', line)
+                                    if lbl_match_any:
+                                        current_data["label"] = lbl_match_any.group(1)
+
+                            # 3. Extract CEFR Level
+                            # srs-kg:cefrLevel "B1" ;
+                            if "cefrLevel" in line:
+                                lvl_match = re.search(r'"([^"]+)"', line)
+                                if lvl_match:
+                                    current_data["cefr"] = lvl_match.group(1)
+
+                            # 4. Extract Prerequisites
+                            # srs-kg:hasPrerequisite srs-inst:gp-XXX ;
+                            if "hasPrerequisite" in line:
+                                # Grab the ID that follows
+                                pre_match = re.search(r'(srs-(?:inst|kg):[^;\s]+)', line)
+                                if pre_match:
+                                    current_data["prereqs"].append(pre_match.group(1))
+
+                            # 5. End of Block (Line ends with .)
+                            if line.endswith("."):
+                                parsed_nodes[current_id] = FallbackNode(
+                                    current_data["label"],
+                                    current_data["prereqs"],
+                                    current_data["cefr"]
+                                )
+                                current_id = None
+
+                    # Cache the result
+                    self.__class__._grammar_cache = parsed_nodes
+                    nodes = parsed_nodes
+                    print(f"   ✅ Manually parsed {len(nodes)} Grammar Points")
+
+                except Exception as e:
+                    print(f"   ❌ Error parsing grammar file: {e}")
+                    nodes = {}
+
+        # 3. Filter grammar points by ZPD criteria
         candidates = []
         for node_id, node in nodes.items():
             mastery = mastery_vector.get(node_id, 0.0)
-            
+
             # Skip if mastered
             if mastery >= config.mastery_threshold:
                 continue
-            
+
             # Check prerequisites
             prereq_scores = [mastery_vector.get(pr, 0.0) for pr in node.prerequisites]
             missing_prereqs = [
                 pr for pr, score in zip(node.prerequisites, prereq_scores)
                 if score < config.prereq_threshold
             ]
-            
+
             if missing_prereqs:
                 continue
-            
+
             # Score based on readiness (1 - mastery) and prerequisite mastery
             prereq_mastery = min(prereq_scores) if prereq_scores else 1.0
             readiness = 1.0 - mastery
             score = (readiness * 0.7) + (prereq_mastery * 0.3)
-            
+
             candidates.append(IntegratedRecommendation(
                 node_id=node_id,
                 label=node.label,
@@ -423,11 +595,12 @@ class IntegratedRecommenderService:
                 prerequisites=node.prerequisites.copy() if node.prerequisites else [],
                 missing_prereqs=missing_prereqs
             ))
-        
+
         # Sort by score
         candidates.sort(key=lambda x: x.score, reverse=True)
+        print(f"   ✅ Found {len(candidates)} grammar candidates")
         return candidates
-    
+
     def _campaign_manager(
         self,
         vocab_candidates: List[IntegratedRecommendation],
@@ -457,4 +630,3 @@ class IntegratedRecommenderService:
         final_recommendations.sort(key=lambda x: x.score, reverse=True)
         
         return final_recommendations
-
