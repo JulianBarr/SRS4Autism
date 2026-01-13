@@ -329,12 +329,13 @@ def _build_sorted_vocab_cache(sort_order: str = "interleaved") -> List[Dict[str,
     # 1. LOAD THE BLOCKLIST
     blocklist = _load_curation_blocklist()
 
-    # Optimized query
+    # Optimized query (updated for ontology v2: uses rdfs:label)
     light_query = """
     PREFIX srs-kg: <http://srs4autism.com/schema/>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
     SELECT DISTINCT ?wordUri ?englishWord (SAMPLE(?imageNode) AS ?exampleImage) WHERE {
         ?zhNode srs-kg:learningTheme "Logic City" ; srs-kg:means ?concept .
-        ?wordUri a srs-kg:Word ; srs-kg:means ?concept ; srs-kg:text ?englishWord .
+        ?wordUri a srs-kg:Word ; srs-kg:means ?concept ; rdfs:label ?englishWord .
         FILTER (lang(?englishWord) = "en")
         OPTIONAL { ?concept srs-kg:hasVisualization ?imageNode }
     } GROUP BY ?wordUri ?englishWord
@@ -544,18 +545,19 @@ async def get_logic_city_vocab(
         
         detail_query = f"""
         PREFIX srs-kg: <http://srs4autism.com/schema/>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
         SELECT ?wordUri ?chineseWord ?imagePath WHERE {{
             VALUES ?wordUri {{ {uris} }}
             ?wordUri srs-kg:means ?concept .
-            
-            # Fetch ONLY the Logic City tagged Chinese word
+
+            # Fetch ONLY the Logic City tagged Chinese word (updated for ontology v2: uses rdfs:label)
             OPTIONAL {{
-                ?zhNode srs-kg:text ?chineseWord ;
+                ?zhNode rdfs:label ?chineseWord ;
                         srs-kg:means ?concept ;
                         srs-kg:learningTheme "Logic City" .
                 FILTER (lang(?chineseWord) = "zh")
             }}
-            
+
             OPTIONAL {{
                 ?concept srs-kg:hasVisualization ?v . ?v srs-kg:imageFilePath ?imagePath .
             }}
@@ -665,13 +667,14 @@ async def sync_logic_city_to_anki(request: Dict[str, Any]):
         
         q = f"""
         PREFIX srs-kg: <http://srs4autism.com/schema/>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
         SELECT ?wordUri ?english ?chinese ?imagePath WHERE {{
             VALUES ?wordUri {{ {uri_str} }}
-            ?wordUri srs-kg:text ?english .
+            ?wordUri rdfs:label ?english .
             FILTER(lang(?english)="en")
             ?wordUri srs-kg:means ?c .
             OPTIONAL {{
-                ?zh srs-kg:means ?c; srs-kg:text ?chinese; srs-kg:learningTheme "Logic City".
+                ?zh srs-kg:means ?c; rdfs:label ?chinese; srs-kg:learningTheme "Logic City".
                 FILTER(lang(?chinese)="zh")
             }}
             OPTIONAL {{ ?c srs-kg:hasVisualization ?v. ?v srs-kg:imageFilePath ?imagePath. }}

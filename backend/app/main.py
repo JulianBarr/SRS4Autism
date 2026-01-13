@@ -730,7 +730,7 @@ def fetch_word_knowledge_points(word: str) -> Dict[str, Any]:
     
     SELECT ?pinyin ?definition ?conceptLabel ?hsk WHERE {{
         ?word a srs-kg:Word ;
-              srs-kg:text "{sparql_word}" .
+              rdfs:label "{sparql_word}"@zh .
         OPTIONAL {{ ?word srs-kg:pinyin ?pinyin . }}
         OPTIONAL {{ ?word srs-kg:definition ?definition .
                     FILTER(LANG(?definition) = "en" || LANG(?definition) = "") }}
@@ -1148,8 +1148,9 @@ def find_learning_frontier(mastered_words: List[str], target_level: int = 1, top
     
     SELECT ?word ?word_text ?pinyin ?hsk ?concreteness ?aoa WHERE {{
         ?word a srs-kg:Word ;
-              srs-kg:text ?word_text ;
+              rdfs:label ?word_text ;
               srs-kg:hskLevel ?hsk .
+        FILTER (lang(?word_text) = "zh")
         OPTIONAL {{ ?word srs-kg:pinyin ?pinyin }}
         OPTIONAL {{ ?word srs-kg:concreteness ?concreteness }}
         OPTIONAL {{ ?word srs-kg:ageOfAcquisition ?aoa }}
@@ -2802,8 +2803,9 @@ async def get_recommendations(request: RecommendationRequest):
                 
                 SELECT ?word ?word_text ?hsk WHERE {
                     ?word a srs-kg:Word ;
-                          srs-kg:text ?word_text ;
+                          rdfs:label ?word_text ;
                           srs-kg:hskLevel ?hsk .
+                    FILTER (lang(?word_text) = "zh")
                 }
                 """
                 
@@ -3695,10 +3697,11 @@ def get_word_image_map():
                         word_image_map = {}
                         sparql = """
                         PREFIX srs-kg: <http://srs4autism.com/schema/>
+                        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
                         SELECT DISTINCT ?word_text ?image_path
                         WHERE {
                             ?word_uri a srs-kg:Word .
-                            ?word_uri srs-kg:text ?word_text .
+                            ?word_uri rdfs:label ?word_text .
                             ?word_uri srs-kg:means ?concept_uri .
                             ?concept_uri srs-kg:hasVisualization ?image_uri .
                             ?image_uri srs-kg:imageFilePath ?image_path .
@@ -3800,41 +3803,42 @@ def fetch_logic_city_vocabulary(page: int = 1, page_size: int = 50) -> List[Logi
     # This prevents combinatorial explosion from multiple OPTIONAL joins
     query = f"""
     PREFIX srs-kg: <http://srs4autism.com/schema/>
-    
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
     SELECT ?englishWord ?chineseWord ?pinyin ?imagePath WHERE {{
         {{
             # Sub-query: Select English word nodes first (with pagination)
             SELECT ?w WHERE {{
                 ?w a srs-kg:Word ;
                    srs-kg:learningTheme "Logic City" ;
-                   srs-kg:text ?text .
+                   rdfs:label ?text .
                 FILTER (lang(?text) = "en" || REGEX(STR(?w), "word-en-"))
             }}
             ORDER BY ?text
             LIMIT {page_size}
             OFFSET {offset}
         }}
-        
+
         # Get English word text
-        ?w srs-kg:text ?englishWord .
+        ?w rdfs:label ?englishWord .
         FILTER (lang(?englishWord) = "en" || REGEX(STR(?w), "word-en-"))
-        
+
         # Get concept
         ?w srs-kg:means ?concept .
-        
+
         # Find Chinese words linked to the same concept
         OPTIONAL {{
             ?chineseWordNode a srs-kg:Word ;
-                            srs-kg:text ?chineseWord ;
+                            rdfs:label ?chineseWord ;
                             srs-kg:means ?concept .
             FILTER (lang(?chineseWord) = "zh" || REGEX(STR(?chineseWordNode), "word-zh-"))
-            
+
             # Get pinyin if available (try direct property first)
             OPTIONAL {{
                 ?chineseWordNode srs-kg:pinyin ?pinyin .
             }}
         }}
-        
+
         # Get image visualization from concept
         OPTIONAL {{
             ?concept srs-kg:hasVisualization ?imageNode .

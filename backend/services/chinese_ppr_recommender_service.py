@@ -93,10 +93,21 @@ def load_chinese_word_metadata(kg_file: Path) -> Dict[str, ChineseWordMetadata]:
                 finalize()
                 continue
             
-            # Chinese words use "word-" prefix (not "word-en-")
-            if line.startswith("srs-kg:word-") and "a srs-kg:Word" in line:
+            # Chinese words: support both old (srs-kg:word-) and new (srs-inst:word_zh_) formats
+            # Old format: srs-kg:word-{text}
+            # New format: srs-inst:word_zh_{pinyin}
+            is_old_format = line.startswith("srs-kg:word-") and "a srs-kg:Word" in line
+            is_new_format = line.startswith("srs-inst:word_zh_") and "a srs-kg:Word" in line
+
+            if (is_old_format or is_new_format):
                 finalize()
-                current_id = line.split()[0].replace("srs-kg:", "")
+                # Extract node ID, preserving the prefix for proper identification
+                current_id = line.split()[0]  # Keep full prefixed ID
+                # Strip namespace prefix for local ID
+                if current_id.startswith("srs-kg:"):
+                    current_id = current_id.replace("srs-kg:", "")
+                elif current_id.startswith("srs-inst:"):
+                    current_id = current_id.replace("srs-inst:", "")
                 buffer = {}
                 continue
             

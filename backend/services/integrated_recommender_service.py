@@ -170,9 +170,9 @@ class IntegratedRecommenderService:
         
         print(f"   📊 Found {len(mastered_chars_db)} explicitly mastered characters in database")
         
-        # Map character text to KG node IDs
+        # Map character text to KG node IDs (v2: use srs-inst: namespace for instances)
         for char_text in mastered_chars_db:
-            char_id = _normalize_kg_id(f"srs-kg:char-{quote(char_text, safe='')}")
+            char_id = _normalize_kg_id(f"srs-inst:char_{quote(char_text, safe='')}")
             enhanced[char_id] = 1.0  # Fully mastered
         
         # 2. Infer character mastery from word mastery
@@ -197,10 +197,10 @@ class IntegratedRecommenderService:
                 # Add to mastery vector
                 inferred_count = 0
                 for char_text in inferred_chars:
-                    # Create character node ID (matching KG format)
+                    # Create character node ID (v2: use srs-inst: namespace for instances)
                     char_slug = quote(char_text, safe='')
-                    char_id = _normalize_kg_id(f"srs-kg:char-{char_slug}")
-                    
+                    char_id = _normalize_kg_id(f"srs-inst:char_{char_slug}")
+
                     # Only set if not already explicitly mastered (preserve explicit mastery = 1.0)
                     if char_id not in enhanced or enhanced[char_id] < 0.8:
                         enhanced[char_id] = 0.8  # Inferred mastery (slightly lower than explicit)
@@ -351,29 +351,45 @@ class IntegratedRecommenderService:
             missing_prereqs = []
 
             if use_metadata_fallback:
-                # --- FIXED VALIDATION LOGIC ---
-                # The cache keys (e.g. 'word-zh-饭馆') lack the 'srs-kg:' prefix,
-                # but _normalize_kg_id ensures node_id has it (e.g. 'srs-kg:word-饭馆').
-                # We must handle both prefix stripping and the -zh- insertion.
-                
-                base_id = node_id.replace("srs-kg:", "") # Strip prefix if present
-                
+                # --- METADATA VALIDATION (v2: supports both old and new URI formats) ---
+                # Old format: srs-kg:word-{text} → word-{text} (after stripping prefix)
+                # New format: srs-inst:word_zh_{pinyin} → word_zh_{pinyin} (after stripping prefix)
+                # Cache keys may or may not have prefixes, so we need to try multiple patterns.
+
+                # Strip namespace prefixes to get base ID
+                base_id = node_id.replace("srs-kg:", "").replace("srs-inst:", "")
+
                 found_id = None
-                
-                # Check 1: Base ID in cache?
+
+                # Check 1: Exact match (base ID in cache)
                 if base_id in metadata_valid_node_ids:
                     found_id = base_id
-                
-                # Check 2: Base ID + -zh- fix?
-                elif base_id.replace("word-", "word-zh-") in metadata_valid_node_ids:
-                    found_id = base_id.replace("word-", "word-zh-")
-                
-                # Check 3: Full ID in cache? (fallback)
+
+                # Check 2: Old format migration (word- → word-zh-)
+                # For backward compatibility with old format during transition
+                elif "word-" in base_id and not "word_zh_" in base_id:
+                    legacy_fixed = base_id.replace("word-", "word-zh-")
+                    if legacy_fixed in metadata_valid_node_ids:
+                        found_id = legacy_fixed
+
+                # Check 3: Full ID in cache (with prefix)
                 elif node_id in metadata_valid_node_ids:
                     found_id = node_id
 
+                # Check 4: Try alternate prefix (srs-kg: vs srs-inst:)
+                elif not found_id:
+                    # Try swapping prefixes for backward compatibility
+                    if node_id.startswith("srs-kg:"):
+                        alternate = node_id.replace("srs-kg:", "srs-inst:")
+                        if alternate in metadata_valid_node_ids:
+                            found_id = alternate
+                    elif node_id.startswith("srs-inst:"):
+                        alternate = node_id.replace("srs-inst:", "srs-kg:")
+                        if alternate in metadata_valid_node_ids:
+                            found_id = alternate
+
                 if found_id:
-                    node_id = found_id # Success! Update ID to match cache
+                    node_id = found_id  # Success! Update ID to match cache
                 else:
                     skipped_no_node += 1
                     continue
