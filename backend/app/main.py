@@ -24,6 +24,19 @@ import shutil
 import re
 import logging
 
+def _normalize_model_name(model_name: str, base_url: str) -> str:
+    """Normalizes model names based on the base_url, especially for SiliconFlow."""
+    if "siliconflow" in base_url.lower():
+        if model_name == "deepseek-chat":
+            return "deepseek-ai/DeepSeek-V3"
+        elif model_name == "deepseek-reasoner":
+            return "deepseek-ai/DeepSeek-R1"
+        elif model_name == "gpt-4o-mini":  # Fallback
+            return "deepseek-ai/DeepSeek-V3"
+        elif model_name == "gpt-3.5-turbo":  # Fallback
+            return "deepseek-ai/DeepSeek-V3"
+    return model_name
+
 # Database imports
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
@@ -471,6 +484,10 @@ def get_llm_client_from_request(request: Request):
     Creates an LLM client (OpenAI-compatible) based on request headers.
     Headers: X-LLM-Provider, X-LLM-Key, X-LLM-Base-URL
     """
+    print(f"\n🔍 DEBUG: get_llm_client_from_request")
+    print(f"   Headers - Provider: {request.headers.get('X-LLM-Provider')}")
+    print(f"   Headers - Base URL: {request.headers.get('X-LLM-Base-URL')}")
+
     provider = request.headers.get("X-LLM-Provider", "gemini").lower()
     api_key = request.headers.get("X-LLM-Key")
     base_url = request.headers.get("X-LLM-Base-URL")
@@ -483,9 +500,10 @@ def get_llm_client_from_request(request: Request):
         
         # Default Base URLs
         if not base_url:
-            base_url = "https://api.deepseek.com" if provider == "deepseek" else None
+            base_url = "https://api.siliconflow.cn/v1" if provider == "deepseek" else None
         
         if api_key:
+            print(f"   🚀 Initializing Client -> URL: {base_url} | Key: {api_key[:6]}...***")
             try:
                 return OpenAI(api_key=api_key, base_url=base_url)
             except Exception as e:
@@ -494,7 +512,7 @@ def get_llm_client_from_request(request: Request):
     return _genai_model  # Default fallback
 
 
-def _run_director_agent(card_front: str, card_back: str, client=None, style_guide: str = "Modern 3D Animation Style (Pixar/Disney style), vibrant lighting, high fidelity, highly detailed, 8k resolution") -> str:
+def _run_director_agent(card_front: str, card_back: str, client=None, style_guide: str = "Modern 3D Animation Style (Pixar/Disney style), vibrant lighting, high fidelity, highly detailed, 8k resolution", model_name: Optional[str] = None) -> str:
     """
     Run the director agent to generate image descriptions with an optional client.
     If client is an OpenAI instance, use client.chat.completions.create.
@@ -505,6 +523,7 @@ def _run_director_agent(card_front: str, card_back: str, client=None, style_guid
         card_back: The back content of the flashcard
         client: Optional OpenAI client or None/Gemini model
         style_guide: Art style guide for image generation (default: Modern 3D Animation Style)
+        model_name: Optional model name to use for OpenAI client. If not provided, will use fallback logic.
         
     Returns:
         Generated image description text
@@ -545,8 +564,16 @@ Generate the image description now:"""
     # Check if client is an OpenAI instance
     if client is not None and isinstance(client, OpenAI):
         try:
+            # Determine model name with fallback logic
+            if not model_name:
+                # Check client.base_url for DeepSeek
+                if hasattr(client, 'base_url') and client.base_url and "deepseek" in str(client.base_url).lower():
+                    model_name = "deepseek-chat"
+                else:
+                    model_name = "gpt-3.5-turbo"
+            
             response = client.chat.completions.create(
-                model="gpt-4o-mini",  # Default model, can be made configurable
+                model=model_name,
                 messages=[
                     {"role": "user", "content": system_instruction}
                 ]
@@ -1698,6 +1725,32 @@ async def delete_card(card_id: str):
 
 @app.post("/cards/{card_id}/generate-image")
 async def generate_card_image(card_id: str, request: CardImageRequest, req: Request):
+    # 1. SETUP ENVIRONMENT (Copied from send_message)
+    # ----------------------------------------------------------------
+    api_key = req.headers.get("X-LLM-Key")
+    if not api_key:
+        auth = req.headers.get("Authorization")
+        if auth and auth.startswith("Bearer "):
+            api_key = auth.split(" ")[1]
+    
+    base_url = req.headers.get("X-LLM-Base-URL")
+    provider = req.headers.get("X-LLM-Provider", "deepseek").lower()
+
+    # Default fallback for DeepSeek -> SiliconFlow
+    if not base_url and provider == "deepseek":
+        base_url = "https://api.siliconflow.cn/v1"
+
+    import os
+    if api_key:
+        # Critical: Set env vars so ConversationHandler can find them
+        os.environ["DEEPSEEK_API_KEY"] = api_key
+        os.environ["OPENAI_API_KEY"] = api_key 
+        if base_url:
+            os.environ["DEEPSEEK_API_BASE"] = base_url
+            os.environ["OPENAI_BASE_URL"] = base_url
+            os.environ["OPENAI_API_BASE"] = base_url # Legacy support
+    # ----------------------------------------------------------------
+
     cards = load_json_file(CARDS_FILE, [])
     card_index = next((idx for idx, card in enumerate(cards) if card.get("id") == card_id), None)
     
@@ -1719,17 +1772,38 @@ async def generate_card_image(card_id: str, request: CardImageRequest, req: Requ
         from agent.content_generator import ContentGenerator
         import base64
         
-        # Get LLM client from request headers (stateless configuration)
+        # Get LLM client for Step 1
         llm_client = get_llm_client_from_request(req)
         
-        # Get image model from request (config.image_model or direct image_model field)
-        image_model = None
-        if request.config and request.config.get("image_model"):
-            image_model = request.config.get("image_model")
-        elif request.image_model:
-            image_model = request.image_model
+        # Determine Card Model (Text)
+        card_model_raw = None
+        if request.config and request.config.get("card_model"):
+            card_model_raw = request.config.get("card_model")
         
-        # Initialize handlers with image model configuration
+        # Normalize Text Model
+        card_model = _normalize_model_name(card_model_raw, base_url or "") if card_model_raw else None
+        
+        # Determine Image Model
+        image_model_raw = None
+        if request.config and request.config.get("image_model"):
+            image_model_raw = request.config.get("image_model")
+        elif request.image_model:
+            image_model_raw = request.image_model
+        
+        # --- FIX: Explicitly Map Hunyuan for SiliconFlow ---
+        image_model = image_model_raw
+        if base_url and "siliconflow" in base_url.lower():
+             # If user selected generic Hunyuan or nothing, force specific ID
+             if not image_model or "hunyuan" in str(image_model).lower():
+                 image_model = "Tencent/Hunyuan-DiT"
+        
+        print(f"\n🎨 DEBUG: Config")
+        print(f"   Text Model: {card_model}")
+        print(f"   Image Model: {image_model}")
+        print(f"   Base URL: {base_url}")
+        
+        # Initialize handlers
+        # ConversationHandler will now find the API Key in os.environ!
         conversation_handler = ConversationHandler(image_model=image_model)
         content_generator = ContentGenerator()
         
@@ -1742,8 +1816,7 @@ async def generate_card_image(card_id: str, request: CardImageRequest, req: Requ
         )
         user_request = request.user_request or f"Generate an illustration for this flashcard content: {primary_text}"
         
-        # Force high-fidelity 3D style by changing persona to Art Director
-        context_str = "No specific context available"  # child_profile is None in this endpoint
+        context_str = "No specific context available"
         prompt = f"""You are a Lead Texture Artist & Lighter for a high-budget animated feature film (Pixar/Disney style).
 
 **Context:**
@@ -1774,43 +1847,55 @@ Write a vivid, highly detailed rendering prompt for Unreal Engine 5.
 Return ONLY the raw prompt string. Start with: "A stunning 3D render of..."
 """
         
-        # Generate image description using LLM with high-fidelity 3D style prompt
+        # --- STEP 1: Generate Description ---
         try:
             print("\n" + "="*80)
-            print("🎨 IMAGE GENERATION - SENDING TO LLM:")
+            print("🎨 STEP 1: GENERATING DESCRIPTION")
             print("-"*80)
-            print(prompt)
-            print("="*80 + "\n")
             
-            # Call LLM with the prompt
+            # Fallback logic for text model
+            target_model = card_model
+            if not target_model or target_model == "gpt-3.5-turbo":
+                if base_url and "siliconflow" in base_url.lower():
+                    target_model = "deepseek-ai/DeepSeek-V3"
+                elif base_url and "deepseek" in base_url.lower():
+                    target_model = "deepseek-chat"
+
             if llm_client is not None and isinstance(llm_client, OpenAI):
                 response = llm_client.chat.completions.create(
-                    model="gpt-4o-mini",
-                    messages=[
-                        {"role": "user", "content": prompt}
-                    ]
+                    model=target_model,
+                    messages=[{"role": "user", "content": prompt}]
                 )
                 image_description = response.choices[0].message.content
             elif _genai_model:
                 response = _genai_model.generate_content(prompt)
                 image_description = response.text
             else:
-                raise Exception("No LLM client available. Please configure GEMINI_API_KEY or provide X-LLM-Key header.")
+                image_description = f"A stunning 3D render of {sanitized_card.get('front', '')}."
             
-            print("\n" + "="*80)
-            print("🎨 IMAGE DESCRIPTION GENERATED:")
-            print("-"*80)
-            print(image_description)
-            print("="*80 + "\n")
+            print(f"✅ Description: {image_description[:100]}...")
+
         except Exception as e:
-            print(f"Image description generation error: {e}")
-            # Fallback with high-fidelity 3D style
-            image_description = f"A stunning 3D render of {sanitized_card.get('front', '')}. 3D CGI Render, Stylized Realism (like Zootopia, Frozen), cinematic volumetric lighting, rim lighting, high-fidelity textures with subsurface scattering, 85mm portrait lens effect with soft depth-of-field."
-        
+            print(f"❌ Text Generation Error: {e}")
+            image_description = f"A stunning 3D render of {sanitized_card.get('front', '')}."
+
+        # --- STEP 2: Generate Actual Image ---
+        print("\n" + "="*80)
+        print("🎨 STEP 2: GENERATING IMAGE")
+        print(f"   Model: {image_model}")
+        print("-"*80)
+
         image_result = conversation_handler.generate_actual_image(
             image_description=image_description,
             user_request=user_request
         )
+        
+        print(f"✅ Image Result: Success={image_result.get('success')}")
+        if image_result.get('error'):
+            print(f"❌ Image Error: {image_result.get('error')}")
+
+        # ... (Rest of existing saving logic remains the same) ...
+        # [Cursor: Copy the rest of the original saving/response logic here]
         
         card["image_description"] = image_description
         card["image_generated"] = image_result.get("success", False)
@@ -1929,51 +2014,98 @@ async def clear_chat_history():
     save_json_file(CHAT_HISTORY_FILE, [])
     return {"message": "Chat history cleared"}
 
+# [Keep all imports at the top unchanged]
+# ... (imports remain the same)
+
+# [Find the /chat endpoint around line 1238 and replace it with this updated version]
 @app.post("/chat", response_model=ChatMessage)
-async def send_message(message: ChatMessage):
+async def send_message(message: ChatMessage, request: Request):  # <--- Added 'request: Request'
     try:
+        import sys
+        import os
+
+        # 1. Capture Credentials from Headers
+        api_key = request.headers.get("X-LLM-Key")
+        if not api_key:
+            auth = request.headers.get("Authorization")
+            if auth and auth.startswith("Bearer "):
+                api_key = auth.split(" ")[1]
+            else:
+                api_key = message.config.get("apiKey") # Fallback to body if not in headers
+
+        # 2. Capture Base URL (The Fix)
+        base_url = request.headers.get("X-LLM-Base-URL")
+        provider = request.headers.get("X-LLM-Provider", "deepseek").lower()
+
+        # Default fallback if user left URL blank
+        if not base_url and provider == "deepseek":
+            base_url = "https://api.siliconflow.cn/v1"
+        
+        # 3. Set Environment Variables
+        if api_key:
+            print(f"DEBUG: Key found (length={len(api_key)})")
+            print(f"DEBUG X-LLM-Key: {request.headers.get('X-LLM-Key')}")
+            print(f"DEBUG Authorization: {request.headers.get('Authorization')}")
+
+            # Force set these BEFORE imports
+            os.environ["DEEPSEEK_API_KEY"] = api_key
+            os.environ["OPENAI_API_KEY"] = api_key # Fallback for some SDKs
+            if base_url:
+                os.environ["DEEPSEEK_API_BASE"] = base_url # <--- Vital override
+                os.environ["OPENAI_BASE_URL"] = base_url   # <--- Good practice for OpenAI SDKs
+        else:
+            print("DEBUG: No API Key found in headers or message config")
+
+        # 4. Imports (Delayed until after env var is set)
+        sys.path.append(os.path.join(os.path.dirname(__file__), '../../'))
+        
+        from agent.intent_detector import IntentDetector, IntentType
+        from agent.conversation_handler import ConversationHandler
+        from agent.content_generator import ContentGenerator
+
         # Save user message to history
         history = load_json_file(CHAT_HISTORY_FILE, [])
         history.append(message.dict())
         save_json_file(CHAT_HISTORY_FILE, history)
-        
-        # Import intent detection and conversation handler
-        import sys
-        import os
-        sys.path.append(os.path.join(os.path.dirname(__file__), '../../'))
-        
+
         try:
-            from agent.intent_detector import IntentDetector, IntentType
-            from agent.conversation_handler import ConversationHandler
-            from agent.content_generator import ContentGenerator
-            
+
             # Initialize handlers with model configuration from message
-            card_model = message.config.get("card_model") if message.config else None
-            image_model = message.config.get("image_model") if message.config else None
-            
+            card_model_raw = message.config.get("card_model") if message.config else None
+            image_model_raw = message.config.get("image_model") if message.config else None
+
+            base_url = os.getenv("DEEPSEEK_API_BASE", "") # Get base_url for normalization
+
+            card_model = _normalize_model_name(card_model_raw, base_url) if card_model_raw else None
+            image_model = _normalize_model_name(image_model_raw, base_url) if image_model_raw else None
+
             intent_detector = IntentDetector()
+
+            # Pass the API key explicitly if the classes support it, otherwise they use the os.environ we set above
             conversation_handler = ConversationHandler(card_model=card_model, image_model=image_model)
             generator = ContentGenerator(card_model=card_model)
-            
+
             # Parse @mentions from the message
             context_tags = parse_context_tags(message.content, message.mentions)
-            
+
             # Detect user intent
             intent_result = intent_detector.detect_intent(message.content, context_tags)
             intent_type = intent_result["intent"]
             confidence = intent_result["confidence"]
             reason = intent_result["reason"]
-            
+
             print(f"\n🎯 INTENT DETECTION:")
             print(f"   Intent: {intent_type.value}")
             print(f"   Confidence: {confidence}")
             print(f"   Reason: {reason}")
             print(f"   Entities: {intent_result.get('entities', {})}")
-            
+
+            # [Rest of the function remains identical...]
             # Get child profile from mentions if specified
             child_profile = None
             profiles = load_json_file(PROFILES_FILE, [])
             for mention in message.mentions:
+                # ... (existing profile matching logic) ...
                 for profile in profiles:
                     # Match by ID (including slugs), then by name
                     # Handle both old UUIDs and new slugs
@@ -1981,11 +2113,11 @@ async def send_message(message: ChatMessage):
                     profile_name_slug = normalize_to_slug(profile.get("name", ""))
                     mention_lower = mention.lower()
                     mention_slug = normalize_to_slug(mention)
-                    
+
                     if (profile_id_raw and profile_id_raw == mention_lower or
-                        profile.get("name") == mention or 
+                        profile.get("name") == mention or
                         profile_name_slug and profile_name_slug == mention_slug or
-                        (profile_id_raw and profile_id_raw.endswith(mention_lower)) or  # For partial UUID matching
+                        (profile_id_raw and profile_id_raw.endswith(mention_lower)) or
                         (profile_id_raw and mention_lower.endswith(profile_id_raw)) or
                         (profile_name_slug and mention_slug.endswith(profile_name_slug))):
                         child_profile = profile
@@ -1993,59 +2125,51 @@ async def send_message(message: ChatMessage):
                         break
                 if child_profile:
                     break
-            
+
             # Handle different intents
             if intent_type == IntentType.CONVERSATION:
-                # Handle conversational messages
-                response_content = conversation_handler.handle_conversation(
-                    message=message.content,
-                    context_tags=context_tags,
-                    child_profile=child_profile,
-                    chat_history=history[-5:]  # Last 5 messages for context
-                )
-                
-            elif intent_type == IntentType.CARD_GENERATION:
-                # Handle card generation requests
-                response_content = await _handle_card_generation(
-                    message, context_tags, child_profile, generator, profiles
-                )
-                
-            elif intent_type == IntentType.IMAGE_GENERATION:
-                # Handle image generation requests
-                response_content = await _handle_image_generation(
-                    message, context_tags, child_profile, generator, profiles
-                )
-                
-            elif intent_type == IntentType.IMAGE_INSERTION:
-                # Handle image insertion requests
-                response_content = await _handle_image_insertion(
-                    message, context_tags, child_profile
-                )
-                
-            elif intent_type == IntentType.CARD_UPDATE:
-                # Handle card update requests (placeholder for now)
-                response_content = "✏️ Card update feature is coming soon! For now, you can edit cards in the Card Curation tab."
-                
-            else:
-                # Fallback to conversation
                 response_content = conversation_handler.handle_conversation(
                     message=message.content,
                     context_tags=context_tags,
                     child_profile=child_profile,
                     chat_history=history[-5:]
                 )
-            
+
+            elif intent_type == IntentType.CARD_GENERATION:
+                response_content = await _handle_card_generation(
+                    message, context_tags, child_profile, generator, profiles
+                )
+
+            elif intent_type == IntentType.IMAGE_GENERATION:
+                response_content = await _handle_image_generation(
+                    message, context_tags, child_profile, generator, profiles
+                )
+
+            elif intent_type == IntentType.IMAGE_INSERTION:
+                response_content = await _handle_image_insertion(
+                    message, context_tags, child_profile
+                )
+
+            elif intent_type == IntentType.CARD_UPDATE:
+                response_content = "✏️ Card update feature is coming soon! For now, you can edit cards in the Card Curation tab."
+
+            else:
+                response_content = conversation_handler.handle_conversation(
+                    message=message.content,
+                    context_tags=context_tags,
+                    child_profile=child_profile,
+                    chat_history=history[-5:]
+                )
+
         except ImportError as e:
             print(f"Agent import error: {e}")
-            # Fallback response when agent is not available
-            response_content = f"I received your message: '{message.content}'. "
-            response_content += "The AI agent is currently not available, but I can help you create flashcards manually. "
-            response_content += "Please use the Card Curation tab to add cards."
-            
+            response_content = f"Error: Agent modules could not be loaded. {str(e)}"
+
     except Exception as e:
         print(f"Chat error: {e}")
-        response_content = f"I encountered an error processing your message: '{message.content}'. Please try again."
-    
+        # Return the actual error to the UI so we can debug easier
+        response_content = f"System Error: {str(e)}"
+
     response = ChatMessage(
         id=f"resp_{datetime.now().timestamp()}",
         content=response_content,
@@ -2053,13 +2177,14 @@ async def send_message(message: ChatMessage):
         timestamp=datetime.now(),
         mentions=message.mentions
     )
-    
+
     # Save assistant response to history
     history = load_json_file(CHAT_HISTORY_FILE, [])
     history.append(response.dict())
     save_json_file(CHAT_HISTORY_FILE, history)
-    
+
     return response
+
 
 async def _handle_card_generation(message: ChatMessage, context_tags: List[Dict[str, Any]], 
                                 child_profile: Dict[str, Any], generator,

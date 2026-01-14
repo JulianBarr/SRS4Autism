@@ -417,7 +417,18 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
 
     try {
       // Send message to backend
-      const response = await axios.post(`${API_BASE}/chat`, userMessage);
+      const llmProvider = localStorage.getItem('llm_provider') || 'gemini';
+      const llmKey = localStorage.getItem('llm_key') || '';
+      const llmBaseUrl = localStorage.getItem('llm_base_url') || '';
+
+      // Prepare headers with LLM configuration
+      const headers = {
+        'X-LLM-Provider': llmProvider,
+        'X-LLM-Key': llmKey,
+        'X-LLM-Base-URL': llmBaseUrl
+      };
+
+      const response = await axios.post(`${API_BASE}/chat`, userMessage, { headers });
       const assistantMessage = response.data;
       
       // Check if the response contains intent information

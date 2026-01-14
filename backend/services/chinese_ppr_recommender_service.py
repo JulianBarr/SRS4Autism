@@ -519,7 +519,9 @@ class ChinesePPRRecommenderService:
             label = meta.label or self.labels.get(node_id, node_id)
             candidates.append({
                 "word": label,
-                "node_id": node_id,
+                # --- CRITICAL FIX: Return the KG ID (metadata ID), not the PPR Graph ID ---
+                "node_id": meta_node_id, 
+                "graph_node_id": node_id, # Preserve graph ID just in case
                 "score": final_score,
                 "log_ppr": ppr_transformed,
                 "z_concreteness": conc_transformed,
@@ -630,4 +632,3 @@ def get_chinese_ppr_service(
             raise RuntimeError(f"Failed to initialize Chinese PPR service: {str(e)}") from e
     
     return _chinese_service_instance
-
