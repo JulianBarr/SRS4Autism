@@ -55,6 +55,7 @@ export https_proxy=http://127.0.0.1:1087
 export HTTP_PROXY=http://127.0.0.1:1087
 export HTTPS_PROXY=http://127.0.0.1:1087
 export NO_PROXY=localhost,127.0.0.1,0.0.0.0
+export BROWSER=none
 
 # 5. Start the App
 echo "🚀 Starting SRS4Autism..."

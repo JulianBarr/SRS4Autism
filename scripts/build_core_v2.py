@@ -14,11 +14,14 @@ Features:
 import re
 import sys
 import time
+import csv
+import json
 from pathlib import Path
 from typing import Optional, Dict, List, Tuple
 import requests
 from rdflib import Graph, Namespace, RDF, RDFS, OWL, Literal, URIRef
 from rdflib.namespace import XSD
+import argparse
 
 # Setup paths
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -29,14 +32,22 @@ SRS_KG = Namespace("http://srs4autism.com/schema/")
 SRS_INST = Namespace("http://srs4autism.com/instance/")
 WD = Namespace("http://www.wikidata.org/entity/")
 
-# Sample HSK 1 vocabulary with hardcoded Q-IDs (fallback for API issues)
-HSK1_VOCAB = [
-    {"zh": "朋友", "pinyin": "pengyou", "pinyin_tones": "péng you", "en": "friend", "pos": "noun", "qid": "Q34079"},
-    {"zh": "猫", "pinyin": "mao", "pinyin_tones": "māo", "en": "cat", "pos": "noun", "qid": "Q146"},
-    {"zh": "吃", "pinyin": "chi", "pinyin_tones": "chī", "en": "eat", "pos": "verb", "qid": "Q213449"},
-    {"zh": "老师", "pinyin": "laoshi", "pinyin_tones": "lǎo shī", "en": "teacher", "pos": "noun", "qid": "Q37226"},
-    {"zh": "苹果", "pinyin": "pingguo", "pinyin_tones": "píng guǒ", "en": "apple", "pos": "noun", "qid": "Q89"},
-]
+# Pinyin library (optional but recommended)
+try:
+    from pypinyin import pinyin as get_pinyin, Style
+    HAS_PYPINYIN = True
+except ImportError:
+    HAS_PYPINYIN = False
+    print("⚠️  pypinyin not installed. Install with: pip install pypinyin")
+
+# Data paths
+DATA_DIR = PROJECT_ROOT / "data" / "content_db"
+HSK_CSV_DIR = DATA_DIR / "hsk_csv"
+HSK_COMBINED = DATA_DIR / "hsk_vocabulary.csv"
+ENGLISH_CSV = DATA_DIR / "english_vocab_evp.csv"
+
+# Cache for Wikidata Q-IDs (to avoid repeated lookups)
+QIDCACHE_FILE = DATA_DIR / "wikidata_qid_cache.json"
 
 # Wikidata API configuration
 WIKIDATA_API = "https://www.wikidata.org/w/api.php"
@@ -46,6 +57,179 @@ WIKIDATA_SPARQL = "https://query.wikidata.org/sparql"
 HEADERS = {
     "User-Agent": "SRS4Autism-KG-Builder/2.0 (https://github.com/srs4autism; research project)"
 }
+
+
+def load_qid_cache() -> Dict[str, str]:
+    """Load cached Wikidata Q-IDs from file."""
+    if QIDCACHE_FILE.exists():
+        try:
+            with open(QIDCACHE_FILE, 'r', encoding='utf-8') as f:
+                cache = json.load(f)
+                print(f"✅ Loaded {len(cache)} cached Q-IDs")
+                return cache
+        except Exception as e:
+            print(f"⚠️  Error loading Q-ID cache: {e}")
+    return {}
+
+
+def save_qid_cache(cache: Dict[str, str]):
+    """Save Wikidata Q-ID cache to file."""
+    try:
+        with open(QIDCACHE_FILE, 'w', encoding='utf-8') as f:
+            json.dump(cache, f, ensure_ascii=False, indent=2)
+        print(f"✅ Saved {len(cache)} Q-IDs to cache")
+    except Exception as e:
+        print(f"⚠️  Error saving Q-ID cache: {e}")
+
+
+def load_hsk_vocabulary(hsk_levels: Optional[List[int]] = None) -> List[Dict]:
+    """
+    Load HSK vocabulary from CSV files.
+
+    Prioritizes individual HSK CSV files (hsk1.csv, hsk2.csv, etc.) which contain
+    English glosses needed for accurate Wikidata Q-ID lookups. Falls back to
+    combined CSV if individual files are not available.
+
+    Args:
+        hsk_levels: List of HSK levels to load (1-6), or None for all
+
+    Returns:
+        List of vocabulary dictionaries with keys: zh, pinyin_raw, en_gloss, hsk_level
+    """
+    vocab = []
+    levels_to_load = hsk_levels or list(range(1, 7))
+
+    # PRIORITY 1: Try individual HSK files first (they have English glosses)
+    if HSK_CSV_DIR.exists():
+        print(f"📖 Loading HSK vocabulary from individual files in {HSK_CSV_DIR.name}/")
+        files_found = 0
+
+        for level in levels_to_load:
+            hsk_file = HSK_CSV_DIR / f"hsk{level}.csv"
+            if not hsk_file.exists():
+                continue
+
+            files_found += 1
+            print(f"  📄 Loading HSK{level} from {hsk_file.name}")
+
+            with open(hsk_file, 'r', encoding='utf-8') as f:
+                reader = csv.reader(f)
+                for row in reader:
+                    if len(row) >= 3:
+                        vocab.append({
+                            'zh': row[0].strip(),
+                            'pinyin_raw': row[1].strip(),
+                            'en_gloss': row[2].strip(),
+                            'hsk_level': level
+                        })
+
+        if files_found > 0:
+            print(f"✅ Loaded {len(vocab)} HSK words from {files_found} individual files")
+            return vocab
+        else:
+            print(f"  ⚠️  No individual HSK files found, trying combined file...")
+
+    # PRIORITY 2: Fall back to combined file (lacks English glosses - less accurate Q-IDs)
+    if HSK_COMBINED.exists():
+        print(f"📖 Loading HSK vocabulary from combined file {HSK_COMBINED.name}")
+        print(f"  ⚠️  WARNING: Combined file lacks English glosses, Q-ID lookups may be less accurate")
+
+        with open(HSK_COMBINED, 'r', encoding='utf-8') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                try:
+                    hsk_level_str = row.get('hsk_level', '1').strip()
+                    hsk_level = int(hsk_level_str) if hsk_level_str else 1
+                except (ValueError, AttributeError):
+                    hsk_level = 1
+
+                if hsk_levels and hsk_level not in hsk_levels:
+                    continue
+
+                word = row.get('word', '').strip()
+                if not word:  # Skip empty rows
+                    continue
+
+                vocab.append({
+                    'zh': word,
+                    'traditional': row.get('traditional', '').strip(),
+                    'pinyin_raw': row.get('pinyin', '').strip(),
+                    'en_gloss': '',  # Not available in combined file
+                    'hsk_level': hsk_level
+                })
+
+        print(f"✅ Loaded {len(vocab)} HSK words from combined file")
+        return vocab
+
+    # No files found
+    print(f"❌ No HSK vocabulary files found!")
+    return vocab
+
+
+def load_english_vocabulary(limit: Optional[int] = None) -> List[Dict]:
+    """
+    Load English vocabulary from CSV.
+
+    Args:
+        limit: Maximum number of words to load, or None for all
+
+    Returns:
+        List of vocabulary dictionaries
+    """
+    vocab = []
+
+    if not ENGLISH_CSV.exists():
+        print(f"⚠️  English vocabulary file not found: {ENGLISH_CSV}")
+        return vocab
+
+    print(f"📖 Loading English vocabulary from {ENGLISH_CSV.name}")
+
+    with open(ENGLISH_CSV, 'r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for idx, row in enumerate(reader):
+            if limit and idx >= limit:
+                break
+
+            vocab.append({
+                'en': row.get('word', '').strip(),
+                'definition': row.get('definition', '').strip(),
+                'pos': row.get('pos', 'noun').strip(),
+                'cefr_level': row.get('cefr_level', '').strip(),
+                'concreteness': row.get('concreteness', '').strip()
+            })
+
+    print(f"✅ Loaded {len(vocab)} English words")
+    return vocab
+
+
+def clean_pinyin_for_uri(pinyin: str) -> str:
+    """
+    Clean pinyin for URI usage (remove tones, spaces, special chars).
+
+    Args:
+        pinyin: Pinyin with tone marks (e.g., "péng you")
+
+    Returns:
+        Clean pinyin for URI (e.g., "pengyou")
+    """
+    # Remove tone marks
+    tone_map = {
+        'ā': 'a', 'á': 'a', 'ǎ': 'a', 'à': 'a',
+        'ē': 'e', 'é': 'e', 'ě': 'e', 'è': 'e',
+        'ī': 'i', 'í': 'i', 'ǐ': 'i', 'ì': 'i',
+        'ō': 'o', 'ó': 'o', 'ǒ': 'o', 'ò': 'o',
+        'ū': 'u', 'ú': 'u', 'ǔ': 'u', 'ù': 'u',
+        'ǖ': 'v', 'ǘ': 'v', 'ǚ': 'v', 'ǜ': 'v', 'ü': 'v',
+    }
+
+    result = pinyin.lower().strip()
+    for tone, base in tone_map.items():
+        result = result.replace(tone, base)
+
+    # Remove spaces and special characters
+    result = re.sub(r'[^\w]', '', result)
+
+    return result
 
 
 def clean_for_uri(text: str) -> str:
@@ -59,32 +243,64 @@ def clean_for_uri(text: str) -> str:
     return text
 
 
-def fetch_wikidata_qid(english_term: str, hardcoded_qid: Optional[str] = None, language: str = "en") -> Optional[str]:
+def clean_english_gloss(gloss: str) -> str:
+    """
+    Clean English gloss for Wikidata searching by removing parenthetical notes.
+
+    Examples:
+        "(informal) father" -> "father"
+        "dish (type of food)" -> "dish"
+        "(negative prefix)" -> "" (empty)
+
+    Args:
+        gloss: Raw English gloss from HSK CSV
+
+    Returns:
+        Cleaned gloss suitable for Wikidata search
+    """
+    # Remove all parenthetical content
+    cleaned = re.sub(r'\([^)]*\)', '', gloss)
+    # Clean up extra whitespace
+    cleaned = ' '.join(cleaned.split())
+    return cleaned.strip()
+
+
+def fetch_wikidata_qid(english_term: str, qid_cache: Dict[str, str], use_cache: bool = True) -> Optional[str]:
     """
     Fetch Wikidata Q-ID for a given English term using the Wikidata API.
-    Falls back to hardcoded Q-ID if API fails.
+    Uses cache to avoid repeated API calls.
 
     Args:
         english_term: The English word to search for
-        hardcoded_qid: Optional hardcoded Q-ID to use as fallback
-        language: Language code (default: "en")
+        qid_cache: Dictionary cache for Q-IDs
+        use_cache: Whether to check cache first
 
     Returns:
         Q-ID string (e.g., "Q146") or None if not found
     """
-    # If hardcoded Q-ID is provided, use it as fallback
-    if hardcoded_qid:
-        print(f"  ✓ Using hardcoded Q-ID: {hardcoded_qid}")
-        return hardcoded_qid
+    # Clean the English term (remove parenthetical notes)
+    search_term = clean_english_gloss(english_term)
+
+    # If cleaning removed everything, skip
+    if not search_term:
+        print(f"  ℹ️  Skipping empty gloss after cleaning: '{english_term}'")
+        return None
+
+    # Normalize term for cache lookup (use original for cache key)
+    cache_key = english_term.lower().strip()
+
+    # Check cache first
+    if use_cache and cache_key in qid_cache:
+        return qid_cache[cache_key]
 
     try:
         # Use Wikidata's wbsearchentities API
         params = {
             "action": "wbsearchentities",
             "format": "json",
-            "language": language,
+            "language": "en",
             "type": "item",
-            "search": english_term,
+            "search": search_term,
             "limit": 5  # Get top 5 results
         }
 
@@ -98,10 +314,19 @@ def fetch_wikidata_qid(english_term: str, hardcoded_qid: Optional[str] = None, l
             label = data["search"][0].get("label", "")
             description = data["search"][0].get("description", "")
 
-            print(f"  ✓ Found Q-ID: {qid} ('{label}' - {description})")
+            # Cache the result
+            qid_cache[cache_key] = qid
+
+            # Show cleaned term if different from original
+            if search_term != english_term:
+                print(f"  ✓ Found Q-ID: {qid} ('{label}' - {description}) [searched: \"{search_term}\"]")
+            else:
+                print(f"  ✓ Found Q-ID: {qid} ('{label}' - {description})")
             return qid
         else:
-            print(f"  ✗ No Q-ID found for '{english_term}'")
+            print(f"  ✗ No Q-ID found for '{english_term}' (searched: \"{search_term}\")")
+            # Cache negative result to avoid repeated lookups
+            qid_cache[cache_key] = None
             return None
 
     except requests.RequestException as e:
@@ -238,9 +463,22 @@ def add_english_word(
     return word_uri
 
 
-def generate_knowledge_graph() -> Graph:
+def generate_knowledge_graph(
+    hsk_vocab: List[Dict],
+    english_vocab: Optional[List[Dict]] = None,
+    qid_cache: Optional[Dict] = None,
+    rate_limit: float = 0.5,
+    save_every: int = 100
+) -> Graph:
     """
-    Generate the knowledge graph from HSK 1 vocabulary.
+    Generate the knowledge graph from vocabulary lists.
+
+    Args:
+        hsk_vocab: List of HSK vocabulary dictionaries
+        english_vocab: Optional list of English vocabulary
+        qid_cache: Cache for Wikidata Q-IDs
+        rate_limit: Seconds to wait between Wikidata API calls
+        save_every: Save cache every N items
 
     Returns:
         RDF Graph object
@@ -248,6 +486,9 @@ def generate_knowledge_graph() -> Graph:
     print("\n" + "="*70)
     print("KNOWLEDGE GRAPH GENERATOR V2 - ONTOLOGY-DRIVEN")
     print("="*70 + "\n")
+
+    if qid_cache is None:
+        qid_cache = {}
 
     # Initialize graph
     g = Graph()
@@ -261,44 +502,124 @@ def generate_knowledge_graph() -> Graph:
     g.bind("rdfs", RDFS)
     g.bind("xsd", XSD)
 
-    print(f"Processing {len(HSK1_VOCAB)} vocabulary items...\n")
+    total_items = len(hsk_vocab)
+    processed = 0
+    skipped = 0
+    concepts_created = set()
 
-    for idx, entry in enumerate(HSK1_VOCAB, start=1):
-        zh = entry["zh"]
-        pinyin = entry["pinyin"]
-        pinyin_tones = entry["pinyin_tones"]
-        en = entry["en"]
-        pos = entry.get("pos")
-        hardcoded_qid = entry.get("qid")
+    print(f"Processing {total_items} HSK vocabulary items...\n")
 
-        print(f"[{idx}/{len(HSK1_VOCAB)}] Processing: {zh} ({pinyin_tones}) = {en}")
+    for idx, entry in enumerate(hsk_vocab, start=1):
+        zh = entry.get("zh", "").strip()
+        pinyin_raw = entry.get("pinyin_raw", "").strip()
+        hsk_level = entry.get("hsk_level", 1)
 
-        # Step 1: Fetch Wikidata Q-ID (with hardcoded fallback)
-        qid = fetch_wikidata_qid(en, hardcoded_qid=hardcoded_qid)
-
-        if not qid:
-            print(f"  ⚠ Skipping '{en}' - no Q-ID found\n")
+        if not zh:
+            skipped += 1
             continue
 
-        # Step 2: Create Concept hub
-        concept_uri = add_concept(g, qid, en)
-        print(f"  ✓ Created concept: {concept_uri}")
+        # Clean pinyin for URI and generate if missing
+        if pinyin_raw:
+            pinyin_clean = clean_pinyin_for_uri(pinyin_raw)
+            pinyin_tones = pinyin_raw
+        elif HAS_PYPINYIN:
+            # Generate pinyin if not provided
+            pinyin_tones = " ".join([x[0] for x in get_pinyin(zh, style=Style.TONE)])
+            pinyin_clean = clean_pinyin_for_uri(pinyin_tones)
+        else:
+            print(f"[{idx}/{total_items}] ⚠️  Skipping '{zh}' - no pinyin available")
+            skipped += 1
+            continue
+
+        # Try to get English gloss (for Q-ID lookup)
+        en_gloss = entry.get("en_gloss", "").strip()
+
+        # Skip if no English gloss for now (we need it for Wikidata lookup)
+        # In production, you might want to use a dictionary or translation API
+        if not en_gloss:
+            # Try to use Chinese word for Wikidata search (less reliable)
+            en_gloss = zh
+
+        print(f"[{idx}/{total_items}] Processing: {zh} ({pinyin_tones}) [HSK{hsk_level}]")
+
+        # Step 1: Fetch Wikidata Q-ID (with cache)
+        qid = fetch_wikidata_qid(en_gloss, qid_cache)
+
+        if not qid:
+            print(f"  ⚠️  Skipping - no Q-ID found\n")
+            skipped += 1
+            continue
+
+        # Step 2: Create Concept hub (only once per Q-ID)
+        if qid not in concepts_created:
+            concept_uri = add_concept(g, qid, en_gloss)
+            print(f"  ✓ Created concept: {concept_uri}")
+            concepts_created.add(qid)
+        else:
+            concept_uri = SRS_INST[f"concept_{qid}"]
+            print(f"  ℹ️  Reusing existing concept: {concept_uri}")
 
         # Step 3: Create Chinese Word spoke
-        zh_word_uri = add_chinese_word(g, zh, pinyin, pinyin_tones, concept_uri, pos)
+        zh_word_uri = add_chinese_word(
+            g, zh, pinyin_clean, pinyin_tones, concept_uri,
+            pos=None, hsk_level=hsk_level
+        )
         print(f"  ✓ Created Chinese word: {zh_word_uri}")
 
-        # Step 4: Create English Word spoke
-        en_word_uri = add_english_word(g, en, concept_uri, pos)
-        print(f"  ✓ Created English word: {en_word_uri}")
-
-        print()
+        processed += 1
 
         # Rate limiting (be nice to Wikidata)
-        time.sleep(0.5)
+        if rate_limit > 0:
+            time.sleep(rate_limit)
 
-    print("="*70)
-    print(f"✅ Generation complete! Total triples: {len(g)}")
+        # Periodic cache save
+        if save_every and idx % save_every == 0:
+            save_qid_cache(qid_cache)
+            print(f"  💾 Progress saved ({idx}/{total_items})\n")
+
+    # Process English vocabulary if provided
+    if english_vocab:
+        print(f"\nProcessing {len(english_vocab)} English vocabulary items...\n")
+
+        for idx, entry in enumerate(english_vocab, start=1):
+            en = entry.get("en", "").strip()
+            pos = entry.get("pos", "noun").strip()
+
+            if not en:
+                continue
+
+            print(f"[{idx}/{len(english_vocab)}] Processing English: {en}")
+
+            # Fetch Q-ID
+            qid = fetch_wikidata_qid(en, qid_cache)
+
+            if not qid:
+                print(f"  ⚠️  Skipping - no Q-ID found\n")
+                continue
+
+            # Create/reuse concept
+            if qid not in concepts_created:
+                concept_uri = add_concept(g, qid, en)
+                print(f"  ✓ Created concept: {concept_uri}")
+                concepts_created.add(qid)
+            else:
+                concept_uri = SRS_INST[f"concept_{qid}"]
+                print(f"  ℹ️  Reusing existing concept: {concept_uri}")
+
+            # Create English word
+            en_word_uri = add_english_word(g, en, concept_uri, pos)
+            print(f"  ✓ Created English word: {en_word_uri}")
+
+            # Rate limiting
+            if rate_limit > 0:
+                time.sleep(rate_limit)
+
+    print("\n" + "="*70)
+    print(f"✅ Generation complete!")
+    print(f"   Total triples: {len(g)}")
+    print(f"   Concepts created: {len(concepts_created)}")
+    print(f"   HSK words processed: {processed}/{total_items}")
+    print(f"   Skipped: {skipped}")
     print("="*70 + "\n")
 
     return g
@@ -306,11 +627,65 @@ def generate_knowledge_graph() -> Graph:
 
 def main():
     """Main execution function."""
+    parser = argparse.ArgumentParser(description="Generate Knowledge Graph v2.0")
+    parser.add_argument("--hsk-levels", nargs="+", type=int, choices=range(1, 7),
+                       help="HSK levels to process (1-6), default: all")
+    parser.add_argument("--english", action="store_true",
+                       help="Include English vocabulary from Logic City")
+    parser.add_argument("--english-limit", type=int, default=None,
+                       help="Limit number of English words to process")
+    parser.add_argument("--rate-limit", type=float, default=0.5,
+                       help="Seconds between Wikidata API calls (default: 0.5)")
+    parser.add_argument("--save-every", type=int, default=100,
+                       help="Save cache every N items (default: 100)")
+    parser.add_argument("--output", type=str,
+                       default="knowledge_graph/world_model_v2.ttl",
+                       help="Output file path")
+    parser.add_argument("--sample", type=int, default=None,
+                       help="Process only first N HSK words (for testing)")
+
+    args = parser.parse_args()
+
+    print("="*70)
+    print("KNOWLEDGE GRAPH GENERATOR V2.0")
+    print("="*70)
+    print(f"\nConfiguration:")
+    print(f"  HSK Levels: {args.hsk_levels or 'All (1-6)'}")
+    print(f"  English vocab: {'Yes' if args.english else 'No'}")
+    print(f"  Rate limit: {args.rate_limit}s")
+    print(f"  Output: {args.output}")
+    print()
+
+    # Load Q-ID cache
+    qid_cache = load_qid_cache()
+
+    # Load HSK vocabulary
+    hsk_vocab = load_hsk_vocabulary(args.hsk_levels)
+
+    # Apply sample limit if specified
+    if args.sample:
+        print(f"⚠️  SAMPLE MODE: Processing only first {args.sample} words\n")
+        hsk_vocab = hsk_vocab[:args.sample]
+
+    # Load English vocabulary if requested
+    english_vocab = None
+    if args.english:
+        english_vocab = load_english_vocabulary(args.english_limit)
+
     # Generate the graph
-    graph = generate_knowledge_graph()
+    graph = generate_knowledge_graph(
+        hsk_vocab=hsk_vocab,
+        english_vocab=english_vocab,
+        qid_cache=qid_cache,
+        rate_limit=args.rate_limit,
+        save_every=args.save_every
+    )
+
+    # Save final cache
+    save_qid_cache(qid_cache)
 
     # Output path
-    output_path = PROJECT_ROOT / "knowledge_graph" / "world_model_v2.ttl"
+    output_path = PROJECT_ROOT / args.output
 
     # Ensure directory exists
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -319,7 +694,10 @@ def main():
     print(f"Writing to: {output_path}")
     graph.serialize(destination=str(output_path), format="turtle")
 
-    print(f"\n✅ SUCCESS! Knowledge graph saved to:\n   {output_path}\n")
+    # Get file size
+    size_mb = output_path.stat().st_size / (1024 * 1024)
+    print(f"\n✅ SUCCESS! Knowledge graph saved to:\n   {output_path}")
+    print(f"   File size: {size_mb:.2f} MB\n")
 
     # Validation
     print("="*70)
