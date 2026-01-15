@@ -12,10 +12,10 @@ from sqlalchemy.pool import StaticPool
 from .models import Base
 
 # Project root
-PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+from backend.app.core.config import PROJECT_ROOT, DATABASE_PATH
 
 # Database file location
-DB_PATH = PROJECT_ROOT / "data" / "srs4autism.db"
+DB_PATH = DATABASE_PATH
 
 # Ensure data directory exists
 DB_PATH.parent.mkdir(parents=True, exist_ok=True)

@@ -17,6 +17,8 @@ import unicodedata
 from functools import lru_cache, partial
 import asyncio
 from pathlib import Path
+from .core.config import PROJECT_ROOT, PROFILES_FILE, CARDS_FILE, ANKI_PROFILES_FILE, CHAT_HISTORY_FILE, PROMPT_TEMPLATES_FILE, WORD_KP_CACHE_FILE, MODEL_CONFIG_FILE, ENGLISH_SIMILARITY_FILE, GRAMMAR_CORRECTIONS_FILE
+from .utils.pinyin_utils import get_word_knowledge, get_word_image_map, fetch_word_knowledge_points, fix_iu_ui_tone_placement
 import math
 import tempfile
 import zipfile
@@ -39,7 +41,7 @@ def _normalize_model_name(model_name: str, base_url: str) -> str:
 
 # Database imports
 import sys
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+# sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from database.db import get_db, init_db, get_db_session
 from database.services import ProfileService, CardService, ChatService
 from sqlalchemy.orm import Session
@@ -55,6 +57,9 @@ import google.generativeai as genai
 
 # Configure logging
 logger = logging.getLogger(__name__)
+
+print(f"PROJECT_ROOT: {PROJECT_ROOT}")
+
 from openai import OpenAI
 try:
     from dotenv import load_dotenv
@@ -78,6 +83,9 @@ except ImportError:
         sys.path.insert(0, str(Path(__file__).parent))
         from routers import literacy
         app.include_router(literacy.router)
+
+from .routers import pinyin_admin
+app.include_router(pinyin_admin.router, prefix="/pinyin", tags=["pinyin-admin"])
 
 # ============================================================================
 # KG_Map Helper Functions (Following Strict Schema from Knowledge Tracking Spec)
@@ -201,6 +209,8 @@ async def startup_event():
     print("🚀 Starting Curious Mario API...")
     print("📊 Initializing database...")
     init_db()
+    from backend.database.db import DB_PATH
+    print(f"🚀 ACTIVE DATABASE PATH: {DB_PATH}")
     print("✅ Database ready!")
     
     # Initialize literacy cache (Anki order + sorted vocab list)
@@ -393,19 +403,8 @@ class AgenticPlanRequest(BaseModel):
 
 # File paths for data storage (relative to project root)
 # Get project root: backend/app/main.py -> project root is 2 levels up
-PROJECT_ROOT = Path(__file__).parent.parent.parent.resolve()
-PROFILES_FILE = str(PROJECT_ROOT / "data" / "profiles" / "child_profiles.json")
-CARDS_FILE = str(PROJECT_ROOT / "data" / "content_db" / "approved_cards.json")
-ANKI_PROFILES_FILE = str(PROJECT_ROOT / "data" / "profiles" / "anki_profiles.json")
-CHAT_HISTORY_FILE = str(PROJECT_ROOT / "data" / "content_db" / "chat_history.json")
-PROMPT_TEMPLATES_FILE = str(PROJECT_ROOT / "data" / "profiles" / "prompt_templates.json")
-WORD_KP_CACHE_FILE = str(PROJECT_ROOT / "data" / "content_db" / "word_kp_cache.json")
-MODEL_CONFIG_FILE = str(PROJECT_ROOT / "config" / "model_config.json")
-ENGLISH_SIMILARITY_FILE = PROJECT_ROOT / "data" / "content_db" / "english_word_similarity.json"
 
 # Ensure data directories exist
-os.makedirs(PROJECT_ROOT / "data" / "profiles", exist_ok=True)
-os.makedirs(PROJECT_ROOT / "data" / "content_db", exist_ok=True)
 
 def load_json_file(file_path: str, default: Any = None):
     """Load JSON data from file, return default if file doesn't exist"""
@@ -462,22 +461,7 @@ if GEMINI_API_KEY:
 else:
     print("⚠️ GEMINI_API_KEY not set; falling back to cache-only knowledge lookup.")
 
-# Cache for word knowledge derived from LLM or manual sources
-_word_kp_cache: Dict[str, Dict[str, Any]] = {}
-try:
-    _word_kp_cache = load_json_file(WORD_KP_CACHE_FILE, {})
-    if not isinstance(_word_kp_cache, dict):
-        _word_kp_cache = {}
-except Exception as exc:
-    print(f"⚠️ Could not load word knowledge cache: {exc}")
     _word_kp_cache = {}
-
-def _save_word_kp_cache():
-    try:
-        save_json_file(WORD_KP_CACHE_FILE, _word_kp_cache)
-    except Exception as exc:
-        print(f"⚠️ Failed to save word knowledge cache: {exc}")
-
 
 def get_llm_client_from_request(request: Request):
     """
@@ -743,227 +727,14 @@ def split_tag_annotations(tags: List[Any]) -> (List[str], List[str]):
 
 
 @lru_cache(maxsize=256)
-def fetch_word_knowledge_points(word: str) -> Dict[str, Any]:
-    """Fetch pronunciation/meaning knowledge points for a given Chinese word."""
-    if not word:
-        return {}
-    sanitized_word = word.strip()
-    if not sanitized_word:
-        return {}
-    sparql_word = _sanitize_for_sparql_literal(sanitized_word)
-    sparql = f"""
-    PREFIX srs-kg: <http://srs4autism.com/schema/>
-    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-    
-    SELECT ?pinyin ?definition ?conceptLabel ?hsk WHERE {{
-        ?word a srs-kg:Word ;
-              rdfs:label "{sparql_word}"@zh .
-        OPTIONAL {{ ?word srs-kg:pinyin ?pinyin . }}
-        OPTIONAL {{ ?word srs-kg:definition ?definition .
-                    FILTER(LANG(?definition) = "en" || LANG(?definition) = "") }}
-        OPTIONAL {{
-            ?word srs-kg:means ?concept .
-            ?concept rdfs:label ?conceptLabel .
-        }}
-        OPTIONAL {{ ?word srs-kg:hskLevel ?hsk . }}
-    }}
-    """
-    try:
-        results = query_sparql(sparql, output_format="application/sparql-results+json")
-    except HTTPException:
-        return {}
-    except Exception:
-        return {}
-    
-    bindings = []
-    if isinstance(results, dict):
-        bindings = results.get("results", {}).get("bindings", [])
-    
-    pronunciations: List[str] = []
-    meanings: List[str] = []
-    hsk_level = None
-    
-    for row in bindings or []:
-        pinyin_value = row.get("pinyin", {}).get("value")
-        if pinyin_value and pinyin_value not in pronunciations:
-            pronunciations.append(pinyin_value)
-        definition_value = row.get("definition", {}).get("value")
-        if definition_value and definition_value not in meanings:
-            meanings.append(definition_value)
-        concept_value = row.get("conceptLabel", {}).get("value")
-        if concept_value and concept_value not in meanings:
-            meanings.append(concept_value)
-        hsk_value = row.get("hsk", {}).get("value")
-        if hsk_value and not hsk_level:
-            hsk_level = hsk_value
-    
-    if not pronunciations and not meanings and not hsk_level:
-        return {}
-    
-    return {
-        "pronunciations": pronunciations,
-        "meanings": meanings,
-        "hsk_level": hsk_level
-    }
 
 
-def _clean_llm_json(text: str) -> Dict[str, Any]:
-    try:
-        text = text.strip()
-        if text.startswith("```"):
-            text = text.split("```", 2)[1]
-            if text.startswith("json"):
-                text = text[4:]
-        return json.loads(text)
-    except Exception:
-        return {}
 
 
-def _fetch_word_info_via_llm(word: str) -> Dict[str, Any]:
-    if not _genai_model:
-        return {}
-    prompt = (
-        "You are a bilingual lexicon assistant.\n"
-        f"Provide the Hanyu Pinyin (with tone marks) and a concise English meaning for the Chinese word \"{word}\".\n"
-        "Respond ONLY with JSON like: {\"pinyin\": \"dú zhě\", \"meaning\": \"reader\"}."
-    )
-    try:
-        response = _genai_model.generate_content(prompt)
-        text = getattr(response, "text", "") or ""
-        data = _clean_llm_json(text)
-        result: Dict[str, Any] = {}
-        pinyin = data.get("pinyin")
-        meaning = data.get("meaning") or data.get("meaning_en") or data.get("english")
-        if pinyin:
-            result["pinyin"] = pinyin.strip()
-        if meaning:
-            result["meaning"] = meaning.strip()
-        return result
-    except Exception as exc:
-        print(f"⚠️ Gemini lookup failed for '{word}': {exc}")
-        return {}
 
 
-def fix_iu_ui_tone_placement(pinyin: str) -> str:
-    """
-    Fix pinyin tone marks to follow 'i u 并列标在后' rule.
-    When i and u appear together:
-    - 'iu' -> tone should be on 'u' (e.g., 'liú' not 'líu')
-    - 'ui' -> tone should be on 'i' (e.g., 'guì' not 'gúi')
-    
-    Returns corrected pinyin.
-    """
-    if not pinyin:
-        return pinyin
-    
-    import re
-    from scripts.knowledge_graph.pinyin_parser import TONE_MARKS, extract_tone, add_tone_to_final
-    
-    # Split into syllables (space-separated)
-    syllables = pinyin.split()
-    fixed_syllables = []
-    
-    for syllable in syllables:
-        # Extract tone from syllable
-        syllable_no_tone, tone = extract_tone(syllable)
-        
-        if not tone:
-            fixed_syllables.append(syllable)
-            continue
-        
-        # Check for 'iu' pattern - tone should be on 'u' (the latter)
-        if 'iu' in syllable_no_tone.lower():
-            # Check if tone is currently on 'i' (wrong)
-            i_tones = ['ī', 'í', 'ǐ', 'ì', 'Ī', 'Í', 'Ǐ', 'Ì']
-            has_tone_on_i = any(i_tone in syllable for i_tone in i_tones)
-            
-            if has_tone_on_i:
-                # Wrong: tone is on i, should be on u
-                # Use add_tone_to_final which follows the i u 并列标在后 rule
-                fixed = add_tone_to_final(syllable_no_tone, tone)
-                fixed_syllables.append(fixed)
-            else:
-                # Tone is already on u or correct, keep as is
-                fixed_syllables.append(syllable)
-        
-        # Check for 'ui' pattern - tone should be on 'i' (the latter)
-        elif 'ui' in syllable_no_tone.lower():
-            # Check if tone is currently on 'u' (wrong)
-            u_tones = ['ū', 'ú', 'ǔ', 'ù', 'Ū', 'Ú', 'Ǔ', 'Ù']
-            has_tone_on_u = any(u_tone in syllable for u_tone in u_tones)
-            
-            if has_tone_on_u:
-                # Wrong: tone is on u, should be on i
-                # Use add_tone_to_final which follows the i u 并列标在后 rule
-                fixed = add_tone_to_final(syllable_no_tone, tone)
-                fixed_syllables.append(fixed)
-            else:
-                # Tone is already on i or correct, keep as is
-                fixed_syllables.append(syllable)
-        else:
-            # No iu/ui pattern, keep as is
-            fixed_syllables.append(syllable)
-    
-    return ' '.join(fixed_syllables)
 
 
-def get_word_knowledge(word: str) -> Dict[str, Any]:
-    """Combine knowledge graph data, cache, and LLM fallback for a Chinese word."""
-    info = fetch_word_knowledge_points(word) or {}
-    pronunciations: List[str] = list(dict.fromkeys(info.get("pronunciations") or []))
-    meanings: List[str] = list(dict.fromkeys(info.get("meanings") or []))
-    hsk_level = info.get("hsk_level")
-
-    cached = _word_kp_cache.get(word) or {}
-    cache_pinyin = cached.get("pinyin")
-    cache_meaning = cached.get("meaning") or cached.get("meaning_en")
-    cache_pron_list = cached.get("pronunciations") or []
-    cache_meaning_list = cached.get("meanings") or []
-    cache_hsk = cached.get("hsk_level")
-
-    for val in [cache_pinyin]:
-        if val and val not in pronunciations:
-            pronunciations.append(val)
-    for val in cache_pron_list:
-        if val and val not in pronunciations:
-            pronunciations.append(val)
-    for val in [cache_meaning]:
-        if val and val not in meanings:
-            meanings.append(val)
-    for val in cache_meaning_list:
-        if val and val not in meanings:
-            meanings.append(val)
-    if not hsk_level and cache_hsk:
-        hsk_level = cache_hsk
-
-    needs_llm = (not pronunciations or not meanings) and _genai_model is not None
-    if needs_llm:
-        llm_info = _fetch_word_info_via_llm(word)
-        updated = False
-        llm_pinyin = llm_info.get("pinyin")
-        llm_meaning = llm_info.get("meaning")
-        if llm_pinyin and llm_pinyin not in pronunciations:
-            pronunciations.append(llm_pinyin)
-            updated = True
-        if llm_meaning and llm_meaning not in meanings:
-            meanings.append(llm_meaning)
-            updated = True
-        if updated:
-            cache_entry = _word_kp_cache.get(word, {})
-            cache_entry.setdefault("pronunciations", [])
-            cache_entry.setdefault("meanings", [])
-            if llm_pinyin and llm_pinyin not in cache_entry["pronunciations"]:
-                cache_entry["pronunciations"].append(llm_pinyin)
-            if llm_meaning and llm_meaning not in cache_entry["meanings"]:
-                cache_entry["meanings"].append(llm_meaning)
-            _word_kp_cache[word] = cache_entry
-            _save_word_kp_cache()
-
-    return {
-        "pronunciations": pronunciations,
-        "meanings": meanings,
-        "hsk_level": hsk_level
-    }
 
 
 def expand_kp_template_variables(kp_pattern: str, context_tags: List[Dict[str, Any]]) -> str:
@@ -3802,84 +3573,9 @@ async def get_cefr_vocabulary(cefr_level: Optional[str] = None):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error loading CEFR vocabulary: {str(e)}")
 
-# Cache for word->image mapping (loaded from TTL file)
-_word_image_cache = None
-_word_image_cache_time = None
 
 # Cache for pinyin gap fill suggestions
-_pinyin_suggestions_cache = None
-_pinyin_suggestions_cache_mtime = None
 
-def get_word_image_map():
-    """Load word->image mapping from TTL file (cached, much faster than full graph)."""
-    global _word_image_cache, _word_image_cache_time
-    from pathlib import Path
-    import threading
-    
-    kg_file = PROJECT_ROOT / "knowledge_graph" / "world_model_cwn.ttl"
-    
-    # Reload if file is newer than cache (or cache doesn't exist)
-    file_mtime = kg_file.stat().st_mtime if kg_file.exists() else 0
-    if _word_image_cache is None or _word_image_cache_time is None or file_mtime > _word_image_cache_time:
-        # If cache is being built, return empty dict (will be populated on next request)
-        if _word_image_cache is None:
-            # Start loading in background thread to avoid blocking
-            def load_cache():
-                global _word_image_cache, _word_image_cache_time
-                from rdflib import Graph, Namespace
-                from rdflib.namespace import RDF
-                
-                print("Loading word->image mapping from TTL file (this may take 20-30 seconds)...")
-                graph = Graph()
-                SRS_KG = Namespace("http://srs4autism.com/schema/")
-                graph.bind("srs-kg", SRS_KG)
-                
-                if kg_file.exists():
-                    try:
-                        # Only parse the file (this is still slow but necessary)
-                        graph.parse(str(kg_file), format="turtle")
-                        
-                        # Build a simple word->image mapping (much faster lookups)
-                        word_image_map = {}
-                        sparql = """
-                        PREFIX srs-kg: <http://srs4autism.com/schema/>
-                        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-                        SELECT DISTINCT ?word_text ?image_path
-                        WHERE {
-                            ?word_uri a srs-kg:Word .
-                            ?word_uri rdfs:label ?word_text .
-                            ?word_uri srs-kg:means ?concept_uri .
-                            ?concept_uri srs-kg:hasVisualization ?image_uri .
-                            ?image_uri srs-kg:imageFilePath ?image_path .
-                        }
-                        """
-                        
-                        results = graph.query(sparql)
-                        for row in results:
-                            word = str(row.word_text).strip()
-                            img = str(row.image_path).strip()
-                            if word and img:
-                                if not img.startswith('/'):
-                                    img = '/' + img
-                                word_image_map[word] = img
-                        
-                        _word_image_cache = word_image_map
-                        _word_image_cache_time = file_mtime
-                        print(f"✅ Loaded {len(word_image_map)} word->image mappings from {len(graph)} triples")
-                    except Exception as e:
-                        print(f"Error loading KG file: {e}")
-                        import traceback
-                        traceback.print_exc()
-                        if _word_image_cache is None:
-                            _word_image_cache = {}  # Empty dict as fallback
-            
-            # Start loading in background
-            thread = threading.Thread(target=load_cache, daemon=True)
-            thread.start()
-            # Return empty dict while loading
-            return {}
-    
-    return _word_image_cache or {}
 
 # Get images for words (batch query)
 @app.post("/vocabulary/images")
@@ -4314,7 +4010,6 @@ async def get_grammar_points(cefr_level: Optional[str] = None, language: Optiona
         }
 
 # Save grammar point corrections/edits
-GRAMMAR_CORRECTIONS_FILE = str(PROJECT_ROOT / "data" / "content_db" / "grammar_corrections.json")
 
 @app.put("/vocabulary/grammar/{gp_uri:path}")
 async def update_grammar_point(gp_uri: str, grammar_data: dict):
@@ -6580,303 +6275,8 @@ async def get_pinyin_for_word(word: str):
         raise HTTPException(status_code=500, detail=f"Error getting word info: {str(e)}")
 
 
-@app.get("/pinyin/gap-fill-suggestions")
-async def get_pinyin_gap_fill_suggestions():
-    """
-    Get pinyin gap fill suggestions.
-    OPTIMIZED: Removed asyncio executor for simple file IO to prevent thread starvation.
-    """
-    global _pinyin_suggestions_cache, _pinyin_suggestions_cache_mtime
-    import time
-    
-    t_start = time.time()
-    try:
-        suggestions_file = PROJECT_ROOT / "data" / "pinyin_gap_fill_suggestions.csv"
-        print(f"🔍 [GET] Request received. Checking: {suggestions_file}")
-        
-        if not suggestions_file.exists():
-            print(f"❌ [GET] File not found: {suggestions_file}")
-            raise HTTPException(status_code=404, detail="Suggestions file not found. Please run find_best_pinyin_words.py first.")
-        
-        # Check file stats (blocking but fast)
-        file_stats = suggestions_file.stat()
-        current_mtime = file_stats.st_mtime
-        file_size = file_stats.st_size
-        
-        print(f"📂 [GET] File found. Size: {file_size} bytes. Cache mtime: {_pinyin_suggestions_cache_mtime} vs Current: {current_mtime}")
-        
-        # Refresh cache if needed
-        if _pinyin_suggestions_cache is None or _pinyin_suggestions_cache_mtime != current_mtime:
-            print("🔄 [GET] Cache stale. Reading CSV synchronously...")
-            
-            # DIRECT READ (No Executor): Removes complexity and deadlock risk
-            suggestions = []
-            with open(suggestions_file, 'r', encoding='utf-8') as f:
-                reader = csv.DictReader(f)
-                for row in reader:
-                    suggestions.append(dict(row))
-            
-            _pinyin_suggestions_cache = suggestions
-            _pinyin_suggestions_cache_mtime = current_mtime
-            print(f"✅ [GET] CSV Read complete. Loaded {len(suggestions)} rows.")
-        else:
-            print("⚡ [GET] Serving from cache.")
-        
-        duration = (time.time() - t_start) * 1000
-        print(f"🚀 [GET] Completed in {duration:.2f}ms")
-        
-        return {
-            "suggestions": _pinyin_suggestions_cache,
-            "total": len(_pinyin_suggestions_cache)
-        }
-    except HTTPException:
-        raise
-    except Exception as e:
-        import traceback
-        print(f"🔥 [GET] Critical Error: {str(e)}")
-        traceback.print_exc()
-        raise HTTPException(status_code=500, detail=f"Error loading suggestions: {str(e)}")
 
 
-@app.put("/pinyin/gap-fill-suggestions")
-async def save_pinyin_gap_fill_suggestions(request: Dict[str, Any]):
-    """
-    Save approved/edited pinyin gap fill suggestions.
-    Invalidates cache after saving.
-    """
-    global _pinyin_suggestions_cache, _pinyin_suggestions_cache_mtime
-    import asyncio
-    try:
-        suggestions_file = PROJECT_ROOT / "data" / "pinyin_gap_fill_suggestions.csv"
-        approved_suggestions = request.get("suggestions", [])
-        
-        if not approved_suggestions:
-            return {"message": "No suggestions to save", "saved": 0}
-        
-        print(f"💾 [SAVE] Starting save of {len(approved_suggestions)} suggestions to CSV...")
-        print(f"💾 [SAVE] File path: {suggestions_file}")
-        
-        # Load existing suggestions
-        print(f"💾 [SAVE] Loading existing suggestions from CSV...")
-        existing_suggestions = {}
-        if suggestions_file.exists():
-            try:
-                with open(suggestions_file, 'r', encoding='utf-8') as f:
-                    reader = csv.DictReader(f)
-                    row_count = 0
-                    for row in reader:
-                        syllable = row.get('Syllable')
-                        if syllable:
-                            existing_suggestions[syllable] = dict(row)
-                            row_count += 1
-                    print(f"💾 [SAVE] Loaded {row_count} existing suggestions")
-            except Exception as e:
-                print(f"⚠️ [SAVE] Error reading existing suggestions: {e}")
-                import traceback
-                traceback.print_exc()
-                # Continue with empty dict if read fails
-        
-        # Normalize pinyin function
-        def normalize_pinyin_for_save(pinyin: str, word: str = None) -> str:
-            """
-            Normalize pinyin to proper format with tone marks and space separation.
-            If word is provided and pinyin is missing/incorrect, try to fetch from knowledge graph.
-            """
-            if not pinyin or not isinstance(pinyin, str):
-                pinyin = ''
-            
-            pinyin = pinyin.strip()
-            
-            # If pinyin is empty or doesn't have proper tone marks, try to get from word
-            if word and word.strip():
-                word_stripped = word.strip()
-                # Check if pinyin needs updating (empty or missing tone marks)
-                has_tone_marks = any(mark in pinyin for mark in ['ā', 'á', 'ǎ', 'à', 'ē', 'é', 'ě', 'è', 
-                                                                  'ī', 'í', 'ǐ', 'ì', 'ō', 'ó', 'ǒ', 'ò', 
-                                                                  'ū', 'ú', 'ǔ', 'ù', 'ǖ', 'ǘ', 'ǚ', 'ǜ'])
-                
-                if not pinyin or not has_tone_marks:
-                    try:
-                        word_info = get_word_knowledge(word_stripped)
-                        pronunciations = word_info.get("pronunciations", [])
-                        if pronunciations and pronunciations[0]:
-                            pinyin = pronunciations[0]
-                            print(f"💾 [SAVE] Fetched pinyin for '{word_stripped}': '{pinyin}'")
-                    except Exception as e:
-                        print(f"⚠️ [SAVE] Could not fetch pinyin for '{word_stripped}': {e}")
-            
-            if not pinyin:
-                return ''
-            
-            # Normalize: ensure space separation and proper formatting
-            # Remove extra whitespace and normalize to single spaces
-            pinyin = ' '.join(pinyin.split())
-            
-            # Apply fix_iu_ui_tone_placement to ensure correct tone placement
-            try:
-                pinyin = fix_iu_ui_tone_placement(pinyin)
-            except Exception as e:
-                print(f"⚠️ [SAVE] Could not apply tone placement fix: {e}")
-            
-            return pinyin
-        
-        # Update with approved/edited suggestions
-        print(f"💾 [SAVE] Updating {len(approved_suggestions)} suggestions...")
-        for suggestion in approved_suggestions:
-            syllable = suggestion.get('Syllable')
-            if syllable:
-                # Auto-update pinyin from Chinese word
-                word = suggestion.get('Suggested Word', '').strip()
-                current_pinyin = suggestion.get('Word Pinyin', '').strip()
-                
-                # Always fetch pinyin from the Chinese word if word is provided
-                if word and word != 'NONE':
-                    try:
-                        # Use the word-info endpoint logic which already handles normalization
-                        word_stripped = word.strip()
-                        word_info = get_word_knowledge(word_stripped)
-                        pronunciations = word_info.get("pronunciations", [])
-                        if pronunciations and pronunciations[0]:
-                            fetched_pinyin = pronunciations[0]
-                            
-                            # Add spaces between syllables if missing
-                            # Use a simple heuristic: split after tone marks when followed by initials
-                            # This is a best-effort approach - for perfect results, use the frontend normalization
-                            import re
-                            if ' ' not in fetched_pinyin:
-                                # Simple pattern: after a tone mark + letters, if we see an initial consonant
-                                # that's followed by a vowel (indicating new syllable), split there
-                                
-                                # Pattern: (tone_mark + letters) + (initial + vowel_with_tone)
-                                # This matches: syllable ending + new syllable starting
-                                
-                                # First pass: handle ng endings (ang, eng, ong) - these are complete
-                                fetched_pinyin = re.sub(r'([āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ][a-zü]*?ng)([bpmfdtnlgkhjqxzcsrzhchshyw][a-zü]*?[āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ])', r'\1 \2', fetched_pinyin, flags=re.IGNORECASE)
-                                
-                                # Second pass: handle n/r endings (but check it's not part of ng)
-                                fetched_pinyin = re.sub(r'([āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ][a-zü]*?[nr])(?![g])([bpmfdtnlgkhjqxzcsrzhchshyw][a-zü]*?[āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ])', r'\1 \2', fetched_pinyin, flags=re.IGNORECASE)
-                                
-                                # Third pass: handle syllables ending with just tone mark (including compound finals like ao, ou, ai, ei)
-                                # Pattern: tone_mark + initial + (letters containing tone_mark)
-                                fetched_pinyin = re.sub(r'([āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ])([bpmfdtnlgkhjqxzcsrzhchshyw][a-zü]*?[āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ])', r'\1 \2', fetched_pinyin, flags=re.IGNORECASE)
-                                
-                                # Additional pass: handle cases where tone mark is in compound final (ao, ou, etc.)
-                                # and is followed by initial + vowel with tone
-                                fetched_pinyin = re.sub(r'([āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ][a-zü]*?[a-zü])([bpmfdtnlgkhjqxzcsrzhchshyw][a-zü]*?[āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ])', r'\1 \2', fetched_pinyin, flags=re.IGNORECASE)
-                                
-                                # Iterative pass: keep splitting until no more changes (handles multi-syllable words)
-                                prev_pinyin = ''
-                                while prev_pinyin != fetched_pinyin:
-                                    prev_pinyin = fetched_pinyin
-                                    # Split after any tone mark when followed by initial + vowel with tone
-                                    fetched_pinyin = re.sub(r'([āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ][a-zü]*?)([bpmfdtnlgkhjqxzcsrzhchshyw][a-zü]*?[āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ])', r'\1 \2', fetched_pinyin, flags=re.IGNORECASE)
-                                
-                                # Handle two-character initials (zh, ch, sh)
-                                fetched_pinyin = re.sub(r'([āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ][a-zü]*?)\s*(zh|ch|sh)([a-zü]*?[āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ])', r'\1 \2\3', fetched_pinyin, flags=re.IGNORECASE)
-                                
-                                # Clean up: if we accidentally split "an" + "g" (should be "ang"), fix it
-                                fetched_pinyin = re.sub(r'([āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ][a-zü]*?[nr])\s+([g])([a-zü]*?[āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ])', r'\1\2\3', fetched_pinyin, flags=re.IGNORECASE)
-                            
-                            # Normalize: ensure single spaces and trim
-                            normalized_pinyin = ' '.join(fetched_pinyin.split()).strip()
-                            
-                            # Apply tone placement fix
-                            try:
-                                normalized_pinyin = fix_iu_ui_tone_placement(normalized_pinyin)
-                            except:
-                                pass
-                            
-                            suggestion['Word Pinyin'] = normalized_pinyin
-                            print(f"💾 [SAVE] Auto-updated pinyin for '{syllable}' (word: '{word}'): '{current_pinyin}' → '{normalized_pinyin}'")
-                        else:
-                            print(f"⚠️ [SAVE] No pinyin found for word '{word}'")
-                    except Exception as e:
-                        print(f"⚠️ [SAVE] Could not fetch pinyin for word '{word}': {e}")
-                        # If fetch fails, still try to normalize existing pinyin
-                        if current_pinyin:
-                            normalized_pinyin = normalize_pinyin_for_save(current_pinyin, None)
-                            if normalized_pinyin:
-                                suggestion['Word Pinyin'] = normalized_pinyin
-                else:
-                    # No word provided, just normalize existing pinyin
-                    if current_pinyin:
-                        normalized_pinyin = normalize_pinyin_for_save(current_pinyin, None)
-                        if normalized_pinyin:
-                            suggestion['Word Pinyin'] = normalized_pinyin
-                
-                # Ensure all fields are properly preserved, especially Image File
-                image_file = suggestion.get('Image File', '') or ''
-                if image_file and str(image_file).strip():
-                    suggestion['Has Image'] = 'Yes'
-                    suggestion['Image File'] = str(image_file).strip()
-                else:
-                    suggestion['Has Image'] = 'No'
-                    suggestion['Image File'] = ''
-                
-                if syllable in existing_suggestions:
-                    existing_suggestions[syllable].update(suggestion)
-                else:
-                    existing_suggestions[syllable] = suggestion
-                
-                print(f"💾 [SAVE] Updated syllable '{syllable}': Image File = '{suggestion.get('Image File', '')}', Has Image = '{suggestion.get('Has Image', '')}'")
-        
-        # Save back to CSV
-        if existing_suggestions:
-            fieldnames = ['Syllable', 'Suggested Word', 'Word Pinyin', 'HSK Level', 
-                         'Frequency Rank', 'Has Image', 'Image File', 'Concreteness', 
-                         'AoA', 'Num Syllables', 'Score', 'approved']
-            
-            # Write to a temporary file first, then rename (atomic operation)
-            import tempfile
-            import shutil
-            temp_file = suggestions_file.with_suffix('.tmp')
-            
-            try:
-                print(f"📝 [SAVE] Writing to temp file: {temp_file}")
-                # Run file I/O in thread executor to avoid blocking event loop
-                import asyncio
-                
-                def write_csv_file():
-                    with open(temp_file, 'w', encoding='utf-8', newline='') as f:
-                        writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction='ignore')
-                        writer.writeheader()
-                        print(f"📝 [SAVE] Writing {len(existing_suggestions)} suggestions...")
-                        for suggestion in existing_suggestions.values():
-                            writer.writerow(suggestion)
-                    print(f"📝 [SAVE] Temp file written successfully")
-                
-                # Run in executor with timeout
-                loop = asyncio.get_event_loop()
-                await asyncio.wait_for(
-                    loop.run_in_executor(None, write_csv_file),
-                    timeout=30.0  # 30 second timeout for file write
-                )
-                
-                print(f"📝 [SAVE] Renaming temp file to: {suggestions_file}")
-                # Atomic rename - also run in executor
-                await loop.run_in_executor(
-                    None,
-                    lambda: shutil.move(str(temp_file), str(suggestions_file))
-                )
-                print(f"✅ [SAVE] Successfully saved {len(existing_suggestions)} suggestions")
-            except Exception as e:
-                # Clean up temp file on error
-                if temp_file.exists():
-                    temp_file.unlink()
-                raise
-        
-        # Invalidate cache so next GET request will reload fresh data
-        _pinyin_suggestions_cache = None
-        _pinyin_suggestions_cache_mtime = None
-        
-        return {
-            "message": f"Saved {len(approved_suggestions)} suggestions",
-            "saved": len(approved_suggestions)
-        }
-    except Exception as e:
-        import traceback
-        traceback.print_exc()
-        raise HTTPException(status_code=500, detail=f"Error saving suggestions: {str(e)}")
 
 
 @app.get("/pinyin/english-vocab-suggestions")
@@ -6988,267 +6388,14 @@ async def find_and_rename_image(request: Dict[str, Any]):
         return {"error": str(e), "image_file": ""}
 
 
-def generate_tone_variations(syllable: str) -> list:
-    """
-    Generate all 4 tone variations of a syllable.
-    Example: 'zhen' -> ['zhēn', 'zhén', 'zhěn', 'zhèn']
-    """
-    from scripts.knowledge_graph.pinyin_parser import extract_tone, add_tone_to_final
-    
-    syllable_no_tone, _ = extract_tone(syllable)
-    if not syllable_no_tone:
-        return ['', '', '', '']
-    
-    variations = []
-    for tone in [1, 2, 3, 4]:
-        toned = add_tone_to_final(syllable_no_tone, tone)
-        variations.append(toned)
-    return variations
 
 
-def generate_confusors(syllable: str) -> list:
-    """
-    Generate confusor syllables (similar syllables that might be confused).
-    Based on pattern: change initial to b/p and vary tones.
-    """
-    from scripts.knowledge_graph.pinyin_parser import extract_tone, add_tone_to_final
-    
-    syllable_no_tone, _ = extract_tone(syllable)
-    if not syllable_no_tone or len(syllable_no_tone) < 2:
-        return ['', '', '']
-    
-    # Extract initial and final
-    initial = syllable_no_tone[0]
-    final = syllable_no_tone[1:] if len(syllable_no_tone) > 1 else ''
-    
-    # Generate confusors: b+final (tone 1), p+final (tone 2), original with different tone
-    confusors = []
-    if final:
-        confusors.append(add_tone_to_final('b' + final, 1))
-        confusors.append(add_tone_to_final('p' + final, 2))
-    else:
-        confusors.append(add_tone_to_final('ba', 1))
-        confusors.append(add_tone_to_final('pa', 2))
-    
-    # Third confusor: original syllable with tone 3 or 4 (if original wasn't tone 3)
-    original_toned = add_tone_to_final(syllable_no_tone, 3)
-    if original_toned == syllable:
-        original_toned = add_tone_to_final(syllable_no_tone, 4)
-    confusors.append(original_toned)
-    
-    return confusors
 
 
-def get_element_to_learn(syllable: str) -> str:
-    """
-    Determine ElementToLearn from syllable.
-    For syllable cards, ElementToLearn is typically the final (韵母).
-    Example: 'zhen' -> 'en' (final)
-    """
-    from scripts.knowledge_graph.pinyin_parser import parse_pinyin, extract_tone
-    
-    syllable_no_tone, _ = extract_tone(syllable)
-    if not syllable_no_tone:
-        return ''
-    
-    parsed = parse_pinyin(syllable_no_tone)
-    # ElementToLearn is the final (韵母)
-    return parsed.get('final', '') or ''
 
 
-def generate_word_audio(word: str) -> str:
-    """
-    Generate WordAudio field with plain filename: cm_tts_zh_<word>.mp3
-    """
-    if not word:
-        return ''
-    return f"cm_tts_zh_{word}.mp3"
 
 
-@app.post("/pinyin/apply-suggestions")
-async def apply_pinyin_suggestions(request: Dict[str, Any]):
-    """
-    Apply approved pinyin suggestions to the pinyin deck database.
-    Creates new PinyinSyllableNote entries for approved suggestions.
-    """
-    try:
-        from database.models import PinyinSyllableNote
-        from database.db import get_db
-        
-        suggestions = request.get("suggestions", [])
-        # profile_id is not used - notes are created in shared table accessible by all profiles
-        # Keeping for backward compatibility but not required
-        profile_id = request.get("profile_id")
-        
-        if not suggestions:
-            raise HTTPException(status_code=400, detail="No suggestions provided")
-        
-        # Note: profile_id is not required - pinyin suggestions are shared across all profiles
-        # Each profile can filter from this basic list when syncing to Anki
-        
-        from database.db import get_db_session
-        
-        created_count = 0
-        updated_count = 0
-        errors = []
-        
-        with get_db_session() as db:
-            # OPTIMIZATION: Batch fetch all existing notes in ONE query instead of N queries in loop
-            # Collect all unique syllables from suggestions
-            target_syllables = set()
-            suggestion_data = []  # Store processed suggestion data
-            
-            for suggestion in suggestions:
-                syllable = suggestion.get('Syllable') or suggestion.get('syllable', '')
-                word = suggestion.get('Suggested Word') or suggestion.get('word', '')
-                
-                if not syllable or not word or word == 'NONE':
-                    continue
-                
-                target_syllables.add(syllable)
-                suggestion_data.append({
-                    'syllable': syllable,
-                    'word': word,
-                    'pinyin': suggestion.get('Word Pinyin') or suggestion.get('pinyin', ''),
-                    'image_file': suggestion.get('Image File') or suggestion.get('image_file', ''),
-                    'original': suggestion  # Keep original for error messages
-                })
-            
-            # Fetch all existing notes for these syllables in ONE query
-            existing_notes = []
-            if target_syllables:
-                existing_notes = db.query(PinyinSyllableNote).filter(
-                    PinyinSyllableNote.syllable.in_(target_syllables)
-                ).all()
-            
-            # Create lookup dictionaries for O(1) access
-            # Map: (syllable, word) -> Note Object (exact match)
-            exact_match_map = {
-                (note.syllable, note.word): note 
-                for note in existing_notes
-            }
-            
-            # Map: syllable -> Note Object (for backward compatibility fallback)
-            # Use the first note found for each syllable (maintains backward compat behavior)
-            syllable_fallback_map = {}
-            for note in existing_notes:
-                if note.syllable not in syllable_fallback_map:
-                    syllable_fallback_map[note.syllable] = note
-            
-            # Get the highest display_order to append new notes
-            max_order = db.query(PinyinSyllableNote.display_order).order_by(
-                PinyinSyllableNote.display_order.desc()
-            ).first()
-            next_order = (max_order[0] if max_order else 0) + 1
-            
-            for suggestion_info in suggestion_data:
-                try:
-                    syllable = suggestion_info['syllable']
-                    word = suggestion_info['word']
-                    pinyin = suggestion_info['pinyin']
-                    image_file = suggestion_info['image_file']
-                    
-                    # OPTIMIZATION: In-memory lookup instead of database query
-                    existing = exact_match_map.get((syllable, word))
-                    if not existing:
-                        existing = syllable_fallback_map.get(syllable)
-                    
-                    # Fetch concept from knowledge graph
-                    # For batch operations, skip both LLM and KG SPARQL queries (too slow)
-                    # KG queries can take 10s each if Fuseki is slow/unavailable
-                    # For 210 suggestions, this could be 35+ minutes!
-                    # Just use word as concept - can be updated later if needed
-                    concept = word  # Use word itself as concept for batch operations
-                    
-                    if existing:
-                        # Update existing note (idempotent - safe to apply multiple times)
-                        existing.word = word
-                        existing.concept = concept
-                        fields = json.loads(existing.fields) if existing.fields else {}
-                        
-                        # Update basic fields
-                        if pinyin:
-                            fields['WordPinyin'] = fix_iu_ui_tone_placement(pinyin)
-                        fields['WordHanzi'] = word
-                        
-                        # Update image if provided
-                        if image_file:
-                            fields['WordPicture'] = f'<img src="{image_file}">'
-                        
-                        # Note: Tone1-4 fields are now obsolete - generated dynamically on frontend
-                        
-                        if not fields.get('ElementToLearn'):
-                            fields['ElementToLearn'] = get_element_to_learn(syllable)
-                        
-                        if not fields.get('WordAudio'):
-                            fields['WordAudio'] = generate_word_audio(word)
-                        
-                        existing.fields = json.dumps(fields, ensure_ascii=False)
-                        updated_count += 1
-                    else:
-                        # Create new note
-                        # Fix tone placement for iu/ui patterns in pinyin
-                        fixed_pinyin = fix_iu_ui_tone_placement(pinyin or '') if pinyin else ''
-                        
-                        # Generate all required fields
-                        # Note: Tone1-4 fields are now obsolete - generated dynamically on frontend
-                        element_to_learn = get_element_to_learn(syllable)
-                        word_audio = generate_word_audio(word)
-                        
-                        # Format WordPicture as HTML img tag if image_file exists
-                        word_picture = ''
-                        if image_file:
-                            word_picture = f'<img src="{image_file}">'
-                        
-                        fields = {
-                            'ElementToLearn': element_to_learn,
-                            'Syllable': syllable,
-                            'WordPinyin': fixed_pinyin,
-                            'WordHanzi': word,
-                            'WordPicture': word_picture,
-                            'WordAudio': word_audio,
-                            '_Remarks': '',
-                            '_KG_Map': '{}'
-                        }
-                        
-                        new_note = PinyinSyllableNote(
-                            note_id=f"syllable_{syllable}_{next_order}",
-                            syllable=syllable,
-                            word=word,
-                            concept=concept,
-                            fields=json.dumps(fields, ensure_ascii=False),
-                            display_order=next_order
-                        )
-                        
-                        db.add(new_note)
-                        
-                        # Update local maps to prevent duplicates if input list has same syllable twice
-                        exact_match_map[(syllable, word)] = new_note
-                        if syllable not in syllable_fallback_map:
-                            syllable_fallback_map[syllable] = new_note
-                        
-                        next_order += 1
-                        created_count += 1
-                
-                except Exception as e:
-                    syllable = suggestion_info.get('syllable', 'unknown')
-                    errors.append(f"Error processing {syllable}: {str(e)}")
-                    continue
-        
-        return {
-            "message": f"Applied {len(suggestions)} suggestions ({created_count} created, {updated_count} updated)",
-            "created": created_count,
-            "updated": updated_count,
-            "total": len(suggestions),
-            "errors": errors
-        }
-    
-    except HTTPException:
-        raise
-    except Exception as e:
-        import traceback
-        traceback.print_exc()
-        raise HTTPException(status_code=500, detail=f"Error applying suggestions: {str(e)}")
 
 
 # Mount static files for serving images
