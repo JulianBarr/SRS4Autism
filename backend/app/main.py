@@ -1749,6 +1749,13 @@ async def generate_card_image(card_id: str, request: CardImageRequest, req: Requ
             os.environ["DEEPSEEK_API_BASE"] = base_url
             os.environ["OPENAI_BASE_URL"] = base_url
             os.environ["OPENAI_API_BASE"] = base_url # Legacy support
+        
+        # --- FIX: PREVENT FALLBACK TO GEMINI ---
+        # If using DeepSeek, hide the Gemini key so ContentGenerator doesn't default to Google.
+        if provider == "deepseek" or (base_url and "siliconflow" in base_url):
+            if "GEMINI_API_KEY" in os.environ:
+                del os.environ["GEMINI_API_KEY"]
+            # Also unset the global fallback model if possible, or ensuring the generator prefers OpenAI
     # ----------------------------------------------------------------
 
     cards = load_json_file(CARDS_FILE, [])
@@ -2053,6 +2060,20 @@ async def send_message(message: ChatMessage, request: Request):  # <--- Added 'r
             if base_url:
                 os.environ["DEEPSEEK_API_BASE"] = base_url # <--- Vital override
                 os.environ["OPENAI_BASE_URL"] = base_url   # <--- Good practice for OpenAI SDKs
+            
+            # --- FIX: PREVENT FALLBACK TO GEMINI ---
+            # If using DeepSeek, hide the Gemini key so ContentGenerator doesn't default to Google.
+            if provider == "deepseek" or (base_url and "siliconflow" in base_url):
+                if "GEMINI_API_KEY" in os.environ:
+                    del os.environ["GEMINI_API_KEY"]
+                
+                # CRITICAL: Reload modules to purge cached env vars
+                import importlib
+                import agent.content_generator
+                import agent.conversation_handler
+                importlib.reload(agent.content_generator)
+                importlib.reload(agent.conversation_handler)
+                print("🔄 Modules reloaded to force DeepSeek configuration")
         else:
             print("DEBUG: No API Key found in headers or message config")
 

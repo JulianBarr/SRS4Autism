@@ -120,7 +120,6 @@ class ContentGenerator:
     
     def __init__(self, api_key: str = None, card_model: Optional[str] = None):
         # Set up media objects directory for hash-based storage
-        # PROJECT_ROOT is typically the parent of agent/ directory
         self.PROJECT_ROOT = Path(__file__).resolve().parent.parent
         self.MEDIA_OBJECTS_DIR = self.PROJECT_ROOT / "content" / "media" / "objects"
         self.MEDIA_OBJECTS_DIR.mkdir(parents=True, exist_ok=True)
@@ -132,7 +131,16 @@ class ContentGenerator:
             with open(model_config_path, 'r') as f:
                 model_config = json.load(f)
         
-        self.card_model_id = card_model or "gemini-2.5-flash"
+        # --- FIX 1: Smart Default Detection ---
+        # If no model specified, check environment to decide default
+        if not card_model:
+            # If DeepSeek key exists and Gemini key is MISSING (forced by main.py), use DeepSeek
+            if os.getenv("DEEPSEEK_API_KEY") and not os.getenv("GEMINI_API_KEY"):
+                card_model = "deepseek-ai/DeepSeek-V3"
+            else:
+                card_model = "gemini-2.5-flash"
+        
+        self.card_model_id = card_model
         
         # Find model config for the selected model
         self.model_config = None
@@ -141,15 +149,26 @@ class ContentGenerator:
                 self.model_config = model
                 break
         
-        # Initialize based on provider
-        provider = self.model_config.get("provider", "google") if self.model_config else "google"
+        # --- FIX 2: Robust Provider Detection ---
+        if self.model_config:
+            provider = self.model_config.get("provider", "google")
+        else:
+            # Fallback: Infer provider from model name if config is missing
+            lower_id = str(self.card_model_id).lower()
+            if "deepseek" in lower_id:
+                provider = "deepseek"
+            elif "qwen" in lower_id:
+                provider = "alibaba"
+            else:
+                provider = "google"
         
+        self.provider = provider
+
         if provider == "google":
             # Initialize Gemini
             if api_key:
                 genai.configure(api_key=api_key)
             else:
-                # Try to get from environment
                 api_key = os.getenv("GEMINI_API_KEY")
                 if api_key:
                     genai.configure(api_key=api_key)
@@ -164,33 +183,49 @@ class ContentGenerator:
             model_name = model_map.get(self.card_model_id, self.card_model_id)
             if not model_name.startswith("models/"):
                 model_name = f"models/{model_name}"
+            
+            # Only create model if we have an API key or generic setup
             self.model = genai.GenerativeModel(model_name)
             self.openai_client = None
             
         elif provider in ["deepseek", "alibaba"]:
-            # Initialize OpenAI-compatible client for DeepSeek/Qwen
+            # Initialize OpenAI-compatible client
             if OpenAI is None:
-                raise ImportError("openai package is required for DeepSeek/Qwen models. Install with: pip install openai")
+                raise ImportError("openai package is required. pip install openai")
             
             api_key_env = "DEEPSEEK_API_KEY" if provider == "deepseek" else "DASHSCOPE_API_KEY"
-            model_api_key = os.getenv(api_key_env)
+            model_api_key = api_key or os.getenv(api_key_env)
             
             if not model_api_key:
-                raise ValueError(f"{api_key_env} environment variable is required for {provider} models")
+                # Fallback to generic OPENAI_API_KEY if specific one missing
+                model_api_key = os.getenv("OPENAI_API_KEY")
+
+            if not model_api_key:
+                print(f"⚠️ Warning: No API key found for {provider}")
             
-            base_url = self.model_config.get("base_url")
+            # --- FIX 3: Allow Base URL from Environment ---
+            base_url = None
+            if self.model_config:
+                base_url = self.model_config.get("base_url")
+            
+            # Fallback to Environment Variable (Crucial for SiliconFlow)
             if not base_url:
-                raise ValueError(f"base_url not configured for model {self.card_model_id}")
+                if provider == "deepseek":
+                    base_url = os.getenv("DEEPSEEK_API_BASE")
+                elif provider == "alibaba":
+                    base_url = os.getenv("DASHSCOPE_API_BASE")
             
+            # Final fallback
+            if not base_url:
+                 if provider == "deepseek": base_url = "https://api.deepseek.com"
+
             self.openai_client = OpenAI(
                 api_key=model_api_key,
                 base_url=base_url
             )
-            self.model = None  # Not using Gemini model
+            self.model = None
         else:
             raise ValueError(f"Unsupported provider: {provider}")
-        
-        self.provider = provider
     
     def _generate_content(self, prompt: str) -> str:
         """
@@ -208,7 +243,13 @@ class ContentGenerator:
             return response.text
         elif self.provider in ["deepseek", "alibaba"]:
             # Use OpenAI-compatible API
-            model_name = self.model_config.get("model_name", self.card_model_id)
+            
+            # FIX: Handle case where model_config is None (custom model ID)
+            if self.model_config:
+                model_name = self.model_config.get("model_name", self.card_model_id)
+            else:
+                model_name = self.card_model_id
+
             response = self.openai_client.chat.completions.create(
                 model=model_name,
                 messages=[
