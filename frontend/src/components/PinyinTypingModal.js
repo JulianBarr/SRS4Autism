@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
+import { isValidId } from '../utils/apiUtils';
 
 const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
@@ -29,8 +30,9 @@ const PinyinTypingModal = ({ lessonId, onClose }) => {
         setError(null);
         
         // Try API endpoint first
-        try {
-          const response = await fetch(`${API_BASE}/api/typing-course/lesson/${lessonId}`);
+        if (isValidId(lessonId)) {
+          try {
+            const response = await fetch(`${API_BASE}/api/typing-course/lesson/${lessonId}`);
           if (response.ok) {
             const data = await response.json();
             setLessonData(data);
@@ -40,8 +42,9 @@ const PinyinTypingModal = ({ lessonId, onClose }) => {
         } catch (apiErr) {
           console.warn('API endpoint not available, trying local file:', apiErr);
         }
-        
-        // Fallback to local JSON file in public directory
+      }
+      
+      // Fallback to local JSON file in public directory
         const response = await fetch('/cloze_typing_course.json');
         if (!response.ok) {
           throw new Error('Failed to fetch course data');
@@ -57,7 +60,7 @@ const PinyinTypingModal = ({ lessonId, onClose }) => {
       }
     };
 
-    if (lessonId) {
+    if (isValidId(lessonId)) {
       loadLessonData();
     }
   }, [lessonId]);
@@ -266,7 +269,7 @@ const PinyinTypingModal = ({ lessonId, onClose }) => {
         alignItems: 'center',
         justifyContent: 'center'
       }}>
-        {currentCard.image ? (
+        {isValidId(currentCard.image) ? (
           <img
             src={currentCard.image.startsWith('http') 
               ? currentCard.image 
@@ -307,7 +310,7 @@ const PinyinTypingModal = ({ lessonId, onClose }) => {
       </div>
 
       {/* Audio Player */}
-      {currentCard.audio && (
+      {isValidId(currentCard.audio) && (
         <div style={{
           textAlign: 'center',
           marginBottom: '24px'
