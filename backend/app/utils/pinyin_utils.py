@@ -394,3 +394,38 @@ def get_word_image_map() -> Dict[str, str]:
         except Exception as e:
             logger.error(f"Error loading word image map from TTL: {e}")
             return {}
+
+def strip_pinyin_tones(pinyin_str: str) -> str:
+    """
+    Removes tone marks (diacritics) from a pinyin string.
+    Example: 'shì' -> 'shi', 'zhōng' -> 'zhong'
+    """
+    if not pinyin_str:
+        return ""
+    # Use NFKD normalization to separate base characters from diacritics
+    normalized = unicodedata.normalize('NFKD', pinyin_str)
+    # Filter out the combining marks (tones)
+    return "".join([c for c in normalized if not unicodedata.combining(c)])
+
+def get_pinyin_tone(pinyin_str: str) -> int:
+    """
+    Identifies the tone (1-4) of a pinyin syllable. Returns 0 for neutral.
+    """
+    tone_marks = {
+        'ā': 1, 'ē': 1, 'ī': 1, 'ō': 1, 'ū': 1, 'ǖ': 1,
+        'á': 2, 'é': 2, 'í': 2, 'ó': 2, 'ú': 2, 'ǘ': 2,
+        'ǎ': 3, 'ě': 3, 'ǐ': 3, 'ǒ': 3, 'ǔ': 3, 'ǚ': 3,
+        'à': 4, 'è': 4, 'ì': 4, 'ò': 4, 'ù': 4, 'ǜ': 4,
+    }
+    for char in pinyin_str:
+        if char in tone_marks:
+            return tone_marks[char]
+    return 0
+
+def get_standard_pinyin(pinyin_str: str) -> str:
+    """
+    Returns a lowercase, stripped version of the pinyin.
+    """
+    if not pinyin_str:
+        return ""
+    return pinyin_str.strip().lower()

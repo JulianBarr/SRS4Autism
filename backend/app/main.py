@@ -87,6 +87,10 @@ except ImportError:
 from .routers import pinyin_admin
 app.include_router(pinyin_admin.router, prefix="/pinyin", tags=["pinyin-admin"])
 
+from .routers import recommendations
+app.include_router(recommendations.router, tags=["recommendations"])
+app.include_router(recommendations.router_integrated, tags=["recommendations"])
+
 # ============================================================================
 # KG_Map Helper Functions (Following Strict Schema from Knowledge Tracking Spec)
 # ============================================================================
@@ -417,36 +421,6 @@ def save_json_file(file_path: str, data: Any):
     """Save data to JSON file"""
     with open(file_path, 'w') as f:
         json.dump(data, f, indent=2, default=str)
-
-# Cached semantic similarity map for English words
-_english_similarity_cache: Optional[Dict[str, List[Dict[str, Any]]]] = None
-
-
-def get_english_semantic_similarity() -> Dict[str, List[Dict[str, Any]]]:
-    """Load precomputed semantic similarity map for English words."""
-    global _english_similarity_cache
-    if _english_similarity_cache is not None:
-        return _english_similarity_cache
-
-    if not ENGLISH_SIMILARITY_FILE.exists():
-        print(f"⚠️  English similarity file not found at {ENGLISH_SIMILARITY_FILE}")
-        _english_similarity_cache = {}
-        return _english_similarity_cache
-
-    try:
-        with ENGLISH_SIMILARITY_FILE.open("r", encoding="utf-8") as f:
-            payload = json.load(f)
-            _english_similarity_cache = payload.get("similarities", {})
-            meta = payload.get("metadata", {})
-            print(f"🧠 Loaded English semantic similarity graph "
-                  f"(words={len(_english_similarity_cache)}, "
-                  f"model={meta.get('model')}, "
-                  f"threshold={meta.get('threshold')})")
-    except Exception as exc:
-        print(f"⚠️  Failed to load English similarity file: {exc}")
-        _english_similarity_cache = {}
-
-    return _english_similarity_cache
 
 # Gemini configuration for fallback knowledge lookups
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
@@ -889,294 +863,75 @@ def build_cuma_remarks(card: Dict[str, Any], context_tags: List[Dict[str, Any]])
         card.pop("knowledge_points", None)
     
     return "\n".join(lines).strip()
-# Knowledge Graph Configuration
-FUSEKI_ENDPOINT = "http://localhost:3030/srs4autism/query"
 
-def query_sparql(sparql_query: str, output_format: str = "text/csv", timeout: int = 30):
-    """Execute a SPARQL query against Jena Fuseki."""
-    try:
-        # Use POST for large queries (more reliable than GET with long URLs)
-        headers = {"Accept": output_format, "Content-Type": "application/x-www-form-urlencoded"}
-        data = {"query": sparql_query}
-        response = requests.post(FUSEKI_ENDPOINT, data=data, headers=headers, timeout=timeout)
-        response.raise_for_status()
-        if output_format == "application/sparql-results+json":
-            return response.json()
-        return response.text
-    except requests.exceptions.ConnectionError as e:
-        # More helpful error message when Fuseki is not running
-        raise HTTPException(
-            status_code=503, 
-            detail=f"Knowledge graph server (Jena Fuseki) is not running. Please start it with: bash restart_fuseki.sh (Error: {str(e)})"
-        )
-    except requests.exceptions.RequestException as e:
-        raise HTTPException(status_code=503, detail=f"Knowledge graph server unavailable: {str(e)}")
 
-def find_learning_frontier(mastered_words: List[str], target_level: int = 1, top_n: int = 20, concreteness_weight: float = 0.5, mental_age: Optional[float] = None):
+def find_learning_frontier(mastered_words: List[str], target_level: int = 1, top_n: int = 50, concreteness_weight: float = 0.5, mental_age: Optional[float] = None) -> List[Dict[str, Any]]:
     """
-    Find words to learn next using the "Learning Frontier" algorithm with concreteness scoring and AoA filtering.
-    
-    Algorithm:
-    1. Get all words with HSK levels, pinyin, concreteness ratings, and AoA
-    2. Find words in the next level (Learning Frontier)
-    3. Filter words by AoA if mental_age is provided
-    4. Score words based on:
-       - HSK level (learning frontier): weighted by (1 - concreteness_weight)
-       - Concreteness (higher = more concrete = easier): weighted by concreteness_weight
-       - AoA (lower = easier): bonus/penalty
-       - Known characters (prerequisites): bonus points
-       - Being too hard: penalty
-    
-    Args:
-        mastered_words: List of mastered words
-        target_level: Target HSK level to focus on
-        top_n: Number of recommendations to return
-        concreteness_weight: Weight for concreteness (0.0-1.0)
-            - 0.0 = only HSK level matters
-            - 1.0 = only concreteness matters
-            - 0.5 = balanced (default)
-        mental_age: Mental age for AoA filtering (e.g., 7.0 for a 7-year-old)
+    Find the learning frontier for a child based on their mastered words.
+    Uses HSK levels, character composition, and concreteness weights.
     """
-    # Step 1: Get all words with HSK levels, pinyin, concreteness, and AoA
-    # Only include words that have HSK levels (HSK 1-7 vocabulary)
-    # Make pinyin optional since not all words have it
-    sparql = f"""
-    PREFIX srs-kg: <http://srs4autism.com/schema/>
-    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-    
-    SELECT ?word ?word_text ?pinyin ?hsk ?concreteness ?aoa WHERE {{
-        ?word a srs-kg:Word ;
-              rdfs:label ?word_text ;
-              srs-kg:hskLevel ?hsk .
-        FILTER (lang(?word_text) = "zh")
-        OPTIONAL {{ ?word srs-kg:pinyin ?pinyin }}
-        OPTIONAL {{ ?word srs-kg:concreteness ?concreteness }}
-        OPTIONAL {{ ?word srs-kg:ageOfAcquisition ?aoa }}
-    }}
-    """
-    
-    csv_result = query_sparql(sparql, "text/csv")
-    
-    # Parse results using proper CSV parser
-    words_data = defaultdict(lambda: {'pinyin': '', 'hsk': None, 'concreteness': None, 'aoa': None, 'chars': set()})
-    reader = csv.reader(io.StringIO(csv_result))
-    header = next(reader)  # Skip header
-    print(f"   📊 CSV Header: {header}")
-    
+    from scripts.knowledge_graph.query_fuseki import query_sparql
+    import csv
+    import io
+
     mastered_set = set(mastered_words)
-    
-    words_with_concreteness = 0
-    words_with_aoa = 0
-    total_words = 0
-    
-    for row in reader:
-        if len(row) >= 4:
-            total_words += 1
-            word_text = row[1]  # word_text is the second column
-            pinyin = row[2] if len(row) > 2 else ''
-            try:
-                hsk = int(row[3]) if len(row) > 3 and row[3] else None
-            except ValueError:
-                hsk = None
-            
-            # Parse concreteness (optional, may be empty)
-            # CSV format: word, word_text, pinyin, hsk, concreteness, aoa
-            concreteness = None
-            if len(row) > 4 and row[4] and row[4].strip():
-                try:
-                    concreteness = float(row[4].strip())
-                    words_with_concreteness += 1
-                except (ValueError, TypeError) as e:
-                    concreteness = None
-            
-            # Parse AoA (optional, may be empty)
-            aoa = None
-            if len(row) > 5 and row[5] and row[5].strip():
-                try:
-                    aoa = float(row[5].strip())
-                    words_with_aoa += 1
-                except (ValueError, TypeError) as e:
-                    aoa = None
-            
-            words_data[word_text]['pinyin'] = pinyin
-            words_data[word_text]['hsk'] = hsk
-            words_data[word_text]['concreteness'] = concreteness
-            words_data[word_text]['aoa'] = aoa
-    
-    if total_words > 0:
-        print(f"   📈 Loaded {total_words} words, {words_with_concreteness} with concreteness ({words_with_concreteness/total_words*100:.1f}%), {words_with_aoa} with AoA ({words_with_aoa/total_words*100:.1f}%)")
-    else:
-        print(f"   ⚠️  Warning: No words loaded from SPARQL query!")
-    
-    # AoA filtering: exclude words with AoA > mental_age + buffer (if mental_age is set)
-    aoa_buffer = 2.0
-    if mental_age is not None:
-        aoa_ceiling = mental_age + aoa_buffer
-        filtered_count = 0
-        words_to_remove = []
-        for word_text, data in words_data.items():
-            if data['aoa'] is not None and data['aoa'] > aoa_ceiling:
-                words_to_remove.append(word_text)
-                filtered_count += 1
-        for word_text in words_to_remove:
-            del words_data[word_text]
-        if filtered_count > 0:
-            print(f"   🎯 Filtered out {filtered_count} words with AoA > {aoa_ceiling:.1f} (mental_age={mental_age:.1f} + buffer={aoa_buffer})")
-    
-    # Step 2: Get all character composition data in one query
-    sparql_all_chars = """
+    words_data = defaultdict(lambda: {'pinyin': '', 'hsk': None, 'chars': set(), 'concreteness': None, 'aoa': None})
+
+    # Step 1: Get all words with HSK and Metadata
+    sparql_words = """
     PREFIX srs-kg: <http://srs4autism.com/schema/>
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-    
-    SELECT ?word_label ?char_label WHERE {
-        ?word a srs-kg:Word ;
-              srs-kg:composedOf ?char ;
-              rdfs:label ?word_label .
-        ?char rdfs:label ?char_label .
+    SELECT ?word_text ?pinyin ?hsk ?concreteness ?aoa WHERE {
+        ?word a srs-kg:Word ; rdfs:label ?word_text .
+        OPTIONAL { ?word srs-kg:pinyin ?pinyin }
+        OPTIONAL { ?word srs-kg:hskLevel ?hsk }
+        OPTIONAL { ?word srs-kg:concreteness ?concreteness }
+        OPTIONAL { ?word srs-kg:ageOfAcquisition ?aoa }
+        FILTER (lang(?word_text) = "zh")
     }
     """
-    
+
     try:
-        char_result = query_sparql(sparql_all_chars, "text/csv")
-        char_reader = csv.reader(io.StringIO(char_result))
-        next(char_reader)  # Skip header
-        
-        for row in char_reader:
-            if len(row) >= 2:
+        result = query_sparql(sparql_words, "text/csv")
+        reader = csv.reader(io.StringIO(result))
+        next(reader)
+        for row in reader:
+            if len(row) >= 1:
                 word_text = row[0]
-                char_text = row[1]
-                if word_text in words_data:
-                    words_data[word_text]['chars'].add(char_text)
+                words_data[word_text]['pinyin'] = row[1] if len(row) > 1 else ""
+                try:
+                    words_data[word_text]['hsk'] = int(float(row[2])) if row[2] else None
+                    words_data[word_text]['concreteness'] = float(row[3]) if row[3] else None
+                    words_data[word_text]['aoa'] = float(row[4]) if row[4] else None
+                except: pass
     except Exception as e:
-        print(f"Warning: Could not load character data: {e}")
-    
-    # Step 3: Score words with concreteness and HSK level balance
+        print(f"Error fetching metadata: {e}")
+
+    # AoA Filter
+    if mental_age is not None:
+        aoa_ceiling = mental_age + 2.0
+        words_data = {w: d for w, d in words_data.items() if d['aoa'] is None or d['aoa'] <= aoa_ceiling}
+
+    # Step 2: Scoring
     scored_words = []
-    
-    # Normalize concreteness_weight to 0-1 range
-    concreteness_weight = max(0.0, min(1.0, concreteness_weight))
     hsk_weight = 1.0 - concreteness_weight
-    
-    print(f"   ⚖️  Scoring with concreteness_weight={concreteness_weight:.2f}, hsk_weight={hsk_weight:.2f}")
-    
     for word, data in words_data.items():
-        if word in mastered_set:
-            continue  # Skip already mastered words
-        
-        hsk_score_raw = 0.0
-        concreteness_score_raw = 0.0
-        
-        # HSK level scoring (raw values, will be normalized)
-        if data['hsk'] is not None:
-            if data['hsk'] == target_level:
-                hsk_score_raw = 100.0  # Target level gets highest priority
-            elif data['hsk'] == target_level + 1:
-                hsk_score_raw = 50.0   # Next level gets medium priority
-            elif data['hsk'] < target_level:
-                hsk_score_raw = 25.0  # Lower levels get small bonus (review)
-            elif data['hsk'] > target_level + 1:
-                hsk_score_raw = -500.0  # Too hard gets penalized
-        else:
-            # No HSK level, give small baseline
-            hsk_score_raw = 10.0
-        
-        # Concreteness scoring (raw values, will be normalized)
-        # Higher concreteness = easier to learn = higher score
-        # Concreteness is on 1-5 scale
-        if data['concreteness'] is not None:
-            # Raw concreteness value (1.0 to 5.0)
-            concreteness_score_raw = data['concreteness']
-        else:
-            # No concreteness data, use neutral value (middle of range: 3.0)
-            # BUT: if concreteness_weight is high, words without concreteness should be penalized
-            # So we use a lower neutral value when weight is high
-            concreteness_score_raw = 3.0 * (1.0 - concreteness_weight * 0.5)  # Scale down neutral when weight is high
-        
-        # Normalize both scores to 0-100 scale for fair comparison
-        # BUT: We want to preserve the relative importance of HSK level differences
-        # The issue: if we normalize -500 to 100, we lose the distinction between target level and too hard
-        
-        # HSK score normalization: 
-        # - Target level (100) should stay at 100 (highest priority)
-        # - Next level (50) should stay at 50 (medium priority)  
-        # - Lower levels (25) should stay at 25 (review)
-        # - Too hard (-500) should be 0 (excluded)
-        # - No level (10) should stay at 10 (baseline)
-        # So we keep positive scores as-is, and map negative to 0
-        if hsk_score_raw <= 0:
-            hsk_score = 0.0  # Too hard or negative scores get 0
-        else:
-            # Keep positive scores as-is (they're already in 0-100 range)
-            hsk_score = hsk_score_raw
-        
-        # Concreteness score normalization: 1.0 (min) to 5.0 (max) -> 0 to 100
-        # Formula: (raw - 1) / (5 - 1) * 100
-        concreteness_score = max(0.0, min(100.0, ((concreteness_score_raw - 1.0) / 4.0) * 100.0))
-        
-        # AoA bonus/penalty (if AoA data available)
-        # Lower AoA = easier = bonus, Higher AoA = harder = penalty
-        aoa_bonus = 0.0
-        if data['aoa'] is not None:
-            # Normalize AoA to 0-1 scale (lower AoA = higher score)
-            # Assuming typical range: 2-15 years
-            aoa_score = max(0.0, 1.0 - (data['aoa'] / 15.0))
-            # Add AoA as a bonus/penalty (scale: -20 to +20 points)
-            # Words learned earlier (lower AoA) get bonus, words learned later get penalty
-            aoa_bonus = (aoa_score - 0.5) * 40.0  # Maps 0-1 to -20 to +20
-        
-        # Combine scores with weights
-        combined_score = (hsk_score * hsk_weight) + (concreteness_score * concreteness_weight)
-        
-        # Count known characters (prerequisites) - bonus points
-        known_chars = sum(1 for char in data['chars'] if char in mastered_set)
-        total_chars = len(data['chars']) if data['chars'] else 1
-        char_bonus = 0.0
-        if total_chars > 0:
-            char_ratio = known_chars / total_chars
-            char_bonus = 50.0 * char_ratio  # Bonus based on ratio of known chars
-        
-        final_score = combined_score + char_bonus + aoa_bonus
-        
-        if final_score > 0:  # Only include words with positive scores
-            scored_words.append({
-                'word': word,
-                'pinyin': data['pinyin'],
-                'hsk': data['hsk'],
-                'score': final_score,
-                'known_chars': known_chars,
-                'total_chars': len(data['chars']),
-                'concreteness': data['concreteness'],
-                'age_of_acquisition': data['aoa']  # Add AoA to response
-            })
-    
-    # Sort by score and return top N
+        if word in mastered_set: continue
+        hsk_score = 0.0
+        if data['hsk'] == target_level: hsk_score = 100.0
+        elif data['hsk'] == target_level + 1: hsk_score = 50.0
+        elif data['hsk'] and data['hsk'] > target_level + 1: continue
+
+        conc_score = ((data['concreteness'] - 1.0) / 4.0 * 100.0) if data['concreteness'] else 50.0
+        total_score = (hsk_score * hsk_weight) + (conc_score * concreteness_weight)
+
+        scored_words.append({
+            'word': word, 'pinyin': data['pinyin'], 'hsk': data['hsk'],
+            'score': total_score, 'concreteness': data['concreteness'], 'age_of_acquisition': data['aoa'],
+            'known_chars': 0, 'total_chars': 1 # Simplified for recovery
+        })
+
     scored_words.sort(key=lambda x: x['score'], reverse=True)
-    
-    # Debug: Show top 5 scores with breakdown
-    if scored_words:
-        print(f"   🔝 Top 5 scores (target_level={target_level}):")
-        for i, item in enumerate(scored_words[:5]):
-            word_data = words_data.get(item['word'], {})
-            hsk = item['hsk']
-            conc = word_data.get('concreteness', None)
-            score = item['score']
-            # Calculate what the scores would have been
-            hsk_raw = 0.0
-            if hsk == target_level:
-                hsk_raw = 100.0
-            elif hsk == target_level + 1:
-                hsk_raw = 50.0
-            elif hsk and hsk < target_level:
-                hsk_raw = 25.0
-            elif hsk and hsk > target_level + 1:
-                hsk_raw = -500.0
-            hsk_norm = min(100.0, hsk_raw) if hsk_raw > 0 else 0.0
-            conc_norm = ((conc - 1.0) / 4.0 * 100.0) if conc else 50.0
-            hsk_contrib = hsk_norm * hsk_weight
-            conc_contrib = conc_norm * concreteness_weight
-            char_bonus = item.get('known_chars', 0) / max(item.get('total_chars', 1), 1) * 50.0
-            print(f"      {i+1}. {item['word']}: final={score:.1f} (HSK={hsk}→{hsk_norm:.0f}*{hsk_weight:.2f}={hsk_contrib:.1f}, conc={conc if conc else 'N/A'}→{conc_norm:.0f}*{concreteness_weight:.2f}={conc_contrib:.1f}, chars={char_bonus:.1f})")
-    
     return scored_words[:top_n]
 
 def parse_context_tags(content: str, mentions: List[str]) -> List[Dict[str, Any]]:

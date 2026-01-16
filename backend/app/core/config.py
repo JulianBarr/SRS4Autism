@@ -27,6 +27,12 @@ WORD_KP_CACHE_FILE = CONTENT_DB_DIR / "word_kp_cache.json"
 MODEL_CONFIG_FILE = PROJECT_ROOT / "config" / "model_config.json"
 ENGLISH_SIMILARITY_FILE = CONTENT_DB_DIR / "english_word_similarity.json"
 GRAMMAR_CORRECTIONS_FILE = CONTENT_DB_DIR / "grammar_corrections.json"
+# Vocabulary and Data Files
+HSK_VOCAB_FILE = PROJECT_ROOT / "data" / "content_db" / "hsk_vocabulary.csv"
+CEFR_VOCAB_FILE = PROJECT_ROOT.parent / "olp-en-cefrj" / "cefrj-vocabulary-profile-1.5.csv"
+CONCRETENESS_DATA_FILE = PROJECT_ROOT / "data" / "content_db" / "concreteness_ratings.csv"
+AOAS_DATA_FILE = PROJECT_ROOT / "data" / "content_db" / "aoa_ratings.csv"
+ENGLISH_KG_MAP_FILE = PROJECT_ROOT / "data" / "content_db" / "english_kg_map.json"
 
 DATABASE_PATH = CONTENT_DB_DIR / "srs4autism.db"
 
