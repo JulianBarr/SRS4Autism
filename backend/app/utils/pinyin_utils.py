@@ -35,18 +35,24 @@ logger = logging.getLogger(__name__)
 WORD_IMAGE_MAP_FILE = PROJECT_ROOT / "data" / "word_image_map.json"
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-GEMINI_MODEL_NAME = os.getenv("GEMINI_MODEL_NAME", "gemini-pro")
+# FIX: Changed default from deprecated "gemini-pro" to current "gemini-2.0-flash"
+GEMINI_MODEL_NAME = os.getenv("GEMINI_MODEL_NAME", "gemini-2.0-flash")
 
 # Initialize Gemini model
 _genai_model: Optional[genai.GenerativeModel] = None
 if GEMINI_API_KEY:
     try:
         genai.configure(api_key=GEMINI_API_KEY)
-        _genai_model = genai.GenerativeModel(GEMINI_MODEL_NAME)
+        # Add "models/" prefix if not present (required by Gemini API)
+        model_name = GEMINI_MODEL_NAME
+        if not model_name.startswith("models/"):
+            model_name = f"models/{model_name}"
+        _genai_model = genai.GenerativeModel(model_name)
+        logger.info(f"✅ Initialized Gemini model for word lookup: {model_name}")
     except Exception as exc:
-        print(f"⚠️ Unable to configure Gemini model: {exc}")
+        logger.warning(f"⚠️ Unable to configure Gemini model: {exc}")
 else:
-    print("⚠️ GEMINI_API_KEY not set; falling back to cache-only knowledge lookup.")
+    logger.warning("⚠️ GEMINI_API_KEY not set; falling back to cache-only knowledge lookup.")
 
 # Cache files
 

@@ -8,10 +8,14 @@ from pathlib import Path
 import uuid
 import os
 import re
+import logging
 try:
     from openai import OpenAI
 except ImportError:
     OpenAI = None
+
+# Initialize logger
+logger = logging.getLogger(__name__)
 
 # Canonical note type names with CUMA prefix
 DEFAULT_NOTE_TYPES = {
@@ -278,7 +282,8 @@ class ContentGenerator:
     
     def generate_from_prompt(self, user_prompt: str, context_tags: List[Dict[str, Any]] = None, 
                            child_profile: Dict[str, Any] = None, 
-                           prompt_template: str = None) -> List[Dict[str, Any]]:
+                           prompt_template: str = None,
+                           quantity: Optional[int] = None) -> List[Dict[str, Any]]:
         """
         Flexible flashcard generation from natural language with @mention context.
         
@@ -288,12 +293,14 @@ class ContentGenerator:
                 Example: [{"type": "word", "value": "红色"}, 
                          {"type": "interest", "value": "trains"}]
             child_profile: Child's profile data
+            prompt_template: Optional custom template text
+            quantity: Explicit number of flashcards to generate (overrides @quantity in context_tags)
             
         Returns:
             List of generated flashcards
         """
         # Build dynamic system prompt with injected context
-        system_prompt = self._build_dynamic_system_prompt(user_prompt, context_tags, child_profile, prompt_template)
+        system_prompt = self._build_dynamic_system_prompt(user_prompt, context_tags, child_profile, prompt_template, quantity)
         
         try:
             print("\n" + "="*80)
@@ -375,19 +382,111 @@ class ContentGenerator:
             }]
     
     def _build_dynamic_system_prompt(self, user_prompt: str, context_tags: List[Dict[str, Any]] = None,
-                                    child_profile: Dict[str, Any] = None, 
-                                    prompt_template: str = None) -> str:
+                                    child_profile: Dict[str, Any] = None,
+                                    prompt_template: str = None,
+                                    quantity: Optional[int] = None) -> str:
         """Build a dynamic system prompt by injecting @mention context."""
-        
-        # If user provided a custom template, use it as the base
+
+        # === STEP 1: Determine Quantity First ===
+        # Use explicit quantity parameter if provided, otherwise try to extract from context_tags
+        # If still None, use default of 3
+        if quantity is None and context_tags:
+            for tag in context_tags:
+                if tag.get("type") == "quantity":
+                    try:
+                        quantity = int(tag.get("value"))
+                        logger.info(f"📊 Extracted quantity from context_tags: {quantity}")
+                        break
+                    except (ValueError, TypeError):
+                        pass
+
+        # Default to 3 if no quantity specified
+        if quantity is None:
+            quantity = 3
+
+        quantity_str = f"{quantity}"
+        quantity_instruction = f"Return a JSON array containing exactly {quantity} objects."
+        logger.info(f"🎯 Final quantity for generation: {quantity}")
+
+        # === STEP 2: Process Custom Template BEFORE Adding to prompt_parts ===
+        processed_template = None
         if prompt_template:
+            logger.info("🔧 Processing custom template with quantity replacements...")
+
+            # Fix incorrect "English vocab exercise" description in templates
+            if "English vocab exercise" in prompt_template:
+                prompt_template = prompt_template.replace("English vocab exercise", "Chinese vocab exercise")
+                logger.info("✅ Fixed 'English vocab exercise' → 'Chinese vocab exercise' in template")
+
+            # DYNAMIC REPLACEMENT IN TEMPLATE
+            # Replace hardcoded quantity constraints in the template text itself
+            replacements = [
+                # Exact matches for common patterns
+                ("Generate 3 flashcards", f"Generate {quantity} flashcards"),
+                ("generate 3 flashcards", f"generate {quantity} flashcards"),
+                ("Generate 1-3 flashcards", f"Generate {quantity} flashcards"),
+                ("generate 1-3 flashcards", f"generate {quantity} flashcards"),
+                ("1-3 flashcards", f"{quantity} flashcards"),
+                ("3 flashcards", f"{quantity} flashcards"),
+                ("ten (or as specified in @quantity)", f"{quantity}"),
+                ("10 (or as specified in @quantity)", f"{quantity}"),
+                ("10 cards per word family", f"{quantity} cards per word family"),
+                ("ten cards", f"{quantity} cards"),
+                ("10 cards", f"{quantity} cards"),
+            ]
+            for old, new in replacements:
+                if old in prompt_template:
+                    prompt_template = prompt_template.replace(old, new)
+                    logger.info(f"✅ Replaced '{old}' with '{new}' in template")
+
+            # Also use regex to catch patterns like "Generate N flashcards" where N is any number
+            prompt_template = re.sub(
+                r'Generate\s+(\d+)\s+flashcards',
+                f'Generate {quantity} flashcards',
+                prompt_template,
+                flags=re.IGNORECASE
+            )
+            prompt_template = re.sub(
+                r'generate\s+(\d+)\s+flashcards',
+                f'generate {quantity} flashcards',
+                prompt_template,
+                flags=re.IGNORECASE
+            )
+            # Catch patterns in Output Format sections
+            prompt_template = re.sub(
+                r'\*\*Output Format:\*\*\s*Generate\s+(\d+)\s+flashcards',
+                f'**Output Format:**\nGenerate {quantity} flashcards',
+                prompt_template,
+                flags=re.IGNORECASE | re.MULTILINE
+            )
+            # Catch "N cards" patterns
+            prompt_template = re.sub(
+                r'(\d+)\s+cards\s+per\s+word',
+                f'{quantity} cards per word',
+                prompt_template,
+                flags=re.IGNORECASE
+            )
+            prompt_template = re.sub(
+                r'(\d+)\s+cards',
+                f'{quantity} cards',
+                prompt_template,
+                flags=re.IGNORECASE
+            )
+
+            processed_template = prompt_template
+            logger.info("✅ Template processing complete")
+
+        # === STEP 3: Build prompt_parts with processed template ===
+        # If user provided a custom template, use it as the base
+        if processed_template:
             prompt_parts = [
                 "You are an AI assistant specialized in creating educational flashcards for children with autism.",
                 "",
                 "**Custom Template Instructions:**",
-                prompt_template,
+                processed_template,  # Use PROCESSED template here
                 ""
             ]
+            logger.info("✅ Using CUSTOM TEMPLATE with quantity replacements applied")
         else:
             # Base system prompt
             prompt_parts = [
@@ -398,19 +497,19 @@ class ContentGenerator:
                 "- Keep `tags` minimal, machine-friendly labels (single words, hyphenated, or lowercase); NEVER include sentences, colons, or detailed descriptions in `tags`.",
                 "- Avoid duplicating information between `tags` and `_Remarks`."
             ]
-        
+
         # Add child profile context if available
         if child_profile:
             profile_context = self._build_profile_context(child_profile)
             prompt_parts.append(f"**Child Profile:**\n{profile_context}\n")
-        
+
         # Add context from @mentions
         if context_tags:
             prompt_parts.append("**Required Context:**")
             for tag in context_tags:
                 tag_type = tag.get("type", "")
                 tag_value = tag.get("value", "")
-                
+
                 if tag_type == "word":
                     prompt_parts.append(f"- Target word/concept: {tag_value}")
                 elif tag_type == "interest":
@@ -422,7 +521,7 @@ class ContentGenerator:
                 elif tag_type == "character":
                     # Handle slug-based character values (e.g., "peppa-pig" -> "Peppa Pig")
                     # Try to find original character name from child's roster
-                    import re
+                    # Note: re module already imported at top of file
                     character_name = tag_value
                     if child_profile and child_profile.get("character_roster"):
                         # Reverse lookup slug to original name
@@ -452,27 +551,27 @@ class ContentGenerator:
                 else:
                     prompt_parts.append(f"- {tag_type}: {tag_value}")
             prompt_parts.append("")
-        
+
         # Add user's goal
         prompt_parts.append(f"**User's Goal:**\n{user_prompt}\n")
-        
+
         # Check if specific note type was requested
         requested_notetype = None
         if context_tags:
             for tag in context_tags:
                 if tag.get("type") == "notetype":
                     requested_notetype = self._resolve_note_type_name(tag.get("value")) or tag.get("value", "").replace('_', ' ')
-        
+
+        # === STEP 4: Add Output Format Instructions ===
         # ONLY add output format if NO custom template was provided
         # Custom templates should define their own output format
-        if prompt_template:
-            # Template defines its own format - just add JSON reminder
-            print(f"✅ USING CUSTOM TEMPLATE - NO DEFAULT FORMAT APPENDED")
-            prompt_parts.append("**Important:** Return ONLY valid JSON array, no extra text.")
+        if processed_template:
+            # Template defines its own format - just add quantity reminder
+            prompt_parts.append(f"**Important:** {quantity_instruction}")
         elif requested_notetype:
             prompt_parts.extend([
                 "**Output Format:**",
-                f"Generate 1-3 flashcards using the '{requested_notetype}' note type.",
+                f"Generate {quantity_str} flashcards using the '{requested_notetype}' note type.",
                 "",
                 f"If '{requested_notetype}' is '{DEFAULT_NOTE_TYPES['interactive_cloze']}':",
                 "- card_type: 'interactive_cloze'",
@@ -492,12 +591,12 @@ class ContentGenerator:
                 f"- MUST set note_type to '{requested_notetype}'",
                 "- Make the cards simple and age-appropriate",
                 "",
-                "Return ONLY valid JSON array, no extra text."
+                quantity_instruction
             ])
         else:
             prompt_parts.extend([
                 "**Output Format:**",
-                "Generate 1-3 flashcards as a JSON array.",
+                f"Generate {quantity_str} flashcards as a JSON array.",
                 "",
                 "Choose the best card type based on content:",
                 "",
@@ -520,7 +619,7 @@ class ContentGenerator:
                 "- Basic cards for simple definitions",
                 "- Make the cards simple and age-appropriate",
                 "",
-                "Return ONLY valid JSON array, no extra text."
+                quantity_instruction
             ])
         
         return "\n".join(prompt_parts)

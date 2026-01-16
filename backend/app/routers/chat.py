@@ -223,7 +223,12 @@ def build_cuma_remarks(card: Dict[str, Any], context_tags: List[Dict[str, Any]])
 def parse_context_tags(content: str, mentions: List[str]) -> List[Dict[str, Any]]:
     """
     Parse @mentions from message content into structured context tags.
-    
+
+    NOW ENHANCED WITH DIRECT REGEX PARSING:
+    - Scans content string directly using regex pattern: r"@(\w+):([^\s@,]+)"
+    - Extracts ALL @key:value tags from text (quantity, template, word, etc.)
+    - No longer fully dependent on frontend mentions array
+
     Supports formats:
     - @profile:Alex -> {"type": "profile", "value": "Alex"}
     - @interest:trains -> {"type": "interest", "value": "trains"}
@@ -232,55 +237,105 @@ def parse_context_tags(content: str, mentions: List[str]) -> List[Dict[str, Any]
     - @character:Pinocchio -> {"type": "character", "value": "Pinocchio"}
     - @notetype:cuma-interactive-cloze -> {"type": "notetype", "value": "CUMA - Interactive Cloze"}
     - @template:my_template -> {"type": "template", "value": "my_template"}
+    - @quantity:10 -> {"type": "quantity", "value": "10"}
     - @Alex (plain mention) -> {"type": "profile", "value": "Alex"}
     """
-    
+
     context_tags = []
-    
+    seen_tags = set()  # Deduplicate tags
+
+    # Map tag types
+    valid_types = {
+        "profile": "profile",
+        "child": "profile",
+        "interest": "interest",
+        "word": "word",
+        "vocabulary": "word",
+        "skill": "skill",
+        "character": "character",
+        "notetype": "notetype",
+        "note-type": "notetype",
+        "template": "template",
+        "prompt": "template",
+        "quantity": "quantity"
+    }
+
+    # === PRIMARY PARSING: Direct Regex Scan of Content ===
+    # This regex captures @key:value patterns
+    # Pattern: @(\w+):([^\s@,]+)
+    # - \w+ captures the key (alphanumeric + underscore)
+    # - [^\s@,]+ captures the value (anything except space, @, or comma)
+    generic_tag_pattern = r'@(\w+):([^\s@,]+)'
+    generic_matches = re.findall(generic_tag_pattern, content)
+
+    logger.info(f"🔍 Direct Regex Scan found {len(generic_matches)} @key:value tags in content")
+
+    for raw_key, raw_value in generic_matches:
+        tag_type = raw_key.lower().strip()
+        tag_value = raw_value.strip()
+
+        # Map to canonical type
+        mapped_type = valid_types.get(tag_type, tag_type)  # Use raw type if not in map
+
+        # Create unique key for deduplication
+        tag_key = f"{mapped_type}:{tag_value}"
+
+        if tag_key not in seen_tags:
+            seen_tags.add(tag_key)
+            context_tags.append({
+                "type": mapped_type,
+                "value": tag_value
+            })
+            logger.info(f"✅ Parsed from content: @{tag_type}:{tag_value} -> type={mapped_type}")
+
     # Find special standalone @roster mention (no colon)
     # Match @roster as a whole word (not part of another word)
     if re.search(r'(?:^|[\s,])@roster(?:[\s,]|$)', content):
-        context_tags.append({
-            "type": "roster",
-            "value": "roster"
-        })
-        logger.info("Detected @roster mention")
-    
+        roster_key = "roster:roster"
+        if roster_key not in seen_tags:
+            seen_tags.add(roster_key)
+            context_tags.append({
+                "type": "roster",
+                "value": "roster"
+            })
+            logger.info("Detected @roster mention")
+
     # Special handling for knowledge point mentions
     # Supports two formats:
     # 1. @kp:subject--predicate--object (explicit format)
     # 2. @subject--predicate--object (simplified format, e.g., @读者--means--reader)
-    
+
     # First, try @kp: format
     kp_explicit_pattern = r'@kp:([^@\n]+?)(?=\s+@|[\s,]*$|[\s,]*\n)'
     kp_explicit_matches = re.findall(kp_explicit_pattern, content)
     for kp_value in kp_explicit_matches:
         kp_value = kp_value.strip().rstrip(',')
         if kp_value:
-            context_tags.append({
-                "type": "kp",
-                "value": kp_value
-            })
-            logger.debug(f"Parsed knowledge point (explicit): {kp_value}")
-    
+            kp_key = f"kp:{kp_value}"
+            if kp_key not in seen_tags:
+                seen_tags.add(kp_key)
+                context_tags.append({
+                    "type": "kp",
+                    "value": kp_value
+                })
+                logger.debug(f"Parsed knowledge point (explicit): {kp_value}")
+
     # Then, try simplified format: @subject--predicate--object
     kp_simplified_pattern = r'@([^@\s:]+)--([^@\s]+)--([^@\n]+?)(?=\s+@|[\s,]*$|[\s,]*\n)'
     kp_simplified_matches = re.findall(kp_simplified_pattern, content)
     for subj, pred, obj in kp_simplified_matches:
         if pred and '--' not in subj and '--' not in pred:
             kp_value = f"{subj}--{pred}--{obj.strip()}"
-            # Check if this KP was already added
-            already_exists = any(
-                t.get("type") == "kp" and t.get("value") == kp_value
-                for t in context_tags
-            )
-            if not already_exists:
+            kp_key = f"kp:{kp_value}"
+            if kp_key not in seen_tags:
+                seen_tags.add(kp_key)
                 context_tags.append({
                     "type": "kp",
                     "value": kp_value
                 })
-    
-    # Process structured mentions
+
+    # === FALLBACK: Process Frontend Mentions (for backward compatibility) ===
+    # Only add if not already captured by regex scan
     for mention in mentions:
         # Handle @type:value format
         if ":" in mention:
@@ -288,24 +343,12 @@ def parse_context_tags(content: str, mentions: List[str]) -> List[Dict[str, Any]
             parts = mention.split(":", 1)
             tag_type = parts[0].lower().strip()
             tag_value = parts[1].strip()
-            
-            # Map tag types
-            valid_types = {
-                "profile": "profile",
-                "child": "profile",
-                "interest": "interest",
-                "word": "word",
-                "vocabulary": "word",
-                "skill": "skill",
-                "character": "character",
-                "notetype": "notetype",
-                "note-type": "notetype",
-                "template": "template",
-                "prompt": "template"
-            }
-            
-            mapped_type = valid_types.get(tag_type)
-            if mapped_type:
+
+            mapped_type = valid_types.get(tag_type, tag_type)
+            tag_key = f"{mapped_type}:{tag_value}"
+
+            if tag_key not in seen_tags:
+                seen_tags.add(tag_key)
                 context_tags.append({
                     "type": mapped_type,
                     "value": tag_value
@@ -315,12 +358,16 @@ def parse_context_tags(content: str, mentions: List[str]) -> List[Dict[str, Any]
             # Check if it's already handled by @roster or others
             if mention.lower() == "roster":
                 continue
-                
-            context_tags.append({
-                "type": "profile",
-                "value": mention
-            })
-            
+
+            tag_key = f"profile:{mention}"
+            if tag_key not in seen_tags:
+                seen_tags.add(tag_key)
+                context_tags.append({
+                    "type": "profile",
+                    "value": mention
+                })
+
+    logger.info(f"📋 Final context_tags count: {len(context_tags)}")
     return context_tags
 
 async def _handle_card_generation(message: ChatMessage, context_tags: List[Dict[str, Any]], 
@@ -364,6 +411,12 @@ async def _handle_card_generation(message: ChatMessage, context_tags: List[Dict[
                         template_name_normalized.replace('_', '') == template_value_normalized.replace('_', '') or
                         tmpl.get("name", "").lower().replace(' ', '-') == template_value.lower().replace('_', '-')):
                         prompt_template = tmpl.get("template_text")
+                        
+                        # Fix for incorrect instruction in chinese_word template
+                        if "English vocab exercise" in prompt_template:
+                            prompt_template = prompt_template.replace("English vocab exercise", "Chinese vocab exercise")
+                            logger.info("Fixed 'English vocab exercise' in template")
+
                         logger.info(f"Found template: {tmpl.get('name')}")
                         
                         # Parse knowledge point mentions from template text and add to context_tags
@@ -419,6 +472,16 @@ async def _handle_card_generation(message: ChatMessage, context_tags: List[Dict[
                 if not prompt_template:
                     logger.warning(f"Template not found: {template_value}")
         
+        # Extract quantity from context_tags
+        quantity = None
+        for tag in context_tags:
+            if tag.get("type") == "quantity":
+                try:
+                    quantity = int(tag.get("value"))
+                    logger.info(f"Extracted quantity from @quantity: {quantity}")
+                except (ValueError, TypeError):
+                    logger.warning(f"Invalid quantity value: {tag.get('value')}")
+        
         # Use the flexible agent method
         loop = asyncio.get_event_loop()
         cards = await loop.run_in_executor(
@@ -428,7 +491,8 @@ async def _handle_card_generation(message: ChatMessage, context_tags: List[Dict[
                 user_prompt=message.content,
                 context_tags=context_tags,
                 child_profile=child_profile,
-                prompt_template=prompt_template
+                prompt_template=prompt_template,
+                quantity=quantity
             )
         )
         

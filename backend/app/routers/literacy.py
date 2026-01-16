@@ -607,10 +607,12 @@ async def get_logic_city_vocab(
                     # 3. Fallback: Clean the raw path if file not found on disk
                     clean_path = raw_img_path.replace("content/media/", "").replace("/media/", "")
                     if clean_path.startswith("/"): clean_path = clean_path[1:]
-                    # Assume it might be in static media if not found elsewhere? 
-                    # Or keep as legacy behavior? 
-                    # Best effort: use /static/media/ if it looks like a hash
-                    if re.match(r'^[0-9a-f]{12}\.(jpg|png|jpeg)$', clean_path, re.I):
+                    # Assume it might be in static media if not found elsewhere?
+                    # Or keep as legacy behavior?
+                    # Best effort: use /static/media/ if it looks like a hash-based filename
+                    # ENHANCED REGEX: Supports arbitrary-length hexadecimal filenames (not just 12 chars)
+                    # Pattern: ^[0-9a-fA-F]+\.(jpg|png|jpeg|webp|gif)$
+                    if re.match(r'^[0-9a-fA-F]+\.(jpg|png|jpeg|webp|gif)$', clean_path, re.IGNORECASE):
                          final_image_path = f"/static/media/{clean_path}"
                     else:
                          final_image_path = f"/media/{clean_path}"
