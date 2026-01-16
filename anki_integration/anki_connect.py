@@ -135,14 +135,14 @@ class AnkiConnect:
             
             # Generate a unique filename based on content hash
             content_hash = hashlib.md5(img_data.encode()).hexdigest()[:12]
-            filename = f"srs4autism_{content_hash}.{img_type}"
+            filename = f"{content_hash}.{img_type}"
             
             try:
                 # Store the file in Anki's media folder
                 self.store_media_file(filename, img_data)
                 
                 # Return img tag with media reference
-                return f'<img src="{filename}">'
+                return f'<img src="/static/media/{filename}">'
             except Exception as e:
                 print(f"Warning: Failed to store image {filename}: {e}")
                 # If storing fails, keep original (but this might still cause issues)

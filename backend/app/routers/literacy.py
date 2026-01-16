@@ -709,9 +709,9 @@ async def sync_logic_city_to_anki(request: Dict[str, Any]):
                     with open(img_path, "rb") as f:
                         data = f.read()
                         b64 = base64.b64encode(data).decode('utf-8')
-                        fname = f"cuma_{hashlib.md5(data).hexdigest()[:8]}{img_path.suffix}"
+                        fname = f"{hashlib.md5(data).hexdigest()[:12]}{img_path.suffix}"
                         anki_fname = anki.store_media_file(fname, b64)
-                        image_html = f'<img src="{anki_fname}">'
+                        image_html = f'<img src="/static/media/{anki_fname}">'
             
             # Sentence Placeholder (since we don't have sentences yet)
             sentence_cloze = ""
