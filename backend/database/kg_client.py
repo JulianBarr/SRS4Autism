@@ -9,8 +9,6 @@ import pyoxigraph as oxigraph
 from typing import Dict, Any, Optional
 from pathlib import Path
 from backend.config import settings
-
-
 class KnowledgeGraphError(Exception):
     """Base exception for knowledge graph operations."""
     pass
@@ -24,11 +22,6 @@ class KnowledgeGraphConnectionError(KnowledgeGraphError):
 class KnowledgeGraphQueryError(KnowledgeGraphError):
     """Exception raised when SPARQL query execution fails."""
     pass
-
-
-# Global store instance to prevent multiple locks on the same store
-_global_store = None
-_global_store_path = None
 
 
 class KnowledgeGraphClient:
@@ -46,32 +39,22 @@ class KnowledgeGraphClient:
         """
         Initialize the knowledge graph client with an embedded Oxigraph store.
 
-        Uses a global store instance to avoid locking issues when multiple clients
-        access the same store path.
+        Uses the singleton store instance from oxigraph_utils.
 
         Args:
             store_path: Path to the Oxigraph store directory. If None, uses settings.kg_store_path
             timeout: Deprecated parameter kept for backward compatibility (no longer used with embedded store)
         """
-        global _global_store, _global_store_path
-
         self.store_path = store_path or settings.kg_store_path
-        self.timeout = timeout  # Kept for backward compatibility but not used with embedded Oxigraph
-        # Backward compatibility: provide endpoint_url property for logging
+        self.timeout = timeout
         self.endpoint_url = f"oxigraph://{self.store_path}"
 
         try:
-            # Use global store instance if same path, otherwise create new one
-            if _global_store is None or _global_store_path != self.store_path:
-                # Ensure the directory exists
-                Path(self.store_path).mkdir(parents=True, exist_ok=True)
-                _global_store = oxigraph.Store(path=self.store_path)
-                _global_store_path = self.store_path
-
-            self.store = _global_store
+            from backend.app.utils.oxigraph_utils import get_oxigraph_store
+            self.store = get_oxigraph_store(self.store_path)
         except Exception as e:
             raise KnowledgeGraphConnectionError(
-                f"Failed to initialize Oxigraph store at {self.store_path}: {str(e)}"
+                f"Failed to connect to Oxigraph store: {str(e)}"
             ) from e
 
     def load_file(self, file_path: str, format=None) -> None:

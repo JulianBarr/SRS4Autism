@@ -5,11 +5,14 @@ from datetime import datetime
 import base64
 import os
 import json
+import logging
 
 from ..core.config import CARDS_FILE, PROJECT_ROOT
+from ..utils.common import load_json_file, save_json_file, split_tag_annotations
 from openai import OpenAI
 
 router = APIRouter()
+logger = logging.getLogger(__name__)
 
 # Import Gemini model - will be set at module level when main.py imports this router
 _genai_model = None
@@ -19,71 +22,14 @@ def _set_genai_model(model):
     global _genai_model
     _genai_model = model
 
-# ============================================================================
-# Shared Utility Functions (imported from main.py or duplicated)
-# ============================================================================
-
-def load_json_file(file_path: str, default: Any = None):
-    """Load JSON data from file, return default if file doesn't exist"""
-    if os.path.exists(file_path):
-        with open(file_path, 'r', encoding='utf-8') as f:
-            return json.load(f)
-    return default if default is not None else []
-
-def save_json_file(file_path: str, data: Any):
-    """Save data to JSON file"""
-    with open(file_path, 'w', encoding='utf-8') as f:
-        json.dump(data, f, indent=2, default=str, ensure_ascii=False)
-
-def split_tag_annotations(tags: List[Any]) -> tuple:
-    """Separate descriptive annotations from machine-friendly tags."""
-    TAG_ANNOTATION_PREFIXES = (
-        "pronunciation",
-        "meaning",
-        "hsk",
-        "knowledge",
-        "note",
-        "remark",
-        "example",
-    )
-
-    clean_tags: List[str] = []
-    annotations: List[str] = []
-
-    # Handle case where tags is a string (comma-separated or single tag)
-    if isinstance(tags, str):
-        # Split comma-separated string into list
-        tags = [t.strip() for t in tags.split(',') if t.strip()]
-    elif not isinstance(tags, (list, tuple)):
-        # If it's not a string or list, convert to list
-        tags = [tags] if tags else []
-
-    for tag in tags:
-        if not tag:
-            continue
-        tag_str = str(tag).strip()
-        if not tag_str:
-            continue
-
-        # Check if it starts with an annotation prefix
-        lower_tag = tag_str.lower()
-        is_annotation = any(lower_tag.startswith(prefix + ":") for prefix in TAG_ANNOTATION_PREFIXES)
-
-        if is_annotation:
-            annotations.append(tag_str)
-        else:
-            clean_tags.append(tag_str)
-
-    return clean_tags, annotations
-
 def get_llm_client_from_request(request: Request):
     """
     Creates an LLM client (OpenAI-compatible) based on request headers.
     Headers: X-LLM-Provider, X-LLM-Key, X-LLM-Base-URL
     """
-    print(f"\n🔍 DEBUG: get_llm_client_from_request")
-    print(f"   Headers - Provider: {request.headers.get('X-LLM-Provider')}")
-    print(f"   Headers - Base URL: {request.headers.get('X-LLM-Base-URL')}")
+    logger.debug(f"DEBUG: get_llm_client_from_request")
+    logger.debug(f"   Headers - Provider: {request.headers.get('X-LLM-Provider')}")
+    logger.debug(f"   Headers - Base URL: {request.headers.get('X-LLM-Base-URL')}")
 
     provider = request.headers.get("X-LLM-Provider", "gemini").lower()
     api_key = request.headers.get("X-LLM-Key")
@@ -99,16 +45,16 @@ def get_llm_client_from_request(request: Request):
         if not base_url:
             base_url = "https://api.siliconflow.cn/v1" if provider == "deepseek" else None
 
-        print(f"   Creating OpenAI client with base_url={base_url}")
+        logger.info(f"Creating OpenAI client with base_url={base_url}")
 
         if api_key:
             return OpenAI(api_key=api_key, base_url=base_url) if base_url else OpenAI(api_key=api_key)
         else:
-            print(f"   ⚠️ No API key found for {provider}")
+            logger.warning(f"No API key found for {provider}")
             return None
 
     # For Gemini or unsupported providers, return None (will use _genai_model)
-    print(f"   Using Gemini fallback (_genai_model)")
+    logger.info(f"Using Gemini fallback (_genai_model)")
     return None
 
 def _normalize_model_name(model_name: str, base_url: str) -> str:
@@ -238,7 +184,7 @@ Generate the image description now:"""
             )
             return response.choices[0].message.content
         except Exception as e:
-            print(f"OpenAI client error: {e}")
+            logger.error(f"OpenAI client error: {e}")
             # Fallback to Gemini if OpenAI fails
             if _genai_model:
                 response = _genai_model.generate_content(system_instruction)
@@ -252,7 +198,7 @@ Generate the image description now:"""
             response = _genai_model.generate_content(system_instruction)
             return response.text
         except Exception as e:
-            print(f"Gemini error: {e}")
+            logger.error(f"Gemini error: {e}")
             return f"A high-quality, {style_guide} illustration of: {card_front}. Cinematic lighting, 8k."
 
     # Fallback if no model available
@@ -431,10 +377,10 @@ async def generate_card_image(card_id: str, request: CardImageRequest, req: Requ
              if not image_model or "hunyuan" in str(image_model).lower():
                  image_model = "Tencent/Hunyuan-DiT"
 
-        print(f"\n🎨 DEBUG: Config")
-        print(f"   Text Model: {card_model}")
-        print(f"   Image Model: {image_model}")
-        print(f"   Base URL: {base_url}")
+        logger.debug(f"DEBUG: Config")
+        logger.debug(f"   Text Model: {card_model}")
+        logger.debug(f"   Image Model: {image_model}")
+        logger.debug(f"   Base URL: {base_url}")
 
         # Initialize handlers
         # ConversationHandler will now find the API Key in os.environ!
@@ -483,9 +429,7 @@ Return ONLY the raw prompt string. Start with: "A stunning 3D render of..."
 
         # --- STEP 1: Generate Description ---
         try:
-            print("\n" + "="*80)
-            print("🎨 STEP 1: GENERATING DESCRIPTION")
-            print("-"*80)
+            logger.info("STEP 1: GENERATING DESCRIPTION")
 
             # Fallback logic for text model
             target_model = card_model
@@ -507,26 +451,23 @@ Return ONLY the raw prompt string. Start with: "A stunning 3D render of..."
             else:
                 image_description = f"A stunning 3D render of {sanitized_card.get('front', '')}."
 
-            print(f"✅ Description: {image_description[:100]}...")
+            logger.info(f"Description: {image_description[:100]}...")
 
         except Exception as e:
-            print(f"❌ Text Generation Error: {e}")
+            logger.error(f"Text Generation Error: {e}")
             image_description = f"A stunning 3D render of {sanitized_card.get('front', '')}."
 
         # --- STEP 2: Generate Actual Image ---
-        print("\n" + "="*80)
-        print("🎨 STEP 2: GENERATING IMAGE")
-        print(f"   Model: {image_model}")
-        print("-"*80)
+        logger.info(f"STEP 2: GENERATING IMAGE. Model: {image_model}")
 
         image_result = conversation_handler.generate_actual_image(
             image_description=image_description,
             user_request=user_request
         )
 
-        print(f"✅ Image Result: Success={image_result.get('success')}")
+        logger.info(f"Image Result: Success={image_result.get('success')}")
         if image_result.get('error'):
-            print(f"❌ Image Error: {image_result.get('error')}")
+            logger.error(f"Image Error: {image_result.get('error')}")
 
         # ... (Rest of existing saving logic remains the same) ...
         # [Cursor: Copy the rest of the original saving/response logic here]
@@ -568,7 +509,7 @@ Return ONLY the raw prompt string. Start with: "A stunning 3D render of..."
                         'style="max-width: 100%; height: auto; margin: 0 0 10px 0; border-radius: 8px; border: 1px solid #dee2e6;" />'
                     )
                 except Exception as e:
-                    print(f"Error processing image data: {e}")
+                    logger.error(f"Error processing image data: {e}")
                     # Fallback to original data URL if processing fails
                     card["image_data"] = image_data_url
                     image_html = (
@@ -622,5 +563,5 @@ Return ONLY the raw prompt string. Start with: "A stunning 3D render of..."
         }
 
     except Exception as e:
-        print(f"Image generation endpoint error: {e}")
+        logger.error(f"Image generation endpoint error: {e}")
         raise HTTPException(status_code=500, detail=f"Failed to generate image: {str(e)}")

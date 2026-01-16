@@ -13,6 +13,7 @@ from pathlib import Path
 from ..core.config import PROJECT_ROOT, ENGLISH_SIMILARITY_FILE, WORD_KP_CACHE_FILE
 
 from fastapi import HTTPException
+from database.kg_client import KnowledgeGraphClient
 import google.generativeai as genai
 from openai import OpenAI
 from dotenv import load_dotenv
@@ -35,7 +36,6 @@ WORD_IMAGE_MAP_FILE = PROJECT_ROOT / "data" / "word_image_map.json"
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 GEMINI_MODEL_NAME = os.getenv("GEMINI_MODEL_NAME", "gemini-pro")
-FUSEKI_ENDPOINT = os.getenv("FUSEKI_ENDPOINT", "http://localhost:3030/srs4autism/query")
 
 # Initialize Gemini model
 _genai_model: Optional[genai.GenerativeModel] = None
@@ -93,22 +93,13 @@ _word_image_cache_time: Optional[float] = None
 _word_image_cache_lock = threading.Lock()
 
 def query_sparql(sparql_query: str, output_format: str = "application/sparql-results+json") -> Dict[str, Any]:
-    headers = {
-        "Accept": output_format,
-        "Content-Type": "application/sparql-query"
-    }
+    """Execute a SPARQL query against Oxigraph knowledge graph store."""
     try:
-        response = requests.post(FUSEKI_ENDPOINT, data=sparql_query.encode('utf-8'), headers=headers)
-        response.raise_for_status()
-        return response.json()
-    except requests.exceptions.HTTPError as e:
-        logger.error(f"HTTP error querying SPARQL: {e.response.status_code} - {e.response.text}")
-        raise HTTPException(status_code=e.response.status_code, detail=f"SPARQL query failed: {e.response.text}")
-    except requests.exceptions.ConnectionError as e:
-        logger.error(f"Connection error querying SPARQL: {e}")
-        raise HTTPException(status_code=503, detail=f"Could not connect to knowledge graph service: {e}")
+        kg_client = KnowledgeGraphClient()
+        result = kg_client.query(sparql_query)
+        return result
     except Exception as e:
-        logger.error(f"General error querying SPARQL: {e}")
+        logger.error(f"Error querying knowledge graph: {e}")
         raise HTTPException(status_code=500, detail=f"Error querying knowledge graph: {e}")
 
 

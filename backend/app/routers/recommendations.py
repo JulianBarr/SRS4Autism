@@ -23,6 +23,7 @@ from ..utils.pinyin_utils import get_standard_pinyin, get_pinyin_tone, strip_pin
 # CORRECT IMPORTS FROM THE SCRIPTS FOLDER
 from scripts.knowledge_graph.curious_mario_recommender import KnowledgeGraphService, CuriousMarioRecommender, RecommenderConfig, KnowledgeNode
 
+from database.kg_client import KnowledgeGraphClient
 from services.ppr_recommender_service import get_ppr_service
 from services.chinese_ppr_recommender_service import get_chinese_ppr_service
 from database.db import get_db
@@ -139,28 +140,48 @@ def load_json_file(file_path: Path, default: Any = None):
     return default if default is not None else []
 
 
-# Knowledge Graph Configuration
-FUSEKI_ENDPOINT = "http://localhost:3030/srs4autism/query"
-
+# Knowledge Graph Configuration - Using Oxigraph embedded store
 def query_sparql(sparql_query: str, output_format: str = "text/csv", timeout: int = 30):
-    """Execute a SPARQL query against Jena Fuseki."""
+    """Execute a SPARQL query against Oxigraph knowledge graph store."""
     try:
-        # Use POST for large queries (more reliable than GET with long URLs)
-        headers = {"Accept": output_format, "Content-Type": "application/x-www-form-urlencoded"}
-        data = {"query": sparql_query}
-        response = requests.post(FUSEKI_ENDPOINT, data=data, headers=headers, timeout=timeout)
-        response.raise_for_status()
-        if output_format == "application/sparql-results+json":
-            return response.json()
-        return response.text
-    except requests.exceptions.ConnectionError as e:
-        # More helpful error message when Fuseki is not running
-        raise HTTPException(
-            status_code=503,
-            detail=f"Knowledge graph server (Jena Fuseki) is not running. Please start it with: bash restart_fuseki.sh (Error: {str(e)})"
-        )
-    except requests.exceptions.RequestException as e:
-        raise HTTPException(status_code=503, detail=f"Knowledge graph server unavailable: {str(e)}")
+        kg_client = KnowledgeGraphClient()
+        result = kg_client.query(sparql_query)
+        
+        # If CSV format was requested, convert JSON to CSV
+        if output_format == "text/csv":
+            if "results" not in result or "bindings" not in result.get("results", {}):
+                return ""
+            
+            bindings = result["results"]["bindings"]
+            if not bindings:
+                return ""
+            
+            # Get variable names
+            vars = result.get("head", {}).get("vars", [])
+            if not vars:
+                return ""
+            
+            # Convert to CSV
+            output = io.StringIO()
+            writer = csv.writer(output)
+            writer.writerow(vars)  # Header
+            
+            for binding in bindings:
+                row = []
+                for var in vars:
+                    if var in binding:
+                        value = binding[var].get("value", "")
+                        row.append(value)
+                    else:
+                        row.append("")
+                writer.writerow(row)
+            
+            return output.getvalue()
+        
+        # Otherwise return JSON format
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=503, detail=f"Knowledge graph query failed: {str(e)}")
 
 # Cached semantic similarity map for English words
 _english_similarity_cache: Optional[Dict[str, List[Dict[str, Any]]]] = None
@@ -447,7 +468,6 @@ async def get_english_recommendations(request: EnglishRecommendationRequest):
         print(f"   📋 CEFR acts as hard filter: only showing current level and +1")
         
         config = RecommenderConfig(
-            fuseki_endpoint="http://localhost:3030/srs4autism/query",
             node_types=("srs-kg:Word",),
             concreteness_weight=slider_value,  # This is now the slider position, not a weight
             top_n=50,
@@ -485,14 +505,9 @@ async def get_english_recommendations(request: EnglishRecommendationRequest):
         }}
         """
         
-        response = requests.post(
-            config.fuseki_endpoint,
-            data={"query": query},
-            headers={"Accept": "application/sparql-results+json"},
-            timeout=30,
-        )
-        response.raise_for_status()
-        data = response.json()
+        # Use KnowledgeGraphClient instead of direct Fuseki endpoint
+        kg_client = KnowledgeGraphClient()
+        data = kg_client.query(query)
         
         # Parse nodes from SPARQL results
         nodes = {}

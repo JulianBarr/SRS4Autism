@@ -10,6 +10,7 @@ from fastapi import APIRouter, HTTPException, Depends, Query
 from pydantic import BaseModel
 from typing import List, Optional, Dict, Any
 from pathlib import Path
+import logging
 import sqlite3
 import zipfile
 import tempfile
@@ -38,9 +39,11 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 from database.db import get_db
 from database.services import ProfileService
+from database.kg_client import KnowledgeGraphClient
 from anki_integration.anki_connect import AnkiConnect
 
 router = APIRouter(prefix="/literacy", tags=["literacy"])
+logger = logging.getLogger(__name__)
 
 # Path to the English Vocabulary Level 2 deck
 ENGLISH_VOCAB_DECK = PROJECT_ROOT / "data" / "content_db" / "English__Vocabulary__2. Level 2.apkg"
@@ -102,16 +105,16 @@ def _load_anki_order_from_apkg() -> Dict[str, int]:
             with open(ANKI_ORDER_CACHE_FILE, 'r', encoding='utf-8') as f:
                 order_map = json.load(f)
                 if isinstance(order_map, dict):
-                    print(f"✅ Loaded Anki order from cache: {len(order_map)} words")
+                    logger.info(f"Loaded Anki order from cache: {len(order_map)} words")
                     return order_map
                 else:
-                    print(f"⚠️  Cache file has invalid format, regenerating...")
+                    logger.warning(f"Cache file has invalid format, regenerating...")
         except (json.JSONDecodeError, IOError, OSError) as e:
-            print(f"⚠️  Error reading cache file ({e}), regenerating...")
+            logger.warning(f"Error reading cache file ({e}), regenerating...")
     
     # Cache miss or error: extract from .apkg file
     if not ENGLISH_VOCAB_DECK.exists():
-        print(f"⚠️  English Vocabulary deck not found: {ENGLISH_VOCAB_DECK}")
+        logger.warning(f"English Vocabulary deck not found: {ENGLISH_VOCAB_DECK}")
         return {}
     
     order_map = {}
@@ -130,7 +133,7 @@ def _load_anki_order_from_apkg() -> Dict[str, int]:
                         break
                 
                 if not db_path or not db_path.exists():
-                    print(f"⚠️  No database found in {ENGLISH_VOCAB_DECK.name}")
+                    logger.warning(f"No database found in {ENGLISH_VOCAB_DECK.name}")
                     return {}
                 
                 # Read database
@@ -198,15 +201,15 @@ def _load_anki_order_from_apkg() -> Dict[str, int]:
             
             with open(ANKI_ORDER_CACHE_FILE, 'w', encoding='utf-8') as f:
                 json.dump(order_map, f, ensure_ascii=False, indent=2)
-            print(f"✅ Saved Anki order to cache: {len(order_map)} words")
+            logger.info(f"Saved Anki order to cache: {len(order_map)} words")
         except (IOError, OSError) as e:
-            print(f"⚠️  Error saving cache file ({e}), continuing without cache...")
+            logger.warning(f"Error saving cache file ({e}), continuing without cache...")
         
-        print(f"✅ Loaded original Anki order for {len(order_map)} words")
+        logger.info(f"Loaded original Anki order for {len(order_map)} words")
         return order_map
     
     except Exception as e:
-        print(f"❌ Error extracting Anki order: {e}")
+        logger.error(f"Error extracting Anki order: {e}")
         import traceback
         traceback.print_exc()
         return {}
@@ -225,14 +228,12 @@ def get_anki_original_order() -> Dict[str, int]:
     return _anki_order_cache
 
 def query_sparql(query: str, output_format: str = "application/sparql-results+json", timeout: int = 30):
-    import requests
-    FUSEKI_ENDPOINT = "http://localhost:3030/srs4autism/query"
+    """Execute a SPARQL query against Oxigraph knowledge graph store."""
     try:
-        headers = {"Accept": output_format, "Content-Type": "application/x-www-form-urlencoded"}
-        data = {"query": query}
-        response = requests.post(FUSEKI_ENDPOINT, data=data, headers=headers, timeout=timeout)
-        response.raise_for_status()
-        return response.json() if output_format == "application/sparql-results+json" else response.text
+        kg_client = KnowledgeGraphClient()
+        result = kg_client.query(query)
+        # Return JSON format (Oxigraph always returns JSON format compatible with SPARQL JSON results)
+        return result
     except Exception as e:
         raise HTTPException(status_code=503, detail=f"Graph Error: {str(e)}")
 
@@ -260,7 +261,7 @@ def find_image_file(image_path: str) -> Optional[Path]:
         if candidate.exists(): 
             return candidate
             
-    print(f"⚠️ Image not found: {filename} (Checked {len(media_dirs)} dirs)")
+    logger.warning(f"Image not found: {filename} (Checked {len(media_dirs)} dirs)")
     return None
 # --- GATEKEEPER CONFIG ---
 CURATION_REPORT_PATH = PROJECT_ROOT / "logs" / "vision_cleanup_report.csv"
@@ -276,7 +277,7 @@ def _load_curation_blocklist() -> Dict[str, bool]:
     - We only BLOCK words that you explicitly reviewed and marked for deletion.
     """
     if not CURATION_REPORT_PATH.exists():
-        print(f"⚠️ Gatekeeper: Report not found at {CURATION_REPORT_PATH}. Showing ALL.")
+        logger.info(f"Gatekeeper: Report not found at {CURATION_REPORT_PATH}. Showing ALL.")
         return set()
 
     blocklist = set()
@@ -312,11 +313,11 @@ def _load_curation_blocklist() -> Dict[str, bool]:
 
                     blocklist.add(english_word)
 
-        print(f"🛡️  Gatekeeper Active: Blocking {len(blocklist)} explicitly deleted words.")
+        logger.info(f"Gatekeeper Active: Blocking {len(blocklist)} explicitly deleted words.")
         return blocklist
 
     except Exception as e:
-        print(f"❌ Gatekeeper Error: {e}")
+        logger.error(f"Gatekeeper Error: {e}")
         return set()
 
 def _build_sorted_vocab_cache(sort_order: str = "interleaved") -> List[Dict[str, Any]]:
@@ -412,17 +413,17 @@ def get_sorted_vocab_cache(force_refresh: bool = False, sort_order: str = "inter
             return _sorted_vocab_cache
         
         # Rebuild cache
-        print(f"🔄 Building sorted vocabulary cache (force_refresh={force_refresh})...")
+        logger.info(f"Building sorted vocabulary cache (force_refresh={force_refresh})...")
         _sorted_vocab_cache = _build_sorted_vocab_cache(sort_order)
         _cache_timestamp = current_time
-        print(f"✅ Cache built: {len(_sorted_vocab_cache)} words")
+        logger.info(f"Cache built: {len(_sorted_vocab_cache)} words")
         return _sorted_vocab_cache
 
 def initialize_literacy_cache():
     """
     Initialize the cache at startup. Call this from the main app's startup event.
     """
-    print("🚀 Initializing literacy cache at startup...")
+    logger.info("Initializing literacy cache at startup...")
     global _anki_order_cache
     
     # Load Anki order
@@ -431,7 +432,7 @@ def initialize_literacy_cache():
     # Pre-populate vocab cache
     get_sorted_vocab_cache(force_refresh=False)
     
-    print("✅ Literacy cache initialized")
+    logger.info("Literacy cache initialized")
 
 # --- ANKI ARCHITECTURE ---
 
@@ -488,7 +489,7 @@ def ensure_cuma_level2_model(anki: AnkiConnect) -> None:
     
     existing_models = anki._invoke("modelNames", {})
     if model_name not in existing_models:
-        print(f"📝 Creating Advanced Note Model: {model_name}")
+        logger.info(f"Creating Advanced Note Model: {model_name}")
         anki._invoke("createModel", {
             "modelName": model_name,
             "inOrderFields": fields,
@@ -588,38 +589,31 @@ async def get_logic_city_vocab(
                 
                 if found_path:
                     # 2. If found, construct a valid URL path
-                    # Check if file is in content/media/ or just media/
-                    try:
-                        rel_path = found_path.relative_to(PROJECT_ROOT)
-                        path_parts = rel_path.parts
-                        
-                        # If in content/media/, use /content/media/... URL
-                        if len(path_parts) >= 3 and path_parts[0] == "content" and path_parts[1] == "media":
-                            # content/media/images/filename.jpg -> /content/media/images/filename.jpg
-                            final_image_path = "/" + "/".join(path_parts)
-                        else:
-                            # media/images/filename.jpg -> /media/images/filename.jpg
-                            # Or just filename.jpg -> /media/filename.jpg
-                            filename = found_path.name
-                            parent_dir = found_path.parent.name
-                            
-                            if parent_dir in ['visual_images', 'images', 'pinyin']:
-                                final_image_path = f"/media/{parent_dir}/{filename}"
-                            else:
-                                final_image_path = f"/media/{filename}"
-                    except ValueError:
-                        # Fallback if relative path calculation fails
-                        filename = found_path.name
-                        parent_dir = found_path.parent.name
-                        if parent_dir in ['visual_images', 'images', 'pinyin']:
-                            final_image_path = f"/media/{parent_dir}/{filename}"
-                        else:
-                            final_image_path = f"/media/{filename}"
+                    # Check if it's in the objects directory (the main static media dir)
+                    media_objects_dir = PROJECT_ROOT / "content" / "media" / "objects"
+                    
+                    if media_objects_dir in found_path.parents or found_path.parent == media_objects_dir:
+                        # It is in the objects dir, use /static/media/
+                        final_image_path = f"/static/media/{found_path.name}"
+                    else:
+                        # Fallback for legacy paths
+                        try:
+                            rel_path = found_path.relative_to(PROJECT_ROOT)
+                            final_image_path = f"/{rel_path}"
+                        except ValueError:
+                            # Should not happen if found_path is under PROJECT_ROOT
+                            final_image_path = f"/media/{found_path.name}"
                 else:
                     # 3. Fallback: Clean the raw path if file not found on disk
                     clean_path = raw_img_path.replace("content/media/", "").replace("/media/", "")
                     if clean_path.startswith("/"): clean_path = clean_path[1:]
-                    final_image_path = f"/media/{clean_path}"
+                    # Assume it might be in static media if not found elsewhere? 
+                    # Or keep as legacy behavior? 
+                    # Best effort: use /static/media/ if it looks like a hash
+                    if re.match(r'^[0-9a-f]{12}\.(jpg|png|jpeg)$', clean_path, re.I):
+                         final_image_path = f"/static/media/{clean_path}"
+                    else:
+                         final_image_path = f"/media/{clean_path}"
             # --- END FIX ---
 
             # Generate Pinyin
@@ -646,7 +640,7 @@ async def get_logic_city_vocab(
         )
     
     except Exception as e:
-        print(e)
+        logger.error(e)
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/logic-city/sync")
