@@ -250,3 +250,4 @@ async def delete_template(template_id: str):
     save_json_file(PROMPT_TEMPLATES_FILE, templates)
     return {"message": "Template deleted successfully"}
 
+

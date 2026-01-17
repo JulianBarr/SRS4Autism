@@ -114,3 +114,5 @@ temp_anki_extract/
 knowledge_graph_backup_*
 cuma_knowledge_graph/
 backend/cuma_knowledge_graph/
+data/content_db/*.db.backup_*
+test_parser_fix.py
