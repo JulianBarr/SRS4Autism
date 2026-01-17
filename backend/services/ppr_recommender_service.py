@@ -316,7 +316,8 @@ def get_ppr_service(
         if similarity_file is None:
             similarity_file = PROJECT_ROOT / "data" / "content_db" / "english_word_similarity.json"
         if kg_file is None:
-            kg_file = PROJECT_ROOT / "knowledge_graph" / "world_model_english.ttl"
+            # Use rescued KG with 18K English words
+            kg_file = PROJECT_ROOT / "knowledge_graph" / "world_model_final_master.ttl"
         
         # Ensure paths are absolute
         similarity_file = similarity_file.resolve()

@@ -36,3 +36,5 @@ ENGLISH_KG_MAP_FILE = PROJECT_ROOT / "data" / "content_db" / "english_kg_map.jso
 
 DATABASE_PATH = CONTENT_DB_DIR / "srs4autism.db"
 
+MASTER_KG_FILE = PROJECT_ROOT / "knowledge_graph" / "world_model_final_master.ttl"
+

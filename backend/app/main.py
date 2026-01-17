@@ -18,7 +18,7 @@ import unicodedata
 from functools import lru_cache, partial
 import asyncio
 from pathlib import Path
-from .core.config import PROJECT_ROOT, PROFILES_FILE, CARDS_FILE, ANKI_PROFILES_FILE, CHAT_HISTORY_FILE, PROMPT_TEMPLATES_FILE, WORD_KP_CACHE_FILE, MODEL_CONFIG_FILE, ENGLISH_SIMILARITY_FILE, GRAMMAR_CORRECTIONS_FILE
+from .core.config import PROJECT_ROOT, PROFILES_FILE, CARDS_FILE, ANKI_PROFILES_FILE, CHAT_HISTORY_FILE, PROMPT_TEMPLATES_FILE, WORD_KP_CACHE_FILE, MODEL_CONFIG_FILE, ENGLISH_SIMILARITY_FILE, GRAMMAR_CORRECTIONS_FILE, MASTER_KG_FILE
 from .utils.pinyin_utils import get_word_knowledge, get_word_image_map, fetch_word_knowledge_points, fix_iu_ui_tone_placement
 from .utils.common import (
     load_json_file,
@@ -237,13 +237,6 @@ async def startup_event():
         print(f"⚠️  Warning: Failed to initialize literacy cache: {e}")
         # Continue startup even if cache init fails
 
-    # Initialize Oxigraph store
-    try:
-        from backend.app.utils.oxigraph_utils import initialize_store
-        initialize_store()
-        print("✅ Oxigraph store initialized!")
-    except Exception as e:
-        print(f"⚠️  Warning: Failed to initialize Oxigraph store: {e}")
 
 # CORS middleware for frontend communication
 app.add_middleware(
@@ -697,8 +690,8 @@ async def get_chinese_ppr_recommendations(request):
         
         # Get Chinese PPR service (lazy-loaded singleton)
         similarity_file = PROJECT_ROOT / "data" / "content_db" / "chinese_word_similarity.json"
-        # Use merged KG which now includes SUBTLEX-CH frequency data
-        kg_file = PROJECT_ROOT / "knowledge_graph" / "world_model_complete.ttl"
+        # Use rescued KG with 27K Chinese words, 18K English words, characters, and concepts
+        kg_file = MASTER_KG_FILE
         
         service = get_chinese_ppr_service(
             similarity_file=similarity_file,

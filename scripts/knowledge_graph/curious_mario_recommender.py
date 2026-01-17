@@ -348,7 +348,7 @@ class KnowledgeGraphService:
 
     def __init__(self, config: RecommenderConfig):
         self.config = config
-        self.kg_client = KnowledgeGraphClient()  # Now uses Oxigraph embedded store
+        self.kg_client = KnowledgeGraphClient(endpoint_url=self.config.fuseki_endpoint)  # Now uses Oxigraph embedded store
 
     def fetch_nodes(self) -> Dict[str, KnowledgeNode]:
         node_types = " ".join(self.config.node_types)
@@ -360,6 +360,8 @@ class KnowledgeGraphService:
             VALUES ?type {{ {node_types} }}
             ?node a ?type ;
                   rdfs:label ?label .
+            FILTER (!STRSTARTS(STR(?label), "synset:"))
+            FILTER (!STRSTARTS(STR(?label), "concept:"))
             OPTIONAL {{ ?node srs-kg:hskLevel ?hsk }}
             OPTIONAL {{ ?node srs-kg:cefrLevel ?cefr }}
             OPTIONAL {{ ?node srs-kg:concreteness ?concreteness }}

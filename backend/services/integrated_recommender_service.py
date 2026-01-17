@@ -35,7 +35,7 @@ from backend.database.models import Profile, MasteredWord
 from backend.database.services import ProfileService
 from sqlalchemy.orm import Session
 import requests
-from urllib.parse import quote
+from urllib.parse import quote, unquote
 
 
 # Global defaults (can be overridden per profile)
@@ -155,9 +155,8 @@ class IntegratedRecommenderService:
         language: str
     ) -> Dict[str, float]:
         """
-        Enhance mastery vector with character mastery from:
-        1. Database (MasteredWord with language='character')
-        2. Inferred from word mastery (if word is mastered, its characters are mastered)
+        Enhance mastery vector with character mastery.
+        Ensures IDs match the format found in world_model_rescued.ttl (char-汉)
         """
         enhanced = mastery_vector.copy()
         
@@ -165,45 +164,33 @@ class IntegratedRecommenderService:
         mastered_chars_db = ProfileService.get_mastered_words(
             self.db,
             self.profile.id,
-            'character'  # language='character' for characters
+            'character'
         )
         
-        print(f"   📊 Found {len(mastered_chars_db)} explicitly mastered characters in database")
-        
-        # Map character text to KG node IDs (v2: use srs-inst: namespace for instances)
+        # In rescued.ttl, characters are usually char-饭 (hyphen)
         for char_text in mastered_chars_db:
-            char_id = _normalize_kg_id(f"srs-inst:char_{quote(char_text, safe='')}")
-            enhanced[char_id] = 1.0  # Fully mastered
+            # Clean ID: char-饭
+            char_id = f"char-{char_text}"
+            enhanced[char_id] = 1.0
         
         # 2. Infer character mastery from word mastery
-        # Extract characters directly from mastered word texts
         if language == "zh":
-            mastered_words_list = ProfileService.get_mastered_words(
-                self.db,
-                self.profile.id,
-                'zh'
-            )
+            mastered_words_list = ProfileService.get_mastered_words(self.db, self.profile.id, 'zh')
             
             if mastered_words_list:
-                print(f"   📊 Inferring character mastery from {len(mastered_words_list)} mastered words...")
-                
-                # Extract unique Chinese characters from mastered words
                 inferred_chars = set()
                 for word in mastered_words_list:
                     for char in word:
-                        if '\u4e00' <= char <= '\u9fff':  # Chinese character range
+                        if '\u4e00' <= char <= '\u9fff':
                             inferred_chars.add(char)
                 
-                # Add to mastery vector
                 inferred_count = 0
                 for char_text in inferred_chars:
-                    # Create character node ID (v2: use srs-inst: namespace for instances)
-                    char_slug = quote(char_text, safe='')
-                    char_id = _normalize_kg_id(f"srs-inst:char_{char_slug}")
+                    # USE HYPHEN to match Knowledge Graph: char-饭
+                    char_id = f"char-{char_text}"
 
-                    # Only set if not already explicitly mastered (preserve explicit mastery = 1.0)
                     if char_id not in enhanced or enhanced[char_id] < 0.8:
-                        enhanced[char_id] = 0.8  # Inferred mastery (slightly lower than explicit)
+                        enhanced[char_id] = 0.8 
                         inferred_count += 1
                 
                 print(f"      ✅ Inferred {inferred_count} characters as mastered from word composition")
@@ -296,9 +283,12 @@ class IntegratedRecommenderService:
             mental_age=self.profile.mental_age,
         )
         kg_service = KnowledgeGraphService(vocab_config)
-        nodes = kg_service.fetch_nodes()
+        raw_nodes = kg_service.fetch_nodes()
         
-        print(f"   📊 KG has {len(nodes)} Word nodes")
+        # Create a lookup map using clean IDs (strip ns1:, srs-kg:, etc.)
+        nodes = { k.split(':')[-1]: v for k, v in raw_nodes.items() }
+        
+        print(f"   📊 KG has {len(nodes)} Word nodes (normalized)")
         
         # Fallback to metadata cache if KG is empty
         use_metadata_fallback = len(nodes) == 0
@@ -334,13 +324,14 @@ class IntegratedRecommenderService:
         
         for rec in ppr_recommendations:
             raw_node_id = rec.get("node_id", "")
-            node_id = _normalize_kg_id(raw_node_id)
+            # CLEAN ID: 'word-zh-饭馆' (no srs-kg: prefix)
+            node_id = raw_node_id.split(':')[-1]
             
             if not node_id:
                 skipped_no_node_id += 1
                 continue
             
-            # 1. Check mastery (Fast Fail)
+            # 1. Check mastery (using Clean ID)
             mastery = mastery_vector.get(node_id, 0.0)
             if mastery >= self.zpd_recommender.config.mastery_threshold:
                 skipped_mastered += 1
@@ -356,8 +347,8 @@ class IntegratedRecommenderService:
                 # New format: srs-inst:word_zh_{pinyin} → word_zh_{pinyin} (after stripping prefix)
                 # Cache keys may or may not have prefixes, so we need to try multiple patterns.
 
-                # Strip namespace prefixes to get base ID
-                base_id = node_id.replace("srs-kg:", "").replace("srs-inst:", "")
+                # Handle standard rescued format
+                base_id = node_id.split(':')[-1] if ':' in node_id else node_id
 
                 found_id = None
 
@@ -406,7 +397,15 @@ class IntegratedRecommenderService:
                     skipped_no_node += 1
                     continue
                 
-                prereq_scores = [mastery_vector.get(pr, 0.0) for pr in node.prerequisites]
+                # Robust prerequisite lookup: Always strip prefixes when checking mastery
+                prereq_scores = []
+                for pr in node.prerequisites:
+                    # Clean the prerequisite ID from KG (e.g., ns1:char-饭 -> char-饭)
+                    # Handle URL encoding (e.g. char-%E9%A5%AD -> char-饭)
+                    clean_pr = unquote(pr.split(':')[-1])
+                    prereq_scores.append(mastery_vector.get(clean_pr, 0.0))
+
+
                 missing_prereqs = [
                     pr for pr, score in zip(node.prerequisites, prereq_scores)
                     if score < self.zpd_recommender.config.prereq_threshold
@@ -486,7 +485,7 @@ class IntegratedRecommenderService:
                 nodes = self.__class__._grammar_cache
                 print(f"   📊 Using Cached Grammar Nodes: {len(nodes)}")
             else:
-                kg_file_path = PROJECT_ROOT / "knowledge_graph" / "world_model_complete.ttl"
+                kg_file_path = PROJECT_ROOT / "knowledge_graph" / "world_model_final_master.ttl"
                 print(f"   ⚠️  Live KG empty. Parsing grammar manually from {kg_file_path.name}...")
 
                 parsed_nodes = {}

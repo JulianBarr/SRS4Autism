@@ -470,13 +470,14 @@ class ChinesePPRRecommenderService:
                 continue
             
             # Filter by HSK level if configured
-            if (
-                max_hsk_level is not None
-                and meta.hsk_level is not None
-                and meta.hsk_level > max_hsk_level
-            ):
-                words_filtered_by_hsk += 1
-                continue
+            if max_hsk_level is not None:
+                if meta.hsk_level is None:
+                    # No HSK level = treat as advanced/rare, filter out
+                    words_filtered_by_hsk += 1
+                    continue
+                elif meta.hsk_level > max_hsk_level:
+                    words_filtered_by_hsk += 1
+                    continue
 
             # Exclude multi-word if configured
             if config.get("exclude_multiword") and (" " in meta.label or "-" in meta.label):
@@ -575,8 +576,8 @@ def get_chinese_ppr_service(
     if similarity_file is None:
         similarity_file = PROJECT_ROOT / "data" / "content_db" / "chinese_word_similarity.json"
     if kg_file is None:
-        # Use merged KG to ensure AoA/frequency metadata is available
-        kg_file = PROJECT_ROOT / "knowledge_graph" / "world_model_complete.ttl"
+        # Use rescued KG with 27K Chinese words, characters, and concepts
+        kg_file = PROJECT_ROOT / "knowledge_graph" / "world_model_final_master.ttl"
     
     # Ensure paths are absolute
     similarity_file = similarity_file.resolve()

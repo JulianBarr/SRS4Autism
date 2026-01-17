@@ -17,8 +17,9 @@ PROJECT_ROOT_DIR = Path(__file__).resolve().parent.parent.parent.parent
 if str(PROJECT_ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT_DIR))
 
-from ..core.config import PROJECT_ROOT, HSK_VOCAB_FILE, CEFR_VOCAB_FILE, CONCRETENESS_DATA_FILE, AOAS_DATA_FILE, ENGLISH_SIMILARITY_FILE, ENGLISH_KG_MAP_FILE, PROFILES_FILE
+from ..core.config import HSK_VOCAB_FILE, CEFR_VOCAB_FILE, CONCRETENESS_DATA_FILE, AOAS_DATA_FILE, ENGLISH_SIMILARITY_FILE, ENGLISH_KG_MAP_FILE, PROFILES_FILE, PROJECT_ROOT # PROJECT_ROOT added back as it's used for other files
 from ..utils.pinyin_utils import get_standard_pinyin, get_pinyin_tone, strip_pinyin_tones
+from ..utils.oxigraph_utils import get_kg_store # Added new import
 
 # CORRECT IMPORTS FROM THE SCRIPTS FOLDER
 from scripts.knowledge_graph.curious_mario_recommender import KnowledgeGraphService, CuriousMarioRecommender, RecommenderConfig, KnowledgeNode
@@ -221,12 +222,14 @@ def find_learning_frontier(mastered_words: List[str], target_level: int = 1, top
     sparql = f"""
     PREFIX srs-kg: <http://srs4autism.com/schema/>
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-    
+
     SELECT ?word ?word_text ?pinyin ?hsk ?concreteness ?aoa WHERE {{
         ?word a srs-kg:Word ;
               rdfs:label ?word_text ;
               srs-kg:hskLevel ?hsk .
         FILTER (lang(?word_text) = "zh")
+        FILTER (!STRSTARTS(?word_text, "synset:"))
+        FILTER (!STRSTARTS(?word_text, "concept:"))
         OPTIONAL {{ ?word srs-kg:pinyin ?pinyin }}
         OPTIONAL {{ ?word srs-kg:concreteness ?concreteness }}
         OPTIONAL {{ ?word srs-kg:ageOfAcquisition ?aoa }}
@@ -235,6 +238,11 @@ def find_learning_frontier(mastered_words: List[str], target_level: int = 1, top
     
     csv_result = query_sparql(sparql, "text/csv")
     words_data = defaultdict(lambda: {'pinyin': '', 'hsk': None, 'concreteness': None, 'aoa': None, 'chars': set()})
+    
+    if not csv_result.strip(): # Check if csv_result is empty or just whitespace
+        print("⚠️  SPARQL query for words_data returned no results. Returning empty list.")
+        return []
+
     reader = csv.reader(io.StringIO(csv_result))
     next(reader)  # Skip header
     
@@ -248,14 +256,15 @@ def find_learning_frontier(mastered_words: List[str], target_level: int = 1, top
                 hsk = int(float(row[3])) if row[3] else None
                 conc = float(row[4]) if len(row) > 4 and row[4] else None
                 aoa = float(row[5]) if len(row) > 5 and row[5] else None
-                
+
                 words_data[word_text].update({
                     'pinyin': pinyin,
                     'hsk': hsk,
                     'concreteness': conc,
                     'aoa': aoa
                 })
-            except: continue
+            except:
+                continue
 
     # Step 2: Get character prerequisites
     sparql_chars = """
@@ -285,11 +294,14 @@ def find_learning_frontier(mastered_words: List[str], target_level: int = 1, top
         if word in mastered_set: continue
         if data['aoa'] and data['aoa'] > aoa_ceiling: continue
         
-        # HSK Score
+        # HSK Score - filter out words without HSK level (treat as advanced/rare)
         hsk_val = 0.0
+        if not data['hsk']:
+            # No HSK level = treat as advanced/rare, skip
+            continue
         if data['hsk'] == target_level: hsk_val = 100.0
         elif data['hsk'] == target_level + 1: hsk_val = 50.0
-        elif data['hsk'] and data['hsk'] > target_level + 1: continue # Too difficult
+        elif data['hsk'] > target_level + 1: continue # Too difficult
         
         # Concreteness (1-5 scale normalized to 0-100)
         conc_val = ((data['concreteness'] - 1.0) / 4.0 * 100.0) if data['concreteness'] else 50.0
@@ -348,34 +360,60 @@ async def get_recommendations(request: RecommendationRequest):
                 sparql = """
                 PREFIX srs-kg: <http://srs4autism.com/schema/>
                 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-                
+
                 SELECT ?word ?word_text ?hsk WHERE {
                     ?word a srs-kg:Word ;
                           rdfs:label ?word_text ;
                           srs-kg:hskLevel ?hsk .
                     FILTER (lang(?word_text) = "zh")
+                    FILTER (!STRSTARTS(?word_text, "synset:"))
+                    FILTER (!STRSTARTS(?word_text, "concept:"))
                 }
                 """
-                
-                print(f"   🔍 Querying knowledge graph...")
+
+                print(f"   🔍 Querying knowledge graph (WITH FILTERS APPLIED - v2)...")
                 csv_result = query_sparql(sparql, "text/csv")
-                reader = csv.reader(io.StringIO(csv_result))
-                next(reader)  # Skip header
-                
-                mastered_set = set(request.mastered_words)
-                
-                for row in reader:
-                    if len(row) >= 3:
-                        word_text = row[1]  # word_text is second column
-                        try:
-                            hsk = int(row[2]) if len(row) > 2 and row[2] else None
-                        except ValueError:
-                            hsk = None
-                        
-                        if hsk:
-                            mastery_by_level[hsk]['total'] += 1
-                            if word_text in mastered_set:
-                                mastery_by_level[hsk]['mastered'] += 1
+
+                if not csv_result.strip():  # Check if csv_result is empty or just whitespace
+                    print("   ⚠️  SPARQL query for mastery rates returned no results.")
+                    # No words in KG, cannot determine mastery. Keep default target_level.
+                else:
+                    reader = csv.reader(io.StringIO(csv_result))
+                    next(reader)  # Skip header
+
+                    mastered_set = set(request.mastered_words)
+
+                    # DEBUG: Sample first 10 words to see what we're getting
+                    debug_count = 0
+                    synset_count = 0
+                    concept_count = 0
+
+                    for row in reader:
+                        if len(row) >= 3:
+                            word_text = row[1]  # word_text is second column
+
+                            # DEBUG: Sample first few words
+                            if debug_count < 5:
+                                print(f"      DEBUG: word_text = '{word_text}'")
+                                debug_count += 1
+
+                            # Count synsets and concepts that got through
+                            if word_text.startswith("synset:"):
+                                synset_count += 1
+                            elif word_text.startswith("concept:"):
+                                concept_count += 1
+
+                            try:
+                                hsk = int(row[2]) if len(row) > 2 and row[2] else None
+                            except ValueError:
+                                hsk = None
+
+                            if hsk:
+                                mastery_by_level[hsk]['total'] += 1
+                                if word_text in mastered_set:
+                                    mastery_by_level[hsk]['mastered'] += 1
+
+                    print(f"      DEBUG: Found {synset_count} synsets and {concept_count} concepts (filters NOT working!)")
                 
                 print(f"   📊 Mastery rates by level:")
                 for level in sorted(mastery_by_level.keys()):
@@ -502,6 +540,8 @@ async def get_english_recommendations(request: EnglishRecommendationRequest):
             OPTIONAL {{ ?node srs-kg:requiresPrerequisite ?prereq }}
             # Only include words with CEFR level (English words)
             FILTER(BOUND(?cefr))
+            FILTER (!STRSTARTS(STR(?label), "synset:"))
+            FILTER (!STRSTARTS(STR(?label), "concept:"))
         }}
         """
         
@@ -737,7 +777,8 @@ async def get_ppr_recommendations(request: PPRRecommendationRequest):
         
         # Get PPR service (lazy-loaded singleton)
         similarity_file = PROJECT_ROOT / "data" / "content_db" / "english_word_similarity.json"
-        kg_file = PROJECT_ROOT / "knowledge_graph" / "world_model_english.ttl"
+        # Use rescued KG with 18K English words
+        kg_file = PROJECT_ROOT / "knowledge_graph" / "world_model_final_master.ttl"
         
         service = get_ppr_service(
             similarity_file=similarity_file,
@@ -822,8 +863,8 @@ async def get_chinese_ppr_recommendations(request: ChinesePPRRecommendationReque
         
         # Get Chinese PPR service (lazy-loaded singleton)
         similarity_file = PROJECT_ROOT / "data" / "content_db" / "chinese_word_similarity.json"
-        # Use merged KG which now includes SUBTLEX-CH frequency data
-        kg_file = PROJECT_ROOT / "knowledge_graph" / "world_model_complete.ttl"
+        # Use rescued KG with 27K Chinese words, characters, and concepts
+        kg_file = PROJECT_ROOT / "knowledge_graph" / "world_model_final_master.ttl"
         
         service = get_chinese_ppr_service(
             similarity_file=similarity_file,

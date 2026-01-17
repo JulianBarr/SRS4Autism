@@ -5,6 +5,7 @@ This module provides a unified interface for querying the knowledge graph,
 using an embedded Oxigraph store.
 """
 
+import requests
 import pyoxigraph as oxigraph
 from typing import Dict, Any, Optional
 from pathlib import Path
@@ -35,27 +36,35 @@ class KnowledgeGraphClient:
         >>> bindings = results.get("results", {}).get("bindings", [])
     """
 
-    def __init__(self, store_path: Optional[str] = None, timeout: int = 30):
+    def __init__(self, endpoint_url: Optional[str] = None, timeout: int = 30):
         """
-        Initialize the knowledge graph client with an embedded Oxigraph store.
-
-        Uses the singleton store instance from oxigraph_utils.
+        Initialize the knowledge graph client. Can connect to a Fuseki endpoint or use an embedded Oxigraph store.
 
         Args:
-            store_path: Path to the Oxigraph store directory. If None, uses settings.kg_store_path
-            timeout: Deprecated parameter kept for backward compatibility (no longer used with embedded store)
+            endpoint_url: Optional. The URL of the SPARQL endpoint (e.g., Fuseki).
+                          If None, an embedded Oxigraph store is used.
+            timeout: Request timeout in seconds for Fuseki connections (deprecated for embedded store).
         """
-        self.store_path = store_path or settings.kg_store_path
         self.timeout = timeout
-        self.endpoint_url = f"oxigraph://{self.store_path}"
+        self.endpoint_url = endpoint_url
+        self.store = None # For Oxigraph
+        self.is_fuseki = False
 
-        try:
-            from backend.app.utils.oxigraph_utils import get_oxigraph_store
-            self.store = get_oxigraph_store(self.store_path)
-        except Exception as e:
-            raise KnowledgeGraphConnectionError(
-                f"Failed to connect to Oxigraph store: {str(e)}"
-            ) from e
+        if self.endpoint_url and self.endpoint_url != "oxigraph://embedded":
+            # Assume Fuseki or compatible external endpoint
+            print(f"Connecting to external SPARQL endpoint: {self.endpoint_url}")
+            self.is_fuseki = True
+        else:
+            # Use embedded Oxigraph store
+            print("Using embedded Oxigraph store.")
+            try:
+                from backend.app.utils.oxigraph_utils import get_kg_store
+                self.store = get_kg_store()
+                self.endpoint_url = "oxigraph://embedded" # Standardize internal representation
+            except Exception as e:
+                raise KnowledgeGraphConnectionError(
+                    f"Failed to connect to Oxigraph store: {str(e)}"
+                ) from e
 
     def load_file(self, file_path: str, format=None) -> None:
         """
@@ -73,6 +82,8 @@ class KnowledgeGraphClient:
             >>> client = KnowledgeGraphClient()
             >>> client.load_file("knowledge_graph/world_model.ttl")
         """
+        if self.is_fuseki:
+            raise KnowledgeGraphError("File loading is not supported for external Fuseki endpoints via this client.")
         try:
             # Use path parameter - pyoxigraph can handle the file directly
             self.store.load(path=file_path, format=format)
@@ -112,37 +123,49 @@ class KnowledgeGraphClient:
             ... '''
             >>> results = client.query(query)
         """
-        try:
-            results = self.store.query(sparql_query)
+        if self.is_fuseki:
+            try:
+                headers = {"Content-Type": "application/sparql-query"}
+                response = requests.post(self.endpoint_url, data=sparql_query.encode('utf-8'), headers=headers, timeout=self.timeout)
+                response.raise_for_status()
+                return response.json()
+            except requests.exceptions.RequestException as e:
+                raise KnowledgeGraphQueryError(f"Fuseki query failed: {e}") from e
+        else:
+            try:
+                results = self.store.query(sparql_query)
 
-            # Handle ASK queries - pyoxigraph returns a QueryBoolean object
-            if hasattr(results, '__bool__'):
-                return {"boolean": bool(results)}
+                # Handle ASK queries - pyoxigraph returns a QueryBoolean object
+                if hasattr(results, '__bool__'):
+                    return {"boolean": bool(results)}
 
-            # Handle SELECT queries
-            # Oxigraph returns a QuerySolutions object for SELECT queries
-            # Get variable names from the QuerySolutions object
-            variables = [var.value for var in results.variables]
-            bindings_list = []
+                # Handle SELECT queries
+                # Oxigraph returns a QuerySolutions object for SELECT queries
+                # Get variable names from the QuerySolutions object
+                variables = [var.value for var in results.variables]
+                bindings_list = []
 
-            for solution in results:
-                binding = {}
-                for var_name in variables:
-                    value = solution[var_name]
-                    if value is not None:
-                        binding[var_name] = self._convert_term_to_json(value)
+                for solution in results:
+                    binding = {}
+                    for var_name in variables:
+                        try:
+                            value = solution[var_name]
+                            if value is not None:
+                                binding[var_name] = self._convert_term_to_json(value)
+                        except (KeyError, TypeError):
+                            # Variable not bound in this solution, skip it
+                            continue
+                    bindings_list.append(binding)
 
-                bindings_list.append(binding)
+                return {
+                    "head": {"vars": variables},
+                    "results": {"bindings": bindings_list}
+                }
 
-            return {
-                "head": {"vars": variables},
-                "results": {"bindings": bindings_list}
-            }
-
-        except Exception as e:
-            raise KnowledgeGraphQueryError(
-                f"Query execution failed: {str(e)}"
-            ) from e
+            except Exception as e:
+                raise KnowledgeGraphQueryError(
+                    f"Query execution failed: {str(e)}"
+                ) from e
 
     def _convert_term_to_json(self, term) -> Dict[str, str]:
         """
@@ -195,10 +218,18 @@ class KnowledgeGraphClient:
         Returns:
             True if store is accessible, False otherwise
         """
-        try:
-            # Simple ASK query to test connectivity
-            query = "ASK { ?s ?p ?o }"
-            self.query(query)
-            return True
-        except KnowledgeGraphError:
-            return False
+        if self.is_fuseki:
+            try:
+                response = requests.get(self.endpoint_url, timeout=self.timeout)
+                response.raise_for_status()
+                return True
+            except requests.exceptions.RequestException:
+                return False
+        else:
+            try:
+                # Simple ASK query to test connectivity for Oxigraph
+                query = "ASK { ?s ?p ?o }"
+                self.query(query)
+                return True
+            except KnowledgeGraphError:
+                return False
