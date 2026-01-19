@@ -380,7 +380,7 @@ def _normalize_node_id(node_id: str) -> str:
     if not node_id.startswith("word-en-"):
         return node_id
     
-    word_part = node_id.replace("word-en-", "")
+    word_part = node_id[8:]
     
     # Handle combined forms like "behaviorbehaviour" or "metermetre"
     # Check if word contains both British and American variants concatenated

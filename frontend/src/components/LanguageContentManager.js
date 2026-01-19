@@ -7,7 +7,6 @@ import MasteredGrammarManager from './MasteredGrammarManager';
 import CharacterRecognition from './CharacterRecognition';
 import ChineseWordRecognition from './ChineseWordRecognition';
 import EnglishWordRecognition from './EnglishWordRecognition';
-import PinyinLearning from './PinyinLearning';
 import RecommendationSmartConfig from './RecommendationSmartConfig';
 import theme from '../styles/theme';
 
@@ -26,8 +25,6 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
   const [loadingRecommendations, setLoadingRecommendations] = useState(false);
   const [selectedRecommendations, setSelectedRecommendations] = useState(new Set());
   const [savingMasteredWords, setSavingMasteredWords] = useState(false);
-  const [concretenessWeight, setConcretenessWeight] = useState(0.5);
-  const [useChinesePPRAlgorithm, setUseChinesePPRAlgorithm] = useState(false); // Toggle between PPR and old algorithm for Chinese
   
   // Chinese PPR Algorithm Configuration State
   const [chinesePprConfig, setChinesePprConfig] = useState({
@@ -40,10 +37,9 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
     mental_age: null, // Will use profile.mental_age if available
     aoa_buffer: 0.0,
     top_n: 50,
-    exclude_multiword: false,
+    exclude_multiword: true,
     max_hsk_level: 4 // Default max HSK level
   });
-  const [showChinesePprConfig, setShowChinesePprConfig] = useState(false);
   
   // Calculate current HSK level from recommendations (fallback to 1)
   const [currentHSKLevel, setCurrentHSKLevel] = useState(1);
@@ -81,11 +77,9 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
   const [loadingEnglishRecommendations, setLoadingEnglishRecommendations] = useState(false);
   const [selectedEnglishRecommendations, setSelectedEnglishRecommendations] = useState(new Set());
   const [savingMasteredEnglishWords, setSavingMasteredEnglishWords] = useState(false);
-  const [englishSliderPosition, setEnglishSliderPosition] = useState(0.5);
   const [recommendationsKey, setRecommendationsKey] = useState(0);
-  const [usePPRAlgorithm, setUsePPRAlgorithm] = useState(false); // Toggle between PPR and old algorithm
   
-  // PPR Algorithm Configuration State
+  // PPR Algorithm Configuration State for English
   const [pprConfig, setPprConfig] = useState({
     beta_ppr: 1.0,
     beta_concreteness: 0.8,
@@ -96,13 +90,11 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
     mental_age: null, // Will use profile.mental_age if available
     aoa_buffer: 0.0,
     top_n: 50,
-    exclude_multiword: false
+    exclude_multiword: true
   });
-  const [showPprConfig, setShowPprConfig] = useState(false);
   
   const englishRecommendationsAbortController = useRef(null);
   const englishRecommendationsRequestId = useRef(0);
-  const sliderDebounceTimer = useRef(null);
 
   // Grammar Recommendations State
   const [showGrammarRecommendations, setShowGrammarRecommendations] = useState(false);
@@ -123,9 +115,6 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
     return () => {
       if (englishRecommendationsAbortController.current) {
         englishRecommendationsAbortController.current.abort();
-      }
-      if (sliderDebounceTimer.current) {
-        clearTimeout(sliderDebounceTimer.current);
       }
     };
   }, []);
@@ -230,50 +219,38 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
 
   // --- Chinese Word Recommendations ---
 
-  const handleGetChineseWordRecommendations = async (weight = null, algorithmType = null) => {
+  const handleGetChineseWordRecommendations = async (configOverride = null) => {
     setLoadingRecommendations(true);
     setSelectedRecommendations(new Set());
     
-    const weightToUse = weight !== null ? weight : concretenessWeight;
-    // Use provided algorithm type or current state
-    const usePPR = algorithmType !== null ? algorithmType : useChinesePPRAlgorithm;
+    const config = configOverride || chinesePprConfig;
     
     try {
       const mastered_words_array = profile.mastered_words 
         ? profile.mastered_words.split(/[,\s，]+/).filter(w => w.trim())
         : [];
       
-      let response;
-      if (usePPR) {
-        // Use Chinese PPR algorithm with configurable parameters
-        const mentalAge = profile.mental_age ? parseFloat(profile.mental_age) : null;
-        const requestConfig = {
-          profile_id: profile.id || profile.name,
-          mastered_words: mastered_words_array.length > 0 ? mastered_words_array : undefined,
-          mental_age: chinesePprConfig.mental_age !== null ? chinesePprConfig.mental_age : (mentalAge || 8.0),
-          beta_ppr: chinesePprConfig.beta_ppr,
-          beta_concreteness: chinesePprConfig.beta_concreteness,
-          beta_frequency: chinesePprConfig.beta_frequency,
-          beta_aoa_penalty: chinesePprConfig.beta_aoa_penalty,
-          beta_intercept: chinesePprConfig.beta_intercept,
-          alpha: chinesePprConfig.alpha,
-          aoa_buffer: chinesePprConfig.aoa_buffer,
-          top_n: chinesePprConfig.top_n,
-          exclude_multiword: chinesePprConfig.exclude_multiword,
-          max_hsk_level: chinesePprConfig.max_hsk_level
-        };
-        
-        response = await axios.post(`${API_BASE}/kg/chinese-ppr-recommendations?t=${Date.now()}`, requestConfig, {
-          headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' }
-        });
-      } else {
-        // Use old algorithm
-        response = await axios.post(`${API_BASE}/kg/recommendations`, {
-        mastered_words: mastered_words_array,
+      // Use Chinese PPR algorithm with configurable parameters
+      const mentalAge = profile.mental_age ? parseFloat(profile.mental_age) : null;
+      const requestConfig = {
         profile_id: profile.id || profile.name,
-        concreteness_weight: weightToUse
+        mastered_words: mastered_words_array.length > 0 ? mastered_words_array : undefined,
+        mental_age: config.mental_age !== null ? config.mental_age : (mentalAge || 8.0),
+        beta_ppr: config.beta_ppr,
+        beta_concreteness: config.beta_concreteness,
+        beta_frequency: config.beta_frequency,
+        beta_aoa_penalty: config.beta_aoa_penalty,
+        beta_intercept: config.beta_intercept,
+        alpha: config.alpha,
+        aoa_buffer: config.aoa_buffer,
+        top_n: config.top_n,
+        exclude_multiword: config.exclude_multiword,
+        max_hsk_level: config.max_hsk_level
+      };
+      
+      const response = await axios.post(`${API_BASE}/kg/chinese-ppr-recommendations?t=${Date.now()}`, requestConfig, {
+        headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' }
       });
-      }
       
       const recs = response.data.recommendations || [];
       setRecommendations(recs);
@@ -342,7 +319,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
 
   // --- English Word Recommendations ---
 
-  const handleGetEnglishWordRecommendations = async (sliderPos = null, algorithmType = null) => {
+  const handleGetEnglishWordRecommendations = async (configOverride = null) => {
     if (englishRecommendationsAbortController.current) {
       englishRecommendationsAbortController.current.abort();
     }
@@ -354,48 +331,33 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
     setLoadingEnglishRecommendations(true);
     setSelectedEnglishRecommendations(new Set());
     
-    const sliderValue = sliderPos !== null ? sliderPos : englishSliderPosition;
-    // Use provided algorithm type or current state
-    const usePPR = algorithmType !== null ? algorithmType : usePPRAlgorithm;
+    const config = configOverride || pprConfig;
     
     try {
       const mastered_words_array = parseMasteredEnglishWords(profile.mastered_english_words);
       const mentalAge = profile.mental_age ? parseFloat(profile.mental_age) : null;
       
-      let response;
-      if (usePPR) {
-        // Use PPR algorithm with configurable parameters
-        const requestConfig = {
-          profile_id: profile.id || profile.name,
-          mastered_words: mastered_words_array.length > 0 ? mastered_words_array : undefined,
-          mental_age: pprConfig.mental_age !== null ? pprConfig.mental_age : (mentalAge || 8.0),
-          beta_ppr: pprConfig.beta_ppr,
-          beta_concreteness: pprConfig.beta_concreteness,
-          beta_frequency: pprConfig.beta_frequency,
-          beta_aoa_penalty: pprConfig.beta_aoa_penalty,
-          beta_intercept: pprConfig.beta_intercept,
-          alpha: pprConfig.alpha,
-          aoa_buffer: pprConfig.aoa_buffer,
-          top_n: pprConfig.top_n,
-          exclude_multiword: pprConfig.exclude_multiword
-        };
-        
-        response = await axios.post(`${API_BASE}/kg/ppr-recommendations?t=${Date.now()}`, requestConfig, {
-          headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' },
-          signal: abortController.signal
-        });
-      } else {
-        // Use old algorithm
-        response = await axios.post(`${API_BASE}/kg/english-recommendations?t=${Date.now()}`, {
-        mastered_words: mastered_words_array,
+      // Use PPR algorithm with configurable parameters
+      const requestConfig = {
         profile_id: profile.id || profile.name,
-        concreteness_weight: sliderValue,
-        mental_age: mentalAge
-      }, {
+        mastered_words: mastered_words_array.length > 0 ? mastered_words_array : undefined,
+        mental_age: config.mental_age !== null ? config.mental_age : (mentalAge || 8.0),
+        beta_ppr: config.beta_ppr,
+        beta_concreteness: config.beta_concreteness,
+        beta_frequency: config.beta_frequency,
+        beta_aoa_penalty: config.beta_aoa_penalty,
+        beta_intercept: config.beta_intercept,
+        alpha: config.alpha,
+        aoa_buffer: config.aoa_buffer,
+        top_n: config.top_n,
+        exclude_multiword: config.exclude_multiword,
+        max_level: config.max_hsk_level
+      };
+      
+      const response = await axios.post(`${API_BASE}/kg/ppr-recommendations?t=${Date.now()}`, requestConfig, {
         headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' },
         signal: abortController.signal
       });
-      }
       
       if (currentRequestId !== englishRecommendationsRequestId.current) return;
       
@@ -620,7 +582,6 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
   };
 
   const contentTypes = getContentTypes(selectedLanguage);
-  const isCharacterAvailable = selectedLanguage === 'zh' && selectedContentType === 'character';
   const isLoading = (selectedContentType === 'word' && selectedLanguage === 'zh' && loadingRecommendations) ||
                     (selectedContentType === 'word' && selectedLanguage === 'en' && loadingEnglishRecommendations) ||
                     (selectedContentType === 'grammar' && loadingGrammarRecommendations);
@@ -826,40 +787,25 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
           alignItems: 'center', justifyContent: 'center', zIndex: 1000
         }}>
           <div className="modal-content" style={{
-            backgroundColor: 'white', padding: '30px', borderRadius: '8px',
-            maxWidth: '600px', maxHeight: '80vh', overflow: 'auto', position: 'relative'
+            backgroundColor: 'white', borderRadius: '8px',
+            maxWidth: '700px', maxHeight: '85vh', display: 'flex', flexDirection: 'column', position: 'relative',
+            boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
           }}>
             <button onClick={() => setShowRecommendations(false)} style={{
-              position: 'absolute', top: '10px', right: '10px', border: 'none', background: 'none', fontSize: '24px', cursor: 'pointer'
+              position: 'absolute', top: '15px', right: '15px', border: 'none', background: 'white', 
+              fontSize: '28px', cursor: 'pointer', zIndex: 10, width: '40px', height: '40px',
+              borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              boxShadow: '0 2px 4px rgba(0,0,0,0.1)', color: '#666'
             }}>×</button>
-            <h2>📚 {t('chineseWordRecommendations')}</h2>
             
-            {/* PPR Algorithm Toggle */}
-            <div style={{ marginBottom: '15px', padding: '12px', backgroundColor: '#e8f4f8', borderRadius: '8px', border: '1px solid #b3d9e6' }}>
-              <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' }}>
-                <input
-                  type="checkbox"
-                  checked={useChinesePPRAlgorithm}
-                  onChange={(e) => {
-                    setUseChinesePPRAlgorithm(e.target.checked);
-                    handleGetChineseWordRecommendations(null, e.target.checked);
-                  }}
-                  style={{ cursor: 'pointer' }}
-                />
-                <span style={{ fontWeight: 'bold', fontSize: '14px' }}>
-                  🧠 使用智能推荐
-                </span>
-              </label>
-              <div style={{ fontSize: '12px', color: '#666', marginTop: '5px', marginLeft: '24px' }}>
-                {useChinesePPRAlgorithm 
-                  ? t('smartRecommendationDesc')
-                  : t('learningFrontierDesc')}
-              </div>
+            <div style={{ padding: '30px 30px 10px 30px', borderBottom: '1px solid #eee' }}>
+              <h2 style={{ margin: 0 }}>📚 {t('chineseWordRecommendations')}</h2>
             </div>
-            
-            {/* PPR Configuration Panel (when PPR is enabled) */}
-            {useChinesePPRAlgorithm && (
+
+            <div style={{ padding: '20px 30px', overflowY: 'auto', flex: 1 }}>
+              {/* PPR Configuration Panel */}
               <RecommendationSmartConfig
+                language="zh"
                 currentLevel={currentHSKLevel}
                 initialConfig={{
                   beta_ppr: chinesePprConfig.beta_ppr,
@@ -872,126 +818,153 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
                   mental_age: chinesePprConfig.mental_age !== null ? chinesePprConfig.mental_age : (profile.mental_age || 8.0)
                 }}
                 onConfigChange={(newConfig) => {
-                  setChinesePprConfig(prev => ({
-                    ...prev,
-                    beta_ppr: newConfig.beta_ppr,
-                    beta_concreteness: newConfig.beta_concreteness,
-                    beta_frequency: newConfig.beta_frequency,
-                    beta_aoa_penalty: newConfig.beta_aoa_penalty,
-                    alpha: newConfig.alpha,
-                    max_hsk_level: newConfig.max_hsk_level,
-                    top_n: newConfig.top_n,
-                    mental_age: newConfig.mental_age
-                  }));
-                  // Auto-refresh recommendations when config changes
-                  setTimeout(() => handleGetChineseWordRecommendations(null, true), 300);
+                  setChinesePprConfig(prev => {
+                    const updated = { ...prev, ...newConfig };
+                    // If exclude_multiword or other key params changed, trigger refresh
+                    if (prev.exclude_multiword !== updated.exclude_multiword || 
+                        prev.beta_ppr !== updated.beta_ppr ||
+                        prev.max_hsk_level !== updated.max_hsk_level) {
+                      setTimeout(() => handleGetChineseWordRecommendations(updated), 50);
+                    }
+                    return updated;
+                  });
                 }}
               />
-            )}
-            
-            {/* Concreteness Weight Control (only show when PPR is disabled) */}
-            {!useChinesePPRAlgorithm && (
-            <div style={{ marginBottom: '20px', padding: '15px', backgroundColor: '#f5f5f5', borderRadius: '8px', border: '1px solid #ddd' }}>
-              <label style={{ display: 'block', marginBottom: '10px', fontWeight: 'bold', fontSize: '14px' }}>
-                  ⚖️ 推荐平衡：
-              </label>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                  <span style={{ fontSize: '12px', color: '#666', minWidth: '100px' }}>{t('onlyHSKLevel')}</span>
-                <input
-                  type="range" min="0" max="1" step="0.1" value={concretenessWeight}
-                  onChange={(e) => {
-                    const newWeight = parseFloat(e.target.value);
-                    setConcretenessWeight(newWeight);
-                      handleGetChineseWordRecommendations(newWeight, false);
-                  }}
-                  style={{ flex: 1, cursor: 'pointer' }}
-                />
-                  <span style={{ fontSize: '12px', color: '#666', minWidth: '100px', textAlign: 'right' }}>{t('onlyConcreteness')}</span>
-              </div>
-            </div>
-            )}
-            
-            {recommendations.length === 0 ? (
-              <p>{t('noRecommendations')}. {t('pleaseAddMasteredWords')}</p>
-            ) : (
-              <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <p style={{ color: '#666', margin: 0 }}>{t('nextWordsToLearnCount').replace('{count}', useChinesePPRAlgorithm ? chinesePprConfig.top_n : 50)}：</p>
-                    <button
-                      onClick={() => handleGetChineseWordRecommendations()}
-                      disabled={loadingRecommendations}
-                      className="btn"
-                      style={{
-                        padding: '4px 12px',
-                        fontSize: '12px',
-                        backgroundColor: loadingRecommendations ? '#ccc' : '#2196F3',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '4px',
-                        cursor: loadingRecommendations ? 'not-allowed' : 'pointer',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '5px'
-                      }}
-                      title="使用当前配置刷新推荐"
-                    >
-                      {loadingRecommendations ? '⏳' : '🔄'} {loadingRecommendations ? '加载中...' : '刷新'}
-                    </button>
+              
+              {recommendations.length === 0 ? (
+                <p>{t('noRecommendations')}. {t('pleaseAddMasteredWords')}</p>
+              ) : (
+                <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px', position: 'sticky', top: 0, backgroundColor: 'white', zIndex: 5, padding: '10px 0' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <p style={{ color: '#666', margin: 0, fontWeight: '500' }}>{t('nextWordsToLearnCount').replace('{count}', recommendations.length)}：</p>
+                      <button
+                        onClick={() => handleGetChineseWordRecommendations()}
+                        disabled={loadingRecommendations}
+                        className="btn"
+                        style={{
+                          padding: '6px 16px',
+                          fontSize: '13px',
+                          backgroundColor: loadingRecommendations ? '#ccc' : theme.actions.primary,
+                          color: 'white',
+                          border: 'none',
+                          borderRadius: '6px',
+                          cursor: loadingRecommendations ? 'not-allowed' : 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '5px',
+                          fontWeight: '600',
+                          transition: 'all 0.2s'
+                        }}
+                        title="使用当前配置刷新推荐"
+                      >
+                        {loadingRecommendations ? '⏳' : '🔄'} {loadingRecommendations ? '加载中...' : '刷新'}
+                      </button>
+                    </div>
+                    {selectedRecommendations.size > 0 && (
+                      <button
+                        onClick={handleAddSelectedToMastered}
+                        disabled={savingMasteredWords}
+                        className="btn"
+                        style={{ 
+                          backgroundColor: theme.actions.success, 
+                          color: 'white',
+                          padding: '6px 16px',
+                          borderRadius: '6px',
+                          fontWeight: '600'
+                        }}
+                      >
+                        {savingMasteredWords ? `💾 ${t('saving')}` : `✓ ${t('addSelected')} (${selectedRecommendations.size})`}
+                      </button>
+                    )}
                   </div>
-                  {selectedRecommendations.size > 0 && (
-                    <button
-                      onClick={handleAddSelectedToMastered}
-                      disabled={savingMasteredWords}
-                      className="btn"
-                      style={{ backgroundColor: theme.actions.success, color: 'white' }}
-                    >
-                      {savingMasteredWords ? `💾 ${t('saving')}` : `✓ ${t('addSelected')} (${selectedRecommendations.size})`}
-                    </button>
-                  )}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                    {recommendations.map((rec, idx) => {
+                      const isSelected = selectedRecommendations.has(rec.word);
+                      const isAlreadyMastered = profile.mastered_words?.split(/[,\s，]+/).map(w => w.trim()).includes(rec.word);
+                      
+                      return (
+                        <div key={rec.word || idx} style={{ 
+                          padding: '12px 16px',
+                          borderRadius: '10px',
+                          border: `1px solid ${isSelected ? theme.actions.primary : '#eee'}`,
+                          backgroundColor: isSelected ? `${theme.actions.primary}08` : 'white',
+                          transition: 'all 0.2s'
+                        }}>
+                          <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+                            <input
+                              type="checkbox" checked={isSelected} disabled={isAlreadyMastered}
+                              onChange={() => handleToggleRecommendation(rec.word)}
+                              style={{ width: '18px', height: '18px', marginRight: '15px', cursor: 'pointer' }}
+                            />
+                            <div style={{ flex: 1 }}>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '4px' }}>
+                                <span style={{ 
+                                  fontSize: '14px', 
+                                  fontWeight: '800', 
+                                  color: theme.actions.primary,
+                                  backgroundColor: `${theme.actions.primary}15`,
+                                  padding: '2px 8px',
+                                  borderRadius: '4px',
+                                  minWidth: '40px',
+                                  textAlign: 'center'
+                                }}>
+                                  #{idx + 1}
+                                </span>
+                                <span style={{ fontSize: '20px', fontWeight: '800', color: '#1a1a1a' }}>
+                                  {rec.word}
+                                </span>
+                                {rec.pinyin && (
+                                  <span style={{ color: '#666', fontSize: '15px', fontWeight: '500' }}>
+                                    ({rec.pinyin})
+                                  </span>
+                                )}
+                                {isAlreadyMastered && (
+                                  <span style={{ 
+                                    fontSize: '11px', 
+                                    fontWeight: '600',
+                                    color: theme.status.alreadyMastered, 
+                                    backgroundColor: `${theme.status.alreadyMastered}15`,
+                                    padding: '2px 6px',
+                                    borderRadius: '4px',
+                                    textTransform: 'uppercase'
+                                  }}>
+                                    {t('alreadyMastered')}
+                                  </span>
+                                )}
+                              </div>
+                              <div style={{ fontSize: '12px', color: '#999', fontWeight: '400', display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
+                                <span>P(Recommend): <strong style={{ color: '#555' }}>{(rec.score * 100).toFixed(1)}%</strong></span>
+                                <span style={{ margin: '0 8px', color: '#ddd' }}>|</span>
+                                {rec.log_ppr !== undefined && (
+                                  <>
+                                    <span>log(PPR): <strong style={{ color: '#555' }}>{rec.log_ppr.toFixed(2)}</strong></span>
+                                    <span style={{ margin: '0 8px', color: '#ddd' }}>|</span>
+                                  </>
+                                )}
+                                {rec.z_concreteness !== undefined && (
+                                  <>
+                                    <span>Concreteness: <strong style={{ color: '#555' }}>{rec.z_concreteness.toFixed(2)}</strong></span>
+                                    <span style={{ margin: '0 8px', color: '#ddd' }}>|</span>
+                                  </>
+                                )}
+                                {rec.log_frequency !== undefined && (
+                                  <>
+                                    <span>Frequency: <strong style={{ color: '#555' }}>{rec.log_frequency.toFixed(2)}</strong></span>
+                                    <span style={{ margin: '0 8px', color: '#ddd' }}>|</span>
+                                  </>
+                                )}
+                                {rec.hsk_level && <span>HSK: <strong style={{ color: '#555' }}>{rec.hsk_level}</strong></span>}
+                              </div>
+                            </div>
+                          </label>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
-                <ol style={{ paddingLeft: '20px' }}>
-                  {recommendations.map((rec, idx) => {
-                    const isSelected = selectedRecommendations.has(rec.word);
-                    const isAlreadyMastered = profile.mastered_words?.split(/[,\s，]+/).map(w => w.trim()).includes(rec.word);
-                    
-                    return (
-                      <li key={rec.word || idx} style={{ marginBottom: '15px' }}>
-                        <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
-                          <input
-                            type="checkbox" checked={isSelected} disabled={isAlreadyMastered}
-                            onChange={() => handleToggleRecommendation(rec.word)}
-                            style={{ marginRight: '10px' }}
-                          />
-                          <div>
-                            <div style={{ fontWeight: 'bold' }}>
-                              {rec.word} {rec.pinyin && <span style={{ color: '#666', fontSize: '0.9em' }}>({rec.pinyin})</span>}
-                              {isAlreadyMastered && <span style={{ fontSize: '12px', color: theme.status.alreadyMastered, marginLeft: '8px' }}>({t('alreadyMastered')})</span>}
-                            </div>
-                            <div style={{ fontSize: '0.8em', color: '#888' }}>
-                              {useChinesePPRAlgorithm ? (
-                                <>
-                                  P(推荐): {(rec.score * 100).toFixed(1)}% |
-                                  {rec.log_ppr !== undefined && ` log(PPR): ${rec.log_ppr.toFixed(2)} |`}
-                                  {rec.z_concreteness !== undefined && ` Z(具体): ${rec.z_concreteness.toFixed(2)} |`}
-                                  {rec.log_frequency !== undefined && ` log(${t('frequency')}): ${rec.log_frequency.toFixed(2)} |`}
-                                  {rec.aoa_penalty !== undefined && rec.aoa_penalty > 0 && ` AoA惩罚: ${rec.aoa_penalty.toFixed(1)} |`}
-                                  {rec.hsk_level && ` HSK: ${rec.hsk_level}`}
-                                </>
-                              ) : (
-                                <>
-                              HSK: {rec.hsk} | Score: {typeof rec.score === 'number' ? rec.score.toFixed(1) : rec.score}
-                                </>
-                              )}
-                            </div>
-                          </div>
-                        </label>
-                      </li>
-                    );
-                  })}
-                </ol>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       )}
@@ -1004,352 +977,193 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
           alignItems: 'center', justifyContent: 'center', zIndex: 1000
         }}>
           <div className="modal-content" style={{
-            backgroundColor: 'white', padding: '30px', borderRadius: '8px',
-            maxWidth: '600px', maxHeight: '80vh', overflow: 'auto', position: 'relative'
+            backgroundColor: 'white', borderRadius: '8px',
+            maxWidth: '700px', maxHeight: '85vh', display: 'flex', flexDirection: 'column', position: 'relative',
+            boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
           }}>
             <button onClick={() => setShowEnglishRecommendations(false)} style={{
-              position: 'absolute', top: '10px', right: '10px', border: 'none', background: 'none', fontSize: '24px', cursor: 'pointer'
+              position: 'absolute', top: '15px', right: '15px', border: 'none', background: 'white', 
+              fontSize: '28px', cursor: 'pointer', zIndex: 10, width: '40px', height: '40px',
+              borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              boxShadow: '0 2px 4px rgba(0,0,0,0.1)', color: '#666'
             }}>×</button>
-            <h2>📚 {t('englishWordRecommendations')}</h2>
-            
-            <div style={{ marginBottom: '15px', padding: '12px', backgroundColor: '#e8f4f8', borderRadius: '8px', border: '1px solid #b3d9e6' }}>
-              <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' }}>
-                <input
-                  type="checkbox"
-                  checked={usePPRAlgorithm}
-                  onChange={(e) => {
-                    const newValue = e.target.checked;
-                    setUsePPRAlgorithm(newValue);
-                    // Refetch recommendations with new algorithm
-                    // Pass the new value directly to avoid state timing issues
-                    setTimeout(() => {
-                      handleGetEnglishWordRecommendations(englishSliderPosition, newValue);
-                    }, 100);
-                  }}
-                  style={{ cursor: 'pointer' }}
-                />
-                <span style={{ fontWeight: 'bold', fontSize: '14px' }}>
-                  🧠 使用智能推荐
-                </span>
-              </label>
-              <div style={{ fontSize: '12px', color: '#666', marginTop: '5px', marginLeft: '24px' }}>
-                {usePPRAlgorithm 
-                  ? t('smartRecommendationDesc')
-                  : t('learningFrontierDescEnglish')}
-              </div>
-              {usePPRAlgorithm && (
-                <div style={{ marginTop: '10px', marginLeft: '24px' }}>
-                  <button
-                    type="button"
-                    onClick={() => setShowPprConfig(!showPprConfig)}
-                    style={{
-                      fontSize: '12px',
-                      padding: '4px 8px',
-                      backgroundColor: showPprConfig ? '#4CAF50' : '#2196F3',
-                      color: 'white',
-                      border: 'none',
-                      borderRadius: '4px',
-                      cursor: 'pointer'
-                    }}
-                  >
-                    {showPprConfig ? `▼ ${t('hideConfig')}` : `▶ ${t('showConfig')}`}
-                  </button>
+
+            <div style={{ padding: '30px 30px 10px 30px', borderBottom: '1px solid #eee' }}>
+              <h2 style={{ margin: 0 }}>📚 {t('englishWordRecommendations')}</h2>
+            </div>
+
+            <div style={{ padding: '20px 30px', overflowY: 'auto', flex: 1 }}>
+              {/* English PPR Configuration Grid */}
+              <RecommendationSmartConfig
+                language="en"
+                currentLevel={1}
+                initialConfig={{
+                  beta_ppr: pprConfig.beta_ppr,
+                  beta_concreteness: pprConfig.beta_concreteness,
+                  beta_frequency: pprConfig.beta_frequency,
+                  beta_aoa_penalty: pprConfig.beta_aoa_penalty,
+                  alpha: pprConfig.alpha,
+                  top_n: pprConfig.top_n,
+                  mental_age: pprConfig.mental_age !== null ? pprConfig.mental_age : (profile.mental_age || 8.0)
+                }}
+                onConfigChange={(newConfig) => {
+                  setPprConfig(prev => {
+                    const updated = { ...prev, ...newConfig };
+                    if (prev.exclude_multiword !== updated.exclude_multiword || 
+                        prev.beta_ppr !== updated.beta_ppr ||
+                        prev.max_hsk_level !== updated.max_hsk_level) {
+                      setTimeout(() => handleGetEnglishWordRecommendations(updated), 50);
+                    }
+                    return updated;
+                  });
+                }}
+              />
+              
+              {englishRecommendations.length === 0 ? (
+                <p>{t('noRecommendations')}. {t('pleaseAddMasteredEnglishWords')}</p>
+              ) : (
+                <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px', position: 'sticky', top: 0, backgroundColor: 'white', zIndex: 5, padding: '10px 0' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                      <p style={{ color: '#666', margin: 0, fontWeight: '500' }}>
+                        {t('nextWordsToLearnCount').replace('{count}', englishRecommendations.length)}：
+                      </p>
+                      <button
+                        onClick={() => handleGetEnglishWordRecommendations()}
+                        disabled={loadingEnglishRecommendations}
+                        className="btn"
+                        style={{
+                          padding: '6px 16px',
+                          fontSize: '13px',
+                          backgroundColor: loadingEnglishRecommendations ? '#ccc' : theme.actions.primary,
+                          color: 'white',
+                          border: 'none',
+                          borderRadius: '6px',
+                          cursor: loadingEnglishRecommendations ? 'not-allowed' : 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '5px',
+                          fontWeight: '600',
+                          transition: 'all 0.2s'
+                        }}
+                        title="Refresh Recommendations"
+                      >
+                        {loadingEnglishRecommendations ? '⏳' : '🔄'} {loadingEnglishRecommendations ? 'Loading...' : 'Refresh'}
+                      </button>
+                    </div>
+                    {selectedEnglishRecommendations.size > 0 && (
+                      <button
+                        onClick={handleAddSelectedEnglishToMastered}
+                        disabled={savingMasteredEnglishWords}
+                        className="btn"
+                        style={{ 
+                          backgroundColor: theme.actions.success, 
+                          color: 'white',
+                          padding: '6px 16px',
+                          borderRadius: '6px',
+                          fontWeight: '600'
+                        }}
+                      >
+                        {savingMasteredEnglishWords ? `💾 ${t('saving')}` : `✓ ${t('addSelected')} (${selectedEnglishRecommendations.size})`}
+                      </button>
+                    )}
+                  </div>
+                  <div key={recommendationsKey} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                    {englishRecommendations.map((rec, idx) => {
+                      const isSelected = selectedEnglishRecommendations.has(rec.word);
+                      const isAlreadyMastered = parseMasteredEnglishWords(profile.mastered_english_words).includes(rec.word);
+                      
+                      return (
+                        <div key={`${rec.word}-${idx}`} style={{ 
+                          padding: '12px 16px',
+                          borderRadius: '10px',
+                          border: `1px solid ${isSelected ? theme.actions.primary : '#eee'}`,
+                          backgroundColor: isSelected ? `${theme.actions.primary}08` : 'white',
+                          transition: 'all 0.2s'
+                        }}>
+                          <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+                            <input
+                              type="checkbox" checked={isSelected} disabled={isAlreadyMastered}
+                              onChange={() => handleToggleEnglishRecommendation(rec.word)}
+                              style={{ width: '18px', height: '18px', marginRight: '15px', cursor: 'pointer' }}
+                            />
+                            <div style={{ flex: 1 }}>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '4px' }}>
+                                <span style={{ 
+                                  fontSize: '14px', 
+                                  fontWeight: '800', 
+                                  color: theme.actions.primary,
+                                  backgroundColor: `${theme.actions.primary}15`,
+                                  padding: '2px 8px',
+                                  borderRadius: '4px',
+                                  minWidth: '40px',
+                                  textAlign: 'center'
+                                }}>
+                                  #{idx + 1}
+                                </span>
+                                <span style={{ fontSize: '20px', fontWeight: '800', color: '#1a1a1a' }}>
+                                  {rec.word}
+                                </span>
+                                {isAlreadyMastered && (
+                                  <span style={{ 
+                                    fontSize: '11px', 
+                                    fontWeight: '600',
+                                    color: theme.status.alreadyMastered, 
+                                    backgroundColor: `${theme.status.alreadyMastered}15`,
+                                    padding: '2px 6px',
+                                    borderRadius: '4px',
+                                    textTransform: 'uppercase'
+                                  }}>
+                                    {t('alreadyMastered')}
+                                  </span>
+                                )}
+                              </div>
+                              <div style={{ fontSize: '12px', color: '#999', fontWeight: '400', display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
+                                <span>P(Recommend): <strong style={{ color: '#555' }}>{(rec.score * 100).toFixed(1)}%</strong></span>
+                                <span style={{ margin: '0 8px', color: '#ddd' }}>|</span>
+                                {rec.log_ppr !== undefined && (
+                                  <>
+                                    <span>log(PPR): <strong style={{ color: '#555' }}>{rec.log_ppr.toFixed(2)}</strong></span>
+                                    <span style={{ margin: '0 8px', color: '#ddd' }}>|</span>
+                                  </>
+                                )}
+                                {rec.z_concreteness !== undefined ? (
+                                  <>
+                                    <span>Concreteness: <strong style={{ color: '#555' }}>{rec.z_concreteness.toFixed(2)}</strong></span>
+                                    <span style={{ margin: '0 8px', color: '#ddd' }}>|</span>
+                                  </>
+                                ) : (
+                                  typeof rec.concreteness === 'number' && (
+                                    <>
+                                      <span>Concreteness: <strong style={{ color: '#555' }}>{rec.concreteness.toFixed(1)}</strong></span>
+                                      <span style={{ margin: '0 8px', color: '#ddd' }}>|</span>
+                                    </>
+                                  )
+                                )}
+                                {rec.log_frequency !== undefined ? (
+                                  <>
+                                    <span>Frequency: <strong style={{ color: '#555' }}>{rec.log_frequency.toFixed(2)}</strong></span>
+                                    <span style={{ margin: '0 8px', color: '#ddd' }}>|</span>
+                                  </>
+                                ) : (
+                                  rec.frequency_rank && (
+                                    <>
+                                      <span>Freq rank: <strong style={{ color: '#555' }}>{rec.frequency_rank}</strong></span>
+                                      <span style={{ margin: '0 8px', color: '#ddd' }}>|</span>
+                                    </>
+                                  )
+                                )}
+                                {rec.cefr_level && <span>CEFR: <strong style={{ color: '#555' }}>{rec.cefr_level}</strong></span>}
+                              </div>
+                            </div>
+                          </label>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               )}
             </div>
-            
-            {usePPRAlgorithm && showPprConfig && (
-              <div style={{ marginBottom: '20px', padding: '15px', backgroundColor: '#f0f8ff', borderRadius: '8px', border: '1px solid #b3d9e6' }}>
-                <h4 style={{ marginTop: 0, marginBottom: '15px', fontSize: '14px', fontWeight: 'bold' }}>
-                  ⚙️ {t('smartRecommendationConfig')}
-                </h4>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
-                  <div>
-                    <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px', fontWeight: 'bold' }}>
-                      语义权重: {pprConfig.beta_ppr.toFixed(2)}
-                    </label>
-                    <input
-                      type="range"
-                      min="0"
-                      max="3"
-                      step="0.1"
-                      value={pprConfig.beta_ppr}
-                      onChange={(e) => {
-                        const newValue = parseFloat(e.target.value);
-                        setPprConfig(prev => ({ ...prev, beta_ppr: newValue }));
-                        setTimeout(() => handleGetEnglishWordRecommendations(), 300);
-                      }}
-                      style={{ width: '100%' }}
-                    />
-                  </div>
-                  <div>
-                    <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px', fontWeight: 'bold' }}>
-                      具体性: {pprConfig.beta_concreteness.toFixed(2)}
-                    </label>
-                    <input
-                      type="range"
-                      min="0"
-                      max="3"
-                      step="0.1"
-                      value={pprConfig.beta_concreteness}
-                      onChange={(e) => {
-                        const newValue = parseFloat(e.target.value);
-                        setPprConfig(prev => ({ ...prev, beta_concreteness: newValue }));
-                        setTimeout(() => handleGetEnglishWordRecommendations(), 300);
-                      }}
-                      style={{ width: '100%' }}
-                    />
-                  </div>
-                  <div>
-                    <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px', fontWeight: 'bold' }}>
-                      频率: {pprConfig.beta_frequency.toFixed(2)}
-                    </label>
-                    <input
-                      type="range"
-                      min="0"
-                      max="3"
-                      step="0.1"
-                      value={pprConfig.beta_frequency}
-                      onChange={(e) => {
-                        const newValue = parseFloat(e.target.value);
-                        setPprConfig(prev => ({ ...prev, beta_frequency: newValue }));
-                        setTimeout(() => handleGetEnglishWordRecommendations(), 300);
-                      }}
-                      style={{ width: '100%' }}
-                    />
-                  </div>
-                  <div>
-                    <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px', fontWeight: 'bold' }}>
-                      习得年龄: {pprConfig.beta_aoa_penalty.toFixed(2)}
-                    </label>
-                    <input
-                      type="range"
-                      min="0"
-                      max="5"
-                      step="0.1"
-                      value={pprConfig.beta_aoa_penalty}
-                      onChange={(e) => {
-                        const newValue = parseFloat(e.target.value);
-                        setPprConfig(prev => ({ ...prev, beta_aoa_penalty: newValue }));
-                        setTimeout(() => handleGetEnglishWordRecommendations(), 300);
-                      }}
-                      style={{ width: '100%' }}
-                    />
-                  </div>
-                  <div>
-                    <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px', fontWeight: 'bold' }}>
-                      基础分: {pprConfig.beta_intercept.toFixed(2)}
-                    </label>
-                    <input
-                      type="range"
-                      min="-2"
-                      max="2"
-                      step="0.1"
-                      value={pprConfig.beta_intercept}
-                      onChange={(e) => {
-                        const newValue = parseFloat(e.target.value);
-                        setPprConfig(prev => ({ ...prev, beta_intercept: newValue }));
-                        setTimeout(() => handleGetEnglishWordRecommendations(), 300);
-                      }}
-                      style={{ width: '100%' }}
-                    />
-                  </div>
-                  <div>
-                    <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px', fontWeight: 'bold' }}>
-                      多样性: {pprConfig.alpha.toFixed(2)}
-                    </label>
-                    <input
-                      type="range"
-                      min="0"
-                      max="1"
-                      step="0.05"
-                      value={pprConfig.alpha}
-                      onChange={(e) => {
-                        const newValue = parseFloat(e.target.value);
-                        setPprConfig(prev => ({ ...prev, alpha: newValue }));
-                        setTimeout(() => handleGetEnglishWordRecommendations(), 300);
-                      }}
-                      style={{ width: '100%' }}
-                    />
-                  </div>
-                  <div>
-                    <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px', fontWeight: 'bold' }}>
-                      {t('mentalAge')}: {pprConfig.mental_age !== null ? pprConfig.mental_age.toFixed(1) : (profile.mental_age || t('useProfileDefault'))}
-                    </label>
-                    <input
-                      type="number"
-                      min="1"
-                      max="18"
-                      step="0.5"
-                      value={pprConfig.mental_age !== null ? pprConfig.mental_age : ''}
-                      onChange={(e) => {
-                        const newValue = e.target.value === '' ? null : parseFloat(e.target.value);
-                        setPprConfig(prev => ({ ...prev, mental_age: newValue }));
-                        setTimeout(() => handleGetEnglishWordRecommendations(), 300);
-                      }}
-                      placeholder={profile.mental_age ? `${t('profileColon')} ${profile.mental_age}` : t('useProfileDefault')}
-                      style={{ width: '100%', padding: '4px' }}
-                    />
-                  </div>
-                  <div>
-                    <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px', fontWeight: 'bold' }}>
-                      {t('ageBuffer')}: {pprConfig.aoa_buffer.toFixed(1)}
-                    </label>
-                    <input
-                      type="range"
-                      min="0"
-                      max="3"
-                      step="0.1"
-                      value={pprConfig.aoa_buffer}
-                      onChange={(e) => {
-                        const newValue = parseFloat(e.target.value);
-                        setPprConfig(prev => ({ ...prev, aoa_buffer: newValue }));
-                        setTimeout(() => handleGetEnglishWordRecommendations(), 300);
-                      }}
-                      style={{ width: '100%' }}
-                    />
-                  </div>
-                  <div>
-                    <label style={{ display: 'block', marginBottom: '5px', fontSize: '12px', fontWeight: 'bold' }}>
-                      {t('topNResults')}: {pprConfig.top_n}
-                    </label>
-                    <input
-                      type="number"
-                      min="10"
-                      max="200"
-                      step="10"
-                      value={pprConfig.top_n}
-                      onChange={(e) => {
-                        const newValue = parseInt(e.target.value);
-                        setPprConfig(prev => ({ ...prev, top_n: newValue }));
-                        setTimeout(() => handleGetEnglishWordRecommendations(), 300);
-                      }}
-                      style={{ width: '100%', padding: '4px' }}
-                    />
-                  </div>
-                  <div style={{ gridColumn: '1 / -1' }}>
-                    <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' }}>
-                      <input
-                        type="checkbox"
-                        checked={pprConfig.exclude_multiword}
-                        onChange={(e) => {
-                          setPprConfig(prev => ({ ...prev, exclude_multiword: e.target.checked }));
-                          setTimeout(() => handleGetEnglishWordRecommendations(), 300);
-                        }}
-                      />
-                      <span style={{ fontSize: '12px', fontWeight: 'bold' }}>
-                        排除多词短语（例如："ice hockey"、"chewing gum"）
-                      </span>
-                    </label>
-                  </div>
-                </div>
-              </div>
-            )}
-            
-            {!usePPRAlgorithm && (
-            <div style={{ marginBottom: '20px', padding: '15px', backgroundColor: '#f5f5f5', borderRadius: '8px', border: '1px solid #ddd' }}>
-              <label style={{ display: 'block', marginBottom: '10px', fontWeight: 'bold', fontSize: '14px' }}>
-                ⚖️ {t('recommendationBalanceEnglish')}：
-              </label>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                <span style={{ fontSize: '12px', color: '#666', minWidth: '120px' }}>{t('frequencyUtility')}</span>
-                <input
-                  type="range" min="0" max="1" step="0.1" value={englishSliderPosition}
-                  onChange={(e) => {
-                    const newPos = parseFloat(e.target.value);
-                    setEnglishSliderPosition(newPos);
-                    if (sliderDebounceTimer.current) clearTimeout(sliderDebounceTimer.current);
-                    sliderDebounceTimer.current = setTimeout(() => {
-                        handleGetEnglishWordRecommendations(newPos);
-                    }, 300);
-                  }}
-                  style={{ flex: 1, cursor: 'pointer' }}
-                />
-                <span style={{ fontSize: '12px', color: '#666', minWidth: '120px', textAlign: 'right' }}>{t('concretenessEase')}</span>
-              </div>
-            </div>
-            )}
-
-            {englishRecommendations.length === 0 ? (
-              <p>{t('noRecommendations')}. {t('pleaseAddMasteredEnglishWords')}</p>
-            ) : (
-              <div>
-                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <p style={{ color: '#666', margin: 0 }}>
-                      {t('nextWordsToLearnCount').replace('{count}', usePPRAlgorithm ? pprConfig.top_n : 50)}：
-                    </p>
-                    <button
-                      onClick={() => handleGetEnglishWordRecommendations()}
-                      disabled={loadingEnglishRecommendations}
-                      className="btn"
-                      style={{
-                        padding: '4px 12px',
-                        fontSize: '12px',
-                        backgroundColor: loadingEnglishRecommendations ? '#ccc' : '#2196F3',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '4px',
-                        cursor: loadingEnglishRecommendations ? 'not-allowed' : 'pointer',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '5px'
-                      }}
-                      title="使用当前配置刷新推荐"
-                    >
-                      {loadingEnglishRecommendations ? '⏳' : '🔄'} {loadingEnglishRecommendations ? '加载中...' : '刷新'}
-                    </button>
-                  </div>
-                  {selectedEnglishRecommendations.size > 0 && (
-                    <button
-                      onClick={handleAddSelectedEnglishToMastered}
-                      disabled={savingMasteredEnglishWords}
-                      className="btn"
-                      style={{ backgroundColor: theme.actions.success, color: 'white' }}
-                    >
-                      {savingMasteredEnglishWords ? `💾 ${t('saving')}` : `✓ ${t('addSelected')} (${selectedEnglishRecommendations.size})`}
-                    </button>
-                  )}
-                </div>
-                <ol key={recommendationsKey} style={{ paddingLeft: '20px' }}>
-                  {englishRecommendations.map((rec, idx) => {
-                    const isSelected = selectedEnglishRecommendations.has(rec.word);
-                    const isAlreadyMastered = parseMasteredEnglishWords(profile.mastered_english_words).includes(rec.word);
-                    
-                    return (
-                      <li key={`${rec.word}-${idx}`} style={{ marginBottom: '15px' }}>
-                        <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
-                          <input
-                            type="checkbox" checked={isSelected} disabled={isAlreadyMastered}
-                            onChange={() => handleToggleEnglishRecommendation(rec.word)}
-                            style={{ marginRight: '10px' }}
-                          />
-                          <div>
-                            <div style={{ fontWeight: 'bold' }}>
-                              {rec.word}
-                              {isAlreadyMastered && <span style={{ fontSize: '12px', color: theme.status.alreadyMastered, marginLeft: '8px' }}>({t('alreadyMastered')})</span>}
-                            </div>
-                            <div style={{ fontSize: '0.8em', color: '#888' }}>
-                              {usePPRAlgorithm ? (
-                                <>
-                                  P(Recommend): {(rec.score * 100).toFixed(1)}% | 
-                                  Concreteness: {rec.concreteness?.toFixed(1) || '-'} | 
-                                  AoA: {rec.age_of_acquisition?.toFixed(1) || '-'}
-                                </>
-                              ) : (
-                                <>
-                              CEFR: {rec.cefr_level || '-'} | Score: {rec.score?.toFixed(2)}
-                                </>
-                              )}
-                            </div>
-                          </div>
-                        </label>
-                      </li>
-                    );
-                  })}
-                </ol>
-              </div>
-            )}
           </div>
         </div>
       )}

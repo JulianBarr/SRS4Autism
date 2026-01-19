@@ -108,7 +108,9 @@ class PPRRecommenderService:
         unmatched = []
         
         for word in mastered_words:
-            node_id = _map_word_to_node_id(word, self.label_index)
+            # Normalize input word (case-insensitive)
+            clean_word = word.strip().lower()
+            node_id = _map_word_to_node_id(clean_word, self.label_index)
             if node_id:
                 # Normalize node ID to match graph
                 normalized_id = _normalize_node_id(node_id)
@@ -150,6 +152,11 @@ class PPRRecommenderService:
         # Map mastered words to node IDs
         matched_ids, unmatched = self.get_mastered_word_ids(mastered_words, profile_id)
         
+        # Diagnostic logs
+        print(f"📊 Seed validation: {len(matched_ids)}/{len(mastered_words)} mastered words found in similarity graph")
+        if matched_ids:
+            print(f" ✅ Sample seeds: {matched_ids[:5]}")
+        
         if not matched_ids:
             return []
         
@@ -166,6 +173,10 @@ class PPRRecommenderService:
         scores = run_ppr(self.graph, personalization, alpha=config["alpha"])
         
         # Calculate statistics for transformations
+        all_ppr_scores = [s for s in scores.values() if s > 0]
+        ppr_mean = math.log10(sum(all_ppr_scores) / len(all_ppr_scores)) if all_ppr_scores else 0.0
+        ppr_std = math.sqrt(sum((math.log10(s) - ppr_mean)**2 for s in all_ppr_scores) / len(all_ppr_scores)) if len(all_ppr_scores) > 1 else 1.0
+
         all_concreteness = [
             meta.concreteness
             for meta in self.word_metadata.values()
@@ -179,20 +190,36 @@ class PPRRecommenderService:
             if len(all_concreteness) > 1
             else 1.5
         )
+
+        # Calculate frequency statistics for normalization
+        all_freq_ranks = [
+            -math.log10(meta.frequency_rank + 1)
+            for meta in self.word_metadata.values()
+            if meta.frequency_rank is not None and meta.frequency_rank > 0
+        ]
+        freq_mean = sum(all_freq_ranks) / len(all_freq_ranks) if all_freq_ranks else 0.0
+        freq_std = (
+            math.sqrt(
+                sum((f - freq_mean) ** 2 for f in all_freq_ranks) / len(all_freq_ranks)
+            )
+            if len(all_freq_ranks) > 1
+            else 1.0
+        )
         
         # Transform functions
         def transform_ppr(raw_ppr: float) -> float:
-            return math.log10(raw_ppr + 1e-10)
+            return (math.log10(raw_ppr + 1e-10) - ppr_mean) / ppr_std if ppr_std > 0 else 0.0
         
         def transform_concreteness(value: Optional[float]) -> float:
             if value is None:
                 return 0.0
-            return (value - conc_mean) / conc_std
+            return (value - conc_mean) / conc_std if conc_std > 0 else 0.0
         
         def transform_frequency(rank: Optional[int]) -> float:
             if not rank or rank <= 0:
                 return 0.0
-            return -math.log10(rank + 1)
+            raw = -math.log10(rank + 1)
+            return (raw - freq_mean) / freq_std if freq_std > 0 else 0.0
         
         def calculate_aoa_penalty(aoa: Optional[float], mental_age: Optional[float]) -> float:
             if aoa is None or mental_age is None:
@@ -211,8 +238,14 @@ class PPRRecommenderService:
         candidates = []
         mental_age = config.get("mental_age")
         aoa_buffer = config.get("aoa_buffer", 0.0)
+        max_level = config.get("max_level", 6)
+        
+        # CEFR Mapping for filtering
+        cefr_values = {"A1": 1, "A2": 2, "B1": 3, "B2": 4, "C1": 5, "C2": 6}
+        
         words_with_aoa = 0
         words_filtered_by_aoa = 0
+        words_filtered_by_level = 0
         aoa_penalties_applied = []
         
         for node_id, raw_score in scores.items():
@@ -234,6 +267,14 @@ class PPRRecommenderService:
                 if " " in label or "-" in label:
                     continue
             
+            # Filter by CEFR Level
+            cefr_level = getattr(meta, 'cefr', None)
+            if cefr_level:
+                level_val = cefr_values.get(cefr_level.upper(), 99)
+                if level_val > max_level:
+                    words_filtered_by_level += 1
+                    continue
+
             # Track AoA data availability
             if meta.age_of_acquisition is not None:
                 words_with_aoa += 1
@@ -280,6 +321,7 @@ class PPRRecommenderService:
                 "concreteness": meta.concreteness,
                 "age_of_acquisition": meta.age_of_acquisition,
                 "frequency_rank": meta.frequency_rank,
+                "cefr_level": cefr_level
             })
         
         # Log AoA statistics
@@ -341,4 +383,3 @@ def get_ppr_service(
             raise RuntimeError(f"Failed to initialize PPR service: {str(e)}") from e
     
     return _service_instance
-

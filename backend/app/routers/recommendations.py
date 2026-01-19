@@ -87,6 +87,7 @@ class PPRRecommendationRequest(BaseModel):
     aoa_buffer: Optional[float] = 2.0
     exclude_multiword: Optional[bool] = True
     top_n: Optional[int] = 50
+    max_level: Optional[int] = 6  # Added to support CEFR filtering (1=A1...6=C2)
 
 class ChinesePPRRecommendationRequest(BaseModel):
     profile_id: str
@@ -774,6 +775,8 @@ async def get_ppr_recommendations(request: PPRRecommendationRequest):
             config["exclude_multiword"] = request.exclude_multiword
         if request.top_n is not None:
             config["top_n"] = request.top_n
+        if request.max_level is not None:
+            config["max_level"] = request.max_level
         
         # Get PPR service (lazy-loaded singleton)
         similarity_file = PROJECT_ROOT / "data" / "content_db" / "english_word_similarity.json"
