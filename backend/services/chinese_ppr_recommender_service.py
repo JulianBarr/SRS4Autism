@@ -28,7 +28,7 @@ DEFAULT_CONFIG = {
     "alpha": 0.5,
     "beta_ppr": 1.0,
     "beta_concreteness": 0.8,
-    "beta_frequency": 0.3,
+    "beta_frequency": 0.4,
     "beta_aoa_penalty": 2.0,
     "beta_intercept": 0.0,
     "mental_age": 8.0,

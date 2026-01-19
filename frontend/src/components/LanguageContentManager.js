@@ -109,6 +109,20 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
   const [loadingIntegratedRecommendations, setLoadingIntegratedRecommendations] = useState(false);
   const [selectedIntegratedRecommendations, setSelectedIntegratedRecommendations] = useState(new Set());
   const [allocationInfo, setAllocationInfo] = useState(null);
+  const [integratedPprConfig, setIntegratedPprConfig] = useState({
+    beta_ppr: 1.0,
+    beta_concreteness: 0.8,
+    beta_frequency: 0.4,
+    beta_aoa_penalty: 2.0,
+    beta_intercept: 0.0,
+    alpha: 0.5,
+    mental_age: profile?.mental_age ? parseFloat(profile.mental_age) : null,
+    aoa_buffer: 0.0,
+    top_n: 50,
+    exclude_multiword: true,
+    max_hsk_level: 4
+  });
+  const [integratedStrategy, setIntegratedStrategy] = useState('standard');
 
   // Cleanup on unmount
   useEffect(() => {
@@ -492,14 +506,18 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
 
   // --- Integrated Recommendations (PPR + ZPD + Campaign Manager) ---
 
-  const handleGetIntegratedRecommendations = async () => {
+  const handleGetIntegratedRecommendations = async (configOverride = null) => {
     setLoadingIntegratedRecommendations(true);
     setSelectedIntegratedRecommendations(new Set());
     
     try {
+      const config = configOverride || integratedPprConfig;
+      // Sanitize config to prevent circular reference errors during JSON.stringify
+      const sanitizedConfig = JSON.parse(JSON.stringify(config));
       const response = await axios.post(`${API_BASE}/recommendations/integrated`, {
         profile_id: profile.id || profile.name,
-        language: selectedLanguage
+        language: selectedLanguage,
+        ...config
       });
       
       setIntegratedRecommendations(response.data.recommendations || []);
@@ -737,7 +755,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
         </button>
         {(selectedContentType === 'word' || selectedContentType === 'grammar') && (
         <button 
-                onClick={handleGetIntegratedRecommendations}
+                onClick={() => handleGetIntegratedRecommendations()}
           className="btn"
                 disabled={loadingIntegratedRecommendations}
                 style={{
@@ -1186,6 +1204,21 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
             }}>×</button>
             <h2>🎯 Integrated Recommendations ({selectedLanguage === 'en' ? t('english') : t('chinese')})</h2>
             
+            {/* Strategy Grid for Integrated Recommendations */}
+            <div style={{ marginBottom: '25px', backgroundColor: '#f9f9f9', padding: '15px', borderRadius: '8px', border: '1px solid #eee' }}>
+              <h3 style={{ marginTop: 0, marginBottom: '15px', fontSize: '16px' }}>⚙️ Strategy Alignment</h3>
+              <RecommendationSmartConfig 
+                currentLevel={selectedLanguage === 'zh' ? (currentHSKLevel || 1) : 1}
+                language={selectedLanguage}
+                initialConfig={integratedPprConfig}
+                onConfigChange={(newConfig) => {
+                  setIntegratedPprConfig(newConfig);
+                  // Auto-refresh recommendations when strategy changes
+                  handleGetIntegratedRecommendations(newConfig);
+                }}
+              />
+            </div>
+            
             {allocationInfo && (
               <div style={{ 
                 backgroundColor: '#f0f0f0', 
@@ -1212,7 +1245,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
                       {integratedRecommendations.length} recommendations (PPR + ZPD filtered)
                     </p>
                     <button
-                      onClick={handleGetIntegratedRecommendations}
+                      onClick={() => handleGetIntegratedRecommendations()}
                       disabled={loadingIntegratedRecommendations}
                       className="btn"
                       style={{

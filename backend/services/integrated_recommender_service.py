@@ -7,13 +7,18 @@ Implements the three-stage funnel:
 2. Campaign Manager: Inventory Logic (allocates slots based on configurable ratios)
 3. Synergy Matcher: (skipped for now)
 """
+import sys
 from pathlib import Path
 from typing import List, Dict, Any, Optional, Tuple
 from dataclasses import dataclass
-import sys
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
-sys.path.insert(0, str(PROJECT_ROOT / "scripts" / "knowledge_graph"))
+# Add the scripts directory to sys.path for local imports
+# This is necessary for the KnowledgeGraphService and related models to be found
+# when running from the backend context.
+PROJECT_ROOT = Path(__file__).parent.parent.parent
+SCRIPTS_PATH = PROJECT_ROOT / "scripts"
+if str(SCRIPTS_PATH) not in sys.path:
+    sys.path.insert(0, str(SCRIPTS_PATH))
 
 from backend.services.chinese_ppr_recommender_service import (
     get_chinese_ppr_service,
@@ -23,12 +28,13 @@ from backend.services.ppr_recommender_service import (
     get_ppr_service,
     PPRRecommenderService
 )
+from backend.database.kg_client import KnowledgeGraphClient # Corrected: Only import KnowledgeGraphClient
 from scripts.knowledge_graph.curious_mario_recommender import (
-    CuriousMarioRecommender,
+    KnowledgeGraphService, # Corrected: Import KnowledgeGraphService from here
+    KnowledgeNode,         # Corrected: Import KnowledgeNode from here
     RecommenderConfig,
+    CuriousMarioRecommender,
     AnkiMasteryExtractor,
-    KnowledgeGraphService,
-    KnowledgeNode,
     _normalize_kg_id
 )
 from backend.database.models import Profile, MasteredWord
@@ -110,12 +116,11 @@ class IntegratedRecommenderService:
         zpd_config = RecommenderConfig(
             anki_query='_KG_Map:*',  # Anki search syntax: field_name:* (no quotes, colon is field separator)
             kg_field_name="_KG_Map",
-            fuseki_endpoint="http://localhost:3030/srs4autism/query",
             mastery_threshold=0.85,
             prereq_threshold=0.75,
             mental_age=profile.mental_age,
         )
-        self.zpd_recommender = CuriousMarioRecommender(zpd_config)
+        self.zpd_recommender = CuriousMarioRecommender(zpd_config, kg_client=KnowledgeGraphClient())
     
     def get_recommendations(
         self,
@@ -242,6 +247,19 @@ class IntegratedRecommenderService:
         **ppr_config_overrides
     ) -> List[IntegratedRecommendation]:
         """Get vocabulary recommendations from PPR, then apply ZPD filtering."""
+        # Ensure 'Standard Course' defaults are used if not provided
+        # These are the *default* values, which can be overridden by ppr_config_overrides
+        ppr_config = {
+            "beta_concreteness": 0.8,
+            "beta_frequency": 0.4,
+            "beta_ppr": 1.0,
+            "alpha": 0.5,
+            "beta_aoa_penalty": 2.0,
+            "top_n": 50
+        }
+        # Apply overrides from the API call
+        ppr_config.update(ppr_config_overrides)
+
         # Get mastered words if not provided
         if mastered_words is None:
             mastered_words = ProfileService.get_mastered_words(
@@ -256,14 +274,14 @@ class IntegratedRecommenderService:
             ppr_recommendations = ppr_service.get_recommendations(
                 mastered_words=mastered_words,
                 profile_id=self.profile.id,
-                **ppr_config_overrides
+                **ppr_config
             )
         else:
             ppr_service = get_ppr_service()
             ppr_recommendations = ppr_service.get_recommendations(
                 mastered_words=mastered_words,
                 profile_id=self.profile.id,
-                **ppr_config_overrides
+                **ppr_config
             )
         
         print(f"   📊 PPR returned {len(ppr_recommendations)} vocabulary recommendations")
@@ -276,13 +294,12 @@ class IntegratedRecommenderService:
         vocab_config = RecommenderConfig(
             anki_query='_KG_Map:*',
             kg_field_name="_KG_Map",
-            fuseki_endpoint="http://localhost:3030/srs4autism/query",
             node_types=("srs-kg:Word",),
             mastery_threshold=0.85,
             prereq_threshold=0.75,
             mental_age=self.profile.mental_age,
         )
-        kg_service = KnowledgeGraphService(vocab_config)
+        kg_service = KnowledgeGraphService(config=vocab_config, kg_client=KnowledgeGraphClient())
         raw_nodes = kg_service.fetch_nodes()
         
         # Create a lookup map using clean IDs (strip ns1:, srs-kg:, etc.)
@@ -468,30 +485,34 @@ class IntegratedRecommenderService:
         config = RecommenderConfig(
             anki_query='_KG_Map:*',
             kg_field_name="_KG_Map",
-            fuseki_endpoint="http://localhost:3030/srs4autism/query",
             node_types=("srs-kg:GrammarPoint",),
             mastery_threshold=0.85,
             prereq_threshold=0.75,
             mental_age=self.profile.mental_age,
+            # Pass the language to the KG Service for SPARQL filtering
+            target_language=language
         )
 
-        kg_service = KnowledgeGraphService(config)
+        kg_service = KnowledgeGraphService(config, kg_client=KnowledgeGraphClient())
         nodes = kg_service.fetch_nodes()
+
+        # Language filtering is now handled within KnowledgeGraphService if target_language is set
+        # No explicit filtering needed here for live KG results, as it's done at the source.
 
         # 2. FALLBACK: If Live KG is empty, parse the TTL file manually
         if not nodes:
             # Check class-level cache to avoid re-parsing
-            if hasattr(self.__class__, '_grammar_cache') and self.__class__._grammar_cache:
-                nodes = self.__class__._grammar_cache
-                print(f"   📊 Using Cached Grammar Nodes: {len(nodes)}")
+            if hasattr(self.__class__, f'_grammar_cache_{language}') and getattr(self.__class__, f'_grammar_cache_{language}'):
+                nodes = getattr(self.__class__, f'_grammar_cache_{language}')
+                print(f"   📊 Using Cached {language.upper()} Grammar Nodes: {len(nodes)}")
             else:
                 kg_file_path = PROJECT_ROOT / "knowledge_graph" / "world_model_final_master.ttl"
-                print(f"   ⚠️  Live KG empty. Parsing grammar manually from {kg_file_path.name}...")
+                print(f"   ⚠️  Live KG empty for {language}. Parsing grammar manually from {kg_file_path.name}...")
 
                 parsed_nodes = {}
                 current_id = None
                 # Simple container for node data
-                current_data = {"label": "Unknown", "prereqs": [], "cefr": "A1"}
+                current_data = {"label": "Unknown", "prereqs": [], "cefr": "A1", "matched_lang": False}
 
                 # Duck-Type Class for Nodes
                 class FallbackNode:
@@ -508,67 +529,75 @@ class IntegratedRecommenderService:
                     for line in lines:
                         line = line.strip()
 
-                        # 1. Detect Start of Grammar Point
-                        # Matches: srs-inst:gp-B1-142-Reduplication of adjectives a srs-kg:GrammarPoint ;
                         if "a srs-kg:GrammarPoint" in line and line.startswith("srs-inst:"):
-                            # Save previous node if exists
-                            if current_id:
+                            if current_id and current_data["matched_lang"]:
                                 parsed_nodes[current_id] = FallbackNode(
                                     current_data["label"],
                                     current_data["prereqs"],
                                     current_data["cefr"]
                                 )
 
-                            # Extract ID (Everything before ' a srs-kg:GrammarPoint')
-                            # e.g. "srs-inst:gp-B1-142-Reduplication of adjectives"
-                            current_id = line.split(" a srs-kg:GrammarPoint")[0].strip()
-
-                            # Reset data (Use part of ID as default label)
+                            full_id = line.split(" a srs-kg:GrammarPoint")[0].strip()
+                            node_id_only = full_id.split(":")[-1]
+                            
+                            id_match_for_language = False
+                            if language == "zh":
+                                id_match_for_language = not ("grammar-en-" in node_id_only or "gp-en-" in node_id_only)
+                            elif language == "en":
+                                id_match_for_language = "grammar-en-" in node_id_only or "gp-en-" in node_id_only
+                            
+                            current_id = full_id
                             default_label = current_id.replace("srs-inst:", "")
-                            current_data = {"label": default_label, "prereqs": [], "cefr": "A1"}
+                            current_data = {"label": default_label, "prereqs": [], "cefr": "A1", "matched_lang": id_match_for_language} # Initialize matched_lang based on ID
 
-                        if current_id:
-                            # 2. Extract Label (Prefer English)
-                            # rdfs:label "Reduplication of adjectives"@en ;
+                        if current_id and current_data["matched_lang"] is True: # Only process if ID matched the language
                             if "rdfs:label" in line:
-                                # Try to grab text inside quotes before @en
-                                lbl_match = re.search(r'"([^"]+)"@en', line)
-                                if lbl_match:
-                                    current_data["label"] = lbl_match.group(1)
-                                else:
-                                    # Fallback to any quoted string
-                                    lbl_match_any = re.search(r'"([^"]+)"', line)
-                                    if lbl_match_any:
-                                        current_data["label"] = lbl_match_any.group(1)
+                                lbl_match = None
+                                if language == "zh":
+                                    # Prefer @zh tag
+                                    if f'@{language}' in line:
+                                        lbl_match = re.search(f'"([^"]+)"@{language}', line)
+                                        if lbl_match: current_data["label"] = lbl_match.group(1)
+                                    # Fallback for Chinese if no tag (assume untagged is zh if it contains Chinese characters)
+                                    elif "@" not in line:
+                                        lbl_match = re.search(r'"([^"]+)"', line)
+                                        if lbl_match and any('\u4e00' <= c <= '\u9fff' for c in lbl_match.group(1)):
+                                            current_data["label"] = lbl_match.group(1)
+                                elif language == "en":
+                                    # Strictly require @en tag for English
+                                    if f'@{language}' in line:
+                                        lbl_match = re.search(f'"([^"]+)"@{language}', line)
+                                        if lbl_match: current_data["label"] = lbl_match.group(1)
+                                    else:
+                                        # If English and no @en tag, this label is not for us
+                                        current_data["matched_lang"] = False # Mark as not matched for language
 
-                            # 3. Extract CEFR Level
-                            # srs-kg:cefrLevel "B1" ;
+                                if current_data["label"] == default_label and lbl_match is None:
+                                    # If label still default and no match found, try to extract any label as fallback if still needed.
+                                    lbl_match_any = re.search(r'"([^"]+)"', line)
+                                    if lbl_match_any: current_data["label"] = lbl_match_any.group(1)
+
                             if "cefrLevel" in line:
                                 lvl_match = re.search(r'"([^"]+)"', line)
-                                if lvl_match:
-                                    current_data["cefr"] = lvl_match.group(1)
+                                if lvl_match: current_data["cefr"] = lvl_match.group(1)
 
-                            # 4. Extract Prerequisites
-                            # srs-kg:hasPrerequisite srs-inst:gp-XXX ;
                             if "hasPrerequisite" in line:
-                                # Grab the ID that follows
                                 pre_match = re.search(r'(srs-(?:inst|kg):[^;\s]+)', line)
-                                if pre_match:
-                                    current_data["prereqs"].append(pre_match.group(1))
+                                if pre_match: current_data["prereqs"].append(pre_match.group(1))
 
-                            # 5. End of Block (Line ends with .)
                             if line.endswith("."):
-                                parsed_nodes[current_id] = FallbackNode(
-                                    current_data["label"],
-                                    current_data["prereqs"],
-                                    current_data["cefr"]
-                                )
+                                if current_data["matched_lang"]:
+                                    parsed_nodes[current_id] = FallbackNode(
+                                        current_data["label"],
+                                        current_data["prereqs"],
+                                        current_data["cefr"]
+                                    )
                                 current_id = None
 
-                    # Cache the result
-                    self.__class__._grammar_cache = parsed_nodes
+                    # Cache the result for this language
+                    setattr(self.__class__, f'_grammar_cache_{language}', parsed_nodes)
                     nodes = parsed_nodes
-                    print(f"   ✅ Manually parsed {len(nodes)} Grammar Points")
+                    print(f"   ✅ Manually parsed {len(nodes)} {language} Grammar Points")
 
                 except Exception as e:
                     print(f"   ❌ Error parsing grammar file: {e}")

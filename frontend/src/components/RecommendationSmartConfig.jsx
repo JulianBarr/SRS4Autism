@@ -308,7 +308,13 @@ const RecommendationSmartConfig = ({ currentLevel, onConfigChange, initialConfig
       <div style={{ padding: '0 24px 24px 24px' }}>
         {activeTab === 'mode' && (
             <div>
-                <div style={{ display: 'flex', gap: '12px', width: '100%', marginBottom: '20px' }}>
+                <div style={{ 
+                    display: 'grid', 
+                    gridTemplateColumns: '1fr 1fr', 
+                    gap: '12px', 
+                    width: '100%', 
+                    marginBottom: '20px' 
+                }}>
                 {Object.values(PRESETS).map((scenario) => {
                     const isActive = selectedScenario === scenario.id;
                     return (

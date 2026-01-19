@@ -32,9 +32,10 @@ from pathlib import Path
 
 import requests
 
-# Add project root to path for backend imports
-PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
-sys.path.insert(0, str(PROJECT_ROOT))
+# Add the project root to sys.path so we can reach the backend folder
+project_root = str(Path(__file__).resolve().parent.parent.parent)
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
 
 from backend.database.kg_client import KnowledgeGraphClient, KnowledgeGraphError
 from anki_integration.anki_connect import AnkiConnect
@@ -91,7 +92,7 @@ class RecommenderConfig:
 
     anki_query: str = '_KG_Map:*'
     kg_field_name: str = "_KG_Map"
-    fuseki_endpoint: str = "http://localhost:3030/srs4autism/query"
+    fuseki_endpoint: Optional[str] = None
     node_types: Tuple[str, ...] = ("srs-kg:Word",)
     mastery_threshold: float = 0.85
     prereq_threshold: float = 0.75
@@ -114,6 +115,7 @@ class RecommenderConfig:
     semantic_similarity_weight: float = 1.5  # Boost for semantic neighbours (English only)
     mental_age: Optional[float] = None  # Mental age for AoA filtering (e.g., 7.0 for a 7-year-old)
     aoa_buffer: float = 2.0  # Allow words with AoA up to mental_age + buffer
+    target_language: Optional[str] = None # For filtering grammar recommendations by language
 
 
 # ---------------------------------------------------------------------------
@@ -346,22 +348,29 @@ class MasteryVectorGenerator:
 class KnowledgeGraphService:
     """Fetch node metadata from knowledge graph via SPARQL."""
 
-    def __init__(self, config: RecommenderConfig):
+    def __init__(self, config: RecommenderConfig, kg_client=None):
         self.config = config
-        self.kg_client = KnowledgeGraphClient(endpoint_url=self.config.fuseki_endpoint)  # Now uses Oxigraph embedded store
+        if kg_client:
+            self.kg_client = kg_client
+        else:
+            # Fallback to creating a client if none is provided
+            self.kg_client = KnowledgeGraphClient(
+                endpoint_url=self.config.fuseki_endpoint if self.config.fuseki_endpoint else None
+            )
 
     def fetch_nodes(self) -> Dict[str, KnowledgeNode]:
         node_types = " ".join(self.config.node_types)
         query = f"""
         PREFIX srs-kg: <http://srs4autism.com/schema/>
+        PREFIX srs-inst: <http://srs4autism.com/instance/>
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
-        SELECT ?node ?label ?hsk ?cefr ?concreteness ?frequency ?freqRank ?aoa ?prereq WHERE {{
+        SELECT DISTINCT ?node ?label ?hsk ?cefr ?concreteness ?frequency ?freqRank ?aoa ?prereq
+        WHERE {{
             VALUES ?type {{ {node_types} }}
-            ?node a ?type ;
-                  rdfs:label ?label .
-            FILTER (!STRSTARTS(STR(?label), "synset:"))
-            FILTER (!STRSTARTS(STR(?label), "concept:"))
+            ?node a ?type .
+            ?node rdfs:label ?label .
             OPTIONAL {{ ?node srs-kg:hskLevel ?hsk }}
             OPTIONAL {{ ?node srs-kg:cefrLevel ?cefr }}
             OPTIONAL {{ ?node srs-kg:concreteness ?concreteness }}
@@ -369,8 +378,25 @@ class KnowledgeGraphService:
             OPTIONAL {{ ?node srs-kg:frequencyRank ?freqRank }}
             OPTIONAL {{ ?node srs-kg:ageOfAcquisition ?aoa }}
             OPTIONAL {{ ?node srs-kg:requiresPrerequisite ?prereq }}
-        }}
+            FILTER (!STRSTARTS(STR(?label), "synset:"))
+            FILTER (!STRSTARTS(STR(?label), "concept:"))
         """
+        
+        if self.config.target_language == "zh":
+            # Chinese: Exclude grammar points with IDs starting with "grammar-en-" or "gp-en-"
+            # and only include those with rdfs:label@zh or no language tag (assuming Chinese)
+            query += '    FILTER (!STRSTARTS(STR(?node), "http://srs4autism.com/instance/grammar-en-"))\n'
+            query += '    FILTER (!STRSTARTS(STR(?node), "http://srs4autism.com/instance/gp-en-"))\n'
+            query += '    FILTER (lang(?label) = "zh" || lang(?label) = "")\n'
+        elif self.config.target_language == "en":
+            # English: Only include grammar points with IDs starting with "grammar-en-" or "gp-en-"
+            # and rdfs:label@en
+            query += '    FILTER (STRSTARTS(STR(?node), "http://srs4autism.com/instance/grammar-en-") || STRSTARTS(STR(?node), "http://srs4autism.com/instance/gp-en-"))\n'
+            query += '    FILTER (lang(?label) = "en")\n'
+
+        query += "}"
+
+        print(f"\n--- DEBUG SPARQL ---\n{query}\n------------------\n")
 
         try:
             data = self.kg_client.query(query)
@@ -448,11 +474,11 @@ class KnowledgeGraphService:
 class CuriousMarioRecommender:
     """Main façade class that orchestrates the pipeline."""
 
-    def __init__(self, config: Optional[RecommenderConfig] = None):
+    def __init__(self, config: Optional[RecommenderConfig] = None, kg_client=None):
         self.config = config or RecommenderConfig()
         self.anki_extractor = AnkiMasteryExtractor(self.config)
         self.mastery_generator = MasteryVectorGenerator(self.config)
-        self.kg_service = KnowledgeGraphService(self.config)
+        self.kg_service = KnowledgeGraphService(self.config, kg_client=kg_client)
 
     def build_mastery_vector(self) -> Dict[str, float]:
         kg_to_card_states = self.anki_extractor.fetch_kg_card_states()
