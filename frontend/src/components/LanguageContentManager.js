@@ -815,14 +815,16 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
                   alpha: chinesePprConfig.alpha,
                   max_hsk_level: chinesePprConfig.max_hsk_level || 4,
                   top_n: chinesePprConfig.top_n,
-                  mental_age: chinesePprConfig.mental_age !== null ? chinesePprConfig.mental_age : (profile.mental_age || 8.0)
+                  mental_age: chinesePprConfig.mental_age !== null ? chinesePprConfig.mental_age : (profile.mental_age || 8.0),
+                  exclude_multiword: chinesePprConfig.exclude_multiword // Pass exclude_multiword to RecommendationSmartConfig
                 }}
                 onConfigChange={(newConfig) => {
                   setChinesePprConfig(prev => {
                     const updated = { ...prev, ...newConfig };
-                    // If exclude_multiword or other key params changed, trigger refresh
+                    // Trigger refresh if relevant config params changed
+                    // The RecommendationSmartConfig component handles the internal refresh for sliders.
+                    // This is for top-level changes like HSK level or exclude multi-word.
                     if (prev.exclude_multiword !== updated.exclude_multiword || 
-                        prev.beta_ppr !== updated.beta_ppr ||
                         prev.max_hsk_level !== updated.max_hsk_level) {
                       setTimeout(() => handleGetChineseWordRecommendations(updated), 50);
                     }
@@ -836,31 +838,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
               ) : (
                 <div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px', position: 'sticky', top: 0, backgroundColor: 'white', zIndex: 5, padding: '10px 0' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <p style={{ color: '#666', margin: 0, fontWeight: '500' }}>{t('nextWordsToLearnCount').replace('{count}', recommendations.length)}：</p>
-                      <button
-                        onClick={() => handleGetChineseWordRecommendations()}
-                        disabled={loadingRecommendations}
-                        className="btn"
-                        style={{
-                          padding: '6px 16px',
-                          fontSize: '13px',
-                          backgroundColor: loadingRecommendations ? '#ccc' : theme.actions.primary,
-                          color: 'white',
-                          border: 'none',
-                          borderRadius: '6px',
-                          cursor: loadingRecommendations ? 'not-allowed' : 'pointer',
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '5px',
-                          fontWeight: '600',
-                          transition: 'all 0.2s'
-                        }}
-                        title="使用当前配置刷新推荐"
-                      >
-                        {loadingRecommendations ? '⏳' : '🔄'} {loadingRecommendations ? '加载中...' : '刷新'}
-                      </button>
-                    </div>
                     {selectedRecommendations.size > 0 && (
                       <button
                         onClick={handleAddSelectedToMastered}
@@ -877,6 +855,30 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
                         {savingMasteredWords ? `💾 ${t('saving')}` : `✓ ${t('addSelected')} (${selectedRecommendations.size})`}
                       </button>
                     )}
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'center', width: '100%', marginTop: '24px', marginBottom: '16px' }}>
+                    <button
+                      onClick={() => handleGetChineseWordRecommendations()}
+                      disabled={loadingRecommendations}
+                      className="btn"
+                      style={{
+                        padding: '6px 16px',
+                        fontSize: '13px',
+                        backgroundColor: loadingRecommendations ? '#ccc' : theme.actions.primary,
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '6px',
+                        cursor: loadingRecommendations ? 'not-allowed' : 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '5px',
+                        fontWeight: '600',
+                        transition: 'all 0.2s'
+                      }}
+                      title="使用当前配置刷新推荐"
+                    >
+                      {loadingRecommendations ? '⏳' : '🔄'} {loadingRecommendations ? '加载中...' : '刷新'}
+                    </button>
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                     {recommendations.map((rec, idx) => {
@@ -1024,33 +1026,9 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
               ) : (
                 <div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px', position: 'sticky', top: 0, backgroundColor: 'white', zIndex: 5, padding: '10px 0' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                      <p style={{ color: '#666', margin: 0, fontWeight: '500' }}>
-                        {t('nextWordsToLearnCount').replace('{count}', englishRecommendations.length)}：
-                      </p>
-                      <button
-                        onClick={() => handleGetEnglishWordRecommendations()}
-                        disabled={loadingEnglishRecommendations}
-                        className="btn"
-                        style={{
-                          padding: '6px 16px',
-                          fontSize: '13px',
-                          backgroundColor: loadingEnglishRecommendations ? '#ccc' : theme.actions.primary,
-                          color: 'white',
-                          border: 'none',
-                          borderRadius: '6px',
-                          cursor: loadingEnglishRecommendations ? 'not-allowed' : 'pointer',
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '5px',
-                          fontWeight: '600',
-                          transition: 'all 0.2s'
-                        }}
-                        title="Refresh Recommendations"
-                      >
-                        {loadingEnglishRecommendations ? '⏳' : '🔄'} {loadingEnglishRecommendations ? 'Loading...' : 'Refresh'}
-                      </button>
-                    </div>
+                    <p style={{ color: '#666', margin: 0, fontWeight: '500' }}>
+                      {t('nextWordsToLearnCount').replace('{count}', englishRecommendations.length)}：
+                    </p>
                     {selectedEnglishRecommendations.size > 0 && (
                       <button
                         onClick={handleAddSelectedEnglishToMastered}
@@ -1067,6 +1045,30 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
                         {savingMasteredEnglishWords ? `💾 ${t('saving')}` : `✓ ${t('addSelected')} (${selectedEnglishRecommendations.size})`}
                       </button>
                     )}
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'center', width: '100%', marginTop: '24px', marginBottom: '16px' }}>
+                    <button
+                      onClick={() => handleGetEnglishWordRecommendations()}
+                      disabled={loadingEnglishRecommendations}
+                      className="btn"
+                      style={{
+                        padding: '6px 16px',
+                        fontSize: '13px',
+                        backgroundColor: loadingEnglishRecommendations ? '#ccc' : theme.actions.primary,
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '6px',
+                        cursor: loadingEnglishRecommendations ? 'not-allowed' : 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '5px',
+                        fontWeight: '600',
+                        transition: 'all 0.2s'
+                      }}
+                      title="Refresh Recommendations"
+                    >
+                      {loadingEnglishRecommendations ? '⏳' : '🔄'} {loadingEnglishRecommendations ? 'Loading...' : 'Refresh'}
+                    </button>
                   </div>
                   <div key={recommendationsKey} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                     {englishRecommendations.map((rec, idx) => {

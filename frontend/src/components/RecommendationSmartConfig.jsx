@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Book, Sparkles, Target, BookOpen, Settings2, ChevronDown, ChevronUp } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Book, Sparkles, Target, BookOpen } from 'lucide-react';
 
 const PRESETS = {
   vocab: {
     id: 'vocab',
-    name: '早期词汇 / Early Vocab (具象)',
+    label: { zh: '早期词汇', en: 'Early Vocab' },
     description: 'Focus on concrete nouns/objects.',
     icon: Book,
     config: {
@@ -17,7 +17,7 @@ const PRESETS = {
   },
   sentence: {
     id: 'sentence',
-    name: '句子构建 / Sentence Building (动词/抽象)',
+    label: { zh: '句子构建', en: 'Sentence Building' },
     description: 'Focus on verbs and functional words.',
     icon: Target,
     config: {
@@ -30,7 +30,7 @@ const PRESETS = {
   },
   topic: {
     id: 'topic',
-    name: '主题探索 / Theme Exploration (语义关联)',
+    label: { zh: '主题探索', en: 'Theme Exploration' },
     description: 'Focus on words semantically close to what is known.',
     icon: Sparkles,
     config: {
@@ -43,7 +43,7 @@ const PRESETS = {
   },
   standard: {
     id: 'standard',
-    name: '标准课程 / Standard Course (均衡)',
+    label: { zh: '标准课程', en: 'Standard Course' },
     description: 'The default balanced mode.',
     icon: BookOpen,
     config: {
@@ -60,20 +60,17 @@ const RecommendationSmartConfig = ({ currentLevel, onConfigChange, initialConfig
   // Persistence keys
   const strategyKey = `srs_rec_strategy_${language}`;
   const excludeMultiKey = `srs_rec_exclude_multi_${language}`;
-  const advancedKey = `srs_rec_advanced_${language}`;
   
   const [selectedScenario, setSelectedScenario] = useState(() => {
     const saved = localStorage.getItem(strategyKey);
     return saved && PRESETS[saved] ? saved : 'standard';
   });
 
+  const [activeTab, setActiveTab] = useState('mode'); // 'mode' or 'expert'
+
   const [excludeMultiword, setExcludeMultiword] = useState(() => {
     const saved = localStorage.getItem(excludeMultiKey);
     return saved !== null ? saved === 'true' : true;
-  });
-
-  const [showAdvanced, setShowAdvanced] = useState(() => {
-    return localStorage.getItem(advancedKey) === 'true';
   });
   
   // Current config values (independent of whether a scenario is selected)
@@ -119,8 +116,12 @@ const RecommendationSmartConfig = ({ currentLevel, onConfigChange, initialConfig
   };
 
   const handleSliderChange = (key, value) => {
-    setSelectedScenario(null); // Manual change "unlocks" strategy selection
-    localStorage.removeItem(strategyKey);
+    // If sliders are adjusted, we are effectively in "expert" mode, but we keep the tab selection as is.
+    // However, we should deselect the preset scenario as it's modified.
+    if (selectedScenario) {
+        setSelectedScenario(null); 
+        localStorage.removeItem(strategyKey);
+    }
     setConfig(prev => ({
       ...prev,
       [key]: value
@@ -131,12 +132,6 @@ const RecommendationSmartConfig = ({ currentLevel, onConfigChange, initialConfig
     const newValue = !excludeMultiword;
     setExcludeMultiword(newValue);
     localStorage.setItem(excludeMultiKey, newValue.toString());
-  };
-
-  const handleAdvancedToggle = () => {
-    const newValue = !showAdvanced;
-    setShowAdvanced(newValue);
-    localStorage.setItem(advancedKey, newValue.toString());
   };
 
   const handleCurrentLevelChange = (level) => {
@@ -157,122 +152,205 @@ const RecommendationSmartConfig = ({ currentLevel, onConfigChange, initialConfig
   return (
     <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm mb-6 overflow-hidden">
       {/* Header with Level Controls and Toggle */}
-      <div className="px-4 py-3 bg-gray-50/50 dark:bg-gray-700/30 border-b border-gray-200 dark:border-gray-700">
-        <div className="flex flex-wrap items-center gap-6">
-          <div className="flex items-center gap-2">
-            <label className="text-sm font-semibold text-gray-700 dark:text-gray-300 whitespace-nowrap">
-              {language === 'zh' ? '当前水平' : 'Current Level'}
-            </label>
-            <select
-              value={currentLevelState}
-              onChange={(e) => handleCurrentLevelChange(e.target.value)}
-              className="px-3 py-1.5 text-sm border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              {[1, 2, 3, 4, 5, 6].map((level) => (
-                <option key={level} value={level}>
-                  {levelLabel} {level}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="flex items-center gap-2">
-            <label className="text-sm font-semibold text-gray-700 dark:text-gray-300 whitespace-nowrap">
-              {language === 'zh' ? '最高上限' : 'Max Level'}
-            </label>
-            <select
-              value={maxLevelState}
-              onChange={(e) => handleMaxLevelChange(e.target.value)}
-              className="px-3 py-1.5 text-sm border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              {[1, 2, 3, 4, 5, 6].map((level) => (
-                <option key={level} value={level}>
-                  {levelLabel} {level}
-                </option>
-              ))}
-            </select>
-          </div>
-          
-          <div className="flex items-center gap-2 ml-auto">
-            <label className="flex items-center gap-2 cursor-pointer group">
-              <div className="relative">
-                <input
-                  type="checkbox"
-                  checked={excludeMultiword}
-                  onChange={handleExcludeMultiToggle}
-                  className="sr-only"
-                />
-                <div className={`w-10 h-5 rounded-full transition-colors ${excludeMultiword ? 'bg-blue-500' : 'bg-gray-300 dark:bg-gray-600'}`}></div>
-                <div className={`absolute left-0.5 top-0.5 bg-white w-4 h-4 rounded-full transition-transform ${excludeMultiword ? 'translate-x-5' : 'translate-x-0'}`}></div>
-              </div>
-              <span className="text-sm font-semibold text-gray-700 dark:text-gray-300 group-hover:text-blue-600 transition-colors">
-                {language === 'zh' ? '排除多词短语' : 'Exclude Multi-word'}
-              </span>
-            </label>
-          </div>
+      <div style={{ padding: '20px 24px', borderBottom: '1px solid #eee', marginBottom: '20px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '20px', flexWrap: 'wrap', marginBottom: '20px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <label style={{ 
+            fontSize: '14px', 
+            fontWeight: '600', 
+            color: '#374151', 
+            whiteSpace: 'nowrap',
+            marginRight: '8px' 
+          }}>
+            {language === 'zh' ? '当前水平' : 'Current Level'}
+          </label>
+          <select
+            value={currentLevelState}
+            onChange={(e) => handleCurrentLevelChange(e.target.value)}
+            style={{
+              padding: '6px 12px',
+              fontSize: '14px',
+              border: '1px solid #d1d5db',
+              borderRadius: '6px',
+              backgroundColor: 'white',
+              color: '#111827',
+              outline: 'none'
+            }}
+          >
+            {[1, 2, 3, 4, 5, 6].map((level) => (
+              <option key={level} value={level}>
+                {levelLabel} {level}
+              </option>
+            ))}
+          </select>
+        </div>
+        
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <label style={{ 
+            fontSize: '14px', 
+            fontWeight: '600', 
+            color: '#374151', 
+            whiteSpace: 'nowrap',
+            marginRight: '8px' 
+          }}>
+            {language === 'zh' ? '最高上限' : 'Max Level'}
+          </label>
+          <select
+            value={maxLevelState}
+            onChange={(e) => handleMaxLevelChange(e.target.value)}
+            style={{
+              padding: '6px 12px',
+              fontSize: '14px',
+              border: '1px solid #d1d5db',
+              borderRadius: '6px',
+              backgroundColor: 'white',
+              color: '#111827',
+              outline: 'none'
+            }}
+          >
+            {[1, 2, 3, 4, 5, 6].map((level) => (
+              <option key={level} value={level}>
+                {levelLabel} {level}
+              </option>
+            ))}
+          </select>
+        </div>
+        
+        <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+            <div style={{ position: 'relative' }}>
+              <input
+                type="checkbox"
+                checked={excludeMultiword}
+                onChange={handleExcludeMultiToggle}
+                style={{ 
+                  position: 'absolute',
+                  opacity: 0,
+                  width: 0,
+                  height: 0
+                }}
+              />
+              <div style={{ 
+                width: '40px', 
+                height: '20px', 
+                borderRadius: '999px', 
+                transition: 'background-color 0.2s',
+                backgroundColor: excludeMultiword ? '#3b82f6' : '#d1d5db'
+              }}></div>
+              <div style={{ 
+                position: 'absolute',
+                left: '2px',
+                top: '2px',
+                backgroundColor: 'white',
+                width: '16px',
+                height: '16px',
+                borderRadius: '50%',
+                transition: 'transform 0.2s',
+                transform: excludeMultiword ? 'translateX(20px)' : 'translateX(0)'
+              }}></div>
+            </div>
+            <span style={{ 
+              fontSize: '14px', 
+              fontWeight: '600', 
+              color: '#374151'
+            }}>
+              {language === 'zh' ? '排除多词短语' : 'Exclude Multi-word'}
+            </span>
+          </label>
         </div>
       </div>
 
-      {/* Strategy Grid */}
-      <div className="p-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {Object.values(PRESETS).map((scenario) => {
-            const Icon = scenario.icon;
-            const isActive = selectedScenario === scenario.id;
-            return (
-              <button
-                key={scenario.id}
-                onClick={() => handleScenarioChange(scenario.id)}
-                className={`group p-4 rounded-xl border-2 transition-all text-left flex flex-col gap-2 ${
-                  isActive
-                    ? 'border-blue-500 bg-blue-50/50 dark:bg-blue-900/20 ring-1 ring-blue-500/50'
-                    : 'border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-blue-200 dark:hover:border-blue-800 hover:bg-blue-50/20'
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <div className={`p-2 rounded-lg transition-colors ${
-                    isActive 
-                      ? 'bg-blue-500 text-white' 
-                      : 'bg-gray-100 dark:bg-gray-700 text-gray-500 group-hover:bg-blue-100 dark:group-hover:bg-blue-900/30 group-hover:text-blue-600'
-                  }`}>
-                    <Icon className="w-5 h-5" />
-                  </div>
-                  <span className={`text-sm font-bold transition-colors ${
-                    isActive ? 'text-blue-700 dark:text-blue-300' : 'text-gray-900 dark:text-gray-100'
-                  }`}>
-                    {scenario.name}
-                  </span>
+      {/* Tabs */}
+      <div style={{ 
+        display: 'flex', 
+        borderBottom: '1px solid #eee',
+        marginBottom: '20px'
+      }}>
+        <button
+           onClick={() => setActiveTab('mode')}
+           style={{
+             flex: 1,
+             padding: '12px 0',
+             fontSize: '14px',
+             fontWeight: '700',
+             textAlign: 'center',
+             transition: 'all 0.2s',
+             position: 'relative',
+             border: 'none',
+             background: activeTab === 'mode' ? 'white' : '#f9fafb',
+             color: activeTab === 'mode' ? '#2563eb' : '#6b7280',
+             cursor: 'pointer'
+           }}
+        >
+          {language === 'zh' ? '模式选择' : 'Mode Selection'}
+          {activeTab === 'mode' && <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '2px', backgroundColor: '#3b82f6' }}></div>}
+        </button>
+        <button
+           onClick={() => setActiveTab('expert')}
+           style={{
+             flex: 1,
+             padding: '12px 0',
+             fontSize: '14px',
+             fontWeight: '700',
+             textAlign: 'center',
+             transition: 'all 0.2s',
+             position: 'relative',
+             border: 'none',
+             background: activeTab === 'expert' ? 'white' : '#f9fafb',
+             color: activeTab === 'expert' ? '#2563eb' : '#6b7280',
+             cursor: 'pointer'
+           }}
+        >
+          {language === 'zh' ? '专家微调' : 'Expert Tuning'}
+          {activeTab === 'expert' && <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '2px', backgroundColor: '#3b82f6' }}></div>}
+        </button>
+      </div>
+
+      <div style={{ padding: '0 24px 24px 24px' }}>
+        {activeTab === 'mode' && (
+            <div>
+                <div style={{ display: 'flex', gap: '12px', width: '100%', marginBottom: '20px' }}>
+                {Object.values(PRESETS).map((scenario) => {
+                    const isActive = selectedScenario === scenario.id;
+                    return (
+                    <button
+                        key={scenario.id}
+                        onClick={() => handleScenarioChange(scenario.id)}
+                        style={{
+                          flex: 1,
+                          padding: '12px',
+                          borderRadius: '8px',
+                          transition: 'all 0.2s',
+                          textAlign: 'center',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontSize: '16px',
+                          fontWeight: '500',
+                          cursor: 'pointer',
+                          boxShadow: isActive ? '0 2px 4px rgba(0,0,0,0.1)' : 'none',
+                          border: isActive ? 'none' : '1px solid #d9d9d9',
+                          backgroundColor: isActive ? '#1890ff' : '#f5f5f5',
+                          color: isActive ? 'white' : '#555'
+                        }}
+                        title={scenario.description}
+                    >
+                        {language === 'zh' ? scenario.label.zh : scenario.label.en}
+                    </button>
+                    );
+                })}
                 </div>
-                <p className={`text-xs leading-relaxed transition-colors ${
-                  isActive ? 'text-blue-600/80 dark:text-blue-300/70' : 'text-gray-500 dark:text-gray-400'
-                }`}>
-                  {scenario.description}
-                </p>
-              </button>
-            );
-          })}
-        </div>
+            </div>
+        )}
 
-        {/* Advanced Toggle */}
-        <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700">
-          <button
-            onClick={handleAdvancedToggle}
-            className="flex items-center gap-2 text-xs font-bold text-gray-400 hover:text-blue-500 transition-colors uppercase tracking-wider"
-          >
-            <Settings2 className="w-3.5 h-3.5" />
-            {language === 'zh' ? '专家模式 / Advanced Tuning' : 'Advanced Tuning / Expert Mode'}
-            {showAdvanced ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
-          </button>
-
-          {showAdvanced && (
-            <div className="mt-4 grid grid-cols-1 gap-4 p-4 bg-gray-50 dark:bg-gray-900/40 rounded-xl border border-gray-100 dark:border-gray-700">
+        {activeTab === 'expert' && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <ParameterControls
                 config={config}
                 onConfigChange={handleSliderChange}
                 language={language}
               />
             </div>
-          )}
-        </div>
+        )}
       </div>
     </div>
   );
@@ -282,46 +360,48 @@ const ParameterControls = ({ config, onConfigChange, language }) => {
   const sliders = [
     {
       key: 'beta_ppr',
-      label: language === 'zh' ? '语义关联权重' : 'PPR Weight',
-      sub: 'beta_ppr',
+      label: language === 'zh' ? 'PPR 权重' : 'PPR Weight',
       min: 0, max: 3, step: 0.1
     },
     {
       key: 'beta_concreteness',
-      label: language === 'zh' ? '具象程度权重' : 'Concreteness Weight',
-      sub: 'beta_concreteness',
+      label: language === 'zh' ? '具象权重' : 'Concreteness Weight',
       min: 0, max: 3, step: 0.1
     },
     {
       key: 'beta_frequency',
-      label: language === 'zh' ? '词频权重' : 'Frequency Weight',
-      sub: 'beta_frequency',
+      label: language === 'zh' ? '频率权重' : 'Frequency Weight',
       min: 0, max: 3, step: 0.1
     },
     {
       key: 'beta_aoa_penalty',
-      label: language === 'zh' ? '习得年龄惩罚' : 'AoA Penalty',
-      sub: 'beta_aoa_penalty',
+      label: language === 'zh' ? 'AoA 惩罚' : 'AoA Penalty',
       min: 0, max: 5, step: 0.1
     },
     {
       key: 'alpha',
-      label: language === 'zh' ? '探索多样性' : 'Diversity (Alpha)',
-      sub: 'alpha',
+      label: language === 'zh' ? '多样性 (Alpha)' : 'Diversity (Alpha)',
       min: 0, max: 1, step: 0.05
     }
   ];
 
   return (
-    <div className="space-y-4">
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       {sliders.map(s => (
-        <div key={s.key} className="space-y-1.5">
-          <div className="flex justify-between items-center">
-            <label className="text-xs font-bold text-gray-700 dark:text-gray-300">
+        <div key={s.key} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <label style={{ fontSize: '15px', fontWeight: '600', color: '#374151' }}>
               {s.label}
-              <span className="ml-2 font-mono text-[10px] text-gray-400 font-normal">{s.sub}</span>
             </label>
-            <span className="text-xs font-mono font-bold text-blue-600 bg-blue-50 dark:bg-blue-900/30 px-2 py-0.5 rounded">
+            <span style={{ 
+              fontSize: '14px', 
+              fontFamily: 'monospace', 
+              fontWeight: '700', 
+              color: '#2563eb', 
+              backgroundColor: '#eff6ff', 
+              padding: '2px 8px', 
+              borderRadius: '4px' 
+            }}>
               {config[s.key]?.toFixed(2) || '0.00'}
             </span>
           </div>
@@ -332,7 +412,15 @@ const ParameterControls = ({ config, onConfigChange, language }) => {
             step={s.step}
             value={config[s.key] || 0}
             onChange={(e) => onConfigChange(s.key, parseFloat(e.target.value))}
-            className="w-full h-1.5 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
+            style={{
+              width: '100%',
+              height: '6px',
+              backgroundColor: '#e5e7eb',
+              borderRadius: '999px',
+              appearance: 'none',
+              cursor: 'pointer',
+              outline: 'none'
+            }}
           />
         </div>
       ))}
