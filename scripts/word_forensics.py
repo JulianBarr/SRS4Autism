@@ -1,53 +1,42 @@
 import re
-import json
+from pathlib import Path
 
-def word_forensics(file_path):
-    print(f"🕵️  Focusing on Word/Concept nodes in {file_path}...")
-    
-    word_samples = []
-    concept_samples = []
-    
+RESCUED = Path("knowledge_graph/world_model_rescued.ttl")
+MASTER = Path("knowledge_graph/world_model_final_master.ttl")
+
+def get_stats(file_path):
     with open(file_path, 'r', encoding='utf-8') as f:
-        # We'll read line by line to be memory efficient for 41MB
-        current_block = []
-        for line in f:
-            current_block.append(line)
-            if line.strip().endswith('.') or line.strip().endswith(';'):
-                block_str = "".join(current_block)
-                
-                # Check if this block is a Word or Concept
-                if "a srs-kg:Word" in block_str or "a srs-kg:Concept" in block_str:
-                    # Extract ID
-                    id_match = re.search(r'srs-inst:([^\s;]+)', block_str)
-                    # Extract Chinese label
-                    zh_match = re.search(r'\"([^\"]+)\"@zh', block_str)
-                    # Extract English label/translation
-                    en_match = re.search(r'\"([^\"]+)\"@en', block_str)
-                    # Extract HSK
-                    hsk_match = re.search(r'srs-kg:hskLevel\s+"?(\d)"?', block_str)
+        content = f.read()
+    
+    return {
+        "words": len(re.findall(r' a (?:ns1|srs-kg):Word', content)),
+        "logic_city_space": len(re.findall(r'"Logic City"', content)),
+        "logic_city_underscore": len(re.findall(r'"Logic_City"', content)),
+        "hsk_levels": len(re.findall(r'hskLevel \d', content)),
+        "bad_chars": len(re.findall(r'srs-kg:img-[^\s;.]+[\(\)]', content)),
+        "size_mb": file_path.stat().st_size / (1024 * 1024)
+    }
 
-                    data = {
-                        "id": id_match.group(1) if id_match else "unknown",
-                        "zh": zh_match.group(1) if zh_match else None,
-                        "en": en_match.group(1) if en_match else None,
-                        "hsk": hsk_match.group(1) if hsk_match else None,
-                        "raw_preview": block_str[:200].replace('\n', ' ')
-                    }
+def audit():
+    print(f"🧐 comparing Files...")
+    r_stats = get_stats(RESCUED)
+    m_stats = get_stats(MASTER)
 
-                    if "a srs-kg:Word" in block_str and len(word_samples) < 10:
-                        word_samples.append(data)
-                    elif "a srs-kg:Concept" in block_str and len(concept_samples) < 10:
-                        concept_samples.append(data)
-                
-                if len(word_samples) >= 10 and len(concept_samples) >= 10:
-                    break
-                
-                if line.strip().endswith('.'):
-                    current_block = []
+    print(f"\n--- {RESCUED.name} (Current) ---")
+    print(f"Words: {r_stats['words']}")
+    print(f"Logic City tags (Correct): {r_stats['logic_city_space']}")
+    print(f"Logic City tags (Broken): {r_stats['logic_city_underscore']}")
+    print(f"HSK Level tags: {r_stats['hsk_levels']}")
+    print(f"IDs with bad ( ) characters: {r_stats['bad_chars']}")
+    print(f"File Size: {r_stats['size_mb']:.2f} MB")
 
-    print("\n--- WORD SAMPLES ---")
-    print(json.dumps(word_samples, indent=2, ensure_ascii=False))
-    print("\n--- CONCEPT SAMPLES ---")
-    print(json.dumps(concept_samples, indent=2, ensure_ascii=False))
+    print(f"\n--- {MASTER.name} (Proposed) ---")
+    print(f"Words: {m_stats['words']}")
+    print(f"Logic City tags (Correct): {m_stats['logic_city_space']}")
+    print(f"Logic City tags (Broken): {m_stats['logic_city_underscore']}")
+    print(f"HSK Level tags: {m_stats['hsk_levels']}")
+    print(f"IDs with bad ( ) characters: {m_stats['bad_chars']}")
+    print(f"File Size: {m_stats['size_mb']:.2f} MB")
 
-word_forensics("knowledge_graph/world_model_legacy_backup.ttl")
+if __name__ == "__main__":
+    audit()
