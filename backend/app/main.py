@@ -31,7 +31,7 @@ from .utils.common import (
     TAG_ANNOTATION_PREFIXES,
     CHINESE_CHAR_PATTERN
 )
-from database.kg_client import KnowledgeGraphClient
+from database.kg_client import KnowledgeGraphClient, normalize_for_kg
 import math
 import tempfile
 import zipfile
@@ -980,7 +980,7 @@ async def get_word_images(request: Dict[str, Any]):
         result = {}
         found_count = 0
         for word in words:
-            image_path = word_image_map.get(word.strip())
+            image_path = word_image_map.get(normalize_for_kg(word.strip()))
             result[word] = image_path
             if image_path:
                 found_count += 1

@@ -13,7 +13,7 @@ from pathlib import Path
 from ..core.config import PROJECT_ROOT, ENGLISH_SIMILARITY_FILE, WORD_KP_CACHE_FILE
 
 from fastapi import HTTPException
-from database.kg_client import KnowledgeGraphClient
+from database.kg_client import KnowledgeGraphClient, normalize_for_kg
 import google.generativeai as genai
 from openai import OpenAI
 from dotenv import load_dotenv
@@ -380,7 +380,7 @@ def get_word_image_map() -> Dict[str, str]:
                         image_file = str(o2)
                 
                 if word_label and image_file:
-                    word_image_map[word_label] = image_file
+                    word_image_map[normalize_for_kg(word_label)] = image_file
             
             _word_image_cache = word_image_map
             _word_image_cache_time = time.time()

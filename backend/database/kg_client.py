@@ -7,9 +7,21 @@ using an embedded Oxigraph store.
 
 import requests
 import pyoxigraph as oxigraph
+import re
 from typing import Dict, Any, Optional
 from pathlib import Path
 from backend.config import settings
+
+
+def normalize_for_kg(raw_str: str) -> str:
+    """
+    Normalizes a string for use as a Knowledge Graph identifier.
+    Replaces illegal characters ()[]{}\s,<,>,? with an underscore _.
+    Matches the logic in in Prompt 2.
+    """
+    return re.sub(r'[(){}\[\]<>,?\s]', '_', raw_str)
+
+
 class KnowledgeGraphError(Exception):
     """Base exception for knowledge graph operations."""
     pass
