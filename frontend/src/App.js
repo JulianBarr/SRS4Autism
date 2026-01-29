@@ -151,7 +151,17 @@ function App() {
                   onError={() => setLogoError(true)}
                 />
               )}
-              <h1 data-lang={language}>{t('appTitle')}</h1>
+              <h1 data-lang={language}>
+                {language === 'zh' ? (
+                  <img 
+                    src="/star_lingxi.png" 
+                    alt="好奇马力" 
+                    style={{ height: '43.2px', marginTop: '4px' }} 
+                  />
+                ) : (
+                  t('appTitle')
+                )}
+              </h1>
             </div>
             
             <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginLeft: 'auto' }}>
