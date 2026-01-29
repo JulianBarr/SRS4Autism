@@ -1,0 +1,185 @@
+<!-- Hidden data elements -->
+<div id="data-word" class="hidden-data">{{Word}}</div>
+<div id="data-category" class="hidden-data">{{Category}}</div>
+<div id="data-uuid" class="hidden-data">{{UUID}}</div>
+<!-- Clean Architecture: Separate Audio and Picture Fields -->
+<div id="data-audio" style="display:none;">{{WordAudio}}</div>
+<div id="data-picture" style="display:none;">{{WordPicture}}</div>
+
+<div class="cuma-word-card">
+  <div class="media-container">
+    <div id="media-display"></div>
+  </div>
+  
+  <div class="options-grid-2" id="options-container">
+    <p class="loading-text">Loading...</p>
+  </div>
+</div>
+
+<!-- Visual Console (Hidden by default, can be enabled for debugging) -->
+<div id="visual-console">DEBUG LOG:<br></div>
+
+<script>
+(function() {
+    var consoleDiv = document.getElementById('visual-console');
+    window.visualLog = function(msg) {
+        console.log(msg);
+        if (consoleDiv) consoleDiv.innerHTML += msg + "<br>";
+    };
+    window.onerror = function(msg, url, line) {
+        window.visualLog("🔥 GLOBAL ERROR: " + msg + " (Line " + line + ")");
+        return false; 
+    };
+    window.visualLog("✅ Logger Ready (Global Catcher Active)");
+})();
+</script>
+
+<script>
+(function() {
+  window.visualLog("🚀 Script Starting (Stage 2 - Stealth Mode)...");
+
+  function loadDataScript() {
+      window.visualLog("Attempting to load _cuma_logic_city_data.js...");
+      var s = document.createElement('script');
+      s.src = '_cuma_logic_city_data.js';
+      s.onload = function() { 
+          window.visualLog("✅ Data File Loaded!"); 
+          initCard(); 
+      };
+      s.onerror = function() { 
+          window.visualLog("❌ Failed to load data file. Check collection.media."); 
+          document.getElementById('options-container').textContent = "Error: Data file missing.";
+      };
+      document.body.appendChild(s);
+  }
+
+  // Define Global Audio Player (consistent with Stage 1)
+  window.playAudio = function(filename) {
+      if (!filename) return;
+      try {
+          var audio = new Audio(filename);
+          var p = audio.play();
+          if (p !== undefined) {
+              p.catch(function(e) { window.visualLog("Audio Play Error: " + e); });
+          }
+      } catch(e) {
+          window.visualLog("Audio Error: " + e);
+      }
+  };
+
+  function initCard() {
+      try {
+          window.visualLog("Initializing Card Logic...");
+          
+          var wordEl = document.getElementById('data-word');
+          var audioEl = document.getElementById('data-audio');
+          var pictureEl = document.getElementById('data-picture');
+          var categoryEl = document.getElementById('data-category');
+          var container = document.getElementById('options-container');
+          var mediaDisplay = document.getElementById('media-display');
+          
+          if (!wordEl || !container || !mediaDisplay) throw new Error("Critical elements missing");
+
+          // Clean Architecture: Get data directly from separate fields
+          var audioFilename = audioEl ? audioEl.innerText.trim() : null;
+          var pictureHTML = pictureEl ? pictureEl.innerHTML.trim() : '';
+          
+          window.visualLog("Audio: " + (audioFilename || "None"));
+          window.visualLog("Picture: " + (pictureHTML ? "Found" : "None"));
+
+          // STAGE 2 (Silent Mode): Front shows picture immediately, NO audio
+          if (pictureHTML) {
+              mediaDisplay.innerHTML = pictureHTML;
+          } else {
+              window.visualLog("No image found.");
+          }
+          
+          // Store audioFilename for use on back side (when correct answer is selected)
+          window._stage2AudioFilename = audioFilename;
+
+          if (typeof window.CUMA_DATA === 'undefined') {
+              window.visualLog("❌ window.CUMA_DATA is undefined.");
+              return;
+          }
+
+          var targetWord = wordEl.innerText.trim();
+          var category = categoryEl ? categoryEl.innerText.trim() : '';
+          var seedString = document.getElementById('data-uuid').innerText.trim() || targetWord;
+          
+          var seed = 0;
+          for (var i = 0; i < seedString.length; i++) {
+              seed = (seed + seedString.charCodeAt(i)) % 100000;
+          }
+          var seededRandom = function() { 
+              var x = Math.sin(seed++) * 10000; 
+              return x - Math.floor(x); 
+          };
+
+          var data = window.CUMA_DATA;
+          var allCategories = [];
+          for (var key in data) {
+              if (key !== 'all_words' && key !== category && Object.prototype.toString.call(data[key]) === '[object Array]') {
+                  allCategories.push(key);
+              }
+          }
+          
+          var candidates = [];
+          if (allCategories.length > 0) {
+              var rc = allCategories[Math.floor(seededRandom() * allCategories.length)];
+              candidates = data[rc] || [];
+          } else {
+              candidates = data.all_words || [];
+          }
+          candidates = candidates.filter(function(w) { return w !== targetWord; });
+          
+          var distractor = candidates.length > 0 ? candidates[Math.floor(seededRandom() * candidates.length)] : null;
+          
+          if (!distractor) {
+              window.visualLog("⚠️ No distractor found.");
+              container.textContent = "No distractor available.";
+              return;
+          }
+
+          var options = [{w: targetWord, c: true}, {w: distractor, c: false}];
+          for (var k = options.length - 1; k > 0; k--) {
+              var j = Math.floor(seededRandom() * (k + 1));
+              var temp = options[k];
+              options[k] = options[j];
+              options[j] = temp;
+          }
+
+          container.innerHTML = '';
+          for (var m = 0; m < options.length; m++) {
+              (function(opt) {
+                  var btn = document.createElement('button');
+                  btn.className = 'word-option';
+                  btn.textContent = opt.w;
+                  btn.onclick = function() {
+                      if (opt.c) {
+                          this.classList.add('selected');
+                          // Audio will play on back side (reward), not on front
+                          if (typeof pycmd !== 'undefined') pycmd('ans');
+                      } else {
+                          this.classList.add('wrong');
+                      }
+                  };
+                  container.appendChild(btn);
+              })(options[m]);
+          }
+          window.visualLog("✅ UI Rendered Successfully");
+
+      } catch (e) {
+          window.visualLog("CRASH: " + e.message);
+          console.error(e);
+      }
+  }
+
+  if (typeof window.CUMA_DATA !== 'undefined') {
+      window.visualLog("Data already loaded.");
+      initCard();
+  } else {
+      loadDataScript();
+  }
+
+})();
+</script>

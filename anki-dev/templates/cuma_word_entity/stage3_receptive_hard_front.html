@@ -1,0 +1,174 @@
+<!-- Hidden data elements -->
+<div id="data-word" class="hidden-data">{{Word}}</div>
+<div id="data-category" class="hidden-data">{{Category}}</div>
+<div id="data-uuid" class="hidden-data">{{UUID}}</div>
+<!-- Clean Architecture: Separate Audio and Picture Fields -->
+<div id="data-audio" style="display:none;">{{WordAudio}}</div>
+<div id="data-picture" style="display:none;">{{WordPicture}}</div>
+
+<div class="cuma-word-card">
+  <div class="media-container">
+    <div id="media-display"></div>
+  </div>
+  
+  <div class="options-grid-4" id="options-container">
+    <p class="loading-text">Loading...</p>
+  </div>
+</div>
+
+<!-- Visual Console (Hidden by default, can be enabled for debugging) -->
+<div id="visual-console">DEBUG LOG:<br></div>
+
+<script>
+(function() {
+    var consoleDiv = document.getElementById('visual-console');
+    window.visualLog = function(msg) {
+        console.log(msg);
+        if (consoleDiv) consoleDiv.innerHTML += msg + "<br>";
+    };
+    window.onerror = function(msg, url, line) {
+        window.visualLog("🔥 GLOBAL ERROR: " + msg + " (Line " + line + ")");
+        return false; 
+    };
+    window.visualLog("✅ Logger Ready (Global Catcher Active)");
+})();
+</script>
+
+<script>
+(function() {
+  window.visualLog("🚀 Script Starting (Stage 3 - Stealth Mode)...");
+
+  function loadDataScript() {
+      window.visualLog("Attempting to load _cuma_logic_city_data.js...");
+      var s = document.createElement('script');
+      s.src = '_cuma_logic_city_data.js';
+      s.onload = function() { 
+          window.visualLog("✅ Data File Loaded!"); 
+          initCard(); 
+      };
+      s.onerror = function() { 
+          window.visualLog("❌ Failed to load data file. Check collection.media."); 
+          document.getElementById('options-container').textContent = "Error: Data file missing.";
+      };
+      document.body.appendChild(s);
+  }
+
+  function initCard() {
+      try {
+          window.visualLog("Initializing Card Logic...");
+          
+          var wordEl = document.getElementById('data-word');
+          var audioEl = document.getElementById('data-audio');
+          var pictureEl = document.getElementById('data-picture');
+          var categoryEl = document.getElementById('data-category');
+          var container = document.getElementById('options-container');
+          var mediaDisplay = document.getElementById('media-display');
+          
+          if (!wordEl || !container || !mediaDisplay) throw new Error("Critical elements missing");
+
+          // Clean Architecture: Get data directly from separate fields
+          var audioFilename = audioEl ? audioEl.innerText.trim() : null;
+          var pictureHTML = pictureEl ? pictureEl.innerHTML.trim() : '';
+          
+          window.visualLog("Audio: " + (audioFilename || "None"));
+          window.visualLog("Picture: " + (pictureHTML ? "Found" : "None"));
+
+          // STAGE 3 (Audio + Pic): Show picture AND play audio
+          if (pictureHTML) {
+              mediaDisplay.innerHTML = pictureHTML;
+          } else {
+              window.visualLog("No image found.");
+          }
+
+          if (audioFilename) {
+             setTimeout(function() {
+                 try { 
+                     var audio = new Audio(audioFilename);
+                     audio.play().catch(function(e){ window.visualLog("Audio Play Error: "+e); }); 
+                 } 
+                 catch(e){ window.visualLog("Audio Error: "+e); }
+             }, 300);
+          }
+
+          if (typeof window.CUMA_DATA === 'undefined') {
+              window.visualLog("❌ window.CUMA_DATA is undefined.");
+              return;
+          }
+
+          var targetWord = wordEl.innerText.trim();
+          var category = categoryEl ? categoryEl.innerText.trim() : '';
+          var seedString = document.getElementById('data-uuid').innerText.trim() || targetWord;
+          
+          var seed = 0;
+          for (var i = 0; i < seedString.length; i++) {
+              seed = (seed + seedString.charCodeAt(i)) % 100000;
+          }
+          var seededRandom = function() { 
+              var x = Math.sin(seed++) * 10000; 
+              return x - Math.floor(x); 
+          };
+
+          var data = window.CUMA_DATA;
+          var candidates = [];
+          if (category && data[category] && Object.prototype.toString.call(data[category]) === '[object Array]') {
+              candidates = data[category].filter(function(w) { return w !== targetWord; });
+          }
+          if (candidates.length < 3) {
+             var all = data.all_words || [];
+             var padding = all.filter(function(w) { return w !== targetWord && candidates.indexOf(w) === -1; });
+             candidates = candidates.concat(padding);
+          }
+          
+          var distractors = [];
+          for(var k=0; k<3 && candidates.length>0; k++) {
+              var idx = Math.floor(seededRandom() * candidates.length);
+              distractors.push(candidates[idx]);
+              candidates.splice(idx, 1);
+          }
+
+          var options = [{w: targetWord, c: true}];
+          for(var d=0; d<distractors.length; d++) {
+              options.push({w: distractors[d], c: false});
+          }
+
+          for (var k = options.length - 1; k > 0; k--) {
+              var j = Math.floor(seededRandom() * (k + 1));
+              var temp = options[k];
+              options[k] = options[j];
+              options[j] = temp;
+          }
+
+          container.innerHTML = '';
+          for (var m = 0; m < options.length; m++) {
+              (function(opt) {
+                  var btn = document.createElement('button');
+                  btn.className = 'word-option';
+                  btn.textContent = opt.w;
+                  btn.onclick = function() {
+                      if (opt.c) {
+                          this.classList.add('selected');
+                          if (typeof pycmd !== 'undefined') pycmd('ans');
+                      } else {
+                          this.classList.add('wrong');
+                      }
+                  };
+                  container.appendChild(btn);
+              })(options[m]);
+          }
+          window.visualLog("✅ UI Rendered Successfully");
+
+      } catch (e) {
+          window.visualLog("CRASH: " + e.message);
+          console.error(e);
+      }
+  }
+
+  if (typeof window.CUMA_DATA !== 'undefined') {
+      window.visualLog("Data already loaded.");
+      initCard();
+  } else {
+      loadDataScript();
+  }
+
+})();
+</script>

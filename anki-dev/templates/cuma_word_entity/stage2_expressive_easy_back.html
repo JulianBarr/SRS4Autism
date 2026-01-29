@@ -1,0 +1,65 @@
+<script src="_cuma_logic_city_data.js"></script>
+
+{{FrontSide}}
+
+<hr id="answer">
+
+<div class="answer-section">
+  <p><strong>正确答案:</strong> <span class="correct-answer">{{Word}}</span></p>
+</div>
+
+<script>
+(function() {
+  // Ensure playAudio function exists (consistent with front template)
+  if (typeof window.playAudio === 'undefined') {
+    window.playAudio = function(filename) {
+      if (!filename) return;
+      try {
+        var audio = new Audio(filename);
+        var p = audio.play();
+        if (p !== undefined) {
+          p.catch(function(e) { console.log("Audio Play Error: " + e); });
+        }
+      } catch(e) {
+        console.log("Audio Error: " + e);
+      }
+    };
+  }
+
+  // Play audio as reward (Stage 2: Silent Mode - Reading)
+  var audioEl = document.getElementById('data-audio');
+  var audioFilename = audioEl ? audioEl.innerText.trim() : null;
+  if (audioFilename) {
+    // Use stored filename from front if available, otherwise get from DOM
+    var filenameToPlay = window._stage2AudioFilename || audioFilename;
+    setTimeout(function() { 
+      window.playAudio(filenameToPlay); 
+    }, 300);
+  }
+
+  // Disable all buttons on back side
+  const container = document.getElementById('options-container');
+  if (!container) return;
+  
+  const options = container.querySelectorAll('.word-option');
+  const targetWord = document.getElementById('data-word').innerText.trim();
+  
+  options.forEach(button => {
+    button.disabled = true;
+    button.style.pointerEvents = 'none';
+    
+    // Remove event listeners by cloning
+    const newBtn = button.cloneNode(true);
+    button.parentNode.replaceChild(newBtn, button);
+  });
+  
+  // Highlight correct answer
+  const newOptions = container.querySelectorAll('.word-option');
+  newOptions.forEach(button => {
+    if (button.getAttribute('data-word') === targetWord) {
+      button.classList.add('selected');
+    }
+  });
+})();
+</script>
+
