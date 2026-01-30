@@ -26,3 +26,8 @@ window.CUMA_DATA = {
   window.CUMA_DATA.all_words = Array.from(new Set(all));
 })();
 
+
+
+
+
+
