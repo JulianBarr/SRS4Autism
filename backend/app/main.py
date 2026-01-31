@@ -1319,7 +1319,7 @@ async def get_grammar_points(cefr_level: Optional[str] = None, language: Optiona
                         PREFIX srs-kg: <http://srs4autism.com/schema/>
                         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
                         SELECT ?example_text WHERE {{
-                            <{gp_uri}> srs-kg:hasExample ?example .
+                            <{gp_uri}> srs-kg:isIllustratedBy ?example .
                             ?example rdfs:label ?example_text . FILTER(LANG(?example_text) = "{example_lang}")
                         }}
                         LIMIT 1
@@ -1337,7 +1337,7 @@ async def get_grammar_points(cefr_level: Optional[str] = None, language: Optiona
                             PREFIX srs-kg: <http://srs4autism.com/schema/>
                             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
                             SELECT ?example_text WHERE {{
-                                ?example srs-kg:demonstratesGrammar <{gp_uri}> .
+                                ?example srs-kg:illustratesGrammar <{gp_uri}> .
                                 ?example rdfs:label ?example_text . FILTER(LANG(?example_text) = "{example_lang}")
                             }}
                             LIMIT 1

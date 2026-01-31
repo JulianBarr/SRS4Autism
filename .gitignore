@@ -117,3 +117,4 @@ backend/cuma_knowledge_graph/
 data/content_db/*.db.backup_*
 test_parser_fix.py
 data/kg_store/
+scripts/data/
