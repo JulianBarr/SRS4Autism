@@ -101,8 +101,12 @@ def migrate_graph(file_path):
         logger.warning(f"Found {literal_pinyin_count} srs-kg:hasPinyin triples pointing to Literals.")
 
     # Save output
-    # Force _v3 suffix as per user request
-    output_path = path.with_name(f"{path.stem}_v3{path.suffix}")
+    if len(sys.argv) > 2:
+        output_path = Path(sys.argv[2])
+    else:
+        # Force _v3 suffix as per user request (legacy default)
+        output_path = path.with_name(f"{path.stem}_v3{path.suffix}")
+    
     logger.info(f"Saving migrated graph to {output_path}...")
     g.serialize(destination=output_path, format="turtle")
     
