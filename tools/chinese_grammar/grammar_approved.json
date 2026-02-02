@@ -1,0 +1,1101 @@
+[
+  {
+    "id": "6",
+    "grammar_point_cn": "基本语序 (主谓宾)",
+    "anchor_example": "我吃苹果。",
+    "summary_cn": "中文最基本的句子结构与英语相同，遵循“主语-谓语-宾语”（SVO）的顺序。",
+    "mandatory_keywords": [
+      "主语",
+      "谓语",
+      "宾语",
+      "语序"
+    ],
+    "pragmatic_scenarios": [
+      "用于陈述一个简单的动作或事实,是构成句子的最基本方式。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "7",
+    "grammar_point_cn": "疑问句 (Yíwènjù)",
+    "anchor_example": "你喜欢咖啡吗？(Nǐ xǐhuan kāfēi ma?)",
+    "summary_cn": "中文疑问句主要有三种构成方式：1. 在陈述句句末加“吗”构成是非问句；2. 在名词或代词后加“呢”询问“……怎么样？”的情况；3. 使用疑问词（如：谁、什么、哪里）替换想知道的信息，语序与陈述句相同。",
+    "mandatory_keywords": [
+      "吗",
+      "呢",
+      "疑问词"
+    ],
+    "pragmatic_scenarios": [
+      "询问是否同意或确认事实",
+      "在对话中反问对方情况",
+      "询问具体信息,如人物、事物、地点、时间、方式等"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "8",
+    "grammar_point_cn": "所有权的表达",
+    "anchor_example": "我的手机",
+    "summary_cn": "表示所有关系主要有两种方式：使用助词“的”，放在“所有者”之后，表示领属关系，如“我的手机”；或使用动词“有”，表示“拥有”，如“我有钱”。",
+    "mandatory_keywords": [
+      "的",
+      "有"
+    ],
+    "pragmatic_scenarios": [
+      "谈论个人物品",
+      "介绍家庭成员"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "9",
+    "grammar_point_cn": "“不”和“没”的用法",
+    "anchor_example": "她不喝酒。",
+    "summary_cn": "用“不”来否定动词和形容词，表达主观意愿、习惯或事实。用“没有”来否定“有”，表示不曾拥有某物。",
+    "mandatory_keywords": [
+      "不",
+      "没",
+      "没有"
+    ],
+    "pragmatic_scenarios": [
+      "表达不喜欢的事物",
+      "说明自己没有某样东西",
+      "陈述一个否定的事实"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "15",
+    "grammar_point_cn": "“没有”的用法",
+    "anchor_example": "我没有问题。",
+    "summary_cn": "动词“有”的否定形式是“没有”，表示不拥有或不存在。绝不能用“不有”。",
+    "mandatory_keywords": [
+      "没有"
+    ],
+    "pragmatic_scenarios": [
+      "表达不拥有某物或不存在某事物"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "17",
+    "grammar_point_cn": "“没有”的缩写",
+    "anchor_example": "我没钱。",
+    "summary_cn": "在表示“不拥有”时，“没有”可以被缩写为“没”，其意思保持不变。",
+    "mandatory_keywords": [
+      "没",
+      "没有"
+    ],
+    "pragmatic_scenarios": [
+      "陈述不拥有某个物品、关系或抽象概念（如时间、工作）"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "698",
+    "grammar_point_cn": "“不”和“没”的区别",
+    "anchor_example": "我昨天没上班，明天也不上班。",
+    "summary_cn": "“不”和“没”都是否定副词，但用法不同。“不”通常否定现在的、将来的或习惯性的动作和状态，以及主观意愿。“没”（有）通常否定过去的动作或状态的发生和存在。",
+    "mandatory_keywords": [
+      "不",
+      "没"
+    ],
+    "pragmatic_scenarios": [
+      "表达否定",
+      "陈述事实",
+      "拒绝"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "19",
+    "grammar_point_cn": "“不”和“没”的区别",
+    "anchor_example": "我昨天没上班，因为我不想去。",
+    "summary_cn": "“不”通常用于否定现在、将来、习惯或主观看法。“没”或“没有”用于否定过去的动作或客观存在（即“有”的反义词）。",
+    "mandatory_keywords": [
+      "不",
+      "没",
+      "没有"
+    ],
+    "pragmatic_scenarios": [
+      "描述过去未发生的动作（用“没”）与陈述现在的习惯、状态或未来的计划（用“不”）"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "253",
+    "grammar_point_cn": "副词“都”的用法",
+    "anchor_example": "美国人都说英文。",
+    "summary_cn": "副词“都”表示“全部”，放在主语后面、动词前面，用来总括主语的所有成员。在否定句中，“都没”或“都不”表示完全否定，即“一个也没/不”。",
+    "mandatory_keywords": [
+      "都"
+    ],
+    "pragmatic_scenarios": [
+      "当你想强调一个群体里的所有成员都有共同的动作或状态时使用。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "21",
+    "grammar_point_cn": "副词“都”的用法",
+    "anchor_example": "我们都喜欢中国菜。",
+    "summary_cn": "副词“都”表示总括，指范围内的人或事物全部如此。它必须放在主语之后，动词之前。",
+    "mandatory_keywords": [
+      "都"
+    ],
+    "pragmatic_scenarios": [
+      "表示主语所指的全部范围"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "24",
+    "grammar_point_cn": "都的用法",
+    "anchor_example": "他们俩都喜欢猫。",
+    "summary_cn": "用“都”来概括主语中的所有成员。当主语是两个人或物时，它的意思就是“both”。否定形式“都不”表示“neither”。",
+    "mandatory_keywords": [
+      "都",
+      "俩",
+      "两个"
+    ],
+    "pragmatic_scenarios": [
+      "表达两个人或两件事物共同的特征、行为或状态。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "28",
+    "grammar_point_cn": "“也”的否定用法",
+    "anchor_example": "我也不喜欢。",
+    "summary_cn": "在中文里，无论肯定句（“too”）还是否定句（“either”），都使用“也”。在否定句中，“也”必须放在否定词（如“不”或“没”）的前面。",
+    "mandatory_keywords": [
+      "也",
+      "不",
+      "没"
+    ],
+    "pragmatic_scenarios": [
+      "附和或同意他人的否定陈述"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "33",
+    "grammar_point_cn": "副词“也”的用法",
+    "anchor_example": "我也是。",
+    "summary_cn": "副词“也”表示相同的情况，但不能单独放在句末。要表达“me too”，最通用的说法是“我也是”。",
+    "mandatory_keywords": [
+      "也",
+      "是"
+    ],
+    "pragmatic_scenarios": [
+      "用于同意或附和别人的陈述。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "48",
+    "grammar_point_cn": "量词“个”",
+    "anchor_example": "我是一个学生。",
+    "summary_cn": "“个”是最常用的量词，可以用于人或多种事物。在不确定使用哪个量词时，用“个”通常是可以被理解的。",
+    "mandatory_keywords": [
+      "个",
+      "量词"
+    ],
+    "pragmatic_scenarios": [
+      "数人或物体时"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "64",
+    "grammar_point_cn": "十几的说法",
+    "anchor_example": "他今年十三岁。",
+    "summary_cn": "表示十一到十九的数字，结构为“十”加上“一”到“九”中的一个数字。",
+    "mandatory_keywords": [
+      "十"
+    ],
+    "pragmatic_scenarios": [
+      "表达年龄",
+      "说日期",
+      "点数"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "65",
+    "grammar_point_cn": "十位数的读法",
+    "anchor_example": "三十四",
+    "summary_cn": "中文的两位数（11-99）遵循'几十几'的结构。例如，21是'二十一'，99是'九十九'。",
+    "mandatory_keywords": [
+      "十"
+    ],
+    "pragmatic_scenarios": [
+      "数数",
+      "说年龄",
+      "报价格"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "66",
+    "grammar_point_cn": "数字读法：百以上",
+    "anchor_example": "一百五十 (yībǎi wǔshí) 常被简说为 一百五 (yībǎi wǔ)。",
+    "summary_cn": "介绍一百以上数字的读法规则及口语习惯。当数字以整十结尾时（如150），末尾的“十”常被省略。数字200可以说“二百”或“两百”。对于以十几结尾的数字（如113），“十”常读作“一十”。",
+    "mandatory_keywords": [
+      "百",
+      "十",
+      "两",
+      "零"
+    ],
+    "pragmatic_scenarios": [
+      "在日常生活中报价或数数,例如在商店里问价钱：“这个一百五（块钱）。”"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "67",
+    "grammar_point_cn": "钟点表示法",
+    "anchor_example": "现在下午三点。",
+    "summary_cn": "用“数字 + 点”来表示整点时间。必要时，可以在时间前加上“上午”或“下午”来区分。",
+    "mandatory_keywords": [
+      "点",
+      "上午",
+      "下午"
+    ],
+    "pragmatic_scenarios": [
+      "询问和告知整点时间"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "454",
+    "grammar_point_cn": "的字结构",
+    "anchor_example": "小李的房子",
+    "summary_cn": "“的”放在名词前面，连接修饰语和名词，表示所属关系（谁的）或描述属性（什么样的）。",
+    "mandatory_keywords": [
+      "的",
+      "名词"
+    ],
+    "pragmatic_scenarios": [
+      "用于表示所有关系,如“我的书”；用于描述人或事物的属性,如“红色的自行车”。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "75",
+    "grammar_point_cn": "的字结构",
+    "anchor_example": "我的书",
+    "summary_cn": "助词“的”放在名词或代词后面，表示所有关系。",
+    "mandatory_keywords": [
+      "的"
+    ],
+    "pragmatic_scenarios": [
+      "介绍家人朋友或说明物品归属时"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "82",
+    "grammar_point_cn": "用“呢”问地点",
+    "anchor_example": "我的手机呢？",
+    "summary_cn": "在名词或代词后面加上“呢”，用来询问某人或某物在哪里。通常用于对话双方都清楚所指对象的情景。",
+    "mandatory_keywords": [
+      "呢"
+    ],
+    "pragmatic_scenarios": [
+      "You're about to leave your apartment but can't find your keys. You ask your roommate: 我的钥匙呢？ (Wǒ de yàoshi ne?)"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "93",
+    "grammar_point_cn": "有的否定",
+    "anchor_example": "我没有钱。",
+    "summary_cn": "动词“有”的否定形式是“没有”，而不用“不有”。",
+    "mandatory_keywords": [
+      "有",
+      "没",
+      "不"
+    ],
+    "pragmatic_scenarios": [
+      "表示没有拥有或不存在某物时"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "104",
+    "grammar_point_cn": "询问姓氏",
+    "anchor_example": "您贵姓？",
+    "summary_cn": "“姓”用作动词来询问姓氏。正式或礼貌的问法是“您贵姓？”，通俗的问法是“你姓什么？”。",
+    "mandatory_keywords": [
+      "姓",
+      "贵"
+    ],
+    "pragmatic_scenarios": [
+      "在初次见面、商务场合或对长辈等需要表示尊敬的场合,礼貌地询问对方的姓氏。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "119",
+    "grammar_point_cn": "用“能”礼貌地提问",
+    "anchor_example": "你能帮我一下吗？",
+    "summary_cn": "“能”可以用来礼貌地提出请求或询问可能性，类似于英语中的“Could you”或“Is it possible to”。",
+    "mandatory_keywords": [
+      "能",
+      "礼貌",
+      "请求"
+    ],
+    "pragmatic_scenarios": [
+      "在需要获得许可或请求他人帮助时使用。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "122",
+    "grammar_point_cn": "用“可以”表示允许",
+    "anchor_example": "我可以在这里坐吗？",
+    "summary_cn": "助动词“可以”主要用于表示允许，询问或给予许可。",
+    "mandatory_keywords": [
+      "可以",
+      "允许"
+    ],
+    "pragmatic_scenarios": [
+      "向别人请求允许做某事"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "130",
+    "grammar_point_cn": "助动词：要 vs 想",
+    "anchor_example": "我想去中国。",
+    "summary_cn": "“要”表示有计划、会采取行动的意愿，语气较强。“想”则更多表示一个想法或愿望，不一定会行动，可理解为“would like to”。",
+    "mandatory_keywords": [
+      "要",
+      "想"
+    ],
+    "pragmatic_scenarios": [
+      "在餐厅点餐或向他人请求时,使用“想”比“要”更礼貌,因为“要”听起来可能更像命令或要求。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "136",
+    "grammar_point_cn": "主题句",
+    "anchor_example": "这个字怎么写？",
+    "summary_cn": "在问句中，先把要讨论的话题（名词）放在句首，然后再用“怎么”来提问相关的方法。",
+    "mandatory_keywords": [
+      "怎么"
+    ],
+    "pragmatic_scenarios": [
+      "询问做事的方法或方向"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "143",
+    "grammar_point_cn": "用“没有”否定过去的动作",
+    "anchor_example": "我没有做。",
+    "summary_cn": "用“没有”否定过去的动作时，动词后面不能加“了”。",
+    "mandatory_keywords": [
+      "没有",
+      "了"
+    ],
+    "pragmatic_scenarios": [
+      "否定过去的动作"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "145",
+    "grammar_point_cn": "不要",
+    "anchor_example": "不要说话。",
+    "summary_cn": "用于发出否定性的命令或请求，告诉别人“别做某事”。",
+    "mandatory_keywords": [
+      "不要",
+      "别"
+    ],
+    "pragmatic_scenarios": [
+      "制止别人的行为",
+      "提出否定性建议或请求"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "149",
+    "grammar_point_cn": "用'不'否定",
+    "anchor_example": "我不吃肉。",
+    "summary_cn": "“不”通常用在动词前，否定现在或将来的动作，或表示习惯。",
+    "mandatory_keywords": [
+      "不",
+      "动词"
+    ],
+    "pragmatic_scenarios": [
+      "陈述习惯或偏好"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "164",
+    "grammar_point_cn": "是不是/是吗问句",
+    "anchor_example": "你是不是累了？",
+    "summary_cn": "用“是不是”或在句尾加“是吗”来构成疑问句，用于确认信息或表达关心。“是不是”可以放在句首或句尾。",
+    "mandatory_keywords": [
+      "是",
+      "不",
+      "吗"
+    ],
+    "pragmatic_scenarios": [
+      "向他人确认信息或事实 (e.g. 你是学生,是吗？)",
+      "表达对某人的关心 (e.g. 是不是不舒服？)"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "167",
+    "grammar_point_cn": "“太...了”结构",
+    "anchor_example": "今天太热了。",
+    "summary_cn": "用“太...了”来形容程度过高，常带有感叹或评价的语气。",
+    "mandatory_keywords": [
+      "太",
+      "了"
+    ],
+    "pragmatic_scenarios": [
+      "表达强烈的感叹或评价"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "172",
+    "grammar_point_cn": "形容词谓语句",
+    "anchor_example": "他很高。",
+    "summary_cn": "在中文里，用形容词描述名词时，通常在它们之间加“很”，而不是“是”。",
+    "mandatory_keywords": [
+      "很",
+      "是"
+    ],
+    "pragmatic_scenarios": [
+      "描述人或事物的状态和特征,如天气、外貌、感觉等。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "176",
+    "grammar_point_cn": "形容词作谓语",
+    "anchor_example": "他很高。",
+    "summary_cn": "当一个形容词直接用作谓语来描述主语时，通常需要在形容词前加上“很”。在这种结构中，“很”只是一个语法连接词，并不一定表示“非常”的程度。",
+    "mandatory_keywords": [
+      "很",
+      "形容词"
+    ],
+    "pragmatic_scenarios": [
+      "在没有比较的情况下,简单地描述某人或某物的状态或性质,如“天气很好”或“我很忙”。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "733",
+    "grammar_point_cn": "正反问句",
+    "anchor_example": "你是不是学生？",
+    "summary_cn": "通过并列一个动词（或形容词）的肯定形式和否定形式来构成疑问句，用于提问。",
+    "mandatory_keywords": [
+      "动词",
+      "肯定",
+      "否定",
+      "问句"
+    ],
+    "pragmatic_scenarios": [
+      "当你想提出一个“是”或“否”的问题时,这是一种比用“吗”更常见的提问方式。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "708",
+    "grammar_point_cn": "正反问句",
+    "anchor_example": "你去不去？",
+    "summary_cn": "通过并列动词或形容词的肯定和否定形式来构成疑问句。",
+    "mandatory_keywords": [
+      "不",
+      "正反"
+    ],
+    "pragmatic_scenarios": [
+      "代替“吗”来提问,以寻求确认或询问选择。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "180",
+    "grammar_point_cn": "正反问句",
+    "anchor_example": "你是不是学生？",
+    "summary_cn": "通过重复动词的肯定和否定形式来构成问句。",
+    "mandatory_keywords": [
+      "动词",
+      "不",
+      "没"
+    ],
+    "pragmatic_scenarios": [
+      "在日常对话中询问并希望得到是或否的回答"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "188",
+    "grammar_point_cn": "双音节词的正反问句",
+    "anchor_example": "你喜不喜欢猫？",
+    "summary_cn": "对于双音节（两个汉字）的动词或形容词“AB”，其正反问句的常见形式是“A不AB”。",
+    "mandatory_keywords": [
+      "正反问句",
+      "双音节",
+      "A不AB"
+    ],
+    "pragmatic_scenarios": [
+      "询问他人的好恶、状态或意见时使用,这是一种非常口语化的提问方式。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "195",
+    "grammar_point_cn": "特殊疑问句",
+    "anchor_example": "他是谁？",
+    "summary_cn": "用疑问词（谁、什么、哪儿等）提问时，语序和陈述句一样，想问什么，就把疑问词放在答案的位置。",
+    "mandatory_keywords": [
+      "谁",
+      "什么",
+      "哪儿",
+      "什么时候",
+      "为什么",
+      "怎么"
+    ],
+    "pragmatic_scenarios": [
+      "询问基本信息,如姓名、地点、时间等。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "198",
+    "grammar_point_cn": "疑问代词问句",
+    "anchor_example": "你是谁？",
+    "summary_cn": "用疑问代词（如'谁'、'什么'、'哪里'）提问时，只需将疑问代词放在陈述句中想提问部分的位置，语序保持不变。",
+    "mandatory_keywords": [
+      "疑问代词",
+      "语序"
+    ],
+    "pragmatic_scenarios": [
+      "询问对方是谁、在做什么或在哪里"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "218",
+    "grammar_point_cn": "确认问句（吗）",
+    "anchor_example": "你是学生，对吗？",
+    "summary_cn": "在陈述句的末尾加上“对吗”、“好吗”、“是吗”等，用来确认信息或征求对方的同意。",
+    "mandatory_keywords": [
+      "吗",
+      "对",
+      "好",
+      "是"
+    ],
+    "pragmatic_scenarios": [
+      "用于确认自己不完全确定的信息,或在提出建议时征求对方同意。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "222",
+    "grammar_point_cn": "吗字句",
+    "anchor_example": "你是学生吗？",
+    "summary_cn": "在陈述句的末尾加上“吗”，把句子变成一个可以用“是”或“不是”来回答的问题。",
+    "mandatory_keywords": [
+      "吗"
+    ],
+    "pragmatic_scenarios": [
+      "确认信息",
+      "提出简单的疑问"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "229",
+    "grammar_point_cn": "数字‘二’的用法",
+    "anchor_example": "我有十二本书。",
+    "summary_cn": "“二”用于读数字、序数和多位数中（如十二、二十二）。当单独表示数量“两个”时，通常用“两”，不用“二”。",
+    "mandatory_keywords": [
+      "二",
+      "两",
+      "数字"
+    ],
+    "pragmatic_scenarios": [
+      "数数",
+      "报电话号码"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "237",
+    "grammar_point_cn": "形容词 + 死了",
+    "anchor_example": "可爱死了！",
+    "summary_cn": "“死了”用在形容词后面作程度补语，表示程度极高。传统上多用于贬义词，但现在常用于褒义词，以表达强烈的赞美或喜爱。",
+    "mandatory_keywords": [
+      "形容词",
+      "死了"
+    ],
+    "pragmatic_scenarios": [
+      "表达强烈的赞美或喜爱"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "239",
+    "grammar_point_cn": "差不多",
+    "anchor_example": "这两个差不多。",
+    "summary_cn": "表示两者差别不大，或者在数量、时间、程度上很接近，意思是“大概”、“几乎一样”。",
+    "mandatory_keywords": [
+      "差不多"
+    ],
+    "pragmatic_scenarios": [
+      "估算时间、数量、价格或比较事物时使用"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "241",
+    "grammar_point_cn": "“差不多”作谓语",
+    "anchor_example": "这两个差不多。",
+    "summary_cn": "用在主语后，表示几个事物在某方面很相似，几乎一样。",
+    "mandatory_keywords": [
+      "差不多"
+    ],
+    "pragmatic_scenarios": [
+      "比较两个或多个事物,发现它们非常相似时"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "242",
+    "grammar_point_cn": "用“差不多”表示相似",
+    "anchor_example": "我们的想法差不多。",
+    "summary_cn": "用于表示两个或多个事物在某方面非常相似或基本相同。当主语数量大于二时，常可在“差不多”前加“都”。",
+    "mandatory_keywords": [
+      "差不多",
+      "都"
+    ],
+    "pragmatic_scenarios": [
+      "比较两个人或事物的相似之处"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "243",
+    "grammar_point_cn": "A 跟/和 B 差不多",
+    "anchor_example": "上海和纽约差不多。",
+    "summary_cn": "用于比较两个事物（A和B），表示它们在某方面非常相似或几乎一样。",
+    "mandatory_keywords": [
+      "跟",
+      "和",
+      "差不多"
+    ],
+    "pragmatic_scenarios": [
+      "比较两个事物或情况的相似度"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "250",
+    "grammar_point_cn": "很多...都...",
+    "anchor_example": "很多地方都有WiFi。",
+    "summary_cn": "用“很多 + 名词 + 都”的结构来概括一个大的群体，表示后面的情况适用于这个群体中的大部分或所有成员。",
+    "mandatory_keywords": [
+      "很多",
+      "都"
+    ],
+    "pragmatic_scenarios": [
+      "描述一个普遍的现象或许多人/事物的共同点"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "251",
+    "grammar_point_cn": "大家...都...",
+    "anchor_example": "大家都来了吗？",
+    "summary_cn": "“大家”指“所有人”，常常和副词“都”一起使用，用来强调后面的动作或状态适用于群体里的每一个人。",
+    "mandatory_keywords": [
+      "大家",
+      "都"
+    ],
+    "pragmatic_scenarios": [
+      "在询问或陈述一个群体中所有人的共同情况、动作或看法时。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "252",
+    "grammar_point_cn": "每...都...",
+    "anchor_example": "我每天都要上班。",
+    "summary_cn": "“每...都...”结构用于强调在某个范围内的所有成员都具有共同的特征或行为，表示“每一个都”或“总是”。当“每”后面跟时间词（如天、星期、年）时，表示一个动作或状态在每个时间单位内都会重复发生。",
+    "mandatory_keywords": [
+      "每",
+      "都"
+    ],
+    "pragmatic_scenarios": [
+      "描述日常习惯或规律性发生的事件"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "255",
+    "grammar_point_cn": "副词“一直”的用法",
+    "anchor_example": "我一直在学中文。",
+    "summary_cn": "表示一个动作或状态从过去某个时间开始，持续到现在或将来，没有中断。",
+    "mandatory_keywords": [
+      "一直"
+    ],
+    "pragmatic_scenarios": [
+      "描述一个从过去持续到现在的动作或状态",
+      "表达某个动作将持续到未来"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "259",
+    "grammar_point_cn": "“已经……了”句式",
+    "anchor_example": "他们已经走了。",
+    "summary_cn": "副词“已经”和句末助词“了”通常一起使用，表示动作或情况在说话之前已经发生或完成。",
+    "mandatory_keywords": [
+      "已经",
+      "了"
+    ],
+    "pragmatic_scenarios": [
+      "告知别人某事已经完成或发生"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "260",
+    "grammar_point_cn": "已经 + 形容词 + 了",
+    "anchor_example": "已经很晚了。",
+    "summary_cn": "表示某种状态或性质已经发生变化或达到某种程度。",
+    "mandatory_keywords": [
+      "已经",
+      "了"
+    ],
+    "pragmatic_scenarios": [
+      "描述一个已经发生变化或达到的状态"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "261",
+    "grammar_point_cn": "“已经……了”与时间名词",
+    "anchor_example": "已经11点了。",
+    "summary_cn": "“已经 + 时间名词 + 了”结构用来强调某个时间点已经到来，或者某个动作、状态已经持续了一段时间。",
+    "mandatory_keywords": [
+      "已经",
+      "了"
+    ],
+    "pragmatic_scenarios": [
+      "表达时间点已到",
+      "说明动作或状态持续的时间长度"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "265",
+    "grammar_point_cn": "总是",
+    "anchor_example": "他上课总是迟到。",
+    "summary_cn": "副词，表示某种情况或动作在所有时间里一直如此，没有改变。通常放在动词前面。",
+    "mandatory_keywords": [
+      "总是"
+    ],
+    "pragmatic_scenarios": [
+      "描述日常惯例或习惯",
+      "描述持续发生的情况"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "269",
+    "grammar_point_cn": "总是 + 副词 + 形容词",
+    "anchor_example": "你为什么总是这么忙？",
+    "summary_cn": "当“总是”和形容词一起使用时，中间通常需要加上一个程度副词，如“这么”、“那么”、“很”等，不能直接说“总是 + 形容词”。",
+    "mandatory_keywords": [
+      "总是",
+      "这么",
+      "那么"
+    ],
+    "pragmatic_scenarios": [
+      "用于抱怨或描述一种反复出现的、带有说话人主观评价的状态。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "276",
+    "grammar_point_cn": "还和也的区别",
+    "anchor_example": "我喜欢唱歌，还喜欢跳舞。",
+    "summary_cn": "还(hái)用于一个主语做多件事；也(yě)用于多个主语做同一件事。",
+    "mandatory_keywords": [
+      "还",
+      "也"
+    ],
+    "pragmatic_scenarios": [
+      "Listing multiple actions for one person (using 还), or showing that a different person does the same action (using 也)."
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "283",
+    "grammar_point_cn": "副词“刚”的用法",
+    "anchor_example": "我刚到家。",
+    "summary_cn": "表示动作或情况在不久前发生。",
+    "mandatory_keywords": [
+      "刚",
+      "刚刚"
+    ],
+    "pragmatic_scenarios": [
+      "说明一个动作是在很短的时间之前完成的"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "292",
+    "grammar_point_cn": "用“在/正在”表示动作的进行",
+    "anchor_example": "我正在看书。",
+    "summary_cn": "在动词前加上“在”或“正在”，表示动作正在进行中，相当于英语的现在进行时。",
+    "mandatory_keywords": [
+      "在",
+      "正在"
+    ],
+    "pragmatic_scenarios": [
+      "描述自己或他人当下正在做的事情"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "298",
+    "grammar_point_cn": "一边…一边…",
+    "anchor_example": "他一边吃饭一边看电视。",
+    "summary_cn": "表示同时进行的两个动作。",
+    "mandatory_keywords": [
+      "一边"
+    ],
+    "pragmatic_scenarios": [
+      "Describing two actions that someone is doing at the same time."
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "308",
+    "grammar_point_cn": "有点 + 形容词",
+    "anchor_example": "今天有点热。",
+    "summary_cn": "表示对某种情况有轻微的不满或抱怨，意思是“a little too...”。",
+    "mandatory_keywords": [
+      "有点",
+      "有一点"
+    ],
+    "pragmatic_scenarios": [
+      "当你想委婉地表达天气太热,建议朋友在室内吃饭时,可以说：“外面有点热,我们去里面吧。”"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "312",
+    "grammar_point_cn": "有点的用法",
+    "anchor_example": "我有点累。(Wǒ yǒudiǎn lèi.)",
+    "summary_cn": "“有点”用来形容说话者不希望或不喜欢的某种状态，后面通常跟有负面含义的形容词。",
+    "mandatory_keywords": [
+      "有点"
+    ],
+    "pragmatic_scenarios": [
+      "表达轻微的不满或不适"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "314",
+    "grammar_point_cn": "又……又……",
+    "anchor_example": "这个苹果又大又甜。",
+    "summary_cn": "用于连接两个形容词，表示主语同时具有这两种性质或状态。",
+    "mandatory_keywords": [
+      "又"
+    ],
+    "pragmatic_scenarios": [
+      "在描述人或事物的两个并列特征时使用,通常两个特征是同类别的（比如都是褒义或都是贬义）。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "318",
+    "grammar_point_cn": "不太",
+    "anchor_example": "这个不太好。",
+    "summary_cn": "用来表示程度不深，意思是“不是很…”。",
+    "mandatory_keywords": [
+      "不",
+      "太"
+    ],
+    "pragmatic_scenarios": [
+      "委婉地表达否定或负面评价"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "325",
+    "grammar_point_cn": "离字句",
+    "anchor_example": "我家离公司很远。",
+    "summary_cn": "用“离”表示两个地点之间的距离。",
+    "mandatory_keywords": [
+      "离"
+    ],
+    "pragmatic_scenarios": [
+      "询问或描述地点之间的距离"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "352",
+    "grammar_point_cn": "或者",
+    "anchor_example": "你想喝茶或者咖啡？",
+    "summary_cn": "用于陈述句中，连接两个或多个选项，表示一种选择关系。",
+    "mandatory_keywords": [
+      "或者"
+    ],
+    "pragmatic_scenarios": [
+      "在陈述句中提供几种可能性或选择"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "355",
+    "grammar_point_cn": "填充词“那个”",
+    "anchor_example": "我想买……那个……一个红色的苹果。",
+    "summary_cn": "“那个”(nèige)是一个口头填充词，在说话停顿时使用，用来争取思考时间，类似于英语中的“umm”。",
+    "mandatory_keywords": [
+      "那个",
+      "nèige"
+    ],
+    "pragmatic_scenarios": [
+      "在对话中想不起来合适的词或需要时间思考时使用。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "361",
+    "grammar_point_cn": "连词“可是”和“但是”",
+    "anchor_example": "我想去，可是我没有时间。",
+    "summary_cn": "“可是”和“但是”都用于连接两个意思相反或相对的句子，表示转折，相当于英文的'but'。“但是”比“可是”更正式一些。",
+    "mandatory_keywords": [
+      "可是",
+      "但是"
+    ],
+    "pragmatic_scenarios": [
+      "当你想对前一个陈述做出转折或补充一个相反的情况时使用。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "368",
+    "grammar_point_cn": "“和”与“跟”的区别",
+    "anchor_example": "跟我读。",
+    "summary_cn": "虽然“和”与“跟”都可以表示“and”或“with”，但“跟”还包含“跟随”的意思，表示动作有先后顺序。因此在“跟我读”这类句子中，不能用“和”替换。当表示同时进行的动作时（如加入“一起”），两者才可以互换。",
+    "mandatory_keywords": [
+      "和",
+      "跟"
+    ],
+    "pragmatic_scenarios": [
+      "在教学或指示场景中,要求他人模仿或跟随自己的动作或话语时,必须使用“跟”。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "396",
+    "grammar_point_cn": "大数读法",
+    "anchor_example": "这辆车二十五万块。",
+    "summary_cn": "中文的大数以“万”为基本单位进行分组计数，这与英文以“千”为单位不同。例如，100,000读作“十万”，而不是“一百千”。",
+    "mandatory_keywords": [
+      "万",
+      "十万",
+      "百万",
+      "千万"
+    ],
+    "pragmatic_scenarios": [
+      "谈论价格（如房价、车价）",
+      "讨论人口数量",
+      "报告公司收入或预算"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "398",
+    "grammar_point_cn": "大数单位：万",
+    "anchor_example": "这个手机一万两千块。",
+    "summary_cn": "在中文里，数大数时习惯以四位数为单位进行分组，使用“万”来表示10,000。这与英文中以三位数为一组的习惯不同。例如，12,000 在中文里被看作“1个万”和“2个千”，因此读作“一万两千”。",
+    "mandatory_keywords": [
+      "万"
+    ],
+    "pragmatic_scenarios": [
+      "谈论价格或金额",
+      "描述大的数量（如人口、字数）"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "400",
+    "grammar_point_cn": "大数单位：亿",
+    "anchor_example": "十一亿一百一十一万",
+    "summary_cn": "“亿”是一个数字单位，表示一万个万，即 100,000,000（一亿）。它用于表达非常大的数目。",
+    "mandatory_keywords": [
+      "亿"
+    ],
+    "pragmatic_scenarios": [
+      "讨论国家人口、财政预算或大公司市值等大额数字时。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "405",
+    "grammar_point_cn": "时间的表达：分钟",
+    "anchor_example": "现在是三点十分。",
+    "summary_cn": "在“点”(diǎn)表示小时后，直接加上分钟数和“分”(fēn)来表达具体分钟。",
+    "mandatory_keywords": [
+      "点",
+      "分"
+    ],
+    "pragmatic_scenarios": [
+      "询问和回答当前时间",
+      "约定见面时间",
+      "查看火车或航班时刻表"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "408",
+    "grammar_point_cn": "用'刻'表示时间",
+    "anchor_example": "现在是三点一刻。",
+    "summary_cn": "用'一刻'表示15分钟，'三刻'表示45分钟，放在'点'后面来表达时间。",
+    "mandatory_keywords": [
+      "点",
+      "刻"
+    ],
+    "pragmatic_scenarios": [
+      "Telling the time",
+      "Making appointments"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "419",
+    "grammar_point_cn": "语气助词了 (表示变化)",
+    "anchor_example": "下雨了。",
+    "summary_cn": "放在句末，表示出现了新的情况或状态发生了变化。",
+    "mandatory_keywords": [
+      "了",
+      "变化",
+      "新情况"
+    ],
+    "pragmatic_scenarios": [
+      "描述天气变化",
+      "表达个人状态的改变",
+      "说明新情况的出现"
+    ],
+    "is_useful_for_child": true
+  }
+]

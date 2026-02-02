@@ -118,3 +118,8 @@ data/content_db/*.db.backup_*
 test_parser_fix.py
 data/kg_store/
 scripts/data/
+
+# Chinese Grammar Tools Ignored Files
+tools/chinese_grammar/*.epub
+tools/chinese_grammar/*.pdf
+tools/chinese_grammar/grammar_staging.json

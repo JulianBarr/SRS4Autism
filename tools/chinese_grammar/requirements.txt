@@ -1,0 +1,5 @@
+ebooklib
+beautifulsoup4
+google-generativeai
+streamlit
+typing_extensions
