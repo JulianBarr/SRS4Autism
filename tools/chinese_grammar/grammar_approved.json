@@ -1097,5 +1097,2887 @@
       "说明新情况的出现"
     ],
     "is_useful_for_child": true
+  },
+  {
+    "id": "422",
+    "grammar_point_cn": "语气助词了 (变化)",
+    "anchor_example": "下雨了。",
+    "summary_cn": "用在句末，表示情况发生了变化，可以理解为‘现在’、‘已经’或‘不再’的意思。",
+    "mandatory_keywords": [
+      "了",
+      "变化"
+    ],
+    "pragmatic_scenarios": [
+      "表达情况的变化,如天气变了（下雨了）或状态变了（我累了）。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "424",
+    "grammar_point_cn": "用'吧'表示让步",
+    "anchor_example": "好吧，就这么办。",
+    "summary_cn": "用语气助词'吧'表示勉强同意或接受一个自己不太满意的建议或事实。",
+    "mandatory_keywords": [
+      "吧"
+    ],
+    "pragmatic_scenarios": [
+      "当别人提出一个建议,你虽然不太情愿但最后还是同意了"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "427",
+    "grammar_point_cn": "用“了”表示“已经”",
+    "anchor_example": "吃了。",
+    "summary_cn": "在回答问题或回应陈述时，单用“了”可以表示事情已经发生或完成，相当于“已经...了”。",
+    "mandatory_keywords": [
+      "了",
+      "已经"
+    ],
+    "pragmatic_scenarios": [
+      "Responding to a question about whether an action has been completed."
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "436",
+    "grammar_point_cn": "动态助词了",
+    "anchor_example": "我吃了一个苹果。",
+    "summary_cn": "放在动词后面，表示动作已经完成。",
+    "mandatory_keywords": [
+      "了",
+      "动词"
+    ],
+    "pragmatic_scenarios": [
+      "告诉别人你刚才做了什么",
+      "确认一个任务已经做完"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "446",
+    "grammar_point_cn": "语气词“啊”表示感叹",
+    "anchor_example": "这里好漂亮啊！",
+    "summary_cn": "语气词“啊”放在陈述句句末，用来加强感叹、赞叹或兴奋的语气。",
+    "mandatory_keywords": [
+      "啊",
+      "句末",
+      "感叹"
+    ],
+    "pragmatic_scenarios": [
+      "表达强烈的赞美或惊讶",
+      "表示十分认同",
+      "抒发强烈的个人感受"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "448",
+    "grammar_point_cn": "语气助词“啊”表示肯定或催促",
+    "anchor_example": "小心啊！",
+    "summary_cn": "在句末使用“啊”，可以加强语气，表达一种肯定的态度、催促的命令或强烈的感叹。",
+    "mandatory_keywords": [
+      "啊"
+    ],
+    "pragmatic_scenarios": [
+      "表达强烈的同意",
+      "发出警告或催促",
+      "表示感叹"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "457",
+    "grammar_point_cn": "得字补语",
+    "anchor_example": "他跑得很快。",
+    "summary_cn": "用在动词后面，连接补语，用来说明动作的程度或结果。",
+    "mandatory_keywords": [
+      "动词",
+      "得"
+    ],
+    "pragmatic_scenarios": [
+      "描述一个动作做得怎么样,比如评价别人的歌声、厨艺或运动表现。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "461",
+    "grammar_point_cn": "土也地",
+    "anchor_example": "他高兴地笑了。",
+    "summary_cn": "“地”放在形容词后面，动词前面，把形容词变成副词来修饰动作，功能上类似于英文中-ly的后缀。",
+    "mandatory_keywords": [
+      "地",
+      "形容词",
+      "动词"
+    ],
+    "pragmatic_scenarios": [
+      "描述一个动作是如何进行的"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "463",
+    "grammar_point_cn": "“的、地、得”的用法",
+    "anchor_example": "今天的作业你做得不好，因为你没认真地听课。",
+    "summary_cn": "区分三个结构助词：“的”用于名词前，表示修饰或所属关系（今天的作业）；“得”用于动词后，连接表示程度或结果的补语（做得不好）；“地”用于动词前，将前面的词语变为状语来修饰动作（认真地听课）。",
+    "mandatory_keywords": [
+      "的",
+      "得",
+      "地"
+    ],
+    "pragmatic_scenarios": [
+      "在写作和口语中准确描述事物、评价行为和说明动作方式。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "465",
+    "grammar_point_cn": "“过……了”结构",
+    "anchor_example": "我吃过饭了。",
+    "summary_cn": "表示过去的某个动作已经完成，并且情况发生了变化或该动作已不再持续。",
+    "mandatory_keywords": [
+      "过",
+      "了"
+    ],
+    "pragmatic_scenarios": [
+      "礼貌地拒绝邀请,因为某事已经做过"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "469",
+    "grammar_point_cn": "动词 + 过 + 宾语 + 了",
+    "anchor_example": "我刷过牙了。",
+    "summary_cn": "表示某个动作在过去已经完成，并且这个完成的状态与现在的情况有关，常含有“已经”的意思。",
+    "mandatory_keywords": [
+      "过",
+      "了"
+    ],
+    "pragmatic_scenarios": [
+      "确认某个预期的或常规的动作是否已经完成,例如询问“你吃过饭了吗？”"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "471",
+    "grammar_point_cn": "动词 + 过 ... 了",
+    "anchor_example": "我吃过饭了。",
+    "summary_cn": "将“过”和“了”结合使用，以强调某个动作已经完成。这与单独使用“过”表示过去的经历不同，它更侧重于确认一个近期或常规的动作已经结束。",
+    "mandatory_keywords": [
+      "过",
+      "了"
+    ],
+    "pragmatic_scenarios": [
+      "用于确认日常或预期的动作已经完成,例如“我刷过牙了”或“他洗过澡了”。可以加入“已经”来进一步加强语气。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "473",
+    "grammar_point_cn": "动词 + 过 + 了",
+    "anchor_example": "我已经吃过饭了。",
+    "summary_cn": "表示某个动作已经完成，情况发生了变化，因此（通常暗示）不需要再做了。",
+    "mandatory_keywords": [
+      "过",
+      "了"
+    ],
+    "pragmatic_scenarios": [
+      "在回应提醒或建议时,强调某事已经做完,无需再做。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "477",
+    "grammar_point_cn": "比字句",
+    "anchor_example": "他比我高。(tā bǐ wǒ gāo.)",
+    "summary_cn": "用于比较两个事物在某个方面的差异，基本结构是“A比B+形容词”。",
+    "mandatory_keywords": [
+      "比"
+    ],
+    "pragmatic_scenarios": [
+      "比较身高、年龄或价格时使用"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "475",
+    "grammar_point_cn": "比字句",
+    "anchor_example": "他比我高。",
+    "summary_cn": "用“比”字来比较两个事物，指出它们在某个方面的差异。",
+    "mandatory_keywords": [
+      "比"
+    ],
+    "pragmatic_scenarios": [
+      "比较身高、年龄、价格等"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "481",
+    "grammar_point_cn": "比字句的常见错误",
+    "anchor_example": "你比我聪明。",
+    "summary_cn": "使用“比”进行比较时，形容词必须是肯定形式，不能用“不”否定。此外，“比”表示差异，不能与表示相同的“一样”连用。",
+    "mandatory_keywords": [
+      "比",
+      "一样"
+    ],
+    "pragmatic_scenarios": [
+      "纠正比较句的错误用法",
+      "比较两个人或事物的不同之处"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "483",
+    "grammar_point_cn": "比...更...结构",
+    "anchor_example": "今天比昨天更冷。",
+    "summary_cn": "在'比'字句中加入'更'，用来强调形容词的程度，意思是'还要...'或'更加...'。",
+    "mandatory_keywords": [
+      "比",
+      "更"
+    ],
+    "pragmatic_scenarios": [
+      "当比较的双方都已经具备某种特性时,用来强调其中一方的程度更深。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "492",
+    "grammar_point_cn": "没有比较句",
+    "anchor_example": "他没有我高。",
+    "summary_cn": "用“没有”来表示A在某个方面不如B。",
+    "mandatory_keywords": [
+      "没有"
+    ],
+    "pragmatic_scenarios": [
+      "When comparing two things and stating one is 'less than' the other in a certain quality (e.g., price, height, skill)."
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "493",
+    "grammar_point_cn": "用“没有”进行比较",
+    "anchor_example": "小张没有小李高。",
+    "summary_cn": "表示A在某个方面不如B。结构为：名词1 + 没有 + 名词2 + 形容词。",
+    "mandatory_keywords": [
+      "没有"
+    ],
+    "pragmatic_scenarios": [
+      "比较两个人的身高",
+      "比较两件商品的价格",
+      "比较两个地方的温度"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "496",
+    "grammar_point_cn": "方向动词 '来' 和 '去'",
+    "anchor_example": "你什么时候来我家？",
+    "summary_cn": "'来'表示动作朝向说话人，'去'表示动作远离说话人。",
+    "mandatory_keywords": [
+      "来",
+      "去"
+    ],
+    "pragmatic_scenarios": [
+      "邀请别人来自己所在的地方,或者询问别人去另一个地方的计划。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "500",
+    "grammar_point_cn": "简单趋向补语",
+    "anchor_example": "请进来。",
+    "summary_cn": "在动词后面加上“来”或“去”表示动作的方向。“来”表示动作朝向说话者，“去”表示动作远离说话者。",
+    "mandatory_keywords": [
+      "来",
+      "去"
+    ],
+    "pragmatic_scenarios": [
+      "在门口邀请客人进入或让某人出去时。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "502",
+    "grammar_point_cn": "助动词“要”的用法",
+    "anchor_example": "我要一杯咖啡。",
+    "summary_cn": "“要”是一个多义助动词，可以表示“想要”、“需要”或“将要”（表示将来）。具体意思需要根据上下文判断。",
+    "mandatory_keywords": [
+      "要"
+    ],
+    "pragmatic_scenarios": [
+      "点餐时表达想要什么 (Ordering something)",
+      "表达需求 (Expressing a need)",
+      "谈论将来的计划 (Talking about future plans)"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "521",
+    "grammar_point_cn": "助动词'想'",
+    "anchor_example": "我想喝咖啡。",
+    "summary_cn": "用助动词'想'来表示愿望或打算，语气比'要'更委婉。",
+    "mandatory_keywords": [
+      "想"
+    ],
+    "pragmatic_scenarios": [
+      "委婉地表达个人愿望或计划"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "534",
+    "grammar_point_cn": "用'从来'表示否定",
+    "anchor_example": "我从来不喝酒。",
+    "summary_cn": "表示从过去到现在一直没有某种行为或经历，通常与'不'或'没'连用。",
+    "mandatory_keywords": [
+      "从来",
+      "不",
+      "没"
+    ],
+    "pragmatic_scenarios": [
+      "谈论个人习惯和经历"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "538",
+    "grammar_point_cn": "用“从来没...过”表示从未",
+    "anchor_example": "我从来没去过中国。",
+    "summary_cn": "“从来”与“没有”和动词后的“过”连用，表示从过去到现在从未有过某种经历或做过某事。",
+    "mandatory_keywords": [
+      "从来",
+      "没有",
+      "过"
+    ],
+    "pragmatic_scenarios": [
+      "谈论个人经历或习惯"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "559",
+    "grammar_point_cn": "在字句",
+    "anchor_example": "我在家吃饭。",
+    "summary_cn": "介词'在'和地点名词一起，放在动词前，表示动作发生的场所。",
+    "mandatory_keywords": [
+      "在",
+      "动词"
+    ],
+    "pragmatic_scenarios": [
+      "询问或说明某人正在某地做什么"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "565",
+    "grammar_point_cn": "在...上/下/里 (方位词)",
+    "anchor_example": "苹果在桌子上。",
+    "summary_cn": "用“在”加上名词和方位词（如“上”、“下”、“里”）来表示物体更具体的位置，如“在...里面”、“在...上面”、“在...下面”。",
+    "mandatory_keywords": [
+      "在",
+      "上",
+      "下",
+      "里"
+    ],
+    "pragmatic_scenarios": [
+      "Describing the precise location of an object, for example, saying 'The keys are *on* the table' instead of just '*at* the table'."
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "569",
+    "grammar_point_cn": "动词重叠",
+    "anchor_example": "我看看。",
+    "summary_cn": "重复动词可以表示动作时间短，或者只是“试一试”，语气比较轻松、随意。",
+    "mandatory_keywords": [
+      "动词",
+      "重叠"
+    ],
+    "pragmatic_scenarios": [
+      "用于非正式的口语中,提出轻松的建议或请求,例如想看一样东西时说“我看看”,或邀请朋友“我们聊聊天吧”。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "575",
+    "grammar_point_cn": "双音节动词重叠 (ABAB式)",
+    "anchor_example": "我们研究研究这个问题。",
+    "summary_cn": "双音节动词可以ABAB式重叠，表示动作时间短、轻松或尝试一下。这种形式比形容词的AABB式重叠更常见于口语。",
+    "mandatory_keywords": [
+      "双音节动词",
+      "重叠",
+      "ABAB"
+    ],
+    "pragmatic_scenarios": [
+      "提出轻松、委婉的建议",
+      "让语气更柔和"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "576",
+    "grammar_point_cn": "动词 + 在",
+    "anchor_example": "我住在北京。",
+    "summary_cn": "一些表示状态或结果的动词（如：住、放、坐、站）后面可以直接跟“在”来表示地点。",
+    "mandatory_keywords": [
+      "住",
+      "放",
+      "坐",
+      "站",
+      "在"
+    ],
+    "pragmatic_scenarios": [
+      "描述人或物的位置"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "591",
+    "grammar_point_cn": "到、去、走的区别",
+    "anchor_example": "我明天要去北京。",
+    "summary_cn": "“去”指前往某个目的地，“到”指已经抵达目的地，“走”指离开当前位置。",
+    "mandatory_keywords": [
+      "到",
+      "去",
+      "走"
+    ],
+    "pragmatic_scenarios": [
+      "计划去一个地方时用“去”",
+      "确认是否已抵达时用“到”",
+      "准备离开或告别时用“走”"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "595",
+    "grammar_point_cn": "好 + 动词 (表示令人愉悦)",
+    "anchor_example": "这首歌很好听。",
+    "summary_cn": "“好”可以加在一些感官动词前，表示该动作带来的体验是愉快的或令人满意的，而不是“容易做”。",
+    "mandatory_keywords": [
+      "好",
+      "好吃",
+      "好喝",
+      "好看",
+      "好听"
+    ],
+    "pragmatic_scenarios": [
+      "用于评价食物、饮料、外貌、声音、气味或娱乐活动。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "604",
+    "grammar_point_cn": "可能补语：不懂",
+    "anchor_example": "我听不懂你说什么。",
+    "summary_cn": "用在动词（如“听”或“看”）后面，表示没有能力通过该动作来理解某事。",
+    "mandatory_keywords": [
+      "不",
+      "懂"
+    ],
+    "pragmatic_scenarios": [
+      "在课堂上听不懂老师讲课时",
+      "看中文书或菜单看不明白时"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "611",
+    "grammar_point_cn": "结果补语：到 / 见",
+    "anchor_example": "我看见了。",
+    "summary_cn": "用在感官动词（如看、听）后面，表示动作达到了目的或结果。在这种用法中，“到”和“见”可以互换。",
+    "mandatory_keywords": [
+      "到",
+      "见"
+    ],
+    "pragmatic_scenarios": [
+      "表示感官动作成功,即‘看到’、‘听到’了某物"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "618",
+    "grammar_point_cn": "“一些”的用法",
+    "anchor_example": "我想买一些水果。",
+    "summary_cn": "“一些”放在名词前，表示不确定的、复数的数量，意思是“some”或“a few”。",
+    "mandatory_keywords": [
+      "一些",
+      "名词"
+    ],
+    "pragmatic_scenarios": [
+      "购物时表达不确定的数量"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "621",
+    "grammar_point_cn": "有的……有的……",
+    "anchor_example": "桌子上的水果，有的红，有的绿。",
+    "summary_cn": "用“有的”来指一个群体中的一部分，可以重复使用来列举或对比群体中不同的部分。",
+    "mandatory_keywords": [
+      "有的"
+    ],
+    "pragmatic_scenarios": [
+      "描述一个群体中不同成员的特征或行为"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "629",
+    "grammar_point_cn": "半 + 量词 + 名词",
+    "anchor_example": "半个小时",
+    "summary_cn": "“半”放在量词前面，用来表示某个事物数量的一半。",
+    "mandatory_keywords": [
+      "半",
+      "量词"
+    ],
+    "pragmatic_scenarios": [
+      "表示时间或数量"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "630",
+    "grammar_point_cn": "数量词 + 半",
+    "anchor_example": "三个半小时",
+    "summary_cn": "当表示“整数加一半”时，“半”必须放在量词之后。结构为：数字 + 量词 + 半 (+ 名词)。",
+    "mandatory_keywords": [
+      "半",
+      "量词"
+    ],
+    "pragmatic_scenarios": [
+      "描述时间长度（如：一个半小时）",
+      "购物时描述重量或数量（如：两斤半）"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "641",
+    "grammar_point_cn": "量词",
+    "anchor_example": "那个女孩是我的朋友。",
+    "summary_cn": "用“这”或“那”来指代名词时，它们和名词的中间必须加上一个量词。最常用的量词是“个”。",
+    "mandatory_keywords": [
+      "这",
+      "那",
+      "量词",
+      "个"
+    ],
+    "pragmatic_scenarios": [
+      "在商店里指着一件物品说：'我要这个杯子'。(Pointing at an item in a store and saying 'I want this cup.')"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "644",
+    "grammar_point_cn": "用'第'表示序数",
+    "anchor_example": "这是第一课。",
+    "summary_cn": "在数字前加上'第'来表示顺序，构成序数词。",
+    "mandatory_keywords": [
+      "第",
+      "序数"
+    ],
+    "pragmatic_scenarios": [
+      "表示名次,如：第一名",
+      "表示楼层,如：住第三楼",
+      "表示次序,如：第二次机会"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "647",
+    "grammar_point_cn": "用“怎么”问原因",
+    "anchor_example": "他怎么还没来？",
+    "summary_cn": "“怎么”可以用来询问原因，通常带有惊讶、意外或不满的语气，类似于英文的“how come”。",
+    "mandatory_keywords": [
+      "怎么"
+    ],
+    "pragmatic_scenarios": [
+      "对某个意想不到的情况表示惊讶或不解时"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "648",
+    "grammar_point_cn": "怎么 + 不 + 形容词",
+    "anchor_example": "你怎么不高兴？",
+    "summary_cn": "用于询问原因，通常表示说话人对某种预期的状态没有发生感到惊讶或奇怪。",
+    "mandatory_keywords": [
+      "怎么",
+      "不"
+    ],
+    "pragmatic_scenarios": [
+      "表达对与预期不符的情况的惊讶或疑问"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "653",
+    "grammar_point_cn": "“了…吗？”疑问句",
+    "anchor_example": "你吃饭了吗？",
+    "summary_cn": "在陈述句末尾加上“了吗”，用来询问某个动作是否已经完成。",
+    "mandatory_keywords": [
+      "了",
+      "吗"
+    ],
+    "pragmatic_scenarios": [
+      "询问对方是否已经做完某件事"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "674",
+    "grammar_point_cn": "什么...都...",
+    "anchor_example": "我们什么酒都喝。",
+    "summary_cn": "使用“什么 + 名词 + 都”的结构来表示“任何”或“所有”，强调该名词所指范围内没有例外。",
+    "mandatory_keywords": [
+      "什么",
+      "都"
+    ],
+    "pragmatic_scenarios": [
+      "表达全部、所有的概念,强调没有例外"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "676",
+    "grammar_point_cn": "疑问代词的否定用法",
+    "anchor_example": "我什么东西都不想吃。",
+    "summary_cn": "使用疑问代词（如“什么”）加上“都”或“也”，再跟上否定词“不”或“没”，来表示对该范围内的所有事物进行完全否定，意思是“一个也没有”或“一点儿也不”。",
+    "mandatory_keywords": [
+      "什么",
+      "都",
+      "也",
+      "不",
+      "没"
+    ],
+    "pragmatic_scenarios": [
+      "用于表达全面的否定,例如拒绝所有选项（'我什么都不吃'）,或陈述某事完全没有发生（'我昨天什么都没做'）。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "677",
+    "grammar_point_cn": "用‘什么’表示任指（否定句）",
+    "anchor_example": "我什么东西都没吃。",
+    "summary_cn": "该结构用疑问代词“什么”来指代任何事物，后面跟“都”或“也”以及否定词“不”或“没”，表示完全否定。意思是“任何...都（不/没）...”。",
+    "mandatory_keywords": [
+      "什么",
+      "都",
+      "也",
+      "不",
+      "没"
+    ],
+    "pragmatic_scenarios": [
+      "当你想强调在某个范围内,没有任何例外时,比如完全拒绝、抱怨或陈述一个彻底的事实。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "681",
+    "grammar_point_cn": "别…了",
+    "anchor_example": "别吃了。",
+    "summary_cn": "用于劝阻或禁止某人继续进行某个动作。",
+    "mandatory_keywords": [
+      "别",
+      "了"
+    ],
+    "pragmatic_scenarios": [
+      "劝告或命令某人停止正在进行的活动"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "684",
+    "grammar_point_cn": "在...上/下/里",
+    "anchor_example": "书在桌子上。",
+    "summary_cn": "说明一个物体在另一个物体的上面、下面或里面等相对位置。",
+    "mandatory_keywords": [
+      "在",
+      "上",
+      "下",
+      "里"
+    ],
+    "pragmatic_scenarios": [
+      "描述物品的位置"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "688",
+    "grammar_point_cn": "在...方位词",
+    "anchor_example": "苹果在桌子上。",
+    "summary_cn": "用“在”加上方位词（如：上、下、里、旁边）来表示一个物体相对于另一个物体的位置。",
+    "mandatory_keywords": [
+      "在",
+      "上",
+      "下",
+      "里",
+      "旁边"
+    ],
+    "pragmatic_scenarios": [
+      "描述物品的位置"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "692",
+    "grammar_point_cn": "方位词",
+    "anchor_example": "书在桌子上面。",
+    "summary_cn": "方位词是表示方向或位置的名词，通常用在名词或代词的后面，来说明人或事物的具体位置。",
+    "mandatory_keywords": [
+      "方位词",
+      "上",
+      "下",
+      "里",
+      "外",
+      "位置"
+    ],
+    "pragmatic_scenarios": [
+      "描述物体的位置",
+      "指明方向"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "700",
+    "grammar_point_cn": "“不”的用法",
+    "anchor_example": "我不想去。",
+    "summary_cn": "“不”通常用来否定现在或将来的动作或意愿。",
+    "mandatory_keywords": [
+      "不"
+    ],
+    "pragmatic_scenarios": [
+      "拒绝邀请或提议",
+      "表达不打算做某事"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "703",
+    "grammar_point_cn": "用“不”否定习惯性动作",
+    "anchor_example": "我不吃肉。",
+    "summary_cn": "在动词前加“不”，可以否定一个习惯性或经常性的动作，表示通常不做某事。",
+    "mandatory_keywords": [
+      "不",
+      "动词"
+    ],
+    "pragmatic_scenarios": [
+      "Stating a habit or something you generally don't do (e.g., dietary preferences, lifestyle choices)."
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "717",
+    "grammar_point_cn": "特定动词的否定",
+    "anchor_example": "他以前不是我的老板。",
+    "summary_cn": "一些动词，如“是”、“在”和一些心理动词（如“知道”、“认识”），即使在描述过去的情况时，也总是用“不”来否定，而不是“没”或“没有”。",
+    "mandatory_keywords": [
+      "不",
+      "没",
+      "是",
+      "在",
+      "知道",
+      "认识"
+    ],
+    "pragmatic_scenarios": [
+      "用于否定过去的身份、状态或认知,例如说明某人过去不在某地或不认识某人。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "726",
+    "grammar_point_cn": "“要”和“想”的区别",
+    "anchor_example": "我要喝水。",
+    "summary_cn": "“要”和“想”都可表示“想做某事”。但“要”的语气更坚决、直接，有时显得比较急切或孩子气；而“想”则更委婉、客气，用于表达一种想法或愿望。",
+    "mandatory_keywords": [
+      "要",
+      "想"
+    ],
+    "pragmatic_scenarios": [
+      "当一个孩子强烈表达需求时,可能会说：“妈妈,我要吃冰淇淋！”。而一个成年人礼貌地表达意愿时,更可能说：“我想试试那家新开的餐厅。”"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "721",
+    "grammar_point_cn": "“要”和“想”的区别",
+    "anchor_example": "我要一杯水。",
+    "summary_cn": "“要”和“想”都可以表示“想要”。但“要”的语气更强，表示直接的需求或计划（将要）；“想”的语气更柔和，表示想法或愿望。此外，“想”后面跟名词时，也可以表示“想念”。",
+    "mandatory_keywords": [
+      "要",
+      "想"
+    ],
+    "pragmatic_scenarios": [
+      "点餐或表达愿望与计划"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "723",
+    "grammar_point_cn": "要 + 名词 (表示想要)",
+    "anchor_example": "我们都要咖啡。",
+    "summary_cn": "使用“主语 + 要 + 名词”的结构来直接表达想要得到某个东西。",
+    "mandatory_keywords": [
+      "要",
+      "名词"
+    ],
+    "pragmatic_scenarios": [
+      "在餐厅点餐",
+      "购物"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "724",
+    "grammar_point_cn": "用“想”表达“思念”",
+    "anchor_example": "我想你。",
+    "summary_cn": "动词“想”后面直接跟名词（通常是人、地方或与个人有情感联系的事物），意思是“思念”或“怀念”。",
+    "mandatory_keywords": [
+      "想"
+    ],
+    "pragmatic_scenarios": [
+      "当你想表达对远方的家人、朋友或爱人的思念之情时",
+      "当你怀念家乡的食物或某个地方时"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "727",
+    "grammar_point_cn": "助动词'要'表示意愿",
+    "anchor_example": "我要休息。",
+    "summary_cn": "用在动词前，表示有做某事的意愿或打算，意愿通常比'想'更强烈。",
+    "mandatory_keywords": [
+      "要"
+    ],
+    "pragmatic_scenarios": [
+      "表达自己想做某事的计划或决定",
+      "询问他人想做什么"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "728",
+    "grammar_point_cn": "用'想'表达意愿",
+    "anchor_example": "我想请你吃饭。",
+    "summary_cn": "用在动词前，表示主语有做某事的愿望或打算，语气比'要'更委婉。",
+    "mandatory_keywords": [
+      "想"
+    ],
+    "pragmatic_scenarios": [
+      "表达愿望或计划",
+      "礼貌地提出邀请或询问"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "729",
+    "grammar_point_cn": "助动词'要'表示计划",
+    "anchor_example": "星期六我要去北京。",
+    "summary_cn": "用在动词前，表示不久后的计划或打算，类似于英文的“going to”。",
+    "mandatory_keywords": [
+      "要"
+    ],
+    "pragmatic_scenarios": [
+      "讨论未来的计划和安排"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "731",
+    "grammar_point_cn": "想要",
+    "anchor_example": "你想要几个孩子？",
+    "summary_cn": "“想要”用来表达愿望或打算，意思是“to want”，后面可以跟名词或动词。",
+    "mandatory_keywords": [
+      "想要"
+    ],
+    "pragmatic_scenarios": [
+      "表达愿望或需求"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_0",
+    "grammar_point_cn": "形容词 + 极了",
+    "anchor_example": "这个主意好极了。",
+    "summary_cn": "“极了”用在形容词后面作为程度补语，表示程度非常高，相当于“非常”或“极其”。可用于褒义和贬义的形容词，多用于口语。",
+    "mandatory_keywords": [
+      "极",
+      "了"
+    ],
+    "pragmatic_scenarios": [
+      "表达强烈的情绪或评价"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_1",
+    "grammar_point_cn": "用“不怎么”表示程度不高",
+    "anchor_example": "这里的冬天不怎么冷。",
+    "summary_cn": "“不怎么”用在形容词或心理动词前，表示程度不高，相当于“不太”。这是一种比较委婉、温和的表达方式，可以使负面评价听起来不那么直接。",
+    "mandatory_keywords": [
+      "不怎么",
+      "形容词",
+      "心理动词"
+    ],
+    "pragmatic_scenarios": [
+      "委婉地表达负面或消极的看法",
+      "描述程度不高的状态或感受"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_2",
+    "grammar_point_cn": "用“全”表示全部",
+    "anchor_example": "我们全家都去过北京。",
+    "summary_cn": "副词“全”用来强调“整个”或“所有”。它可以直接放在某些名词前（如全家、全身、全国），或与“都”连用（全都）放在动词或形容词前，表示范围内无一例外。否定词“不/没”放在“全都”前后会改变句意，分别表示“部分否定”（不是所有）和“完全否定”（一个也没有）。",
+    "mandatory_keywords": [
+      "全",
+      "都"
+    ],
+    "pragmatic_scenarios": [
+      "谈论一个群体（如家庭、公司、学校）的整体情况",
+      "描述某个事物（如身体、作业）的全部状态",
+      "表达对一组事物的完全或部分否定"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_3",
+    "grammar_point_cn": "形容词重叠",
+    "anchor_example": "宝宝的眼睛大大的。",
+    "summary_cn": "通过重复形容词来加强描述的生动性。单音节形容词通常以“AA”形式重复（如“大大”），双音节形容词以“AABB”形式重复（如“高高兴兴”）。这种形式常用来生动地描述事物的状态或外貌。",
+    "mandatory_keywords": [
+      "形容词",
+      "重叠",
+      "AA",
+      "AABB"
+    ],
+    "pragmatic_scenarios": [
+      "生动地描述人或事物的外观、状态或心情"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_4",
+    "grammar_point_cn": "用“地”将形容词变为状语",
+    "anchor_example": "你要努力地学习。",
+    "summary_cn": "在形容词后面加上结构助词“地”，可以将其变为状语来修饰动词，说明动作进行的方式或状态，类似于英文中的-ly后缀。",
+    "mandatory_keywords": [
+      "地",
+      "形容词",
+      "动词"
+    ],
+    "pragmatic_scenarios": [
+      "描述动作的方式或状态"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_5",
+    "grammar_point_cn": "正好",
+    "anchor_example": "你来了！我正好要找你。",
+    "summary_cn": "“正好”可以作为副词或形容词，用来表示巧合，或者说明在时间、大小、数量等方面恰到好处。",
+    "mandatory_keywords": [
+      "正好"
+    ],
+    "pragmatic_scenarios": [
+      "表示某事发生得非常巧合",
+      "描述某物的尺寸、数量、温度或时间等刚刚好"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_6",
+    "grammar_point_cn": "用“还”表示持续",
+    "anchor_example": "已经中午了，他还在睡？",
+    "summary_cn": "副词“还”表示某个动作或状态的持续，或者某事没有发生。常与“在”、“是”、“没”、“不”连用，表达“仍然”或“依旧”的意思，可以用于询问、陈述或表达与预期相反的结果。",
+    "mandatory_keywords": [
+      "还",
+      "在",
+      "是",
+      "没",
+      "不"
+    ],
+    "pragmatic_scenarios": [
+      "评论一个持续到现在的动作或状态",
+      "表达与预期或建议相反的结果",
+      "询问某事是否仍未发生"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_7",
+    "grammar_point_cn": "“就是”的强调用法",
+    "anchor_example": "我就是要去！",
+    "summary_cn": "“就是”放在动词或名词前，用来加强语气，表示强调、肯定或固执。可以表达“正是”、“偏要”或“只是因为”等意思。",
+    "mandatory_keywords": [
+      "就",
+      "是"
+    ],
+    "pragmatic_scenarios": [
+      "用于强调事实、表达固执或坚持己见时。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_9",
+    "grammar_point_cn": "用“就要...了”表示即将发生",
+    "anchor_example": "就要下雨了。",
+    "summary_cn": "“就要...了”结构用来表示某事很快将要发生。与“快要...了”不同的是，“就要”可以和表示具体时间的词语连用，来指明事件发生的确定时间点。",
+    "mandatory_keywords": [
+      "就",
+      "要",
+      "了"
+    ],
+    "pragmatic_scenarios": [
+      "预告天气变化",
+      "宣布即将开始的活动",
+      "谈论有确定时间点的未来计划"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_10",
+    "grammar_point_cn": "副词“再”的用法",
+    "anchor_example": "我们明年再来。",
+    "summary_cn": "副词“再”用于表示某个动作或状态在未来的重复发生，与表示过去重复的“又”相对。它也可以表示在现有基础上增加数量（“另外”、“更多”），或表示动作的短暂持续。",
+    "mandatory_keywords": [
+      "再"
+    ],
+    "pragmatic_scenarios": [
+      "请求某人重复一个动作",
+      "计划在未来再次做某事",
+      "点餐或购物时要求更多",
+      "鼓励或请求某人继续做某事"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_11",
+    "grammar_point_cn": "用“又”表示过去的重复",
+    "anchor_example": "你又迟到了。",
+    "summary_cn": "副词“又”用来表示一个已经发生过的动作的重复。它通常指过去发生的事情，常与“了”连用，区别于表示将来重复的“再”。",
+    "mandatory_keywords": [
+      "又",
+      "了",
+      "再"
+    ],
+    "pragmatic_scenarios": [
+      "抱怨某事再次发生",
+      "表达对某人重复行为的无奈或厌烦",
+      "描述一个令人期待的好事再次即将发生"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_12",
+    "grammar_point_cn": "原来",
+    "anchor_example": "原来是这样！",
+    "summary_cn": "“原来”用于表示突然意识到或发现某个之前不知道的情况，带有恍然大悟的语气，意为“it turns out that...”。",
+    "mandatory_keywords": [
+      "原来"
+    ],
+    "pragmatic_scenarios": [
+      "当你发现一个你之前不知道或误解了的事实,感到惊讶或恍然大悟时。例如,你找了半天的钥匙,最后发现就在自己口袋里,可以说：“啊,原来在这里！”"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_13",
+    "grammar_point_cn": "“一下子”的用法",
+    "anchor_example": "天气一下子变冷了。",
+    "summary_cn": "“一下子”用作副词，表示某个动作或变化在很短的时间内突然发生或完成，强调事情发生得快而突然。它通常与“了”连用，也可以和“就”一起使用，来强调事情发生得又快又容易。",
+    "mandatory_keywords": [
+      "一下子",
+      "了",
+      "就"
+    ],
+    "pragmatic_scenarios": [
+      "描述天气、情绪或状态的突然变化",
+      "强调某个动作完成得非常迅速"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_14",
+    "grammar_point_cn": "差点(儿)",
+    "anchor_example": "我今天差点迟到了。",
+    "summary_cn": "用“差点(儿)”表示某事几乎发生但最终没有发生，常用于描述不希望发生的情况。",
+    "mandatory_keywords": [
+      "差点",
+      "差点儿"
+    ],
+    "pragmatic_scenarios": [
+      "描述一次险些发生的意外或失误,例如差点迟到、差点忘了某事或差点撞车。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_15",
+    "grammar_point_cn": "都⋯⋯了",
+    "anchor_example": "都九点了，快点起床！",
+    "summary_cn": "用于强调某事已经发生，通常带有抱怨、催促或惊讶的语气，比“已经⋯⋯了”更强烈。",
+    "mandatory_keywords": [
+      "都",
+      "了"
+    ],
+    "pragmatic_scenarios": [
+      "催促他人行动",
+      "表达对现状的抱怨或惊讶"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_16",
+    "grammar_point_cn": "用“从来都”表示“一直以来”",
+    "anchor_example": "他从来都这样。",
+    "summary_cn": "“从来都”用于肯定句，强调某个情况或动作从过去到现在一直如此，没有改变。",
+    "mandatory_keywords": [
+      "从来",
+      "都"
+    ],
+    "pragmatic_scenarios": [
+      "描述长期存在的习惯或状态",
+      "陈述不变的事实或规律"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_17",
+    "grammar_point_cn": "用“结果”表示结果",
+    "anchor_example": "她穿得很少，结果感冒了。",
+    "summary_cn": "“结果”常放在第二句话的开头，引出前面情况所带来的结果。这个结果可以是符合逻辑的，也可以是意想不到的。",
+    "mandatory_keywords": [
+      "结果"
+    ],
+    "pragmatic_scenarios": [
+      "解释一个行为导致的后果",
+      "讲述一个意想不到的结局"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_18",
+    "grammar_point_cn": "用“互相”表示“each other”",
+    "anchor_example": "我们应该互相帮助。",
+    "summary_cn": "副词“互相”用在动词前，表示动作是相互的、双向的。通常与双音节动词连用。",
+    "mandatory_keywords": [
+      "互相"
+    ],
+    "pragmatic_scenarios": [
+      "描述团队合作或人际关系中的相互行为"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_19",
+    "grammar_point_cn": "够的用法",
+    "anchor_example": "我带的钱够花。",
+    "summary_cn": "“够”表示数量或程度达到了某个标准或满足了需求。肯定式通常是“够 + 动词/形容词”，否定式是“不够 + 动词/形容词”。“够”也可以用在某些动词后，如“吃够了”、“受够了”，表示对某事感到厌烦。",
+    "mandatory_keywords": [
+      "够",
+      "不够"
+    ],
+    "pragmatic_scenarios": [
+      "表示数量或程度是否充足",
+      "表达对某事感到厌烦"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_20",
+    "grammar_point_cn": "终于",
+    "anchor_example": "你终于到了！",
+    "summary_cn": "表示某事在经过长时间等待后最终发生，通常带有喜悦或松了一口气的感情色彩。",
+    "mandatory_keywords": [
+      "终于",
+      "了"
+    ],
+    "pragmatic_scenarios": [
+      "表达经过长时间的等待后,期待的事情终于发生,带有欣慰或解脱的情感"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_21",
+    "grammar_point_cn": "用“还是”表示建议",
+    "anchor_example": "我们还是明天去吧。",
+    "summary_cn": "在比较了不同选择后，用“还是”来提出一个说话人认为更好的建议或决定，意思是“最好还是...”。句末常跟“吧”。",
+    "mandatory_keywords": [
+      "还是",
+      "吧"
+    ],
+    "pragmatic_scenarios": [
+      "在权衡利弊后提出建议或做出决定"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_22",
+    "grammar_point_cn": "用“最好”来建议",
+    "anchor_example": "你最好先休息一下。",
+    "summary_cn": "“最好”用于向他人提出建议或委婉的要求，表示某种做法是当前情况下的最佳选择。",
+    "mandatory_keywords": [
+      "最好",
+      "别",
+      "不要"
+    ],
+    "pragmatic_scenarios": [
+      "提出建议或劝告"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_23",
+    "grammar_point_cn": "“这样”的用法",
+    "anchor_example": "这样做不对。",
+    "summary_cn": "“这样”可以作为副词，放在动词前，表示“用这种方式”；也可以作为连词，连接前后分句，说明前一句是后一句的原因或方式，从而引出结果或结论。",
+    "mandatory_keywords": [
+      "这样",
+      "的话",
+      "会",
+      "才"
+    ],
+    "pragmatic_scenarios": [
+      "说明做事的方式",
+      "解释原因与结果",
+      "提出建议或假设"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_24",
+    "grammar_point_cn": "“一 + 量词 + 一 + 量词”结构",
+    "anchor_example": "别吵，一个一个说。",
+    "summary_cn": "“一 + 量词 + 一 + 量词”结构用于表示动作的顺序或重复。根据所用量词的不同，它可以表示“一个接一个地”（如：一个一个），“逐渐地”（如：一天一天），或“反复地”（如：一次一次）。有时中间可以加上“又”来加强重复的语气（如：一次又一次）。",
+    "mandatory_keywords": [
+      "一"
+    ],
+    "pragmatic_scenarios": [
+      "指示按顺序做事",
+      "描述逐渐发生的变化",
+      "强调动作的重复性"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_25",
+    "grammar_point_cn": "用“就”表示数量少",
+    "anchor_example": "我就一个哥哥。",
+    "summary_cn": "副词“就”可以放在动词或主语前，用来强调数量少、范围小，常翻译为“只有”或“仅仅”。",
+    "mandatory_keywords": [
+      "就"
+    ],
+    "pragmatic_scenarios": [
+      "强调人或物的数量很少"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_26",
+    "grammar_point_cn": "动作未发生时间的表达",
+    "anchor_example": "我们已经十年没见了。",
+    "summary_cn": "用于说明某个动作持续了多长时间没有发生。结构为：主语 + (已经 +) 时长 + 没 + 动词 + 了。",
+    "mandatory_keywords": [
+      "没",
+      "了"
+    ],
+    "pragmatic_scenarios": [
+      "询问或描述某个常规活动有多久没做了,例如询问朋友多久没回家,或抱怨自己很久没休假了。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_27",
+    "grammar_point_cn": "用“就”表示动作发生得早或快",
+    "anchor_example": "我们九点上课，他八点就来了。",
+    "summary_cn": "副词“就”用在动词前，强调动作发生得早、快，或进行得顺利，常含有比预期要早或快的意思。",
+    "mandatory_keywords": [
+      "就"
+    ],
+    "pragmatic_scenarios": [
+      "描述某个动作比预期的要早发生",
+      "说明完成某事用时很短",
+      "表示一个动作在不久的将来马上发生"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_28",
+    "grammar_point_cn": "用“才”表示晚",
+    "anchor_example": "我十一点才到家。",
+    "summary_cn": "用副词“才”来表示动作发生的时间比预期的晚，有“不早”或“直到那时”的意思。",
+    "mandatory_keywords": [
+      "才"
+    ],
+    "pragmatic_scenarios": [
+      "抱怨别人来晚了",
+      "解释自己迟到的原因",
+      "描述一件事情很晚才发生"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_29",
+    "grammar_point_cn": "用“先……再……”表示顺序",
+    "anchor_example": "先洗手再吃。",
+    "summary_cn": "“先……再……”结构用于描述动作的先后顺序，表示先完成一个动作，然后进行下一个动作，类似于英语的“first..., then...”。",
+    "mandatory_keywords": [
+      "先",
+      "再"
+    ],
+    "pragmatic_scenarios": [
+      "描述做事的计划或步骤",
+      "说明日常习惯",
+      "给出指令或建议"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_30",
+    "grammar_point_cn": "用“老是”表达抱怨",
+    "anchor_example": "你怎么老是加班？",
+    "summary_cn": "副词“老是”表示某个动作或情况频繁重复，通常带有一种抱怨或不满的语气。可以简称为“老”。",
+    "mandatory_keywords": [
+      "老是",
+      "老"
+    ],
+    "pragmatic_scenarios": [
+      "抱怨某人重复做某事或表达不满"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_31",
+    "grammar_point_cn": "用“才”表示数量少",
+    "anchor_example": "这个班才两个学生。",
+    "summary_cn": "副词“才”用在数量词前，强调数量少或低于预期。",
+    "mandatory_keywords": [
+      "才",
+      "数量"
+    ],
+    "pragmatic_scenarios": [
+      "表达对数量之少（如年龄、价格、时间等）的惊讶或认为其不够的语气"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_32",
+    "grammar_point_cn": "“也都”的用法",
+    "anchor_example": "我的家人也都很好。",
+    "summary_cn": "当“也”和“都”连用时，“也”必须在“都”的前面。这个结构用于强调多个主语都具有某个相同的属性或行为。",
+    "mandatory_keywords": [
+      "也",
+      "都"
+    ],
+    "pragmatic_scenarios": [
+      "强调多个事物或群体间的共同点"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_33",
+    "grammar_point_cn": "用“这么”和“那么”强调形容词",
+    "anchor_example": "雨这么大，明天再去吧。",
+    "summary_cn": "“这么”和“那么”放在形容词前，用来强调程度，类似于英语的“so”或“this/that”。“这么”常指近处或当前情况，“那么”常指远处或非当前情况。",
+    "mandatory_keywords": [
+      "这么",
+      "那么"
+    ],
+    "pragmatic_scenarios": [
+      "用于感叹或强调事物的状态和程度",
+      "解释原因或结果"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_34",
+    "grammar_point_cn": "用“挺...的”表达程度",
+    "anchor_example": "你男朋友挺帅的。",
+    "summary_cn": "“挺”用在形容词或心理动词前，表示“很”或“相当”的意思，表示一个比较高的程度。这个结构的句尾通常会带上“的”。",
+    "mandatory_keywords": [
+      "挺",
+      "的"
+    ],
+    "pragmatic_scenarios": [
+      "在日常口语中评价人、事、物或表达自己的感受。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_35",
+    "grammar_point_cn": "用“比较”表达“相当”或“相对”",
+    "anchor_example": "这个问题比较简单。",
+    "summary_cn": "“比较”作为副词，用在形容词或心理动词前，表示相对而言程度较高，意思是“相当”、“还算”或“更”。",
+    "mandatory_keywords": [
+      "比较"
+    ],
+    "pragmatic_scenarios": [
+      "在不绝对的情况下,对事物进行评价或描述",
+      "表达个人偏好"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_36",
+    "grammar_point_cn": "用“什么的”表示列举",
+    "anchor_example": "我们见面一般就是吃饭、聊天什么的。",
+    "summary_cn": "“什么的”用在列举的一个或多个名词/动词后，表示省略了其他同类的事物，意思是‘等等’、‘之类的’，多用于口语。",
+    "mandatory_keywords": [
+      "什么的"
+    ],
+    "pragmatic_scenarios": [
+      "在口语中非正式地列举事物,且不想或不需要全部说完时"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_37",
+    "grammar_point_cn": "之类的",
+    "anchor_example": "你喜欢《星球大战》之类的电影吗？",
+    "summary_cn": "用于列举一个或多个例子后，概括性地表示还有其他同类但未一一说明的事物，相当于“……等等”或“……之类的东西”。",
+    "mandatory_keywords": [
+      "之类"
+    ],
+    "pragmatic_scenarios": [
+      "列举事物或类别",
+      "给出例子进行说明"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_38",
+    "grammar_point_cn": "用'等等'或'等'表示非穷尽列举",
+    "anchor_example": "西瓜、菠萝、葡萄等等，我都喜欢吃。",
+    "summary_cn": "'等等'或'等'放在一系列列举的事物之后，表示“诸如此类”，说明列表并未完全列出，相当于英语的 'etc.' 或 'and so on'。",
+    "mandatory_keywords": [
+      "等",
+      "等等"
+    ],
+    "pragmatic_scenarios": [
+      "在口头或书面语中列举多个事物、例子或情况时"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_39",
+    "grammar_point_cn": "用'不过'表示转折",
+    "anchor_example": "这件衣服我喜欢，不过有点贵。",
+    "summary_cn": "'不过'是一个连词，用于连接两个分句，表示转折关系。它的语气比'但是'或'可是'更温和、口语化，常用于补充说明或提出一个不太强烈的反对意见。",
+    "mandatory_keywords": [
+      "不过"
+    ],
+    "pragmatic_scenarios": [
+      "在日常对话中,委婉地表达转折或补充说明"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_40",
+    "grammar_point_cn": "用“要不”提建议",
+    "anchor_example": "下雨了，要不明天去吧。",
+    "summary_cn": "在口语中，“要不”可以用来委婉地提出建议，询问对方的意见，类似于英语的“how about”。它可以在句首，也可以在说明情况之后使用。",
+    "mandatory_keywords": [
+      "要不"
+    ],
+    "pragmatic_scenarios": [
+      "与人商量并提出替代方案或建议"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_41",
+    "grammar_point_cn": "还有",
+    "anchor_example": "你需要吃药。还有，要多休息。",
+    "summary_cn": "“还有”用于在对话中补充新的信息、要求或情况，相当于“另外”或“而且”。",
+    "mandatory_keywords": [
+      "还有"
+    ],
+    "pragmatic_scenarios": [
+      "补充信息或提出额外要求",
+      "给出多项建议或指令"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_42",
+    "grammar_point_cn": "另外的用法",
+    "anchor_example": "幼儿园提供午餐。另外，每天下午还有点心和水果。",
+    "summary_cn": "“另外”用来补充说明额外的信息。作为连词，它连接两个句子，常与“还”或“也”连用，表示“除此之外”。作为副词，它放在动词前，表示“另外的”或“额外的”。",
+    "mandatory_keywords": [
+      "另外",
+      "还",
+      "也"
+    ],
+    "pragmatic_scenarios": [
+      "列举多个理由或情况",
+      "补充说明额外的信息",
+      "提出另一个选择或建议"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_43",
+    "grammar_point_cn": "用“再说”表示“另外”",
+    "anchor_example": "这么晚，别走了。再说，外面正在下雪。",
+    "summary_cn": "“再说”用于在第一句话的理由或情况之上，补充另一个理由或情况，相当于“另外”或“而且”。后一个分句常跟“也”或“还”。",
+    "mandatory_keywords": [
+      "再说",
+      "也"
+    ],
+    "pragmatic_scenarios": [
+      "在劝说、拒绝或解释原因时,提供补充的理由来加强语气"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_44",
+    "grammar_point_cn": "用'那么'或'那'表示推论或建议",
+    "anchor_example": "大家 都 到 了 ，那么 我们 开始 吧。",
+    "summary_cn": "根据前文提到的情况，用'那么'或'那'引出合乎逻辑的判断、建议或结果。常用于口语，表示'so...'或'then...'。",
+    "mandatory_keywords": [
+      "那么",
+      "那"
+    ],
+    "pragmatic_scenarios": [
+      "根据已知情况提出建议或做出决定",
+      "基于对方的话进行追问或推断"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_45",
+    "grammar_point_cn": "用'来'连接动词短语",
+    "anchor_example": "很多年轻人用手机APP来点外卖。",
+    "summary_cn": "用'来'连接两个动词性短语，表示通过前一个动作（方式或方法）来实现后一个动作（目的）。常与'用'或'通过'连用，构成“用/通过 + 方式 + 来 + 目的”的结构。",
+    "mandatory_keywords": [
+      "来",
+      "用",
+      "通过"
+    ],
+    "pragmatic_scenarios": [
+      "解释如何通过某种方式或方法来达到一个目的"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_46",
+    "grammar_point_cn": "用“之前”和“之后”表达时间顺序",
+    "anchor_example": "来中国之前，我的汉语很一般。",
+    "summary_cn": "“之前”和“之后”用于指明某个事件发生前或后的时间点。它们与“以前”和“以后”相似，但语气上稍微正式一些。它们可以放在一个事件短语之后，也可以独立作时间词使用。",
+    "mandatory_keywords": [
+      "之前",
+      "之后"
+    ],
+    "pragmatic_scenarios": [
+      "按时间顺序叙述事件",
+      "描述个人经历或背景",
+      "安排计划或给出指示"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_47",
+    "grammar_point_cn": "用'以来'和'来'表示“自从”",
+    "anchor_example": "结婚以来，我们没吵过架。",
+    "summary_cn": "'以来'放在过去的时间点或事件后，表示从那时起直到现在的一段持续时间。'来'的用法相似，但只能用在表示时间长度的词语后面，例如“十年来”或“几个月来”。",
+    "mandatory_keywords": [
+      "以来",
+      "来",
+      "自从"
+    ],
+    "pragmatic_scenarios": [
+      "描述从过去某个时间点或事件开始,一直持续到现在的状况或变化"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_49",
+    "grammar_point_cn": "用“后来”连接过去事件",
+    "anchor_example": "他们上周吵架了，后来和好了。",
+    "summary_cn": "“后来”用来连接两个已经发生的过去事件，表示一个事件在另一个事件之后发生，类似于英文的“afterward”或“later”。",
+    "mandatory_keywords": [
+      "后来"
+    ],
+    "pragmatic_scenarios": [
+      "叙述过去发生的一系列事情",
+      "讲述个人经历或故事"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_50",
+    "grammar_point_cn": "“分之”的用法",
+    "anchor_example": "这个文件已经下载了三分之二。",
+    "summary_cn": "“分之”用于表达分数和百分比，其结构为“分母 + 分之 + 分子”，顺序与英语相反。例如，“三分之二”表示2/3，“百分之五”表示5%。",
+    "mandatory_keywords": [
+      "分之",
+      "是",
+      "占"
+    ],
+    "pragmatic_scenarios": [
+      "表达统计数据和调查结果",
+      "描述整体中的部分或比例",
+      "说明百分比（如折扣、电量、进度）"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_51",
+    "grammar_point_cn": "用'多'表示概数",
+    "anchor_example": "这个班有两百多个学生。",
+    "summary_cn": "用'多'表示比某个整数多一点的概数。对于大于10的数，'多'放在数词和量词之间（如：二十多岁）。对于1-10的数，'多'则放在量词之后（如：三个多月）。",
+    "mandatory_keywords": [
+      "多",
+      "概数"
+    ],
+    "pragmatic_scenarios": [
+      "估算不确切的数量、年龄、时间或价格"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_53",
+    "grammar_point_cn": "动态助词“着”",
+    "anchor_example": "他笑着说“对不起”。",
+    "summary_cn": "助词“着”用在动词后面，表示一个动作或状态的持续。常用来描述一个动作发生时伴随的姿态或方式（动词1+着+动词2），或表示某个事物正处于一种持续的状态（如：门开着）。",
+    "mandatory_keywords": [
+      "着",
+      "动词"
+    ],
+    "pragmatic_scenarios": [
+      "描述做某个动作时的伴随状态或方式",
+      "描述人或事物的持续存在状态",
+      "发出持续性动作的指令"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_54",
+    "grammar_point_cn": "用“嘛”表示显而易见",
+    "anchor_example": "不想去就不要去嘛。",
+    "summary_cn": "语气助词“嘛”用在句末，表示说话人认为所说的事情是显而易见的、理所当然的。",
+    "mandatory_keywords": [
+      "嘛"
+    ],
+    "pragmatic_scenarios": [
+      "陈述一个显而易见的道理或事实",
+      "给出理所当然的建议或劝说",
+      "表达一种轻松或略带安抚的语气"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_55",
+    "grammar_point_cn": "用'吧...吧...'表示两难选择",
+    "anchor_example": "冬天去吧，太冷；夏天去吧，太热。",
+    "summary_cn": "当一个句子中出现两次'吧'时，通常用来列出两个让说话人犹豫不决的选项。这个句式表达了一种左右为难的感觉，因为两个选项通常都有各自的缺点。",
+    "mandatory_keywords": [
+      "吧"
+    ],
+    "pragmatic_scenarios": [
+      "表达左右为难的困境",
+      "衡量两个都不理想的选项"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_56",
+    "grammar_point_cn": "语气助词“的”",
+    "anchor_example": "他会好的。",
+    "summary_cn": "放在陈述句句末，表示说话人非常肯定的语气。",
+    "mandatory_keywords": [
+      "的"
+    ],
+    "pragmatic_scenarios": [
+      "表示肯定或向他人保证"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_58",
+    "grammar_point_cn": "“直到”的用法",
+    "anchor_example": "直到十二点半，我才做完作业。",
+    "summary_cn": "“直到”表示某个动作或状态一直持续到某个特定的时间点才发生变化或结束，常用于强调事情发生得晚。肯定句中常与“才”连用，否定句中常与“都”连用。",
+    "mandatory_keywords": [
+      "直到",
+      "才",
+      "都"
+    ],
+    "pragmatic_scenarios": [
+      "叙述一件持续了很久才发生或改变的事情",
+      "强调某个动作或结果发生得很晚",
+      "描述一个人生或事件的转折点"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_59",
+    "grammar_point_cn": "介词'给'表示'为'",
+    "anchor_example": "妈妈给孩子们做饭。",
+    "summary_cn": "介词'给'放在动词前，表示动作是为谁做的，引出动作的受益人。结构是：主语 + 给 + 接受者 + 动词短语。",
+    "mandatory_keywords": [
+      "给"
+    ],
+    "pragmatic_scenarios": [
+      "请求别人帮忙",
+      "为别人做事或提供服务"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_60",
+    "grammar_point_cn": "用'为'表示动作的对象",
+    "anchor_example": "我们都为你高兴。",
+    "summary_cn": "介词“为”用来引出动作或情感所涉及的对象，表示“替”某人做事或“因”某人而产生某种状态。",
+    "mandatory_keywords": [
+      "为"
+    ],
+    "pragmatic_scenarios": [
+      "表达为某人或某事感到某种情绪（如高兴、担心）,或为其做某事（如工作、准备、加油、祈祷）时使用。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_61",
+    "grammar_point_cn": "用“不到”表示少于",
+    "anchor_example": "我女儿不到三岁。",
+    "summary_cn": "“不到”放在数字和量词前，表示数量、年龄、时间或距离等没有达到某个具体数目，意思是“少于”或“未满”。当与“就”连用时，可以强调某事发生得比预想的要早或快。",
+    "mandatory_keywords": [
+      "不",
+      "到"
+    ],
+    "pragmatic_scenarios": [
+      "谈论年龄",
+      "谈论价格",
+      "谈论时间",
+      "谈论距离"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_62",
+    "grammar_point_cn": "介词“往”的用法",
+    "anchor_example": "一直往前走。",
+    "summary_cn": "介词“往”用来表示动作的方向，通常结构为“往 + 方向/地点 + 动词”。在一些固定搭配中，如“往下说”，它也可以表示“继续”的意思。",
+    "mandatory_keywords": [
+      "往"
+    ],
+    "pragmatic_scenarios": [
+      "指明方向",
+      "表示继续进行某个动作"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_63",
+    "grammar_point_cn": "介词 '向' 的用法",
+    "anchor_example": "向东走。",
+    "summary_cn": "介词'向'用来引出动作的方向或对象。它表示动作是'朝着'某个方向或'对'某个人发出的，例如指路、道歉、学习或借东西。",
+    "mandatory_keywords": [
+      "向",
+      "介词"
+    ],
+    "pragmatic_scenarios": [
+      "指示方向",
+      "表示动作的对象",
+      "请求或获取信息/物品"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_64",
+    "grammar_point_cn": "“在”表示抽象范围",
+    "anchor_example": "在技术方面，他是专家。",
+    "summary_cn": "介词“在”与“上”、“下”、“方面”等词搭配，可以引出一个抽象的话题、条件或方面，从而限定主句的范围。",
+    "mandatory_keywords": [
+      "在",
+      "上",
+      "下",
+      "方面"
+    ],
+    "pragmatic_scenarios": [
+      "在讨论或评论特定话题、方面或条件时使用,以明确讨论的范围。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_65",
+    "grammar_point_cn": "介词“对”的用法",
+    "anchor_example": "宝宝对我笑了。",
+    "summary_cn": "介词“对”用来引出动作或态度所指向的对象，可以翻译为英文的“to”或“towards”。它通常跟在主语后面，对象后面再跟一个动词或表示心理状态的词。",
+    "mandatory_keywords": [
+      "对",
+      "介词"
+    ],
+    "pragmatic_scenarios": [
+      "表达动作的对象",
+      "表达态度或情感的对象"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_66",
+    "grammar_point_cn": "用“看起来”表达外表判断",
+    "anchor_example": "蛋糕看起来很好吃。",
+    "summary_cn": "“看起来”用于根据视觉观察，对人或事物的外观、状态或性质做出推断或评价。后面可以跟形容词（表示判断），或者“像”+名词（表示类比）。",
+    "mandatory_keywords": [
+      "看起来"
+    ],
+    "pragmatic_scenarios": [
+      "评价他人的外貌或状态",
+      "描述食物的外观",
+      "根据外表进行比较"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_67",
+    "grammar_point_cn": "使役动词 (Causative Verbs)",
+    "anchor_example": "这部电影让人很感动。",
+    "summary_cn": "使用“让”、“叫”、“请”、“使”等动词，表示主语导致或影响宾语去做某事或进入某种状态。基本结构是：主语 + 使役动词 + 宾语 + 谓语。",
+    "mandatory_keywords": [
+      "让",
+      "叫",
+      "请",
+      "使"
+    ],
+    "pragmatic_scenarios": [
+      "请求、允许或命令某人做某事",
+      "表达某人或某事造成的影响或情感变化",
+      "在正式文体中说明因果关系"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_68",
+    "grammar_point_cn": "用“看”表达“取决于”",
+    "anchor_example": "去不去得看我的心情。",
+    "summary_cn": "用“要看”或“得看”来表达一个结果取决于另一个不确定的情况。结构通常是“[不确定的结果] + 要看/得看 + [条件]”。",
+    "mandatory_keywords": [
+      "看",
+      "要看",
+      "得看"
+    ],
+    "pragmatic_scenarios": [
+      "当被问到一个无法给出确定答案的问题时,用来解释结果取决于什么条件。",
+      "讨论一个计划或决定的多种可能性及其决定因素。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_69",
+    "grammar_point_cn": "用“好像”表达“似乎”",
+    "anchor_example": "她好像生病了。",
+    "summary_cn": "“好像”是一个副词，用来表示对人或情况的推测或判断，意思是“看起来像”或“似乎是”。可以放在主语后面，也可以直接放在句首。",
+    "mandatory_keywords": [
+      "好像"
+    ],
+    "pragmatic_scenarios": [
+      "推测某人的状态或情况"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_70",
+    "grammar_point_cn": "“以为”的用法",
+    "anchor_example": "我以为他是德国人。",
+    "summary_cn": "用于表达一个错误的想法或判断，表示事实与说话人之前想的不一样。",
+    "mandatory_keywords": [
+      "以为"
+    ],
+    "pragmatic_scenarios": [
+      "纠正一个错误的看法或假设"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_71",
+    "grammar_point_cn": "介词'经过'",
+    "anchor_example": "经过自己的努力，她考上了北京大学。",
+    "summary_cn": "用作介词，表示在经历某个过程或时间段后，带来了某种结果。结构通常为“经过 + 事件/时间，......”。",
+    "mandatory_keywords": [
+      "经过"
+    ],
+    "pragmatic_scenarios": [
+      "描述经过一番努力或一段时间后取得的成果或变化"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_72",
+    "grammar_point_cn": "“通过”的用法",
+    "anchor_example": "通过这个调查，我们发现很多人都支持他。",
+    "summary_cn": "“通过”可用作动词，表示“穿过”某个地方或“合格”某个考核。也可用作介词，引出达到某种目的所使用的方法、途径或媒介。",
+    "mandatory_keywords": [
+      "通过"
+    ],
+    "pragmatic_scenarios": [
+      "说明达到目的所使用的方法或途径",
+      "描述穿过某个物理空间",
+      "表示成功通过考试或审查"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_73",
+    "grammar_point_cn": "“来自”的用法",
+    "anchor_example": "我来自中国。",
+    "summary_cn": "“来自”用于表示人或事物的来源地或出处，可以指具体的地方，也可以指抽象的概念。",
+    "mandatory_keywords": [
+      "来自"
+    ],
+    "pragmatic_scenarios": [
+      "自我介绍时说明国籍或家乡",
+      "解释一个想法或物品的来源"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_74",
+    "grammar_point_cn": "用“算”做判断",
+    "anchor_example": "她算天才。",
+    "summary_cn": "“算”用来表示一种判断或评价，意思是“算是”或“被认为是”。它可以和名词或形容词一起使用。",
+    "mandatory_keywords": [
+      "算",
+      "算是"
+    ],
+    "pragmatic_scenarios": [
+      "当对人或事物进行评价或归类,表达“可以看作”或“称得上”的意思时。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_75",
+    "grammar_point_cn": "用“来”代替动词",
+    "anchor_example": "我来吧。",
+    "summary_cn": "在上下文清楚的情况下，“来”可以代替具体的动词，表示由主语来执行该动作，常用于主动承担任务或指示他人做事。",
+    "mandatory_keywords": [
+      "来"
+    ],
+    "pragmatic_scenarios": [
+      "主动承担一项任务或提供帮助",
+      "回应一个需要人完成某事的请求",
+      "在别人抱怨事情难做或做得慢时,挑战对方来做"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_76",
+    "grammar_point_cn": "“不用”的用法",
+    "anchor_example": "不用谢。",
+    "summary_cn": "“不用”表示没有必要或不需要做某事，是“要”的否定形式之一。",
+    "mandatory_keywords": [
+      "不用"
+    ],
+    "pragmatic_scenarios": [
+      "表示做某事是没有必要的",
+      "礼貌地回应感谢",
+      "劝别人不要担心"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_77",
+    "grammar_point_cn": "用'得'表示必须",
+    "anchor_example": "我们得走了。",
+    "summary_cn": "助动词'得' (děi) 用在动词前，表示由于某种原因必须或有必要做某事。",
+    "mandatory_keywords": [
+      "得"
+    ],
+    "pragmatic_scenarios": [
+      "表达因客观情况或道理而产生的必要性或义务"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_78",
+    "grammar_point_cn": "“少”+动词",
+    "anchor_example": "少吃垃圾食品。",
+    "summary_cn": "副词“少”放在动词前，表示减少某个动作的频率或数量，常用于提出建议或劝告。",
+    "mandatory_keywords": [
+      "少",
+      "动词"
+    ],
+    "pragmatic_scenarios": [
+      "用于提出建议、劝告,或带有轻微责备意味地要求某人少做某事。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_79",
+    "grammar_point_cn": "多 + 动词",
+    "anchor_example": "你应该多喝水。",
+    "summary_cn": "副词“多”放在动词前面，表示增加动作的数量或频率，常用于建议或命令。",
+    "mandatory_keywords": [
+      "多",
+      "动词"
+    ],
+    "pragmatic_scenarios": [
+      "提出建议",
+      "表达愿望",
+      "发出指令"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_80",
+    "grammar_point_cn": "用“不怎么”表示不常",
+    "anchor_example": "我老公不怎么运动。",
+    "summary_cn": "“不怎么”放在动词前，表示动作发生的频率不高或程度不深，意思是“不常”或“不太”。",
+    "mandatory_keywords": [
+      "不怎么",
+      "动词"
+    ],
+    "pragmatic_scenarios": [
+      "描述不常做的习惯或行为"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_81",
+    "grammar_point_cn": "动词 + 到",
+    "anchor_example": "我们一直聊到半夜。",
+    "summary_cn": "在动词后用“到”，表示动作持续到某个时间点或另一事件发生时才结束。如果动词带有宾语，通常需要重复动词，如“写作业写到半夜”。",
+    "mandatory_keywords": [
+      "到"
+    ],
+    "pragmatic_scenarios": [
+      "通过指定活动的终点（时间或其他事件）来描述活动的持续时间。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_82",
+    "grammar_point_cn": "动作的进行 (正在/在/呢)",
+    "anchor_example": "我正在吃饭呢。",
+    "summary_cn": "使用“正在”、“正”、“在”放在动词前，以及“呢”放在句末，来表示动作正在进行。这个结构的完整形式是“主语 + 正在/正/在 + 动词 + 呢”，但其中几乎每个部分都是可选的，因此在实际使用中会出现多种组合。",
+    "mandatory_keywords": [
+      "在",
+      "正",
+      "正在",
+      "呢",
+      "着"
+    ],
+    "pragmatic_scenarios": [
+      "描述自己或他人当前正在进行的活动",
+      "设置一个动作正在发生的背景",
+      "礼貌地拒绝请求,因为正在忙于某事"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_83",
+    "grammar_point_cn": "动量词",
+    "anchor_example": "我们去过两次。",
+    "summary_cn": "动量词（如“次”、“遍”、“下”）放在动词后面，表示动作发生的次数。",
+    "mandatory_keywords": [
+      "动量词",
+      "次",
+      "遍",
+      "下",
+      "动词"
+    ],
+    "pragmatic_scenarios": [
+      "描述动作发生的频率或次数"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_84",
+    "grammar_point_cn": "离合词 ",
+    "anchor_example": "我明天跟他见面。",
+    "summary_cn": "离合词是一个“动词+宾语”结构的短语。动词和宾语可以分开，中间插入其他成分，但整个离合词后面不能再直接加宾语。",
+    "mandatory_keywords": [
+      "离合词"
+    ],
+    "pragmatic_scenarios": [
+      "安排约会",
+      "描述日常活动"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_85",
+    "grammar_point_cn": "动词 + 给",
+    "anchor_example": "请递给我一盒纸巾。",
+    "summary_cn": "在一些单音节动词（如“送”、“递”、“发”）后面加上“给”，来引出动作的接收者。",
+    "mandatory_keywords": [
+      "动词",
+      "给"
+    ],
+    "pragmatic_scenarios": [
+      "递东西给别人",
+      "送礼物",
+      "发送信息或邮件"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_86",
+    "grammar_point_cn": "介词“给”",
+    "anchor_example": "我给你发短信了。",
+    "summary_cn": "介词“给”用在动词前，表示动作的目标或接收者。",
+    "mandatory_keywords": [
+      "给"
+    ],
+    "pragmatic_scenarios": [
+      "打电话",
+      "发邮件",
+      "写信",
+      "讲故事",
+      "道歉"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_87",
+    "grammar_point_cn": "程度补语",
+    "anchor_example": "你画得很好。",
+    "summary_cn": "程度补语用于描述或评价一个动作做得怎么样，或形容词的程度有多深。动词后的补语通常由“得”引出。当动词带宾语时，需要重复动词或将宾语提前。形容词后也可以直接加“极了”、“死了”等来表示极高的程度。",
+    "mandatory_keywords": [
+      "得",
+      "极了",
+      "死了"
+    ],
+    "pragmatic_scenarios": [
+      "评价他人的能力或表现,例如评价某人中文说得好不好。",
+      "描述自己或他人的状态或感受,例如吃得太饱或累死了。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_88",
+    "grammar_point_cn": "趋向补语",
+    "anchor_example": "你上来。",
+    "summary_cn": "趋向补语用在动词后面，表示动作的方向。'来'表示动作朝向说话人，'去'表示动作远离说话人。",
+    "mandatory_keywords": [
+      "动词",
+      "来",
+      "去"
+    ],
+    "pragmatic_scenarios": [
+      "描述人或物的移动方向",
+      "发出指令或请求"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_89",
+    "grammar_point_cn": "方向补语 '起来'",
+    "anchor_example": "宝宝哭起来了。",
+    "summary_cn": "“起来”作为补语有多种用法。一、表示向上的动作，如“站起来”。二、表示动作或状态的开始并持续，如“天气热起来了”。三、用在看、听、尝等动词后，表示初步的判断，如“这件衣服看起来很漂亮”。",
+    "mandatory_keywords": [
+      "起来",
+      "补语"
+    ],
+    "pragmatic_scenarios": [
+      "描述一个动作或状态的开始（例如：天突然下起雨来了）",
+      "根据感官给出初步的评价或判断（例如：这个故事听起来很有意思）",
+      "发出一个包含向上动作的指令（例如：把手举起来）"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_90",
+    "grammar_point_cn": "可能补语",
+    "anchor_example": "这里太暗了，我看不清楚。",
+    "summary_cn": "可能补语用在动词和结果/趋向补语之间，通过'得'（肯定）或'不'（否定）来表示动作实现的可能性。",
+    "mandatory_keywords": [
+      "得",
+      "不"
+    ],
+    "pragmatic_scenarios": [
+      "表达在某种条件下,是否有能力或有可能完成某个动作"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_91",
+    "grammar_point_cn": "结果补语“下去”",
+    "anchor_example": "说下去。",
+    "summary_cn": "用在动词后，表示某个动作或状态的持续。其否定式“动词+不下去”常表示因某种原因无法继续进行某事。",
+    "mandatory_keywords": [
+      "下去",
+      "不下去"
+    ],
+    "pragmatic_scenarios": [
+      "鼓励他人继续行动",
+      "表达因无法忍受而想中断某个动作",
+      "警告继续某个行为可能带来的负面后果"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_92",
+    "grammar_point_cn": "结果补语",
+    "anchor_example": "我吃饱了。",
+    "summary_cn": "在动词后面加上一个形容词或动词，用来说明动作产生的结果。例如，“看懂”表示“看”的动作产生了“懂”的结果。",
+    "mandatory_keywords": [
+      "好",
+      "完",
+      "错",
+      "到",
+      "见",
+      "懂",
+      "干净"
+    ],
+    "pragmatic_scenarios": [
+      "描述动作的结果,如完成、做错、变干净等（例：做好了、写错了、洗干净了）。",
+      "确认是否感知或理解（例：看见了、听懂了）。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_93",
+    "grammar_point_cn": "用“所有”表示“全部”",
+    "anchor_example": "所有的学校都放假了。",
+    "summary_cn": "“所有”用来指代某个名词的全部，强调范围内无一例外。当“所有 (+的) + 名词”作主语时，谓语前通常需要用副词“都”来呼应。其否定形式为“不是所有...都...”，表示“并非全部”。",
+    "mandatory_keywords": [
+      "所有",
+      "都"
+    ],
+    "pragmatic_scenarios": [
+      "概括一个群体的全部情况",
+      "强调无一例外",
+      "否定一个绝对的论断"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_94",
+    "grammar_point_cn": "用'之一'表示'其中一个'",
+    "anchor_example": "她是我最好的朋友之一。",
+    "summary_cn": "“之一”放在一个名词短语的后面，表示是这个群体中的一个，意思是 'one of'。它常常和副词“最”一起使用，构成“最……之一”的结构。",
+    "mandatory_keywords": [
+      "之一",
+      "最"
+    ],
+    "pragmatic_scenarios": [
+      "介绍某人或某物是某个群体中最杰出或最重要的成员之一。",
+      "讲笑话时,故意在'最...'后面停顿,再说'之一'来制造幽默效果。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_95",
+    "grammar_point_cn": "用“另外”表示“其余的”",
+    "anchor_example": "我有两个手机，一个是小米，另一个是iPhone。",
+    "summary_cn": "“另外”或“另”用作代词，指代一个已知整体中的其余部分。其结构通常是“另外/另 + 数量 + [量词] + 名词”，常用于“总数…一部分…另外一部分”的句式中。",
+    "mandatory_keywords": [
+      "另外",
+      "另"
+    ],
+    "pragmatic_scenarios": [
+      "分配或提及已知总体中的其余部分"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_96",
+    "grammar_point_cn": "是⋯⋯的结构",
+    "anchor_example": "我是坐火车去的。",
+    "summary_cn": "“是⋯⋯的”结构常用于强调已经发生的动作的时间、地点、方式或执行者等具体细节。",
+    "mandatory_keywords": [
+      "是",
+      "的",
+      "强调"
+    ],
+    "pragmatic_scenarios": [
+      "询问或说明过去事情的具体细节（如时间、地点、方式等）"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_97",
+    "grammar_point_cn": "用“是...的”表示目的",
+    "anchor_example": "我是来玩的。",
+    "summary_cn": "“是...的”结构可以用来强调动作的目的或物品的用途。主语是人时，常与“来/去”连用；主语是物时，常与“用来”或“给”连用。",
+    "mandatory_keywords": [
+      "是",
+      "的",
+      "来",
+      "去",
+      "用来",
+      "给"
+    ],
+    "pragmatic_scenarios": [
+      "说明来意或澄清目的",
+      "解释物品的功能或用途"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_99",
+    "grammar_point_cn": "话题句",
+    "anchor_example": "水果，我最爱吃草莓。",
+    "summary_cn": "将句子中想要强调的部分（即“话题”）移到句首，后面跟上对这个话题的陈述或说明（即“评论”）。书写时，话题和评论之间通常用逗号隔开。",
+    "mandatory_keywords": [],
+    "pragmatic_scenarios": [
+      "为了强调句子的某个部分",
+      "在对话中引出并评论一个特定的话题"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_100",
+    "grammar_point_cn": "把字句",
+    "anchor_example": "把书放在桌子上。",
+    "summary_cn": "“把”字句将动词的宾语提前至动词前，用“把”引出，以强调动作对宾语的处置、影响或产生的结果。",
+    "mandatory_keywords": [
+      "把"
+    ],
+    "pragmatic_scenarios": [
+      "用于发出指令、请求,或描述一个动作如何处置、影响了某个特定的宾语,并说明其结果。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_102",
+    "grammar_point_cn": "存现句",
+    "anchor_example": "桌子上放着一本书。",
+    "summary_cn": "存现句用于表示某地存在某人或某物。除了常见的“有”字句，也可用“地点+动词+着+名词”结构，描述某物以某种姿态存在；或用“地点+是+名词”结构，强调该地点只有此物。",
+    "mandatory_keywords": [
+      "着",
+      "是",
+      "地点"
+    ],
+    "pragmatic_scenarios": [
+      "描述一个场景或环境",
+      "指出物品的位置和状态",
+      "强调某地只有特定的事物"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_103",
+    "grammar_point_cn": "“想...就...”句型",
+    "anchor_example": "想吃就吃。",
+    "summary_cn": "用于表达可以随心所欲地做某事，不受限制。结构为在“想”和“就”后面跟同一个动词，也可以加入疑问代词（如什么、哪儿）来表示“无论什么/无论哪里”。",
+    "mandatory_keywords": [
+      "想",
+      "就"
+    ],
+    "pragmatic_scenarios": [
+      "鼓励或允许他人随心所欲地行动,例如在点菜、购物或选择目的地时。",
+      "表达自己不受约束的决定或态度。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_104",
+    "grammar_point_cn": "双重否定",
+    "anchor_example": "他不会不来的。",
+    "summary_cn": "使用两个否定词（如“不”、“没”）来表达一个肯定的意思，通常带有强调的语气。例如，“不是不”等于“是”，“没有...不”等于“都...”。",
+    "mandatory_keywords": [
+      "不是不",
+      "不是没",
+      "不会不",
+      "不能不",
+      "没有一个不"
+    ],
+    "pragmatic_scenarios": [
+      "用于强调肯定的事实或观点",
+      "用于委婉地反驳或澄清误解",
+      "用于表达一种必然性或义务（不得不做某事）"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_105",
+    "grammar_point_cn": "“连...都...”句式",
+    "anchor_example": "连三岁小孩都知道。",
+    "summary_cn": "“连...都...”结构用于强调一个极端或令人意外的例子，表示“甚至”或“就连”的意思。“连”引出强调的部分（主语或宾语），后面必须用副词“都”或“也”来呼应。",
+    "mandatory_keywords": [
+      "连",
+      "都"
+    ],
+    "pragmatic_scenarios": [
+      "强调极端或意料之外的情况"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_106",
+    "grammar_point_cn": "“每次⋯⋯都⋯⋯”句式",
+    "anchor_example": "我妹妹每次打针都哭。",
+    "summary_cn": "“每次⋯⋯都⋯⋯”是一个固定搭配，用来表示“每一次”某个事件发生时，另一个事件也总会随之发生，强调事情的规律性和重复性。句中的“每次”和“都”缺一不可。",
+    "mandatory_keywords": [
+      "每次",
+      "都"
+    ],
+    "pragmatic_scenarios": [
+      "描述一种习惯或在特定条件下反复发生的事情"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_107",
+    "grammar_point_cn": "疑问代词 + '都' 表示任意",
+    "anchor_example": "谁都喜欢美食。",
+    "summary_cn": "使用“疑问词 + 都”的结构，可以泛指一个范围内的任何人、任何地方、任何时间等，表示“所有”或“任何”。",
+    "mandatory_keywords": [
+      "谁",
+      "哪儿",
+      "什么",
+      "怎么",
+      "多少",
+      "都"
+    ],
+    "pragmatic_scenarios": [
+      "用于表达不受特定人、地点、时间、方式或数量限制的普遍情况,即'无论谁/哪里/何时/如何/多少都...'。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_108",
+    "grammar_point_cn": "频率的表达",
+    "anchor_example": "你多长时间剪一次头发？",
+    "summary_cn": "使用“多长时间 + 动词 + 一次”的结构来询问动作发生的频率。回答或陈述频率时，使用“[时间段] + 动词 + [次数]”的结构。这个句型通常用于讨论有规律、习惯性的活动。",
+    "mandatory_keywords": [
+      "多长时间",
+      "次"
+    ],
+    "pragmatic_scenarios": [
+      "询问和描述日常习惯或规律性活动的频率,例如多久理一次发、多久看一次电影、多久给家人打一次电话等。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_109",
+    "grammar_point_cn": "越来越",
+    "anchor_example": "天气越来越冷了。",
+    "summary_cn": "“越来越”用于表示某种性质、状态或行为的程度随着时间的推移而不断加深。",
+    "mandatory_keywords": [
+      "越来越",
+      "了"
+    ],
+    "pragmatic_scenarios": [
+      "描述天气、环境或社会趋势的变化",
+      "评论某人的技能、外貌或状态的改变",
+      "表达个人感受或喜好的逐渐加深"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_110",
+    "grammar_point_cn": "用“倍”表达倍数",
+    "anchor_example": "今年的产量是去年的两倍。",
+    "summary_cn": "“倍”用于表示数量成倍增加。主要有两种结构：一是“A是B的N倍”，表示A的总量是B的N倍。二是“A比B+形容词+N倍”，表示A比B多出N倍，即A的总量是B的(N+1)倍。",
+    "mandatory_keywords": [
+      "倍",
+      "是",
+      "比"
+    ],
+    "pragmatic_scenarios": [
+      "比较价格、大小、数量等方面的增长",
+      "描述数据变化"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_111",
+    "grammar_point_cn": "“一点儿也/都 + 不/没”句式",
+    "anchor_example": "这个菜一点都不好吃。",
+    "summary_cn": "用于完全否定，强调否定程度深，表示“完全不”或“丝毫也不”的意思。后面可以跟形容词或动词。",
+    "mandatory_keywords": [
+      "一点",
+      "也",
+      "都",
+      "不",
+      "没"
+    ],
+    "pragmatic_scenarios": [
+      "强烈地否定某种状态或感受,如'我一点儿也不累'。",
+      "表达对某事物强烈的不喜欢或厌恶,如'我一点儿也不喜欢奶酪'。",
+      "评价某事物的质量很差,如'这个笑话一点儿也不好笑'。",
+      "表示某动作完全没有发生,如'作业他一点儿都没做'。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_112",
+    "grammar_point_cn": "疑问代词表示不定指",
+    "anchor_example": "这个人在哪儿我见过。",
+    "summary_cn": "疑问词（如谁、什么、哪儿、什么时候）可用在陈述句中，表示不确定或泛指的人、事物、地点或时间，意思是“某个”。",
+    "mandatory_keywords": [
+      "谁",
+      "什么",
+      "哪儿",
+      "什么时候"
+    ],
+    "pragmatic_scenarios": [
+      "当你不确定具体的人、地点、事物或时间时,用来表达‘某个’的概念"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_113",
+    "grammar_point_cn": "不知道⋯⋯好",
+    "anchor_example": "我们都不知道说什么好。",
+    "summary_cn": "用于表示说话人不知道该怎么做某事，或者不知道怎么做才是最好的选择，常带有犹豫、为难的语气。",
+    "mandatory_keywords": [
+      "不知道",
+      "好",
+      "疑问词"
+    ],
+    "pragmatic_scenarios": [
+      "当面临难题或有多个选择,感到犹豫不决,不知道如何做出最好的决定时,可以用来表达困惑或征求意见。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_114",
+    "grammar_point_cn": "用“为了”表达目的",
+    "anchor_example": "为了孩子的未来，他决定搬到上海。",
+    "summary_cn": "“为了”用于引出并强调动作的目的或受益者，相当于英文的“in order to”或“for the sake of”。它有两种主要结构：一是将“为了+[目的]”放在句首，后接主句；二是用在“是”的后面，构成“[事情] + 是为了 + [目的]”的结构，以解释原因。",
+    "mandatory_keywords": [
+      "为了"
+    ],
+    "pragmatic_scenarios": [
+      "解释做出某个决定或行为的原因和动机",
+      "说明一个计划或行动的目标"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_116",
+    "grammar_point_cn": "用“跟...比”进行比较",
+    "anchor_example": "跟上海比，我老家的物价很低。",
+    "summary_cn": "将“跟A比(起来)”结构置于句首或主语后，用于引出比较的对象A，然后陈述关于主语B的比较结果。这个结构常用来比较两个不同的主体，或同一个主体在不同时间点的状态。",
+    "mandatory_keywords": [
+      "跟",
+      "比"
+    ],
+    "pragmatic_scenarios": [
+      "比较两个不同事物或地点的特点",
+      "比较同一个事物在不同时间点的状态"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_117",
+    "grammar_point_cn": "用“更”或“还”表示比较",
+    "anchor_example": "今天比昨天还热。",
+    "summary_cn": "在“比”字句中，形容词前加上“更”或“还”可以强调程度更高，表示“even more”的意思。“还”的语气通常比“更”更强烈，常带有惊讶的意味。",
+    "mandatory_keywords": [
+      "比",
+      "更",
+      "还"
+    ],
+    "pragmatic_scenarios": [
+      "比较两个事物并强调其中一个的程度更高时",
+      "表达超出预期的比较结果时"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_118",
+    "grammar_point_cn": "用“比”表示“……得多/多了/很多”",
+    "anchor_example": "拼音比汉字容易很多。",
+    "summary_cn": "在“比”字句的形容词后面加上“很多”、“得多”或“多了”，用来强调两者之间的差异很大。",
+    "mandatory_keywords": [
+      "比",
+      "很多",
+      "得多",
+      "多了"
+    ],
+    "pragmatic_scenarios": [
+      "比较两个人或事物的巨大差异",
+      "描述某种状态的显著变化或改善"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_119",
+    "grammar_point_cn": "用“有”进行比较",
+    "anchor_example": "他有我帅吗？",
+    "summary_cn": "用于疑问句中，询问A在某个方面是否达到了B的程度。意为“A和B一样……吗？”",
+    "mandatory_keywords": [
+      "有",
+      "吗"
+    ],
+    "pragmatic_scenarios": [
+      "在比较中表达怀疑或寻求确认,询问一方是否能达到另一方的程度"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_121",
+    "grammar_point_cn": "一...就...",
+    "anchor_example": "我一下课就去吃饭。",
+    "summary_cn": "此结构用于连接两个紧密连续发生的事件。它主要有两种用法：一是表示“一做完某事，马上就做另一件事”（As Soon As）；二是表示一种规律，即“每当出现某种情况，就会有某种结果”（Every Time）。",
+    "mandatory_keywords": [
+      "一",
+      "就"
+    ],
+    "pragmatic_scenarios": [
+      "描述一个动作紧接着另一个动作发生",
+      "描述一种规律性的条件与结果的关系"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_122",
+    "grammar_point_cn": "虽然...但是... (转折关系)",
+    "anchor_example": "虽然外面很冷，但是里面很暖和。",
+    "summary_cn": "表示转折关系。先承认一个事实（虽然部分），然后说出与这个事实相反或不一致的情况（但是部分）。与英语不同，中文通常需要同时使用“虽然”和“但是”。",
+    "mandatory_keywords": [
+      "虽然",
+      "但是"
+    ],
+    "pragmatic_scenarios": [
+      "承认一个事实,但引出与预期相反的结果或情况",
+      "对比事物的两个不同方面"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_123",
+    "grammar_point_cn": "用“要么”表示二选一",
+    "anchor_example": "要么你去，要么他去。",
+    "summary_cn": "“要么”用来提供两种选择，表示必须在这两者中选一个，有“二者择一”的强硬语气。",
+    "mandatory_keywords": [
+      "要么"
+    ],
+    "pragmatic_scenarios": [
+      "给出最后通牒或强硬选择",
+      "描述只有两种可能性的情况或习惯"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_124",
+    "grammar_point_cn": "“除了……以外”的用法",
+    "anchor_example": "除了他，我们都去过。",
+    "summary_cn": "“除了……以外”结构可表示两种意思：与“都”连用时，表示排除在外（except）；与“也”或“还”连用时，表示包含在内，并进行补充（in addition）。其中“以外”有时可以省略。",
+    "mandatory_keywords": [
+      "除了",
+      "以外",
+      "都",
+      "也",
+      "还"
+    ],
+    "pragmatic_scenarios": [
+      "排除特定的人或事物,说明其余的都一样",
+      "在已有事物的基础上,补充说明其他情况"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_125",
+    "grammar_point_cn": "如果...的话",
+    "anchor_example": "如果明天下雨的话，我们就不去了。",
+    "summary_cn": "用于表达假设的情况，即英文的'if'。条件放在“如果”和“的话”之间。口语中，常省略“如果”，只用“的话”，甚至两者都省略。",
+    "mandatory_keywords": [
+      "如果",
+      "的话"
+    ],
+    "pragmatic_scenarios": [
+      "提出假设并讨论其可能的结果",
+      "根据某个条件制定计划",
+      "给出建议或警告"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_126",
+    "grammar_point_cn": "用“如果...就...”表达条件关系",
+    "anchor_example": "如果有困难，就给我打电话。",
+    "summary_cn": "“如果...就...”是一个常用的句式，用来连接一个假设的条件（如果部分）和在这个条件下会产生的结果（就部分），类似于英语的“if...then...”。",
+    "mandatory_keywords": [
+      "如果",
+      "就"
+    ],
+    "pragmatic_scenarios": [
+      "提出假设和相应的结果",
+      "在特定条件下给出建议或指示",
+      "讨论未来计划的可能性"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_127",
+    "grammar_point_cn": "怪不得 / 难怪",
+    "anchor_example": "小张请假了，怪不得今天没有看到他。",
+    "summary_cn": "“怪不得”和“难怪”都用于表达说话人因为得知了某个新信息或原因，而对某个情况或结果不再感到奇怪，有“原来如此”的恍然大悟之意。两者意思完全相同，可以互换。",
+    "mandatory_keywords": [
+      "怪不得",
+      "难怪",
+      "原来"
+    ],
+    "pragmatic_scenarios": [
+      "当你对某个现象感到疑惑,但随后得知了原因,恍然大悟时使用。例如,你觉得一道菜味道很怪,朋友告诉你他放了醋,你就可以说“难怪这么难吃！”。"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_128",
+    "grammar_point_cn": "不但...而且...",
+    "anchor_example": "她不但聪明，而且很幽默。",
+    "summary_cn": "表示一种递进关系，说明不仅有前一种情况，更有后一种情况。当主语相同时，主语放在“不但”之前；当主语不同时，“不但”和“而且”后面各跟一个主语。",
+    "mandatory_keywords": [
+      "不但",
+      "而且"
+    ],
+    "pragmatic_scenarios": [
+      "评价人或事物",
+      "描述情况的多个方面"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_130",
+    "grammar_point_cn": "“还好……不然……”结构",
+    "anchor_example": "还好我们打车来的，不然就迟到了。",
+    "summary_cn": "“还好”用于表达庆幸或幸运，说明因为某个有利情况，避免了一个不好的结果。后面常常跟着“不然”，引出这个本可能发生的坏结果。",
+    "mandatory_keywords": [
+      "还好",
+      "不然"
+    ],
+    "pragmatic_scenarios": [
+      "表达庆幸,解释如何避免了一个坏的结果"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_131",
+    "grammar_point_cn": "一方面…，(另)一方面…",
+    "anchor_example": "自己做饭一方面健康，一方面还能省点钱。",
+    "summary_cn": "用于从两个不同的方面说明同一个事物或情况。这两个方面可以意思相近，也可以意思相反或相对。",
+    "mandatory_keywords": [
+      "一方面"
+    ],
+    "pragmatic_scenarios": [
+      "评价事物的利弊",
+      "陈述并列的两个原因或目标",
+      "描述矛盾的心理或处境"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_132",
+    "grammar_point_cn": "“常常”和“经常”的用法比较",
+    "anchor_example": "他们常常吵架。",
+    "summary_cn": "“常常”和“经常”都是表示“often”的副词，在多数情况下可以互换。主要区别在于“经常”还可以用作形容词（如“经常的事情”），而“常常”不能。",
+    "mandatory_keywords": [
+      "常常",
+      "经常"
+    ],
+    "pragmatic_scenarios": [
+      "描述个人习惯或某事发生的频率"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_134",
+    "grammar_point_cn": "有点和一点的区别",
+    "anchor_example": "今天有点热。",
+    "summary_cn": "“有点”放在形容词前，表示程度并常带有抱怨或负面语气。“一点”放在形容词后，用于比较或请求。此外，“一点”还可以修饰名词表示少量，或用于“一点也/都+不/没”的结构中表示“完全不”。",
+    "mandatory_keywords": [
+      "有点",
+      "一点"
+    ],
+    "pragmatic_scenarios": [
+      "表达抱怨",
+      "提出请求",
+      "进行比较",
+      "完全否定"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_135",
+    "grammar_point_cn": "助动词“会”、“能”、“可以”的比较",
+    "anchor_example": "你会说中文吗？",
+    "summary_cn": "“会”、“能”、“可以”都常被翻译为'can'，但用法不同。“会”侧重于后天学习的技能或对未来的预测。“能”侧重于天生的或客观的能力和可能性。“可以”侧重于许可和可能性。",
+    "mandatory_keywords": [
+      "会",
+      "能",
+      "可以"
+    ],
+    "pragmatic_scenarios": [
+      "询问或描述通过学习获得的技能（如：你会开车吗？）",
+      "请求或给予许可（如：我可以在这里坐吗？）",
+      "讨论或预测未来的可能性（如：明天会下雨吗？）",
+      "表达客观上的能力或可能性（如：你能帮我一下吗？）"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_136",
+    "grammar_point_cn": "还是 vs 或者",
+    "anchor_example": "你喝茶还是喝咖啡？",
+    "summary_cn": "“还是”用于疑问句中提供选择，而“或者”用于陈述句中列出可能性。",
+    "mandatory_keywords": [
+      "还是",
+      "或者"
+    ],
+    "pragmatic_scenarios": [
+      "提问选择",
+      "陈述可能性",
+      "表达不确定性（嵌入式问句）"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_137",
+    "grammar_point_cn": "“人家”和“别人”的区别",
+    "anchor_example": "因为人家喜欢你啊。",
+    "summary_cn": "“别人”指不特定的人，即“其他人”。“人家”除了可以指“别人”（更口语化）外，还可以用来指代自己（我），或特指某个特定的人（他/她）。",
+    "mandatory_keywords": [
+      "人家",
+      "别人"
+    ],
+    "pragmatic_scenarios": [
+      "口语中区分泛指的“其他人”和特指的“那个人”",
+      "撒娇或拉近关系时用“人家”自称“我”",
+      "谈论他人事务或看法时"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_138",
+    "grammar_point_cn": "“之间”和“中间”的区别",
+    "anchor_example": "夫妻之间应该多交流。",
+    "summary_cn": "“之间”和“中间”都可表示两个物体之间的物理位置。但“中间”还可指单个空间或群体中的位置（如“客厅中间”、“你们中间”）。而“之间”常用于描述抽象关系（如“朋友之间”）或非物理范围（如时间和数量）。",
+    "mandatory_keywords": [
+      "之间",
+      "中间"
+    ],
+    "pragmatic_scenarios": [
+      "描述人、事物或时间等的相互关系或位置"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_139",
+    "grammar_point_cn": "“离”和“从”的用法比较",
+    "anchor_example": "你家离公司多远？",
+    "summary_cn": "“从”表示动作或时间的起点，有动态的含义；“离”表示两个地点或时间点之间的静态距离。",
+    "mandatory_keywords": [
+      "离",
+      "从"
+    ],
+    "pragmatic_scenarios": [
+      "询问或描述地点之间的距离",
+      "说明动作或时间的起点"
+    ],
+    "is_useful_for_child": true
+  },
+  {
+    "id": "pdf_140",
+    "grammar_point_cn": "“以后”和“的时候”的用法区别",
+    "anchor_example": "下飞机以后给我打电话。",
+    "summary_cn": "“以后”表示一个动作完成之后（after），另一个动作才发生。“的时候”表示在一个动作进行期间（during/while），另一个动作同时发生。",
+    "mandatory_keywords": [
+      "以后",
+      "的时候"
+    ],
+    "pragmatic_scenarios": [
+      "描述一个动作完成之后发生的另一个动作",
+      "描述两个同时发生的动作或状态"
+    ],
+    "is_useful_for_child": true
   }
 ]
