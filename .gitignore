@@ -124,3 +124,5 @@ tools/chinese_grammar/*.epub
 tools/chinese_grammar/*.pdf
 tools/chinese_grammar/grammar_staging.json
 tools/chinese_grammar/grammar_staging_pdf.json
+data/knowledge_graph_store/
+knowledge_graph_data/
