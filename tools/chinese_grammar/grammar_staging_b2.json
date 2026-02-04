@@ -1,0 +1,2739 @@
+[
+  {
+    "grammar_point_cn": "程度补语 '得不得了'",
+    "anchor_example": "今天冷得不得了。",
+    "summary_cn": "用在形容词或心理动词后面，表示程度非常深，达到了极点，含有夸张的语气。可以用于好的方面，也可以用于不好的方面。",
+    "mandatory_keywords": [
+      "得",
+      "不得了"
+    ],
+    "pragmatic_scenarios": [
+      "夸张地描述天气、情绪、状态或情况"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_0",
+    "status": "pending",
+    "source_header": "Adjectival complement \"de budeliao\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "程度补语“得很”",
+    "anchor_example": "这次考试简单得很。",
+    "summary_cn": "用在形容词后面，表示程度很深，比“很+形容词”的语气更强，更口语化。",
+    "mandatory_keywords": [
+      "形容词",
+      "得",
+      "很"
+    ],
+    "pragmatic_scenarios": [
+      "在口语中强调某种状态或感受"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_1",
+    "status": "pending",
+    "source_header": "Adjectival complement \"de hen\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "形容词 + 了(一)点儿",
+    "anchor_example": "这件衬衫小了点儿。",
+    "summary_cn": "用在形容词后面，表示对某种状态有轻微的不满意，是一种比“太”更委婉、客气的抱怨或评价。",
+    "mandatory_keywords": [
+      "了",
+      "点儿"
+    ],
+    "pragmatic_scenarios": [
+      "购物时评价商品尺寸、价格（这双鞋贵了点儿）",
+      "委婉地评价食物的味道（这道菜咸了点儿）",
+      "礼貌地提出对情况的意见（现在出发是不是晚了点儿？）"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_2",
+    "status": "pending",
+    "source_header": "Expressing \"a bit too\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "有的是",
+    "anchor_example": "她有的是时间。",
+    "summary_cn": "“有的是”作为一个固定短语，表示某事物的数量或分量非常大、很充足，有时带有夸张的语气。",
+    "mandatory_keywords": [
+      "有的是"
+    ],
+    "pragmatic_scenarios": [
+      "强调自己或他人拥有的某样东西数量充足",
+      "安慰他人时表示机会或选择很多"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_3",
+    "status": "pending",
+    "source_header": "Saying \"a lot\" with \"youdeshi\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“都”表强调（甚至）",
+    "anchor_example": "我都能闻见面包的香味。",
+    "summary_cn": "在此用法中，“都”相当于“甚至”，用来加强语气，表示情况达到了一个令人意外或意想不到的程度。",
+    "mandatory_keywords": [
+      "都"
+    ],
+    "pragmatic_scenarios": [
+      "当你想强调某个情况或行为的程度之深，已经超乎寻常时使用。"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_4",
+    "status": "pending",
+    "source_header": "Advanced uses of \"dou\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“还”表示意外或反诘的语气",
+    "anchor_example": "都怪你，你还生气呢。",
+    "summary_cn": "副词“还”可以用来表示惊讶、讽刺或不满的语气，强调情况出乎意料或不合常理。与“吗”连用时，常构成反问句，加强语气。",
+    "mandatory_keywords": [
+      "还",
+      "呢",
+      "吗"
+    ],
+    "pragmatic_scenarios": [
+      "表达对意料之外情况的惊讶",
+      "带有讽刺意味地抱怨或批评",
+      "用反问句来强调自己的观点或反驳对方"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_5",
+    "status": "pending",
+    "source_header": "Advanced uses of \"hai\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "副词“总”的用法",
+    "anchor_example": "不管发生什么，人总要吃饭吧。",
+    "summary_cn": "副词“总”用来强调在任何情况下，某个事实或道理都是必然或合乎情理的，可以理解为“终究”、“毕竟”。它经常和助动词（如会、得、要、能）或否定词（不、没）连用，表达一种确定的推断、责任或带有揣测语气的建议。",
+    "mandatory_keywords": [
+      "总"
+    ],
+    "pragmatic_scenarios": [
+      "陈述一个在任何情况下都成立的必然道理或事实",
+      "提出一个理所当然的建议或指出一个应尽的责任",
+      "在否定句中进行带有揣测或委婉建议的判断"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_6",
+    "status": "pending",
+    "source_header": "Advanced uses of \"zong\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“看来”的用法",
+    "anchor_example": "看来他 不来了，都这么晚了。",
+    "summary_cn": "用于根据观察到的情况或迹象做出推测或判断，也可以用来引出某人的观点。",
+    "mandatory_keywords": [
+      "看来",
+      "在"
+    ],
+    "pragmatic_scenarios": [
+      "根据观察到的迹象对情况进行推测",
+      "在讨论中表达自己的观点或看法",
+      "引用或说明他人的观点"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_7",
+    "status": "pending",
+    "source_header": "Assessing situations with \"kanlai\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "用“只好”表示别无选择",
+    "anchor_example": "我忘了预约，只好去排队。",
+    "summary_cn": "“只好”是一个副词，用来表示在某种情况下没有别的选择，只能被迫去做某事，而这个选择通常不是说话人情愿的。",
+    "mandatory_keywords": [
+      "只好"
+    ],
+    "pragmatic_scenarios": [
+      "因外部条件限制而被迫做出不情愿的选择",
+      "计划因意外情况改变而采取的补救措施",
+      "表示无奈地接受唯一的选项"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_8",
+    "status": "pending",
+    "source_header": "Declaring the only option with \"zhihao\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "副词“可”的强调用法",
+    "anchor_example": "这只小狗可淘气了！",
+    "summary_cn": "副词“可”用于加强语气，强调形容词时意为“真、太”，强调动词时意为“千万”或“终于”。常用于口语，表达一种与预期不符的感叹或提醒。",
+    "mandatory_keywords": [
+      "可",
+      "了",
+      "别"
+    ],
+    "pragmatic_scenarios": [
+      "当事物程度超出你的想象时",
+      "当你要强烈地劝告或禁止某人时",
+      "当等待已久的事情终于发生时"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_9",
+    "status": "pending",
+    "source_header": "Emphatic adverb \"ke\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "毕竟的用法",
+    "anchor_example": "别骂他了，他毕竟是孩子。",
+    "summary_cn": "毕竟用来强调一个根本或最重要的原因/事实，表示对情况的解释或理解，类似于英文的“after all”。",
+    "mandatory_keywords": [
+      "毕竟"
+    ],
+    "pragmatic_scenarios": [
+      "为某种情况提供一个无法忽视的理由，以表示理解、劝说或辩护",
+      "在承认某个事实的同时，强调另一个更重要的事实，常与“虽然”连用"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_10",
+    "status": "pending",
+    "source_header": "Expressing \"after all\" with \"bijing\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "再不...就...",
+    "anchor_example": "你再不走，我就叫保安了。",
+    "summary_cn": "表示如果现在不立即做某事，就会产生某种（通常是不好的）后果，有强烈的紧迫感和催促意味。",
+    "mandatory_keywords": [
+      "再不",
+      "就"
+    ],
+    "pragmatic_scenarios": [
+      "当时间紧迫，需要催促别人立即采取行动，否则会产生不良后果时使用。"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_11",
+    "status": "pending",
+    "source_header": "Expressing a last chance with \"zaibu... jiu...\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“差点没”的用法",
+    "anchor_example": "我差点儿没赶上火车。",
+    "summary_cn": "“差点没”用于表示某事几乎发生或未发生。当其后是期望实现的好事时，表示该事最终成功了（差点没赶上 = 赶上了）。当其后是不希望发生的坏事时，表示该事最终被避免了（差点没摔倒 = 没摔倒），此时“没”字可以省略，与“差点”意思相同。",
+    "mandatory_keywords": [
+      "差点",
+      "没"
+    ],
+    "pragmatic_scenarios": [
+      "叙述一次有惊无险的经历，强调事情的结果与预期相反或十分惊险，如差点错过重要约会但最后赶到，或差点发生意外但最终幸免。"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_12",
+    "status": "pending",
+    "source_header": "Expressing \"almost\" using \"chadian mei\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "反正的用法",
+    "anchor_example": "不管他去不去，反正我要去。",
+    "summary_cn": "“反正”用来表示不管前面的情况如何，结果或决定都不会改变。它也可以用来强调一个已经确定的事实作为理由，并引出结论或建议。",
+    "mandatory_keywords": [
+      "反正"
+    ],
+    "pragmatic_scenarios": [
+      "表示无论情况如何，决心或结果不变",
+      "为自己的决定或建议提供一个明确的理由",
+      "表达一种不在乎或无所谓的态度"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_13",
+    "status": "pending",
+    "source_header": "Expressing \"anyway\" with \"fanzheng\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“尽量”的用法",
+    "anchor_example": "我会尽量想办法帮你的。",
+    "summary_cn": "副词“尽量”表示尽最大努力去做某事，或者达到最大限度，通常放在动词或形容词前面。",
+    "mandatory_keywords": [
+      "尽量"
+    ],
+    "pragmatic_scenarios": [
+      "表示自己会尽力去做某事",
+      "向他人提出建议或要求"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_14",
+    "status": "pending",
+    "source_header": "Expressing \"as much as possible\" with \"jinliang\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "恐怕的用法",
+    "anchor_example": "今天恐怕要下雨。",
+    "summary_cn": "“恐怕”用于表示对某事不太好的推测或担忧，意思是“我担心”或“我怕”。它常被用来委婉地表达负面或令人不悦的可能性。",
+    "mandatory_keywords": [
+      "恐怕"
+    ],
+    "pragmatic_scenarios": [
+      "委婉地告知坏消息",
+      "表达对不好情况的猜测或担忧",
+      "提出带有顾虑的建议或看法"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_15",
+    "status": "pending",
+    "source_header": "Expressing concern with \"kongpa\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "好(不)容易 的用法",
+    "anchor_example": "我好不容易才打通了银行的服务热线。",
+    "summary_cn": "表示经过很多努力和困难才完成某事，强调过程的艰辛和不易。“好容易”和“好不容易”意思相同，可以互换使用。",
+    "mandatory_keywords": [
+      "好不容易",
+      "好容易",
+      "才"
+    ],
+    "pragmatic_scenarios": [
+      "在描述经过一番周折或巨大努力后终于达成某个结果时使用，常用来表达欣慰、感叹，或因后续的意外转折而感到无奈、惋惜。"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_16",
+    "status": "pending",
+    "source_header": "Expressing difficulty with \"hao (bu) rongyi\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "甚至",
+    "anchor_example": "这个问题很简单，甚至连孩子都知道。",
+    "summary_cn": "用“甚至”引出一个更突出、更令人意外的例子，来加强语气，强调前面所说的情况，常与“都”或“也”连用。",
+    "mandatory_keywords": [
+      "甚至",
+      "都",
+      "也"
+    ],
+    "pragmatic_scenarios": [
+      "当你想通过举出一个极端的或令人意外的例子来强调你的观点时"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_17",
+    "status": "pending",
+    "source_header": "Expressing \"even\" with \"shenzhi\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "用“尽管”表示鼓励",
+    "anchor_example": "有什么问题尽管问。",
+    "summary_cn": "副词“尽管”用来鼓励别人不要拘束或担心，可以放心地做某事。",
+    "mandatory_keywords": [
+      "尽管"
+    ],
+    "pragmatic_scenarios": [
+      "鼓励他人提问或发表意见",
+      "主动向他人提供帮助",
+      "招待客人时表示客气，让对方不要拘束",
+      "给予他人许可或安慰，让其放心行动"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_18",
+    "status": "pending",
+    "source_header": "Expressing \"feel free\" with \"jinguan\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "不得不",
+    "anchor_example": "电梯坏了，我们不得不爬楼梯。",
+    "summary_cn": "表示在某种情况下，没有别的选择，只能做某事，强调一种无奈的必须性。",
+    "mandatory_keywords": [
+      "不得不"
+    ],
+    "pragmatic_scenarios": [
+      "解释因客观情况或压力而别无选择时必须做某事",
+      "无奈地承认某个事实",
+      "表达因规定或责任而必须履行的义务"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_19",
+    "status": "pending",
+    "source_header": "Expressing \"have to\" with \"budebu\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“到底”的用法",
+    "anchor_example": "你到底怎么了？",
+    "summary_cn": "“到底”主要有三种用法：一是用在问句中加强语气，表示追问，相当于“究竟”；二是表示“毕竟”，用来强调最重要的原因或情况；三是表示“终于”，指经过波折后最终实现。",
+    "mandatory_keywords": [
+      "到底"
+    ],
+    "pragmatic_scenarios": [
+      "当你对某个情况感到困惑或不耐烦，想追问出真实原因或结果时",
+      "当你想强调某个不容忽视的基本事实或理由时",
+      "当你想表达某件事经过长时间或努力后终于发生时"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_20",
+    "status": "pending",
+    "source_header": "Expressing \"in the end\" with \"daodi\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "究竟的用法",
+    "anchor_example": "这个人究竟是谁？",
+    "summary_cn": "“究竟”是一个副词，主要用于疑问句中加强语气，表示追根究底，希望得到确切的答案，类似于“到底”。它也可以用在陈述句中，表示“毕竟”，强调一个不容改变的事实。",
+    "mandatory_keywords": [
+      "究竟"
+    ],
+    "pragmatic_scenarios": [
+      "当你对某事感到困惑、不解或不耐烦，想追问并得到一个明确的答案时。",
+      "当你想强调某个事物终究还是其本身，具有其固有的、无法改变的特性时。"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_21",
+    "status": "pending",
+    "source_header": "Expressing \"in the end\" with \"jiujing\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "副词“干脆”的用法",
+    "anchor_example": "家里什么都没有，干脆出去吃吧。",
+    "summary_cn": "副词“干脆”用来在某个困难或复杂的的情况下，提出一个直接了当的行动或建议，有“索性就”或“还不如”的意思。",
+    "mandatory_keywords": [
+      "干脆"
+    ],
+    "pragmatic_scenarios": [
+      "当面临一个麻烦或令人不满意的情况时，用来提出一个更直接、简单的解决方案或决定。"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_22",
+    "status": "pending",
+    "source_header": "Expressing \"just\" do it with \"gancui\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "副词“几乎”的用法",
+    "anchor_example": "几乎每个人都有手机。",
+    "summary_cn": "“几乎”是一个副词，意思是“差不多”或“将近”，用来强调情况非常接近某个程度或数量，但还没有完全达到。",
+    "mandatory_keywords": [
+      "几乎",
+      "都",
+      "没有",
+      "不"
+    ],
+    "pragmatic_scenarios": [
+      "描述一个接近全部或绝大多数的情况（常与'都'、'每'、'所有'连用）",
+      "描述一个接近零或极少数的情况（常与'没有'、'不'连用）",
+      "描述一个动作或状态即将完成或达到某个程度"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_23",
+    "status": "pending",
+    "source_header": "Expressing \"nearly\" with \"jihu\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“再也”结构",
+    "anchor_example": "我再也不想看到你了！",
+    "summary_cn": "“再也不...了”表示决定或决心将来不再做某事。“再也没...过”表示从过去某个时间点起，某事没有再次发生过。",
+    "mandatory_keywords": [
+      "再也",
+      "不",
+      "没"
+    ],
+    "pragmatic_scenarios": [
+      "在经历不好的事情后，表达强烈的决心或情绪，表示将来不会再做某事。",
+      "描述由于某种原因（如医生建议、毕业等），某个动作在将来无法或不会再继续。",
+      "描述从过去某个时间点（如分手后、出国后）到现在，某件事再也没有发生过。"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_24",
+    "status": "pending",
+    "source_header": "Expressing \"never again\" with \"zai ye bu\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "曾经",
+    "anchor_example": "我们曾经一起去过。",
+    "summary_cn": "副词“曾经”用于表示某事或某种状态在过去发生过，但现在已经结束或改变，强调与现在的对比。常与助词“过”连用。",
+    "mandatory_keywords": [
+      "曾经",
+      "过"
+    ],
+    "pragmatic_scenarios": [
+      "回忆往事、讲述个人经历或描述某地今昔的变迁。"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_25",
+    "status": "pending",
+    "source_header": "Expressing \"once\" with \"cengjing\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“本来”的用法",
+    "anchor_example": "我本来是要去的，不过后来不舒服，就没去。",
+    "summary_cn": "“本来”表示事情过去是某种情况，但后来发生了变化，意为“originally”。它也可以用来强调某事理应如此或显而易见，常与“就”连用，加强语气。",
+    "mandatory_keywords": [
+      "本来",
+      "是",
+      "的",
+      "就"
+    ],
+    "pragmatic_scenarios": [
+      "解释计划的改变",
+      "强调理所当然的情况或观点",
+      "说明事情本来的、应有的状态"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_26",
+    "status": "pending",
+    "source_header": "Expressing \"originally\" with \"benlai\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "副词“再三”的用法",
+    "anchor_example": "老师再三强调这次考试很重要。",
+    "summary_cn": "副词“再三”表示动作或行为反复、多次进行，常用于双音节动词前，语气比较正式。",
+    "mandatory_keywords": [
+      "再三"
+    ],
+    "pragmatic_scenarios": [
+      "用于正式或严肃地强调、劝说、警告或提醒某事"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_27",
+    "status": "pending",
+    "source_header": "Expressing \"over and over again\" with \"zaisan\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "副词“简直”的用法",
+    "anchor_example": "这里简直是天堂！",
+    "summary_cn": "副词“简直”用于强调程度之深，带有夸张和惊讶的语气，类似于英文的“simply”或“completely”。它可以修饰动词或形容词，但修饰形容词时，形容词后常需跟“太...了”、“...极了”等程度补语。",
+    "mandatory_keywords": [
+      "简直"
+    ],
+    "pragmatic_scenarios": [
+      "表达强烈的惊讶或夸张"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_28",
+    "status": "pending",
+    "source_header": "Expressing \"simply\" with \"jianzhi\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "副词“一向”的用法",
+    "anchor_example": "他一向是个好学生。",
+    "summary_cn": "“一向”是一个副词，表示从过去到现在，某个习惯、态度或状态一直如此，从未改变。它强调的是一种长期形成的、稳定的情况，有“向来如此”的意味。它不能用于描述持续进行的动作或未来的情况。",
+    "mandatory_keywords": [
+      "一向",
+      "一直"
+    ],
+    "pragmatic_scenarios": [
+      "描述一个人长期形成的习惯或态度",
+      "说明一个长期存在的传统或惯例"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_29",
+    "status": "pending",
+    "source_header": "Expressing \"since the beginning\" with \"yixiang\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "副词“千万”的用法",
+    "anchor_example": "那里太危险了，千万不要去！",
+    "summary_cn": "“千万”是一个副词，用在动词前，表示强烈的叮嘱或警告，意思是“务必”、“一定要”或“一定不要”。常与“要”、“别”、“不要”、“不能”等词连用。",
+    "mandatory_keywords": [
+      "千万",
+      "要",
+      "别",
+      "不要",
+      "不能"
+    ],
+    "pragmatic_scenarios": [
+      "在给出重要的建议或提醒时",
+      "用于强烈地警告他人不要做某事",
+      "在表达郑重的请求或嘱咐时"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_30",
+    "status": "pending",
+    "source_header": "Expressing \"to make certain\" with \"qianwan\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "用“白”表示徒劳",
+    "anchor_example": "我这些菜白做了。",
+    "summary_cn": "副词“白”或“白白”放在动词前，表示动作没有达到预期的效果，徒劳无功，白费了力气。“白”常跟单音节动词，“白白”常跟双音节动词且语气更强。注意，“白”和少数动词（如吃、喝、住）连用时，也可表示“免费”。",
+    "mandatory_keywords": [
+      "白",
+      "白白"
+    ],
+    "pragmatic_scenarios": [
+      "当付出的努力没有得到预期回报或结果时，用来表达失望、抱怨或遗憾。",
+      "形容做了某事后发现完全没有必要。"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_31",
+    "status": "pending",
+    "source_header": "Expressing wasted efforts with \"bai\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "副词“顺便”的用法",
+    "anchor_example": "你 去 超市 的 时候，顺便 帮 我 买 一 瓶 牛奶 吧。",
+    "summary_cn": "“顺便”用作副词，表示在做一件主要事情的同时，利用方便的机会做了另一件次要的事情，以节省时间或精力。它常常被翻译为“顺路”或“捎带”。",
+    "mandatory_keywords": [
+      "顺便"
+    ],
+    "pragmatic_scenarios": [
+      "请求别人在做某事时顺路帮忙",
+      "陈述自己在做主要事情时，也做了另一件次要的事情",
+      "在口语中作为插入语转换话题或补充信息（如“顺便问一下”、“顺便说一下”）"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_32",
+    "status": "pending",
+    "source_header": "Expressing \"while you're at it\" with \"shunbian\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "动词重叠式“V了又V”",
+    "anchor_example": "我想了又想，还是不同意。",
+    "summary_cn": "使用“V了又V”的格式，强调某个单音节动词的动作在过去被反复进行。后半句常跟“还是”或“就是”表示结果不变，或用“终于”表示最终达成了目的。",
+    "mandatory_keywords": [
+      "了",
+      "又"
+    ],
+    "pragmatic_scenarios": [
+      "强调为解决问题或做决定而反复进行某一动作"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_33",
+    "status": "pending",
+    "source_header": "Repeated actions in the past with \"you\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "难道反问句",
+    "anchor_example": "难道你不知道吗？",
+    "summary_cn": "“难道”用于构成反问句，以加强语气，通常表达一种惊讶、怀疑或责备的情绪，暗示事实本不该如此。",
+    "mandatory_keywords": [
+      "难道",
+      "吗"
+    ],
+    "pragmatic_scenarios": [
+      "用于表达强烈的怀疑、惊讶或不满，强调某事理应如此或不应如此。"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_34",
+    "status": "pending",
+    "source_header": "Rhetorical questions with \"nandao\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "差很多",
+    "anchor_example": "中西方的文化差很多。",
+    "summary_cn": "“差很多”用作谓语，表示两个或多个事物之间有很大的区别或差距，是“差不多”的反义词。",
+    "mandatory_keywords": [
+      "差很多"
+    ],
+    "pragmatic_scenarios": [
+      "比较两个事物的巨大差异时",
+      "强调事物间的不同"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_35",
+    "status": "pending",
+    "source_header": "The opposite of \"chabuduo\" is \"cha hen duo\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "用“啊”列举事物",
+    "anchor_example": "我们什么零食都有，花生啊，瓜子啊，薯片啊，你随便吃吧。",
+    "summary_cn": "在口语中列举同类的几个事物时，可以在每个事物后面加上语气词“啊”，表示这个列表是不完整的、非正式的，有点像中文里的“之类的”或“什么的”。",
+    "mandatory_keywords": [
+      "啊"
+    ],
+    "pragmatic_scenarios": [
+      "在口语中随意地列举一些例子，比如食物、人名、地点等，并暗示列表并不完整。"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_36",
+    "status": "pending",
+    "source_header": "Listing things with \"a\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "用“于是”表示然后",
+    "anchor_example": "我看大家都买了，于是我也买了。",
+    "summary_cn": "连词“于是”用来连接两个按顺序发生的事件。第二个事件是第一个事件直接导致的结果，通常用于叙述过去发生的事情，所以常常和“了”一起用。",
+    "mandatory_keywords": [
+      "于是",
+      "了"
+    ],
+    "pragmatic_scenarios": [
+      "叙述故事或过去发生的一连串事件"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_37",
+    "status": "pending",
+    "source_header": "Expressing \"and then\" with \"yushi\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "用“而”表示转折对比",
+    "anchor_example": "我们是来办事的，而不是来玩的。",
+    "summary_cn": "连词“而”用于连接两个分句，表示转折或对比关系。常用于“不是A，而是B”或“是A，而不是B”的结构中，用来否定A并肯定B，强调后者才是真实情况。",
+    "mandatory_keywords": [
+      "而",
+      "是",
+      "不是"
+    ],
+    "pragmatic_scenarios": [
+      "澄清误解或事实",
+      "强调两种情况的对比"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_38",
+    "status": "pending",
+    "source_header": "Using \"er\" to explain contrasting ideas (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“当中”的用法",
+    "anchor_example": "他们当中很多人都是上海人。",
+    "summary_cn": "“当中”有两个主要用法：一是指在某个群体或范围之内，表示“其中”；二是指某个比较正式的活动或过程正在进行，表示“在…过程中”。",
+    "mandatory_keywords": [
+      "当中"
+    ],
+    "pragmatic_scenarios": [
+      "从一个群体中挑选出某人或某物",
+      "描述某个正式活动或过程的当前状态"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_39",
+    "status": "pending",
+    "source_header": "Expressing \"among\" with \"dangzhong\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "彼此的用法",
+    "anchor_example": "我们是好朋友，应该互相关心，照顾彼此。",
+    "summary_cn": "“彼此”是一个代词，指代相互关系的双方，意思是“互相”。它可以在句子中作主语、宾语或定语。口语中，重复使用“彼此彼此”是一种客套的回应，表示“大家一样”或“我也一样”。",
+    "mandatory_keywords": [
+      "彼此",
+      "互相"
+    ],
+    "pragmatic_scenarios": [
+      "描述两个人或群体之间的相互关系、行为或状态",
+      "在社交场合客气地回应别人的赞美或祝福"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_40",
+    "status": "pending",
+    "source_header": "Expressing \"each other\" with \"bici\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "当……的时候",
+    "anchor_example": "当她生气的时候，她就会去买衣服。",
+    "summary_cn": "用于引出某个事件发生的时间点或条件，意思是'when'。",
+    "mandatory_keywords": [
+      "当",
+      "时候"
+    ],
+    "pragmatic_scenarios": [
+      "描述在特定时间或条件下发生的事情"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_41",
+    "status": "pending",
+    "source_header": "Expressing \"when\" using \"dang\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "其中",
+    "anchor_example": "我有四辆汽车，其中三辆都是宝马。",
+    "summary_cn": "“其中”表示在前面提到的某个范围、群体或事物之内，相当于“在...当中”或“那里面”，用来引出这个整体中的某一部分。",
+    "mandatory_keywords": [
+      "其中"
+    ],
+    "pragmatic_scenarios": [
+      "说明一个整体中的某一部分"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_42",
+    "status": "pending",
+    "source_header": "Expressing \"within (it/them)\" with \"qizhong\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "用“这个”强调评价或分类",
+    "anchor_example": "你这个坏蛋！",
+    "summary_cn": "在名词前使用“这个”来强调说话者对某人或某事的评价、分类或看法。这会加强语气，既可用于客观陈述，也可用于带有强烈感情色彩的指责或辱骂。",
+    "mandatory_keywords": [
+      "这个"
+    ],
+    "pragmatic_scenarios": [
+      "表达强烈的负面情绪，用于辱骂或指责",
+      "提出特定的人或事物作为话题，并加以评论"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_43",
+    "status": "pending",
+    "source_header": "Name-calling with \"zhege\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "宾语后的“了”",
+    "anchor_example": "我上课了。",
+    "summary_cn": "表示动作完成的“了”（了1），既可以放在动词后，也可以放在宾语后。宾语的长短会影响“了”的位置：当宾语很短时，把“了”放在宾语后更自然；当宾语很长时，通常把“了”放在动词后。",
+    "mandatory_keywords": [
+      "了",
+      "动词",
+      "宾语",
+      "完成"
+    ],
+    "pragmatic_scenarios": [
+      "报告或陈述一个已经完成的简单动作"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_44",
+    "status": "pending",
+    "source_header": "Advanced \"le\" after an object (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "动词补语和“了”的位置",
+    "anchor_example": "我们打赢了比赛。",
+    "summary_cn": "当动词后面有补语时，“了”通常放在补语之后（动词+补语+了），表示动作完成。这种用法适用于大多数补语，尤其是在口语中。在书面语中，当补语是趋向补语时，“了”也可以放在动词和补语之间（动词+了+补语），例如“站了起来”。",
+    "mandatory_keywords": [
+      "了",
+      "动词",
+      "补语"
+    ],
+    "pragmatic_scenarios": [
+      "描述一个动作已经完成并产生了某种结果或状态"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_45",
+    "status": "pending",
+    "source_header": "Advanced \"le\" with complements (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "用“嘛”表示话题",
+    "anchor_example": "大熊猫嘛，大家都喜欢。",
+    "summary_cn": "用在名词或短语后，提出一个话题，稍作停顿，然后对其进行解释或评论。",
+    "mandatory_keywords": [
+      "嘛",
+      "，"
+    ],
+    "pragmatic_scenarios": [
+      "提出一个话题后，对其进行评论或解释"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_46",
+    "status": "pending",
+    "source_header": "Marking a topic with \"ma\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "用“呢”缓和疑问句语气",
+    "anchor_example": "你去不去逛街呢？",
+    "summary_cn": "语气助词“呢”用在疑问句句末，可以使语气更委婉、间接，听起来不那么强硬或急切，常带有商量、思索或不确定的意味。",
+    "mandatory_keywords": [
+      "呢",
+      "疑问句",
+      "语气",
+      "缓和"
+    ],
+    "pragmatic_scenarios": [
+      "当你希望提问的语气更客气、更委婉，避免给对方造成压力或显得不耐烦时，尤其是在使用“还是”选择问句、“Verb不Verb”问句或包含疑问代词的问句中。"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_47",
+    "status": "pending",
+    "source_header": "Softening the tone of questions with \"ne\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "方位词表示范围 (以上/下/内/外)",
+    "anchor_example": "十岁以下的孩子不用买票。",
+    "summary_cn": "在数量、时间、地点或范围等名词后，使用“以上”、“以下”、“以内”、“以外”来表示上限、下限或特定范围。",
+    "mandatory_keywords": [
+      "以上",
+      "以下",
+      "以内",
+      "以外"
+    ],
+    "pragmatic_scenarios": [
+      "设定年龄、时间或数量的限制",
+      "规定物理距离或空间范围",
+      "在书面语或演讲中指代上下文"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_48",
+    "status": "pending",
+    "source_header": "Defining upper and lower limits (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "随着",
+    "anchor_example": "随着经济的发展，人们的生活越来越好了。",
+    "summary_cn": "“随着”用来引出一个情况或趋势，表示另一个情况是伴随它发生或由它引起的。",
+    "mandatory_keywords": [
+      "随着"
+    ],
+    "pragmatic_scenarios": [
+      "描述一个情况如何因另一个趋势而变化",
+      "描述一个动作伴随另一个事物发生"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_49",
+    "status": "pending",
+    "source_header": "Expressing \"along with...\" with \"suizhe\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“自从”的用法",
+    "anchor_example": "自从来到湖南，我越来越能吃辣了。",
+    "summary_cn": "“自从”用来表示一个动作或情况从过去某个时间点开始，一直持续到现在。它后面常跟一个表示过去时间点的词或短语，且不能用于将来时。",
+    "mandatory_keywords": [
+      "自从",
+      "从",
+      "以来"
+    ],
+    "pragmatic_scenarios": [
+      "谈论从过去某个时间点开始，到现在发生的变化或持续的状态"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_50",
+    "status": "pending",
+    "source_header": "Expressing \"ever since\" with \"zicong\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "对……而言",
+    "anchor_example": "对她而言，自由更重要。",
+    "summary_cn": "表示“从……的角度来看”或“在……看来”，是“对……来说”的正式说法。",
+    "mandatory_keywords": [
+      "对",
+      "而言"
+    ],
+    "pragmatic_scenarios": [
+      "在正式场合或书面语中，从特定人物或群体的角度出发阐述观点或情况"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_51",
+    "status": "pending",
+    "source_header": "Expressing \"for...\" with \"eryan\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "用'包括...在内'表示包含",
+    "anchor_example": "包括他的母语在内，他会说四种语言。",
+    "summary_cn": "使用结构'(包括)...在内'来指明某个事物是前面或后面提到的一个整体的一部分。这个结构可以放在句首或句中。",
+    "mandatory_keywords": [
+      "在内",
+      "包括"
+    ],
+    "pragmatic_scenarios": [
+      "在列举或说明一个整体时，用以强调其中包含的某个具体成员或项目。"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_52",
+    "status": "pending",
+    "source_header": "Expressing \"including\" with \"zainei\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "介词“凭”的用法",
+    "anchor_example": "凭护照，外国人可以买火车票。",
+    "summary_cn": "“凭”是介词，表示动作行为的依据或凭借，意思是“根据”或“依靠”。后面可以跟名词（具体的或抽象的）、动词短语，或用于“凭什么”的质问句式中。",
+    "mandatory_keywords": [
+      "凭",
+      "凭着",
+      "凭什么"
+    ],
+    "pragmatic_scenarios": [
+      "出示证件或文件作为依据（如：凭学生证打折）",
+      "说明能力、努力或经验是成功的基础（如：凭自己的努力找到工作）",
+      "在争论中带有不满情绪地质问对方的理由或资格（如：你凭什么怪我？）"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_53",
+    "status": "pending",
+    "source_header": "Expressing \"on the basis of\" with \"ping\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "用“给”表示被动",
+    "anchor_example": "我给他骗了。",
+    "summary_cn": "在口语中，“给”可以像“被”一样表示被动语态，通常用于不如意的事情。它可以直接替代“被”，也可以和“被”一起使用（被...给...）来加强语气。",
+    "mandatory_keywords": [
+      "给",
+      "被"
+    ],
+    "pragmatic_scenarios": [
+      "在口语中抱怨或描述一件不幸或不希望发生的事情"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_54",
+    "status": "pending",
+    "source_header": "Expressing passive voice with \"gei\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“至于”的用法",
+    "anchor_example": "他足球踢得不错，至于篮球，那就一般了。",
+    "summary_cn": "提出一个话题后，用“至于”引出与此相关的另一个话题进行补充说明。",
+    "mandatory_keywords": [
+      "至于"
+    ],
+    "pragmatic_scenarios": [
+      "在对话中，当你想从一个已讨论的话题，转移到另一个相关的方面时使用"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_55",
+    "status": "pending",
+    "source_header": "Expressing \"with regards to\" with \"zhiyu\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "用“就”限定范围",
+    "anchor_example": "两国领导人就环保问题交换了意见。",
+    "summary_cn": "“就”可以放在一个名词或主题前，用来限定后面动作或评论所涉及的范围，类似于英文的“on”或“as for”。常见的结构有两种：一是“就+范围+动词”，用于正式讨论；二是“就+范围+来说/而言”，用于发表评论。",
+    "mandatory_keywords": [
+      "就",
+      "来说",
+      "而言"
+    ],
+    "pragmatic_scenarios": [
+      "在会议或正式讨论中，明确指出将要讨论的主题",
+      "在发表个人看法时，限定评论只针对某一个方面"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_56",
+    "status": "pending",
+    "source_header": "Limiting scope with \"jiu\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“趁”的用法",
+    "anchor_example": "趁打折，我买了新手机。",
+    "summary_cn": "表示利用某个有利的时机或机会去做某事。",
+    "mandatory_keywords": [
+      "趁",
+      "的时候"
+    ],
+    "pragmatic_scenarios": [
+      "抓住有利时机完成某事，例如利用折扣、好天气或空闲时间"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_57",
+    "status": "pending",
+    "source_header": "Opportune timing with \"chen\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "用“并”强调否定",
+    "anchor_example": "天气并不凉快。",
+    "summary_cn": "“并”用在否定词“不”或“没”的前面，用来加强否定的语气，常用于澄清事实或反驳他人的看法。",
+    "mandatory_keywords": [
+      "并",
+      "不",
+      "没"
+    ],
+    "pragmatic_scenarios": [
+      "澄清误解或反驳他人的看法"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_58",
+    "status": "pending",
+    "source_header": "Emphasizing a negation with \"bing\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“要不是”句式",
+    "anchor_example": "要不是你，我会迷路。",
+    "summary_cn": "“要不是”用来提出一个与事实相反的假设，意思是“如果不是因为…”。后面的分句通常会说明在这种假设下，本该发生的（但实际上没有发生的）不同结果。",
+    "mandatory_keywords": [
+      "要不是"
+    ],
+    "pragmatic_scenarios": [
+      "用于解释某个意料之外的结果或情况的原因",
+      "用于表达感谢（强调对方帮助的重要性）",
+      "用于委婉地抱怨或找借口"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_59",
+    "status": "pending",
+    "source_header": "Expressing \"if it were not for\" with \"yaobushi\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "多亏",
+    "anchor_example": "多亏了你开车送我，我才没迟到。",
+    "summary_cn": "“多亏”用于表达因为某人或某事的帮助，从而避免了某种不好的结果，带有强烈的感激之情。常与“了”、“才”或“不然”搭配使用。",
+    "mandatory_keywords": [
+      "多亏",
+      "才",
+      "不然"
+    ],
+    "pragmatic_scenarios": [
+      "向他人表示感谢，特别是当对方的帮助避免了负面情况发生时。"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_60",
+    "status": "pending",
+    "source_header": "Expressing \"thanks to\" with \"duokui\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "而已",
+    "anchor_example": "他只是开个玩笑而已，不要当真。",
+    "summary_cn": "“而已”用在句末，表示“只不过是这样”，有轻描淡写的语气，强调事情、情况或数量没什么大不了。",
+    "mandatory_keywords": [
+      "而已"
+    ],
+    "pragmatic_scenarios": [
+      "轻描淡写地描述某事以表示谦虚或不以为然",
+      "安慰反应过度的人，说明事情并不严重"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_61",
+    "status": "pending",
+    "source_header": "Expressing \"that's all\" with \"eryi\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "将字句",
+    "anchor_example": "我们将竞争对手打败了。",
+    "summary_cn": "“将”是“把”的正式或书面语用法，将动词的对象（宾语）提前，表示对该对象的处置。",
+    "mandatory_keywords": [
+      "将"
+    ],
+    "pragmatic_scenarios": [
+      "书面语",
+      "正式演讲",
+      "新闻报道",
+      "官方文件"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_62",
+    "status": "pending",
+    "source_header": "Using \"jiang\" as a formal \"ba\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "用“什么”进行反问",
+    "anchor_example": "你看什么看？",
+    "summary_cn": "在动词后加上“什么”构成反问句，通常带有不耐烦、责备或制止的语气，表示说话者认为该行为不应该发生。",
+    "mandatory_keywords": [
+      "什么",
+      "动词"
+    ],
+    "pragmatic_scenarios": [
+      "当你想用一种不耐烦或挑战的语气，制止或质问别人的某个行为时使用。例如，当别人一直盯着你看，你可以说“你看什么看？”来表达你的不满。"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_63",
+    "status": "pending",
+    "source_header": "Challenging a verb with \"shenme\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "用“像”进行比较",
+    "anchor_example": "她像小孩一样天真。",
+    "summary_cn": "“像”用于比较两个事物在某个特定方面的相似性。肯定句式为“A像B一样+形容词/动词”，表示A和B在某方面程度相同。否定句式为“A不像B那么/这么+形容词/动词”，表示A在某方面不如B。",
+    "mandatory_keywords": [
+      "像",
+      "一样",
+      "不像",
+      "那么",
+      "这么"
+    ],
+    "pragmatic_scenarios": [
+      "通过比喻来描述人或事物的特征或程度"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_64",
+    "status": "pending",
+    "source_header": "Comparing specifically with \"xiang\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "用“比起”和“相比”进行比较",
+    "anchor_example": "比起上海，我老家的物价便宜多了。",
+    "summary_cn": "“比起”和“相比”都用于引出比较的对象，从而对主语进行比较和评价，强调两者之间的差异。这是一种比“A比B...”更正式或更复杂的比较方式。",
+    "mandatory_keywords": [
+      "比起",
+      "相比"
+    ],
+    "pragmatic_scenarios": [
+      "对比两个事物的优劣或差异",
+      "在比较中表达个人偏好或观点"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_65",
+    "status": "pending",
+    "source_header": "Comparisons with \"biqi\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "用“不如”进行比较",
+    "anchor_example": "看电影不如看原著。",
+    "summary_cn": "“不如”主要有两个用法：一是用于比较，表示前者在某方面比不上后者（A不如B = A没有B好）；二是用来提出一个更好的选择或建议，意思是“最好还是”或“倒不如”。",
+    "mandatory_keywords": [
+      "不如"
+    ],
+    "pragmatic_scenarios": [
+      "比较事物优劣或提出更好的建议"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_66",
+    "status": "pending",
+    "source_header": "Comparisons with \"buru\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "后缀“化”的用法",
+    "anchor_example": "你不要把真相浪漫化！",
+    "summary_cn": "在名词或形容词后加上后缀“化”，可以构成动词，表示“使…变成…”或“转变成…”的过程，类似于英文的后缀“-ize”或“-ify”。这些由“化”构成的词有时也可以作名词使用。",
+    "mandatory_keywords": [
+      "化",
+      "后缀",
+      "动词"
+    ],
+    "pragmatic_scenarios": [
+      "描述社会或技术趋势（如：现代化、数字化、城市化）",
+      "描述使某物发生性质或外观上的改变（如：美化、绿化、软化）"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_67",
+    "status": "pending",
+    "source_header": "Making \"-ize\" and \"-ify\" verbs with \"hua\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“难怪”的动词用法",
+    "anchor_example": "他迟到了，这也难怪。今天地铁坏了。",
+    "summary_cn": "作为动词时，“难怪”表示因为有合理的原因，所以不应该或很难责备某人。",
+    "mandatory_keywords": [
+      "难怪"
+    ],
+    "pragmatic_scenarios": [
+      "当你想表示理解某人的行为，并认为他们不应被责备时，因为存在明显的原因或情有可原的情况。"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_68",
+    "status": "pending",
+    "source_header": "Using \"nanguai\" as a verb (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "用“将”表示将来",
+    "anchor_example": "他将成为一个好爸爸。",
+    "summary_cn": "副词“将”用在动词前，表示某事将在不久的将来发生。它常用于正式语境或书面语中，与“会”的意思相近。",
+    "mandatory_keywords": [
+      "将",
+      "将会",
+      "将要"
+    ],
+    "pragmatic_scenarios": [
+      "在正式场合或书面语中（如新闻、公告、计划书）预告或陈述未来将要发生的事情。"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_69",
+    "status": "pending",
+    "source_header": "Expressing future with \"jiang\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "用“并”连接动词",
+    "anchor_example": "我同意并支持你的决定。",
+    "summary_cn": "连词“并”用来连接两个同等重要的动词或动词短语，表示两个动作的并列关系，通常用于比较正式的语境中。",
+    "mandatory_keywords": [
+      "并"
+    ],
+    "pragmatic_scenarios": [
+      "在会议中报告工作",
+      "撰写正式报告或计划",
+      "陈述观点和后续行动"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_70",
+    "status": "pending",
+    "source_header": "Combining verbs with \"bing\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "用“由”强调施动者",
+    "anchor_example": "这件事由我负责。",
+    "summary_cn": "介词“由”用来引出并强调动作的执行者或负责方，表示某事“归谁管”或“是谁做的”。",
+    "mandatory_keywords": [
+      "由"
+    ],
+    "pragmatic_scenarios": [
+      "在工作或正式场合中分配任务、明确责任或说明来源"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_71",
+    "status": "pending",
+    "source_header": "Emphasizing the doer of an action with \"you\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "难免",
+    "anchor_example": "刚开始工作，难免会出错。",
+    "summary_cn": "表示某种情况（通常是不太好的）很难避免，一定会发生。",
+    "mandatory_keywords": [
+      "难免"
+    ],
+    "pragmatic_scenarios": [
+      "解释或预测一个通常不太好但又不可避免的结果"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_72",
+    "status": "pending",
+    "source_header": "Expressing \"hard to avoid\" with \"nanmian\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "连词“并且”的用法",
+    "anchor_example": "我通知了所有的人，并且还准备了所有的材料。",
+    "summary_cn": "“并且”是连词，用于连接动词或分句，表示在第一个动作或情况之上，还有一个更进一步的动作或情况，有“而且”、“此外”的意思。它比“和”更正式，常用于书面语。在表达递进关系时，常与“不但/不仅”和“也/还”搭配使用。",
+    "mandatory_keywords": [
+      "并且",
+      "也",
+      "还",
+      "不但",
+      "不仅"
+    ],
+    "pragmatic_scenarios": [
+      "在正式或书面语中，当需要连接两个动作或情况，并强调后者是前者的递进或补充时使用。"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_73",
+    "status": "pending",
+    "source_header": "Expressing \"moreover\" with \"bingqie\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "值得",
+    "anchor_example": "学汉语是值得的。",
+    "summary_cn": "“值得”用来表示做某件事是有价值或有意义的，常放在动词前，或单独作谓语，但不能表示金钱价值。",
+    "mandatory_keywords": [
+      "值得"
+    ],
+    "pragmatic_scenarios": [
+      "评估行为的价值"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_74",
+    "status": "pending",
+    "source_header": "Expressing \"to be worth\" doing with \"zhide\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "害得句式",
+    "anchor_example": "路上堵车，害得我迟到了。",
+    "summary_cn": "用于说明由于某个原因导致了不好的、令人不快的结果，通常带有抱怨或责备的语气。'得'字可以省略。",
+    "mandatory_keywords": [
+      "害得",
+      "害"
+    ],
+    "pragmatic_scenarios": [
+      "抱怨或责备某人/某事造成的不良后果"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_75",
+    "status": "pending",
+    "source_header": "Indicating negative impact with \"haide\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "受字句",
+    "anchor_example": "他的课很受学生欢迎。",
+    "summary_cn": "“受”字句用来表示主语“接受”或“遭受”某种行为或影响，常带有被动的意味。",
+    "mandatory_keywords": [
+      "受",
+      "受到"
+    ],
+    "pragmatic_scenarios": [
+      "描述个人或事物受到的评价、影响或待遇"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_76",
+    "status": "pending",
+    "source_header": "Passive verbs with \"shou\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "V着V着",
+    "anchor_example": "看着看着，就睡着了。",
+    "summary_cn": "表示某个动作持续了一段时间后，无意中或自然而然地发生了另一个情况。",
+    "mandatory_keywords": [
+      "着",
+      "就"
+    ],
+    "pragmatic_scenarios": [
+      "描述在持续进行某个动作的过程中，不知不觉地发生了意想不到的变化或结果。"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_77",
+    "status": "pending",
+    "source_header": "Using \"zhe\" when \"verbing away\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "用“格外”表达“特别”",
+    "anchor_example": "下过雨的早晨格外舒服。",
+    "summary_cn": "副词“格外”用来修饰形容词或心理动词，表示程度超过平常，意思是“特别”或“分外”。与“特别”不同，“格外”只能作副词，不能作形容词。",
+    "mandatory_keywords": [
+      "格外"
+    ],
+    "pragmatic_scenarios": [
+      "用于强调某种状态、感觉或情况超乎寻常"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_78",
+    "status": "pending",
+    "source_header": "Expressing \"especially\" with \"gewai\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "用“尽管”表示让步",
+    "anchor_example": "尽管困难很多，但是我们不能放弃。",
+    "summary_cn": "“尽管”用来引导一个让步从句，意思是“虽然”，但语气更强。后一个分句通常用“但是”、“可是”或“还是”来表示转折，强调结果不受前一个分句的条件影响。",
+    "mandatory_keywords": [
+      "尽管",
+      "但是",
+      "可是",
+      "还是"
+    ],
+    "pragmatic_scenarios": [
+      "表示强烈的转折或让步，即便存在某种事实或情况，但结果依然不变或相反。"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_79",
+    "status": "pending",
+    "source_header": "Expressing \"although\" with \"jinguan\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "用“倒”表示出乎意料或转折",
+    "anchor_example": "他不是很努力，成绩倒也不错。",
+    "summary_cn": "副词“倒”表示情况与预想或常理相反，有出乎意料的意味，带有转折或让步的语气。",
+    "mandatory_keywords": [
+      "倒"
+    ],
+    "pragmatic_scenarios": [
+      "表达与预期相反的结果或情况",
+      "先做出让步或肯定，然后引出转折或不利的方面"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_80",
+    "status": "pending",
+    "source_header": "Expressing contrariness with \"dao\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "副词“反而”",
+    "anchor_example": "吃了这个药，病反而更严重了。",
+    "summary_cn": "“反而”是一个副词，用在后一个分句，表示结果与预期或常理完全相反。",
+    "mandatory_keywords": [
+      "反而",
+      "不但"
+    ],
+    "pragmatic_scenarios": [
+      "描述一个行为导致了与预期相反的结果",
+      "加强转折语气，常与“不但/不仅...没/不...”连用"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_81",
+    "status": "pending",
+    "source_header": "Expressing \"on the contrary\" with \"fan'er\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "副词“却”",
+    "anchor_example": "他是老板，却没有人听他的。",
+    "summary_cn": "副词“却”用在主语后，动词前，表示转折，指出与前文或预期相反的情况，常带有意外或不满的语气。",
+    "mandatory_keywords": [
+      "却"
+    ],
+    "pragmatic_scenarios": [
+      "表达与预期相反的结果",
+      "提出一个与前文矛盾的观点",
+      "抱怨或表达不满"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_82",
+    "status": "pending",
+    "source_header": "The \"however\" adverb \"que\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "用“由于”表示原因",
+    "anchor_example": "由于天气原因，航班推迟了。",
+    "summary_cn": "“由于”用来引出事情发生的原因，后面跟着结果，多用于书面语或正式场合。",
+    "mandatory_keywords": [
+      "由于"
+    ],
+    "pragmatic_scenarios": [
+      "在书面或正式场合解释某个情况或结果的原因"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_83",
+    "status": "pending",
+    "source_header": "Expressing \"due to...\" with \"youyu\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“既然……就……”句式",
+    "anchor_example": "既然你那么喜欢，那就买吧。",
+    "summary_cn": "“既然”引出一个已知的事实作为前提，后半句常用“就”或“那”引出基于该前提的建议、推断或结论。",
+    "mandatory_keywords": [
+      "既然",
+      "就",
+      "那"
+    ],
+    "pragmatic_scenarios": [
+      "根据一个已知事实，提出建议或进行推断"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_84",
+    "status": "pending",
+    "source_header": "Expressing \"since\" with \"jiran\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "因此",
+    "anchor_example": "我病了，因此心情不好。",
+    "summary_cn": "连词，表示因果关系，连接原因和结果，意思是“所以”。通常用于比较正式的书面语。",
+    "mandatory_keywords": [
+      "因此"
+    ],
+    "pragmatic_scenarios": [
+      "在书面语中解释原因和结果",
+      "进行正式的陈述或说明"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_85",
+    "status": "pending",
+    "source_header": "Expressing \"therefore\" with \"yinci\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "之所以……是因为……",
+    "anchor_example": "我们之所以迟到，是因为路上堵车。",
+    "summary_cn": "一个用于先陈述结果（效果），再解释其背后原因的句式，可以翻译为“……的原因是……”。",
+    "mandatory_keywords": [
+      "之所以",
+      "是",
+      "因为"
+    ],
+    "pragmatic_scenarios": [
+      "在较为正式的场合解释或强调某个行为、决定或情况发生的原因"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_86",
+    "status": "pending",
+    "source_header": "Stating the effect before the cause (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "高级程度补语",
+    "anchor_example": "外面热得不行。",
+    "summary_cn": "在形容词后面加上“得”再跟上“很”、“不得了”、“要命”或“不行”，可以用来强调程度之深，通常带有夸张的语气。",
+    "mandatory_keywords": [
+      "得",
+      "很",
+      "不得了",
+      "要命",
+      "不行"
+    ],
+    "pragmatic_scenarios": [
+      "表达强烈的感受或夸张地描述事物状态"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_87",
+    "status": "pending",
+    "source_header": "Advanced degree complements (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "特殊可能补语",
+    "anchor_example": "这件衣服太小了，我穿不了。",
+    "summary_cn": "在动词后用“得”或“不”加上特定的补语（如“了 liǎo”、“下”、“起”、“动”、“着 zháo”），表示主语在客观条件下是否有能力完成某个动作。“不了”表示能力或条件限制，“不下”表示空间不足，“不起”表示经济无法负担，“不动”表示体力不支，“不着”表示无法达到结果。",
+    "mandatory_keywords": [
+      "得了",
+      "不了",
+      "得下",
+      "不下",
+      "得起",
+      "不起",
+      "得动",
+      "不动",
+      "得着",
+      "不着"
+    ],
+    "pragmatic_scenarios": [
+      "表达因时间、空间、金钱、体力等客观条件限制而无法完成某事。"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_88",
+    "status": "pending",
+    "source_header": "Advanced potential complements (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "结果补语：住、开、出来",
+    "anchor_example": "这些数学题有点难，我花了一个小时才做出来。",
+    "summary_cn": "“住”、“开”和“出来”作动词后的结果补语，可以表达丰富的含义。“住”表示动作的稳固、停止或坚持（如“站住”、“记住”）。“开”表示从关闭到打开，或动作的分离、扩散（如“打开”、“走开”）。“出来”表示从无到有地产生或完成，或通过感官辨别出事物（如“想出来”、“听出来”）。",
+    "mandatory_keywords": [
+      "住",
+      "开",
+      "出来",
+      "结果补语"
+    ],
+    "pragmatic_scenarios": [
+      "发出指令或要求（如：站住！放开我！）",
+      "表达完成或想出新事物（如：我终于做出来了）",
+      "通过感官进行分辨（如：我听出来了，这是他的声音）",
+      "表达动作的稳固或坚持（如：你一定要记住）",
+      "劝说他人想开一点，不要纠结"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_89",
+    "status": "pending",
+    "source_header": "Advanced result complements \"zhu\", \"kai\", and \"chulai\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "趋向补语“起来”的引申义 (表示集中、合拢)",
+    "anchor_example": "他把衣服都收起来了。",
+    "summary_cn": "动词后的“起来”可以表示将分散的事物集中或合拢起来，或者从显露到隐藏。这个结构常和“把”字句一起使用。",
+    "mandatory_keywords": [
+      "V",
+      "起来",
+      "把"
+    ],
+    "pragmatic_scenarios": [
+      "整理或收藏物品时",
+      "将抽象概念或事物结合在一起时"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_90",
+    "status": "pending",
+    "source_header": "Advanced uses of direction complement \"-qilai\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "程度补语'坏了'",
+    "anchor_example": "大家 都 累 坏了。",
+    "summary_cn": "用在形容词或心理动词后，作为程度补语，表示程度极深。可用于负面情绪（如累、饿、气），也可用于正面情绪（如高兴、激动），带有夸张的语气。",
+    "mandatory_keywords": [
+      "坏了"
+    ],
+    "pragmatic_scenarios": [
+      "表达极度的劳累、饥饿或担心",
+      "描述听到好消息后的狂喜",
+      "夸张地形容某种情绪达到了顶点"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_91",
+    "status": "pending",
+    "source_header": "Complement \"-huai le\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "结果补语/可能补语‘着’(zháo)",
+    "anchor_example": "宝宝刚睡着了。",
+    "summary_cn": "用在动词后作补语，读'zháo'，表示动作达到了目的或产生了结果。它的可能补语形式是‘V得着’和‘V不着’，表示有能力或没能力完成某事。",
+    "mandatory_keywords": [
+      "着",
+      "得着",
+      "不着"
+    ],
+    "pragmatic_scenarios": [
+      "表达动作的成功与否（如找到东西、买到东西、成功入睡）",
+      "表达是否有能力或机会完成某个动作"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_92",
+    "status": "pending",
+    "source_header": "Complement \"-zhao\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "结果补语“到”",
+    "anchor_example": "我没买到。",
+    "summary_cn": "在动词后加“到”作为结果补语，表示动作达到了目的或取得了预期的结果。它将“尝试做某事”（如“找”）变为“成功做成某事”（如“找到”）。",
+    "mandatory_keywords": [
+      "到"
+    ],
+    "pragmatic_scenarios": [
+      "当需要明确强调一个动作是否成功或达到了预期目的时"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_93",
+    "status": "pending",
+    "source_header": "Tricky uses of \"dao\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "V来V去格式",
+    "anchor_example": "学生们在考场外面走来走去。",
+    "summary_cn": "用“V来V去”的格式表示同一个动作反复进行，常带有漫无目的或往复的意味。",
+    "mandatory_keywords": [
+      "来",
+      "去",
+      "动词"
+    ],
+    "pragmatic_scenarios": [
+      "描述一个人因为焦虑或思考而来回踱步",
+      "形容一个人反复讲述某件事却没说到重点",
+      "表达经过反复思考后仍未得出结论",
+      "描述孩子活泼地到处跑动或跳动"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_94",
+    "status": "pending",
+    "source_header": "Using \"lai\" and \"qu\" when \"verbing around\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“只要...就...”句式",
+    "anchor_example": "只要你努力学习，就会有进步。",
+    "summary_cn": "表示只要满足某个条件，就必然会产生相应的结果。前一个分句提出一个充分条件，后一个分句说明在该条件下产生的结果。",
+    "mandatory_keywords": [
+      "只要",
+      "就"
+    ],
+    "pragmatic_scenarios": [
+      "设定条件以获得某个结果",
+      "做出承诺或保证",
+      "描述一个规律或必然的联系"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_95",
+    "status": "pending",
+    "source_header": "Expressing \"as long as\" with \"zhiyao\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "一旦...就...",
+    "anchor_example": "有些人一旦有了钱，就变了。",
+    "summary_cn": "表示只要某个假设的条件成立，某种结果就必然或很可能会随之发生。",
+    "mandatory_keywords": [
+      "一旦",
+      "就"
+    ],
+    "pragmatic_scenarios": [
+      "用于提出一个假设条件，并强调该条件一旦满足就会带来的结果，常带有警告、提醒或描述规律的意味。"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_96",
+    "status": "pending",
+    "source_header": "Expressing \"once...then...\" with \"yidan...jiu...\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "用'才'表示'只有在...之后'",
+    "anchor_example": "她做完了功课才睡觉。",
+    "summary_cn": "'才'表示某个动作或结果是在一个条件满足之后才发生的，常常强调这个条件需要花费时间、金钱或努力，或者发生得比较晚。",
+    "mandatory_keywords": [
+      "才"
+    ],
+    "pragmatic_scenarios": [
+      "描述一个结果来之不易，强调必须先完成某个条件（如花费时间或努力），之后结果才发生。"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_97",
+    "status": "pending",
+    "source_header": "Expressing \"only after\" with \"cai\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "只有...才...",
+    "anchor_example": "只有努力才能做好工作。",
+    "summary_cn": "“只有...才...”用来强调某个条件是实现某个结果的唯一或必要条件。",
+    "mandatory_keywords": [
+      "只有",
+      "才"
+    ],
+    "pragmatic_scenarios": [
+      "设定条件或规则",
+      "强调成功的必要因素"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_98",
+    "status": "pending",
+    "source_header": "Expressing \"only if\" with \"zhiyou\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“除非”的用法",
+    "anchor_example": "除非你是会员，否则不能进去。",
+    "summary_cn": "“除非”用来引出唯一能改变结果的条件，意思是“只有在…条件下”。它常常与“否则”、“不然”或“才”搭配使用，构成“除非A，否则/不然B”（表示如果不满足条件A，就会有结果B）或“除非A，才B”（表示只有满足条件A，才会有结果B）的句式。",
+    "mandatory_keywords": [
+      "除非",
+      "否则",
+      "不然",
+      "才"
+    ],
+    "pragmatic_scenarios": [
+      "提出唯一的条件",
+      "设定规则或限制",
+      "进行协商或谈判"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_99",
+    "status": "pending",
+    "source_header": "Expressing \"unless\" with \"chufei\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "即使...也...",
+    "anchor_example": "即使你不想让我去，我也要去。",
+    "summary_cn": "用于连接一个假设的让步分句和一个表示结果或结论的主句。意思是，即便在假设的情况下，结果也不会改变。",
+    "mandatory_keywords": [
+      "即使",
+      "也"
+    ],
+    "pragmatic_scenarios": [
+      "表达不受假设条件影响的坚定决心或结论",
+      "提出一个假设条件，并强调其对结果没有影响"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_100",
+    "status": "pending",
+    "source_header": "Expressing \"even if...\" with \"jishi\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "就是...也...",
+    "anchor_example": "就是以后会失败，我也想尝试。",
+    "summary_cn": "“就是”用来引导一个假设性的情况，而“也”引出即使在上述假设下，结果或决心依然不变。",
+    "mandatory_keywords": [
+      "就是",
+      "也"
+    ],
+    "pragmatic_scenarios": [
+      "表达不受假设条件影响的坚定决心或立场"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_101",
+    "status": "pending",
+    "source_header": "Expressing \"even if...\" with \"jiushi\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "就算⋯⋯也⋯⋯结构",
+    "anchor_example": "就算会失败，我也不后悔。",
+    "summary_cn": "“就算”用来引导一个假设，表示即使这个假设成立，主要从句描述的情况或结果也不会改变。“就算”比“即使”更口语化，常带有一种说话人认为假设不太可能发生或不合理的语气。",
+    "mandatory_keywords": [
+      "就算",
+      "也"
+    ],
+    "pragmatic_scenarios": [
+      "在提出一个假设的、通常是不太可能或不利的条件后，强调自己的决心或某个事实不会因此改变。"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_102",
+    "status": "pending",
+    "source_header": "Expressing \"even if...\" with \"jiusuan\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "用“哪怕”表达“即使”",
+    "anchor_example": "哪怕他不说，我也会知道。",
+    "summary_cn": "“哪怕”用来引导一个假设性的让步状语从句，表示即使出现某种极端或不太可能的情况，主句的结果或结论也不会改变。它的语气比“即使”或“就算”更强。",
+    "mandatory_keywords": [
+      "哪怕",
+      "也"
+    ],
+    "pragmatic_scenarios": [
+      "当需要提出一个极端的、不太可能发生的假设，并强调无论如何结果都不会改变时，用来表达坚定的决心或态度。"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_103",
+    "status": "pending",
+    "source_header": "Expressing \"even if...\" with \"napa\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "假如...就...",
+    "anchor_example": "假如我是你，我就戒烟。",
+    "summary_cn": "“假如”用于引导一个假设性的条件，常与“就”搭配，引出在该条件下会发生的结果。它比“如果”或“要是”更为正式，常用于书面语或正式场合。",
+    "mandatory_keywords": [
+      "假如",
+      "就"
+    ],
+    "pragmatic_scenarios": [
+      "在正式或书面语中提出假设",
+      "讨论虚拟或不太可能发生的情况"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_104",
+    "status": "pending",
+    "source_header": "Expressing \"if... then...\" with \"jiaru\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "要是...就...",
+    "anchor_example": "你要是真想我，就给我打电话。",
+    "summary_cn": "“要是”用来引导一个假设条件，后面常跟“就”引出相应的结果，表示“如果...那么...”。它比“如果”更口语化，常用于日常对话。",
+    "mandatory_keywords": [
+      "要是",
+      "就",
+      "要"
+    ],
+    "pragmatic_scenarios": [
+      "在日常口语中提出假设并说明相应的结果，比如和朋友讨论周末计划或提出建议。"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_105",
+    "status": "pending",
+    "source_header": "Expressing \"if... then...\" with \"yaoshi\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“万一”的用法",
+    "anchor_example": "万一下雨呢？",
+    "summary_cn": "用“万一”来提出一种可能性很小，但后果通常不好的假设，意思是“in case”或“what if”。",
+    "mandatory_keywords": [
+      "万一"
+    ],
+    "pragmatic_scenarios": [
+      "提醒别人或自己为某种不太可能发生但后果不好的情况做准备"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_106",
+    "status": "pending",
+    "source_header": "Expressing \"what if\" with \"wanyi\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "用“的话”标记话题",
+    "anchor_example": "北京的话，秋天去最好。",
+    "summary_cn": "“的话”可以放在一个名词或短语的后面，用来引出一个要评论的话题，意思类似于“说到…”或“至于…”。它也可以用来表示假设条件，相当于“如果”。",
+    "mandatory_keywords": [
+      "的话"
+    ],
+    "pragmatic_scenarios": [
+      "针对某个特定话题发表评论或建议",
+      "提出一个假设条件并说明其结果",
+      "在对话中，回应对方提到的某个要点"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_107",
+    "status": "pending",
+    "source_header": "Marking a topic with \"de hua\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“不管...都/也...”句式",
+    "anchor_example": "不管多难，都不能放弃。",
+    "summary_cn": "用于表示在任何假设的条件下，结果或结论都不会改变。后面常常跟“都”或“也”来强调结果的唯一性。",
+    "mandatory_keywords": [
+      "不管",
+      "都",
+      "也"
+    ],
+    "pragmatic_scenarios": [
+      "表达坚定的决心或决定",
+      "陈述一个不受条件影响的事实或规则",
+      "给予承诺或安慰"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_108",
+    "status": "pending",
+    "source_header": "Expressing \"no matter\" with \"buguan\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "无论…都/也…",
+    "anchor_example": "无论你做什么，我都不喜欢。",
+    "summary_cn": "“无论”用来引导一个条件分句，表示在任何假设的条件下，主句的结果都不会改变。条件分句中常包含疑问代词（如：什么、谁、哪儿）或正反问的形式（如：去不去），主句常用“都”或“也”来呼应。比“不管”更正式。",
+    "mandatory_keywords": [
+      "无论",
+      "都",
+      "也",
+      "不论"
+    ],
+    "pragmatic_scenarios": [
+      "表达坚定的决心或立场",
+      "强调某个结果在任何条件下都成立",
+      "做出不受任何情况影响的承诺或保证"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_109",
+    "status": "pending",
+    "source_header": "Expressing \"no matter\" with \"wulun\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "把字句 (进阶用法)",
+    "anchor_example": "请你把这个蛋糕切成六块。",
+    "summary_cn": "“把字句”强调主语如何处置宾语，使其产生变化。进阶用法包括与“给”（加强语气）、“看作/当作”（视为）、“动词+成”（变成）以及“当回事”（重视）等结构搭配，来表达更复杂的含义。",
+    "mandatory_keywords": [
+      "把",
+      "给",
+      "当作",
+      "看作",
+      "成",
+      "当回事"
+    ],
+    "pragmatic_scenarios": [
+      "描述将某物转变为另一物",
+      "表达如何看待或对待某人某物",
+      "在口语中强调动作的结果",
+      "表示重视或轻视某事"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_110",
+    "status": "pending",
+    "source_header": "Advanced uses of \"ba\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "连...都...",
+    "anchor_example": "他连一句中文都不会说。",
+    "summary_cn": "“连...都...”句式用于强调意想不到或令人惊讶的情况，通过举出一个极端的例子来突出整体情况，类似于英语中的“even”。",
+    "mandatory_keywords": [
+      "连",
+      "都"
+    ],
+    "pragmatic_scenarios": [
+      "用于表达惊讶、抱怨或强调极端情况",
+      "强调连最基本、最简单的事情都做不到或没有发生"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_111",
+    "status": "pending",
+    "source_header": "Advanced uses of \"lian\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“不比”比较句",
+    "anchor_example": "你不比我聪明。",
+    "summary_cn": "用于否定比较，表示前者不比后者更…，意味着前者的程度可能小于或等于后者 (A ≤ B)。这与“没有”(A < B) 的含义不同。",
+    "mandatory_keywords": [
+      "不比"
+    ],
+    "pragmatic_scenarios": [
+      "在比较事物时，委婉地表示一方不比另一方更优越或更差，有时也带有安慰的语气。"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_112",
+    "status": "pending",
+    "source_header": "Basic comparisons with \"bu bi\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“要⋯⋯就⋯⋯”句式",
+    "anchor_example": "要走就走。",
+    "summary_cn": "用“要+动词+就+动词”的结构来表达一种坚决果断的态度，意思是“如果想做某事，就立刻去做”，常带有命令或催促的语气。",
+    "mandatory_keywords": [
+      "要",
+      "就"
+    ],
+    "pragmatic_scenarios": [
+      "当某人犹豫不决时，用这个句式来催促对方下定决心并立即行动，表达一种坚决或不耐烦的态度。"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_113",
+    "status": "pending",
+    "source_header": "Conditions with \"yao\" and \"jiu\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“任何”的用法",
+    "anchor_example": "任何时候都可以来。",
+    "summary_cn": "“任何”意思是不论哪个、无论什么，用来指代某个范围内的一切，强调没有例外。它常与“都”或“也”连用。",
+    "mandatory_keywords": [
+      "任何",
+      "都",
+      "也"
+    ],
+    "pragmatic_scenarios": [
+      "提出禁令或否定",
+      "提供无限制的选择",
+      "强调没有例外的情况"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_114",
+    "status": "pending",
+    "source_header": "Expressing \"any\" with \"renhe\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "既…又/也…",
+    "anchor_example": "这家餐厅既便宜又好吃。",
+    "summary_cn": "用于连接两个并列的词或短语，表示同时具备两种属性、行为或情况，强调两者兼备。",
+    "mandatory_keywords": [
+      "既",
+      "又",
+      "也"
+    ],
+    "pragmatic_scenarios": [
+      "在评价人或事物时，描述其同时拥有的两种（通常是正面的）特质。",
+      "在陈述事实时，说明一个人兼具的两种身份或行为。"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_115",
+    "status": "pending",
+    "source_header": "Expressing \"both... and...\" with \"ji...you\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“少不了”的用法",
+    "anchor_example": "过生日少不了吃生日蛋糕。",
+    "summary_cn": "表示某人或某物是必不可少的，或某种情况必然会发生、无法避免。也可以用来根据情况推测原因或结果。",
+    "mandatory_keywords": [
+      "少不了"
+    ],
+    "pragmatic_scenarios": [
+      "说明在特定场合或做某事时，某些事物或活动是必不可少的",
+      "表示某种结果或行为是不可避免的",
+      "根据已有情况推测原因或结果"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_116",
+    "status": "pending",
+    "source_header": "Expressing \"can't do without\" with \"shaobuliao\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "等于的用法",
+    "anchor_example": "浪费时间等于浪费生命。",
+    "summary_cn": "“A 等于 B” 结构用来表示A和B在结果或意义上是相等的。它常用来描述一个行为（A）带来的一个意想不到的或逻辑上的后果（B）。",
+    "mandatory_keywords": [
+      "等于"
+    ],
+    "pragmatic_scenarios": [
+      "用于说明一个行为在本质上或结果上等同于另一个行为，常用来强调某一行为的后果或意义。"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_117",
+    "status": "pending",
+    "source_header": "Expressing \"equal to\" with \"dengyu\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "从⋯⋯中结构",
+    "anchor_example": "我从书中学习了很多知识。",
+    "summary_cn": "表示从某个来源（如事件、经历、谈话等）中获得了某种知识、信息、经验或感悟。",
+    "mandatory_keywords": [
+      "从",
+      "中"
+    ],
+    "pragmatic_scenarios": [
+      "分享从经历或事件中学到的教训或感悟",
+      "说明通过观察或交流获得信息的来源"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_118",
+    "status": "pending",
+    "source_header": "Expressing \"from\" with \"cong... zhong\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "用“就”表示无所谓",
+    "anchor_example": "坏了就坏了，再买新的。",
+    "summary_cn": "使用“动词/形容词 + 就 + 动词/形容词”的重复结构，来强调一种无所谓、不在乎的态度，表示说话人对某事的结果或他人的行为毫不在意。",
+    "mandatory_keywords": [
+      "就"
+    ],
+    "pragmatic_scenarios": [
+      "在争论中表示不在乎对方的决定或威胁",
+      "表示对已经发生的负面情况无所谓"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_119",
+    "status": "pending",
+    "source_header": "Expressing indifference with \"jiu\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“无...可...”结构",
+    "anchor_example": "我和他无话可说。",
+    "summary_cn": "一个较为正式和书面的句式，是“没有 (名词) 可以 (动词)”的浓缩形式，表示因缺少某个名词所指代的人、事、物而无法进行某个动作。",
+    "mandatory_keywords": [
+      "无",
+      "可"
+    ],
+    "pragmatic_scenarios": [
+      "用于书面语或正式场合，表达由于缺乏某种条件或对象而无法做某事，常带有无奈或消极的意味，如陷入困境时说“无路可走”，或关系破裂时说“无话可说”。"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_120",
+    "status": "pending",
+    "source_header": "Expressing \"no\" (noun) \"to\" (verb) with \"wu... ke...\"",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "一...也/都...不/没",
+    "anchor_example": "他一句话都没说。",
+    "summary_cn": "使用'一 + 量词 + 名词 + 也/都 + 不/没 + 动词'的结构，来强调某事物的数量极少，甚至连一个都没有。",
+    "mandatory_keywords": [
+      "一",
+      "也",
+      "都",
+      "不",
+      "没"
+    ],
+    "pragmatic_scenarios": [
+      "用于强调完全没有或完全不做某事，例如抱怨工作太忙，'今天我一口水都没喝'。"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_121",
+    "status": "pending",
+    "source_header": "Expressing \"not even one\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "不但...甚至连...",
+    "anchor_example": "他不但不知道李连杰，甚至连成龙也不知道。",
+    "summary_cn": "用于递进关系，强调后一个分句的内容比前一个分句更进一步，表示一种出乎意料或夸张的情况。",
+    "mandatory_keywords": [
+      "不但",
+      "甚至连",
+      "也"
+    ],
+    "pragmatic_scenarios": [
+      "强调一件意料之外或程度更深的事情"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_122",
+    "status": "pending",
+    "source_header": "Expressing \"not only..., even...\" using \"budan..., shenzhi lian\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "用“好”表示目的",
+    "anchor_example": "请说慢点儿，我们好做笔记。",
+    "summary_cn": "“好”可以用在动词短语前，连接前一个分句，表示做某事是为了方便实现后面的目的，有“以便于”的意思。",
+    "mandatory_keywords": [
+      "好"
+    ],
+    "pragmatic_scenarios": [
+      "解释自己行为的目的",
+      "提出请求并说明原因"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_123",
+    "status": "pending",
+    "source_header": "Expressing purpose with \"hao\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“跟/和/与……有关的”结构",
+    "anchor_example": "和这个项目有关的资料都需要保密。",
+    "summary_cn": "用于修饰名词，表示该名词与某个特定的人、事或物相关联。口语中常用“跟”或“和”，书面语或正式场合多用“与”。",
+    "mandatory_keywords": [
+      "跟",
+      "和",
+      "与",
+      "有关的"
+    ],
+    "pragmatic_scenarios": [
+      "在口语或书面语中限定名词的范围，说明其与某一主题相关",
+      "需要区分正式（与）与非正式（跟/和）语境时"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_124",
+    "status": "pending",
+    "source_header": "Expressing \"related to...\" with \"you guan de\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "一面……一面……",
+    "anchor_example": "我一面哭一面跑。",
+    "summary_cn": "“一面……一面……”用于连接两个同时进行的动作，比“一边”更正式。它也可以用来表示一个情况的两个方面，相当于“一方面……另一方面……”。",
+    "mandatory_keywords": [
+      "一面"
+    ],
+    "pragmatic_scenarios": [
+      "描述同时进行的两个动作",
+      "陈述一个情况或问题的两个方面"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_125",
+    "status": "pending",
+    "source_header": "Expressing simultaneous actions with \"yimian\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“所谓”的用法",
+    "anchor_example": "这种所谓的名牌，是销售自己说的。",
+    "summary_cn": "“所谓”用于引出大众所说的或某个名义上的事物，但说话人对其真实性或价值持怀疑、不认可的态度。它相当于英文中的“so-called”。",
+    "mandatory_keywords": [
+      "所谓"
+    ],
+    "pragmatic_scenarios": [
+      "当你要质疑一个普遍接受的称号或概念时",
+      "当你想要表达讽刺或不以为然的语气时",
+      "当你要重新定义或解释一个术语时"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_126",
+    "status": "pending",
+    "source_header": "Expressing \"so-called\" with \"suowei\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "越...越...",
+    "anchor_example": "他越跑越快。",
+    "summary_cn": "用“越A越B”的结构来表示B的程度会随着A的程度的增加而增加，可以理解为“the more A, the more B”。",
+    "mandatory_keywords": [
+      "越"
+    ],
+    "pragmatic_scenarios": [
+      "描述一个动作或状态如何随着另一个动作或状态的加深而改变",
+      "表达一种情况（如情绪或状态）因某个持续的动作而变得越来越强烈",
+      "表示事与愿违的结果，即“越...越不...”"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_127",
+    "status": "pending",
+    "source_header": "Expressing \"the more... the more...\" with \"yue... yue...\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "不是⋯⋯就是⋯⋯",
+    "anchor_example": "他整天不是打游戏就是睡觉。",
+    "summary_cn": "用于描述一个情况只有两种可能性，强调“非此即彼”。",
+    "mandatory_keywords": [
+      "不是",
+      "就是"
+    ],
+    "pragmatic_scenarios": [
+      "描述某人单调的习惯或生活方式",
+      "抱怨某个事物总是不合心意",
+      "在两种可能性中进行猜测"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_128",
+    "status": "pending",
+    "source_header": "Expressing the only two possibilities (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "在...内",
+    "anchor_example": "政府计划在十年内研究出电动汽车。",
+    "summary_cn": "用于表示在某个指定的时间段之内完成某事或发生某种变化。",
+    "mandatory_keywords": [
+      "在",
+      "内"
+    ],
+    "pragmatic_scenarios": [
+      "设定计划或截止日期",
+      "描述在特定时间范围内发生的变化"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_129",
+    "status": "pending",
+    "source_header": "Expressing \"within\" a period of time using \"zai... nei\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“宁可”句式",
+    "anchor_example": "他宁可输，也不放弃。",
+    "summary_cn": "用于在两个选项之间进行比较和选择，表示说话人宁愿选择前者（通常是不太理想的选项），也不愿选择后者（更不理想的选项），或者愿意承受前者的代价来达到后者的目的。",
+    "mandatory_keywords": [
+      "宁可",
+      "也"
+    ],
+    "pragmatic_scenarios": [
+      "在两个不理想的选项中做出权衡和选择时",
+      "表达为了实现某个目标而愿意付出代价的决心时"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_130",
+    "status": "pending",
+    "source_header": "Expressing \"would rather\" with \"ningke\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "或者... 或者...",
+    "anchor_example": "咱们或者去爬山，或者泡温泉。",
+    "summary_cn": "在陈述句中提供两种选择，表示二者择一，意思是“要么A，要么B”。",
+    "mandatory_keywords": [
+      "或者"
+    ],
+    "pragmatic_scenarios": [
+      "在制定计划或提出建议时，列出两个备选方案"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_131",
+    "status": "pending",
+    "source_header": "Providing two options with double \"huozhe\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "别说……，连/就是……也/都……",
+    "anchor_example": "别说白酒，连啤酒的味道我都受不了。",
+    "summary_cn": "通过陈述一个较简单或基本的情况（B）尚且如此，来强调一个更极端或困难的情况（A）就更不用提了。常用于夸张或加强语气，表示“let alone”的意思。",
+    "mandatory_keywords": [
+      "别说",
+      "连",
+      "就是",
+      "也",
+      "都"
+    ],
+    "pragmatic_scenarios": [
+      "表达强烈的否定或拒绝",
+      "强调事情的难度或程度之高",
+      "进行夸张对比以加强语气"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_132",
+    "status": "pending",
+    "source_header": "Expressing \"let alone\" with \"bie shuo\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "更不用说",
+    "anchor_example": "他连鸡蛋都不会煮，更不用说做一桌菜了。",
+    "summary_cn": "用于强调，表示既然前一个更简单或基本的情况都如此，那么后一个更进一步或更难的情况就更不用提了。常与“连...都/也...”搭配使用，相当于英语的“let alone”。",
+    "mandatory_keywords": [
+      "更不用说",
+      "连",
+      "都",
+      "也"
+    ],
+    "pragmatic_scenarios": [
+      "通过举一个简单的例子，来强调一个更难或更极端的情况也同样成立或不成立时"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_133",
+    "status": "pending",
+    "source_header": "Expressing \"let alone\" with \"geng buyong shuo\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "不但/不仅/不只... 而且/还/也...",
+    "anchor_example": "他不但聪明，还很善良。",
+    "summary_cn": "“不但/不仅/不只”与“而且/还/也”搭配使用，表示递进关系。第一部分的三个词和第二部分的三个词可以自由组合，用于连接两个分句，强调在已有情况的基础上，还存在更进一层的情况。",
+    "mandatory_keywords": [
+      "不但",
+      "不仅",
+      "不只",
+      "而且",
+      "还",
+      "也"
+    ],
+    "pragmatic_scenarios": [
+      "介绍人或事物的多个优点或能力",
+      "补充更重要的信息"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_134",
+    "status": "pending",
+    "source_header": "Many types of \"not only... but also...\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“本来”和“原来”的区别",
+    "anchor_example": "我本来是要去上班的，后来才发现，原来今天是周末！",
+    "summary_cn": "“本来”(běnlái) 强调与现在情况相反的“最初计划”或“理应如此”的状态，常与“但是/可是”连用。 “原来”(yuánlái) 则表示恍然大悟，发现了之前不知道的真实情况，意为“竟然是这样”。",
+    "mandatory_keywords": [
+      "本来",
+      "原来"
+    ],
+    "pragmatic_scenarios": [
+      "解释计划为何改变 (e.g., 我本来要去，但是...)",
+      "表达理所当然的看法或常识 (e.g., 孩子本来就应该听父母的话)",
+      "表达对新发现事实的惊讶或恍然大悟 (e.g., 原来是你！)"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_135",
+    "status": "pending",
+    "source_header": "Comparing \"benlai\" and \"yuanlai\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "副词“才”和“就”的比较",
+    "anchor_example": "他八点就来了，你怎么九点才来？",
+    "summary_cn": "副词“才”和“就”都放在动词前表示时间或数量。“就”通常强调动作发生得早、快或顺利，有“比预期早”的含义。“才”则相反，强调动作发生得晚、慢或困难，有“比预期晚”的含义。两者也都可以表示数量少，意为“仅仅”。",
+    "mandatory_keywords": [
+      "才",
+      "就"
+    ],
+    "pragmatic_scenarios": [
+      "抱怨别人迟到或事情发生得晚 (e.g., 你怎么现在才来？)",
+      "惊讶于事情发生得早或顺利 (e.g., 你这么早就做完了？)",
+      "强调数量少 (e.g., 你就吃了这么一点儿？)"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_136",
+    "status": "pending",
+    "source_header": "Comparing \"cai\" and \"jiu\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“再”和“又”的区别",
+    "anchor_example": "他昨天又来了，明天会再来。",
+    "summary_cn": "“再”和“又”都表示动作的重复，但“再”用于将来（动作未发生），而“又”用于过去（动作已发生）。",
+    "mandatory_keywords": [
+      "再",
+      "又"
+    ],
+    "pragmatic_scenarios": [
+      "描述已经重复发生的事件（用“又”）",
+      "提出请求或计划将来再次进行的活动（用“再”）",
+      "表示做完一件事后再做另一件事的顺序（用“再”）"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_137",
+    "status": "pending",
+    "source_header": "Comparing \"zai\" and \"you\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“总算”和“终于”的用法区别",
+    "anchor_example": "你总算来了！",
+    "summary_cn": "“总算”和“终于”都表示期待已久的事情最终发生。主要区别在于语气：“总算”更口语化，常带有焦急、不耐烦或松了一口气的感情色彩；而“终于”则更书面、客观，只强调一个期待已久的结果实现了。",
+    "mandatory_keywords": [
+      "总算",
+      "终于"
+    ],
+    "pragmatic_scenarios": [
+      "在焦急等待后表达解脱或略带抱怨的情绪",
+      "客观陈述一个经过长期努力或等待才达成的重大结果"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_138",
+    "status": "pending",
+    "source_header": "Comparing \"zongsuan\" and “zhongyu\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“跟”和“对”的用法比较",
+    "anchor_example": "我跟他说了，但是他不信。",
+    "summary_cn": "“跟”和“对”与动词“说”连用时，都可以表示“向某人说话”，意思相近。但在其他情况下，“跟”主要用于表示“和/与”（A跟B一起）、比较（A跟B一样）或“跟随”；而“对”则强调动作的对象或方向（对我笑、对...发脾气）。",
+    "mandatory_keywords": [
+      "跟",
+      "对"
+    ],
+    "pragmatic_scenarios": [
+      "比较人或事物，说明动作（如说话、笑）的对象，或者表示“和/与”以及“跟随”"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_139",
+    "status": "pending",
+    "source_header": "Comparing \"gen\" and \"dui\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "介词“朝”、“向”、“往”的用法",
+    "anchor_example": "他往南走了，你别朝我发火，我应该向你道歉。",
+    "summary_cn": "“朝”、“向”、“往”都可作介词表示方向。指纯粹方向时常可互换（如：往北走）。指动作的具体对象时用“朝”或“向”（如：朝我笑）。指抽象对象时只能用“向”（如：向他学习）。“往”还常用于动词后，强调目的地（如：开往上海）。",
+    "mandatory_keywords": [
+      "朝",
+      "向",
+      "往"
+    ],
+    "pragmatic_scenarios": [
+      "指明行进的方向",
+      "描述动作朝向的对象",
+      "向某人学习、请求或道歉"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_140",
+    "status": "pending",
+    "source_header": "Comparing \"chao\" \"xiang\" and \"wang\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“对”和“对于”的比较",
+    "anchor_example": "他对工作很认真。",
+    "summary_cn": "“对”和“对于”都可以作介词，引出动作或行为的对象，此时常可互换，但“对于”更正式。“对”的用法更广：可以和表示态度或情感的形容词连用（如“对…很好”），可以用在副词后面，还可以作动词表示“面向”或“核对”。",
+    "mandatory_keywords": [
+      "对",
+      "对于"
+    ],
+    "pragmatic_scenarios": [
+      "表达对人或事的看法或态度",
+      "在正式场合或书面语中引出讨论的话题"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_141",
+    "status": "pending",
+    "source_header": "Comparing \"dui\" and \"duiyu\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“对于”和“至于”的区别",
+    "anchor_example": "我们要开始这个项目了，至于什么时候开始，还没定。",
+    "summary_cn": "“对于”用来引出并强调讨论的对象，意为“关于”或“就……来说”。“至于”有两个主要用法：一是用来转换话题，引出另一个相关的话题，意为“说到，提及”；二是表示达到某种程度，常用于反问或否定句，如“至于吗？”或“不至于”。",
+    "mandatory_keywords": [
+      "对于",
+      "至于"
+    ],
+    "pragmatic_scenarios": [
+      "引出并强调某个动作或评价的对象",
+      "在谈话中转换到一个新的相关话题",
+      "表示程度，或质疑某人的反应是否过激"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_142",
+    "status": "pending",
+    "source_header": "Comparing \"duiyu\" and \"zhiyu\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "介词“给”和“为”的区别",
+    "anchor_example": "我为公司工作，下班后给你打电话。",
+    "summary_cn": "“给”和“为”都可以表示“为了”。“给”通常用于出于善意或友谊的个人行为，比较口语化；“为”则更正式，常用于表示责任、义务或更抽象的目标。",
+    "mandatory_keywords": [
+      "给",
+      "为"
+    ],
+    "pragmatic_scenarios": [
+      "为朋友或家人做一件具体的事（用“给”，如：给我打电话）",
+      "表达为某个组织、国家或抽象概念工作或付出（用“为”，如：为国家做贡献）"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_143",
+    "status": "pending",
+    "source_header": "Comparing \"gei\" and \"wei\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“关于”和“对于”的比较",
+    "anchor_example": "关于孩子的教育，她跟丈夫的看法很不一样。",
+    "summary_cn": "“关于”用于引出一个范围或主题，强调“和...有关”（about/concerning）。“对于”用于指向一个明确的对象，并引出与之相关的看法、态度或行为，强调“针对”（as for/towards）。",
+    "mandatory_keywords": [
+      "关于",
+      "对于"
+    ],
+    "pragmatic_scenarios": [
+      "在会议或文章中引出讨论的主题",
+      "表达对特定人或事的看法或态度"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_144",
+    "status": "pending",
+    "source_header": "Comparing \"guanyu\" and \"duiyu\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“适合”和“合适”的区别",
+    "anchor_example": "这个工作很适合我。",
+    "summary_cn": "“适合”是动词，意思是“to suit”，后面需要跟宾语（适合某人/某物）。“合适”是形容词，意思是“suitable”或“appropriate”，用来描述事物，可以被“很”、“不太”等副词修饰。",
+    "mandatory_keywords": [
+      "适合",
+      "合适"
+    ],
+    "pragmatic_scenarios": [
+      "评价工作、衣物、价格或行为是否恰当",
+      "挑选人选或物品"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_145",
+    "status": "pending",
+    "source_header": "Comparing \"shihe\" and \"heshi\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“平时”和“平常”的区别",
+    "anchor_example": "A: 你平时做什么菜？ B: 都是很平常的菜。",
+    "summary_cn": "“平时”和“平常”都可以作副词，表示“通常”，此时可以互换。但是，只有“平常”可以作形容词，表示“普通的”或“常见的”。",
+    "mandatory_keywords": [
+      "平时",
+      "平常"
+    ],
+    "pragmatic_scenarios": [
+      "谈论日常习惯",
+      "评价事物是否普通"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_146",
+    "status": "pending",
+    "source_header": "Comparing \"pingshi\" and \"pingchang\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“以后”和“之后”的用法比较",
+    "anchor_example": "我六点下班，之后去跟朋友吃饭。",
+    "summary_cn": "“以后”和“之后”都可以在具体时间或事件后表示“在...之后”。但单独使用时，“以后”指“将来”，而“之后”指“在那件事之后”，用来连接前后事件。",
+    "mandatory_keywords": [
+      "以后",
+      "之后"
+    ],
+    "pragmatic_scenarios": [
+      "叙述事件顺序",
+      "谈论未来计划",
+      "说明事件的结果"
+    ],
+    "is_useful_for_child": true,
+    "id": "pdf_b2_147",
+    "status": "pending",
+    "source_header": "Comparing \"yihou\" and \"zhihou\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“以后”、“然后”和“后来”的辨析",
+    "anchor_example": "我们先复习一下，然后上新课。",
+    "summary_cn": "“然后”是连词，用于连接先后发生的动作（and then）。“以后”指将来或某个时间点之后（in the future/after）。“后来”指过去某个时间点之后发生的事（afterwards），用于叙述过去。",
+    "mandatory_keywords": [
+      "以后",
+      "然后",
+      "后来"
+    ],
+    "pragmatic_scenarios": [
+      "安排计划顺序",
+      "叙述过去的故事",
+      "谈论未来"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_148",
+    "status": "pending",
+    "source_header": "Comparing \"yihou\" \"ranhou\" \"houlai\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“看起来”和“看来”的用法比较",
+    "anchor_example": "这道菜看起来很好吃。",
+    "summary_cn": "“看起来”用于描述外表或视觉上的判断，意为“looks like”。而“看来”用于根据情况进行推断或表达观点，意为“it seems”。",
+    "mandatory_keywords": [
+      "看起来",
+      "看来"
+    ],
+    "pragmatic_scenarios": [
+      "评价某人或某物的外观",
+      "根据情况做出推断或结论",
+      "表达个人观点（如“在我看来”）"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_149",
+    "status": "pending",
+    "source_header": "Comparing \"kanqilai\" and \"kanlai\" (B2)",
+    "level": "B2"
+  },
+  {
+    "grammar_point_cn": "“显得”和“看起来”的比较",
+    "anchor_example": "这件衣服显得我很苗条。",
+    "summary_cn": "“显得”和“看起来”都表示“看起来像”，但“显得”更客观，常指某个原因导致某人/某物呈现出某种状态；而“看起来”更主观，表示观察者的个人看法或感觉。",
+    "mandatory_keywords": [
+      "显得",
+      "看起来"
+    ],
+    "pragmatic_scenarios": [
+      "评论外表或状态",
+      "表达主观印象",
+      "解释客观原因造成的外观"
+    ],
+    "is_useful_for_child": false,
+    "id": "pdf_b2_150",
+    "status": "pending",
+    "source_header": "Comparing \"xiande\" and \"kanqilai\" (B2)",
+    "level": "B2"
+  }
+]

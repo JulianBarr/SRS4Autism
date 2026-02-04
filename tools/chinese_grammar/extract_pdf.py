@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Chinese Grammar Extraction Agent (PDF Version)
+Chinese Grammar Extraction Agent (PDF Version) - B2 Upper Intermediate
 Uses PDF Outline (TOC) to slice content and extract grammar points.
 """
 
@@ -19,18 +19,21 @@ from dotenv import load_dotenv
 # 1. CONFIGURATION
 # ============================================================================
 
-TEST_LIMIT = None  # None = 跑全量
+TEST_LIMIT = None  # Set to None to process the whole book
 SAVE_INTERVAL = 5
-# 请确认你的 PDF 文件名是否正确
-PDF_FILENAME = "book_chinese_grammar_intermediary.pdf"
+
+# --- TARGET FILE ---
+PDF_FILENAME = "chinese_grammar_upper_intermediate.pdf"
 PDF_PATH = Path(__file__).parent / PDF_FILENAME
-OUTPUT_PATH = Path(__file__).parent / "grammar_staging_pdf.json" # 区分输出文件
+OUTPUT_PATH = Path(__file__).parent / "grammar_staging_b2.json" # Saved to a new file to avoid overwriting your old work
+# -------------------
+
 MIN_CONTENT_LENGTH = 100
-# 垃圾过滤
+# Skip sections that aren't grammar points
 SKIP_KEYWORDS = ["Contents", "Foreword", "Copyright", "Index", "Wiki", "Introduction", "Preface", "Appendix", "Glossary"]
 
 # ============================================================================
-# 2. NETWORK & MODEL (与 EPUB 版完全一致)
+# 2. NETWORK & MODEL
 # ============================================================================
 
 load_dotenv()
@@ -60,7 +63,6 @@ def get_best_model():
         genai.configure(api_key=API_KEY, transport='rest')
         candidates = [m.name for m in genai.list_models() if 'generateContent' in m.supported_generation_methods]
         if not candidates: return None
-        # 优先找 Pro，其次 Flash
         chosen = next((m for m in candidates if 'pro' in m.lower()), 
                  next((m for m in candidates if 'flash' in m.lower()), candidates[0]))
         print(f"✅ Model: {chosen}")
@@ -72,7 +74,7 @@ def get_best_model():
 model = get_best_model()
 
 # ============================================================================
-# 3. PDF SPECIFIC EXTRACTION (核心差异)
+# 3. PDF EXTRACTION
 # ============================================================================
 
 def extract_sections_from_pdf(pdf_path: Path) -> List[Dict[str, str]]:
@@ -84,12 +86,10 @@ def extract_sections_from_pdf(pdf_path: Path) -> List[Dict[str, str]]:
         print(f"❌ Error opening PDF: {e}")
         return []
 
-    # 获取目录结构 (lvl, title, page)
     toc = doc.get_toc()
     
     if not toc:
         print("❌ Error: No Table of Contents (Outline) found in this PDF.")
-        print("   Without bookmarks, we cannot automatically split chapters.")
         return []
 
     print(f"   Found {len(toc)} TOC entries.")
@@ -98,29 +98,22 @@ def extract_sections_from_pdf(pdf_path: Path) -> List[Dict[str, str]]:
     
     for i in range(len(toc)):
         lvl, title, page_num = toc[i]
-        
-        # 这里的 page_num 是从 1 开始的，PyMuPDF 是从 0 开始
         start_page = page_num - 1
         
-        # 确定结束页：是下一章的开始页，或者是文档末尾
         if i < len(toc) - 1:
             end_page = toc[i+1][2] - 1
         else:
             end_page = doc.page_count
             
-        # 安全检查
         if start_page < 0: start_page = 0
         if end_page > doc.page_count: end_page = doc.page_count
         
-        # 提取这一范围内的所有文本
         chapter_text = ""
-        # 限制每章最多读 10 页，防止某个目录项包含了半本书
         real_end = min(end_page, start_page + 10) 
         
         for p in range(start_page, real_end):
             chapter_text += doc.load_page(p).get_text()
             
-        # 清洗文本 (去掉过多的换行)
         clean_text = chapter_text.replace('\n', ' ').replace('  ', ' ')
         
         if len(clean_text) >= MIN_CONTENT_LENGTH:
@@ -133,7 +126,7 @@ def extract_sections_from_pdf(pdf_path: Path) -> List[Dict[str, str]]:
     return sections
 
 # ============================================================================
-# 4. SHARED LOGIC (复用)
+# 4. LOGIC
 # ============================================================================
 
 def load_existing_data():
@@ -152,7 +145,6 @@ def should_skip(header):
     return any(k.lower() in header.lower() for k in SKIP_KEYWORDS)
 
 def extract_grammar_point(section):
-    # Prompt 稍微针对 PDF 的 OCR 噪音做一点鲁棒性调整
     prompt = f"""
     You are a Chinese Grammar Expert. 
     Extract a structured grammar card from this text (OCR extracted from PDF).
@@ -206,9 +198,13 @@ def main():
             
             if data:
                 print(f"   ✅ SUCCESS: {data.get('grammar_point_cn')}")
-                data['id'] = f"pdf_{i}" # 使用前缀区分 PDF 数据
+                
+                # --- METADATA INJECTION ---
+                data['id'] = f"pdf_b2_{i}"  # Unique ID prefix for B2 book
                 data['status'] = 'pending'
                 data['source_header'] = header
+                data['level'] = 'B2'        # <--- HARDCODED LEVEL
+                # --------------------------
                 
                 all_data.append(data)
                 processed_headers.add(header)
@@ -224,6 +220,7 @@ def main():
     
     save_data(all_data)
     print(f"\n🎉 Done. Total: {len(all_data)}")
+    print(f"👉 Output saved to: {OUTPUT_PATH}")
 
 if __name__ == "__main__":
     main()
