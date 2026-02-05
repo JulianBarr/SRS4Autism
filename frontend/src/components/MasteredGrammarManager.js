@@ -670,7 +670,7 @@ const MasteredGrammarManager = ({ profile, onUpdate, grammarLanguage = 'zh' }) =
                                   marginBottom: '6px',
                                   fontStyle: 'italic'
                                 }}>
-                                  {(editData.example_chinese || editData.example || '').replace(/\s+/g, '')}
+                                  {editData.example_chinese || editData.example || ''}
                                 </div>
                               )}
                               {editData.explanation.length > 150 ? `${editData.explanation.substring(0, 150)}...` : editData.explanation}
@@ -687,7 +687,7 @@ const MasteredGrammarManager = ({ profile, onUpdate, grammarLanguage = 'zh' }) =
                                 marginBottom: '6px',
                                 fontStyle: 'italic'
                               }}>
-                                {(editData.example_chinese || editData.example || '').replace(/\s+/g, '')}
+                                {editData.example_chinese || editData.example || ''}
                               </div>
                             </div>
                           )}

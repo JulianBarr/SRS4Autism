@@ -1226,169 +1226,296 @@ async def get_logic_city_vocabulary(page: int = 1, page_size: int = 50):
     
     return fetch_logic_city_vocabulary(page=page, page_size=page_size)
 
-# Get grammar points for mastered grammar management
+# ==========================================
+# Language Configuration
+# ==========================================
+LANGUAGE_CONFIG = {
+    "en": {
+        "kg_name": "English",
+        "example_key": "example",
+    },
+    "zh": {
+        "kg_name": "Chinese",
+        "example_key": "example_chinese",
+    }
+}
+
 @app.get("/vocabulary/grammar")
 async def get_grammar_points(cefr_level: Optional[str] = None, language: Optional[str] = "zh"):
     """
-    Get grammar points from the knowledge graph, optionally filtered by CEFR level (A1, A2, etc.) and language.
-    Returns grammar points with their structure, explanation, and CEFR level.
-    
-    Args:
-        cefr_level: Optional CEFR level filter (A1, A2, B1, B2, etc.)
-        language: Language filter - "zh" for Chinese, "en" for English (default: "zh")
+    Get grammar points sorted via Python Natural Sort (handles "1-1", "2", "10").
     """
     try:
-        # Filter by language: 
-        # English grammar (CEFR-J): URI starts with "grammar-en-"
-        # Chinese grammar: URI does NOT start with "grammar-en-"
+        lang_cfg = LANGUAGE_CONFIG.get(language, LANGUAGE_CONFIG["zh"])
+        target_lang_name = lang_cfg["kg_name"]
+
+        # Filters
         if language == "en":
-            language_filter = 'FILTER(CONTAINS(STR(?gp_uri), "grammar-en-"))'
+            lang_filter = f'FILTER(?lang = "{target_lang_name}")'
         else:
-            language_filter = 'FILTER(!CONTAINS(STR(?gp_uri), "grammar-en-") && BOUND(?label_zh))'
-        
-        # Query the knowledge graph for grammar points
-        # Use OPTIONAL for properties that might be missing, and handle language-tagged literals
-        # Get both English and Chinese labels, and first example sentence (only one per grammar point)
-        # First get all grammar points with their properties
-        # Build CEFR level filter if specified
+            lang_filter = f'FILTER(?lang = "{target_lang_name}" || !BOUND(?lang) || ?lang != "English")'
+
         cefr_filter = f'FILTER(?cefr = "{cefr_level}")' if cefr_level else ''
-        
+
+        # SPARQL: Fetch Raw Data (No Sorting Here)
         sparql = f"""
         PREFIX srs-kg: <http://srs4autism.com/schema/>
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-        
-        SELECT DISTINCT ?gp_uri ?label_en ?label_zh ?structure ?explanation ?cefr WHERE {{
+        PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+        SELECT DISTINCT ?gp_uri ?cefr ?anchor ?lang ?sid
+               (SAMPLE(?lbl_en) AS ?label_en)
+               (SAMPLE(?lbl_zh) AS ?label_zh)
+               (SAMPLE(?expl_en) AS ?explanation_en)
+               (SAMPLE(?expl_zh) AS ?explanation_zh)
+               (SAMPLE(?struct) AS ?structure)
+        WHERE {{
             ?gp_uri a srs-kg:GrammarPoint .
-            OPTIONAL {{ ?gp_uri rdfs:label ?label_en . FILTER(LANG(?label_en) = "en" || LANG(?label_en) = "") }}
-            OPTIONAL {{ ?gp_uri rdfs:label ?label_zh . FILTER(LANG(?label_zh) = "zh") }}
-            OPTIONAL {{ ?gp_uri srs-kg:structure ?structure }}
-            OPTIONAL {{ ?gp_uri srs-kg:explanation ?explanation }}
+
             OPTIONAL {{ ?gp_uri srs-kg:cefrLevel ?cefr }}
-            {language_filter}
+            OPTIONAL {{ ?gp_uri srs-kg:language ?lang }}
+            OPTIONAL {{ ?gp_uri srs-kg:anchorExample ?anchor }}
+            OPTIONAL {{ ?gp_uri srs-kg:structure ?struct }}
+
+            # Fetch Source ID (String)
+            OPTIONAL {{ ?gp_uri srs-kg:sourceId ?sid }}
+
+            OPTIONAL {{ ?gp_uri rdfs:label ?lbl_en . FILTER(LANG(?lbl_en) = "en") }}
+            OPTIONAL {{ ?gp_uri rdfs:label ?lbl_zh . FILTER(LANG(?lbl_zh) = "zh") }}
+            OPTIONAL {{ ?gp_uri srs-kg:explanation ?expl_en . FILTER(LANG(?expl_en) = "en") }}
+            OPTIONAL {{ ?gp_uri srs-kg:explanation ?expl_zh . FILTER(LANG(?expl_zh) = "zh") }}
+
+            {lang_filter}
             {cefr_filter}
         }}
-        ORDER BY ?cefr ?label_en
+        GROUP BY ?gp_uri ?cefr ?anchor ?lang ?sid
         """
-        
-        # Clean up query string (remove extra whitespace)
-        sparql = ' '.join(sparql.split())
-        
-        # Query Knowledge Graph (Oxigraph)
+
         kg_client = KnowledgeGraphClient()
+        # Pass raw multi-line string
         results = kg_client.query(sparql)
-        
-        if not results or 'results' not in results:
-            return {
-                "grammar_points": [],
-                "total": 0,
-                "filtered_by": cefr_level
-            }
-        
+
         grammar_points = []
-        seen_uris = set()  # Track seen grammar points to avoid duplicates
-        
+        if not results or 'results' not in results:
+            return {"grammar_points": [], "total": 0, "filtered_by": cefr_level}
+
         for binding in results.get('results', {}).get('bindings', []):
+            gp_uri = binding.get('gp_uri', {}).get('value', '')
+            l_en = binding.get('label_en', {}).get('value', '')
+            l_zh = binding.get('label_zh', {}).get('value', '')
+            e_en = binding.get('explanation_en', {}).get('value', '')
+            e_zh = binding.get('explanation_zh', {}).get('value', '')
+
+            if language == "en":
+                title = l_en or l_zh
+                sub_title = l_zh
+            else:
+                title = l_zh or l_en
+                sub_title = l_en
+
+            ui_explanation = e_zh if e_zh else e_en
+
+            item = {
+                'gp_uri': gp_uri,
+                'grammar_point': title,
+                'grammar_point_zh': sub_title,
+                'structure': binding.get('structure', {}).get('value', ''),
+                'explanation': ui_explanation,
+                'cefr_level': binding.get('cefr', {}).get('value', ''),
+                'source_id': binding.get('sid', {}).get('value', '')
+            }
+
+            anchor = binding.get('anchor', {}).get('value', '')
+            item[lang_cfg["example_key"]] = anchor
+
+            grammar_points.append(item)
+
+        # --- PYTHON NATURAL SORT ---
+        def natural_sort_key(item):
+            sid = item.get('source_id', '')
+            if not sid:
+                return [999999] # Push items with no ID to the end
             try:
-                gp_uri = binding.get('gp_uri', {}).get('value', '')
-                
-                # Skip if we've already seen this grammar point (avoid duplicates)
-                if gp_uri in seen_uris:
-                    continue
-                seen_uris.add(gp_uri)
-                
-                label_en = binding.get('label_en', {}).get('value', '')
-                label_zh = binding.get('label_zh', {}).get('value', '')
-                structure = binding.get('structure', {}).get('value', '')
-                explanation = binding.get('explanation', {}).get('value', '')
-                cefr = binding.get('cefr', {}).get('value', '')
-                
-                # For English grammar, use English label; for Chinese, prefer Chinese label
-                if language == "en":
-                    label = label_en or label_zh  # English grammar: prefer English label
-                else:
-                    label = label_zh or label_en  # Chinese grammar: prefer Chinese label
-                
-                if label:
-                    # Get first example sentence for this grammar point
-                    # For English grammar, look for English examples; for Chinese, look for Chinese examples
-                    example_text = ''
-                    example_lang = 'en' if language == 'en' else 'zh'
-                    try:
-                        # First try hasExample (grammar point -> sentence)
-                        example_sparql = f"""
-                        PREFIX srs-kg: <http://srs4autism.com/schema/>
-                        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-                        SELECT ?example_text WHERE {{
-                            <{gp_uri}> srs-kg:isIllustratedBy ?example .
-                            ?example rdfs:label ?example_text . FILTER(LANG(?example_text) = "{example_lang}")
-                        }}
-                        LIMIT 1
-                        """
-                        kg_client = KnowledgeGraphClient()
-                        example_results = kg_client.query(example_sparql)
-                        if example_results and 'results' in example_results:
-                            bindings = example_results.get('results', {}).get('bindings', [])
-                            if bindings:
-                                example_text = bindings[0].get('example_text', {}).get('value', '')
-                        
-                        # If no result, try reverse relationship (sentence -> grammar point)
-                        if not example_text:
-                            example_sparql_reverse = f"""
-                            PREFIX srs-kg: <http://srs4autism.com/schema/>
-                            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-                            SELECT ?example_text WHERE {{
-                                ?example srs-kg:illustratesGrammar <{gp_uri}> .
-                                ?example rdfs:label ?example_text . FILTER(LANG(?example_text) = "{example_lang}")
-                            }}
-                            LIMIT 1
-                            """
-                            kg_client = KnowledgeGraphClient()
-                            example_results_reverse = kg_client.query(example_sparql_reverse)
-                            if example_results_reverse and 'results' in example_results_reverse:
-                                bindings = example_results_reverse.get('results', {}).get('bindings', [])
-                                if bindings:
-                                    example_text = bindings[0].get('example_text', {}).get('value', '')
-                    except:
-                        pass  # If example query fails, just continue without example
-                    
-                    # For English grammar, don't include Chinese translation; for Chinese, include it
-                    grammar_point_data = {
-                        'gp_uri': gp_uri,  # Include URI for updating
-                        'grammar_point': label,
-                        'structure': structure,
-                        'explanation': explanation,
-                        'cefr_level': cefr,
-                    }
-                    
-                    if language == "en":
-                        # English grammar: use example_text for English examples
-                        grammar_point_data['example'] = example_text
-                        # Only include Chinese translation if it exists (for bilingual display)
-                        if label_zh:
-                            grammar_point_data['grammar_point_zh'] = label_zh
-                    else:
-                        # Chinese grammar: use example_chinese for Chinese examples
-                        grammar_point_data['example_chinese'] = example_text
-                        grammar_point_data['grammar_point_zh'] = label_zh  # Chinese translation
-                    
-                    grammar_points.append(grammar_point_data)
-            except Exception as e:
-                continue
-        
+                # Convert "1-1" -> [1, 1], "2" -> [2], "10" -> [10]
+                # Python lists compare element-by-element correctly: [1] < [1, 1] < [2] < [10]
+                return [int(part) for part in sid.split('-')]
+            except ValueError:
+                return [999999] # Fallback for non-numeric IDs
+
+        grammar_points.sort(key=natural_sort_key)
+
         return {
             "grammar_points": grammar_points,
             "total": len(grammar_points),
-            "filtered_by": cefr_level
-        }
-    except Exception as e:
-        # If Fuseki is not available, return empty list
-        print(f"Warning: Could not query grammar points from KG: {e}")
-        return {
-            "grammar_points": [],
-            "total": 0,
             "filtered_by": cefr_level,
-            "error": "Knowledge graph server may not be available"
+            "language": language
         }
+
+    except Exception as e:
+        print(f"Error querying grammar: {e}")
+        return {"grammar_points": [], "total": 0, "error": str(e)}
+#@app.get("/vocabulary/grammar")
+#async def get_grammar_points(cefr_level: Optional[str] = None, language: Optional[str] = "zh"):
+#    """
+#    Get grammar points from the knowledge graph, optionally filtered by CEFR level (A1, A2, etc.) and language.
+#    Returns grammar points with their structure, explanation, and CEFR level.
+#    
+#    Args:
+#        cefr_level: Optional CEFR level filter (A1, A2, B1, B2, etc.)
+#        language: Language filter - "zh" for Chinese, "en" for English (default: "zh")
+#    """
+#    try:
+#        # Filter by language: 
+#        # English grammar (CEFR-J): URI starts with "grammar-en-"
+#        # Chinese grammar: URI does NOT start with "grammar-en-"
+#        if language == "en":
+#            language_filter = 'FILTER(CONTAINS(STR(?gp_uri), "grammar-en-"))'
+#        else:
+#            language_filter = 'FILTER(!CONTAINS(STR(?gp_uri), "grammar-en-") && BOUND(?label_zh))'
+#        
+#        # Query the knowledge graph for grammar points
+#        # Use OPTIONAL for properties that might be missing, and handle language-tagged literals
+#        # Get both English and Chinese labels, and first example sentence (only one per grammar point)
+#        # First get all grammar points with their properties
+#        # Build CEFR level filter if specified
+#        cefr_filter = f'FILTER(?cefr = "{cefr_level}")' if cefr_level else ''
+#        
+#        sparql = f"""
+#        PREFIX srs-kg: <http://srs4autism.com/schema/>
+#        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+#        
+#        SELECT DISTINCT ?gp_uri ?label_en ?label_zh ?structure ?explanation ?cefr WHERE {{
+#            ?gp_uri a srs-kg:GrammarPoint .
+#            OPTIONAL {{ ?gp_uri rdfs:label ?label_en . FILTER(LANG(?label_en) = "en" || LANG(?label_en) = "") }}
+#            OPTIONAL {{ ?gp_uri rdfs:label ?label_zh . FILTER(LANG(?label_zh) = "zh") }}
+#            OPTIONAL {{ ?gp_uri srs-kg:structure ?structure }}
+#            OPTIONAL {{ ?gp_uri srs-kg:explanation ?explanation }}
+#            OPTIONAL {{ ?gp_uri srs-kg:cefrLevel ?cefr }}
+#            {language_filter}
+#            {cefr_filter}
+#        }}
+#        ORDER BY ?cefr ?label_en
+#        """
+#        
+#        # Clean up query string (remove extra whitespace)
+#        sparql = ' '.join(sparql.split())
+#        
+#        # Query Knowledge Graph (Oxigraph)
+#        kg_client = KnowledgeGraphClient()
+#        results = kg_client.query(sparql)
+#        
+#        if not results or 'results' not in results:
+#            return {
+#                "grammar_points": [],
+#                "total": 0,
+#                "filtered_by": cefr_level
+#            }
+#        
+#        grammar_points = []
+#        seen_uris = set()  # Track seen grammar points to avoid duplicates
+#        
+#        for binding in results.get('results', {}).get('bindings', []):
+#            try:
+#                gp_uri = binding.get('gp_uri', {}).get('value', '')
+#                
+#                # Skip if we've already seen this grammar point (avoid duplicates)
+#                if gp_uri in seen_uris:
+#                    continue
+#                seen_uris.add(gp_uri)
+#                
+#                label_en = binding.get('label_en', {}).get('value', '')
+#                label_zh = binding.get('label_zh', {}).get('value', '')
+#                structure = binding.get('structure', {}).get('value', '')
+#                explanation = binding.get('explanation', {}).get('value', '')
+#                cefr = binding.get('cefr', {}).get('value', '')
+#                
+#                # For English grammar, use English label; for Chinese, prefer Chinese label
+#                if language == "en":
+#                    label = label_en or label_zh  # English grammar: prefer English label
+#                else:
+#                    label = label_zh or label_en  # Chinese grammar: prefer Chinese label
+#                
+#                if label:
+#                    # Get first example sentence for this grammar point
+#                    # For English grammar, look for English examples; for Chinese, look for Chinese examples
+#                    example_text = ''
+#                    example_lang = 'en' if language == 'en' else 'zh'
+#                    try:
+#                        # First try hasExample (grammar point -> sentence)
+#                        example_sparql = f"""
+#                        PREFIX srs-kg: <http://srs4autism.com/schema/>
+#                        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+#                        SELECT ?example_text WHERE {{
+#                            <{gp_uri}> srs-kg:isIllustratedBy ?example .
+#                            ?example rdfs:label ?example_text . FILTER(LANG(?example_text) = "{example_lang}")
+#                        }}
+#                        LIMIT 1
+#                        """
+#                        kg_client = KnowledgeGraphClient()
+#                        example_results = kg_client.query(example_sparql)
+#                        if example_results and 'results' in example_results:
+#                            bindings = example_results.get('results', {}).get('bindings', [])
+#                            if bindings:
+#                                example_text = bindings[0].get('example_text', {}).get('value', '')
+#                        
+#                        # If no result, try reverse relationship (sentence -> grammar point)
+#                        if not example_text:
+#                            example_sparql_reverse = f"""
+#                            PREFIX srs-kg: <http://srs4autism.com/schema/>
+#                            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+#                            SELECT ?example_text WHERE {{
+#                                ?example srs-kg:illustratesGrammar <{gp_uri}> .
+#                                ?example rdfs:label ?example_text . FILTER(LANG(?example_text) = "{example_lang}")
+#                            }}
+#                            LIMIT 1
+#                            """
+#                            kg_client = KnowledgeGraphClient()
+#                            example_results_reverse = kg_client.query(example_sparql_reverse)
+#                            if example_results_reverse and 'results' in example_results_reverse:
+#                                bindings = example_results_reverse.get('results', {}).get('bindings', [])
+#                                if bindings:
+#                                    example_text = bindings[0].get('example_text', {}).get('value', '')
+#                    except:
+#                        pass  # If example query fails, just continue without example
+#                    
+#                    # For English grammar, don't include Chinese translation; for Chinese, include it
+#                    grammar_point_data = {
+#                        'gp_uri': gp_uri,  # Include URI for updating
+#                        'grammar_point': label,
+#                        'structure': structure,
+#                        'explanation': explanation,
+#                        'cefr_level': cefr,
+#                    }
+#                    
+#                    if language == "en":
+#                        # English grammar: use example_text for English examples
+#                        grammar_point_data['example'] = example_text
+#                        # Only include Chinese translation if it exists (for bilingual display)
+#                        if label_zh:
+#                            grammar_point_data['grammar_point_zh'] = label_zh
+#                    else:
+#                        # Chinese grammar: use example_chinese for Chinese examples
+#                        grammar_point_data['example_chinese'] = example_text
+#                        grammar_point_data['grammar_point_zh'] = label_zh  # Chinese translation
+#                    
+#                    grammar_points.append(grammar_point_data)
+#            except Exception as e:
+#                continue
+#        
+#        return {
+#            "grammar_points": grammar_points,
+#            "total": len(grammar_points),
+#            "filtered_by": cefr_level
+#        }
+#    except Exception as e:
+#        # If Fuseki is not available, return empty list
+#        print(f"Warning: Could not query grammar points from KG: {e}")
+#        return {
+#            "grammar_points": [],
+#            "total": 0,
+#            "filtered_by": cefr_level,
+#            "error": "Knowledge graph server may not be available"
+#        }
 
 # Save grammar point corrections/edits
 

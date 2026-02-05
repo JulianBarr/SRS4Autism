@@ -1424,7 +1424,7 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
                             )}
                             {rec.example_chinese && (
                               <div style={{ fontSize: '13px', color: '#1976d2', marginTop: '3px', fontStyle: 'italic' }}>
-                                {rec.example_chinese.replace(/\s+/g, '')}
+                                {rec.example_chinese}
                               </div>
                             )}
                             <div style={{ fontSize: '12px', color: '#888', marginTop: '3px' }}>
