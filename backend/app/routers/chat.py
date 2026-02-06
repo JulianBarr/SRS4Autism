@@ -11,6 +11,14 @@ from functools import partial, lru_cache
 import base64
 import collections
 import unicodedata
+from sqlalchemy.orm import Session
+import sys
+from pathlib import Path
+
+# Adjust path to include backend root if needed
+sys.path.append(str(Path(__file__).resolve().parent.parent.parent))
+from database.db import get_db
+from database.services import ChatSessionService
 
 # Internal imports
 from ..core.config import (
@@ -912,4 +920,63 @@ async def agentic_plan(request: AgenticPlanRequest):
             status_code=500,
             detail="An unexpected error occurred. Please try again."
         )
+
+
+# --- Topic Chat Endpoints ---
+
+class TopicChatMessageRequest(BaseModel):
+    topic_id: str
+    roster_id: str
+    content: str
+    template: Optional[str] = "Basic Grammar Card"
+    quantity: Optional[int] = 5
+
+
+@router.get("/chat/topic/history")
+async def get_topic_chat_history(topic_id: str, roster_id: str, db: Session = Depends(get_db)):
+    """Get chat history for a specific topic and roster"""
+    try:
+        messages = ChatSessionService.get_history(db, topic_id, roster_id)
+        return {"messages": messages}
+    except Exception as e:
+        logger.error(f"Error getting topic chat history: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Error retrieving chat history: {str(e)}")
+
+
+@router.post("/chat/topic/message")
+async def send_topic_chat_message(request: TopicChatMessageRequest, db: Session = Depends(get_db)):
+    """Send a message to the topic chat and get a mock response"""
+    try:
+        # Save user message
+        ChatSessionService.add_message(
+            db, 
+            request.topic_id, 
+            request.roster_id, 
+            "user", 
+            request.content
+        )
+        
+        # Wait 1 second (mock delay)
+        await asyncio.sleep(1)
+        
+        # Generate mock response
+        mock_response = f"I have received your request for {request.topic_id} for {request.roster_id}. (Mock) Generated {request.quantity} cards."
+        
+        # Save assistant response
+        ChatSessionService.add_message(
+            db,
+            request.topic_id,
+            request.roster_id,
+            "assistant",
+            mock_response
+        )
+        
+        return {
+            "role": "assistant",
+            "content": mock_response,
+            "timestamp": datetime.now().isoformat()
+        }
+    except Exception as e:
+        logger.error(f"Error sending topic chat message: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Error sending message: {str(e)}")
 

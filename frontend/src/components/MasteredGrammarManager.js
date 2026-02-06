@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import axios from 'axios';
 import { useLanguage } from '../i18n/LanguageContext';
+import TopicChat from './TopicChat';
 
 const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
@@ -20,6 +21,8 @@ const MasteredGrammarManager = ({ profile, onClose, grammarLanguage = 'zh' }) =>
   const [editingId, setEditingId] = useState(null); // Track which grammar point is being edited
   const [editedGrammar, setEditedGrammar] = useState({}); // Store edited values
   const [savingGrammar, setSavingGrammar] = useState(false); // Track grammar save status
+  const [chatTopic, setChatTopic] = useState(null); // Track which topic is open for chat
+  const [chatTopicName, setChatTopicName] = useState(null); // Track the topic name for display
 
   // Parse mastered grammar from profile
   // Grammar points are stored as URIs (gp_uri) to avoid comma issues in names
@@ -640,14 +643,27 @@ const MasteredGrammarManager = ({ profile, onClose, grammarLanguage = 'zh' }) =>
                                 </>
                               )}
                             </div>
-                            <button
-                              onClick={() => startEdit(g)}
-                              className="btn btn-secondary"
-                              style={{ fontSize: '12px', padding: '4px 8px', marginLeft: '10px' }}
-                              title="Edit this grammar point"
-                            >
-                              ✏️ Edit
-                            </button>
+                            <div style={{ display: 'flex', gap: '8px' }}>
+                              <button
+                                onClick={() => {
+                                  setChatTopic(g.gp_uri);
+                                  setChatTopicName(g.grammar_point || g.grammar_point_zh || g.gp_uri);
+                                }}
+                                className="btn btn-secondary"
+                                style={{ fontSize: '12px', padding: '4px 8px' }}
+                                title="Chat about this grammar point"
+                              >
+                                💬 Chat
+                              </button>
+                              <button
+                                onClick={() => startEdit(g)}
+                                className="btn btn-secondary"
+                                style={{ fontSize: '12px', padding: '4px 8px' }}
+                                title="Edit this grammar point"
+                              >
+                                ✏️ Edit
+                              </button>
+                            </div>
                           </div>
                           
                           {editData.structure && (
@@ -714,6 +730,38 @@ const MasteredGrammarManager = ({ profile, onClose, grammarLanguage = 'zh' }) =>
           </>
         )}
       </div>
+
+      {/* Topic Chat Drawer */}
+      {chatTopic && (
+        <>
+          {/* Backdrop */}
+          <div
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundColor: 'rgba(0, 0, 0, 0.3)',
+              zIndex: 1000
+            }}
+            onClick={() => {
+              setChatTopic(null);
+              setChatTopicName(null);
+            }}
+          />
+          {/* Chat Drawer */}
+          <TopicChat
+            topicId={chatTopic}
+            topicName={chatTopicName}
+            rosterId={profile?.id || profile?.name || 'yiming'}
+            onClose={() => {
+              setChatTopic(null);
+              setChatTopicName(null);
+            }}
+          />
+        </>
+      )}
     </div>
   );
 };

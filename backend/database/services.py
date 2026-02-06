@@ -7,7 +7,7 @@ from typing import List, Optional, Dict, Any
 from sqlalchemy.orm import Session
 from sqlalchemy import func
 
-from .models import Profile, MasteredWord, MasteredGrammar, ApprovedCard, ChatMessage, AuditLog
+from .models import Profile, MasteredWord, MasteredGrammar, ApprovedCard, ChatMessage, AuditLog, ChatSession
 
 
 class ProfileService:
@@ -257,4 +257,63 @@ class ChatService:
         db.refresh(message)
         return message
 
+
+class ChatSessionService:
+    """Service for topic-specific chat session operations"""
+    
+    @staticmethod
+    def get_or_create_session(db: Session, topic_id: str, roster_id: str) -> ChatSession:
+        """Get existing session or create a new one for topic_id + roster_id"""
+        # Generate session_id from topic_id and roster_id
+        import hashlib
+        session_key = f"{topic_id}:{roster_id}"
+        session_id = hashlib.md5(session_key.encode()).hexdigest()
+        
+        session = db.query(ChatSession).filter_by(session_id=session_id).first()
+        if not session:
+            session = ChatSession(
+                session_id=session_id,
+                topic_id=topic_id,
+                roster_id=roster_id,
+                messages=json.dumps([])
+            )
+            db.add(session)
+            db.commit()
+            db.refresh(session)
+        return session
+    
+    @staticmethod
+    def get_session(db: Session, topic_id: str, roster_id: str) -> Optional[ChatSession]:
+        """Get existing session for topic_id + roster_id"""
+        import hashlib
+        session_key = f"{topic_id}:{roster_id}"
+        session_id = hashlib.md5(session_key.encode()).hexdigest()
+        return db.query(ChatSession).filter_by(session_id=session_id).first()
+    
+    @staticmethod
+    def get_history(db: Session, topic_id: str, roster_id: str) -> List[Dict[str, Any]]:
+        """Get chat history for a topic and roster"""
+        session = ChatSessionService.get_session(db, topic_id, roster_id)
+        if not session:
+            return []
+        messages = json.loads(session.messages) if session.messages else []
+        return messages
+    
+    @staticmethod
+    def add_message(db: Session, topic_id: str, roster_id: str, role: str, content: str) -> ChatSession:
+        """Add a message to the chat session"""
+        from datetime import datetime
+        session = ChatSessionService.get_or_create_session(db, topic_id, roster_id)
+        
+        messages = json.loads(session.messages) if session.messages else []
+        messages.append({
+            "role": role,
+            "content": content,
+            "timestamp": datetime.now().isoformat()
+        })
+        
+        session.messages = json.dumps(messages)
+        db.commit()
+        db.refresh(session)
+        return session
 

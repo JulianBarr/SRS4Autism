@@ -277,3 +277,26 @@ class PinyinSyllableNote(Base):
     def __repr__(self):
         return f"<EnglishWordRecognitionNote(note_id='{self.note_id}', word='{self.word}', concept='{self.concept}', order={self.display_order})>"
 
+
+class ChatSession(Base):
+    """Persistent chat sessions for topic-specific conversations"""
+    __tablename__ = 'chat_sessions'
+    
+    session_id = Column(String, primary_key=True)
+    topic_id = Column(String, nullable=False)  # Grammar Point ID (e.g., en_grammar_101)
+    roster_id = Column(String, nullable=False)  # Student profile ID (e.g., yiming)
+    messages = Column(Text, nullable=False)  # JSON array of messages
+    last_updated = Column(DateTime, default=func.now(), onupdate=func.now())
+    created_at = Column(DateTime, default=func.now())
+    
+    # Constraints
+    __table_args__ = (
+        Index('idx_chat_sessions_topic_roster', 'topic_id', 'roster_id'),
+        Index('idx_chat_sessions_roster', 'roster_id'),
+        Index('idx_chat_sessions_topic', 'topic_id'),
+        Index('idx_chat_sessions_updated', 'last_updated'),
+    )
+    
+    def __repr__(self):
+        return f"<ChatSession(session_id='{self.session_id}', topic_id='{self.topic_id}', roster_id='{self.roster_id}')>"
+
