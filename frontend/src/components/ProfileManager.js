@@ -630,6 +630,19 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
     }
   };
 
+  const handleCloseMasteredGrammar = async () => {
+    // Close modal first
+    setShowMasteredGrammarManager(false);
+    setSelectedProfileForMasteredGrammar(null);
+    // Then refresh profiles to ensure main screen is up to date
+    try {
+      const response = await axios.get(`${API_BASE}/profiles`);
+      onProfilesChange(response.data);
+    } catch (error) {
+      console.error('Error refreshing profiles:', error);
+    }
+  };
+
   return (
     <div className="card">
       <h2>{t('profilesTitle')}</h2>
@@ -1610,14 +1623,7 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
             position: 'relative'
           }}>
             <button
-              onClick={() => {
-                setShowMasteredGrammarManager(false);
-                setSelectedProfileForMasteredGrammar(null);
-                // Refresh profiles after closing
-                axios.get(`${API_BASE}/profiles`).then(response => {
-                  onProfilesChange(response.data);
-                });
-              }}
+              onClick={handleCloseMasteredGrammar}
               style={{
                 position: 'absolute',
                 top: '10px',
@@ -1633,19 +1639,7 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
             </button>
             <MasteredGrammarManager
               profile={selectedProfileForMasteredGrammar}
-              onUpdate={async () => {
-                // Refresh profiles
-                const response = await axios.get(`${API_BASE}/profiles`);
-                onProfilesChange(response.data);
-                // Update selected profile
-                const updated = response.data.find(p => 
-                  p.name === selectedProfileForMasteredGrammar.name || 
-                  p.id === selectedProfileForMasteredGrammar.id
-                );
-                if (updated) {
-                  setSelectedProfileForMasteredGrammar(updated);
-                }
-              }}
+              onClose={handleCloseMasteredGrammar}
             />
           </div>
         </div>

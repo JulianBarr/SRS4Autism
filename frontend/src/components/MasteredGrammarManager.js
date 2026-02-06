@@ -4,7 +4,7 @@ import { useLanguage } from '../i18n/LanguageContext';
 
 const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
-const MasteredGrammarManager = ({ profile, onUpdate, grammarLanguage = 'zh' }) => {
+const MasteredGrammarManager = ({ profile, onClose, grammarLanguage = 'zh' }) => {
   const { language: uiLanguage } = useLanguage(); // Get current UI language
   // grammarLanguage is now passed as prop from parent (no local state)
   const [grammarPoints, setGrammarPoints] = useState([]);
@@ -95,9 +95,7 @@ const MasteredGrammarManager = ({ profile, onUpdate, grammarLanguage = 'zh' }) =
         const profileData = { ...profile, mastered_grammar: masteredGrammarString };
         await axios.put(`${API_BASE}/profiles/${profile.name}`, profileData);
         setLastSaveTime(new Date());
-        if (onUpdate) {
-          await onUpdate();
-        }
+        // NO onUpdate call - modal is isolated during editing
       } catch (error) {
         console.error('Error saving mastered grammar:', error);
         alert('Failed to save mastered grammar. Please try again.');
@@ -111,7 +109,7 @@ const MasteredGrammarManager = ({ profile, onUpdate, grammarLanguage = 'zh' }) =
     } else {
       saveTimeoutRef.current = setTimeout(saveAction, 500); // 500ms debounce
     }
-  }, [profile, onUpdate]);
+  }, [profile]);
 
   // Toggle grammar mastery with auto-save
   // grammarPoint should be gp_uri (unique identifier)
