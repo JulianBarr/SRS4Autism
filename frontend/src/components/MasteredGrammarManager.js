@@ -754,7 +754,7 @@ const MasteredGrammarManager = ({ profile, onClose, grammarLanguage = 'zh' }) =>
           <TopicChat
             topicId={chatTopic}
             topicName={chatTopicName}
-            rosterId={profile?.id || profile?.name || 'yiming'}
+            profile={profile}
             onClose={() => {
               setChatTopic(null);
               setChatTopicName(null);

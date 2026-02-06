@@ -3,25 +3,52 @@ import axios from 'axios';
 
 const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
-const TopicChat = ({ topicId, topicName, rosterId, onClose }) => {
+const TopicChat = ({ topicId, topicName, profile, onClose }) => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [sending, setSending] = useState(false);
   const [userInput, setUserInput] = useState('');
-  const [roster, setRoster] = useState(rosterId || 'yiming');
-  const [template, setTemplate] = useState('Basic Grammar Card');
-  const [quantity, setQuantity] = useState(5);
+  const [templates, setTemplates] = useState([]);
+  const [selectedTemplateId, setSelectedTemplateId] = useState(null);
   const messagesEndRef = useRef(null);
+  const messagesContainerRef = useRef(null);
+
+  // Get roster_id from profile (implicit)
+  const rosterId = profile?.id || profile?.name || 'yiming';
+
+  // Load templates on mount
+  useEffect(() => {
+    const loadTemplates = async () => {
+      try {
+        const response = await axios.get(`${API_BASE}/templates`);
+        const templatesList = response.data || [];
+        setTemplates(templatesList);
+        // Set default template (first one, or filter for Grammar if available)
+        if (templatesList.length > 0) {
+          const grammarTemplate = templatesList.find(t => 
+            t.name?.toLowerCase().includes('grammar') || 
+            t.description?.toLowerCase().includes('grammar')
+          );
+          setSelectedTemplateId(grammarTemplate?.id || templatesList[0].id);
+        }
+      } catch (error) {
+        console.error('Error loading templates:', error);
+        setTemplates([]);
+      }
+    };
+
+    loadTemplates();
+  }, []);
 
   // Load chat history on mount
   useEffect(() => {
     const loadHistory = async () => {
-      if (!topicId || !roster) return;
+      if (!topicId || !rosterId) return;
       
       setLoading(true);
       try {
         const response = await axios.get(`${API_BASE}/chat/topic/history`, {
-          params: { topic_id: topicId, roster_id: roster }
+          params: { topic_id: topicId, roster_id: rosterId }
         });
         setMessages(response.data.messages || []);
       } catch (error) {
@@ -33,43 +60,58 @@ const TopicChat = ({ topicId, topicName, rosterId, onClose }) => {
     };
 
     loadHistory();
-  }, [topicId, roster]);
+  }, [topicId, rosterId]);
 
   // Scroll to bottom when messages change
+  const scrollToBottom = () => {
+    if (messagesContainerRef.current && messagesEndRef.current) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+    }
+  };
+
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (messages.length > 0) {
+      scrollToBottom();
+    }
   }, [messages]);
 
   const handleGenerate = async () => {
-    if (!userInput.trim() || !topicId || !roster) return;
+    if (!userInput.trim() || !topicId || !rosterId || !selectedTemplateId) return;
 
-    const userMessage = userInput.trim();
+    const chatInstruction = userInput.trim();
     setUserInput('');
     setSending(true);
 
     // Add user message to UI immediately
     const newUserMessage = {
+      id: Date.now().toString(),
       role: 'user',
-      content: userMessage,
+      content: chatInstruction,
       timestamp: new Date().toISOString()
     };
     setMessages(prev => [...prev, newUserMessage]);
 
     try {
-      const response = await axios.post(`${API_BASE}/chat/topic/message`, {
+      const response = await axios.post(`${API_BASE}/agent/generate`, {
         topic_id: topicId,
-        roster_id: roster,
-        content: userMessage,
-        template: template,
-        quantity: quantity
+        roster_id: rosterId,
+        template_id: selectedTemplateId,
+        chat_instruction: chatInstruction
       });
 
       // Add assistant response
-      setMessages(prev => [...prev, response.data]);
+      const assistantMessage = {
+        id: Date.now().toString(),
+        role: 'assistant',
+        content: response.data.content || response.data.message || 'Cards generated successfully!',
+        timestamp: new Date().toISOString()
+      };
+      setMessages(prev => [...prev, assistantMessage]);
     } catch (error) {
       console.error('Error sending message:', error);
       // Add error message
       setMessages(prev => [...prev, {
+        id: Date.now().toString(),
         role: 'assistant',
         content: 'Sorry, there was an error processing your request.',
         timestamp: new Date().toISOString()
@@ -135,32 +177,13 @@ const TopicChat = ({ topicId, topicName, rosterId, onClose }) => {
         borderBottom: '1px solid #e0e0e0',
         backgroundColor: '#f8f9fa'
       }}>
-        <div style={{ marginBottom: '12px' }}>
-          <label style={{ display: 'block', fontSize: '12px', fontWeight: 'bold', marginBottom: '4px' }}>
-            Roster:
-          </label>
-          <select
-            value={roster}
-            onChange={(e) => setRoster(e.target.value)}
-            style={{
-              width: '100%',
-              padding: '8px',
-              border: '1px solid #ddd',
-              borderRadius: '4px',
-              fontSize: '14px'
-            }}
-          >
-            <option value="yiming">Yiming</option>
-            <option value="general">General</option>
-          </select>
-        </div>
-        <div style={{ marginBottom: '12px' }}>
+        <div>
           <label style={{ display: 'block', fontSize: '12px', fontWeight: 'bold', marginBottom: '4px' }}>
             Template:
           </label>
           <select
-            value={template}
-            onChange={(e) => setTemplate(e.target.value)}
+            value={selectedTemplateId || ''}
+            onChange={(e) => setSelectedTemplateId(e.target.value)}
             style={{
               width: '100%',
               padding: '8px',
@@ -168,119 +191,80 @@ const TopicChat = ({ topicId, topicName, rosterId, onClose }) => {
               borderRadius: '4px',
               fontSize: '14px'
             }}
+            disabled={templates.length === 0}
           >
-            <option value="Basic Grammar Card">Basic Grammar Card</option>
-            <option value="Cloze">Cloze</option>
+            {templates.length === 0 ? (
+              <option value="">Loading templates...</option>
+            ) : (
+              templates.map(template => (
+                <option key={template.id} value={template.id}>
+                  {template.name} {template.description ? `- ${template.description}` : ''}
+                </option>
+              ))
+            )}
           </select>
-        </div>
-        <div>
-          <label style={{ display: 'block', fontSize: '12px', fontWeight: 'bold', marginBottom: '4px' }}>
-            Quantity:
-          </label>
-          <input
-            type="number"
-            value={quantity}
-            onChange={(e) => setQuantity(parseInt(e.target.value) || 5)}
-            min="1"
-            max="20"
-            style={{
-              width: '100%',
-              padding: '8px',
-              border: '1px solid #ddd',
-              borderRadius: '4px',
-              fontSize: '14px'
-            }}
-          />
         </div>
       </div>
 
       {/* Chat Area */}
-      <div style={{
-        flex: 1,
-        overflowY: 'auto',
-        padding: '20px',
-        backgroundColor: '#fafafa'
-      }}>
+      <div className="chat-messages" ref={messagesContainerRef}>
         {loading ? (
-          <div style={{ textAlign: 'center', color: '#666', padding: '20px' }}>
+          <div className="welcome-message">
             Loading chat history...
           </div>
         ) : messages.length === 0 ? (
-          <div style={{ textAlign: 'center', color: '#666', padding: '20px' }}>
+          <div className="welcome-message">
             <p>No messages yet. Start a conversation to generate Anki cards!</p>
           </div>
         ) : (
-          messages.map((msg, idx) => (
-            <div
-              key={idx}
-              style={{
-                marginBottom: '16px',
-                display: 'flex',
-                justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start'
-              }}
-            >
-              <div style={{
-                maxWidth: '75%',
-                padding: '12px 16px',
-                borderRadius: '12px',
-                backgroundColor: msg.role === 'user' ? '#007AFF' : '#e0e0e0',
-                color: msg.role === 'user' ? 'white' : '#333',
-                fontSize: '14px',
-                lineHeight: '1.5'
-              }}>
+          messages.map((msg) => (
+            <div key={msg.id || msg.timestamp} className={`message ${msg.role}`}>
+              <div className="message-content" style={{maxWidth: msg.role === 'user' ? '70%' : '75%'}}>
                 {msg.content}
+                <div className="message-time">
+                  {new Date(msg.timestamp).toLocaleTimeString()}
+                </div>
               </div>
             </div>
           ))
+        )}
+        {sending && (
+          <div className="message assistant">
+            <div className="message-content">
+              <div className="typing-indicator">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+          </div>
         )}
         <div ref={messagesEndRef} />
       </div>
 
       {/* Action Area */}
-      <div style={{
-        padding: '16px',
-        borderTop: '1px solid #e0e0e0',
-        backgroundColor: 'white'
-      }}>
-        <div style={{ display: 'flex', gap: '8px' }}>
-          <input
-            type="text"
-            value={userInput}
-            onChange={(e) => setUserInput(e.target.value)}
-            onKeyPress={(e) => {
-              if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                handleGenerate();
-              }
-            }}
-            placeholder="Enter specific instructions (e.g., 'Use Kung Fu Panda examples')"
-            style={{
-              flex: 1,
-              padding: '10px',
-              border: '1px solid #ddd',
-              borderRadius: '4px',
-              fontSize: '14px'
-            }}
-            disabled={sending}
-          />
-          <button
-            onClick={handleGenerate}
-            disabled={sending || !userInput.trim()}
-            style={{
-              padding: '10px 20px',
-              backgroundColor: sending ? '#ccc' : '#007AFF',
-              color: 'white',
-              border: 'none',
-              borderRadius: '4px',
-              fontSize: '14px',
-              fontWeight: 'bold',
-              cursor: sending || !userInput.trim() ? 'not-allowed' : 'pointer'
-            }}
-          >
-            {sending ? 'Generating...' : 'Generate'}
-          </button>
-        </div>
-      </div>
+      <form className="chat-input" onSubmit={(e) => { e.preventDefault(); handleGenerate(); }}>
+        <input
+          type="text"
+          value={userInput}
+          onChange={(e) => setUserInput(e.target.value)}
+          onKeyPress={(e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+              e.preventDefault();
+              handleGenerate();
+            }
+          }}
+          placeholder="Enter specific instructions (e.g., 'Use Kung Fu Panda examples')"
+          disabled={sending || !selectedTemplateId}
+        />
+        <button
+          type="submit"
+          disabled={sending || !userInput.trim() || !selectedTemplateId}
+          className="btn"
+        >
+          {sending ? 'Generating...' : 'Generate'}
+        </button>
+      </form>
     </div>
   );
 };

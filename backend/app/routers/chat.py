@@ -980,3 +980,168 @@ async def send_topic_chat_message(request: TopicChatMessageRequest, db: Session 
         logger.error(f"Error sending topic chat message: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail=f"Error sending message: {str(e)}")
 
+
+# --- Agent Generate Endpoint ---
+
+class AgentGenerateRequest(BaseModel):
+    topic_id: str
+    roster_id: str
+    template_id: str
+    chat_instruction: str
+
+
+@router.post("/agent/generate")
+async def agent_generate(request: AgentGenerateRequest, req: Request, db: Session = Depends(get_db)):
+    """
+    Generate cards using the agent for a specific topic, roster, and template.
+    This is the main endpoint for the TopicChat "Flight Deck" workflow.
+    """
+    try:
+        # 1. Load profile/roster data
+        profiles = load_json_file(PROFILES_FILE, [])
+        child_profile = None
+        for profile in profiles:
+            profile_id = profile.get("id") or profile.get("name", "").lower()
+            if profile_id == request.roster_id.lower() or profile.get("name", "").lower() == request.roster_id.lower():
+                child_profile = profile
+                break
+        
+        if not child_profile:
+            raise HTTPException(status_code=404, detail=f"Profile/roster '{request.roster_id}' not found")
+        
+        # 2. Load template
+        templates = load_json_file(PROMPT_TEMPLATES_FILE, [])
+        template = None
+        for tmpl in templates:
+            if tmpl.get("id") == request.template_id or tmpl.get("name") == request.template_id:
+                template = tmpl
+                break
+        
+        if not template:
+            raise HTTPException(status_code=404, detail=f"Template '{request.template_id}' not found")
+        
+        prompt_template = template.get("template_text")
+        
+        # 3. Setup LLM environment (similar to /chat endpoint)
+        api_key = req.headers.get("X-LLM-Key")
+        if not api_key:
+            auth = req.headers.get("Authorization")
+            if auth and auth.startswith("Bearer "):
+                api_key = auth.split(" ")[1]
+        
+        base_url = req.headers.get("X-LLM-Base-URL")
+        provider = req.headers.get("X-LLM-Provider", "deepseek").lower()
+        
+        if not base_url and provider == "deepseek":
+            base_url = "https://api.siliconflow.cn/v1"
+        
+        if api_key:
+            os.environ["DEEPSEEK_API_KEY"] = api_key
+            os.environ["OPENAI_API_KEY"] = api_key
+            if base_url:
+                os.environ["DEEPSEEK_API_BASE"] = base_url
+                os.environ["OPENAI_BASE_URL"] = base_url
+                os.environ["OPENAI_API_BASE"] = base_url
+            
+            if provider == "deepseek" or (base_url and "siliconflow" in base_url):
+                if "GEMINI_API_KEY" in os.environ:
+                    del os.environ["GEMINI_API_KEY"]
+        
+        # 4. Initialize ContentGenerator
+        generator = ContentGenerator()
+        
+        # 5. Build context tags from topic_id and chat_instruction
+        context_tags = []
+        
+        # Add topic as a context tag
+        context_tags.append({
+            "type": "topic",
+            "value": request.topic_id
+        })
+        
+        # Add template as a context tag
+        context_tags.append({
+            "type": "template",
+            "value": template.get("name", request.template_id)
+        })
+        
+        # 6. Combine topic context with chat instruction
+        # The chat_instruction should provide specific guidance (e.g., "Use Kung Fu Panda examples")
+        user_prompt = f"Generate cards for grammar topic: {request.topic_id}. {request.chat_instruction}"
+        
+        # 7. Generate cards
+        loop = asyncio.get_event_loop()
+        cards = await loop.run_in_executor(
+            None,
+            partial(
+                generator.generate_from_prompt,
+                user_prompt=user_prompt,
+                context_tags=context_tags,
+                child_profile=child_profile,
+                prompt_template=prompt_template,
+                quantity=None  # Let the generator decide based on template/context
+            )
+        )
+        
+        # 8. Save generated cards
+        existing_cards = load_json_file(CARDS_FILE, [])
+        for card in cards:
+            remarks = build_cuma_remarks(card, context_tags)
+            card["field__Remarks"] = remarks or ""
+            card.pop("field__Remarks_annotations", None)
+            existing_cards.append(card)
+        save_json_file(CARDS_FILE, existing_cards)
+        
+        # 9. Save chat messages to session
+        ChatSessionService.add_message(
+            db,
+            request.topic_id,
+            request.roster_id,
+            "user",
+            request.chat_instruction
+        )
+        
+        # 10. Create response message
+        card_count = len(cards)
+        response_content = f"✨ Successfully generated {card_count} cards for grammar topic: {request.topic_id}!\n\n"
+        
+        basic_count = len([c for c in cards if c['card_type'] == 'basic'])
+        reverse_count = len([c for c in cards if c['card_type'] == 'basic_reverse'])
+        cloze_count = len([c for c in cards if c['card_type'] == 'cloze'])
+        
+        details = []
+        if basic_count > 0:
+            details.append(f"{basic_count} basic cards")
+        if reverse_count > 0:
+            details.append(f"{reverse_count} reverse cards")
+        if cloze_count > 0:
+            details.append(f"{cloze_count} cloze cards")
+        
+        if details:
+            response_content += f"📝 Includes: {', '.join(details)}\n\n"
+        
+        response_content += f"Template: {template.get('name', 'Unknown')}\n"
+        response_content += f"Topic: {request.topic_id}"
+        
+        # Save assistant response
+        ChatSessionService.add_message(
+            db,
+            request.topic_id,
+            request.roster_id,
+            "assistant",
+            response_content
+        )
+        
+        return {
+            "content": response_content,
+            "message": response_content,
+            "cards_generated": card_count,
+            "timestamp": datetime.now().isoformat()
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error in agent_generate: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Error generating cards: {str(e)}")
+
