@@ -1,4 +1,5 @@
 from fastapi import APIRouter, HTTPException, Request, Depends, status
+from fastapi import Request
 from pydantic import BaseModel
 from typing import List, Optional, Dict, Any, Set
 import json
@@ -29,6 +30,7 @@ from ..core.config import (
     PROMPT_TEMPLATES_FILE,
     MODEL_CONFIG_FILE
 )
+from app.services.agent_service import AgentService
 from ..utils.common import (
     load_json_file,
     save_json_file,
@@ -930,6 +932,8 @@ class TopicChatMessageRequest(BaseModel):
     content: str
     template: Optional[str] = "Basic Grammar Card"
     quantity: Optional[int] = 5
+    generate_request: Optional[bool] = False  # Flag to trigger card generation
+    template_id: Optional[str] = None  # Template ID for generation
 
 
 @router.get("/chat/topic/history")
@@ -944,8 +948,8 @@ async def get_topic_chat_history(topic_id: str, roster_id: str, db: Session = De
 
 
 @router.post("/chat/topic/message")
-async def send_topic_chat_message(request: TopicChatMessageRequest, db: Session = Depends(get_db)):
-    """Send a message to the topic chat and get a mock response"""
+async def send_topic_chat_message(request: TopicChatMessageRequest, req: Request, db: Session = Depends(get_db)):
+    """Send a message to the topic chat and handle card generation if requested"""
     try:
         # Save user message
         ChatSessionService.add_message(
@@ -956,26 +960,84 @@ async def send_topic_chat_message(request: TopicChatMessageRequest, db: Session 
             request.content
         )
         
-        # Wait 1 second (mock delay)
-        await asyncio.sleep(1)
-        
-        # Generate mock response
-        mock_response = f"I have received your request for {request.topic_id} for {request.roster_id}. (Mock) Generated {request.quantity} cards."
-        
-        # Save assistant response
-        ChatSessionService.add_message(
-            db,
-            request.topic_id,
-            request.roster_id,
-            "assistant",
-            mock_response
-        )
-        
-        return {
-            "role": "assistant",
-            "content": mock_response,
-            "timestamp": datetime.now().isoformat()
-        }
+        # Check if this is a card generation request
+        if request.generate_request:
+            # Import AgentService
+            from ..services.agent_service import AgentService
+            
+            # Get API key from request headers (similar to /chat endpoint)
+            api_key = req.headers.get("X-LLM-Key")
+            if not api_key:
+                auth = req.headers.get("Authorization")
+                if auth and auth.startswith("Bearer "):
+                    api_key = auth.split(" ")[1]
+            
+            # Get template_id (use provided or default)
+            template_id = request.template_id or request.template or "visual_card_v1"
+            
+            # Generate cards using AgentService
+            generated_cards = AgentService.generate_cards(
+                topic_id=request.topic_id,
+                roster_id=request.roster_id,
+                template_id=template_id,
+                user_instruction=request.content,
+                quantity=request.quantity or 5,
+                db=db,
+                api_key=api_key
+            )
+            
+            # Create response message with generated cards
+            card_count = len(generated_cards)
+            response_content = f"✨ Successfully generated {card_count} Anki cards!\n\n"
+            
+            if generated_cards:
+                response_content += "Generated Cards:\n"
+                for i, card in enumerate(generated_cards, 1):
+                    # Handle different card types
+                    front_text = card.get('front') or card.get('text_field') or card.get('cloze_text') or 'N/A'
+                    back_text = card.get('back') or card.get('extra_field') or 'N/A'
+                    response_content += f"\n{i}. Front: {str(front_text)[:50]}...\n"
+                    response_content += f"   Back: {str(back_text)[:50]}...\n"
+            else:
+                response_content += "⚠️ No cards were generated. Please check the logs for errors."
+            
+            # Save assistant response
+            ChatSessionService.add_message(
+                db,
+                request.topic_id,
+                request.roster_id,
+                "assistant",
+                response_content
+            )
+            
+            return {
+                "role": "assistant",
+                "content": response_content,
+                "timestamp": datetime.now().isoformat(),
+                "cards": generated_cards,
+                "cards_generated": card_count
+            }
+        else:
+            # Regular chat message (mock response for now)
+            await asyncio.sleep(1)
+            
+            # Generate mock response
+            mock_response = f"I have received your request for {request.topic_id} for {request.roster_id}. (Mock) Generated {request.quantity} cards."
+            
+            # Save assistant response
+            ChatSessionService.add_message(
+                db,
+                request.topic_id,
+                request.roster_id,
+                "assistant",
+                mock_response
+            )
+            
+            return {
+                "role": "assistant",
+                "content": mock_response,
+                "timestamp": datetime.now().isoformat()
+            }
     except Exception as e:
         logger.error(f"Error sending topic chat message: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail=f"Error sending message: {str(e)}")
@@ -993,155 +1055,49 @@ class AgentGenerateRequest(BaseModel):
 @router.post("/agent/generate")
 async def agent_generate(request: AgentGenerateRequest, req: Request, db: Session = Depends(get_db)):
     """
-    Generate cards using the agent for a specific topic, roster, and template.
-    This is the main endpoint for the TopicChat "Flight Deck" workflow.
+    Generate cards using the AgentService (Grammar-Aware).
     """
     try:
-        # 1. Load profile/roster data
-        profiles = load_json_file(PROFILES_FILE, [])
-        child_profile = None
-        for profile in profiles:
-            profile_id = profile.get("id") or profile.get("name", "").lower()
-            if profile_id == request.roster_id.lower() or profile.get("name", "").lower() == request.roster_id.lower():
-                child_profile = profile
-                break
-        
-        if not child_profile:
-            raise HTTPException(status_code=404, detail=f"Profile/roster '{request.roster_id}' not found")
-        
-        # 2. Load template
-        templates = load_json_file(PROMPT_TEMPLATES_FILE, [])
-        template = None
-        for tmpl in templates:
-            if tmpl.get("id") == request.template_id or tmpl.get("name") == request.template_id:
-                template = tmpl
-                break
-        
-        if not template:
-            raise HTTPException(status_code=404, detail=f"Template '{request.template_id}' not found")
-        
-        prompt_template = template.get("template_text")
-        
-        # 3. Setup LLM environment (similar to /chat endpoint)
+        logger.info(f"🛸 Agent Request: {request.topic_id} | Template: {request.template_id}")
+        # 1. Credentials (Get API Key from Headers)
         api_key = req.headers.get("X-LLM-Key")
         if not api_key:
             auth = req.headers.get("Authorization")
             if auth and auth.startswith("Bearer "):
                 api_key = auth.split(" ")[1]
         
-        base_url = req.headers.get("X-LLM-Base-URL")
-        provider = req.headers.get("X-LLM-Provider", "deepseek").lower()
-        
-        if not base_url and provider == "deepseek":
-            base_url = "https://api.siliconflow.cn/v1"
-        
-        if api_key:
-            os.environ["DEEPSEEK_API_KEY"] = api_key
-            os.environ["OPENAI_API_KEY"] = api_key
-            if base_url:
-                os.environ["DEEPSEEK_API_BASE"] = base_url
-                os.environ["OPENAI_BASE_URL"] = base_url
-                os.environ["OPENAI_API_BASE"] = base_url
-            
-            if provider == "deepseek" or (base_url and "siliconflow" in base_url):
-                if "GEMINI_API_KEY" in os.environ:
-                    del os.environ["GEMINI_API_KEY"]
-        
-        # 4. Initialize ContentGenerator
-        generator = ContentGenerator()
-        
-        # 5. Build context tags from topic_id and chat_instruction
-        context_tags = []
-        
-        # Add topic as a context tag
-        context_tags.append({
-            "type": "topic",
-            "value": request.topic_id
-        })
-        
-        # Add template as a context tag
-        context_tags.append({
-            "type": "template",
-            "value": template.get("name", request.template_id)
-        })
-        
-        # 6. Combine topic context with chat instruction
-        # The chat_instruction should provide specific guidance (e.g., "Use Kung Fu Panda examples")
-        user_prompt = f"Generate cards for grammar topic: {request.topic_id}. {request.chat_instruction}"
-        
-        # 7. Generate cards
-        loop = asyncio.get_event_loop()
-        cards = await loop.run_in_executor(
-            None,
-            partial(
-                generator.generate_from_prompt,
-                user_prompt=user_prompt,
-                context_tags=context_tags,
-                child_profile=child_profile,
-                prompt_template=prompt_template,
-                quantity=None  # Let the generator decide based on template/context
-            )
+        # 2. Call the SMART AgentService
+        # This service automatically detects if it's Grammar vs Vocab and selects the right prompt.
+        generated_cards = AgentService.generate_cards(
+            topic_id=request.topic_id,
+            roster_id=request.roster_id,
+            template_id=request.template_id,
+            user_instruction=request.chat_instruction,
+            quantity=5, # Default to 5 cards
+            db=db,
+            api_key=api_key
         )
         
-        # 8. Save generated cards
-        existing_cards = load_json_file(CARDS_FILE, [])
-        for card in cards:
-            remarks = build_cuma_remarks(card, context_tags)
-            card["field__Remarks"] = remarks or ""
-            card.pop("field__Remarks_annotations", None)
-            existing_cards.append(card)
-        save_json_file(CARDS_FILE, existing_cards)
-        
-        # 9. Save chat messages to session
+        # 3. Create Response & Save History
+        card_count = len(generated_cards)
+        if card_count > 0:
+            response_content = f"✅ Generated {card_count} cards for {request.topic_id}."
+        else:
+            response_content = "⚠️ No cards were generated. Check backend logs."
+        # Save User Request to History
         ChatSessionService.add_message(
-            db,
-            request.topic_id,
-            request.roster_id,
-            "user",
-            request.chat_instruction
+            db, request.topic_id, request.roster_id, "user", request.chat_instruction
         )
-        
-        # 10. Create response message
-        card_count = len(cards)
-        response_content = f"✨ Successfully generated {card_count} cards for grammar topic: {request.topic_id}!\n\n"
-        
-        basic_count = len([c for c in cards if c['card_type'] == 'basic'])
-        reverse_count = len([c for c in cards if c['card_type'] == 'basic_reverse'])
-        cloze_count = len([c for c in cards if c['card_type'] == 'cloze'])
-        
-        details = []
-        if basic_count > 0:
-            details.append(f"{basic_count} basic cards")
-        if reverse_count > 0:
-            details.append(f"{reverse_count} reverse cards")
-        if cloze_count > 0:
-            details.append(f"{cloze_count} cloze cards")
-        
-        if details:
-            response_content += f"📝 Includes: {', '.join(details)}\n\n"
-        
-        response_content += f"Template: {template.get('name', 'Unknown')}\n"
-        response_content += f"Topic: {request.topic_id}"
-        
-        # Save assistant response
+        # Save Assistant Response to History
         ChatSessionService.add_message(
-            db,
-            request.topic_id,
-            request.roster_id,
-            "assistant",
-            response_content
+            db, request.topic_id, request.roster_id, "assistant", response_content
         )
-        
         return {
             "content": response_content,
-            "message": response_content,
             "cards_generated": card_count,
-            "timestamp": datetime.now().isoformat()
+            "cards": generated_cards
         }
-        
-    except HTTPException:
-        raise
     except Exception as e:
-        logger.error(f"Error in agent_generate: {e}", exc_info=True)
-        raise HTTPException(status_code=500, detail=f"Error generating cards: {str(e)}")
+        logger.error(f"❌ Agent Generate Error: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=str(e))
 
