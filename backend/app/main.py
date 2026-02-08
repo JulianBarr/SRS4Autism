@@ -463,7 +463,7 @@ async def get_anki_note_types():
 
 # Anki sync endpoint
 @app.post("/anki/sync")
-async def sync_to_anki(request: Dict[str, Any]):
+async def sync_to_anki(request: Dict[str, Any], db: Session = Depends(get_db)):
     """
     Sync cards to Anki via AnkiConnect.
     Handles media processing: uploads local images to Anki and rewrites HTML src paths.
@@ -478,6 +478,8 @@ async def sync_to_anki(request: Dict[str, Any]):
         
         sys.path.append(os.path.join(os.path.dirname(__file__), '../../'))
         from anki_integration.anki_connect import AnkiConnect
+        from database.models import ApprovedCard
+        from .routers.cards import format_card_flat
         
         deck_name = request.get("deck_name")
         card_ids = request.get("card_ids", [])
@@ -488,9 +490,28 @@ async def sync_to_anki(request: Dict[str, Any]):
         if not card_ids:
             raise HTTPException(status_code=400, detail="card_ids is required")
         
-        # Get cards from database
-        all_cards = load_json_file(CARDS_FILE, [])
-        cards_to_sync = [dict(card) for card in all_cards if card["id"] in card_ids]  # Make a copy to modify
+        # Convert card_ids to strings for comparison (frontend sends strings)
+        card_ids_set = {str(cid) for cid in card_ids}
+        
+        # Get cards from database instead of JSON file
+        # Try to parse card_ids as integers first, then fall back to string comparison
+        card_id_ints = []
+        for cid in card_ids:
+            try:
+                card_id_ints.append(int(cid))
+            except (ValueError, TypeError):
+                pass
+        
+        # Query cards from database
+        if card_id_ints:
+            db_cards = db.query(ApprovedCard).filter(ApprovedCard.id.in_(card_id_ints)).all()
+        else:
+            # Fallback: query all and filter by string ID
+            db_cards = db.query(ApprovedCard).all()
+        
+        # Format cards and filter by ID
+        all_cards_flat = [format_card_flat(card) for card in db_cards]
+        cards_to_sync = [dict(card) for card in all_cards_flat if str(card["id"]) in card_ids_set]
         
         if not cards_to_sync:
             raise HTTPException(status_code=404, detail="No cards found to sync")
@@ -605,12 +626,19 @@ async def sync_to_anki(request: Dict[str, Any]):
             for failure in results['failed']:
                 print(f"  ❌ Failed: {failure['card_id']} - {failure['error']}")
         
-        # Update card status to synced
-        for card in all_cards:
-            if card["id"] in [s["card_id"] for s in results["success"]]:
-                card["status"] = "synced"
+        # Update card status to synced in database
+        successful_card_ids = [s["card_id"] for s in results["success"]]
+        for card_id_str in successful_card_ids:
+            try:
+                card_id_int = int(card_id_str)
+                card = db.query(ApprovedCard).filter(ApprovedCard.id == card_id_int).first()
+                if card:
+                    card.status = "synced"
+            except (ValueError, TypeError):
+                # If card_id is not an integer, skip (shouldn't happen but handle gracefully)
+                pass
         
-        save_json_file(CARDS_FILE, all_cards)
+        db.commit()
         
         return {
             "message": f"Synced {len(results['success'])} cards successfully",

@@ -321,32 +321,97 @@ class AnkiConnect:
                 remarks_value = card.get("field__Remarks") or card.get("field__remarks") or ""
                 
                 print(f"  Processing card {card.get('id')}: type={card_type}, note_type={note_type}")
+                print(f"    Debug - text_field: {repr(text_field[:100]) if text_field else 'None'}")
+                print(f"    Debug - extra_field: {repr(extra_field[:100]) if extra_field else 'None'}")
+                print(f"    Debug - front: {repr(front[:100]) if front else 'None'}")
+                print(f"    Debug - back: {repr(back[:100]) if back else 'None'}")
+                print(f"    Debug - cloze_text: {repr(cloze_text[:100]) if cloze_text else 'None'}")
                 
                 # Handle custom note types
                 if note_type:
+                    # Determine field names based on note type
+                    # "CUMA - Basic" and "CUMA - Basic (and reversed card)" use "Front"/"Back"
+                    # "CUMA - Cloze", "CUMA - Interactive Cloze", "Interactive Cloze" use "Text"/"Extra"
+                    is_basic_type = "Basic" in note_type and "Cloze" not in note_type
+                    
+                    if is_basic_type:
+                        primary_field = "Front"
+                        secondary_field = "Back"
+                    else:
+                        primary_field = "Text"
+                        secondary_field = "Extra"
+                    
+                    print(f"    Field mapping: note_type='{note_type}', is_basic_type={is_basic_type}, primary='{primary_field}', secondary='{secondary_field}'")
+                    
                     # Custom note type with custom fields
                     fields = {}
-                    if text_field:
-                        # Process images in text field
-                        processed_text = self._process_html_images(text_field)
-                        fields["Text"] = processed_text
-                        print(f"    Text field length: {len(text_field)} chars (original), {len(processed_text)} chars (processed)")
-                    if extra_field:
-                        # Process images in extra field
-                        processed_extra = self._process_html_images(extra_field)
-                        fields["Extra"] = processed_extra
-                        print(f"    Extra field length: {len(extra_field)} chars (original), {len(processed_extra)} chars (processed)")
-                    # Add any other custom fields from the card
+                    
+                    # Try text_field first, then fallback to front or cloze_text
+                    content_for_primary = None
+                    if text_field and text_field.strip():
+                        content_for_primary = text_field
+                    elif front and front.strip():
+                        content_for_primary = front
+                    elif cloze_text and cloze_text.strip():
+                        content_for_primary = cloze_text
+                    
+                    if content_for_primary:
+                        # Process images in primary field
+                        processed_primary = self._process_html_images(content_for_primary)
+                        fields[primary_field] = processed_primary
+                        print(f"    {primary_field} field length: {len(content_for_primary)} chars (original), {len(processed_primary)} chars (processed)")
+                    else:
+                        # Ensure primary field exists even if empty (Anki requires all fields)
+                        fields[primary_field] = ""
+                    
+                    # Try extra_field first, then fallback to back
+                    content_for_secondary = None
+                    if extra_field and extra_field.strip():
+                        content_for_secondary = extra_field
+                    elif back and back.strip():
+                        content_for_secondary = back
+                    
+                    if content_for_secondary:
+                        # Process images in secondary field
+                        processed_secondary = self._process_html_images(content_for_secondary)
+                        fields[secondary_field] = processed_secondary
+                        print(f"    {secondary_field} field length: {len(content_for_secondary)} chars (original), {len(processed_secondary)} chars (processed)")
+                    else:
+                        # Ensure secondary field exists even if empty (Anki requires all fields)
+                        fields[secondary_field] = ""
+                    
+                    # Add any other custom fields from the card (but don't overwrite primary/secondary fields)
                     for key, value in card.items():
                         if key.startswith("field_"):
                             if key == "field__Remarks_annotations":
                                 continue
                             field_name = key.replace("field_", "")
-                            fields[field_name] = value
+                            # Don't overwrite the primary/secondary fields we just set
+                            if field_name in (primary_field, secondary_field):
+                                continue
+                            # Only add non-empty values
+                            if value and (isinstance(value, str) and value.strip() or not isinstance(value, str)):
+                                fields[field_name] = str(value) if value else ""
                     if remarks_value and "_Remarks" not in fields:
                         fields["_Remarks"] = remarks_value
                     
-                    print(f"    Adding custom note: {note_type} with fields: {list(fields.keys())}")
+                    # Validate that we have at least one non-empty field (Anki rejects completely empty notes)
+                    non_empty_fields = {k: v for k, v in fields.items() if v and str(v).strip()}
+                    if not non_empty_fields:
+                        raise ValueError(
+                            f"Card {card.get('id')} has empty fields. "
+                            f"text_field: {repr(text_field[:50]) if text_field else 'None'}, "
+                            f"extra_field: {repr(extra_field[:50]) if extra_field else 'None'}, "
+                            f"front: {repr(front[:50]) if front else 'None'}, "
+                            f"back: {repr(back[:50]) if back else 'None'}, "
+                            f"cloze_text: {repr(cloze_text[:50]) if cloze_text else 'None'}, "
+                            f"note_type: {note_type}, "
+                            f"card_type: {card_type}, "
+                            f"fields set: {list(fields.keys())}, "
+                            f"non_empty: {list(non_empty_fields.keys())}"
+                        )
+                    
+                    print(f"    Adding custom note: {note_type} with fields: {list(fields.keys())} (values: {[(k, len(str(v)) if v else 0) for k, v in fields.items()]})")
                     note_id = self.add_custom_note(deck_name, note_type, fields, tags)
                     print(f"    ✅ Created note ID: {note_id}")
                 

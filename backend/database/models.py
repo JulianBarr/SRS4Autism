@@ -100,6 +100,7 @@ class ApprovedCard(Base):
     profile_id = Column(String, ForeignKey('profiles.id', ondelete='CASCADE'), nullable=False)
     card_type = Column(String, nullable=False)
     content = Column(Text, nullable=False)  # JSON object stored as text
+    status = Column(String, default='pending')  # 'pending', 'approved', 'rejected'
     approved_at = Column(DateTime, default=func.now())
     
     # Relationship

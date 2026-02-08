@@ -221,12 +221,19 @@ class CardService:
         return db.query(ApprovedCard).filter_by(profile_id=profile_id).all()
     
     @staticmethod
-    def create(db: Session, profile_id: str, card_type: str, content: Dict[str, Any]) -> ApprovedCard:
-        """Create new approved card"""
+    def create(db: Session, profile_id: str, card_type: str, content: Dict[str, Any], status: str = "pending") -> ApprovedCard:
+        """
+        Create new card.
+        Defaults to status='pending' so it appears in Curation Area.
+        """
+        # Ensure content is a string if it's not already
+        content_json = json.dumps(content) if isinstance(content, dict) else content
+        
         card = ApprovedCard(
             profile_id=profile_id,
             card_type=card_type,
-            content=json.dumps(content)
+            content=content_json,
+            status=status  # <--- CRITICAL FIX: Set the status!
         )
         db.add(card)
         db.commit()
@@ -316,4 +323,3 @@ class ChatSessionService:
         db.commit()
         db.refresh(session)
         return session
-

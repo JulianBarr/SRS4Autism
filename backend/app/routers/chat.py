@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException, Request, Depends, status
 from fastapi import Request
-from pydantic import BaseModel
+from fastapi.responses import JSONResponse
+from pydantic import BaseModel, Field
 from typing import List, Optional, Dict, Any, Set
 import json
 import os
@@ -18,8 +19,14 @@ from pathlib import Path
 
 # Adjust path to include backend root if needed
 sys.path.append(str(Path(__file__).resolve().parent.parent.parent))
-from database.db import get_db
-from database.services import ChatSessionService
+from backend.database.db import get_db
+from backend.database.services import ChatSessionService
+
+# Database models (optional, for topic history endpoint)
+try:
+    from backend.database.models import Profile
+except ImportError:
+    Profile = None
 
 # Internal imports
 from ..core.config import (
@@ -30,7 +37,6 @@ from ..core.config import (
     PROMPT_TEMPLATES_FILE,
     MODEL_CONFIG_FILE
 )
-from app.services.agent_service import AgentService
 from ..utils.common import (
     load_json_file,
     save_json_file,
@@ -40,19 +46,26 @@ from ..utils.common import (
 )
 from ..utils.pinyin_utils import get_word_knowledge, get_word_image_map
 
-# Agentic imports
-from agentic import AgenticPlanner, AgentMemory, PrincipleStore, AgentTools
-from agentic.tools import (
-    MasteryVectorError,
-    KnowledgeGraphError,
-    RecommenderError,
-)
-from agent.intent_detector import IntentDetector, IntentType
-from agent.conversation_handler import ConversationHandler
-from agent.content_generator import ContentGenerator
-
 router = APIRouter()
 logger = logging.getLogger(__name__)
+
+# Agentic imports
+try:
+    from agentic import AgenticPlanner, AgentMemory, PrincipleStore, AgentTools
+    from agentic.tools import (
+        MasteryVectorError,
+        KnowledgeGraphError,
+        RecommenderError,
+    )
+    from agent.intent_detector import IntentDetector, IntentType
+    from agent.conversation_handler import ConversationHandler
+    from agent.content_generator import ContentGenerator
+except ImportError as e:
+    logger.warning(f"Agent imports failed: {e}")
+    IntentDetector = None
+    IntentType = None
+    ConversationHandler = None
+    ContentGenerator = None
 
 # --- Models ---
 
@@ -63,12 +76,6 @@ class ChatMessage(BaseModel):
     timestamp: datetime
     mentions: List[str] = []
     config: Optional[Dict[str, str]] = None  # Optional model configuration: {"card_model": "...", "image_model": "..."}
-
-class AgenticPlanRequest(BaseModel):
-    user_id: str
-    topic: Optional[str] = None  # Optional - agent can determine what to learn
-    learner_level: Optional[str] = None
-    topic_complexity: Optional[str] = None  # Optional - agent can infer from mastery
 
 # --- Helper Functions ---
 
@@ -380,6 +387,93 @@ def parse_context_tags(content: str, mentions: List[str]) -> List[Dict[str, Any]
     logger.info(f"📋 Final context_tags count: {len(context_tags)}")
     return context_tags
 
+@router.get("/chat/topic/history")
+async def get_topic_chat_history(
+    topic_id: Optional[str] = None,
+    roster_id: Optional[str] = None,
+    limit: int = 50,
+    db: Session = Depends(get_db)
+):
+    """
+    Topic-specific chat history endpoint (matches frontend expectations).
+    Returns {messages: [...]} format.
+    """
+    try:
+        if not roster_id:
+             if Profile:
+                 p = db.query(Profile).first()
+                 if p: roster_id = str(p.id)
+        
+        if not roster_id or not topic_id:
+            return {"messages": []}
+
+        history = []
+        if ChatSessionService:
+            history = ChatSessionService.get_history(db, topic_id, roster_id)
+            if limit and len(history) > limit:
+                history = history[-limit:]
+
+        safe_history = []
+        for msg in history:
+            # Initialize with ALL required arrays that frontend expects
+            item = {
+                "cards": [],
+                "suggestions": [],
+                "sources": [],
+                "mentions": []  # CRITICAL: Frontend formatMessage expects this
+            }
+            
+            if isinstance(msg, dict):
+                for key, value in msg.items():
+                    if key in ["cards", "suggestions", "sources", "mentions"]:
+                        # Only set if it's already a valid list
+                        if isinstance(value, list):
+                            item[key] = value
+                        # Otherwise keep the empty list we initialized
+                    else:
+                        item[key] = value
+            else:
+                item["role"] = getattr(msg, "role", "assistant")
+                item["content"] = getattr(msg, "content", "")
+                timestamp = getattr(msg, "timestamp", None)
+                if timestamp:
+                    item["timestamp"] = timestamp.isoformat() if isinstance(timestamp, datetime) else timestamp
+                else:
+                    item["timestamp"] = None
+
+            # Final safety check - ensure ALL arrays are present and are lists
+            if "cards" not in item or not isinstance(item["cards"], list):
+                item["cards"] = []
+            if "suggestions" not in item or not isinstance(item["suggestions"], list):
+                item["suggestions"] = []
+            if "sources" not in item or not isinstance(item["sources"], list):
+                item["sources"] = []
+            if "mentions" not in item or not isinstance(item["mentions"], list):
+                item["mentions"] = []
+                
+            safe_history.append(item)
+
+        return {"messages": safe_history}
+    except Exception as e:
+        logger.error(f"Topic History Error: {e}")
+        return {"messages": []}
+
+@router.get("/chat/history", response_model=List[ChatMessage])
+async def get_chat_history():
+    """Get chat history."""
+    history = load_json_file(CHAT_HISTORY_FILE, [])
+    # Ensure all messages have mentions array
+    for msg in history:
+        if "mentions" not in msg or not isinstance(msg.get("mentions"), list):
+            msg["mentions"] = []
+        if "cards" not in msg:
+            msg["cards"] = []
+        if "suggestions" not in msg:
+            msg["suggestions"] = []
+        if "sources" not in msg:
+            msg["sources"] = []
+    return history
+
 async def _handle_card_generation(message: ChatMessage, context_tags: List[Dict[str, Any]], 
                                 child_profile: Dict[str, Any], generator,
                                 profiles: List[Dict[str, Any]]) -> str:
@@ -506,22 +600,80 @@ async def _handle_card_generation(message: ChatMessage, context_tags: List[Dict[
             )
         )
         
-        # Save generated cards
-        existing_cards = load_json_file(CARDS_FILE, [])
-        for card in cards:
-            remarks = build_cuma_remarks(card, context_tags)
-            card["field__Remarks"] = remarks or ""
-            card.pop("field__Remarks_annotations", None)
-            existing_cards.append(card)
-        save_json_file(CARDS_FILE, existing_cards)
+        # Save generated cards to database
+        from backend.database.services import CardService
+        from backend.database.db import SessionLocal
+        
+        # Create database session
+        db = SessionLocal()
+        try:
+            # Determine profile_id from child_profile or context_tags
+            profile_id = None
+            if child_profile:
+                profile_id = child_profile.get("id") or child_profile.get("name")
+            else:
+                # Try to get from context_tags
+                for tag in context_tags:
+                    if tag.get("type") == "profile":
+                        profile_id = tag.get("value")
+                        break
+            
+            if not profile_id:
+                # Fallback: use first profile from database
+                from backend.database.models import Profile
+                first_profile = db.query(Profile).first()
+                if first_profile:
+                    profile_id = first_profile.id
+                else:
+                    profile_id = "Unknown_Student"
+            
+            saved_cards = []
+            for card in cards:
+                remarks = build_cuma_remarks(card, context_tags)
+                card["field__Remarks"] = remarks or ""
+                card.pop("field__Remarks_annotations", None)
+                
+                # Determine card_type
+                card_type = card.get("card_type", "basic")
+                if not card_type:
+                    # Infer from note_type
+                    note_type = card.get("note_type", "")
+                    if "interactive" in note_type.lower() or "cloze" in note_type.lower():
+                        card_type = "interactive_cloze"
+                    elif "reverse" in note_type.lower():
+                        card_type = "basic_reverse"
+                    else:
+                        card_type = "basic"
+                
+                # Save to database
+                db_card = CardService.create(
+                    db=db,
+                    profile_id=str(profile_id),
+                    card_type=card_type,
+                    content=card,
+                    status="pending"
+                )
+                
+                # Add database ID to card for response
+                card["id"] = str(db_card.id)
+                card["status"] = "pending"
+                saved_cards.append(card)
+            
+            db.commit()
+        except Exception as e:
+            db.rollback()
+            logger.error(f"Error saving cards to database: {e}", exc_info=True)
+            raise
+        finally:
+            db.close()
         
         # Create response
-        card_count = len(cards)
+        card_count = len(saved_cards)
         response_content = f"✨ 成功为您生成了 {card_count} 张卡片！\n\n"
         
-        basic_count = len([c for c in cards if c['card_type'] == 'basic'])
-        reverse_count = len([c for c in cards if c['card_type'] == 'basic_reverse'])
-        cloze_count = len([c for c in cards if c['card_type'] == 'cloze'])
+        basic_count = len([c for c in saved_cards if c.get('card_type') == 'basic'])
+        reverse_count = len([c for c in saved_cards if c.get('card_type') == 'basic_reverse'])
+        cloze_count = len([c for c in saved_cards if c.get('card_type') == 'cloze'])
         
         details = []
         if basic_count > 0: details.append(f"{basic_count} 张基础卡片")
@@ -543,188 +695,10 @@ async def _handle_card_generation(message: ChatMessage, context_tags: List[Dict[
         response_content += "👉 请在「卡片审核」标签页中查看并批准这些卡片！"
         
         return response_content
-        
+
     except Exception as e:
         logger.error(f"Card generation error: {e}")
         return f"I encountered an error generating cards: {str(e)}. Please try again with a different request."
-
-async def _handle_image_generation(message: ChatMessage, context_tags: List[Dict[str, Any]], 
-                                 child_profile: Dict[str, Any], generator,
-                                 profiles: List[Dict[str, Any]]) -> str:
-    """Handle image generation requests."""
-    try:
-        all_cards = load_json_file(CARDS_FILE, [])
-        if not all_cards:
-            return "❌ No cards found to add images to. Please generate some cards first."
-        
-        target_card = all_cards[-1]
-        card_id = target_card["id"]
-        
-        logger.info(f"Generating image for card: {card_id}")
-        
-        image_prompt = f"Create a simple, child-friendly illustration for this flashcard content: '{target_card.get('front', '')}' - '{target_card.get('back', '')}'. The image should be colorful, simple, and appropriate for a child with autism."
-        
-        card_model = message.config.get("card_model") if message.config else None
-        image_model = message.config.get("image_model") if message.config else None
-        
-        conversation_handler = ConversationHandler(card_model=card_model, image_model=image_model)
-        content_generator = ContentGenerator(card_model=card_model)
-        
-        image_description = conversation_handler._generate_image_description(
-            card_content=target_card,
-            user_request=message.content,
-            child_profile=child_profile
-        )
-        
-        image_result = conversation_handler.generate_actual_image(
-            image_description=image_description,
-            user_request=message.content
-        )
-        
-        target_card["image_description"] = image_description
-        target_card["image_prompt"] = image_prompt
-        
-        image_filename = None
-        if image_result.get("success") and image_result.get("image_data"):
-            image_data_url = image_result.get("image_data")
-            if image_data_url and image_data_url.startswith("data:"):
-                try:
-                    header, encoded = image_data_url.split(",", 1)
-                    mime_type = header.split(";")[0].split(":")[1]
-                    image_bytes = base64.b64decode(encoded)
-                    image_filename = content_generator._save_hashed_image(image_bytes, mime_type)
-                    target_card["image_data"] = image_filename
-                except Exception as e:
-                    logger.error(f"Error processing image data in chat handler: {e}")
-                    target_card["image_data"] = image_data_url
-        
-        if image_result["success"]:
-            if image_result.get("is_placeholder", False):
-                return f"🖼️ **Generated Image Description:**\n\n{image_description}\n\n⚠️ **Note:** This is a placeholder image."
-            else:
-                if image_filename:
-                    image_path = f"/static/media/{image_filename}"
-                    image_markdown = f"![Generated Image]({image_path})"
-                else:
-                    image_markdown = f"![Generated Image]({image_result.get('image_data', '')})"
-                
-                return f"🖼️ **Generated Image:**\n\n{image_markdown}\n\n**Image Description:**\n{image_description}\n\n**To add this image to a card, please specify:**\n- Which card (by ID or 'last card')\n- Front or back\n- Before or after the text"
-        else:
-            target_card["image_generated"] = False
-            target_card["image_error"] = image_result["error"]
-            
-            for i, card in enumerate(all_cards):
-                if card["id"] == card_id:
-                    all_cards[i] = target_card
-                    break
-            save_json_file(CARDS_FILE, all_cards)
-            
-            return f"🖼️ Generated image description for card '{target_card.get('front', 'Card')}':\n\n{image_description}\n\n❌ **Image generation failed:** {image_result['error']}"
-        
-    except Exception as e:
-        logger.error(f"Image generation error: {e}")
-        return f"I encountered an error generating an image: {str(e)}. Please try again."
-
-async def _handle_image_insertion(message: ChatMessage, context_tags: List[Dict[str, Any]], 
-                                child_profile: Optional[Dict[str, Any]]) -> str:
-    """Handle image insertion requests."""
-    try:
-        message_lower = message.content.lower()
-        
-        # Extract card reference
-        card_ref = None
-        if "last card" in message_lower:
-            all_cards = load_json_file(CARDS_FILE)
-            if all_cards:
-                card_ref = all_cards[-1]
-            else:
-                return "❌ No cards found. Please create a card first."
-        elif "card #" in message_lower or "card " in message_lower:
-            card_id_match = re.search(r'card\s*#?(\w+)', message_lower)
-            if card_id_match:
-                card_id = card_id_match.group(1)
-                all_cards = load_json_file(CARDS_FILE)
-                card_ref = next((card for card in all_cards if card["id"].endswith(card_id)), None)
-                if not card_ref:
-                    return f"❌ Card #{card_id} not found."
-        else:
-            return "❌ Please specify which card to add the image to (e.g., 'last card', 'card #123')."
-        
-        # Extract position and location
-        position = "back" if "back" in message_lower else "front"
-        location = "before" if "before" in message_lower else "after"
-        
-        # Check chat history for recent image
-        chat_history = load_json_file(CHAT_HISTORY_FILE)
-        last_image = None
-        
-        for msg in reversed(chat_history[-10:]):
-            if msg.get("role") == "assistant":
-                content = msg.get("content", "")
-                if "Generated Image:" in content:
-                    img_match = re.search(r'!\[Generated Image\]\(([^)]+)\)', content)
-                    if img_match:
-                        last_image = img_match.group(1)
-                        break
-        
-        if not last_image:
-            return "❌ No recent image found. Please generate an image first."
-        
-        # Insert image
-        card_type = card_ref.get("card_type", "")
-        is_interactive_cloze = card_type == "interactive_cloze"
-        
-        if position == "front":
-            target_field = "text_field" if is_interactive_cloze else "front"
-            current_content = card_ref.get(target_field, "") or card_ref.get("front", "")
-            img_html = f"<img src=\"{last_image}\" alt=\"Generated image\" style=\"max-width: 100%; height: auto; margin-bottom: 10px;\">"
-            
-            if location == "before":
-                card_ref[target_field] = f"{img_html}\n{current_content}"
-            else:
-                card_ref[target_field] = f"{current_content}\n{img_html.replace('margin-bottom', 'margin-top')}"
-        else:
-            target_field = "extra_field" if is_interactive_cloze else "back"
-            current_content = card_ref.get(target_field, "") or card_ref.get("back", "")
-            img_html = f"<img src=\"{last_image}\" alt=\"Generated image\" style=\"max-width: 100%; height: auto; margin-bottom: 10px;\">"
-            
-            if location == "before":
-                card_ref[target_field] = f"{img_html}\n{current_content}"
-            else:
-                card_ref[target_field] = f"{current_content}\n{img_html.replace('margin-bottom', 'margin-top')}"
-        
-        # Save updated card
-        all_cards = load_json_file(CARDS_FILE)
-        card_updated = False
-        for i, card in enumerate(all_cards):
-            if card["id"] == card_ref["id"]:
-                all_cards[i] = card_ref
-                card_updated = True
-                break
-        
-        if card_updated:
-            save_json_file(CARDS_FILE, all_cards)
-            return f"✅ Image added to {position} of card ({location} text)."
-        else:
-            return "❌ Failed to update card."
-            
-    except Exception as e:
-        logger.error(f"Image insertion error: {e}")
-        return f"Error inserting image: {str(e)}"
-
-# --- Routes ---
-
-@router.get("/chat/history", response_model=List[ChatMessage])
-async def get_chat_history():
-    """Get chat history."""
-    history = load_json_file(CHAT_HISTORY_FILE, [])
-    return history
-
-@router.delete("/chat/history")
-async def clear_chat_history():
-    """Clear chat history."""
-    save_json_file(CHAT_HISTORY_FILE, [])
-    return {"message": "Chat history cleared"}
 
 @router.post("/chat", response_model=ChatMessage)
 async def send_message(message: ChatMessage, request: Request):
@@ -738,7 +712,7 @@ async def send_message(message: ChatMessage, request: Request):
             if auth and auth.startswith("Bearer "):
                 api_key = auth.split(" ")[1]
             else:
-                api_key = message.config.get("apiKey")
+                api_key = message.config.get("apiKey") if message.config else None
         
         base_url = request.headers.get("X-LLM-Base-URL")
         provider = request.headers.get("X-LLM-Provider", "deepseek").lower()
@@ -765,9 +739,6 @@ async def send_message(message: ChatMessage, request: Request):
                 importlib.reload(agent.conversation_handler)
                 logger.info("Modules reloaded to force DeepSeek configuration")
         
-        # 3. Imports
-        # sys.path.append(os.path.join(os.path.dirname(__file__), '../../'))
-        
         # Save user message
         history = load_json_file(CHAT_HISTORY_FILE, [])
         history.append(message.dict())
@@ -782,6 +753,9 @@ async def send_message(message: ChatMessage, request: Request):
             
             card_model = _normalize_model_name(card_model_raw, base_url) if card_model_raw else None
             image_model = _normalize_model_name(image_model_raw, base_url) if image_model_raw else None
+            
+            if not IntentDetector or not ConversationHandler or not ContentGenerator:
+                raise ImportError("Agent modules not available")
             
             intent_detector = IntentDetector()
             conversation_handler = ConversationHandler(card_model=card_model, image_model=image_model)
@@ -828,16 +802,6 @@ async def send_message(message: ChatMessage, request: Request):
                 response_content = await _handle_card_generation(
                     message, context_tags, child_profile, generator, profiles
                 )
-            elif intent_type == IntentType.IMAGE_GENERATION:
-                response_content = await _handle_image_generation(
-                    message, context_tags, child_profile, generator, profiles
-                )
-            elif intent_type == IntentType.IMAGE_INSERTION:
-                response_content = await _handle_image_insertion(
-                    message, context_tags, child_profile
-                )
-            elif intent_type == IntentType.CARD_UPDATE:
-                response_content = "✏️ Card update feature is coming soon!"
             else:
                 response_content = conversation_handler.handle_conversation(
                     message=message.content,
@@ -849,7 +813,7 @@ async def send_message(message: ChatMessage, request: Request):
         except ImportError as e:
             logger.error(f"Agent import error: {e}")
             response_content = f"Error: Agent modules could not be loaded. {str(e)}"
-            
+
     except Exception as e:
         logger.error(f"Chat error: {e}")
         response_content = f"System Error: {str(e)}"
@@ -868,181 +832,6 @@ async def send_message(message: ChatMessage, request: Request):
     
     return response
 
-# Agentic Planner Logic
-_agentic_planner: Optional[AgenticPlanner] = None
-
-def get_agentic_planner() -> AgenticPlanner:
-    global _agentic_planner
-    if _agentic_planner is None:
-        memory = AgentMemory()
-        principles = PrincipleStore()
-        tools = AgentTools()
-        _agentic_planner = AgenticPlanner(memory=memory, principles=principles, tools=tools)
-    return _agentic_planner
-
-@router.post("/agentic/plan")
-async def agentic_plan(request: AgenticPlanRequest):
-    """
-    Entry point for the new Agentic Learning Agent.
-    """
-    try:
-        planner = get_agentic_planner()
-        plan = planner.plan_learning_step(
-            user_id=request.user_id,
-            topic=request.topic,
-            learner_level=request.learner_level,
-            topic_complexity=request.topic_complexity,
-        )
-        response = {
-            "learner_level": plan.learner_level,
-            "topic": plan.topic,
-            "topic_complexity": plan.topic_complexity,
-            "scaffold_type": plan.scaffold_type,
-            "rationale": plan.rationale,
-            "cognitive_prior": {
-                "mastery_summary": plan.cognitive_prior.get("mastery_summary", {}),
-                "total_nodes": len(plan.cognitive_prior.get("mastery_vector", {})),
-            },
-            "recommendation_plan": plan.recommendation_plan,
-            "cards": plan.cards_payload.get("cards") if plan.cards_payload else None,
-        }
-        return response
-
-    except (MasteryVectorError, KnowledgeGraphError, RecommenderError) as e:
-        logger.error(f"Agentic planner failed for user {request.user_id}: {e}", exc_info=True)
-        raise HTTPException(
-            status_code=503,
-            detail="Learning service temporarily unavailable. Please try again later."
-        )
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"Unexpected error in agentic planner for user {request.user_id}: {e}", exc_info=True)
-        raise HTTPException(
-            status_code=500,
-            detail="An unexpected error occurred. Please try again."
-        )
-
-
-# --- Topic Chat Endpoints ---
-
-class TopicChatMessageRequest(BaseModel):
-    topic_id: str
-    roster_id: str
-    content: str
-    template: Optional[str] = "Basic Grammar Card"
-    quantity: Optional[int] = 5
-    generate_request: Optional[bool] = False  # Flag to trigger card generation
-    template_id: Optional[str] = None  # Template ID for generation
-
-
-@router.get("/chat/topic/history")
-async def get_topic_chat_history(topic_id: str, roster_id: str, db: Session = Depends(get_db)):
-    """Get chat history for a specific topic and roster"""
-    try:
-        messages = ChatSessionService.get_history(db, topic_id, roster_id)
-        return {"messages": messages}
-    except Exception as e:
-        logger.error(f"Error getting topic chat history: {e}", exc_info=True)
-        raise HTTPException(status_code=500, detail=f"Error retrieving chat history: {str(e)}")
-
-
-@router.post("/chat/topic/message")
-async def send_topic_chat_message(request: TopicChatMessageRequest, req: Request, db: Session = Depends(get_db)):
-    """Send a message to the topic chat and handle card generation if requested"""
-    try:
-        # Save user message
-        ChatSessionService.add_message(
-            db, 
-            request.topic_id, 
-            request.roster_id, 
-            "user", 
-            request.content
-        )
-        
-        # Check if this is a card generation request
-        if request.generate_request:
-            # Import AgentService
-            from ..services.agent_service import AgentService
-            
-            # Get API key from request headers (similar to /chat endpoint)
-            api_key = req.headers.get("X-LLM-Key")
-            if not api_key:
-                auth = req.headers.get("Authorization")
-                if auth and auth.startswith("Bearer "):
-                    api_key = auth.split(" ")[1]
-            
-            # Get template_id (use provided or default)
-            template_id = request.template_id or request.template or "visual_card_v1"
-            
-            # Generate cards using AgentService
-            generated_cards = AgentService.generate_cards(
-                topic_id=request.topic_id,
-                roster_id=request.roster_id,
-                template_id=template_id,
-                user_instruction=request.content,
-                quantity=request.quantity or 5,
-                db=db,
-                api_key=api_key
-            )
-            
-            # Create response message with generated cards
-            card_count = len(generated_cards)
-            response_content = f"✨ Successfully generated {card_count} Anki cards!\n\n"
-            
-            if generated_cards:
-                response_content += "Generated Cards:\n"
-                for i, card in enumerate(generated_cards, 1):
-                    # Handle different card types
-                    front_text = card.get('front') or card.get('text_field') or card.get('cloze_text') or 'N/A'
-                    back_text = card.get('back') or card.get('extra_field') or 'N/A'
-                    response_content += f"\n{i}. Front: {str(front_text)[:50]}...\n"
-                    response_content += f"   Back: {str(back_text)[:50]}...\n"
-            else:
-                response_content += "⚠️ No cards were generated. Please check the logs for errors."
-            
-            # Save assistant response
-            ChatSessionService.add_message(
-                db,
-                request.topic_id,
-                request.roster_id,
-                "assistant",
-                response_content
-            )
-            
-            return {
-                "role": "assistant",
-                "content": response_content,
-                "timestamp": datetime.now().isoformat(),
-                "cards": generated_cards,
-                "cards_generated": card_count
-            }
-        else:
-            # Regular chat message (mock response for now)
-            await asyncio.sleep(1)
-            
-            # Generate mock response
-            mock_response = f"I have received your request for {request.topic_id} for {request.roster_id}. (Mock) Generated {request.quantity} cards."
-            
-            # Save assistant response
-            ChatSessionService.add_message(
-                db,
-                request.topic_id,
-                request.roster_id,
-                "assistant",
-                mock_response
-            )
-            
-            return {
-                "role": "assistant",
-                "content": mock_response,
-                "timestamp": datetime.now().isoformat()
-            }
-    except Exception as e:
-        logger.error(f"Error sending topic chat message: {e}", exc_info=True)
-        raise HTTPException(status_code=500, detail=f"Error sending message: {str(e)}")
-
-
 # --- Agent Generate Endpoint ---
 
 class AgentGenerateRequest(BaseModel):
@@ -1056,8 +845,11 @@ class AgentGenerateRequest(BaseModel):
 async def agent_generate(request: AgentGenerateRequest, req: Request, db: Session = Depends(get_db)):
     """
     Generate cards using the AgentService (Grammar-Aware).
+    Used by TopicChat component for grammar card generation.
     """
     try:
+        from backend.app.services.agent_service import AgentService
+        
         logger.info(f"🛸 Agent Request: {request.topic_id} | Template: {request.template_id}")
         # 1. Credentials (Get API Key from Headers)
         api_key = req.headers.get("X-LLM-Key")
@@ -1095,9 +887,12 @@ async def agent_generate(request: AgentGenerateRequest, req: Request, db: Sessio
         return {
             "content": response_content,
             "cards_generated": card_count,
-            "cards": generated_cards
+            "cards": generated_cards if isinstance(generated_cards, list) else [],
+            "role": "assistant",
+            "mentions": [],
+            "suggestions": [],
+            "sources": []
         }
     except Exception as e:
         logger.error(f"❌ Agent Generate Error: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail=str(e))
-

@@ -544,12 +544,14 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
       return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     };
     
-    // Highlight mentions
-    message.mentions.forEach(mention => {
-      const escapedMention = escapeRegex(mention);
-      const regex = new RegExp(`@?${escapedMention}`, 'gi');
-      content = content.replace(regex, `<span class="mention">@${mention}</span>`);
-    });
+    // Highlight mentions (defensive check to prevent forEach on undefined)
+    if (message.mentions && Array.isArray(message.mentions)) {
+      message.mentions.forEach(mention => {
+        const escapedMention = escapeRegex(mention);
+        const regex = new RegExp(`@?${escapedMention}`, 'gi');
+        content = content.replace(regex, `<span class="mention">@${mention}</span>`);
+      });
+    }
 
     // Convert markdown images to HTML
     content = content.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" style="max-width: 100%; height: auto; border-radius: 8px; margin: 10px 0; border: 1px solid #ddd;" />');
