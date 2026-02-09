@@ -26,7 +26,7 @@ class IntentDetector:
             "create", "generate", "make", "build", "card", "flashcard",
             "learn", "study", "practice", "quiz", "question", "answer",
             "cloze", "fill", "blank", "sentence", "word", "vocabulary",
-            "grammar", "lesson", "exercise", "drill"
+            "grammar", "lesson", "exercise", "drill", "teach"
         ]
         
         # Image generation keywords
@@ -270,7 +270,8 @@ class IntentDetector:
             r"about\s+([a-zA-Z\u4e00-\u9fff]+)",
             r"with\s+([a-zA-Z\u4e00-\u9fff]+)",
             r"the\s+word\s+([a-zA-Z\u4e00-\u9fff]+)",
-            r"concept\s+([a-zA-Z\u4e00-\u9fff]+)"
+            r"concept\s+([a-zA-Z\u4e00-\u9fff]+)",
+            r"teach\s+([a-zA-Z\u4e00-\u9fff]+)"
         ]
         
         for pattern in target_patterns:

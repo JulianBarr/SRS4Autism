@@ -477,228 +477,192 @@ async def get_chat_history():
 async def _handle_card_generation(message: ChatMessage, context_tags: List[Dict[str, Any]], 
                                 child_profile: Dict[str, Any], generator,
                                 profiles: List[Dict[str, Any]]) -> str:
-    """Handle card generation requests."""
+    """Handle card generation requests via Legacy ContentGenerator (Template Support)."""
     try:
-        # Check for @roster mention - use entire character roster from profile
-        has_roster_mention = any(tag.get("type") == "roster" for tag in context_tags)
+        from backend.database.db import SessionLocal
+        from backend.database.services import CardService, ProfileService
+        from backend.database.models import Profile
         
-        if has_roster_mention:
-            # If no specific profile mentioned, use the first available profile
-            if not child_profile and profiles:
-                child_profile = profiles[0]
-                logger.info(f"No profile specified with @roster, using first profile: {child_profile.get('name')}")
+        # 1. Extract parameters
+        # --- TOPIC EXTRACTION LOGIC ---
+        extracted_topic = None
+        user_message = message.content
+        
+        # 1. Check for @word: syntax (Legacy/UI)
+        word_match = re.search(r"@word:([\w\-\s]+)", user_message)
+        if word_match:
+            extracted_topic = word_match.group(1).strip()
+        
+        # 2. Check for Quotes (Chat "Teach 'X'")
+        if not extracted_topic:
+            quote_match = re.search(r"['\"](.*?)['\"]", user_message)
+            if quote_match:
+                extracted_topic = quote_match.group(1).strip()
+                
+        # 3. Fallback (Clean cleanup)
+        if not extracted_topic:
+            clean_msg = re.sub(r"(teach|explain|create cards for)\s+(the word|the concept of)?\s*", "", user_message, flags=re.IGNORECASE)
+            extracted_topic = clean_msg.strip()
             
-            if child_profile and child_profile.get("character_roster"):
-                characters_str = ", ".join(child_profile["character_roster"])
-                context_tags.append({
-                    "type": "character_list",
-                    "value": characters_str
-                })
-                logger.info(f"Using character roster: {characters_str}")
+        print(f"🎯 Extracted Topic: '{extracted_topic}'")
+        topic_id = extracted_topic
         
-        # Get prompt template if specified
-        prompt_template = None
+        # --- NEW LOGIC: Ensure Profile & Roster are Loaded from DB ---
+        has_roster_mention = any(tag.get("type") == "roster" or tag.get("value") == "roster" for tag in context_tags)
+
+        # 1. Try to get profile from DB if not passed in
+        if not child_profile:
+            db = SessionLocal()
+            try:
+                # Get the first profile or specific one if we could parse an ID
+                # For now, default to the first available profile in DB (Active User)
+                db_profile = db.query(Profile).first()
+                if db_profile:
+                    # Convert DB model to Dict to match expected format
+                    child_profile = ProfileService.profile_to_dict(db, db_profile)
+                    logger.info(f"👤 Loaded Profile from DB: {child_profile.get('name')}")
+            except Exception as e:
+                logger.error(f"DB Profile Fetch Error: {e}")
+            finally:
+                db.close()
+
+        # 2. Inject Roster
+        if child_profile and child_profile.get("character_roster"):
+            characters = child_profile["character_roster"]
+            # Handle list or string format
+            if isinstance(characters, list):
+                characters_str = ", ".join(characters)
+            else:
+                characters_str = str(characters)
+                
+            context_tags.append({
+                "type": "character_list",
+                "value": characters_str
+            })
+            logger.info(f"✅ Injected Roster: {characters_str}")
+        else:
+            logger.warning("⚠️ Profile found but has empty character_roster!")
+
+        # Roster/Profile
+        roster_id = "Unknown_Student"
+        if child_profile:
+            roster_id = str(child_profile.get("id") or child_profile.get("name"))
+        
+        # Template
+        template_id = None
         for tag in context_tags:
             if tag.get("type") == "template":
-                template_value = tag.get("value")
-                templates = load_json_file(PROMPT_TEMPLATES_FILE, [])
-                logger.debug(f"Looking for template: {template_value}")
-                
-                for tmpl in templates:
-                    # Match by ID, name, or name with underscores/hyphens
-                    template_name_normalized = tmpl.get("name", "").replace(' ', '_').lower()
-                    template_value_normalized = template_value.replace('_', '_').replace('-', '_').lower()
-                    
-                    if (tmpl.get("id") == template_value or 
-                        tmpl.get("name") == template_value or
-                        template_name_normalized == template_value_normalized or
-                        template_name_normalized.replace('_', '') == template_value_normalized.replace('_', '') or
-                        tmpl.get("name", "").lower().replace(' ', '-') == template_value.lower().replace('_', '-')):
-                        prompt_template = tmpl.get("template_text")
-                        
-                        # Fix for incorrect instruction in chinese_word template
-                        if "English vocab exercise" in prompt_template:
-                            prompt_template = prompt_template.replace("English vocab exercise", "Chinese vocab exercise")
-                            logger.info("Fixed 'English vocab exercise' in template")
-
-                        logger.info(f"Found template: {tmpl.get('name')}")
-                        
-                        # Parse knowledge point mentions from template text and add to context_tags
-                        # First, try @kp: format
-                        template_kp_explicit_pattern = r'@kp:([^@\n]+?)(?=\s+@|[\s,]*$|[\s,]*\n)'
-                        template_kp_explicit_matches = re.findall(template_kp_explicit_pattern, prompt_template)
-                        for kp_pattern in template_kp_explicit_matches:
-                            kp_pattern = kp_pattern.strip().rstrip(',')
-                            if not kp_pattern:
-                                continue
-                            kp_value = expand_kp_template_variables(kp_pattern, context_tags)
-                            if kp_value == kp_pattern and "{{" in kp_pattern:
-                                logger.warning(f"Could not expand knowledge point template variables: {kp_pattern}")
-                                continue
-                            kp_already_exists = any(
-                                t.get("type") == "kp" and t.get("value") == kp_value
-                                for t in context_tags
-                            )
-                            if not kp_already_exists:
-                                context_tags.append({
-                                    "type": "kp",
-                                    "value": kp_value
-                                })
-                                logger.debug(f"Added knowledge point from template (explicit, expanded): {kp_value}")
-                        
-                        # Then, try simplified format
-                        template_kp_simplified_pattern = r'@([^@\n]+?--[^@\n]+?--[^@\n]+?)(?=\s+@|[\s,]*$|[\s,]*\n)'
-                        template_kp_simplified_matches = re.findall(template_kp_simplified_pattern, prompt_template)
-                        for kp_pattern_raw in template_kp_simplified_matches:
-                            kp_pattern_raw = kp_pattern_raw.strip().rstrip(',')
-                            if not kp_pattern_raw:
-                                continue
-                            if kp_pattern_raw.count('--') != 2:
-                                continue
-                            kp_value = expand_kp_template_variables(f"@{kp_pattern_raw}", context_tags)
-                            if kp_value.startswith("@"):
-                                kp_value = kp_value[1:]
-                            if kp_value == kp_pattern_raw and "{{" in kp_pattern_raw:
-                                logger.warning(f"Could not expand knowledge point template variables: @{kp_pattern_raw}")
-                                continue
-                            kp_already_exists = any(
-                                t.get("type") == "kp" and t.get("value") == kp_value
-                                for t in context_tags
-                            )
-                            if not kp_already_exists:
-                                context_tags.append({
-                                    "type": "kp",
-                                    "value": kp_value
-                                })
-                                logger.debug(f"Added knowledge point from template (simplified, expanded): {kp_value}")
-                        break
-                
-                if not prompt_template:
-                    logger.warning(f"Template not found: {template_value}")
+                template_id = tag.get("value")
+                break
         
-        # Extract quantity from context_tags
+        # Load template text if ID is present
+        template_text = None
+        if template_id:
+            templates = load_json_file(PROMPT_TEMPLATES_FILE, [])
+            for t in templates:
+                if t.get("id") == template_id:
+                    template_text = t.get("template_text")
+                    break
+            logger.info(f"📄 Loaded Template: {template_id} -> {len(template_text) if template_text else 0} chars")
+        
+        # Quantity
         quantity = None
         for tag in context_tags:
             if tag.get("type") == "quantity":
                 try:
                     quantity = int(tag.get("value"))
-                    logger.info(f"Extracted quantity from @quantity: {quantity}")
-                except (ValueError, TypeError):
-                    logger.warning(f"Invalid quantity value: {tag.get('value')}")
+                except:
+                    pass
         
-        # Use the flexible agent method
-        loop = asyncio.get_event_loop()
-        cards = await loop.run_in_executor(
-            None,
-            partial(
-                generator.generate_from_prompt,
+        logger.info(f"🤖 Delegate to Legacy ContentGenerator: Topic='{topic_id}', Template='{template_id}'")
+
+        # 2. Call ContentGenerator in executor
+        def run_legacy_generator():
+            return generator.generate_from_prompt(
                 user_prompt=message.content,
                 context_tags=context_tags,
                 child_profile=child_profile,
-                prompt_template=prompt_template,
+                prompt_template=template_text,
                 quantity=quantity
             )
-        )
+
+        loop = asyncio.get_event_loop()
+        generated_cards = await loop.run_in_executor(None, run_legacy_generator)
         
-        # Save generated cards to database
-        from backend.database.services import CardService
-        from backend.database.db import SessionLocal
-        
-        # Create database session
+        # 3. Save cards to DB
         db = SessionLocal()
+        saved_cards = []
         try:
-            # Determine profile_id from child_profile or context_tags
-            profile_id = None
-            if child_profile:
-                profile_id = child_profile.get("id") or child_profile.get("name")
-            else:
-                # Try to get from context_tags
-                for tag in context_tags:
-                    if tag.get("type") == "profile":
-                        profile_id = tag.get("value")
-                        break
+            # SAFETY: Ensure profile_id exists in DB
+            from backend.database.models import Profile
             
-            if not profile_id:
-                # Fallback: use first profile from database
-                from backend.database.models import Profile
+            safe_profile_id = roster_id
+            # Check if roster_id exists
+            profile_exists = db.query(Profile).filter(Profile.id == safe_profile_id).first()
+            if not profile_exists:
+                # Try by name
+                profile_exists = db.query(Profile).filter(Profile.name == safe_profile_id).first()
+                
+            if profile_exists:
+                safe_profile_id = profile_exists.id
+            else:
+                # Fallback: First profile or create default
                 first_profile = db.query(Profile).first()
                 if first_profile:
-                    profile_id = first_profile.id
+                    safe_profile_id = first_profile.id
+                    logger.warning(f"⚠️ Profile '{roster_id}' not found in DB. Fallback to '{first_profile.name}' ({safe_profile_id})")
                 else:
-                    profile_id = "Unknown_Student"
+                    # Create default if absolutely no profiles
+                    logger.warning(f"⚠️ No profiles found. Creating Default Student.")
+                    default_profile = Profile(id="default", name="Default Student", interests="[]")
+                    db.add(default_profile)
+                    db.commit()
+                    safe_profile_id = default_profile.id
             
-            saved_cards = []
-            for card in cards:
-                remarks = build_cuma_remarks(card, context_tags)
-                card["field__Remarks"] = remarks or ""
-                card.pop("field__Remarks_annotations", None)
+            for card in generated_cards:
+                # Map ContentGenerator output to DB schema
+                content = card.copy()
+                # Ensure generic fields are present
+                if "note_type" not in content:
+                    content["note_type"] = "CUMA - Basic" # Fallback
                 
-                # Determine card_type
-                card_type = card.get("card_type", "basic")
-                if not card_type:
-                    # Infer from note_type
-                    note_type = card.get("note_type", "")
-                    if "interactive" in note_type.lower() or "cloze" in note_type.lower():
-                        card_type = "interactive_cloze"
-                    elif "reverse" in note_type.lower():
-                        card_type = "basic_reverse"
-                    else:
-                        card_type = "basic"
-                
-                # Save to database
                 db_card = CardService.create(
-                    db=db,
-                    profile_id=str(profile_id),
-                    card_type=card_type,
-                    content=card,
+                    db=db, 
+                    profile_id=safe_profile_id, 
+                    card_type=content.get("card_type", "basic"), 
+                    content=content, 
                     status="pending"
                 )
-                
-                # Add database ID to card for response
-                card["id"] = str(db_card.id)
-                card["status"] = "pending"
-                saved_cards.append(card)
-            
-            db.commit()
-        except Exception as e:
-            db.rollback()
-            logger.error(f"Error saving cards to database: {e}", exc_info=True)
-            raise
+                content["id"] = str(db_card.id)
+                saved_cards.append(content)
+                logger.info(f"💾 Legacy Saved Card #{db_card.id}")
         finally:
             db.close()
-        
-        # Create response
+
+        # 4. Create response
         card_count = len(saved_cards)
-        response_content = f"✨ 成功为您生成了 {card_count} 张卡片！\n\n"
-        
-        basic_count = len([c for c in saved_cards if c.get('card_type') == 'basic'])
-        reverse_count = len([c for c in saved_cards if c.get('card_type') == 'basic_reverse'])
-        cloze_count = len([c for c in saved_cards if c.get('card_type') == 'cloze'])
-        
-        details = []
-        if basic_count > 0: details.append(f"{basic_count} 张基础卡片")
-        if reverse_count > 0: details.append(f"{reverse_count} 张反向卡片")
-        if cloze_count > 0: details.append(f"{cloze_count} 张完形填空卡片")
-        
-        if details:
-            response_content += f"📝 包含：{', '.join(details)}\n\n"
-        
-        if context_tags:
-            tag_strings = []
-            for t in context_tags:
-                if t['type'] == 'profile' and child_profile:
-                    tag_strings.append(f"profile={child_profile.get('name')}")
-                else:
-                    tag_strings.append(f"{t['type']}={t['value']}")
-            response_content += f"🎯 应用上下文：{', '.join(tag_strings)}\n\n"
-        
-        response_content += "👉 请在「卡片审核」标签页中查看并批准这些卡片！"
-        
+        if card_count > 0:
+            response_content = f"✅ Legacy Generator produced {card_count} cards for '{topic_id}' using template '{template_id or 'Default'}'.\n\n"
+            
+            # Count types
+            types = {}
+            for c in saved_cards:
+                ctype = c.get("note_type", c.get("card_type", "Basic"))
+                types[ctype] = types.get(ctype, 0) + 1
+            
+            details = [f"{count} {ctype}" for ctype, count in types.items()]
+            if details:
+                response_content += f"📝 Included: {', '.join(details)}\n\n"
+                
+            response_content += "👉 Check the 'Card Review' tab to approve them."
+        else:
+            response_content = f"⚠️ The Legacy Generator could not generate cards for '{topic_id}'. Please check inputs."
+
         return response_content
 
     except Exception as e:
-        logger.error(f"Card generation error: {e}")
-        return f"I encountered an error generating cards: {str(e)}. Please try again with a different request."
+        logger.error(f"Legacy generation error: {e}", exc_info=True)
+        return f"I encountered an error generating cards: {str(e)}. Please try again."
 
 @router.post("/chat", response_model=ChatMessage)
 async def send_message(message: ChatMessage, request: Request):
@@ -771,24 +735,31 @@ async def send_message(message: ChatMessage, request: Request):
             
             # Match profile
             child_profile = None
-            profiles = load_json_file(PROFILES_FILE, [])
-            for mention in message.mentions:
-                for profile in profiles:
-                    profile_id_raw = (profile.get("id") or "").lower()
-                    profile_name_slug = normalize_to_slug(profile.get("name", ""))
-                    mention_lower = mention.lower()
-                    mention_slug = normalize_to_slug(mention)
-                    
-                    if (profile_id_raw and profile_id_raw == mention_lower or
-                        profile.get("name") == mention or
-                        profile_name_slug and profile_name_slug == mention_slug or
-                        (profile_id_raw and profile_id_raw.endswith(mention_lower)) or
-                        (profile_id_raw and mention_lower.endswith(profile_id_raw)) or
-                        (profile_name_slug and mention_slug.endswith(profile_name_slug))):
-                        child_profile = profile
-                        break
-                if child_profile:
-                    break
+            
+            # LOAD FROM DB INSTEAD OF JSON
+            from backend.database.db import SessionLocal
+            from backend.database.services import ProfileService
+            from backend.database.models import Profile
+
+            db = SessionLocal()
+            profiles = [] # Legacy compatibility
+            try:
+                # 1. Try to match specific mention
+                all_profiles = db.query(Profile).all()
+                for mention in message.mentions:
+                    for p in all_profiles:
+                        if p.name.lower() in mention.lower() or mention.lower() in p.name.lower():
+                            child_profile = ProfileService.profile_to_dict(db, p)
+                            break
+                    if child_profile: break
+                
+                # 2. Fallback: If @roster is used but no name matched, use the first profile
+                if not child_profile and "@roster" in message.content:
+                    first = db.query(Profile).first()
+                    if first:
+                        child_profile = ProfileService.profile_to_dict(db, first)
+            finally:
+                db.close()
             
             # Handle intents
             if intent_type == IntentType.CONVERSATION:
@@ -799,9 +770,77 @@ async def send_message(message: ChatMessage, request: Request):
                     chat_history=history[-5:]
                 )
             elif intent_type == IntentType.CARD_GENERATION:
-                response_content = await _handle_card_generation(
-                    message, context_tags, child_profile, generator, profiles
-                )
+                # UNIFIED ROUTE: All card generation goes through AgentService
+                # AgentService dynamically handles templates vs. constitution-based generation
+                logger.info("🔀 Unified Route: Routing to AgentService")
+                
+                # Import internally to avoid circular imports
+                from backend.app.services.agent_service import AgentService
+                from backend.database.db import SessionLocal
+                
+                # Extract parameters from context_tags and message
+                # 1. Extract Template ID
+                template_id = None
+                for tag in context_tags:
+                    if tag.get("type") == "template":
+                        template_id = tag.get("value")
+                        break
+                
+                # 2. Extract Quantity
+                quantity = 3  # Default
+                for tag in context_tags:
+                    if tag.get("type") == "quantity":
+                        try:
+                            quantity = int(tag.get("value"))
+                        except (ValueError, TypeError):
+                            pass
+                
+                # 3. Extract Topic
+                extracted_topic = None
+                # Check for @word: syntax
+                word_match = re.search(r"@word:([\w\-\s]+)", message.content)
+                if word_match:
+                    extracted_topic = word_match.group(1).strip()
+                # Check for quotes
+                if not extracted_topic:
+                    quote_match = re.search(r"['\"](.*?)['\"]", message.content)
+                    if quote_match:
+                        extracted_topic = quote_match.group(1).strip()
+                # Fallback: Clean message
+                if not extracted_topic:
+                    clean_msg = re.sub(r"(teach|explain|create cards for)\s+(the word|the concept of)?\s*", "", message.content, flags=re.IGNORECASE)
+                    extracted_topic = clean_msg.strip()
+                
+                # 4. Resolve Roster ID
+                roster_id = "Unknown_Student"
+                if child_profile:
+                    roster_id = child_profile.get("id") or child_profile.get("name")
+                
+                # 5. Call AgentService (handles templates dynamically)
+                db = SessionLocal()
+                try:
+                    cards = AgentService.generate_cards(
+                        topic_id=extracted_topic,
+                        roster_id=roster_id,
+                        template_id=template_id,  # Pass template_id, AgentService loads content dynamically
+                        user_instruction=message.content,
+                        quantity=quantity,
+                        db=db,
+                        api_key=api_key
+                    )
+                    
+                    # Format Response
+                    count = len(cards)
+                    if count > 0:
+                        template_info = f" using template '{template_id}'" if template_id else ""
+                        response_content = f"✅ Generated {count} cards for '{extracted_topic}'{template_info}.\n👉 Check 'Card Review' tab."
+                    else:
+                        response_content = "⚠️ Agent could not generate cards. Please try being more specific."
+                except Exception as e:
+                    logger.error(f"Agent Error: {e}", exc_info=True)
+                    response_content = f"Error: {str(e)}"
+                finally:
+                    db.close()
             else:
                 response_content = conversation_handler.handle_conversation(
                     message=message.content,

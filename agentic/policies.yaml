@@ -1,0 +1,36 @@
+# 0. Abstract Concept Workflow (Highest Priority)
+- name: "abstract_concept_workflow"
+  priority: 80
+  # Logic: If flagged as abstract OR specifically requested
+  condition: "state.is_abstract is True"
+  action: "run_workflow"
+  params:
+    type: "producer_critic"
+    generate_count: 10
+    select_count: 3
+
+# 1. Frustration Bailout (High Priority)
+- name: "frustration_bailout"
+  priority: 100
+  condition: "state.frustration > 0.7"
+  action: "switch_topic"
+  params:
+    target: "interests"
+    message: "I sense some frustration. Let's take a break and look at something fun!"
+
+# 2. Scaffolding Intervention (Medium Priority)
+- name: "scaffolding_intervention"
+  priority: 50
+  condition: "state.consecutive_errors >= 2"
+  action: "adjust_difficulty"
+  params:
+    mode: "scaffolded"
+    message: "Let's try an easier one."
+
+# 3. Flow State (Default)
+- name: "continue_flow"
+  priority: 10
+  condition: "default"
+  action: "continue_curriculum"
+  params:
+    difficulty: "adaptive"
