@@ -475,12 +475,14 @@ async def get_chat_history():
     return history
 
 async def _handle_card_generation(message: ChatMessage, context_tags: List[Dict[str, Any]], 
-                                child_profile: Dict[str, Any], generator,
-                                profiles: List[Dict[str, Any]]) -> str:
-    """Handle card generation requests via Legacy ContentGenerator (Template Support)."""
+                                child_profile: Dict[str, Any], profiles: List[Dict[str, Any]],
+                                api_key: Optional[str], provider: str, model: Optional[str], 
+                                base_url: Optional[str]) -> str:
+    """Handle card generation requests via AgentService (replaces Legacy ContentGenerator)."""
     try:
+        from backend.app.services.agent_service import AgentService
         from backend.database.db import SessionLocal
-        from backend.database.services import CardService, ProfileService
+        from backend.database.services import ProfileService
         from backend.database.models import Profile
         
         # 1. Extract parameters
@@ -504,44 +506,21 @@ async def _handle_card_generation(message: ChatMessage, context_tags: List[Dict[
             clean_msg = re.sub(r"(teach|explain|create cards for)\s+(the word|the concept of)?\s*", "", user_message, flags=re.IGNORECASE)
             extracted_topic = clean_msg.strip()
             
-        print(f"🎯 Extracted Topic: '{extracted_topic}'")
+        logger.info(f"🎯 Extracted Topic: '{extracted_topic}'")
         topic_id = extracted_topic
-        
-        # --- NEW LOGIC: Ensure Profile & Roster are Loaded from DB ---
-        has_roster_mention = any(tag.get("type") == "roster" or tag.get("value") == "roster" for tag in context_tags)
 
         # 1. Try to get profile from DB if not passed in
         if not child_profile:
             db = SessionLocal()
             try:
-                # Get the first profile or specific one if we could parse an ID
-                # For now, default to the first available profile in DB (Active User)
                 db_profile = db.query(Profile).first()
                 if db_profile:
-                    # Convert DB model to Dict to match expected format
                     child_profile = ProfileService.profile_to_dict(db, db_profile)
                     logger.info(f"👤 Loaded Profile from DB: {child_profile.get('name')}")
             except Exception as e:
                 logger.error(f"DB Profile Fetch Error: {e}")
             finally:
                 db.close()
-
-        # 2. Inject Roster
-        if child_profile and child_profile.get("character_roster"):
-            characters = child_profile["character_roster"]
-            # Handle list or string format
-            if isinstance(characters, list):
-                characters_str = ", ".join(characters)
-            else:
-                characters_str = str(characters)
-                
-            context_tags.append({
-                "type": "character_list",
-                "value": characters_str
-            })
-            logger.info(f"✅ Injected Roster: {characters_str}")
-        else:
-            logger.warning("⚠️ Profile found but has empty character_roster!")
 
         # Roster/Profile
         roster_id = "Unknown_Student"
@@ -555,113 +534,50 @@ async def _handle_card_generation(message: ChatMessage, context_tags: List[Dict[
                 template_id = tag.get("value")
                 break
         
-        # Load template text if ID is present
-        template_text = None
-        if template_id:
-            templates = load_json_file(PROMPT_TEMPLATES_FILE, [])
-            for t in templates:
-                if t.get("id") == template_id:
-                    template_text = t.get("template_text")
-                    break
-            logger.info(f"📄 Loaded Template: {template_id} -> {len(template_text) if template_text else 0} chars")
-        
         # Quantity
-        quantity = None
+        quantity = 3  # Default
         for tag in context_tags:
             if tag.get("type") == "quantity":
                 try:
                     quantity = int(tag.get("value"))
-                except:
+                except (ValueError, TypeError):
                     pass
         
-        logger.info(f"🤖 Delegate to Legacy ContentGenerator: Topic='{topic_id}', Template='{template_id}'")
+        logger.info(f"🤖 Delegate to AgentService: Topic='{topic_id}', Template='{template_id}', Provider='{provider}'")
 
-        # 2. Call ContentGenerator in executor
-        def run_legacy_generator():
-            return generator.generate_from_prompt(
-                user_prompt=message.content,
-                context_tags=context_tags,
-                child_profile=child_profile,
-                prompt_template=template_text,
-                quantity=quantity
-            )
-
-        loop = asyncio.get_event_loop()
-        generated_cards = await loop.run_in_executor(None, run_legacy_generator)
-        
-        # 3. Save cards to DB
+        # 2. Call AgentService
         db = SessionLocal()
-        saved_cards = []
         try:
-            # SAFETY: Ensure profile_id exists in DB
-            from backend.database.models import Profile
+            cards = AgentService.generate_cards(
+                topic_id=topic_id,
+                roster_id=roster_id,
+                template_id=template_id,
+                user_instruction=message.content,
+                quantity=quantity,
+                db=db,
+                api_key=api_key,
+                provider=provider,
+                model_name=model,
+                base_url=base_url
+            )
             
-            safe_profile_id = roster_id
-            # Check if roster_id exists
-            profile_exists = db.query(Profile).filter(Profile.id == safe_profile_id).first()
-            if not profile_exists:
-                # Try by name
-                profile_exists = db.query(Profile).filter(Profile.name == safe_profile_id).first()
-                
-            if profile_exists:
-                safe_profile_id = profile_exists.id
+            # 3. Create response
+            card_count = len(cards)
+            if card_count > 0:
+                template_info = f" using template '{template_id}'" if template_id else ""
+                response_content = f"✅ Generated {card_count} cards for '{topic_id}'{template_info}.\n👉 Check 'Card Review' tab."
             else:
-                # Fallback: First profile or create default
-                first_profile = db.query(Profile).first()
-                if first_profile:
-                    safe_profile_id = first_profile.id
-                    logger.warning(f"⚠️ Profile '{roster_id}' not found in DB. Fallback to '{first_profile.name}' ({safe_profile_id})")
-                else:
-                    # Create default if absolutely no profiles
-                    logger.warning(f"⚠️ No profiles found. Creating Default Student.")
-                    default_profile = Profile(id="default", name="Default Student", interests="[]")
-                    db.add(default_profile)
-                    db.commit()
-                    safe_profile_id = default_profile.id
-            
-            for card in generated_cards:
-                # Map ContentGenerator output to DB schema
-                content = card.copy()
-                # Ensure generic fields are present
-                if "note_type" not in content:
-                    content["note_type"] = "CUMA - Basic" # Fallback
-                
-                db_card = CardService.create(
-                    db=db, 
-                    profile_id=safe_profile_id, 
-                    card_type=content.get("card_type", "basic"), 
-                    content=content, 
-                    status="pending"
-                )
-                content["id"] = str(db_card.id)
-                saved_cards.append(content)
-                logger.info(f"💾 Legacy Saved Card #{db_card.id}")
+                response_content = f"⚠️ Agent could not generate cards for '{topic_id}'. Please try being more specific."
+        except Exception as e:
+            logger.error(f"Agent Error: {e}", exc_info=True)
+            response_content = f"Error generating cards: {str(e)}"
         finally:
             db.close()
-
-        # 4. Create response
-        card_count = len(saved_cards)
-        if card_count > 0:
-            response_content = f"✅ Legacy Generator produced {card_count} cards for '{topic_id}' using template '{template_id or 'Default'}'.\n\n"
-            
-            # Count types
-            types = {}
-            for c in saved_cards:
-                ctype = c.get("note_type", c.get("card_type", "Basic"))
-                types[ctype] = types.get(ctype, 0) + 1
-            
-            details = [f"{count} {ctype}" for ctype, count in types.items()]
-            if details:
-                response_content += f"📝 Included: {', '.join(details)}\n\n"
-                
-            response_content += "👉 Check the 'Card Review' tab to approve them."
-        else:
-            response_content = f"⚠️ The Legacy Generator could not generate cards for '{topic_id}'. Please check inputs."
 
         return response_content
 
     except Exception as e:
-        logger.error(f"Legacy generation error: {e}", exc_info=True)
+        logger.error(f"Card generation error: {e}", exc_info=True)
         return f"I encountered an error generating cards: {str(e)}. Please try again."
 
 @router.post("/chat", response_model=ChatMessage)
@@ -669,7 +585,7 @@ async def send_message(message: ChatMessage, request: Request):
     try:
         import sys
         
-        # 1. Capture Credentials
+        # 1. Capture Credentials & Config from Headers
         api_key = request.headers.get("X-LLM-Key")
         if not api_key:
             auth = request.headers.get("Authorization")
@@ -679,29 +595,12 @@ async def send_message(message: ChatMessage, request: Request):
                 api_key = message.config.get("apiKey") if message.config else None
         
         base_url = request.headers.get("X-LLM-Base-URL")
-        provider = request.headers.get("X-LLM-Provider", "deepseek").lower()
+        provider = request.headers.get("X-LLM-Provider", "google").lower()  # Changed default to google
+        model = request.headers.get("X-LLM-Model")
         
-        if not base_url and provider == "deepseek":
-            base_url = "https://api.siliconflow.cn/v1"
-        
-        # 2. Set Env Vars
-        if api_key:
-            os.environ["DEEPSEEK_API_KEY"] = api_key
-            os.environ["OPENAI_API_KEY"] = api_key
-            if base_url:
-                os.environ["DEEPSEEK_API_BASE"] = base_url
-                os.environ["OPENAI_BASE_URL"] = base_url
-            
-            if provider == "deepseek" or (base_url and "siliconflow" in base_url):
-                if "GEMINI_API_KEY" in os.environ:
-                    del os.environ["GEMINI_API_KEY"]
-                
-                import importlib
-                import agent.content_generator
-                import agent.conversation_handler
-                importlib.reload(agent.content_generator)
-                importlib.reload(agent.conversation_handler)
-                logger.info("Modules reloaded to force DeepSeek configuration")
+        # Normalize provider names: "gemini" -> "google"
+        if provider == "gemini":
+            provider = "google"
         
         # Save user message
         history = load_json_file(CHAT_HISTORY_FILE, [])
@@ -723,7 +622,6 @@ async def send_message(message: ChatMessage, request: Request):
             
             intent_detector = IntentDetector()
             conversation_handler = ConversationHandler(card_model=card_model, image_model=image_model)
-            generator = ContentGenerator(card_model=card_model)
             
             context_tags = parse_context_tags(message.content, message.mentions)
             
@@ -774,73 +672,11 @@ async def send_message(message: ChatMessage, request: Request):
                 # AgentService dynamically handles templates vs. constitution-based generation
                 logger.info("🔀 Unified Route: Routing to AgentService")
                 
-                # Import internally to avoid circular imports
-                from backend.app.services.agent_service import AgentService
-                from backend.database.db import SessionLocal
-                
-                # Extract parameters from context_tags and message
-                # 1. Extract Template ID
-                template_id = None
-                for tag in context_tags:
-                    if tag.get("type") == "template":
-                        template_id = tag.get("value")
-                        break
-                
-                # 2. Extract Quantity
-                quantity = 3  # Default
-                for tag in context_tags:
-                    if tag.get("type") == "quantity":
-                        try:
-                            quantity = int(tag.get("value"))
-                        except (ValueError, TypeError):
-                            pass
-                
-                # 3. Extract Topic
-                extracted_topic = None
-                # Check for @word: syntax
-                word_match = re.search(r"@word:([\w\-\s]+)", message.content)
-                if word_match:
-                    extracted_topic = word_match.group(1).strip()
-                # Check for quotes
-                if not extracted_topic:
-                    quote_match = re.search(r"['\"](.*?)['\"]", message.content)
-                    if quote_match:
-                        extracted_topic = quote_match.group(1).strip()
-                # Fallback: Clean message
-                if not extracted_topic:
-                    clean_msg = re.sub(r"(teach|explain|create cards for)\s+(the word|the concept of)?\s*", "", message.content, flags=re.IGNORECASE)
-                    extracted_topic = clean_msg.strip()
-                
-                # 4. Resolve Roster ID
-                roster_id = "Unknown_Student"
-                if child_profile:
-                    roster_id = child_profile.get("id") or child_profile.get("name")
-                
-                # 5. Call AgentService (handles templates dynamically)
-                db = SessionLocal()
-                try:
-                    cards = AgentService.generate_cards(
-                        topic_id=extracted_topic,
-                        roster_id=roster_id,
-                        template_id=template_id,  # Pass template_id, AgentService loads content dynamically
-                        user_instruction=message.content,
-                        quantity=quantity,
-                        db=db,
-                        api_key=api_key
-                    )
-                    
-                    # Format Response
-                    count = len(cards)
-                    if count > 0:
-                        template_info = f" using template '{template_id}'" if template_id else ""
-                        response_content = f"✅ Generated {count} cards for '{extracted_topic}'{template_info}.\n👉 Check 'Card Review' tab."
-                    else:
-                        response_content = "⚠️ Agent could not generate cards. Please try being more specific."
-                except Exception as e:
-                    logger.error(f"Agent Error: {e}", exc_info=True)
-                    response_content = f"Error: {str(e)}"
-                finally:
-                    db.close()
+                # PASS CONFIG TO HANDLER
+                response_content = await _handle_card_generation(
+                    message, context_tags, child_profile, profiles,
+                    api_key, provider, model, base_url  # Pass config from headers
+                )
             else:
                 response_content = conversation_handler.handle_conversation(
                     message=message.content,
@@ -883,22 +719,29 @@ class AgentGenerateRequest(BaseModel):
 @router.post("/agent/generate")
 async def agent_generate(request: AgentGenerateRequest, req: Request, db: Session = Depends(get_db)):
     """
-    Generate cards using the AgentService (Grammar-Aware).
+    Generate cards with DYNAMIC PROVIDER support.
     Used by TopicChat component for grammar card generation.
     """
     try:
         from backend.app.services.agent_service import AgentService
         
-        logger.info(f"🛸 Agent Request: {request.topic_id} | Template: {request.template_id}")
-        # 1. Credentials (Get API Key from Headers)
-        api_key = req.headers.get("X-LLM-Key")
+        # 1. Extract Headers (Support both X-Llm-* and X-LLM-* for compatibility)
+        api_key = req.headers.get("X-Llm-Key") or req.headers.get("X-LLM-Key")
+        raw_provider = (req.headers.get("X-Llm-Provider") or req.headers.get("X-LLM-Provider") or "google").lower()
+        # Normalize provider names: "gemini" -> "google"
+        provider = "google" if raw_provider == "gemini" else raw_provider
+        model = req.headers.get("X-Llm-Model") or req.headers.get("X-LLM-Model")
+        base_url = req.headers.get("X-Llm-Base-Url") or req.headers.get("X-LLM-Base-URL")
+        
+        # Fallback for Bearer Token
         if not api_key:
             auth = req.headers.get("Authorization")
             if auth and auth.startswith("Bearer "):
                 api_key = auth.split(" ")[1]
-        
-        # 2. Call the SMART AgentService
-        # This service automatically detects if it's Grammar vs Vocab and selects the right prompt.
+
+        logger.info(f"🛸 Agent Request: {request.topic_id} | Provider: {provider} | Model: {model} | Template: {request.template_id}")
+
+        # 2. Call Service with Explicit Config
         generated_cards = AgentService.generate_cards(
             topic_id=request.topic_id,
             roster_id=request.roster_id,
@@ -906,7 +749,11 @@ async def agent_generate(request: AgentGenerateRequest, req: Request, db: Sessio
             user_instruction=request.chat_instruction,
             quantity=5, # Default to 5 cards
             db=db,
-            api_key=api_key
+            # Pass config explicitly
+            api_key=api_key,
+            provider=provider,
+            model_name=model,
+            base_url=base_url
         )
         
         # 3. Create Response & Save History

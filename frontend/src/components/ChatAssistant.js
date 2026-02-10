@@ -416,18 +416,49 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
     setIsLoading(true);
 
     try {
-      // Send message to backend
-      const llmProvider = localStorage.getItem('llm_provider') || 'gemini';
-      const llmKey = localStorage.getItem('llm_key') || '';
-      const llmBaseUrl = localStorage.getItem('llm_base_url') || '';
+      // 1. Retrieve the FULL model object from available models
+      // (Do NOT just use the ID string; we need the provider and key)
+      // The dropdown is the absolute authority - no fallback to localStorage
+      if (!selectedCardModel) {
+        console.error("❌ No model selected in Main Chat!");
+        setMessages(prev => [...prev, {
+          id: Date.now().toString(),
+          content: 'Error: No AI model selected. Please select a model from the settings (⚙️ Models button).',
+          role: 'assistant',
+          timestamp: new Date().toISOString(),
+          mentions: []
+        }]);
+        return;
+      }
 
-      // Prepare headers with LLM configuration
+      const activeModel = availableModels.card_models.find(m => m.id === selectedCardModel);
+
+      if (!activeModel) {
+        console.error("❌ Selected model not found in available models:", selectedCardModel);
+        setMessages(prev => [...prev, {
+          id: Date.now().toString(),
+          content: `Error: Selected model "${selectedCardModel}" not found. Please select a valid model from the settings.`,
+          role: 'assistant',
+          timestamp: new Date().toISOString(),
+          mentions: []
+        }]);
+        return;
+      }
+
+      // 2. Normalize Provider Name (Frontend 'gemini' -> Backend 'google')
+      const provider = activeModel.provider === 'gemini' ? 'google' : activeModel.provider;
+
+      // 3. Construct Dynamic Headers (Source of Truth = Dropdown)
       const headers = {
-        'X-LLM-Provider': llmProvider,
-        'X-LLM-Key': llmKey,
-        'X-LLM-Base-URL': llmBaseUrl
+        'X-LLM-Provider': provider,
+        'X-LLM-Model': activeModel.id,
+        'X-LLM-Base-URL': activeModel.base_url || '',
+        'X-LLM-Key': activeModel.api_key || ''
       };
 
+      console.log("🚀 Main Chat Sending:", headers);
+
+      // 4. Send Request
       const response = await axios.post(`${API_BASE}/chat`, userMessage, { headers });
       const assistantMessage = response.data;
       

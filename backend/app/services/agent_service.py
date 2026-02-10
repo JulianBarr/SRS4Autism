@@ -2,6 +2,8 @@ import json
 import os
 import logging
 import re
+import time
+import random
 from typing import List, Dict, Any, Optional
 from sqlalchemy.orm import Session
 from dotenv import load_dotenv, find_dotenv
@@ -70,30 +72,26 @@ class AgentService:
         return "Unknown (Assume Concrete)"
 
     @staticmethod
-    def _get_valid_api_key(passed_key: Optional[str]) -> Optional[str]:
+    def _get_valid_api_key(passed_key: Optional[str], provider: str) -> Optional[str]:
         """
-        Resolves API Key with SERVER PRIORITY.
+        Resolves API Key with SERVER PRIORITY, provider-aware.
         Always prefers the robust local .env key over potentially stale frontend headers.
         """
-        # 1. PRIORITY: Server Environment Key (The "Source of Truth")
-        load_dotenv(find_dotenv()) # Ensure latest env is loaded
-        env_key = os.getenv("GEMINI_API_KEY")
-        
-        if env_key:
-            # print("🔑 Using Server Environment Key (Priority)") # Uncomment for debug
-            return env_key
-
-        # 2. FALLBACK: Frontend Passed Key
+        # 1. Sanitize passed key
         if passed_key:
-            clean_key = passed_key.strip()
-            # Basic sanity checks
-            if (len(clean_key) > 20 and 
-                "null" not in clean_key.lower() and 
-                "undefined" not in clean_key.lower()):
-                print("⚠️ Server Key missing. Falling back to Frontend Key.")
-                return clean_key
-            
-        print("❌ No valid API Key found in Environment or Headers.")
+            clean = passed_key.strip()
+            if len(clean) > 10 and "null" not in clean.lower() and "undefined" not in clean.lower():
+                return clean
+        
+        # 2. Env Fallback (provider-specific)
+        load_dotenv(find_dotenv())
+        if provider == "google":
+            return os.getenv("GEMINI_API_KEY")
+        if provider == "openai":
+            return os.getenv("OPENAI_API_KEY")
+        if provider == "deepseek":
+            return os.getenv("DEEPSEEK_API_KEY")
+        
         return None
 
     @staticmethod
@@ -201,33 +199,72 @@ You must adhere to these rules above all else:
         return prompt + "\n" + technical_specs
 
     @staticmethod
-    def _call_llm(system_prompt: str, passed_key: Optional[str] = None) -> str:
-        # 1. Validate/Sanitize Key
-        api_key = AgentService._get_valid_api_key(passed_key)
-        
+    def _call_llm(system_prompt: str, api_key: str, provider: str, model_name: Optional[str] = None, base_url: Optional[str] = None) -> str:
+        """
+        Call LLM with dynamic provider support and retry logic.
+        """
         if not api_key:
-            print("⚠️ No valid API Key. Returning Mock.")
+            logger.warning("⚠️ No valid API Key. Returning Mock.")
             return AgentService._get_mock_response()
-
-        try:
-            if os.getenv("GEMINI_API_KEY") or (api_key and not api_key.startswith("sk-")):
-                import google.generativeai as genai
-                genai.configure(api_key=api_key)
-                model = genai.GenerativeModel("models/gemini-2.0-flash") # Use Flash for speed
-                response = model.generate_content(system_prompt)
-                return response.text
+        
+        # Default Models
+        if not model_name:
+            if provider == "google":
+                model_name = "gemini-2.0-flash"
+            elif provider == "deepseek":
+                model_name = "deepseek-chat"
+            elif provider == "openai":
+                model_name = "gpt-4o-mini"
             else:
-                from openai import OpenAI
-                base_url = os.getenv("DEEPSEEK_API_BASE") or os.getenv("OPENAI_BASE_URL")
-                client = OpenAI(api_key=api_key, base_url=base_url)
-                response = client.chat.completions.create(
-                    model=os.getenv("LLM_MODEL", "gpt-3.5-turbo"),
-                    messages=[{"role": "user", "content": system_prompt}]
-                )
-                return response.choices[0].message.content
-        except Exception as e:
-            logger.error(f"LLM Error: {e}")
-            return "[]"
+                model_name = "gemini-2.0-flash"  # Ultimate fallback
+        
+        max_retries = 3
+        attempt = 0
+        
+        while attempt <= max_retries:
+            try:
+                if provider == "google":
+                    import google.generativeai as genai
+                    genai.configure(api_key=api_key)
+                    # Ensure model name has 'models/' prefix if not present
+                    if not model_name.startswith("models/"):
+                        model_name = f"models/{model_name}"
+                    model = genai.GenerativeModel(model_name)
+                    response = model.generate_content(system_prompt)
+                    return response.text
+                else:
+                    # OpenAI-compatible API (DeepSeek, OpenAI, etc.)
+                    from openai import OpenAI
+                    
+                    # Set default base_url if not provided
+                    if not base_url:
+                        if provider == "deepseek":
+                            base_url = "https://api.deepseek.com"
+                        elif provider == "openai":
+                            base_url = "https://api.openai.com/v1"
+                    
+                    client = OpenAI(api_key=api_key, base_url=base_url)
+                    response = client.chat.completions.create(
+                        model=model_name,
+                        messages=[{"role": "user", "content": system_prompt}]
+                    )
+                    return response.choices[0].message.content
+                    
+            except Exception as e:
+                error_str = str(e).lower()
+                # Retry on rate limit errors
+                if "429" in str(e) or "quota" in error_str or "rate limit" in error_str:
+                    wait_time = 2 ** attempt  # Exponential backoff
+                    logger.warning(f"⚠️ Rate limit error (attempt {attempt + 1}/{max_retries + 1}). Waiting {wait_time}s...")
+                    time.sleep(wait_time)
+                    attempt += 1
+                    continue
+                else:
+                    logger.error(f"❌ LLM Error ({provider}/{model_name}): {e}")
+                    return "[]"
+        
+        logger.error(f"❌ Max retries exceeded for {provider}/{model_name}")
+        return "[]"
 
     @staticmethod
     def _get_mock_response() -> str:
@@ -243,7 +280,7 @@ You must adhere to these rules above all else:
         return p.id if p is not None else None
 
     @staticmethod
-    def generate_cards(topic_id: str, roster_id: str, template_id: str, user_instruction: str, quantity: int, db: Session, api_key: Optional[str] = None) -> List[Dict[str, Any]]:
+    def generate_cards(topic_id: str, roster_id: str, template_id: str, user_instruction: str, quantity: int, db: Session, api_key: Optional[str] = None, provider: str = "google", model_name: Optional[str] = None, base_url: Optional[str] = None) -> List[Dict[str, Any]]:
         print(f"🚀 Generating: '{topic_id}' | Template: '{template_id}' | Qty: {quantity}")
 
         # 1. Resolve Data
@@ -291,8 +328,10 @@ You must adhere to these rules above all else:
                 user_instruction=user_instruction
             )
 
-        # 3. Execution
-        response_text = AgentService._call_llm(system_prompt, api_key)
+        # 3. Execution (with dynamic provider support)
+        # Resolve API key with provider awareness
+        resolved_api_key = AgentService._get_valid_api_key(api_key, provider)
+        response_text = AgentService._call_llm(system_prompt, resolved_api_key, provider, model_name, base_url)
 
         # 4. Parse & Save
         saved_cards = []

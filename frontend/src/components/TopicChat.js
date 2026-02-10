@@ -10,6 +10,8 @@ const TopicChat = ({ topicId, topicName, profile, onClose }) => {
   const [userInput, setUserInput] = useState('');
   const [templates, setTemplates] = useState([]);
   const [selectedTemplateId, setSelectedTemplateId] = useState(null);
+  const [availableModels, setAvailableModels] = useState({ card_models: [] });
+  const [selectedCardModel, setSelectedCardModel] = useState(null);
   const messagesEndRef = useRef(null);
   const messagesContainerRef = useRef(null);
 
@@ -38,6 +40,33 @@ const TopicChat = ({ topicId, topicName, profile, onClose }) => {
     };
 
     loadTemplates();
+  }, []);
+
+  // Load available models on mount and sync selected model state
+  useEffect(() => {
+    const loadAvailableModels = async () => {
+      try {
+        const response = await axios.get(`${API_BASE}/config/models`);
+        const modelsData = response.data || { card_models: [] };
+        setAvailableModels(modelsData);
+        
+        // Load saved selection from localStorage and sync with state
+        const savedCardModel = localStorage.getItem('selectedCardModel');
+        if (savedCardModel && modelsData.card_models?.find(m => m.id === savedCardModel)) {
+          setSelectedCardModel(savedCardModel);
+        } else if (modelsData.card_models?.length > 0 && !selectedCardModel) {
+          // Set default to first model if no saved selection
+          const defaultModel = modelsData.card_models[0].id;
+          setSelectedCardModel(defaultModel);
+          localStorage.setItem('selectedCardModel', defaultModel);
+        }
+      } catch (error) {
+        console.error('Error loading available models:', error);
+        setAvailableModels({ card_models: [] });
+      }
+    };
+
+    loadAvailableModels();
   }, []);
 
   // Load chat history on mount
@@ -92,12 +121,68 @@ const TopicChat = ({ topicId, topicName, profile, onClose }) => {
     setMessages(prev => [...prev, newUserMessage]);
 
     try {
+      // 1. DEFINITIVE SOURCE OF TRUTH: The Local Dropdown State
+      // (Do not fall back to globalConfig unless this is null)
+      if (!selectedCardModel) {
+        console.error("❌ No model selected in dropdown!");
+        setMessages(prev => [...prev, {
+          id: Date.now().toString(),
+          role: 'assistant',
+          content: 'Error: Please select a model from the dropdown first.',
+          timestamp: new Date().toISOString()
+        }]);
+        setSending(false);
+        return;
+      }
+
+      // 2. Get the ACTIVE model object from LIVE STATE
+      const activeModel = availableModels.card_models?.find(m => m.id === selectedCardModel);
+      
+      // CRITICAL: Do NOT proceed if model is not found
+      if (!activeModel) {
+        console.error(`❌ Cannot find model. Selected: "${selectedCardModel}", Available: ${availableModels.card_models?.length || 0}`);
+        setMessages(prev => [...prev, {
+          id: Date.now().toString(),
+          role: 'assistant',
+          content: `Error: Selected model "${selectedCardModel}" not found. Please select a valid model.`,
+          timestamp: new Date().toISOString()
+        }]);
+        setSending(false);
+        return;
+      }
+      
+      // 3. Normalize provider: "gemini" -> "google" (as backend expects)
+      let provider = activeModel.provider;
+      if (provider === 'gemini') {
+        provider = 'google';
+      }
+      
+      // 4. Construct Headers from LOCAL state ONLY
+      // CRITICAL: Use properties directly from activeModel - NO fallback to global settings
+      const headers = {
+        'Content-Type': 'application/json',
+        'X-Llm-Provider': provider,       // MUST be from activeModel.provider
+        'X-Llm-Model': activeModel.id,    // MUST be from activeModel.id
+        'X-Llm-Base-Url': activeModel.baseUrl || activeModel.base_url || '',
+        'X-Llm-Key': activeModel.apiKey || activeModel.api_key || ''
+      };
+      
+      console.log("🚀 Using Local Selection:", {
+        id: activeModel.id,
+        name: activeModel.name,
+        provider: headers['X-Llm-Provider'],
+        model: headers['X-Llm-Model'],
+        hasKey: !!headers['X-Llm-Key'],
+        hasBaseUrl: !!headers['X-Llm-Base-Url']
+      });
+      
+      // 5. Make Request with LOCAL headers
       const response = await axios.post(`${API_BASE}/agent/generate`, {
         topic_id: topicId,
         roster_id: rosterId,
         template_id: selectedTemplateId,
         chat_instruction: chatInstruction
-      });
+      }, { headers });
 
       // Add assistant response
       const assistantMessage = {
@@ -177,32 +262,66 @@ const TopicChat = ({ topicId, topicName, profile, onClose }) => {
         borderBottom: '1px solid #e0e0e0',
         backgroundColor: '#f8f9fa'
       }}>
-        <div>
-          <label style={{ display: 'block', fontSize: '12px', fontWeight: 'bold', marginBottom: '4px' }}>
-            Template:
-          </label>
-          <select
-            value={selectedTemplateId || ''}
-            onChange={(e) => setSelectedTemplateId(e.target.value)}
-            style={{
-              width: '100%',
-              padding: '8px',
-              border: '1px solid #ddd',
-              borderRadius: '4px',
-              fontSize: '14px'
-            }}
-            disabled={templates.length === 0}
-          >
-            {templates.length === 0 ? (
-              <option value="">Loading templates...</option>
-            ) : (
-              templates.map(template => (
-                <option key={template.id} value={template.id}>
-                  {template.name} {template.description ? `- ${template.description}` : ''}
-                </option>
-              ))
-            )}
-          </select>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+          <div>
+            <label style={{ display: 'block', fontSize: '12px', fontWeight: 'bold', marginBottom: '4px' }}>
+              Template:
+            </label>
+            <select
+              value={selectedTemplateId || ''}
+              onChange={(e) => setSelectedTemplateId(e.target.value)}
+              style={{
+                width: '100%',
+                padding: '8px',
+                border: '1px solid #ddd',
+                borderRadius: '4px',
+                fontSize: '14px'
+              }}
+              disabled={templates.length === 0}
+            >
+              {templates.length === 0 ? (
+                <option value="">Loading templates...</option>
+              ) : (
+                templates.map(template => (
+                  <option key={template.id} value={template.id}>
+                    {template.name} {template.description ? `- ${template.description}` : ''}
+                  </option>
+                ))
+              )}
+            </select>
+          </div>
+          <div>
+            <label style={{ display: 'block', fontSize: '12px', fontWeight: 'bold', marginBottom: '4px' }}>
+              AI Model:
+            </label>
+            <select
+              value={selectedCardModel || ''}
+              onChange={(e) => {
+                const newModel = e.target.value;
+                setSelectedCardModel(newModel);
+                localStorage.setItem('selectedCardModel', newModel);
+                console.log('✅ Model changed to:', newModel);
+              }}
+              style={{
+                width: '100%',
+                padding: '8px',
+                border: '1px solid #ddd',
+                borderRadius: '4px',
+                fontSize: '14px'
+              }}
+              disabled={availableModels.card_models.length === 0}
+            >
+              {availableModels.card_models.length === 0 ? (
+                <option value="">Loading models...</option>
+              ) : (
+                availableModels.card_models.map(model => (
+                  <option key={model.id} value={model.id}>
+                    {model.name} ({model.provider})
+                  </option>
+                ))
+              )}
+            </select>
+          </div>
         </div>
       </div>
 
