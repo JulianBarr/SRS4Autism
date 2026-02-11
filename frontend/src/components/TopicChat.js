@@ -114,62 +114,34 @@ const TopicChat = ({ topicId, topicName, profile, onClose }) => {
     setMessages(prev => [...prev, newUserMessage]);
 
     try {
-      // 1. DEFINITIVE SOURCE OF TRUTH: The Local Dropdown State
-      // (Do not fall back to globalConfig unless this is null)
-      if (!selectedCardModel) {
-        console.error("❌ No model selected in dropdown!");
+      // 1. Link the UI selection to the data payload
+      const activeModel = availableModels.card_models?.find(m => m.id === selectedCardModel);
+
+      if (!activeModel) {
         setMessages(prev => [...prev, {
           id: Date.now().toString(),
           role: 'assistant',
-          content: 'Error: Please select a model from the dropdown first.',
+          content: 'No model selected. Please check AI Model Configuration.',
           timestamp: new Date().toISOString()
         }]);
         setSending(false);
         return;
       }
 
-      // 2. Get the ACTIVE model object from LIVE STATE
-      const activeModel = availableModels.card_models?.find(m => m.id === selectedCardModel);
-      
-      // CRITICAL: Do NOT proceed if model is not found
-      if (!activeModel) {
-        console.error(`❌ Cannot find model. Selected: "${selectedCardModel}", Available: ${availableModels.card_models?.length || 0}`);
-        setMessages(prev => [...prev, {
-          id: Date.now().toString(),
-          role: 'assistant',
-          content: `Error: Selected model "${selectedCardModel}" not found. Please select a valid model.`,
-          timestamp: new Date().toISOString()
-        }]);
-        setSending(false);
-        return;
-      }
-      
-      // 3. Normalize provider: "gemini" -> "google" (as backend expects)
-      let provider = activeModel.provider;
-      if (provider === 'gemini') {
-        provider = 'google';
-      }
-      
-      // 4. Construct Headers from LOCAL state ONLY
-      // CRITICAL: Use properties directly from activeModel - NO fallback to global settings
+      // 2. Prepare dynamic headers: use keys from localStorage (SettingsModal), not backend config
+      const activeProvider = activeModel.provider === 'gemini' ? 'google' : activeModel.provider;
+      const storageKey = activeModel.provider; // gemini, deepseek, openai - matches SettingsModal
+      const savedKeys = JSON.parse(localStorage.getItem('llm_keys_map') || '{}') || {};
+      const savedUrls = JSON.parse(localStorage.getItem('llm_urls_map') || '{}') || {};
       const headers = {
         'Content-Type': 'application/json',
-        'X-Llm-Provider': provider,       // MUST be from activeModel.provider
-        'X-Llm-Model': activeModel.id,    // MUST be from activeModel.id
-        'X-Llm-Base-Url': activeModel.baseUrl || activeModel.base_url || '',
-        'X-Llm-Key': activeModel.apiKey || activeModel.api_key || ''
+        'X-Llm-Provider': activeProvider,
+        'X-Llm-Model': activeModel.id,
+        'X-Llm-Key': savedKeys[storageKey] || localStorage.getItem('llm_key') || '',
+        'X-Llm-Base-Url': savedUrls[storageKey] || localStorage.getItem('llm_base_url') || ''
       };
-      
-      console.log("🚀 Using Local Selection:", {
-        id: activeModel.id,
-        name: activeModel.name,
-        provider: headers['X-Llm-Provider'],
-        model: headers['X-Llm-Model'],
-        hasKey: !!headers['X-Llm-Key'],
-        hasBaseUrl: !!headers['X-Llm-Base-Url']
-      });
-      
-      // 5. Make Request with LOCAL headers
+
+      // 3. Send the request
       const response = await axios.post(`${API_BASE}/agent/generate`, {
         topic_id: topicId,
         roster_id: rosterId,

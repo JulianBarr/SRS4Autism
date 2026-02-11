@@ -447,13 +447,16 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
 
       // 2. Normalize Provider Name (Frontend 'gemini' -> Backend 'google')
       const provider = activeModel.provider === 'gemini' ? 'google' : activeModel.provider;
+      const storageKey = activeModel.provider; // gemini, deepseek, openai - matches SettingsModal
 
-      // 3. Construct Dynamic Headers (Source of Truth = Dropdown)
+      // 3. Construct Dynamic Headers: use keys from localStorage (SettingsModal), not backend config
+      const savedKeys = JSON.parse(localStorage.getItem('llm_keys_map') || '{}') || {};
+      const savedUrls = JSON.parse(localStorage.getItem('llm_urls_map') || '{}') || {};
       const headers = {
         'X-LLM-Provider': provider,
         'X-LLM-Model': activeModel.id,
-        'X-LLM-Base-URL': activeModel.base_url || '',
-        'X-LLM-Key': activeModel.api_key || ''
+        'X-LLM-Base-URL': savedUrls[storageKey] || localStorage.getItem('llm_base_url') || '',
+        'X-LLM-Key': savedKeys[storageKey] || localStorage.getItem('llm_key') || ''
       };
 
       console.log("🚀 Main Chat Sending:", headers);

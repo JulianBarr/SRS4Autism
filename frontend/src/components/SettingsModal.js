@@ -1,46 +1,71 @@
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
 
+// Default base URLs for providers (used when no saved value exists)
+const DEFAULT_BASE_URLS = {
+  gemini: '',
+  deepseek: 'https://api.siliconflow.cn/v1',
+  openai: ''
+};
+
 const SettingsModal = ({ isOpen, onClose }) => {
   const { language, t } = useLanguage();
+  const [keys, setKeys] = useState({ gemini: '', deepseek: '', openai: '' });
+  const [baseUrls, setBaseUrls] = useState({ ...DEFAULT_BASE_URLS });
   const [provider, setProvider] = useState('gemini');
-  const [apiKey, setApiKey] = useState('');
-  const [baseUrl, setBaseUrl] = useState('');
 
-  // Load settings from localStorage on mount
   useEffect(() => {
     if (isOpen) {
+      let savedKeys = JSON.parse(localStorage.getItem('llm_keys_map') || '{}') || {};
+      let savedUrls = JSON.parse(localStorage.getItem('llm_urls_map') || '{}') || {};
       const savedProvider = localStorage.getItem('llm_provider') || 'gemini';
-      const savedApiKey = localStorage.getItem('llm_key') || '';
-      const savedBaseUrl = localStorage.getItem('llm_base_url') || '';
-      
+
+      // Migrate legacy single-key format to per-provider map
+      const legacyKey = localStorage.getItem('llm_key');
+      const legacyUrl = localStorage.getItem('llm_base_url');
+      if (Object.keys(savedKeys).length === 0 && legacyKey) {
+        savedKeys = { [savedProvider]: legacyKey };
+      }
+      if (Object.keys(savedUrls).length === 0 && legacyUrl) {
+        savedUrls = { [savedProvider]: legacyUrl };
+      }
+
+      setKeys({ gemini: '', deepseek: '', openai: '', ...savedKeys });
+      setBaseUrls({ ...DEFAULT_BASE_URLS, ...savedUrls });
       setProvider(savedProvider);
-      setApiKey(savedApiKey);
-      setBaseUrl(savedBaseUrl);
     }
   }, [isOpen]);
 
   const handleSave = () => {
-    // Save to localStorage
     localStorage.setItem('llm_provider', provider);
-    localStorage.setItem('llm_key', apiKey);
-    localStorage.setItem('llm_base_url', baseUrl);
-    
-    // Close modal
+    localStorage.setItem('llm_keys_map', JSON.stringify(keys));
+    localStorage.setItem('llm_urls_map', JSON.stringify(baseUrls));
+
+    // Set the active ones for the backend headers to find easily
+    localStorage.setItem('llm_key', keys[provider] || '');
+    localStorage.setItem('llm_base_url', baseUrls[provider] || '');
+
     onClose();
   };
 
   const handleCancel = () => {
-    // Reset to saved values
+    const savedKeys = JSON.parse(localStorage.getItem('llm_keys_map') || '{}') || {};
+    const savedUrls = JSON.parse(localStorage.getItem('llm_urls_map') || '{}') || {};
     const savedProvider = localStorage.getItem('llm_provider') || 'gemini';
-    const savedApiKey = localStorage.getItem('llm_key') || '';
-    const savedBaseUrl = localStorage.getItem('llm_base_url') || '';
-    
+
+    setKeys({ gemini: '', deepseek: '', openai: '', ...savedKeys });
+    setBaseUrls({ ...DEFAULT_BASE_URLS, ...savedUrls });
     setProvider(savedProvider);
-    setApiKey(savedApiKey);
-    setBaseUrl(savedBaseUrl);
-    
+
     onClose();
+  };
+
+  const handleKeyChange = (value) => {
+    setKeys((prev) => ({ ...prev, [provider]: value }));
+  };
+
+  const handleBaseUrlChange = (value) => {
+    setBaseUrls((prev) => ({ ...prev, [provider]: value }));
   };
 
   if (!isOpen) return null;
@@ -171,8 +196,8 @@ const SettingsModal = ({ isOpen, onClose }) => {
             </label>
             <input
               type="password"
-              value={apiKey}
-              onChange={(e) => setApiKey(e.target.value)}
+              value={keys[provider] || ''}
+              onChange={(e) => handleKeyChange(e.target.value)}
               placeholder={language === 'zh' ? '输入您的API密钥' : 'Enter your API key'}
               style={{
                 width: '100%',
@@ -204,8 +229,8 @@ const SettingsModal = ({ isOpen, onClose }) => {
             </label>
             <input
               type="text"
-              value={baseUrl}
-              onChange={(e) => setBaseUrl(e.target.value)}
+              value={baseUrls[provider] || ''}
+              onChange={(e) => handleBaseUrlChange(e.target.value)}
               placeholder="https://api.deepseek.com"
               style={{
                 width: '100%',
