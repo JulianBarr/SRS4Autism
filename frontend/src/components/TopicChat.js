@@ -9,7 +9,7 @@ const TopicChat = ({ topicId, topicName, profile, onClose }) => {
   const [sending, setSending] = useState(false);
   const [userInput, setUserInput] = useState('');
   const [templates, setTemplates] = useState([]);
-  const [selectedTemplateId, setSelectedTemplateId] = useState(null);
+  const [selectedTemplateId, setSelectedTemplateId] = useState('auto');
   const [availableModels, setAvailableModels] = useState({ card_models: [] });
   const [selectedCardModel, setSelectedCardModel] = useState(null);
   const messagesEndRef = useRef(null);
@@ -18,21 +18,13 @@ const TopicChat = ({ topicId, topicName, profile, onClose }) => {
   // Get roster_id from profile (implicit)
   const rosterId = profile?.id || profile?.name || 'yiming';
 
-  // Load templates on mount
+  // Load templates on mount (default is "Automatic"; do not override user choice)
   useEffect(() => {
     const loadTemplates = async () => {
       try {
         const response = await axios.get(`${API_BASE}/templates`);
         const templatesList = response.data || [];
         setTemplates(templatesList);
-        // Set default template (first one, or filter for Grammar if available)
-        if (templatesList.length > 0) {
-          const grammarTemplate = templatesList.find(t => 
-            t.name?.toLowerCase().includes('grammar') || 
-            t.description?.toLowerCase().includes('grammar')
-          );
-          setSelectedTemplateId(grammarTemplate?.id || templatesList[0].id);
-        }
       } catch (error) {
         console.error('Error loading templates:', error);
         setTemplates([]);
@@ -40,7 +32,7 @@ const TopicChat = ({ topicId, topicName, profile, onClose }) => {
     };
 
     loadTemplates();
-  }, []);
+  }, [topicId, topicName]);
 
   // Load available models on mount and sync selected model state
   useEffect(() => {
@@ -105,7 +97,8 @@ const TopicChat = ({ topicId, topicName, profile, onClose }) => {
   }, [messages]);
 
   const handleGenerate = async () => {
-    if (!userInput.trim() || !topicId || !rosterId || !selectedTemplateId) return;
+    const hasValidTemplate = selectedTemplateId === 'auto' || selectedTemplateId;
+    if (!userInput.trim() || !topicId || !rosterId || !hasValidTemplate) return;
 
     const chatInstruction = userInput.trim();
     setUserInput('');
@@ -180,7 +173,7 @@ const TopicChat = ({ topicId, topicName, profile, onClose }) => {
       const response = await axios.post(`${API_BASE}/agent/generate`, {
         topic_id: topicId,
         roster_id: rosterId,
-        template_id: selectedTemplateId,
+        template_id: selectedTemplateId === 'auto' ? null : selectedTemplateId,
         chat_instruction: chatInstruction
       }, { headers });
 
@@ -268,7 +261,7 @@ const TopicChat = ({ topicId, topicName, profile, onClose }) => {
               Template:
             </label>
             <select
-              value={selectedTemplateId || ''}
+              value={selectedTemplateId || 'auto'}
               onChange={(e) => setSelectedTemplateId(e.target.value)}
               style={{
                 width: '100%',
@@ -279,6 +272,7 @@ const TopicChat = ({ topicId, topicName, profile, onClose }) => {
               }}
               disabled={templates.length === 0}
             >
+              <option value="auto">🪄 Automatic (AI decides)</option>
               {templates.length === 0 ? (
                 <option value="">Loading templates...</option>
               ) : (

@@ -477,7 +477,7 @@ async def get_chat_history():
 async def _handle_card_generation(message: ChatMessage, context_tags: List[Dict[str, Any]], 
                                 child_profile: Dict[str, Any], profiles: List[Dict[str, Any]],
                                 api_key: Optional[str], provider: str, model: Optional[str], 
-                                base_url: Optional[str]) -> str:
+                                base_url: Optional[str], ai_extracted_topic: Optional[str] = None) -> str:
     """Handle card generation requests via AgentService (replaces Legacy ContentGenerator)."""
     try:
         from backend.app.services.agent_service import AgentService
@@ -505,6 +505,11 @@ async def _handle_card_generation(message: ChatMessage, context_tags: List[Dict[
         if not extracted_topic:
             clean_msg = re.sub(r"(teach|explain|create cards for)\s+(the word|the concept of)?\s*", "", user_message, flags=re.IGNORECASE)
             extracted_topic = clean_msg.strip()
+        
+        # 4. Use AI-extracted topic as final fallback
+        if not extracted_topic and ai_extracted_topic:
+            extracted_topic = ai_extracted_topic
+            logger.info(f"🎯 Using AI-extracted topic as fallback: '{extracted_topic}'")
             
         logger.info(f"🎯 Extracted Topic: '{extracted_topic}'")
         topic_id = extracted_topic
@@ -620,16 +625,24 @@ async def send_message(message: ChatMessage, request: Request):
             if not IntentDetector or not ConversationHandler or not ContentGenerator:
                 raise ImportError("Agent modules not available")
             
-            intent_detector = IntentDetector()
             conversation_handler = ConversationHandler(card_model=card_model, image_model=image_model)
             
             context_tags = parse_context_tags(message.content, message.mentions)
             
-            intent_result = intent_detector.detect_intent(message.content, context_tags)
+            # 1. Detect Intent (Pass credentials to the router)
+            # We use the explicit static method now, passing the key/provider we extracted earlier
+            intent_result = IntentDetector.detect_intent(
+                message=message.content, 
+                api_key=api_key, 
+                provider=provider
+            )
+            
             intent_type = intent_result["intent"]
             confidence = intent_result["confidence"]
+            # If the LLM extracted a topic, we can use it as a fallback override if needed
+            ai_extracted_topic = intent_result.get("extracted_topic")
             
-            logger.info(f"INTENT: {intent_type.value} ({confidence})")
+            logger.info(f"INTENT: {intent_type.value} ({confidence}) | AI Topic: {ai_extracted_topic}")
             
             # Match profile
             child_profile = None
@@ -675,7 +688,8 @@ async def send_message(message: ChatMessage, request: Request):
                 # PASS CONFIG TO HANDLER
                 response_content = await _handle_card_generation(
                     message, context_tags, child_profile, profiles,
-                    api_key, provider, model, base_url  # Pass config from headers
+                    api_key, provider, model, base_url,  # Pass config from headers
+                    ai_extracted_topic=ai_extracted_topic  # Pass AI-extracted topic as fallback
                 )
             else:
                 response_content = conversation_handler.handle_conversation(
@@ -712,7 +726,7 @@ async def send_message(message: ChatMessage, request: Request):
 class AgentGenerateRequest(BaseModel):
     topic_id: str
     roster_id: str
-    template_id: str
+    template_id: Optional[str] = None  # Allow null for Automatic mode
     chat_instruction: str
 
 
@@ -739,7 +753,7 @@ async def agent_generate(request: AgentGenerateRequest, req: Request, db: Sessio
             if auth and auth.startswith("Bearer "):
                 api_key = auth.split(" ")[1]
 
-        logger.info(f"🛸 Agent Request: {request.topic_id} | Provider: {provider} | Model: {model} | Template: {request.template_id}")
+        logger.info(f"🛸 Agent Request: {request.topic_id} | Template: {request.template_id or 'AUTO'}")
 
         # 2. Call Service with Explicit Config
         generated_cards = AgentService.generate_cards(

@@ -129,37 +129,40 @@ class AgentService:
 
     @staticmethod
     def _build_pedagogical_prompt(student_name: str, interests: str, roster_list: str, topic: str, concept_nature: str, quantity: int, user_instruction: str) -> str:
+        """
+        Builds a prompt using direct f-string interpolation to avoid literal brace conflicts.
+        """
+        # We use raw curly braces for the JSON example so the LLM understands it,
+        # but because this is an f-string, we must double any braces we want to REMAIN as literal text.
         prompt = f"""
 SYSTEM: You are CUMA, an expert Special Education Content Generator assisting a PARENT.
-
 CONTEXT:
-- Student: {{student_name}}
-- Interests: {{interests}}
-- Character Roster: {{roster_list}}
-- Concept: "{{topic}}"
-- Concept Nature: {{concept_nature}}
+- Student: {student_name}
+- Interests: {interests}
+- Character Roster: {roster_list}
+- Concept: "{topic}"
+- Concept Nature: {concept_nature}
 
 YOUR CONSTITUTION (PEDAGOGICAL RULES):
-1. **Character Usage:** You MUST use characters from the **Character Roster** ({{roster_list}}) in your examples. Do not use generic names if a roster is provided.
-2. **Abstract Concepts:** If the concept is Abstract, generate a "Producer-Critic" style scenario.
-3. **Interest Integration:** Weave interests ({{interests}}) into the examples.
+1. **Character Usage:** You MUST use characters from the **Character Roster** ({roster_list}) in your examples.
+2. **Abstract Concepts:** If the concept is Abstract, generate a "Producer-Critic" style scenario where characters discuss or interact with the concept.
+3. **Interest Integration:** Weave student interests ({interests}) into the examples.
+4. **Anki Cloze Syntax:** You MUST use the syntax [[c1::answer]] for all cards.
 
-TASK:
-Generate {{quantity}} Anki cards for: "{{user_instruction}}".
+TASK: Generate {quantity} Anki cards for: "{user_instruction}".
 
 OUTPUT FORMAT:
-Return ONLY a JSON array of cards: 
-[{{ "text_field": "...", "extra_field": "...", "tags": [...] }}]
+Return ONLY a raw JSON array of objects.
+Example:
+[
+  {{
+    "text_field": "Peppa Pig says the water is [[c1::cold]].",
+    "extra_field": "Moana agrees it is very chilly.",
+    "tags": ["{topic}", "CUMA_Auto"]
+  }}
+]
 """
-        return prompt.strip().format(
-            student_name=student_name,
-            interests=interests,
-            roster_list=roster_list,
-            topic=topic,
-            concept_nature=concept_nature,
-            quantity=quantity,
-            user_instruction=user_instruction
-        )
+        return prompt.strip()
 
     @staticmethod
     def _build_universal_prompt(template_content: str, context: Dict[str, Any], user_instruction: str) -> str:
