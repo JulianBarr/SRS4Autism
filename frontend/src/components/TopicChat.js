@@ -12,6 +12,7 @@ const TopicChat = ({ topicId, topicName, profile, onClose }) => {
   const [selectedTemplateId, setSelectedTemplateId] = useState('auto');
   const [availableModels, setAvailableModels] = useState({ card_models: [] });
   const [selectedCardModel, setSelectedCardModel] = useState(null);
+  const [quantity, setQuantity] = useState(5);
   const messagesEndRef = useRef(null);
   const messagesContainerRef = useRef(null);
 
@@ -97,10 +98,12 @@ const TopicChat = ({ topicId, topicName, profile, onClose }) => {
   }, [messages]);
 
   const handleGenerate = async () => {
-    const hasValidTemplate = selectedTemplateId === 'auto' || selectedTemplateId;
-    if (!userInput.trim() || !topicId || !rosterId || !hasValidTemplate) return;
+    // Allow empty input if we have a template/mode selected (e.g. just clicking Generate for 5 cards)
+    if (!selectedTemplateId || !topicId || !rosterId) return;
 
-    const chatInstruction = userInput.trim();
+    const finalQty = quantity && quantity >= 1 ? Math.min(20, quantity) : 5;
+    const finalInstruction = `${userInput.trim()} @quantity:${finalQty}`.trim();
+
     setUserInput('');
     setSending(true);
 
@@ -108,7 +111,7 @@ const TopicChat = ({ topicId, topicName, profile, onClose }) => {
     const newUserMessage = {
       id: Date.now().toString(),
       role: 'user',
-      content: chatInstruction,
+      content: finalInstruction,
       timestamp: new Date().toISOString()
     };
     setMessages(prev => [...prev, newUserMessage]);
@@ -146,7 +149,7 @@ const TopicChat = ({ topicId, topicName, profile, onClose }) => {
         topic_id: topicId,
         roster_id: rosterId,
         template_id: selectedTemplateId === 'auto' ? null : selectedTemplateId,
-        chat_instruction: chatInstruction
+        chat_instruction: finalInstruction
       }, { headers });
 
       // Add assistant response
@@ -329,6 +332,28 @@ const TopicChat = ({ topicId, topicName, profile, onClose }) => {
 
       {/* Action Area */}
       <form className="chat-input" onSubmit={(e) => { e.preventDefault(); handleGenerate(); }}>
+        <div style={{ marginRight: '8px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <label style={{ fontSize: '0.65rem', color: '#888', marginBottom: '2px', textAlign: 'center' }}>Qty</label>
+          <input
+            type="number"
+            min="1"
+            max="20"
+            value={quantity}
+            onChange={(e) => {
+              const v = parseInt(e.target.value, 10);
+              setQuantity(isNaN(v) ? 5 : Math.min(20, Math.max(1, v)));
+            }}
+            placeholder="5"
+            style={{
+              width: '45px',
+              padding: '6px',
+              borderRadius: '6px',
+              border: '1px solid #ddd',
+              textAlign: 'center',
+              fontSize: '0.9rem'
+            }}
+          />
+        </div>
         <input
           type="text"
           value={userInput}
@@ -339,12 +364,12 @@ const TopicChat = ({ topicId, topicName, profile, onClose }) => {
               handleGenerate();
             }
           }}
-          placeholder="Enter specific instructions (e.g., 'Use Kung Fu Panda examples')"
+          placeholder="Instructions (optional)..."
           disabled={sending || !selectedTemplateId}
         />
         <button
           type="submit"
-          disabled={sending || !userInput.trim() || !selectedTemplateId}
+          disabled={sending || !selectedTemplateId}
           className="btn"
         >
           {sending ? 'Generating...' : 'Generate'}
