@@ -770,7 +770,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
                   opacity: loadingIntegratedRecommendations ? 0.6 : 1
                 }}
               >
-                {loadingIntegratedRecommendations ? t('loading') : '🎯 Integrated Recommendations'}
+                {loadingIntegratedRecommendations ? t('loading') : `🎯 ${t('integratedRecommendations')}`}
         </button>
         )}
         {selectedContentType === 'word' && selectedLanguage === 'zh' && (
@@ -1202,7 +1202,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
             <button onClick={() => setShowIntegratedRecommendations(false)} style={{
               position: 'absolute', top: '10px', right: '10px', border: 'none', background: 'none', fontSize: '24px', cursor: 'pointer'
             }}>×</button>
-            <h2>🎯 Integrated Recommendations ({selectedLanguage === 'en' ? t('english') : t('chinese')})</h2>
+            <h2>🎯 {t('integratedRecommendations')} ({selectedLanguage === 'en' ? t('english') : t('chinese')})</h2>
             
             {/* Strategy Grid for Integrated Recommendations */}
             <div style={{ marginBottom: '25px', backgroundColor: '#f9f9f9', padding: '15px', borderRadius: '8px', border: '1px solid #eee' }}>
