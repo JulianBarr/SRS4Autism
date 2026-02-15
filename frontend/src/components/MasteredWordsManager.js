@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import axios from 'axios';
+import { useLanguage } from '../i18n/LanguageContext';
 
 const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
 const MasteredWordsManager = ({ profile, onUpdate }) => {
+  const { t } = useLanguage();
   const [vocabulary, setVocabulary] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
@@ -49,14 +51,14 @@ const MasteredWordsManager = ({ profile, onUpdate }) => {
         setVocabulary(response.data.words || []);
       } catch (error) {
         console.error('Error loading vocabulary:', error);
-        alert('Failed to load vocabulary. Please try again.');
+        alert(t('failedToLoadVocabulary'));
       } finally {
         setLoading(false);
       }
     };
 
     loadVocabulary();
-  }, []);
+  }, [t]);
 
   // Filter vocabulary based on search and HSK level
   const filteredVocab = useMemo(() => {
@@ -146,7 +148,7 @@ const MasteredWordsManager = ({ profile, onUpdate }) => {
         }
       } catch (error) {
         console.error('Error saving mastered words:', error);
-        alert('Failed to save mastered words. Please try again.');
+        alert(t('failedToSaveMasteredWords'));
       } finally {
         setSaving(false);
       }
@@ -192,23 +194,19 @@ const MasteredWordsManager = ({ profile, onUpdate }) => {
     const alreadyMastered = filtered.filter(w => masteredSet.has(w.word)).length;
     const willAdd = wordCount - alreadyMastered;
     
-    let warningMessage = `⚠️ You are about to select ${wordCount.toLocaleString()} word(s).\n\n`;
+    let warningMessage = `⚠️ `;
     if (willAdd > 0) {
-      warningMessage += `This will add ${willAdd.toLocaleString()} new word(s) to your mastered list.\n`;
-      if (alreadyMastered > 0) {
-        warningMessage += `(${alreadyMastered.toLocaleString()} are already selected)\n\n`;
-      } else {
-        warningMessage += `\n`;
-      }
+      warningMessage += t('selectAllVisibleConfirm')
+        .replace('{count}', wordCount.toLocaleString())
+        .replace('{willAdd}', willAdd.toLocaleString())
+        .replace('{alreadyMastered}', alreadyMastered.toLocaleString());
     } else {
-      warningMessage += `All ${wordCount.toLocaleString()} words are already selected.\n\n`;
+      warningMessage += t('selectAllVisibleConfirmNoAdd').replace('{count}', wordCount.toLocaleString());
     }
-    
     if (isAllLevels) {
-      warningMessage += `🚨 WARNING: You are selecting ALL words across ALL HSK levels!\n\n`;
-      warningMessage += `This is a very large selection. Are you sure you want to continue?`;
+      warningMessage += `🚨 ` + t('selectAllVisibleWarnAllLevels');
     } else {
-      warningMessage += `Are you sure you want to continue?`;
+      warningMessage += t('selectAllVisibleConfirmContinue');
     }
     
     if (!window.confirm(warningMessage)) {
@@ -221,7 +219,7 @@ const MasteredWordsManager = ({ profile, onUpdate }) => {
     });
     setMasteredSet(newSet);
     saveMasteredWords(newSet, false);
-  }, [masteredSet, saveMasteredWords, vocabulary, selectedHSK, searchTerm]);
+  }, [masteredSet, saveMasteredWords, vocabulary, selectedHSK, searchTerm, t]);
 
   // Deselect all visible words with warning
   const deselectAllVisible = useCallback(() => {
@@ -241,19 +239,17 @@ const MasteredWordsManager = ({ profile, onUpdate }) => {
     const selectedCount = filtered.filter(w => masteredSet.has(w.word)).length;
     
     if (selectedCount === 0) {
-      alert('No selected words to deselect in the current view.');
+      alert(t('deselectAllVisibleNoSelected'));
       return;
     }
     
     // Show warning
     const isAllLevels = selectedHSK === null && !searchTerm.trim();
-    let warningMessage = `⚠️ You are about to deselect ${selectedCount.toLocaleString()} word(s).\n\n`;
-    
+    let warningMessage = `⚠️ ` + t('deselectAllVisibleConfirm').replace('{count}', selectedCount.toLocaleString());
     if (isAllLevels && selectedCount > 100) {
-      warningMessage += `🚨 WARNING: You are deselecting a large number of words across ALL HSK levels!\n\n`;
+      warningMessage += `🚨 ` + t('deselectAllVisibleWarnAllLevels');
     }
-    
-    warningMessage += `Are you sure you want to continue?`;
+    warningMessage += t('selectAllVisibleConfirmContinue');
     
     if (!window.confirm(warningMessage)) {
       return; // User cancelled
@@ -265,7 +261,7 @@ const MasteredWordsManager = ({ profile, onUpdate }) => {
     });
     setMasteredSet(newSet);
     saveMasteredWords(newSet, false);
-  }, [masteredSet, saveMasteredWords, vocabulary, selectedHSK, searchTerm]);
+  }, [masteredSet, saveMasteredWords, vocabulary, selectedHSK, searchTerm, t]);
 
   // Select all single-character words with auto-save
   const selectAllSingleCharacterWords = useCallback(() => {
@@ -274,19 +270,15 @@ const MasteredWordsManager = ({ profile, onUpdate }) => {
     const willAdd = singleCharWords.length - alreadyMastered;
     
     if (willAdd === 0) {
-      alert('All single-character words are already selected.');
+      alert(t('selectAllSingleCharAlready'));
       return;
     }
     
     // Show warning for large selections
-    let warningMessage = `⚠️ You are about to select all single-character words.\n\n`;
-    warningMessage += `This will add ${willAdd.toLocaleString()} word(s) to your mastered list.\n`;
-    if (alreadyMastered > 0) {
-      warningMessage += `(${alreadyMastered.toLocaleString()} are already selected)\n\n`;
-    } else {
-      warningMessage += `\n`;
-    }
-    warningMessage += `Are you sure you want to continue?`;
+    let warningMessage = `⚠️ ` + t('selectAllSingleCharConfirm')
+      .replace('{count}', willAdd.toLocaleString())
+      .replace('{alreadyMastered}', alreadyMastered.toLocaleString())
+      + t('selectAllVisibleConfirmContinue');
     
     if (!window.confirm(warningMessage)) {
       return; // User cancelled
@@ -298,7 +290,7 @@ const MasteredWordsManager = ({ profile, onUpdate }) => {
     });
     setMasteredSet(newSet);
     saveMasteredWords(newSet, false);
-  }, [masteredSet, vocabulary, saveMasteredWords]);
+  }, [masteredSet, vocabulary, saveMasteredWords, t]);
 
   // Reset to original state (undo all changes)
   const resetToOriginal = useCallback(async () => {
@@ -341,7 +333,7 @@ const MasteredWordsManager = ({ profile, onUpdate }) => {
   }, [vocabulary, masteredSet]);
 
   if (loading) {
-    return <div style={{ padding: '20px', textAlign: 'center' }}>Loading vocabulary...</div>;
+    return <div style={{ padding: '20px', textAlign: 'center' }}>{t('loadingVocabulary')}</div>;
   }
 
   return (
@@ -349,18 +341,18 @@ const MasteredWordsManager = ({ profile, onUpdate }) => {
       <div style={{ marginBottom: '20px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div>
-            <h3>📚 Manage Mastered Words</h3>
+            <h3>📚 {t('manageMasteredWords')}</h3>
             <p style={{ color: '#666', fontSize: '14px', marginTop: '5px' }}>
-              Select words the child has mastered. Changes are saved automatically.
+              {t('masteredWordsSubtitle')}
             </p>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             {saving && (
-              <span style={{ fontSize: '12px', color: '#666' }}>💾 Saving...</span>
+              <span style={{ fontSize: '12px', color: '#666' }}>💾 {t('saving')}</span>
             )}
             {lastSaveTime && !saving && (
               <span style={{ fontSize: '12px', color: '#4CAF50' }}>
-                ✓ Saved {lastSaveTime.toLocaleTimeString()}
+                {t('savedAtTime').replace('{time}', lastSaveTime.toLocaleTimeString())}
               </span>
             )}
           </div>
@@ -376,7 +368,7 @@ const MasteredWordsManager = ({ profile, onUpdate }) => {
       }}>
         <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
           <div>
-            <strong>Total Mastered:</strong> {stats.mastered} / {stats.total} words
+            <strong>{t('totalMastered')}</strong> {stats.mastered} / {stats.total} {t('wordsCountShort')}
           </div>
           {Object.keys(stats.byLevel)
             .map(level => parseInt(level))
@@ -387,7 +379,7 @@ const MasteredWordsManager = ({ profile, onUpdate }) => {
               const percentage = levelStats.total > 0
                 ? (levelStats.mastered / levelStats.total * 100).toFixed(1)
                 : 0;
-              const levelLabel = isNaN(level) || level === 0 ? 'Unknown/Unspecified' : level;
+              const levelLabel = isNaN(level) || level === 0 ? t('unknownUnspecified') : level;
               return (
                 <div key={level}>
                   <strong>HSK {levelLabel}:</strong> {levelStats.mastered} / {levelStats.total} ({percentage}%)
@@ -401,7 +393,7 @@ const MasteredWordsManager = ({ profile, onUpdate }) => {
       <div style={{ marginBottom: '20px', display: 'flex', gap: '10px', flexWrap: 'wrap', alignItems: 'center' }}>
         <input
           type="text"
-          placeholder="Search words or pinyin..."
+          placeholder={t('searchWordsOrPinyin')}
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           style={{
@@ -423,7 +415,7 @@ const MasteredWordsManager = ({ profile, onUpdate }) => {
             fontSize: '14px'
           }}
         >
-          <option value="">All HSK Levels</option>
+          <option value="">{t('allHSKLevels')}</option>
           {[1, 2, 3, 4, 5, 6, 7].map(level => (
             <option key={level} value={level}>HSK {level}</option>
           ))}
@@ -437,28 +429,28 @@ const MasteredWordsManager = ({ profile, onUpdate }) => {
           className="btn"
           style={{ fontSize: '14px', padding: '8px 16px' }}
         >
-          ✓ Select All Visible ({filteredVocab.length})
+          ✓ {t('selectAllVisible').replace('{count}', filteredVocab.length)}
         </button>
         <button
           onClick={deselectAllVisible}
           className="btn btn-secondary"
           style={{ fontSize: '14px', padding: '8px 16px' }}
         >
-          ✗ Deselect All Visible
+          ✗ {t('deselectAllVisible')}
         </button>
         <button
           onClick={selectAllSingleCharacterWords}
           className="btn"
           style={{ fontSize: '14px', padding: '8px 16px', backgroundColor: '#4CAF50', color: 'white' }}
         >
-          ✓ Select All Single-Character Words
+          ✓ {t('selectAllSingleCharWords')}
         </button>
         <button
           onClick={resetToOriginal}
           className="btn btn-secondary"
           style={{ fontSize: '14px', padding: '8px 16px', backgroundColor: '#ff9800', color: 'white' }}
         >
-          ↶ Reset to Original
+          ↶ {t('resetToOriginal')}
         </button>
       </div>
 
@@ -472,7 +464,7 @@ const MasteredWordsManager = ({ profile, onUpdate }) => {
       }}>
         {filteredVocab.length === 0 ? (
           <div style={{ textAlign: 'center', color: '#666', padding: '20px' }}>
-            No words found matching your criteria.
+            {t('noWordsMatchingCriteria')}
           </div>
         ) : (
           <>
@@ -558,7 +550,7 @@ const MasteredWordsManager = ({ profile, onUpdate }) => {
                   className="btn"
                   style={{ fontSize: '14px' }}
                 >
-                  Show All Results
+                  {t('showAllResults')}
                 </button>
               </div>
             )}
