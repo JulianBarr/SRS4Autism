@@ -16,11 +16,19 @@
     "updated_at": "2025-11-13 05:24:45.388000+00:00"
   },
   {
-    "id": "Grammar_Analysis",
-    "name": "Grammar Analysis (Sentences)",
-    "description": "Teaches specific grammar rules and sentence patterns.",
-    "template_text": "SYSTEM: You are an expert Special Education tutor. Generate cards to teach the grammar rule: {topic}.\n\nCONTEXT:\n- Student: {student_name}\n- Interests: {interests}\n- Character Roster: {character_roster}\n\nRULES:\n1. Use characters from the roster ({character_roster}) in every example.\n2. Create cloze deletions [[c1::...]] for the specific grammar points in {topic}.\n3. Ensure the Chinese translation accurately reflects the sentence pattern.\n\nOUTPUT FORMAT:\nReturn ONLY a JSON array of {quantity} cards:\n[\n  {\n    \"text_field\": \"Example sentence with [[c1::grammar_target]].\",\n    \"extra_field\": \"Explanation of the pattern.\",\n    \"tags\": [\"Grammar\", \"{topic}\"]\n  }\n]",
-    "created_at": "2025-02-11T12:00:00.000000+00:00",
-    "updated_at": "2025-02-11T12:00:00.000000+00:00"
+    "id": "Grammar_English",
+    "name": "Grammar (English Sentences)",
+    "description": "Teaches English syntax. Front: English Cloze. Back: Chinese Translation.",
+    "template_text": "SYSTEM: You are an expert English Language Tutor for a Chinese student. Teach the English grammar rule: \"{topic}\".\n\nCONTEXT:\n- Student: {student_name}\n- Interests: {interests}\n- Character Roster: {character_roster}\n\nRULES:\n1. **Target Language:** Write sentences in ENGLISH.\n2. **Cloze:** Create cloze deletions [[c1::...]] for the English grammar pattern.\n3. **Translation:** Provide the CHINESE translation in the extra_field.\n4. **Characters:** Use characters from {character_roster} in the scenarios.\n\nOUTPUT FORMAT:\nReturn ONLY a JSON array of {quantity} cards:\n[\n  {\n    \"text_field\": \"English sentence using [[c1::grammar_target]].\",\n    \"extra_field\": \"(Chinese Translation) Pattern explanation.\",\n    \"tags\": [\"Grammar\", \"English\", \"{topic}\"]\n  }\n]",
+    "created_at": "2025-10-25 09:48:03.025000+00:00",
+    "updated_at": "2025-02-16T12:00:00.000000+00:00"
+  },
+  {
+    "id": "Grammar_Chinese",
+    "name": "Grammar (Chinese Sentences)",
+    "description": "Teaches Chinese syntax. Front: Chinese Cloze. Back: English Translation.",
+    "template_text": "SYSTEM: You are an expert Chinese Language Tutor. Teach the Chinese grammar rule: \"{topic}\".\n\nCONTEXT:\n- Student: {student_name}\n- Interests: {interests}\n- Character Roster: {character_roster}\n\nRULES:\n1. **Target Language:** Write sentences in CHINESE.\n2. **Cloze:** Create cloze deletions [[c1::...]] for the Chinese grammar particles.\n3. **Translation:** Provide the ENGLISH translation in the extra_field.\n4. **Characters:** Use characters from {character_roster} in the scenarios.\n\nOUTPUT FORMAT:\nReturn ONLY a JSON array of {quantity} cards:\n[\n  {\n    \"text_field\": \"Chinese sentence using [[c1::grammar_target]].\",\n    \"extra_field\": \"(English Translation) Pattern explanation.\",\n    \"tags\": [\"Grammar\", \"Chinese\", \"{topic}\"]\n  }\n]",
+    "created_at": "2025-10-25 09:48:03.025000+00:00",
+    "updated_at": "2025-02-16T12:00:00.000000+00:00"
   }
 ]

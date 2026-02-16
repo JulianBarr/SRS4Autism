@@ -19,13 +19,32 @@ const TopicChat = ({ topicId, topicName, profile, onClose }) => {
   // Get roster_id from profile (implicit)
   const rosterId = profile?.id || profile?.name || 'yiming';
 
-  // Load templates on mount (default is "Automatic"; do not override user choice)
+  // Load templates on mount and Apply Smart Selection
   useEffect(() => {
     const loadTemplates = async () => {
       try {
         const response = await axios.get(`${API_BASE}/templates`);
         const templatesList = response.data || [];
         setTemplates(templatesList);
+
+        // --- SMART SELECTION LOGIC ---
+        // Only override if currently 'auto'
+        if (selectedTemplateId === 'auto' && topicId) {
+          const lowerTopic = topicId.toLowerCase();
+          const isGrammar = lowerTopic.includes('grammar') || lowerTopic.includes('语法') || lowerTopic.includes('句式');
+
+          if (isGrammar) {
+            const hasChineseChars = /[\u4e00-\u9fa5]/.test(topicId);
+
+            if (hasChineseChars) {
+              const zhTemplate = templatesList.find(t => t.id === 'Grammar_Chinese');
+              if (zhTemplate) setSelectedTemplateId('Grammar_Chinese');
+            } else {
+              const enTemplate = templatesList.find(t => t.id === 'Grammar_English');
+              if (enTemplate) setSelectedTemplateId('Grammar_English');
+            }
+          }
+        }
       } catch (error) {
         console.error('Error loading templates:', error);
         setTemplates([]);
