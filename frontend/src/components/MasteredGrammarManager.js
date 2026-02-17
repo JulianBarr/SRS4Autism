@@ -6,7 +6,7 @@ import TopicChat from './TopicChat';
 const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
 const MasteredGrammarManager = ({ profile, onClose, grammarLanguage = 'zh' }) => {
-  const { language: uiLanguage } = useLanguage(); // Get current UI language
+  const { language: uiLanguage, t } = useLanguage();
   // grammarLanguage is now passed as prop from parent (no local state)
   const [grammarPoints, setGrammarPoints] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -75,7 +75,7 @@ const MasteredGrammarManager = ({ profile, onClose, grammarLanguage = 'zh' }) =>
         setGrammarPoints(grammarPoints);
       } catch (error) {
         console.error('Error loading grammar points:', error);
-        alert('Failed to load grammar points. Please check if the knowledge graph server is running.');
+        alert(t('failedToLoadGrammar'));
       } finally {
         setLoading(false);
       }
@@ -101,7 +101,7 @@ const MasteredGrammarManager = ({ profile, onClose, grammarLanguage = 'zh' }) =>
         // NO onUpdate call - modal is isolated during editing
       } catch (error) {
         console.error('Error saving mastered grammar:', error);
-        alert('Failed to save mastered grammar. Please try again.');
+        alert(t('failedToSaveMasteredGrammar'));
       } finally {
         setSaving(false);
       }
@@ -163,10 +163,10 @@ const MasteredGrammarManager = ({ profile, onClose, grammarLanguage = 'zh' }) =>
       
       setEditingId(null);
       setEditedGrammar({});
-      alert('✅ Grammar point updated successfully!');
+      alert(t('grammarUpdatedSuccess'));
     } catch (error) {
       console.error('Error saving grammar point:', error);
-      alert('Failed to save grammar point. Please try again.');
+      alert(t('failedToSaveGrammar'));
     } finally {
       setSavingGrammar(false);
     }
@@ -194,23 +194,17 @@ const MasteredGrammarManager = ({ profile, onClose, grammarLanguage = 'zh' }) =>
     const alreadyMastered = filtered.filter(g => masteredSet.has(g.gp_uri)).length; // Use gp_uri
     const willAdd = grammarCount - alreadyMastered;
     
-    let warningMessage = `⚠️ You are about to select ${grammarCount.toLocaleString()} grammar point(s).\n\n`;
-    if (willAdd > 0) {
-      warningMessage += `This will add ${willAdd.toLocaleString()} new grammar point(s) to your mastered list.\n`;
-      if (alreadyMastered > 0) {
-        warningMessage += `(${alreadyMastered.toLocaleString()} are already selected)\n\n`;
-      } else {
-        warningMessage += `\n`;
-      }
-    } else {
-      warningMessage += `All ${grammarCount.toLocaleString()} grammar points are already selected.\n\n`;
-    }
+    let warningMessage = `⚠️ ` + (willAdd > 0
+      ? t('selectAllVisibleGrammarConfirm')
+          .replace('{count}', grammarCount.toLocaleString())
+          .replace('{willAdd}', willAdd.toLocaleString())
+          .replace('{alreadyMastered}', alreadyMastered.toLocaleString())
+      : t('selectAllVisibleGrammarConfirmNoAdd').replace('{count}', grammarCount.toLocaleString()));
     
     if (isAllLevels) {
-      warningMessage += `🚨 WARNING: You are selecting ALL grammar points across ALL CEFR levels!\n\n`;
-      warningMessage += `This is a very large selection. Are you sure you want to continue?`;
+      warningMessage += `🚨 ` + t('selectAllVisibleGrammarWarnAllLevels');
     } else {
-      warningMessage += `Are you sure you want to continue?`;
+      warningMessage += t('selectAllVisibleGrammarConfirmContinue');
     }
     
     if (!window.confirm(warningMessage)) {
@@ -223,7 +217,7 @@ const MasteredGrammarManager = ({ profile, onClose, grammarLanguage = 'zh' }) =>
     });
     setMasteredSet(newSet);
     saveMasteredGrammar(newSet, false);
-  }, [masteredSet, saveMasteredGrammar, grammarPoints, selectedCEFR, searchTerm]);
+  }, [masteredSet, saveMasteredGrammar, grammarPoints, selectedCEFR, searchTerm, t]);
 
   // Deselect all visible grammar points
   const deselectAllVisible = useCallback(() => {
@@ -244,19 +238,18 @@ const MasteredGrammarManager = ({ profile, onClose, grammarLanguage = 'zh' }) =>
     const selectedCount = filtered.filter(g => masteredSet.has(g.gp_uri)).length; // Use gp_uri
     
     if (selectedCount === 0) {
-      alert('No selected grammar points to deselect in the current view.');
+      alert(t('deselectAllVisibleGrammarNoSelected'));
       return;
     }
     
     // Show warning
     const isAllLevels = selectedCEFR === null && !searchTerm.trim();
-    let warningMessage = `⚠️ You are about to deselect ${selectedCount.toLocaleString()} grammar point(s).\n\n`;
+    let warningMessage = `⚠️ ` + t('deselectAllVisibleGrammarConfirm').replace('{count}', selectedCount.toLocaleString());
     
     if (isAllLevels && selectedCount > 50) {
-      warningMessage += `🚨 WARNING: You are deselecting a large number of grammar points across ALL CEFR levels!\n\n`;
+      warningMessage += `🚨 ` + t('deselectAllVisibleGrammarWarnAllLevels');
     }
-    
-    warningMessage += `Are you sure you want to continue?`;
+    warningMessage += t('selectAllVisibleGrammarConfirmContinue');
     
     if (!window.confirm(warningMessage)) {
       return; // User cancelled
@@ -268,7 +261,7 @@ const MasteredGrammarManager = ({ profile, onClose, grammarLanguage = 'zh' }) =>
     });
     setMasteredSet(newSet);
     saveMasteredGrammar(newSet, false);
-  }, [masteredSet, saveMasteredGrammar, grammarPoints, selectedCEFR, searchTerm]);
+  }, [masteredSet, saveMasteredGrammar, grammarPoints, selectedCEFR, searchTerm, t]);
 
   // Reset to original state (undo all changes)
   const resetToOriginal = useCallback(async () => {
@@ -338,7 +331,7 @@ const MasteredGrammarManager = ({ profile, onClose, grammarLanguage = 'zh' }) =>
   }, [grammarPoints, masteredSet]);
 
   if (loading) {
-    return <div style={{ padding: '20px', textAlign: 'center' }}>Loading grammar points...</div>;
+    return <div style={{ padding: '20px', textAlign: 'center' }}>{t('loadingGrammarPoints')}</div>;
   }
 
   return (
@@ -346,18 +339,18 @@ const MasteredGrammarManager = ({ profile, onClose, grammarLanguage = 'zh' }) =>
       <div style={{ marginBottom: '20px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div>
-            <h3>📚 Manage Mastered {grammarLanguage === 'en' ? 'English' : 'Chinese'} Grammar Points</h3>
+            <h3>📚 {grammarLanguage === 'en' ? t('masteredGrammarTitleEnglish') : t('masteredGrammarTitleChinese')}</h3>
             <p style={{ color: '#666', fontSize: '14px', marginTop: '5px' }}>
-              Select grammar points the child has mastered. Changes are saved automatically.
+              {t('masteredGrammarSubtitle')}
             </p>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             {saving && (
-              <span style={{ fontSize: '12px', color: '#666' }}>💾 Saving...</span>
+              <span style={{ fontSize: '12px', color: '#666' }}>{t('savingGrammar')}</span>
             )}
             {lastSaveTime && !saving && (
               <span style={{ fontSize: '12px', color: '#4CAF50' }}>
-                ✓ Saved {lastSaveTime.toLocaleTimeString()}
+                {t('savedAtTime').replace('{time}', lastSaveTime.toLocaleTimeString())}
               </span>
             )}
           </div>
@@ -373,7 +366,7 @@ const MasteredGrammarManager = ({ profile, onClose, grammarLanguage = 'zh' }) =>
       }}>
         <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
           <div>
-            <strong>Total Mastered:</strong> {stats.mastered} / {stats.total} grammar points
+            <strong>{t('totalMasteredGrammar')}:</strong> {stats.mastered} / {stats.total} {t('grammarPointsCount')}
           </div>
           {Object.keys(stats.byLevel)
             .sort((a, b) => {
@@ -392,7 +385,7 @@ const MasteredGrammarManager = ({ profile, onClose, grammarLanguage = 'zh' }) =>
               const percentage = levelStats.total > 0
                 ? (levelStats.mastered / levelStats.total * 100).toFixed(1)
                 : 0;
-              const levelLabel = level === 'unknown' ? 'Unknown/Unspecified' : level === 'not specified' ? 'Not Specified' : level === 'not mentioned' ? 'Not Mentioned' : level;
+              const levelLabel = level === 'unknown' ? t('unknownUnspecifiedGrammar') : level === 'not specified' ? t('notSpecifiedGrammar') : level === 'not mentioned' ? t('notMentionedGrammar') : level;
               return (
                 <div key={level}>
                   <strong>CEFR {levelLabel}:</strong> {levelStats.mastered} / {levelStats.total} ({percentage}%)
@@ -408,7 +401,7 @@ const MasteredGrammarManager = ({ profile, onClose, grammarLanguage = 'zh' }) =>
       <div style={{ marginBottom: '20px', display: 'flex', gap: '10px', flexWrap: 'wrap', alignItems: 'center' }}>
         <input
           type="text"
-          placeholder="Search grammar points, structures, or explanations..."
+          placeholder={t('searchGrammarPlaceholder')}
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           style={{
@@ -430,7 +423,7 @@ const MasteredGrammarManager = ({ profile, onClose, grammarLanguage = 'zh' }) =>
             fontSize: '14px'
           }}
         >
-          <option value="">All CEFR Levels</option>
+          <option value="">{t('allCEFRLevels')}</option>
           <option value="A1">A1</option>
           <option value="A2">A2</option>
           <option value="B1">B1</option>
@@ -447,21 +440,21 @@ const MasteredGrammarManager = ({ profile, onClose, grammarLanguage = 'zh' }) =>
           className="btn"
           style={{ fontSize: '14px', padding: '8px 16px' }}
         >
-          ✓ Select All Visible ({filteredGrammar.length})
+          ✓ {t('selectAllVisibleGrammar').replace('{count}', filteredGrammar.length)}
         </button>
         <button
           onClick={deselectAllVisible}
           className="btn btn-secondary"
           style={{ fontSize: '14px', padding: '8px 16px' }}
         >
-          ✗ Deselect All Visible
+          ✗ {t('deselectAllVisibleGrammar')}
         </button>
         <button
           onClick={resetToOriginal}
           className="btn btn-secondary"
           style={{ fontSize: '14px', padding: '8px 16px', backgroundColor: '#ff9800', color: 'white' }}
         >
-          ↶ Reset to Original
+          ↶ {t('resetToOriginalGrammar')}
         </button>
       </div>
 
@@ -477,13 +470,13 @@ const MasteredGrammarManager = ({ profile, onClose, grammarLanguage = 'zh' }) =>
           <div style={{ textAlign: 'center', color: '#666', padding: '20px' }}>
             {grammarPoints.length === 0 ? (
               <div>
-                <p>No grammar points found.</p>
+                <p>{t('noGrammarPointsFound')}</p>
                 <p style={{ fontSize: '12px', marginTop: '10px' }}>
-                  Make sure the knowledge graph server (Jena Fuseki) is running.
+                  {t('knowledgeGraphCheck')}
                 </p>
               </div>
             ) : (
-              'No grammar points found matching your criteria.'
+              t('noGrammarPointsMatching')
             )}
           </div>
         ) : (
@@ -523,7 +516,7 @@ const MasteredGrammarManager = ({ profile, onClose, grammarLanguage = 'zh' }) =>
                         <div>
                           <div style={{ marginBottom: '10px' }}>
                             <label style={{ display: 'block', fontSize: '12px', color: '#666', marginBottom: '4px' }}>
-                              English Name:
+                              {t('englishName')}
                             </label>
                             <input
                               type="text"
@@ -534,7 +527,7 @@ const MasteredGrammarManager = ({ profile, onClose, grammarLanguage = 'zh' }) =>
                           </div>
                           <div style={{ marginBottom: '10px' }}>
                             <label style={{ display: 'block', fontSize: '12px', color: '#666', marginBottom: '4px' }}>
-                              Chinese Translation (中文):
+                              {t('chineseTranslation')}
                             </label>
                             <input
                               type="text"
@@ -545,7 +538,7 @@ const MasteredGrammarManager = ({ profile, onClose, grammarLanguage = 'zh' }) =>
                           </div>
                           <div style={{ marginBottom: '10px' }}>
                             <label style={{ display: 'block', fontSize: '12px', color: '#666', marginBottom: '4px' }}>
-                              Structure:
+                              {t('structureLabel')}
                             </label>
                             <input
                               type="text"
@@ -556,7 +549,7 @@ const MasteredGrammarManager = ({ profile, onClose, grammarLanguage = 'zh' }) =>
                           </div>
                           <div style={{ marginBottom: '10px' }}>
                             <label style={{ display: 'block', fontSize: '12px', color: '#666', marginBottom: '4px' }}>
-                              Example ({grammarLanguage === 'en' ? 'English' : 'Chinese'}):
+                              {t('exampleLabel')} ({grammarLanguage === 'en' ? t('english') : t('chinese')}):
                             </label>
                             <input
                               type="text"
@@ -573,7 +566,7 @@ const MasteredGrammarManager = ({ profile, onClose, grammarLanguage = 'zh' }) =>
                           </div>
                           <div style={{ marginBottom: '10px' }}>
                             <label style={{ display: 'block', fontSize: '12px', color: '#666', marginBottom: '4px' }}>
-                              Explanation:
+                              {t('explanationLabel')}
                             </label>
                             <textarea
                               value={editData.explanation}
@@ -584,14 +577,14 @@ const MasteredGrammarManager = ({ profile, onClose, grammarLanguage = 'zh' }) =>
                           </div>
                           <div style={{ marginBottom: '10px' }}>
                             <label style={{ display: 'block', fontSize: '12px', color: '#666', marginBottom: '4px' }}>
-                              CEFR Level:
+                              {t('cefrLevel')}
                             </label>
                             <select
                               value={editData.cefr_level || ''}
                               onChange={(e) => setEditedGrammar({...editData, cefr_level: e.target.value})}
                               style={{ padding: '6px', border: '1px solid #ddd', borderRadius: '4px' }}
                             >
-                              <option value="">Not specified</option>
+                              <option value="">{t('notSpecifiedGrammar')}</option>
                               <option value="A1">A1</option>
                               <option value="A2">A2</option>
                               <option value="B1">B1</option>
@@ -607,14 +600,14 @@ const MasteredGrammarManager = ({ profile, onClose, grammarLanguage = 'zh' }) =>
                               className="btn"
                               style={{ fontSize: '14px', padding: '6px 12px', backgroundColor: '#4CAF50', color: 'white' }}
                             >
-                              {savingGrammar ? '💾 Saving...' : '✓ Save'}
+                              {savingGrammar ? t('savingGrammar') : t('saveButton')}
                             </button>
                             <button
                               onClick={cancelEdit}
                               className="btn btn-secondary"
                               style={{ fontSize: '14px', padding: '6px 12px' }}
                             >
-                              Cancel
+                              {t('cancelButton')}
                             </button>
                           </div>
                         </div>
@@ -651,17 +644,17 @@ const MasteredGrammarManager = ({ profile, onClose, grammarLanguage = 'zh' }) =>
                                 }}
                                 className="btn btn-secondary"
                                 style={{ fontSize: '12px', padding: '4px 8px' }}
-                                title="Chat about this grammar point"
+                                title={t('chatAboutGrammar')}
                               >
-                                💬 Chat
+                                💬 {t('chatButton')}
                               </button>
                               <button
                                 onClick={() => startEdit(g)}
                                 className="btn btn-secondary"
                                 style={{ fontSize: '12px', padding: '4px 8px' }}
-                                title="Edit this grammar point"
+                                title={t('editGrammarPoint')}
                               >
-                                ✏️ Edit
+                                ✏️ {t('editButton')}
                               </button>
                             </div>
                           </div>
@@ -707,7 +700,7 @@ const MasteredGrammarManager = ({ profile, onClose, grammarLanguage = 'zh' }) =>
                           )}
                           
                           <div style={{ fontSize: '11px', color: '#999', marginTop: '4px' }}>
-                            CEFR Level: {editData.cefr_level || 'Not specified'}
+                            {t('cefrLevel')} {editData.cefr_level || t('notSpecifiedGrammar')}
                           </div>
                         </>
                       )}
@@ -723,7 +716,7 @@ const MasteredGrammarManager = ({ profile, onClose, grammarLanguage = 'zh' }) =>
                   className="btn"
                   style={{ fontSize: '14px' }}
                 >
-                  Show All Results
+                  {t('showAllResultsGrammar')}
                 </button>
               </div>
             )}
