@@ -299,7 +299,40 @@ export const translations = {
     selectAllVisibleGrammarConfirmContinue: "Are you sure you want to continue?",
     deselectAllVisibleGrammarNoSelected: "No selected grammar points to deselect in the current view.",
     deselectAllVisibleGrammarConfirm: "You are about to deselect {count} grammar point(s).\n\n",
-    deselectAllVisibleGrammarWarnAllLevels: "WARNING: You are deselecting a large number of grammar points across ALL CEFR levels!\n\n"
+    deselectAllVisibleGrammarWarnAllLevels: "WARNING: You are deselecting a large number of grammar points across ALL CEFR levels!\n\n",
+
+    // MasteredEnglishWordsManager
+    masteredEnglishWordsManagerTitle: "Manage Mastered English Words",
+    masteredEnglishWordsSubtitle: "Select words the child has mastered. Changes are saved automatically.",
+    totalMasteredEnglishWords: "Total Mastered",
+    wordsCountEnglish: "words",
+    searchWordsOrDefinitions: "Search words or definitions...",
+    selectAllVisibleEnglishWords: "Select All Visible ({count})",
+    deselectAllVisibleEnglishWords: "Deselect All Visible",
+    resetToOriginalEnglishWords: "Reset to Original",
+    loadingVocabularyEnglish: "Loading vocabulary...",
+    noWordsMatchingCriteriaEnglish: "No words found matching your criteria.",
+    showAllResultsEnglish: "Show All Results",
+    failedToLoadVocabularyEnglish: "Failed to load vocabulary. Please try again.",
+    failedToSaveMasteredEnglishWords: "Failed to save mastered words. Please try again.",
+    unknownLevel: "Unknown Level",
+    selectAllVisibleEnglishConfirm: "You are about to select {count} word(s).\n\nThis will add {willAdd} new word(s) to your mastered list.\n({alreadyMastered} are already selected)\n\n",
+    selectAllVisibleEnglishConfirmNoAdd: "All {count} words are already selected.\n\n",
+    selectAllVisibleEnglishWarnAllLevels: "WARNING: You are selecting ALL words across ALL CEFR levels!\n\nThis is a very large selection. Are you sure you want to continue?",
+    selectAllVisibleEnglishConfirmContinue: "Are you sure you want to continue?",
+    deselectAllVisibleEnglishNoSelected: "No selected words to deselect in the current view.",
+    deselectAllVisibleEnglishConfirm: "You are about to deselect {count} word(s).\n\n",
+    deselectAllVisibleEnglishWarnAllLevels: "WARNING: You are deselecting a large number of words across ALL CEFR levels!\n\n",
+    // Part of speech (POS) labels for English words
+    posBeVerb: "be-verb",
+    posDeterminer: "determiner",
+    posAdverb: "adverb",
+    posNoun: "noun",
+    posVerb: "verb",
+    posAdjective: "adjective",
+    posPreposition: "preposition",
+    posConjunction: "conjunction",
+    posPronoun: "pronoun"
   },
   
   zh: {
@@ -708,7 +741,40 @@ export const translations = {
     selectAllVisibleGrammarConfirmContinue: "确定要继续吗？",
     deselectAllVisibleGrammarNoSelected: "当前视图中没有已选语法点可取消。",
     deselectAllVisibleGrammarConfirm: "即将取消选中 {count} 个语法点。\n\n",
-    deselectAllVisibleGrammarWarnAllLevels: "警告：您正在取消选中全部 CEFR 等级的大量语法点！\n\n"
+    deselectAllVisibleGrammarWarnAllLevels: "警告：您正在取消选中全部 CEFR 等级的大量语法点！\n\n",
+
+    // MasteredEnglishWordsManager
+    masteredEnglishWordsManagerTitle: "管理已掌握的英文单词",
+    masteredEnglishWordsSubtitle: "选择孩子已掌握的单词。更改将自动保存。",
+    totalMasteredEnglishWords: "总计已掌握",
+    wordsCountEnglish: "个单词",
+    searchWordsOrDefinitions: "搜索单词或释义...",
+    selectAllVisibleEnglishWords: "全选当前可见 ({count})",
+    deselectAllVisibleEnglishWords: "取消全选",
+    resetToOriginalEnglishWords: "重置为初始状态",
+    loadingVocabularyEnglish: "正在加载词汇...",
+    noWordsMatchingCriteriaEnglish: "没有找到符合条件的单词。",
+    showAllResultsEnglish: "显示全部结果",
+    failedToLoadVocabularyEnglish: "加载词汇失败，请重试。",
+    failedToSaveMasteredEnglishWords: "保存已掌握单词失败，请重试。",
+    unknownLevel: "未知等级",
+    selectAllVisibleEnglishConfirm: "即将选中 {count} 个单词。\n\n这将把 {willAdd} 个新单词加入已掌握列表。\n（{alreadyMastered} 个已选中）\n\n",
+    selectAllVisibleEnglishConfirmNoAdd: "全部 {count} 个单词已选中。\n\n",
+    selectAllVisibleEnglishWarnAllLevels: "警告：您正在选择全部 CEFR 等级的所有单词！\n\n这是非常大的选择范围，确定要继续吗？",
+    selectAllVisibleEnglishConfirmContinue: "确定要继续吗？",
+    deselectAllVisibleEnglishNoSelected: "当前视图中没有已选单词可取消。",
+    deselectAllVisibleEnglishConfirm: "即将取消选中 {count} 个单词。\n\n",
+    deselectAllVisibleEnglishWarnAllLevels: "警告：您正在取消选中全部 CEFR 等级的大量单词！\n\n",
+    // Part of speech (POS) labels for English words
+    posBeVerb: "系动词",
+    posDeterminer: "限定词",
+    posAdverb: "副词",
+    posNoun: "名词",
+    posVerb: "动词",
+    posAdjective: "形容词",
+    posPreposition: "介词",
+    posConjunction: "连词",
+    posPronoun: "代词"
   }
 };
 

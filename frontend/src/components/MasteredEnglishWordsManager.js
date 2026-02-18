@@ -1,9 +1,24 @@
 import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import axios from 'axios';
+import { useLanguage } from '../i18n/LanguageContext';
 
 const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
+// Map POS values from CEFR-J CSV to i18n keys
+const POS_TO_KEY = {
+  'be-verb': 'posBeVerb',
+  'determiner': 'posDeterminer',
+  'adverb': 'posAdverb',
+  'noun': 'posNoun',
+  'verb': 'posVerb',
+  'adjective': 'posAdjective',
+  'preposition': 'posPreposition',
+  'conjunction': 'posConjunction',
+  'pronoun': 'posPronoun'
+};
+
 const MasteredEnglishWordsManager = ({ profile, onUpdate }) => {
+  const { t } = useLanguage();
   const [vocabulary, setVocabulary] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
@@ -49,7 +64,7 @@ const MasteredEnglishWordsManager = ({ profile, onUpdate }) => {
         setVocabulary(response.data.words || []);
       } catch (error) {
         console.error('Error loading vocabulary:', error);
-        alert('Failed to load vocabulary. Please try again.');
+        alert(t('failedToLoadVocabularyEnglish'));
       } finally {
         setLoading(false);
       }
@@ -146,7 +161,7 @@ const MasteredEnglishWordsManager = ({ profile, onUpdate }) => {
         }
       } catch (error) {
         console.error('Error saving mastered words:', error);
-        alert('Failed to save mastered words. Please try again.');
+        alert(t('failedToSaveMasteredEnglishWords'));
       } finally {
         setSaving(false);
       }
@@ -157,7 +172,7 @@ const MasteredEnglishWordsManager = ({ profile, onUpdate }) => {
     } else {
       saveTimeoutRef.current = setTimeout(saveAction, 500); // 500ms debounce
     }
-  }, [profile, onUpdate]);
+  }, [profile, onUpdate, t]);
 
   // Toggle word mastery with auto-save
   const toggleWord = useCallback((word) => {
@@ -193,23 +208,16 @@ const MasteredEnglishWordsManager = ({ profile, onUpdate }) => {
     const alreadyMastered = filtered.filter(w => masteredSet.has(w.word.toLowerCase())).length;
     const willAdd = wordCount - alreadyMastered;
     
-    let warningMessage = `⚠️ You are about to select ${wordCount.toLocaleString()} word(s).\n\n`;
-    if (willAdd > 0) {
-      warningMessage += `This will add ${willAdd.toLocaleString()} new word(s) to your mastered list.\n`;
-      if (alreadyMastered > 0) {
-        warningMessage += `(${alreadyMastered.toLocaleString()} are already selected)\n\n`;
-      } else {
-        warningMessage += `\n`;
-      }
-    } else {
-      warningMessage += `All ${wordCount.toLocaleString()} words are already selected.\n\n`;
-    }
-    
+    let warningMessage = `⚠️ ` + (willAdd > 0
+      ? t('selectAllVisibleEnglishConfirm')
+          .replace('{count}', wordCount.toLocaleString())
+          .replace('{willAdd}', willAdd.toLocaleString())
+          .replace('{alreadyMastered}', alreadyMastered.toLocaleString())
+      : t('selectAllVisibleEnglishConfirmNoAdd').replace('{count}', wordCount.toLocaleString()));
     if (isAllLevels) {
-      warningMessage += `🚨 WARNING: You are selecting ALL words across ALL CEFR levels!\n\n`;
-      warningMessage += `This is a very large selection. Are you sure you want to continue?`;
+      warningMessage += `🚨 ` + t('selectAllVisibleEnglishWarnAllLevels');
     } else {
-      warningMessage += `Are you sure you want to continue?`;
+      warningMessage += t('selectAllVisibleEnglishConfirmContinue');
     }
     
     if (!window.confirm(warningMessage)) {
@@ -222,7 +230,7 @@ const MasteredEnglishWordsManager = ({ profile, onUpdate }) => {
     });
     setMasteredSet(newSet);
     saveMasteredWords(newSet, false);
-  }, [masteredSet, saveMasteredWords, vocabulary, selectedCEFR, searchTerm]);
+  }, [masteredSet, saveMasteredWords, vocabulary, selectedCEFR, searchTerm, t]);
 
   // Deselect all visible words with warning
   const deselectAllVisible = useCallback(() => {
@@ -242,19 +250,17 @@ const MasteredEnglishWordsManager = ({ profile, onUpdate }) => {
     const selectedCount = filtered.filter(w => masteredSet.has(w.word.toLowerCase())).length;
     
     if (selectedCount === 0) {
-      alert('No selected words to deselect in the current view.');
+      alert(t('deselectAllVisibleEnglishNoSelected'));
       return;
     }
     
     // Show warning
     const isAllLevels = selectedCEFR === null && !searchTerm.trim();
-    let warningMessage = `⚠️ You are about to deselect ${selectedCount.toLocaleString()} word(s).\n\n`;
-    
+    let warningMessage = `⚠️ ` + t('deselectAllVisibleEnglishConfirm').replace('{count}', selectedCount.toLocaleString());
     if (isAllLevels && selectedCount > 100) {
-      warningMessage += `🚨 WARNING: You are deselecting a large number of words across ALL CEFR levels!\n\n`;
+      warningMessage += `🚨 ` + t('deselectAllVisibleEnglishWarnAllLevels');
     }
-    
-    warningMessage += `Are you sure you want to continue?`;
+    warningMessage += t('selectAllVisibleEnglishConfirmContinue');
     
     if (!window.confirm(warningMessage)) {
       return; // User cancelled
@@ -266,7 +272,7 @@ const MasteredEnglishWordsManager = ({ profile, onUpdate }) => {
     });
     setMasteredSet(newSet);
     saveMasteredWords(newSet, false);
-  }, [masteredSet, saveMasteredWords, vocabulary, selectedCEFR, searchTerm]);
+  }, [masteredSet, saveMasteredWords, vocabulary, selectedCEFR, searchTerm, t]);
 
   // Reset to original state (undo all changes)
   const resetToOriginal = useCallback(async () => {
@@ -301,7 +307,7 @@ const MasteredEnglishWordsManager = ({ profile, onUpdate }) => {
   }, [vocabulary, masteredSet]);
 
   if (loading) {
-    return <div style={{ padding: '20px', textAlign: 'center' }}>Loading vocabulary...</div>;
+    return <div style={{ padding: '20px', textAlign: 'center' }}>{t('loadingVocabularyEnglish')}</div>;
   }
 
   return (
@@ -309,18 +315,18 @@ const MasteredEnglishWordsManager = ({ profile, onUpdate }) => {
       <div style={{ marginBottom: '20px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div>
-            <h3>📚 Manage Mastered English Words</h3>
+            <h3>📚 {t('masteredEnglishWordsManagerTitle')}</h3>
             <p style={{ color: '#666', fontSize: '14px', marginTop: '5px' }}>
-              Select words the child has mastered. Changes are saved automatically.
+              {t('masteredEnglishWordsSubtitle')}
             </p>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             {saving && (
-              <span style={{ fontSize: '12px', color: '#666' }}>💾 Saving...</span>
+              <span style={{ fontSize: '12px', color: '#666' }}>💾 {t('saving')}</span>
             )}
             {lastSaveTime && !saving && (
               <span style={{ fontSize: '12px', color: '#4CAF50' }}>
-                ✓ Saved {lastSaveTime.toLocaleTimeString()}
+                {t('savedAtTime').replace('{time}', lastSaveTime.toLocaleTimeString())}
               </span>
             )}
           </div>
@@ -336,7 +342,7 @@ const MasteredEnglishWordsManager = ({ profile, onUpdate }) => {
       }}>
         <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
           <div>
-            <strong>Total Mastered:</strong> {stats.mastered} / {stats.total} words
+            <strong>{t('totalMasteredEnglishWords')}:</strong> {stats.mastered} / {stats.total} {t('wordsCountEnglish')}
           </div>
           {['A1', 'A2', 'B1', 'B2', 'C1', 'C2'].map(level => {
             const levelStats = stats.byLevel[level];
@@ -352,7 +358,7 @@ const MasteredEnglishWordsManager = ({ profile, onUpdate }) => {
           })}
           {stats.byLevel['Unknown'] && (
             <div>
-              <strong>Unknown Level:</strong> {stats.byLevel['Unknown'].mastered} / {stats.byLevel['Unknown'].total}
+              <strong>{t('unknownLevel')}:</strong> {stats.byLevel['Unknown'].mastered} / {stats.byLevel['Unknown'].total}
             </div>
           )}
         </div>
@@ -362,7 +368,7 @@ const MasteredEnglishWordsManager = ({ profile, onUpdate }) => {
       <div style={{ marginBottom: '20px', display: 'flex', gap: '10px', flexWrap: 'wrap', alignItems: 'center' }}>
         <input
           type="text"
-          placeholder="Search words or definitions..."
+          placeholder={t('searchWordsOrDefinitions')}
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           style={{
@@ -384,7 +390,7 @@ const MasteredEnglishWordsManager = ({ profile, onUpdate }) => {
             fontSize: '14px'
           }}
         >
-          <option value="">All CEFR Levels</option>
+          <option value="">{t('allCEFRLevels')}</option>
           {['A1', 'A2', 'B1', 'B2', 'C1', 'C2'].map(level => (
             <option key={level} value={level}>CEFR {level}</option>
           ))}
@@ -398,21 +404,21 @@ const MasteredEnglishWordsManager = ({ profile, onUpdate }) => {
           className="btn"
           style={{ fontSize: '14px', padding: '8px 16px' }}
         >
-          ✓ Select All Visible ({filteredVocab.length})
+          ✓ {t('selectAllVisibleEnglishWords').replace('{count}', filteredVocab.length)}
         </button>
         <button
           onClick={deselectAllVisible}
           className="btn btn-secondary"
           style={{ fontSize: '14px', padding: '8px 16px' }}
         >
-          ✗ Deselect All Visible
+          ✗ {t('deselectAllVisibleEnglishWords')}
         </button>
         <button
           onClick={resetToOriginal}
           className="btn btn-secondary"
           style={{ fontSize: '14px', padding: '8px 16px', backgroundColor: '#ff9800', color: 'white' }}
         >
-          ↶ Reset to Original
+          ↶ {t('resetToOriginalEnglishWords')}
         </button>
       </div>
 
@@ -426,7 +432,7 @@ const MasteredEnglishWordsManager = ({ profile, onUpdate }) => {
       }}>
         {filteredVocab.length === 0 ? (
           <div style={{ textAlign: 'center', color: '#666', padding: '20px' }}>
-            No words found matching your criteria.
+            {t('noWordsMatchingCriteriaEnglish')}
           </div>
         ) : (
           <>
@@ -503,7 +509,9 @@ const MasteredEnglishWordsManager = ({ profile, onUpdate }) => {
                         <div style={{ fontSize: '11px', color: '#999' }}>CEFR {w.cefr_level}</div>
                       )}
                       {w.pos && (
-                        <div style={{ fontSize: '11px', color: '#999' }}>{w.pos}</div>
+                        <div style={{ fontSize: '11px', color: '#999' }}>
+                          {POS_TO_KEY[w.pos] ? t(POS_TO_KEY[w.pos]) : w.pos}
+                        </div>
                       )}
                     </div>
                   </label>
@@ -517,7 +525,7 @@ const MasteredEnglishWordsManager = ({ profile, onUpdate }) => {
                   className="btn"
                   style={{ fontSize: '14px' }}
                 >
-                  Show All Results
+                  {t('showAllResultsEnglish')}
                 </button>
               </div>
             )}
