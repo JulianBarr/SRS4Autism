@@ -217,10 +217,10 @@ const TopicChat = ({ topicId, topicName, profile, onClose }) => {
       }}>
         <div>
           <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 'bold' }}>
-            Grammar: {topicName || topicId}
+            语法：{topicName || topicId}
           </h3>
           <p style={{ margin: '4px 0 0 0', fontSize: '12px', color: '#666' }}>
-            Contextual Copilot
+            语境助手
           </p>
         </div>
         <button
@@ -252,7 +252,7 @@ const TopicChat = ({ topicId, topicName, profile, onClose }) => {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
           <div>
             <label style={{ display: 'block', fontSize: '12px', fontWeight: 'bold', marginBottom: '4px' }}>
-              Template:
+              模板：
             </label>
             <select
               value={selectedTemplateId || 'auto'}
@@ -280,7 +280,7 @@ const TopicChat = ({ topicId, topicName, profile, onClose }) => {
           </div>
           <div>
             <label style={{ display: 'block', fontSize: '12px', fontWeight: 'bold', marginBottom: '4px' }}>
-              AI Model:
+              AI 模型：
             </label>
             <select
               value={selectedCardModel || ''}
@@ -321,7 +321,7 @@ const TopicChat = ({ topicId, topicName, profile, onClose }) => {
           </div>
         ) : messages.length === 0 ? (
           <div className="welcome-message">
-            <p>No messages yet. Start a conversation to generate Anki cards!</p>
+            <p>暂无消息。开始对话以生成 Anki 卡片！</p>
           </div>
         ) : (
           messages.map((msg) => (
@@ -352,7 +352,7 @@ const TopicChat = ({ topicId, topicName, profile, onClose }) => {
       {/* Action Area */}
       <form className="chat-input" onSubmit={(e) => { e.preventDefault(); handleGenerate(); }}>
         <div style={{ marginRight: '8px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-          <label style={{ fontSize: '0.65rem', color: '#888', marginBottom: '2px', textAlign: 'center' }}>Qty</label>
+          <label style={{ fontSize: '0.65rem', color: '#888', marginBottom: '2px', textAlign: 'center' }}>数量</label>
           <input
             type="number"
             min="1"
@@ -383,7 +383,7 @@ const TopicChat = ({ topicId, topicName, profile, onClose }) => {
               handleGenerate();
             }
           }}
-          placeholder="Instructions (optional)..."
+          placeholder="输入指令（可选）..."
           disabled={sending || !selectedTemplateId}
         />
         <button
@@ -391,7 +391,7 @@ const TopicChat = ({ topicId, topicName, profile, onClose }) => {
           disabled={sending || !selectedTemplateId}
           className="btn"
         >
-          {sending ? 'Generating...' : 'Generate'}
+          {sending ? '生成中...' : '生成'}
         </button>
       </form>
     </div>
