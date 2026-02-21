@@ -95,6 +95,16 @@ function App() {
     }
   };
 
+  /** Cards-only refresh for curation panel. Does not trigger full loading overlay. */
+  const loadCardsOnly = async () => {
+    try {
+      const cardsRes = await axios.get(`${API_BASE}/cards`);
+      setCards(cardsRes.data);
+    } catch (error) {
+      console.error('Error loading cards:', error);
+    }
+  };
+
   const handleNewCard = async (newCard) => {
     // Optimistically add the new card without full page reload
     if (newCard) {
@@ -274,7 +284,7 @@ function App() {
               <CardCuration 
                 cards={cards}
                 onApproveCard={handleApproveCard}
-                onRefresh={loadData}
+                onRefresh={loadCardsOnly}
               />
             </div>
           </div>

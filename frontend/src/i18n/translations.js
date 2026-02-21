@@ -29,6 +29,7 @@ export const translations = {
     // Card Curation
     curationTitle: "Card Curation",
     curationDescription: "Review and approve generated flashcards before syncing to Anki.",
+    refreshCards: "Refresh card list",
     globalSettings: "Global Settings",
     ankiProfile: "Anki Profile",
     selectAnkiProfile: "Select Anki Profile",
@@ -370,6 +371,7 @@ export const translations = {
     // Card Curation
     curationTitle: "卡片管理",
     curationDescription: "在同步到Anki之前审核和批准生成的闪卡。",
+    refreshCards: "刷新卡片列表",
     globalSettings: "全局设置",
     ankiProfile: "Anki配置",
     selectAnkiProfile: "选择Anki配置",
@@ -477,6 +479,7 @@ export const translations = {
     // Card Curation
     curationTitle: "卡片管理",
     curationDescription: "在同步到Anki之前审核和批准生成的闪卡。",
+    refreshCards: "刷新卡片列表",
     globalSettings: "全局设置",
     ankiProfile: "Anki配置",
     selectAnkiProfile: "选择Anki配置",

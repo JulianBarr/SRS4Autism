@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
+import { RefreshCw } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 import SearchableDropdown from './SearchableDropdown';
 import RichTextEditor from './RichTextEditor';
@@ -165,6 +166,7 @@ const CardImagePreview = ({ card }) => {
 
 const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
   const { t } = useLanguage();
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const [selectedCards, setSelectedCards] = useState([]);
   const masterCheckboxRef = useRef(null);
   const [activeTab, setActiveTab] = useState('pending'); // 'pending', 'approved', 'synced'
@@ -862,9 +864,50 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
     selectedCards.includes(card.id) && card.status === 'approved'
   ).length > 0;
 
+  const handleRefreshCards = async () => {
+    if (!onRefresh || isRefreshing) return;
+    setIsRefreshing(true);
+    try {
+      await onRefresh();
+    } finally {
+      setIsRefreshing(false);
+    }
+  };
+
   return (
     <div className="card">
-      <h2>{t('curationTitle')}</h2>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '4px' }}>
+        <h2 style={{ margin: 0 }}>{t('curationTitle')}</h2>
+        {onRefresh && (
+          <button
+            type="button"
+            onClick={handleRefreshCards}
+            disabled={isRefreshing}
+            title={t('refreshCards') || 'Refresh card list'}
+            className="curation-refresh-btn"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '6px',
+              border: 'none',
+              background: 'transparent',
+              color: '#666',
+              cursor: isRefreshing ? 'wait' : 'pointer',
+              borderRadius: '4px',
+            }}
+            aria-label={t('refreshCards') || 'Refresh card list'}
+          >
+            <RefreshCw
+              size={18}
+              style={{
+                transition: 'color 0.2s',
+                animation: isRefreshing ? 'spin 0.8s linear infinite' : 'none',
+              }}
+            />
+          </button>
+        )}
+      </div>
       <p>{t('curationDescription')}</p>
 
       {/* Global Settings */}
