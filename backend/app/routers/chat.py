@@ -755,13 +755,25 @@ async def agent_generate(request: AgentGenerateRequest, req: Request, db: Sessio
 
         logger.info(f"🛸 Agent Request: {request.topic_id} | Template: {request.template_id or 'AUTO'}")
 
-        # 2. Call Service with Explicit Config
+        # 2. Parse quantity from @quantity:N in chat_instruction (same as chat flow)
+        quantity = 5  # Default
+        context_tags = parse_context_tags(request.chat_instruction, [])
+        for tag in context_tags:
+            if tag.get("type") == "quantity":
+                try:
+                    quantity = int(tag.get("value"))
+                    quantity = max(1, min(20, quantity))  # Clamp 1–20
+                    break
+                except (ValueError, TypeError):
+                    pass
+
+        # 3. Call Service with Explicit Config
         generated_cards = AgentService.generate_cards(
             topic_id=request.topic_id,
             roster_id=request.roster_id,
             template_id=request.template_id,
             user_instruction=request.chat_instruction,
-            quantity=5, # Default to 5 cards
+            quantity=quantity,
             db=db,
             # Pass config explicitly
             api_key=api_key,
@@ -770,7 +782,7 @@ async def agent_generate(request: AgentGenerateRequest, req: Request, db: Sessio
             base_url=base_url
         )
         
-        # 3. Create Response & Save History
+        # 4. Create Response & Save History
         card_count = len(generated_cards)
         if card_count > 0:
             response_content = f"✅ Generated {card_count} cards for {request.topic_id}."
