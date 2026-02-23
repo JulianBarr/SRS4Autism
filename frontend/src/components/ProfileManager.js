@@ -630,16 +630,26 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
     }
   };
 
-  const handleCloseMasteredGrammar = async () => {
-    // Close modal first
+  const handleMasteredGrammarUpdate = (updatedProfile) => {
+    // Only update the selected profile in modal - avoid onProfilesChange during autosave
+    // so we don't trigger parent re-renders or refresh while the user is editing
+    if (selectedProfileForMasteredGrammar &&
+        (selectedProfileForMasteredGrammar.name === updatedProfile.name ||
+         selectedProfileForMasteredGrammar.id === updatedProfile.id)) {
+      setSelectedProfileForMasteredGrammar(updatedProfile);
+    }
+  };
+
+  const handleCloseMasteredGrammar = () => {
+    const profileToMerge = selectedProfileForMasteredGrammar;
     setShowMasteredGrammarManager(false);
     setSelectedProfileForMasteredGrammar(null);
-    // Then refresh profiles to ensure main screen is up to date
-    try {
-      const response = await axios.get(`${API_BASE}/profiles`);
-      onProfilesChange(response.data);
-    } catch (error) {
-      console.error('Error refreshing profiles:', error);
+    // Merge the edited profile into the list (no refetch - avoids page refresh)
+    if (profileToMerge) {
+      const newProfiles = profiles.map(p =>
+        (p.name === profileToMerge.name || p.id === profileToMerge.id) ? profileToMerge : p
+      );
+      onProfilesChange(newProfiles);
     }
   };
 
@@ -1640,6 +1650,7 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
             <MasteredGrammarManager
               profile={selectedProfileForMasteredGrammar}
               onClose={handleCloseMasteredGrammar}
+              onUpdate={handleMasteredGrammarUpdate}
             />
           </div>
         </div>

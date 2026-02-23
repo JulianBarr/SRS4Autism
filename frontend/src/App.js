@@ -95,6 +95,22 @@ function App() {
     }
   };
 
+  /** Lightweight profile update for autosave - no loading overlay, no refetch. */
+  const handleProfileUpdate = (updatedProfile) => {
+    if (updatedProfile) {
+      setProfiles(prev => prev.map(p =>
+        (p.name === updatedProfile.name || p.id === updatedProfile.id) ? updatedProfile : p
+      ));
+      setCurrentProfile(prev =>
+        prev && (prev.name === updatedProfile.name || prev.id === updatedProfile.id)
+          ? updatedProfile
+          : prev
+      );
+    } else {
+      loadData();
+    }
+  };
+
   /** Cards-only refresh for curation panel. Does not trigger full loading overlay. */
   const loadCardsOnly = async () => {
     try {
@@ -303,7 +319,7 @@ function App() {
                <div style={{ marginTop: '20px', padding: '20px', backgroundColor: '#f5f5f5', borderRadius: '8px' }}>
                   <LanguageContentManager 
                     profile={currentProfile} 
-                    onProfileUpdate={loadData}
+                    onProfileUpdate={handleProfileUpdate}
                   />
                </div>
             )}

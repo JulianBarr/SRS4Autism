@@ -5,7 +5,7 @@ import TopicChat from './TopicChat';
 
 const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
-const MasteredGrammarManager = ({ profile, onClose, grammarLanguage = 'zh' }) => {
+const MasteredGrammarManager = ({ profile, onClose, onUpdate, grammarLanguage = 'zh' }) => {
   const { language: uiLanguage, t } = useLanguage();
   // grammarLanguage is now passed as prop from parent (no local state)
   const [grammarPoints, setGrammarPoints] = useState([]);
@@ -18,6 +18,10 @@ const MasteredGrammarManager = ({ profile, onClose, grammarLanguage = 'zh' }) =>
   const [lastSaveTime, setLastSaveTime] = useState(null);
   const saveTimeoutRef = useRef(null);
   const initialMasteredSetRef = useRef(null); // Store original state for reset
+  const masteredSetRef = useRef(masteredSet); // Track latest for flush-on-unmount
+  const onUpdateRef = useRef(onUpdate);
+  onUpdateRef.current = onUpdate;
+  masteredSetRef.current = masteredSet;
   const [editingId, setEditingId] = useState(null); // Track which grammar point is being edited
   const [editedGrammar, setEditedGrammar] = useState({}); // Store edited values
   const [savingGrammar, setSavingGrammar] = useState(false); // Track grammar save status
@@ -84,6 +88,22 @@ const MasteredGrammarManager = ({ profile, onClose, grammarLanguage = 'zh' }) =>
     loadGrammarPoints();
   }, [grammarLanguage]);
 
+  // Flush pending save on unmount so changes aren't lost when modal closes quickly
+  useEffect(() => {
+    return () => {
+      if (saveTimeoutRef.current) {
+        clearTimeout(saveTimeoutRef.current);
+        saveTimeoutRef.current = null;
+        const toSave = masteredSetRef.current;
+        const masteredGrammarString = Array.from(toSave).join(',');
+        const profileData = { ...profile, mastered_grammar: masteredGrammarString };
+        axios.put(`${API_BASE}/profiles/${profile.name}`, profileData)
+          .then((res) => onUpdateRef.current?.(res.data))
+          .catch((err) => console.error('Flush save on unmount failed:', err));
+      }
+    };
+  }, [profile]);
+
   // Auto-save function with debounce
   const saveMasteredGrammar = useCallback(async (grammarToSave, immediate = false) => {
     if (saveTimeoutRef.current) {
@@ -96,12 +116,23 @@ const MasteredGrammarManager = ({ profile, onClose, grammarLanguage = 'zh' }) =>
         // Join URIs with comma only (no space) since URIs don't contain commas
         const masteredGrammarString = Array.from(grammarToSave).join(',');
         const profileData = { ...profile, mastered_grammar: masteredGrammarString };
-        await axios.put(`${API_BASE}/profiles/${profile.name}`, profileData);
+        const response = await axios.put(`${API_BASE}/profiles/${profile.name}`, profileData);
         setLastSaveTime(new Date());
-        // NO onUpdate call - modal is isolated during editing
+        onUpdate?.(response.data);
       } catch (error) {
         console.error('Error saving mastered grammar:', error);
         alert(t('failedToSaveMasteredGrammar'));
+        // Revert to server state by refetching
+        try {
+          const res = await axios.get(`${API_BASE}/profiles/${profile.name}`);
+          const grammar = (res.data.mastered_grammar || '')
+            .split(',')
+            .map(g => g.trim())
+            .filter(g => g);
+          setMasteredSet(new Set(grammar));
+        } catch (refetchErr) {
+          console.error('Error refetching profile:', refetchErr);
+        }
       } finally {
         setSaving(false);
       }
@@ -112,7 +143,7 @@ const MasteredGrammarManager = ({ profile, onClose, grammarLanguage = 'zh' }) =>
     } else {
       saveTimeoutRef.current = setTimeout(saveAction, 500); // 500ms debounce
     }
-  }, [profile]);
+  }, [profile, onUpdate, t]);
 
   // Toggle grammar mastery with auto-save
   // grammarPoint should be gp_uri (unique identifier)
