@@ -4,7 +4,7 @@ import json
 import logging
 import re
 from datetime import datetime
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Union
 
 # --- PATH SETUP ---
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -34,6 +34,11 @@ def _set_genai_model(model):
 # We use a flexible Dict return type to support flattening
 class UpdateCardRequest(BaseModel):
     status: str
+    text_field: Optional[str] = None
+    extra_field: Optional[str] = None
+    front: Optional[str] = None
+    back: Optional[str] = None
+    tags: Optional[List[str]] = None
     content: Optional[Dict[str, Any]] = None
 
 class ImageGenerationRequest(BaseModel):
@@ -196,13 +201,24 @@ def update_card(card_id: str, request: UpdateCardRequest, db: Session = Depends(
         card.status = request.status
         if request.status == "approved" and not card.approved_at:
             card.approved_at = datetime.utcnow()
-            
+
+        # Pack flat fields from UI back into the content blob
+        current_content = safe_parse_content(card.content)
+        if request.text_field is not None:
+            current_content["text_field"] = request.text_field
+        elif request.front is not None:
+            current_content["text_field"] = request.front
+        if request.extra_field is not None:
+            current_content["extra_field"] = request.extra_field
+        elif request.back is not None:
+            current_content["extra_field"] = request.back
+        if request.tags is not None:
+            current_content["tags"] = request.tags
         if request.content:
-            # If updating content, we must respect the DB structure (storage is nested)
-            # But we receive it flat or nested? Usually frontend sends what it got.
-            # We'll assume request.content IS the content blob.
-            card.content = json.dumps(request.content)
-            
+            # Allow full content blob override if provided
+            current_content.update(request.content)
+        card.content = json.dumps(current_content)
+
         db.commit()
         db.refresh(card)
         # Return flat structure

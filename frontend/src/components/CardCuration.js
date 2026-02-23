@@ -189,6 +189,7 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
   const [availableDecks, setAvailableDecks] = useState([]);
   const [editingCard, setEditingCard] = useState(null);
   const [editForm, setEditForm] = useState({});
+  const [savingEdit, setSavingEdit] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [currentPageApproved, setCurrentPageApproved] = useState(1);
   const [currentPageSynced, setCurrentPageSynced] = useState(1);
@@ -370,15 +371,20 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
   };
 
   const handleSaveEdit = async () => {
+    if (!editingCard || savingEdit) return;
+    setSavingEdit(true);
     try {
-      // Update card in backend
       await axios.put(`${API_BASE}/cards/${editingCard}`, editForm);
+      if (onRefresh && typeof onRefresh === 'function') {
+        await onRefresh();
+      }
       setEditingCard(null);
       setEditForm({});
-      onRefresh();
     } catch (error) {
       console.error('Error saving card:', error);
-      alert('Failed to save card changes');
+      alert(t('failedToSaveCard'));
+    } finally {
+      setSavingEdit(false);
     }
   };
 
@@ -685,50 +691,50 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
   const renderEditForm = (card) => {
     return (
       <div className="card-edit-form">
-        <h4>Editing {card.card_type} card</h4>
+        <h4>{t('editingCardTitle').replace('{type}', card.card_type || '')}</h4>
         
         {card.card_type === 'interactive_cloze' ? (
           <>
             <div className="form-group">
-              <label>Text (with [[c1::answer]] syntax - paste images supported):</label>
+              <label>{t('textFieldLabel')}</label>
               <RichTextEditor
                 value={editForm.text_field || ''}
                 onChange={(value) => handleEditFieldChange('text_field', value)}
-                placeholder="Type or paste content with [[c1::cloze]] syntax. You can paste images!"
+                placeholder={t('textFieldPlaceholder')}
               />
             </div>
             <div className="form-group">
-              <label>Extra Info (optional - paste images supported):</label>
+              <label>{t('extraFieldLabel')}</label>
               <RichTextEditor
                 value={editForm.extra_field || ''}
                 onChange={(value) => handleEditFieldChange('extra_field', value)}
-                placeholder="Additional context or hints. You can paste images!"
+                placeholder={t('extraFieldPlaceholder')}
               />
             </div>
           </>
         ) : (
           <>
             <div className="form-group">
-              <label>Front (paste images supported):</label>
+              <label>{t('frontLabel')}</label>
               <RichTextEditor
                 value={editForm.front || ''}
                 onChange={(value) => handleEditFieldChange('front', value)}
-                placeholder="Question or prompt. You can paste images!"
+                placeholder={t('frontPlaceholder')}
               />
             </div>
             <div className="form-group">
-              <label>Back (paste images supported):</label>
+              <label>{t('backLabel')}</label>
               <RichTextEditor
                 value={editForm.back || ''}
                 onChange={(value) => handleEditFieldChange('back', value)}
-                placeholder="Answer. You can paste images!"
+                placeholder={t('backPlaceholder')}
               />
             </div>
           </>
         )}
         
         <div className="form-group">
-          <label>Tags (comma-separated):</label>
+          <label>{t('tagsLabel')}</label>
           <input
             type="text"
             value={(editForm.tags || []).join(', ')}
@@ -740,11 +746,19 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
         </div>
         
         <div className="edit-actions">
-          <button onClick={handleSaveEdit} className="btn btn-success">
-            Save Changes
+          <button
+            onClick={handleSaveEdit}
+            className="btn btn-success"
+            disabled={savingEdit}
+          >
+            {savingEdit ? t('savingChanges') : t('saveChanges')}
           </button>
-          <button onClick={handleCancelEdit} className="btn btn-secondary">
-            Cancel
+          <button
+            onClick={handleCancelEdit}
+            className="btn btn-secondary"
+            disabled={savingEdit}
+          >
+            {t('cancel')}
           </button>
         </div>
       </div>
