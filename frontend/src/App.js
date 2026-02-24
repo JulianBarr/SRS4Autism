@@ -4,6 +4,7 @@ import ChatAssistant from './components/ChatAssistant';
 import CardCuration from './components/CardCuration';
 import ChildProfileSettings from './components/ChildProfileSettings';
 import LanguageContentManager from './components/LanguageContentManager';
+import CognitionContentManager from './components/CognitionContentManager';
 import TemplateManager from './components/TemplateManager';
 import ContentCategoryNav from './components/ContentCategoryNav';
 import MariosWorld from './components/MariosWorld';
@@ -322,6 +323,12 @@ function App() {
                     onProfileUpdate={handleProfileUpdate}
                   />
                </div>
+            )}
+
+            {activeCategory === 'cognition' && (
+              <div style={{ marginTop: '20px' }}>
+                <CognitionContentManager />
+              </div>
             )}
             
             {activeCategory === 'math' && (

@@ -29,6 +29,12 @@ export const theme = {
       light: '#BA68C8',
       dark: '#6A1B9A',
       background: '#F3E5F5'
+    },
+    cognition: {
+      primary: '#00ACC1',
+      light: '#4DD0E1',
+      dark: '#00838F',
+      background: '#E0F7FA'
     }
   },
   

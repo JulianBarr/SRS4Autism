@@ -50,10 +50,10 @@ echo "✅ Ports are clear!"
 
 # 4. Set Proxy Settings (ShadowsocksX-NG)
 echo "🌐 Setting up proxy..."
-export http_proxy=http://127.0.0.1:1087
-export https_proxy=http://127.0.0.1:1087
-export HTTP_PROXY=http://127.0.0.1:1087
-export HTTPS_PROXY=http://127.0.0.1:1087
+export http_proxy=socks5://127.0.0.1:56435
+export https_proxy=socks5://127.0.0.1:56435
+export HTTP_PROXY=socks5://127.0.0.1:56435
+export HTTPS_PROXY=socks5://127.0.0.1:56435
 export NO_PROXY=localhost,127.0.0.1,0.0.0.0
 export BROWSER=none
 

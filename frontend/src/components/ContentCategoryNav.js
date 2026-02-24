@@ -4,13 +4,14 @@ import theme from '../styles/theme';
 
 /**
  * Content Category Navigation
- * Organizes content into: Language, Math, Common Knowledge, Culture
+ * Organizes content into: Language, Cognition, Math, Common Knowledge, Culture
  */
 const ContentCategoryNav = ({ activeCategory, onCategoryChange }) => {
   const { t } = useLanguage();
   
   const categories = [
     { id: 'language', label: t('language'), icon: '📚', color: theme.categories.language },
+    { id: 'cognition', label: t('cognition'), icon: '🧠', color: theme.categories.cognition },
     { id: 'math', label: t('math'), icon: '🔢', color: theme.categories.math },
     { id: 'knowledge', label: t('commonKnowledge'), icon: '🌍', color: theme.categories.knowledge },
     { id: 'culture', label: t('culture'), icon: '🎭', color: theme.categories.culture }
