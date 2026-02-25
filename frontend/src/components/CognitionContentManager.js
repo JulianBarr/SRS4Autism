@@ -4,56 +4,113 @@ import theme from '../styles/theme';
 
 /**
  * MacroObjective row - clickable row for a macro objective.
- * TODO: Clicking will eventually open a drawer/modal showing the detailed TeachingTask cards.
+ * Expands to show Level 3 Quest Cards (phases) when clicked.
  */
-const MacroObjectiveRow = ({ objective }) => {
-  const { uri_id, label } = objective;
+const MacroObjectiveRow = ({ objective, isExpanded, onToggle }) => {
+  const { uri_id, label, phases } = objective;
+  const hasPhases = phases && phases.length > 0;
+
   return (
-    <div
-      role="button"
-      tabIndex={0}
-      onClick={() => {
-        /* TODO: Open drawer/modal with TeachingTask cards for this objective */
-      }}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          /* TODO: Open drawer/modal */
-        }
-      }}
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: theme.spacing.sm,
-        padding: `${theme.spacing.sm} ${theme.spacing.md}`,
-        borderRadius: theme.borderRadius.sm,
-        cursor: 'pointer',
-        backgroundColor: theme.ui.background,
-        border: `1px solid ${theme.ui.border}`,
-        transition: 'background-color 0.15s ease, border-color 0.15s ease'
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.backgroundColor = theme.ui.backgrounds.hover;
-        e.currentTarget.style.borderColor = theme.categories.cognition.light;
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.backgroundColor = theme.ui.background;
-        e.currentTarget.style.borderColor = theme.ui.border;
-      }}
-    >
-      <span
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+      <div
+        role="button"
+        tabIndex={0}
+        onClick={onToggle}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            onToggle();
+          }
+        }}
         style={{
-          fontSize: '12px',
-          color: theme.ui.text.hint,
-          fontFamily: 'monospace',
-          minWidth: '48px'
+          display: 'flex',
+          alignItems: 'center',
+          gap: theme.spacing.sm,
+          padding: `${theme.spacing.sm} ${theme.spacing.md}`,
+          borderRadius: theme.borderRadius.sm,
+          cursor: 'pointer',
+          backgroundColor: theme.ui.background,
+          border: `1px solid ${theme.ui.border}`,
+          transition: 'background-color 0.15s ease, border-color 0.15s ease'
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.backgroundColor = theme.ui.backgrounds.hover;
+          e.currentTarget.style.borderColor = theme.categories.cognition.light;
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.backgroundColor = theme.ui.background;
+          e.currentTarget.style.borderColor = theme.ui.border;
         }}
       >
-        {uri_id.replace(/^.*:/, '')}
-      </span>
-      <span style={{ fontSize: '14px', color: theme.ui.text.primary, flex: 1 }}>
-        {label}
-      </span>
+        <span style={{ fontSize: '14px', color: theme.ui.text.primary, flex: 1 }}>
+          {label}
+        </span>
+        <span
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            color: theme.ui.text.hint,
+            transition: 'transform 0.2s ease'
+          }}
+        >
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            style={{
+              transform: isExpanded ? 'rotate(90deg)' : 'rotate(0deg)'
+            }}
+          >
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </span>
+      </div>
+      {isExpanded && (
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: theme.spacing.sm,
+            padding: theme.spacing.md,
+            marginTop: theme.spacing.xs,
+            marginLeft: theme.spacing.lg,
+            backgroundColor: theme.ui.backgrounds.surface,
+            borderRadius: theme.borderRadius.sm,
+            borderLeft: `3px solid ${theme.categories.cognition.light}`,
+            transition: 'opacity 0.2s ease'
+          }}
+        >
+          {hasPhases ? (
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+                gap: theme.spacing.md
+              }}
+            >
+              {phases.map((quest) => (
+                <QuestCard key={quest.uri_id} quest={quest} />
+              ))}
+            </div>
+          ) : (
+            <p
+              style={{
+                fontSize: '13px',
+                color: theme.ui.text.secondary,
+                fontStyle: 'italic',
+                margin: 0
+              }}
+            >
+              暂无阶段任务 (No phasal quests yet)
+            </p>
+          )}
+        </div>
+      )}
     </div>
   );
 };
@@ -179,29 +236,28 @@ const QuestCard = ({ quest }) => {
  */
 const CognitionContentManager = () => {
   const [macroGroups, setMacroGroups] = useState([]);
-  const [quests, setQuests] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [expandedObjective, setExpandedObjective] = useState(null);
 
   useEffect(() => {
     const load = async () => {
       setLoading(true);
       try {
-        const [macroData, questData] = await Promise.all([
-          CognitionQuestService.getMacroStructure(),
-          CognitionQuestService.getUnlockedQuests([])
-        ]);
+        const macroData = await CognitionQuestService.getMacroStructure();
         setMacroGroups(macroData);
-        setQuests(questData);
       } catch (err) {
         console.error('Failed to load cognition content:', err);
         setMacroGroups([]);
-        setQuests([]);
       } finally {
         setLoading(false);
       }
     };
     load();
   }, []);
+
+  const handleToggleObjective = (uriId) => {
+    setExpandedObjective((prev) => (prev === uriId ? null : uriId));
+  };
 
   return (
     <div
@@ -268,7 +324,12 @@ const CognitionContentManager = () => {
                 }}
               >
                 {group.objectives.map((obj) => (
-                  <MacroObjectiveRow key={obj.uri_id} objective={obj} />
+                  <MacroObjectiveRow
+                    key={obj.uri_id}
+                    objective={obj}
+                    isExpanded={expandedObjective === obj.uri_id}
+                    onToggle={() => handleToggleObjective(obj.uri_id)}
+                  />
                 ))}
               </div>
             </details>
@@ -276,23 +337,6 @@ const CognitionContentManager = () => {
         </div>
       )}
 
-      {/* TeachingTask cards - hidden by default. Clicking a MacroObjective row will
-          eventually open a drawer/modal showing these detailed cards for that objective. */}
-      {quests.length > 0 && (
-        <div style={{ display: 'none' }}>
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
-              gap: theme.spacing.lg
-            }}
-          >
-            {quests.map((quest) => (
-              <QuestCard key={quest.uri_id} quest={quest} />
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   );
 };
