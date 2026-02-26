@@ -1,0 +1,25 @@
+{
+  "domain": "小肌肉发展",
+  "age_range": "",
+  "macro_objective": "增进拼砌技能",
+  "quests": [
+    {
+      "quest_name": "完成连接性的图画拼版 - 拼2-4块连接性的木拼板",
+      "materials": [
+        "木拼板"
+      ],
+      "teaching_steps": "①导师展示拼板的照片，示范并引导儿童从上侧拿起拼板，学会用手腕旋转和调整的方式，将拼板放入正确的位置。观察和理解图中拼搭的顺序和块之间的关系是重点。②最开始只留1—2块拼板，熟练后可增加拼板块数，直至能独立完成。",
+      "group_class_generalization": "个人工作课的练习。",
+      "home_generalization": null
+    },
+    {
+      "quest_name": "完成连接性的图画拼版 - 较复杂的非几何图形的拼板",
+      "materials": [
+        "拼板"
+      ],
+      "teaching_steps": "所有动作操作要求见小肌肉发展篇（1—2岁年龄段）中的“形状拼版”。",
+      "group_class_generalization": "个人工作课独立完成。",
+      "home_generalization": "让儿童将散落在外的修理工具，放回工具箱中（按照轮廓形状）。"
+    }
+  ]
+}

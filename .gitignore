@@ -126,3 +126,5 @@ tools/chinese_grammar/grammar_staging.json
 tools/chinese_grammar/grammar_staging_pdf.json
 data/knowledge_graph_store/
 knowledge_graph_data/
+data_prep/QCQ_handbook/
+data_prep/handbook_sample/

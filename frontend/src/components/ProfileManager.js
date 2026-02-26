@@ -630,6 +630,28 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
     }
   };
 
+  const handleMasteredWordsUpdate = (updatedProfile) => {
+    // Only update the selected profile in modal - avoid onProfilesChange during autosave
+    if (selectedProfileForMasteredWords &&
+        (selectedProfileForMasteredWords.name === updatedProfile.name ||
+         selectedProfileForMasteredWords.id === updatedProfile.id)) {
+      setSelectedProfileForMasteredWords(updatedProfile);
+    }
+  };
+
+  const handleCloseMasteredWords = () => {
+    const profileToMerge = selectedProfileForMasteredWords;
+    setShowMasteredWordsManager(false);
+    setSelectedProfileForMasteredWords(null);
+    // Merge the edited profile into the list (no refetch - avoids page refresh)
+    if (profileToMerge) {
+      const newProfiles = profiles.map(p =>
+        (p.name === profileToMerge.name || p.id === profileToMerge.id) ? profileToMerge : p
+      );
+      onProfilesChange(newProfiles);
+    }
+  };
+
   const handleMasteredGrammarUpdate = (updatedProfile) => {
     // Only update the selected profile in modal - avoid onProfilesChange during autosave
     // so we don't trigger parent re-renders or refresh while the user is editing
@@ -1164,14 +1186,7 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
             position: 'relative'
           }}>
             <button
-              onClick={() => {
-                setShowMasteredWordsManager(false);
-                setSelectedProfileForMasteredWords(null);
-                // Refresh profiles after closing
-                axios.get(`${API_BASE}/profiles`).then(response => {
-                  onProfilesChange(response.data);
-                });
-              }}
+              onClick={handleCloseMasteredWords}
               style={{
                 position: 'absolute',
                 top: '10px',
@@ -1188,19 +1203,7 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
             <MasteredWordsManager
               key={`${selectedProfileForMasteredWords?.name}-${selectedProfileForMasteredWords?.mastered_words?.length || 0}`}
               profile={selectedProfileForMasteredWords}
-              onUpdate={async () => {
-                // Refresh profiles
-                const response = await axios.get(`${API_BASE}/profiles`);
-                onProfilesChange(response.data);
-                // Update selected profile
-                const updated = response.data.find(p => 
-                  p.name === selectedProfileForMasteredWords.name || 
-                  p.id === selectedProfileForMasteredWords.id
-                );
-                if (updated) {
-                  setSelectedProfileForMasteredWords(updated);
-                }
-              }}
+              onUpdate={handleMasteredWordsUpdate}
             />
           </div>
         </div>

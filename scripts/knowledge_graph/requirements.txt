@@ -1,4 +1,5 @@
 rdflib>=6.0.0
+fsrs>=5.0.0
 chinese-converter>=1.1.0
 dragonmapper>=0.13.0
 requests>=2.31.0

@@ -311,7 +311,7 @@ Generate an image that matches this description exactly."""
         
         # Map image model IDs to actual Gemini model names
         image_model_map = {
-            "gemini-3-pro-image-preview": "models/gemini-3-pro-image-preview",
+            "-pro-image-preview": "models/gemini-3-pro-image-preview",
             "gemini-2.5-flash-image": "models/gemini-2.5-flash-image",
             "gemini-2.0-flash-exp-image-generation": "models/gemini-2.0-flash-exp-image-generation",
             "imagen-4.0-generate-001": "models/imagen-4.0-generate-001",  # Note: May require Vertex AI

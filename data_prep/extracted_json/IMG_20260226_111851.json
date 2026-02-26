@@ -1,0 +1,26 @@
+{
+  "domain": "语言理解篇",
+  "age_range": "",
+  "macro_objective": "理解简单的双词指令或句子",
+  "quests": [
+    {
+      "quest_name": "能理解只包括一个步骤的指示",
+      "materials": [
+        "玩具",
+        "篮子"
+      ],
+      "teaching_steps": "导师给儿童一个玩具，然后发出指令，“把××给我”“把××放好”“把××放在篮子里”。",
+      "group_class_generalization": "在上课前，导师下指令：“起立”“请坐”“拿出书本”“翻开书”等，儿童都能按要求操作。",
+      "home_generalization": "家长可以给儿童下指令“把××给我”“把××放在衣柜里”。"
+    },
+    {
+      "quest_name": "能对有否定意思的指令作出适当反应",
+      "materials": [
+        "玩具"
+      ],
+      "teaching_steps": "融入教学过程中，导师提示儿童“不可以”“不能”，同时马上给一个准确指示。",
+      "group_class_generalization": "儿童用不正确的方式表现自己时，导师阻止儿童，并提示儿童“不可以，你可以这样做”。",
+      "home_generalization": "儿童在乱丢玩具时，家长提示：“不可以。”"
+    }
+  ]
+}

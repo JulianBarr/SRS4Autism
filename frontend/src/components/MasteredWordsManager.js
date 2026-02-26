@@ -16,6 +16,10 @@ const MasteredWordsManager = ({ profile, onUpdate }) => {
   const [lastSaveTime, setLastSaveTime] = useState(null);
   const saveTimeoutRef = useRef(null);
   const initialMasteredSetRef = useRef(null); // Store original state for reset
+  const masteredSetRef = useRef(masteredSet); // Track latest for flush-on-unmount
+  const onUpdateRef = useRef(onUpdate);
+  onUpdateRef.current = onUpdate;
+  masteredSetRef.current = masteredSet;
   const [wordImages, setWordImages] = useState({}); // Cache of word -> image URL
   const [loadingImages, setLoadingImages] = useState(false);
   const imageObserverRef = useRef(null);
@@ -42,6 +46,22 @@ const MasteredWordsManager = ({ profile, onUpdate }) => {
       initialMasteredSetRef.current = new Set();
     }
   }, [profile?.mastered_words]); // Depend only on mastered_words string value
+
+  // Flush pending save on unmount so changes aren't lost when modal closes quickly
+  useEffect(() => {
+    return () => {
+      if (saveTimeoutRef.current) {
+        clearTimeout(saveTimeoutRef.current);
+        saveTimeoutRef.current = null;
+        const toSave = masteredSetRef.current;
+        const masteredWordsString = Array.from(toSave).join(', ');
+        const profileData = { ...profile, mastered_words: masteredWordsString };
+        axios.put(`${API_BASE}/profiles/${profile.name}`, profileData)
+          .then((res) => onUpdateRef.current?.(res.data))
+          .catch((err) => console.error('Flush save on unmount failed:', err));
+      }
+    };
+  }, [profile]);
 
   // Load HSK vocabulary
   useEffect(() => {
@@ -141,14 +161,23 @@ const MasteredWordsManager = ({ profile, onUpdate }) => {
       try {
         const masteredWordsString = Array.from(wordsToSave).join(', ');
         const profileData = { ...profile, mastered_words: masteredWordsString };
-        await axios.put(`${API_BASE}/profiles/${profile.name}`, profileData);
+        const response = await axios.put(`${API_BASE}/profiles/${profile.name}`, profileData);
         setLastSaveTime(new Date());
-        if (immediate && onUpdate) {
-          await onUpdate();
-        }
+        onUpdate?.(response.data);
       } catch (error) {
         console.error('Error saving mastered words:', error);
         alert(t('failedToSaveMasteredWords'));
+        // Revert to server state by refetching
+        try {
+          const res = await axios.get(`${API_BASE}/profiles/${profile.name}`);
+          const words = (res.data.mastered_words || '')
+            .split(/[,\s，]+/)
+            .map(w => w.trim())
+            .filter(w => w);
+          setMasteredSet(new Set(words));
+        } catch (refetchErr) {
+          console.error('Error refetching profile:', refetchErr);
+        }
       } finally {
         setSaving(false);
       }
@@ -159,7 +188,7 @@ const MasteredWordsManager = ({ profile, onUpdate }) => {
     } else {
       saveTimeoutRef.current = setTimeout(saveAction, 500); // 500ms debounce
     }
-  }, [profile, onUpdate]);
+  }, [profile, onUpdate, t]);
 
   // Toggle word mastery with auto-save
   const toggleWord = useCallback((word) => {

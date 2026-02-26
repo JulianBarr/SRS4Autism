@@ -1,0 +1,35 @@
+{
+  "domain": "大肌肉发展篇",
+  "age_range": "",
+  "macro_objective": "",
+  "quests": [
+    {
+      "quest_name": "站立踢球",
+      "materials": [
+        "球",
+        "固定物"
+      ],
+      "teaching_steps": "① 老师示范站立踢球的方法。\n② 指导儿童完成相同的练习。刚开始练习时可让儿童借助固定物保持身体平衡，之后慢慢减少。\n③ 要求儿童能将球踢入2米外的固定范围内。",
+      "group_class_generalization": null,
+      "home_generalization": null
+    },
+    {
+      "quest_name": "举手过头上抛球",
+      "materials": [
+        "大皮球"
+      ],
+      "teaching_steps": "① 导师进行示范双手将球举过头顶的动作并向前抛球。\n② 导师引导儿童双手拿住球并举过头顶，下指令“抛”，儿童将球抛给导师。",
+      "group_class_generalization": null,
+      "home_generalization": null
+    },
+    {
+      "quest_name": "双手接住抛来的球",
+      "materials": [
+        "大皮球"
+      ],
+      "teaching_steps": "① 导师将球抛向儿童，并下指令“接”，儿童能自行伸出双手接住抛来的球。\n② 导师抛球的距离由近到远。",
+      "group_class_generalization": null,
+      "home_generalization": null
+    }
+  ]
+}

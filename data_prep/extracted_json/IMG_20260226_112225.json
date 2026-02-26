@@ -1,0 +1,49 @@
+{
+  "domain": "",
+  "age_range": "",
+  "macro_objective": "操作技能",
+  "quests": [
+    {
+      "quest_name": "自行将绳穿入大针并缝合 - 穿针",
+      "materials": [
+        "毛线",
+        "大针",
+        "穿线板"
+      ],
+      "teaching_steps": "① 导师示范一手拿大针一手拿毛线，当毛线的前端穿过针孔后拉出。引导儿童完成同样的动作。\n② 待儿童熟练完成后可在穿线板上来回缝合。",
+      "group_class_generalization": "主题课母亲节时可结合《游子吟》相关的活动。",
+      "home_generalization": "帮助家人完成缝补。"
+    },
+    {
+      "quest_name": "自行将绳穿入大针并缝合 - 能用绳子捆住物件，会打结",
+      "materials": [
+        "绳子或丝带",
+        "小物件",
+        "小包装盒"
+      ],
+      "teaching_steps": "导师示范并教会儿童留出适宜的绳两端，二绳交叉，一手捏住交叉处，主控手将一段绳子完全穿过圆圈，手缩回后双手立刻握住绳两端并拉紧打结。动作要求见“小肌肉发展篇·4-5岁年龄段”中的“系鞋带”。",
+      "group_class_generalization": "烹饪课捆粽子。",
+      "home_generalization": "打结包装小礼品。"
+    },
+    {
+      "quest_name": "用锤子敲打钉子 - 用螺钉螺帽组装玩具",
+      "materials": [
+        "螺钉螺帽组装玩具",
+        "图样"
+      ],
+      "teaching_steps": "① 导师出示螺钉螺帽组装图样，指导儿童按照图案用螺钉螺帽将拼块组装在一起。\n② 要求儿童能按照顺序组装；有能力时，可引导有想象力地随意拆卸、组装成一件物品（避免简单排列）。",
+      "group_class_generalization": "个人工作课：照图案组装螺母螺帽。",
+      "home_generalization": "照图案组装玩具，如玩具车。"
+    },
+    {
+      "quest_name": "用锤子敲打钉子 - 用订书机装订",
+      "materials": [
+        "纸张",
+        "订书机"
+      ],
+      "teaching_steps": "",
+      "group_class_generalization": null,
+      "home_generalization": null
+    }
+  ]
+}

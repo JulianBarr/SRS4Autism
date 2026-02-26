@@ -1,0 +1,39 @@
+{
+  "domain": "认知发展",
+  "age_range": "",
+  "macro_objective": "开始学习数字及其意义",
+  "quests": [
+    {
+      "quest_name": "画迷宫",
+      "materials": [
+        "迷宫图卡"
+      ],
+      "teaching_steps": "导师让儿童在迷宫的图卡上画出迷宫的线路。",
+      "group_class_generalization": "社交课上，导师出示花朵采蜜迷宫图纸，儿童分饰不同蜜蜂走出迷宫采出蜂蜜。",
+      "home_generalization": "玩家庭 DIY 迷宫，如用积木片摆出不同弯曲迷宫。"
+    },
+    {
+      "quest_name": "完成 4—6 块的拼图（照样拼图）",
+      "materials": [
+        "4—6 块拼图、拼图的照片"
+      ],
+      "teaching_steps": "导师把拼图以及拼图的照片拿给儿童，引导儿童对照照片并按顺序拼出图案。",
+      "group_class_generalization": "社交游戏课，大家一起玩拼图游戏，2 人一组完成 4—6 块的拼图。",
+      "home_generalization": "玩亲子拼图。"
+    },
+    {
+      "quest_name": "走步数楼梯",
+      "materials": [],
+      "teaching_steps": "导师让儿童练习走一步数一步。",
+      "group_class_generalization": "体能课上，导师搭出阶梯教具引导儿童走一步数一步。",
+      "home_generalization": "融入日常，可以让儿童练习走一步数一步。"
+    },
+    {
+      "quest_name": "拍手游戏，数字儿歌",
+      "materials": [],
+      "teaching_steps": "导师和儿童做互动游戏，唱数字儿歌。例：“你拍 1，我拍 1，你拍 2，我拍 2……”",
+      "group_class_generalization": "导师在课前带领儿童做手指谣游戏，如“数字歌”。",
+      "home_generalization": "亲子互动唱数字儿歌，如“数鸭子”等。"
+    }
+  ]
+}

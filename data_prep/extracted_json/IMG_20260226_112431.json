@@ -1,0 +1,60 @@
+{
+  "domain": "",
+  "age_range": "",
+  "macro_objective": "3. 模仿画单一的线条",
+  "quests": [
+    {
+      "quest_name": "(2) 镂空板内涂鸦",
+      "materials": [
+        "纸",
+        "蜡笔",
+        "镂空板"
+      ],
+      "teaching_steps": "导师示范，让儿童在镂空板内涂鸦。",
+      "group_class_generalization": "创意乐课，导师准备一张 A4 纸镂空剪出小鸭子，让儿童用拓印棒拓印上颜色。",
+      "home_generalization": "家庭亲子创作用镂空板装饰环境，如星空，草地，游乐园，家长示范涂鸦，让儿童模仿。"
+    },
+    {
+      "quest_name": "(3) 木棒在沙盘上涂画",
+      "materials": [
+        "木棒",
+        "沙盘"
+      ],
+      "teaching_steps": "导师在儿童注视时，示范拿小棒在沙盘上涂画，然后引导或辅助儿童同样做。",
+      "group_class_generalization": "创意乐课，导师在沙盘上画一个圆圈，让儿童沿着圆圈痕迹模仿画圆。",
+      "home_generalization": "家长带着儿童去沙坑玩，家长在沙地上画五角星，让儿童沿着圆圈痕迹模仿画五角星。"
+    },
+    {
+      "quest_name": "(4) 牙刷画",
+      "materials": [
+        "牙刷",
+        "白纸",
+        "颜料",
+        "调色盘"
+      ],
+      "teaching_steps": "导师示范用牙刷蘸颜料在白纸上涂画，然后引导或辅助儿童同样操作。",
+      "group_class_generalization": "绘画课上导师示范用牙刷蘸颜料在白纸上涂出海浪的波纹，小草。",
+      "home_generalization": "亲子绘画游戏：家长用牙刷在 A4 纸上刷出树枝形状，儿童模仿。"
+    },
+    {
+      "quest_name": "(5) 画画板",
+      "materials": [
+        "画板"
+      ],
+      "teaching_steps": "导师示范在画板上涂鸦或画简单线条，要求儿童做一样的，可以重复以上过程。",
+      "group_class_generalization": "创意乐课，儿童用白板笔再黑板上模仿导师画简单的简笔画，如太阳、气球、房子、小鱼。",
+      "home_generalization": "亲子绘画时间，学习简笔画。"
+    },
+    {
+      "quest_name": "(6) 模仿画点",
+      "materials": [
+        "纸",
+        "蜡笔",
+        "画板"
+      ],
+      "teaching_steps": "导师在儿童注视时，示范在纸或画板上画点，并引导或辅助儿童模仿画一样的。",
+      "group_class_generalization": "创意乐课，导师出示一棵苹果树，并在树上手指点画苹果，让儿童用手指蘸红色颜料，说：“和老师做一样的。”",
+      "home_generalization": "画雪人，儿童模仿家长给雪人点纽扣。"
+    }
+  ]
+}

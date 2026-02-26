@@ -1,0 +1,17 @@
+{
+  "child_name": "小明",
+  "quest_cards": {
+    "task_count_1_2": {
+      "due": "2026-03-01T07:56:50.789614+00:00",
+      "stability": 4.350979488306093,
+      "difficulty": 5.267035550345074,
+      "elapsed_days": 0,
+      "scheduled_days": 4,
+      "reps": 2,
+      "lapses": 0,
+      "state": 2,
+      "last_review": "2026-02-25T07:56:50.789614+00:00"
+    }
+  },
+  "created_at": "2026-02-25T07:45:33.587055+00:00"
+}

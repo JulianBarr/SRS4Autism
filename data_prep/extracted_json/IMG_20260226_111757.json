@@ -1,0 +1,47 @@
+[
+  {
+    "domain": "语言理解",
+    "age_range": "",
+    "macro_objective": "会聆听成人的对话及音乐声",
+    "quests": [
+      {
+        "quest_name": "会聆听成人的对话及音乐声",
+        "materials": [
+          "声光玩具",
+          "乐器"
+        ],
+        "teaching_steps": "① 导师播放音乐观察儿童的专注度。② 导师可以放时间较长的音乐给儿童听。",
+        "group_class_generalization": "音乐课上，导师播放音乐或视频观察儿童对其的反应，如认真听或看视频。",
+        "home_generalization": "家长可以播放音乐或视频，观察儿童是否能聆听音乐或声音。"
+      }
+    ]
+  },
+  {
+    "domain": "语言理解",
+    "age_range": "",
+    "macro_objective": "开始发展对环境的理解",
+    "quests": [
+      {
+        "quest_name": "利用环境提示和熟悉的环境明白成人说话的意思",
+        "materials": [],
+        "teaching_steps": "融会在课程中或日常生活中，如导师张开手臂说“抱抱”，引导儿童走向导师。当导师拥抱时要表现开心，反复几次后儿童就会理解导师的意思。",
+        "group_class_generalization": "早课上，导师和儿童打招呼，张开手臂说“早上好，抱一抱”，引导儿童走向导师。",
+        "home_generalization": "家长带儿童外出，为儿童换衣服时，可指着旁边的衣服说“穿”，引导儿童看衣服或拿起衣服。"
+      }
+    ]
+  },
+  {
+    "domain": "语言理解",
+    "age_range": "",
+    "macro_objective": "对名字的理解及反应",
+    "quests": [
+      {
+        "quest_name": "能对自己名字作出反应，显示已听到名字",
+        "materials": [],
+        "teaching_steps": "融会在课堂及家庭训练中进行。如在与儿童互动过程中反复呼叫儿童的名字（注意避免无目的地叫儿童名字），并引导儿童当被叫到名字时要有反应。",
+        "group_class_generalization": "导师在做手指谣时可以反复呼叫儿童，观察儿童的反应是否会看向导师。",
+        "home_generalization": "家长叫儿童的名字，观察儿童是否有反应。"
+      }
+    ]
+  }
+]

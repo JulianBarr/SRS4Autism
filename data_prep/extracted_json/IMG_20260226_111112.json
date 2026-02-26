@@ -1,0 +1,41 @@
+{
+  "domain": "认知发展",
+  "age_range": "",
+  "macro_objective": "明白比较的概念",
+  "quests": [
+    {
+      "quest_name": "比较物件大小（最大，最小）- 排序",
+      "materials": [
+        "套娃",
+        "套杯",
+        "套圈",
+        "大小不等的物件"
+      ],
+      "teaching_steps": "导师把从大到小的同类物件拿给儿童，引导儿童从大到小（或从小到大）排列。同样方法排序其他物件（先同类物件，再不同类物件）。",
+      "group_class_generalization": "社交游戏课上玩套娃游戏，从小到大排序套娃。",
+      "home_generalization": "亲子整理衣柜游戏，按照大中小给衣服排序挂到衣柜里。"
+    },
+    {
+      "quest_name": "比较物件大小（最大，最小）- 辨认最大、最小",
+      "materials": [
+        "套娃",
+        "套杯",
+        "套圈",
+        "大小不等的物件"
+      ],
+      "teaching_steps": "① 导师拿出大小不等的几块积木放在桌上，引导儿童把最大的积木给导师，儿童掌握后用同样方法教最小的。同样方法辨认其他最大、最小物件。\n② 先同类物件辨别，随后可以不同类物件进行辨别。",
+      "group_class_generalization": "社交游戏课，导师拿出套杯引导儿童辨认最大的套杯和最小的套杯。",
+      "home_generalization": "亲子整理鞋柜游戏，让儿童把最大的和最小的鞋子拿出来。"
+    },
+    {
+      "quest_name": "比较物件大小（最大，最小）- 涂色",
+      "materials": [
+        "图画",
+        "蜡笔"
+      ],
+      "teaching_steps": "",
+      "group_class_generalization": null,
+      "home_generalization": null
+    }
+  ]
+}
