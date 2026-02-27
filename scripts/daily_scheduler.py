@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """
-CUMA (Lingxi) Daily Scheduler - FSRS 调度引擎概念验证版
+CUMA (Lingxi) Daily Scheduler - 基于 PEP-3 短板靶向推送的智能调度器
 
 核心逻辑：
-1. 从 quest_full.ttl 读取 ECTA 认知任务池（Level 3 任务）
-2. 特教反馈映射：全辅助→Again, 部分辅助→Hard, 独立完成→Good
-3. 使用 FSRS 算法计算 due_date，每日推送最需复习的任务
+1. 从 SQLite profiles 表读取 extracted_data，解析 pep3_baseline，找出最短板领域
+2. 跨图谱 SPARQL 查询：命中该领域的 PhasalObjective 任务作为靶向候选池
+3. 结合 FSRS 记忆状态，优先推送到期或未做过的靶向任务
 
 用法：
-    # 生成每日任务（默认）
-    python scripts/daily_scheduler.py [--child 小明] [--date 2026-02-26] [--count 3]
+    # 生成每日靶向任务（默认）
+    python scripts/daily_scheduler.py [--child 小明] [--date 2026-02-27] [--count 3]
 
     # 记录家长反馈
     python scripts/daily_scheduler.py record <quest_id> <全辅助|部分辅助|独立完成> [--child 小明]
@@ -20,32 +20,99 @@ from __future__ import annotations
 
 import argparse
 import json
+import sqlite3
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
+from typing import Optional
 
 # 项目根目录
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Level 3 任务显示名称（quest_full.ttl 中 phase 无 rdfs:label 时的回退）
-TASK_LABELS: dict[str, str] = {
-    "task_count_1_2": "数数 1-2",
-    "task_match_num_1_5": "数字配数字(1-5)",
-    "task_color_match_identical": "颜色配对 (基础)",
-    "task_color_match_distractor": "抗干扰颜色配对",
+# PEP-3 领域代码 → 图谱 domain URI 后缀 映射
+DOMAIN_CODE_TO_URI_SUFFIX: dict[str, str] = {
+    "CVP": "domain_cvp",   # 认知(语言/语前)
+    "EL": "domain_el",     # 语言表达
+    "RL": "domain_rl",     # 语言理解
+    "FM": "domain_fm",     # 小肌肉
+    "GM": "domain_gm",     # 大肌肉
+    "VMI": "domain_vmi",   # 模仿(视觉/动作)
+    "AE": "domain_ae",     # 情感表达
+    "SR": "domain_sr",     # 社交互动
+    "CMB": "domain_cmb",   # 行为特征-非语言
+    "CVB": "domain_cvb",   # 行为特征-语言
 }
 
-# 建议环境（来自 cognitionQuestService，后续可从 KG 读取）
-TASK_ENVIRONMENTS: dict[str, str] = {
-    "task_count_1_2": "桌面结构化；居家自然 (洗手液挤两下)",
-    "task_match_num_1_5": "桌面结构化；居家自然 (看病拿号排队)",
-    "task_color_match_identical": "桌面结构化",
-    "task_color_match_distractor": "桌面结构化",
-}
+
+def get_db_path() -> Path:
+    """获取 content_db 下的 SQLite 路径（与 backend 配置一致）。"""
+    # 优先 content_db，其次 data
+    for subdir in ("content_db", ""):
+        base = BASE_DIR / "data" / subdir if subdir else BASE_DIR / "data"
+        db_path = base / "srs4autism.db"
+        if db_path.exists():
+            return db_path
+    return BASE_DIR / "data" / "content_db" / "srs4autism.db"
+
+
+def find_child_profile(db_path: Path, child_query: str) -> Optional[tuple[str, str, dict]]:
+    """
+    从 SQLite 查找儿童档案。支持模糊匹配 name 或精确 id。
+    返回: (profile_id, name, extracted_data_dict) 或 None
+    """
+    conn = sqlite3.connect(str(db_path))
+    conn.row_factory = sqlite3.Row
+    cur = conn.cursor()
+    cur.execute(
+        "SELECT id, name, extracted_data FROM profiles WHERE id LIKE ? OR name LIKE ?",
+        (f"%{child_query}%", f"%{child_query}%"),
+    )
+    row = cur.fetchone()
+    conn.close()
+    if not row:
+        return None
+    raw = row["extracted_data"]
+    data = json.loads(raw) if raw else {}
+    return (row["id"], row["name"], data)
+
+
+def find_weakest_domain(extracted_data: dict) -> Optional[tuple[str, str, int]]:
+    """
+    从 extracted_data 解析 pep3_baseline，找出 age_equivalent_months 最低的领域。
+    返回: (domain_code, domain_name, age_months) 或 None
+    """
+    baseline = extracted_data.get("pep3_baseline", {})
+    metrics = baseline.get("metrics", {})
+    if not metrics:
+        return None
+
+    weakest_code: Optional[str] = None
+    weakest_name: str = ""
+    min_months: int = 9999
+
+    for code, info in metrics.items():
+        if not isinstance(info, dict):
+            continue
+        months = info.get("age_equivalent_months")
+        if months is None:
+            continue
+        try:
+            m = int(months) if isinstance(months, (int, float)) else int(float(months))
+        except (ValueError, TypeError):
+            continue
+        name = info.get("domain_name") or code
+        if m < min_months:
+            min_months = m
+            weakest_code = code
+            weakest_name = name
+
+    if weakest_code is None:
+        return None
+    return (weakest_code, weakest_name, min_months)
 
 
 def load_graph():
-    """加载 ECTA + PEP-3 知识图谱并执行对齐。"""
-    from rdflib import Graph, Namespace
+    """加载 ECTA + PEP-3 知识图谱。"""
+    from rdflib import Graph
 
     g = Graph()
     quest_path = BASE_DIR / "knowledge_graph" / "quest_full.ttl"
@@ -53,84 +120,76 @@ def load_graph():
 
     if not quest_path.exists():
         raise FileNotFoundError(f"找不到 quest_full.ttl: {quest_path}")
+    if not pep3_path.exists():
+        raise FileNotFoundError(f"找不到 pep3_master.ttl: {pep3_path}")
 
     g.parse(str(quest_path), format="turtle")
     g.parse(str(pep3_path), format="turtle")
-
-    # 对齐规则（与 align_pep3.py 一致）
-    ECTA_INST = Namespace("http://ecta.ai/instance/")
-    ECTA_KG = Namespace("http://ecta.ai/schema/")
-    PEP3_INST = Namespace("http://ecta.ai/pep3/instance/")
-
-    g.add((ECTA_INST.obj_cog_032, ECTA_KG.alignsWithStandard, PEP3_INST.item_105))
-    g.add((ECTA_INST.obj_cog_032, ECTA_KG.alignsWithStandard, PEP3_INST.item_108))
-    g.add((ECTA_INST.obj_cog_044, ECTA_KG.alignsWithStandard, PEP3_INST.item_101))
-    g.add((ECTA_INST.obj_cog_044, ECTA_KG.alignsWithStandard, PEP3_INST.item_102))
-
     return g
 
 
-def get_quest_pool(graph) -> list[dict]:
+def get_targeted_quests(graph, domain_code: str) -> list[dict]:
     """
-    从图谱中提取 Level 3 任务池，含 PEP-3 对齐信息。
-    返回: [{quest_id, label, pep3_items, macro_label}, ...]
+    跨图谱 SPARQL：查询所有通过 alignsWithStandard 命中该领域的 PhasalObjective 任务。
+    返回: [{quest_id, label, pep3_items, pep3_item_nums, suggested_materials}, ...]
     """
-    sparql = """
+    uri_suffix = DOMAIN_CODE_TO_URI_SUFFIX.get(domain_code.upper())
+    if not uri_suffix:
+        return []
+
+    domain_uri = f"http://ecta.ai/pep3/instance/{uri_suffix}"
+
+    sparql = f"""
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
     PREFIX ecta-kg: <http://ecta.ai/schema/>
     PREFIX ecta-inst: <http://ecta.ai/instance/>
+    PREFIX pep3: <http://ecta.ai/pep3/schema/>
+    PREFIX pep3-inst: <http://ecta.ai/pep3/instance/>
 
-    SELECT ?phase ?macro ?macroLabel ?pep3Label
-    WHERE {
-        ?macro ecta-kg:hasPhase ?phase ;
-               rdfs:label ?macroLabel .
-        OPTIONAL {
-            ?macro ecta-kg:alignsWithStandard ?pep3Item .
-            ?pep3Item rdfs:label ?pep3Label .
-        }
-    }
+    SELECT ?task ?taskLabel ?pep3Item ?pep3Label ?itemNum ?material
+    WHERE {{
+        ?task a ecta-kg:PhasalObjective ;
+              ecta-kg:alignsWithStandard ?pep3Item ;
+              rdfs:label ?taskLabel .
+        ?pep3Item pep3:belongsToDomain <{domain_uri}> ;
+                  pep3:itemNumber ?itemNum ;
+                  rdfs:label ?pep3Label .
+        OPTIONAL {{ ?task ecta-kg:suggestedMaterials ?material . }}
+    }}
     """
+
     results = list(graph.query(sparql))
 
-    # 按 phase 聚合 PEP-3 项
-    phase_to_pep3: dict[str, list[str]] = {}
-    phase_to_macro: dict[str, tuple[str, str]] = {}
-
+    # 按 task 聚合
+    task_data: dict[str, dict] = {}
     for row in results:
-        phase_uri = str(row.phase)
-        phase_id = phase_uri.split("/")[-1] if "/" in phase_uri else phase_uri
-        macro_label = str(row.macroLabel) if row.macroLabel else ""
+        task_uri = str(row.task)
+        task_id = task_uri.split("/")[-1] if "/" in task_uri else task_uri
+        label = str(row.taskLabel) if row.taskLabel else task_id
         pep3_label = str(row.pep3Label) if row.pep3Label else ""
+        item_num = row.itemNum
+        material = str(row.material) if row.material else None
 
-        phase_to_macro[phase_id] = (macro_label, phase_id)
-        if phase_id not in phase_to_pep3:
-            phase_to_pep3[phase_id] = []
-        if pep3_label:
-            phase_to_pep3[phase_id].append(pep3_label)
+        if task_id not in task_data:
+            task_data[task_id] = {
+                "quest_id": task_id,
+                "label": label,
+                "pep3_items": [],
+                "pep3_item_nums": [],
+                "suggested_materials": [],
+            }
+        if pep3_label and pep3_label not in task_data[task_id]["pep3_items"]:
+            task_data[task_id]["pep3_items"].append(pep3_label)
+            if item_num is not None:
+                task_data[task_id]["pep3_item_nums"].append(int(item_num))
+        if material and material not in task_data[task_id]["suggested_materials"]:
+            task_data[task_id]["suggested_materials"].append(material)
 
-    quests = []
-    seen = set()
-    for phase_id, (macro_label, _) in phase_to_macro.items():
-        if phase_id in seen:
-            continue
-        seen.add(phase_id)
-        label = TASK_LABELS.get(phase_id, macro_label or phase_id)
-        env = TASK_ENVIRONMENTS.get(phase_id, "")
-        pep3_items = phase_to_pep3.get(phase_id, [])
-
-        quests.append({
-            "quest_id": phase_id,
-            "label": label,
-            "macro_label": macro_label,
-            "pep3_items": pep3_items,
-            "environment": env,
-        })
-
-    return quests
+    return list(task_data.values())
 
 
 def get_child_profile_path(child_name: str) -> Path:
-    """儿童档案路径。"""
+    """儿童 FSRS 状态档案路径。"""
     profiles_dir = BASE_DIR / "data" / "child_profiles"
     profiles_dir.mkdir(parents=True, exist_ok=True)
     return profiles_dir / f"{child_name}.json"
@@ -153,123 +212,264 @@ def save_child_profile(child_name: str, profile: dict) -> None:
 
 
 def prompt_level_to_fsrs_rating(prompt_level: str) -> int:
-    """
-    特教辅助层级 → FSRS Rating 映射（The Magic Mapping）
-    全辅助 → Again(1), 部分辅助 → Hard(2), 独立完成 → Good(3)
-    """
-    mapping = {
-        "全辅助": 1,  # Rating.Again
-        "部分辅助": 2,  # Rating.Hard
-        "独立完成": 3,  # Rating.Good
-    }
+    """特教辅助层级 → FSRS Rating 映射。"""
+    mapping = {"全辅助": 1, "部分辅助": 2, "独立完成": 3}
     return mapping.get(prompt_level, 3)
 
 
-def run_scheduler(child_name: str, target_date: datetime, count: int = 3) -> list[dict]:
+def _parse_due_from_fsrs_state(state: dict) -> Optional[datetime]:
+    """从 fsrs_states 中的单条记录解析 due 日期。"""
+    due_val = state.get("due")
+    if due_val is None:
+        return None
+    if isinstance(due_val, datetime):
+        return due_val
+    if isinstance(due_val, str):
+        try:
+            return datetime.fromisoformat(due_val.replace("Z", "+00:00"))
+        except ValueError:
+            return None
+    return None
+
+
+def run_targeted_scheduler(
+    child_name: str,
+    target_date: datetime,
+    count: int = 3,
+    db_path: Optional[Path] = None,
+) -> tuple[list[dict], Optional[tuple[str, str, int]]]:
     """
-    运行 FSRS 调度，返回当日应完成的 quest 列表。
+    运行靶向调度：找最短板 → SPARQL 靶向任务池 → 严格 FSRS 过滤 → 排序。
+    严格从 extracted_data['fsrs_states'] 读取：due > --date 的任务坚决剔除。
+    返回: (selected_quests, weakest_domain_info)
     """
     from fsrs import FSRS, Card
 
+    db_path = db_path or get_db_path()
+    profile_row = find_child_profile(db_path, child_name)
+
+    weakest: Optional[tuple[str, str, int]] = None
+    fsrs_states: dict = {}
+    if profile_row:
+        _, _, extracted = profile_row
+        weakest = find_weakest_domain(extracted)
+        fsrs_states = extracted.get("fsrs_states") or {}
+
     graph = load_graph()
-    quest_pool = get_quest_pool(graph)
-    profile = load_child_profile(child_name)
-    scheduler = FSRS()
 
-    now = target_date.replace(hour=0, minute=0, second=0, microsecond=0)
-    now_utc = now.astimezone(timezone.utc)
+    if weakest:
+        domain_code, domain_name, age_months = weakest
+        quest_pool = get_targeted_quests(graph, domain_code)
+        if not quest_pool:
+            quest_pool = _get_fallback_quest_pool(graph)
+    else:
+        quest_pool = _get_fallback_quest_pool(graph)
 
-    quest_cards = profile.get("quest_cards", {})
+    target_date_d = target_date.date()
+    target_dt = target_date.replace(hour=0, minute=0, second=0, microsecond=0)
     due_quests: list[tuple[datetime, dict, Card | None]] = []
 
     for quest in quest_pool:
         qid = quest["quest_id"]
-        card_data = quest_cards.get(qid)
+        card_data = fsrs_states.get(qid)
 
         if card_data:
-            card = Card.from_dict(card_data)
-            due = card.due
-            if due and due.astimezone(now_utc.tzinfo) <= now_utc + timedelta(days=1):
-                due_quests.append((due, quest, card))
-            elif due:
-                due_quests.append((due, quest, card))
+            due = _parse_due_from_fsrs_state(card_data)
+            if due is not None and due.date() > target_date_d:
+                continue
+            try:
+                card = Card.from_dict(card_data)
+            except Exception:
+                card = Card()
+            sort_due = due if due else target_dt
+            due_quests.append((sort_due, quest, card))
         else:
-            # 新任务：due 为现在，应优先安排
             card = Card()
-            due_quests.append((now_utc, quest, card))
+            due_quests.append((target_dt, quest, card))
 
-    # 按 due 时间排序，取最紧急的 count 个
-    due_quests.sort(key=lambda x: x[0])
+    def _sort_key(item: tuple) -> float:
+        d = item[0]
+        if d.tzinfo is None:
+            d = d.replace(tzinfo=timezone.utc)
+        return d.timestamp()
+
+    due_quests.sort(key=_sort_key)
     selected = due_quests[:count]
+    return [{"quest": q, "card": c, "due": d} for d, q, c in selected], weakest
 
-    return [{"quest": q, "card": c, "due": d} for d, q, c in selected]
+
+def _get_fallback_quest_pool(graph) -> list[dict]:
+    """无最短板或靶向池为空时，返回全部有 alignsWithStandard 的任务。"""
+    sparql = """
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX ecta-kg: <http://ecta.ai/schema/>
+    PREFIX ecta-inst: <http://ecta.ai/instance/>
+
+    SELECT ?task ?taskLabel ?pep3Label ?material
+    WHERE {
+        ?task a ecta-kg:PhasalObjective ;
+              ecta-kg:alignsWithStandard ?pep3Item ;
+              rdfs:label ?taskLabel .
+        ?pep3Item rdfs:label ?pep3Label .
+        OPTIONAL { ?task ecta-kg:suggestedMaterials ?material . }
+    }
+    """
+    results = list(graph.query(sparql))
+    task_data: dict[str, dict] = {}
+    for row in results:
+        task_uri = str(row.task)
+        task_id = task_uri.split("/")[-1] if "/" in task_uri else task_uri
+        label = str(row.taskLabel) if row.taskLabel else task_id
+        pep3_label = str(row.pep3Label) if row.pep3Label else ""
+        material = str(row.material) if row.material else None
+        if task_id not in task_data:
+            task_data[task_id] = {
+                "quest_id": task_id,
+                "label": label,
+                "pep3_items": [],
+                "pep3_item_nums": [],
+                "suggested_materials": [],
+            }
+        if pep3_label and pep3_label not in task_data[task_id]["pep3_items"]:
+            task_data[task_id]["pep3_items"].append(pep3_label)
+            if "." in str(pep3_label):
+                try:
+                    num = int(pep3_label.split(".")[0].strip())
+                    task_data[task_id]["pep3_item_nums"].append(num)
+                except ValueError:
+                    pass
+        if material and material not in task_data[task_id]["suggested_materials"]:
+            task_data[task_id]["suggested_materials"].append(material)
+    return list(task_data.values())
 
 
-def print_daily_quests(child_name: str, target_date: datetime, count: int = 3) -> None:
-    """在终端打印每日任务。"""
-    results = run_scheduler(child_name, target_date, count)
+def format_pep3_short(quest: dict) -> str:
+    """生成 PEP-3 题号简写，如 '86题、133题'。"""
+    nums = quest.get("pep3_item_nums")
+    if nums:
+        return "、".join(f"{n}题" for n in sorted(set(nums)))
+    items = quest.get("pep3_items", [])
+    if items:
+        parts = []
+        for p in items:
+            if "." in str(p):
+                parts.append(p.split(".")[0].strip() + "题")
+        return "、".join(parts) if parts else "、".join(items)
+    return "—"
+
+
+def format_materials(quest: dict) -> str:
+    """格式化推荐教具。"""
+    mats = quest.get("suggested_materials", [])
+    if mats:
+        return "、".join(mats)
+    return "利用自然环境"
+
+
+def print_daily_quests(
+    child_name: str,
+    target_date: datetime,
+    count: int = 3,
+    db_path: Optional[Path] = None,
+) -> None:
+    """在终端打印靶向 Daily Quests。"""
+    results, weakest = run_targeted_scheduler(child_name, target_date, count, db_path)
     date_str = target_date.strftime("%Y-%m-%d")
+
+    # 解析显示用 child 名称（优先 DB 中的 name）
+    db_path = db_path or get_db_path()
+    profile_row = find_child_profile(db_path, child_name)
+    display_name = profile_row[1] if profile_row else child_name
 
     print()
     print("=" * 64)
-    print(f"📅 今天是 {date_str}，{child_name} 的 Daily Quests：")
+    print(f"📅 今天是 {date_str}，{display_name} 的靶向 Daily Quests：")
+    if weakest:
+        domain_code, domain_name, age_months = weakest
+        print(f"📊 算法诊断：当前最短板为【{domain_name} ({domain_code})】(年龄当量{age_months}个月)，已倾斜推荐权重。")
+    else:
+        print("📊 算法诊断：未检测到 PEP-3 基线数据，使用全任务池推荐。")
     print("=" * 64)
 
     for i, item in enumerate(results, 1):
         quest = item["quest"]
-        pep3_str = "、".join(quest["pep3_items"]) if quest["pep3_items"] else "—"
-        env = quest.get("environment", "")
-        # PEP-3 题号简写（如 "105. 颜色配对" -> "105题"）
-        pep3_short = "、".join(
-            p.split(".")[0].strip() + "题" for p in quest["pep3_items"] if "." in str(p)
-        ) or pep3_str
-
-        print(f"\n{i}. [认知] {quest['label']} —— 🎯 支撑 PEP-3 {pep3_short}")
-        if env:
-            print(f"   ↳ 建议环境：{env}")
+        task_id = quest["quest_id"]
+        pep3_short = format_pep3_short(quest)
+        materials = format_materials(quest)
+        print(f"\n{i}. [{task_id}] {quest['label']} —— 🎯 支撑 PEP-3 {pep3_short}")
+        print(f"   ↳ 推荐教具：{materials}")
 
     print("\n" + "=" * 64)
     print("💡 家长反馈后，系统将映射为 FSRS 评级并更新下次复习时间。")
     print("=" * 64 + "\n")
 
 
-def record_feedback(child_name: str, quest_id: str, prompt_level: str) -> None:
-    """
-    记录家长反馈并更新 FSRS 状态（供后续扩展）。
-    全辅助→Again, 部分辅助→Hard, 独立完成→Good
-    """
+def record_feedback(
+    child_name: str,
+    quest_id: str,
+    prompt_level: str,
+    db_path: Optional[Path] = None,
+) -> None:
+    """记录家长反馈并真实更新至 SQLite 数据库的 FSRS 状态中。"""
     from fsrs import FSRS, Card, Rating
 
-    profile = load_child_profile(child_name)
-    quest_cards = profile.setdefault("quest_cards", {})
+    db_path = db_path or get_db_path()
+    profile_row = find_child_profile(db_path, child_name)
+
+    if not profile_row:
+        print(f"❌ 找不到儿童档案: {child_name}")
+        return
+
+    profile_id, name, extracted = profile_row
+
+    # 获取或初始化数据库中的 fsrs_states
+    fsrs_states = extracted.setdefault("fsrs_states", {})
     scheduler = FSRS()
 
-    card_data = quest_cards.get(quest_id)
+    # 读取卡片历史状态
+    card_data = fsrs_states.get(quest_id)
     card = Card.from_dict(card_data) if card_data else Card()
 
+    # FSRS 要求：state != New 时必须有 last_review，否则 review_card 会报错
+    if card.state != 0 and not getattr(card, "last_review", None):
+        card.last_review = card.due
+
+    # 映射评级并复习
     rating_val = prompt_level_to_fsrs_rating(prompt_level)
     rating = Rating(rating_val)
-
     new_card, _ = scheduler.review_card(card, rating)
-    quest_cards[quest_id] = new_card.to_dict()
-    profile["quest_cards"] = quest_cards
-    save_child_profile(child_name, profile)
-    print(f"✅ 已记录：{quest_id} → {prompt_level} (FSRS {rating_val})")
+
+    # 将更新后的卡片存回 extracted_data
+    fsrs_states[quest_id] = new_card.to_dict()
+    extracted["fsrs_states"] = fsrs_states
+
+    # 执行 SQL 真正落盘到数据库
+    conn = sqlite3.connect(str(db_path))
+    cur = conn.cursor()
+    now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    cur.execute(
+        "UPDATE profiles SET extracted_data = ?, updated_at = ? WHERE id = ?",
+        (json.dumps(extracted, ensure_ascii=False), now_str, profile_id),
+    )
+    conn.commit()
+    conn.close()
+
+    print(f"✅ 已持久化记录：{quest_id} → {prompt_level} (FSRS {rating_val})")
+    due_str = new_card.due.strftime("%Y-%m-%d") if new_card.due else "—"
+    print(f"📅 该任务下次复习时间已推迟至: {due_str}")
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="CUMA 每日任务调度器 (FSRS 概念验证)")
-    parser.add_argument("--child", default="小明", help="儿童姓名")
+    parser = argparse.ArgumentParser(description="CUMA 靶向每日任务调度器 (PEP-3 短板)")
+    parser.add_argument("--child", default="小明", help="儿童姓名或 ID（支持模糊匹配）")
     parser.add_argument("--date", default=None, help="目标日期 YYYY-MM-DD")
     parser.add_argument("--count", type=int, default=3, help="每日任务数量")
+    parser.add_argument("--db", default=None, help="SQLite 数据库路径（默认 data/content_db/srs4autism.db）")
     subparsers = parser.add_subparsers(dest="cmd", help="子命令")
 
-    # schedule: 生成每日任务 (默认，可不写)
-    subparsers.add_parser("schedule", help="生成每日任务 (默认)")
-
-    # record: 记录家长反馈
+    subparsers.add_parser("schedule", help="生成每日靶向任务 (默认)")
     sp_record = subparsers.add_parser("record", help="记录家长反馈")
-    sp_record.add_argument("quest_id", help="任务 ID，如 task_count_1_2")
+    sp_record.add_argument("quest_id", help="任务 ID，如 task_1001")
     sp_record.add_argument(
         "prompt_level",
         choices=["全辅助", "部分辅助", "独立完成"],
@@ -277,15 +477,13 @@ def main() -> None:
     )
 
     args = parser.parse_args()
-    # 无子命令时默认 schedule
-    if args.cmd is None:
+    db_path = Path(args.db) if args.db else None
+
+    if args.cmd is None or args.cmd == "schedule":
         target = datetime.strptime(args.date, "%Y-%m-%d") if args.date else datetime.now()
-        print_daily_quests(args.child, target, args.count)
-    elif args.cmd == "schedule":
-        target = datetime.strptime(args.date, "%Y-%m-%d") if args.date else datetime.now()
-        print_daily_quests(args.child, target, args.count)
+        print_daily_quests(args.child, target, args.count, db_path)
     elif args.cmd == "record":
-        record_feedback(args.child, args.quest_id, args.prompt_level)
+        record_feedback(args.child, args.quest_id, args.prompt_level, db_path)
 
 
 if __name__ == "__main__":
