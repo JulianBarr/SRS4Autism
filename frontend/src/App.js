@@ -17,6 +17,7 @@ import LogicCityManager from './components/widgets/LogicCityManager';
 import PinyinTypingManager from './components/widgets/PinyinTypingManager';
 import CharacterRecognition from './components/CharacterRecognition';
 import SettingsModal from './components/SettingsModal';
+import DailyDeck from './components/DailyDeck';
 import { useLanguage } from './i18n/LanguageContext';
 import './App.css';
 
@@ -36,6 +37,7 @@ function App() {
   const [showPinyinModal, setShowPinyinModal] = useState(false); // Modal state for Pinyin Learning
   const [cognitionLanguage, setCognitionLanguage] = useState(null); // 'zh' or 'en' for Cognition Cove
   const [cognitionContentType, setCognitionContentType] = useState(null); // Content type based on language
+  const [cognitionContentView, setCognitionContentView] = useState('quests'); // 'quests' | 'daily-deck'
   const [showLogicCityModal, setShowLogicCityModal] = useState(false); // Modal state for Logic City
   const [logicCityContentType, setLogicCityContentType] = useState(null); // Content type for Logic City ('vocab-advanced', etc.)
   const [profiles, setProfiles] = useState([]);
@@ -192,24 +194,25 @@ function App() {
             </div>
             
             <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginLeft: 'auto' }}>
-              {/* Profile Selector */}
-              {profiles.length > 0 && (
-                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                   <span style={{ fontSize: '1.2em' }}>🧒</span>
-                   <select 
-                     value={currentProfile?.name || ''}
-                     onChange={(e) => {
-                       const selected = profiles.find(p => p.name === e.target.value);
-                       setCurrentProfile(selected);
-                     }}
-                     style={{ padding: '5px', borderRadius: '4px', border: '1px solid #ccc' }}
-                   >
-                     {profiles.map(p => (
-                       <option key={p.name} value={p.name}>{p.name}</option>
-                     ))}
-                   </select>
-                 </div>
-              )}
+              {/* Profile Selector - always visible */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{ fontSize: '1.2em' }}>🧒</span>
+                <select 
+                  value={currentProfile?.name || ''}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    if (!val) return;
+                    const selected = profiles.find(p => p.name === val);
+                    setCurrentProfile(selected || null);
+                  }}
+                  style={{ padding: '5px', borderRadius: '4px', border: '1px solid #ccc', minWidth: '100px' }}
+                >
+                  <option value="">{profiles.length === 0 ? '（无档案）' : '选择儿童'}</option>
+                  {profiles.map(p => (
+                    <option key={p.name} value={p.name}>{p.name}</option>
+                  ))}
+                </select>
+              </div>
 
               <button 
                 className="language-toggle"
@@ -327,7 +330,41 @@ function App() {
 
             {activeCategory === 'cognition' && (
               <div style={{ marginTop: '20px' }}>
-                <CognitionContentManager />
+                <div style={{ display: 'flex', gap: '12px', marginBottom: '16px' }}>
+                  <button
+                    onClick={() => setCognitionContentView('quests')}
+                    style={{
+                      padding: '8px 16px',
+                      borderRadius: '8px',
+                      border: 'none',
+                      cursor: 'pointer',
+                      fontWeight: cognitionContentView === 'quests' ? 600 : 400,
+                      background: cognitionContentView === 'quests' ? '#e0e7ff' : '#f3f4f6',
+                      color: cognitionContentView === 'quests' ? '#4338ca' : '#6b7280',
+                    }}
+                  >
+                    🧠 任务库
+                  </button>
+                  <button
+                    onClick={() => setCognitionContentView('daily-deck')}
+                    style={{
+                      padding: '8px 16px',
+                      borderRadius: '8px',
+                      border: 'none',
+                      cursor: 'pointer',
+                      fontWeight: cognitionContentView === 'daily-deck' ? 600 : 400,
+                      background: cognitionContentView === 'daily-deck' ? '#fef3c7' : '#f3f4f6',
+                      color: cognitionContentView === 'daily-deck' ? '#b45309' : '#6b7280',
+                    }}
+                  >
+                    📋 每日靶向课表
+                  </button>
+                </div>
+                {cognitionContentView === 'daily-deck' ? (
+                  <DailyDeck childName={currentProfile?.name || '小明'} />
+                ) : (
+                  <CognitionContentManager />
+                )}
               </div>
             )}
             

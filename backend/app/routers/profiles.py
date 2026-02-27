@@ -26,11 +26,11 @@ router = APIRouter()
 class ChildProfile(BaseModel):
     id: Optional[str] = None  # Add ID field for unique identification
     name: str
-    dob: str
-    gender: str
-    address: str
-    school: str
-    neighborhood: str
+    dob: Optional[str] = None
+    gender: Optional[str] = None
+    address: Optional[str] = None
+    school: Optional[str] = None
+    neighborhood: Optional[str] = None
     interests: List[str]
     character_roster: Optional[List[str]] = []
     verbal_fluency: Optional[str] = None

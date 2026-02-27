@@ -228,14 +228,25 @@ const QuestCard = ({ quest }) => {
   );
 };
 
+/** Emoji mapping for each module */
+const MODULE_EMOJI = {
+  '认知发展篇': '🧠',
+  '语言表达篇': '🗣️',
+  '语言理解篇': '👂',
+  '小肌肉发展篇': '🤏',
+  '大肌肉发展篇': '🏃‍♂️',
+  '模仿发展篇': '👯',
+  '未分类模块': '📋'
+};
+
 /**
  * Cognition Content Manager
- * Renders hierarchical TOC (Module -> MacroObjective by age bracket) from getMacroStructure().
- * TeachingTask cards are hidden by default; clicking a MacroObjective will eventually
- * open a drawer/modal showing those detailed cards.
+ * Renders hierarchical TOC (Module -> Age Bracket -> MacroObjective) from getMacroStructure().
+ * Each module (认知发展篇, 大肌肉发展篇, etc.) is a top-level section; within each,
+ * age brackets are accordion panels containing MacroObjectives.
  */
 const CognitionContentManager = () => {
-  const [macroGroups, setMacroGroups] = useState([]);
+  const [modules, setModules] = useState([]);
   const [loading, setLoading] = useState(true);
   const [expandedObjective, setExpandedObjective] = useState(null);
 
@@ -243,11 +254,11 @@ const CognitionContentManager = () => {
     const load = async () => {
       setLoading(true);
       try {
-        const macroData = await CognitionQuestService.getMacroStructure();
-        setMacroGroups(macroData);
+        const data = await CognitionQuestService.getMacroStructure();
+        setModules(Array.isArray(data) ? data : []);
       } catch (err) {
         console.error('Failed to load cognition content:', err);
-        setMacroGroups([]);
+        setModules([]);
       } finally {
         setLoading(false);
       }
@@ -269,74 +280,102 @@ const CognitionContentManager = () => {
         border: `1px solid ${theme.categories.cognition.light}`
       }}
     >
-      <h2
-        style={{
-          color: theme.categories.cognition.primary,
-          marginBottom: theme.spacing.md,
-          fontSize: '22px',
-          fontWeight: '600'
-        }}
-      >
-        🧠 认知发展篇 (Cognitive Development Module)
-      </h2>
       {loading ? (
         <p style={{ color: theme.ui.text.secondary, fontSize: '16px' }}>
           加载中...
         </p>
-      ) : macroGroups.length === 0 ? (
+      ) : modules.length === 0 ? (
         <p style={{ color: theme.ui.text.secondary, fontSize: '16px' }}>
           暂无可用内容
         </p>
       ) : (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: theme.spacing.md }}>
-          {macroGroups.map((group) => (
-            <details
-              key={group.ageBracket}
-              open
-              style={{
-                backgroundColor: theme.ui.background,
-                borderRadius: theme.borderRadius.md,
-                border: `1px solid ${theme.ui.border}`,
-                overflow: 'hidden'
-              }}
-            >
-              <summary
-                style={{
-                  padding: theme.spacing.md,
-                  fontSize: '16px',
-                  fontWeight: '600',
-                  color: theme.categories.cognition.primary,
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: theme.spacing.sm
-                }}
-              >
-                <span>📍</span>
-                <span>{group.ageBracket}年龄段训练目标</span>
-              </summary>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: theme.spacing.xl }}>
+          {modules.map((mod) => {
+            const emoji = MODULE_EMOJI[mod.moduleName] || '📋';
+            return (
               <div
+                key={mod.moduleName}
                 style={{
-                  padding: `0 ${theme.spacing.md} ${theme.spacing.md}`,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: theme.spacing.xs
+                  backgroundColor: theme.ui.background,
+                  borderRadius: theme.borderRadius.md,
+                  border: `1px solid ${theme.ui.border}`,
+                  overflow: 'hidden'
                 }}
               >
-                {group.objectives.map((obj) => (
-                  <MacroObjectiveRow
-                    key={obj.uri_id}
-                    objective={obj}
-                    isExpanded={expandedObjective === obj.uri_id}
-                    onToggle={() => handleToggleObjective(obj.uri_id)}
-                  />
-                ))}
+                <h2
+                  style={{
+                    padding: theme.spacing.md,
+                    color: theme.categories.cognition.primary,
+                    fontSize: '20px',
+                    fontWeight: '600',
+                    margin: 0,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: theme.spacing.sm
+                  }}
+                >
+                  <span>{emoji}</span>
+                  <span>{mod.moduleName}</span>
+                </h2>
+                <div
+                  style={{
+                    padding: `0 ${theme.spacing.md} ${theme.spacing.md}`,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: theme.spacing.sm
+                  }}
+                >
+                  {(mod.ageGroups || []).map((group) => (
+                    <details
+                      key={`${mod.moduleName}-${group.ageBracket}`}
+                      open
+                      style={{
+                        backgroundColor: theme.ui.backgrounds.surface,
+                        borderRadius: theme.borderRadius.sm,
+                        border: `1px solid ${theme.ui.border}`,
+                        overflow: 'hidden'
+                      }}
+                    >
+                      <summary
+                        style={{
+                          padding: theme.spacing.md,
+                          fontSize: '15px',
+                          fontWeight: '600',
+                          color: theme.categories.cognition.primary,
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: theme.spacing.sm
+                        }}
+                      >
+                        <span>📍</span>
+                        <span>{group.ageBracket}年龄段训练目标</span>
+                      </summary>
+                      <div
+                        style={{
+                          padding: `0 ${theme.spacing.md} ${theme.spacing.md}`,
+                          display: 'flex',
+                          flexDirection: 'column',
+                          gap: theme.spacing.xs
+                        }}
+                      >
+                        {(group.objectives || []).map((obj) => (
+                          <MacroObjectiveRow
+                            key={obj.uri_id}
+                            objective={obj}
+                            isExpanded={expandedObjective === obj.uri_id}
+                            onToggle={() => handleToggleObjective(obj.uri_id)}
+                          />
+                        ))}
+                      </div>
+                    </details>
+                  ))}
+                </div>
               </div>
-            </details>
-          ))}
+            );
+          })}
         </div>
       )}
-
     </div>
   );
 };

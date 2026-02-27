@@ -417,8 +417,7 @@ def record_feedback(
     profile_row = find_child_profile(db_path, child_name)
 
     if not profile_row:
-        print(f"❌ 找不到儿童档案: {child_name}")
-        return
+        raise ValueError(f"找不到儿童档案: {child_name}")
 
     profile_id, name, extracted = profile_row
 

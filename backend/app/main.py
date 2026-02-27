@@ -93,9 +93,10 @@ app.include_router(profiles.router, tags=["profiles"])
 from .routers import cards
 # Inject the Gemini model into cards router (will be set after Gemini initialization below)
 
-from .routers import chat, kg
+from .routers import chat, kg, daily_deck
 app.include_router(chat.router, tags=["chat"])
 app.include_router(kg.router, prefix="/kg", tags=["Knowledge Graph"])
+app.include_router(daily_deck.router, tags=["daily-deck"])
 # cards._set_genai_model will be called after _genai_model is initialized
 app.include_router(cards.router, tags=["cards"])
 
@@ -237,6 +238,21 @@ async def startup_event():
     except Exception as e:
         print(f"⚠️  Warning: Failed to initialize literacy cache: {e}")
         # Continue startup even if cache init fails
+
+    # Load quest_full.ttl and pep3_master.ttl into Oxigraph for cognition quest library
+    try:
+        from database.kg_client import KnowledgeGraphClient
+        quest_path = PROJECT_ROOT / "knowledge_graph" / "quest_full.ttl"
+        pep3_path = PROJECT_ROOT / "knowledge_graph" / "pep3_master.ttl"
+        client = KnowledgeGraphClient()
+        for name, path in [("quest_full.ttl", quest_path), ("pep3_master.ttl", pep3_path)]:
+            if path.exists():
+                client.load_file(str(path))
+                print(f"✅ Loaded {name} into Oxigraph")
+            else:
+                print(f"⚠️  {name} not found at {path}")
+    except Exception as e:
+        print(f"⚠️  Warning: Failed to load quest TTL into Oxigraph: {e}")
 
 
 # CORS middleware for frontend communication
