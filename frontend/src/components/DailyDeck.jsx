@@ -192,6 +192,22 @@ function DailyDeck({ childName = '小明' }) {
               <span className="font-medium text-slate-500">推荐教具：</span>
               {currentQuest.suggested_materials}
             </p>
+            {currentQuest.teaching_steps && (
+              <div className="mt-4 pt-3 border-t border-slate-200">
+                <p className="font-medium text-slate-500 mb-2">教学步骤</p>
+                <div className="text-slate-700 text-sm whitespace-pre-wrap leading-relaxed">
+                  {currentQuest.teaching_steps}
+                </div>
+              </div>
+            )}
+            {currentQuest.home_generalization && (
+              <div className="mt-4 p-3 rounded-lg bg-amber-50 border border-amber-200">
+                <p className="font-medium text-amber-800 text-xs mb-1">🏠 家庭泛化建议</p>
+                <p className="text-amber-900 text-sm whitespace-pre-wrap">
+                  {currentQuest.home_generalization}
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </main>

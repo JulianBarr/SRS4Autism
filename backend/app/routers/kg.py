@@ -164,6 +164,7 @@ async def get_cognition_macro_structure():
         PREFIX ecta-inst: <http://ecta.ai/instance/>
 
         SELECT ?macro ?macroLabel ?ageBracket ?module ?phase ?phaseLabel ?phaseMaterial
+               ?teachingSteps ?groupClassGeneralization ?homeGeneralization
         WHERE {
             ?macro a ecta-kg:MacroObjective ;
                    rdfs:label ?macroLabel .
@@ -173,6 +174,9 @@ async def get_cognition_macro_structure():
                 ?macro ecta-kg:hasPhase ?phase .
                 ?phase rdfs:label ?phaseLabel .
                 OPTIONAL { ?phase ecta-kg:suggestedMaterials ?phaseMaterial . }
+                OPTIONAL { ?phase ecta-kg:teachingSteps ?teachingSteps . }
+                OPTIONAL { ?phase ecta-kg:groupClassGeneralization ?groupClassGeneralization . }
+                OPTIONAL { ?phase ecta-kg:homeGeneralization ?homeGeneralization . }
             }
         }
         ORDER BY ?module ?ageBracket ?macro ?phase
@@ -199,13 +203,32 @@ async def get_cognition_macro_structure():
             phase_uri = row.get("phase", {}).get("value") if row.get("phase") else None
             phase_label = row.get("phaseLabel", {}).get("value", "") if row.get("phaseLabel") else ""
             phase_mat = row.get("phaseMaterial", {}).get("value", "") if row.get("phaseMaterial") else ""
+            teaching_steps = row.get("teachingSteps", {}).get("value", "") if row.get("teachingSteps") else ""
+            group_class_gen = row.get("groupClassGeneralization", {}).get("value", "") if row.get("groupClassGeneralization") else ""
+            home_gen = row.get("homeGeneralization", {}).get("value", "") if row.get("homeGeneralization") else ""
 
             m = groups_by_module[module_name][age_short][uri_id]
             m["label"] = macro_label
             m["uri_id"] = f"ecta-inst:{uri_id}" if not uri_id.startswith("ecta-inst") else uri_id
             if phase_uri and phase_label:
                 phase_id = phase_uri.split("/")[-1] if "/" in phase_uri else phase_uri
-                phase_obj = {"uri_id": f"ecta-inst:{phase_id}", "title": phase_label, "materials": [phase_mat] if phase_mat else []}
+                # Parse teachingSteps into steps array (split by newline, filter empty)
+                steps_list = []
+                if teaching_steps and isinstance(teaching_steps, str):
+                    steps_list = [s.strip() for s in teaching_steps.split("\n") if s.strip()]
+                group_social = [group_class_gen] if (group_class_gen and isinstance(group_class_gen, str) and group_class_gen.strip()) else []
+                home_natural = [home_gen] if (home_gen and isinstance(home_gen, str) and home_gen.strip()) else []
+                environments = {
+                    "structured_desktop": {"steps": steps_list},
+                    "group_social": group_social,
+                    "home_natural": home_natural,
+                }
+                phase_obj = {
+                    "uri_id": f"ecta-inst:{phase_id}",
+                    "title": phase_label,
+                    "materials": [phase_mat] if phase_mat else [],
+                    "environments": environments,
+                }
                 if not any(p["uri_id"] == phase_obj["uri_id"] for p in m["phases"]):
                     m["phases"].append(phase_obj)
 

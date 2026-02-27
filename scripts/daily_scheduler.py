@@ -147,6 +147,7 @@ def get_targeted_quests(graph, domain_code: str) -> list[dict]:
     PREFIX pep3-inst: <http://ecta.ai/pep3/instance/>
 
     SELECT ?task ?taskLabel ?pep3Item ?pep3Label ?itemNum ?material
+           ?teachingSteps ?groupClassGeneralization ?homeGeneralization
     WHERE {{
         ?task a ecta-kg:PhasalObjective ;
               ecta-kg:alignsWithStandard ?pep3Item ;
@@ -155,6 +156,9 @@ def get_targeted_quests(graph, domain_code: str) -> list[dict]:
                   pep3:itemNumber ?itemNum ;
                   rdfs:label ?pep3Label .
         OPTIONAL {{ ?task ecta-kg:suggestedMaterials ?material . }}
+        OPTIONAL {{ ?task ecta-kg:teachingSteps ?teachingSteps . }}
+        OPTIONAL {{ ?task ecta-kg:groupClassGeneralization ?groupClassGeneralization . }}
+        OPTIONAL {{ ?task ecta-kg:homeGeneralization ?homeGeneralization . }}
     }}
     """
 
@@ -169,6 +173,9 @@ def get_targeted_quests(graph, domain_code: str) -> list[dict]:
         pep3_label = str(row.pep3Label) if row.pep3Label else ""
         item_num = row.itemNum
         material = str(row.material) if row.material else None
+        teaching_steps = str(row.teachingSteps) if getattr(row, "teachingSteps", None) else None
+        group_class_gen = str(row.groupClassGeneralization) if getattr(row, "groupClassGeneralization", None) else None
+        home_gen = str(row.homeGeneralization) if getattr(row, "homeGeneralization", None) else None
 
         if task_id not in task_data:
             task_data[task_id] = {
@@ -177,6 +184,9 @@ def get_targeted_quests(graph, domain_code: str) -> list[dict]:
                 "pep3_items": [],
                 "pep3_item_nums": [],
                 "suggested_materials": [],
+                "teaching_steps": None,
+                "group_class_generalization": None,
+                "home_generalization": None,
             }
         if pep3_label and pep3_label not in task_data[task_id]["pep3_items"]:
             task_data[task_id]["pep3_items"].append(pep3_label)
@@ -184,6 +194,12 @@ def get_targeted_quests(graph, domain_code: str) -> list[dict]:
                 task_data[task_id]["pep3_item_nums"].append(int(item_num))
         if material and material not in task_data[task_id]["suggested_materials"]:
             task_data[task_id]["suggested_materials"].append(material)
+        if teaching_steps:
+            task_data[task_id]["teaching_steps"] = teaching_steps
+        if group_class_gen:
+            task_data[task_id]["group_class_generalization"] = group_class_gen
+        if home_gen:
+            task_data[task_id]["home_generalization"] = home_gen
 
     return list(task_data.values())
 
@@ -306,12 +322,16 @@ def _get_fallback_quest_pool(graph) -> list[dict]:
     PREFIX ecta-inst: <http://ecta.ai/instance/>
 
     SELECT ?task ?taskLabel ?pep3Label ?material
+           ?teachingSteps ?groupClassGeneralization ?homeGeneralization
     WHERE {
         ?task a ecta-kg:PhasalObjective ;
               ecta-kg:alignsWithStandard ?pep3Item ;
               rdfs:label ?taskLabel .
         ?pep3Item rdfs:label ?pep3Label .
         OPTIONAL { ?task ecta-kg:suggestedMaterials ?material . }
+        OPTIONAL { ?task ecta-kg:teachingSteps ?teachingSteps . }
+        OPTIONAL { ?task ecta-kg:groupClassGeneralization ?groupClassGeneralization . }
+        OPTIONAL { ?task ecta-kg:homeGeneralization ?homeGeneralization . }
     }
     """
     results = list(graph.query(sparql))
@@ -322,6 +342,9 @@ def _get_fallback_quest_pool(graph) -> list[dict]:
         label = str(row.taskLabel) if row.taskLabel else task_id
         pep3_label = str(row.pep3Label) if row.pep3Label else ""
         material = str(row.material) if row.material else None
+        teaching_steps = str(row.teachingSteps) if getattr(row, "teachingSteps", None) else None
+        group_class_gen = str(row.groupClassGeneralization) if getattr(row, "groupClassGeneralization", None) else None
+        home_gen = str(row.homeGeneralization) if getattr(row, "homeGeneralization", None) else None
         if task_id not in task_data:
             task_data[task_id] = {
                 "quest_id": task_id,
@@ -329,6 +352,9 @@ def _get_fallback_quest_pool(graph) -> list[dict]:
                 "pep3_items": [],
                 "pep3_item_nums": [],
                 "suggested_materials": [],
+                "teaching_steps": None,
+                "group_class_generalization": None,
+                "home_generalization": None,
             }
         if pep3_label and pep3_label not in task_data[task_id]["pep3_items"]:
             task_data[task_id]["pep3_items"].append(pep3_label)
@@ -340,6 +366,12 @@ def _get_fallback_quest_pool(graph) -> list[dict]:
                     pass
         if material and material not in task_data[task_id]["suggested_materials"]:
             task_data[task_id]["suggested_materials"].append(material)
+        if teaching_steps:
+            task_data[task_id]["teaching_steps"] = teaching_steps
+        if group_class_gen:
+            task_data[task_id]["group_class_generalization"] = group_class_gen
+        if home_gen:
+            task_data[task_id]["home_generalization"] = home_gen
     return list(task_data.values())
 
 

@@ -60,6 +60,9 @@ def get_daily_quests(child_name: str = "小明", count: int = 3):
             "label": q["label"],
             "pep3_standard": format_pep3_short(q),
             "suggested_materials": format_materials(q),
+            "teaching_steps": q.get("teaching_steps"),
+            "group_class_generalization": q.get("group_class_generalization"),
+            "home_generalization": q.get("home_generalization"),
         })
 
     weakest_info = None
