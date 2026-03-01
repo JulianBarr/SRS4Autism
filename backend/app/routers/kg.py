@@ -150,14 +150,13 @@ Return ONLY a JSON array, no other text:
 @router.get("/cognition-macro-structure")
 async def get_cognition_macro_structure():
     """
-    Get macro structure (MacroObjective by module and age bracket) from quest_full.ttl in Oxigraph.
-    Returns modules (e.g. 认知发展篇, 大肌肉发展篇) each containing age groups with objectives.
+    Get macro structure (MacroObjective by age bracket and module) from quest_full.ttl in Oxigraph.
+    Returns Age -> Module -> Macro hierarchy. Deduplicates by macroLabel (merge tasks from same-named nodes).
     Used by CognitionContentManager / Quest Library. Falls back to empty if KG not loaded.
     """
     try:
         from database.kg_client import KnowledgeGraphClient
         client = KnowledgeGraphClient()
-        # Query MacroObjectives with optional module, age bracket, and phases (PhasalObjectives)
         sparql = """
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
         PREFIX ecta-kg: <http://ecta.ai/schema/>
@@ -183,21 +182,26 @@ async def get_cognition_macro_structure():
         """
         bindings = client.query_bindings(sparql)
         if not bindings:
-            return {"modules": [], "source": "kg_empty"}
+            return {"data": [], "source": "kg_empty"}
 
-        # Group by module, then by age bracket, then by macro
         from collections import defaultdict
-        UNCATEGORIZED = "未分类模块"
-        age_display = {"3-12个月": "3-12个月", "1-2岁": "1-2岁", "2-3岁": "2-3岁", "3-4岁": "3-4岁", "default": "未分类年龄段"}
-        # module -> age_short -> uri_id -> macro data
-        groups_by_module = defaultdict(lambda: defaultdict(lambda: defaultdict(lambda: {"label": "", "uri_id": "", "phases": []})))
+        UNCATEGORIZED_MODULE = "未分类"
+        UNCATEGORIZED_AGE = "未分类年龄段"
+        age_display = {"3-12个月": "3-12个月", "1-2岁": "1-2岁", "2-3岁": "2-3岁", "3-4岁": "3-4岁", "default": UNCATEGORIZED_AGE}
+        module_order = ["认知发展篇", "语言表达篇", "语言理解篇", "小肌肉发展篇", "大肌肉发展篇", "模仿发展篇", UNCATEGORIZED_MODULE]
+
+        # age_short -> module_name -> macro_label_normalized -> { label, tasks }
+        # Dedupe by macroLabel: same label = merge tasks
+        by_age_module_macro = defaultdict(lambda: defaultdict(lambda: defaultdict(lambda: {"label": "", "tasks": []})))
 
         for row in bindings:
             macro_uri = row.get("macro", {}).get("value", "")
             uri_id = macro_uri.split("/")[-1] if "/" in macro_uri else macro_uri
-            macro_label = row.get("macroLabel", {}).get("value", uri_id)
+            macro_label_raw = row.get("macroLabel", {}).get("value", uri_id)
+            macro_label = (macro_label_raw or "").strip()
+            macro_key = macro_label or uri_id  # normalize for dedup
             module_val = row.get("module", {}).get("value", "")
-            module_name = module_val if module_val and isinstance(module_val, str) else UNCATEGORIZED
+            module_name = module_val.strip() if module_val and isinstance(module_val, str) else UNCATEGORIZED_MODULE
             age = row.get("ageBracket", {}).get("value", "default")
             age_short = age.split("/")[-1] if age and "/" in age else (age or "default")
             phase_uri = row.get("phase", {}).get("value") if row.get("phase") else None
@@ -207,12 +211,10 @@ async def get_cognition_macro_structure():
             group_class_gen = row.get("groupClassGeneralization", {}).get("value", "") if row.get("groupClassGeneralization") else ""
             home_gen = row.get("homeGeneralization", {}).get("value", "") if row.get("homeGeneralization") else ""
 
-            m = groups_by_module[module_name][age_short][uri_id]
-            m["label"] = macro_label
-            m["uri_id"] = f"ecta-inst:{uri_id}" if not uri_id.startswith("ecta-inst") else uri_id
+            m = by_age_module_macro[age_short][module_name][macro_key]
+            m["label"] = macro_label or uri_id
             if phase_uri and phase_label:
                 phase_id = phase_uri.split("/")[-1] if "/" in phase_uri else phase_uri
-                # Parse teachingSteps into steps array (split by newline, filter empty)
                 steps_list = []
                 if teaching_steps and isinstance(teaching_steps, str):
                     steps_list = [s.strip() for s in teaching_steps.split("\n") if s.strip()]
@@ -229,34 +231,52 @@ async def get_cognition_macro_structure():
                     "materials": [phase_mat] if phase_mat else [],
                     "environments": environments,
                 }
-                if not any(p["uri_id"] == phase_obj["uri_id"] for p in m["phases"]):
-                    m["phases"].append(phase_obj)
+                if not any(p["uri_id"] == phase_obj["uri_id"] for p in m["tasks"]):
+                    m["tasks"].append(phase_obj)
 
-        # Preferred module order for display
-        module_order = ["认知发展篇", "语言表达篇", "语言理解篇", "小肌肉发展篇", "大肌肉发展篇", "模仿发展篇", UNCATEGORIZED]
-        seen_modules = set(groups_by_module.keys())
-        ordered_modules = [m for m in module_order if m in seen_modules]
-        ordered_modules += sorted(m for m in seen_modules if m not in module_order)
+        # Build result: Age -> Module -> Macro (reversed hierarchy)
+        age_order = ["3-12个月", "1-2岁", "2-3岁", "3-4岁", "default"]
+        result = []
 
-        modules = []
-        for module_name in ordered_modules:
-            age_groups = []
-            for age_key in sorted(groups_by_module[module_name].keys()):
-                objs = []
-                for uri_id, data in groups_by_module[module_name][age_key].items():
-                    obj = {"uri_id": data["uri_id"], "label": data["label"]}
-                    if data["phases"]:
-                        obj["phases"] = data["phases"]
-                    objs.append(obj)
-                age_groups.append({
+        def build_modules_for_age(age_key):
+            modules_data = []
+            for mod_name in module_order:
+                if mod_name not in by_age_module_macro[age_key]:
+                    continue
+                macros_list = [
+                    {"macroLabel": d["label"], "tasks": d["tasks"]}
+                    for d in by_age_module_macro[age_key][mod_name].values()
+                ]
+                modules_data.append({"moduleName": mod_name, "macros": macros_list})
+            for mod_name in sorted(by_age_module_macro[age_key].keys()):
+                if mod_name in module_order:
+                    continue
+                macros_list = [
+                    {"macroLabel": d["label"], "tasks": d["tasks"]}
+                    for d in by_age_module_macro[age_key][mod_name].values()
+                ]
+                modules_data.append({"moduleName": mod_name, "macros": macros_list})
+            return modules_data
+
+        for age_key in age_order:
+            if age_key not in by_age_module_macro:
+                continue
+            modules_data = build_modules_for_age(age_key)
+            if modules_data:
+                result.append({
                     "ageBracket": age_display.get(age_key, age_key),
-                    "objectives": objs,
+                    "modules": modules_data,
                 })
-            modules.append({
-                "moduleName": module_name,
-                "ageGroups": age_groups,
-            })
-        return {"modules": modules, "source": "kg"}
+        for age_key in sorted(by_age_module_macro.keys()):
+            if age_key in age_order:
+                continue
+            modules_data = build_modules_for_age(age_key)
+            if modules_data:
+                result.append({
+                    "ageBracket": age_display.get(age_key, age_key),
+                    "modules": modules_data,
+                })
+        return {"data": result, "source": "kg"}
     except Exception as e:
         logger.warning(f"Cognition macro structure from KG failed: {e}")
-        return {"modules": [], "source": "error", "error": str(e)}
+        return {"data": [], "source": "error", "error": str(e)}

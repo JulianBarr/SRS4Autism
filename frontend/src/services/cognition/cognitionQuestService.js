@@ -13,7 +13,7 @@ export class CognitionQuestService {
     try {
       const res = await fetch(`${API_BASE}/kg/cognition-macro-structure`);
       const data = await res.json();
-      return data.modules || [];
+      return data.data ?? data.modules ?? [];
     } catch (err) {
       console.warn('CognitionQuestService: API fetch failed:', err);
       return [];

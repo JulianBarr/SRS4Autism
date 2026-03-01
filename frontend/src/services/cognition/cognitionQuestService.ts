@@ -22,10 +22,19 @@ export interface MacroObjectiveGroup {
   objectives: MacroObjective[];
 }
 
-/** ModuleWithAgeGroups - module (e.g. 认知发展篇) containing age groups */
+/** ModuleWithAgeGroups - module (e.g. 认知发展篇) containing age groups (legacy) */
 export interface ModuleWithAgeGroups {
   moduleName: string;
   ageGroups: MacroObjectiveGroup[];
+}
+
+/** AgeBracketBlock - age-first hierarchy (Age -> Module -> Macro) */
+export interface AgeBracketBlock {
+  ageBracket: string;
+  modules: Array<{
+    moduleName: string;
+    macros: Array<{ macroLabel: string; tasks: QuestPayload[] }>;
+  }>;
 }
 
 export class CognitionQuestService {
@@ -33,11 +42,11 @@ export class CognitionQuestService {
    * Get macro structure from API. Nodes without recommendedAgeBracket
    * appear under "未分类年龄段".
    */
-  static async getMacroStructure(): Promise<ModuleWithAgeGroups[]> {
+  static async getMacroStructure(): Promise<AgeBracketBlock[] | ModuleWithAgeGroups[]> {
     try {
       const res = await fetch(`${API_BASE}/kg/cognition-macro-structure`);
       const data = await res.json();
-      return data.modules || [];
+      return data.data ?? data.modules ?? [];
     } catch (err) {
       console.warn('CognitionQuestService: API fetch failed:', err);
       return [];

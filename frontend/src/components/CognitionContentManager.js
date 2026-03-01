@@ -236,29 +236,30 @@ const MODULE_EMOJI = {
   '小肌肉发展篇': '🤏',
   '大肌肉发展篇': '🏃‍♂️',
   '模仿发展篇': '👯',
+  '未分类': '📋',
   '未分类模块': '📋'
 };
 
 /**
  * Cognition Content Manager
- * Renders hierarchical TOC (Module -> Age Bracket -> MacroObjective) from getMacroStructure().
- * Each module (认知发展篇, 大肌肉发展篇, etc.) is a top-level section; within each,
- * age brackets are accordion panels containing MacroObjectives.
+ * Renders hierarchical TOC (Age -> Module -> Macro -> Tasks) from getMacroStructure().
+ * Age bracket (e.g. 1-2岁) is the top-level section; within each, modules (认知发展篇, etc.)
+ * contain MacroObjectives with their phase tasks.
  */
 const CognitionContentManager = () => {
-  const [modules, setModules] = useState([]);
+  const [ageBrackets, setAgeBrackets] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [expandedObjective, setExpandedObjective] = useState(null);
+  const [expandedMacro, setExpandedMacro] = useState(null);
 
   useEffect(() => {
     const load = async () => {
       setLoading(true);
       try {
         const data = await CognitionQuestService.getMacroStructure();
-        setModules(Array.isArray(data) ? data : []);
+        setAgeBrackets(Array.isArray(data) ? data : []);
       } catch (err) {
         console.error('Failed to load cognition content:', err);
-        setModules([]);
+        setAgeBrackets([]);
       } finally {
         setLoading(false);
       }
@@ -266,8 +267,8 @@ const CognitionContentManager = () => {
     load();
   }, []);
 
-  const handleToggleObjective = (uriId) => {
-    setExpandedObjective((prev) => (prev === uriId ? null : uriId));
+  const handleToggleMacro = (key) => {
+    setExpandedMacro((prev) => (prev === key ? null : key));
   };
 
   return (
@@ -284,51 +285,50 @@ const CognitionContentManager = () => {
         <p style={{ color: theme.ui.text.secondary, fontSize: '16px' }}>
           加载中...
         </p>
-      ) : modules.length === 0 ? (
+      ) : ageBrackets.length === 0 ? (
         <p style={{ color: theme.ui.text.secondary, fontSize: '16px' }}>
           暂无可用内容
         </p>
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: theme.spacing.xl }}>
-          {modules.map((mod) => {
-            const emoji = MODULE_EMOJI[mod.moduleName] || '📋';
-            return (
-              <div
-                key={mod.moduleName}
+          {ageBrackets.map((ageBlock) => (
+            <div
+              key={ageBlock.ageBracket}
+              style={{
+                backgroundColor: theme.ui.background,
+                borderRadius: theme.borderRadius.md,
+                border: `1px solid ${theme.ui.border}`,
+                overflow: 'hidden'
+              }}
+            >
+              <h2
                 style={{
-                  backgroundColor: theme.ui.background,
-                  borderRadius: theme.borderRadius.md,
-                  border: `1px solid ${theme.ui.border}`,
-                  overflow: 'hidden'
+                  padding: theme.spacing.md,
+                  color: theme.categories.cognition.primary,
+                  fontSize: '20px',
+                  fontWeight: '600',
+                  margin: 0,
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: theme.spacing.sm
                 }}
               >
-                <h2
-                  style={{
-                    padding: theme.spacing.md,
-                    color: theme.categories.cognition.primary,
-                    fontSize: '20px',
-                    fontWeight: '600',
-                    margin: 0,
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: theme.spacing.sm
-                  }}
-                >
-                  <span>{emoji}</span>
-                  <span>{mod.moduleName}</span>
-                </h2>
-                <div
-                  style={{
-                    padding: `0 ${theme.spacing.md} ${theme.spacing.md}`,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: theme.spacing.sm
-                  }}
-                >
-                  {(mod.ageGroups || []).map((group) => (
-                    <details
-                      key={`${mod.moduleName}-${group.ageBracket}`}
-                      open
+                <span>📍</span>
+                <span>{ageBlock.ageBracket} 年龄段训练目标</span>
+              </h2>
+              <div
+                style={{
+                  padding: `0 ${theme.spacing.md} ${theme.spacing.md}`,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: theme.spacing.md
+                }}
+              >
+                {(ageBlock.modules || []).map((mod) => {
+                  const emoji = MODULE_EMOJI[mod.moduleName] || '📋';
+                  return (
+                    <div
+                      key={`${ageBlock.ageBracket}-${mod.moduleName}`}
                       style={{
                         backgroundColor: theme.ui.backgrounds.surface,
                         borderRadius: theme.borderRadius.sm,
@@ -336,21 +336,21 @@ const CognitionContentManager = () => {
                         overflow: 'hidden'
                       }}
                     >
-                      <summary
+                      <h3
                         style={{
                           padding: theme.spacing.md,
-                          fontSize: '15px',
+                          fontSize: '16px',
                           fontWeight: '600',
                           color: theme.categories.cognition.primary,
-                          cursor: 'pointer',
+                          margin: 0,
                           display: 'flex',
                           alignItems: 'center',
                           gap: theme.spacing.sm
                         }}
                       >
-                        <span>📍</span>
-                        <span>{group.ageBracket}年龄段训练目标</span>
-                      </summary>
+                        <span>{emoji}</span>
+                        <span>{mod.moduleName}</span>
+                      </h3>
                       <div
                         style={{
                           padding: `0 ${theme.spacing.md} ${theme.spacing.md}`,
@@ -359,21 +359,29 @@ const CognitionContentManager = () => {
                           gap: theme.spacing.xs
                         }}
                       >
-                        {(group.objectives || []).map((obj) => (
-                          <MacroObjectiveRow
-                            key={obj.uri_id}
-                            objective={obj}
-                            isExpanded={expandedObjective === obj.uri_id}
-                            onToggle={() => handleToggleObjective(obj.uri_id)}
-                          />
-                        ))}
+                        {(mod.macros || []).map((macro) => {
+                          const macroKey = `${ageBlock.ageBracket}-${mod.moduleName}-${macro.macroLabel}`;
+                          const objective = {
+                            uri_id: macroKey,
+                            label: macro.macroLabel,
+                            phases: macro.tasks || []
+                          };
+                          return (
+                            <MacroObjectiveRow
+                              key={macroKey}
+                              objective={objective}
+                              isExpanded={expandedMacro === macroKey}
+                              onToggle={() => handleToggleMacro(macroKey)}
+                            />
+                          );
+                        })}
                       </div>
-                    </details>
-                  ))}
-                </div>
+                    </div>
+                  );
+                })}
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
       )}
     </div>
