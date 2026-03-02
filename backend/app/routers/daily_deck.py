@@ -34,15 +34,30 @@ class RecordFeedbackBody(BaseModel):
     prompt_level: str
 
 
+def _quest_to_api_item(q: dict, format_pep3_short, format_materials) -> dict:
+    """将 quest 转为 API 返回格式。"""
+    return {
+        "quest_id": q["quest_id"],
+        "label": q["label"],
+        "pep3_standard": format_pep3_short(q),
+        "pep3_items": q.get("pep3_items") or [],
+        "suggested_materials": format_materials(q),
+        "teaching_steps": q.get("teaching_steps"),
+        "group_class_generalization": q.get("group_class_generalization"),
+        "home_generalization": q.get("home_generalization"),
+    }
+
+
 @router.get("/daily_quests")
 def get_daily_quests(child_name: str = "小明", count: int = 3):
-    """获取今日靶向任务课表。默认 3 个任务，可通过 count 参数自定义数量。"""
+    """获取今日靶向任务课表。默认 3 个任务，可通过 count 参数自定义数量。
+    返回 pending（待完成）和 completed_today（今日已打卡）两个列表。"""
     run_targeted_scheduler, _, format_pep3_short, format_materials = _import_scheduler()
     target_date = datetime.now(timezone.utc)
     count = max(1, min(count, 20))  # Clamp 1–20
 
     try:
-        selected_quests, weakest = run_targeted_scheduler(
+        result, weakest = run_targeted_scheduler(
             child_name=child_name,
             target_date=target_date,
             count=count,
@@ -52,19 +67,11 @@ def get_daily_quests(child_name: str = "小明", count: int = 3):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-    quests = []
-    for item in selected_quests:
-        q = item["quest"]
-        quests.append({
-            "quest_id": q["quest_id"],
-            "label": q["label"],
-            "pep3_standard": format_pep3_short(q),
-            "pep3_items": q.get("pep3_items") or [],
-            "suggested_materials": format_materials(q),
-            "teaching_steps": q.get("teaching_steps"),
-            "group_class_generalization": q.get("group_class_generalization"),
-            "home_generalization": q.get("home_generalization"),
-        })
+    pending = [_quest_to_api_item(item["quest"], format_pep3_short, format_materials) for item in result["pending"]]
+    completed_today = [
+        _quest_to_api_item(item["quest"], format_pep3_short, format_materials)
+        for item in result["completed_today"]
+    ]
 
     weakest_info = None
     if weakest:
@@ -76,7 +83,8 @@ def get_daily_quests(child_name: str = "小明", count: int = 3):
         }
 
     return {
-        "quests": quests,
+        "pending": pending,
+        "completed_today": completed_today,
         "weakest_domain_info": weakest_info,
     }
 

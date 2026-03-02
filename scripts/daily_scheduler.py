@@ -248,16 +248,33 @@ def _parse_due_from_fsrs_state(state: dict) -> Optional[datetime]:
     return None
 
 
+def _parse_last_review_date(state: dict) -> Optional[datetime]:
+    """从 fsrs_states 中的单条记录解析 last_review 日期。"""
+    lr_val = state.get("last_review")
+    if lr_val is None:
+        return None
+    if isinstance(lr_val, datetime):
+        return lr_val
+    if isinstance(lr_val, str):
+        try:
+            return datetime.fromisoformat(lr_val.replace("Z", "+00:00"))
+        except ValueError:
+            return None
+    return None
+
+
 def run_targeted_scheduler(
     child_name: str,
     target_date: datetime,
     count: int = 3,
     db_path: Optional[Path] = None,
-) -> tuple[list[dict], Optional[tuple[str, str, int]]]:
+) -> tuple[dict, Optional[tuple[str, str, int]]]:
     """
     运行靶向调度：找最短板 → SPARQL 靶向任务池 → 严格 FSRS 过滤 → 排序。
     严格从 extracted_data['fsrs_states'] 读取：due > --date 的任务坚决剔除。
-    返回: (selected_quests, weakest_domain_info)
+    今日已打卡（last_review 日期 == target_date）的任务放入 completed_today；未打卡且到期的放入 pending。
+    名额计算：pending 最多 count - len(completed_today) 个。
+    返回: ({"pending": [...], "completed_today": [...]}, weakest_domain_info)
     """
     from fsrs import FSRS, Card
 
@@ -283,7 +300,8 @@ def run_targeted_scheduler(
 
     target_date_d = target_date.date()
     target_dt = target_date.replace(hour=0, minute=0, second=0, microsecond=0)
-    due_quests: list[tuple[datetime, dict, Card | None]] = []
+    completed_today: list[dict] = []
+    pending_unsorted: list[tuple[datetime, dict, Card | None]] = []
 
     for quest in quest_pool:
         qid = quest["quest_id"]
@@ -293,15 +311,23 @@ def run_targeted_scheduler(
             due = _parse_due_from_fsrs_state(card_data)
             if due is not None and due.date() > target_date_d:
                 continue
+            last_review = _parse_last_review_date(card_data)
+            if last_review is not None and last_review.date() == target_date_d:
+                try:
+                    card = Card.from_dict(card_data)
+                except Exception:
+                    card = Card()
+                completed_today.append({"quest": quest, "card": card, "due": due or target_dt})
+                continue
             try:
                 card = Card.from_dict(card_data)
             except Exception:
                 card = Card()
             sort_due = due if due else target_dt
-            due_quests.append((sort_due, quest, card))
+            pending_unsorted.append((sort_due, quest, card))
         else:
             card = Card()
-            due_quests.append((target_dt, quest, card))
+            pending_unsorted.append((target_dt, quest, card))
 
     def _sort_key(item: tuple) -> float:
         d = item[0]
@@ -309,9 +335,12 @@ def run_targeted_scheduler(
             d = d.replace(tzinfo=timezone.utc)
         return d.timestamp()
 
-    due_quests.sort(key=_sort_key)
-    selected = due_quests[:count]
-    return [{"quest": q, "card": c, "due": d} for d, q, c in selected], weakest
+    pending_unsorted.sort(key=_sort_key)
+    quota = max(0, count - len(completed_today))
+    selected_pending = pending_unsorted[:quota]
+    pending = [{"quest": q, "card": c, "due": d} for d, q, c in selected_pending]
+
+    return {"pending": pending, "completed_today": completed_today}, weakest
 
 
 def _get_fallback_quest_pool(graph) -> list[dict]:
@@ -405,7 +434,9 @@ def print_daily_quests(
     db_path: Optional[Path] = None,
 ) -> None:
     """在终端打印靶向 Daily Quests。"""
-    results, weakest = run_targeted_scheduler(child_name, target_date, count, db_path)
+    result, weakest = run_targeted_scheduler(child_name, target_date, count, db_path)
+    pending = result["pending"]
+    completed_today = result["completed_today"]
     date_str = target_date.strftime("%Y-%m-%d")
 
     # 解析显示用 child 名称（优先 DB 中的 name）
@@ -423,12 +454,20 @@ def print_daily_quests(
         print("📊 算法诊断：未检测到 PEP-3 基线数据，使用全任务池推荐。")
     print("=" * 64)
 
-    for i, item in enumerate(results, 1):
+    for i, item in enumerate(pending, 1):
         quest = item["quest"]
         task_id = quest["quest_id"]
         pep3_short = format_pep3_short(quest)
         materials = format_materials(quest)
-        print(f"\n{i}. [{task_id}] {quest['label']} —— 🎯 支撑 PEP-3 {pep3_short}")
+        print(f"\n{i}. [待完成] [{task_id}] {quest['label']} —— 🎯 支撑 PEP-3 {pep3_short}")
+        print(f"   ↳ 推荐教具：{materials}")
+
+    for i, item in enumerate(completed_today, 1):
+        quest = item["quest"]
+        task_id = quest["quest_id"]
+        pep3_short = format_pep3_short(quest)
+        materials = format_materials(quest)
+        print(f"\n{i}. [已打卡] [{task_id}] {quest['label']} —— 🎯 支撑 PEP-3 {pep3_short}")
         print(f"   ↳ 推荐教具：{materials}")
 
     print("\n" + "=" * 64)
