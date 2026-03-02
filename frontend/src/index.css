@@ -25,6 +25,7 @@ code {
 
 .card {
   background: white;
+  border: 1px solid #ddd;
   border-radius: 10px;
   padding: 10px 14px;
   margin-bottom: 12px;
@@ -78,6 +79,15 @@ code {
 
 .btn-danger:hover {
   background: #c82333;
+}
+
+.btn-warning {
+  background: #ffc107;
+  color: #212529;
+}
+
+.btn-warning:hover {
+  background: #e0a800;
 }
 
 .form-group {

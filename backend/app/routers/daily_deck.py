@@ -59,6 +59,7 @@ def get_daily_quests(child_name: str = "小明", count: int = 3):
             "quest_id": q["quest_id"],
             "label": q["label"],
             "pep3_standard": format_pep3_short(q),
+            "pep3_items": q.get("pep3_items") or [],
             "suggested_materials": format_materials(q),
             "teaching_steps": q.get("teaching_steps"),
             "group_class_generalization": q.get("group_class_generalization"),
