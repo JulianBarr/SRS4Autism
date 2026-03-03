@@ -300,6 +300,8 @@ def run_targeted_scheduler(
 
     target_date_d = target_date.date()
     target_dt = target_date.replace(hour=0, minute=0, second=0, microsecond=0)
+    # 严格校验“今天”：使用本地时间的 YYYY-MM-DD，避免将昨天或更早的任务误判为今日已打卡
+    today_local_str = datetime.now().strftime("%Y-%m-%d")
     completed_today: list[dict] = []
     pending_unsorted: list[tuple[datetime, dict, Card | None]] = []
 
@@ -312,13 +314,19 @@ def run_targeted_scheduler(
             if due is not None and due.date() > target_date_d:
                 continue
             last_review = _parse_last_review_date(card_data)
-            if last_review is not None and last_review.date() == target_date_d:
-                try:
-                    card = Card.from_dict(card_data)
-                except Exception:
-                    card = Card()
-                completed_today.append({"quest": quest, "card": card, "due": due or target_dt})
-                continue
+            if last_review is not None:
+                last_review_local_str = (
+                    last_review.astimezone().strftime("%Y-%m-%d")
+                    if last_review.tzinfo
+                    else last_review.strftime("%Y-%m-%d")
+                )
+                if last_review_local_str == today_local_str:
+                    try:
+                        card = Card.from_dict(card_data)
+                    except Exception:
+                        card = Card()
+                    completed_today.append({"quest": quest, "card": card, "due": due or target_dt})
+                    continue
             try:
                 card = Card.from_dict(card_data)
             except Exception:
@@ -576,8 +584,8 @@ def record_feedback(
     fsrs_states[quest_id] = new_card.to_dict()
     extracted["fsrs_states"] = fsrs_states
 
-    # 自动追加系统打卡日志到 quest_logs（Topic Chat）
-    system_content = f"✅ 打卡完成: {prompt_level} (FSRS评级: {rating_val})"
+    # 自动追加系统打卡日志到 quest_logs（Topic Chat），供家校接力查看
+    system_content = f"✅ 打卡完成: {prompt_level}"
     quest_logs = extracted.setdefault("quest_logs", {})
     logs = quest_logs.setdefault(quest_id, [])
     logs.append({
@@ -588,7 +596,7 @@ def record_feedback(
     quest_logs[quest_id] = logs
     extracted["quest_logs"] = quest_logs
 
-    # 执行 SQL 真正落盘到数据库
+    # 执行 SQL 真正落盘到数据库（extracted_data 已用 json.loads 解析，修改后用 json.dumps 转回）
     conn = sqlite3.connect(str(db_path))
     cur = conn.cursor()
     now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")

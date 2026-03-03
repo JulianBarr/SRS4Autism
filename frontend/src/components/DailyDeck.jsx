@@ -217,12 +217,12 @@ function QuestTopicChatModal({ quest, childName, onClose }) {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => {
-              if (e.key === 'Enter' && !e.shiftKey) {
+              if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
                 e.preventDefault();
                 handleSend();
               }
             }}
-            placeholder="输入沟通内容... (Enter 发送，Shift + Enter 换行)"
+            placeholder="输入沟通内容... (按 Cmd/Ctrl + Enter 快捷发送)"
             rows={3}
             style={{ flex: 1, padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e1', outline: 'none', resize: 'none', fontFamily: 'inherit', fontSize: '14px', lineHeight: '1.5' }}
           />
@@ -376,9 +376,7 @@ function DailyDeck({ childName = '小明' }) {
                   <hr className="my-4 border-gray-100" />
                   <div className="flex justify-between items-center bg-gray-50 p-3 rounded-lg">
                     <div className="flex items-center gap-2 text-emerald-700 font-bold">
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                      </svg>
+                      <span>✅</span>
                       今日已打卡
                     </div>
                     <button
@@ -520,9 +518,7 @@ function DailyDeck({ childName = '小明' }) {
         ) : (
           <div className="flex justify-between items-center bg-gray-50 p-3 rounded-lg">
             <div className="flex items-center gap-2 text-emerald-700 font-bold">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-              </svg>
+              <span>✅</span>
               今日已打卡
             </div>
             <button
