@@ -348,7 +348,30 @@ def run_targeted_scheduler(
     selected_pending = pending_unsorted[:quota]
     pending = [{"quest": q, "card": c, "due": d} for d, q, c in selected_pending]
 
-    return {"pending": pending, "completed_today": completed_today}, weakest
+    # 历史打卡任务：last_review 存在且日期 != 今天
+    quest_map = {q["quest_id"]: q for q in _get_fallback_quest_pool(graph)}
+    history_quests: list[dict] = []
+    for qid, card_data in fsrs_states.items():
+        last_review = _parse_last_review_date(card_data)
+        if last_review is None:
+            continue
+        last_review_local_str = (
+            last_review.astimezone().strftime("%Y-%m-%d")
+            if last_review.tzinfo
+            else last_review.strftime("%Y-%m-%d")
+        )
+        if last_review_local_str == today_local_str:
+            continue
+        quest = quest_map.get(qid) or {"quest_id": qid, "label": qid}
+        history_quests.append({"quest": quest, "last_review": last_review})
+    history_quests.sort(key=lambda x: x["last_review"].timestamp(), reverse=True)
+    history_quests = history_quests[:20]
+
+    return {
+        "pending": pending,
+        "completed_today": completed_today,
+        "history_quests": history_quests,
+    }, weakest
 
 
 def _get_fallback_quest_pool(graph) -> list[dict]:

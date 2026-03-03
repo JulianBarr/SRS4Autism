@@ -159,42 +159,31 @@ function QuestTopicChatModal({ quest, childName, onClose }) {
             logs.map((log, i) => {
               if (log.role === 'system') {
                 return (
-                  <div key={i} style={{ display: 'flex', justifyContent: 'center' }}>
-                    <span style={{ fontSize: '12px', color: '#64748b', backgroundColor: '#f1f5f9', padding: '6px 12px', borderRadius: '9999px' }}>
-                      {log.content}
-                    </span>
-                  </div>
-                );
-              }
-              if (log.role === 'parent') {
-                return (
-                  <div key={i} style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                    <div style={{ maxWidth: '80%', backgroundColor: '#d1fae5', color: '#065f46', borderRadius: '8px', padding: '8px 12px', fontSize: '14px' }}>
-                      <span style={{ fontSize: '12px', color: '#059669', display: 'block', marginBottom: '2px' }}>{roleLabel.parent}</span>
-                      {log.content}
-                      <span style={{ fontSize: '12px', color: '#94a3b8', display: 'block', marginTop: '4px' }}>{log.timestamp?.slice(0, 16)}</span>
-                    </div>
-                  </div>
-                );
-              }
-              return (
-                <div key={i} style={{ display: 'flex', justifyContent: 'flex-start' }}>
-                  <div
-                    style={{
-                      maxWidth: '80%',
-                      borderRadius: '8px',
-                      padding: '8px 12px',
-                      fontSize: '14px',
-                      backgroundColor: log.role === 'ai' ? '#ede9fe' : '#dbeafe',
-                      color: log.role === 'ai' ? '#4c1d95' : '#1e40af'
-                    }}
-                  >
-                    <span style={{ fontSize: '12px', display: 'block', marginBottom: '2px', color: log.role === 'ai' ? '#7c3aed' : '#2563eb' }}>
-                      {roleLabel[log.role] || log.role}
-                    </span>
+                  <div key={i} style={{ alignSelf: 'center', backgroundColor: '#f1f5f9', color: '#64748b', padding: '6px 16px', borderRadius: '999px', fontSize: '12px', marginTop: '8px' }}>
                     {log.content}
-                    <span style={{ fontSize: '12px', color: '#94a3b8', display: 'block', marginTop: '4px' }}>{log.timestamp?.slice(0, 16)}</span>
                   </div>
+                );
+              }
+              const isParent = log.role === 'parent';
+              return (
+                <div key={i} style={{
+                  alignSelf: isParent ? 'flex-end' : 'flex-start',
+                  backgroundColor: isParent ? '#dcfce7' : (log.role === 'ai' ? '#ede9fe' : '#dbeafe'),
+                  color: isParent ? '#064e3b' : (log.role === 'ai' ? '#4c1d95' : '#1e3a8a'),
+                  padding: '12px 16px',
+                  borderRadius: '16px',
+                  borderBottomRightRadius: isParent ? '4px' : '16px',
+                  borderBottomLeftRadius: !isParent ? '4px' : '16px',
+                  maxWidth: '80%',
+                  boxShadow: '0 1px 2px rgba(0,0,0,0.05)'
+                }}>
+                  <span style={{ fontSize: '12px', opacity: 0.6, display: 'block', marginBottom: '6px' }}>
+                    {roleLabel[log.role] || log.role}
+                  </span>
+                  <div style={{ fontSize: '14px', lineHeight: '1.5', whiteSpace: 'pre-wrap' }}>{log.content}</div>
+                  <span style={{ fontSize: '11px', opacity: 0.5, display: 'block', marginTop: '8px', textAlign: 'right' }}>
+                    {log.timestamp?.slice(0, 16).replace('T', ' ')}
+                  </span>
                 </div>
               );
             })
@@ -243,6 +232,7 @@ function QuestTopicChatModal({ quest, childName, onClose }) {
 function DailyDeck({ childName = '小明' }) {
   const [pending, setPending] = useState([]);
   const [completedToday, setCompletedToday] = useState([]);
+  const [historyQuests, setHistoryQuests] = useState([]);
   const [weakestDomainInfo, setWeakestDomainInfo] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -276,11 +266,13 @@ function DailyDeck({ childName = '小明' }) {
       const data = await res.json();
       setPending(data.pending || []);
       setCompletedToday(data.completed_today || []);
+      setHistoryQuests(data.history_quests || []);
       setWeakestDomainInfo(data.weakest_domain_info || null);
     } catch (err) {
       setError(err.message || '获取课表失败');
       setPending([]);
       setCompletedToday([]);
+      setHistoryQuests([]);
     } finally {
       setLoading(false);
     }
@@ -387,6 +379,47 @@ function DailyDeck({ childName = '小明' }) {
                       💬 补充记录
                     </button>
                   </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+        {historyQuests.length > 0 && (
+          <div className="max-w-2xl mx-auto w-full px-4 pb-8">
+            <h2 className="text-base font-semibold text-slate-600 mb-4">🕰️ 历史干预记录 (History)</h2>
+            <div className="space-y-2">
+              {historyQuests.map((item) => (
+                <div
+                  key={item.quest?.quest_id || item.last_review}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    padding: '8px 12px',
+                    backgroundColor: '#f8fafc',
+                    borderRadius: '8px',
+                    border: '1px solid #e2e8f0'
+                  }}
+                >
+                  <div>
+                    <span style={{ fontWeight: 500, color: '#334155' }}>{item.quest?.label || item.quest?.quest_id}</span>
+                    <span style={{ fontSize: '12px', color: '#64748b', marginLeft: '8px' }}>{item.last_review}</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => openChat(item.quest)}
+                    style={{
+                      fontSize: '12px',
+                      padding: '4px 10px',
+                      backgroundColor: '#e0e7ff',
+                      color: '#4338ca',
+                      border: 'none',
+                      borderRadius: '6px',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    💬 查看记录
+                  </button>
                 </div>
               ))}
             </div>
@@ -607,6 +640,51 @@ function DailyDeck({ childName = '小明' }) {
                     isCompleted={true}
                     showButtons={false}
                   />
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* 历史干预记录 */}
+          {historyQuests.length > 0 && (
+            <section>
+              <h2 className="text-base font-semibold text-slate-600 mb-4 flex items-center gap-2">
+                🕰️ 历史干预记录 (History)
+              </h2>
+              <div className="space-y-2">
+                {historyQuests.map((item) => (
+                  <div
+                    key={item.quest?.quest_id || item.last_review}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      padding: '8px 12px',
+                      backgroundColor: '#f8fafc',
+                      borderRadius: '8px',
+                      border: '1px solid #e2e8f0'
+                    }}
+                  >
+                    <div>
+                      <span style={{ fontWeight: 500, color: '#334155' }}>{item.quest?.label || item.quest?.quest_id}</span>
+                      <span style={{ fontSize: '12px', color: '#64748b', marginLeft: '8px' }}>{item.last_review}</span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => openChat(item.quest)}
+                      style={{
+                        fontSize: '12px',
+                        padding: '4px 10px',
+                        backgroundColor: '#e0e7ff',
+                        color: '#4338ca',
+                        border: 'none',
+                        borderRadius: '6px',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      💬 查看记录
+                    </button>
+                  </div>
                 ))}
               </div>
             </section>

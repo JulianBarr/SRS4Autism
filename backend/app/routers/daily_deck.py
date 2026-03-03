@@ -81,6 +81,17 @@ def get_daily_quests(child_name: str = "小明", count: int = 3):
         _quest_to_api_item(item["quest"], format_pep3_short, format_materials)
         for item in result["completed_today"]
     ]
+    history_quests = [
+        {
+            "quest": _quest_to_api_item(item["quest"], format_pep3_short, format_materials),
+            "last_review": (
+                item["last_review"].astimezone().strftime("%Y-%m-%d")
+                if item["last_review"].tzinfo
+                else item["last_review"].strftime("%Y-%m-%d")
+            ),
+        }
+        for item in result.get("history_quests", [])
+    ]
 
     weakest_info = None
     if weakest:
@@ -94,6 +105,7 @@ def get_daily_quests(child_name: str = "小明", count: int = 3):
     return {
         "pending": pending,
         "completed_today": completed_today,
+        "history_quests": history_quests,
         "weakest_domain_info": weakest_info,
     }
 
