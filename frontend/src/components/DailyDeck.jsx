@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 
 const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
@@ -56,6 +56,8 @@ function QuestTopicChatModal({ quest, childName, onClose }) {
   const [input, setInput] = useState('');
   const [sending, setSending] = useState(false);
   const [sendRole, setSendRole] = useState('parent');
+  const [selectedFile, setSelectedFile] = useState(null);
+  const fileInputRef = useRef(null);
 
   const fetchLogs = useCallback(async () => {
     if (!quest?.quest_id) return;
@@ -80,21 +82,24 @@ function QuestTopicChatModal({ quest, childName, onClose }) {
 
   const handleSend = async () => {
     const content = input.trim();
-    if (!content || sending) return;
+    if ((!content && !selectedFile) || sending) return;
     setSending(true);
     try {
+      const formData = new FormData();
+      formData.append('child_name', childName);
+      formData.append('quest_id', quest.quest_id);
+      formData.append('role', sendRole);
+      formData.append('content', content);
+      if (selectedFile) {
+        formData.append('file', selectedFile);
+      }
       const res = await fetch(`${API_BASE}/api/quest_logs`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          child_name: childName,
-          quest_id: quest.quest_id,
-          role: sendRole,
-          content,
-        }),
+        body: formData,
       });
       if (!res.ok) throw new Error(await res.text());
       setInput('');
+      setSelectedFile(null);
       await fetchLogs();
     } catch (err) {
       console.error('发送失败:', err);
@@ -181,6 +186,24 @@ function QuestTopicChatModal({ quest, childName, onClose }) {
                     {roleLabel[log.role] || log.role}
                   </span>
                   <div style={{ fontSize: '14px', lineHeight: '1.5', whiteSpace: 'pre-wrap' }}>{log.content}</div>
+                  {log.file_url && (
+                    <>
+                      {log.file_type && log.file_type.startsWith('image/') && (
+                        <img
+                          src={API_BASE + log.file_url}
+                          alt=""
+                          style={{ maxWidth: '100%', borderRadius: '8px', marginTop: '8px', display: 'block' }}
+                        />
+                      )}
+                      {log.file_type && log.file_type.startsWith('video/') && (
+                        <video
+                          controls
+                          src={API_BASE + log.file_url}
+                          style={{ maxWidth: '100%', borderRadius: '8px', marginTop: '8px', display: 'block' }}
+                        />
+                      )}
+                    </>
+                  )}
                   <span style={{ fontSize: '11px', opacity: 0.5, display: 'block', marginTop: '8px', textAlign: 'right' }}>
                     {log.timestamp?.slice(0, 16).replace('T', ' ')}
                   </span>
@@ -191,7 +214,31 @@ function QuestTopicChatModal({ quest, childName, onClose }) {
         </div>
 
         {/* Input Area：多行文本框 */}
-        <div style={{ padding: '16px 24px', borderTop: '1px solid #e2e8f0', backgroundColor: '#ffffff', display: 'flex', gap: '12px', alignItems: 'flex-start', flexShrink: 0 }}>
+        <div style={{ padding: '16px 24px', borderTop: '1px solid #e2e8f0', backgroundColor: '#ffffff', display: 'flex', flexDirection: 'column', gap: '12px', flexShrink: 0 }}>
+          <input
+            type="file"
+            ref={fileInputRef}
+            accept="image/*,video/*"
+            style={{ display: 'none' }}
+            onChange={(e) => {
+              const f = e.target.files?.[0];
+              if (f) setSelectedFile(f);
+              e.target.value = '';
+            }}
+          />
+          {selectedFile && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 12px', backgroundColor: '#f1f5f9', borderRadius: '8px', fontSize: '13px', color: '#475569' }}>
+              <span style={{ flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{selectedFile.name}</span>
+              <button
+                type="button"
+                onClick={() => setSelectedFile(null)}
+                style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: '14px', color: '#64748b', padding: '2px 6px' }}
+              >
+                ✕
+              </button>
+            </div>
+          )}
+          <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
           <select
             value={sendRole}
             onChange={(e) => setSendRole(e.target.value)}
@@ -201,6 +248,17 @@ function QuestTopicChatModal({ quest, childName, onClose }) {
             <option value="teacher">老师</option>
             <option value="ai">AI</option>
           </select>
+
+          <button
+            type="button"
+            onClick={() => fileInputRef.current?.click()}
+            onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#e2e8f0'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; }}
+            style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: '18px', padding: '8px', borderRadius: '6px' }}
+            title="上传图片或视频"
+          >
+            📎
+          </button>
 
           <textarea
             value={input}
@@ -218,11 +276,12 @@ function QuestTopicChatModal({ quest, childName, onClose }) {
 
           <button
             onClick={handleSend}
-            disabled={sending || !input.trim()}
-            style={{ padding: '10px 24px', backgroundColor: '#334155', color: '#fff', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 500, alignSelf: 'stretch', opacity: (sending || !input.trim()) ? 0.5 : 1 }}
+            disabled={sending || (!input.trim() && !selectedFile)}
+            style={{ padding: '10px 24px', backgroundColor: '#334155', color: '#fff', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 500, alignSelf: 'stretch', opacity: (sending || (!input.trim() && !selectedFile)) ? 0.5 : 1 }}
           >
             发送
           </button>
+          </div>
         </div>
       </div>
     </div>

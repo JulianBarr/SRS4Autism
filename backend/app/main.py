@@ -3755,7 +3755,13 @@ content_dir = PROJECT_ROOT / "content"
 if content_dir.exists():
     app.mount("/content", StaticFiles(directory=str(content_dir)), name="content")
 
-# 4. 根目录图片重定向中间件 (处理 /xxxx.png)
+# 4. 挂载 uploads 目录 (Topic Chat 图片/短视频)
+uploads_dir = PROJECT_ROOT / "uploads"
+uploads_dir.mkdir(parents=True, exist_ok=True)
+app.mount("/uploads", StaticFiles(directory=str(uploads_dir)), name="uploads")
+print(f"📂 Uploads mounted at: /uploads -> {uploads_dir}")
+
+# 5. 根目录图片重定向中间件 (处理 /xxxx.png)
 class RootImageRedirectMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
         path = request.url.path

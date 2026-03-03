@@ -21,7 +21,11 @@ from __future__ import annotations
 import argparse
 import json
 import sqlite3
+import threading
 from datetime import datetime, timezone, timedelta
+
+# rdflib SPARQL parser 非线程安全 (RDFLib/rdflib#765)，需串行化
+_sparql_lock = threading.Lock()
 from pathlib import Path
 from typing import Optional
 
@@ -162,7 +166,8 @@ def get_targeted_quests(graph, domain_code: str) -> list[dict]:
     }}
     """
 
-    results = list(graph.query(sparql))
+    with _sparql_lock:
+        results = list(graph.query(sparql))
 
     # 按 task 聚合
     task_data: dict[str, dict] = {}
@@ -394,7 +399,8 @@ def _get_fallback_quest_pool(graph) -> list[dict]:
         OPTIONAL { ?task ecta-kg:homeGeneralization ?homeGeneralization . }
     }
     """
-    results = list(graph.query(sparql))
+    with _sparql_lock:
+        results = list(graph.query(sparql))
     task_data: dict[str, dict] = {}
     for row in results:
         task_uri = str(row.task)
@@ -487,10 +493,14 @@ def append_quest_log(
     role: str,
     content: str,
     db_path: Optional[Path] = None,
+    file_url: Optional[str] = None,
+    file_type: Optional[str] = None,
 ) -> None:
     """
     向某任务的 quest_logs 追加一条日志。
     role: "system" | "parent" | "teacher" | "ai"
+    file_url: 可选，上传文件的相对路径，如 /uploads/xxx.jpg
+    file_type: 可选，MIME 类型，如 image/jpeg、video/mp4
     """
     db_path = db_path or get_db_path()
     profile_row = find_child_profile(db_path, child_name)
@@ -501,11 +511,15 @@ def append_quest_log(
     quest_logs = extracted.setdefault("quest_logs", {})
     logs = quest_logs.setdefault(quest_id, [])
 
-    entry = {
+    entry: dict = {
         "role": role,
         "content": content,
         "timestamp": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
     }
+    if file_url:
+        entry["file_url"] = file_url
+    if file_type:
+        entry["file_type"] = file_type
     logs.append(entry)
     quest_logs[quest_id] = logs
     extracted["quest_logs"] = quest_logs

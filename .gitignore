@@ -64,6 +64,7 @@ config/credentials.json
 # Media
 media/
 images/
+uploads/
 data/content_db/jpgs/
 
 # Obsidian notes (exclude the entire Zettelkasten workspace)

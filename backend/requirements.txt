@@ -1,5 +1,7 @@
 fastapi==0.104.1
 uvicorn==0.24.0
+# rdflib SPARQL parser 与 pyparsing 3.2+ 存在线程安全/兼容性问题 (RDFLib/rdflib#765)
+pyparsing<3.2
 pydantic==2.5.0
 python-multipart==0.0.6
 google-generativeai==0.3.2

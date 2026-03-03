@@ -6,9 +6,11 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Optional
 import sys
 
-from fastapi import APIRouter, HTTPException
+import uuid
+from fastapi import APIRouter, HTTPException, Form, File, UploadFile
 from pydantic import BaseModel
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
@@ -41,6 +43,8 @@ class QuestLogBody(BaseModel):
     quest_id: str
     role: str  # "parent" | "teacher" | "ai"
     content: str
+    file_url: Optional[str] = None
+    file_type: Optional[str] = None
 
 
 def _quest_to_api_item(q: dict, format_pep3_short, format_materials) -> dict:
@@ -148,21 +152,48 @@ def get_quest_logs_api(child_name: str, quest_id: str):
 
 
 @router.post("/quest_logs")
-def post_quest_log(body: QuestLogBody):
-    """追加一条沟通日志。role 为 parent / teacher /ai 之一。"""
+async def post_quest_log(
+    child_name: str = Form(...),
+    quest_id: str = Form(...),
+    role: str = Form(...),
+    content: str = Form(""),
+    file: Optional[UploadFile] = File(None),
+):
+    """追加一条沟通日志。role 为 parent / teacher / ai 之一。支持 multipart/form-data 上传图片或短视频。"""
     valid_roles = {"parent", "teacher", "ai"}
-    if body.role not in valid_roles:
+    if role not in valid_roles:
         raise HTTPException(
             status_code=400,
             detail=f"role 必须是 {valid_roles} 之一",
         )
     _, _, _, _, _, append_quest_log = _import_scheduler()
+
+    file_url: Optional[str] = None
+    file_type: Optional[str] = None
+
+    if file and file.filename:
+        uploads_dir = PROJECT_ROOT / "uploads"
+        uploads_dir.mkdir(parents=True, exist_ok=True)
+        ext = Path(file.filename).suffix or ""
+        safe_ext = ext.lower() if ext else ".bin"
+        unique_name = f"{uuid.uuid4().hex}{safe_ext}"
+        dest_path = uploads_dir / unique_name
+        try:
+            contents = await file.read()
+            dest_path.write_bytes(contents)
+            file_url = f"/uploads/{unique_name}"
+            file_type = file.content_type or "application/octet-stream"
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=f"文件保存失败: {e}")
+
     try:
         append_quest_log(
-            child_name=body.child_name,
-            quest_id=body.quest_id,
-            role=body.role,
-            content=body.content,
+            child_name=child_name,
+            quest_id=quest_id,
+            role=role,
+            content=content,
+            file_url=file_url,
+            file_type=file_type,
         )
         return {"status": "success"}
     except ValueError as e:
