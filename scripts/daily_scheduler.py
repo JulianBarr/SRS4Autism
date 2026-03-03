@@ -427,6 +427,69 @@ def format_materials(quest: dict) -> str:
     return "利用自然环境"
 
 
+# ---------------------------------------------------------------------------
+# Quest Logs (Topic Chat) - 家校接力沟通记录
+# ---------------------------------------------------------------------------
+
+
+def get_quest_logs(
+    child_name: str,
+    quest_id: str,
+    db_path: Optional[Path] = None,
+) -> list[dict]:
+    """
+    获取某任务的历史沟通日志。
+    返回: [{"role": "system|parent|teacher|ai", "content": "...", "timestamp": "..."}, ...]
+    """
+    db_path = db_path or get_db_path()
+    profile_row = find_child_profile(db_path, child_name)
+    if not profile_row:
+        return []
+    _, _, extracted = profile_row
+    quest_logs = extracted.get("quest_logs", {})
+    return quest_logs.get(quest_id, [])
+
+
+def append_quest_log(
+    child_name: str,
+    quest_id: str,
+    role: str,
+    content: str,
+    db_path: Optional[Path] = None,
+) -> None:
+    """
+    向某任务的 quest_logs 追加一条日志。
+    role: "system" | "parent" | "teacher" | "ai"
+    """
+    db_path = db_path or get_db_path()
+    profile_row = find_child_profile(db_path, child_name)
+    if not profile_row:
+        raise ValueError(f"找不到儿童档案: {child_name}")
+
+    profile_id, _, extracted = profile_row
+    quest_logs = extracted.setdefault("quest_logs", {})
+    logs = quest_logs.setdefault(quest_id, [])
+
+    entry = {
+        "role": role,
+        "content": content,
+        "timestamp": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+    }
+    logs.append(entry)
+    quest_logs[quest_id] = logs
+    extracted["quest_logs"] = quest_logs
+
+    conn = sqlite3.connect(str(db_path))
+    cur = conn.cursor()
+    now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    cur.execute(
+        "UPDATE profiles SET extracted_data = ?, updated_at = ? WHERE id = ?",
+        (json.dumps(extracted, ensure_ascii=False), now_str, profile_id),
+    )
+    conn.commit()
+    conn.close()
+
+
 def print_daily_quests(
     child_name: str,
     target_date: datetime,
@@ -512,6 +575,18 @@ def record_feedback(
     # 将更新后的卡片存回 extracted_data
     fsrs_states[quest_id] = new_card.to_dict()
     extracted["fsrs_states"] = fsrs_states
+
+    # 自动追加系统打卡日志到 quest_logs（Topic Chat）
+    system_content = f"✅ 打卡完成: {prompt_level} (FSRS评级: {rating_val})"
+    quest_logs = extracted.setdefault("quest_logs", {})
+    logs = quest_logs.setdefault(quest_id, [])
+    logs.append({
+        "role": "system",
+        "content": system_content,
+        "timestamp": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+    })
+    quest_logs[quest_id] = logs
+    extracted["quest_logs"] = quest_logs
 
     # 执行 SQL 真正落盘到数据库
     conn = sqlite3.connect(str(db_path))

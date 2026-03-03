@@ -24,14 +24,23 @@ def _import_scheduler():
         record_feedback,
         format_pep3_short,
         format_materials,
+        get_quest_logs,
+        append_quest_log,
     )
-    return run_targeted_scheduler, record_feedback, format_pep3_short, format_materials
+    return run_targeted_scheduler, record_feedback, format_pep3_short, format_materials, get_quest_logs, append_quest_log
 
 
 class RecordFeedbackBody(BaseModel):
     child_name: str
     quest_id: str
     prompt_level: str
+
+
+class QuestLogBody(BaseModel):
+    child_name: str
+    quest_id: str
+    role: str  # "parent" | "teacher" | "ai"
+    content: str
 
 
 def _quest_to_api_item(q: dict, format_pep3_short, format_materials) -> dict:
@@ -52,7 +61,7 @@ def _quest_to_api_item(q: dict, format_pep3_short, format_materials) -> dict:
 def get_daily_quests(child_name: str = "小明", count: int = 3):
     """获取今日靶向任务课表。默认 3 个任务，可通过 count 参数自定义数量。
     返回 pending（待完成）和 completed_today（今日已打卡）两个列表。"""
-    run_targeted_scheduler, _, format_pep3_short, format_materials = _import_scheduler()
+    run_targeted_scheduler, _, format_pep3_short, format_materials, _, _ = _import_scheduler()
     target_date = datetime.now(timezone.utc)
     count = max(1, min(count, 20))  # Clamp 1–20
 
@@ -99,7 +108,7 @@ def post_record_feedback(body: RecordFeedbackBody):
             detail=f"prompt_level 必须是 {valid_levels} 之一",
         )
 
-    _, record_feedback, _, _ = _import_scheduler()
+    _, record_feedback, _, _, _, _ = _import_scheduler()
 
     try:
         record_feedback(
@@ -113,3 +122,38 @@ def post_record_feedback(body: RecordFeedbackBody):
         raise HTTPException(status_code=500, detail=str(e))
 
     return {"status": "success"}
+
+
+@router.get("/quest_logs")
+def get_quest_logs_api(child_name: str, quest_id: str):
+    """获取某任务的历史沟通日志（Topic Chat）。"""
+    _, _, _, _, get_quest_logs, _ = _import_scheduler()
+    try:
+        logs = get_quest_logs(child_name=child_name, quest_id=quest_id)
+        return {"logs": logs}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post("/quest_logs")
+def post_quest_log(body: QuestLogBody):
+    """追加一条沟通日志。role 为 parent / teacher /ai 之一。"""
+    valid_roles = {"parent", "teacher", "ai"}
+    if body.role not in valid_roles:
+        raise HTTPException(
+            status_code=400,
+            detail=f"role 必须是 {valid_roles} 之一",
+        )
+    _, _, _, _, _, append_quest_log = _import_scheduler()
+    try:
+        append_quest_log(
+            child_name=body.child_name,
+            quest_id=body.quest_id,
+            role=body.role,
+            content=body.content,
+        )
+        return {"status": "success"}
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

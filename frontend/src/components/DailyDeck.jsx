@@ -49,6 +49,197 @@ const PROMPT_LEVELS = [
   { key: '独立完成', label: '独立完成', short: 'Independent', color: 'green', emoji: '🟩' },
 ];
 
+/** Topic Chat 沟通与记录模态框 - 家校接力 */
+function QuestTopicChatModal({ quest, childName, onClose }) {
+  const [logs, setLogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [input, setInput] = useState('');
+  const [sending, setSending] = useState(false);
+  const [sendRole, setSendRole] = useState('parent');
+
+  const fetchLogs = useCallback(async () => {
+    if (!quest?.quest_id) return;
+    setLoading(true);
+    try {
+      const res = await fetch(
+        `${API_BASE}/api/quest_logs?child_name=${encodeURIComponent(childName)}&quest_id=${encodeURIComponent(quest.quest_id)}`
+      );
+      if (!res.ok) throw new Error(await res.text());
+      const data = await res.json();
+      setLogs(data.logs || []);
+    } catch {
+      setLogs([]);
+    } finally {
+      setLoading(false);
+    }
+  }, [childName, quest?.quest_id]);
+
+  useEffect(() => {
+    fetchLogs();
+  }, [fetchLogs]);
+
+  const handleSend = async () => {
+    const content = input.trim();
+    if (!content || sending) return;
+    setSending(true);
+    try {
+      const res = await fetch(`${API_BASE}/api/quest_logs`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          child_name: childName,
+          quest_id: quest.quest_id,
+          role: sendRole,
+          content,
+        }),
+      });
+      if (!res.ok) throw new Error(await res.text());
+      setInput('');
+      await fetchLogs();
+    } catch (err) {
+      console.error('发送失败:', err);
+    } finally {
+      setSending(false);
+    }
+  };
+
+  const roleLabel = { parent: '家长', teacher: '老师', ai: 'AI' };
+
+  return (
+    <div
+      style={{
+        position: 'fixed',
+        top: 0, left: 0, width: '100vw', height: '100vh',
+        backgroundColor: 'rgba(0, 0, 0, 0.6)',
+        zIndex: 99999,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '20px',
+        boxSizing: 'border-box'
+      }}
+      onClick={onClose}
+      role="dialog"
+    >
+      {/* 弹窗本体：宽90%（最大800px），高85vh */}
+      <div
+        style={{
+          backgroundColor: '#ffffff',
+          borderRadius: '16px',
+          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+          width: '90%',
+          maxWidth: '800px',
+          height: '85vh',
+          display: 'flex',
+          flexDirection: 'column',
+          overflow: 'hidden'
+        }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header：左右两端对齐，X在右上角 */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 24px', borderBottom: '1px solid #f1f5f9', backgroundColor: '#f8fafc', flexShrink: 0 }}>
+          <h3 style={{ fontWeight: 600, fontSize: '1.125rem', color: '#1e293b', margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+            💬 沟通与记录 — {quest?.label || ''}
+          </h3>
+          <button
+            onClick={onClose}
+            style={{ background: 'transparent', border: 'none', fontSize: '1.5rem', cursor: 'pointer', color: '#64748b', padding: '4px 8px', borderRadius: '8px' }}
+          >
+            ✕
+          </button>
+        </div>
+
+        {/* Chat Body：保留原有的渲染逻辑 */}
+        <div style={{ flex: 1, overflowY: 'auto', padding: '24px', backgroundColor: '#f8fafc', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          {loading ? (
+            <div style={{ color: '#64748b', fontSize: '14px', textAlign: 'center', padding: '32px 0' }}>加载中...</div>
+          ) : logs.length === 0 ? (
+            <div style={{ color: '#94a3b8', fontSize: '14px', textAlign: 'center', padding: '32px 0' }}>暂无记录，可在此添加沟通内容</div>
+          ) : (
+            logs.map((log, i) => {
+              if (log.role === 'system') {
+                return (
+                  <div key={i} style={{ display: 'flex', justifyContent: 'center' }}>
+                    <span style={{ fontSize: '12px', color: '#64748b', backgroundColor: '#f1f5f9', padding: '6px 12px', borderRadius: '9999px' }}>
+                      {log.content}
+                    </span>
+                  </div>
+                );
+              }
+              if (log.role === 'parent') {
+                return (
+                  <div key={i} style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    <div style={{ maxWidth: '80%', backgroundColor: '#d1fae5', color: '#065f46', borderRadius: '8px', padding: '8px 12px', fontSize: '14px' }}>
+                      <span style={{ fontSize: '12px', color: '#059669', display: 'block', marginBottom: '2px' }}>{roleLabel.parent}</span>
+                      {log.content}
+                      <span style={{ fontSize: '12px', color: '#94a3b8', display: 'block', marginTop: '4px' }}>{log.timestamp?.slice(0, 16)}</span>
+                    </div>
+                  </div>
+                );
+              }
+              return (
+                <div key={i} style={{ display: 'flex', justifyContent: 'flex-start' }}>
+                  <div
+                    style={{
+                      maxWidth: '80%',
+                      borderRadius: '8px',
+                      padding: '8px 12px',
+                      fontSize: '14px',
+                      backgroundColor: log.role === 'ai' ? '#ede9fe' : '#dbeafe',
+                      color: log.role === 'ai' ? '#4c1d95' : '#1e40af'
+                    }}
+                  >
+                    <span style={{ fontSize: '12px', display: 'block', marginBottom: '2px', color: log.role === 'ai' ? '#7c3aed' : '#2563eb' }}>
+                      {roleLabel[log.role] || log.role}
+                    </span>
+                    {log.content}
+                    <span style={{ fontSize: '12px', color: '#94a3b8', display: 'block', marginTop: '4px' }}>{log.timestamp?.slice(0, 16)}</span>
+                  </div>
+                </div>
+              );
+            })
+          )}
+        </div>
+
+        {/* Input Area：多行文本框 */}
+        <div style={{ padding: '16px 24px', borderTop: '1px solid #e2e8f0', backgroundColor: '#ffffff', display: 'flex', gap: '12px', alignItems: 'flex-start', flexShrink: 0 }}>
+          <select
+            value={sendRole}
+            onChange={(e) => setSendRole(e.target.value)}
+            style={{ padding: '10px 12px', borderRadius: '8px', border: '1px solid #cbd5e1', outline: 'none', backgroundColor: '#fff', fontSize: '14px' }}
+          >
+            <option value="parent">家长</option>
+            <option value="teacher">老师</option>
+            <option value="ai">AI</option>
+          </select>
+
+          <textarea
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                handleSend();
+              }
+            }}
+            placeholder="输入沟通内容... (Enter 发送，Shift + Enter 换行)"
+            rows={3}
+            style={{ flex: 1, padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e1', outline: 'none', resize: 'none', fontFamily: 'inherit', fontSize: '14px', lineHeight: '1.5' }}
+          />
+
+          <button
+            onClick={handleSend}
+            disabled={sending || !input.trim()}
+            style={{ padding: '10px 24px', backgroundColor: '#334155', color: '#fff', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 500, alignSelf: 'stretch', opacity: (sending || !input.trim()) ? 0.5 : 1 }}
+          >
+            发送
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function DailyDeck({ childName = '小明' }) {
   const [pending, setPending] = useState([]);
   const [completedToday, setCompletedToday] = useState([]);
@@ -57,6 +248,22 @@ function DailyDeck({ childName = '小明' }) {
   const [error, setError] = useState(null);
   const [submitting, setSubmitting] = useState(null); // quest_id when submitting
   const [questCount, setQuestCount] = useState(3);
+  const [currentChatQuest, setCurrentChatQuest] = useState(null);
+
+  // Prevent background scroll when modal is open; always restore on unmount
+  useEffect(() => {
+    if (currentChatQuest) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [currentChatQuest]);
+
+  const openChat = (quest) => setCurrentChatQuest(quest);
+  const closeChat = () => setCurrentChatQuest(null);
 
   const fetchDailyQuests = useCallback(async () => {
     setLoading(true);
@@ -166,10 +373,33 @@ function DailyDeck({ childName = '小明' }) {
                   {quest.pep3_standard && (
                     <p className="text-sm text-slate-500 mt-1">PEP-3: {quest.pep3_standard}</p>
                   )}
+                  <hr className="my-4 border-gray-100" />
+                  <div className="flex justify-between items-center bg-gray-50 p-3 rounded-lg">
+                    <div className="flex items-center gap-2 text-emerald-700 font-bold">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                      </svg>
+                      今日已打卡
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => openChat(quest)}
+                      className="text-sm bg-white border border-gray-200 text-gray-700 px-3 py-1.5 rounded-md hover:bg-gray-50 transition font-medium"
+                    >
+                      💬 补充记录
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
+        )}
+        {currentChatQuest && (
+          <QuestTopicChatModal
+            quest={currentChatQuest}
+            childName={childName}
+            onClose={closeChat}
+          />
         )}
       </div>
     );
@@ -239,44 +469,71 @@ function DailyDeck({ childName = '小明' }) {
               </p>
             </div>
           )}
+        </div>
 
-          <div className="pt-2 mb-6">
-            <a
-              href="#"
-              className="text-sm text-blue-600 hover:text-blue-800 hover:underline"
-              onClick={(e) => e.preventDefault()}
+        {/* 1. Secondary Actions (Top right aligned below content) */}
+        <div className="flex justify-end gap-3 mt-6">
+          <button
+            type="button"
+            className="text-sm bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition font-medium flex items-center gap-1"
+            onClick={(e) => e.preventDefault()}
+          >
+            📹 示范视频 (待添加)
+          </button>
+          <button
+            type="button"
+            onClick={() => openChat(quest)}
+            className="text-sm bg-blue-50 text-blue-700 px-4 py-2 rounded-lg hover:bg-blue-100 transition font-medium flex items-center gap-1"
+          >
+            💬 沟通与记录 (Intervention Log)
+          </button>
+        </div>
+
+        {/* 2. Divider */}
+        <hr className="my-5 border-gray-200" />
+
+        {/* 3. Primary Action: Grading Buttons (Left aligned or centered) */}
+        {showButtons ? (
+          <div className="flex gap-4">
+            <button
+              onClick={() => recordFeedback(quest.quest_id, '全辅助')}
+              disabled={isSubmitting}
+              className={`flex-1 bg-red-500 text-white px-4 py-3 rounded-lg hover:bg-red-600 transition font-bold shadow-sm ${isSubmitting ? 'opacity-60 cursor-not-allowed' : ''}`}
             >
-              📹 示范视频（待添加）
-            </a>
+              🟥 全辅助
+            </button>
+            <button
+              onClick={() => recordFeedback(quest.quest_id, '部分辅助')}
+              disabled={isSubmitting}
+              className={`flex-1 bg-yellow-500 text-white px-4 py-3 rounded-lg hover:bg-yellow-600 transition font-bold shadow-sm ${isSubmitting ? 'opacity-60 cursor-not-allowed' : ''}`}
+            >
+              🟨 部分辅助
+            </button>
+            <button
+              onClick={() => recordFeedback(quest.quest_id, '独立完成')}
+              disabled={isSubmitting}
+              className={`flex-1 bg-green-500 text-white px-4 py-3 rounded-lg hover:bg-green-600 transition font-bold shadow-sm ${isSubmitting ? 'opacity-60 cursor-not-allowed' : ''}`}
+            >
+              🟩 独立完成
+            </button>
           </div>
-        </div>
-
-        <div className="flex flex-wrap justify-end gap-6">
-          {showButtons ? (
-            PROMPT_LEVELS.map(({ key, label, emoji }) => (
-              <button
-                key={key}
-                onClick={() => recordFeedback(quest.quest_id, key)}
-                disabled={isSubmitting}
-                className={`
-                  btn
-                  ${key === '全辅助' && 'btn-danger'}
-                  ${key === '部分辅助' && 'btn-warning'}
-                  ${key === '独立完成' && 'btn-success'}
-                  ${isSubmitting ? 'opacity-60 cursor-not-allowed' : ''}
-                `}
-              >
-                <span className="block text-lg mb-0.5">{emoji}</span>
-                {label}
-              </button>
-            ))
-          ) : (
-            <div className="flex items-center gap-2 px-4 py-2 bg-slate-200 text-slate-600 rounded-lg font-medium">
-              <span>✅</span>
-              <span>已打卡</span>
+        ) : (
+          <div className="flex justify-between items-center bg-gray-50 p-3 rounded-lg">
+            <div className="flex items-center gap-2 text-emerald-700 font-bold">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+              </svg>
+              今日已打卡
             </div>
-          )}
-        </div>
+            <button
+              type="button"
+              onClick={() => openChat(quest)}
+              className="text-sm bg-white border border-gray-200 text-gray-700 px-3 py-1.5 rounded-md hover:bg-gray-50 transition font-medium"
+            >
+              💬 补充记录
+            </button>
+          </div>
+        )}
       </div>
     );
   };
@@ -360,6 +617,14 @@ function DailyDeck({ childName = '小明' }) {
           )}
         </div>
       </main>
+
+      {currentChatQuest && (
+        <QuestTopicChatModal
+          quest={currentChatQuest}
+          childName={childName}
+          onClose={closeChat}
+        />
+      )}
     </div>
   );
 }
