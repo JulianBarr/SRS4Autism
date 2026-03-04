@@ -1,6 +1,67 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { VB_MAPP_SEEDS } from '../vbmapp_seeds';
 
 const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+
+/** 大一统 Demo：PEP 评估项悬停提示，鼠标悬停显示详细描述 */
+function AssessmentTooltip({ details }) {
+  const [show, setShow] = useState(false);
+  if (!details || details.length === 0) return null;
+  return (
+    <span
+      style={{ position: 'relative', display: 'inline-flex', cursor: 'help' }}
+      onMouseEnter={() => setShow(true)}
+      onMouseLeave={() => setShow(false)}
+    >
+      <span
+        style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '20px',
+          height: '20px',
+          fontSize: '14px',
+          fontWeight: 700,
+          color: '#4338ca',
+          backgroundColor: '#e0e7ff',
+          borderRadius: '50%',
+          border: '1px solid #818cf8'
+        }}
+      >
+        i
+      </span>
+      {show && (
+        <div
+          style={{
+            position: 'absolute',
+            zIndex: 50,
+            left: 0,
+            top: '100%',
+            marginTop: '6px',
+            width: '280px',
+            maxWidth: '90vw',
+            padding: '12px',
+            fontSize: '13px',
+            textAlign: 'left',
+            backgroundColor: '#1e293b',
+            color: '#e2e8f0',
+            borderRadius: '8px',
+            boxShadow: '0 10px 25px rgba(0,0,0,0.2)',
+            border: '1px solid #334155'
+          }}
+          role="tooltip"
+        >
+          <div style={{ fontWeight: 600, color: '#a5b4fc', marginBottom: '8px' }}>PEP-3 评估项描述</div>
+          <ul style={{ margin: 0, paddingLeft: '18px', lineHeight: 1.6 }}>
+            {details.map((item, i) => (
+              <li key={i} style={{ marginBottom: '4px' }}>{item}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </span>
+  );
+}
 
 /** PEP3 悬停提示：鼠标悬停显示完整描述 */
 function Pep3Tooltip({ pep3Standard, pep3Items }) {
@@ -314,6 +375,43 @@ function DailyDeck({ childName = '小明' }) {
   const openChat = (quest) => setCurrentChatQuest(quest);
   const closeChat = () => setCurrentChatQuest(null);
 
+  // 提取真实的 VB-MAPP 节点作为底层图谱演示
+  const vb19 = VB_MAPP_SEEDS.find(s => s.id === 'VB019') || { content: '将图片与实物配对（例如：真实的鞋子和鞋子的图片）。' };
+
+  const DEMO_SUPER_NODE = {
+    quest_id: "SUPER_NODE_001",
+    label: "(3) 特征相同和不同（颜色、形状）",
+    ecumenical_integration: {
+      assessment: {
+        title: "🎯 核心评估目标",
+        badge: "PEP-3",
+        content: "第 23 题：配对形状；第 106 题：根据特征分类",
+        details: [
+          "第 23 题（配对形状）：评估儿童是否能将相同形状的物体进行配对。",
+          "第 106 题（根据特征分类）：评估儿童是否能根据颜色、形状等特征对物品进行分类。"
+        ]
+      },
+      prerequisite: {
+        title: "🧠 图谱前置能力",
+        badge: "VB-MAPP 节点",
+        content: `要求：${vb19.content}`
+      },
+      teaching: {
+        title: "🛠️ 标准教学步骤",
+        badge: "ABLLS-R 实操",
+        content: `B5 - 匹配相同的物品
+① 在桌上放一个苹果和一个香蕉。
+② 递给儿童一个一样的苹果，指令「放一样的」。
+③ 若做对，给予强烈强化；若做错，立即提供物理辅助。`
+      },
+      generalization: {
+        title: "🏠 生活场景泛化",
+        badge: "本土化经验",
+        content: `收衣服时，按长短袖或颜色整理，引导儿童观察并说出：「这些衣服是一样的，都是红色的。」 或者玩超市购物游戏，找一样的零食。`
+      }
+    }
+  };
+
   const fetchDailyQuests = useCallback(async () => {
     setLoading(true);
     setError(null);
@@ -533,7 +631,60 @@ function DailyDeck({ childName = '小明' }) {
             </p>
           )}
 
-          {quest.teaching_steps && (
+          {quest.ecumenical_integration && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', margin: '24px 0' }}>
+
+              {/* 1. 标准教学步骤 */}
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
+                  <span style={{ fontWeight: 700, fontSize: '16px', color: '#111827' }}>{quest.ecumenical_integration.teaching.title}</span>
+                  <span style={{ fontSize: '12px', padding: '2px 8px', backgroundColor: '#f3f4f6', color: '#6b7280', borderRadius: '4px', fontFamily: 'monospace' }}>{quest.ecumenical_integration.teaching.badge}</span>
+                </div>
+                <div style={{ fontSize: '14px', color: '#374151', whiteSpace: 'pre-line', lineHeight: 1.6 }}>
+                  {quest.ecumenical_integration.teaching.content}
+                </div>
+              </div>
+
+              {/* 2. 生活场景泛化 */}
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
+                  <span style={{ fontWeight: 700, fontSize: '16px', color: '#111827' }}>{quest.ecumenical_integration.generalization.title}</span>
+                  <span style={{ fontSize: '12px', padding: '2px 8px', backgroundColor: '#f3f4f6', color: '#6b7280', borderRadius: '4px', fontFamily: 'monospace' }}>{quest.ecumenical_integration.generalization.badge}</span>
+                </div>
+                <div style={{ fontSize: '14px', color: '#374151', whiteSpace: 'pre-line', lineHeight: 1.6 }}>
+                  {quest.ecumenical_integration.generalization.content}
+                </div>
+              </div>
+
+              {/* 3. 图谱前置能力 */}
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
+                  <span style={{ fontWeight: 700, fontSize: '16px', color: '#111827' }}>{quest.ecumenical_integration.prerequisite.title}</span>
+                  <span style={{ fontSize: '12px', padding: '2px 8px', backgroundColor: '#f3f4f6', color: '#6b7280', borderRadius: '4px', fontFamily: 'monospace' }}>{quest.ecumenical_integration.prerequisite.badge}</span>
+                </div>
+                <div style={{ fontSize: '14px', color: '#374151', whiteSpace: 'pre-line', lineHeight: 1.6 }}>
+                  {quest.ecumenical_integration.prerequisite.content}
+                </div>
+              </div>
+
+              {/* 4. 核心评估目标 */}
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
+                  <span style={{ fontWeight: 700, fontSize: '16px', color: '#111827' }}>{quest.ecumenical_integration.assessment.title}</span>
+                  <span style={{ fontSize: '12px', padding: '2px 8px', backgroundColor: '#f3f4f6', color: '#6b7280', borderRadius: '4px', fontFamily: 'monospace' }}>{quest.ecumenical_integration.assessment.badge}</span>
+                  {quest.ecumenical_integration.assessment.details && quest.ecumenical_integration.assessment.details.length > 0 && (
+                    <AssessmentTooltip details={quest.ecumenical_integration.assessment.details} />
+                  )}
+                </div>
+                <div style={{ fontSize: '14px', color: '#374151', whiteSpace: 'pre-line', lineHeight: 1.6 }}>
+                  {quest.ecumenical_integration.assessment.content}
+                </div>
+              </div>
+
+            </div>
+          )}
+
+          {(!quest.ecumenical_integration && quest.teaching_steps) && (
             <div className="mt-4 p-4 bg-slate-50 rounded-lg border border-slate-200">
               <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-emerald-100 text-emerald-800 border border-emerald-200 mb-3">教学步骤</span>
               <div className="text-slate-700 text-sm whitespace-pre-wrap leading-relaxed mt-2">
@@ -542,7 +693,7 @@ function DailyDeck({ childName = '小明' }) {
             </div>
           )}
 
-          {quest.group_class_generalization && (
+          {(!quest.ecumenical_integration && quest.group_class_generalization) && (
             <div className="p-3 rounded-lg bg-blue-50 border-l-4 border-blue-400">
               <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-blue-100 text-blue-800 border border-blue-200">👥 集体课泛化建议</span>
               <p className="text-blue-900 text-sm whitespace-pre-wrap mt-2">
@@ -551,7 +702,7 @@ function DailyDeck({ childName = '小明' }) {
             </div>
           )}
 
-          {quest.home_generalization && (
+          {(!quest.ecumenical_integration && quest.home_generalization) && (
             <div className="p-3 rounded-lg bg-orange-50 border-l-4 border-orange-400">
               <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-orange-100 text-orange-800 border border-orange-200">🏠 家庭泛化建议</span>
               <p className="text-orange-900 text-sm whitespace-pre-wrap mt-2">
@@ -659,6 +810,15 @@ function DailyDeck({ childName = '小明' }) {
               className="text-sm px-3 py-1 bg-slate-200 hover:bg-slate-300 rounded-lg"
             >
               刷新
+            </button>
+            <button
+              onClick={() => {
+                setPending([DEMO_SUPER_NODE]);
+                setCompletedToday([]);
+              }}
+              className="text-sm px-4 py-1.5 bg-indigo-600 text-white hover:bg-indigo-700 rounded-lg font-bold shadow-md transition-all ml-2"
+            >
+              ✨ 载入大一统 Demo
             </button>
           </div>
         </div>
