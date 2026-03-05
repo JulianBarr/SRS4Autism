@@ -250,13 +250,18 @@ const CognitionContentManager = () => {
   const [ageBrackets, setAgeBrackets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [expandedMacro, setExpandedMacro] = useState(null);
+  const [activeAgeGroup, setActiveAgeGroup] = useState(null);
 
   useEffect(() => {
     const load = async () => {
       setLoading(true);
       try {
         const data = await CognitionQuestService.getMacroStructure();
-        setAgeBrackets(Array.isArray(data) ? data : []);
+        const brackets = Array.isArray(data) ? data : [];
+        setAgeBrackets(brackets);
+        if (brackets.length > 0) {
+          setActiveAgeGroup((prev) => prev ?? brackets[0].ageBracket);
+        }
       } catch (err) {
         console.error('Failed to load cognition content:', err);
         setAgeBrackets([]);
@@ -270,6 +275,9 @@ const CognitionContentManager = () => {
   const handleToggleMacro = (key) => {
     setExpandedMacro((prev) => (prev === key ? null : key));
   };
+
+  const activeAgeBlock =
+    ageBrackets.find((b) => b.ageBracket === activeAgeGroup) ?? ageBrackets[0];
 
   return (
     <div
@@ -290,99 +298,117 @@ const CognitionContentManager = () => {
           暂无可用内容
         </p>
       ) : (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: theme.spacing.xl }}>
-          {ageBrackets.map((ageBlock) => (
-            <div
-              key={ageBlock.ageBracket}
-              style={{
-                backgroundColor: theme.ui.background,
-                borderRadius: theme.borderRadius.md,
-                border: `1px solid ${theme.ui.border}`,
-                overflow: 'hidden'
-              }}
-            >
-              <h2
-                style={{
-                  padding: theme.spacing.md,
-                  color: theme.categories.cognition.primary,
-                  fontSize: '20px',
-                  fontWeight: '600',
-                  margin: 0,
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: theme.spacing.sm
-                }}
-              >
-                <span>📍</span>
-                <span>{ageBlock.ageBracket} 年龄段训练目标</span>
-              </h2>
-              <div
-                style={{
-                  padding: `0 ${theme.spacing.md} ${theme.spacing.md}`,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: theme.spacing.md
-                }}
-              >
-                {(ageBlock.modules || []).map((mod) => {
-                  const emoji = MODULE_EMOJI[mod.moduleName] || '📋';
-                  return (
-                    <div
-                      key={`${ageBlock.ageBracket}-${mod.moduleName}`}
+        <>
+          {/* Horizontal tab bar for age groups */}
+          <div
+            style={{
+              display: 'flex',
+              flexWrap: 'nowrap',
+              overflowX: 'auto',
+              gap: 0,
+              borderBottom: '1px solid #e5e7eb',
+              marginBottom: theme.spacing.lg,
+              paddingBottom: 0
+            }}
+          >
+            {ageBrackets.map((ageBlock) => {
+              const isActive = activeAgeGroup === ageBlock.ageBracket;
+              return (
+                <button
+                  key={ageBlock.ageBracket}
+                  type="button"
+                  onClick={() => setActiveAgeGroup(ageBlock.ageBracket)}
+                  style={{
+                    flexShrink: 0,
+                    padding: `${theme.spacing.sm} ${theme.spacing.md}`,
+                    marginBottom: '-1px',
+                    border: 'none',
+                    borderBottom: isActive ? '2px solid #2563eb' : '2px solid transparent',
+                    background: 'transparent',
+                    color: isActive ? '#2563eb' : '#6b7280',
+                    fontWeight: isActive ? 600 : 400,
+                    fontSize: '14px',
+                    cursor: 'pointer',
+                    whiteSpace: 'nowrap',
+                    transition: 'color 0.15s ease, border-color 0.15s ease'
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isActive) {
+                      e.currentTarget.style.color = '#374151';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isActive) {
+                      e.currentTarget.style.color = '#6b7280';
+                    }
+                  }}
+                >
+                  {ageBlock.ageBracket}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Content for active age group only */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: theme.spacing.md }}>
+            {activeAgeBlock &&
+              (activeAgeBlock.modules || []).map((mod) => {
+                const emoji = MODULE_EMOJI[mod.moduleName] || '📋';
+                return (
+                  <div
+                    key={`${activeAgeBlock.ageBracket}-${mod.moduleName}`}
+                    style={{
+                      backgroundColor: theme.ui.backgrounds.surface,
+                      borderRadius: theme.borderRadius.sm,
+                      border: `1px solid ${theme.ui.border}`,
+                      overflow: 'hidden'
+                    }}
+                  >
+                    <h3
                       style={{
-                        backgroundColor: theme.ui.backgrounds.surface,
-                        borderRadius: theme.borderRadius.sm,
-                        border: `1px solid ${theme.ui.border}`,
-                        overflow: 'hidden'
+                        padding: theme.spacing.md,
+                        fontSize: '16px',
+                        fontWeight: '600',
+                        color: theme.categories.cognition.primary,
+                        margin: 0,
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: theme.spacing.sm
                       }}
                     >
-                      <h3
-                        style={{
-                          padding: theme.spacing.md,
-                          fontSize: '16px',
-                          fontWeight: '600',
-                          color: theme.categories.cognition.primary,
-                          margin: 0,
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: theme.spacing.sm
-                        }}
-                      >
-                        <span>{emoji}</span>
-                        <span>{mod.moduleName}</span>
-                      </h3>
-                      <div
-                        style={{
-                          padding: `0 ${theme.spacing.md} ${theme.spacing.md}`,
-                          display: 'flex',
-                          flexDirection: 'column',
-                          gap: theme.spacing.xs
-                        }}
-                      >
-                        {(mod.macros || []).map((macro) => {
-                          const macroKey = `${ageBlock.ageBracket}-${mod.moduleName}-${macro.macroLabel}`;
-                          const objective = {
-                            uri_id: macroKey,
-                            label: macro.macroLabel,
-                            phases: macro.tasks || []
-                          };
-                          return (
-                            <MacroObjectiveRow
-                              key={macroKey}
-                              objective={objective}
-                              isExpanded={expandedMacro === macroKey}
-                              onToggle={() => handleToggleMacro(macroKey)}
-                            />
-                          );
-                        })}
-                      </div>
+                      <span>{emoji}</span>
+                      <span>{mod.moduleName}</span>
+                    </h3>
+                    <div
+                      style={{
+                        padding: `0 ${theme.spacing.md} ${theme.spacing.md}`,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: theme.spacing.xs
+                      }}
+                    >
+                      {(mod.macros || []).map((macro) => {
+                        const macroKey = `${activeAgeBlock.ageBracket}-${mod.moduleName}-${macro.macroLabel}`;
+                        const objective = {
+                          uri_id: macroKey,
+                          label: macro.macroLabel,
+                          phases: macro.tasks || []
+                        };
+                        return (
+                          <MacroObjectiveRow
+                            key={macroKey}
+                            objective={objective}
+                            isExpanded={expandedMacro === macroKey}
+                            onToggle={() => handleToggleMacro(macroKey)}
+                          />
+                        );
+                      })}
                     </div>
-                  );
-                })}
-              </div>
-            </div>
-          ))}
-        </div>
+                  </div>
+                );
+              })}
+          </div>
+        </>
       )}
     </div>
   );
