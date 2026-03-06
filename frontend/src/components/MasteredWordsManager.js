@@ -10,6 +10,7 @@ const MasteredWordsManager = ({ profile, onUpdate }) => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedHSK, setSelectedHSK] = useState(null); // null = all levels
+  const [showUncheckedOnly, setShowUncheckedOnly] = useState(false);
   const [masteredSet, setMasteredSet] = useState(new Set());
   const [saving, setSaving] = useState(false);
   const [showAll, setShowAll] = useState(false);
@@ -98,13 +99,18 @@ const MasteredWordsManager = ({ profile, onUpdate }) => {
       );
     }
 
+    // Filter by unchecked only (hide mastered/green cards)
+    if (showUncheckedOnly) {
+      filtered = filtered.filter(w => !masteredSet.has(w.word));
+    }
+
     // Limit display unless showAll is true
     if (!showAll && filtered.length > 100) {
       filtered = filtered.slice(0, 100);
     }
 
     return filtered;
-  }, [vocabulary, searchTerm, selectedHSK, showAll]);
+  }, [vocabulary, searchTerm, selectedHSK, showAll, showUncheckedOnly, masteredSet]);
 
   // Load images for visible words (batch query, lazy loading)
   useEffect(() => {
@@ -204,7 +210,7 @@ const MasteredWordsManager = ({ profile, onUpdate }) => {
 
   // Select all visible words with warning
   const selectAllVisible = useCallback(() => {
-    // Recalculate filtered vocab based on current filters
+    // Recalculate filtered vocab based on current filters (must match filteredVocab logic)
     let filtered = vocabulary;
     if (selectedHSK !== null) {
       filtered = filtered.filter(w => w.hsk_level === selectedHSK);
@@ -215,6 +221,9 @@ const MasteredWordsManager = ({ profile, onUpdate }) => {
         w.word.toLowerCase().includes(searchLower) ||
         w.pinyin?.toLowerCase().includes(searchLower)
       );
+    }
+    if (showUncheckedOnly) {
+      filtered = filtered.filter(w => !masteredSet.has(w.word));
     }
     
     // Show warning, especially for all HSK levels
@@ -248,11 +257,11 @@ const MasteredWordsManager = ({ profile, onUpdate }) => {
     });
     setMasteredSet(newSet);
     saveMasteredWords(newSet, false);
-  }, [masteredSet, saveMasteredWords, vocabulary, selectedHSK, searchTerm, t]);
+  }, [masteredSet, saveMasteredWords, vocabulary, selectedHSK, searchTerm, showUncheckedOnly, t]);
 
   // Deselect all visible words with warning
   const deselectAllVisible = useCallback(() => {
-    // Recalculate filtered vocab based on current filters
+    // Recalculate filtered vocab based on current filters (must match filteredVocab logic)
     let filtered = vocabulary;
     if (selectedHSK !== null) {
       filtered = filtered.filter(w => w.hsk_level === selectedHSK);
@@ -263,6 +272,9 @@ const MasteredWordsManager = ({ profile, onUpdate }) => {
         w.word.toLowerCase().includes(searchLower) ||
         w.pinyin?.toLowerCase().includes(searchLower)
       );
+    }
+    if (showUncheckedOnly) {
+      filtered = filtered.filter(w => !masteredSet.has(w.word));
     }
     
     const selectedCount = filtered.filter(w => masteredSet.has(w.word)).length;
@@ -290,7 +302,7 @@ const MasteredWordsManager = ({ profile, onUpdate }) => {
     });
     setMasteredSet(newSet);
     saveMasteredWords(newSet, false);
-  }, [masteredSet, saveMasteredWords, vocabulary, selectedHSK, searchTerm, t]);
+  }, [masteredSet, saveMasteredWords, vocabulary, selectedHSK, searchTerm, showUncheckedOnly, t]);
 
   // Select all single-character words with auto-save
   const selectAllSingleCharacterWords = useCallback(() => {
@@ -449,6 +461,15 @@ const MasteredWordsManager = ({ profile, onUpdate }) => {
             <option key={level} value={level}>HSK {level}</option>
           ))}
         </select>
+        <label style={{ display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer', fontSize: '14px' }}>
+          <input
+            type="checkbox"
+            checked={showUncheckedOnly}
+            onChange={(e) => setShowUncheckedOnly(e.target.checked)}
+            style={{ cursor: 'pointer' }}
+          />
+          {t('showUncheckedOnly')}
+        </label>
       </div>
 
       {/* Bulk Actions */}
