@@ -42,12 +42,6 @@ This guide will help you set up the Interactive Cloze note type in Anki to displ
     {{Text}}
   </div>
   
-  {{#Extra}}
-  <div class="extra">
-    {{Extra}}
-  </div>
-  {{/Extra}}
-  
   <div class="controls">
     <button id="showAll" class="show-all-btn">Show All</button>
   </div>
@@ -131,6 +125,12 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="back-content">
   <p style="color: #28a745; font-weight: bold;">All answers revealed!</p>
 </div>
+
+{{#Extra}}
+<div class="extra">
+  {{Extra}}
+</div>
+{{/Extra}}
 ```
 
 ### 4. Save and Test
