@@ -508,7 +508,8 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
         card_ids: cardsToSync.map(c => c.id)
       });
 
-      alert(`✅ Success!\n${response.data.message}\n\nCards have been added to Anki deck: ${deckName}`);
+      const actualDeck = response.data.deck_name || deckName;
+      alert(`✅ Success!\n${response.data.message}\n\nCards have been added to Anki deck: ${actualDeck}`);
       
       // Refresh the cards to show updated status
       onRefresh();

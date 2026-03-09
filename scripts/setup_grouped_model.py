@@ -32,7 +32,6 @@ def create_grouped_model():
     for i in range(1, 6):
         # 1. Define the paired fields for this slot
         fields.extend([f"Text{i}", f"Extra{i}"])
-        
         # 2. Build Front Template
         # Swap out the generic {{Text}} for the specific {{TextN}}
         front_replaced = front_raw.replace("{{Text}}", f"{{{{Text{i}}}}}")
@@ -51,11 +50,28 @@ def create_grouped_model():
             "Front": front_card,
             "Back": back_replaced
         })
+    # Add metadata fields for production CUMA compatibility
+    fields.extend(["_Remarks", "_KG_Map"])
+
+    model_name = "CUMA - Grouped Interactive Cloze"
+    model_names = invoke("modelNames")
+    if model_name in model_names:
+        # Model exists: add missing fields only
+        existing_fields = invoke("modelFieldNames", modelName=model_name)
+        for field_name in ["_Remarks", "_KG_Map"]:
+            if field_name not in existing_fields:
+                try:
+                    invoke("modelFieldAdd", modelName=model_name, fieldName=field_name)
+                    print(f"✅ Added field '{field_name}' to existing note type.")
+                except Exception as e:
+                    print(f"⚠️ Could not add '{field_name}': {e}")
+        print("✅ Note type already exists; missing fields added (if any).")
+        return
 
     print("Pushing 'CUMA - Grouped Interactive Cloze' to Anki...")
     try:
-        result = invoke("createModel", 
-               modelName="CUMA - Grouped Interactive Cloze",
+        result = invoke("createModel",
+               modelName=model_name,
                inOrderFields=fields,
                css=css,
                isCloze=False, # We keep this False because your JS handles the cloze logic, not Anki's native engine

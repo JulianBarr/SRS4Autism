@@ -284,7 +284,158 @@ class AnkiConnect:
             fields=fields,
             tags=tags
         )
-    
+
+    def add_notes(
+        self,
+        notes: List[Dict[str, Any]],
+        allow_duplicate: bool = False,
+    ) -> List[Optional[int]]:
+        """
+        Add multiple notes to Anki in one batch (AnkiConnect addNotes action).
+
+        Args:
+            notes: List of note dicts, each with deckName, modelName, fields, optional tags
+            allow_duplicate: If True, allows creating duplicate notes
+
+        Returns:
+            List of note IDs (or None for notes that failed/duplicate)
+        """
+        payload_notes = []
+        for n in notes:
+            note = {
+                "deckName": n["deckName"],
+                "modelName": n["modelName"],
+                "fields": n["fields"],
+                "tags": n.get("tags", []),
+                "options": {"allowDuplicate": allow_duplicate},
+            }
+            payload_notes.append(note)
+        return self._invoke("addNotes", {"notes": payload_notes})
+
+    def push_grouped_examples_to_anki(
+        self,
+        examples: List[Dict[str, Any]],
+        deck_name: str = "CUMA_Test_Lab",
+        model_name: str = "CUMA - Grouped Interactive Cloze",
+        allow_duplicate: bool = False,
+    ) -> Dict[str, Any]:
+        """
+        Push generated vocabulary/grammar examples to Anki using the Grouped Interactive Cloze note type.
+
+        Groups examples by knowledge_point, chunks into batches of 5, and maps each chunk
+        to Text1-5 / Extra1-5 fields. Converts [target] in front to [[c1::target]] cloze syntax.
+
+        Args:
+            examples: List of dicts with keys: knowledge_point, front, back.
+                Optional: remarks, source_url, kg_map (metadata for _Remarks/_KG_Map fields).
+            deck_name: Target deck (default: CUMA_Test_Lab for sandbox testing)
+            model_name: Note type (default: CUMA - Grouped Interactive Cloze)
+            allow_duplicate: Whether to allow duplicate notes
+
+        Returns:
+            Dict with note_ids, success_count, failed_count, errors
+        """
+        if not examples:
+            return {"note_ids": [], "success_count": 0, "failed_count": 0, "errors": []}
+
+        # 1. Group by knowledge_point
+        from itertools import groupby
+
+        sorted_examples = sorted(examples, key=lambda x: x.get("knowledge_point", ""))
+        grouped = {
+            kp: list(grp)
+            for kp, grp in groupby(sorted_examples, key=lambda x: x.get("knowledge_point", ""))
+        }
+
+        # 2. Chunk into batches of 5 per knowledge point
+        def _chunk_list(lst: List, size: int):
+            for i in range(0, len(lst), size):
+                yield lst[i : i + size]
+
+        notes_to_add = []
+        for kp, ex_list in grouped.items():
+            for chunk in _chunk_list(ex_list, 5):
+                # 3. Initialize fields
+                fields = {
+                    f"Text{i}": "" for i in range(1, 6)
+                }
+                fields.update({f"Extra{i}": "" for i in range(1, 6)})
+
+                # 4. Format and map each example in the chunk
+                for i, ex in enumerate(chunk, start=1):
+                    front = ex.get("front", "")
+                    back = ex.get("back", "")
+                    # Pass front through as-is; CUMA pipeline already has [[c1::target]] cloze syntax
+                    fields[f"Text{i}"] = front
+                    fields[f"Extra{i}"] = back
+
+                # 4b. Add metadata fields (_Remarks, _KG_Map) for production CUMA compatibility
+                # Use first example's metadata or sensible defaults
+                first_ex = chunk[0] if chunk else {}
+                # Avoid printing "General" on the card; use generic label for fallback
+                remarks = first_ex.get("remarks") or first_ex.get("source_url") or (
+                    f"CUMA - {kp}" if kp and kp != "General" else "CUMA"
+                )
+                kg_map = first_ex.get("kg_map") or ""
+                fields["_Remarks"] = remarks
+                fields["_KG_Map"] = kg_map
+
+                notes_to_add.append(
+                    {
+                        "deckName": deck_name,
+                        "modelName": model_name,
+                        "fields": fields,
+                        "tags": [],
+                        "options": {"allowDuplicate": allow_duplicate},
+                    }
+                )
+
+        # 5. Ensure deck exists
+        try:
+            self.create_deck(deck_name)
+        except Exception:
+            pass  # Deck may already exist
+
+        # 6. Build addNotes payload (flatten options into each note)
+        payload_notes = []
+        for n in notes_to_add:
+            payload_notes.append(
+                {
+                    "deckName": n["deckName"],
+                    "modelName": n["modelName"],
+                    "fields": n["fields"],
+                    "tags": n.get("tags", []),
+                    "options": {"allowDuplicate": allow_duplicate},
+                }
+            )
+
+        # 7. Invoke addNotes
+        try:
+            result = self._invoke("addNotes", {"notes": payload_notes})
+        except Exception as e:
+            return {
+                "note_ids": [],
+                "success_count": 0,
+                "failed_count": len(notes_to_add),
+                "errors": [str(e)],
+            }
+
+        # 8. Parse result (addNotes returns list of IDs or null for failures)
+        note_ids = [x if x is not None else None for x in (result or [])]
+        success_count = sum(1 for x in note_ids if x is not None)
+        failed_count = len(note_ids) - success_count
+        errors = []
+        for idx, nid in enumerate(note_ids):
+            if nid is None:
+                errors.append(f"Note {idx + 1} failed to create (possibly duplicate)")
+
+        return {
+            "note_ids": note_ids,
+            "success_count": success_count,
+            "failed_count": failed_count,
+            "errors": errors,
+        }
+
     def sync_cards(self, deck_name: str, cards: List[Dict[str, Any]]) -> Dict[str, Any]:
         """
         Sync multiple cards to Anki.

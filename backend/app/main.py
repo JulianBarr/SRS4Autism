@@ -478,6 +478,66 @@ async def get_anki_note_types():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+
+# Push grouped examples to Anki (CUMA - Grouped Interactive Cloze)
+@app.post("/anki/push-grouped-examples")
+async def push_grouped_examples_to_anki(request: Dict[str, Any]):
+    """
+    Push generated vocabulary/grammar examples to Anki using the Grouped Interactive Cloze note type.
+
+    Expects JSON body:
+    {
+        "examples": [
+            {"knowledge_point": "就算...也...", "front": "就算明天下雨，我[也]要去。", "back": "Even if it rains tomorrow, I'm still going."},
+            ...
+        ],
+        "deck_name": "CUMA_Test_Lab",  // optional, defaults to CUMA_Test_Lab
+        "allow_duplicate": false        // optional
+    }
+
+    Groups by knowledge_point, chunks into batches of 5, maps to Text1-5/Extra1-5.
+    Pushes to CUMA_Test_Lab deck by default (sandbox).
+    """
+    try:
+        import sys
+        import os
+
+        sys.path.append(os.path.join(os.path.dirname(__file__), '../../'))
+        from anki_integration.anki_connect import AnkiConnect
+
+        examples = request.get("examples", [])
+        if not examples:
+            raise HTTPException(status_code=400, detail="examples is required and must be non-empty")
+
+        deck_name = request.get("deck_name", "CUMA_Test_Lab")
+        allow_duplicate = request.get("allow_duplicate", False)
+
+        anki = AnkiConnect()
+        if not anki.ping():
+            raise HTTPException(
+                status_code=503,
+                detail="Cannot connect to Anki. Make sure Anki is running with AnkiConnect add-on installed.",
+            )
+
+        result = anki.push_grouped_examples_to_anki(
+            examples=examples,
+            deck_name=deck_name,
+            allow_duplicate=allow_duplicate,
+        )
+
+        return {
+            "message": f"Pushed {result['success_count']} notes to {deck_name}",
+            "note_ids": result["note_ids"],
+            "success_count": result["success_count"],
+            "failed_count": result["failed_count"],
+            "errors": result["errors"],
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 # Anki sync endpoint
 @app.post("/anki/sync")
 async def sync_to_anki(request: Dict[str, Any], db: Session = Depends(get_db)):
@@ -633,33 +693,67 @@ async def sync_to_anki(request: Dict[str, Any], db: Session = Depends(get_db)):
             card["field__Remarks"] = remarks or ""
             card.pop("field__Remarks_annotations", None)
         
-        # Sync cards
-        print(f"🚀 Sending cards to AnkiConnect...")
-        results = anki.sync_cards(deck_name, cards_to_sync)
-        
-        print(f"✅ Sync results: {results['total']} total, {len(results['success'])} success, {len(results['failed'])} failed")
-        
-        if results['failed']:
-            for failure in results['failed']:
-                print(f"  ❌ Failed: {failure['card_id']} - {failure['error']}")
-        
-        # Update card status to synced in database
-        successful_card_ids = [s["card_id"] for s in results["success"]]
-        for card_id_str in successful_card_ids:
-            try:
-                card_id_int = int(card_id_str)
-                card = db.query(ApprovedCard).filter(ApprovedCard.id == card_id_int).first()
-                if card:
-                    card.status = "synced"
-            except (ValueError, TypeError):
-                # If card_id is not an integer, skip (shouldn't happen but handle gracefully)
-                pass
-        
+        # Transform cards to grouped examples format and push via new grouped logic
+        def _card_to_example(card: dict) -> dict:
+            kp = card.get("knowledge_point") or ""
+            if not kp and card.get("knowledge_points"):
+                kps = card.get("knowledge_points") or []
+                first = (kps or [""])[0]
+                kp = first.replace("kp:", "").split("--")[0] if first else ""
+            if not kp:
+                kp = "General"
+            front = card.get("text_field") or card.get("cloze_text") or card.get("front") or ""
+            back = card.get("extra_field") or card.get("back") or ""
+            remarks = card.get("field__Remarks") or ""
+            kg_map = card.get("field__KG_Map") or card.get("field__kg_map") or ""
+            return {
+                "knowledge_point": kp,
+                "front": front,
+                "back": back,
+                "remarks": remarks or None,
+                "kg_map": kg_map or None,
+            }
+
+        examples = [_card_to_example(c) for c in cards_to_sync]
+        grouped_model = "CUMA - Grouped Interactive Cloze"
+        # Use the deck selected by the user in the UI
+        target_deck = deck_name
+
+        print(f"🚀 Pushing {len(examples)} examples to Anki (grouped, deck={target_deck})...")
+        result = anki.push_grouped_examples_to_anki(
+            examples=examples,
+            deck_name=target_deck,
+            model_name=grouped_model,
+            allow_duplicate=False,
+        )
+
+        print(f"✅ Grouped push: {result['success_count']} notes created, {result['failed_count']} failed")
+        if result.get("errors"):
+            for err in result["errors"]:
+                print(f"  ❌ {err}")
+
+        # Update card status to synced in database (all cards considered synced if push succeeded)
+        if result["success_count"] > 0:
+            for card in cards_to_sync:
+                try:
+                    card_id_int = int(card["id"])
+                    db_card = db.query(ApprovedCard).filter(ApprovedCard.id == card_id_int).first()
+                    if db_card:
+                        db_card.status = "synced"
+                except (ValueError, TypeError):
+                    pass
+
         db.commit()
-        
+
         return {
-            "message": f"Synced {len(results['success'])} cards successfully",
-            "results": results
+            "message": f"Synced {result['success_count']} grouped notes to {target_deck} ({len(cards_to_sync)} cards)",
+            "deck_name": target_deck,
+            "results": {
+                "success_count": result["success_count"],
+                "failed_count": result["failed_count"],
+                "note_ids": result.get("note_ids", []),
+                "errors": result.get("errors", []),
+            },
         }
     
     except ImportError as e:
