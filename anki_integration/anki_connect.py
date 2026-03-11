@@ -322,12 +322,13 @@ class AnkiConnect:
         """
         Push generated vocabulary/grammar examples to Anki using the Grouped Interactive Cloze note type.
 
-        Groups examples by knowledge_point, chunks into batches of 5, and maps each chunk
-        to Text1-5 / Extra1-5 fields. Converts [target] in front to [[c1::target]] cloze syntax.
+        Groups examples by target_word (or knowledge_point) so each Note contains ONLY
+        examples testing the SAME knowledge point. SRS best practice: siblings must share
+        the exact same target to enable Anki's "bury related cards" correctly.
 
         Args:
-            examples: List of dicts with keys: knowledge_point, front, back.
-                Optional: remarks, source_url, kg_map (metadata for _Remarks/_KG_Map fields).
+            examples: List of dicts with keys: front, back; and at least one of:
+                target_word, knowledge_point. Optional: remarks, source_url, kg_map.
             deck_name: Target deck (default: CUMA_Test_Lab for sandbox testing)
             model_name: Note type (default: CUMA - Grouped Interactive Cloze)
             allow_duplicate: Whether to allow duplicate notes
@@ -338,22 +339,39 @@ class AnkiConnect:
         if not examples:
             return {"note_ids": [], "success_count": 0, "failed_count": 0, "errors": []}
 
-        # 1. Group by knowledge_point
+        # Helper: extract target word from Anki cloze [[c1::target]] in front text
+        _CLOZE_RE = re.compile(r"\[\[c1::([^\]]+)\]\]")
+
+        def _group_key(ex: dict) -> str:
+            """SRS-critical: each Note must group by the SAME target word."""
+            tw = ex.get("target_word") or ex.get("targetWord") or ""
+            if tw:
+                return str(tw).strip()
+            kp = ex.get("knowledge_point") or ""
+            if kp and kp != "General":
+                return str(kp).strip()
+            front = ex.get("front", "")
+            m = _CLOZE_RE.search(front)
+            if m:
+                return m.group(1).strip()
+            return kp or "General"
+
+        # 1. Group by target word (SRS: siblings must share same knowledge point)
         from itertools import groupby
 
-        sorted_examples = sorted(examples, key=lambda x: x.get("knowledge_point", ""))
+        sorted_examples = sorted(examples, key=_group_key)
         grouped = {
-            kp: list(grp)
-            for kp, grp in groupby(sorted_examples, key=lambda x: x.get("knowledge_point", ""))
+            k: list(grp)
+            for k, grp in groupby(sorted_examples, key=_group_key)
         }
 
-        # 2. Chunk into batches of 5 per knowledge point
+        # 2. Chunk into batches of 5 per target word (each chunk = one Note)
         def _chunk_list(lst: List, size: int):
             for i in range(0, len(lst), size):
                 yield lst[i : i + size]
 
         notes_to_add = []
-        for kp, ex_list in grouped.items():
+        for target_key, ex_list in grouped.items():
             for chunk in _chunk_list(ex_list, 5):
                 # 3. Initialize fields
                 fields = {
@@ -361,7 +379,7 @@ class AnkiConnect:
                 }
                 fields.update({f"Extra{i}": "" for i in range(1, 6)})
 
-                # 4. Format and map each example in the chunk
+                # 4. Format and map each example in the chunk (all same target_word)
                 for i, ex in enumerate(chunk, start=1):
                     front = ex.get("front", "")
                     back = ex.get("back", "")
@@ -374,7 +392,7 @@ class AnkiConnect:
                 first_ex = chunk[0] if chunk else {}
                 # Avoid printing "General" on the card; use generic label for fallback
                 remarks = first_ex.get("remarks") or first_ex.get("source_url") or (
-                    f"CUMA - {kp}" if kp and kp != "General" else "CUMA"
+                    f"CUMA - {target_key}" if target_key and target_key != "General" else "CUMA"
                 )
                 kg_map = first_ex.get("kg_map") or ""
                 fields["_Remarks"] = remarks

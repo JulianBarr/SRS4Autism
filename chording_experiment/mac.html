@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CUMA Mac 视觉控制台 (3D 全局向量版)</title>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+    <style>
+        body { margin: 0; padding: 0; background-color: #0f172a; color: #f8fafc; font-family: -apple-system, sans-serif; overflow: hidden; display: flex; flex-direction: column; }
+        .video-container { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 1; }
+        .input_video { position: absolute; width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); opacity: 0.15; }
+        .output_canvas { position: absolute; width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); z-index: 2; }
+
+        #ui-layer { position: relative; z-index: 10; padding: 10px 20px; display: flex; flex-direction: column; height: 100vh; pointer-events: none; }
+        .header { display: flex; justify-content: space-between; align-items: flex-start; pointer-events: auto;}
+        
+        .control-panel { background: rgba(0,0,0,0.85); padding: 15px 20px; border-radius: 15px; border: 1px solid #4ade80; display: flex; flex-direction: column; gap: 8px;}
+        .status-row { display: flex; gap: 20px; align-items: center; }
+        #ws-status { font-size: 1rem; color: #fbbf24; }
+        #cv-status { font-size: 1.2rem; color: #4ade80; font-weight: bold; }
+        
+        .api-row { display: flex; gap: 10px; align-items: center; font-size:0.9rem; color:#94a3b8;}
+        #api-key { background: #1e293b; border: 1px solid #475569; color: #fff; padding: 5px 10px; border-radius: 5px; width: 160px; font-family: monospace; }
+        button { cursor: pointer; }
+        #save-key-btn { background: #3b82f6; color: white; border: none; padding: 5px 10px; border-radius: 5px; }
+        
+        .calibration-row { display: flex; gap: 10px; align-items: center; font-size:0.8rem; color:#cbd5e1; margin-top: 5px; padding-top: 8px; border-top: 1px dashed #475569;}
+        .param-group { display: flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.05); padding: 4px 8px; border-radius: 8px;}
+        .param-slider { width: 70px; cursor: pointer; }
+        .val-badge { color: #fbbf24; font-weight: bold; display: inline-block; width: 26px; text-align: center;}
+
+        #cam-toggle { background-color: #ef4444; color: white; border: none; padding: 12px 24px; border-radius: 12px; font-size: 1.1rem; font-weight: bold; transition: all 0.2s; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3); }
+        #cam-toggle.off { background-color: #3b82f6; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3); }
+
+        .buffer-panel { margin-top: auto; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 2vh; pointer-events: auto;}
+        #pinyin-buffer-display { font-size: 2.5rem; font-weight: bold; color: #fbbf24; letter-spacing: 4px; min-height: 4rem; text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);}
+        #llm-result-display { font-size: 5rem; font-weight: bold; color: #fff; min-height: 6rem; text-shadow: 0 0 20px rgba(255, 255, 255, 0.4); margin-top: 10px; transition: all 0.2s;}
+        .llm-loading { color: #94a3b8 !important; transform: scale(0.95); }
+        
+        .buffer-controls { display: flex; gap: 15px; margin-top: 15px; }
+        .buf-btn { background: #334155; color: white; border: 1px solid #475569; padding: 10px 25px; border-radius: 10px; font-size: 1.2rem; transition: 0.2s; font-weight: bold;}
+        .buf-btn.delete { color: #fca5a5; }
+        .buf-btn.send { background: #10b981; border-color: #059669; color: #fff; box-shadow: 0 0 15px rgba(16, 185, 129, 0.4); }
+
+        .dashboard { display: flex; justify-content: space-between; gap: 20px; pointer-events: none; margin-bottom: 20px;}
+        .hand-panel { background: rgba(30, 41, 59, 0.8); border: 1px solid #475569; padding: 15px; border-radius: 15px; flex: 1; backdrop-filter: blur(10px); }
+        .finger-status { font-size: 1rem; margin: 5px 0; font-family: monospace; display: flex; justify-content: space-between;}
+        .val { color: #38bdf8; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="video-container">
+        <video class="input_video" autoplay playsinline></video>
+        <canvas class="output_canvas" width="1280" height="720"></canvas>
+    </div>
+
+    <div id="ui-layer">
+        <div class="header">
+            <div class="control-panel">
+                <div class="status-row">
+                    <div id="ws-status">手机端连接中...</div>
+                    <div id="cv-status">启动摄像头引擎...</div>
+                </div>
+                <div class="api-row">
+                    <span>API:</span>
+                    <input type="password" id="api-key" placeholder="输入 Gemini API Key">
+                    <button id="save-key-btn">保存</button>
+                    <span style="margin-left:15px;">防抖锁定: <span id="val-hold" class="val-badge" style="width:30px;">250</span>ms</span>
+                    <input type="range" class="param-slider" id="hold-slider" min="50" max="1500" value="250" step="10">
+                </div>
+                <div class="calibration-row">
+                    <div class="param-group">
+                        四指浅弯(1) &gt; <span id="val-pos1" class="val-badge">25</span>°
+                        <input type="range" class="param-slider" id="pos1-slider" min="10" max="50" value="25" step="5">
+                    </div>
+                    <div class="param-group">
+                        四指中弯(2) &gt; <span id="val-pos2" class="val-badge">60</span>°
+                        <input type="range" class="param-slider" id="pos2-slider" min="50" max="90" value="60" step="5">
+                    </div>
+                    <div class="param-group">
+                        四指深弯(3) &gt; <span id="val-pos3" class="val-badge">110</span>°
+                        <input type="range" class="param-slider" id="pos3-slider" min="90" max="150" value="110" step="5">
+                    </div>
+                </div>
+                <div class="calibration-row">
+                    <div class="param-group">
+                        大拇指外展(1) &lt; <span id="val-thumb-pos1" class="val-badge">40</span>°
+                        <input type="range" class="param-slider" id="thumb-pos1-slider" min="20" max="60" value="40" step="5">
+                    </div>
+                    <div class="param-group">
+                        大拇指内收(2) &gt; <span id="val-thumb-pos2" class="val-badge">75</span>°
+                        <input type="range" class="param-slider" id="thumb-pos2-slider" min="60" max="110" value="75" step="5">
+                    </div>
+                </div>
+            </div>
+            <button id="cam-toggle">🔴 关闭摄像头</button>
+        </div>
+
+        <div class="buffer-panel">
+            <div id="pinyin-buffer-display">等待结印...</div>
+            <div id="llm-result-display"></div>
+            <div class="buffer-controls">
+                <button class="buf-btn delete" id="btn-backspace">⌫ 退格</button>
+                <button class="buf-btn" id="btn-clear">🗑️ 清空缓冲</button>
+                <button class="buf-btn send" id="btn-send-llm">🚀 发送大模型 (握拳)</button>
+            </div>
+        </div>
+
+        <div class="dashboard">
+            <div class="hand-panel">
+                <div class="finger-status">L 拇 (1) <span class="val" id="l-1">0</span></div>
+                <div class="finger-status">L 食 (2) <span class="val" id="l-2">0</span></div>
+                <div class="finger-status">L 中 (3) <span class="val" id="l-3">0</span></div>
+                <div class="finger-status">L 无 (4) <span class="val" id="l-4">0</span></div>
+                <div class="finger-status">L 小 (5) <span class="val" id="l-5">0</span></div>
+            </div>
+            <div class="hand-panel">
+                <div class="finger-status">R 拇 (1) <span class="val" id="r-1">0</span></div>
+                <div class="finger-status">R 食 (2) <span class="val" id="r-2">0</span></div>
+                <div class="finger-status">R 中 (3) <span class="val" id="r-3">0</span></div>
+                <div class="finger-status">R 无 (4) <span class="val" id="r-4">0</span></div>
+                <div class="finger-status">R 小 (5) <span class="val" id="r-5">0</span></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ======= 0. 配置与滑块管理 =======
+        const apiKeyInput = document.getElementById('api-key');
+        if (localStorage.getItem('gemini_api_key')) apiKeyInput.value = localStorage.getItem('gemini_api_key');
+        document.getElementById('save-key-btn').addEventListener('click', () => {
+            localStorage.setItem('gemini_api_key', apiKeyInput.value.trim());
+            alert('API Key 已保存至本地缓存！');
+        });
+
+        // 3D 角度动态标定参数 (越弯角度越大)
+        let holdThreshold = 250;
+        let FINGER_POS1_THRES = 25;
+        let FINGER_POS2_THRES = 60;
+        let FINGER_POS3_THRES = 110; 
+        
+        let THUMB_POS1_THRES = 40; // 外展阈值 (<40 为1)
+        let THUMB_POS2_THRES = 75; // 内收阈值 (>75 为2)
+
+        function bindSlider(sliderId, valId, updateVarCb) {
+            document.getElementById(sliderId).addEventListener('input', (e) => {
+                let val = parseFloat(e.target.value);
+                document.getElementById(valId).innerText = val;
+                updateVarCb(val);
+            });
+        }
+        
+        bindSlider('hold-slider', 'val-hold', (v) => holdThreshold = parseInt(v, 10));
+        bindSlider('pos1-slider', 'val-pos1', (v) => FINGER_POS1_THRES = parseInt(v, 10));
+        bindSlider('pos2-slider', 'val-pos2', (v) => FINGER_POS2_THRES = parseInt(v, 10));
+        bindSlider('pos3-slider', 'val-pos3', (v) => FINGER_POS3_THRES = parseInt(v, 10));
+        
+        bindSlider('thumb-pos1-slider', 'val-thumb-pos1', (v) => THUMB_POS1_THRES = parseInt(v, 10));
+        bindSlider('thumb-pos2-slider', 'val-thumb-pos2', (v) => THUMB_POS2_THRES = parseInt(v, 10));
+
+        // ======= 1. WebSocket 通信 =======
+        const wsUrl = `ws://${window.location.hostname}:8777`;
+        let ws;
+        function initWebSocket() {
+            ws = new WebSocket(wsUrl);
+            ws.onopen = () => document.getElementById('ws-status').innerText = "🟢 方舟反应炉已连接";
+            ws.onclose = () => { document.getElementById('ws-status').innerText = "🔴 手机信号断开，重连中..."; setTimeout(initWebSocket, 2000); };
+        }
+        initWebSocket();
+        function sendToPhone(text) { if (ws && ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify({type: 'hanzi', text: text})); }
+
+        // ======= 2. 拼音 Buffer 与 LLM 发送引擎 =======
+        let pinyinBuffer = []; 
+        const bufferDisplay = document.getElementById('pinyin-buffer-display');
+        const llmDisplay = document.getElementById('llm-result-display');
+
+        function updateBufferDisplayOnly() { bufferDisplay.innerText = pinyinBuffer.length > 0 ? pinyinBuffer.join(' ') : "等待结印..."; }
+        document.getElementById('btn-backspace').addEventListener('click', () => { if (pinyinBuffer.length > 0) { pinyinBuffer.pop(); updateBufferDisplayOnly(); }});
+        document.getElementById('btn-clear').addEventListener('click', () => { pinyinBuffer = []; updateBufferDisplayOnly(); llmDisplay.innerText = ""; sendToPhone("..."); });
+
+        async function triggerLLMSend() {
+            if (pinyinBuffer.length === 0) return;
+            const fullPinyinQuery = pinyinBuffer.join(' ');
+            pinyinBuffer = []; updateBufferDisplayOnly();
+
+            const apiKey = localStorage.getItem('gemini_api_key');
+            if (!apiKey) { llmDisplay.innerText = "请先配置 API Key"; return; }
+
+            llmDisplay.innerText = "正在推演..."; llmDisplay.classList.add('llm-loading'); sendToPhone("...");
+
+            const model = "gemini-3.1-pro-preview"; 
+            const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+
+            const prompt = `你是一个极其智能的拼音输入法引擎(IME)。用户当前完整拼音序列为：[ ${fullPinyinQuery} ]\n要求：无声调，有物理误触容错，极简拼音可自动补全最常见单字。\n强制：只输出推测出的纯中文汉字，绝对不要输出解释或废话。`;
+
+            try {
+                const response = await fetch(endpoint, {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { temperature: 0.2 } })
+                });
+                if (!response.ok) throw new Error(`API Error: ${response.status}`);
+                const data = await response.json();
+                let hanzi = data.candidates[0].content.parts[0].text.trim().replace(/[\r\n]/g, '');
+                llmDisplay.innerText = hanzi; llmDisplay.classList.remove('llm-loading'); sendToPhone(hanzi);
+            } catch (error) {
+                console.error("LLM Error:", error); llmDisplay.innerText = "大模型请求失败"; llmDisplay.classList.remove('llm-loading');
+            }
+        }
+        document.getElementById('btn-send-llm').addEventListener('click', triggerLLMSend);
+
+        // ======= 3. 物理映射字典 =======
+        const leftChordMap = {
+            "2_1": "b", "2_2": "p", "2_3": "r", "3_1": "d", "3_2": "t", "4_1": "m", "4_2": "f", "5_1": "n", "5_2": "l",
+            "234_1": "g", "234_2": "k", "234_3": "h", "345_1": "j", "345_2": "q", "345_3": "x", "2345_1": "z", "2345_2": "c", "2345_3": "s",
+            "23_1": "zh", "23_2": "ch", "23_3": "sh", "34_1": "zh", "34_2": "ch", "34_3": "sh", "45_1": "zh", "45_2": "ch", "45_3": "sh"
+        };
+        const zeroInitialMap = { 
+            'i': 'yi', 'ia': 'ya', 'ie': 'ye', 'iao': 'yao', 'iu': 'you', 'ian': 'yan', 'in': 'yin', 'iang': 'yang', 'ing': 'ying', 'iong': 'yong', 
+            'u': 'wu', 'ua': 'wa', 'uo': 'wo', 'uu': 'wo', 'uai': 'wai', 'ui': 'wei', 'uan': 'wan', 'un': 'wen', 'uang': 'wang', 'ung': 'weng', 'ong': 'weng', 
+            'v': 'yu', 've': 'yue', 'van': 'yuan', 'vn': 'yun' 
+        };
+
+        // ======= 4. 视觉引擎防抖与状态机 =======
+        let lastSig = "";
+        let holdStartTime = 0;
+        let lockedState = null; 
+
+        function getHandSig(l, r) {
+            return `${l.thumb}${l.index}${l.middle}${l.ring}${l.pinky}|${r.thumb}${r.index}${r.middle}${r.ring}${r.pinky}`;
+        }
+
+        function resolveAndPushToBuffer(state) {
+            let l = state.l; let r = state.r;
+
+            // 拦截全局握拳发送
+            if (r.index === 3 && r.middle === 3 && r.ring === 3 && r.pinky === 3) {
+                triggerLLMSend(); return;
+            }
+
+            let lFingers = [];
+            if (l.index > 0) lFingers.push('2'); if (l.middle > 0) lFingers.push('3'); 
+            if (l.ring > 0) lFingers.push('4'); if (l.pinky > 0) lFingers.push('5');
+            let comboStr = lFingers.sort().join('');
+            let validCombos = ["2", "3", "4", "5", "23", "34", "45", "234", "345", "2345"];
+            if (comboStr && !validCombos.includes(comboStr)) comboStr = comboStr[0];
+            
+            let lPosMax = Math.max(l.index, l.middle, l.ring, l.pinky);
+            let initial = comboStr ? (leftChordMap[`${comboStr}_${lPosMax}`] || '') : '';
+            let medial = l.thumb === 1 ? 'u' : (l.thumb === 2 ? 'i' : '');
+            
+            let nucleus = r.index === 1 ? 'a' : (r.index === 2 ? 'o' : (r.index === 3 ? 'e' : ''));
+            let coda_n = r.middle === 1 ? 'n' : (r.middle === 2 ? 'ng' : '');
+            let coda_v = r.thumb === 1 ? 'u' : (r.thumb === 2 ? 'i' : '');
+            let tone = r.pinky > 0 ? (r.pinky === 1 ? '3':'4') : (r.ring > 0 ? (r.ring === 1 ? '1':'2') : '');
+
+            let fRaw = medial + nucleus + coda_v + coda_n;
+            if (!initial && !fRaw) return;
+
+            // 声母独立成音压缩
+            if (initial && !fRaw) {
+                if (['zh', 'ch', 'sh', 'r', 'z', 'c', 's'].includes(initial)) fRaw = 'i';
+                else if (['g', 'k', 'h'].includes(initial)) fRaw = 'e';
+                else if (['j', 'q', 'x'].includes(initial)) fRaw = 'i';
+            }
+
+            fRaw = fRaw.replace('au', 'ao').replace('eu', 'ou').replace('uu', 'uo'); 
+            let finalResult = fRaw;
+            if (initial) finalResult = fRaw.replace('ung', 'ong'); 
+            else finalResult = zeroInitialMap[fRaw] || fRaw;
+
+            pinyinBuffer.push(`${initial}${finalResult}${tone}`);
+            updateBufferDisplayOnly();
+        }
+
+        // ======= 5. 核心 3D 全局向量引擎 (Dot Product) =======
+        
+        // p1->p2 是基准向量 (如手腕到指根)
+        // p3->p4 是活动向量 (如指关节到指尖)
+        function calculate3DAngle(p1, p2, p3, p4) {
+            let vA = { x: p2.x - p1.x, y: p2.y - p1.y, z: p2.z - p1.z };
+            let vB = { x: p4.x - p3.x, y: p4.y - p3.y, z: p4.z - p3.z };
+
+            let dotProduct = vA.x * vB.x + vA.y * vB.y + vA.z * vB.z;
+            let magA = Math.sqrt(vA.x*vA.x + vA.y*vA.y + vA.z*vA.z);
+            let magB = Math.sqrt(vB.x*vB.x + vB.y*vB.y + vB.z*vB.z);
+
+            let cosTheta = dotProduct / (magA * magB);
+            cosTheta = Math.max(-1.0, Math.min(1.0, cosTheta)); // 防溢出
+            
+            return Math.acos(cosTheta) * (180.0 / Math.PI); // 返回 0-180 度
+        }
+
+        function parseHandState(landmarks) {
+            let state = { thumb: 0, index: 0, middle: 0, ring: 0, pinky: 0 };
+            
+            // 四指判定：手腕到指根 (0->base) vs 第三关节到指尖 (tip_prev->tip)
+            const fingers = { 
+                index: { base: [0, 5], tip: [7, 8] }, 
+                middle: { base: [0, 9], tip: [11, 12] }, 
+                ring: { base: [0, 13], tip: [15, 16] }, 
+                pinky: { base: [0, 17], tip: [19, 20] } 
+            };
+            
+            for (let f in fingers) {
+                let p1 = landmarks[fingers[f].base[0]];
+                let p2 = landmarks[fingers[f].base[1]];
+                let p3 = landmarks[fingers[f].tip[0]];
+                let p4 = landmarks[fingers[f].tip[1]];
+                
+                let angle = calculate3DAngle(p1, p2, p3, p4);
+                
+                if (angle > FINGER_POS3_THRES) state[f] = 3;       
+                else if (angle > FINGER_POS2_THRES) state[f] = 2;  
+                else if (angle > FINGER_POS1_THRES) state[f] = 1;  
+                // < POS1 视为 0 (伸直)
+            }
+
+            // 大拇指判定：手腕到食指根(0->5)代表手掌绝对平面方向 vs 拇指关节到指尖(3->4)
+            let thumbAngle = calculate3DAngle(
+                landmarks[0], landmarks[5], 
+                landmarks[3], landmarks[4]
+            );
+
+            if (thumbAngle > THUMB_POS2_THRES) {
+                state.thumb = 2; // 内收
+            } else if (thumbAngle < THUMB_POS1_THRES) {
+                state.thumb = 1; // 外展
+            } else {
+                state.thumb = 0; // 居中摊手归零区
+            }
+
+            return state;
+        }
+
+        function updateUI(l, r) {
+            if(l) { document.getElementById('l-1').innerText=l.thumb; document.getElementById('l-2').innerText=l.index; document.getElementById('l-3').innerText=l.middle; document.getElementById('l-4').innerText=l.ring; document.getElementById('l-5').innerText=l.pinky; }
+            if(r) { document.getElementById('r-1').innerText=r.thumb; document.getElementById('r-2').innerText=r.index; document.getElementById('r-3').innerText=r.middle; document.getElementById('r-4').innerText=r.ring; document.getElementById('r-5').innerText=r.pinky; }
+        }
+
+        const videoElement = document.getElementsByClassName('input_video')[0];
+        const canvasElement = document.getElementsByClassName('output_canvas')[0];
+        const canvasCtx = canvasElement.getContext('2d');
+
+        function onResults(results) {
+            canvasCtx.save();
+            canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+
+            let lState = { thumb: 0, index: 0, middle: 0, ring: 0, pinky: 0 };
+            let rState = { thumb: 0, index: 0, middle: 0, ring: 0, pinky: 0 };
+
+            if (results.multiHandLandmarks) {
+                for (let i = 0; i < results.multiHandLandmarks.length; i++) {
+                    const landmarks = results.multiHandLandmarks[i];
+                    const handedness = results.multiHandedness[i].label === 'Left' ? 'Right' : 'Left'; 
+                    drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS, {color: '#4ade80', lineWidth: 2});
+                    drawLandmarks(canvasCtx, landmarks, {color: '#fff', lineWidth: 1, radius: 2});
+                    if (handedness === 'Left') lState = parseHandState(landmarks); else rState = parseHandState(landmarks);
+                }
+            }
+            updateUI(lState, rState);
+
+            let currentActiveLevel = lState.index + lState.middle + lState.ring + lState.pinky + lState.thumb + 
+                                     rState.index + rState.middle + rState.ring + rState.pinky + rState.thumb;
+
+            let currentSig = getHandSig(lState, rState);
+            let now = Date.now();
+            
+            if (currentSig !== lastSig) {
+                lastSig = currentSig;
+                holdStartTime = now;
+            }
+
+            if (currentActiveLevel > 0) {
+                if (now - holdStartTime >= holdThreshold) {
+                    lockedState = { l: {...lState}, r: {...rState} }; 
+                    if (rState.index === 3 && rState.middle === 3 && rState.ring === 3 && rState.pinky === 3) {
+                        document.getElementById('cv-status').innerText = "✊ Enter已锁定 (张开双手触发大模型)";
+                        document.getElementById('cv-status').style.color = "#10b981";
+                    } else {
+                        document.getElementById('cv-status').innerText = "⚡ 结印已锁定 (张开双手推入缓冲)";
+                        document.getElementById('cv-status').style.color = "#fbbf24";
+                    }
+                } else {
+                    if (!lockedState) {
+                        document.getElementById('cv-status').innerText = `⏳ 稳住手势...`;
+                        document.getElementById('cv-status').style.color = "#94a3b8";
+                    }
+                }
+            } else {
+                if (lockedState) {
+                    resolveAndPushToBuffer(lockedState);
+                    lockedState = null; 
+                }
+                document.getElementById('cv-status').innerText = "🟢 追踪就绪 (掌心朝前)";
+                document.getElementById('cv-status').style.color = "#4ade80";
+            }
+            canvasCtx.restore();
+        }
+
+        const hands = new Hands({locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`});
+        hands.setOptions({ maxNumHands: 2, modelComplexity: 1, minDetectionConfidence: 0.7, minTrackingConfidence: 0.7 });
+        hands.onResults(onResults);
+        const camera = new Camera(videoElement, { onFrame: async () => { await hands.send({image: videoElement}); }, width: 1280, height: 720 });
+        camera.start();
+
+        // ======= 6. 物理开关 =======
+        const camBtn = document.getElementById('cam-toggle');
+        let isCamRunning = true;
+        camBtn.addEventListener('click', async () => {
+            if (isCamRunning) {
+                await camera.stop();
+                if (videoElement.srcObject) { videoElement.srcObject.getTracks().forEach(track => track.stop()); videoElement.srcObject = null; }
+                canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+                document.getElementById('cv-status').innerText = "⏸️ 摄像头已休眠"; camBtn.innerText = "🟢 打开摄像头"; camBtn.classList.add('off'); isCamRunning = false;
+            } else {
+                document.getElementById('cv-status').innerText = "⚡ 正在唤醒..."; await camera.start(); camBtn.innerText = "🔴 关闭摄像头"; camBtn.classList.remove('off'); isCamRunning = true;
+            }
+        });
+    </script>
+</body>
+</html>

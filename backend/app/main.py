@@ -488,14 +488,16 @@ async def push_grouped_examples_to_anki(request: Dict[str, Any]):
     Expects JSON body:
     {
         "examples": [
-            {"knowledge_point": "就算...也...", "front": "就算明天下雨，我[也]要去。", "back": "Even if it rains tomorrow, I'm still going."},
+            {"target_word": "哪怕", "front": "哪怕下雨，我也去。", "back": "..."},
+            {"knowledge_point": "就算...也...", "front": "就算明天下雨，我[[c1::也]]要去。", "back": "..."},
             ...
         ],
         "deck_name": "CUMA_Test_Lab",  // optional, defaults to CUMA_Test_Lab
         "allow_duplicate": false        // optional
     }
 
-    Groups by knowledge_point, chunks into batches of 5, maps to Text1-5/Extra1-5.
+    Groups by target_word (or knowledge_point, or extracted from [[c1::x]] in front).
+    Each Note contains ONLY examples for the SAME target. Chunks into max 5 per Note.
     Pushes to CUMA_Test_Lab deck by default (sandbox).
     """
     try:
@@ -694,6 +696,9 @@ async def sync_to_anki(request: Dict[str, Any], db: Session = Depends(get_db)):
             card.pop("field__Remarks_annotations", None)
         
         # Transform cards to grouped examples format and push via new grouped logic
+        # SRS-critical: target_word groups siblings; never mix different targets in one Note
+        _cloze_re = re.compile(r"\[\[c1::([^\]]+)\]\]")
+
         def _card_to_example(card: dict) -> dict:
             kp = card.get("knowledge_point") or ""
             if not kp and card.get("knowledge_points"):
@@ -704,10 +709,17 @@ async def sync_to_anki(request: Dict[str, Any], db: Session = Depends(get_db)):
                 kp = "General"
             front = card.get("text_field") or card.get("cloze_text") or card.get("front") or ""
             back = card.get("extra_field") or card.get("back") or ""
+            # Extract target_word for SRS grouping (same target = same Note)
+            target_word = card.get("target_word") or card.get("targetWord") or ""
+            if not target_word and front:
+                m = _cloze_re.search(front)
+                if m:
+                    target_word = m.group(1).strip()
             remarks = card.get("field__Remarks") or ""
             kg_map = card.get("field__KG_Map") or card.get("field__kg_map") or ""
             return {
                 "knowledge_point": kp,
+                "target_word": target_word or None,
                 "front": front,
                 "back": back,
                 "remarks": remarks or None,

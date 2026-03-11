@@ -19,32 +19,15 @@ from anki_integration.anki_connect import AnkiConnect
 
 
 def main():
+    # SRS test: each Note must contain ONLY examples for the SAME target_word.
+    # "哪怕" and "究竟" must NOT be mixed in one Note.
     examples = [
-        {
-            "knowledge_point": "就算...也...",
-            "front": "就算明天下雨，我[也]要去。",
-            "back": "Even if it rains tomorrow, I'm still going.",
-        },
-        {
-            "knowledge_point": "就算...也...",
-            "front": "就算他很忙，[也]会来参加聚会。",
-            "back": "Even if he's busy, he'll still come to the party.",
-        },
-        {
-            "knowledge_point": "就算...也...",
-            "front": "就算你不同意，我[也]要坚持。",
-            "back": "Even if you disagree, I still insist.",
-        },
-        {
-            "knowledge_point": "一边...一边...",
-            "front": "他[一边]吃饭[一边]看电视。",
-            "back": "He eats while watching TV.",
-        },
-        {
-            "knowledge_point": "一边...一边...",
-            "front": "她[一边]走路[一边]听音乐。",
-            "back": "She walks while listening to music.",
-        },
+        {"target_word": "哪怕", "front": "哪怕下雨，我[[c1::也]]去。", "back": "Even if it rains, I'll go."},
+        {"target_word": "哪怕", "front": "哪怕他很忙，[[c1::也]]会来。", "back": "Even if busy, he'll come."},
+        {"target_word": "究竟", "front": "你[[c1::究竟]]想说什么？", "back": "What exactly do you want to say?"},
+        {"target_word": "究竟", "front": "这件事[[c1::究竟]]怎么回事？", "back": "What on earth is going on?"},
+        # Fallback: knowledge_point when no target_word (e.g. grammar patterns)
+        {"knowledge_point": "一边...一边...", "front": "他[[c1::一边]]吃饭[[c1::一边]]看电视。", "back": "He eats while watching TV."},
     ]
 
     print("Testing push_grouped_examples_to_anki...")
