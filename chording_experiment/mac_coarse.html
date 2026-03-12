@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CUMA Mac 视觉控制台 (教育兼容最终版)</title>
+    <title>CUMA Mac 视觉控制台 (全指曲率终极版)</title>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
@@ -48,22 +48,6 @@
         .hand-panel { background: rgba(30, 41, 59, 0.8); border: 1px solid #475569; padding: 15px; border-radius: 15px; flex: 1; backdrop-filter: blur(10px); }
         .finger-status { font-size: 1rem; margin: 5px 0; font-family: monospace; display: flex; justify-content: space-between;}
         .val { color: #38bdf8; font-weight: bold; }
-
-        /* ====== 空间映射 Cheatsheet 样式 ====== */
-        .cs-panel { position: absolute; background: rgba(15, 23, 42, 0.6); padding: 12px; border-radius: 12px; backdrop-filter: blur(5px); border: 1px solid #334155; pointer-events: none; }
-        .cs-left { top: 320px; left: 20px; }
-        .cs-right { top: 120px; right: 20px; }
-        
-        .cs-title { color: #94a3b8; font-size: 0.85rem; margin-bottom: 8px; text-align: center; letter-spacing: 1px;}
-        .cs-keyboard { display: flex; gap: 4px; align-items: flex-start; }
-        .cs-col { display: flex; flex-direction: column; gap: 6px; align-items: center; }
-        .cs-col-title { font-size: 0.7rem; color: #64748b; margin-bottom: 2px; }
-        .cs-key { width: 34px; height: 34px; border-radius: 8px; background: rgba(30, 41, 59, 0.85); border: 1px solid #4ade80; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #f8fafc; font-size: 1.1rem; box-shadow: 0 2px 5px rgba(0,0,0,0.4); }
-        .cs-key.combo { width: 26px; height: 26px; border-radius: 6px; background: rgba(15, 23, 42, 0.95); border-color: #38bdf8; color: #bae6fd; font-size: 0.85rem; margin-top: 4px; }
-        .cs-key.thumb { border-color: #a855f7; color: #e9d5ff; font-size: 0.85rem; }
-        .cs-key.vowel { border-color: #fbbf24; color: #fef3c7; }
-        .cs-key.empty { border: none; background: transparent; box-shadow: none; color: transparent; pointer-events: none;}
-        .cs-macro { background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; color: #fca5a5; font-size: 0.75rem; text-align: center; padding: 4px; border-radius: 6px; margin-top: 10px; }
     </style>
 </head>
 <body>
@@ -115,33 +99,6 @@
             <button id="cam-toggle">🔴 关闭摄像头</button>
         </div>
 
-        <div class="cs-panel cs-left">
-            <div class="cs-title">🤚 左手 12+9 (声母)</div>
-            <div class="cs-keyboard">
-                <div class="cs-col"><div class="cs-col-title">小(5)</div><div class="cs-key">zh</div><div class="cs-key">ch</div><div class="cs-key">sh</div></div>
-                <div class="cs-col"><div class="cs-col-title">45</div><div class="cs-key combo">z</div><div class="cs-key combo">c</div><div class="cs-key combo">s</div></div>
-                <div class="cs-col"><div class="cs-col-title">无(4)</div><div class="cs-key">g</div><div class="cs-key">k</div><div class="cs-key">h</div></div>
-                <div class="cs-col"><div class="cs-col-title">34</div><div class="cs-key combo">j</div><div class="cs-key combo">q</div><div class="cs-key combo">x</div></div>
-                <div class="cs-col"><div class="cs-col-title">中(3)</div><div class="cs-key">d</div><div class="cs-key">t</div><div class="cs-key">n</div></div>
-                <div class="cs-col"><div class="cs-col-title">23</div><div class="cs-key combo">r</div><div class="cs-key combo">f</div><div class="cs-key combo">l</div></div>
-                <div class="cs-col"><div class="cs-col-title">食(2)</div><div class="cs-key">b</div><div class="cs-key">p</div><div class="cs-key">m</div></div>
-                <div class="cs-col"><div class="cs-col-title">拇(1)</div><div class="cs-key thumb">介u</div><div class="cs-key thumb">介i</div></div>
-            </div>
-            <div class="cs-macro">✊ 左手深握拳：⌫ 退格 &nbsp;&nbsp;|&nbsp;&nbsp; 爪子：🗑️ 清空</div>
-        </div>
-
-        <div class="cs-panel cs-right">
-            <div class="cs-title">🖐️ 右手 韵母与控制</div>
-            <div class="cs-keyboard">
-                <div class="cs-col"><div class="cs-col-title">拇(1)</div><div class="cs-key thumb">尾u</div><div class="cs-key thumb">尾i</div></div>
-                <div class="cs-col"><div class="cs-col-title">食(2)</div><div class="cs-key vowel">a</div><div class="cs-key vowel">o</div><div class="cs-key vowel">e</div></div>
-                <div class="cs-col"><div class="cs-col-title">中(3)</div><div class="cs-key vowel">n</div><div class="cs-key vowel">ng</div><div class="cs-key empty"></div></div>
-                <div class="cs-col"><div class="cs-col-title">无(4)</div><div class="cs-key combo">调1</div><div class="cs-key combo">调2</div></div>
-                <div class="cs-col"><div class="cs-col-title">小(5)</div><div class="cs-key combo">调3</div><div class="cs-key combo">调4</div></div>
-            </div>
-            <div class="cs-macro">✊ 右手深握拳：🚀 发送大模型</div>
-        </div>
-
         <div class="buffer-panel">
             <div id="pinyin-buffer-display">等待结印...</div>
             <div id="llm-result-display"></div>
@@ -154,18 +111,18 @@
 
         <div class="dashboard">
             <div class="hand-panel">
-                <div class="finger-status">L 拇 (介) <span class="val" id="l-1">0</span></div>
-                <div class="finger-status">L 食 (声) <span class="val" id="l-2">0</span></div>
-                <div class="finger-status">L 中 (声) <span class="val" id="l-3">0</span></div>
-                <div class="finger-status">L 无 (声) <span class="val" id="l-4">0</span></div>
-                <div class="finger-status">L 小 (声) <span class="val" id="l-5">0</span></div>
+                <div class="finger-status">L 拇 (1) <span class="val" id="l-1">0</span></div>
+                <div class="finger-status">L 食 (2) <span class="val" id="l-2">0</span></div>
+                <div class="finger-status">L 中 (3) <span class="val" id="l-3">0</span></div>
+                <div class="finger-status">L 无 (4) <span class="val" id="l-4">0</span></div>
+                <div class="finger-status">L 小 (5) <span class="val" id="l-5">0</span></div>
             </div>
             <div class="hand-panel">
-                <div class="finger-status">R 拇 (尾) <span class="val" id="r-1">0</span></div>
-                <div class="finger-status">R 食 (a/o/e) <span class="val" id="r-2">0</span></div>
-                <div class="finger-status">R 中 (n/ng) <span class="val" id="r-3">0</span></div>
-                <div class="finger-status">R 无 (调) <span class="val" id="r-4">0</span></div>
-                <div class="finger-status">R 小 (调) <span class="val" id="r-5">0</span></div>
+                <div class="finger-status">R 拇 (1) <span class="val" id="r-1">0</span></div>
+                <div class="finger-status">R 食 (2) <span class="val" id="r-2">0</span></div>
+                <div class="finger-status">R 中 (3) <span class="val" id="r-3">0</span></div>
+                <div class="finger-status">R 无 (4) <span class="val" id="r-4">0</span></div>
+                <div class="finger-status">R 小 (5) <span class="val" id="r-5">0</span></div>
             </div>
         </div>
     </div>
@@ -220,12 +177,8 @@
         const llmDisplay = document.getElementById('llm-result-display');
 
         function updateBufferDisplayOnly() { bufferDisplay.innerText = pinyinBuffer.length > 0 ? pinyinBuffer.join(' ') : "等待结印..."; }
-        
-        function handleBackspace() { if (pinyinBuffer.length > 0) { pinyinBuffer.pop(); updateBufferDisplayOnly(); } }
-        function handleClear() { pinyinBuffer = []; updateBufferDisplayOnly(); llmDisplay.innerText = ""; sendToPhone("..."); }
-        
-        document.getElementById('btn-backspace').addEventListener('click', handleBackspace);
-        document.getElementById('btn-clear').addEventListener('click', handleClear);
+        document.getElementById('btn-backspace').addEventListener('click', () => { if (pinyinBuffer.length > 0) { pinyinBuffer.pop(); updateBufferDisplayOnly(); }});
+        document.getElementById('btn-clear').addEventListener('click', () => { pinyinBuffer = []; updateBufferDisplayOnly(); llmDisplay.innerText = ""; sendToPhone("..."); });
 
         async function triggerLLMSend() {
             if (pinyinBuffer.length === 0) return;
@@ -257,15 +210,11 @@
         }
         document.getElementById('btn-send-llm').addEventListener('click', triggerLLMSend);
 
-        // ======= 3. 物理映射字典 (完全与用户指定版对齐) =======
+        // ======= 3. 物理映射字典 =======
         const leftChordMap = {
-            "2_1": "b", "2_2": "p", "2_3": "m",
-            "3_1": "d", "3_2": "t", "3_3": "n",
-            "4_1": "g", "4_2": "k", "4_3": "h",
-            "5_1": "zh", "5_2": "ch", "5_3": "sh",
-            "23_1": "r", "23_2": "f", "23_3": "l",
-            "34_1": "j", "34_2": "q", "34_3": "x",
-            "45_1": "z", "45_2": "c", "45_3": "s"
+            "2_1": "b", "2_2": "p", "2_3": "r", "3_1": "d", "3_2": "t", "4_1": "m", "4_2": "f", "5_1": "n", "5_2": "l",
+            "234_1": "g", "234_2": "k", "234_3": "h", "345_1": "j", "345_2": "q", "345_3": "x", "2345_1": "z", "2345_2": "c", "2345_3": "s",
+            "23_1": "zh", "23_2": "ch", "23_3": "sh", "34_1": "zh", "34_2": "ch", "34_3": "sh", "45_1": "zh", "45_2": "ch", "45_3": "sh"
         };
         const zeroInitialMap = { 
             'i': 'yi', 'ia': 'ya', 'ie': 'ye', 'iao': 'yao', 'iu': 'you', 'ian': 'yan', 'in': 'yin', 'iang': 'yang', 'ing': 'ying', 'iong': 'yong', 
@@ -285,29 +234,21 @@
         function resolveAndPushToBuffer(state) {
             let l = state.l; let r = state.r;
 
-            // ⚡ 宏指令拦截层 ⚡
             if (r.index === 3 && r.middle === 3 && r.ring === 3 && r.pinky === 3) {
-                triggerLLMSend(); return; 
-            }
-            if (l.index === 3 && l.middle === 3 && l.ring === 3 && l.pinky === 3) {
-                handleBackspace(); return; 
-            }
-            if (l.index === 1 && l.middle === 1 && l.ring === 1 && l.pinky === 1) {
-                handleClear(); return;     
+                triggerLLMSend(); return;
             }
 
             let lFingers = [];
             if (l.index > 0) lFingers.push('2'); if (l.middle > 0) lFingers.push('3'); 
             if (l.ring > 0) lFingers.push('4'); if (l.pinky > 0) lFingers.push('5');
             let comboStr = lFingers.sort().join('');
-            
-            let validCombos = ["2", "3", "4", "5", "23", "34", "45"];
-            if (comboStr && !validCombos.includes(comboStr)) comboStr = comboStr[0]; 
+            let validCombos = ["2", "3", "4", "5", "23", "34", "45", "234", "345", "2345"];
+            if (comboStr && !validCombos.includes(comboStr)) comboStr = comboStr[0];
             
             let lPosMax = Math.max(l.index, l.middle, l.ring, l.pinky);
             let initial = comboStr ? (leftChordMap[`${comboStr}_${lPosMax}`] || '') : '';
-            
             let medial = l.thumb === 1 ? 'u' : (l.thumb === 2 ? 'i' : '');
+            
             let nucleus = r.index === 1 ? 'a' : (r.index === 2 ? 'o' : (r.index === 3 ? 'e' : ''));
             let coda_n = r.middle === 1 ? 'n' : (r.middle === 2 ? 'ng' : '');
             let coda_v = r.thumb === 1 ? 'u' : (r.thumb === 2 ? 'i' : '');
@@ -318,7 +259,7 @@
 
             if (initial && !fRaw) {
                 if (['zh', 'ch', 'sh', 'r', 'z', 'c', 's'].includes(initial)) fRaw = 'i';
-                else if (['g', 'k', 'h', 'd', 't', 'n', 'l'].includes(initial)) fRaw = 'e';
+                else if (['g', 'k', 'h'].includes(initial)) fRaw = 'e';
                 else if (['j', 'q', 'x'].includes(initial)) fRaw = 'i';
             }
 
@@ -350,26 +291,35 @@
         function parseHandState(landmarks) {
             let state = { thumb: 0, index: 0, middle: 0, ring: 0, pinky: 0 };
             
+            // 四指：曲率逻辑 (>25, >60, >110)
             const curveFingers = { index: {v1: [5,6], v2: [7,8]}, middle: {v1: [9,10], v2: [11,12]}, ring: {v1: [13,14], v2: [15,16]} };
             for (let f in curveFingers) {
                 let pts = curveFingers[f];
                 let curvature = calculateVectorAngle(landmarks[pts.v1[0]], landmarks[pts.v1[1]], landmarks[pts.v2[0]], landmarks[pts.v2[1]]);
+                
                 if (curvature > FINGER_POS3_THRES) state[f] = 3; 
                 else if (curvature > FINGER_POS2_THRES) state[f] = 2; 
                 else if (curvature > FINGER_POS1_THRES) state[f] = 1; 
                 else state[f] = 0;
             }
 
+            // 小指：由于宁折不弯，计算手腕全局夹角，用 180 减去
             let pinkyAngle = 180 - calculateAngle(landmarks[0], landmarks[17], landmarks[20]);
             if (pinkyAngle > FINGER_POS3_THRES) state.pinky = 3;
             else if (pinkyAngle > FINGER_POS2_THRES) state.pinky = 2;
             else if (pinkyAngle > FINGER_POS1_THRES) state.pinky = 1;
             else state.pinky = 0;
 
+            // 🚨 大拇指：彻底抛弃点 1，计算真实外露关节 (点2-点3，点3-点4) 的向量曲率夹角！ 🚨
             let thumbCurvature = calculateVectorAngle(landmarks[2], landmarks[3], landmarks[3], landmarks[4]);
-            if (thumbCurvature > THUMB_POS2_THRES) state.thumb = 2;       
-            else if (thumbCurvature > THUMB_POS1_THRES) state.thumb = 1;  
-            else state.thumb = 0;                                     
+            
+            if (thumbCurvature > THUMB_POS2_THRES) {        
+                state.thumb = 2;                       // 深弯 (曲率大于设定值，比如 >50°)
+            } else if (thumbCurvature > THUMB_POS1_THRES) {  
+                state.thumb = 1;                       // 浅弯 (曲率大于设定值，比如 >20°)
+            } else {
+                state.thumb = 0;                       // 自然伸直
+            }
 
             return state;
         }
@@ -416,14 +366,8 @@
                 if (now - holdStartTime >= holdThreshold) {
                     lockedState = { l: {...lState}, r: {...rState} }; 
                     if (rState.index === 3 && rState.middle === 3 && rState.ring === 3 && rState.pinky === 3) {
-                        document.getElementById('cv-status').innerText = "✊ Enter已锁定 (发送大模型)";
+                        document.getElementById('cv-status').innerText = "✊ Enter已锁定 (张开双手触发大模型)";
                         document.getElementById('cv-status').style.color = "#10b981";
-                    } else if (lState.index === 3 && lState.middle === 3 && lState.ring === 3 && lState.pinky === 3) {
-                        document.getElementById('cv-status').innerText = "⏪ 退格已锁定 (删除上一个拼音)";
-                        document.getElementById('cv-status').style.color = "#fca5a5";
-                    } else if (lState.index === 1 && lState.middle === 1 && lState.ring === 1 && lState.pinky === 1) {
-                        document.getElementById('cv-status').innerText = "🗑️ 清空已锁定 (丢弃所有拼音)";
-                        document.getElementById('cv-status').style.color = "#fca5a5";
                     } else {
                         document.getElementById('cv-status').innerText = "⚡ 结印已锁定 (张开双手推入缓冲)";
                         document.getElementById('cv-status').style.color = "#fbbf24";

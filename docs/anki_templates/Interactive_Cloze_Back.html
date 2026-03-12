@@ -13,3 +13,17 @@
 </div>
 {{/Extra}}
 
+<script>
+(function() {
+  var blanks = document.querySelectorAll('.cloze-blank');
+  blanks.forEach(function(blank) {
+    var answer = blank.getAttribute('data-answer');
+    if (answer) {
+      blank.textContent = answer;
+      blank.classList.add('revealed');
+    }
+  });
+  var controls = document.querySelector('.controls');
+  if (controls) controls.style.display = 'none';
+})();
+</script>

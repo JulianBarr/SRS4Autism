@@ -56,7 +56,7 @@ def create_grouped_model():
     model_name = "CUMA - Grouped Interactive Cloze"
     model_names = invoke("modelNames")
     if model_name in model_names:
-        # Model exists: add missing fields only
+        # Model exists: add missing fields, then sync templates and CSS
         existing_fields = invoke("modelFieldNames", modelName=model_name)
         for field_name in ["_Remarks", "_KG_Map"]:
             if field_name not in existing_fields:
@@ -65,7 +65,20 @@ def create_grouped_model():
                     print(f"✅ Added field '{field_name}' to existing note type.")
                 except Exception as e:
                     print(f"⚠️ Could not add '{field_name}': {e}")
-        print("✅ Note type already exists; missing fields added (if any).")
+
+        # Build templates payload for updateModelTemplates
+        # Format: { "Example Card 1": {"Front": "...", "Back": "..."}, ... }
+        templates_payload = {
+            card["Name"]: {"Front": card["Front"], "Back": card["Back"]}
+            for card in card_templates
+        }
+
+        try:
+            invoke("updateModelTemplates", model={"name": model_name, "templates": templates_payload})
+            invoke("updateModelStyling", model={"name": model_name, "css": css})
+            print("✅ Templates and CSS updated successfully.")
+        except Exception as e:
+            print(f"❌ Failed to update templates/CSS: {e}")
         return
 
     print("Pushing 'CUMA - Grouped Interactive Cloze' to Anki...")

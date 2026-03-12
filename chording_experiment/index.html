@@ -8,8 +8,8 @@
         body {
             margin: 0; padding: 0; background-color: #000; color: #fff;
             font-family: -apple-system, sans-serif;
-            height: 100vh; display: flex; align-items: center; justify-content: center;
-            overflow: hidden;
+            height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            overflow: hidden; cursor: pointer;
         }
         #text-display {
             font-size: 12vw; /* 占据屏幕大部分宽度的巨大字体 */
@@ -18,15 +18,56 @@
             text-shadow: 0 0 40px rgba(255,255,255,0.4);
             transition: all 0.1s;
         }
+        #wake-hint {
+            position: absolute;
+            bottom: 30px;
+            color: #475569;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            transition: opacity 0.5s ease;
+        }
     </style>
 </head>
 <body>
     <div id="text-display">等待连接...</div>
+    <div id="wake-hint">💡 点击屏幕任何位置保持常亮</div>
 
     <script>
         const displayEl = document.getElementById('text-display');
+        const hintEl = document.getElementById('wake-hint');
         
-        // 自动连接到当前局域网 IP 的 8765 端口
+        // ====== 1. 手机端防息屏 (Wake Lock) 引擎 ======
+        let wakeLock = null;
+
+        async function keepScreenAwake() {
+            try {
+                if ('wakeLock' in navigator) {
+                    wakeLock = await navigator.wakeLock.request('screen');
+                    // 激活成功，淡出隐藏提示语
+                    hintEl.style.opacity = '0';
+                    
+                    // 如果切到后台再回来，自动重新请求唤醒锁定
+                    document.addEventListener('visibilitychange', async () => {
+                        if (wakeLock !== null && document.visibilityState === 'visible') {
+                            wakeLock = await navigator.wakeLock.request('screen');
+                        }
+                    });
+                } else {
+                    hintEl.innerText = "当前浏览器不支持常亮，请调长手机自动息屏时间";
+                }
+            } catch (err) {
+                console.error(`防息屏失败: ${err.name}, ${err.message}`);
+            }
+        }
+
+        // 监听屏幕的第一次点击来触发常亮（突破浏览器安全限制）
+        document.body.addEventListener('click', () => {
+            keepScreenAwake();
+        }, { once: true });
+
+
+        // ====== 2. WebSocket 通信引擎 ======
+        // 自动连接到当前局域网 IP 的 8777 端口
         const wsUrl = `ws://${window.location.hostname}:8777`;
         let ws;
 
