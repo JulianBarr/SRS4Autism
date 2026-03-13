@@ -548,7 +548,15 @@ async def _handle_card_generation(message: ChatMessage, context_tags: List[Dict[
                 except (ValueError, TypeError):
                     pass
         
-        logger.info(f"🤖 Delegate to AgentService: Topic='{topic_id}', Template='{template_id}', Provider='{provider}'")
+        # Extract @word from context_tags (ground truth for target_word/knowledge_point)
+        word_param = None
+        for tag in context_tags:
+            if tag.get("type") == "word":
+                word_param = (tag.get("value") or "").strip()
+                break
+        if not word_param and extracted_topic:
+            word_param = extracted_topic  # Fallback: topic from @word: regex
+        logger.info(f"🤖 Delegate to AgentService: Topic='{topic_id}', @word='{word_param}', Template='{template_id}', Provider='{provider}'")
 
         # 2. Call AgentService
         db = SessionLocal()
@@ -563,7 +571,8 @@ async def _handle_card_generation(message: ChatMessage, context_tags: List[Dict[
                 api_key=api_key,
                 provider=provider,
                 model_name=model,
-                base_url=base_url
+                base_url=base_url,
+                word_param=word_param
             )
             
             # 3. Create response
@@ -755,8 +764,9 @@ async def agent_generate(request: AgentGenerateRequest, req: Request, db: Sessio
 
         logger.info(f"🛸 Agent Request: {request.topic_id} | Template: {request.template_id or 'AUTO'}")
 
-        # 2. Parse quantity from @quantity:N in chat_instruction (same as chat flow)
+        # 2. Parse quantity and @word from chat_instruction (same as chat flow)
         quantity = 5  # Default
+        word_param = None
         context_tags = parse_context_tags(request.chat_instruction, [])
         for tag in context_tags:
             if tag.get("type") == "quantity":
@@ -766,6 +776,10 @@ async def agent_generate(request: AgentGenerateRequest, req: Request, db: Sessio
                     break
                 except (ValueError, TypeError):
                     pass
+            if tag.get("type") == "word":
+                word_param = (tag.get("value") or "").strip()
+        if not word_param and request.topic_id:
+            word_param = request.topic_id  # Fallback: topic_id as word
 
         # 3. Call Service with Explicit Config
         generated_cards = AgentService.generate_cards(
@@ -779,7 +793,8 @@ async def agent_generate(request: AgentGenerateRequest, req: Request, db: Sessio
             api_key=api_key,
             provider=provider,
             model_name=model,
-            base_url=base_url
+            base_url=base_url,
+            word_param=word_param
         )
         
         # 4. Create Response & Save History

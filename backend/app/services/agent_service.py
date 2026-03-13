@@ -283,8 +283,34 @@ You must adhere to these rules above all else:
         return p.id if p is not None else None
 
     @staticmethod
-    def generate_cards(topic_id: str, roster_id: str, template_id: str, user_instruction: str, quantity: int, db: Session, api_key: Optional[str] = None, provider: str = "google", model_name: Optional[str] = None, base_url: Optional[str] = None) -> List[Dict[str, Any]]:
-        print(f"🚀 Generating: '{topic_id}' | Template: '{template_id}' | Qty: {quantity}")
+    def _build_kg_map_for_kp(kp: str) -> str:
+        """Generate strict _KG_Map JSON for a knowledge point (word-en-X or word-zh-X)."""
+        card_mappings = {
+            "0": [{"kp": kp, "skill": "concept_to_sound", "weight": 1.0}],
+            "1": [{"kp": kp, "skill": "sound_to_concept", "weight": 1.0}],
+            "2": [{"kp": kp, "skill": "form_to_concept", "weight": 1.0}],
+        }
+        return json.dumps(card_mappings, ensure_ascii=False)
+
+    @staticmethod
+    def _is_kg_map_empty(raw: Any) -> bool:
+        """Treat empty, whitespace, or trivial JSON as empty."""
+        if raw is None:
+            return True
+        if isinstance(raw, (dict, list)):
+            return not raw
+        s = str(raw).strip()
+        if not s or s in ("{}", "[]", "null"):
+            return True
+        try:
+            parsed = json.loads(s)
+            return not parsed if isinstance(parsed, (dict, list)) else False
+        except (json.JSONDecodeError, TypeError):
+            return True
+
+    @staticmethod
+    def generate_cards(topic_id: str, roster_id: str, template_id: str, user_instruction: str, quantity: int, db: Session, api_key: Optional[str] = None, provider: str = "google", model_name: Optional[str] = None, base_url: Optional[str] = None, word_param: Optional[str] = None) -> List[Dict[str, Any]]:
+        print(f"🚀 Generating: '{topic_id}' | Template: '{template_id}' | Qty: {quantity} | @word: {word_param}")
 
         # 1. Resolve Data
         real_profile_id = AgentService._resolve_profile_id(db, roster_id) or roster_id
@@ -376,6 +402,16 @@ You must adhere to these rules above all else:
                 "text_field": text_field,
                 "extra_field": extra_field
             }
+
+            # Force inject @word ground truth: target_word, knowledge_point, _KG_Map
+            if word_param and word_param.strip():
+                w = word_param.strip()
+                staging["target_word"] = w
+                staging["knowledge_point"] = f"word-en-{w}"
+                # Force generate _KG_Map if LLM response is missing it
+                kg_raw = card.get("_KG_Map") or card.get("field__KG_Map") or card.get("field__kg_map") or ""
+                if AgentService._is_kg_map_empty(kg_raw):
+                    staging["field__KG_Map"] = AgentService._build_kg_map_for_kp(f"word-en-{w}")
 
             try:
                 db_card = CardService.create(db, real_profile_id, card_type, staging, "pending")

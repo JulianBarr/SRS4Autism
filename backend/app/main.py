@@ -696,10 +696,34 @@ async def sync_to_anki(request: Dict[str, Any], db: Session = Depends(get_db)):
             card.pop("field__Remarks_annotations", None)
         
         # Transform cards to grouped examples format and push via new grouped logic
-        # SRS-critical: target_word groups siblings; never mix different targets in one Note
-        _cloze_re = re.compile(r"\[\[c1::([^\]]+)\]\]")
+        # SRS-critical: target_word groups siblings; never mix different targets in one Note.
+        # Trust target_word and knowledge_point from DB (injected from @word at generation time).
+        def _is_kg_map_empty(raw: Any) -> bool:
+            """Treat empty, whitespace, or trivial JSON as empty."""
+            if raw is None:
+                return True
+            if isinstance(raw, (dict, list)):
+                return not raw
+            s = str(raw).strip()
+            if not s or s in ("{}", "[]", "null"):
+                return True
+            try:
+                parsed = json.loads(s)
+                return not parsed if isinstance(parsed, (dict, list)) else False
+            except (json.JSONDecodeError, TypeError):
+                return True
+
+        def _build_kg_map_fallback(kp: str) -> str:
+            """Generate strict JSON fallback when _KG_Map is empty."""
+            card_mappings = {
+                "0": [{"kp": kp, "skill": "concept_to_sound", "weight": 1.0}],
+                "1": [{"kp": kp, "skill": "sound_to_concept", "weight": 1.0}],
+                "2": [{"kp": kp, "skill": "form_to_concept", "weight": 1.0}],
+            }
+            return build_kg_map_strict(card_mappings)
 
         def _card_to_example(card: dict) -> dict:
+            # Trust target_word and knowledge_point from DB (injected from @word at generation)
             kp = card.get("knowledge_point") or ""
             if not kp and card.get("knowledge_points"):
                 kps = card.get("knowledge_points") or []
@@ -707,19 +731,18 @@ async def sync_to_anki(request: Dict[str, Any], db: Session = Depends(get_db)):
                 kp = first.replace("kp:", "").split("--")[0] if first else ""
             if not kp:
                 kp = "General"
+            target_word = card.get("target_word") or card.get("targetWord") or "General"
             front = card.get("text_field") or card.get("cloze_text") or card.get("front") or ""
             back = card.get("extra_field") or card.get("back") or ""
-            # Extract target_word for SRS grouping (same target = same Note)
-            target_word = card.get("target_word") or card.get("targetWord") or ""
-            if not target_word and front:
-                m = _cloze_re.search(front)
-                if m:
-                    target_word = m.group(1).strip()
             remarks = card.get("field__Remarks") or ""
-            kg_map = card.get("field__KG_Map") or card.get("field__kg_map") or ""
+            kg_map_raw = card.get("field__KG_Map") or card.get("field__kg_map") or ""
+            if _is_kg_map_empty(kg_map_raw):
+                kg_map = _build_kg_map_fallback(kp)
+            else:
+                kg_map = kg_map_raw if isinstance(kg_map_raw, str) else json.dumps(kg_map_raw, ensure_ascii=False)
             return {
                 "knowledge_point": kp,
-                "target_word": target_word or None,
+                "target_word": target_word,
                 "front": front,
                 "back": back,
                 "remarks": remarks or None,
