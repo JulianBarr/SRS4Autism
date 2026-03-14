@@ -617,10 +617,10 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
           <button 
             onClick={() => setShowModelSettings(!showModelSettings)} 
             className="btn btn-secondary"
-            style={{fontSize: '0.9em', padding: '6px 12px'}}
+            style={{fontSize: '0.9em', padding: '6px 12px', whiteSpace: 'nowrap'}}
             title="AI Model Settings"
           >
-            ⚙️ Models
+            ⚙️ {t('models')}
           </button>
           {messages.length > 0 && (
             <button onClick={handleClearHistory} className="btn btn-secondary clear-history-btn">

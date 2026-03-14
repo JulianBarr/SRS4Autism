@@ -15,6 +15,7 @@ export const translations = {
     // Chat Assistant
     chatTitle: "Chat Assistant",
     chatDescription: "Ask me to create flashcards for your child. Use @mentions to reference profiles or characters.",
+    models: "Models",
     clearHistory: "Clear History",
     availableMentions: "Available Mentions:",
     childProfile: "Child Profile",
@@ -368,6 +369,7 @@ export const translations = {
     // Chat Assistant
     chatTitle: "聊天助手",
     chatDescription: "向我提问，为您的孩子创建闪卡。使用@提及来引用档案或角色。",
+    models: "模型选择",
     clearHistory: "清除历史",
     availableMentions: "可用提及：",
     childProfile: "儿童档案",
