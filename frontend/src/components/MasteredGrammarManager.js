@@ -12,6 +12,7 @@ const MasteredGrammarManager = ({ profile, onClose, onUpdate, grammarLanguage = 
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCEFR, setSelectedCEFR] = useState(null); // null = all levels
+  const [showUncheckedOnly, setShowUncheckedOnly] = useState(false);
   const [masteredSet, setMasteredSet] = useState(new Set());
   const [saving, setSaving] = useState(false);
   const [showAll, setShowAll] = useState(false);
@@ -218,6 +219,9 @@ const MasteredGrammarManager = ({ profile, onClose, onUpdate, grammarLanguage = 
         g.explanation?.toLowerCase().includes(searchLower)
       );
     }
+    if (showUncheckedOnly) {
+      filtered = filtered.filter(g => !masteredSet.has(g.gp_uri));
+    }
     
     // Show warning, especially for all CEFR levels
     const isAllLevels = selectedCEFR === null && !searchTerm.trim();
@@ -248,7 +252,7 @@ const MasteredGrammarManager = ({ profile, onClose, onUpdate, grammarLanguage = 
     });
     setMasteredSet(newSet);
     saveMasteredGrammar(newSet, false);
-  }, [masteredSet, saveMasteredGrammar, grammarPoints, selectedCEFR, searchTerm, t]);
+  }, [masteredSet, saveMasteredGrammar, grammarPoints, selectedCEFR, searchTerm, showUncheckedOnly, t]);
 
   // Deselect all visible grammar points
   const deselectAllVisible = useCallback(() => {
@@ -264,6 +268,9 @@ const MasteredGrammarManager = ({ profile, onClose, onUpdate, grammarLanguage = 
         g.structure?.toLowerCase().includes(searchLower) ||
         g.explanation?.toLowerCase().includes(searchLower)
       );
+    }
+    if (showUncheckedOnly) {
+      filtered = filtered.filter(g => !masteredSet.has(g.gp_uri));
     }
     
     const selectedCount = filtered.filter(g => masteredSet.has(g.gp_uri)).length; // Use gp_uri
@@ -292,7 +299,7 @@ const MasteredGrammarManager = ({ profile, onClose, onUpdate, grammarLanguage = 
     });
     setMasteredSet(newSet);
     saveMasteredGrammar(newSet, false);
-  }, [masteredSet, saveMasteredGrammar, grammarPoints, selectedCEFR, searchTerm, t]);
+  }, [masteredSet, saveMasteredGrammar, grammarPoints, selectedCEFR, searchTerm, showUncheckedOnly, t]);
 
   // Reset to original state (undo all changes)
   const resetToOriginal = useCallback(async () => {
@@ -323,13 +330,18 @@ const MasteredGrammarManager = ({ profile, onClose, onUpdate, grammarLanguage = 
       );
     }
 
+    // Filter by unchecked only (hide mastered/green cards)
+    if (showUncheckedOnly) {
+      filtered = filtered.filter(g => !masteredSet.has(g.gp_uri));
+    }
+
     // Limit display unless showAll is true
     if (!showAll && filtered.length > 100) {
       filtered = filtered.slice(0, 100);
     }
 
     return filtered;
-  }, [grammarPoints, searchTerm, selectedCEFR, showAll]);
+  }, [grammarPoints, searchTerm, selectedCEFR, showAll, showUncheckedOnly, masteredSet]);
 
   // Calculate statistics
   const stats = useMemo(() => {
@@ -462,6 +474,15 @@ const MasteredGrammarManager = ({ profile, onClose, onUpdate, grammarLanguage = 
           <option value="C1">C1</option>
           <option value="C2">C2</option>
         </select>
+        <label style={{ display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer', fontSize: '14px' }}>
+          <input
+            type="checkbox"
+            checked={showUncheckedOnly}
+            onChange={(e) => setShowUncheckedOnly(e.target.checked)}
+            style={{ cursor: 'pointer' }}
+          />
+          {t('showUncheckedOnly')}
+        </label>
       </div>
 
       {/* Bulk Actions */}

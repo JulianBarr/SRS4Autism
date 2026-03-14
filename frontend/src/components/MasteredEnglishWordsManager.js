@@ -23,6 +23,7 @@ const MasteredEnglishWordsManager = ({ profile, onUpdate }) => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCEFR, setSelectedCEFR] = useState(null); // null = all levels
+  const [showUncheckedOnly, setShowUncheckedOnly] = useState(false);
   const [masteredSet, setMasteredSet] = useState(new Set());
   const [saving, setSaving] = useState(false);
   const [showAll, setShowAll] = useState(false);
@@ -91,13 +92,18 @@ const MasteredEnglishWordsManager = ({ profile, onUpdate }) => {
       );
     }
 
+    // Filter by unchecked only (hide mastered/green cards)
+    if (showUncheckedOnly) {
+      filtered = filtered.filter(w => !masteredSet.has(w.word.toLowerCase()));
+    }
+
     // Limit display unless showAll is true
     if (!showAll && filtered.length > 100) {
       filtered = filtered.slice(0, 100);
     }
 
     return filtered;
-  }, [vocabulary, searchTerm, selectedCEFR, showAll]);
+  }, [vocabulary, searchTerm, selectedCEFR, showAll, showUncheckedOnly, masteredSet]);
 
   // Load images for visible words (batch query, lazy loading)
   useEffect(() => {
@@ -201,6 +207,9 @@ const MasteredEnglishWordsManager = ({ profile, onUpdate }) => {
         w.definition?.toLowerCase().includes(searchLower)
       );
     }
+    if (showUncheckedOnly) {
+      filtered = filtered.filter(w => !masteredSet.has(w.word.toLowerCase()));
+    }
     
     // Show warning, especially for all CEFR levels
     const isAllLevels = selectedCEFR === null && !searchTerm.trim();
@@ -230,7 +239,7 @@ const MasteredEnglishWordsManager = ({ profile, onUpdate }) => {
     });
     setMasteredSet(newSet);
     saveMasteredWords(newSet, false);
-  }, [masteredSet, saveMasteredWords, vocabulary, selectedCEFR, searchTerm, t]);
+  }, [masteredSet, saveMasteredWords, vocabulary, selectedCEFR, searchTerm, showUncheckedOnly, t]);
 
   // Deselect all visible words with warning
   const deselectAllVisible = useCallback(() => {
@@ -245,6 +254,9 @@ const MasteredEnglishWordsManager = ({ profile, onUpdate }) => {
         w.word.toLowerCase().includes(searchLower) ||
         w.definition?.toLowerCase().includes(searchLower)
       );
+    }
+    if (showUncheckedOnly) {
+      filtered = filtered.filter(w => !masteredSet.has(w.word.toLowerCase()));
     }
     
     const selectedCount = filtered.filter(w => masteredSet.has(w.word.toLowerCase())).length;
@@ -272,7 +284,7 @@ const MasteredEnglishWordsManager = ({ profile, onUpdate }) => {
     });
     setMasteredSet(newSet);
     saveMasteredWords(newSet, false);
-  }, [masteredSet, saveMasteredWords, vocabulary, selectedCEFR, searchTerm, t]);
+  }, [masteredSet, saveMasteredWords, vocabulary, selectedCEFR, searchTerm, showUncheckedOnly, t]);
 
   // Reset to original state (undo all changes)
   const resetToOriginal = useCallback(async () => {
@@ -395,6 +407,15 @@ const MasteredEnglishWordsManager = ({ profile, onUpdate }) => {
             <option key={level} value={level}>CEFR {level}</option>
           ))}
         </select>
+        <label style={{ display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer', fontSize: '14px' }}>
+          <input
+            type="checkbox"
+            checked={showUncheckedOnly}
+            onChange={(e) => setShowUncheckedOnly(e.target.checked)}
+            style={{ cursor: 'pointer' }}
+          />
+          {t('showUncheckedOnly')}
+        </label>
       </div>
 
       {/* Bulk Actions */}
