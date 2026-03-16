@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CUMA Mac 视觉控制台 (教育兼容最终版)</title>
+    <title>CUMA Mac 双摄全知控制台 (12+9)</title>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
     <style>
         body { margin: 0; padding: 0; background-color: #0f172a; color: #f8fafc; font-family: -apple-system, sans-serif; overflow: hidden; display: flex; flex-direction: column; }
         .video-container { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 1; }
-        .input_video { position: absolute; width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); opacity: 0.15; }
+        /* 彻底删除了 input_video，全靠后台 Canvas 离屏渲染双摄 */
         .output_canvas { position: absolute; width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); z-index: 2; }
 
         #ui-layer { position: relative; z-index: 10; padding: 10px 20px; display: flex; flex-direction: column; height: 100vh; pointer-events: none; }
@@ -69,7 +69,6 @@
 <body>
 
     <div class="video-container">
-        <video class="input_video" autoplay playsinline></video>
         <canvas class="output_canvas" width="1280" height="720"></canvas>
     </div>
 
@@ -78,7 +77,7 @@
             <div class="control-panel">
                 <div class="status-row">
                     <div id="ws-status">手机端连接中...</div>
-                    <div id="cv-status">启动摄像头引擎...</div>
+                    <div id="cv-status">启动双摄引擎...</div>
                 </div>
                 <div class="api-row">
                     <span>API:</span>
@@ -257,7 +256,7 @@
         }
         document.getElementById('btn-send-llm').addEventListener('click', triggerLLMSend);
 
-        // ======= 3. 物理映射字典 (完全与用户指定版对齐) =======
+        // ======= 3. 物理映射字典 =======
         const leftChordMap = {
             "2_1": "b", "2_2": "p", "2_3": "m",
             "3_1": "d", "3_2": "t", "3_3": "n",
@@ -379,13 +378,35 @@
             if(r) { document.getElementById('r-1').innerText=r.thumb; document.getElementById('r-2').innerText=r.index; document.getElementById('r-3').innerText=r.middle; document.getElementById('r-4').innerText=r.ring; document.getElementById('r-5').innerText=r.pinky; }
         }
 
-        const videoElement = document.getElementsByClassName('input_video')[0];
+        // ==========================================
+        // 核心改动：双摄离屏拼接引擎
+        // ==========================================
         const canvasElement = document.getElementsByClassName('output_canvas')[0];
         const canvasCtx = canvasElement.getContext('2d');
+        
+        let isCamRunning = true;
+        let streamMac = null;
+        let streamExt = null;
+        const videoMac = document.createElement('video'); videoMac.autoplay = true; videoMac.playsInline = true;
+        const videoExt = document.createElement('video'); videoExt.autoplay = true; videoExt.playsInline = true;
+        
+        // 创建虚拟拼接画布
+        const stitchCanvas = document.createElement('canvas');
+        stitchCanvas.width = 1280; 
+        stitchCanvas.height = 480;
+        const stitchCtx = stitchCanvas.getContext('2d', { willReadFrequently: true });
+
+        const hands = new Hands({locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`});
+        hands.setOptions({ maxNumHands: 2, modelComplexity: 1, minDetectionConfidence: 0.7, minTrackingConfidence: 0.7 });
 
         function onResults(results) {
             canvasCtx.save();
             canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+
+            // 🌟 核心：把后台拼接好的双摄画面，铺满整个背景 🌟
+            canvasCtx.globalAlpha = 0.2; // 背景稍微调亮一点，方便你看到两个摄像头的拼接缝隙
+            canvasCtx.drawImage(stitchCanvas, 0, 0, canvasElement.width, canvasElement.height);
+            canvasCtx.globalAlpha = 1.0; 
 
             let lState = { thumb: 0, index: 0, middle: 0, ring: 0, pinky: 0 };
             let rState = { thumb: 0, index: 0, middle: 0, ring: 0, pinky: 0 };
@@ -393,6 +414,7 @@
             if (results.multiHandLandmarks) {
                 for (let i = 0; i < results.multiHandLandmarks.length; i++) {
                     const landmarks = results.multiHandLandmarks[i];
+                    // 因为我们画在了离屏Canvas上，镜像反转可能需要在这微调，先保持默认跑起来
                     const handedness = results.multiHandedness[i].label === 'Left' ? 'Right' : 'Left'; 
                     drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS, {color: '#4ade80', lineWidth: 2});
                     drawLandmarks(canvasCtx, landmarks, {color: '#fff', lineWidth: 1, radius: 2});
@@ -445,24 +467,68 @@
             canvasCtx.restore();
         }
 
-        const hands = new Hands({locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`});
-        hands.setOptions({ maxNumHands: 2, modelComplexity: 1, minDetectionConfidence: 0.7, minTrackingConfidence: 0.7 });
         hands.onResults(onResults);
-        const camera = new Camera(videoElement, { onFrame: async () => { await hands.send({image: videoElement}); }, width: 1280, height: 720 });
-        camera.start();
+
+        async function startCustomCamera() {
+            try {
+                const devices = await navigator.mediaDevices.enumerateDevices();
+                const videoDevices = devices.filter(d => d.kind === 'videoinput');
+                
+                // 智能分发：寻找左右眼
+                const macCam = videoDevices.find(d => d.label.includes('FaceTime'));
+                const extCam = videoDevices.find(d => !d.label.includes('FaceTime')) || videoDevices[0];
+
+                document.getElementById('cv-status').innerText = `🔥 双摄引擎已点火`;
+
+                // 分别拉取两个流
+                if (macCam) {
+                    streamMac = await navigator.mediaDevices.getUserMedia({ video: { deviceId: { exact: macCam.deviceId }, width: 640, height: 480 } });
+                    videoMac.srcObject = streamMac;
+                }
+                if (extCam) {
+                    streamExt = await navigator.mediaDevices.getUserMedia({ video: { deviceId: { exact: extCam.deviceId }, width: 640, height: 480, frameRate: { ideal: 120 } } });
+                    videoExt.srcObject = streamExt;
+                }
+
+                // 核心拼接与推断循环
+                async function processFrame() {
+                    if (isCamRunning) {
+                        if ((!macCam || videoMac.readyState >= 2) && (!extCam || videoExt.readyState >= 2)) {
+                            // 将 Mac 画在左边，外接工业头画在右边
+                            if (macCam) stitchCtx.drawImage(videoMac, 0, 0, 640, 480);
+                            if (extCam) stitchCtx.drawImage(videoExt, 640, 0, 640, 480);
+                            
+                            // 把拼接好的画喂给 MediaPipe
+                            await hands.send({image: stitchCanvas});
+                        }
+                        requestAnimationFrame(processFrame);
+                    }
+                }
+                processFrame();
+
+            } catch (err) {
+                console.error("双摄拉取失败:", err);
+                document.getElementById('cv-status').innerText = "❌ 双摄权限被拒绝或带宽不足";
+                document.getElementById('cv-status').style.color = "#ef4444";
+            }
+        }
+
+        startCustomCamera();
 
         const camBtn = document.getElementById('cam-toggle');
-        let isCamRunning = true;
         camBtn.addEventListener('click', async () => {
             if (isCamRunning) {
-                await camera.stop();
-                if (videoElement.srcObject) { videoElement.srcObject.getTracks().forEach(track => track.stop()); videoElement.srcObject = null; }
+                isCamRunning = false;
+                if (streamMac) streamMac.getTracks().forEach(track => track.stop());
+                if (streamExt) streamExt.getTracks().forEach(track => track.stop());
                 canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-                document.getElementById('cv-status').innerText = "⏸️ 摄像头已休眠"; camBtn.innerText = "🟢 打开摄像头"; camBtn.classList.add('off'); isCamRunning = false;
+                document.getElementById('cv-status').innerText = "⏸️ 摄像头已休眠"; camBtn.innerText = "🟢 打开摄像头"; camBtn.classList.add('off');
             } else {
-                document.getElementById('cv-status').innerText = "⚡ 正在唤醒..."; await camera.start(); camBtn.innerText = "🔴 关闭摄像头"; camBtn.classList.remove('off'); isCamRunning = true;
+                document.getElementById('cv-status').innerText = "⚡ 正在唤醒..."; isCamRunning = true;
+                await startCustomCamera(); camBtn.innerText = "🔴 关闭摄像头"; camBtn.classList.remove('off');
             }
         });
+
     </script>
 </body>
 </html>

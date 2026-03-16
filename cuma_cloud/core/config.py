@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from pydantic import field_validator
+from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 _CUMA_CLOUD_ROOT = Path(__file__).resolve().parent.parent
@@ -17,6 +17,10 @@ class Settings(BaseSettings):
     database_url: str
     jwt_secret: str
     environment: str = "dev"
+    cloud_port: int = Field(
+        default=8080,
+        description="Port for the Cloud Control Plane",
+    )
 
     @field_validator("database_url")
     @classmethod
