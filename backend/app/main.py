@@ -93,12 +93,13 @@ app.include_router(profiles.router, tags=["profiles"])
 from .routers import cards
 # Inject the Gemini model into cards router (will be set after Gemini initialization below)
 
-from .routers import chat, kg, daily_deck
+from .routers import chat, kg, daily_deck, test_sync
 app.include_router(chat.router, tags=["chat"])
 app.include_router(kg.router, prefix="/kg", tags=["Knowledge Graph"])
 app.include_router(daily_deck.router, tags=["daily-deck"])
 # cards._set_genai_model will be called after _genai_model is initialized
 app.include_router(cards.router, tags=["cards"])
+app.include_router(test_sync.router, tags=["debug"])
 
 
 # ============================================================================
