@@ -1,0 +1,37 @@
+# Cuma Cloud Control Plane - Local / VPS orchestration
+# Run: docker compose up --build -d
+
+services:
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-cuma}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-cuma_secret_change_me}
+      POSTGRES_DB: ${POSTGRES_DB:-cuma_cloud}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"  # Exposed for direct debugging; remove in prod if desired
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-cuma} -d ${POSTGRES_DB:-cuma_cloud}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-cuma}:${POSTGRES_PASSWORD:-cuma_secret_change_me}@db:5432/${POSTGRES_DB:-cuma_cloud}
+      JWT_SECRET: ${JWT_SECRET:-your-secret-key-change-in-production}
+      ENVIRONMENT: ${ENVIRONMENT:-dev}
+      CLOUD_PORT: 8080
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
