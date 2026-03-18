@@ -10,6 +10,7 @@ from typing import Any
 
 from fastapi import APIRouter
 
+from backend.config import settings
 from ..services.cloud_sync import CloudSyncService
 
 router = APIRouter(tags=["debug"])
@@ -54,16 +55,15 @@ async def test_cloud_sync() -> dict[str, Any]:
     Trigger a manual telemetry sync to the cloud for testing.
 
     Uses credentials from env: CLOUD_SYNC_EMAIL, CLOUD_SYNC_PASSWORD,
-    CLOUD_SYNC_DEVICE_ID, CLOUD_BASE_URL.
+    CLOUD_SYNC_DEVICE_ID. CLOUD_BASE_URL from settings (app config / .env).
     Falls back to test account (user@example.com / stringst) if not set.
     """
     email = os.getenv("CLOUD_SYNC_EMAIL", "user@example.com")
     password = os.getenv("CLOUD_SYNC_PASSWORD", "stringst")
     client_device_id = os.getenv("CLOUD_SYNC_DEVICE_ID", "fat-client-test-device")
-    cloud_base_url = os.getenv("CLOUD_BASE_URL", "http://localhost:8080")
 
     sync_service = CloudSyncService(
-        cloud_base_url=cloud_base_url,
+        cloud_base_url=settings.cloud_base_url,
         email=email,
         password=password,
         client_device_id=client_device_id,

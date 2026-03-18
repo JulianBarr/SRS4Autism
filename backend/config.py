@@ -8,12 +8,17 @@ This module centralizes all configuration values and supports:
 - Default values
 """
 
-from pydantic_settings import BaseSettings
 from typing import Optional
+
+from pydantic import field_validator
+from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
     """Application settings with environment variable support."""
+
+    # Cloud Sync Configuration
+    cloud_base_url: str = "http://localhost:8080"
 
     # Fuseki/Knowledge Graph Configuration (deprecated, use KG_STORE_PATH instead)
     fuseki_url: str = "http://localhost:3030/srs4autism/query"
@@ -33,6 +38,14 @@ class Settings(BaseSettings):
 
     # Logging Configuration
     log_level: str = "INFO"
+
+    @field_validator("cloud_base_url", mode="before")
+    @classmethod
+    def strip_trailing_slash(cls, v: str) -> str:
+        """Ensure cloud_base_url has no trailing slash for consistent URL construction."""
+        if isinstance(v, str):
+            return v.rstrip("/")
+        return v
 
     class Config:
         env_file = ".env"

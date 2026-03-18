@@ -23,7 +23,7 @@ class CloudSyncService:
     def __init__(
         self,
         *,
-        cloud_base_url: str = "http://localhost:8080",
+        cloud_base_url: str,
         email: str,
         password: str,
         client_device_id: str,
