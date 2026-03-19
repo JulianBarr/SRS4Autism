@@ -3,9 +3,12 @@ from typing import Annotated
 
 from fastapi import Depends
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
+from sqlalchemy.orm import DeclarativeBase
+
+class Base(DeclarativeBase):
+    pass
 
 from cuma_cloud.core.config import settings
-from cuma_cloud.models import Base
 
 engine = create_async_engine(
     settings.database_url,
