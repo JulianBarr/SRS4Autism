@@ -24,6 +24,9 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
+    volumes:
+      - ..:/app       # 🌟 映射本地代码到容器内 (前提：您的 Dockerfile 工作目录 WORKDIR 是 /app)
+    command: uvicorn cuma_cloud.main:app --host 0.0.0.0 --port 8080 --reload  # 🌟 强制使用 reload 启动
     environment:
       DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-cuma}:${POSTGRES_PASSWORD:-cuma_secret_change_me}@db:5432/${POSTGRES_DB:-cuma_cloud}
       JWT_SECRET: ${JWT_SECRET:-your-secret-key-change-in-production}

@@ -93,3 +93,21 @@ class TelemetrySyncResponse(BaseModel):
     status: str = "success"
 
     model_config = ConfigDict(from_attributes=True)
+
+
+# --- IEP Communication Schemas ---
+
+class IepLogCreate(BaseModel):
+    content: str
+
+class IepLogResponse(BaseModel):
+    id: int
+    child_id: int
+    sender_id: int
+    content: str
+    created_at: datetime
+    
+    # Nested info optionally
+    sender_role: Optional[str] = None
+    
+    model_config = ConfigDict(from_attributes=True)

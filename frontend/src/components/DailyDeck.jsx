@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { VB_MAPP_SEEDS } from '../vbmapp_seeds';
 
 const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+const CLOUD_API_BASE = 'http://127.0.0.1:8080';
 
 /** 大一统 Demo：PEP 评估项悬停提示，鼠标悬停显示详细描述 */
 function AssessmentTooltip({ details }) {
@@ -124,18 +125,40 @@ function QuestTopicChatModal({ quest, childName, onClose }) {
     if (!quest?.quest_id) return;
     setLoading(true);
     try {
+      const roleToId = { teacher: '1', parent: '2', ai: '3' };
+      const userId = roleToId[sendRole] || '2';
+      
       const res = await fetch(
-        `${API_BASE}/api/quest_logs?child_name=${encodeURIComponent(childName)}&quest_id=${encodeURIComponent(quest.quest_id)}`
+        `${CLOUD_API_BASE}/api/v1/children/1/logs`,
+        {
+          headers: {
+            'x-mock-user-id': userId
+          }
+        }
       );
       if (!res.ok) throw new Error(await res.text());
       const data = await res.json();
-      setLogs(data.logs || []);
+      
+      const mappedLogs = data.map(log => {
+        let mappedRole = log.sender_role;
+        if (mappedRole === 'agent') mappedRole = 'ai';
+        if (mappedRole === 'qcq_admin') mappedRole = 'admin';
+        return {
+          role: mappedRole || 'parent',
+          content: log.content,
+          timestamp: log.created_at,
+          file_url: null,
+          file_type: null
+        };
+      });
+      
+      setLogs(mappedLogs.reverse());
     } catch {
       setLogs([]);
     } finally {
       setLoading(false);
     }
-  }, [childName, quest?.quest_id]);
+  }, [quest?.quest_id, sendRole]);
 
   useEffect(() => {
     fetchLogs();
@@ -143,20 +166,21 @@ function QuestTopicChatModal({ quest, childName, onClose }) {
 
   const handleSend = async () => {
     const content = input.trim();
-    if ((!content && !selectedFile) || sending) return;
+    if (!content || sending) return;
     setSending(true);
     try {
-      const formData = new FormData();
-      formData.append('child_name', childName);
-      formData.append('quest_id', quest.quest_id);
-      formData.append('role', sendRole);
-      formData.append('content', content);
-      if (selectedFile) {
-        formData.append('file', selectedFile);
-      }
-      const res = await fetch(`${API_BASE}/api/quest_logs`, {
+      const roleToId = { teacher: '1', parent: '2', ai: '3' };
+      const userId = roleToId[sendRole] || '2';
+      
+      const res = await fetch(`${CLOUD_API_BASE}/api/v1/children/1/logs`, {
         method: 'POST',
-        body: formData,
+        headers: {
+          'Content-Type': 'application/json',
+          'x-mock-user-id': userId
+        },
+        body: JSON.stringify({
+          content: content
+        }),
       });
       if (!res.ok) throw new Error(await res.text());
       setInput('');
@@ -337,8 +361,8 @@ function QuestTopicChatModal({ quest, childName, onClose }) {
 
           <button
             onClick={handleSend}
-            disabled={sending || (!input.trim() && !selectedFile)}
-            style={{ padding: '10px 24px', backgroundColor: '#334155', color: '#fff', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 500, alignSelf: 'stretch', opacity: (sending || (!input.trim() && !selectedFile)) ? 0.5 : 1 }}
+            disabled={sending || !input.trim()}
+            style={{ padding: '10px 24px', backgroundColor: '#334155', color: '#fff', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 500, alignSelf: 'stretch', opacity: (sending || !input.trim()) ? 0.5 : 1 }}
           >
             发送
           </button>

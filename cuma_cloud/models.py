@@ -61,6 +61,10 @@ class User(Base):
     parent_children: Mapped[list["ChildProfile"]] = relationship(
         "ChildProfile", back_populates="parent", foreign_keys="ChildProfile.parent_id"
     )
+    
+    sent_iep_logs: Mapped[list["IepCommunicationLog"]] = relationship(
+        "IepCommunicationLog", back_populates="sender", foreign_keys="IepCommunicationLog.sender_id"
+    )
 
 
 class ChildProfile(Base):
@@ -91,6 +95,10 @@ class ChildProfile(Base):
     )
     parent: Mapped[Optional["User"]] = relationship(
         "User", back_populates="parent_children", foreign_keys=[parent_id]
+    )
+
+    iep_logs: Mapped[list["IepCommunicationLog"]] = relationship(
+        "IepCommunicationLog", back_populates="child", foreign_keys="IepCommunicationLog.child_id"
     )
 
 class CloudAccount(Base):
@@ -162,3 +170,25 @@ class TelemetrySyncLog(Base):
         Index("idx_telemetry_event_type", "event_type"),
         Index("idx_telemetry_client_device", "client_device_id"),
     )
+
+
+class IepCommunicationLog(Base):
+    """
+    IEP 沟通与记录模块。
+    用于记录老师、家长、AI围绕特定儿童的干预记录。
+    """
+
+    __tablename__ = "iep_communication_logs"
+
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    child_id: Mapped[int] = mapped_column(
+        ForeignKey("child_profiles.id", ondelete="CASCADE"), nullable=False, index=True
+    )
+    sender_id: Mapped[int] = mapped_column(
+        ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True
+    )
+    content: Mapped[str] = mapped_column(String, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+
+    child: Mapped["ChildProfile"] = relationship("ChildProfile", back_populates="iep_logs", foreign_keys=[child_id])
+    sender: Mapped["User"] = relationship("User", back_populates="sent_iep_logs", foreign_keys=[sender_id])

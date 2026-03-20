@@ -16,16 +16,14 @@ async def seed_data():
     初始化数据库并插入 ABAC 模型的 Mock 数据。
     """
     logger.info("开始初始化数据库表...")
-    # 使用 Base.metadata.create_all 创建表
     async with engine.begin() as conn:
+        # 🌟 关键优化：先彻底删表，再重建，确保序列重置，小明必定是 id=1
+        await conn.run_sync(Base.metadata.drop_all)
         await conn.run_sync(Base.metadata.create_all)
     logger.info("数据库表创建完成。")
 
     logger.info("开始插入 Mock 数据...")
     async with async_sessionmaker_factory() as session:
-        # 清理已有数据，防止重复执行报错
-        await session.execute(text("TRUNCATE TABLE child_profiles, users, institutions CASCADE"))
-        
         # 1. 创建 Institution: QCQ机构
         qcq_inst = Institution(id=1, name="QCQ机构")
         session.add(qcq_inst)
@@ -42,14 +40,24 @@ async def seed_data():
         
         # 3. 创建 User (Parent): parent_b@test.com
         parent_b = User(
-            id=2,  # 强制 id=2 避免序列冲突
+            id=2,  # 强制 id=2
             email="parent_b@test.com",
             role=RoleEnum.PARENT
         )
         session.add(parent_b)
-        await session.flush()  # 获取 teacher_a.id 和 parent_b.id
+
+        # 🌟 4. 新增：创建 User (Agent): 超级助教 AI
+        agent_ai = User(
+            id=3,  # 强制 id=3，完美对接前端 UI 的 {"x-mock-user-id": "3"}
+            email="ai@cuma.com",
+            role=RoleEnum.AGENT,
+            institution_id=qcq_inst.id
+        )
+        session.add(agent_ai)
+
+        await session.flush() 
         
-        # 4. 创建 Child B (归属 Teacher A): 小明
+        # 5. 创建 Child A (归属 Teacher A): 小明 (数据库重建后，id必然为1)
         child_ming = ChildProfile(
             name="小明",
             institution_id=qcq_inst.id,
@@ -57,14 +65,14 @@ async def seed_data():
         )
         session.add(child_ming)
         
-        # 5. 创建 Child C (归属 Parent B): 小红
+        # 6. 创建 Child B (归属 Parent B): 小红
         child_hong = ChildProfile(
             name="小红",
             parent_id=parent_b.id
         )
         session.add(child_hong)
         
-        # 6. 创建 Child D (归属其他老师): 小刚
+        # 7. 创建 Child C (归属其他老师): 小刚
         child_gang = ChildProfile(
             name="小刚",
             institution_id=qcq_inst.id
@@ -74,7 +82,7 @@ async def seed_data():
         
         # 提交事务
         await session.commit()
-        logger.info("Mock 数据插入成功！")
+        logger.info("Mock 数据插入成功！(包含 AI Agent 账号)")
 
 if __name__ == "__main__":
     asyncio.run(seed_data())
