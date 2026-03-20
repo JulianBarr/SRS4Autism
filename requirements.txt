@@ -1,0 +1,6 @@
+google-genai
+pydantic
+python-dotenv
+google-genai
+pydantic
+python-dotenv
