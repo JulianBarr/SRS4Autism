@@ -18,13 +18,27 @@ import PinyinTypingManager from './components/widgets/PinyinTypingManager';
 import CharacterRecognition from './components/CharacterRecognition';
 import SettingsModal from './components/SettingsModal';
 import DailyDeck from './components/DailyDeck';
+import Login from './components/Login';
 import { useLanguage } from './i18n/LanguageContext';
 import './App.css';
 
 const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
+// Setup axios interceptor for JWT
+axios.interceptors.request.use(config => {
+  const token = localStorage.getItem('access_token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+}, error => {
+  return Promise.reject(error);
+});
+
 function App() {
   const { language, toggleLanguage, t } = useLanguage();
+  
+  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('access_token'));
   
   // Check if we're on the admin route
   const isAdminRoute = window.location.pathname === '/admin/pinyin-gap-fill' || 
@@ -48,8 +62,10 @@ function App() {
   const [showSettingsModal, setShowSettingsModal] = useState(false);
 
   useEffect(() => {
-    loadData();
-  }, []);
+    if (isAuthenticated) {
+      loadData();
+    }
+  }, [isAuthenticated]);
 
   // Scroll to top when switching to workbench tab
   useEffect(() => {
@@ -151,9 +167,18 @@ function App() {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('access_token');
+    setIsAuthenticated(false);
+  };
+
   // If admin route, render admin interface (after all hooks)
   if (isAdminRoute) {
     return <PinyinGapFillAdmin />;
+  }
+
+  if (!isAuthenticated) {
+    return <Login onLoginSuccess={(token) => setIsAuthenticated(true)} />;
   }
 
   if (loading) {
@@ -231,6 +256,24 @@ function App() {
                 onMouseLeave={(e) => e.target.style.background = 'transparent'}
               >
                 {language === 'en' ? '🇨🇳' : '🇺🇸'}
+              </button>
+              
+              <button 
+                onClick={handleLogout}
+                title="Logout"
+                style={{
+                  background: 'transparent',
+                  border: 'none',
+                  fontSize: '24px',
+                  cursor: 'pointer',
+                  padding: '4px 8px',
+                  borderRadius: '4px',
+                  transition: 'background 0.2s'
+                }}
+                onMouseEnter={(e) => e.target.style.background = '#f0f0f0'}
+                onMouseLeave={(e) => e.target.style.background = 'transparent'}
+              >
+                🚪
               </button>
               
               <button 

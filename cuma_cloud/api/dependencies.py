@@ -57,22 +57,40 @@ async def get_current_user(
 
 
 async def get_current_user_abac(
-    x_mock_user_id: Optional[int] = Header(None),
+    token: str = Depends(oauth2_scheme),
     db: AsyncSession = Depends(get_db)
 ) -> User:
     """
-    Mock：如果请求头带有 x-mock-user-id，则用其查询 User。
-    如果未提供，默认回退到查询 id=1 的用户。
-    后续可替换为 JWT 解析后按 cloud_account_id 关联 User。
+    通过 JWT Token 验证用户身份，并返回 ABAC User 实体。
     """
-    user_id_to_query = x_mock_user_id if x_mock_user_id is not None else 1
-    result = await db.execute(select(User).where(User.id == user_id_to_query))
-    user = result.scalar_one_or_none()
-    if user is None:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail=f"当前用户不存在（请确保 users 表中有 id={user_id_to_query} 的记录）",
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Could not validate credentials",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+    try:
+        payload = jwt.decode(
+            token,
+            settings.jwt_secret,
+            algorithms=["HS256"],
         )
+        sub: Optional[str] = payload.get("sub")
+        if sub is None:
+            raise credentials_exception
+    except PyJWTError:
+        raise credentials_exception
+
+    try:
+        user_id = int(sub)
+    except ValueError:
+        raise credentials_exception
+
+    result = await db.execute(select(User).where(User.id == user_id))
+    user = result.scalar_one_or_none()
+    
+    if user is None:
+        raise credentials_exception
+        
     return user
 
 

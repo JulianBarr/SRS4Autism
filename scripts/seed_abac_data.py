@@ -7,6 +7,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 # 引入 models 和 database 组件
 from cuma_cloud.models import Base, Institution, User, ChildProfile, RoleEnum
 from cuma_cloud.core.database import engine, async_sessionmaker_factory
+from cuma_cloud.core.security import get_password_hash
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -22,6 +23,8 @@ async def seed_data():
         await conn.run_sync(Base.metadata.create_all)
     logger.info("数据库表创建完成。")
 
+    default_hashed_password = get_password_hash("cuma123")
+
     logger.info("开始插入 Mock 数据...")
     async with async_sessionmaker_factory() as session:
         # 1. 创建 Institution: QCQ机构
@@ -33,6 +36,7 @@ async def seed_data():
         teacher_a = User(
             id=1,  # 强制 id=1 匹配 mock 鉴权
             email="teacher_a@qcq.com",
+            hashed_password=default_hashed_password,
             role=RoleEnum.TEACHER,
             institution_id=qcq_inst.id
         )
@@ -42,6 +46,7 @@ async def seed_data():
         parent_b = User(
             id=2,  # 强制 id=2
             email="parent_b@test.com",
+            hashed_password=default_hashed_password,
             role=RoleEnum.PARENT
         )
         session.add(parent_b)
@@ -50,6 +55,7 @@ async def seed_data():
         agent_ai = User(
             id=3,  # 强制 id=3，完美对接前端 UI 的 {"x-mock-user-id": "3"}
             email="ai@cuma.com",
+            hashed_password=default_hashed_password,
             role=RoleEnum.AGENT,
             institution_id=qcq_inst.id
         )

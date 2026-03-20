@@ -45,6 +45,7 @@ class User(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     email: Mapped[str] = mapped_column(String(255), unique=True, nullable=False, index=True)
+    hashed_password: Mapped[str] = mapped_column(String, nullable=False, server_default="mock_hash")
     role: Mapped[RoleEnum] = mapped_column(Enum(RoleEnum), nullable=False)
     institution_id: Mapped[Optional[int]] = mapped_column(
         ForeignKey("institutions.id", ondelete="SET NULL"), nullable=True, index=True

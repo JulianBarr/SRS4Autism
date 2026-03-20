@@ -125,16 +125,13 @@ function QuestTopicChatModal({ quest, childName, onClose }) {
     if (!quest?.quest_id) return;
     setLoading(true);
     try {
-      const roleToId = { teacher: '1', parent: '2', ai: '3' };
-      const userId = roleToId[sendRole] || '2';
-      
+      const token = localStorage.getItem('access_token');
+      const headers = {};
+      if (token) headers['Authorization'] = `Bearer ${token}`;
+
       const res = await fetch(
         `${CLOUD_API_BASE}/api/v1/children/1/logs`,
-        {
-          headers: {
-            'x-mock-user-id': userId
-          }
-        }
+        { headers }
       );
       if (!res.ok) throw new Error(await res.text());
       const data = await res.json();
@@ -169,15 +166,15 @@ function QuestTopicChatModal({ quest, childName, onClose }) {
     if (!content || sending) return;
     setSending(true);
     try {
-      const roleToId = { teacher: '1', parent: '2', ai: '3' };
-      const userId = roleToId[sendRole] || '2';
+      const token = localStorage.getItem('access_token');
+      const headers = {
+        'Content-Type': 'application/json'
+      };
+      if (token) headers['Authorization'] = `Bearer ${token}`;
       
       const res = await fetch(`${CLOUD_API_BASE}/api/v1/children/1/logs`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-mock-user-id': userId
-        },
+        headers,
         body: JSON.stringify({
           content: content
         }),
@@ -324,15 +321,6 @@ function QuestTopicChatModal({ quest, childName, onClose }) {
             </div>
           )}
           <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
-          <select
-            value={sendRole}
-            onChange={(e) => setSendRole(e.target.value)}
-            style={{ padding: '10px 12px', borderRadius: '8px', border: '1px solid #cbd5e1', outline: 'none', backgroundColor: '#fff', fontSize: '14px' }}
-          >
-            <option value="parent">家长</option>
-            <option value="teacher">老师</option>
-            <option value="ai">AI</option>
-          </select>
 
           <button
             type="button"

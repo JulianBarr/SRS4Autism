@@ -1,56 +1,35 @@
-"""Security utilities: password hashing and JWT token generation."""
-
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
 from typing import Optional
 
-import bcrypt
 import jwt
+import bcrypt
 
 from cuma_cloud.core.config import settings
 
-# Default token expiration: 7 days (local-first desktop app)
-DEFAULT_ACCESS_TOKEN_EXPIRE_DAYS = 7
-
+# JWT configurations
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 * 7  # 7 days
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
-    """Verify a plain password against a bcrypt hash."""
-    return bcrypt.checkpw(
-        plain_password.encode("utf-8"),
-        hashed_password.encode("utf-8"),
-    )
-
+    try:
+        return bcrypt.checkpw(
+            plain_password.encode("utf-8"), 
+            hashed_password.encode("utf-8")
+        )
+    except Exception:
+        return False
 
 def get_password_hash(password: str) -> str:
-    """Hash a password using bcrypt."""
-    return bcrypt.hashpw(
-        password.encode("utf-8"),
-        bcrypt.gensalt(),
-    ).decode("utf-8")
+    salt = bcrypt.gensalt()
+    hashed = bcrypt.hashpw(password.encode("utf-8"), salt)
+    return hashed.decode("utf-8")
 
-
-def create_access_token(
-    data: dict,
-    expires_delta: Optional[timedelta] = None,
-) -> str:
-    """
-    Create a JWT access token.
-
-    Args:
-        data: Payload dict (e.g. {"sub": email}).
-        expires_delta: Optional custom expiration. Defaults to 7 days.
-
-    Returns:
-        Encoded JWT string.
-    """
+def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -> str:
     to_encode = data.copy()
-    if expires_delta is not None:
-        expire = datetime.now(timezone.utc) + expires_delta
+    if expires_delta:
+        expire = datetime.utcnow() + expires_delta
     else:
-        expire = datetime.now(timezone.utc) + timedelta(days=DEFAULT_ACCESS_TOKEN_EXPIRE_DAYS)
-    to_encode["exp"] = expire
-    to_encode["iat"] = datetime.now(timezone.utc)
-    return jwt.encode(
-        to_encode,
-        settings.jwt_secret,
-        algorithm="HS256",
-    )
+        expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    to_encode.update({"exp": expire})
+    encoded_jwt = jwt.encode(to_encode, settings.jwt_secret, algorithm=ALGORITHM)
+    return encoded_jwt

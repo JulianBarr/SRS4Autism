@@ -8,7 +8,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from cuma_cloud.api.schemas import CloudAccountCreate, CloudAccountResponse, TokenResponse
 from cuma_cloud.core.database import get_db
 from cuma_cloud.core.security import create_access_token, get_password_hash, verify_password
-from cuma_cloud.models import CloudAccount
+from cuma_cloud.models import CloudAccount, User
 
 router = APIRouter(tags=["auth"])
 
@@ -24,15 +24,19 @@ async def login(
     Use `username` as email and `password` as password.
     Swagger UI will show the standard OAuth2 form.
     """
-    result = await db.execute(select(CloudAccount).where(CloudAccount.email == form_data.username))
-    account = result.scalar_one_or_none()
-    if account is None or not verify_password(form_data.password, account.hashed_password):
+    # 查找 User 表（Teacher / Parent / Agent 等角色）
+    result = await db.execute(select(User).where(User.email == form_data.username))
+    user = result.scalar_one_or_none()
+    
+    if user is None or not verify_password(form_data.password, user.hashed_password):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect email or password",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    token = create_access_token(data={"sub": account.email})
+        
+    # 将 user_id (通常是数字的转成字符串) 存为 subject
+    token = create_access_token(data={"sub": str(user.id)})
     return {"access_token": token, "token_type": "bearer"}
 
 
