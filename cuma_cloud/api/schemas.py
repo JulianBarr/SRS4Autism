@@ -24,11 +24,19 @@ class CloudAccountResponse(BaseModel):
     model_config = {"from_attributes": True}
 
 
+class UserInfo(BaseModel):
+    id: int
+    email: str
+    role: str
+    institution_id: Optional[int] = None
+
 class TokenResponse(BaseModel):
     """OAuth2 token response schema."""
 
     access_token: str
     token_type: str = "bearer"
+    user: UserInfo
+
 
 
 # --- ABAC Policy Schemas (Phase 3: Distributed Authorization) ---

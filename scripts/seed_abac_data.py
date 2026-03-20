@@ -70,6 +70,22 @@ async def seed_data():
             assigned_teacher_id=teacher_a.id
         )
         session.add(child_ming)
+
+        # 🌟 抢救周一鸣：在真实数据库里给他建档，并分配给 Teacher A
+        child_yiming = ChildProfile(
+            name="Zhou Yiming (周一鸣）",
+            institution_id=qcq_inst.id,
+            assigned_teacher_id=teacher_a.id
+        )
+        session.add(child_yiming)
+
+        # 🌟 顺手把 David Shannon 也抢救回来，保持队形完整
+        child_david = ChildProfile(
+            name="David Shannon",
+            institution_id=qcq_inst.id,
+            assigned_teacher_id=teacher_a.id
+        )
+        session.add(child_david)
         
         # 6. 创建 Child B (归属 Parent B): 小红
         child_hong = ChildProfile(
@@ -88,7 +104,7 @@ async def seed_data():
         
         # 提交事务
         await session.commit()
-        logger.info("Mock 数据插入成功！(包含 AI Agent 账号)")
+        logger.info("Mock 数据插入成功！(包含 AI Agent 账号和全部测试儿童)")
 
 if __name__ == "__main__":
     asyncio.run(seed_data())

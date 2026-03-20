@@ -37,7 +37,16 @@ async def login(
         
     # 将 user_id (通常是数字的转成字符串) 存为 subject
     token = create_access_token(data={"sub": str(user.id)})
-    return {"access_token": token, "token_type": "bearer"}
+    return {
+        "access_token": token,
+        "token_type": "bearer",
+        "user": {
+            "id": user.id,
+            "email": user.email,
+            "role": user.role,
+            "institution_id": user.institution_id
+        }
+    }
 
 
 @router.post("/register", response_model=CloudAccountResponse)

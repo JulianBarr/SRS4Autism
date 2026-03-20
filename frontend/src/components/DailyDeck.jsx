@@ -112,7 +112,7 @@ const PROMPT_LEVELS = [
 ];
 
 /** Topic Chat 沟通与记录模态框 - 家校接力 */
-function QuestTopicChatModal({ quest, childName, onClose }) {
+function QuestTopicChatModal({ quest, childName, childId, onClose }) {
   const [logs, setLogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [input, setInput] = useState('');
@@ -122,7 +122,7 @@ function QuestTopicChatModal({ quest, childName, onClose }) {
   const fileInputRef = useRef(null);
 
   const fetchLogs = useCallback(async () => {
-    if (!quest?.quest_id) return;
+    if (!quest?.quest_id || !childId) return;
     setLoading(true);
     try {
       const token = localStorage.getItem('access_token');
@@ -130,7 +130,7 @@ function QuestTopicChatModal({ quest, childName, onClose }) {
       if (token) headers['Authorization'] = `Bearer ${token}`;
 
       const res = await fetch(
-        `${CLOUD_API_BASE}/api/v1/children/1/logs`,
+        `${CLOUD_API_BASE}/api/v1/children/${childId}/logs`,
         { headers }
       );
       if (!res.ok) throw new Error(await res.text());
@@ -163,7 +163,7 @@ function QuestTopicChatModal({ quest, childName, onClose }) {
 
   const handleSend = async () => {
     const content = input.trim();
-    if (!content || sending) return;
+    if (!content || sending || !childId) return;
     setSending(true);
     try {
       const token = localStorage.getItem('access_token');
@@ -172,7 +172,7 @@ function QuestTopicChatModal({ quest, childName, onClose }) {
       };
       if (token) headers['Authorization'] = `Bearer ${token}`;
       
-      const res = await fetch(`${CLOUD_API_BASE}/api/v1/children/1/logs`, {
+      const res = await fetch(`${CLOUD_API_BASE}/api/v1/children/${childId}/logs`, {
         method: 'POST',
         headers,
         body: JSON.stringify({
@@ -361,7 +361,7 @@ function QuestTopicChatModal({ quest, childName, onClose }) {
   );
 }
 
-function DailyDeck({ childName = '小明' }) {
+function DailyDeck({ childName = '小明', childId }) {
   const [pending, setPending] = useState([]);
   const [completedToday, setCompletedToday] = useState([]);
   const [historyQuests, setHistoryQuests] = useState([]);
@@ -598,6 +598,7 @@ function DailyDeck({ childName = '小明' }) {
           <QuestTopicChatModal
             quest={currentChatQuest}
             childName={childName}
+            childId={childId}
             onClose={closeChat}
           />
         )}
@@ -927,6 +928,7 @@ function DailyDeck({ childName = '小明' }) {
         <QuestTopicChatModal
           quest={currentChatQuest}
           childName={childName}
+          childId={childId}
           onClose={closeChat}
         />
       )}

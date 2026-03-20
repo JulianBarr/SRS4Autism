@@ -23,6 +23,7 @@ import { useLanguage } from './i18n/LanguageContext';
 import './App.css';
 
 const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+const CLOUD_API_BASE = process.env.REACT_APP_CLOUD_URL || 'http://localhost:8080';
 
 // Setup axios interceptor for JWT
 axios.interceptors.request.use(config => {
@@ -39,6 +40,10 @@ function App() {
   const { language, toggleLanguage, t } = useLanguage();
   
   const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('access_token'));
+  const [currentUser, setCurrentUser] = useState(() => {
+    const saved = localStorage.getItem('user_info');
+    return saved ? JSON.parse(saved) : null;
+  });
   
   // Check if we're on the admin route
   const isAdminRoute = window.location.pathname === '/admin/pinyin-gap-fill' || 
@@ -55,6 +60,8 @@ function App() {
   const [showLogicCityModal, setShowLogicCityModal] = useState(false); // Modal state for Logic City
   const [logicCityContentType, setLogicCityContentType] = useState(null); // Content type for Logic City ('vocab-advanced', etc.)
   const [profiles, setProfiles] = useState([]);
+  const [cloudChildren, setCloudChildren] = useState([]);
+  const [currentCloudChildId, setCurrentCloudChildId] = useState(null);
   const [currentProfile, setCurrentProfile] = useState(null);
   const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -101,12 +108,28 @@ function App() {
   const loadData = async () => {
     try {
       setLoading(true);
+      // Fetch cloud children separately so it doesn't fail the whole app if cloud is down
       const [profilesRes, cardsRes] = await Promise.all([
         axios.get(`${API_BASE}/profiles`),
         axios.get(`${API_BASE}/cards`)
       ]);
       setProfiles(profilesRes.data);
       setCards(cardsRes.data);
+      
+      try {
+        const cloudRes = await axios.get(`${CLOUD_API_BASE}/api/v1/children/me`);
+        setCloudChildren(cloudRes.data);
+        if (cloudRes.data.length > 0) {
+          setCurrentCloudChildId(cloudRes.data[0].id);
+          // Try to sync currentProfile
+          const localMatch = profilesRes.data.find(p => p.name === cloudRes.data[0].name);
+          if (localMatch) {
+            setCurrentProfile(localMatch);
+          }
+        }
+      } catch (cloudErr) {
+        console.warn('Failed to fetch cloud children', cloudErr);
+      }
     } catch (error) {
       console.error('Error loading data:', error);
     } finally {
@@ -169,7 +192,9 @@ function App() {
 
   const handleLogout = () => {
     localStorage.removeItem('access_token');
+    localStorage.removeItem('user_info');
     setIsAuthenticated(false);
+    setCurrentUser(null);
   };
 
   // If admin route, render admin interface (after all hooks)
@@ -178,7 +203,10 @@ function App() {
   }
 
   if (!isAuthenticated) {
-    return <Login onLoginSuccess={(token) => setIsAuthenticated(true)} />;
+    return <Login onLoginSuccess={(token, user) => {
+      setIsAuthenticated(true);
+      if (user) setCurrentUser(user);
+    }} />;
   }
 
   if (loading) {
@@ -223,18 +251,22 @@ function App() {
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <span style={{ fontSize: '1.2em' }}>🧒</span>
                 <select 
-                  value={currentProfile?.name || ''}
+                  value={currentCloudChildId || ''}
                   onChange={(e) => {
-                    const val = e.target.value;
+                    const val = Number(e.target.value);
                     if (!val) return;
-                    const selected = profiles.find(p => p.name === val);
-                    setCurrentProfile(selected || null);
+                    setCurrentCloudChildId(val);
+                    const selectedCloud = cloudChildren.find(c => c.id === val);
+                    if (selectedCloud) {
+                      const localMatch = profiles.find(p => p.name === selectedCloud.name);
+                      if (localMatch) setCurrentProfile(localMatch);
+                    }
                   }}
                   style={{ padding: '5px', borderRadius: '4px', border: '1px solid #ccc', minWidth: '100px' }}
                 >
-                  <option value="">{profiles.length === 0 ? '（无档案）' : '选择儿童'}</option>
-                  {profiles.map(p => (
-                    <option key={p.name} value={p.name}>{p.name}</option>
+                  <option value="">{cloudChildren.length === 0 ? '（无儿童）' : '选择儿童'}</option>
+                  {cloudChildren.map(c => (
+                    <option key={c.id} value={c.id}>{c.name}</option>
                   ))}
                 </select>
               </div>
@@ -258,6 +290,17 @@ function App() {
                 {language === 'en' ? '🇨🇳' : '🇺🇸'}
               </button>
               
+              {currentUser && (
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', marginRight: '8px' }}>
+                  <span style={{ fontSize: '12px', fontWeight: 'bold', color: '#555' }}>
+                    {currentUser.role?.toUpperCase()}
+                  </span>
+                  <span style={{ fontSize: '10px', color: '#888' }}>
+                    {currentUser.email}
+                  </span>
+                </div>
+              )}
+
               <button 
                 onClick={handleLogout}
                 title="Logout"
@@ -404,7 +447,7 @@ function App() {
                   </button>
                 </div>
                 {cognitionContentView === 'daily-deck' ? (
-                  <DailyDeck childName={currentProfile?.name || '小明'} />
+                  <DailyDeck childName={currentProfile?.name || '小明'} childId={currentCloudChildId} />
                 ) : (
                   <CognitionContentManager />
                 )}

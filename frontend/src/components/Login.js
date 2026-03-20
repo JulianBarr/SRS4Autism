@@ -31,8 +31,11 @@ function Login({ onLoginSuccess }) {
 
       if (response.data && response.data.access_token) {
         localStorage.setItem('access_token', response.data.access_token);
+        if (response.data.user) {
+          localStorage.setItem('user_info', JSON.stringify(response.data.user));
+        }
         // Decode JWT to get user ID or just let subsequent requests use it
-        onLoginSuccess(response.data.access_token);
+        onLoginSuccess(response.data.access_token, response.data.user);
       }
     } catch (err) {
       setError(err.response?.data?.detail || 'Login failed. Please check your credentials.');
