@@ -120,10 +120,11 @@ function QuestTopicChatModal({ quest, childName, childId, onClose }) {
   const [sendRole, setSendRole] = useState('parent');
   const [selectedFile, setSelectedFile] = useState(null);
   const fileInputRef = useRef(null);
+  const messagesEndRef = useRef(null);
 
-  const fetchLogs = useCallback(async () => {
+  const fetchLogs = useCallback(async (silent = false) => {
     if (!quest?.quest_id || !childId) return;
-    setLoading(true);
+    if (!silent) setLoading(true);
     try {
       const token = localStorage.getItem('access_token');
       const headers = {};
@@ -149,17 +150,36 @@ function QuestTopicChatModal({ quest, childName, childId, onClose }) {
         };
       });
       
-      setLogs(mappedLogs.reverse());
+      const newLogs = mappedLogs.reverse();
+      setLogs(prev => {
+        if (prev.length === newLogs.length) {
+          // Check if any message content changed (e.g. streaming update)
+          const hasChanged = prev.some((log, i) => 
+            log.content !== newLogs[i].content || 
+            log.role !== newLogs[i].role
+          );
+          if (!hasChanged) return prev;
+        }
+        return newLogs;
+      });
     } catch {
-      setLogs([]);
+      if (!silent) setLogs([]);
     } finally {
-      setLoading(false);
+      if (!silent) setLoading(false);
     }
-  }, [quest?.quest_id, sendRole]);
+  }, [quest?.quest_id, childId]);
 
   useEffect(() => {
     fetchLogs();
+    const intervalId = setInterval(() => {
+      fetchLogs(true);
+    }, 3000);
+    return () => clearInterval(intervalId);
   }, [fetchLogs]);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [logs]);
 
   const handleSend = async () => {
     const content = input.trim();
@@ -182,7 +202,7 @@ function QuestTopicChatModal({ quest, childName, childId, onClose }) {
       if (!res.ok) throw new Error(await res.text());
       setInput('');
       setSelectedFile(null);
-      await fetchLogs();
+      await fetchLogs(true);
     } catch (err) {
       console.error('发送失败:', err);
     } finally {
@@ -293,6 +313,7 @@ function QuestTopicChatModal({ quest, childName, childId, onClose }) {
               );
             })
           )}
+          <div ref={messagesEndRef} />
         </div>
 
         {/* Input Area：多行文本框 */}
