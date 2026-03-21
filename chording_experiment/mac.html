@@ -470,47 +470,40 @@
         hands.onResults(onResults);
 
         async function startCustomCamera() {
-            try {
+		// 1. 获取所有视频设备
                 const devices = await navigator.mediaDevices.enumerateDevices();
                 const videoDevices = devices.filter(d => d.kind === 'videoinput');
-                
-                // 智能分发：寻找左右眼
-                const macCam = videoDevices.find(d => d.label.includes('FaceTime'));
-                const extCam = videoDevices.find(d => !d.label.includes('FaceTime')) || videoDevices[0];
 
-                document.getElementById('cv-status').innerText = `🔥 双摄引擎已点火`;
+                // 2. 暴力过滤掉所有自带摄像头 (处理不同语言环境下的命名)
+                const extCameras = videoDevices.filter(d =>
+                    !d.label.toLowerCase().includes('facetime') &&
+                    !d.label.toLowerCase().includes('built-in') &&
+                    !d.label.includes('内建') // 防止中文系统下叫“内建摄像头”
+                );
 
-                // 分别拉取两个流
-                if (macCam) {
-                    streamMac = await navigator.mediaDevices.getUserMedia({ video: { deviceId: { exact: macCam.deviceId }, width: 640, height: 480 } });
-                    videoMac.srcObject = streamMac;
+                // 3. 严格分配，没有就不给保底
+                let camLeft = extCameras.length > 0 ? extCameras[0] : null;
+                let camRight = extCameras.length > 1 ? extCameras[1] : null;
+
+                // 4. 硬件掉线报警机制
+                if (!camLeft || !camRight) {
+                    document.getElementById('cv-status').innerText = `⚠️ 警告: 仅识别到 ${extCameras.length} 个外接镜头! 请检查 USB 连线`;
+                    document.getElementById('cv-status').style.color = "#ef4444"; // 标红
+                    console.warn("当前识别到的所有镜头:", videoDevices.map(d => d.label));
+                } else {
+                    document.getElementById('cv-status').innerText = `🔥 OTG双摄引擎已点火 (锁死外接)`;
+                    document.getElementById('cv-status').style.color = "#4ade80";
                 }
-                if (extCam) {
-                    streamExt = await navigator.mediaDevices.getUserMedia({ video: { deviceId: { exact: extCam.deviceId }, width: 640, height: 480, frameRate: { ideal: 120 } } });
-                    videoExt.srcObject = streamExt;
-                }
 
-                // 核心拼接与推断循环
-                async function processFrame() {
-                    if (isCamRunning) {
-                        if ((!macCam || videoMac.readyState >= 2) && (!extCam || videoExt.readyState >= 2)) {
-                            // 将 Mac 画在左边，外接工业头画在右边
-                            if (macCam) stitchCtx.drawImage(videoMac, 0, 0, 640, 480);
-                            if (extCam) stitchCtx.drawImage(videoExt, 640, 0, 640, 480);
-                            
-                            // 把拼接好的画喂给 MediaPipe
-                            await hands.send({image: stitchCanvas});
-                        }
-                        requestAnimationFrame(processFrame);
-                    }
+                // 分别拉取流 (只有在非 null 的情况下才拉)
+                if (camLeft) {
+                    streamLeft = await navigator.mediaDevices.getUserMedia({ video: { deviceId: { exact: camLeft.deviceId }, width: 640, height: 480 } });
+                    videoLeft.srcObject = streamLeft;
                 }
-                processFrame();
-
-            } catch (err) {
-                console.error("双摄拉取失败:", err);
-                document.getElementById('cv-status').innerText = "❌ 双摄权限被拒绝或带宽不足";
-                document.getElementById('cv-status').style.color = "#ef4444";
-            }
+                if (camRight) {
+                    streamRight = await navigator.mediaDevices.getUserMedia({ video: { deviceId: { exact: camRight.deviceId }, width: 640, height: 480 } });
+                    videoRight.srcObject = streamRight;
+                }
         }
 
         startCustomCamera();

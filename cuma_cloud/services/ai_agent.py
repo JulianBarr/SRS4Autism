@@ -1,0 +1,180 @@
+import asyncio
+import os
+import sys
+import logging
+from datetime import datetime
+from dotenv import load_dotenv
+
+from sqlalchemy.future import select
+from sqlalchemy.orm import selectinload
+from pydantic import BaseModel, Field
+from google import genai
+
+from cuma_cloud.core.database import async_sessionmaker_factory
+from cuma_cloud.models import IepCommunicationLog, RoleEnum, User, ChildProfile
+
+# Setup logger
+import logging
+
+logger = logging.getLogger(__name__)
+
+# Initialize Gemini Client
+def get_gemini_client():
+    # Load environment variables
+    # Try finding .env in root directory
+    root_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    from dotenv import load_dotenv
+    load_dotenv(os.path.join(root_dir, '.env'))
+    # Also load from current working directory just in case
+    load_dotenv()
+    
+    api_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
+    if not api_key:
+        logger.error("GEMINI_API_KEY or GOOGLE_API_KEY is not set in environment variables.")
+        return None
+        
+    return genai.Client(api_key=api_key)
+
+# Definition of structured output Schema
+class AICardResponse(BaseModel):
+    analysis: str = Field(description="对当前群聊记录的简短分析总结")
+    card_type: str = Field(description="推荐的卡片类型，如 FSRS_COGNITIVE")
+    topic: str = Field(description="推荐的干预主题，例如 红蓝积木区分")
+    difficulty: int = Field(description="卡片难度等级，1-5")
+    ai_message: str = Field(description="发在群聊里的回复话术，如检测到小明已掌握颜色区分...")
+
+async def trigger_ai_assistant(child_id: int):
+    """
+    Asynchronous background task to trigger Gemini AI assistant
+    Must use its own database session.
+    """
+    logger.info(f"🚀 Starting background AI task for child {child_id}...")
+    
+    client = get_gemini_client()
+    if not client:
+        logger.error("❌ Cannot start AI task: No Gemini API Key found.")
+        return
+
+    try:
+        async with async_sessionmaker_factory() as session:
+            # 1. Verify child_id
+            child_stmt = select(ChildProfile.id).where(ChildProfile.id == child_id)
+            child_result = await session.execute(child_stmt)
+            if not child_result.scalar_one_or_none():
+                logger.warning(f"⚠️ Child {child_id} not found. AI task aborted.")
+                return
+                
+            # 2. Get context: Fetch recent 10 communication logs for child_id
+            stmt = (
+                select(IepCommunicationLog)
+                .where(IepCommunicationLog.child_id == child_id)
+                .options(selectinload(IepCommunicationLog.sender))
+                .order_by(IepCommunicationLog.created_at.desc())
+                .limit(10)
+            )
+            result = await session.execute(stmt)
+            logs = result.scalars().all()
+            # Reverse to chronological order
+            logs.reverse()
+            
+            if not logs:
+                logger.warning(f"⚠️ No IEP communication logs found for child {child_id}.")
+                return
+
+            # Build Chat History Context
+            prompt_lines = []
+            for log in logs:
+                sender_role = log.sender.role.value if log.sender and log.sender.role else "unknown"
+                time_str = log.created_at.strftime("%Y-%m-%d %H:%M:%S") if log.created_at else "未知时间"
+                prompt_lines.append(f"[{time_str}] {sender_role}: {log.content}")
+                
+            chat_history = "\n".join(prompt_lines)
+            
+            logger.info("\n=== 📝 Recent Chat History ===")
+            logger.info(chat_history)
+            logger.info("=============================\n")
+
+            # 3. Build System Instruction
+            system_instruction = (
+                "你是一位专业的自闭症 (ASD) 特教 AI 助教。你的任务是阅读家校群聊记录，"
+                "分析儿童的干预进度，并基于 FSRS (Free Spaced Repetition Scheduler) "
+                "算法思想，为家长推荐下一个阶段的干预卡片配置。"
+            )
+
+            prompt = (
+                f"以下是最近的家校沟通记录：\n{chat_history}\n\n"
+                "请根据上述记录进行分析，并输出 JSON 格式的推荐配置。包含对当前进度的分析总结、"
+                "推荐的干预主题和卡片类型、难度等级(1-5)，以及你想发送到群聊里的回复消息。"
+            )
+            
+            # 4 & 5. Call Gemini to Think and use structured output
+            logger.info("🧠 Thinking with Gemini-2.5-pro...")
+            try:
+                response = client.models.generate_content(
+                    model='gemini-2.5-pro',
+                    contents=prompt,
+                    config=genai.types.GenerateContentConfig(
+                        system_instruction=system_instruction,
+                        response_mime_type="application/json",
+                        response_schema=AICardResponse,
+                    ),
+                )
+                
+                # Parse JSON
+                response_json = response.text
+                logger.info(f"\n✨ Gemini Response JSON:\n{response_json}\n")
+                
+                # Pydantic validation
+                ai_output = AICardResponse.model_validate_json(response_json)
+                
+            except Exception as e:
+                logger.error(f"❌ Error calling Gemini API: {e}", exc_info=True)
+                return
+                
+            # Format final message
+            final_content = (
+                f"{ai_output.ai_message}\n\n"
+                f"【🤖 AI 智能干预配置建议】\n"
+                f"📝 分析总结: {ai_output.analysis}\n"
+                f"🏷️ 卡片类型: {ai_output.card_type}\n"
+                f"🎯 推荐主题: {ai_output.topic}\n"
+                f"⭐ 难度级别: L{ai_output.difficulty}"
+            )
+
+            # Get AGENT user ID
+            agent_stmt = select(User).where(User.role == RoleEnum.AGENT).limit(1)
+            agent_result = await session.execute(agent_stmt)
+            agent_user = agent_result.scalar_one_or_none()
+            
+            if agent_user:
+                agent_id = agent_user.id
+                logger.info(f"🔍 Found AGENT user, using ID: {agent_id}")
+            else:
+                # Fallback: find ID=3 or another user
+                check_3_stmt = select(User.id).where(User.id == 3)
+                if await session.scalar(check_3_stmt):
+                    agent_id = 3
+                    logger.warning(f"⚠️ AGENT user not found, falling back to ID: {agent_id}")
+                else:
+                    fallback_stmt = select(User.id).limit(1)
+                    agent_id = await session.scalar(fallback_stmt)
+                    logger.warning(f"⚠️ AGENT user and ID=3 not found, falling back to ID: {agent_id}")
+                    
+                if not agent_id:
+                    logger.error("❌ No user found in the database for fallback. Exiting.")
+                    return
+            
+            # 6. Save reply to DB
+            new_log = IepCommunicationLog(
+                child_id=child_id,
+                sender_id=agent_id,
+                content=final_content
+            )
+            
+            session.add(new_log)
+            await session.commit()
+            
+            logger.info("✅ Agent background task finished successfully. Real AI log inserted.")
+            
+    except Exception as e:
+        logger.error(f"❌ Unhandled exception in trigger_ai_assistant: {e}", exc_info=True)
