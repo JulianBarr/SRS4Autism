@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { VB_MAPP_SEEDS } from '../vbmapp_seeds';
+import AICard from './AICard';
 
 const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 const CLOUD_API_BASE = 'http://127.0.0.1:8080';
@@ -272,6 +273,22 @@ function QuestTopicChatModal({ quest, childName, childId, onClose }) {
                 );
               }
               const isParent = log.role === 'parent';
+              
+              let textContent = log.content;
+              let parsedData = null;
+              if (log.role === 'ai' && log.content.includes('```json')) {
+                try {
+                  const parts = log.content.split('```json');
+                  textContent = parts[0].trim();
+                  const jsonStr = parts[1].split('```')[0].trim();
+                  parsedData = JSON.parse(jsonStr);
+                } catch (e) {
+                  // Fallback to original content on parse error
+                  textContent = log.content;
+                  parsedData = null;
+                }
+              }
+
               return (
                 <div key={i} style={{
                   alignSelf: isParent ? 'flex-end' : 'flex-start',
@@ -287,7 +304,8 @@ function QuestTopicChatModal({ quest, childName, childId, onClose }) {
                   <span style={{ fontSize: '12px', opacity: 0.6, display: 'block', marginBottom: '6px' }}>
                     {roleLabel[log.role] || log.role}
                   </span>
-                  <div style={{ fontSize: '14px', lineHeight: '1.5', whiteSpace: 'pre-wrap' }}>{log.content}</div>
+                  <div style={{ fontSize: '14px', lineHeight: '1.5', whiteSpace: 'pre-wrap' }}>{textContent}</div>
+                  {parsedData && <AICard data={parsedData} />}
                   {log.file_url && (
                     <>
                       {log.file_type && log.file_type.startsWith('image/') && (

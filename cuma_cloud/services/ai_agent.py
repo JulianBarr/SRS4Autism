@@ -38,10 +38,15 @@ def get_gemini_client():
 # Definition of structured output Schema
 class AICardResponse(BaseModel):
     analysis: str = Field(description="对当前群聊记录的简短分析总结")
-    card_type: str = Field(description="推荐的卡片类型，如 FSRS_COGNITIVE")
+    card_type: str = Field(description="推荐的卡片类型，例如 PHYSICAL_QUEST 或 DIGITAL_ANKI")
     topic: str = Field(description="推荐的干预主题，例如 红蓝积木区分")
     difficulty: int = Field(description="卡片难度等级，1-5")
     ai_message: str = Field(description="发在群聊里的回复话术，如检测到小明已掌握颜色区分...")
+    macro_objective: str = Field(description="宏观目标", default="")
+    phasal_objective: str = Field(description="阶段目标", default="")
+    suggested_materials: list[str] = Field(description="教具准备建议", default_factory=list)
+    teaching_steps: list[str] = Field(description="教学步骤", default_factory=list)
+    home_generalization: str = Field(description="家庭泛化建议", default="")
 
 async def trigger_ai_assistant(child_id: int):
     """
@@ -131,15 +136,13 @@ async def trigger_ai_assistant(child_id: int):
                 logger.error(f"❌ Error calling Gemini API: {e}", exc_info=True)
                 return
                 
-            # Format final message
-            final_content = (
-                f"{ai_output.ai_message}\n\n"
-                f"【🤖 AI 智能干预配置建议】\n"
-                f"📝 分析总结: {ai_output.analysis}\n"
-                f"🏷️ 卡片类型: {ai_output.card_type}\n"
-                f"🎯 推荐主题: {ai_output.topic}\n"
-                f"⭐ 难度级别: L{ai_output.difficulty}"
-            )
+            import json
+            ai_data = json.loads(response.text)
+            
+            # 将完整的结构化数据作为隐藏的 payload 传给前端
+            payload_str = json.dumps(ai_data, ensure_ascii=False, indent=2)
+            
+            final_content = f"{ai_data.get('ai_message', '为您生成了最新的干预方案：')}\n\n```json\n{payload_str}\n```"
 
             # Get AGENT user ID
             agent_stmt = select(User).where(User.role == RoleEnum.AGENT).limit(1)
