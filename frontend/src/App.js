@@ -25,8 +25,41 @@ import './App.css';
 const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 const CLOUD_API_BASE = process.env.REACT_APP_CLOUD_URL || 'http://localhost:8080';
 
-// Setup axios interceptor for JWT
+// Setup global fetch interceptor for Smart Routing
+const originalFetch = window.fetch;
+window.fetch = async function () {
+  let [resource, config] = arguments;
+  
+  if (typeof resource === 'string') {
+    if (resource.includes('/api/v1')) {
+      resource = resource.replace(/http:\/\/(localhost|127\.0\.0\.1):(8000|8080)/, 'http://127.0.0.1:8080');
+    } else if (resource.startsWith('http')) {
+      resource = resource.replace(/http:\/\/(localhost|127\.0\.0\.1):(8000|8080)/, 'http://127.0.0.1:8000');
+    }
+  } else if (resource instanceof Request) {
+    if (resource.url.includes('/api/v1')) {
+      const newUrl = resource.url.replace(/http:\/\/(localhost|127\.0\.0\.1):(8000|8080)/, 'http://127.0.0.1:8080');
+      resource = new Request(newUrl, resource);
+    } else if (resource.url.startsWith('http')) {
+      const newUrl = resource.url.replace(/http:\/\/(localhost|127\.0\.0\.1):(8000|8080)/, 'http://127.0.0.1:8000');
+      resource = new Request(newUrl, resource);
+    }
+  }
+  
+  return originalFetch.call(this, resource, config);
+};
+
+// Setup axios interceptor for JWT and Smart Routing
 axios.interceptors.request.use(config => {
+  // Smart Routing for Axios
+  if (config.url) {
+    if (config.url.includes('/api/v1')) {
+      config.url = config.url.replace(/http:\/\/(localhost|127\.0\.0\.1):(8000|8080)/, 'http://127.0.0.1:8080');
+    } else if (config.url.startsWith('http')) {
+      config.url = config.url.replace(/http:\/\/(localhost|127\.0\.0\.1):(8000|8080)/, 'http://127.0.0.1:8000');
+    }
+  }
+
   const token = localStorage.getItem('access_token');
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
