@@ -151,7 +151,7 @@ def get_targeted_quests(graph, domain_code: str) -> list[dict]:
     PREFIX pep3-inst: <http://ecta.ai/pep3/instance/>
 
     SELECT ?task ?taskLabel ?pep3Item ?pep3Label ?itemNum ?material
-           ?teachingSteps ?groupClassGeneralization ?homeGeneralization
+           ?teachingSteps ?groupClassGeneralization ?homeGeneralization ?ecumenicalIntegration
     WHERE {{
         ?task a ecta-kg:PhasalObjective ;
               ecta-kg:alignsWithStandard ?pep3Item ;
@@ -163,6 +163,7 @@ def get_targeted_quests(graph, domain_code: str) -> list[dict]:
         OPTIONAL {{ ?task ecta-kg:teachingSteps ?teachingSteps . }}
         OPTIONAL {{ ?task ecta-kg:groupClassGeneralization ?groupClassGeneralization . }}
         OPTIONAL {{ ?task ecta-kg:homeGeneralization ?homeGeneralization . }}
+        OPTIONAL {{ ?task ecta-kg:ecumenicalIntegration ?ecumenicalIntegration . }}
     }}
     """
 
@@ -181,6 +182,21 @@ def get_targeted_quests(graph, domain_code: str) -> list[dict]:
         teaching_steps = str(row.teachingSteps) if getattr(row, "teachingSteps", None) else None
         group_class_gen = str(row.groupClassGeneralization) if getattr(row, "groupClassGeneralization", None) else None
         home_gen = str(row.homeGeneralization) if getattr(row, "homeGeneralization", None) else None
+        
+        raw_integration = str(row.ecumenicalIntegration) if getattr(row, "ecumenicalIntegration", None) else None
+        parsed_integration = None
+        if raw_integration:
+            try:
+                # 尝试修复多行字符串导致的 JSON 解析问题
+                if '\n' in raw_integration and '\\n' not in raw_integration:
+                    raw_integration = raw_integration.replace('\n', '\\n')
+                parsed_integration = json.loads(raw_integration)
+                # 处理如果解析后还是字符串的情况（双重序列化）
+                if isinstance(parsed_integration, str):
+                    parsed_integration = json.loads(parsed_integration)
+            except Exception as e:
+                # print(f"DEBUG: Failed to parse JSON for {task_id}: {e}")
+                parsed_integration = None
 
         if task_id not in task_data:
             task_data[task_id] = {
@@ -192,6 +208,7 @@ def get_targeted_quests(graph, domain_code: str) -> list[dict]:
                 "teaching_steps": None,
                 "group_class_generalization": None,
                 "home_generalization": None,
+                "ecumenical_integration": None,
             }
         if pep3_label and pep3_label not in task_data[task_id]["pep3_items"]:
             task_data[task_id]["pep3_items"].append(pep3_label)
@@ -205,6 +222,8 @@ def get_targeted_quests(graph, domain_code: str) -> list[dict]:
             task_data[task_id]["group_class_generalization"] = group_class_gen
         if home_gen:
             task_data[task_id]["home_generalization"] = home_gen
+        if parsed_integration:
+            task_data[task_id]["ecumenical_integration"] = parsed_integration
 
     return list(task_data.values())
 
@@ -387,7 +406,7 @@ def _get_fallback_quest_pool(graph) -> list[dict]:
     PREFIX ecta-inst: <http://ecta.ai/instance/>
 
     SELECT ?task ?taskLabel ?pep3Label ?material
-           ?teachingSteps ?groupClassGeneralization ?homeGeneralization
+           ?teachingSteps ?groupClassGeneralization ?homeGeneralization ?ecumenicalIntegration
     WHERE {
         ?task a ecta-kg:PhasalObjective ;
               ecta-kg:alignsWithStandard ?pep3Item ;
@@ -397,6 +416,7 @@ def _get_fallback_quest_pool(graph) -> list[dict]:
         OPTIONAL { ?task ecta-kg:teachingSteps ?teachingSteps . }
         OPTIONAL { ?task ecta-kg:groupClassGeneralization ?groupClassGeneralization . }
         OPTIONAL { ?task ecta-kg:homeGeneralization ?homeGeneralization . }
+        OPTIONAL { ?task ecta-kg:ecumenicalIntegration ?ecumenicalIntegration . }
     }
     """
     with _sparql_lock:
@@ -411,6 +431,22 @@ def _get_fallback_quest_pool(graph) -> list[dict]:
         teaching_steps = str(row.teachingSteps) if getattr(row, "teachingSteps", None) else None
         group_class_gen = str(row.groupClassGeneralization) if getattr(row, "groupClassGeneralization", None) else None
         home_gen = str(row.homeGeneralization) if getattr(row, "homeGeneralization", None) else None
+        
+        raw_integration = str(row.ecumenicalIntegration) if getattr(row, "ecumenicalIntegration", None) else None
+        parsed_integration = None
+        if raw_integration:
+            try:
+                # 尝试修复多行字符串导致的 JSON 解析问题
+                if '\n' in raw_integration and '\\n' not in raw_integration:
+                    raw_integration = raw_integration.replace('\n', '\\n')
+                parsed_integration = json.loads(raw_integration)
+                # 处理如果解析后还是字符串的情况（双重序列化）
+                if isinstance(parsed_integration, str):
+                    parsed_integration = json.loads(parsed_integration)
+            except Exception as e:
+                # print(f"DEBUG: Failed to parse JSON for {task_id}: {e}")
+                parsed_integration = None
+
         if task_id not in task_data:
             task_data[task_id] = {
                 "quest_id": task_id,
@@ -421,6 +457,7 @@ def _get_fallback_quest_pool(graph) -> list[dict]:
                 "teaching_steps": None,
                 "group_class_generalization": None,
                 "home_generalization": None,
+                "ecumenical_integration": None,
             }
         if pep3_label and pep3_label not in task_data[task_id]["pep3_items"]:
             task_data[task_id]["pep3_items"].append(pep3_label)
@@ -438,6 +475,8 @@ def _get_fallback_quest_pool(graph) -> list[dict]:
             task_data[task_id]["group_class_generalization"] = group_class_gen
         if home_gen:
             task_data[task_id]["home_generalization"] = home_gen
+        if parsed_integration:
+            task_data[task_id]["ecumenical_integration"] = parsed_integration
     return list(task_data.values())
 
 
@@ -569,6 +608,8 @@ def print_daily_quests(
         materials = format_materials(quest)
         print(f"\n{i}. [待完成] [{task_id}] {quest['label']} —— 🎯 支撑 PEP-3 {pep3_short}")
         print(f"   ↳ 推荐教具：{materials}")
+        if quest.get("ecumenical_integration"):
+            print("   ↳ 🌟 已融合多源生态教案 (ecumenical_integration)！")
 
     for i, item in enumerate(completed_today, 1):
         quest = item["quest"]
@@ -577,6 +618,8 @@ def print_daily_quests(
         materials = format_materials(quest)
         print(f"\n{i}. [已打卡] [{task_id}] {quest['label']} —— 🎯 支撑 PEP-3 {pep3_short}")
         print(f"   ↳ 推荐教具：{materials}")
+        if quest.get("ecumenical_integration"):
+            print("   ↳ 🌟 已融合多源生态教案 (ecumenical_integration)！")
 
     print("\n" + "=" * 64)
     print("💡 家长反馈后，系统将映射为 FSRS 评级并更新下次复习时间。")

@@ -49,6 +49,19 @@ class QuestLogBody(BaseModel):
 
 def _quest_to_api_item(q: dict, format_pep3_short, format_materials) -> dict:
     """将 quest 转为 API 返回格式。"""
+    import json
+    raw_integration = q.get("ecumenical_integration")
+    parsed_integration = None
+    if raw_integration:
+        try:
+            # 如果已经是字典就不需要再 loads
+            if isinstance(raw_integration, str):
+                parsed_integration = json.loads(raw_integration)
+            elif isinstance(raw_integration, dict):
+                parsed_integration = raw_integration
+        except Exception:
+            parsed_integration = None
+
     return {
         "quest_id": q["quest_id"],
         "label": q["label"],
@@ -58,6 +71,7 @@ def _quest_to_api_item(q: dict, format_pep3_short, format_materials) -> dict:
         "teaching_steps": q.get("teaching_steps"),
         "group_class_generalization": q.get("group_class_generalization"),
         "home_generalization": q.get("home_generalization"),
+        "ecumenical_integration": parsed_integration,
     }
 
 
