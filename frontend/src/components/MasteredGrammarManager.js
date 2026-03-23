@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useLanguage } from '../i18n/LanguageContext';
 import TopicChat from './TopicChat';
 
-const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+const API_BASE = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000';
 
 const MasteredGrammarManager = ({ profile, onClose, onUpdate, grammarLanguage = 'zh' }) => {
   const { language: uiLanguage, t } = useLanguage();

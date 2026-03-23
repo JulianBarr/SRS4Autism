@@ -22,6 +22,12 @@ class RoleEnum(str, enum.Enum):
     AGENT = "agent"
 
 
+class InstitutionStatusEnum(str, enum.Enum):
+    """租户/机构审批状态"""
+    PENDING = "PENDING"
+    APPROVED = "APPROVED"
+
+
 class Institution(Base):
     """机构：学校/康复中心，用于隔离多租户数据。"""
 
@@ -50,6 +56,9 @@ class User(Base):
     institution_id: Mapped[Optional[int]] = mapped_column(
         ForeignKey("institutions.id", ondelete="SET NULL"), nullable=True, index=True
     )
+    institution_status: Mapped[Optional[InstitutionStatusEnum]] = mapped_column(
+        Enum(InstitutionStatusEnum), nullable=True
+    )
 
     institution: Mapped[Optional["Institution"]] = relationship(
         "Institution", back_populates="users", foreign_keys=[institution_id]
@@ -66,7 +75,26 @@ class User(Base):
     sent_iep_logs: Mapped[list["IepCommunicationLog"]] = relationship(
         "IepCommunicationLog", back_populates="sender", foreign_keys="IepCommunicationLog.sender_id"
     )
+    # Administrative links to children (e.g., assignment links)
+    child_links: Mapped[list["UserChildLink"]] = relationship(
+        "UserChildLink", back_populates="user", cascade="all, delete-orphan", foreign_keys="UserChildLink.user_id"
+    )
 
+
+class UserChildLink(Base):
+    """
+    Mapping between User (Teacher) and Profile (Child).
+    Used for administrative assignment of children to teachers.
+    """
+    __tablename__ = 'user_child_link'
+    
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
+    child_id: Mapped[int] = mapped_column(ForeignKey('child_profiles.id', ondelete='CASCADE'), nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+
+    user: Mapped["User"] = relationship("User", back_populates="child_links", foreign_keys=[user_id])
+    child: Mapped["ChildProfile"] = relationship("ChildProfile", back_populates="teacher_links", foreign_keys=[child_id])
 
 class ChildProfile(Base):
     """
@@ -100,6 +128,10 @@ class ChildProfile(Base):
 
     iep_logs: Mapped[list["IepCommunicationLog"]] = relationship(
         "IepCommunicationLog", back_populates="child", foreign_keys="IepCommunicationLog.child_id"
+    )
+    # Administrative links to teachers (e.g., assignment links)
+    teacher_links: Mapped[list["UserChildLink"]] = relationship(
+        "UserChildLink", back_populates="child", cascade="all, delete-orphan", foreign_keys="UserChildLink.child_id"
     )
 
 class CloudAccount(Base):

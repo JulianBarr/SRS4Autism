@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import ChatAssistant from './components/ChatAssistant';
 import CardCuration from './components/CardCuration';
 import ChildProfileSettings from './components/ChildProfileSettings';
@@ -12,62 +11,20 @@ import ChineseWordRecognition from './components/ChineseWordRecognition';
 import EnglishWordRecognition from './components/EnglishWordRecognition';
 import PinyinLearning from './components/PinyinLearning';
 import PinyinGapFillAdmin from './components/PinyinGapFillAdmin';
+import AdminDashboard from './components/AdminDashboard';
 import LogicCityGallery from './components/widgets/LogicCityGallery';
 import LogicCityManager from './components/widgets/LogicCityManager';
 import PinyinTypingManager from './components/widgets/PinyinTypingManager';
 import CharacterRecognition from './components/CharacterRecognition';
 import SettingsModal from './components/SettingsModal';
+import UserProfile from './components/UserProfile';
 import DailyDeck from './components/DailyDeck';
 import Login from './components/Login';
 import { useLanguage } from './i18n/LanguageContext';
+import axios from './utils/api';
 import './App.css';
 
-const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
-const CLOUD_API_BASE = process.env.REACT_APP_CLOUD_URL || 'http://localhost:8080';
-
-// Setup global fetch interceptor for Smart Routing
-const originalFetch = window.fetch;
-window.fetch = async function () {
-  let [resource, config] = arguments;
-  
-  if (typeof resource === 'string') {
-    if (resource.includes('/api/v1')) {
-      resource = resource.replace(/http:\/\/(localhost|127\.0\.0\.1):(8000|8080)/, 'http://127.0.0.1:8080');
-    } else if (resource.startsWith('http')) {
-      resource = resource.replace(/http:\/\/(localhost|127\.0\.0\.1):(8000|8080)/, 'http://127.0.0.1:8000');
-    }
-  } else if (resource instanceof Request) {
-    if (resource.url.includes('/api/v1')) {
-      const newUrl = resource.url.replace(/http:\/\/(localhost|127\.0\.0\.1):(8000|8080)/, 'http://127.0.0.1:8080');
-      resource = new Request(newUrl, resource);
-    } else if (resource.url.startsWith('http')) {
-      const newUrl = resource.url.replace(/http:\/\/(localhost|127\.0\.0\.1):(8000|8080)/, 'http://127.0.0.1:8000');
-      resource = new Request(newUrl, resource);
-    }
-  }
-  
-  return originalFetch.call(this, resource, config);
-};
-
-// Setup axios interceptor for JWT and Smart Routing
-axios.interceptors.request.use(config => {
-  // Smart Routing for Axios
-  if (config.url) {
-    if (config.url.includes('/api/v1')) {
-      config.url = config.url.replace(/http:\/\/(localhost|127\.0\.0\.1):(8000|8080)/, 'http://127.0.0.1:8080');
-    } else if (config.url.startsWith('http')) {
-      config.url = config.url.replace(/http:\/\/(localhost|127\.0\.0\.1):(8000|8080)/, 'http://127.0.0.1:8000');
-    }
-  }
-
-  const token = localStorage.getItem('access_token');
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-}, error => {
-  return Promise.reject(error);
-});
+const API_BASE = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000';
 
 function App() {
   const { language, toggleLanguage, t } = useLanguage();
@@ -78,9 +35,11 @@ function App() {
     return saved ? JSON.parse(saved) : null;
   });
   
-  // Check if we're on the admin route
-  const isAdminRoute = window.location.pathname === '/admin/pinyin-gap-fill' || 
-                       window.location.pathname.startsWith('/admin/pinyin-gap-fill');
+  // Check if we're on the admin routes
+  const isPinyinAdminRoute = window.location.pathname === '/admin/pinyin-gap-fill' || 
+                             window.location.pathname.startsWith('/admin/pinyin-gap-fill');
+  const isMainAdminRoute = window.location.pathname === '/admin';
+
   
   // All hooks must be called before any conditional returns
   const [activeTab, setActiveTab] = useState('main');
@@ -93,8 +52,6 @@ function App() {
   const [showLogicCityModal, setShowLogicCityModal] = useState(false); // Modal state for Logic City
   const [logicCityContentType, setLogicCityContentType] = useState(null); // Content type for Logic City ('vocab-advanced', etc.)
   const [profiles, setProfiles] = useState([]);
-  const [cloudChildren, setCloudChildren] = useState([]);
-  const [currentCloudChildId, setCurrentCloudChildId] = useState(null);
   const [currentProfile, setCurrentProfile] = useState(null);
   const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -141,28 +98,12 @@ function App() {
   const loadData = async () => {
     try {
       setLoading(true);
-      // Fetch cloud children separately so it doesn't fail the whole app if cloud is down
       const [profilesRes, cardsRes] = await Promise.all([
         axios.get(`${API_BASE}/profiles`),
         axios.get(`${API_BASE}/cards`)
       ]);
       setProfiles(profilesRes.data);
       setCards(cardsRes.data);
-      
-      try {
-        const cloudRes = await axios.get(`${CLOUD_API_BASE}/api/v1/children/me`);
-        setCloudChildren(cloudRes.data);
-        if (cloudRes.data.length > 0) {
-          setCurrentCloudChildId(cloudRes.data[0].id);
-          // Try to sync currentProfile
-          const localMatch = profilesRes.data.find(p => p.name === cloudRes.data[0].name);
-          if (localMatch) {
-            setCurrentProfile(localMatch);
-          }
-        }
-      } catch (cloudErr) {
-        console.warn('Failed to fetch cloud children', cloudErr);
-      }
     } catch (error) {
       console.error('Error loading data:', error);
     } finally {
@@ -231,8 +172,40 @@ function App() {
   };
 
   // If admin route, render admin interface (after all hooks)
-  if (isAdminRoute) {
+  if (isPinyinAdminRoute) {
+    if (!isAuthenticated) {
+      return <Login onLoginSuccess={(token, user) => {
+        setIsAuthenticated(true);
+        if (user) setCurrentUser(user);
+      }} />;
+    }
+    if (!currentUser?.role?.toUpperCase()?.includes('ADMIN')) {
+      return (
+        <div className="container" style={{ padding: '2rem', textAlign: 'center' }}>
+          <h2>Access Denied</h2>
+          <p>You need administrator privileges to access this page.</p>
+        </div>
+      );
+    }
     return <PinyinGapFillAdmin />;
+  }
+  
+  if (isMainAdminRoute) {
+    if (!isAuthenticated) {
+      return <Login onLoginSuccess={(token, user) => {
+        setIsAuthenticated(true);
+        if (user) setCurrentUser(user);
+      }} />;
+    }
+    if (!currentUser?.role?.toUpperCase()?.includes('ADMIN')) {
+      return (
+        <div className="container" style={{ padding: '2rem', textAlign: 'center' }}>
+          <h2>Access Denied</h2>
+          <p>You need administrator privileges to access this page.</p>
+        </div>
+      );
+    }
+    return <AdminDashboard />;
   }
 
   if (!isAuthenticated) {
@@ -284,22 +257,20 @@ function App() {
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <span style={{ fontSize: '1.2em' }}>🧒</span>
                 <select 
-                  value={currentCloudChildId || ''}
+                  value={currentProfile ? currentProfile.id : ''}
                   onChange={(e) => {
-                    const val = Number(e.target.value);
+                    const val = e.target.value;
                     if (!val) return;
-                    setCurrentCloudChildId(val);
-                    const selectedCloud = cloudChildren.find(c => c.id === val);
-                    if (selectedCloud) {
-                      const localMatch = profiles.find(p => p.name === selectedCloud.name);
-                      if (localMatch) setCurrentProfile(localMatch);
+                    const selectedLocal = profiles.find(p => p.id === val);
+                    if (selectedLocal) {
+                      setCurrentProfile(selectedLocal);
                     }
                   }}
                   style={{ padding: '5px', borderRadius: '4px', border: '1px solid #ccc', minWidth: '100px' }}
                 >
-                  <option value="">{cloudChildren.length === 0 ? '（无儿童）' : '选择儿童'}</option>
-                  {cloudChildren.map(c => (
-                    <option key={c.id} value={c.id}>{c.name}</option>
+                  <option value="">{profiles.length === 0 ? '（无儿童）' : '选择儿童'}</option>
+                  {profiles.map(p => (
+                    <option key={p.id} value={p.id}>{p.name}</option>
                   ))}
                 </select>
               </div>
@@ -353,6 +324,27 @@ function App() {
               </button>
               
               <button 
+                onClick={() => setActiveTab('userProfile')}
+                title={language === 'en' ? 'Profile' : '个人设置'}
+                style={{
+                  background: 'transparent',
+                  border: 'none',
+                  fontSize: '20px',
+                  cursor: 'pointer',
+                  padding: '4px 8px',
+                  borderRadius: '4px',
+                  transition: 'background 0.2s',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+                onMouseEnter={(e) => e.target.style.background = '#f0f0f0'}
+                onMouseLeave={(e) => e.target.style.background = 'transparent'}
+              >
+                👤
+              </button>
+
+              <button 
                 onClick={() => setShowSettingsModal(true)}
                 title={language === 'en' ? 'Settings' : '设置'}
                 style={{
@@ -405,6 +397,14 @@ function App() {
             >
               {t('templates')}
             </button>
+            {currentUser?.role?.toUpperCase()?.includes('ADMIN') && (
+              <button 
+                className={activeTab === 'admin' ? 'active' : ''}
+                onClick={() => setActiveTab('admin')}
+              >
+                控制台
+              </button>
+            )}
           </nav>
         </div>
       </header>
@@ -480,7 +480,7 @@ function App() {
                   </button>
                 </div>
                 {cognitionContentView === 'daily-deck' ? (
-                  <DailyDeck childName={currentProfile?.name || '小明'} childId={currentCloudChildId} />
+                  <DailyDeck childName={currentProfile?.name || '小明'} childId={currentProfile?.id} />
                 ) : (
                   <CognitionContentManager />
                 )}
@@ -518,6 +518,10 @@ function App() {
         )}
         {activeTab === 'templates' && (
           <TemplateManager />
+        )}
+
+        {activeTab === 'admin' && currentUser?.role?.toUpperCase()?.includes('ADMIN') && (
+          <AdminDashboard />
         )}
 
         {activeTab === 'mariosWorld' && (
@@ -1109,6 +1113,13 @@ function App() {
               </div>
             </div>
           </div>
+        )}
+
+        {activeTab === 'userProfile' && (
+          <UserProfile 
+            currentUser={currentUser}
+            onUserUpdate={setCurrentUser}
+          />
         )}
       </main>
 

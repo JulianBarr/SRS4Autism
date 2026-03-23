@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
-const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+const API_BASE = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000';
 
 const TopicChat = ({ topicId, topicName, profile, onClose }) => {
   const [messages, setMessages] = useState([]);

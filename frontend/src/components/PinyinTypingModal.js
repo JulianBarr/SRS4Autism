@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { isValidId } from '../utils/apiUtils';
+import api from '../utils/api';
 
-const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+const API_BASE = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000';
 
 /**
  * PinyinTypingModal - Level 2: Pinyin Typing game for Logic City
@@ -32,14 +33,11 @@ const PinyinTypingModal = ({ lessonId, onClose }) => {
         // Try API endpoint first
         if (isValidId(lessonId)) {
           try {
-            const response = await fetch(`${API_BASE}/api/typing-course/lesson/${lessonId}`);
-          if (response.ok) {
-            const data = await response.json();
-            setLessonData(data);
+            const response = await api.get(`/api/typing-course/lesson/${lessonId}`);
+            setLessonData(response.data);
             setLoading(false);
             return;
-          }
-        } catch (apiErr) {
+          } catch (apiErr) {
           console.warn('API endpoint not available, trying local file:', apiErr);
         }
       }

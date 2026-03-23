@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
+import api, { API_BASE } from '../utils/api';
 import AICard from './AICard';
-
-const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
-const CLOUD_API_BASE = 'http://127.0.0.1:8080';
 
 //       onMouseEnter={() => setShow(true)}
 //       onMouseLeave={() => setShow(false)}
@@ -113,16 +111,8 @@ function QuestTopicChatModal({ quest, childName, childId, onClose }) {
     if (!quest?.quest_id || !childId) return;
     if (!silent) setLoading(true);
     try {
-      const token = localStorage.getItem('access_token');
-      const headers = {};
-      if (token) headers['Authorization'] = `Bearer ${token}`;
-
-      const res = await fetch(
-        `${CLOUD_API_BASE}/api/v1/children/${childId}/logs`,
-        { headers }
-      );
-      if (!res.ok) throw new Error(await res.text());
-      const data = await res.json();
+      const res = await api.get(`/api/v1/children/${childId}/logs`);
+      const data = res.data;
       
       const mappedLogs = data.map(log => {
         let mappedRole = log.sender_role;
@@ -173,20 +163,7 @@ function QuestTopicChatModal({ quest, childName, childId, onClose }) {
     if (!content || sending || !childId) return;
     setSending(true);
     try {
-      const token = localStorage.getItem('access_token');
-      const headers = {
-        'Content-Type': 'application/json'
-      };
-      if (token) headers['Authorization'] = `Bearer ${token}`;
-      
-      const res = await fetch(`${CLOUD_API_BASE}/api/v1/children/${childId}/logs`, {
-        method: 'POST',
-        headers,
-        body: JSON.stringify({
-          content: content
-        }),
-      });
-      if (!res.ok) throw new Error(await res.text());
+      const res = await api.post(`/api/v1/children/${childId}/logs`, { content });
       setInput('');
       setSelectedFile(null);
       await fetchLogs(true);
@@ -610,11 +587,8 @@ function DailyDeck({ childName = '小明', childId }) {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch(
-        `${API_BASE}/api/daily_quests?child_name=${encodeURIComponent(childName)}&count=${questCount}`
-      );
-      if (!res.ok) throw new Error(await res.text());
-      const data = await res.json();
+      const res = await api.get(`/api/daily_quests?child_name=${encodeURIComponent(childName)}&count=${questCount}`);
+      const data = res.data;
       setPending(data.pending || []);
       setCompletedToday(data.completed_today || []);
       setHistoryQuests(data.history_quests || []);
@@ -637,17 +611,12 @@ function DailyDeck({ childName = '小明', childId }) {
     if (submitting) return;
     setSubmitting(questId);
     try {
-      const res = await fetch(`${API_BASE}/api/record_feedback`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      const res = await api.post(`/api/record_feedback`, {
           child_name: childName,
           quest_id: questId,
           prompt_level: promptLevel,
-        }),
       });
-      if (!res.ok) throw new Error(await res.text());
-      const data = await res.json();
+      const data = res.data;
       if (data.status !== 'success') throw new Error('记录失败');
 
       // 打卡成功后重新拉取数据，将任务从 pending 移到 completed_today

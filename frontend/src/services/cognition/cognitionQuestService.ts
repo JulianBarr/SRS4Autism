@@ -7,7 +7,7 @@
 
 import type { QuestPayload } from '../../types/cognition';
 
-const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+const API_BASE = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000';
 
 /** MacroObjective - high-level training goal within a module */
 export interface MacroObjective {

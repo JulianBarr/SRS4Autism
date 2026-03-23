@@ -4,7 +4,7 @@ import { useLanguage } from '../../i18n/LanguageContext';
 import KeyboardTutorModal from '../KeyboardTutorModal';
 import PinyinTypingModal from '../PinyinTypingModal';
 
-const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+const API_BASE = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000';
 
 /**
  * PinyinTypingManager - Management Dashboard for Pinyin Typing Curriculum

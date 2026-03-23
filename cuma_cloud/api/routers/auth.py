@@ -44,7 +44,8 @@ async def login(
             "id": user.id,
             "email": user.email,
             "role": user.role,
-            "institution_id": user.institution_id
+            "institution_id": user.institution_id,
+            "institution_status": user.institution_status
         }
     }
 

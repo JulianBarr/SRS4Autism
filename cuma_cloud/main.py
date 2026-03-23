@@ -4,6 +4,9 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware  # 🌟 1. 导入 CORS 中间件
 
 from cuma_cloud.api.routers import auth
+from cuma_cloud.api.routers import admin as admin_router
+from cuma_cloud.api.routers import institutions as institutions_router
+from cuma_cloud.api.routers import users as users_router
 from cuma_cloud.api.routers import children as children_router
 from cuma_cloud.api.routers import iep_logs as iep_logs_router
 from cuma_cloud.api.routers import policies as policies_router
@@ -28,3 +31,6 @@ app.include_router(policies_router.router, prefix="/policies")
 app.include_router(sync_router.router, prefix="/sync", tags=["Auditing & Telemetry"])
 app.include_router(children_router.router, prefix="/api/v1")
 app.include_router(iep_logs_router.router, prefix="/api/v1")
+app.include_router(admin_router.router, prefix="/api/v1")
+app.include_router(institutions_router.router, prefix="/api/v1")
+app.include_router(users_router.router, prefix="/api/v1")

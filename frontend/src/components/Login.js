@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useLanguage } from '../i18n/LanguageContext';
+import { cloudApi } from '../utils/api';
 import './Login.css';
-
-const API_BASE = process.env.REACT_APP_CLOUD_URL || 'http://localhost:8080';
 
 function Login({ onLoginSuccess }) {
   const { t } = useLanguage();
@@ -23,7 +21,7 @@ function Login({ onLoginSuccess }) {
       formData.append('username', email);
       formData.append('password', password);
 
-      const response = await axios.post(`${API_BASE}/auth/login`, formData, {
+      const response = await cloudApi.post('/auth/login', formData, {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },

@@ -29,6 +29,7 @@ class UserInfo(BaseModel):
     email: str
     role: str
     institution_id: Optional[int] = None
+    institution_status: Optional[str] = None
 
 class TokenResponse(BaseModel):
     """OAuth2 token response schema."""

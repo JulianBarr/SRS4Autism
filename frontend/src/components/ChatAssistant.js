@@ -1,8 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import axios from 'axios';
+import api, { API_BASE, cloudApi } from '../utils/api'; // Import both instances and API_BASE
 import { useLanguage } from '../i18n/LanguageContext';
-
-const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
 const ChatAssistant = ({ profiles, onNewCard }) => {
   const { t, language } = useLanguage();
@@ -79,7 +77,7 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
 
   const loadChatHistory = async () => {
     try {
-      const response = await axios.get(`${API_BASE}/chat/history`);
+      const response = await api.get(`${API_BASE}/chat/history`);
       setMessages(response.data);
     } catch (error) {
       console.error('Error loading chat history:', error);
@@ -88,7 +86,7 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
 
   const loadNoteTypes = async () => {
     try {
-      const response = await axios.get(`${API_BASE}/anki/note-types`);
+      const response = await api.get(`${API_BASE}/anki/note-types`);
       setNoteTypes(response.data.note_types || []);
       console.log('Loaded note types:', response.data.note_types);
     } catch (error) {
@@ -105,7 +103,7 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
 
   const loadTemplates = async () => {
     try {
-      const response = await axios.get(`${API_BASE}/templates`);
+      const response = await api.get(`${API_BASE}/templates`);
       setTemplates(response.data || []);
       console.log('Loaded templates:', response.data);
     } catch (error) {
@@ -116,7 +114,7 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
 
   const loadAvailableModels = async () => {
     try {
-      const response = await axios.get(`${API_BASE}/config/models`);
+      const response = await api.get(`${API_BASE}/config/models`);
       setAvailableModels(response.data || { card_models: [], image_models: [] });
       
       // Load saved selections from localStorage
@@ -151,7 +149,7 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
   const handleClearHistory = async () => {
     if (window.confirm('Are you sure you want to clear chat history?')) {
       try {
-        await axios.delete(`${API_BASE}/chat/history`);
+        await api.delete(`${API_BASE}/chat/history`);
         setMessages([]);
       } catch (error) {
         console.error('Error clearing chat history:', error);
@@ -462,7 +460,7 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
       console.log("🚀 Main Chat Sending:", headers);
 
       // 4. Send Request
-      const response = await axios.post(`${API_BASE}/chat`, userMessage, { headers });
+      const response = await api.post(`${API_BASE}/chat`, userMessage, { headers });
       const assistantMessage = response.data;
       
       // Check if the response contains intent information
@@ -535,7 +533,7 @@ const ChatAssistant = ({ profiles, onNewCard }) => {
       };
 
       // Send to backend
-      await axios.post(`${API_BASE}/cards`, exampleCard);
+      await api.post(`${API_BASE}/cards`, exampleCard);
       onNewCard(exampleCard);
     } catch (error) {
       console.error('Error generating cards:', error);
