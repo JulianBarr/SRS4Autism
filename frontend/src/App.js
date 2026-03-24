@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import ChatAssistant from './components/ChatAssistant';
 import CardCuration from './components/CardCuration';
 import ChildProfileSettings from './components/ChildProfileSettings';
@@ -20,6 +21,7 @@ import SettingsModal from './components/SettingsModal';
 import UserProfile from './components/UserProfile';
 import DailyDeck from './components/DailyDeck';
 import Login from './components/Login';
+import ParentDashboard from './components/ParentDashboard'; // New import for ParentDashboard
 import { useLanguage } from './i18n/LanguageContext';
 import axios from './utils/api';
 import './App.css';
@@ -28,6 +30,7 @@ const API_BASE = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000';
 
 function App() {
   const { language, toggleLanguage, t } = useLanguage();
+  const navigate = useNavigate(); // Initialize useNavigate
   
   const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('access_token'));
   const [currentUser, setCurrentUser] = useState(() => {
@@ -98,8 +101,13 @@ function App() {
   const loadData = async () => {
     try {
       setLoading(true);
+      let profilesUrl = `${API_BASE}/profiles`;
+      if (currentUser && currentUser.role === 'PARENT') {
+        profilesUrl += `?parent_id=${currentUser.id}`;
+      }
+      
       const [profilesRes, cardsRes] = await Promise.all([
-        axios.get(`${API_BASE}/profiles`),
+        axios.get(profilesUrl),
         axios.get(`${API_BASE}/cards`)
       ]);
       setProfiles(profilesRes.data);
@@ -208,11 +216,25 @@ function App() {
     return <AdminDashboard />;
   }
 
+  // Handle authentication logic here
+  const handleLoginSuccess = (token, user) => {
+    setIsAuthenticated(true);
+    if (user) setCurrentUser(user);
+    // Login component now handles navigation based on role, so no need to navigate here
+  };
+
   if (!isAuthenticated) {
-    return <Login onLoginSuccess={(token, user) => {
-      setIsAuthenticated(true);
-      if (user) setCurrentUser(user);
-    }} />;
+    return <Login onLoginSuccess={handleLoginSuccess} />;
+  }
+
+  // Conditional rendering based on user role
+  if (currentUser?.role === 'PARENT') {
+    return (
+      <Routes>
+        <Route path="/parent" element={<ParentDashboard currentUser={currentUser} />} />
+        <Route path="*" element={<ParentDashboard currentUser={currentUser} />} /> {/* Default for parent */}
+      </Routes>
+    );
   }
 
   if (loading) {
@@ -514,6 +536,7 @@ function App() {
           <ChildProfileSettings 
             profiles={profiles}
             onProfilesChange={setProfiles}
+            currentUser={currentUser}
           />
         )}
         {activeTab === 'templates' && (
@@ -1132,4 +1155,10 @@ function App() {
   );
 }
 
-export default App;
+export default function AppWrapper() {
+  return (
+    <Router>
+      <App />
+    </Router>
+  );
+}

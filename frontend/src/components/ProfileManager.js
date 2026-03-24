@@ -7,7 +7,17 @@ import MasteredGrammarManager from './MasteredGrammarManager';
 
 const API_BASE = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000';
 
-const ProfileManager = ({ profiles, onProfilesChange }) => {
+  const fetchProfiles = async () => {
+    let profilesUrl = `${API_BASE}/profiles`;
+    if (currentUser && currentUser.role === 'PARENT') {
+      profilesUrl += `?parent_id=${currentUser.id}`;
+    }
+    const response = await axios.get(profilesUrl);
+    return response.data;
+  };
+
+
+const ProfileManager = ({ profiles, onProfilesChange, currentUser }) => {
   const { t } = useLanguage();
   const [showForm, setShowForm] = useState(false);
   const [editingProfile, setEditingProfile] = useState(null);
@@ -117,6 +127,10 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
         mental_age: formData.mental_age ? parseFloat(formData.mental_age) : null // Convert to number or null
       };
       
+      if (currentUser && currentUser.role === 'PARENT') {
+        profileData.parent_id = currentUser.id;
+      }
+      
       if (editingProfile) {
         // Update existing profile
         await axios.put(`${API_BASE}/profiles/${editingProfile}`, profileData);
@@ -126,8 +140,8 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
       }
       
       // Refresh profiles
-      const response = await axios.get(`${API_BASE}/profiles`);
-      onProfilesChange(response.data);
+      const responseData = await fetchProfiles();
+      onProfilesChange(responseData);
       
       // Reset form
       setFormData({
@@ -190,8 +204,8 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
     if (window.confirm('Are you sure you want to delete this profile?')) {
       try {
         await axios.delete(`${API_BASE}/profiles/${profileName}`);
-        const response = await axios.get(`${API_BASE}/profiles`);
-        onProfilesChange(response.data);
+        const responseData = await fetchProfiles();
+        onProfilesChange(responseData);
       } catch (error) {
         console.error('Error deleting profile:', error);
       }
@@ -247,7 +261,7 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
         beta_concreteness: 0.8,
         beta_frequency: 0.3,
         beta_aoa_penalty: 2.0,
-        beta_intercept: 0.0,
+        bet-intercept: 0.0,
         alpha: 0.5,
         aoa_buffer: 0.0,
         top_n: 50,
@@ -320,7 +334,7 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
         beta_concreteness: 0.8,
         beta_frequency: 0.3,
         beta_aoa_penalty: 2.0,
-        beta_intercept: 0.0,
+        bet-intercept: 0.0,
         alpha: 0.5,
         aoa_buffer: 0.0,
         top_n: 50,
@@ -426,11 +440,11 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
       await axios.put(`${API_BASE}/profiles/${selectedProfileForEnglishRecommendations.name}`, updatedProfile);
       
       // Refresh profiles
-      const response = await axios.get(`${API_BASE}/profiles`);
-      onProfilesChange(response.data);
+      const responseData = await fetchProfiles();
+      onProfilesChange(responseData);
       
       // Update the selected profile reference
-      const updated = response.data.find(p => p.name === selectedProfileForEnglishRecommendations.name);
+      const updated = responseData.find(p => p.name === selectedProfileForEnglishRecommendations.name);
       if (updated) {
         setSelectedProfileForEnglishRecommendations(updated);
         // Refresh recommendations so the UI immediately reflects the newly mastered words
@@ -528,11 +542,11 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
       await axios.put(`${API_BASE}/profiles/${selectedProfileForRecommendations.name}`, updatedProfile);
       
       // Refresh profiles
-      const response = await axios.get(`${API_BASE}/profiles`);
-      onProfilesChange(response.data);
+      const responseData = await fetchProfiles();
+      onProfilesChange(responseData);
       
       // Update the selected profile reference
-      const updated = response.data.find(p => p.name === selectedProfileForRecommendations.name);
+      const updated = responseData.find(p => p.name === selectedProfileForRecommendations.name);
       if (updated) {
         setSelectedProfileForRecommendations(updated);
         
@@ -597,11 +611,11 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
       await axios.put(`${API_BASE}/profiles/${selectedProfileForGrammarRecommendations.name}`, updatedProfile);
       
       // Refresh profiles
-      const response = await axios.get(`${API_BASE}/profiles`);
-      onProfilesChange(response.data);
+      const responseData = await fetchProfiles();
+      onProfilesChange(responseData);
       
       // Update the selected profile reference
-      const updated = response.data.find(p => p.name === selectedProfileForGrammarRecommendations.name);
+      const updated = responseData.find(p => p.name === selectedProfileForGrammarRecommendations.name);
       if (updated) {
         setSelectedProfileForGrammarRecommendations(updated);
         
@@ -1115,7 +1129,7 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
                           padding: '8px',
                           borderRadius: '4px',
                           backgroundColor: isSelected ? '#e8f5e9' : isAlreadyMastered ? '#fff3e0' : 'transparent',
-                          border: isSelected ? '2px solid #4CAF50' : isAlreadyMastered ? '1px solid #ff9800' : '1px solid transparent'
+                          border: isSelected ? '2px solid #4CAF50' : isAlreadyMastered ? '1px solid transparent' : '1px solid transparent'
                         }}>
                           <input
                             type="checkbox"
@@ -1238,8 +1252,8 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
                 setShowMasteredEnglishWordsManager(false);
                 setSelectedProfileForMasteredEnglishWords(null);
                 // Refresh profiles after closing
-                axios.get(`${API_BASE}/profiles`).then(response => {
-                  onProfilesChange(response.data);
+                fetchProfiles().then(responseData => {
+                  onProfilesChange(responseData);
                 });
               }}
               style={{
@@ -1260,10 +1274,10 @@ const ProfileManager = ({ profiles, onProfilesChange }) => {
               profile={selectedProfileForMasteredEnglishWords}
               onUpdate={async () => {
                 // Refresh profiles
-                const response = await axios.get(`${API_BASE}/profiles`);
-                onProfilesChange(response.data);
+                const responseData = await fetchProfiles();
+                onProfilesChange(responseData);
                 // Update selected profile
-                const updated = response.data.find(p => 
+                const updated = responseData.find(p => 
                   p.name === selectedProfileForMasteredEnglishWords.name || 
                   p.id === selectedProfileForMasteredEnglishWords.id
                 );

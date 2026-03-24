@@ -28,6 +28,7 @@ class Profile(Base):
     passive_language_level = Column(String)
     mental_age = Column(Float)
     raw_input = Column(Text)
+    parent_id = Column(Integer)  # Link to parent user ID
     extracted_data = Column(Text)  # JSON object stored as text
     # Recommender configuration (per-child attention inventory)
     recommender_daily_capacity = Column(Integer, default=20)  # Daily attention slots

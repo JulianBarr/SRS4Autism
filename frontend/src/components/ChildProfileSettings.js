@@ -4,13 +4,22 @@ import { useLanguage } from '../i18n/LanguageContext';
 
 const API_BASE = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000';
 
-const ChildProfileSettings = ({ profiles, onProfilesChange }) => {
+const ChildProfileSettings = ({ profiles, onProfilesChange, currentUser }) => {
   const { t } = useLanguage();
   const [showForm, setShowForm] = useState(false);
   const [editingProfile, setEditingProfile] = useState(null);
   const [interestsInput, setInterestsInput] = useState('');
   const [charactersInput, setCharactersInput] = useState('');
   const [saving, setSaving] = useState(false);
+
+  const fetchProfiles = async () => {
+    let profilesUrl = `${API_BASE}/profiles`;
+    if (currentUser && currentUser.role === 'PARENT') {
+      profilesUrl += `?parent_id=${currentUser.id}`;
+    }
+    const response = await axios.get(profilesUrl);
+    return response.data;
+  };
 
   const [formData, setFormData] = useState({
     name: '',
@@ -52,7 +61,11 @@ const ChildProfileSettings = ({ profiles, onProfilesChange }) => {
     try {
       // Test backend connectivity first
       try {
-        await axios.get(`${API_BASE}/profiles`, { timeout: 5000 });
+        let testUrl = `${API_BASE}/profiles`;
+        if (currentUser && currentUser.role === 'PARENT') {
+          testUrl += `?parent_id=${currentUser.id}`;
+        }
+        await axios.get(testUrl, { timeout: 5000 });
       } catch (connectError) {
         throw new Error(`Cannot connect to backend at ${API_BASE}. Please ensure the backend server is running on port 8000.`);
       }
@@ -76,6 +89,10 @@ const ChildProfileSettings = ({ profiles, onProfilesChange }) => {
         raw_input: formData.raw_input || null,
         extracted_data: formData.extracted_data || {}
       };
+
+      if (currentUser && currentUser.role === 'PARENT') {
+        profileData.parent_id = currentUser.id;
+      }
       
       if (editingProfile) {
         // Preserve existing mastered data if we are just editing metadata
@@ -100,8 +117,8 @@ const ChildProfileSettings = ({ profiles, onProfilesChange }) => {
         await axios.post(`${API_BASE}/profiles`, profileData);
       }
       
-      const response = await axios.get(`${API_BASE}/profiles`);
-      onProfilesChange(response.data);
+      const responseData = await fetchProfiles();
+      onProfilesChange(responseData);
       
       resetForm();
       alert(editingProfile ? (t('profileUpdated') || 'Profile updated successfully!') : (t('profileCreated') || 'Profile created successfully!'));
@@ -177,8 +194,8 @@ const ChildProfileSettings = ({ profiles, onProfilesChange }) => {
     if (window.confirm('Are you sure you want to delete this profile?')) {
       try {
         await axios.delete(`${API_BASE}/profiles/${profileName}`);
-        const response = await axios.get(`${API_BASE}/profiles`);
-        onProfilesChange(response.data);
+        const responseData = await fetchProfiles();
+        onProfilesChange(responseData);
       } catch (error) {
         console.error('Error deleting profile:', error);
       }
@@ -294,4 +311,3 @@ const ChildProfileSettings = ({ profiles, onProfilesChange }) => {
 };
 
 export default ChildProfileSettings;
-

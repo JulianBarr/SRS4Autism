@@ -25,6 +25,7 @@ router = APIRouter()
 
 class ChildProfile(BaseModel):
     id: Optional[str] = None  # Add ID field for unique identification
+    parent_id: Optional[int] = None  # Add parent_id field
     name: str
     dob: Optional[str] = None
     gender: Optional[str] = None
@@ -80,9 +81,12 @@ def save_json_file(file_path: Path, data: Any):
 # ============================================================================
 
 @router.get("/profiles", response_model=List[ChildProfile])
-async def get_profiles(db: Session = Depends(get_db)):
-    """Get all profiles from database"""
-    profiles = ProfileService.get_all(db)
+async def get_profiles(
+    parent_id: Optional[int] = None,
+    db: Session = Depends(get_db)
+):
+    """Get all profiles from database, optionally filtered by parent_id"""
+    profiles = ProfileService.get_all(db, parent_id=parent_id)
     return [ProfileService.profile_to_dict(db, p) for p in profiles]
 
 @router.post("/profiles", response_model=ChildProfile)

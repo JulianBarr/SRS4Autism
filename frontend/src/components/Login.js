@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext';
 import { cloudApi } from '../utils/api';
 import './Login.css';
 
 function Login({ onLoginSuccess }) {
+  const navigate = useNavigate();
   const { t } = useLanguage();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -33,7 +35,13 @@ function Login({ onLoginSuccess }) {
           localStorage.setItem('user_info', JSON.stringify(response.data.user));
         }
         // Decode JWT to get user ID or just let subsequent requests use it
+        // Call onLoginSuccess for App.js to update auth state, then navigate based on role
         onLoginSuccess(response.data.access_token, response.data.user);
+        if (response.data.user && response.data.user.role === 'PARENT') {
+          navigate('/parent');
+        } else {
+          navigate('/');
+        }
       }
     } catch (err) {
       setError(err.response?.data?.detail || 'Login failed. Please check your credentials.');

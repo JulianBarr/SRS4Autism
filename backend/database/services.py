@@ -14,9 +14,12 @@ class ProfileService:
     """Service for profile operations"""
     
     @staticmethod
-    def get_all(db: Session) -> List[Profile]:
-        """Get all profiles"""
-        return db.query(Profile).all()
+    def get_all(db: Session, parent_id: Optional[int] = None) -> List[Profile]:
+        """Get all profiles, optionally filtered by parent_id"""
+        query = db.query(Profile)
+        if parent_id is not None:
+            query = query.filter(Profile.parent_id == parent_id)
+        return query.all()
     
     @staticmethod
     def get_by_id(db: Session, profile_id: str) -> Optional[Profile]:
