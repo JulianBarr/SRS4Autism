@@ -99,14 +99,23 @@ function App() {
   const loadData = async () => {
     try {
       setLoading(true);
-      const [profilesRes, cardsRes] = await Promise.all([
-        businessApi.get('/profiles'),
-        businessApi.get('/cards'),
-      ]);
+      const isParent = String(currentUser?.role || '').toLowerCase() === 'parent';
+      
+      const profilesRes = await businessApi.get('/profiles').catch(e => {
+        console.error('Error loading profiles:', e);
+        return { data: [] };
+      });
       setProfiles(profilesRes.data);
-      setCards(cardsRes.data);
+      
+      if (!isParent) {
+        const cardsRes = await businessApi.get('/cards').catch(e => {
+          console.error('Error loading cards:', e);
+          return { data: [] };
+        });
+        setCards(cardsRes.data);
+      }
     } catch (error) {
-      console.error('Error loading data:', error);
+      console.error('Error in loadData:', error);
     } finally {
       setLoading(false);
     }
@@ -220,15 +229,7 @@ function App() {
     return <Login onLoginSuccess={handleLoginSuccess} />;
   }
 
-  // Conditional rendering based on user role
-  if (String(currentUser?.role || '').toLowerCase() === 'parent') {
-    return (
-      <Routes>
-        <Route path="/parent" element={<ParentDashboard currentUser={currentUser} />} />
-        <Route path="*" element={<ParentDashboard currentUser={currentUser} />} /> {/* Default for parent */}
-      </Routes>
-    );
-  }
+  const isParent = String(currentUser?.role || '').toLowerCase() === 'parent';
 
   if (loading) {
                 return (
@@ -271,23 +272,29 @@ function App() {
               {/* Profile Selector - always visible */}
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <span style={{ fontSize: '1.2em' }}>🧒</span>
-                <select 
-                  value={currentProfile ? currentProfile.id : ''}
-                  onChange={(e) => {
-                    const val = e.target.value;
-                    if (!val) return;
-                    const selectedLocal = profiles.find(p => p.id === val);
-                    if (selectedLocal) {
-                      setCurrentProfile(selectedLocal);
-                    }
-                  }}
-                  style={{ padding: '5px', borderRadius: '4px', border: '1px solid #ccc', minWidth: '100px' }}
-                >
-                  <option value="">{profiles.length === 0 ? '（无儿童）' : '选择儿童'}</option>
-                  {profiles.map(p => (
-                    <option key={p.id} value={p.id}>{p.name}</option>
-                  ))}
-                </select>
+                {isParent ? (
+                  <span style={{ padding: '5px', fontWeight: 'bold' }}>
+                    {currentProfile ? currentProfile.name : '（无儿童）'}
+                  </span>
+                ) : (
+                  <select 
+                    value={currentProfile ? currentProfile.id : ''}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      if (!val) return;
+                      const selectedLocal = profiles.find(p => p.id === val);
+                      if (selectedLocal) {
+                        setCurrentProfile(selectedLocal);
+                      }
+                    }}
+                    style={{ padding: '5px', borderRadius: '4px', border: '1px solid #ccc', minWidth: '100px' }}
+                  >
+                    <option value="">{profiles.length === 0 ? '（无儿童）' : '选择儿童'}</option>
+                    {profiles.map(p => (
+                      <option key={p.id} value={p.id}>{p.name}</option>
+                    ))}
+                  </select>
+                )}
               </div>
 
               <button 
@@ -382,51 +389,76 @@ function App() {
             </div>
           </div>
           <nav className="tab-nav">
-            <button 
-              className={activeTab === 'main' ? 'active' : ''}
-              onClick={() => setActiveTab('main')}
-            >
-              {t('mainWorkflow')}
-            </button>
-            <button 
-              className={activeTab === 'content' ? 'active' : ''}
-              onClick={() => setActiveTab('content')}
-            >
-              {t('contentManagement') || (language === 'en' ? 'Content Management' : '内容管理')}
-            </button>
-            <button 
-              className={activeTab === 'mariosWorld' ? 'active' : ''}
-              onClick={() => setActiveTab('mariosWorld')}
-            >
-              {t('mariosWorld') || (language === 'en' ? "Mario's World" : '马力世界')}
-            </button>
-            <button 
-              className={activeTab === 'profiles' ? 'active' : ''}
-              onClick={() => setActiveTab('profiles')}
-            >
-              {t('profiles')}
-            </button>
-            <button 
-              className={activeTab === 'templates' ? 'active' : ''}
-              onClick={() => setActiveTab('templates')}
-            >
-              {t('templates')}
-            </button>
-            {currentUser?.role?.toUpperCase()?.includes('ADMIN') && (
+            {isParent ? (
               <button 
-                className={activeTab === 'admin' ? 'active' : ''}
-                onClick={() => setActiveTab('admin')}
+                className={activeTab !== 'userProfile' ? 'active' : ''}
+                onClick={() => setActiveTab('main')}
               >
-                控制台
+                {language === 'en' ? 'Daily Tasks' : '今日任务'}
               </button>
+            ) : (
+              <>
+                <button 
+                  className={activeTab === 'main' ? 'active' : ''}
+                  onClick={() => setActiveTab('main')}
+                >
+                  {t('mainWorkflow')}
+                </button>
+                <button 
+                  className={activeTab === 'content' ? 'active' : ''}
+                  onClick={() => setActiveTab('content')}
+                >
+                  {t('contentManagement') || (language === 'en' ? 'Content Management' : '内容管理')}
+                </button>
+                <button 
+                  className={activeTab === 'mariosWorld' ? 'active' : ''}
+                  onClick={() => setActiveTab('mariosWorld')}
+                >
+                  {t('mariosWorld') || (language === 'en' ? "Mario's World" : '马力世界')}
+                </button>
+                <button 
+                  className={activeTab === 'profiles' ? 'active' : ''}
+                  onClick={() => setActiveTab('profiles')}
+                >
+                  {t('profiles')}
+                </button>
+                <button 
+                  className={activeTab === 'templates' ? 'active' : ''}
+                  onClick={() => setActiveTab('templates')}
+                >
+                  {t('templates')}
+                </button>
+                {currentUser?.role?.toUpperCase()?.includes('ADMIN') && (
+                  <button 
+                    className={activeTab === 'admin' ? 'active' : ''}
+                    onClick={() => setActiveTab('admin')}
+                  >
+                    控制台
+                  </button>
+                )}
+              </>
             )}
           </nav>
         </div>
       </header>
 
       <main className="container">
-        {activeTab === 'main' && (
-          <div className="main-workflow">
+        {isParent ? (
+          activeTab === 'userProfile' ? (
+            <UserProfile 
+              currentUser={currentUser}
+              onUserUpdate={setCurrentUser}
+            />
+          ) : (
+            <ParentDashboard 
+              currentUser={currentUser} 
+              currentProfile={currentProfile}
+            />
+          )
+        ) : (
+          <>
+            {activeTab === 'main' && (
+              <div className="main-workflow">
             <div className="workflow-left">
               <ChatAssistant 
                 profiles={profiles}
@@ -1131,11 +1163,13 @@ function App() {
           </div>
         )}
 
-        {activeTab === 'userProfile' && (
+        {activeTab === 'userProfile' && !isParent && (
           <UserProfile 
             currentUser={currentUser}
             onUserUpdate={setCurrentUser}
           />
+        )}
+          </>
         )}
       </main>
 
