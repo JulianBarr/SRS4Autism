@@ -23,10 +23,8 @@ import DailyDeck from './components/DailyDeck';
 import Login from './components/Login';
 import ParentDashboard from './components/ParentDashboard'; // New import for ParentDashboard
 import { useLanguage } from './i18n/LanguageContext';
-import axios from './utils/api';
+import businessApi from './utils/api';
 import './App.css';
-
-const API_BASE = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000';
 
 function App() {
   const { language, toggleLanguage, t } = useLanguage();
@@ -101,14 +99,9 @@ function App() {
   const loadData = async () => {
     try {
       setLoading(true);
-      let profilesUrl = `${API_BASE}/profiles`;
-      if (currentUser && currentUser.role === 'PARENT') {
-        profilesUrl += `?parent_id=${currentUser.id}`;
-      }
-      
       const [profilesRes, cardsRes] = await Promise.all([
-        axios.get(profilesUrl),
-        axios.get(`${API_BASE}/cards`)
+        businessApi.get('/profiles'),
+        businessApi.get('/cards'),
       ]);
       setProfiles(profilesRes.data);
       setCards(cardsRes.data);
@@ -138,7 +131,7 @@ function App() {
   /** Cards-only refresh for curation panel. Does not trigger full loading overlay. */
   const loadCardsOnly = async () => {
     try {
-      const cardsRes = await axios.get(`${API_BASE}/cards`);
+      const cardsRes = await businessApi.get('/cards');
       setCards(cardsRes.data);
     } catch (error) {
       console.error('Error loading cards:', error);
@@ -163,7 +156,7 @@ function App() {
 
   const handleApproveCard = async (cardId) => {
     try {
-      await axios.put(`${API_BASE}/cards/${cardId}/approve`);
+      await businessApi.put(`/cards/${cardId}/approve`);
       setCards(prev => prev.map(card => 
         card.id === cardId ? { ...card, status: 'approved' } : card
       ));
@@ -228,7 +221,7 @@ function App() {
   }
 
   // Conditional rendering based on user role
-  if (currentUser?.role === 'PARENT') {
+  if (String(currentUser?.role || '').toLowerCase() === 'parent') {
     return (
       <Routes>
         <Route path="/parent" element={<ParentDashboard currentUser={currentUser} />} />

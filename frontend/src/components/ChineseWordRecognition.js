@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-
-const API_BASE = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000';
+import businessApi from '../utils/api';
 
 /**
  * Chinese Word Recognition Component (CUMA Naming)
@@ -46,7 +44,7 @@ const ChineseWordRecognition = ({ profile, onProfileUpdate }) => {
     
     setLoading(true);
     try {
-      const response = await axios.get(`${API_BASE}/word-recognition/notes`, {
+      const response = await businessApi.get(`/word-recognition/notes`, {
         params: { profile_id: profile.id }
       });
       setNotes(response.data.notes || []);
@@ -84,7 +82,7 @@ const ChineseWordRecognition = ({ profile, onProfileUpdate }) => {
       .map(note => note.word);
 
     try {
-      await axios.post(`${API_BASE}/profiles/${profile.id}/mastered-words`, {
+      await businessApi.post(`/profiles/${profile.id}/mastered-words`, {
         words: selectedWords,
         language: 'zh'
       });
@@ -122,7 +120,7 @@ const ChineseWordRecognition = ({ profile, onProfileUpdate }) => {
       // Determine config based on script type
       const config = scriptType === 'simplified-pinyin' ? 'simplified' : 'traditional';
       
-      const response = await axios.post(`${API_BASE}/chinese-naming/sync`, {
+      const response = await businessApi.post(`/chinese-naming/sync`, {
         profile_id: profile.id,
         note_ids: Array.from(selectedNotes),
         deck_name: '中文命名',
@@ -172,7 +170,7 @@ const ChineseWordRecognition = ({ profile, onProfileUpdate }) => {
         formData.append('image', newWord.image);
       }
       
-      await axios.post(`${API_BASE}/word-recognition/add-custom`, formData, {
+      await businessApi.post(`/word-recognition/add-custom`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       

@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
-
-const API_BASE = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000';
+import businessApi from '../utils/api';
 
 const TopicChat = ({ topicId, topicName, profile, onClose }) => {
   const [messages, setMessages] = useState([]);
@@ -23,7 +21,7 @@ const TopicChat = ({ topicId, topicName, profile, onClose }) => {
   useEffect(() => {
     const loadTemplates = async () => {
       try {
-        const response = await axios.get(`${API_BASE}/templates`);
+        const response = await businessApi.get('/templates');
         const templatesList = response.data || [];
         setTemplates(templatesList);
 
@@ -58,7 +56,7 @@ const TopicChat = ({ topicId, topicName, profile, onClose }) => {
   useEffect(() => {
     const loadAvailableModels = async () => {
       try {
-        const response = await axios.get(`${API_BASE}/config/models`);
+        const response = await businessApi.get('/config/models');
         const modelsData = response.data || { card_models: [] };
         setAvailableModels(modelsData);
         
@@ -88,7 +86,7 @@ const TopicChat = ({ topicId, topicName, profile, onClose }) => {
       
       setLoading(true);
       try {
-        const response = await axios.get(`${API_BASE}/chat/topic/history`, {
+        const response = await businessApi.get('/chat/topic/history', {
           params: { topic_id: topicId, roster_id: rosterId }
         });
         setMessages(response.data.messages || []);
@@ -164,7 +162,7 @@ const TopicChat = ({ topicId, topicName, profile, onClose }) => {
       };
 
       // 3. Send the request
-      const response = await axios.post(`${API_BASE}/agent/generate`, {
+      const response = await businessApi.post('/agent/generate', {
         topic_id: topicId,
         roster_id: rosterId,
         template_id: selectedTemplateId === 'auto' ? null : selectedTemplateId,

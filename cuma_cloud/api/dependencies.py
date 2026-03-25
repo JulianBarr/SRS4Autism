@@ -133,3 +133,60 @@ async def verify_child_access(
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="无权访问该儿童档案")
 
     raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="未知角色，无权访问")
+
+
+async def get_authorized_child(
+    child_id: int,
+    current_user: User = Depends(get_current_user_abac),
+    db: AsyncSession = Depends(get_db),
+) -> ChildProfile:
+    """
+    RBAC: load a ChildProfile and enforce the 4A isolation matrix.
+
+    - PARENT: only if child.parent_id == current_user.id
+    - TEACHER: if assigned_teacher_id matches, else same institution (MVP fallback)
+    - QCQ_ADMIN (institution admin): child.institution_id == current_user.institution_id
+    - AGENT: unrestricted (service identity)
+
+    Use ``get_current_user_abac`` so ``current_user`` is a ``User``; the legacy
+    ``get_current_user`` dependency returns ``CloudAccount`` (email-based JWT).
+    """
+    forbidden = HTTPException(
+        status_code=status.HTTP_403_FORBIDDEN,
+        detail="无权访问该儿童档案",
+    )
+    result = await db.execute(select(ChildProfile).where(ChildProfile.id == child_id))
+    child = result.scalar_one_or_none()
+    if child is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="儿童档案不存在",
+        )
+
+    if current_user.role == RoleEnum.AGENT:
+        return child
+
+    if current_user.role == RoleEnum.PARENT:
+        if child.parent_id == current_user.id:
+            return child
+        raise forbidden
+
+    if current_user.role == RoleEnum.TEACHER:
+        if child.assigned_teacher_id == current_user.id:
+            return child
+        if (
+            current_user.institution_id is not None
+            and child.institution_id == current_user.institution_id
+        ):
+            return child
+        raise forbidden
+
+    if current_user.role == RoleEnum.QCQ_ADMIN:
+        if child.institution_id == current_user.institution_id:
+            return child
+        raise forbidden
+
+    raise HTTPException(
+        status_code=status.HTTP_403_FORBIDDEN,
+        detail="未知角色，无权访问",
+    )

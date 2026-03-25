@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import businessApi, { API_BASE } from '../../utils/api';
 import BaseWidget from './BaseWidget';
 import theme from '../../styles/theme';
-
-const API_BASE = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000';
 
 /**
  * Logic City Gallery Component
@@ -23,7 +21,7 @@ const LogicCityGallery = () => {
       try {
         setLoading(true);
         setError(null);
-        const response = await axios.get(`${API_BASE}/literacy/logic-city`, {
+        const response = await businessApi.get(`/literacy/logic-city`, {
           params: { page, page_size: pageSize }
         });
         const newItems = response.data || [];

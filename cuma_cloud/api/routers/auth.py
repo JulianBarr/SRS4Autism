@@ -35,8 +35,10 @@ async def login(
             headers={"WWW-Authenticate": "Bearer"},
         )
         
-    # 将 user_id (通常是数字的转成字符串) 存为 subject
-    token = create_access_token(data={"sub": str(user.id)})
+    # sub = cloud User.id; role = ABAC role (local engine 8000 reads both for RBAC)
+    token = create_access_token(
+        data={"sub": str(user.id), "role": user.role.value},
+    )
     return {
         "access_token": token,
         "token_type": "bearer",

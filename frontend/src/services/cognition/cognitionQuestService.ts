@@ -6,8 +6,7 @@
  */
 
 import type { QuestPayload } from '../../types/cognition';
-
-const API_BASE = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000';
+import businessApi from '../../utils/api';
 
 /** MacroObjective - high-level training goal within a module */
 export interface MacroObjective {
@@ -44,11 +43,11 @@ export class CognitionQuestService {
    */
   static async getMacroStructure(): Promise<AgeBracketBlock[] | ModuleWithAgeGroups[]> {
     try {
-      const res = await fetch(`${API_BASE}/kg/cognition-macro-structure`);
-      const data = await res.json();
+      const res = await businessApi.get('/kg/cognition-macro-structure');
+      const data = res.data;
       return data.data ?? data.modules ?? [];
     } catch (err) {
-      console.warn('CognitionQuestService: API fetch failed:', err);
+      console.error('CognitionQuestService: API fetch failed:', err);
       return [];
     }
   }

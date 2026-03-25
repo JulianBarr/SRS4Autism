@@ -1,24 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
-import axios from 'axios';
+import businessApi from '../utils/api';
 import { useLanguage } from '../i18n/LanguageContext';
 import MasteredWordsManager from './MasteredWordsManager';
 import MasteredEnglishWordsManager from './MasteredEnglishWordsManager';
 import MasteredGrammarManager from './MasteredGrammarManager';
 
-const API_BASE = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000';
-
-  const fetchProfiles = async () => {
-    let profilesUrl = `${API_BASE}/profiles`;
-    if (currentUser && currentUser.role === 'PARENT') {
-      profilesUrl += `?parent_id=${currentUser.id}`;
-    }
-    const response = await axios.get(profilesUrl);
-    return response.data;
-  };
-
-
 const ProfileManager = ({ profiles, onProfilesChange, currentUser }) => {
   const { t } = useLanguage();
+
+  const fetchProfiles = async () => {
+    const response = await businessApi.get('/profiles');
+    return response.data;
+  };
   const [showForm, setShowForm] = useState(false);
   const [editingProfile, setEditingProfile] = useState(null);
   const [interestsInput, setInterestsInput] = useState('');
@@ -127,16 +120,19 @@ const ProfileManager = ({ profiles, onProfilesChange, currentUser }) => {
         mental_age: formData.mental_age ? parseFloat(formData.mental_age) : null // Convert to number or null
       };
       
-      if (currentUser && currentUser.role === 'PARENT') {
+      if (
+        currentUser &&
+        String(currentUser.role).toLowerCase() === 'parent'
+      ) {
         profileData.parent_id = currentUser.id;
       }
       
       if (editingProfile) {
         // Update existing profile
-        await axios.put(`${API_BASE}/profiles/${editingProfile}`, profileData);
+        await businessApi.put(`/profiles/${editingProfile}`, profileData);
       } else {
         // Create new profile
-        await axios.post(`${API_BASE}/profiles`, profileData);
+        await businessApi.post('/profiles', profileData);
       }
       
       // Refresh profiles
@@ -203,7 +199,7 @@ const ProfileManager = ({ profiles, onProfilesChange, currentUser }) => {
   const handleDelete = async (profileName) => {
     if (window.confirm('Are you sure you want to delete this profile?')) {
       try {
-        await axios.delete(`${API_BASE}/profiles/${profileName}`);
+        await businessApi.delete(`/profiles/${profileName}`);
         const responseData = await fetchProfiles();
         onProfilesChange(responseData);
       } catch (error) {
@@ -269,7 +265,7 @@ const ProfileManager = ({ profiles, onProfilesChange, currentUser }) => {
         max_hsk_level: 4
       };
 
-      const response = await axios.post(`${API_BASE}/kg/chinese-ppr-recommendations?t=${Date.now()}`, requestConfig, {
+      const response = await businessApi.post(`/kg/chinese-ppr-recommendations?t=${Date.now()}`, requestConfig, {
         headers: {
           'Cache-Control': 'no-cache',
           'Pragma': 'no-cache'
@@ -342,7 +338,7 @@ const ProfileManager = ({ profiles, onProfilesChange, currentUser }) => {
       };
       
       // Use PPR algorithm
-      const response = await axios.post(`${API_BASE}/kg/ppr-recommendations?t=${Date.now()}`, requestConfig, {
+      const response = await businessApi.post(`/kg/ppr-recommendations?t=${Date.now()}`, requestConfig, {
         headers: {
           'Cache-Control': 'no-cache',
           'Pragma': 'no-cache'
@@ -437,7 +433,7 @@ const ProfileManager = ({ profiles, onProfilesChange, currentUser }) => {
         mastered_english_words: newMastered.join(', ')
       };
       
-      await axios.put(`${API_BASE}/profiles/${selectedProfileForEnglishRecommendations.name}`, updatedProfile);
+      await businessApi.put(`/profiles/${selectedProfileForEnglishRecommendations.name}`, updatedProfile);
       
       // Refresh profiles
       const responseData = await fetchProfiles();
@@ -483,7 +479,7 @@ const ProfileManager = ({ profiles, onProfilesChange, currentUser }) => {
       
       console.log(`Getting ${lang.toUpperCase()} grammar recommendations with ${mastered_grammar_array.length} mastered grammar points`);
       
-      const response = await axios.post(`${API_BASE}/kg/grammar-recommendations`, {
+      const response = await businessApi.post(`/kg/grammar-recommendations`, {
         mastered_grammar: mastered_grammar_array,
         profile_id: profile.id || profile.name,
         language: lang
@@ -539,7 +535,7 @@ const ProfileManager = ({ profiles, onProfilesChange, currentUser }) => {
         mastered_words: newMastered.join(', ')
       };
       
-      await axios.put(`${API_BASE}/profiles/${selectedProfileForRecommendations.name}`, updatedProfile);
+      await businessApi.put(`/profiles/${selectedProfileForRecommendations.name}`, updatedProfile);
       
       // Refresh profiles
       const responseData = await fetchProfiles();
@@ -608,7 +604,7 @@ const ProfileManager = ({ profiles, onProfilesChange, currentUser }) => {
         mastered_grammar: newMastered.join(',') // Use comma only, no space (URIs don't need spaces)
       };
       
-      await axios.put(`${API_BASE}/profiles/${selectedProfileForGrammarRecommendations.name}`, updatedProfile);
+      await businessApi.put(`/profiles/${selectedProfileForGrammarRecommendations.name}`, updatedProfile);
       
       // Refresh profiles
       const responseData = await fetchProfiles();

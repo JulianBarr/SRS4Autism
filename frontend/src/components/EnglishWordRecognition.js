@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-
-const API_BASE = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000';
+import businessApi from '../utils/api';
 
 /**
  * English Word Recognition Component
@@ -32,7 +30,7 @@ const EnglishWordRecognition = ({ profile, onProfileUpdate }) => {
     
     setLoading(true);
     try {
-      const response = await axios.get(`${API_BASE}/english-word-recognition/notes`, {
+      const response = await businessApi.get(`/english-word-recognition/notes`, {
         params: { profile_id: profile.id }
       });
       setNotes(response.data.notes || []);
@@ -71,7 +69,7 @@ const EnglishWordRecognition = ({ profile, onProfileUpdate }) => {
 
     try {
       // Use the existing mastered words endpoint for English
-      const response = await axios.post(`${API_BASE}/profiles/${profile.id}/mastered-words`, {
+      const response = await businessApi.post(`/profiles/${profile.id}/mastered-words`, {
         words: selectedWords,
         language: 'en'
       });
@@ -100,7 +98,7 @@ const EnglishWordRecognition = ({ profile, onProfileUpdate }) => {
 
     setSyncing(true);
     try {
-      const response = await axios.post(`${API_BASE}/english-word-recognition/sync`, {
+      const response = await businessApi.post(`/english-word-recognition/sync`, {
         profile_id: profile.id,
         note_ids: Array.from(selectedNotes),
         deck_name: "English Naming"

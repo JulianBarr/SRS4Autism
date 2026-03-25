@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import businessApi, { API_BASE } from '../utils/api';
 import theme from '../styles/theme';
-
-const API_BASE = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000';
 
 /**
  * Image component with fallback paths (similar to LogicCityManager)
@@ -166,7 +164,7 @@ const CharacterRecognition = ({ profile, onProfileUpdate }) => {
     
     setLoading(true);
     try {
-      const response = await axios.get(`${API_BASE}/character-recognition/notes`, {
+      const response = await businessApi.get(`/character-recognition/notes`, {
         params: { profile_id: profile.id }
       });
       setNotes(response.data.notes || []);
@@ -208,7 +206,7 @@ const CharacterRecognition = ({ profile, onProfileUpdate }) => {
       .map(note => note.character);
 
     try {
-      const response = await axios.post(`${API_BASE}/character-recognition/master`, {
+      const response = await businessApi.post(`/character-recognition/master`, {
         profile_id: profile.id,
         characters: selectedChars
       });
@@ -238,7 +236,7 @@ const CharacterRecognition = ({ profile, onProfileUpdate }) => {
     setSyncResult(null);
     
     try {
-      const response = await axios.post(`${API_BASE}/character-recognition/sync`, {
+      const response = await businessApi.post(`/character-recognition/sync`, {
         profile_id: profile.id,
         note_ids: Array.from(selectedNotes),
         deck_name: '识字'

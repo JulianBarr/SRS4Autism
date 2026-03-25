@@ -37,7 +37,10 @@ function Login({ onLoginSuccess }) {
         // Decode JWT to get user ID or just let subsequent requests use it
         // Call onLoginSuccess for App.js to update auth state, then navigate based on role
         onLoginSuccess(response.data.access_token, response.data.user);
-        if (response.data.user && response.data.user.role === 'PARENT') {
+        if (
+          response.data.user &&
+          String(response.data.user.role).toLowerCase() === 'parent'
+        ) {
           navigate('/parent');
         } else {
           navigate('/');

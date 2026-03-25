@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import businessApi, { API_BASE } from '../../utils/api';
 import theme from '../../styles/theme';
-
-const API_BASE = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000';
 
 /**
  * Image component with fallback paths (similar to PinyinLearning)
@@ -130,7 +128,7 @@ const LogicCityManager = ({ profile, onClose }) => {
         params.profile_id = profile.id;
       }
       
-      const response = await axios.get(`${API_BASE}/literacy/logic-city/vocab`, { params });
+      const response = await businessApi.get('/literacy/logic-city/vocab', { params });
       const data = response.data || {};
       
       // Handle new paginated response format
@@ -164,7 +162,7 @@ const LogicCityManager = ({ profile, onClose }) => {
   
   const handleSave = async (wordId) => {
     try {
-      await axios.put(`${API_BASE}/literacy/logic-city/vocab/${wordId}`, editForm);
+      await businessApi.put(`/literacy/logic-city/vocab/${wordId}`, editForm);
       
       // Update local state with all edited fields
       setVocabulary(vocab => vocab.map(item => 
@@ -203,11 +201,11 @@ const LogicCityManager = ({ profile, onClose }) => {
         return;
       }
       
-      const response = await axios.post(`${API_BASE}/literacy/logic-city/sync`, {
+      await businessApi.post('/literacy/logic-city/sync', {
         word_ids: wordIds,
         deck_name: 'English Vocabulary Level 2'
       });
-      
+
       alert(`Sync initiated for ${wordIds.length} words`);
       
       // Refresh vocabulary to update sync status

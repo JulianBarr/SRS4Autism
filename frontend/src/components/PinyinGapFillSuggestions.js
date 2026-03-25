@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import axios from 'axios';
-
-const API_BASE = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000';
+import businessApi, { API_BASE } from '../utils/api';
 
 /**
  * Normalize pinyin to ensure spaces between syllables.
@@ -134,7 +132,7 @@ const PinyinGapFillSuggestions = ({ profile, onProfileUpdate }) => {
     setLoading(true);
     setMessage(null);
     try {
-      const response = await axios.get(`${API_BASE}/pinyin/gap-fill-suggestions`, {
+      const response = await businessApi.get(`/pinyin/gap-fill-suggestions`, {
         timeout: 30000 // 30 second timeout (response can be large with 230+ suggestions)
       });
       const loaded = response.data.suggestions || [];
@@ -179,7 +177,7 @@ const PinyinGapFillSuggestions = ({ profile, onProfileUpdate }) => {
     const word = updatedSuggestion['Suggested Word']?.trim();
     if (word && word !== '') {
       try {
-        const response = await axios.get(`${API_BASE}/pinyin/word-info`, {
+        const response = await businessApi.get(`/pinyin/word-info`, {
           params: { word: word },
           timeout: 5000 // 5 second timeout - reduce from 10s to fail faster
         });
@@ -292,7 +290,7 @@ const PinyinGapFillSuggestions = ({ profile, onProfileUpdate }) => {
         hasImage: s['Has Image']
       })));
       
-      await axios.put(`${API_BASE}/pinyin/gap-fill-suggestions`, {
+      await businessApi.put(`/pinyin/gap-fill-suggestions`, {
         suggestions: approvedSuggestions
       }, {
         timeout: 10000 // 10 second timeout
@@ -340,7 +338,7 @@ const PinyinGapFillSuggestions = ({ profile, onProfileUpdate }) => {
           aoa: s.AoA !== '-' ? parseFloat(s.AoA) : null
         }));
 
-      await axios.post(`${API_BASE}/pinyin/apply-suggestions`, {
+      await businessApi.post(`/pinyin/apply-suggestions`, {
         suggestions: approvedSuggestions,
         profile_id: profile?.id
       });

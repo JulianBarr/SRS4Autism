@@ -1,26 +1,46 @@
 import axios from 'axios';
 
-// Default API Base for Fat Client Backend (Business Logic)
-export const API_BASE = 'http://127.0.0.1:8000';
+// Local engine (business logic) — keep in sync with CRA env
+export const API_BASE = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000';
 
-// Cloud API Base for 4A System (Auth, Admin, etc.)
-export const CLOUD_API_BASE = 'http://127.0.0.1:8080';
+// Cloud control plane (auth, admin, …)
+export const CLOUD_API_BASE =
+  process.env.REACT_APP_CLOUD_API_URL || 'http://127.0.0.1:8080';
 
-// Create Business API Instance
-const businessApi = axios.create({
+/** Axios instance for port 8000; attaches Bearer token from localStorage. */
+export const businessApi = axios.create({
   baseURL: API_BASE,
 });
 
-// Setup axios interceptor for JWT on Business API
-businessApi.interceptors.request.use(config => {
-  const token = localStorage.getItem('access_token');
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+businessApi.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('access_token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+let businessApiAuthRedirectScheduled = false;
+function clearAuthAndReloadToLogin() {
+  if (businessApiAuthRedirectScheduled) return;
+  businessApiAuthRedirectScheduled = true;
+  localStorage.removeItem('access_token');
+  localStorage.removeItem('user_info');
+  window.location.href = '/';
+}
+
+businessApi.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      clearAuthAndReloadToLogin();
+    }
+    return Promise.reject(error);
   }
-  return config;
-}, error => {
-  return Promise.reject(error);
-});
+);
 
 // Create Cloud API Instance
 export const cloudApi = axios.create({
@@ -38,4 +58,5 @@ cloudApi.interceptors.request.use(config => {
   return Promise.reject(error);
 });
 
+// Default export = business API (same as named `businessApi`)
 export default businessApi;

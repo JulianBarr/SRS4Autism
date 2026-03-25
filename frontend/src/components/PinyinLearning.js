@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-
-const API_BASE = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000';
+import businessApi, { API_BASE } from '../utils/api';
 
 /**
  * Image component with fallback paths (similar to PinyinGapFillSuggestions)
@@ -86,11 +84,11 @@ const PinyinLearning = ({ profile, onProfileUpdate }) => {
       // Load both element and syllable notes regardless of active tab
       // This allows selecting from both tabs simultaneously
       const [elementsResponse, syllablesResponse] = await Promise.all([
-        axios.get(`${API_BASE}/pinyin/elements`, {
+        businessApi.get(`/pinyin/elements`, {
           params: { profile_id: profile.id },
           timeout: 10000
         }),
-        axios.get(`${API_BASE}/pinyin/syllables`, {
+        businessApi.get(`/pinyin/syllables`, {
           params: { profile_id: profile.id },
           timeout: 10000
         })
@@ -195,7 +193,7 @@ const PinyinLearning = ({ profile, onProfileUpdate }) => {
 
       // Delete syllable notes
       if (activeTab === 'syllables') {
-        const response = await axios.delete(`${API_BASE}/pinyin/syllables`, {
+        const response = await businessApi.delete(`/pinyin/syllables`, {
           data: { note_ids: notesToDelete },
           timeout: 10000
         });
@@ -247,7 +245,7 @@ const PinyinLearning = ({ profile, onProfileUpdate }) => {
 
       // Sync both types together in the same deck, ordered by 5-stage curriculum
       // Order: Stage 1 initials → Stage 1 finals → Stage 1 syllables → Stage 2 initials → ...
-      const response = await axios.post(`${API_BASE}/pinyin/sync`, {
+      const response = await businessApi.post(`/pinyin/sync`, {
         profile_id: profile.id,
         element_note_ids: elementNoteIds,
         syllable_note_ids: syllableNoteIds,

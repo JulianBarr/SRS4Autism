@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import axios from 'axios';
+import businessApi from '../utils/api';
 import { useLanguage } from '../i18n/LanguageContext';
 import MasteredWordsManager from './MasteredWordsManager';
 import MasteredEnglishWordsManager from './MasteredEnglishWordsManager';
@@ -9,8 +9,6 @@ import ChineseWordRecognition from './ChineseWordRecognition';
 import EnglishWordRecognition from './EnglishWordRecognition';
 import RecommendationSmartConfig from './RecommendationSmartConfig';
 import theme from '../styles/theme';
-
-const API_BASE = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000';
 
 const LanguageContentManager = ({ profile, onProfileUpdate }) => {
   const { t } = useLanguage();
@@ -262,7 +260,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
         max_hsk_level: config.max_hsk_level
       };
       
-      const response = await axios.post(`${API_BASE}/kg/chinese-ppr-recommendations?t=${Date.now()}`, requestConfig, {
+      const response = await businessApi.post(`/kg/chinese-ppr-recommendations?t=${Date.now()}`, requestConfig, {
         headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' }
       });
       
@@ -317,7 +315,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
         mastered_words: newMastered.join(', ')
       };
       
-      await axios.put(`${API_BASE}/profiles/${profile.name}`, updatedProfile);
+      await businessApi.put(`/profiles/${profile.name}`, updatedProfile);
       if (onProfileUpdate) onProfileUpdate();
       
       const addedCount = selectedRecommendations.size;
@@ -368,7 +366,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
         max_level: config.max_hsk_level
       };
       
-      const response = await axios.post(`${API_BASE}/kg/ppr-recommendations?t=${Date.now()}`, requestConfig, {
+      const response = await businessApi.post(`/kg/ppr-recommendations?t=${Date.now()}`, requestConfig, {
         headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' },
         signal: abortController.signal
       });
@@ -419,7 +417,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
         mastered_english_words: newMastered.join(', ')
       };
       
-      await axios.put(`${API_BASE}/profiles/${profile.name}`, updatedProfile);
+      await businessApi.put(`/profiles/${profile.name}`, updatedProfile);
       if (onProfileUpdate) {
         await onProfileUpdate();
       }
@@ -446,7 +444,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
         ? profile.mastered_grammar.split(',').map(g => g.trim()).filter(g => g)
         : [];
       
-      const response = await axios.post(`${API_BASE}/kg/grammar-recommendations`, {
+      const response = await businessApi.post(`/kg/grammar-recommendations`, {
         mastered_grammar: mastered_grammar_array,
         profile_id: profile.id || profile.name,
         language: lang
@@ -490,7 +488,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
         mastered_grammar: newMastered.join(',')
       };
       
-      await axios.put(`${API_BASE}/profiles/${profile.name}`, updatedProfile);
+      await businessApi.put(`/profiles/${profile.name}`, updatedProfile);
       if (onProfileUpdate) onProfileUpdate();
       
       const addedCount = selectedGrammarRecommendations.size;
@@ -514,7 +512,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
       const config = configOverride || integratedPprConfig;
       // Sanitize config to prevent circular reference errors during JSON.stringify
       const sanitizedConfig = JSON.parse(JSON.stringify(config));
-      const response = await axios.post(`${API_BASE}/recommendations/integrated`, {
+      const response = await businessApi.post(`/recommendations/integrated`, {
         profile_id: profile.id || profile.name,
         language: selectedLanguage,
         ...config
@@ -568,7 +566,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
           [selectedLanguage === 'zh' ? 'mastered_words' : 'mastered_english_words']: newMastered.join(', ')
         };
         
-        await axios.put(`${API_BASE}/profiles/${profile.name}`, updatedProfile);
+        await businessApi.put(`/profiles/${profile.name}`, updatedProfile);
       }
 
       // Add grammar points
@@ -585,7 +583,7 @@ const LanguageContentManager = ({ profile, onProfileUpdate }) => {
           mastered_grammar: newMastered.join(',')
         };
         
-        await axios.put(`${API_BASE}/profiles/${profile.name}`, updatedProfile);
+        await businessApi.put(`/profiles/${profile.name}`, updatedProfile);
       }
 
       if (onProfileUpdate) onProfileUpdate();

@@ -1,11 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
-import axios from 'axios';
+import businessApi from '../utils/api';
 import { RefreshCw } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 import SearchableDropdown from './SearchableDropdown';
 import RichTextEditor from './RichTextEditor';
-
-const API_BASE = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000';
 
 const CardImagePreview = ({ card }) => {
   const [imageData, setImageData] = useState(card?.image_data || null);
@@ -33,7 +31,7 @@ const CardImagePreview = ({ card }) => {
       setLoading(true);
       setError('');
       try {
-        const response = await axios.get(`${API_BASE}/cards/${card.id}/image-data`);
+        const response = await businessApi.get(`/cards/${card.id}/image-data`);
         if (!cancelled) {
           setImageData(response.data?.image_data || null);
         }
@@ -204,7 +202,7 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
 
   const loadAnkiProfiles = async () => {
     try {
-      const response = await axios.get(`${API_BASE}/anki-profiles`);
+      const response = await businessApi.get(`/anki-profiles`);
       console.log('Loaded Anki profiles:', response.data);
       setAnkiProfiles(response.data);
       
@@ -220,7 +218,7 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
 
   const loadAvailableDecks = async () => {
     try {
-      const response = await axios.get(`${API_BASE}/anki/decks`);
+      const response = await businessApi.get(`/anki/decks`);
       console.log('Loaded Anki decks:', response.data.decks);
       setAvailableDecks(response.data.decks || []);
     } catch (error) {
@@ -237,8 +235,8 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
         deck_name: 'Curious Mario',
         is_active: true
       };
-      await axios.post(`${API_BASE}/anki-profiles`, defaultProfile);
-      const response = await axios.get(`${API_BASE}/anki-profiles`);
+      await businessApi.post(`/anki-profiles`, defaultProfile);
+      const response = await businessApi.get(`/anki-profiles`);
       setAnkiProfiles(response.data);
       setSelectedDeck('Curious Mario');
     } catch (error) {
@@ -314,7 +312,7 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
     }
     
     try {
-      await axios.delete(`${API_BASE}/cards/${cardId}`);
+      await businessApi.delete(`/cards/${cardId}`);
       onRefresh();
     } catch (error) {
       console.error('Error deleting card:', error);
@@ -348,7 +346,7 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
     
     try {
       for (const cardId of selectedCards) {
-        await axios.delete(`${API_BASE}/cards/${cardId}`);
+        await businessApi.delete(`/cards/${cardId}`);
       }
       setSelectedCards([]);
       onRefresh();
@@ -374,7 +372,7 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
     if (!editingCard || savingEdit) return;
     setSavingEdit(true);
     try {
-      await axios.put(`${API_BASE}/cards/${editingCard}`, editForm);
+      await businessApi.put(`/cards/${editingCard}`, editForm);
       if (onRefresh && typeof onRefresh === 'function') {
         await onRefresh();
       }
@@ -425,8 +423,8 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
         'X-LLM-Base-URL': llmBaseUrl
       };
       
-      const response = await axios.post(
-        `${API_BASE}/cards/${cardId}/generate-image`, 
+      const response = await businessApi.post(
+        `/cards/${cardId}/generate-image`, 
         requestBody,
         { headers }
       );
@@ -503,7 +501,7 @@ const CardCuration = ({ cards, onApproveCard, onRefresh }) => {
     console.log('Deck name:', deckName);
 
     try {
-      const response = await axios.post(`${API_BASE}/anki/sync`, {
+      const response = await businessApi.post(`/anki/sync`, {
         deck_name: deckName,
         card_ids: cardsToSync.map(c => c.id)
       });

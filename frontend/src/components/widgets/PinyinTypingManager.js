@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import businessApi, { API_BASE } from '../../utils/api';
 import { useLanguage } from '../../i18n/LanguageContext';
 import KeyboardTutorModal from '../KeyboardTutorModal';
 import PinyinTypingModal from '../PinyinTypingModal';
-
-const API_BASE = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000';
 
 /**
  * PinyinTypingManager - Management Dashboard for Pinyin Typing Curriculum
@@ -33,7 +31,7 @@ const PinyinTypingManager = ({ profile, onClose }) => {
       setLoading(true);
       setError(null);
       
-      const response = await axios.get(`${API_BASE}/api/typing-course`);
+      const response = await businessApi.get('/api/typing-course');
       setCourseData(response.data);
     } catch (err) {
       console.error('Error loading course data:', err);
@@ -49,7 +47,7 @@ const PinyinTypingManager = ({ profile, onClose }) => {
       setSyncing(true);
       setSyncStatus(null);
       
-      const response = await axios.post(`${API_BASE}/api/typing-course/sync`, {
+      const response = await businessApi.post('/api/typing-course/sync', {
         profile_id: profile?.id
       });
       

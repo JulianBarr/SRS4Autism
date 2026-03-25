@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
-import axios from 'axios';
+import businessApi from '../utils/api';
 import { useLanguage } from '../i18n/LanguageContext';
 import TopicChat from './TopicChat';
-
-const API_BASE = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000';
 
 const MasteredGrammarManager = ({ profile, onClose, onUpdate, grammarLanguage = 'zh' }) => {
   const { language: uiLanguage, t } = useLanguage();
@@ -54,10 +52,10 @@ const MasteredGrammarManager = ({ profile, onClose, onUpdate, grammarLanguage = 
       setLoading(true);
       try {
         const [grammarResponse, correctionsResponse] = await Promise.all([
-          axios.get(`${API_BASE}/vocabulary/grammar`, {
+          businessApi.get('/vocabulary/grammar', {
             params: { language: grammarLanguage }
           }),
-          axios.get(`${API_BASE}/vocabulary/grammar/corrections`).catch(() => ({ data: { corrections: {} } }))
+          businessApi.get('/vocabulary/grammar/corrections').catch(() => ({ data: { corrections: {} } }))
         ]);
         
         let grammarPoints = grammarResponse.data.grammar_points || [];
@@ -98,7 +96,7 @@ const MasteredGrammarManager = ({ profile, onClose, onUpdate, grammarLanguage = 
         const toSave = masteredSetRef.current;
         const masteredGrammarString = Array.from(toSave).join(',');
         const profileData = { ...profile, mastered_grammar: masteredGrammarString };
-        axios.put(`${API_BASE}/profiles/${profile.name}`, profileData)
+        businessApi.put('/profiles/' + profile.name, profileData)
           .then((res) => onUpdateRef.current?.(res.data))
           .catch((err) => console.error('Flush save on unmount failed:', err));
       }
@@ -117,7 +115,7 @@ const MasteredGrammarManager = ({ profile, onClose, onUpdate, grammarLanguage = 
         // Join URIs with comma only (no space) since URIs don't contain commas
         const masteredGrammarString = Array.from(grammarToSave).join(',');
         const profileData = { ...profile, mastered_grammar: masteredGrammarString };
-        const response = await axios.put(`${API_BASE}/profiles/${profile.name}`, profileData);
+        const response = await businessApi.put('/profiles/' + profile.name, profileData);
         setLastSaveTime(new Date());
         onUpdate?.(response.data);
       } catch (error) {
@@ -125,7 +123,7 @@ const MasteredGrammarManager = ({ profile, onClose, onUpdate, grammarLanguage = 
         alert(t('failedToSaveMasteredGrammar'));
         // Revert to server state by refetching
         try {
-          const res = await axios.get(`${API_BASE}/profiles/${profile.name}`);
+          const res = await businessApi.get('/profiles/' + profile.name);
           const grammar = (res.data.mastered_grammar || '')
             .split(',')
             .map(g => g.trim())
@@ -184,7 +182,7 @@ const MasteredGrammarManager = ({ profile, onClose, onUpdate, grammarLanguage = 
     setSavingGrammar(true);
     try {
       const encoded_uri = encodeURIComponent(gp_uri);
-      await axios.put(`${API_BASE}/vocabulary/grammar/${encoded_uri}`, editedGrammar);
+      await businessApi.put('/vocabulary/grammar/' + encoded_uri, editedGrammar);
       
       // Update local state
       setGrammarPoints(prev => prev.map(g => 

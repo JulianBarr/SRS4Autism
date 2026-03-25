@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { isValidId } from '../utils/apiUtils';
-import api from '../utils/api';
-
-const API_BASE = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000';
+import api, { API_BASE } from '../utils/api';
 
 /**
  * PinyinTypingModal - Level 2: Pinyin Typing game for Logic City

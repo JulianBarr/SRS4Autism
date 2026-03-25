@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import businessApi from '../utils/api';
 import { useLanguage } from '../i18n/LanguageContext';
-
-const API_BASE = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000';
 
 const TemplateManager = () => {
   const { t } = useLanguage();
@@ -21,7 +19,7 @@ const TemplateManager = () => {
 
   const loadTemplates = async () => {
     try {
-      const response = await axios.get(`${API_BASE}/templates`);
+      const response = await businessApi.get('/templates');
       setTemplates(response.data);
     } catch (error) {
       console.error('Error loading templates:', error);
@@ -41,9 +39,9 @@ const TemplateManager = () => {
       };
 
       if (editingTemplate) {
-        await axios.put(`${API_BASE}/templates/${editingTemplate}`, templateData);
+        await businessApi.put('/templates/' + editingTemplate, templateData);
       } else {
-        await axios.post(`${API_BASE}/templates`, templateData);
+        await businessApi.post('/templates', templateData);
       }
 
       loadTemplates();
@@ -67,7 +65,7 @@ const TemplateManager = () => {
   const handleDelete = async (templateId) => {
     if (window.confirm(t('areYouSureDeleteTemplate'))) {
       try {
-        await axios.delete(`${API_BASE}/templates/${templateId}`);
+        await businessApi.delete('/templates/' + templateId);
         loadTemplates();
       } catch (error) {
         console.error('Error deleting template:', error);

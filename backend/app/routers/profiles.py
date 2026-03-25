@@ -15,6 +15,7 @@ sys.path.append(str(Path(__file__).resolve().parent.parent.parent))
 from database.db import get_db
 from database.services import ProfileService
 from app.core.config import PROFILES_FILE, ANKI_PROFILES_FILE, PROMPT_TEMPLATES_FILE
+from app.dependencies.jwt_auth import TokenUser, get_current_user_from_token
 from utils import generate_slug
 
 router = APIRouter()
@@ -80,12 +81,35 @@ def save_json_file(file_path: Path, data: Any):
 # Profile Routes
 # ============================================================================
 
+# Role strings match cuma_cloud.models.RoleEnum.value (lowercase).
+_ROLES_FULL_ACCESS = frozenset({"teacher", "qcq_admin", "agent"})
+
+
+def _list_profiles_parent_filter(current: TokenUser) -> Optional[int]:
+    """PARENT: restrict to own children; staff/agent: no SQL parent filter."""
+    if current.role == "parent":
+        return current.user_id
+    if current.role in _ROLES_FULL_ACCESS:
+        return None
+    raise HTTPException(
+        status_code=403,
+        detail="Unsupported role for listing profiles",
+    )
+
+
 @router.get("/profiles", response_model=List[ChildProfile])
 async def get_profiles(
-    parent_id: Optional[int] = None,
-    db: Session = Depends(get_db)
+    current: TokenUser = Depends(get_current_user_from_token),
+    db: Session = Depends(get_db),
 ):
-    """Get all profiles from database, optionally filtered by parent_id"""
+    """
+    List child profiles with server-side isolation.
+
+    Requires ``Authorization: Bearer <token>`` from the cloud control plane.
+    The ``parent_id`` query parameter is ignored; PARENT users are scoped to
+    ``parent_id == JWT sub``; TEACHER / QCQ_ADMIN / AGENT may list all.
+    """
+    parent_id = _list_profiles_parent_filter(current)
     profiles = ProfileService.get_all(db, parent_id=parent_id)
     return [ProfileService.profile_to_dict(db, p) for p in profiles]
 

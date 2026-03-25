@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
-import axios from 'axios';
+import businessApi, { API_BASE } from '../utils/api';
 import { useLanguage } from '../i18n/LanguageContext';
-
-const API_BASE = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000';
 
 // Map POS values from CEFR-J CSV to i18n keys
 const POS_TO_KEY = {
@@ -61,7 +59,7 @@ const MasteredEnglishWordsManager = ({ profile, onUpdate }) => {
   useEffect(() => {
     const loadVocabulary = async () => {
       try {
-        const response = await axios.get(`${API_BASE}/vocabulary/cefr`);
+        const response = await businessApi.get('/vocabulary/cefr');
         setVocabulary(response.data.words || []);
       } catch (error) {
         console.error('Error loading vocabulary:', error);
@@ -125,7 +123,7 @@ const MasteredEnglishWordsManager = ({ profile, onUpdate }) => {
       setLoadingImages(true);
       try {
         console.log('Loading images for words:', wordsToLoad.slice(0, 10), '...');
-        const response = await axios.post(`${API_BASE}/vocabulary/images`, {
+        const response = await businessApi.post('/vocabulary/images', {
           words: wordsToLoad
         });
         const foundCount = Object.keys(response.data).filter(k => response.data[k]).length;
@@ -160,7 +158,7 @@ const MasteredEnglishWordsManager = ({ profile, onUpdate }) => {
       try {
         const masteredWordsString = Array.from(wordsToSave).join(', ');
         const profileData = { ...profile, mastered_english_words: masteredWordsString };
-        await axios.put(`${API_BASE}/profiles/${profile.name}`, profileData);
+        await businessApi.put('/profiles/' + profile.name, profileData);
         setLastSaveTime(new Date());
         if (immediate && onUpdate) {
           await onUpdate();

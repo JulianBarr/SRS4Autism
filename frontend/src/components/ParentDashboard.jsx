@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from '../utils/api';
+import businessApi from '../utils/api';
 import DailyDeck from './DailyDeck';
-
-const API_BASE = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000';
 
 const ParentDashboard = ({ currentUser }) => {
   const [profiles, setProfiles] = useState([]);
@@ -14,11 +12,7 @@ const ParentDashboard = ({ currentUser }) => {
     const fetchProfiles = async () => {
       try {
         setLoading(true);
-        let profilesUrl = `${API_BASE}/profiles`;
-        if (currentUser && currentUser.role === 'PARENT') {
-          profilesUrl += `?parent_id=${currentUser.id}`;
-        }
-        const response = await axios.get(profilesUrl);
+        const response = await businessApi.get('/profiles');
         setProfiles(response.data);
       } catch (err) {
         setError('Failed to load profiles.');

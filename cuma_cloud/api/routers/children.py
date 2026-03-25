@@ -6,7 +6,11 @@ from fastapi import APIRouter, Depends
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from cuma_cloud.api.dependencies import get_current_user_abac, verify_child_access
+from cuma_cloud.api.dependencies import (
+    get_authorized_child,
+    get_current_user_abac,
+    verify_child_access,
+)
 from cuma_cloud.core.database import get_db
 from cuma_cloud.models import ChildProfile, RoleEnum, User
 
@@ -48,3 +52,17 @@ async def get_child(child: ChildProfile = Depends(verify_child_access)) -> dict:
     通过 verify_child_access 注入，鉴权通过后返回。
     """
     return {"id": child.id, "name": child.name}
+
+
+@router.get("/test-auth/{child_id}")
+async def test_child_access(child: ChildProfile = Depends(get_authorized_child)) -> dict:
+    """
+    Temporary test endpoint to verify RBAC data isolation via get_authorized_child.
+    If the request passes the dependency, the caller is allowed to access that child.
+    """
+    return {
+        "status": "success",
+        "message": "Access Granted! 🛡️",
+        "authorized_child_name": child.name,
+        "parent_id": child.parent_id,
+    }
