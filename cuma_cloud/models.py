@@ -129,6 +129,9 @@ class ChildProfile(Base):
     iep_logs: Mapped[list["IepCommunicationLog"]] = relationship(
         "IepCommunicationLog", back_populates="child", foreign_keys="IepCommunicationLog.child_id"
     )
+    ai_drafts: Mapped[list["IepAiDraft"]] = relationship(
+        "IepAiDraft", back_populates="child", foreign_keys="IepAiDraft.child_id"
+    )
     # Administrative links to teachers (e.g., assignment links)
     teacher_links: Mapped[list["UserChildLink"]] = relationship(
         "UserChildLink", back_populates="child", cascade="all, delete-orphan", foreign_keys="UserChildLink.child_id"
@@ -225,3 +228,33 @@ class IepCommunicationLog(Base):
 
     child: Mapped["ChildProfile"] = relationship("ChildProfile", back_populates="iep_logs", foreign_keys=[child_id])
     sender: Mapped["User"] = relationship("User", back_populates="sent_iep_logs", foreign_keys=[sender_id])
+
+    ai_drafts: Mapped[list["IepAiDraft"]] = relationship(
+        "IepAiDraft", back_populates="parent_log", cascade="all, delete-orphan", foreign_keys="IepAiDraft.parent_log_id"
+    )
+
+
+class IepAiDraft(Base):
+    """
+    AI 暂存的建议草稿，用于老师审核 (Human-in-the-loop)。
+    """
+
+    __tablename__ = "iep_ai_drafts"
+
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    child_id: Mapped[int] = mapped_column(
+        ForeignKey("child_profiles.id", ondelete="CASCADE"), nullable=False, index=True
+    )
+    parent_log_id: Mapped[int] = mapped_column(
+        ForeignKey("iep_communication_logs.id", ondelete="CASCADE"), nullable=False, index=True
+    )
+    draft_content: Mapped[str] = mapped_column(String, nullable=False)
+    status: Mapped[str] = mapped_column(String(50), default="PENDING", nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+
+    child: Mapped["ChildProfile"] = relationship(
+        "ChildProfile", back_populates="ai_drafts", foreign_keys=[child_id]
+    )
+    parent_log: Mapped["IepCommunicationLog"] = relationship(
+        "IepCommunicationLog", back_populates="ai_drafts", foreign_keys=[parent_log_id]
+    )
