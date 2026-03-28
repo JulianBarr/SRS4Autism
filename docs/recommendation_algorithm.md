@@ -58,7 +58,7 @@ Word: 小说 (novel, HSK 5)
 
 ## Current Configuration
 
-**Profile:** Zhou Yiming (周一鸣）  
+**Profile:** Zhou Yiming (周一鸣)  
 **Total Mastered:** 2,423 words
 
 **Mastery Rates:**

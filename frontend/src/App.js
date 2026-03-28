@@ -531,7 +531,7 @@ function App() {
                   </button>
                 </div>
                 {cognitionContentView === 'daily-deck' ? (
-                  <DailyDeck childName={currentProfile?.name || '小明'} childId={currentProfile?.id} />
+                  <DailyDeck childName={currentProfile?.name || null} childId={currentProfile?.id} />
                 ) : (
                   <CognitionContentManager />
                 )}

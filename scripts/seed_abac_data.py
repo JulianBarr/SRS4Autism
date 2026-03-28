@@ -73,7 +73,7 @@ async def seed_data():
 
         # 🌟 抢救周一鸣：在真实数据库里给他建档，并分配给 Teacher A
         child_yiming = ChildProfile(
-            name="Zhou Yiming (周一鸣）",
+            name="Zhou Yiming (周一鸣)",
             institution_id=qcq_inst.id,
             assigned_teacher_id=teacher_a.id
         )

@@ -120,12 +120,15 @@ function QuestTopicChatModal({ quest, childName, childId, onClose }) {
         if (!active) return;
         
         const safeChildName = (childName || '').trim();
-        const match = res.data.find(c => (c.name || '').trim() === safeChildName);
+        const normalize = (str) => str ? str.replace(/\s+/g, '').toLowerCase() : '';
+        const match = childName ? res.data.find(c => normalize(c.name) === normalize(childName)) : null;
         
         if (match && match.id) {
           if (active) setResolvedChildId(match.id);
         } else if (res.data && res.data.length > 0) {
-          console.warn('Name mismatch, fallback to first child. Wanted:', safeChildName, 'Got:', res.data[0].name);
+          if (childName) {
+            console.warn('Name mismatch, fallback to first child. Wanted:', safeChildName, 'Got:', res.data[0].name);
+          }
           if (active) setResolvedChildId(res.data[0].id);
         } else {
           console.warn('Could not resolve integer childId from cloudApi for:', childName);
@@ -575,7 +578,7 @@ const ExpandableQuestCard = ({ quest, isCompleted, showButtons, submitting, onRe
   );
 };
 
-function DailyDeck({ childName = '小明', childId }) {
+function DailyDeck({ childName = null, childId }) {
   const [pending, setPending] = useState([]);
   const [completedToday, setCompletedToday] = useState([]);
   const [historyQuests, setHistoryQuests] = useState([]);
@@ -617,6 +620,10 @@ function DailyDeck({ childName = '小明', childId }) {
   };
 
   const fetchDailyQuests = useCallback(async () => {
+    if (!childName) {
+      setLoading(false);
+      return;
+    }
     setLoading(true);
     setError(null);
     try {
@@ -664,6 +671,14 @@ function DailyDeck({ childName = '小明', childId }) {
   const totalCount = questCount;
   const completedCount = completedToday.length;
   const allDone = totalCount > 0 && completedCount >= totalCount;
+
+  if (!childName) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-slate-600 text-lg">请先选择儿童档案</div>
+      </div>
+    );
+  }
 
   if (loading) {
     return (
