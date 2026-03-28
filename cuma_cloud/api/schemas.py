@@ -120,3 +120,19 @@ class IepLogResponse(BaseModel):
     sender_role: Optional[str] = None
     
     model_config = ConfigDict(from_attributes=True)
+
+
+class PendingDraftResponse(BaseModel):
+    """Schema for returning a pending AI draft to the teacher."""
+    id: int
+    draft_content: str
+    child_name: str
+    parent_log_content: str
+    created_at: datetime
+    
+    model_config = ConfigDict(from_attributes=True)
+
+
+class ApproveDraftRequest(BaseModel):
+    """Schema for approving and editing an AI draft."""
+    edited_content: str

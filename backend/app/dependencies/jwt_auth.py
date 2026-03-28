@@ -21,7 +21,7 @@ _DEFAULT_JWT_SECRET_PLACEHOLDER = (
 JWT_SECRET = os.environ.get("JWT_SECRET", _DEFAULT_JWT_SECRET_PLACEHOLDER)
 JWT_ALGORITHM = "HS256"
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
 
 
 @dataclass(frozen=True)

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import api, { API_BASE } from '../utils/api';
+import api, { API_BASE, cloudApi } from '../utils/api';
 import AICard from './AICard';
 
 //       onMouseEnter={() => setShow(true)}
@@ -104,14 +104,47 @@ function QuestTopicChatModal({ quest, childName, childId, onClose }) {
   const [input, setInput] = useState('');
   const [sending, setSending] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [resolvedChildId, setResolvedChildId] = useState(null);
   const fileInputRef = useRef(null);
   const messagesEndRef = useRef(null);
 
+  useEffect(() => {
+    let active = true;
+    const resolveId = async () => {
+      try {
+        if (typeof childId === 'number' || (typeof childId === 'string' && childId.trim() !== '' && !isNaN(Number(childId)))) {
+          if (active) setResolvedChildId(Number(childId));
+          return;
+        }
+        const res = await cloudApi.get('/api/v1/children/me');
+        if (!active) return;
+        
+        const safeChildName = (childName || '').trim();
+        const match = res.data.find(c => (c.name || '').trim() === safeChildName);
+        
+        if (match && match.id) {
+          if (active) setResolvedChildId(match.id);
+        } else if (res.data && res.data.length > 0) {
+          console.warn('Name mismatch, fallback to first child. Wanted:', safeChildName, 'Got:', res.data[0].name);
+          if (active) setResolvedChildId(res.data[0].id);
+        } else {
+          console.warn('Could not resolve integer childId from cloudApi for:', childName);
+          if (active) setLoading(false); // Unblock loading state if resolution fails
+        }
+      } catch (err) {
+        console.error('Failed to resolve child ID:', err);
+        if (active) setLoading(false); // Unblock loading on error
+      }
+    };
+    resolveId();
+    return () => { active = false; };
+  }, [childName, childId]);
+
   const fetchLogs = useCallback(async (silent = false) => {
-    if (!quest?.quest_id || !childId) return;
+    if (!quest?.quest_id || !resolvedChildId) return;
     if (!silent) setLoading(true);
     try {
-      const res = await api.get(`/api/v1/children/${childId}/logs`);
+      const res = await cloudApi.get(`/api/v1/children/${resolvedChildId}/logs`);
       const data = res.data;
       
       const mappedLogs = data.map(log => {
@@ -144,7 +177,7 @@ function QuestTopicChatModal({ quest, childName, childId, onClose }) {
     } finally {
       if (!silent) setLoading(false);
     }
-  }, [quest?.quest_id, childId]);
+  }, [quest?.quest_id, resolvedChildId]);
 
   useEffect(() => {
     fetchLogs();
@@ -160,10 +193,10 @@ function QuestTopicChatModal({ quest, childName, childId, onClose }) {
 
   const handleSend = async () => {
     const content = input.trim();
-    if (!content || sending || !childId) return;
+    if (!content || sending || !resolvedChildId) return;
     setSending(true);
     try {
-      const res = await api.post(`/api/v1/children/${childId}/logs`, { content });
+      const res = await cloudApi.post(`/api/v1/children/${resolvedChildId}/logs`, { content });
       setInput('');
       setSelectedFile(null);
       await fetchLogs(true);

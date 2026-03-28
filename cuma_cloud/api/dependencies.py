@@ -14,7 +14,7 @@ from cuma_cloud.core.config import settings
 from cuma_cloud.core.database import get_db
 from cuma_cloud.models import CloudAccount, ChildProfile, RoleEnum, User
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
 
 
 async def get_current_user(

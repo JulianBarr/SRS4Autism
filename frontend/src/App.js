@@ -22,6 +22,7 @@ import UserProfile from './components/UserProfile';
 import DailyDeck from './components/DailyDeck';
 import Login from './components/Login';
 import ParentDashboard from './components/ParentDashboard'; // New import for ParentDashboard
+import TeacherPendingDrafts from './components/TeacherPendingDrafts'; // AI Copilot for Teachers
 import { useLanguage } from './i18n/LanguageContext';
 import businessApi from './utils/api';
 import './App.css';
@@ -458,23 +459,26 @@ function App() {
         ) : (
           <>
             {activeTab === 'main' && (
-              <div className="main-workflow">
-            <div className="workflow-left">
-              <ChatAssistant 
-                profiles={profiles}
-                currentProfile={currentProfile}
-                onNewCard={handleNewCard}
-              />
-            </div>
-            <div className="workflow-right">
-              <CardCuration 
-                cards={cards}
-                onApproveCard={handleApproveCard}
-                onRefresh={loadCardsOnly}
-              />
-            </div>
-          </div>
-        )}
+              <div className="flex flex-col space-y-4">
+                <TeacherPendingDrafts />
+                <div className="main-workflow">
+                  <div className="workflow-left">
+                    <ChatAssistant 
+                      profiles={profiles}
+                      currentProfile={currentProfile}
+                      onNewCard={handleNewCard}
+                    />
+                  </div>
+                  <div className="workflow-right">
+                    <CardCuration 
+                      cards={cards}
+                      onApproveCard={handleApproveCard}
+                      onRefresh={loadCardsOnly}
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
 
         {activeTab === 'content' && (
           <div>

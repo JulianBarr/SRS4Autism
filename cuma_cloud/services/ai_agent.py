@@ -11,7 +11,7 @@ from pydantic import BaseModel, Field
 from google import genai
 
 from cuma_cloud.core.database import async_sessionmaker_factory
-from cuma_cloud.models import IepCommunicationLog, RoleEnum, User, ChildProfile
+from cuma_cloud.models import IepCommunicationLog, RoleEnum, User, ChildProfile, IepAiDraft
 
 # Setup logger
 import logging
@@ -48,12 +48,12 @@ class AICardResponse(BaseModel):
     teaching_steps: list[str] = Field(description="教学步骤", default_factory=list)
     home_generalization: str = Field(description="家庭泛化建议", default="")
 
-async def trigger_ai_assistant(child_id: int):
+async def trigger_ai_assistant(child_id: int, parent_log_id: int = None):
     """
     Asynchronous background task to trigger Gemini AI assistant
     Must use its own database session.
     """
-    logger.info(f"🚀 Starting background AI task for child {child_id}...")
+    logger.info(f"🚀 Starting background AI task for child {child_id}, triggered by log {parent_log_id}...")
     
     client = get_gemini_client()
     if not client:
@@ -144,40 +144,19 @@ async def trigger_ai_assistant(child_id: int):
             
             final_content = f"{ai_data.get('ai_message', '为您生成了最新的干预方案：')}\n\n```json\n{payload_str}\n```"
 
-            # Get AGENT user ID
-            agent_stmt = select(User).where(User.role == RoleEnum.AGENT).limit(1)
-            agent_result = await session.execute(agent_stmt)
-            agent_user = agent_result.scalar_one_or_none()
-            
-            if agent_user:
-                agent_id = agent_user.id
-                logger.info(f"🔍 Found AGENT user, using ID: {agent_id}")
+            # 6. Save draft to DB
+            if parent_log_id:
+                new_draft = IepAiDraft(
+                    child_id=child_id,
+                    parent_log_id=parent_log_id,
+                    draft_content=final_content,
+                    status="PENDING"
+                )
+                session.add(new_draft)
+                await session.commit()
+                logger.info("✅ Agent background task finished successfully. AI draft inserted.")
             else:
-                # Fallback: find ID=3 or another user
-                check_3_stmt = select(User.id).where(User.id == 3)
-                if await session.scalar(check_3_stmt):
-                    agent_id = 3
-                    logger.warning(f"⚠️ AGENT user not found, falling back to ID: {agent_id}")
-                else:
-                    fallback_stmt = select(User.id).limit(1)
-                    agent_id = await session.scalar(fallback_stmt)
-                    logger.warning(f"⚠️ AGENT user and ID=3 not found, falling back to ID: {agent_id}")
-                    
-                if not agent_id:
-                    logger.error("❌ No user found in the database for fallback. Exiting.")
-                    return
-            
-            # 6. Save reply to DB
-            new_log = IepCommunicationLog(
-                child_id=child_id,
-                sender_id=agent_id,
-                content=final_content
-            )
-            
-            session.add(new_log)
-            await session.commit()
-            
-            logger.info("✅ Agent background task finished successfully. Real AI log inserted.")
+                logger.warning("⚠️ No parent_log_id provided, AI draft not saved.")
             
     except Exception as e:
         logger.error(f"❌ Unhandled exception in trigger_ai_assistant: {e}", exc_info=True)

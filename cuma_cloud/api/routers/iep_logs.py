@@ -35,7 +35,7 @@ async def get_iep_logs(
         
     return logs
 
-@router.post("/{child_id}/logs", response_model=IepLogResponse)
+@router.post("/{child_id}/logs")
 async def create_iep_log(
     child_id: int,
     log_in: IepLogCreate,
@@ -65,6 +65,11 @@ async def create_iep_log(
     # 检测触发 AI 关键词
     trigger_keywords = ["@AI", "@助教", "@超级助教"]
     if any(keyword in log_in.content for keyword in trigger_keywords):
-        background_tasks.add_task(trigger_ai_assistant, child_id)
+        background_tasks.add_task(trigger_ai_assistant, child_id, new_log.id)
+        return {
+            "status": "draft_created",
+            "message": "已通知老师审核",
+            "log": response_data
+        }
     
     return response_data
