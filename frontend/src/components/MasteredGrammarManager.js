@@ -536,14 +536,14 @@ const MasteredGrammarManager = ({ profile, onClose, onUpdate, grammarLanguage = 
               flexDirection: 'column',
               gap: '10px'
             }}>
-              {filteredGrammar.map((g) => {
+              {filteredGrammar.map((g, index) => {
                 const isMastered = masteredSet.has(g.gp_uri); // Use gp_uri instead of grammar_point
                 const isEditing = editingId === g.gp_uri;
                 const editData = isEditing ? editedGrammar : g;
                 
                 return (
                   <div
-                    key={g.gp_uri || g.grammar_point}
+                    key={`${g.gp_uri || g.grammar_point}-${index}`}
                     style={{
                       display: 'flex',
                       alignItems: 'flex-start',
