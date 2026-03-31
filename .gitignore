@@ -129,3 +129,4 @@ data/knowledge_graph_store/
 knowledge_graph_data/
 data_prep/QCQ_handbook/
 data_prep/handbook_sample/
+venv_data/
