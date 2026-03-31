@@ -130,3 +130,5 @@ knowledge_graph_data/
 data_prep/QCQ_handbook/
 data_prep/handbook_sample/
 venv_data/
+scripts/data_extraction/extraction_progress.json
+scripts/data_extraction/tmp_processing.pdf
