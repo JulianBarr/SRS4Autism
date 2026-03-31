@@ -1,0 +1,6386 @@
+[
+  {
+    "name": "學前兒童訓練指南",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "協康會出版。鳴謝：攜手扶弱基金 Partnership Fund for the Disadvantaged，PRINCE 太子珠寶鐘錶 Jewellery & Watch。"
+  },
+  {
+    "name": "語言",
+    "level": "L2",
+    "parent_name": "學前兒童訓練指南",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "《學前兒童訓練指南》語言篇封面。本分冊專注於學前兒童的語言能力訓練與發展。"
+  },
+  {
+    "name": "學前兒童訓練指南—語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "目錄頁面"
+  },
+  {
+    "name": "序言",
+    "level": "L2",
+    "parent_name": "學前兒童訓練指南—語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "對應頁碼：3"
+  },
+  {
+    "name": "引言",
+    "level": "L2",
+    "parent_name": "學前兒童訓練指南—語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "對應頁碼：4"
+  },
+  {
+    "name": "學習範疇",
+    "level": "L2",
+    "parent_name": "學前兒童訓練指南—語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "對應頁碼：5"
+  },
+  {
+    "name": "基本理論",
+    "level": "L2",
+    "parent_name": "學前兒童訓練指南—語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "對應頁碼：6"
+  },
+  {
+    "name": "訓練指引",
+    "level": "L2",
+    "parent_name": "學前兒童訓練指南—語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "對應頁碼：8"
+  },
+  {
+    "name": "活動目錄",
+    "level": "L2",
+    "parent_name": "學前兒童訓練指南—語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "對應頁碼：10"
+  },
+  {
+    "name": "活動建議",
+    "level": "L2",
+    "parent_name": "學前兒童訓練指南—語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "對應頁碼：14"
+  },
+  {
+    "name": "語言表達",
+    "level": "L3",
+    "parent_name": "活動建議",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "對應頁碼：14"
+  },
+  {
+    "name": "語言理解",
+    "level": "L3",
+    "parent_name": "活動建議",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "對應頁碼：114"
+  },
+  {
+    "name": "學前兒童訓練指南—語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 0,
+    "age_max_months": 72,
+    "prompt_corpus": "本套指南全套六冊，涵蓋大肌肉、小肌肉、自理、認知、語言，以及社交與情緒六個範疇，旨在解構初生至六歲幼兒在各範疇的成長發展階段、學習基礎與理論，並提供逾三千三百項訓練活動建議。"
+  },
+  {
+    "name": "序言",
+    "level": "L2",
+    "parent_name": "學前兒童訓練指南—語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "為讓老師能夠深入了解兒童的發展需要，從而因材施教，協康會整理並推出全新版《學前兒童訓練指南》，提供豐富及完備的生活化訓練活動建議及教材範例。"
+  },
+  {
+    "name": "指南背景與範疇",
+    "level": "L3",
+    "parent_name": "序言",
+    "age_min_months": 0,
+    "age_max_months": 72,
+    "prompt_corpus": "全套六冊的活動指南涵蓋大肌肉、小肌肉、自理、認知、語言，以及社交與情緒六個範疇。除了解構初生至六歲幼兒在各範疇的成長發展階段、學習基礎與理論外，本套指南共提供逾三千三百項不同程度、由淺入深及生活化的訓練活動建議，並附有圖片及教材範例，使老師和家長更容易掌握有關的訓練重點及技巧。"
+  },
+  {
+    "name": "訓練對象與應用方法",
+    "level": "L3",
+    "parent_name": "序言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "本套指南不但適用於普通兒童的學習，對有發展遲緩、學習障礙的兒童更為合用。活動建議的使用流程為：老師先利用《兒童發展評估表》為兒童進行評估，再按評估結果參照《兒童學習綱領》為兒童編定學習目標，然後從本指南揀選對應的活動建議為兒童進行訓練，使教與學更有系統，更具成效和輕鬆愉快。"
+  },
+  {
+    "name": "學前兒童訓練指南—語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "引言",
+    "level": "L2",
+    "parent_name": "學前兒童訓練指南—語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "語言是人與人溝通的主要媒介，透過有系統地組織語言符號，我們可以相互交換訊息、交流情感或進行思維活動。語言基本上是以符號代表事物和概念，符號可以是有聲的（如：說話），也可以是無聲的（如：文字、手勢、臉部表情等）。在不同的語言符號中，口語（又稱為說話或言語）是一種有聲符號，是利用語音去代表事物和思想，也是最有效、最直接的溝通方法。語言發展一般是指口語能力的發展，但由於在溝通的過程中，我們要聽得明白別人的說話，才能夠適切地回應，以達到傳情達意的效果，故此在討論語言發展時，需要包括語言理解和語言表達兩個次範疇。"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "語言的學習主要分為以下兩個次範疇：語言理解、語言表達。語言理解及表達能力包括下列兩個主要部分：詞彙和句子、問句。"
+  },
+  {
+    "name": "語言理解",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "語言理解是指憑經驗、記憶和對事物的印象，而能將語言符號與物件或活動聯繫的能力。"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "語言表達是指可以穩定地使用同一語言符號來表達一個特定意思的能力。"
+  },
+  {
+    "name": "詞彙和句子",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "語言理解及表達能力的主要部分之一。包含單詞、雙詞短句、三詞或以上句子。"
+  },
+  {
+    "name": "單詞",
+    "level": "L3",
+    "parent_name": "詞彙和句子",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "單詞：指含一個概念或意思的詞彙，例如：「杯」、「跑步」等。"
+  },
+  {
+    "name": "雙詞短句",
+    "level": "L3",
+    "parent_name": "詞彙和句子",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "雙詞短句：指由兩個不同概念或意思的詞彙所組成的短語或句子，例如：「吃蘋果」、「紅色汽球」等。"
+  },
+  {
+    "name": "三詞或以上句子",
+    "level": "L3",
+    "parent_name": "詞彙和句子",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "三詞或以上句子：指由三個或以上不同概念或意思的詞彙所組成的句子，例如：「公公買蛋糕。」、「姐姐放橙和菜在碟子上。」"
+  },
+  {
+    "name": "問句",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "語言理解及表達能力的主要部分之一。例如：「誰買東西？」、「為甚麼哥哥沒有上學？」"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "基本理論",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "在兒童發展語言的期間，發展速度雖然會因個別情況而有差異，但發展的順序和模式卻大致是相似的。由於語言的結構是按一定的規則組成，而語言的組織亦由簡至繁地發展，故此，語言學習會以循序漸進的形式，按發展階段進行。在沒有概念基礎或理解基礎下，兒童不能說出有意義的字詞；在單字詞階段的兒童亦不能說出複雜的句子。所以當兒童能說出第一個有意義的單字詞時，表示他們已具備基本的概念和理解能力；當兒童能使用複雜的句子時，表示他們已掌握了詞彙運用與組句能力。"
+  },
+  {
+    "name": "1. 語言前階段",
+    "level": "L3",
+    "parent_name": "基本理論",
+    "age_min_months": 0,
+    "age_max_months": 12,
+    "prompt_corpus": "早期的語言發展約由嬰兒出生至十或十二個月期間進行，這階段的兒童依賴很多非語言資料（如：表情、手勢、動作、環境等）來對語言的整體行為作出理解。兒童的視覺及聽覺接收是語言發展的基礎。故此，語言理解的初期訓練重點主要在建立視覺反應、社交反應、聽覺反應，以及建立語言前技能，如：配對技巧、遊戲技巧、輪流作轉技巧、環境性理解等。在這階段，表達能力的發展是整體性的，兒童會運用聲音、語調、身體動作及手勢來表達意思。因此，語言表達的初期訓練重點主要在建立兒童的發聲能力、動作或手勢溝通，以及模仿能力。兒童必須掌握這些基本的技能，及具備適當的語言理解能力，才能進入口語階段。"
+  },
+  {
+    "name": "2. 單詞階段",
+    "level": "L3",
+    "parent_name": "基本理論",
+    "age_min_months": 10,
+    "age_max_months": null,
+    "prompt_corpus": "精細的語言理解大概於出生十個月後開始，這階段的兒童開始能理解語句中的重要字眼。初期理解的詞彙主要以名詞為主，繼而發展至動詞、形容詞等。至於表達能力一般較理解能力遲三至四個月才出現，大概十三至十四個月大的兒童才能運用單字詞溝通，其中亦以名詞佔多數，其後漸漸增加動詞、形容詞等其它詞類。在詞彙的學習過程中，除了語言能力外，兒童亦須具備記憶、組織、順序等能力。故此，語言能力和認知能力是不可分割的。基於上述原因，在語言範疇內有部分的學習目標，會與認知範疇內的目標相同。"
+  },
+  {
+    "name": "語言發展基本理論",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "語言發展期間，理解能力和表達能力是互相影響，並且互相配合的，兩者的發展程序和發展模式大致是相同的。學前兒童的語言訓練應根據其發展階段進行。"
+  },
+  {
+    "name": "句子階段",
+    "level": "L2",
+    "parent_name": "語言發展基本理論",
+    "age_min_months": 24,
+    "age_max_months": 59,
+    "prompt_corpus": "隨著詞彙數量和類別的增加，以及對語法規則的掌握，兒童的理解及表達能力會發展至句子階段。在這階段，兒童能明白句子中不同詞彙之間的關係，以理解別人的說話。"
+  },
+  {
+    "name": "兩歲階段",
+    "level": "L3",
+    "parent_name": "句子階段",
+    "age_min_months": 24,
+    "age_max_months": 35,
+    "prompt_corpus": "到了兩歲左右，兒童便會將詞彙組合成句，例如：動作詞和名詞、形容詞和名詞等，漸漸會使用短句來表達需要。"
+  },
+  {
+    "name": "三歲階段",
+    "level": "L3",
+    "parent_name": "句子階段",
+    "age_min_months": 36,
+    "age_max_months": 47,
+    "prompt_corpus": "隨著詞彙的不斷增加，以及在短句運用中對語法規則的熟習，三歲的兒童會進一步將更多的詞彙連結成句，擴展語句的長度和複雜性，能將人、物、事的關係表達出來，進而增加具修飾及語法功用的詞彙運用，例如：形容詞、數量詞、副詞等。"
+  },
+  {
+    "name": "四歲階段",
+    "level": "L3",
+    "parent_name": "句子階段",
+    "age_min_months": 48,
+    "age_max_months": 59,
+    "prompt_corpus": "一般來說，四歲的兒童已能明白大部分日常生活的說話，及運用結構完整的簡單句和複合句與人溝通。"
+  },
+  {
+    "name": "語言思考",
+    "level": "L2",
+    "parent_name": "語言發展基本理論",
+    "age_min_months": 60,
+    "age_max_months": 83,
+    "prompt_corpus": "到了五至六歲，兒童已能掌握和運用許多語法規則。在這階段，兒童的語言能力開始跟思考力、想像力、記憶力、創造力等有著緊密的聯繫，彼此相輔相成，互相影響。"
+  },
+  {
+    "name": "五至六歲階段",
+    "level": "L3",
+    "parent_name": "語言思考",
+    "age_min_months": 60,
+    "age_max_months": 83,
+    "prompt_corpus": "兒童會利用已掌握的詞彙和按語法規則，以具體的語言形式進行思維活動，學習分析問題、定下假設、作出判斷及推論。因此，當兒童已建立良好的基礎語言能力後，訓練應著重發展兒童的抽象思維，例如：邏輯推理、解難能力等，以及發展兒童運用語言作描述的能力，例如：報告事件、說故事等。"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "訓練指引",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "按照兒童的訓練目標選擇適當的訓練活動後，訓練人員在預備及進行活動時請注意以下事項："
+  },
+  {
+    "name": "粵語 (口語) 的應用",
+    "level": "L3",
+    "parent_name": "訓練指引",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "香港人以粵語 (廣東話) 為口語溝通的語言，故訓練目標及活動設計均以口語化的粵語為藍本。活動建議中的說話以書面語形式顯示，並在有需要時以「粵」符號在括號內標示粵語的詞彙或句子。由於活動內容是以香港的社會環境及文化背景而設計，活動內容所提及的某些詞彙或未能適用於其他地區，故本章最後列出一詞彙對照表，為香港以外地區的讀者提供參考。"
+  },
+  {
+    "name": "詞彙的選取",
+    "level": "L3",
+    "parent_name": "訓練指引",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "一般來說，兒童接觸得最多的事物，就是最早能掌握到的詞彙。故此，在選取詞彙作訓練時，宜先選取一些兒童常接觸的詞彙，再選擇一些較少接觸的詞彙。"
+  },
+  {
+    "name": "教材的選擇",
+    "level": "L3",
+    "parent_name": "訓練指引",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "教材應以兒童熟悉及喜愛的物件為主，並要考慮兒童的能力以選取合適的教具。一般來說，兒童最容易掌握的為實物及玩具，進而是彩色相片或圖畫，黑白的線條圖則比較抽象，是較難掌握的教具。"
+  },
+  {
+    "name": "示範及提示的運用",
+    "level": "L3",
+    "parent_name": "訓練指引",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "在活動開始時，成人應給予清晰的示範。以語言表達的訓練為例，成人須示範說出目標詞彙或句子；而在語言理解的訓練中，成人在說出目標詞彙或句子後，須示範做出相關的行為（如：指向物件、進行句子中的意思等）。成人在示範後，可鼓勵兒童模仿，以確認兒童明白活動的做法及要求。進行活動時，成人需運用不同的提示方法，引導兒童學習。當兒童漸漸熟習後，成人可逐步減少提示，並鼓勵兒童自行完成。"
+  },
+  {
+    "name": "常用詞彙的粵語（口語）及書面語對照參考",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "巴士：公車\n的士：計程車 / 出租車\n小巴：（一種於香港境內行駛的小型公共汽車）\n電單車：摩托車\n私家車：轎車 / 房車\n雪糕：冰淇淋\n朱古力：巧克力\n焗爐：烤箱 / 烤爐\n雪櫃：冰箱\n波波池：彩球池（一種兒童遊樂設施，在寬闊的池子內有大量小型塑膠球，通常會淹沒過兒童的小腿，玩耍時造成失重的感覺）\n衫：上衣"
+  },
+  {
+    "name": "語言表達",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言 活動目錄：語言表達"
+  },
+  {
+    "name": "發聲能力",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學習重點：發聲能力"
+  },
+  {
+    "name": "發出不同的聲音",
+    "level": "L3",
+    "parent_name": "發聲能力",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "項目一：發出不同的聲音"
+  },
+  {
+    "name": "發出有意義的聲音",
+    "level": "L3",
+    "parent_name": "發聲能力",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "項目二：發出有意義的聲音"
+  },
+  {
+    "name": "動作 / 手勢溝通",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學習重點：動作 / 手勢溝通"
+  },
+  {
+    "name": "運用簡單身體動作 / 手勢來溝通",
+    "level": "L3",
+    "parent_name": "動作 / 手勢溝通",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "項目一：運用簡單身體動作 / 手勢來溝通"
+  },
+  {
+    "name": "運用表達性身體動作 / 手勢來溝通",
+    "level": "L3",
+    "parent_name": "動作 / 手勢溝通",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "項目二：運用表達性身體動作 / 手勢來溝通"
+  },
+  {
+    "name": "模仿能力",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學習重點：模仿能力"
+  },
+  {
+    "name": "模仿動作",
+    "level": "L3",
+    "parent_name": "模仿能力",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "項目一：模仿動作"
+  },
+  {
+    "name": "模仿玩玩具方法",
+    "level": "L3",
+    "parent_name": "模仿能力",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "項目二：模仿玩玩具方法"
+  },
+  {
+    "name": "模仿發聲",
+    "level": "L3",
+    "parent_name": "模仿能力",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "項目三：模仿發聲"
+  },
+  {
+    "name": "詞彙運用",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學習重點：詞彙運用"
+  },
+  {
+    "name": "運用名詞",
+    "level": "L3",
+    "parent_name": "詞彙運用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "項目一：運用名詞"
+  },
+  {
+    "name": "運用動詞",
+    "level": "L3",
+    "parent_name": "詞彙運用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "項目二：運用動詞"
+  },
+  {
+    "name": "運用社交詞彙",
+    "level": "L3",
+    "parent_name": "詞彙運用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "項目三：運用社交詞彙"
+  },
+  {
+    "name": "運用形容詞",
+    "level": "L3",
+    "parent_name": "詞彙運用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "項目四：運用形容詞"
+  },
+  {
+    "name": "運用位置詞",
+    "level": "L3",
+    "parent_name": "詞彙運用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "項目五：運用位置詞"
+  },
+  {
+    "name": "運用數詞",
+    "level": "L3",
+    "parent_name": "詞彙運用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "項目六：運用數詞"
+  },
+  {
+    "name": "運用量詞",
+    "level": "L3",
+    "parent_name": "詞彙運用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "項目七：運用量詞"
+  },
+  {
+    "name": "運用代名詞",
+    "level": "L3",
+    "parent_name": "詞彙運用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "項目八：運用代名詞"
+  },
+  {
+    "name": "運用屬有代名詞",
+    "level": "L3",
+    "parent_name": "詞彙運用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "項目九：運用屬有代名詞"
+  },
+  {
+    "name": "運用副詞",
+    "level": "L3",
+    "parent_name": "詞彙運用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "項目十：運用副詞"
+  },
+  {
+    "name": "運用時貌詞",
+    "level": "L3",
+    "parent_name": "詞彙運用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "項目十一：運用時貌詞"
+  },
+  {
+    "name": "運用否定詞",
+    "level": "L3",
+    "parent_name": "詞彙運用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "項目十二：運用否定詞"
+  },
+  {
+    "name": "運用連接詞",
+    "level": "L3",
+    "parent_name": "詞彙運用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "項目十三：運用連接詞"
+  },
+  {
+    "name": "學前兒童訓練指南—語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言 活動目錄"
+  },
+  {
+    "name": "學習重點：簡單句子運用",
+    "level": "L2",
+    "parent_name": "學前兒童訓練指南—語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：64"
+  },
+  {
+    "name": "項目一：運用雙詞短句",
+    "level": "L3",
+    "parent_name": "學習重點：簡單句子運用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：64"
+  },
+  {
+    "name": "項目二：運用三詞句子",
+    "level": "L3",
+    "parent_name": "學習重點：簡單句子運用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：72"
+  },
+  {
+    "name": "項目三：運用四詞句子",
+    "level": "L3",
+    "parent_name": "學習重點：簡單句子運用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：78"
+  },
+  {
+    "name": "學習重點：複合句子運用",
+    "level": "L2",
+    "parent_name": "學前兒童訓練指南—語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：81"
+  },
+  {
+    "name": "項目：運用不同的複合句子",
+    "level": "L3",
+    "parent_name": "學習重點：複合句子運用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：81"
+  },
+  {
+    "name": "學習重點：問句運用",
+    "level": "L2",
+    "parent_name": "學前兒童訓練指南—語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：86"
+  },
+  {
+    "name": "項目：運用不同的問句",
+    "level": "L3",
+    "parent_name": "學習重點：問句運用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：86"
+  },
+  {
+    "name": "學習重點：語言思考",
+    "level": "L2",
+    "parent_name": "學前兒童訓練指南—語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：95"
+  },
+  {
+    "name": "項目一：詞彙尋找（歸納性）",
+    "level": "L3",
+    "parent_name": "學習重點：語言思考",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：95"
+  },
+  {
+    "name": "項目二：詞彙尋找（擴散性）",
+    "level": "L3",
+    "parent_name": "學習重點：語言思考",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：97"
+  },
+  {
+    "name": "項目三：詞彙定義",
+    "level": "L3",
+    "parent_name": "學習重點：語言思考",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：99"
+  },
+  {
+    "name": "項目四：比較異同",
+    "level": "L3",
+    "parent_name": "學習重點：語言思考",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：100"
+  },
+  {
+    "name": "項目五：類比",
+    "level": "L3",
+    "parent_name": "學習重點：語言思考",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：101"
+  },
+  {
+    "name": "項目六：程序概念",
+    "level": "L3",
+    "parent_name": "學習重點：語言思考",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：103"
+  },
+  {
+    "name": "項目七：因果關係",
+    "level": "L3",
+    "parent_name": "學習重點：語言思考",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：105"
+  },
+  {
+    "name": "項目八：解決問題",
+    "level": "L3",
+    "parent_name": "學習重點：語言思考",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：107"
+  },
+  {
+    "name": "項目九：批判",
+    "level": "L3",
+    "parent_name": "學習重點：語言思考",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：109"
+  },
+  {
+    "name": "項目十：推理能力",
+    "level": "L3",
+    "parent_name": "學習重點：語言思考",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：111"
+  },
+  {
+    "name": "學習重點：敘事能力",
+    "level": "L2",
+    "parent_name": "學前兒童訓練指南—語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：112"
+  },
+  {
+    "name": "項目一：敘述個人性事件",
+    "level": "L3",
+    "parent_name": "學習重點：敘事能力",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：112"
+  },
+  {
+    "name": "項目二：敘述一般性事件",
+    "level": "L3",
+    "parent_name": "學習重點：敘事能力",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：113"
+  },
+  {
+    "name": "項目三：敘述簡單故事",
+    "level": "L3",
+    "parent_name": "學習重點：敘事能力",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：113"
+  },
+  {
+    "name": "語言理解",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言活動目錄"
+  },
+  {
+    "name": "學習重點：視覺反應",
+    "level": "L2",
+    "parent_name": "語言理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：114"
+  },
+  {
+    "name": "項目一：目光專注",
+    "level": "L3",
+    "parent_name": "學習重點：視覺反應",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：114"
+  },
+  {
+    "name": "項目二：目光追視",
+    "level": "L3",
+    "parent_name": "學習重點：視覺反應",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：116"
+  },
+  {
+    "name": "項目三：目光轉移",
+    "level": "L3",
+    "parent_name": "學習重點：視覺反應",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：117"
+  },
+  {
+    "name": "學習重點：社交反應",
+    "level": "L2",
+    "parent_name": "語言理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：118"
+  },
+  {
+    "name": "項目一：注視成人",
+    "level": "L3",
+    "parent_name": "學習重點：社交反應",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：118"
+  },
+  {
+    "name": "項目二：追視成人",
+    "level": "L3",
+    "parent_name": "學習重點：社交反應",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：119"
+  },
+  {
+    "name": "學習重點：輪流作轉技巧",
+    "level": "L2",
+    "parent_name": "語言理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：123"
+  },
+  {
+    "name": "項目一：輪流玩玩具",
+    "level": "L3",
+    "parent_name": "學習重點：輪流作轉技巧",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：123"
+  },
+  {
+    "name": "項目二：輪流發聲",
+    "level": "L3",
+    "parent_name": "學習重點：輪流作轉技巧",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：123"
+  },
+  {
+    "name": "學習重點：配對技巧",
+    "level": "L2",
+    "parent_name": "語言理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：124"
+  },
+  {
+    "name": "項目一：配對相同的符號",
+    "level": "L3",
+    "parent_name": "學習重點：配對技巧",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：124"
+  },
+  {
+    "name": "項目二：配對相似的符號",
+    "level": "L3",
+    "parent_name": "學習重點：配對技巧",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：127"
+  },
+  {
+    "name": "學習重點：遊戲技巧",
+    "level": "L2",
+    "parent_name": "語言理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：129"
+  },
+  {
+    "name": "項目一：探索性遊戲",
+    "level": "L3",
+    "parent_name": "學習重點：遊戲技巧",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：129"
+  },
+  {
+    "name": "項目二：功能性遊戲",
+    "level": "L3",
+    "parent_name": "學習重點：遊戲技巧",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：131"
+  },
+  {
+    "name": "項目三：假想性遊戲",
+    "level": "L3",
+    "parent_name": "學習重點：遊戲技巧",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：132"
+  },
+  {
+    "name": "學習重點：聽覺反應",
+    "level": "L2",
+    "parent_name": "語言理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：133"
+  },
+  {
+    "name": "項目一：對聲音作出反應",
+    "level": "L3",
+    "parent_name": "學習重點：聽覺反應",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：133"
+  },
+  {
+    "name": "項目二：理解說話的語氣",
+    "level": "L3",
+    "parent_name": "學習重點：聽覺反應",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：136"
+  },
+  {
+    "name": "學習重點：環境性理解",
+    "level": "L2",
+    "parent_name": "語言理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：137"
+  },
+  {
+    "name": "項目一：對自己的名字作出反應",
+    "level": "L3",
+    "parent_name": "學習重點：環境性理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：137"
+  },
+  {
+    "name": "項目二：對生活的說話作出反應",
+    "level": "L3",
+    "parent_name": "學習重點：環境性理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：138"
+  },
+  {
+    "name": "項目三：理解「不」的意思",
+    "level": "L3",
+    "parent_name": "學習重點：環境性理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：139"
+  },
+  {
+    "name": "項目四：理解環境指令",
+    "level": "L3",
+    "parent_name": "學習重點：環境性理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：140"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言活動目錄"
+  },
+  {
+    "name": "學習重點：日常指示理解",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：141"
+  },
+  {
+    "name": "項目一：理解日常指令",
+    "level": "L3",
+    "parent_name": "學習重點：日常指示理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：141"
+  },
+  {
+    "name": "項目二：理解一個部分的指令",
+    "level": "L3",
+    "parent_name": "學習重點：日常指示理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：142"
+  },
+  {
+    "name": "學習重點：詞彙理解",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：143"
+  },
+  {
+    "name": "項目一：理解名詞",
+    "level": "L3",
+    "parent_name": "學習重點：詞彙理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：143"
+  },
+  {
+    "name": "項目二：理解動作詞",
+    "level": "L3",
+    "parent_name": "學習重點：詞彙理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：152"
+  },
+  {
+    "name": "項目三：理解形容詞",
+    "level": "L3",
+    "parent_name": "學習重點：詞彙理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：153"
+  },
+  {
+    "name": "項目四：理解位置詞",
+    "level": "L3",
+    "parent_name": "學習重點：詞彙理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：155"
+  },
+  {
+    "name": "項目五：理解數詞",
+    "level": "L3",
+    "parent_name": "學習重點：詞彙理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：157"
+  },
+  {
+    "name": "項目六：理解量詞",
+    "level": "L3",
+    "parent_name": "學習重點：詞彙理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：159"
+  },
+  {
+    "name": "項目七：理解代名詞",
+    "level": "L3",
+    "parent_name": "學習重點：詞彙理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：160"
+  },
+  {
+    "name": "項目八：理解屬有代名詞",
+    "level": "L3",
+    "parent_name": "學習重點：詞彙理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：161"
+  },
+  {
+    "name": "項目九：理解副詞",
+    "level": "L3",
+    "parent_name": "學習重點：詞彙理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：162"
+  },
+  {
+    "name": "項目十：理解時貌詞",
+    "level": "L3",
+    "parent_name": "學習重點：詞彙理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：164"
+  },
+  {
+    "name": "項目十一：理解否定詞",
+    "level": "L3",
+    "parent_name": "學習重點：詞彙理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：165"
+  },
+  {
+    "name": "項目十二：理解連接詞",
+    "level": "L3",
+    "parent_name": "學習重點：詞彙理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：166"
+  },
+  {
+    "name": "學習重點：簡單句子理解",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：167"
+  },
+  {
+    "name": "項目一：理解雙詞短句",
+    "level": "L3",
+    "parent_name": "學習重點：簡單句子理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：167"
+  },
+  {
+    "name": "項目二：理解三詞句子",
+    "level": "L3",
+    "parent_name": "學習重點：簡單句子理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：177"
+  },
+  {
+    "name": "學習重點：複合句子理解",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：184"
+  },
+  {
+    "name": "項目：理解不同的複合句子",
+    "level": "L3",
+    "parent_name": "學習重點：複合句子理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：184"
+  },
+  {
+    "name": "學習重點：問句理解",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：187"
+  },
+  {
+    "name": "項目：理解不同的問句",
+    "level": "L3",
+    "parent_name": "學習重點：問句理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議頁數：187"
+  },
+  {
+    "name": "語言表達",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "發聲能力",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "項目一：發出不同的聲音",
+    "level": "L3",
+    "parent_name": "發聲能力",
+    "age_min_months": 0,
+    "age_max_months": 12,
+    "prompt_corpus": "目標：\nA 發出哭聲 / >0歲\nB 發出哭聲以外的其他聲音（如：打氣嗝聲、咳聲、咕咕聲） / 0-6 個月\nC 發出笑聲 / 0-6 個月\nD 發出不同的哭聲來代表不同的需要（如：肚餓、疲倦、尿布濕了） / 0-6 個月\nE 發聲自娛 / 6-12 個月\n\n注意事項：此項目的訓練，主要是成人觀察兒童於活動或日常生活中的反應，並對兒童的發聲給予即時的回應，以鼓勵他再次發聲。而下列各項活動建議，主要是為成人提供一些刺激兒童的方法，以鼓勵他發出笑聲或其他聲音。\n\n活動建議：\n1 與兒童玩搔癢遊戲，引發兒童發出笑聲或聲音。\n2 與兒童玩「躲貓貓」遊戲，引發兒童發出笑聲或聲音。"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南——語言"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議——語言表達"
+  },
+  {
+    "name": "活動 3",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "在兒童面前做出不同的表情或扮鬼臉，並發出笑聲或其他有趣的聲音，吸引兒童發出笑聲或聲音。"
+  },
+  {
+    "name": "活動 4",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "用布遮蓋著臉孔，在兒童面前將布移開，並做出不同的表情及發出有趣的聲音，吸引兒童發笑或發聲。\n\n材料：布"
+  },
+  {
+    "name": "活動 5",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "兒童把玩玩具一段時間後，突然停止兒童的活動，或取去兒童手中的玩具。若兒童發出類似哭聲或其他聲音，成人給予即時回應，並讓兒童繼續把玩玩具。\n\n材料：玩具"
+  },
+  {
+    "name": "活動 6",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童玩耍後，成人表示需要分離。若兒童發出類似哭聲或其他聲音，成人給予即時回應，並繼續與兒童玩耍。"
+  },
+  {
+    "name": "活動 7",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "播放兒童喜愛的卡通片，成人誇張地模仿卡通片中的聲音，吸引兒童發出笑聲或聲音。\n\n材料：卡通片、影片播放器"
+  },
+  {
+    "name": "活動 8",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "給予兒童喜愛的發聲玩具，讓兒童自行玩耍。成人在旁模仿發出聲音，吸引兒童發出笑聲或聲音。\n\n材料：發聲玩具"
+  },
+  {
+    "name": "活動 9",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示兒童喜愛的食物，並發出「yum yum」的聲音表示很美味，吸引兒童發出聲音。\n\n材料：食物"
+  },
+  {
+    "name": "語言表達",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南 — 語言表達"
+  },
+  {
+    "name": "項目二：發出有意義的聲音",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": 6,
+    "age_max_months": 12,
+    "prompt_corpus": "注意事項：此項目中的兩個訓練目標，均可以運用下列各項活動。成人可視乎兒童的訓練情況及需要，選擇引導兒童發出「有溝通意識的聲音」或「類似字詞的聲音」。"
+  },
+  {
+    "name": "目標A：發出有溝通意識的聲音來表達需要和回應成人",
+    "level": "L3",
+    "parent_name": "項目二：發出有意義的聲音",
+    "age_min_months": 6,
+    "age_max_months": 12,
+    "prompt_corpus": "發出有溝通意識的聲音來表達需要和回應成人"
+  },
+  {
+    "name": "目標B：發出類似字詞的聲音來表達需要和回應成人",
+    "level": "L3",
+    "parent_name": "項目二：發出有意義的聲音",
+    "age_min_months": 6,
+    "age_max_months": 12,
+    "prompt_corpus": "發出類似字詞的聲音來表達需要和回應成人"
+  },
+  {
+    "name": "活動1：與兒童玩搔癢遊戲",
+    "level": "L3",
+    "parent_name": "項目二：發出有意義的聲音",
+    "age_min_months": 6,
+    "age_max_months": 12,
+    "prompt_corpus": "與兒童玩搔癢遊戲。成人將食指放在唇邊並發出「bu bu」聲，並在搔癢兒童時發出「吱吱吱」的連串聲音。接著成人協助兒童將食指放在唇邊，鼓勵他發出「bu bu」聲，或協助兒童搔癢成人，鼓勵他發出「吱吱吱」的聲音來表達意思和回應。"
+  },
+  {
+    "name": "活動2：運用奶瓶或食物引導發聲",
+    "level": "L3",
+    "parent_name": "項目二：發出有意義的聲音",
+    "age_min_months": 6,
+    "age_max_months": 12,
+    "prompt_corpus": "出示奶瓶或食物，並一面搖晃奶瓶或食物，一面說「奶奶」或「mum mum」，以吸引兒童的注意。鼓勵兒童發出近似「奶奶」或「mum mum」的聲音後，再讓他進飲或進食。\n材料/建議教材：奶瓶或食物"
+  },
+  {
+    "name": "活動3：運用玩具模仿聲音",
+    "level": "L3",
+    "parent_name": "項目二：發出有意義的聲音",
+    "age_min_months": 6,
+    "age_max_months": 12,
+    "prompt_corpus": "出示兒童喜歡的玩具（如：車、槍），並一面把玩玩具，一面模仿玩具的聲音（如：車聲、槍聲），以吸引兒童的注意。鼓勵兒童在把玩玩具時，發出近似的聲音。\n材料/建議教材：車、飛機、槍或樂器等可用聲音代表的玩具"
+  },
+  {
+    "name": "活動4：運用玩具引導說出名稱",
+    "level": "L3",
+    "parent_name": "項目二：發出有意義的聲音",
+    "age_min_months": 6,
+    "age_max_months": 12,
+    "prompt_corpus": "出示兒童喜歡的玩具，並一面把玩玩具，一面說出玩具的名稱（如：「球」、「車車」），以吸引兒童的注意。鼓勵兒童發出聲音，或類似字詞的聲音，再把玩具給予他把玩。\n材料/建議教材：玩具"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議—語言表達"
+  },
+  {
+    "name": "活動 5：吹肥皂泡",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童玩吹肥皂泡。成人並指著飄浮在空中的肥皂泡說：「嘩！泡泡！」當所有肥皂泡消失後，向兒童說：「噢！沒有泡泡了！」鼓勵兒童發出聲音，或近似「泡」的聲音，才繼續吹肥皂泡。\n所需材料：肥皂泡玩具"
+  },
+  {
+    "name": "活動 6：「打嘩嘩」遊戲",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童玩「打嘩嘩」遊戲。成人示範「打嘩嘩」，接著協助兒童用手輕拍口部，鼓勵他發出聲音，或近似「嘩嘩」的聲音。"
+  },
+  {
+    "name": "活動 7：唱兒歌",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童唱兒歌，鼓勵兒童發出聲音，或近似兒歌的聲音。"
+  },
+  {
+    "name": "動作/手勢溝通",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學習重點：動作/手勢溝通"
+  },
+  {
+    "name": "運用簡單身體動作/手勢來溝通",
+    "level": "L2",
+    "parent_name": "動作/手勢溝通",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "注意事項：\n1. 年幼的兒童不時有一些溝通意識不明顯的動作，成人可多留意並作即時回應，讓兒童明白這些動作是可以用來表達需要的，以提升他們與別人溝通的動機。\n2. 如兒童的動作控制能力較弱，成人可給予適當的動作協助，並接受兒童一些不大準確的動作或手勢。"
+  },
+  {
+    "name": "伸手取物",
+    "level": "L3",
+    "parent_name": "運用簡單身體動作/手勢來溝通",
+    "age_min_months": 6,
+    "age_max_months": 12,
+    "prompt_corpus": "目標：伸手取物"
+  },
+  {
+    "name": "活動建議一",
+    "level": "L4",
+    "parent_name": "伸手取物",
+    "age_min_months": 6,
+    "age_max_months": 12,
+    "prompt_corpus": "活動建議：出示兒童喜歡的食物或玩具，鼓勵他伸手取物。\n材料/建議教材：食物或玩具"
+  },
+  {
+    "name": "活動建議二",
+    "level": "L4",
+    "parent_name": "伸手取物",
+    "age_min_months": 6,
+    "age_max_months": 12,
+    "prompt_corpus": "活動建議：出示小型發聲玩具，在兒童面前把玩，使其發出聲響。待取得兒童的注意後，再把玩具藏在身上，如：口袋或衣袖中，鼓勵兒童伸手往成人身上把玩具取出來。\n材料/建議教材：小型發聲玩具"
+  },
+  {
+    "name": "拖拉成人來要求協助",
+    "level": "L3",
+    "parent_name": "運用簡單身體動作/手勢來溝通",
+    "age_min_months": 9,
+    "age_max_months": 18,
+    "prompt_corpus": "目標：拖拉成人來要求協助"
+  },
+  {
+    "name": "活動建議三",
+    "level": "L4",
+    "parent_name": "拖拉成人來要求協助",
+    "age_min_months": 9,
+    "age_max_months": 18,
+    "prompt_corpus": "活動建議：出示兒童喜歡的玩具，待取得兒童的注意後，把玩具放在兒童面前但觸摸不到的地方（如：櫃子上較高的位置）。成人把手移近兒童的手，鼓勵兒童拉成人的手尋求協助。\n材料/建議教材：玩具"
+  },
+  {
+    "name": "用手指指向物件",
+    "level": "L3",
+    "parent_name": "運用簡單身體動作/手勢來溝通",
+    "age_min_months": 9,
+    "age_max_months": 18,
+    "prompt_corpus": "目標：用手指指向物件"
+  },
+  {
+    "name": "活動建議四",
+    "level": "L4",
+    "parent_name": "用手指指向物件",
+    "age_min_months": 9,
+    "age_max_months": 18,
+    "prompt_corpus": "活動建議：將樂器放在兒童面前但觸摸不到的地方，並示範把玩樂器。待取得兒童的注意後，問兒童：「你要甚麼？」鼓勵兒童指向樂器以表示需要。\n注意事項：選取色彩繽紛的樂器，更能吸引兒童的注意力。\n材料/建議教材：樂器"
+  },
+  {
+    "name": "活動建議五",
+    "level": "L4",
+    "parent_name": "用手指指向物件",
+    "age_min_months": 9,
+    "age_max_months": 18,
+    "prompt_corpus": "活動建議：吹出肥皂泡吸引兒童的注意，示範及鼓勵兒童用手指戳破肥皂泡。待肥皂泡消失後，鼓勵兒童指向肥皂泡液的瓶子，以表示要求成人再吹肥皂泡。\n材料/建議教材：肥皂泡玩具"
+  },
+  {
+    "name": "活動建議六",
+    "level": "L4",
+    "parent_name": "用手指指向物件",
+    "age_min_months": 9,
+    "age_max_months": 18,
+    "prompt_corpus": "活動建議：出示2件玩具或食物，待取得兒童的注意後，問兒童：「你要甚麼？」鼓勵兒童用手指指向想要的物件。若兒童未能指向物件，可握著兒童的手做一次。\n材料/建議教材：玩具或食物"
+  },
+  {
+    "name": "語言表達",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "項目一：運用簡單身體動作/手勢來溝通",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": 9,
+    "age_max_months": 18,
+    "prompt_corpus": "注意事項：如兒童的動作控制能力較弱，成人可給予適當的動作協助，並接受兒童一些不大準確的動作或手勢。"
+  },
+  {
+    "name": "D：開合手/搖晃手表示「拜拜」",
+    "level": "L3",
+    "parent_name": "項目一：運用簡單身體動作/手勢來溝通",
+    "age_min_months": 9,
+    "age_max_months": 18,
+    "prompt_corpus": "1. 家長送兒童到達學校後，成人（老師）說：「和 XX（家人稱謂）說再見！」鼓勵兒童向家人做出開合手或揮手的動作以表示再見。\n2. 收拾玩具時，鼓勵兒童向玩具做出開合手或揮手的動作，以表示再見。（材料/建議教材：玩具）\n3. 下課時，成人向兒童做出開合手或揮手的動作表示再見，接著向兒童說：「你也揮手再見吧！」鼓勵兒童模仿做出「拜拜」的動作回應。"
+  },
+  {
+    "name": "E：拍手表示「好」",
+    "level": "L3",
+    "parent_name": "項目一：運用簡單身體動作/手勢來溝通",
+    "age_min_months": 9,
+    "age_max_months": 18,
+    "prompt_corpus": "4. 當兒童完成活動或遊戲（如：將積木疊起）時，成人拍手並說：「好！」鼓勵兒童模仿做出「拍手」的動作回應。（材料/建議教材：玩具）\n5. 進行小組活動時，當其他兒童作出良好的表現時，鼓勵兒童做出「拍手」動作以表示「好」。"
+  },
+  {
+    "name": "F：張開手表示「抱」",
+    "level": "L3",
+    "parent_name": "項目一：運用簡單身體動作/手勢來溝通",
+    "age_min_months": 9,
+    "age_max_months": 18,
+    "prompt_corpus": "6. 示範張開手表示「抱」，並說：「抱一抱吧！」接著抱起兒童。放下兒童後，待兒童張開手表示「抱」，才再次抱起兒童。有需要時，成人可用動作協助兒童張開手來表示「抱」。"
+  },
+  {
+    "name": "G：攤開手表示「沒有」",
+    "level": "L3",
+    "parent_name": "項目一：運用簡單身體動作/手勢來溝通",
+    "age_min_months": 9,
+    "age_max_months": 18,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "H：點頭表示「好」",
+    "level": "L3",
+    "parent_name": "項目一：運用簡單身體動作/手勢來溝通",
+    "age_min_months": 9,
+    "age_max_months": 18,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "I：搖頭/搖手表示「不」",
+    "level": "L3",
+    "parent_name": "項目一：運用簡單身體動作/手勢來溝通",
+    "age_min_months": 9,
+    "age_max_months": 18,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "活動 7",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童玩洋娃娃，並示範抱起洋娃娃，以吸引兒童的注意。當兒童想抱洋娃娃時，鼓勵兒童做出「抱」的動作，才把洋娃娃交給他。\n【教具/材料】洋娃娃"
+  },
+  {
+    "name": "活動 8",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示玩具，並放進其中一個盒子中，鼓勵兒童找出有玩具的盒子。若兒童能找到，成人即時給予適當的鼓勵，並再重複遊戲。若兒童未能找到有玩具的盒子，成人可張開雙手表示「沒有」，並鼓勵兒童模仿張開手做出「沒有」的動作。\n【注意事項】成人要讓兒童交替打開有玩具及沒有玩具的盒子，以訓練兒童在沒有玩具時才用「沒有」的動作來表示。\n【教具/材料】玩具、盒子 2 個"
+  },
+  {
+    "name": "活動 9",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "吃小吃時，拿出空的食物盒子（如：薯片罐），打開蓋後向兒童說：「沒有啊！」並張開手表示沒有食物，鼓勵兒童模仿「沒有」的動作。\n【注意事項】成人要讓兒童交替打開有食物及沒有食物的盒子，以訓練兒童在沒有食物時才用「沒有」的動作來表示。\n【教具/材料】有食物的盒子、沒有食物的盒子"
+  },
+  {
+    "name": "活動 10",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "在桌面玩一些可滾動的玩具（如：車、球）時，成人故意把玩具推離桌面，接著示範張開手的動作並說：「沒有了！」鼓勵兒童張開手表示沒有玩具。\n【教具/材料】可滾動的玩具（如：車、球）"
+  },
+  {
+    "name": "學前兒童訓練指南",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "語言",
+    "level": "L2",
+    "parent_name": "學前兒童訓練指南",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "活動建議—語言表達",
+    "level": "L3",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "活動 11",
+    "level": "L4",
+    "parent_name": "活動建議—語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示兒童喜愛的食物或玩具，問兒童：「吃/玩 XX (食物或玩具名稱) 好不好？」並示範「點頭」表示「好」，接著用手輕力協助兒童「點頭」，鼓勵兒童模仿「點頭」的動作。\n準備材料：食物或玩具"
+  },
+  {
+    "name": "活動 12",
+    "level": "L4",
+    "parent_name": "活動建議—語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童進行喜愛的活動 (如：唱歌)，完成一次後說：「再玩好不好？」提示或等待兒童點頭表示「好」，才再次進行活動。成人可按兒童的喜好，重複同一個活動，或改用另一個活動。"
+  },
+  {
+    "name": "活動 13",
+    "level": "L4",
+    "parent_name": "活動建議—語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示兒童抗拒的食物或玩具 (如：鱷魚牙醫)，問兒童：「你吃不吃？」或「你玩不玩？」協助兒童搖頭或搖手表示拒絕，接著將食物或玩具收起。\n準備材料：兒童抗拒的食物或玩具"
+  },
+  {
+    "name": "活動 14",
+    "level": "L4",
+    "parent_name": "活動建議—語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "在日常生活中，故意給兒童不合適的用具 (如：喝湯時給兒童筷子)。當兒童搖頭或搖手表示「不要」後，將不合適的用具拿走，並將合適的用具交給兒童。\n準備材料：不合適的用具"
+  },
+  {
+    "name": "語言表達",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "項目二：運用表達性身體動作 / 手勢來溝通",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "注意事項：如兒童的動作控制能力較弱，成人可給予適當的動作協助，並接受兒童一些不大準確的動作 / 手勢。"
+  },
+  {
+    "name": "運用表達性身體動作 / 手勢來表達動作（如：刷牙、洗手、聽電話、開車、睡覺）",
+    "level": "L3",
+    "parent_name": "項目二：運用表達性身體動作 / 手勢來溝通",
+    "age_min_months": 9,
+    "age_max_months": 24,
+    "prompt_corpus": "活動建議：\n1. 出示牙齒模型，並用手指示範「刷牙」的動作，接著成人協助兒童模仿做出動作。若沒有牙齒模型，成人可在自己的臉示範動作。（材料/建議教材：牙齒模型）\n2. 出示有牙齒的洋娃娃，示意洋娃娃要刷牙，並做出「刷牙」的動作。成人一面唱《刷牙歌》，一面用牙刷替洋娃娃刷牙，接著鼓勵兒童用牙刷替洋娃娃刷牙。（材料/建議教材：牙刷、有牙齒的洋娃娃）\n3. 吃東西前，示意要先洗手，並鼓勵兒童做出「洗手」的動作，才與兒童一起洗手。洗手時，可與兒童一起唱《洗手歌》。"
+  },
+  {
+    "name": "運用表達性身體動作 / 手勢來表達情緒 / 感覺（如：驚慌、飽、嘈吵）",
+    "level": "L3",
+    "parent_name": "項目二：運用表達性身體動作 / 手勢來溝通",
+    "age_min_months": 9,
+    "age_max_months": 24,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "學前兒童訓練指南—語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "學前兒童訓練指南—語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議 — 語言表達"
+  },
+  {
+    "name": "活動 4：聽電話手勢",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示玩具電話，並按響電話吸引兒童注意。成人做出「聽電話」的手勢後，拿起電話說：「喂？」之後假裝傾談完畢並掛斷電話。接著成人再次按響電話吸引兒童注意，當兒童想接聽電話時，成人即協助或鼓勵兒童做出「聽電話」的手勢，接著將電話給予他。\n建議物資：玩具電話"
+  },
+  {
+    "name": "活動 5：驚慌手勢",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示仿真度高的玩具昆蟲，做出「驚慌」的手勢 (用手掩著口或用手拍胸口)，並說：「我怕！」接著協助兒童做出「驚慌」的手勢。\n建議物資：玩具昆蟲"
+  },
+  {
+    "name": "活動 6：表示「飽」的動作",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童吃完午飯後，成人搓或拍肚子表示「飽」，並協助兒童將手放在肚子的位置，鼓勵兒童一起搓或拍肚子以表示「飽」。"
+  },
+  {
+    "name": "活動 7：掩著耳朵的動作",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童大力敲打一些較響亮的樂器，接著說：「很吵啊！」並用雙手掩著耳朵，鼓勵兒童一起做出掩著耳朵的動作，表示很嘈吵。\n建議物資：較響亮的樂器"
+  },
+  {
+    "name": "語言表達",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言。活動建議—語言表達。"
+  },
+  {
+    "name": "模仿能力",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學習重點：模仿能力"
+  },
+  {
+    "name": "模仿動作",
+    "level": "L3",
+    "parent_name": "模仿能力",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "項目一：模仿動作。注意事項：如兒童的動作控制能力較弱，成人可給予適當的動作協助，並接受兒童一些不大準確的動作或手勢。"
+  },
+  {
+    "name": "模仿身體動作",
+    "level": "L4",
+    "parent_name": "模仿動作",
+    "age_min_months": 9,
+    "age_max_months": 18,
+    "prompt_corpus": "目標 A：模仿身體動作（如：拍手、踢腳、「點蟲蟲」）。"
+  },
+  {
+    "name": "活動建議一",
+    "level": "L5",
+    "parent_name": "模仿身體動作",
+    "age_min_months": 9,
+    "age_max_months": 18,
+    "prompt_corpus": "與兒童站在一起，每人腳前放置1個足球，成人示範將足球踢向前方並說：「踢」，接著鼓勵兒童模仿踢足球。材料/建議教材：足球 2 個。"
+  },
+  {
+    "name": "活動建議二",
+    "level": "L5",
+    "parent_name": "模仿身體動作",
+    "age_min_months": 9,
+    "age_max_months": 18,
+    "prompt_corpus": "與兒童一起唱歌，成人一面做動作（如：拍手、踏腳、摸頭），一面協助兒童模仿相同的動作，直至歌曲完結。注意事項：在訓練初期，每首歌只做一個動作。當兒童學會模仿不同的動作後，成人可於同一首歌曲中改變動作，但動作的改變不能太快，讓兒童能跟上。"
+  },
+  {
+    "name": "活動建議三",
+    "level": "L5",
+    "parent_name": "模仿身體動作",
+    "age_min_months": 9,
+    "age_max_months": 18,
+    "prompt_corpus": "與兒童玩「點蟲蟲」遊戲。成人一面唱或說：「點蟲蟲，蟲蟲飛」，一面示範點手指的動作，並協助兒童模仿做出相同的動作。"
+  },
+  {
+    "name": "模仿口部動作",
+    "level": "L4",
+    "parent_name": "模仿動作",
+    "age_min_months": 9,
+    "age_max_months": 18,
+    "prompt_corpus": "目標 B：模仿口部動作（如：打嘩嘩、伸舌頭、飛吻）。"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議—語言表達"
+  },
+  {
+    "name": "活動 4",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "兒童面向成人坐著，成人發出「嘩嘩」的聲音並示範「打嘩嘩」的動作，接著協助兒童做出相同的動作。繼續發出「嘩嘩」的聲音，鼓勵兒童模仿發出「嘩嘩」聲及做出「打嘩嘩」的動作。"
+  },
+  {
+    "name": "活動 5",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示紫菜並示範伸出舌頭來舔食。成人向兒童展示另一片紫菜，並放在其嘴巴前，鼓勵兒童伸出舌頭來舔食。\n教材：紫菜"
+  },
+  {
+    "name": "活動 6",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "在壓舌棒上塗上果醬，並示範伸出舌頭來舔食果醬。再將果醬塗在另一支壓舌棒上，鼓勵兒童伸出舌頭來舔食。若兒童不懂得伸出舌頭來，可用壓舌棒觸碰他的舌尖，以誘導他伸出舌尖來舔食果醬。\n教材：壓舌棒、果醬"
+  },
+  {
+    "name": "活動 7",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童玩洋娃娃，並示範親吻洋娃娃，鼓勵兒童模仿。玩耍完畢並與洋娃娃說再見時，成人再示範「飛吻」的動作，鼓勵兒童模仿。\n教材：洋娃娃"
+  },
+  {
+    "name": "活動 8",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動完結時，成人一面說：「拜拜」，一面示範「飛吻」的動作，並鼓勵兒童做出「飛吻」的動作來回應。"
+  },
+  {
+    "name": "語言表達",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南-語言"
+  },
+  {
+    "name": "項目二：模仿玩玩具方法",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "注意事項：當成人示範動作或兒童模仿動作時，成人可簡單地說出正在進行的動作。訓練兒童學習「模仿連續性的玩玩具方法」及「模仿隨意、沒既定的玩玩具方法」時，成人可先逐一教導兒童每個動作，接著才連續地示範連串動作，讓兒童模仿。"
+  },
+  {
+    "name": "目標A：模仿操作性的玩玩具方法",
+    "level": "L3",
+    "parent_name": "項目二：模仿玩玩具方法",
+    "age_min_months": 9,
+    "age_max_months": 18,
+    "prompt_corpus": "模仿操作性的玩玩具方法（如：撥、扭、擰）"
+  },
+  {
+    "name": "目標B：模仿功能性的玩玩具方法",
+    "level": "L3",
+    "parent_name": "項目二：模仿玩玩具方法",
+    "age_min_months": 9,
+    "age_max_months": 18,
+    "prompt_corpus": "模仿功能性的玩玩具方法（如：運用槌子玩槌床玩具、用刀切食物）"
+  },
+  {
+    "name": "目標C：模仿連續性的玩玩具方法",
+    "level": "L3",
+    "parent_name": "項目二：模仿玩玩具方法",
+    "age_min_months": 18,
+    "age_max_months": 30,
+    "prompt_corpus": "模仿連續性的玩玩具方法（如：將洋娃娃放在椅子上，接著從水壺斟水進杯，再餵洋娃娃進飲）"
+  },
+  {
+    "name": "目標D：模仿隨意、沒既定的玩玩具方法",
+    "level": "L3",
+    "parent_name": "項目二：模仿玩玩具方法",
+    "age_min_months": 18,
+    "age_max_months": 30,
+    "prompt_corpus": "模仿隨意、沒既定的玩玩具方法（如：將沙槌放在頭上搖晃，接著放在身後搖晃，最後放在地上）"
+  },
+  {
+    "name": "活動建議 1：撥動玩具",
+    "level": "L3",
+    "parent_name": "項目二：模仿玩玩具方法",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "材料/建議教材：撥動玩具。活動內容：出示可撥動的玩具，並示範撥動玩具，引導兒童注意撥動的效果，接著鼓勵兒童模仿撥動玩具。注意事項：撥動玩具的動作要誇張一點，以吸引兒童注意。"
+  },
+  {
+    "name": "活動建議 2：推球反彈",
+    "level": "L3",
+    "parent_name": "項目二：模仿玩玩具方法",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "材料/建議教材：有彈力的球。活動內容：將桌子的一端貼近牆壁，並與兒童一同坐在面向牆壁的另一端。成人示範將桌子上的球用力推向牆壁使其反彈，接著協助兒童模仿推球，令其反彈回到兒童的位置。"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議—語言表達"
+  },
+  {
+    "name": "活動建議 3",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童面向同一方向坐著，每人面前放置1輛玩具車。成人示範將玩具車向前推，並鼓勵兒童模仿推車，看誰推得較遠。\n材料：玩具車2輛"
+  },
+  {
+    "name": "活動建議 4",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "示範扭動音樂玩具，並吸引兒童注意玩具發出的聲音及走動的畫面。待音樂停止後，鼓勵兒童自行扭動音樂玩具（成人或需要給予動作協助）。\n材料：音樂玩具"
+  },
+  {
+    "name": "活動建議 5",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示扭蛋機，並示範扭動轉輪令玩具蛋滾出來，接著鼓勵兒童模仿扭動轉輪（成人或需要給予動作協助）。\n材料：扭蛋機"
+  },
+  {
+    "name": "活動建議 6",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "示範用槌子玩槌床玩具，鼓勵兒童一起槌打玩具（成人或需要給予動作協助）。\n材料：槌床玩具、槌子2把"
+  },
+  {
+    "name": "活動建議 7",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "示範用玩具刀切泥膠，鼓勵兒童模仿。當兒童熟習「切」的動作後，可用玩具食物代替泥膠。\n材料：玩具刀、泥膠"
+  },
+  {
+    "name": "活動建議 8",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "示範用玩具刀切開玩具食物，並假裝把食物吃掉，接著鼓勵兒童模仿切開食物，繼而進食或給其他人吃。\n材料：可切開的玩具食物、玩具刀"
+  },
+  {
+    "name": "活動建議 9",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "示範用奶瓶餵洋娃娃喝奶，接著將奶瓶及洋娃娃交給兒童，鼓勵兒童模仿餵洋娃娃喝奶。\n材料：奶瓶、洋娃娃"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議—語言表達"
+  },
+  {
+    "name": "活動 10",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "示範用鼓棒打鼓，鼓勵兒童模仿。成人可以一面打鼓，一面唱歌，以吸引兒童的注意。\n\n所需教材：\n• 鼓\n• 鼓棒"
+  },
+  {
+    "name": "活動 11",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示洋娃娃，並示意洋娃娃感到口渴，要坐下來喝水，接著成人示範一連串的動作：\n• 將洋娃娃放在玩具椅上\n• 假裝從水壺斟水進杯\n• 餵洋娃娃進飲\n\n示範完畢後，將洋娃娃交給兒童，鼓勵兒童重複以上一連串的動作。\n\n所需教材：\n• 洋娃娃\n• 玩具椅子\n• 水壺\n• 杯"
+  },
+  {
+    "name": "活動 12",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示玩具巴士、巴士站及數個洋娃娃，並示意洋娃娃要排隊上車，接著成人示範一連串的動作：\n• 洋娃娃在巴士站前排隊\n• 將洋娃娃逐一放進車內\n• 巴士開車離開\n\n示範完畢後，將洋娃娃交給兒童，鼓勵兒童重複以上一連串的動作。\n\n所需教材：\n• 可載洋娃娃的玩具巴士\n• 玩具巴士站\n• 洋娃娃數個"
+  },
+  {
+    "name": "活動 13",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示泥膠及洋娃娃，並示範一連串的動作：\n• 把泥膠搓成小球狀，假裝是糖果並餵洋娃娃吃\n• 把泥膠搓成長條形狀，假裝是香腸並餵洋娃娃吃\n• 假裝洋娃娃吃飽了要睡覺，接著將洋娃娃放在玩具床上\n\n示範完畢後，將洋娃娃及泥膠交給兒童，鼓勵兒童重複以上一連串的動作。\n\n注意事項：兒童模仿以上動作的時候，成人可出示小球狀或長條形的泥膠，以作提示。成人或需以動作協助兒童搓泥膠。\n\n所需教材：\n• 泥膠\n• 洋娃娃\n• 玩具床"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議—語言表達"
+  },
+  {
+    "name": "活動建議 14",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示骯髒的洋娃娃，示意要替洋娃娃洗澡，並示範一連串的動作：\n• 把洋娃娃放進浴缸中\n• 用水清潔洋娃娃的身體\n• 用毛巾抹乾洋娃娃的身體\n示範完畢後，將洋娃娃交給兒童，鼓勵兒童重複以上一連串的動作。\n注意事項：只需用少量的水，以免濺濕。\n\n所需物料：\n• 玩具浴缸\n• 毛巾\n• 洋娃娃\n• 水 (少量)"
+  },
+  {
+    "name": "活動建議 15",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示洋娃娃，示意洋娃娃累了，需要睡覺，並示範一連串的動作：\n• 把洋娃娃放在床上\n• 蓋上被子\n• 輕拍洋娃娃哄她睡覺\n示範完畢後，將洋娃娃交給兒童，鼓勵兒童重複以上一連串的動作。\n\n所需物料：\n• 洋娃娃\n• 玩具床\n• 被子"
+  },
+  {
+    "name": "活動建議 16",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童聽音樂並搖動沙槌。成人示範不同的動作，例如：\n• 在頭上搖動沙槌\n• 在身後搖動沙槌\n• 把沙槌放在地上\n示範完畢後，鼓勵兒童重複以上一連串的動作。\n注意事項：可以使用不同的樂器。\n\n所需物料：\n• 沙槌\n• 音樂播放器"
+  },
+  {
+    "name": "活動建議 17",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童玩積木，並示範不同的玩法，例如：\n• 把積木疊高\n• 推倒積木\n• 敲打積木\n示範完畢後，鼓勵兒童重複以上一連串的動作。\n\n所需物料：\n• 積木"
+  },
+  {
+    "name": "活動建議 18",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童玩膠圈玩具，並示範不同的玩法，例如：\n• 雙手拿著膠圈並左右扭動\n• 舉起膠圈並搖動\n• 把膠圈套在套圈棒上\n示範完畢後，鼓勵兒童重複以上一連串的動作。\n\n所需物料：\n• 膠圈\n• 套圈棒"
+  },
+  {
+    "name": "語言表達",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言：語言表達"
+  },
+  {
+    "name": "項目三：模仿發聲",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "項目三：模仿發聲"
+  },
+  {
+    "name": "模仿發聲 (如：嘩、呠呠、汪汪)",
+    "level": "L3",
+    "parent_name": "項目三：模仿發聲",
+    "age_min_months": 12,
+    "age_max_months": 18,
+    "prompt_corpus": "目標：模仿發聲 (如：嘩、呠呠、汪汪) / 1-1½ 歲"
+  },
+  {
+    "name": "活動建議一：出示大玩具",
+    "level": "L4",
+    "parent_name": "模仿發聲 (如：嘩、呠呠、汪汪)",
+    "age_min_months": 12,
+    "age_max_months": 18,
+    "prompt_corpus": "材料/建議教材：大玩具\n活動建議：出示 1 份大玩具，並誇張地張開口發出「嘩」聲，鼓勵兒童模仿說：「嘩」。"
+  },
+  {
+    "name": "活動建議二：躲貓貓遊戲",
+    "level": "L4",
+    "parent_name": "模仿發聲 (如：嘩、呠呠、汪汪)",
+    "age_min_months": 12,
+    "age_max_months": 18,
+    "prompt_corpus": "材料/建議教材：毛巾\n活動建議：與兒童玩「躲貓貓」遊戲。成人用毛巾遮蓋自己的臉，當兒童拉開毛巾時，成人立刻誇張地發出「嘩」聲。接著替兒童蓋上毛巾，當成人拉下毛巾時，鼓勵兒童模仿發出「嘩」聲。\n注意事項：若兒童未能發聲，成人可在拉下兒童臉上的毛巾後示範發出「嘩」聲，再鼓勵兒童模仿發聲。"
+  },
+  {
+    "name": "活動建議三：推車遊戲",
+    "level": "L4",
+    "parent_name": "模仿發聲 (如：嘩、呠呠、汪汪)",
+    "age_min_months": 12,
+    "age_max_months": 18,
+    "prompt_corpus": "材料/建議教材：玩具車\n活動建議：與兒童玩推車遊戲。成人將玩具車推給兒童，並發出「呠呠」聲。接著協助兒童將玩具車推回給成人，並鼓勵兒童模仿發出「呠呠」聲。"
+  },
+  {
+    "name": "活動建議四：動物叫聲模仿",
+    "level": "L4",
+    "parent_name": "模仿發聲 (如：嘩、呠呠、汪汪)",
+    "age_min_months": 12,
+    "age_max_months": 18,
+    "prompt_corpus": "材料/建議教材：會發聲的玩具、動物\n活動建議：出示發聲玩具狗或其他動物，並以誇張的口型模仿該動物的叫聲 (例如：狗的「汪汪」聲、貓的「喵喵」聲) ，鼓勵兒童模仿。"
+  },
+  {
+    "name": "詞彙運用",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言。學習重點：詞彙運用。"
+  },
+  {
+    "name": "運用名詞",
+    "level": "L2",
+    "parent_name": "詞彙運用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "項目一：運用名詞。注意事項：\n1. 視乎所使用的教材，此項目中的兩個訓練目標，均可以運用下列各項活動。\n2. 活動中物件的數量可按兒童的能力增加或減少。\n3. 在進行活動時，兒童發音的準確度並不重要，只要兒童能發出近似音，成人都要加以回應。當兒童發音不準確時，成人不需作出糾正，只需示範正確的發音便可。"
+  },
+  {
+    "name": "說出食物的名稱",
+    "level": "L3",
+    "parent_name": "運用名詞",
+    "age_min_months": 12,
+    "age_max_months": 48,
+    "prompt_corpus": "目標 A：說出食物的名稱（如：糖、蝦條、麵包）。\n\n【活動建議 1】\n出示及介紹不同的食物，接著成人把食物放在不同的碟子上，再用布蓋著，不讓兒童看見。成人在兒童面前把碟子的位置調亂，並說出其中一款食物的名稱，要求兒童找出該食物。兒童找出食物後，成人隨即問：「這是甚麼？」待兒童回答後，才給予他食物。\n材料/建議教材：食物或水果（實物）、碟子數個、布數塊\n\n【活動建議 2】\n出示不同的食物圖片及相應的實物食物，並介紹有關食物的名稱，接著把實物食物放進食物袋中。成人讓兒童看1張食物圖片，接著鼓勵兒童從袋中找出相同的食物，並說出食物的名稱。\n材料/建議教材：食物袋、實物食物、食物圖片\n\n【活動建議 3】\n介紹籃子內各種食物的名稱，接著要求兒童用食物夾把食物逐一夾出來，並說出食物的名稱，再跨過木欄餵紙板大口娃娃吃。\n材料/建議教材：玩具食物、紙板大口娃娃、籃子、食物夾、木欄"
+  },
+  {
+    "name": "說出水果的名稱",
+    "level": "L3",
+    "parent_name": "運用名詞",
+    "age_min_months": 12,
+    "age_max_months": 48,
+    "prompt_corpus": "目標 B：說出水果的名稱（如：橙、蘋果、香蕉）。\n\n【活動建議 1】\n出示及介紹不同的食物（水果），接著成人把食物放在不同的碟子上，再用布蓋著，不讓兒童看見。成人在兒童面前把碟子的位置調亂，並說出其中一款食物的名稱，要求兒童找出該食物。兒童找出食物後，成人隨即問：「這是甚麼？」待兒童回答後，才給予他食物。\n材料/建議教材：食物或水果（實物）、碟子數個、布數塊\n\n【活動建議 2】\n出示不同的食物（水果）圖片及相應的實物食物，並介紹有關食物的名稱，接著把實物食物放進食物袋中。成人讓兒童看1張食物圖片，接著鼓勵兒童從袋中找出相同的食物，並說出食物的名稱。\n材料/建議教材：食物袋、實物食物、食物圖片\n\n【活動建議 3】\n介紹籃子內各種食物（水果）的名稱，接著要求兒童用食物夾把食物逐一夾出來，並說出食物的名稱，再跨過木欄餵紙板大口娃娃吃。\n材料/建議教材：玩具食物、紙板大口娃娃、籃子、食物夾、木欄"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議—語言表達"
+  },
+  {
+    "name": "活動4",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示完整的食物圖片，並介紹該食物的名稱。介紹完畢後，把一分為二的食物圖片放進尋寶箱內，鼓勵兒童在箱內找出圖片碎塊，並拼砌出完整的圖片，再說出該食物的名稱。\n【準備教材】：(按已選取的訓練目標預備) 完整的食物圖片、一分為二的食物圖片、尋寶箱"
+  },
+  {
+    "name": "活動5",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示不同的水果，並讓兒童拿著觸摸、觀察外形特徵、嗅一嗅其氣味等，接著把水果切開。成人一面介紹水果的名稱，一面讓兒童品嚐味道。鼓勵兒童說出想吃的水果名稱，再讓兒童品嚐。成人可轉換活動形式，讓兒童戴上眼罩試味，再鼓勵兒童猜猜是甚麼水果。\n【準備教材】：水果、刀、眼罩"
+  },
+  {
+    "name": "活動6",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "從神秘盒中拿出玩具水果，並介紹其名稱，接著把水果放回神秘盒內。出示水果圖片，鼓勵兒童按圖片在神秘盒中找出該水果。兒童找到該水果後，成人再鼓勵兒童說出該水果的名稱。\n【準備教材】：玩具水果、水果圖片、神秘盒"
+  },
+  {
+    "name": "學前兒童訓練指南—語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "學前兒童訓練指南—語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議—語言表達"
+  },
+  {
+    "name": "活動7：尋寶箱食物拼圖",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示拼板上的食物拼圖並介紹其名稱，接著把食物拼圖放在尋寶箱內。出示拼板，鼓勵兒童在尋寶箱內逐一拿出食物拼圖，並說出食物名稱，接著放在拼板上。\n準備材料：食物拼板、尋寶箱"
+  },
+  {
+    "name": "活動8：尋寶箱水果影子配對",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "介紹各水果圖片的名稱，接著把圖片放在尋寶箱內。出示水果的影子圖片，鼓勵兒童在尋寶箱內找出水果圖片，與影子圖片配對，並說出水果名稱。\n準備材料：水果圖片、影子圖片、尋寶箱"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南-語言"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議 - 語言表達"
+  },
+  {
+    "name": "活動 5",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童玩「薯蛋頭」玩具。成人把「薯蛋頭」的五官部位放在尋寶箱內，接著出示五官部位圖片，鼓勵兒童在尋寶箱內找出該部位，並要求兒童說出其名稱，再協助兒童把它拼砌在「薯蛋頭」的正確位置。\n\n材料：五官部位圖片、「薯蛋頭」玩具、尋寶箱"
+  },
+  {
+    "name": "活動 6",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示及介紹洋娃娃衣物和其圖片(如：鞋、衫、襪)，並讓兒童觸摸。接著成人把衣物放進布袋中，鼓勵兒童抽出 1 張衣物圖片，再從布袋內找出相同的衣物及說出其名稱。\n\n材料：洋娃娃衣物、布袋、衣物圖片"
+  },
+  {
+    "name": "活動 7",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示洗衣袋(內附鞋、衫、襪)及介紹各衣物的名稱，並告訴兒童袋中的衣物弄污了，需要清洗。鼓勵兒童從洗衣袋中隨意拿出 1 件衣物，說出名稱後，再把衣物放進玩具洗衣機內，模擬清洗。\n\n材料：洋娃娃衣物、洗衣袋、玩具洗衣機"
+  },
+  {
+    "name": "活動 8",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "預先把洋娃娃衣物圖片放在布袋內，成人在布袋中逐一抽出衣物圖片並介紹其名稱。接著鼓勵兒童從袋中抽出衣物圖片，走過障礙物或平衡木後，說出衣物的名稱，最後把衣服圖片貼在人物圖片上。\n\n材料：洋娃娃衣物圖片、人物圖片、布袋、障礙物或平衡木"
+  },
+  {
+    "name": "語言表達",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "項目一：運用名詞",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "目標E：說出日常用品的名稱 (如：毛巾、梳、牙刷)",
+    "level": "L3",
+    "parent_name": "項目一：運用名詞",
+    "age_min_months": 12,
+    "age_max_months": 48,
+    "prompt_corpus": "活動建議1：出示洋娃娃及日常用品 (牙刷、梳、毛巾)，並示意洋娃娃的牙齒骯髒了 / 頭髮亂了 / 臉孔骯髒了，鼓勵兒童選取適當的物件來替洋娃娃刷牙 / 梳頭 / 抹臉，並說出所選取物件的名稱。\n材料/建議教材：日常用品、洋娃娃\n\n活動建議2：出示不同的日常用品 (牙刷、梳、毛巾)，並逐一介紹其名稱。接著把日常用品放進神秘袋中 (每個袋只放1件物件)，鼓勵兒童伸手進神秘袋中觸摸物件，並猜猜是甚麼。當兒童說出正確的物件名稱後，把物件拿出來，由成人介紹其名稱和用途，最後鼓勵兒童模擬在洋娃娃身上使用該物件。\n材料/建議教材：日常用品、神秘袋數個、洋娃娃"
+  },
+  {
+    "name": "目標F：說出餐具的名稱【如：杯、碗、湯匙 (粵 匙羹)】",
+    "level": "L3",
+    "parent_name": "項目一：運用名詞",
+    "age_min_months": 12,
+    "age_max_months": 48,
+    "prompt_corpus": "活動建議3：介紹不同餐具的名稱，並讓兒童觸摸，接著把餐具放進神秘袋中。成人出示洋娃娃，要求兒童從袋中隨意拿出餐具並說出其名稱，再模擬餵洋娃娃進食或進飲 (如：用匙羹舀食物 / 用碗盛載食物 / 用杯進飲)。\n材料/建議教材：餐具、神秘袋、洋娃娃、玩具食物\n\n活動建議4：出示放滿了食物 (如：飲料、水果) 的玩具雪櫃，並模擬與兒童一起吃東西。成人拿著飲料或水果，問兒童要用甚麼餐具，鼓勵兒童說出該餐具的名稱 (如：當成人拿著飲料，兒童便要說：「杯」；當成人拿著水果，兒童便要說：「刀」或「碟」)。接著成人將餐具及食物交給兒童，鼓勵兒童模擬斟飲料、切食物等，再模擬吃東西。\n材料/建議教材：餐具、玩具食物、玩具雪櫃"
+  },
+  {
+    "name": "語言表達",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言，活動建議—語言表達"
+  },
+  {
+    "name": "運用名詞",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "項目一：運用名詞"
+  },
+  {
+    "name": "說出交通工具的名稱",
+    "level": "L3",
+    "parent_name": "運用名詞",
+    "age_min_months": 12,
+    "age_max_months": 48,
+    "prompt_corpus": "目標 G：說出交通工具的名稱（如：巴士、小巴、的士）"
+  },
+  {
+    "name": "活動建議 1",
+    "level": "L4",
+    "parent_name": "說出交通工具的名稱",
+    "age_min_months": 12,
+    "age_max_months": 48,
+    "prompt_corpus": "出示及逐一介紹不同的玩具交通工具，接著成人把洋娃娃交給兒童，問：「你想洋娃娃坐甚麼車？」引導兒童說出交通工具的名稱，並與兒童進行假想遊戲，由兒童把洋娃娃放進車內，駛到不同的地方。\n材料 / 建議教材：玩具交通工具、洋娃娃"
+  },
+  {
+    "name": "說出玩具的名稱",
+    "level": "L3",
+    "parent_name": "運用名詞",
+    "age_min_months": 12,
+    "age_max_months": 48,
+    "prompt_corpus": "目標 H：說出玩具的名稱【如：球（粵 波）、車、積木】"
+  },
+  {
+    "name": "活動建議 2",
+    "level": "L4",
+    "parent_name": "說出玩具的名稱",
+    "age_min_months": 12,
+    "age_max_months": 48,
+    "prompt_corpus": "介紹不同玩具的名稱，並讓兒童觸摸後，才放進盒子內。接著成人要求兒童按玩具圖片把玩具找出來，再鼓勵兒童說出該玩具的名稱。\n材料 / 建議教材：玩具、玩具圖片、盒子"
+  },
+  {
+    "name": "活動建議 3",
+    "level": "L4",
+    "parent_name": "說出玩具的名稱",
+    "age_min_months": 12,
+    "age_max_months": 48,
+    "prompt_corpus": "與兒童玩「猜猜畫畫」遊戲。成人出示及逐一介紹玩具圖片，並鼓勵兒童模仿說出該玩具名稱。接著成人把圖片放進盒子或袋子內，由兒童隨意拿出 1 張圖片，成人隨即在紙或畫板上畫出該玩具，鼓勵兒童猜猜是甚麼。\n材料 / 建議教材：玩具圖片、紙或畫板、筆、盒子或袋子"
+  },
+  {
+    "name": "活動建議 4",
+    "level": "L4",
+    "parent_name": "說出玩具的名稱",
+    "age_min_months": 12,
+    "age_max_months": 48,
+    "prompt_corpus": "兒童圍圈而坐，成人逐一介紹玩具後，將其放在圈中央的籃子內。接著成人取出 1 個球與兒童進行音樂傳球遊戲，當音樂播放時，兒童便開始傳球；音樂停止時，手持球的兒童要從籃子中選取 1 件玩具，並說出其名稱。\n材料 / 建議教材：玩具、球、籃子、音樂播放器"
+  },
+  {
+    "name": "學前兒童訓練指南—語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童語言訓練總體指南與活動建議框架。"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "學前兒童訓練指南—語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "引導及鼓勵學前兒童進行語言表達的訓練活動建議。"
+  },
+  {
+    "name": "活動 5：出示玩具店圖片及實物說出名稱",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示玩具店的圖片，並在玩具架上擺放各種玩具。成人介紹各玩具的名稱，並鼓勵兒童說出想玩的玩具名稱，最後從架上取下玩具給兒童。準備教材：玩具、玩具店圖片、玩具架。"
+  },
+  {
+    "name": "活動 6：玩具圖片認讀比賽",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童進行比賽。成人在桌上展示不同的玩具圖片，由兒童說出其中一件玩具的名稱後，成人與兒童隨即盡快拾起或拍向該玩具圖片，並把該圖片貼於玩具店圖片上。（示例包含：氣球、拼圖、積木、玩具車、搖鼓、洋娃娃、球等）。準備教材：玩具圖片、玩具店圖片。"
+  },
+  {
+    "name": "活動 7：配合兒歌旋律說出玩具名稱",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童玩球、車、積木等玩具，並唱相關的兒歌，如：推球時可唱「推呀推個大波波，推呀推個大波波，推呀推個大波波，啦啦啦啦啦啦啦」。待兒童初步掌握兒歌的旋律後，成人可在歌詞提及玩具名稱時停下來，鼓勵兒童唱出玩具名稱。準備教材：玩具。"
+  },
+  {
+    "name": "語言表達",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "項目一：運用名詞",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "運用名詞的活動與訓練建議"
+  },
+  {
+    "name": "目標 I：說出人物的名稱",
+    "level": "L3",
+    "parent_name": "項目一：運用名詞",
+    "age_min_months": 12,
+    "age_max_months": 48,
+    "prompt_corpus": "目標：說出人物的名稱（如：媽媽、老師、婆婆）"
+  },
+  {
+    "name": "活動 1",
+    "level": "L4",
+    "parent_name": "目標 I：說出人物的名稱",
+    "age_min_months": 12,
+    "age_max_months": 48,
+    "prompt_corpus": "活動建議：出示兒童家人的相片，鼓勵兒童說出家人的名稱，接著把相片貼在房屋圖片上。\n材料/建議教材：兒童家人的相片、房屋圖片"
+  },
+  {
+    "name": "活動 2",
+    "level": "L4",
+    "parent_name": "目標 I：說出人物的名稱",
+    "age_min_months": 12,
+    "age_max_months": 48,
+    "prompt_corpus": "活動建議：出示兒童家人的相片，引導兒童逐一說出他們的名稱。接著成人把相片翻轉，由兒童隨意翻開1張相片，並問：「他/她是誰？」鼓勵兒童說出家人的名稱。\n材料/建議教材：兒童家人的相片"
+  },
+  {
+    "name": "活動 3",
+    "level": "L4",
+    "parent_name": "目標 I：說出人物的名稱",
+    "age_min_months": 12,
+    "age_max_months": 48,
+    "prompt_corpus": "活動建議：在卡紙上剪出不同形狀的洞，利用已剪洞的卡紙遮蓋人物相片，接著由2名兒童作比賽，看誰較快從卡紙的洞中猜出該相片的人物是誰。猜對的兒童可得1張貼紙，如此類推，直至猜完所有人物相片，取得最多貼紙的兒童為勝。\n材料/建議教材：已剪洞的卡紙、人物相片、貼紙"
+  },
+  {
+    "name": "目標 J：說出動物的名稱",
+    "level": "L3",
+    "parent_name": "項目一：運用名詞",
+    "age_min_months": 12,
+    "age_max_months": 48,
+    "prompt_corpus": "目標：說出動物的名稱（如：貓、狗、魚）"
+  },
+  {
+    "name": "活動 4",
+    "level": "L4",
+    "parent_name": "目標 J：說出動物的名稱",
+    "age_min_months": 12,
+    "age_max_months": 48,
+    "prompt_corpus": "活動建議：出示不同的玩具動物，逐一介紹及播放其叫聲。再次播放動物的叫聲，鼓勵兒童猜猜是哪種動物，答對了可將該玩具動物放在圍欄裡。\n材料/建議教材：玩具動物、圍欄、動物叫聲及音樂播放器"
+  },
+  {
+    "name": "活動 5",
+    "level": "L4",
+    "parent_name": "目標 J：說出動物的名稱",
+    "age_min_months": 12,
+    "age_max_months": 48,
+    "prompt_corpus": "活動建議：出示動物圖片，並示範動物的叫聲及其形態。接著成人將動物圖片放進神秘袋內，取出其中一張後，模仿該動物的叫聲或動作，鼓勵兒童猜猜是甚麼動物。成人可與兒童輪流模仿動物的叫聲或動作，讓對方猜。\n材料/建議教材：動物圖片、神秘袋"
+  },
+  {
+    "name": "語言表達",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "說出動物的名稱",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "6 出示及逐一介紹動物媽媽和動物寶寶的圖片，接著成人告訴兒童動物寶寶迷了路，需要兒童協助尋回動物媽媽。成人可指著其中一張動物寶寶的圖片，問兒童：「誰是牠的媽媽？」鼓勵兒童說出動物的名稱，以找回動物媽媽。\n\n材料 / 建議教材：\n動物媽媽和動物寶寶圖片"
+  },
+  {
+    "name": "運用名詞",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "項目一：運用名詞"
+  },
+  {
+    "name": "說出傢具的名稱",
+    "level": "L3",
+    "parent_name": "運用名詞",
+    "age_min_months": 12,
+    "age_max_months": 48,
+    "prompt_corpus": "目標：說出傢具的名稱【如：桌子(檯)、椅子(櫈)、床】\n\n活動建議：\n1 出示並逐一介紹各種玩具傢具，接著成人將各玩具傢具放入不同的神秘袋中。由兒童選擇1個神秘袋，並伸手入內觸摸玩具，再猜猜是甚麼。兒童說出正確的傢具名稱後，讓他玩模擬遊戲，如：將玩具食物和餐具放在玩具桌子上，再將洋娃娃放在玩具椅子上進食桌上的食物；或將洋娃娃放在玩具床上睡覺。\n\n材料 / 建議教材：\n玩具傢具\n玩具食物\n玩具餐具\n洋娃娃\n神秘袋數個"
+  },
+  {
+    "name": "說出地方的名稱",
+    "level": "L3",
+    "parent_name": "運用名詞",
+    "age_min_months": 12,
+    "age_max_months": 48,
+    "prompt_corpus": "目標：說出地方的名稱(如：快餐店、超級市場、學校)"
+  },
+  {
+    "name": "說出家庭電器的名稱",
+    "level": "L3",
+    "parent_name": "運用名詞",
+    "age_min_months": 12,
+    "age_max_months": 48,
+    "prompt_corpus": "目標：說出家庭電器的名稱(如：燈、電視、電話)"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議—語言表達"
+  },
+  {
+    "name": "活動 7",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "【活動描述】小組活動時，逐一介紹不同地方的相片（如：快餐店、超級市場、學校）及相關的物件圖片（如：快餐店－薯條、汽水），接著把物件圖片放在遠處的桌上。向兒童提供物件如：紙袋、超級市場膠袋或書包，由3名兒童各取其一，並往桌子選取正確的圖片放進手上的袋或書包內。完成後，成人問兒童：「你收集了哪裡的物件？」引導兒童說出地方名稱，並與兒童一同檢查袋內的物件圖片是否正確。\n【教具/教材】地方相片、與不同地方相關的物件圖片、快餐店紙袋、超級市場膠袋、書包"
+  },
+  {
+    "name": "活動 8",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "【活動描述】出示及逐一介紹不同地方的相片或標誌圖，接著用9張方形卡紙把相片遮蓋著。成人和兒童輪流翻開卡紙（每次只可翻1張），看看誰可猜到相片或標誌圖所顯示的是甚麼地方。\n【教具/教材】地方相片或標誌圖、方形卡紙9張"
+  },
+  {
+    "name": "活動 9",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "【活動描述】出示及逐一介紹不同地方的相片（如：遊樂場、超級市場、學校）及相關物件的圖片（如：遊樂場－滑梯、鞦韆），接著把地方相片貼在課室的不同角落，並將物件圖片放進袋中。成人要求兒童從袋中抽出其中一張圖片，問兒童：「在哪裡可以找到這東西呢？」引導兒童說出地方名稱後，與兒童一起駕著玩具車，把物件圖片運送到貼有該地方相片的不同角落。\n【教具/教材】地方相片、與不同地方相關的物件圖片、袋子、玩具車"
+  },
+  {
+    "name": "活動 10",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "【活動描述】出示家居圖片，並介紹家居內不同的電器。與兒童玩玩具屋，鼓勵兒童看看屋內欠缺甚麼電器，並告訴成人（說出電器的名稱）。若兒童能說出電器的名稱，成人便把該玩具電器交予兒童，讓他擺放在屋內。擺放好玩具電器後，成人與兒童利用洋娃娃在玩具屋內進行假想遊戲（如：洋娃娃看電視、開電風扇等）。\n【教具/教材】玩具電器、家居圖片、玩具屋、洋娃娃"
+  },
+  {
+    "name": "活動 11",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "【活動描述】預備2套相同的電器圖片，將其中一套圖片放在籃子內，另一套則貼在牆上。成人向兒童發出指令，如：「電視」，由兒童從籃子內找出「電視」的圖片並貼在牆上。兒童可輪流發出指令（說出電器名稱），要求其他兒童找出正確圖片。\n【教具/教材】電器圖片2套、籃子"
+  },
+  {
+    "name": "語言表達",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言，活動建議—語言表達"
+  },
+  {
+    "name": "運用名詞",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "項目一：運用名詞"
+  },
+  {
+    "name": "說出不常用的名詞",
+    "level": "L3",
+    "parent_name": "運用名詞",
+    "age_min_months": 36,
+    "age_max_months": 72,
+    "prompt_corpus": "目標 N：說出不常用的名詞【如：降落傘、潛水艇、海豹、駱駝、啄木鳥、保鮮膜（保鮮紙）、密封袋（密實袋）】 / 3-6歲"
+  },
+  {
+    "name": "說出類名詞",
+    "level": "L3",
+    "parent_name": "運用名詞",
+    "age_min_months": 36,
+    "age_max_months": 72,
+    "prompt_corpus": "目標 O：說出類名詞（如：食物、衣物、動物、電器）/ 3-6歲"
+  },
+  {
+    "name": "活動1：配對不常用物件圖片",
+    "level": "L4",
+    "parent_name": "說出不常用的名詞",
+    "age_min_months": 36,
+    "age_max_months": 72,
+    "prompt_corpus": "活動建議：預備2套相同的不常用物件圖片，並逐一介紹其名稱，成人把圖片翻轉放在桌上，隨意調換位置後，與兒童輪流翻開2張圖片作配對，若圖片是相同的，便要說出該物件的名稱；若圖片是不同的，便將該2張圖片再翻轉，繼續進行遊戲，直至所有圖片都翻開。材料/建議教材：不常用物件的圖片2套"
+  },
+  {
+    "name": "活動2：音樂椅遊戲",
+    "level": "L4",
+    "parent_name": "說出不常用的名詞",
+    "age_min_months": 36,
+    "age_max_months": 72,
+    "prompt_corpus": "活動建議：與兒童進行「音樂椅」遊戲。成人出示並逐一介紹不常用物件的圖片，接著把圖片分別放在椅子上。播放音樂，鼓勵兒童繞著椅子步行。當音樂停止時，引導兒童盡快坐在椅子上，並說出椅子上圖片的物件名稱。材料/建議教材：不常用物件的圖片、椅子數張、音樂播放器"
+  },
+  {
+    "name": "活動3：包裝物料與小吃",
+    "level": "L4",
+    "parent_name": "說出不常用的名詞",
+    "age_min_months": 36,
+    "age_max_months": 72,
+    "prompt_corpus": "活動建議：出示及逐一介紹不同的包裝物料，如：保鮮紙、密實袋、紙袋、布袋等，並邀請兒童協助用不同包裝物料包裝小吃，如：用保鮮紙包裹小吃、用密實袋盛載小吃等，完成後把所有已包裝好的小吃放進神秘箱中。由兒童從神秘箱內拿出1種小吃，說出用以包裹該小吃的包裝物料後，就可以打開包裝拿取小吃。材料/建議教材：密封袋、神秘箱、紙袋、布袋、小吃"
+  },
+  {
+    "name": "活動4：不常用物件神秘箱",
+    "level": "L4",
+    "parent_name": "說出不常用的名詞",
+    "age_min_months": 36,
+    "age_max_months": 72,
+    "prompt_corpus": "活動建議：出示並介紹不常用物件的玩具及圖片（如：降落傘、潛水艇），接著把物件放進神秘箱內。兒童從神秘箱中拿出1件物件，說出該物件的名稱後，再配對相關圖片。材料/建議教材：不常用物件的玩具、不常用物件的圖片、神秘箱"
+  },
+  {
+    "name": "活動5：類別物件分類",
+    "level": "L4",
+    "parent_name": "說出類名詞",
+    "age_min_months": 36,
+    "age_max_months": 72,
+    "prompt_corpus": "活動建議：出示1個放有不同類別物件圖片的神秘箱。成人與兒童輪流從箱中拿出1張圖片，說出該圖片所屬的類名詞名稱（如：食物）後，再把圖片放在所屬類別的籃子內（預先貼上類別圖片）。材料/建議教材：類別圖片（如：食物類、衣物類、動物類、電器類）、不同類別的物件圖片、神秘箱、籃子數個"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議—語言表達"
+  },
+  {
+    "name": "說出所屬類別的名稱",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透過遊戲與活動，引導兒童為物件分類，並說出其所屬類別的名稱。"
+  },
+  {
+    "name": "活動 6",
+    "level": "L4",
+    "parent_name": "說出所屬類別的名稱",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示不同類別的玩具，並介紹每件玩具所屬類別的名稱詞（如：衫 - 衣物、蘋果 - 食物）。由兒童選取1件玩具，把其分類並放在貼有該類別圖片的籃子中，接著說出它所屬類別的名稱。\n\n教具：\n- 不同類別的玩具（每類別至少4件）\n- 類別圖片（如：食物類、衣物類、動物類、電器類）\n- 籃子數個"
+  },
+  {
+    "name": "活動 7",
+    "level": "L4",
+    "parent_name": "說出所屬類別的名稱",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "成人與兒童各人從類別圖片（如：食物類、衣物類、動物類、電器類）中抽出1張圖片，代表自己要找物件所屬的類別。成人隨意派發每人4張物件圖片，引導兒童說出自己要找物件所屬的類別，再從成人手上抽1張圖片。若所抽到的圖片屬於該類別，兒童可保留該圖片（如：兒童的類別圖片為「食物」，從成人手上抽出的圖片是「雞蛋」，兒童便可保留該圖片，兒童即擁有5張圖片）。重複活動，看誰最快集齊所屬類別的圖片。\n\n教具：\n- 類別圖片（如：食物類、衣物類、動物類、電器類）\n- 物件圖片（每類別至少4張）"
+  },
+  {
+    "name": "活動 8",
+    "level": "L4",
+    "parent_name": "說出所屬類別的名稱",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童玩「襟棉胎」遊戲。各人從類別圖片（如：食物類、衣物類、動物類、電器類）中抽出1至2張圖片，代表自己要找的物件類別。成人逐一出示不同的物件圖片，每出示一張圖片，成人與兒童便各自說出自己要找的類別名稱。當類別名稱與出示的圖片相符，就要比賽用手按著該圖片，最快者為勝利，勝利者可取走出示的圖片。遊戲完結後，要求兒童將收集到的圖片分類，並說出相關的類別名稱。\n\n教具：\n- 類別圖片（如：食物類、衣物類、動物類、電器類）\n- 物件圖片（每類別至少4張）"
+  },
+  {
+    "name": "活動 9",
+    "level": "L4",
+    "parent_name": "說出所屬類別的名稱",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "在2塊白板上分別貼上不同的類別圖片，並把不同類別的物件圖片放在滿載發泡膠粒的尋寶箱內。兒童分成2組，每組派出1位兒童從尋寶箱內拿出1張物件圖片。兒童說出物件名稱及所屬類別後，便把圖片貼在所屬類別的白板上，重複遊戲直至拿出所有物件圖片。比賽結束後，成人與兒童一起檢視物件圖片是否貼在正確的白板上，並看看哪一組兒童取得最多圖片。過程中，鼓勵兒童說出物件及類別名稱。\n\n教具：\n- 不同類別的物件圖片\n- 類別圖片\n- 尋寶箱\n- 白板2塊\n- 發泡膠粒"
+  },
+  {
+    "name": "語言表達",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言表達"
+  },
+  {
+    "name": "項目二：運用動詞",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "訓練兒童運用動詞的能力。"
+  },
+  {
+    "name": "目標 A：運用常用的動詞",
+    "level": "L3",
+    "parent_name": "項目二：運用動詞",
+    "age_min_months": 18,
+    "age_max_months": 36,
+    "prompt_corpus": "運用常用的動詞【如：吃(粵 食)、喝(粵 飲)、玩、閱讀(粵 睇書)、梳頭、游水、睡覺(粵 瞓覺)、掃地、煮飯】"
+  },
+  {
+    "name": "目標 B：運用不常用的動詞",
+    "level": "L3",
+    "parent_name": "項目二：運用動詞",
+    "age_min_months": 36,
+    "age_max_months": 72,
+    "prompt_corpus": "運用不常用的動詞(如：掘、織、綁、慶祝、分享)"
+  },
+  {
+    "name": "活動 1：模擬吃喝遊戲",
+    "level": "L4",
+    "parent_name": "目標 A：運用常用的動詞",
+    "age_min_months": 18,
+    "age_max_months": 36,
+    "prompt_corpus": "材料/建議教材：玩具食物或飲料、洋娃娃。\n活動建議：出示洋娃娃和玩具食物(如：香蕉、麵包、蛋)或飲料(如：牛奶、橙汁、汽水)，成人示範取食物或飲料並說：「吃」(粵 食)或「喝」(粵 飲)，接著拿起洋娃娃模擬吃或喝。鼓勵兒童取1件食物或飲料，並說：「吃」(粵 食)或「喝」(粵 飲)，成人才拿起洋娃娃模擬吃或喝兒童手上的玩具食物或飲料。"
+  },
+  {
+    "name": "活動 2：身體動作兒歌",
+    "level": "L4",
+    "parent_name": "目標 A：運用常用的動詞",
+    "age_min_months": 18,
+    "age_max_months": 36,
+    "prompt_corpus": "活動建議：與兒童一起唱有關身體動作的兒歌，如：「我有手可以拍拍拍，我有手可以拍拍拍，我有手可以拍拍拍，大家一起拍」。【可將歌詞轉為腳—踏、餅—吃(粵 食)、水—喝(粵 飲)】。當兒童初步掌握兒歌後，成人每當唱到動作詞時便停下來，讓兒童唱出該動作詞。鼓勵兒童一面唱歌，一面模仿做出相關動作。"
+  },
+  {
+    "name": "活動 3：日常用品模擬遊戲",
+    "level": "L4",
+    "parent_name": "目標 A：運用常用的動詞",
+    "age_min_months": 18,
+    "age_max_months": 36,
+    "prompt_corpus": "材料/建議教材：日常用品、玩具傢具、洋娃娃。\n活動建議：出示各種日常用品及玩具傢具，並逐一介紹相關的動作(如：床—睡覺、梳—梳頭、椅子—坐)。鼓勵兒童運用洋娃娃玩模擬遊戲，如：把洋娃娃放在玩具床上假裝睡覺、用梳替洋娃娃梳頭、把洋娃娃放在椅子上坐。過程中，鼓勵兒童說出相關的動作詞。"
+  },
+  {
+    "name": "語言表達",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言。活動建議—語言表達。"
+  },
+  {
+    "name": "運用動作詞彙",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學習及運用動作名稱和動作詞（延續前一項目）。"
+  },
+  {
+    "name": "活動 4：猜一猜動作遊戲",
+    "level": "L3",
+    "parent_name": "運用動作詞彙",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議：與兒童玩「猜一猜」遊戲。成人介紹不同圖片中的動作名稱（如：跑步、梳頭），接著抽出1張動作圖片，並做出圖片中的動作，鼓勵兒童猜一猜該動作的名稱。兒童熟習遊戲後，可由兒童抽圖片並做出圖片中的動作，由其他同伴猜想該動作的名稱。\n材料/建議教材：動作圖片"
+  },
+  {
+    "name": "活動 5：神秘箱抽圖片說動作",
+    "level": "L3",
+    "parent_name": "運用動作詞彙",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議：出示並逐一介紹動作圖片，鼓勵兒童模仿說出動作詞。接著成人把圖片放進神秘箱內，由兒童從箱中逐一抽出圖片。每抽出一張圖片，成人便問：「他在做甚麼？」鼓勵兒童說出圖片中的動作。\n材料/建議教材：不常用的動作的圖片、神秘箱"
+  },
+  {
+    "name": "項目三：運用社交詞彙",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": 12,
+    "age_max_months": 36,
+    "prompt_corpus": "目標：運用社交詞彙【如：拜拜、早晨、謝謝（粵 唔該）、對不起（粵 對唔住）、請讓一讓（粵 唔該借借）】\n注意事項：當兒童掌握目標詞彙後，可按兒童的能力要求兒童於句子中運用該詞彙。"
+  },
+  {
+    "name": "活動 1：日常生活情境引導",
+    "level": "L3",
+    "parent_name": "項目三：運用社交詞彙",
+    "age_min_months": 12,
+    "age_max_months": 36,
+    "prompt_corpus": "活動建議：利用日常生活的各種機會，引導兒童說出社交詞彙，如：早上兒童遇見鄰居、朋友或同學時說：「早晨」；下課時說：「拜拜」；得到別人的幫助後說：「謝謝」（粵 唔該）；要求別人讓路時說：「請讓一讓」（粵 唔該借借）。"
+  },
+  {
+    "name": "活動 2：快餐店購物遊戲",
+    "level": "L3",
+    "parent_name": "項目三：運用社交詞彙",
+    "age_min_months": 12,
+    "age_max_months": 36,
+    "prompt_corpus": "活動建議：出示快餐店玩具，與兒童玩購物遊戲。過程中，成人可模擬不同的情景來引導兒童說出不同的社交用語，如：向收銀員說：「早晨」或「午安」；購物完畢時說：「謝謝」（粵 唔該）；離開餐廳時說：「拜拜」。\n材料/建議教材：快餐店玩具、食物盆、玩具收銀機"
+  },
+  {
+    "name": "學前兒童訓練指南—語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童語言訓練"
+  },
+  {
+    "name": "活動建議—語言表達",
+    "level": "L2",
+    "parent_name": "學前兒童訓練指南—語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "語言表達相關的活動建議"
+  },
+  {
+    "name": "活動4：比較長短",
+    "level": "L3",
+    "parent_name": "活動建議—語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童搓泥膠條，把完成的泥膠條放在桌上作比較，鼓勵兒童說出哪一條泥膠條「長」；哪一條泥膠條「短」。準備材料：泥膠。"
+  },
+  {
+    "name": "活動5：「記憶」遊戲",
+    "level": "L3",
+    "parent_name": "活動建議—語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童玩「記憶」遊戲。把2套相同的物件圖片翻轉並隨意調換位置，成人與兒童輪流每次翻開2張圖片，鼓勵兒童說出2張圖片是「相同」或「不相同」。準備材料：物件圖片2套。"
+  },
+  {
+    "name": "活動6：「找不同」遊戲",
+    "level": "L3",
+    "parent_name": "活動建議—語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示「找不同」圖片，並示範說出兩者的相同之處（如：2隻小貓的表情是「相同」的）及不同之處（如：蝴蝶結的顏色是「不相同」的這個蝴蝶結是紫色；那個蝴蝶結是綠色）。完成後，鼓勵兒童運用不同的形容詞來描述另一組「找不同」圖片。準備材料：「找不同」圖片。"
+  },
+  {
+    "name": "活動7：描述物件的分別或特徵",
+    "level": "L3",
+    "parent_name": "活動建議—語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "預備及逐一介紹不同特徵的物件，如：軟及硬的球、快及慢的自動車、闊及窄的玩具床，介紹時要特別強調物件的特徵，如：「軟」或「硬」，並鼓勵兒童用手觸摸，以感覺不同的質感。成人將每對物件放進1個袋子中，要求兒童選取其中一個袋子，並取出袋中的2件物件。成人引導兒童描述2件物件的分別或特徵，如：「這個球是軟的，那個球是硬的。」準備材料：軟、硬的球；快、慢的自動車；闊、窄的玩具床；袋子3個。"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議—語言表達"
+  },
+  {
+    "name": "活動 8：與兒童畫表情圖畫",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童畫表情圖畫。畫圖前，鼓勵兒童說出想畫的表情（可用表情圖片提示兒童選擇開心、不開心、驚慌、憤怒等表情，成人可先示範說出表情）。完成後，再鼓勵兒童說出有關的表情。\n\n建議教具：\n- 畫板\n- 表情圖片"
+  },
+  {
+    "name": "活動 9：互相猜測表情圖片",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童各取 1 張表情圖片（如：開心、不開心、驚慌、憤怒），但不讓對方看見。先由成人猜猜兒童所取圖片的表情，再由兒童猜猜成人所取圖片的表情。如此類推，直至猜完所有表情圖片。\n\n建議教具：\n- 表情圖片"
+  },
+  {
+    "name": "活動 10：利用手偶說故事辨識情感",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "利用手偶說故事，故事內容涉及不同的情感（如：開心、不開心、驚慌、憤怒）。過程中，成人按故事人物不同的情感做出不同的表情，並介紹相關的詞彙。當成人再說故事並扮演不同的表情時，鼓勵兒童猜猜是甚麼情感，並一起做出該表情。\n\n建議教具：\n- 手偶"
+  },
+  {
+    "name": "活動 11：扭蛋機抽取表情圖片並扮演",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示並介紹不同情感的表情圖片，接著把圖片貼在白板上。成人與兒童玩扭蛋機，當兒童扭出 1 隻玩具蛋（蛋內預先放了不同的表情圖片）後，要求兒童打開蛋取出圖片，並扮演該圖片的表情，成人同時鼓勵其他兒童猜猜是甚麼表情。若兒童感困難，成人可運用白板上的表情圖片作提示。\n\n建議教具：\n- 表情圖片 2 套\n- 扭蛋機及玩具蛋\n- 白板"
+  },
+  {
+    "name": "運用位置詞",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "注意事項：當兒童掌握目標詞彙後，可按兒童的能力要求兒童於句子中運用該詞彙。"
+  },
+  {
+    "name": "運用位置詞【如：裡面 (粵：入面) / 外面 (粵：出面)、上面/下面、前面/後面】",
+    "level": "L2",
+    "parent_name": "運用位置詞",
+    "age_min_months": 30,
+    "age_max_months": 48,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "活動建議 1",
+    "level": "L3",
+    "parent_name": "運用位置詞【如：裡面 (粵：入面) / 外面 (粵：出面)、上面/下面、前面/後面】",
+    "age_min_months": 30,
+    "age_max_months": 48,
+    "prompt_corpus": "出示模型傢具（如：桌子、椅子）和玩具動物（如：貓、狗）。把玩具動物放在傢具的上面或下面（如：把玩具貓放在桌子上面），鼓勵兒童說出玩具動物的位置，如：「小貓在桌子上面」。再由兒童把玩具動物放在傢具的上面或下面，並說出有關的位置（「桌子上面」或「桌子下面」）。\n材料/建議教材：模型傢具、玩具動物"
+  },
+  {
+    "name": "活動建議 2",
+    "level": "L3",
+    "parent_name": "運用位置詞【如：裡面 (粵：入面) / 外面 (粵：出面)、上面/下面、前面/後面】",
+    "age_min_months": 30,
+    "age_max_months": 48,
+    "prompt_corpus": "出示大樹圖片和不同的水果圖片（如：蘋果、橙）。成人把水果圖片放在樹的上面或下面，並示範說出水果圖片的位置：「樹上面」或「樹下面」。由兒童選取 1 張水果圖片，說出要把水果放在「樹上面」或「樹下面」後，才擺放水果。\n材料/建議教材：大樹圖片、水果圖片"
+  },
+  {
+    "name": "活動建議 3",
+    "level": "L3",
+    "parent_name": "運用位置詞【如：裡面 (粵：入面) / 外面 (粵：出面)、上面/下面、前面/後面】",
+    "age_min_months": 30,
+    "age_max_months": 48,
+    "prompt_corpus": "與兒童玩「家家酒」遊戲。過程中，成人問兒童：「菜在哪裡？」引導兒童說出正確的位置，如：「在鍋裡面」或「在籃子外面」（亦可運用上面或下面來形容位置，如「碟子上面」或「桌子下面」）。\n材料/建議教材：「家家酒」玩具"
+  },
+  {
+    "name": "活動建議 4",
+    "level": "L3",
+    "parent_name": "運用位置詞【如：裡面 (粵：入面) / 外面 (粵：出面)、上面/下面、前面/後面】",
+    "age_min_months": 30,
+    "age_max_months": 48,
+    "prompt_corpus": "與兒童排隊，並引導兒童說出：「XX（兒童名字 / 成人稱謂）排在前面」或「XX（兒童名字 / 成人稱謂）排在後面」。當兒童掌握後，可提高難度，如：「XX（兒童名字 / 成人稱謂）排在 YY（兒童名字 / 成人稱謂）前面」。"
+  },
+  {
+    "name": "運用位置詞【如：中間、旁邊 (粵：隔離)、左/右】",
+    "level": "L2",
+    "parent_name": "運用位置詞",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議—語言表達"
+  },
+  {
+    "name": "活動5：使用位置詞的句子",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示洋娃娃和玩具交通工具，並示範說出含有位置詞的句子，如：「洋娃娃在小巴和巴士中間」、「洋娃娃在巴士旁邊」，接著把洋娃娃放在正確的位置。鼓勵兒童自行說出含位置詞的句子，並把洋娃娃放在適當的位置。\n\n材料建議：\n- 洋娃娃\n- 玩具交通工具"
+  },
+  {
+    "name": "活動6：表達左或右",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示貼紙，鼓勵兒童說出希望成人把貼紙貼在兒童的「左」或「右」手背或手臂上。當兒童熟習自己的左右手後，可用洋娃娃進行活動，教導兒童說出：「洋娃娃的左(或右)手」。\n\n材料建議：\n- 貼紙 (或可用原子印代替)\n- 洋娃娃"
+  },
+  {
+    "name": "活動7：以左邊或右邊回答位置",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "預備 1 張九格圖，並將動物小圖（正面）貼在正中的位置（如下圖）。成人把食物或用品圖片交給兒童，問兒童想將圖片貼在哪裡，鼓勵兒童以「左邊」或「右邊」來回答，如：「貼在老虎的左(或右)邊」。\n\n材料建議：\n- 九格圖\n- 動物小圖（正面）\n- 食物或用品圖片"
+  },
+  {
+    "name": "語言表達",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 24,
+    "age_max_months": 72,
+    "prompt_corpus": "學前兒童訓練指南—語言表達"
+  },
+  {
+    "name": "項目六：運用數詞",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": 24,
+    "age_max_months": 72,
+    "prompt_corpus": "目標：運用數詞【如：一、二、三、第一、第二、最後(粵 第尾)、全部、一半】\n注意事項：當兒童掌握目標詞彙後，可按兒童的能力要求兒童於句子中運用該詞彙。"
+  },
+  {
+    "name": "活動一",
+    "level": "L3",
+    "parent_name": "項目六：運用數詞",
+    "age_min_months": 24,
+    "age_max_months": 72,
+    "prompt_corpus": "預備數個洋娃娃，並在每個洋娃娃面前放1隻碟子及在上面擺放不同數量的玩具食物。成人指着碟子上的食物，與兒童逐一點算每個洋娃娃的食物數量，成人示範說出含有數詞的句子，如：「爸爸吃3個蘋果。」待兒童掌握後，鼓勵兒童自行數算出食物的數量，並說出相關句子。\n材料 / 建議教材：洋娃娃數個、玩具食物 (每種食物數件)、碟子數隻"
+  },
+  {
+    "name": "活動二",
+    "level": "L3",
+    "parent_name": "項目六：運用數詞",
+    "age_min_months": 24,
+    "age_max_months": 72,
+    "prompt_corpus": "透過日常的學習環境，如：排隊時，引導兒童看看各人排列的位置，並示範說：「第一，第二，第三……最後 (粵 第尾)」，鼓勵兒童模仿。待兒童掌握後，引導兒童自行說出各人排列的位置。"
+  },
+  {
+    "name": "活動三",
+    "level": "L3",
+    "parent_name": "項目六：運用數詞",
+    "age_min_months": 24,
+    "age_max_months": 72,
+    "prompt_corpus": "出示洋娃娃或動物娃娃及玩具車站，介紹各娃娃的名稱，並協助其排隊上車。成人與兒童一起唱排隊歌，如「排排隊，排排隊，小朋友要排排隊」，過程中將洋娃娃排成一直線。完成後問兒童：「XX（娃娃名稱）排在第幾位？」鼓勵兒童回答說：「XX（娃娃名稱）排第一 / 第二 / 最後(粵 第尾)。」\n材料 / 建議教材：洋娃娃或動物娃娃、玩具車站、玩具車"
+  },
+  {
+    "name": "活動四",
+    "level": "L3",
+    "parent_name": "項目六：運用數詞",
+    "age_min_months": 24,
+    "age_max_months": 72,
+    "prompt_corpus": "與兒童排隊玩「火車穿山洞」遊戲。在「穿山洞」前，成人可提問：「XX（兒童名字）排在第幾位？」鼓勵兒童回答說：「XX（兒童名字）排第一 / 第二 / 最後(粵 第尾)。」"
+  },
+  {
+    "name": "學前兒童訓練指南—語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "學前兒童訓練指南—語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議 — 語言表達"
+  },
+  {
+    "name": "活動 5",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "【活動目標/內容】預備數個洋娃娃，並在每個洋娃娃面前放1隻碟子。成人出示玩具食物，並把每種食物分成兩等份。成人示範說：「一半」，隨即把半份食物放在其中一個洋娃娃的碟子上，另一半食物放回籃子內。成人再示範說：「全部」，隨即把全部食物放在洋娃娃的碟子上。待兒童掌握後，鼓勵兒童自行說出「一半」或「全部」，並把相應份量的食物放在洋娃娃的碟子上。\n\n【準備材料】\n- 洋娃娃數個\n- 玩具食物（每種食物的數量為雙數，如：4個蘋果、6個橙）\n- 碟子數隻\n- 籃子"
+  },
+  {
+    "name": "活動 6",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "【活動目標/內容】與兒童玩洋娃娃坐車遊戲。成人出示大玩具車，示範說：「全部」，隨即把全部洋娃娃放進玩具車內，模擬開動車子。停車後，把全部洋娃娃拿出來，平均分成兩組。再出示小玩具車，示範說：「一半」，隨即把其中一組洋娃娃放進玩具車內，再開動車子。待兒童掌握後，鼓勵兒童自行說出「一半」或「全部」，並把相應數量的洋娃娃放在大或小的玩具車內。\n\n【準備材料】\n- 洋娃娃數個（數量為雙數，如：4個或6個）\n- 可放入半數洋娃娃的小玩具車\n- 可放入全部洋娃娃的大玩具車"
+  },
+  {
+    "name": "活動建議—語言表達",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "項目七：運用量詞",
+    "level": "L2",
+    "parent_name": "活動建議—語言表達",
+    "age_min_months": 24,
+    "age_max_months": 72,
+    "prompt_corpus": "目標：運用量詞 (如：個、隻、枝、條)。注意事項：當兒童掌握目標詞彙後，可按兒童的能力要求兒童於句子中運用該詞彙。"
+  },
+  {
+    "name": "活動建議一",
+    "level": "L3",
+    "parent_name": "項目七：運用量詞",
+    "age_min_months": 24,
+    "age_max_months": 72,
+    "prompt_corpus": "出示玩具水果和果盆，示範說：「1個XX（水果名稱）」，並把1個水果放進果盆內。示範完畢後，鼓勵兒童模仿說：「1個XX（水果名稱）」，並把該水果放進果盆內。\n材料/建議教材：玩具水果、果盆"
+  },
+  {
+    "name": "活動建議二",
+    "level": "L3",
+    "parent_name": "項目七：運用量詞",
+    "age_min_months": 24,
+    "age_max_months": 72,
+    "prompt_corpus": "出示自製線條圖，並示範說出每幅圖畫中的物件名稱及其量詞，如：「1枝筆」、「1隻手」等。示範完畢後，鼓勵兒童運用量詞（如：個、隻、枝、條）來描述其他物件。\n材料/建議教材：線條圖"
+  },
+  {
+    "name": "學前兒童訓練指南—語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "學前兒童訓練指南—語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議 — 語言表達"
+  },
+  {
+    "name": "項目八：運用代名詞",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "注意事項：當兒童掌握目標詞彙後，可按兒童的能力要求兒童於句子中運用該詞彙。"
+  },
+  {
+    "name": "目標 A：運用單數代名詞",
+    "level": "L4",
+    "parent_name": "項目八：運用代名詞",
+    "age_min_months": 24,
+    "age_max_months": 60,
+    "prompt_corpus": "運用單數代名詞【如：我、你、他 (粵 佢)】"
+  },
+  {
+    "name": "活動建議 1",
+    "level": "L5",
+    "parent_name": "目標 A：運用單數代名詞",
+    "age_min_months": 24,
+    "age_max_months": 60,
+    "prompt_corpus": "材料/建議教材：小吃。活動建議：出示小吃並示範說：「我吃」，再吃掉小吃。接著問兒童：「誰想吃 XX (小吃名稱)？」鼓勵兒童說：「我吃」。"
+  },
+  {
+    "name": "活動建議 2",
+    "level": "L5",
+    "parent_name": "目標 A：運用單數代名詞",
+    "age_min_months": 24,
+    "age_max_months": 60,
+    "prompt_corpus": "材料/建議教材：小吃。活動建議：分派小吃給其他兒童時，強調說：「給你」。當兒童協助分派小吃給其他兒童時，鼓勵他向其他兒童說：「給你」。"
+  },
+  {
+    "name": "活動建議 3",
+    "level": "L5",
+    "parent_name": "目標 A：運用單數代名詞",
+    "age_min_months": 24,
+    "age_max_months": 60,
+    "prompt_corpus": "材料/建議教材：大洋娃娃、椅子、拼圖 3 份。活動建議：將 1 個大洋娃娃放在兒童旁邊的椅子上，與兒童並排而坐。成人、兒童及洋娃娃各分派 1 份不同的拼圖。成人出示屬於兒童的拼圖問：「這拼圖給誰？」鼓勵兒童說：「給我」。再出示屬於成人的拼圖，並將拼圖給予兒童，鼓勵兒童說：「給你」。最後成人出示屬於洋娃娃的拼圖，鼓勵兒童說：「給他」(粵 俾佢)，並由兒童將拼圖放在洋娃娃面前。"
+  },
+  {
+    "name": "目標 B：運用眾數代名詞",
+    "level": "L4",
+    "parent_name": "項目八：運用代名詞",
+    "age_min_months": 24,
+    "age_max_months": 60,
+    "prompt_corpus": "運用眾數代名詞【如：你們 (粵 你哋)、我們 (粵 我哋)、他們 (粵 佢哋)】"
+  },
+  {
+    "name": "活動建議 4",
+    "level": "L5",
+    "parent_name": "目標 B：運用眾數代名詞",
+    "age_min_months": 24,
+    "age_max_months": 60,
+    "prompt_corpus": "材料/建議教材：玩具。活動建議：遊戲時，只分派玩具給部分兒童，另有部分兒童沒有玩具。引導沒有玩具的兒童問有玩具的兒童：「我們 (粵 我哋) 一起玩好嗎？」鼓勵兒童回答說：「好，我們 (粵 我哋) 一起玩」。"
+  },
+  {
+    "name": "學前兒童訓練指南—語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "學前兒童訓練指南—語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議 — 語言表達"
+  },
+  {
+    "name": "活動5：合作性遊戲",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "把兒童分組，進行合作性遊戲（如：2名兒童面對面坐著，同時用手緊握呼拉圈並向前後方向來回推拉玩「搖小船」遊戲）。當成人派發遊戲用具時，鼓勵同組的兒童一起表達意願，並舉手說：「我們（[粵]我哋）想玩」。\n\n建議物資：\n- 呼拉圈"
+  },
+  {
+    "name": "活動6：疊積木比賽",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "把兒童分成2人一組，合作進行疊積木比賽。隨著音樂響起，鼓勵兒童開始合作把積木疊高；當音樂停止時，比賽便結束。賽後成人與兒童一起比較哪一組的積木疊得較高，並引導勝出的組別說：「我們（[粵]我哋）的積木高些」或「我們（[粵]我哋）贏了」。\n\n建議物資：\n- 積木\n- 音樂播放器"
+  },
+  {
+    "name": "活動7：擲紙球比賽",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "把兒童分成2組，面對面站立進行擲紙球比賽，並在中間以繩子為界線。成人出示2袋紙球，問兒童：「誰想要？」引導兒童說：「我們（[粵]我哋）要」。給每組兒童紙球後，隨即播放音樂，由兒童開始互擲紙球。當音樂停止時，比賽便結束。各組兒童數算自己組別範圍內紙球的數量，以數量少的一組為勝。最後成人鼓勵兒童說：「我們（[粵]我哋）贏了」或「他們（[粵]佢哋）贏了」。\n\n建議物資：\n- 紙球\n- 音樂播放器"
+  },
+  {
+    "name": "活動8：分發小吃",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "把兒童分成3組，每組派發不同的小吃，如：葡萄乾、餅乾、朱古力等。成人加入其中一組，詢問兒童哪一組在吃葡萄乾/餅乾/朱古力，引導兒童回答說：「我們」（[粵]我哋）、「你們」（[粵]你哋）或「他們」（[粵]佢哋）。\n\n建議物資：\n- 小吃"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議 — 語言表達"
+  },
+  {
+    "name": "運用屬有代名詞",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": 24,
+    "age_max_months": 60,
+    "prompt_corpus": "項目九：運用屬有代名詞\n注意事項：當兒童掌握目標詞彙後，可按兒童的能力要求兒童於句子中運用該詞彙。"
+  },
+  {
+    "name": "運用單數屬有代名詞",
+    "level": "L4",
+    "parent_name": "運用屬有代名詞",
+    "age_min_months": 24,
+    "age_max_months": 60,
+    "prompt_corpus": "目標 A：運用單數屬有代名詞【如：你的（粵 你嘅）、我的（粵 我嘅）、他的（粵 佢嘅）】"
+  },
+  {
+    "name": "運用眾數屬有代名詞",
+    "level": "L4",
+    "parent_name": "運用屬有代名詞",
+    "age_min_months": 24,
+    "age_max_months": 60,
+    "prompt_corpus": "目標 B：運用眾數屬有代名詞【如：你們的（粵 你哋嘅）、我們的（粵 我哋嘅）、他們的（粵 佢哋嘅）】"
+  },
+  {
+    "name": "活動建議 1",
+    "level": "L4",
+    "parent_name": "運用屬有代名詞",
+    "age_min_months": 24,
+    "age_max_months": 60,
+    "prompt_corpus": "出示 1 包蝦條，並向各人（包括成人自己及兒童）派發 1 隻碟子。成人指著自己的碟子說：「我的」（粵 我嘅），並將 1 條蝦條放在自己的碟子上。接著指著兒童的碟子問：「誰的？」鼓勵兒童說：「我的」（粵 我嘅），並將 1 條蝦條放在兒童的碟子上讓他吃。當兒童開始吃蝦條時，拿起兒童的碟子並再次問：「誰的？」鼓勵兒童回答說：「我的」（粵 我嘅）。\n\n材料 / 建議教材：\n- 兒童喜歡的小吃\n- 碟子"
+  },
+  {
+    "name": "活動建議 2",
+    "level": "L4",
+    "parent_name": "運用屬有代名詞",
+    "age_min_months": 24,
+    "age_max_months": 60,
+    "prompt_corpus": "將數件分別屬於兒童和成人的物件放在布袋內，成人逐一拿出物件，示範說：「你的」（粵 你嘅）、「我的」（粵 我嘅），並把物件交給所屬兒童或成人自己，直至把所有物件分派完畢。接著將所有物件放回布袋內，由兒童逐一拿出來分派給兒童及成人，鼓勵兒童派物件時說：「你的」（粵 你嘅）或「我的」（粵 我嘅）。\n\n材料 / 建議教材：\n- 布袋\n- 兒童的物件\n- 成人的物件"
+  },
+  {
+    "name": "活動建議 3",
+    "level": "L4",
+    "parent_name": "運用屬有代名詞",
+    "age_min_months": 24,
+    "age_max_months": 60,
+    "prompt_corpus": "預備不同種類的物件（如：水果類、飲料類、蔬菜類等），成人和兒童各自選取 1 個物件類別並進行分類遊戲。先把不同的物件放在神秘箱內，成人與兒童輪流抽出 1 件物件，按該物件所屬的種類進行分類，並鼓勵兒童說出該物件類別是屬於「我的」（粵 我嘅）或「你的」（粵 你嘅）。\n\n材料 / 建議教材：\n- 玩具食物\n- 神秘箱"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議—語言表達"
+  },
+  {
+    "name": "活動 4",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "要求兒童各自帶 1 本圖書回學校，並作簡單的介紹。成人隨意拿起其中一本圖書，問兒童該圖書是誰的，鼓勵兒童回答說：「我的」（粵我嘅）、「你的」（粵你嘅）或「他的」（粵佢嘅）。\n\n建議物資：\n- 圖書"
+  },
+  {
+    "name": "活動 5",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示 3 種不同顏色的豆袋，2 位兒童與成人各自選擇 1 種顏色後，便開始拋擲豆袋。拋擲完畢後，成人拾起其中一個豆袋，問兒童該豆袋是屬於誰的，並鼓勵兒童回答說：「我的」（粵我嘅）、「你的」（粵你嘅）或「他的」（粵佢嘅）。\n\n建議物資：\n- 不同顏色的豆袋\n- 籃子"
+  },
+  {
+    "name": "活動 6",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示 3 種不同顏色的積木，2 位兒童與成人各自選擇 1 種顏色後，便開始進行疊積木比賽。成人把所有積木放入布袋中，接著抽出 1 塊積木，問兒童該顏色積木是屬於誰的，鼓勵兒童回答說：「我的」（粵我嘅）、「你的」（粵你嘅）或「他的」（粵佢嘅）。\n\n注意事項：可按訓練目標將活動改為分組遊戲，即每組兒童各選 1 種顏色的積木，而成人則加入其中一組，以教導兒童說出「我們的」（粵我哋嘅）、「你們的」（粵你哋嘅）、「他們的」（粵佢哋嘅）。\n\n建議物資：\n- 3 種不同顏色的積木\n- 布袋"
+  },
+  {
+    "name": "活動 7",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "於每張桌子上放置同一類的玩具 (如：動物、車、積木)，安排兒童分組把玩桌面上的玩具。成人隨意拿起其中一件玩具，問兒童該玩具是屬於哪一組的兒童，並鼓勵兒童回答說：「我們的」（粵我哋嘅）、「你們的」（粵你哋嘅）或「他們的」（粵佢哋嘅）。\n\n建議物資：\n- 不同種類的玩具"
+  },
+  {
+    "name": "項目十：運用副詞",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 30,
+    "age_max_months": 72,
+    "prompt_corpus": "學習運用時間副詞及程度副詞。"
+  },
+  {
+    "name": "目標A：運用時間副詞",
+    "level": "L2",
+    "parent_name": "項目十：運用副詞",
+    "age_min_months": 30,
+    "age_max_months": 72,
+    "prompt_corpus": "運用時間副詞【如：現在 (粵 而家)、剛才 (粵 頭先 / 啱啱)、一會兒 (粵 一陣間)、遲一點 (粵 遲啲)】"
+  },
+  {
+    "name": "活動建議一：沖調即沖飲料",
+    "level": "L3",
+    "parent_name": "目標A：運用時間副詞",
+    "age_min_months": 30,
+    "age_max_months": 72,
+    "prompt_corpus": "材料/建議教材：即沖飲料沖劑（如：朱古力粉）、熱開水、杯、匙羹、沖調飲料的程序圖片。\n與兒童沖調即沖飲料。出示朱古力粉、熱開水、杯和匙羹，並利用程序圖片介紹沖調飲料的過程（舀朱古力粉入杯內→加入熱水→拌勻）。成人問兒童：「現在（粵 而家）要做甚麼？」鼓勵兒童說：「現在（粵 而家）要舀朱古力粉。」成人隨即舀朱古力粉進杯內。接著再問兒童：「現在（粵 而家）要做甚麼？」鼓勵兒童說：「現在（粵 而家）要放熱水。」成人繼而加入熱水。若兒童不清楚下一個步驟，可利用程序圖片作提示。完成沖調飲料後，讓兒童享用飲料。\n注意事項：完成沖調飲料後，可告訴兒童飲料太熱，需要「等一會兒」（粵 等一陣間）或「遲一點」（粵 遲啲）才可以喝。成人再問兒童何時才可以飲用，鼓勵兒童自行說一遍。待飲料冷卻了，成人告訴兒童：「現在（粵 而家）可以喝了」，再鼓勵兒童自行說一遍。"
+  },
+  {
+    "name": "活動建議二：玩 UNO 紙牌",
+    "level": "L3",
+    "parent_name": "目標A：運用時間副詞",
+    "age_min_months": 30,
+    "age_max_months": 72,
+    "prompt_corpus": "材料/建議教材：UNO 紙牌。\n與兒童玩 UNO 紙牌，各人在出牌時說出手上紙牌的顏色，如：「我現在（粵 而家）出黃色牌」。"
+  },
+  {
+    "name": "活動建議三：回顧遊戲時間",
+    "level": "L3",
+    "parent_name": "目標A：運用時間副詞",
+    "age_min_months": 30,
+    "age_max_months": 72,
+    "prompt_corpus": "當遊戲時間完結時，成人問兒童：「剛才（粵 頭先）玩甚麼遊戲？」引導兒童回答說：「剛才（粵 頭先）玩……」。"
+  },
+  {
+    "name": "目標B：運用程度副詞",
+    "level": "L2",
+    "parent_name": "項目十：運用副詞",
+    "age_min_months": 30,
+    "age_max_months": 72,
+    "prompt_corpus": "運用程度副詞（如：最、好、幾、非常）"
+  },
+  {
+    "name": "活動建議四：比較餅乾條長短",
+    "level": "L3",
+    "parent_name": "目標B：運用程度副詞",
+    "age_min_months": 30,
+    "age_max_months": 72,
+    "prompt_corpus": "材料/建議教材：長短不一的餅乾條 3 條。\n出示 3 條長短不一的餅乾條，比較它們的長度，並示範運用「最」說出「最長」和「最短」來形容餅乾條。示範完畢後，成人隨意調亂 3 條餅乾條，鼓勵兒童用「最長」或「最短」來表示想要哪一條餅乾條，才把相應的餅乾條給他。"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議—語言表達"
+  },
+  {
+    "name": "活動建議 5",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童畫圖畫。成人每次出示3枝顏色相同但長短不同的顏色筆，鼓勵兒童運用「最長」或「最短」來表示想要哪一枝顏色筆(如：「我要最長的筆」)，才把相應的顏色筆交給他。\n建議準備材料：顏色相同但長短不同的顏色筆3枝"
+  },
+  {
+    "name": "活動建議 6",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示相同物件但不同數量的圖卡，並運用「最」說出「最多」的一幅和「最少」的一幅，以示範如何比較它們的數量。示範完畢後，成人把圖卡翻轉，由兒童翻開，並說出哪一幅圖卡的物件「最多」、哪一幅「最少」。\n建議準備材料：相同物件但不同數量的圖卡"
+  },
+  {
+    "name": "活動建議 7",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童進行青蛙跳遠比賽。成人用繩或顏色紙標示起點線，而兒童各取1隻青蛙放在起點線，並按它一下令其跳往最遠的位置。成人示範描述各青蛙的距離，如：「好遠」、「最遠」、「幾遠」，並引導兒童模仿描述。\n建議準備材料：塑膠小青蛙、繩或顏色紙"
+  },
+  {
+    "name": "語言表達",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言表達"
+  },
+  {
+    "name": "項目十一：運用時貌詞",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "注意事項：時貌詞必須運用於短句中，因此相關活動建議請參閱本次範疇另一學習重點「簡單句子運用」中項目一「運用雙詞短句」的目標 G「運用動作詞和時貌詞組成的雙詞短句」。"
+  },
+  {
+    "name": "目標 A：運用將來式時貌詞",
+    "level": "L3",
+    "parent_name": "項目十一：運用時貌詞",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "運用將來式時貌詞【如：將會(粵 就)】/ 2-4 歲"
+  },
+  {
+    "name": "目標 B：運用完成式時貌詞",
+    "level": "L3",
+    "parent_name": "項目十一：運用時貌詞",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "運用完成式時貌詞【如：完了、完(粵 晒、完、咗)】/ 2-4 歲"
+  },
+  {
+    "name": "目標 C：運用進行式時貌詞",
+    "level": "L3",
+    "parent_name": "項目十一：運用時貌詞",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "運用進行式時貌詞【如：正在(粵 緊)】/ 2-4 歲"
+  },
+  {
+    "name": "項目十二：運用否定詞",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": 12,
+    "age_max_months": 30,
+    "prompt_corpus": "注意事項：否定詞「不」(粵 唔)及「還沒有」(粵 未)必須運用於短句中，因此相關活動建議請參閱本次範疇另一學習重點「簡單句子運用」中項目一「運用雙詞短句」的目標 F「運用由否定詞和動作或物件名稱組成的雙詞短句」。"
+  },
+  {
+    "name": "目標：運用否定詞",
+    "level": "L3",
+    "parent_name": "項目十二：運用否定詞",
+    "age_min_months": 12,
+    "age_max_months": 30,
+    "prompt_corpus": "運用否定詞【如：沒有(粵 冇)、不(粵 唔)、還沒有(粵 未)】/ 1-2 1/2 歲"
+  },
+  {
+    "name": "活動建議 1：運用「有」或「沒有」描述盒子",
+    "level": "L4",
+    "parent_name": "目標：運用否定詞",
+    "age_min_months": 12,
+    "age_max_months": 30,
+    "prompt_corpus": "材料 / 建議教材：錢幣、錢箱、透明膠盒 2 個。活動內容：出示錢幣及 2 個膠盒，並將 1 個錢幣放在其中一個膠盒中，示範運用「有」來描述該盒子。接著成人出示另一個沒有錢幣的盒子，並示範運用「沒有」(粵 冇)來描述該盒子。成人再次出示不同的膠盒，引導兒童運用「有」或「沒有」(粵 冇)來描述盒子是否有錢幣，並把有錢幣的膠盒交給兒童，由他拿出錢幣並放進錢箱。"
+  },
+  {
+    "name": "活動建議 2：傳布袋遊戲",
+    "level": "L4",
+    "parent_name": "目標：運用否定詞",
+    "age_min_months": 12,
+    "age_max_months": 30,
+    "prompt_corpus": "材料 / 建議教材：布袋數個、套圈玩具、音樂播放器。活動內容：與兒童玩傳布袋遊戲。將放有套圈玩具的布袋交給兒童，當音樂響起時，兒童開始傳布袋；當音樂停止時，手持布袋的兒童拿出 1 個套圈套在柱子上。重複遊戲，直至所有套圈已被取出來，接著成人指著空布袋並引導兒童說：「沒有」(粵 冇)。成人也可以在遊戲開始或中段時，將沒有套圈的布袋交給兒童，引導兒童說：「沒有」(粵 冇)。"
+  },
+  {
+    "name": "語言表達",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言，語言表達活動建議。"
+  },
+  {
+    "name": "項目十三：運用連接詞",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": 36,
+    "age_max_months": 72,
+    "prompt_corpus": "目標：運用連接詞【如：和（粵 同埋）、接著（粵 跟住/之後）、可是（粵 不過）、但是（粵 但係）】"
+  },
+  {
+    "name": "活動建議一",
+    "level": "L3",
+    "parent_name": "項目十三：運用連接詞",
+    "age_min_months": 36,
+    "age_max_months": 72,
+    "prompt_corpus": "活動建議：將2種玩具食物分別放在2隻碟子上，模擬給洋娃娃進食，並示範說：「XX(洋娃娃名稱)吃香蕉和(粵 同埋)雪糕。」由兒童再選另外2種食物，並用連接詞「和」(粵 同埋)來描述。可接受兒童只說短句，如：「橙和(粵 同埋)蘋果」。\n材料/建議教材：洋娃娃、碟子2隻、玩具食物"
+  },
+  {
+    "name": "活動建議二",
+    "level": "L3",
+    "parent_name": "項目十三：運用連接詞",
+    "age_min_months": 36,
+    "age_max_months": 72,
+    "prompt_corpus": "活動建議：與2位兒童一起隨著音樂跳舞，接著問其他兒童誰在跳舞，引導他們說出：「XX(兒童名字)和(粵 同埋)YY(兒童名字)跳舞。」\n材料/建議教材：音樂播放器"
+  },
+  {
+    "name": "活動建議三",
+    "level": "L3",
+    "parent_name": "項目十三：運用連接詞",
+    "age_min_months": 36,
+    "age_max_months": 72,
+    "prompt_corpus": "活動建議：兒童排隊溜滑梯時，鼓勵每位兒童在溜滑梯前運用句子「接著(粵 跟住/之後)到 XX(兒童名字)」說出接著輪到哪一位兒童。"
+  },
+  {
+    "name": "活動建議四",
+    "level": "L3",
+    "parent_name": "項目十三：運用連接詞",
+    "age_min_months": 36,
+    "age_max_months": 72,
+    "prompt_corpus": "活動建議：與兒童玩晾曬衣服遊戲。成人先架起玩具晾曬架，並由兒童擲2顆骰子，顯示要晾曬的衣服。兒童先取其中一顆骰子所顯示的衣服並掛在架上，完成後成人問兒童：「接著(粵 跟住/之後)晾曬甚麼衣服？」引導兒童回答說：「接著(粵 跟住/之後)晾曬 XX(衣服名稱)。」隨即由兒童將另一件衣物掛在架上。\n材料/建議教材：玩具晾曬架、衣物、衣夾、印有不同衣服圖案的骰子2顆"
+  },
+  {
+    "name": "學前兒童訓練指南—語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "學前兒童訓練指南—語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議 — 語言表達"
+  },
+  {
+    "name": "運用連詞「但是」",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "運用轉折連詞「但是」（或粵語「但係」、「不過」）來描述圖片或表達遇到的情況。"
+  },
+  {
+    "name": "活動 5",
+    "level": "L4",
+    "parent_name": "運用連詞「但是」",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示 2 張「找不同」的圖片，與兒童一起找出圖畫中不同之處。成人示範說：「這隻豬有斑點，但是(粵但係)那隻豬沒有斑點。」成人再出示其他「找不同」圖片，由兒童找出不同之處，並運用「但是」(粵但係)來描述圖片。\n所需材料：「找不同」圖片"
+  },
+  {
+    "name": "活動 6",
+    "level": "L4",
+    "parent_name": "運用連詞「但是」",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示 1 把已注水的水槍，並向四周射水。將 1 把沒有注水的水槍交給兒童，當兒童發現沒有水時，成人示範說：「XX（兒童名字）想玩水槍，但是（粵不過）沒有水。」鼓勵兒童模仿說一次。之後將已入水的水槍與兒童交換，讓兒童把玩。成人再出示 1 件已裝有電池的電動玩具，並示範開動玩具。接著將 1 件沒有安裝電池的玩具交給兒童，當兒童發現不能開動玩具時，成人引導兒童說：「我想玩電動車，但是（粵不過）沒有電！」最後將已裝上電池的電動玩具與兒童交換，讓他把玩。\n所需材料：水槍 2 把（注水及沒有注水）；電動玩具 2 件（已裝上電池及沒有裝上電池）"
+  },
+  {
+    "name": "簡單句子運用",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學習重點：簡單句子運用"
+  },
+  {
+    "name": "運用雙詞短句",
+    "level": "L2",
+    "parent_name": "簡單句子運用",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "項目一：運用雙詞短句。注意事項：在訓練初期，成人可多示範句式，讓兒童模仿。待兒童熟習句式後，成人可漸漸減少示範，以鼓勵兒童自行運用目標短句。"
+  },
+  {
+    "name": "運用由動作和物件名稱組成的雙詞短句",
+    "level": "L3",
+    "parent_name": "運用雙詞短句",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "目標 A：運用由動作和物件名稱組成的雙詞短句【如：吃麵包 (粵 食包包)】/ 2-3 歲"
+  },
+  {
+    "name": "運用由人物或動物和動作名稱組成的雙詞短句",
+    "level": "L3",
+    "parent_name": "運用雙詞短句",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "目標 B：運用由人物或動物和動作名稱組成的雙詞短句【如：媽媽 吃 (粵 媽媽食)】/ 2-3 歲"
+  },
+  {
+    "name": "運用由動作和地方名稱組成的雙詞短句",
+    "level": "L3",
+    "parent_name": "運用雙詞短句",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "目標 C：運用由動作和地方名稱組成的雙詞短句 (如：去 公園) / 2-3 歲"
+  },
+  {
+    "name": "推車或推球遊戲",
+    "level": "L4",
+    "parent_name": "運用由動作和物件名稱組成的雙詞短句",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "活動建議（一）：出示玩具車或皮球，並推給兒童，示範說：「推車」或「推球」(粵 推波)，再鼓勵兒童將玩具推回給成人。成人取回玩具車或皮球後，鼓勵兒童說：「推車」或「推球」(粵 推波)，才將玩具再推給兒童。材料/建議教材：玩具車或皮球"
+  },
+  {
+    "name": "切食物遊戲",
+    "level": "L4",
+    "parent_name": "運用由動作和物件名稱組成的雙詞短句",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "活動建議（二）：與兒童玩切食物遊戲。成人以玩具刀切開玩具食物，並示範運用雙詞短句「動作 物件」，如：「切 洋蔥」。接著成人把玩具刀交給兒童，並出示不同的玩具食物，引導兒童說：「切 XX (食物名稱)」，再將相關玩具食物交給兒童進行遊戲。注意事項：兒童熟習句式後，可加入其他玩具，如：膠盆或毛巾，並運用其他動詞（如：「洗」、「抹」）組合短句。材料/建議教材：玩具食物、玩具刀、膠盆及水(洗)、毛巾(抹)"
+  },
+  {
+    "name": "洗衣服遊戲",
+    "level": "L4",
+    "parent_name": "運用由動作和物件名稱組成的雙詞短句",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "活動建議（三）：與兒童玩洗衣服遊戲。成人將衣物放進玩具洗衣機內，並示範說出雙詞短句「動作 物件」，如：「洗 襪子」、「洗褲子」，接著開動洗衣機。成人再出示不同的衣物，引導兒童說：「洗 XX (衣服名稱)」，再將該衣物交給兒童放進洗衣機內，模擬洗衣服。材料/建議教材：玩具洗衣機、洋娃娃衣物"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議—語言表達"
+  },
+  {
+    "name": "與兒童進行晾曬衣服遊戲",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童進行晾曬衣服遊戲。成人用衣夾把衣物夾在繩子上，並示範說出雙詞短句「動作 物件」，如：「夾 襪子」、「夾 褲子」。成人再出示不同的衣物，引導兒童說：「夾 XX (衣服名稱)」，再將該衣物交給兒童夾在繩子上。所需教材：晾曬架或繩子、洋娃娃衣物、衣夾。"
+  },
+  {
+    "name": "運用洋娃娃及玩具傢具進行假想遊戲",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "運用洋娃娃及玩具傢具進行假想遊戲。成人示範雙詞短句「人物 動作」，如：「媽媽 坐」、「哥哥 睡覺」，並做出相關活動。成人再出示不同的洋娃娃及玩具傢具，引導兒童說出「人物 動作」的雙詞短句，再讓兒童利用洋娃娃做出相關活動。注意事項：兒童熟習句式後，可加入更多不同的玩具傢具或電器，如：洗手盆、電視機，並改用其他動詞，如：「洗」、「看」來進行遊戲。所需教材：洋娃娃數個、玩具傢具。"
+  },
+  {
+    "name": "與兒童玩玩具自動販賣機",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童玩玩具自動販賣機。成人出示錢幣並示範說：•「XX (成人稱謂) 入」(將錢幣投入汽水機內) •「XX (成人稱謂) 按掣」(按鈕選擇飲料) •「XX (成人稱謂) 喝」(取得飲料後進飲)。示範完畢後，成人再出示 1 個錢幣，讓兒童模擬購買汽水，並引導兒童說出雙詞短句「人物 動作」。所需教材：玩具自動販賣機。"
+  },
+  {
+    "name": "與兒童玩「家家酒」遊戲",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童玩「家家酒」遊戲。成人拿出玩具刀，並示範說出雙詞短句「人物 動作」，如：「XX (成人稱謂) 切」，再把玩具食物切開。成人再出示玩具刀和食物，引導兒童說：「XX (兒童名字) 切」，並由兒童用刀切開食物。之後成人再出示 1 種玩具食物，問兒童：「誰切？」引導兒童說：「XX (成人稱謂 / 兒童名字) 切」，並繼續進行遊戲。注意事項：兒童熟習句式後，可加入更多不同的玩具，如：煮食爐、洋娃娃，並改用其他動詞，如：「吃」、「洗」來進行遊戲。所需教材：「家家酒」玩具、洋娃娃。"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議 — 語言表達"
+  },
+  {
+    "name": "活動 8",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "運用玩具動物與兒童進行假想遊戲。成人示範說出雙詞句子「動物 動作」，如：「花貓 跳」、「小狗 行」，並運用玩具動物做出相關動作。示範完畢後，成人把玩具動物交給兒童，引導兒童說出「動物 動作」的雙詞句子，並讓兒童運用玩具動物做出相關動作。\n\n所需教材：\n- 玩具動物"
+  },
+  {
+    "name": "活動 9",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示及逐一介紹較大幅的地方圖片 (如：公園、超級市場)，並把地方圖片貼在牆上不同的位置。出示另一套較小的地方圖片，並播放音樂，鼓勵兒童隨著音樂隨意步行。當音樂停止時，成人抽出1張較小的地方圖片，引導兒童說出雙詞短句「動作 地方」，如：「去 公園」、「去 超級市場」，並鼓勵兒童拿著小圖走到相應大圖的位置，最後把小圖貼在牆上。\n\n所需教材：\n- 不同地方的圖片 (大、小各 1 張)\n- 音樂播放器"
+  },
+  {
+    "name": "活動 10",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示及逐一介紹各個地方圖片的名稱，接著出示洋娃娃，示範說出雙詞短句「動作 地方」，如：「去 公園」、「去 商場」，並把洋娃娃放在相關的地方圖片上。成人再出示另一個洋娃娃，引導兒童說出雙詞短句「動作 地方」，並由兒童把洋娃娃放在相關的地方圖片上。\n\n所需教材：\n- 不同地方的圖片\n- 洋娃娃數個"
+  },
+  {
+    "name": "活動 11",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示及逐一介紹不同家居地方圖片的名稱，並把圖片貼於房間中不同的位置。出示1件玩具，示範說出雙詞短句「動作 地方」，如：「放在廚房」，並將玩具放在相應的家居地方圖片處。示範完畢後，成人把不同的玩具傢具、電器或日用品放在布袋內，由兒童抽出1件玩具，並引導兒童說出雙詞短句「動作 地方」，再讓兒童將玩具放在相應的家居地方圖片上。\n\n所需教材：\n- 不同的家居地方圖片\n- 玩具傢具或電器\n- 玩具日用品\n- 布袋"
+  },
+  {
+    "name": "語言表達",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言表達"
+  },
+  {
+    "name": "運用雙詞短句",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "項目一：運用雙詞短句。注意事項：在訓練初期，成人可多示範句式，讓兒童模仿。待兒童熟習句式後，成人可漸漸減少示範，以鼓勵兒童自行運用目標短句。"
+  },
+  {
+    "name": "運用由人物或動物或物件名稱和形容詞組成的雙詞短句",
+    "level": "L3",
+    "parent_name": "運用雙詞短句",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "目標 D：運用由人物或動物或物件名稱和形容詞組成的雙詞短句【如：弟弟很頑皮 (粵 細佬曳)】"
+  },
+  {
+    "name": "運用由形容詞和人物或動物或物件名稱組成的雙詞短句",
+    "level": "L3",
+    "parent_name": "運用雙詞短句",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "目標 E：運用由形容詞和人物或動物或物件名稱組成的雙詞短句 (如：大汽水)"
+  },
+  {
+    "name": "活動建議 1",
+    "level": "L4",
+    "parent_name": "運用由人物或動物或物件名稱和形容詞組成的雙詞短句",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "材料 / 建議教材：小吃。活動建議：小組活動完結時，獎勵安坐著的兒童吃小吃，並示範說雙詞短句「人物 形容詞」，如：「XX(兒童名字) 乖。」接著邀請1位兒童負責派發小吃給其他安坐著的兒童，並引導他說出雙詞短句「人物 形容詞」。"
+  },
+  {
+    "name": "活動建議 2",
+    "level": "L4",
+    "parent_name": "運用由人物或動物或物件名稱和形容詞組成的雙詞短句",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "材料 / 建議教材：玩具傢具、洋娃娃或玩具動物數個。活動建議：出示玩具傢具及洋娃娃或玩具動物，將洋娃娃站立在玩具桌子上，並示範說出雙詞短句「人物/動物 形容詞」，如：「哥哥 頑皮」(粵 哥哥 曳)。接著將另一個洋娃娃放在玩具椅子上坐好，並示範說出以上雙詞短句，如：「妹妹 乖」。示範完畢後，把數個洋娃娃或玩具動物放在不同的玩具傢具上，引導兒童說出目標短句。"
+  },
+  {
+    "name": "活動建議 3",
+    "level": "L4",
+    "parent_name": "運用由人物或動物或物件名稱和形容詞組成的雙詞短句",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "材料 / 建議教材：玩具傢具、可抹掉的顏料、濕布。活動建議：用可抹掉的顏料把玩具傢具(如：桌子、椅子)弄髒，並示範說出雙詞短句「物件 形容詞」，如：「桌子 骯髒」(粵 檯好污槽)。接著用濕布清理玩具傢具，再示範說出以上雙詞短句，如：「桌子 清潔」(粵 檯好乾淨)。成人再次把顏料塗在玩具傢具上，鼓勵兒童說：「XX(傢具名稱) 骯髒」，隨即再用濕布抹掉傢具上的顏料，再引導兒童說：「XX(傢具名稱) 清潔」(粵 XX 乾淨)。"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議 — 語言表達"
+  },
+  {
+    "name": "活動 4：運用「大/小」雙詞短句",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示不同大小的玩具車或玩具食物，示範雙詞短句「大 / 小 (粵：細) XX (物件名稱)」，如「大車」、「小 (粵：細) 蘋果」。接著出示 1 個洋娃娃，問兒童：「XX (洋娃娃名稱) 乘搭哪一輛車？」引導兒童說出目標短句「大車」或「小車」(粵：細車)。成人再出示大小不同的玩具食物，問兒童：「吃哪一個蘋果？」引導兒童說出目標短句「大蘋果」或「小蘋果」(粵：細蘋果)。\n\n所需物料：\n- 不同大小的玩具車或玩具食物\n- 洋娃娃"
+  },
+  {
+    "name": "活動 5：模擬購買食物運用「大/小」雙詞短句",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童模擬在快餐店購買食物。成人出示和介紹不同大小的食物及飲料，並示範說出雙詞短句「大 / 小 (粵：細) XX (食物 / 飲料名稱)」，如：「大麵包」、「小汽水」(粵：細汽水)。示範完畢後，與兒童模擬排隊購買食物，引導兒童運用雙詞短句「大 / 小 (粵：細) XX (食物 / 飲料名稱)」說出想購買的食物。\n\n所需物料：\n- 不同大小的食物及飲料\n- 玩具收銀機\n- 玩具錢幣"
+  },
+  {
+    "name": "活動 6：運用「高/矮」雙詞短句",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "把積木疊成 2 座高度不相同的積木柱，並示範說出雙詞短句「高積木」、「矮積木」。接著播放音樂，鼓勵兒童圍著 2 座積木柱步行。當音樂停止時，成人鼓勵其中一名兒童說出「高積木」或「矮積木」，並邀請其他兒童一起把該座積木柱推倒。\n\n所需物料：\n- 積木\n- 音樂播放器"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "活動 7",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童玩配對遊戲。把所有洋娃娃衣物放在布袋內，接著成人隨意出示1張顏色卡及衣物圖片，示範說出雙詞短句「形容詞 衣物」，如：「紅色 褲」、「黃色 襪」。示範完畢後，由兒童從布袋內拿出1件衣物，並運用雙詞短句「形容詞 衣物」來描述衣物，接著替洋娃娃穿上該衣物。\n\n準備材料：\n- 不同顏色的洋娃娃衣物\n- 洋娃娃\n- 布袋\n- 顏色卡\n- 衣物圖片"
+  },
+  {
+    "name": "活動 8",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童玩滾球玩具。成人出示不同大小的膠球，示範說出雙詞短句「大 球」、「小 球」（粵 細 波），並將球放在滾球玩具上滾動。成人再出示數個膠球，引導兒童運用雙詞短句「大 球」、「小 球」（粵 細 波）來表達自己想要的膠球，以進行遊戲。\n\n準備材料：\n- 滾球玩具\n- 不同大小的玩具膠球（每對不同大小的玩具球必須為相同顏色，如：大紅色球及小紅色球）"
+  },
+  {
+    "name": "項目一：運用雙詞短句",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "目標F：運用由否定詞和動作或物件名稱組成的雙詞短句",
+    "level": "L2",
+    "parent_name": "項目一：運用雙詞短句",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "目標：運用由否定詞和動作或物件名稱組成的雙詞短句【如：不玩了（粵：唔玩）、沒有餅（粵：冇餅）】。注意事項：在訓練初期，成人可多示範句式，讓兒童模仿。待兒童熟習句式後，成人可漸漸減少示範，以鼓勵兒童自行運用目標短句。"
+  },
+  {
+    "name": "活動建議一",
+    "level": "L3",
+    "parent_name": "目標F：運用由否定詞和動作或物件名稱組成的雙詞短句",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "材料 / 建議教材：兒童喜歡及不喜歡的小吃。\n活動建議：預備兒童喜歡及不喜歡的小吃（如：糖果、芥辣豆）。成人出示兒童喜歡的小吃，並引導兒童說：「吃」（粵：食）；接著再出示兒童不喜歡的小吃，引導兒童說：「不吃」（粵：唔食）。"
+  },
+  {
+    "name": "活動建議二",
+    "level": "L3",
+    "parent_name": "目標F：運用由否定詞和動作或物件名稱組成的雙詞短句",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "活動建議：日常生活中，刻意不提供某些物件予兒童，鼓勵其使用雙詞短句「否定詞 物件」，如：吃飯時，把一隻沒有飯的碗子放在兒童面前，接著提示他吃飯。當兒童察覺問題時，鼓勵他說：「沒有飯」（粵：冇飯）。又如：外出時要求兒童穿鞋襪，但只給兒童襪子，鼓勵兒童察覺問題後說：「沒有鞋」（粵：冇鞋）。"
+  },
+  {
+    "name": "語言表達",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "運用雙詞短句",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "運用由動作名稱和時貌詞組成的雙詞短句",
+    "level": "L3",
+    "parent_name": "運用雙詞短句",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "注意事項：在訓練初期，成人可多示範說出句式，讓兒童模仿。待兒童熟習句式後，成人可漸漸減少示範，以鼓勵兒童自行運用目標短句。\n\n活動建議：\n1. 將玩具食物放進碗內，假裝餵洋娃娃進食。完成後，指著碗並示範說：「吃 完」(粵 食 晒)。接著再把1件玩具食物放在碗內，讓兒童餵洋娃娃吃。完成後，成人指著碗，引導兒童說：「吃 完」(粵 食 晒)。【材料/建議教材：洋娃娃、餐具、玩具食物】\n2. 與兒童砌拼圖，完成後，成人示範說：「砌 完」。接著再出示另一套拼圖，讓兒童拼砌。當兒童完成砌圖時，成人引導兒童說：「砌 完」，以表示完成。【材料/建議教材：拼圖】\n3. 與兒童進行競賽，先到地點A依指示從籃子內取出相應的衣物，再到地點B取衣架，最後走到地點C把衣物掛起。完成後，要求兒童說：「掛 好了」(粵 掛 咗)，以代表完成。【材料/建議教材：籃子、衣物、衣架】\n4. 在日常的學習環境（如：吃茶點前洗手），示範運用時貌詞來描述動作，如：「還沒洗手」(粵 未洗手)、「正在洗手」(粵 洗緊手)、「洗完手」，並引導兒童在活動過程中運用時貌詞來描述情景。\n5. 示範運用時貌詞來介紹程序圖片，如：「還沒吃」(粵 未食)、「正在吃」(粵 食緊)、「吃完」(粵 食晒)，鼓勵兒童模仿。接著出示相關實物來進行圖片中的活動，並引導兒童運用時貌詞來描述活動的各個步驟。【材料/建議教材：程序圖片、圖片中相關的實物】"
+  },
+  {
+    "name": "語言表達",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言，活動建議—語言表達"
+  },
+  {
+    "name": "項目二：運用三詞句子",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "運用三詞句子"
+  },
+  {
+    "name": "目標A：運用由人物或動物、動作和物件名稱組成的三詞句子",
+    "level": "L3",
+    "parent_name": "項目二：運用三詞句子",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "目標A：運用由人物或動物、動作和物件名稱組成的三詞句子【如：媽媽 吃 葡萄 (粵 媽媽 食 提子)】"
+  },
+  {
+    "name": "目標B：運用由人物或動物、動作和地方名稱組成的三詞句子",
+    "level": "L3",
+    "parent_name": "項目二：運用三詞句子",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "目標B：運用由人物或動物、動作和地方名稱組成的三詞句子 (如：媽媽 去街市)"
+  },
+  {
+    "name": "活動建議1：推球遊戲",
+    "level": "L4",
+    "parent_name": "目標A：運用由人物或動物、動作和物件名稱組成的三詞句子",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "材料/建議教材：大皮球。活動建議：安排兒童圍圈而坐，以進行推球遊戲。成人示範說出三詞句子「人物 動作 物件」「XX（成人稱謂）推 球」，並把皮球推給其中一位兒童。成人取回皮球後，引導其中一位兒童說：「XX（兒童名字）推 球」，並把皮球交給該兒童，以讓他推給其他兒童。"
+  },
+  {
+    "name": "活動建議2：餵洋娃娃進食",
+    "level": "L4",
+    "parent_name": "目標A：運用由人物或動物、動作和物件名稱組成的三詞句子",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "材料/建議教材：玩具食物、洋娃娃數個、籃子、障礙物。活動建議：把玩具食物放在籃子裡，並把洋娃娃放在兒童的對面，再在兒童與洋娃娃之間放置障礙物。成人從籃子內取出1件玩具食物，示範說出三詞句子「人物 動作 物件」，如：「姐姐 吃 麵包」，接著跨過障礙物，並把玩具食物放到洋娃娃的嘴巴中。示範完畢後，由兒童從籃子內取出1件食物，並說出三詞句子「人物 動作 物件」，接著跨過障礙物餵洋娃娃進食。"
+  },
+  {
+    "name": "活動建議3：餵動物吃東西",
+    "level": "L4",
+    "parent_name": "目標A：運用由人物或動物、動作和物件名稱組成的三詞句子",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "材料/建議教材：玩具動物、玩具食物。活動建議：出示玩具動物及食物，並運用三詞句子「人物 動作 物件」來介紹各種動物喜歡吃的東西，如：「小狗 吃 骨頭」（粵 狗仔 食 骨頭）、「白兔 吃 紅蘿蔔」（粵 白兔 食 紅蘿蔔）。由兒童隨意挑選1件玩具食物，並說出目標句子「人物 動作 物件」，最後餵動物吃東西。"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議—語言表達"
+  },
+  {
+    "name": "說出三詞句子「人物 動作 物件」",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "【所需教具】可切開的玩具食物、玩具刀。\n【活動內容】出示玩具刀及玩具食物，示範說出三詞句子「人物 動作 物件」，如：「XX(成人稱謂) 切蘋果」，並將玩具食物切開。示範完畢後，成人將玩具食物及刀交給兒童，引導兒童說出三詞句子「人物 動作 物件」，並讓他切開該食物。成人可與兒童輪流切食物，並鼓勵兒童說出以上三詞句子。\n【注意事項】兒童熟習句式後，可加入其他玩具(如：洋娃娃、煮食爐)，並改用其他動詞，如：「吃」、「洗」來進行遊戲。"
+  },
+  {
+    "name": "說出三詞句子「人物 動作 地方」",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "【所需教具】不同地方的圖片、洋娃娃數個。\n【活動內容】出示並逐一介紹不同地方圖片的名稱，接著出示1個洋娃娃，示範說出三詞句子「人物 動作 地方」，如：「媽媽 去 街市」，並將洋娃娃放在正確的地方圖片上。鼓勵兒童說出三詞句子「人物 動作 地方」，並帶洋娃娃到不同的地方。"
+  },
+  {
+    "name": "擲骰子組成三詞句子「人物 動作 地方」",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "【所需教具】骰子2顆、人物圖片、地方圖片、洋娃娃數個。\n【活動內容】預備2顆大骰子，其中一顆骰子貼上人物圖片，如：媽媽、爸爸、哥哥等，另一顆骰子則貼上地方圖片，如：超級市場、戲院、水果店等。成人先擲骰子，示範把2顆骰子的圖片內容組成三詞句子「人物 動作 地方」，如：「媽媽 去 超級市場」、「爸爸 去 水果店」，並將洋娃娃放在正確的地方圖片上。鼓勵兒童擲骰子後，說出三詞句子「人物 動作 地方」，並把洋娃娃擺放在地方圖片上。"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議—語言表達"
+  },
+  {
+    "name": "項目二：運用三詞句子",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "項目二：運用三詞句子"
+  },
+  {
+    "name": "目標 C：運用由動作、物件和地方名稱組成的三詞句子",
+    "level": "L4",
+    "parent_name": "項目二：運用三詞句子",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "運用由動作、物件和地方名稱組成的三詞句子【如：放球在桌上 (粵：擺波喺檯度)】/ 2-4歲"
+  },
+  {
+    "name": "目標 D：運用由動作、物件和人物或動物名稱組成的三詞句子",
+    "level": "L4",
+    "parent_name": "項目二：運用三詞句子",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "運用由動作、物件和人物或動物名稱組成的三詞句子【如：拿球給老師 (粵：攞波俾老師)】/ 2-4歲"
+  },
+  {
+    "name": "活動建議一",
+    "level": "L5",
+    "parent_name": "目標 C：運用由動作、物件和地方名稱組成的三詞句子",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童進行「家家酒」遊戲。成人把食物放在餐具中，假裝烹調食物，並示範運用三詞句子「動作 物件 地方」，如：「放雞蛋在碗內」(粵：擺雞蛋喺碗度)、「放魚在碟上」(粵：擺魚喺碟度)。接著由兒童選擇玩具食物，並說出三詞句子「動作 物件 地方」，最後讓兒童做出相應的動作。\n材料/建議教材：\n- 「家家酒」玩具\n- 玩具食物"
+  },
+  {
+    "name": "活動建議二",
+    "level": "L5",
+    "parent_name": "目標 C：運用由動作、物件和地方名稱組成的三詞句子",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童模擬收拾睡房的雜物。成人出示洋娃娃衣物及傢具，示範說出三詞句子「動作 物件 地方」，如：「放褲子在櫃內」(粵：擺褲喺櫃度)、「放毛衣在床上」(粵：擺冷衫喺床度)，並把衣物放在相關的位置。接著再次出示洋娃娃衣物，引導兒童說出三詞句子「動作 物件 地方」，最後讓兒童將衣物放在相應的地方。\n材料/建議教材：\n- 洋娃娃衣物\n- 玩具傢俬"
+  },
+  {
+    "name": "活動建議三",
+    "level": "L5",
+    "parent_name": "目標 C：運用由動作、物件和地方名稱組成的三詞句子",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "安排兒童圍圈而坐，並在圓圈中間放置1張桌子，桌上擺放不同的玩具傢具或電器。成人先介紹不同玩具食物的名稱，接著把玩具食物放進布袋內。音樂響起時，兒童將布袋傳給他人；當音樂停止時，由手持布袋的兒童抽出1件玩具食物，並在成人引導下說出三詞句子「動作 物件 地方」，如：「放香蕉在雪櫃內」(粵：擺香蕉喺雪櫃度)、「放菜在鍋中」(粵：擺菜喺煲度)，最後由兒童將食物放在相應的地方。\n材料/建議教材：\n- 玩具傢具或電器\n- 玩具食物\n- 布袋\n- 音樂播放器"
+  },
+  {
+    "name": "學前兒童訓練指南—語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "學前兒童訓練指南—語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議 — 語言表達"
+  },
+  {
+    "name": "活動 4：三詞句子（動作 物件 地方）- 家居情境",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示並介紹不同的家居地方圖片，及屬於各個地方的物件（如：廚房 — 碗、煮食爐；廁所 — 毛巾、牙刷；睡房 — 床、被）。成人把不同的物件放進布袋內，再從布袋中抽出1件物件，示範三詞句子「動作 物件 地方」，如：「放毛巾在廁所裡」（粵：擺毛巾喺廁所度）、「放床在睡房中」（粵：擺床喺睡房度），並把該物件放在相應的地方圖片上。鼓勵兒童從布袋中抽出1件物件，並在成人引導下說出三詞句子「動作 物件 地方」，再由兒童把物件放在相應的地方圖片上。\n準備物資：家居地方圖片、不同地方的物件、布袋。"
+  },
+  {
+    "name": "活動 5：三詞句子（動作 物件 地方）- 球類遊戲",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童進行籃球或足球遊戲。成人示範說出三詞句子「動作 物件 地方」，如：「踢球往龍門」（粵：踢波去龍門度）、「拋球往籃球架」（粵：拋波去籃度），並做出相應的動作。再次出示籃球或足球，由兒童選擇其中一種球類，並說出三詞句子「動作 物件 地方」，最後由兒童把籃球拋到籃球架或把足球踢到龍門。\n準備物資：籃球、籃球架、足球、龍門。"
+  },
+  {
+    "name": "活動 6：三詞句子（動作 物件 人物）- 派發小吃",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示及介紹2款小吃（如：薯片、蝦條），並要求兒童派小吃予其他兒童。成人示範說出三詞句子「動作 物件 人物」，如：「拿薯片給XX (兒童名字)」（粵：攞薯片俾XX (兒童名字)）、「拿蝦條給XX (兒童名字)」（粵：攞蝦條俾XX (兒童名字)），並派發小食予相應的兒童。示範完畢後，成人邀請1名兒童協助派發小吃，並引導兒童說出三詞句子「動作 物件 人物」。\n準備物資：小吃。"
+  },
+  {
+    "name": "活動 7：三詞句子（動作 物件 人物）- 推球遊戲",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "兒童圍圈而坐，進行推球遊戲。成人示範三詞句子：「推球給XX (兒童名字)」【粵：推波俾XX (兒童名字)】，並把皮球推向該兒童。當該名兒童接過皮球後，成人隨即引導該兒童說：「推球給XX (兒童名字)」【粵：推波俾XX (兒童名字)】，再由該兒童把皮球推給下一位兒童。\n注意事項：兒童熟習句式後，可運用不同的動作詞，如：「拋」、「踢」，或不同的物件，如：豆袋、洋娃娃進行活動。\n準備物資：大皮球。"
+  },
+  {
+    "name": "語言表達",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "項目二：運用三詞句子",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "目標E：運用由否定詞、動作和物件名稱組成的三詞句子",
+    "level": "L3",
+    "parent_name": "項目二：運用三詞句子",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "目標：運用由否定詞、動作和物件名稱組成的三詞句子【如：不 穿 衣服 (粵 唔 著 衫)】。\n\n活動建議1：出示兒童喜歡的小吃，如：蝦條，並引導兒童說：「吃蝦條」。再出示兒童不喜歡的小吃，如：芥辣豆，並引導兒童說：「不吃芥辣豆」(粵 唔食芥辣豆)，以表示拒絕。\n注意事項：可運用兒童不喜歡的物件或玩具，並引導兒童說：「不喝XX (飲料名稱)」、「不玩XX (玩具名稱)」。\n材料／建議教材：兒童喜歡及不喜歡的小吃。\n\n活動建議2：與兒童替洋娃娃穿衣服。預先替洋娃娃穿上部分衣服(如：洋娃娃哥哥穿上褲子、洋娃娃姐姐穿上襪子)，接著出示不同的衣物，並由兒童隨意揀選1件衣物。成人拿起已穿上該衣物的洋娃娃，示範說出三詞句子「否定詞 動作 物件」，如：「不穿褲子」(粵 唔著褲)，表示拒絕穿著該衣物。當兒童揀選1件洋娃娃尚未穿著的衣物時，即鼓勵兒童替洋娃娃穿上該衣服；當兒童揀選1件洋娃娃已穿著了的衣物時，即引導兒童說出三詞句子「否定詞 動作 物件」來拒絕。\n材料／建議教材：洋娃娃、洋娃娃衣物。\n\n活動建議3：在小組活動中，與兒童進行一些輪流玩耍的遊戲。過程中，成人刻意不讓某位兒童參與遊戲，並引導該名兒童說：「還沒有玩XX(遊戲名稱)」【粵 未玩XX(遊戲名稱)】，以表示要求參與。"
+  },
+  {
+    "name": "目標F：運用由兩個形容詞和一個物件名稱組成的三詞句子",
+    "level": "L3",
+    "parent_name": "項目二：運用三詞句子",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "目標：運用由兩個形容詞和一個物件名稱組成的三詞句子【如：大 紅 球 (粵 大 嘅 紅色 波)】。"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議 — 語言表達"
+  },
+  {
+    "name": "運用三詞句子「形容詞 形容詞 物件」",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "引導兒童運用三詞句子「形容詞 形容詞 物件」來描述具備兩項不同特徵的物件。"
+  },
+  {
+    "name": "活動 4",
+    "level": "L4",
+    "parent_name": "運用三詞句子「形容詞 形容詞 物件」",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示具備 2 項不同特徵（如：大小、顏色、形狀）的玩具，並示範說出三詞句子「形容詞 形容詞 物件」，如：「大 綠色 車」。接著再出示不同的玩具，引導兒童運用三詞句子「形容詞 形容詞 物件」來表示所揀選的玩具。\n\n教材建議：\n- 具備 2 項不同特徵的玩具"
+  },
+  {
+    "name": "活動 5",
+    "level": "L4",
+    "parent_name": "運用三詞句子「形容詞 形容詞 物件」",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童進行音樂傳球遊戲。成人介紹不同大小及顏色的皮球，接著放進布袋內。當音樂響起時，兒童隨著音樂傳送布袋；當音樂停止時，手持布袋的兒童要從布袋中取出 1 個皮球，並以三詞句子「形容詞 形容詞 物件」來形容皮球，如：「大 紅色 球」、「小 藍色 球」，接著把皮球拋進籃子內。\n\n教材建議：\n- 具備兩項不同特徵的皮球\n- 籃子\n- 布袋"
+  },
+  {
+    "name": "語言表達",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言：活動建議 — 語言表達"
+  },
+  {
+    "name": "項目三：運用四詞句子",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": 36,
+    "age_max_months": 60,
+    "prompt_corpus": "項目三：運用四詞句子。目標涵蓋運用由不同詞類組成的四詞句子，適合3-5歲兒童。"
+  },
+  {
+    "name": "目標A：運用由人物或動物、動作、物件和地方名稱組成的四詞句子",
+    "level": "L3",
+    "parent_name": "項目三：運用四詞句子",
+    "age_min_months": 36,
+    "age_max_months": 60,
+    "prompt_corpus": "運用由人物或動物、動作、物件和地方名稱組成的四詞句子【如：我 乘 巴士 前往 公園 (粵 我 搭 巴士 去 公園)】/ 3-5歲"
+  },
+  {
+    "name": "活動建議1",
+    "level": "L4",
+    "parent_name": "目標A：運用由人物或動物、動作、物件和地方名稱組成的四詞句子",
+    "age_min_months": 36,
+    "age_max_months": 60,
+    "prompt_corpus": "出示及逐一介紹地方圖片，並把圖片放在桌子上。成人把洋娃娃放在玩具巴士中，推向其中一張圖片 (如：海洋公園)，並示範運用四詞句子「人物 動物 動作 地方」形容動作，如：「哥哥 坐 巴士 去 海洋公園」。示範完畢後，兒童選擇1個洋娃娃、1種玩具車及1個地方，並說出以上四詞句子，接著把洋娃娃放在玩具車上並推向相應的地方圖片。\n\n材料/建議教材：\n• 地方圖片數張\n• 玩具車\n• 洋娃娃數個"
+  },
+  {
+    "name": "活動建議2",
+    "level": "L4",
+    "parent_name": "目標A：運用由人物或動物、動作、物件和地方名稱組成的四詞句子",
+    "age_min_months": 36,
+    "age_max_months": 60,
+    "prompt_corpus": "示範運用4張不同詞類 (人物/動物、動作、物件、地方) 的圖片，組出四詞句子「人物/動物 動作 物件 地方」，如：「媽媽 坐 巴士 去 公園」，並把圖片順序排列出來，作提示之用。把所有圖片打亂並疊在一起，成人與兒童輪流抽1張圖片，看誰最快能抽到4張不同詞類的圖片，組合後說出以上四詞句子。\n\n材料/建議教材：\n• 不同詞類的圖片各10張\n• 百搭卡10張"
+  },
+  {
+    "name": "目標B：運用由人物或動物、動作、物件和人物或動物名稱組成的四詞句子",
+    "level": "L3",
+    "parent_name": "項目三：運用四詞句子",
+    "age_min_months": 36,
+    "age_max_months": 60,
+    "prompt_corpus": "運用由人物或動物、動作、物件和人物或動物名稱組成的四詞句子【如：媽媽 送 球 給 哥哥 (粵 媽媽 送 波 俾 哥哥)】/ 3-5歲"
+  },
+  {
+    "name": "目標C：運用由動作、形容詞、物件和人物或動物名稱組成的四詞句子",
+    "level": "L3",
+    "parent_name": "項目三：運用四詞句子",
+    "age_min_months": 36,
+    "age_max_months": 60,
+    "prompt_corpus": "運用由動作、形容詞、物件和人物或動物名稱組成的四詞句子【如：推 紅色 車 給 老師 (粵 推 紅色 車 俾 老師)】/ 3-5歲"
+  },
+  {
+    "name": "目標D：運用由動作、物件、地方名稱和位置詞組成的四詞句子",
+    "level": "L3",
+    "parent_name": "項目三：運用四詞句子",
+    "age_min_months": 36,
+    "age_max_months": 60,
+    "prompt_corpus": "運用由動作、物件、地方名稱和位置詞組成的四詞句子【如：放 襪子 進 籃子 內 (粵 擺 襪 喺 籃 入面)】/ 3-5歲"
+  },
+  {
+    "name": "學前兒童訓練指南—語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "活動建議—語言表達",
+    "level": "L2",
+    "parent_name": "學前兒童訓練指南—語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議—語言表達"
+  },
+  {
+    "name": "活動3：四詞句子「人物 動作 物件 人物」",
+    "level": "L3",
+    "parent_name": "活動建議—語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童模擬慶祝節日 (如：聖誕節、生日)，並一起預備不同的禮物。成人出示1份禮物，示範運用四詞句子「人物 動作 物件 人物」，如：「XX (成人稱謂) 送火車給 (粵 俾) YY (兒童名字)」，並將禮物送給兒童。示範完畢後，由1名兒童揀選1份禮物，說出以上四詞句子後，再將禮物送給相關的兒童。\n\n準備材料：\n- 禮物數份"
+  },
+  {
+    "name": "活動4：四詞句子「人物 動作 物件 人物」",
+    "level": "L3",
+    "parent_name": "活動建議—語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示2個大布偶、皮球及玩具車，示範運用四詞句子「人物 動作 物件 人物」，如：「XX (成人稱謂) 推球給 (粵 俾) YY (布偶名稱)」，並將皮球推給布偶。示範完畢後，成人再出示皮球或玩具車，引導兒童說出以上四詞句子，並把皮球推給相關的布偶。\n\n準備材料：\n- 大布偶2個\n- 皮球\n- 玩具車"
+  },
+  {
+    "name": "活動5：四詞句子「動作 形容詞 物件 人物」",
+    "level": "L3",
+    "parent_name": "活動建議—語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童進行拋球遊戲。成人揀選1種顏色的皮球，示範運用四詞句子「動作 形容詞 物件 人物」，如：「拋紅色球給 (粵 俾) XX (兒童名字)」，並將皮球拋給該兒童。示範完畢後，成人再出示不同顏色的皮球，引導兒童說出以上四詞句子，並把皮球拋給相關的兒童。\n\n注意事項：兒童熟習句式後，可轉用不同的形容詞 (如：「大」、「小」) 及不同的物件 (如：玩具車) 與動作詞 (如：推) 進行活動。\n\n準備材料：\n- 不同顏色的皮球 (或豆袋)"
+  },
+  {
+    "name": "活動6：四詞句子「動作 形容詞 物件 人物」",
+    "level": "L3",
+    "parent_name": "活動建議—語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示2個大布偶、不同大小或顏色的皮球及玩具車，示範運用四詞句子「動作 形容詞 物件 人物」，如：「推大車給 (粵 俾) 大象」，並將大玩具車推給該布偶。示範完畢後，成人再出示不同的布偶、皮球及玩具車，引導兒童說出以上四詞句子，並把玩具推給相關的布偶。\n\n準備材料：\n- 大布偶2隻\n- 不同大小或顏色的皮球或玩具車"
+  },
+  {
+    "name": "活動7：四詞句子「動作 物件 地方 位置詞」",
+    "level": "L3",
+    "parent_name": "活動建議—語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示並逐一介紹不同的玩具及盛器，如：玩具車、皮球、籃子、桌子等。成人示範說出四詞句子「動作 物件 地方 位置詞」，如：「放車在 (粵 喺) 桌子上面」、「放球在 (粵 喺) 籃子外面」，並把物件放在相關的地方。示範完畢後，成人再出示不同的玩具，引導兒童運用以上四詞句子，並把物件放在適當的地方。\n\n準備材料：\n- 不同的玩具\n- 盛器 (如：籃子、桌子)"
+  },
+  {
+    "name": "學前兒童訓練指南—語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "活動建議—語言表達",
+    "level": "L2",
+    "parent_name": "學前兒童訓練指南—語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議—語言表達"
+  },
+  {
+    "name": "與兒童玩收藏物件遊戲",
+    "level": "L3",
+    "parent_name": "活動建議—語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童玩收藏物件遊戲。成人介紹遊戲中需要收藏的物件，及在房間中可以擺放物件的位置。接著邀請 1 位兒童作「收藏者」，成人示範說出四詞句子「動作 物件 地方 位置詞」，如：「放 車 在 (粵 喺) 玩具櫃 上面」、「放 球 在 (粵 喺) 抽屜 裡面」，並邀請 1 位兒童把物件收藏起來。重複遊戲，引導兒童運用以上四詞句子，指示成人收藏物件。\n\n建議物資：\n- 玩具數份"
+  },
+  {
+    "name": "運用活頁畫冊示範四詞句子",
+    "level": "L3",
+    "parent_name": "活動建議—語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "預備 1 本有 4 個部分的活頁畫冊，按次序貼上動作、物件、地方、位置詞的圖片。運用活頁畫冊示範四詞句子「動作 物件 地方 位置詞」，如：「拋 球 到 籃子 裡面」，並取相關物件進行活動。示範完畢後，鼓勵兒童翻開活頁畫冊以選取不同的圖片，說出以上四詞句子後，由兒童進行該活動。\n\n建議物資：\n- 活頁畫冊\n- 畫冊中相關的物件"
+  },
+  {
+    "name": "與兒童玩洗衣服遊戲",
+    "level": "L3",
+    "parent_name": "活動建議—語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童玩洗衣服遊戲。成人介紹洗衣服的過程，並示範運用四詞句子「動作 物件 地方 位置詞」：\n• 把衣服放進污衣籃內：「放 褲子 在 (粵 喺) 籃子 裡面」\n• 把衣服放進洗衣機內：「放 襪子 在 (粵 喺) 洗衣機 裡面」\n• 把衣服掛起來：「掛 裙子 在 (粵 喺) 衣架 上面」\n示範完畢後，引導兒童運用以上四詞句子，以表示要進行活動。\n\n建議物資：\n- 洋娃娃衣物\n- 污衣籃\n- 玩具洗衣機\n- 衣架及衣夾"
+  },
+  {
+    "name": "複合句子運用",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學習重點：複合句子運用"
+  },
+  {
+    "name": "運用不同的複合句子",
+    "level": "L2",
+    "parent_name": "複合句子運用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "項目：運用不同的複合句子"
+  },
+  {
+    "name": "運用表示條件關係的複合句子",
+    "level": "L3",
+    "parent_name": "運用不同的複合句子",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "目標例句：如：如果做完功課，就可以玩玩具。\n\n活動建議：\n1. 出示及逐一介紹條件圖片及結果圖片，接著成人與兒童運用洋娃娃進行角色扮演遊戲：\n• 抽1張結果圖片，並運用孩子洋娃娃扮演說：「我想踢足球。」\n• 抽1張條件圖片，並運用媽媽洋娃娃扮演說出表示條件關係的句子「如果……，就……」，如：「如果掃完地，就可以踢足球。」\n• 抽1張狀況圖片，看看是否符合條件圖片所列出的條件，例如：抽到「已掃地」的狀況圖片，孩子洋娃娃便可以踢足球；若抽到「還沒掃地」的狀況圖片，孩子洋娃娃則不可以踢足球。\n成人先扮演媽媽角色示範說出表示條件關係的句子，待兒童明白活動後，再由兒童扮演媽媽角色說出目標句子。\n\n材料/建議教材：\n• 洋娃娃\n• 結果圖片 (如：踢足球、看電視、去公園)\n• 條件圖片 (如：掃地、做功課、抹桌子)\n• 狀況圖片 (即條件圖片未完成及已完成的狀況，如：未掃地、已掃地；未做功課、已做功課；未抹桌子、已抹桌子)\n• 結果圖片相關的玩具 (如：足球、電視、公園)"
+  },
+  {
+    "name": "運用表示因果關係的複合句子",
+    "level": "L3",
+    "parent_name": "運用不同的複合句子",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "目標例句：如：今天放假，所以不用上學"
+  },
+  {
+    "name": "運用表示添加關係的複合句子",
+    "level": "L3",
+    "parent_name": "運用不同的複合句子",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "目標例句：如：媽媽去街市買菜，和 (粵 同埋) 去餅店買蛋糕"
+  },
+  {
+    "name": "運用表示先後關係的複合句子",
+    "level": "L3",
+    "parent_name": "運用不同的複合句子",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "目標例句：如：吃完飯，再看電視"
+  },
+  {
+    "name": "運用表示轉折關係的複合句子",
+    "level": "L3",
+    "parent_name": "運用不同的複合句子",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "目標例句：【如：他生病，卻 (粵 不過 / 但) 不願意找醫生求診】"
+  },
+  {
+    "name": "語言表達",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言。活動建議—語言表達。"
+  },
+  {
+    "name": "活動2：抽獎遊戲（條件關係句子）",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童模擬進行抽獎遊戲。成人出示禮物，及介紹每份禮物的編號（可用顏色代替），並示範說出表示條件關係的句子「如果抽到 X 號，就可以得到 XX（禮物名稱）」。示範完畢後，由兒童從抽獎箱中抽出 1 張號碼卡（如：1 號），並說出以上目標句子，接著成人將該份禮物送給兒童。\n\n準備物料：\n- 禮物數份\n- 號碼卡\n- 抽獎箱"
+  },
+  {
+    "name": "活動3：看圖表達（因果關係句子）",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示代表假期或節日及相關活動的圖片，並示範說出表示因果關係的目標句子，如：「今天是假期，所以不用上學」、「今天是中秋節，所以可以玩燈籠」。示範完畢後，由兒童抽取圖片，並說出以上目標句子。\n\n準備物料：\n- 假期或節日圖片\n- 相關活動的圖片"
+  },
+  {
+    "name": "活動4：轉動配對紙筒（因果關係句子）",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "預先製作配對紙筒（如圖所示，紙筒分為固定的與活動的兩部分）。成人隨意轉動配對紙筒，並示範說出表示因果關係的目標句子，如：「今天是假期，所以不用上學」、「今天是星期天，所以爸爸帶我去迪士尼」。示範完畢後，由兒童轉動配對紙筒，並說出以上目標句子。\n\n準備物料：\n- 自製配對紙筒（紙筒上的文字可用圖片代替）"
+  },
+  {
+    "name": "活動5：因果關係圖片配對遊戲",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示 1 張原因及相關結果的圖片，並示範說出表示因果關係的目標句子，如：「因為小朋友沒有做功課，所以被老師責罵。」示範完畢後，成人將所有原因及結果圖片打亂，疊在一起。成人與兒童輪流抽出 2 張圖片，若 2 張圖片能配對成合邏輯的因果關係，便可說出以上目標句子，並獲得 1 分。完成配對所有圖片後，取得最高分數者為勝。\n\n準備物料：\n- 因果關係情景圖片"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議 — 語言表達"
+  },
+  {
+    "name": "活動 6：與兒童玩「家家酒」遊戲",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童玩「家家酒」遊戲。成人及兒童各有2隻碟子，成人從食物籃子中取出2款食物，示範說出表示添加關係的目標句子，如：「我洗蘿蔔和（粵 同埋）切蕃茄。」並進行相關活動，完成後把2款食物放在不同的碟子上。示範完畢後，由兒童揀選食物及說出以上目標句子，接著進行相關活動。\n\n教具 / 材料：\n• 「家家酒」玩具\n• 玩具食物"
+  },
+  {
+    "name": "活動 7：郊外活動圖片配對",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示並逐一介紹各郊外活動（如：射箭、騎馬、燒烤、放風箏、踢足球）的圖片。接著成人隨意抽出其中2張圖片，並示範運用表示添加關係的目標句子，如：「叔叔去郊外射箭和（粵 同埋）騎馬。」示範完畢後，由兒童抽出2張圖片，並說出以上目標句子。\n\n教具 / 材料：\n• 郊外活動圖片"
+  },
+  {
+    "name": "活動 8：運用圖片骰子進行假想遊戲",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "預備2顆貼有不同活動圖片的骰子。成人揀選1個洋娃娃，擲出2顆骰子後，示範說出表示添加關係的目標句子，如：「媽媽去街市買菜，和（粵 同埋）去餅店買蛋糕。」並運用洋娃娃及相關道具進行假想遊戲。示範完畢後，由兒童揀選洋娃娃及擲骰子，說出以上目標句子後，再拿取相關的道具進行假想遊戲。\n\n教具 / 材料：\n• 自製骰子2粒（貼有不同的活動圖片）\n• 各活動圖片相關的道具\n• 洋娃娃數個"
+  },
+  {
+    "name": "活動 9：日常活動中描述先後關係",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童進行日常活動時（如：預備食物），示範運用表示先後關係的目標句子來描述活動，如：「塗完牛油，再放火腿」。示範完畢後，引導兒童說出以上目標句子，再協助預備食物。"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南一語言"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議 — 語言表達"
+  },
+  {
+    "name": "活動 10：運用情景圖片表達先後關係",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示有先後次序的情景圖片，並示範運用表示先後關係的目標句子，如：「修剪完頭髮，再付錢」，再運用道具與兒童進行假想遊戲。示範完畢後，由兒童揀選情景圖片，並說出以上目標句子，再運用道具進行假想遊戲。\n\n準備教具：\n- 有先後次序的情景圖片\n- 情景圖片相關的道具"
+  },
+  {
+    "name": "活動 11：運用活動板表達先後關係",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "拉動活動板，並示範說出表示先後關係的目標句子，如：「吃完飯，再看電視」，再運用洋娃娃及相關物件進行假想遊戲。示範完畢後，由兒童拉動活動板，並說出以上目標句子，再進行假想遊戲。\n\n準備教具：\n- 自製活動板數個（可貼上文字或圖片）\n- 洋娃娃\n- 相關活動的物件"
+  },
+  {
+    "name": "學前兒童訓練指南—語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "學前兒童訓練指南—語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議 — 語言表達"
+  },
+  {
+    "name": "活動 12",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示 2 張有轉折關係的活動圖片，並示範說出表示轉折關係的目標句子，如：「哥哥生病，卻（粵 不過/但）不要吃藥」。示範完畢後，成人把所有圖片打亂，疊在一起，並與兒童每人輪流抽取 2 張圖片，如 2 張圖片能配對成有轉折關係的意思，便可說出相關的目標句子，並獲得 1 分。完成所有圖片後，最後取得最高分者為勝。\n\n準備材料：\n• 有轉折關係的活動圖片"
+  },
+  {
+    "name": "活動 13",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示「找錯處」圖片，並示範說出表示轉折關係的目標句子，如：「哥哥喝湯，卻（粵 不過/但）用錯了叉子」，再運用道具扮演圖片中的錯誤情景。當成人演繹錯誤情景時，鼓勵兒童自行說出以上目標句子，接著將正確的道具交給兒童，鼓勵兒童正確地扮演該情景一次。\n\n準備材料：\n• 「找錯處」圖片\n• 洋娃娃\n• 圖片中活動相關的道具"
+  },
+  {
+    "name": "問句運用",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學習重點：問句運用"
+  },
+  {
+    "name": "運用不同的問句",
+    "level": "L2",
+    "parent_name": "問句運用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "項目：運用不同的問句"
+  },
+  {
+    "name": "運用「有沒有」(粵 有冇)問句",
+    "level": "L3",
+    "parent_name": "運用不同的問句",
+    "age_min_months": 30,
+    "age_max_months": 48,
+    "prompt_corpus": "【如：有沒有(粵 有冇)筆？】\n\n活動建議 1：\n材料/建議教材：布袋2個、滾球玩具、玩具球\n與2位兒童玩滾球玩具（如下圖）。成人在兒童面前將玩具球放進布袋內，並將布袋與另一個空的布袋放在一起。接著成人拿起載有玩具球的布袋，示範運用目標問句：「有沒有（粵 有冇）球呀？」讓兒童A打開布袋及回答說：「有」，並將玩具球放在滾球玩具上進行遊戲，完成後把玩具球放回布袋內。成人再次出示2個布袋，由兒童A隨意選取1個，並引導兒童B運用以上目標問句向兒童A發問，鼓勵兒童A回答。若兒童A選取的布袋載有玩具球，則把玩具球交給兒童B進行遊戲。\n\n活動建議 2：\n材料/建議教材：填色圖畫、顏色筆及盒子\n與兒童進行填顏色活動。成人預先將兒童需要的顏色筆藏起來（如：圖畫是蘋果，便藏起紅色筆），並把載有其他顏色筆的盒子及圖畫交給兒童，讓他填色。當兒童發現沒有他需要的顏色時，成人即引導兒童運用目標問句：「有沒有（粵 有冇）X色筆呀？」成人回答「有」後，再把顏色筆交給兒童。\n注意事項：成人可間中表示沒有兒童需要的顏色筆，以鼓勵兒童向其他成人發問。"
+  },
+  {
+    "name": "運用選擇性問句",
+    "level": "L3",
+    "parent_name": "運用不同的問句",
+    "age_min_months": 30,
+    "age_max_months": 48,
+    "prompt_corpus": "【如：要糖還是(粵 定)要餅乾？】"
+  },
+  {
+    "name": "運用「甚麼」(粵 乜嘢)問句",
+    "level": "L3",
+    "parent_name": "運用不同的問句",
+    "age_min_months": 30,
+    "age_max_months": 48,
+    "prompt_corpus": "【如：這是甚麼(粵 乜嘢)？】"
+  },
+  {
+    "name": "運用「在做甚麼」(粵 做緊乜嘢)問句",
+    "level": "L3",
+    "parent_name": "運用不同的問句",
+    "age_min_months": 30,
+    "age_max_months": 48,
+    "prompt_corpus": "【如：爸爸正在做甚麼(粵 做緊乜嘢)？】"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議—語言表達"
+  },
+  {
+    "name": "運用選擇性問句",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學習運用選擇性問句向其他兒童發問（如：「要...還是...？」）"
+  },
+  {
+    "name": "活動 3",
+    "level": "L4",
+    "parent_name": "運用選擇性問句",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "小組活動時，出示 3 個分別盛有玩具車及皮球、杯子及梳子、餅乾及糖果的神秘袋。成人先取出其中一個神秘袋中的 2 件物件（如：玩具車及皮球），並示範運用選擇性問句：「要車還是（定）球？」要求兒童揀選 1 件物件。示範完畢後，由兒童扮演小老師，選取其中一個神秘袋並取出 2 件物件，接著發問以上選擇性問句，鼓勵其他兒童作選擇。\n教具/材料：玩具車、皮球、杯子、梳子、餅乾、糖果；神秘袋 3 個"
+  },
+  {
+    "name": "活動 4",
+    "level": "L4",
+    "parent_name": "運用選擇性問句",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "小組活動時，出示不同顏色的盒子和 1 個盛有不同顏色玩具車的布袋，並邀請 1 位兒童負責分派玩具車，其他兒童則負責把玩具車放回相同顏色的盒子內。當負責分派玩具的兒童從布袋中取出 2 輛車時，鼓勵兒童運用選擇性問句向其他兒童發問，如：「要紅色車還是（定）黃色車？」當其他兒童回答後，把玩具車放在相同顏色的盒子內。\n教具/材料：不同顏色的盒子、不同顏色的玩具車、布袋"
+  },
+  {
+    "name": "活動 5",
+    "level": "L4",
+    "parent_name": "運用選擇性問句",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "利用日常生活的機會（如：茶點時間、玩具時間），邀請兒童協助分派物件。每次讓兒童拿取 2 件物件，並運用選擇性問句向其他兒童發問，如：「要蝦條還是（定）餅乾？」、「要拼圖還是（定）玩具車？」"
+  },
+  {
+    "name": "運用「這是甚麼」問句",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "引導兒童運用目標問句：「這是甚麼（乜嘢）？」"
+  },
+  {
+    "name": "活動 6",
+    "level": "L4",
+    "parent_name": "運用「這是甚麼」問句",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童玩農場玩具。成人預先將 1 隻玩具動物放進布袋內，鼓勵兒童伸手進布袋內觸摸，並猜猜是甚麼動物。當兒童表示猜不到時，成人即引導兒童運用目標問句：「這是甚麼（乜嘢）？」當成人說出答案後，將玩具動物交給兒童進行遊戲。\n教具/材料：農場玩具、布袋"
+  },
+  {
+    "name": "活動 7",
+    "level": "L4",
+    "parent_name": "運用「這是甚麼」問句",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "預先用 1 塊布覆蓋著 1 件物件，不讓兒童看見。成人示範運用目標問句：「這是甚麼（乜嘢）？」並由兒童掀開布，看看該物件後回答成人的問題。成人再放置其他物件在布下（不讓兒童看見），並引導兒童發問以上問句：「這是甚麼（乜嘢）？」當成人說出答案後，將玩具交給兒童把玩。\n教具/材料：玩具、布"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議 — 語言表達"
+  },
+  {
+    "name": "活動 8",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "預先在電飯煲內放置食物，並蓋上蓋子。成人把電飯煲放在桌子上，並以驚喜的語氣說：「好香呀！」以引導兒童運用目標問句：「這是甚麼（粵：乜嘢）？」當成人說出答案後，讓兒童從電飯煲內把食物拿出來。成人再把其他食物放進電飯煲內（不讓兒童看見），並鼓勵兒童發問以上問句。\n\n所需物料：\n- 食物\n- 電飯煲"
+  },
+  {
+    "name": "活動 9",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童模擬替洋娃娃穿衣服。成人出示 1 個盛有不同衣物的神秘袋，並由兒童在神秘袋內抽出 1 件衣物。當兒童伸手進布袋內時，成人按著布袋，不讓兒童取出衣物，隨即示範問句：「這是甚麼（粵：乜嘢）？」當兒童取出衣物後，鼓勵他回答問題，並替洋娃娃穿上該衣服。成人再次出示神秘袋並抽出衣物，卻故作神秘地不讓兒童看見，鼓勵兒童發問以上問句。成人展示衣物並說出答案後，讓兒童替洋娃娃穿上。\n\n所需物料：\n- 不同的衣物\n- 洋娃娃\n- 神秘袋"
+  },
+  {
+    "name": "活動 10",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童進行模仿遊戲。放 1 塊大白板在成人與兒童之間，令二人看不見對方。鼓勵兒童揀選 1 件玩具並進行相關活動（如：用玩具刀切蘋果），接著成人示範問句：「你在做甚麼？」（粵：你做緊乜嘢？）待兒童回答後，成人拿取相關的玩具進行活動，並推開白板，讓兒童看看雙方的活動是否相同。示範完畢後，由成人揀選玩具進行活動（如：用筷子夾食物），並引導兒童發問以上問句。成人回答後，由兒童拿取相關的玩具並進行相同的活動。成人推開白板，讓兒童看看雙方的活動是否相同。\n\n所需物料：\n- 不同的玩具\n- 大白板\n- 桌子 2 張"
+  },
+  {
+    "name": "活動 11",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童運用洋娃娃進行角色扮演遊戲。成人介紹不同的日常活動圖片（如：睡覺、看電視、洗手）後，把圖片放在布袋中，並由兒童抽出其中一張圖片（不讓成人看見）。成人示範問句：「XX（人物名稱）在做甚麼？」（粵：XX做緊乜嘢？）鼓勵兒童回答，並運用洋娃娃進行該活動。成人再次出示布袋並抽出 1 張圖片，鼓勵兒童發問以上問句。成人回答後，將洋娃娃及相關玩具交給兒童進行角色扮演遊戲。\n\n所需物料：\n- 洋娃娃數個\n- 日常活動圖片\n- 家居活動相關的玩具"
+  },
+  {
+    "name": "運用不同的問句",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 30,
+    "age_max_months": 48,
+    "prompt_corpus": "項目：運用不同的問句"
+  },
+  {
+    "name": "目標E：運用「誰」(粵 邊個) 問句",
+    "level": "L2",
+    "parent_name": "運用不同的問句",
+    "age_min_months": 30,
+    "age_max_months": 48,
+    "prompt_corpus": "目標：運用「誰」(粵 邊個) 問句【如：誰(粵 邊個)？誰(粵 邊個)吃餅？】/ 2½-4歲"
+  },
+  {
+    "name": "目標F：運用「誰的」(粵 邊個嘅) 問句",
+    "level": "L2",
+    "parent_name": "運用不同的問句",
+    "age_min_months": 30,
+    "age_max_months": 48,
+    "prompt_corpus": "目標：運用「誰的」(粵 邊個嘅) 問句【如：這枝筆是誰的(粵 邊個嘅)？】/ 2½-4歲"
+  },
+  {
+    "name": "目標G：運用「哪裡」(粵 邊度) 問句",
+    "level": "L2",
+    "parent_name": "運用不同的問句",
+    "age_min_months": 30,
+    "age_max_months": 48,
+    "prompt_corpus": "目標：運用「哪裡」(粵 邊度) 問句【如：哪裡(粵 邊度)？爸爸去哪裡(粵 邊度)？】/ 2½-4歲"
+  },
+  {
+    "name": "活動建議 1",
+    "level": "L3",
+    "parent_name": "目標E：運用「誰」(粵 邊個) 問句",
+    "age_min_months": 30,
+    "age_max_months": 48,
+    "prompt_corpus": "材料/建議教材：活動圖片、白紙\n活動建議：出示並介紹1張活動圖片，如：「弟弟游水」。用白紙把圖中人物的頭部遮蓋，並示範運用目標問句「誰」(粵 邊個)，如：「誰(粵 邊個)？」、「誰(粵 邊個)游水？」鼓勵兒童回答。成人再出示另一張活動圖片，圖片中的人物已預先被遮蓋著，引導兒童發問以上問句。成人回答後即移開白紙，讓兒童看圖中人物。"
+  },
+  {
+    "name": "活動建議 2",
+    "level": "L3",
+    "parent_name": "目標E：運用「誰」(粵 邊個) 問句",
+    "age_min_months": 30,
+    "age_max_months": 48,
+    "prompt_corpus": "材料/建議教材：玩具屋、洋娃娃數個\n活動建議：與兒童運用玩具屋進行假想遊戲。成人運用洋娃娃A（如：爸爸）在玩具屋外敲門，再運用洋娃娃B（如：媽媽）在屋內示範發問：「誰(粵 邊個)？」並再運用洋娃娃A作出回應。示範完畢後，把洋娃娃A交給兒童，並運用其他洋娃娃（不讓兒童看見）在屋外敲門，鼓勵兒童發問以上問句。成人回答後，讓兒童打開門讓洋娃娃進屋內。"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議—語言表達"
+  },
+  {
+    "name": "活動建議3",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "利用日常生活的機會，如：茶點時間、午睡後穿衣服時間等，邀請兒童協助派發用品或衣物。成人出示1件用品或衣物，引導該兒童運用目標問句「誰的」(粵 邊個嘅) 向全組兒童發問，如：「這個餐盒是誰的 (粵 邊個嘅)？」、「這件外衣是誰的 (粵 邊個嘅)？」鼓勵組內兒童作回應。"
+  },
+  {
+    "name": "活動建議4",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "預先把玩具的其中一部分 (如：拼板玩具的其中一塊拼圖) 收藏起來，再把玩具交給兒童把玩。當兒童發現玩具缺少了某一部分時，成人即引導兒童發問：「XX (物件名稱) 在哪裡 (粵 邊度)？」並告訴兒童玩具收藏的位置，鼓勵兒童前往尋找。\n所需教具：由多個部分組成的玩具"
+  },
+  {
+    "name": "活動建議5",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童進行貼圖遊戲。成人介紹不同的地方和人物圖片，並告訴兒童每個人物想去不同的地方。成人出示1張人物圖片，引導兒童發問：「XX (人物名稱) 去哪裡 (粵 邊度)？」成人回答後，由兒童把人物圖片貼在相關的地方圖片上。\n所需教具：不同的地方和人物圖片"
+  },
+  {
+    "name": "活動建議6",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童進行尋寶遊戲。成人預先把不同的物件收藏在房間中不同的位置，接著把物件圖片交給兒童，要求兒童找尋圖片中的物件。當兒童找不到某件物件時，引導兒童發問：「XX (物件名稱) 在哪裡 (粵 邊度)？」成人隨即作出回應。\n所需教具：不同的物件、物件圖片"
+  },
+  {
+    "name": "語言表達",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言表達"
+  },
+  {
+    "name": "運用不同的問句",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "項目：運用不同的問句"
+  },
+  {
+    "name": "運用「多少」（粵 幾多）問句",
+    "level": "L3",
+    "parent_name": "運用不同的問句",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "目標：運用「多少」（粵 幾多）問句【如：有多少（粵 幾多）個小朋友呀？你要多少（粵 幾多）顆糖果呀？】"
+  },
+  {
+    "name": "活動建議 1：神秘袋遊戲",
+    "level": "L4",
+    "parent_name": "運用「多少」（粵 幾多）問句",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "材料/建議教材：玩具車多輛、神秘袋。\n活動建議：出示盛有 2 輛玩具車的神秘袋，並告訴兒童袋中玩具的數量不明。成人示範運用目標問句「多少」（粵 幾多）向兒童發問，如：「有多少（粵 幾多）輛玩具車？」鼓勵兒童伸手進袋中觸摸玩具，並說出玩具的數量。成人再把多輛玩具車放進神秘袋中，要求兒童猜猜玩具車的數量。當兒童猜不到時，即引導兒童發問以上問句。成人說出答案後，把玩具車拿出來交給兒童把玩。"
+  },
+  {
+    "name": "活動建議 2：角色扮演遊戲",
+    "level": "L4",
+    "parent_name": "運用「多少」（粵 幾多）問句",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "材料/建議教材：食物（每款數件）、侍應服飾。\n活動建議：與兒童進行角色扮演遊戲。成人扮演侍應，介紹有甚麼食物可供選擇，並示範運用目標問句「多少」（粵 幾多），如：「你要多少（粵 幾多）塊餅乾？」並按兒童的回應拿取食物數量。示範完畢後，由兒童扮演侍應，並運用以上目標問句向成人或其他兒童發問。"
+  },
+  {
+    "name": "運用「怎麼辦」（粵 點算）問句",
+    "level": "L3",
+    "parent_name": "運用不同的問句",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "目標：運用「怎麼辦」（粵 點算）問句【如：跌傷了怎麼辦（粵 點算）？】"
+  },
+  {
+    "name": "運用「為甚麼」（粵 點解）問句",
+    "level": "L3",
+    "parent_name": "運用不同的問句",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "目標：運用「為甚麼」（粵 點解）問句【如：為甚麼（粵 點解）要看醫生？為甚麼（粵 點解）會給媽媽責罵？】"
+  },
+  {
+    "name": "運用「怎麼樣」（粵 點樣）問句",
+    "level": "L3",
+    "parent_name": "運用不同的問句",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "目標：運用「怎麼樣」（粵 點樣）問句【如：怎麼樣（粵 點樣）做三明治？】"
+  },
+  {
+    "name": "運用「甚麼時候」（粵 幾時）問句",
+    "level": "L3",
+    "parent_name": "運用不同的問句",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "目標：運用「甚麼時候」（粵 幾時）問句【如：甚麼時候（粵 幾時）放學呀？甚麼時候（粵 幾時）去公園玩呀？】"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議—語言表達"
+  },
+  {
+    "name": "運用目標問句「多少」",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童玩玩具車。成人介紹每輛車有多少個座位，並由兒童隨意拿取不同數量的洋娃娃，準備坐車。成人示範運用目標問句「多少」(粵 幾多)，如：「有多少(粵 幾多)個人坐車？」兒童回答後，成人選取有足夠座位的玩具車給兒童，讓兒童把洋娃娃放進玩具車內，模擬開車。示範完畢後，成人隨意拿取不同數量的洋娃娃(不讓兒童看見)，並引導兒童運用以上目標問句來詢問坐車的人數。成人回答後，由兒童拿取玩具車並把洋娃娃放進車內。\n\n【所需教具】\n• 玩具車數輛 (每輛車的座位數量不同)\n• 洋娃娃數個"
+  },
+  {
+    "name": "運用目標問句「怎麼辦」",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "小組活動時，運用解難圖片與兒童玩遊戲。成人將「解決方法」圖片分派給各兒童，再抽取1張「問題」圖片，示範運用目標問句「怎麼辦」(粵 點算)，如：「哥哥跌傷了，怎麼辦(粵 點算)？」鼓勵持有相關「解決方法」圖片的兒童回答問題。示範完畢後，成人抽取1張「問題」圖片，並交給1位兒童，引導他運用以上目標問句來向其他兒童發問。\n\n【所需教具】\n• 解難圖片 (包括：問題圖片和解決方法圖片)"
+  },
+  {
+    "name": "運用目標問句「為甚麼」",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童進行假想遊戲。成人運用洋娃娃介紹各人物的名字，並簡單介紹日常上學的程序(如：一起乘坐校車回學校、吃早餐、上課、吃午飯、放學等)。遊戲開始時，成人與兒童運用洋娃娃及道具扮演「上學的一天」，並在過程中加入一些特別的事件，從中引導兒童運用目標問句「為甚麼」(粵 點解)，例如：\n• 小明沒有上校車：「為甚麼(粵 點解)小明沒有上校車？」\n• 欣欣沒有吃早餐：「為甚麼(粵 點解)欣欣沒有吃早餐？」\n• 上課時，小偉被老師責備：「為甚麼(粵 點解)老師罵小偉？」\n• 放學前，欣欣早退：「為甚麼(粵 點解)欣欣早退？」\n兒童發問後，成人再運用預先準備的原因圖片回答問題。\n\n注意事項：建議為同一個問題預備多張原因圖片，如：「小朋友沒有上校車」，原因可以是鬧鐘壞了、身體不適、需要覆診等，以便重複遊戲，引導兒童再次發問。\n\n【所需教具】\n• 洋娃娃數個\n• 模擬各情景的道具\n• 問題的原因圖片 (每個問題多張)"
+  },
+  {
+    "name": "學前兒童訓練指南—語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "活動建議—語言表達",
+    "level": "L2",
+    "parent_name": "學前兒童訓練指南—語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "活動 6",
+    "level": "L3",
+    "parent_name": "活動建議—語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "【活動內容】運用因果關係圖片與兒童進行遊戲。成人將「原因」和「結果」圖片分別放在2個布袋內，由兒童從「結果」布袋中抽出1張圖片。成人按照圖片內容，示範運用目標問句「為甚麼」(粵 點解)，如：「為甚麼(粵 點解)小朋友要看醫生？」並與兒童輪流從「原因」布袋中抽出1張圖片，看誰能最快找到正確的「原因」圖片。示範完畢後，由兒童抽出「結果」圖片，並運用以上目標問句來發問。\n【準備材料】因果關係圖片、布袋2個"
+  },
+  {
+    "name": "活動 7",
+    "level": "L3",
+    "parent_name": "活動建議—語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "【活動內容】成人抽出2張交通工具圖片(翻轉放在桌子上，不讓兒童看見)及1張地方圖片(如：海洋公園)，並運用小朋友洋娃娃示範運用目標問句「怎麼樣」(粵 點樣)向媽媽洋娃娃發問，如：「怎麼樣(粵 點樣)去海洋公園？」成人翻開交通工具圖片，並扮演媽媽洋娃娃按照圖片內容回答，如：「首先乘港鐵，接著坐巴士。」再運用媽媽洋娃娃、小朋友洋娃娃及相關的玩具交通工具模擬乘車。重複遊戲時，由兒童抽出地方圖片，並扮演小朋友洋娃娃運用以上目標問句發問，成人回答後再讓兒童運用玩具進行遊戲。\n【準備材料】洋娃娃(媽媽及小朋友)、不同的交通工具(玩具及圖片)、不同的地方圖片"
+  },
+  {
+    "name": "活動 8",
+    "level": "L3",
+    "parent_name": "活動建議—語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "【活動內容】利用日常學習的活動，引導兒童運用目標問句「怎麼樣」(粵 點樣)。如：吃東西時，要求兒童協助預備食物(如：三明治)。成人運用程序圖片教導兒童A預備三明治的過程，再引導其他兒童運用目標問句「怎麼樣」(粵 點樣)向兒童A發問，如：「怎麼樣(粵 點樣)做三明治？」兒童A回答後，再由其他兒童按步驟預備三明治。在預備食物的過程中，如有兒童忘記了步驟，成人可鼓勵該兒童運用以上目標問句再次向兒童A發問。\n【準備材料】食物材料及用具、程序圖片"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議—語言表達"
+  },
+  {
+    "name": "活動 9",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示並介紹洋娃娃（媽媽及小朋友）、月曆和不同活動的圖片（如：游水、畫畫、去海洋公園等），並告訴兒童：「媽媽替小明報名參加了不同的活動，小明想知道每個活動安排在哪一天。我們一起幫助小明問媽媽吧！」由兒童抽出 1 張活動圖片，成人引導兒童運用小朋友洋娃娃發問，如：「甚麼時候（[粵] 幾時）去游泳？」接著成人運用媽媽洋娃娃作出回答，並讓兒童把活動圖片貼在月曆上相應的日期。重複遊戲，由兒童抽出活動圖片，並運用以上目標問句向媽媽洋娃娃發問。\n\n教具準備：\n- 洋娃娃（媽媽及小朋友）\n- 活動圖片\n- 月曆"
+  },
+  {
+    "name": "活動 10",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童一起整理時間表。成人出示第一張活動圖片（如：早餐），並示範運用目標問句「甚麼時候」（[粵] 幾時），如：「甚麼時候（[粵] 幾時）吃早餐？」接著在時間表內寫上或貼上答案（如：9 時），再把活動圖片貼上。示範完畢後，成人將另一張活動圖片交給兒童，引導兒童運用以上目標問句發問，如：「甚麼時候（[粵] 幾時）上音樂課？」成人作出回答後，由兒童在時間表內寫上或貼上答案，並把活動圖片貼上。\n\n時間表格式參考：\n時間            活動\n____ : 00\n____ : 00\n____ : 00\n____ : 00\n\n教具準備：\n- 時間表\n- 活動圖片\n- 數字卡（或筆）"
+  },
+  {
+    "name": "語言思考",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學習重點：語言思考。學前兒童訓練指南—語言。"
+  },
+  {
+    "name": "詞彙尋找（歸納性）",
+    "level": "L2",
+    "parent_name": "語言思考",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "項目一：詞彙尋找（歸納性）。目標：根據所提供的特徵，歸納出特定的人物、物件或事情（如：「哪一種水果是綠色皮、紅色肉、而且是有核的？」「西瓜」）/ 4-6歲。注意事項：在歸納性詞彙的訓練中，成人提供的人物、物件或事情的特徵，必須能引導兒童歸納出特定答案（只得一個），方為恰當。"
+  },
+  {
+    "name": "活動建議一",
+    "level": "L3",
+    "parent_name": "詞彙尋找（歸納性）",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "材料/建議教材：不同的玩具食物、洋娃娃數個、布袋。活動建議：出示並介紹不同的食物，再把食物放進布袋中。成人出示1個洋娃娃並說：「這是樂樂。請你仔細聽我說，再猜一猜樂樂喜歡吃甚麼食物？」成人隨即描述其中一種食物的特徵，如：「我喜歡吃的是一種水果，皮是橙色的，肉也是橙色的，味道有點酸、也有點甜。你猜是甚麼？」（答案：橙）當兒童猜出答案後，便可拿取該玩具食物，模擬餵洋娃娃進食。重複活動，引導兒童猜出其他食物。"
+  },
+  {
+    "name": "活動建議二",
+    "level": "L3",
+    "parent_name": "詞彙尋找（歸納性）",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "材料/建議教材：可把洋娃娃放進內的玩具交通工具、洋娃娃、不同的地方圖片。活動建議：將地方圖片放在桌子上，與兒童玩模擬乘車遊戲。成人出示並介紹不同的交通工具，再將交通工具放進布袋內，接著出示洋娃娃並說：「這是美美，她現在想去XX（地方名稱）。請你仔細聽我說，再猜一猜美美乘坐甚麼交通工具。」成人隨即描述一種交通工具的特徵，如：「我乘坐的交通工具沒有車輪，是在海上航行的，而且可以運載很多乘客。你猜是甚麼？」（答案：船）。當兒童猜出答案後，便可把洋娃娃放進該交通工具內，並模擬航行到該地方的圖片上。重複活動，引導兒童猜出其他交通工具。"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "活動3",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童進行角色扮演的小組活動。成人出示各種職業的服裝及道具，並介紹不同的職業。接著邀請1位兒童躲在大白板後面，並穿上某種職業（如：醫生）的特定服裝及拿取相關的道具。成人向組內其他兒童描述該種職業的特徵，如：「這個人工作時需要用聽診器，他是穿白色衣服的，為病人治病。你猜他的職業是甚麼？」當組內兒童猜出答案後，讓扮演該角色的兒童從大白板後面走出來，看看答案是否正確。重複活動，引導兒童猜出其他職業。\n\n教具：\n- 不同職業的服裝及道具\n- 大白板"
+  },
+  {
+    "name": "活動4",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "預先用長紙條製成1頂紙帽子，讓兒童戴在頭上。遊戲開始時，成人拿出1張物件圖片（如：香蕉）並貼在兒童的帽子上（不讓兒童看見），再描述圖片中物件的特徵，如：「這是一種水果，皮是黃色的，形狀是長長的、彎彎的，要先剝皮才可以吃。」當兒童猜出正確的答案後，成人便把圖片從帽子上撕下來。重複活動，引導兒童猜出其他物件。\n\n教具：\n- 不同的物件圖片\n- 紙條製成的帽子"
+  },
+  {
+    "name": "語言表達",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言。本部分涵蓋語言表達的活動建議及訓練目標。"
+  },
+  {
+    "name": "項目二：詞彙尋找 (擴散性)",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "目標：\nA 根據 1 項條件 (如：類別、特徵)，列舉出不同例子 (如：「請說出三種交通工具的名稱。」「巴士、的士、船」；「在超級市場可以買到甚麼？」「牛奶、汽水、薯片、麵包」) / 4-6 歲\nB 根據 2 項條件 (如：類別、特徵)，列舉出不同例子 (如：「有甚麼是紅色又可以吃的？」「蘋果、西瓜、啫喱」；「有甚麼交通工具不是在道路上行走的？」「飛機、船、地鐵」) / 4-6 歲\nC 根據 3 項或以上條件 (如：類別、特徵)，列舉出不同例子 (如：「有甚麼是 4 隻腳、食肉的、又有毛的？」「老虎、獅子、狗」；「有甚麼是有核的、外皮不能吃、果肉不是紅色的？」「芒果、榴槤、火龍果、荔枝、龍眼」) / 4-6 歲\n\n注意事項：在擴散性詞彙的訓練中，成人列出的條件，必須能引導兒童列舉至少 2 個或以上例子，方為恰當。"
+  },
+  {
+    "name": "活動建議 1",
+    "level": "L3",
+    "parent_name": "項目二：詞彙尋找 (擴散性)",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "預備數字骰子和貼有不同物件類別 (如：衣物、動物、交通工具、傢具等) 的骰子。與兒童分別擲數字骰子和物件類別骰子，例如：骰子顯示「3」及「交通工具」，即表示兒童需說出 3 種交通工具的例子。\n注意事項：物件類別骰子上的類別數量，可按兒童的程度增多或減少。\n\n材料 / 建議教材：\n- 物件類別骰子\n- 數字骰子"
+  },
+  {
+    "name": "活動建議 2",
+    "level": "L3",
+    "parent_name": "項目二：詞彙尋找 (擴散性)",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "運用不同的動物圖片，與兒童玩垂釣遊戲。成人介紹動物可以分為海、陸、空的類別，再要求兒童依照成人的指示，釣起不同類別的動物，如：「釣海洋動物。」完成後，成人收起動物圖片並問兒童：「有甚麼動物是不會在陸地上行走的？」引導兒童在作答時列舉不少於 2 個例子。\n\n材料 / 建議教材：\n- 動物圖片 (海、陸、空)\n- 釣魚玩具"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "語言表達活動建議"
+  },
+  {
+    "name": "活動3：根據特徵列舉動物及交通工具",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "教具：\n• 有不同動物及交通工具的圖片\n\n活動內容：\n出示1幅畫有不同動物及交通工具的圖片，對兒童說：「這張圖片上有很多不同的交通工具和動物，我們逐一把它們圈出來吧。」兒童在圈出不同的動物及交通工具時，成人要描述其特徵，如：車輪或腳的數量。完成後，成人把圖片收起，問兒童：「剛才有甚麼交通工具是有X個車輪的？」或「有甚麼動物是有X隻腳的？」引導兒童列舉不少於2個例子。"
+  },
+  {
+    "name": "活動4：根據多項條件列舉食物",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "教具：\n• 不同特徵的食物（大量）\n• 玩具冰箱\n\n活動內容：\n出示不同的食物，並逐一介紹每件食物的類別與特徵，再由兒童放進冰箱內。兒童放好所有食物後，成人列舉出3項條件，如：「剛才有甚麼食物是水果、是紅色的、皮是可以吃的？」引導兒童列舉不少於2個例子，並把該食物從冰箱中取出來。"
+  },
+  {
+    "name": "語言表達",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南一語言，活動建議 - 語言表達"
+  },
+  {
+    "name": "項目三：詞彙定義",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "目標：根據物件的類別、特徵和功能，對具體名詞下定義（如：「甚麼是老虎？」、「老虎是動物、住在森林或動物園裡、很兇惡的、喜歡吃肉的……」）"
+  },
+  {
+    "name": "活動一",
+    "level": "L3",
+    "parent_name": "項目三：詞彙定義",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "出示玩具動物或食物，由兒童揀選其中一件，如：小狗。成人運用適當的特徵卡，如：「類別」、「居住的地方」、「喜愛的食物」等，示範描述該玩具，如：「狗是動物，居住在人的家裡，並喜歡吃骨頭。」並引導兒童按特徵卡描述一次。完成後，將玩具交給兒童把玩。重複活動時，成人可按兒童選擇的動物或食物，更換不同的特徵卡，並鼓勵兒童自行作出描述。\n特徵卡：\n• 類別：動物或食物\n• 動物特徵：居住的地方、腳的數量、常做的活動、喜愛的食物、叫聲\n• 食物特徵：顏色、形狀、味道、必須 / 不須煮熟、可以 / 不可連皮進食\n材料 / 建議教材：玩具動物及食物、特徵卡"
+  },
+  {
+    "name": "活動二",
+    "level": "L3",
+    "parent_name": "項目三：詞彙定義",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "與兒童進行猜謎遊戲。成人出示並介紹不同的物件圖片，接著把圖片疊起來，隨意抽出1張（不讓兒童看見），並示範說出圖片中物件的特徵，如：「這是一種動物，居住在森林或動物園裡，很兇惡的，並喜歡吃肉。」鼓勵兒童猜謎。當兒童說出答案後，成人即回應說：「對！請你再說一次，甚麼是 XX（物件名稱）？」引導兒童說出該物件的定義。重複遊戲，教導兒童學習對其他物件下定義。\n材料 / 建議教材：具體物件的圖片"
+  },
+  {
+    "name": "活動三",
+    "level": "L3",
+    "parent_name": "項目三：詞彙定義",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "自製1個八格轉盤，於每個空格貼上不同的物件圖片。進行遊戲時，由兒童轉動指針，當指針停在某圖片上，如：「西瓜」，兒童便要根據物件的屬性（類別 / 特徵 / 功能），說出該物件的定義，如：「西瓜是一種水果，果皮是綠色的，果肉是紅色的，有黑色的核。」兒童每描述一項物件的屬性，成人即給他1塊積木。描述完畢後，讓兒童將積木疊起來，以增加活動趣味。\n材料 / 建議教材：自製轉盤、具體物件的圖片、積木多塊"
+  },
+  {
+    "name": "語言表達",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言，活動建議—語言表達。"
+  },
+  {
+    "name": "項目四：比較異同",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "目標：比較物件相同與不同之處（如：「比較蘋果與香蕉相同與相異的地方。」「它們都是水果，可以吃的；但蘋果是紅色的、香蕉是黃色的……」）。"
+  },
+  {
+    "name": "活動建議一",
+    "level": "L3",
+    "parent_name": "項目四：比較異同",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "材料/建議教材：玩具動物及食物、特徵卡。\n活動建議：出示 2 種不同的玩具水果，如：蘋果和香蕉，並問兒童：「蘋果和香蕉有甚麼相同的地方？又有甚麼不同的地方呢？」接著運用特徵卡，引導兒童按物件相同及相異的特徵進行比較，如：「蘋果和香蕉都是水果，都是甜的、不用烹煮的；但是蘋果是紅色的、香蕉是黃色的……」特徵卡的數量可按不同的物件增多或減少。\n特徵卡：類別、顏色、形狀、味道、必須/不須煮熟、可以/不可連皮進食。"
+  },
+  {
+    "name": "活動建議二",
+    "level": "L3",
+    "parent_name": "項目四：比較異同",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "材料/建議教材：自製骰子 3 顆、不同的食物圖片。\n活動建議：預備 3 顆骰子，每顆骰子的 6 面分別貼上：類別、用途、顏色、大小、形狀、進食方法的圖案。成人出示 2 張食物圖片，如：蘿蔔和蕃茄，並由兒童擲 3 顆骰子，如：擲到「類別」、「顏色」及「形狀」，即引導兒童從食物的「類別」、「顏色」及「形狀」進行描述及比較，如：「蘿蔔和蕃茄都是蔬果類；但是蘿蔔是橙色的、蕃茄是紅色的；蘿蔔是圓椎形、蕃茄是圓形。」"
+  },
+  {
+    "name": "活動建議三",
+    "level": "L3",
+    "parent_name": "項目四：比較異同",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "材料/建議教材：自製活頁冊。\n活動建議：預先製作 1 本活頁冊，左右各有 10 張不同的物件圖片。兒童隨意翻開左邊及右邊的圖片，成人引導兒童按物件的類別、顏色、形狀、用途等作出比較，如：「蘋果和香蕉都是水果；蘋果是紅色的、香蕉是黃色的；蘋果是圓的、香蕉是長的……」如此類推。成人可與兒童輪流翻開物件圖片，並作出比較。"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童語言訓練指南"
+  },
+  {
+    "name": "項目五：類比",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "本項目旨在訓練學前兒童的類比推理能力，涵蓋物件對物件、人物對工具、地方對活動、節慶對活動、物件對特徵及物件對類別等多種關係的類比訓練。"
+  },
+  {
+    "name": "目標 A：物件對物件關係類比",
+    "level": "L3",
+    "parent_name": "項目五：類比",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "根據所提供的「物件對物件」關係的例子，類比推理出特定的詞彙（如：「『牙膏』對『牙刷』，『刀』對甚麼？」『叉』）。"
+  },
+  {
+    "name": "目標 B：人物對工具關係類比",
+    "level": "L3",
+    "parent_name": "項目五：類比",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "根據所提供的「人物對工具」關係的例子，類比推理出特定的詞彙（如：「『醫生』對『聽診器』，『警察』對甚麼？」『槍』）。"
+  },
+  {
+    "name": "目標 C：地方對活動關係類比",
+    "level": "L3",
+    "parent_name": "項目五：類比",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "根據所提供的「地方對活動」關係的例子，類比推理出特定的詞彙（如：「『公園』對『盪鞦韆』，『學校』對甚麼？」『上課』）。"
+  },
+  {
+    "name": "目標 D：節慶對活動關係類比",
+    "level": "L3",
+    "parent_name": "項目五：類比",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "根據所提供的「節慶對活動」關係的例子，類比推理出特定的詞彙（如：「『農曆新年』對『拜年』，『中秋節』對甚麼？」『玩燈籠』）。"
+  },
+  {
+    "name": "目標 E：物件對特徵關係類比",
+    "level": "L3",
+    "parent_name": "項目五：類比",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "根據所提供的「物件對特徵」關係的例子，類比推理出特定的詞彙（如：「『蘋果』對『紅色』，『香蕉』對甚麼？」『黃色』）。"
+  },
+  {
+    "name": "目標 F：物件對類別關係類比",
+    "level": "L3",
+    "parent_name": "項目五：類比",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "根據所提供的「物件對類別」關係的例子，類比推理出特定的詞彙（如：「『葡萄』對『水果』，『老鼠』對甚麼？」『動物』）。"
+  },
+  {
+    "name": "活動建議 1：物件及工具類比假想遊戲",
+    "level": "L3",
+    "parent_name": "項目五：類比",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "材料/建議教材：牙刷及牙膏、茶壺及杯、刀及叉、畫紙及畫筆、籃子。\n活動步驟：\n1. 將所有活動教材放在籃子內，鼓勵兒童選取2件相關的物件進行假想遊戲，如：『牙刷』與『牙膏』。\n2. 成人在旁簡單地描述兒童進行的活動，如：「用牙刷和牙膏刷牙。」\n3. 完成後，成人把物件放回籃子內，並問兒童：「『牙刷』對『牙膏』，『刀』對甚麼？」鼓勵兒童在籃子內找出正確的物件並說出答案，再進行假想遊戲。\n4. 提示：成人可先把籃子蓋上，才向兒童發問。當兒童說出正確的答案後，才打開籃子，讓兒童拿取物件。\n注意事項：可使用不同職業的洋娃娃及其相關工具的圖片（如：警察—槍、消防員—滅火筒、醫生—聽診器、郵差—郵袋），以進行根據「人物對工具」關係作類比的訓練。"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議 — 語言表達"
+  },
+  {
+    "name": "與兒童運用洋娃娃模擬乘車",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童運用洋娃娃模擬乘車。成人出示洋娃娃及相關玩具，示範乘坐交通工具的過程，並作出描述：「首先上車，接著拍八達通卡，最後找座位坐下。」鼓勵兒童模仿說一次後，將洋娃娃交給兒童，模擬乘車的過程。成人在過程中觀察兒童是否明白事件的先後次序，並在有需要時給予引導。完成後，成人出示另一個洋娃娃，鼓勵兒童自行描述乘車的程序，並再次進行遊戲。\n\n注意事項：可運用不同的交通工具，引導兒童描述不同的乘車過程，如：乘坐的士、港鐵。\n\n準備材料：交通工具、玩具八達通機器、八達通卡、錢幣、洋娃娃。"
+  },
+  {
+    "name": "語言表達",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言 活動建議—語言表達"
+  },
+  {
+    "name": "項目七：因果關係",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "項目七：因果關係"
+  },
+  {
+    "name": "目標 A：根據事物的定理或事件發生的真實情況指出原因或結果",
+    "level": "L3",
+    "parent_name": "項目七：因果關係",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "根據事物的定理或事件發生的真實情況來指出事件發生的原因或結果（如：「雪糕不放進冰箱內會怎樣？」「會溶掉」；「為甚麼杯子破了洞就不可注水？」「因為會漏水」）"
+  },
+  {
+    "name": "目標 B：憑想像來推測事件的原因或結果",
+    "level": "L3",
+    "parent_name": "項目七：因果關係",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "憑想像來推測事件的原因或結果（如：「為甚麼他這麼開心？」「今天是他生日」、「他收到禮物」、「媽媽稱讚他」；「吃太多糖果會怎樣？」「會肥胖」、「會壞肚子」、「牙齒會壞」、「會給媽媽罵」）"
+  },
+  {
+    "name": "活動建議 1：出示損壞的物件引導說出原因",
+    "level": "L3",
+    "parent_name": "項目七：因果關係",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "活動建議 1：\n出示1件損壞了的物件，並示範使用該物件，如：把水注入破了的杯子中。引導兒童觀察結果，並問兒童：「為甚麼杯子破了就不可注水？」鼓勵兒童說出原因：「因為會漏水。」成人再出示另一件損壞了的物件，繼續進行示範及引導兒童說出原因。\n\n材料 / 建議教材：\n- 沒有筆芯的鉛筆及紙張\n- 破了的杯及水瓶\n- 有破洞的氣球"
+  },
+  {
+    "name": "活動建議 2：運用玩具屋進行假想遊戲推測後果",
+    "level": "L3",
+    "parent_name": "項目七：因果關係",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "活動建議 2：\n運用洋娃娃及玩具屋與兒童進行假想遊戲。成人模擬一些日常生活會發生的小問題，引導兒童推測其後果，例如：\n- 小朋友早上不願起床，後果是「上學遲到」\n- 媽媽買了雪糕，但忘記放進冰箱，後果是「雪糕溶掉了」\n- 不小心打翻了杯子跌在地上，後果是「杯子打破了」\n當兒童說出事件的結果後，成人與兒童運用洋娃娃及玩具，把事件的結果模擬出來。\n\n材料 / 建議教材：\n- 玩具屋\n- 玩具傢具\n- 日用品\n- 洋娃娃（媽媽及小朋友）"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南 - 語言"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議 - 語言表達"
+  },
+  {
+    "name": "活動 3",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "【準備材料】\n- 不同表情的洋娃娃 (如：開心、傷心、驚慌)\n- 不同情緒的事件圖片 (如：開心的、驚慌的、傷心的事情)\n\n【活動內容】\n出示一些高興事情的圖片，並逐一介紹事件及人物的心情，如：出示「生日會」圖片，介紹說：「哥哥辦生日會，很開心！」接著將有關圖片收起，再出示樣子開心的洋娃娃，問兒童：「為甚麼他這麼開心？」引導兒童說出原因，如：「因為哥哥生日，辦生日會」、「因為他收到很多禮物」。若兒童未能說出不同的原因，成人可問：「還有沒有其他原因？」鼓勵兒童運用想像力，或其日常經驗來推測其他原因。成人可更換另一種情緒的圖片及不同表情的洋娃娃，繼續進行活動。"
+  },
+  {
+    "name": "項目八：解決問題",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "項目八：解決問題"
+  },
+  {
+    "name": "目標",
+    "level": "L2",
+    "parent_name": "項目八：解決問題",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "解決問題的訓練目標"
+  },
+  {
+    "name": "目標 A：根據生活經驗或常識，提出解決問題的方法",
+    "level": "L3",
+    "parent_name": "目標",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "根據生活經驗或常識，提出解決問題的方法 (如：「下雨了！沒有雨傘，怎麼辦？」、「買雨傘」、「回家取雨傘」、「找東西擋一擋」、「走快一點」)"
+  },
+  {
+    "name": "目標 B：對生活經驗以外、不常見或假設性的事件，提出解決問題的方法",
+    "level": "L3",
+    "parent_name": "目標",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "對生活經驗以外、不常見或假設性的事件，提出解決問題的方法 (如：「風箏落在樹上，你會怎樣做？」、「不要了」、「爬上樹上再取下來」、「買新的風箏」、「找爸爸取下來」)"
+  },
+  {
+    "name": "活動建議",
+    "level": "L2",
+    "parent_name": "項目八：解決問題",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "解決問題的活動建議與教材"
+  },
+  {
+    "name": "活動 1：布袋情景解難",
+    "level": "L3",
+    "parent_name": "活動建議",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "小組活動時，將右列所有活動教材放進布袋內，並邀請1位兒童從布袋中取出1件物件，如：噴水壺。成人運用該物件模擬一個情景，如：用噴水壺從高處灑水，模擬下雨，並問兒童：「下雨了！我們沒有雨傘，怎麼辦？」引導兒童說出解決的方法，如：「買雨傘」、「找個地方避雨」，並一起依照所提出的解決方法來進行模擬活動。完成後，從布袋中拿取另一件物件，繼續進行活動。\n材料 / 建議教材：噴水壺、沒有八達通卡的八達通套、沒有筆的筆袋、沒有電的相機、布袋"
+  },
+  {
+    "name": "活動 2：餐廳角色扮演遊戲",
+    "level": "L3",
+    "parent_name": "活動建議",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "運用餐廳玩具與兒童進行角色扮演遊戲。由兒童扮演服務員，成人扮演顧客，並在遊戲的過程中加入一些問題，引導兒童提出解決的方法。例如：\n- 某款食品需要較長時間來預備（解決辦法：選擇另一款食品、先坐下來等候等）\n- 沒有帶現金（解決辦法：使用八達通、到提款機提款等）\n- 打翻飲料（解決辦法：用紙巾抹乾、找服務員協助等）\n當兒童說出解決方法後，成人與兒童透過角色扮演，把解決方法模擬出來。\n材料 / 建議教材：餐廳玩具、收銀機、錢包、錢幣、八達通、提款機、紙巾"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "模擬假設性情景並提出解決方法",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "模擬一些兒童生活經驗以外、不常見或假設性的情景，引導兒童提出解決問題的方法，例如：\n• 小貓被困在樹上（解決辦法：成人爬上樹救小貓、找消防員協助等）\n• 小狗受傷（解決辦法：告訴成人、找獸醫等）\n• 在街上拾獲他人的物件（解決辦法：交給警察、等候失主回來等）\n• 小朋友迷路或與媽媽失散（解決辦法：找成人協助、嘗試致電媽媽等）\n\n當兒童說出解決方法後，成人與兒童透過角色扮演，把解決方法模擬出來。\n\n活動建議道具：\n• 洋娃娃\n• 玩具動物\n• 情景中相關的道具"
+  },
+  {
+    "name": "語言表達",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言表達"
+  },
+  {
+    "name": "項目九：批判",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "項目九：批判"
+  },
+  {
+    "name": "指出事物恰當或不恰當之處，並闡述適當的做法",
+    "level": "L3",
+    "parent_name": "項目九：批判",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "目標：指出事物恰當或不恰當之處，並闡述適當的做法（如：「付款購買東西是對的」、「用鉛筆刷牙是錯的，應該用牙刷」） / 4-6 歲"
+  },
+  {
+    "name": "活動建議一",
+    "level": "L4",
+    "parent_name": "指出事物恰當或不恰當之處，並闡述適當的做法",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "材料/建議教材：嬰兒洋娃娃、布袋、不同的日常用品（如：牙刷、梳子、匙羹、杯子、碗等）。\n活動建議：將不同的日常用品放在布袋中，由兒童抽出其中一件。成人出示嬰兒洋娃娃，並運用抽出的物件（如：牙刷）模擬一些錯誤的事情，如：成人用牙刷為洋娃娃梳頭，引導兒童說出錯處及改正的方法，如：「不應該用牙刷梳頭，應該用梳子」或「牙刷並不是用來梳頭，是用來刷牙的」。接著鼓勵兒童正確地使用該物件，或從布袋中找出正確的物件來進行活動。\n注意事項：在進行遊戲時，成人須示範正確地使用有關物件，如：用杯子喝水，以引導兒童對正確的做法作出判斷及描述，如：「妹妹用杯子喝水是對的。」"
+  },
+  {
+    "name": "活動建議二",
+    "level": "L4",
+    "parent_name": "指出事物恰當或不恰當之處，並闡述適當的做法",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "材料/建議教材：對、錯牌子各1張（分別印有「✓」及「✗」）、日常物件圖片（如：枕頭、煮食爐、沙發、洗手液等）、家居地方圖片（如：廚房、洗手間、睡房、客廳）。\n活動建議：由兒童擔任裁判員，利用對、錯的牌子判斷成人的說話是否正確。成人抽出1張日常物件圖片及1張家居地方圖片，如：枕頭和廚房，接著說：「枕頭放在廚房裡。」兒童需判斷成人的說話是否正確。當兒童舉起錯誤的牌子時，引導兒童說出正確的做法，如：「枕頭放在廚房裡是錯的，應該放在睡房裡才對」。"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言表達",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議—語言表達"
+  },
+  {
+    "name": "活動 3：說出用具不恰當之處",
+    "level": "L3",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "小組活動時，與兒童製作圖工作品。成人介紹製作圖工的方法，如：用剪刀剪紙、用顏色筆畫圖案等。在製作過程中，成人將錯誤的用具交給部分兒童，如：剪紙時，將剪刀交予部分兒童，並將顏色筆交予另一部分的兒童。接著引導獲分派了錯誤工具的兒童說出其不恰當之處，如：「用顏色筆剪紙是不對的，應該用剪刀才對。」隨即將正確的用具交予兒童，繼續進行活動。\n\n準備材料：\n- 卡紙\n- 剪刀\n- 顏色筆\n- 漿糊筆\n- 原子筆\n- 膠紙"
+  },
+  {
+    "name": "語言表達",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "項目十：推理能力",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "訓練兒童的推理能力，使其能從所提供的資料中推斷出答案。"
+  },
+  {
+    "name": "從所提供的資料中推斷出答案",
+    "level": "L3",
+    "parent_name": "項目十：推理能力",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "目標：從所提供的資料中推斷出答案（如：「哥哥和姐姐帶小明去公園，姐姐離開了，誰帶小明回家？」「哥哥」）/ 4-6歲"
+  },
+  {
+    "name": "活動建議一",
+    "level": "L4",
+    "parent_name": "從所提供的資料中推斷出答案",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "活動建議：運用洋娃娃及玩具與兒童進行模擬遊戲。成人向兒童描述情景，如：「哥哥和姐姐帶小狗去公園，姐姐要去買東西，要先離開。誰會帶小狗回家呢？」並運用洋娃娃與玩具把情景模擬出來，再引導兒童推斷並說出答案，如：「哥哥帶小狗回家。」接著更換不同的娃娃及玩具，再次模擬類近的情景，如：「爸爸和媽媽帶妹妹去餐廳吃飯，爸爸要上班，所以先走，誰帶妹妹回家？」引導兒童推斷並說出答案。活動中，成人可先向兒童提出問題，引導兒童推斷出答案後，才由兒童運用洋娃娃把答案模擬出來。\n材料 / 建議教材：\n1. 不同的洋娃娃（如：爸爸、媽媽、哥哥、姐姐、弟弟、妹妹、小狗）\n2. 公園玩具\n3. 餐廳玩具"
+  },
+  {
+    "name": "活動建議二",
+    "level": "L4",
+    "parent_name": "從所提供的資料中推斷出答案",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "活動建議：出示不同的人物圖片及地方圖片，向兒童描述情景，如：「爸爸和媽媽去超級市場買東西，付錢的時候爸爸才發現他忘了帶錢包，誰來付款？」引導兒童從人物圖片中挑選並說出答案，如：「媽媽付錢。」接著更換不同的人物圖片及地方圖片，再次描述類似的情景，如：「公公和婆婆去餐廳吃飯，付錢的時候婆婆才發現她沒有帶錢包，誰來付款？」引導兒童說出答案。活動中，成人可先出示地方圖片向兒童提出問題，並引導兒童推斷出答案後，才出示人物圖片作回應。\n材料 / 建議教材：\n1. 不同的人物圖片（如：爸爸、媽媽、公公、婆婆、妹妹、弟弟）\n2. 不同的地方圖片（如：超級市場、餐廳等）"
+  },
+  {
+    "name": "語言表達",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言。活動建議 — 語言表達。"
+  },
+  {
+    "name": "敘事能力",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學習重點：敘事能力。"
+  },
+  {
+    "name": "敘述個人性事件",
+    "level": "L3",
+    "parent_name": "敘事能力",
+    "age_min_months": 48,
+    "age_max_months": 83,
+    "prompt_corpus": "項目一：敘述個人性事件。"
+  },
+  {
+    "name": "介紹自己",
+    "level": "L4",
+    "parent_name": "敘述個人性事件",
+    "age_min_months": 48,
+    "age_max_months": 83,
+    "prompt_corpus": "目標A：介紹自己（如：「我是XX，我今年X歲……」）"
+  },
+  {
+    "name": "活動一",
+    "level": "L5",
+    "parent_name": "介紹自己",
+    "age_min_months": 48,
+    "age_max_months": 83,
+    "prompt_corpus": "材料/建議教材：玩具咪、字卡（姓名、年齡、性別、喜愛的食物、玩具、顏色、動物等）、白板。\n活動建議：小組活動時，將字卡貼在白板上，示範用玩具咪按字卡上的提示介紹自己，如：「我是小明，我是男孩子，今年4歲。我喜歡吃薯條、疊積木……」示範完畢後，鼓勵兒童輪流介紹自己。待兒童熟習敘述後，成人把白板上的字卡遮蓋著，並再次邀請兒童輪流出來介紹自己。當兒童敘述自己的資料時，成人將相關資料的字卡翻開，每翻開1張字卡代表兒童可得1分。活動完結後，與兒童一起計算各人的得分。"
+  },
+  {
+    "name": "敘述過去、現在、將來發生的事件",
+    "level": "L4",
+    "parent_name": "敘述個人性事件",
+    "age_min_months": 48,
+    "age_max_months": 83,
+    "prompt_corpus": "目標B：敘述過去、現在、將來發生的事件（如：「我昨天去了海洋公園，看了…… 吃了…… 玩了……」）"
+  },
+  {
+    "name": "活動二",
+    "level": "L5",
+    "parent_name": "敘述過去、現在、將來發生的事件",
+    "age_min_months": 48,
+    "age_max_months": 83,
+    "prompt_corpus": "材料/建議教材：日常學習活動相關的圖片。\n活動建議：在日常活動完結後（如：大肌肉時間），邀請1位兒童扮演「小記者」，訪問各兒童剛才參與了或發生了甚麼事情，如：「剛才在大肌肉時間，我踏了三輪車和打籃球。」成人可出示活動中相關的圖片，以協助兒童進行敘述。"
+  },
+  {
+    "name": "活動三",
+    "level": "L5",
+    "parent_name": "敘述過去、現在、將來發生的事件",
+    "age_min_months": 48,
+    "age_max_months": 83,
+    "prompt_corpus": "材料/建議教材：兒童參與活動的照片、圖畫或文字記錄。\n活動建議：與兒童參與活動時（如：到海洋公園遊玩、到玩具店購物、探望爺爺等），以拍照、圖畫或文字記錄過程中的細節（如：地點、時間、看過的事物等）。在活動完結後，成人運用這些照片、圖片或文字的記錄，示範敘述過去的事件，如：「剛過去的週日，我去了海洋公園遊玩，乘坐了吊車，看了熊貓……」再引導兒童自行把事件敘述一次。"
+  },
+  {
+    "name": "語言表達",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "敘述一般性事件",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "項目二：敘述一般性事件"
+  },
+  {
+    "name": "敘述簡單的一般性事件",
+    "level": "L3",
+    "parent_name": "敘述一般性事件",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "目標：敘述簡單的一般性事件 (如：沖調阿華田飲料、乘坐巴士) / 4-6 歲。\n注意事項：相關活動建議請參閱本次範疇另一學習重點「語言思考」中的項目六「程序概念」。"
+  },
+  {
+    "name": "敘述複雜的一般性事件",
+    "level": "L3",
+    "parent_name": "敘述一般性事件",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "目標：敘述複雜的一般性事件 (如：籌備生日會、夏天進行的活動) / 4-6 歲。\n注意事項：相關活動建議請參閱本次範疇另一學習重點「語言思考」中的項目六「程序概念」。"
+  },
+  {
+    "name": "敘述簡單故事",
+    "level": "L2",
+    "parent_name": "語言表達",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "項目三：敘述簡單故事"
+  },
+  {
+    "name": "說故事",
+    "level": "L3",
+    "parent_name": "敘述簡單故事",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "目標：說故事 (如：交待有關的背景、內容、結果、寓意) / 4-6 歲。\n\n活動建議：\n1. 出示故事書，並介紹故事的名稱，再出示故事元素卡，介紹說故事時需要描述的內容。成人示範運用故事書說故事，當描述故事中不同的資料或情節時，取出相關的故事元素卡並放在桌子上，例如：\n「星期日……」(將「時間」卡放在桌子上)\n「在公園裡……」(將「地點」卡放在桌子上)\n「媽媽和弟弟……」(將「人物」卡放在桌子上)\n「買雪糕吃，但弟弟吃得很慢……」(將「事件」卡放在桌子上)\n「結果雪糕溶掉了，弟弟沒有雪糕吃了。」(將「結果」卡放在桌子上)\n示範完畢後，引導兒童複述故事一次。如有需要，成人可運用故事元素卡作提示。\n\n材料/建議教材：\n故事書、故事元素卡 (人物、時間、地點、事件、結果)"
+  },
+  {
+    "name": "語言理解",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "視覺反應",
+    "level": "L2",
+    "parent_name": "語言理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "目光專注",
+    "level": "L3",
+    "parent_name": "視覺反應",
+    "age_min_months": 0,
+    "age_max_months": 6,
+    "prompt_corpus": "目標：望向放在面前的物件\n\n注意事項：\n- 當展示任何有趣的物件時，兒童會即時望向物件，並可能在數秒之內便失去興趣。因此，成人必須留意兒童看見物件時的即時反應，當兒童稍為失掉興趣，成人宜轉換另一件物件，或再次晃動物件等，以增加一些變化來維持兒童的目光專注。\n- 大部分的活動都可讓兒童坐著或仰臥來進行。\n- 盡量使用只會發光的玩具作教材。若玩具同時能發光和發聲，則不要按動發聲的功能。\n- 成人須在兒童約 1 呎前的距離展示物件。\n\n活動建議：\n1. 把已按動的發光玩具放在兒童面前，吸引兒童注視。若玩具的光線太強，可用布包著光源，以避免傷害兒童的眼睛。（材料/建議教材：發光玩具、布）\n2. 把玩具放在兒童面前，吸引兒童注視。若兒童伸手想觸摸玩具，可把玩具交給他把玩片刻。（材料/建議教材：色彩鮮豔的玩具）"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南 — 語言"
+  },
+  {
+    "name": "語言理解",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議 — 語言理解"
+  },
+  {
+    "name": "吸引兒童注視",
+    "level": "L3",
+    "parent_name": "語言理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透過不同的視覺刺激物品來吸引兒童的視覺注視。"
+  },
+  {
+    "name": "活動 3：黑白圖畫",
+    "level": "L4",
+    "parent_name": "吸引兒童注視",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "把黑白圖畫（包括：間條、格子或其他圖案）放在兒童面前，吸引兒童注視。\n教材建議：黑白圖畫"
+  },
+  {
+    "name": "活動 4：不倒翁",
+    "level": "L4",
+    "parent_name": "吸引兒童注視",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "把不倒翁放在兒童面前，並輕輕推動它，使其搖動，吸引兒童注視。\n教材建議：不倒翁"
+  },
+  {
+    "name": "活動 5：手指偶",
+    "level": "L4",
+    "parent_name": "吸引兒童注視",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "戴上手指偶並在兒童面前晃動，吸引兒童注視。當兒童開始注視時，成人可代入手指偶的角色與兒童談話。\n教材建議：手指偶"
+  },
+  {
+    "name": "活動 6：鏡子",
+    "level": "L4",
+    "parent_name": "吸引兒童注視",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "把鏡子放在兒童面前，吸引兒童注視。\n教材建議：鏡子"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "語言理解",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "目光追視",
+    "level": "L3",
+    "parent_name": "語言理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "追視移動的物件",
+    "level": "L4",
+    "parent_name": "目光追視",
+    "age_min_months": 0,
+    "age_max_months": 6,
+    "prompt_corpus": "注意事項：\n- 成人移動物件的速度要略為緩慢，以給予兒童足夠的時間作出適當的反應。其後成人可按兒童的能力提升移動物件的速度。\n- 大部分的活動都可讓兒童坐着或仰臥來進行。\n- 盡量使用只會發光的玩具作教材。若玩具同時能發光和發聲，則不要按動發聲的功能。\n- 成人須在兒童約 1 呎前的距離展示物件。\n\n活動建議：\n1. 把玩具置於兒童正前方，當兒童看見玩具後，便把玩具從左至右慢慢地移動，繼而上下移動，以吸引兒童追視玩具。（材料 / 建議教材：發光或色彩鮮艷的玩具）\n2. 讓兒童坐着，並在他面前慢慢來回推動玩具，以吸引兒童追視玩具。（材料 / 建議教材：可移動的玩具（如：小球、車子））\n3. 把小鏡子放在兒童面前，當兒童看見鏡子中自己的倒影後，便把鏡子從左至右慢慢地移動，繼而上下移動，以吸引兒童追視鏡子。（材料 / 建議教材：小鏡子）\n4. 開動電筒，把光源從兒童面前照射至天花或牆壁上，以吸引兒童追視光線。（材料 / 建議教材：電筒）"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言理解",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議—語言理解"
+  },
+  {
+    "name": "項目三：目光轉移",
+    "level": "L3",
+    "parent_name": "語言理解",
+    "age_min_months": 0,
+    "age_max_months": 6,
+    "prompt_corpus": "目標：將目光從一件物件轉移至另一件物件\n注意事項：成人進行活動時，速度要略為緩慢，以給予兒童足夠的時間作出適當的反應。"
+  },
+  {
+    "name": "活動一",
+    "level": "L4",
+    "parent_name": "項目三：目光轉移",
+    "age_min_months": 0,
+    "age_max_months": 6,
+    "prompt_corpus": "材料/建議教材：手偶數個\n活動建議：雙手分別戴上手偶，先在兒童的左方展示其中一個手偶，並跟兒童說話，接著在兒童的右方展示另一個手偶。當兒童轉移視線到右方的手偶時，成人將左方的手偶放下，並用右方的手偶來跟兒童說話及遊戲。若兒童仍有興趣玩耍，可以繼續交替展示不同的手偶。"
+  },
+  {
+    "name": "活動二",
+    "level": "L4",
+    "parent_name": "項目三：目光轉移",
+    "age_min_months": 0,
+    "age_max_months": 6,
+    "prompt_corpus": "材料/建議教材：發光玩具 2 件\n活動建議：把 2 件未亮起的發光玩具分別放在兒童面前的桌子上。成人開動其中一件玩具，讓兒童注視數秒，接著開動另一件玩具，並關掉第一件玩具的電源，以吸引兒童轉移視線到另一件玩具上。繼續交替開動 2 件玩具，直到兒童失去興趣為止。"
+  },
+  {
+    "name": "活動三",
+    "level": "L4",
+    "parent_name": "項目三：目光轉移",
+    "age_min_months": 0,
+    "age_max_months": 6,
+    "prompt_corpus": "材料/建議教材：玩具、兒童喜愛的食物或飲品\n活動建議：當兒童專注玩手上的玩具時，成人可在兒童面前展示美味的食物或飲品，以吸引兒童轉移視線到食物或飲品上。"
+  },
+  {
+    "name": "活動四",
+    "level": "L4",
+    "parent_name": "項目三：目光轉移",
+    "age_min_months": 0,
+    "age_max_months": 6,
+    "prompt_corpus": "材料/建議教材：玩具車 2 輛\n活動建議：在兒童面前將玩具車由桌子的一端推到另一端，任由車子停下。成人再拿出另一輛車子，慢慢在兒童面前推動，以吸引兒童轉移視線到這輛車子上。繼續交替推動 2 輛車子，直到兒童失去興趣為止。"
+  },
+  {
+    "name": "社交反應",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學習重點：社交反應"
+  },
+  {
+    "name": "項目一：注視成人",
+    "level": "L2",
+    "parent_name": "社交反應",
+    "age_min_months": 0,
+    "age_max_months": 6,
+    "prompt_corpus": "目標：望向放在面前的物件 / 0-6 個月\n注意事項：成人可藉著叫喚兒童、哼唱兒歌或發出趣怪的聲調來吸引兒童的注意。當兒童望向成人的臉時，成人可配合有趣的表情以鼓勵兒童繼續注視成人。"
+  },
+  {
+    "name": "活動建議 1",
+    "level": "L3",
+    "parent_name": "項目一：注視成人",
+    "age_min_months": 0,
+    "age_max_months": 6,
+    "prompt_corpus": "坐在兒童面前 (或面對面抱著兒童) ，與兒童保持同一視線水平，接著向兒童做出不同的臉部表情，以吸引兒童注視成人。"
+  },
+  {
+    "name": "活動建議 2",
+    "level": "L3",
+    "parent_name": "項目一：注視成人",
+    "age_min_months": 0,
+    "age_max_months": 6,
+    "prompt_corpus": "坐在兒童面前 (或面對面抱著兒童) ，與兒童保持同一視線水平，協助兒童用雙手撫摸成人的臉，以吸引兒童注視成人。"
+  },
+  {
+    "name": "活動建議 3",
+    "level": "L3",
+    "parent_name": "項目一：注視成人",
+    "age_min_months": 0,
+    "age_max_months": 6,
+    "prompt_corpus": "替兒童換衣服、紙尿褲或洗澡時，可輕柔地對兒童唱兒歌，或替兒童按摩身體，以吸引兒童注視成人。"
+  },
+  {
+    "name": "活動建議 4",
+    "level": "L3",
+    "parent_name": "項目一：注視成人",
+    "age_min_months": 0,
+    "age_max_months": 6,
+    "prompt_corpus": "與兒童面對面坐著，玩「躲貓貓」遊戲。成人用1條小毛巾蓋在自己的臉上，接著快速地把毛巾拉開，以吸引兒童注視成人。\n材料 / 建議教材：小毛巾"
+  },
+  {
+    "name": "活動建議 5",
+    "level": "L3",
+    "parent_name": "項目一：注視成人",
+    "age_min_months": 0,
+    "age_max_months": 6,
+    "prompt_corpus": "將貼紙貼在臉上，以吸引兒童注視成人的臉，並鼓勵兒童用手撕去貼紙。\n材料 / 建議教材：貼紙"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "語言理解",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "項目二：追視成人",
+    "level": "L3",
+    "parent_name": "語言理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "目標A：追視移動的成人及留意成人的活動",
+    "level": "L4",
+    "parent_name": "項目二：追視成人",
+    "age_min_months": 0,
+    "age_max_months": 6,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "目標B：注視向自己引發溝通的人",
+    "level": "L4",
+    "parent_name": "項目二：追視成人",
+    "age_min_months": 0,
+    "age_max_months": 6,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "目標C：注視向自己引發溝通的人並作出反應（如：活動身體、發聲）",
+    "level": "L4",
+    "parent_name": "項目二：追視成人",
+    "age_min_months": 6,
+    "age_max_months": 12,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "目標D：主動向別人引發溝通",
+    "level": "L4",
+    "parent_name": "項目二：追視成人",
+    "age_min_months": 6,
+    "age_max_months": 12,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "目標E：回應成人作共同專注",
+    "level": "L4",
+    "parent_name": "項目二：追視成人",
+    "age_min_months": 6,
+    "age_max_months": 12,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "目標F：主動引發成人作共同專注",
+    "level": "L4",
+    "parent_name": "項目二：追視成人",
+    "age_min_months": 6,
+    "age_max_months": 12,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "活動建議一",
+    "level": "L4",
+    "parent_name": "項目二：追視成人",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "穿上顏色鮮豔的衣服或飾物，以吸引兒童注視。成人接著從兒童的左方走向兒童的右方，並不時叫喚兒童的名字，以維持兒童對成人的注視。\n材料 / 建議教材：顏色鮮豔的衣服或飾物"
+  },
+  {
+    "name": "活動建議二",
+    "level": "L4",
+    "parent_name": "項目二：追視成人",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童玩「躲貓貓」遊戲。兒童坐著，成人躲藏在椅子後面，接著慢慢離開椅子後面，轉移到另一個地方躲藏起來。過程中吸引兒童追視，並留意成人所在的不同位置。\n材料 / 建議教材：椅子"
+  },
+  {
+    "name": "活動建議三",
+    "level": "L4",
+    "parent_name": "項目二：追視成人",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "將玩具和食物分別放在兩個不同但兒童可看見的地方。成人慢慢地走向玩具的位置，拿起玩具並展示給兒童看，繼而走向食物的位置，再拿起食物並展示給兒童看，最後成人將玩具和食物一併交給兒童。成人可在整個過程中使用誇張的動作和聲音，以吸引兒童注視成人。\n材料 / 建議教材：玩具、食物"
+  },
+  {
+    "name": "活動建議四",
+    "level": "L4",
+    "parent_name": "項目二：追視成人",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "成人發出不同但有趣的聲音來吸引兒童注視，如：扮動物叫聲、耳語、用較高或低的音調唱兒歌等。"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言理解",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "活動建議",
+    "level": "L3",
+    "parent_name": "語言理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "活動 12",
+    "level": "L4",
+    "parent_name": "活動建議",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "當兒童正在把玩的玩具掉下來時，不用即時給兒童拾起來。待兒童主動以身體動作、表情或其他表達方式向成人示意後，成人才替他拾起玩具，並交給他繼續玩耍。"
+  },
+  {
+    "name": "活動 13",
+    "level": "L4",
+    "parent_name": "活動建議",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童進行唱遊活動，一面唱歌一面做動作。每唱完一遍後，待兒童主動以身體動作、表情或其他表達方式向成人示意後，成人才重複唱遊活動。\n注意事項：成人宜揀選兒童熟悉的兒歌，讓兒童能掌握兒歌何時完結，並有動機重複再唱。"
+  },
+  {
+    "name": "活動 14",
+    "level": "L4",
+    "parent_name": "活動建議",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "帶兒童往其他房間時，不用立即為兒童開門，待兒童主動以身體動作、表情或其他表達方式向成人示意要開門後，成人才替他開門。"
+  },
+  {
+    "name": "活動 15",
+    "level": "L4",
+    "parent_name": "活動建議",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童保持一段短的距離以進行推球遊戲。成人將球輕輕推向兒童，當兒童伸手觸摸大球時，成人即給予口頭讚賞，並再重複遊戲。\n教具/物料：大治療球"
+  },
+  {
+    "name": "活動 16",
+    "level": "L4",
+    "parent_name": "活動建議",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "在兒童面前吹肥皂泡，並示範拍破泡泡，鼓勵兒童一同參與。\n教具/物料：肥皂泡玩具"
+  },
+  {
+    "name": "活動 17",
+    "level": "L4",
+    "parent_name": "活動建議",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "將手帕交給兒童，當兒童握緊手帕後，成人故意拉扯手帕，假裝與兒童玩拔河遊戲。成人要調節力度，令遊戲能保持在「角力」狀態。\n教具/物料：手帕"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言理解",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議—語言理解"
+  },
+  {
+    "name": "活動 18",
+    "level": "L3",
+    "parent_name": "語言理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童相對而坐，玩「碰頭」遊戲。成人用額頭輕輕觸碰兒童的額頭，示範多次後，成人傾前身體但不觸碰兒童的額頭，並以期待的表情等待兒童主動將額頭觸碰成人的額頭。"
+  },
+  {
+    "name": "活動 19",
+    "level": "L3",
+    "parent_name": "語言理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童吹肥皂泡。當兒童投入地遊玩時，成人暫停吹肥皂泡，待兒童主動以身體動作、表情或其他表達方式向成人示意要再玩肥皂泡時，成人才再次給兒童吹肥皂泡。\n\n所需物資：肥皂泡玩具"
+  },
+  {
+    "name": "活動 20",
+    "level": "L3",
+    "parent_name": "語言理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童玩開關燈遊戲。成人把燈亮起，關掉後再亮起。再關燈後，待兒童主動以身體動作、表情或其他表達方式向成人表示要再把燈亮起時，成人才把燈亮起。\n\n所需物資：燈"
+  },
+  {
+    "name": "活動 21",
+    "level": "L3",
+    "parent_name": "語言理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "用手偶假裝親吻兒童的手。重複遊戲數次後，待兒童主動伸出手示意要手偶親吻後，成人才繼續遊戲。\n\n所需物資：手偶"
+  },
+  {
+    "name": "語言理解",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "配對技巧",
+    "level": "L2",
+    "parent_name": "語言理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "項目一：配對相同的符號",
+    "level": "L3",
+    "parent_name": "配對技巧",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "注意事項：可按兒童的能力調節配對的比例，能力越高，配對項目的數量越多。"
+  },
+  {
+    "name": "配對相同的物件",
+    "level": "L4",
+    "parent_name": "項目一：配對相同的符號",
+    "age_min_months": 24,
+    "age_max_months": 30,
+    "prompt_corpus": "【活動建議 1】與兒童玩「家家酒」遊戲。遊戲結束時，將1隻碗、碟子及杯子分別放在不同的盆子內，要求兒童將所有碗、碟子及杯子配對疊起。完成所有收拾工作後，成人即讚賞兒童。\n注意事項：使用可疊起的餐具。\n材料/建議教材：相同的碗、碟、杯各4個，盆子3個。\n\n【活動建議 2】出示玩具漢堡包，要求兒童先將每種食材（如：芝士、蕃茄等）配對好，放在同一個碗內，才開始模擬製作漢堡包。\n材料/建議教材：玩具漢堡包，碗數個。"
+  },
+  {
+    "name": "配對相同的相片",
+    "level": "L4",
+    "parent_name": "項目一：配對相同的符號",
+    "age_min_months": 24,
+    "age_max_months": 30,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "配對相同的圖片",
+    "level": "L4",
+    "parent_name": "項目一：配對相同的符號",
+    "age_min_months": 24,
+    "age_max_months": 30,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言理解",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "語言理解領域的活動建議。"
+  },
+  {
+    "name": "配對活動",
+    "level": "L3",
+    "parent_name": "語言理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透過日常物件及相片，訓練兒童的配對能力與語言理解。"
+  },
+  {
+    "name": "活動 3",
+    "level": "L4",
+    "parent_name": "配對活動",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "【材料】成人襪子2雙、兒童襪子1雙\n【活動內容】把成人和兒童的襪子混在一起，並排放在桌子上。示範配對1雙相同的成人襪子，接著要求兒童配對餘下的2雙襪子。完成後，成人即給予兒童讚賞。\n【注意事項】使用外貌特徵不同的襪子。"
+  },
+  {
+    "name": "活動 4",
+    "level": "L4",
+    "parent_name": "配對活動",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "【材料】積木、洋娃娃、香蕉相片各2張，玩具車\n【活動內容】預先將積木、洋娃娃及香蕉的相片（各1張）貼在牆上。與兒童相距一段距離而坐，並隨意將任何一張物件相片貼在玩具車上，再將車子推給兒童。兒童接到車子後，需按車子上的相片來配對牆上的相片。繼續遊戲，直至完成配對所有相片。\n【注意事項】使用不同類別物件的相片。"
+  },
+  {
+    "name": "活動 5",
+    "level": "L4",
+    "parent_name": "配對活動",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "【材料】相同相片2套，手指棒2根\n【活動內容】將2套相片（次序不一）分別排列在成人和兒童面前。成人用手指棒指著面前的其中一張相片，要求兒童用手指棒指向相同的一張。若兒童能指出正確的相片，則將相片收起來，並向兒童說明2張相片是相同的。當所有相片都被拿走時，遊戲便結束。\n【注意事項】使用同一類別的相片。"
+  },
+  {
+    "name": "活動 6",
+    "level": "L4",
+    "parent_name": "配對活動",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "【材料】學生的相片\n【活動內容】利用點名時間，要求兒童配對同學的相片。"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "學前兒童訓練指南—語言"
+  },
+  {
+    "name": "語言理解",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活動建議—語言理解"
+  },
+  {
+    "name": "圖卡配對遊戲",
+    "level": "L3",
+    "parent_name": "語言理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童玩圖卡配對遊戲。成人把圖卡翻轉放在桌子上，鼓勵兒童隨意抽取 1 張圖卡，並把該圖卡放在相同的圖案旁邊。所需教具：LOTTO 配對遊戲。"
+  },
+  {
+    "name": "故事圖片配對",
+    "level": "L3",
+    "parent_name": "語言理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "預備 2 套故事圖片，一套由成人拿著，另一套放在籃子內。成人逐一展示圖片，並說出圖片的內容，鼓勵兒童從籃子內找出相同的圖片。所需教具：故事圖片 2 套、籃子。"
+  },
+  {
+    "name": "骨牌接龍遊戲",
+    "level": "L3",
+    "parent_name": "語言理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童玩骨牌接龍遊戲，將相同的圖案連接，排成一條長長的龍。所需教具：骨牌玩具。"
+  },
+  {
+    "name": "語言理解",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "學前兒童訓練指南-語言。本節主要涵蓋語言理解範疇的活動與訓練建議。"
+  },
+  {
+    "name": "項目二：配對相似的符號",
+    "level": "L2",
+    "parent_name": "語言理解",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "注意事項：\n1. 可按兒童的能力調節配對的比例，能力越高，配對項目的數量越多。\n2. 以下活動建議，皆可用作訓練以上3個訓練目標，進行時只需按目標的要求使用物件、相片或線條圖片便可。"
+  },
+  {
+    "name": "目標 A：配對物件及其相片",
+    "level": "L3",
+    "parent_name": "項目二：配對相似的符號",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "訓練目標：配對物件及其相片。"
+  },
+  {
+    "name": "目標 B：配對物件及其線條圖片",
+    "level": "L3",
+    "parent_name": "項目二：配對相似的符號",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "訓練目標：配對物件及其線條圖片。"
+  },
+  {
+    "name": "目標 C：配對照片及其線條圖片",
+    "level": "L3",
+    "parent_name": "項目二：配對相似的符號",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "訓練目標：配對照片及其線條圖片。"
+  },
+  {
+    "name": "活動建議 1",
+    "level": "L3",
+    "parent_name": "項目二：配對相似的符號",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "活動建議：將動物圖片或相片分別放在不同的籃子裡，而玩具動物則放在布袋裡。要求兒童從布袋中逐一抽出玩具動物，並配對在有該動物圖片或相片的籃子中。\n材料 / 建議教材：布袋、籃子數個、玩具動物及其相片或線條圖片。"
+  },
+  {
+    "name": "活動建議 2",
+    "level": "L3",
+    "parent_name": "項目二：配對相似的符號",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "活動建議：將6張物件相片或圖片分別貼在骰子的6面，接著要求兒童擲骰子，並按照骰子頂部的相片，從籃子內拿出相配的物件交給成人。\n材料 / 建議教材：大骰子、物件相片或圖片6張、與圖片相配的物件、籃子。"
+  },
+  {
+    "name": "語言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "語言理解",
+    "level": "L2",
+    "parent_name": "語言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "活動建議 3：看圖拼砌午餐",
+    "level": "L3",
+    "parent_name": "語言理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "將1份午餐（包含食物及餐具）組合好，拍照或畫成圖片，並從電腦打印出與實物面積一樣大小的相片或圖片。與兒童玩「家家酒」遊戲，要求兒童按照相片中各餐具及食物的組合，拼砌出1份午餐。\n\n準備物料：\n- 餐具及食物的實物\n- 上述物件組合的相片或圖片"
+  },
+  {
+    "name": "活動建議 4：購物遊戲",
+    "level": "L3",
+    "parent_name": "語言理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "與兒童玩購物遊戲。預備1張購物清單（可用相片或圖片作為購物清單的內容），要求兒童購買清單上的物件。\n\n準備物料：\n- 購物車\n- 玩具錢幣\n- 購物清單\n- 清單上列出的物件"
+  }
+]

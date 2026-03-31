@@ -2,17 +2,34 @@ import google.generativeai as genai
 import os
 import time
 import json
+import argparse
 from pypdf import PdfReader, PdfWriter
+
+# --- 命令行参数配置 ---
+parser = argparse.ArgumentParser(description="CUMA 知识图谱视觉提炼流水线")
+parser.add_argument("pdf_path", help="需要处理的 PDF 文件路径")
+args = parser.parse_args()
+
+pdf_path = args.pdf_path
+
+if not os.path.exists(pdf_path):
+    print(f"❌ 找不到文件: {pdf_path}")
+    exit(1)
 
 # --- 基础配置 ---
 api_key = os.environ.get("GEMINI_API_KEY")
+if not api_key:
+    print("⚠️ 未找到 GEMINI_API_KEY 环境变量")
+    exit(1)
+
 genai.configure(api_key=api_key)
 model_name = "gemini-3.1-pro-preview" 
 
-# 🎯 请在此修改为你那本全书的文件名
-pdf_path = "21-学前儿童训练指南（语言）—协康会_sample.pdf" 
-checkpoint_file = "extraction_progress.json"
-output_file = "final_book_ontology.json"
+# 根据输入的 PDF 文件名动态生成输出和断点文件名
+# 例如输入 "language.pdf"，输出就是 "language_ontology.json"
+base_name = os.path.splitext(os.path.basename(pdf_path))[0]
+checkpoint_file = f"{base_name}_progress.json"
+output_file = f"{base_name}_ontology.json"
 
 # 为了绝对稳定性，全书模式建议 1 页 1 吞，彻底杜绝 504 报错
 CHUNK_SIZE = 1 
@@ -30,9 +47,9 @@ if os.path.exists(checkpoint_file):
         checkpoint_data = json.load(f)
         processed_data = checkpoint_data.get("nodes", [])
         last_processed_page = checkpoint_data.get("last_page", -1)
-    print(f"♻️ 发现断点：已处理至第 {last_processed_page + 1} 页，已捕获 {len(processed_data)} 个节点。")
+    print(f"♻️ 发现断点文件 '{checkpoint_file}'：已处理至第 {last_processed_page + 1} 页，已捕获 {len(processed_data)} 个节点。")
 else:
-    print(f"🚀 开始全新任务：共 {total_pages} 页。")
+    print(f"🚀 开始全新任务：目标文件 '{pdf_path}'，共 {total_pages} 页。")
 
 # 2. 定义 Prompt
 prompt = """
@@ -67,7 +84,7 @@ for i in range(start_idx, total_pages, CHUNK_SIZE):
     for page_num in range(i, end_idx):
         writer.add_page(reader.pages[page_num])
     
-    tmp_pdf = f"tmp_processing.pdf"
+    tmp_pdf = f"tmp_processing_{base_name}.pdf"
     with open(tmp_pdf, "wb") as f:
         writer.write(f)
         
@@ -98,8 +115,12 @@ for i in range(start_idx, total_pages, CHUNK_SIZE):
         print("程序将暂停 10 秒后尝试下一页。您可以随时 Ctrl+C 停止，下次运行会自动重试失败页。")
         time.sleep(10)
     finally:
+        # 🛡️ 给云端清理加上防护罩，防止网络闪断导致脚本崩溃
         if 'sample_file' in locals():
-            genai.delete_file(sample_file.name)
+            try:
+                genai.delete_file(sample_file.name)
+            except Exception as cleanup_err:
+                print(f"⚠️ 云端清理小故障 (已忽略): {cleanup_err}")
         if os.path.exists(tmp_pdf):
             os.remove(tmp_pdf)
 
