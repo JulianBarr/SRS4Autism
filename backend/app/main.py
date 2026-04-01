@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Form, File, UploadFile, Request, Response
+from fastapi import FastAPI, HTTPException, Form, File, UploadFile, Request, Response, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from starlette.middleware.base import BaseHTTPMiddleware
@@ -220,6 +220,7 @@ def get_pure_hash_filename(original_filename: str, file_data: bytes) -> str:
     return f"{content_hash}{file_ext}"
 
 # Initialize database on startup
+
 @app.on_event("startup")
 async def startup_event():
     print("🚀 Starting Curious Mario API...")

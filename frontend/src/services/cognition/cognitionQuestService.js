@@ -9,9 +9,10 @@
 import businessApi from '../../utils/api';
 
 export class CognitionQuestService {
-  static async getMacroStructure() {
+  static async getMacroStructure(source = 'QCQ') {
     try {
-      const res = await businessApi.get('/kg/cognition-macro-structure');
+      const src = String(source || 'QCQ').toUpperCase();
+      const res = await businessApi.get('/kg/cognition-macro-structure', { params: { source: src } });
       const data = res.data;
       return data.data ?? data.modules ?? [];
     } catch (err) {

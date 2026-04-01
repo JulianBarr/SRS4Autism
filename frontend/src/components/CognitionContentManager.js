@@ -246,7 +246,7 @@ const MODULE_EMOJI = {
  * Age bracket (e.g. 1-2岁) is the top-level section; within each, modules (认知发展篇, etc.)
  * contain MacroObjectives with their phase tasks.
  */
-const CognitionContentManager = () => {
+const CognitionContentManager = ({ source = 'QCQ' }) => {
   const [ageBrackets, setAgeBrackets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [expandedMacro, setExpandedMacro] = useState(null);
@@ -256,7 +256,9 @@ const CognitionContentManager = () => {
     const load = async () => {
       setLoading(true);
       try {
-        const data = await CognitionQuestService.getMacroStructure();
+        const data = await CognitionQuestService.getMacroStructure(
+          typeof source === 'string' ? source : 'QCQ'
+        );
         const brackets = Array.isArray(data) ? data : [];
         setAgeBrackets(brackets);
         if (brackets.length > 0) {
@@ -270,7 +272,7 @@ const CognitionContentManager = () => {
       }
     };
     load();
-  }, []);
+  }, [source]);
 
   const handleToggleMacro = (key) => {
     setExpandedMacro((prev) => (prev === key ? null : key));

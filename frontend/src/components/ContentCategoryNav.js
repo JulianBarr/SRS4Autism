@@ -6,7 +6,7 @@ import theme from '../styles/theme';
  * Content Category Navigation
  * Organizes content into: Language, Cognition, Math, Common Knowledge, Culture
  */
-const ContentCategoryNav = ({ activeCategory, onCategoryChange }) => {
+const ContentCategoryNav = ({ activeCategory, onCategoryChange, stealthMode }) => {
   const { t } = useLanguage();
   
   const categories = [
@@ -14,8 +14,14 @@ const ContentCategoryNav = ({ activeCategory, onCategoryChange }) => {
     { id: 'cognition', label: t('cognition'), icon: '🧠', color: theme.categories.cognition },
     { id: 'math', label: t('math'), icon: '🔢', color: theme.categories.math },
     { id: 'knowledge', label: t('commonKnowledge'), icon: '🌍', color: theme.categories.knowledge },
-    { id: 'culture', label: t('culture'), icon: '🎭', color: theme.categories.culture }
-  ];
+    { id: 'culture', label: t('culture'), icon: '🎭', color: theme.categories.culture },
+    ...(!stealthMode ? [{
+      id: 'hhh',
+      label: 'HHH',
+      icon: '🚀',
+      color: { primary: '#60a5fa', background: '#eff6ff' },
+    }] : []),
+  ].filter(Boolean); // Filter out false values (i.e., the HHH category when stealthMode is true)
   
   return (
     <nav style={{
@@ -28,7 +34,7 @@ const ContentCategoryNav = ({ activeCategory, onCategoryChange }) => {
       {categories.map(category => (
         <button
           key={category.id}
-          onClick={() => onCategoryChange(category.id)}
+          onClick={() => onCategoryChange({ categoryId: category.id })}
           style={{
             padding: `${theme.spacing.sm} ${theme.spacing.md}`,
             border: 'none',

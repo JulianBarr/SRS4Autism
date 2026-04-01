@@ -41,9 +41,10 @@ export class CognitionQuestService {
    * Get macro structure from API. Nodes without recommendedAgeBracket
    * appear under "未分类年龄段".
    */
-  static async getMacroStructure(): Promise<AgeBracketBlock[] | ModuleWithAgeGroups[]> {
+  static async getMacroStructure(source: string = 'QCQ'): Promise<AgeBracketBlock[] | ModuleWithAgeGroups[]> {
     try {
-      const res = await businessApi.get('/kg/cognition-macro-structure');
+      const src = String(source || 'QCQ').toUpperCase();
+      const res = await businessApi.get('/kg/cognition-macro-structure', { params: { source: src } });
       const data = res.data;
       return data.data ?? data.modules ?? [];
     } catch (err) {

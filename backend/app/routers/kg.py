@@ -9,6 +9,9 @@ import json
 import logging
 import os
 
+from app.core.deps import get_ontology_source
+from app.core.types import OntologySource
+from app.adapters.hhh_adapter import HHHAdapter
 from database.db import get_db
 from database.services import ProfileService
 from sqlalchemy.orm import Session
@@ -148,12 +151,14 @@ Return ONLY a JSON array, no other text:
 
 
 @router.get("/cognition-macro-structure")
-async def get_cognition_macro_structure():
+async def get_cognition_macro_structure(source: OntologySource = Depends(get_ontology_source)):
     """
     Get macro structure (MacroObjective by age bracket and module) from quest_full.ttl in Oxigraph.
     Returns Age -> Module -> Macro hierarchy. Deduplicates by macroLabel (merge tasks from same-named nodes).
     Used by CognitionContentManager / Quest Library. Falls back to empty if KG not loaded.
     """
+    if source == "HHH":
+        return HHHAdapter().get_macro_structure()
     try:
         from database.kg_client import KnowledgeGraphClient
         client = KnowledgeGraphClient()

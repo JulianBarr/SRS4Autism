@@ -48,7 +48,10 @@ function App() {
   const [activeCategory, setActiveCategory] = useState('language'); // Content category
   const [activeContentView, setActiveContentView] = useState(null); // Track specific content view (e.g., 'pinyin-learning')
   const [showPinyinModal, setShowPinyinModal] = useState(false); // Modal state for Pinyin Learning
-  const [cognitionLanguage, setCognitionLanguage] = useState(null); // 'zh' or 'en' for Cognition Cove
+  const [stealthMode, setStealthMode] = useState(() => typeof localStorage !== 'undefined' && localStorage.getItem('stealth_mode') === 'true');
+  /** Ontology feed for quest library: QCQ (default KG) vs HHH (parallel adapter). */
+  const [ontologySource, setOntologySource] = useState('QCQ');
+  const [cognitionLanguage, setCognitionLanguage] = useState(null); // 'zh' | 'en' for Cognition Cove modal
   const [cognitionContentType, setCognitionContentType] = useState(null); // Content type based on language
   const [cognitionContentView, setCognitionContentView] = useState('quests'); // 'quests' | 'daily-deck'
   const [showLogicCityModal, setShowLogicCityModal] = useState(false); // Modal state for Logic City
@@ -65,6 +68,17 @@ function App() {
       loadData();
     }
   }, [isAuthenticated]);
+
+  // Effect for "Security Route Ejection"
+  useEffect(() => {
+    if (stealthMode && activeCategory === 'hhh') {
+      setActiveCategory('cognition'); // Redirect to default cognition page
+      setOntologySource('QCQ'); // Reset ontology source
+      // Optionally, show a subtle notification to the user about the redirect
+      // For example, using a toast notification library
+    }
+  }, [stealthMode, activeCategory, navigate]); // Add navigate to dependency array
+
 
   // Scroll to top when switching to workbench tab
   useEffect(() => {
@@ -485,7 +499,11 @@ function App() {
             {/* Content Category Navigation */}
             <ContentCategoryNav 
               activeCategory={activeCategory}
-              onCategoryChange={setActiveCategory}
+              onCategoryChange={({ categoryId }) => {
+                setActiveCategory(categoryId);
+                if (categoryId === 'cognition') setOntologySource('QCQ');
+              }}
+              stealthMode={stealthMode}
             />
             
             {/* Category Content */}
@@ -533,10 +551,13 @@ function App() {
                 {cognitionContentView === 'daily-deck' ? (
                   <DailyDeck childName={currentProfile?.name || null} childId={currentProfile?.id} />
                 ) : (
-                  <CognitionContentManager />
+                  <CognitionContentManager source={ontologySource} />
                 )}
               </div>
             )}
+
+            {/* Remove HHH content section as per requirements */}
+
             
             {activeCategory === 'math' && (
               <div style={{ marginTop: '20px', padding: '20px', textAlign: 'center', color: '#666' }}>
@@ -1178,9 +1199,11 @@ function App() {
       </main>
 
       {/* Settings Modal */}
-      <SettingsModal 
-        isOpen={showSettingsModal} 
-        onClose={() => setShowSettingsModal(false)} 
+      <SettingsModal
+        isOpen={showSettingsModal}
+        onClose={() => setShowSettingsModal(false)}
+        stealthMode={stealthMode}
+        setStealthMode={setStealthMode}
       />
     </div>
   );

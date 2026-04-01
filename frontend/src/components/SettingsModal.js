@@ -8,7 +8,12 @@ const DEFAULT_BASE_URLS = {
   openai: ''
 };
 
-const SettingsModal = ({ isOpen, onClose }) => {
+const SettingsModal = ({
+  isOpen,
+  onClose,
+  stealthMode = false,
+  setStealthMode = () => {},
+}) => {
   const { language, t } = useLanguage();
   const [keys, setKeys] = useState({ gemini: '', deepseek: '', openai: '' });
   const [baseUrls, setBaseUrls] = useState({ ...DEFAULT_BASE_URLS });
@@ -33,8 +38,10 @@ const SettingsModal = ({ isOpen, onClose }) => {
       setKeys({ gemini: '', deepseek: '', openai: '', ...savedKeys });
       setBaseUrls({ ...DEFAULT_BASE_URLS, ...savedUrls });
       setProvider(savedProvider);
+      const savedStealthMode = localStorage.getItem('stealth_mode') === 'true';
+      setStealthMode(savedStealthMode);
     }
-  }, [isOpen]);
+  }, [isOpen, setStealthMode]);
 
   const handleSave = () => {
     localStorage.setItem('llm_provider', provider);
@@ -44,6 +51,7 @@ const SettingsModal = ({ isOpen, onClose }) => {
     // Set the active ones for the backend headers to find easily
     localStorage.setItem('llm_key', keys[provider] || '');
     localStorage.setItem('llm_base_url', baseUrls[provider] || '');
+    localStorage.setItem('stealth_mode', String(stealthMode));
 
     onClose();
   };
@@ -56,6 +64,8 @@ const SettingsModal = ({ isOpen, onClose }) => {
     setKeys({ gemini: '', deepseek: '', openai: '', ...savedKeys });
     setBaseUrls({ ...DEFAULT_BASE_URLS, ...savedUrls });
     setProvider(savedProvider);
+    const savedStealthMode = localStorage.getItem('stealth_mode') === 'true';
+    setStealthMode(savedStealthMode);
 
     onClose();
   };
@@ -246,6 +256,49 @@ const SettingsModal = ({ isOpen, onClose }) => {
                 ? '用于GFW用户的代理URL（可选）'
                 : 'Proxy URL for GFW users (optional)'}
             </small>
+          </div>
+
+          {/* Stealth Mode Toggle */}
+          <div style={{ marginBottom: '24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <label htmlFor="stealth-mode-toggle" style={{ fontSize: '14px', fontWeight: '600', color: '#374151' }}>
+              {language === 'zh' ? '隐身模式' : 'Stealth Mode'}
+            </label>
+            <label style={{ display: 'inline-flex', alignItems: 'center', cursor: 'pointer' }}>
+              <input
+                id="stealth-mode-toggle"
+                type="checkbox"
+                className="sr-only peer"
+                checked={stealthMode}
+                onChange={(e) => setStealthMode(e.target.checked)}
+                style={{ position: 'absolute', width: '1px', height: '1px', padding: 0, margin: -1, overflow: 'hidden', clip: 'rect(0,0,0,0)', whiteSpace: 'nowrap', border: 0 }}
+              />
+              <div
+                style={{
+                  position: 'relative',
+                  width: '38px',
+                  height: '22px',
+                  backgroundColor: stealthMode ? '#3b82f6' : '#e5e7eb',
+                  borderRadius: '9999px',
+                  transition: 'background-color 0.2s ease-in-out',
+                  flexShrink: 0
+                }}
+              >
+                <div
+                  style={{
+                    position: 'absolute',
+                    left: '2px',
+                    top: '2px',
+                    width: '18px',
+                    height: '18px',
+                    borderRadius: '9999px',
+                    backgroundColor: 'white',
+                    transition: 'transform 0.2s ease-in-out',
+                    transform: stealthMode ? 'translateX(16px)' : 'translateX(0)',
+                    boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)'
+                  }}
+                ></div>
+              </div>
+            </label>
           </div>
 
           {/* Action Buttons */}

@@ -23,16 +23,17 @@ if not api_key:
     exit(1)
 
 genai.configure(api_key=api_key)
-model_name = "gemini-3.1-pro-preview" 
+#model_name = "gemini-3.1-pro-preview" 
+model_name = "gemini-3.1-flash-lite-preview" 
 
-# 根据输入的 PDF 文件名动态生成输出和断点文件名
-# 例如输入 "language.pdf"，输出就是 "language_ontology.json"
 base_name = os.path.splitext(os.path.basename(pdf_path))[0]
 checkpoint_file = f"{base_name}_progress.json"
 output_file = f"{base_name}_ontology.json"
 
-# 为了绝对稳定性，全书模式建议 1 页 1 吞，彻底杜绝 504 报错
 CHUNK_SIZE = 1 
+# 🛡️ 新增：节流阀，每页处理完强制休息的秒数。
+# 免费版 Gemini API 限制为 15 RPM。加上上传和推理的时间，设置 5 秒绝对安全。
+SLEEP_TIME_BETWEEN_PAGES = 5 
 
 # --- 核心逻辑 ---
 reader = PdfReader(pdf_path)
@@ -72,14 +73,12 @@ model = genai.GenerativeModel(
 )
 
 # 3. 循环处理
-# 从断点的下一页开始
 start_idx = last_processed_page + 1
 
 for i in range(start_idx, total_pages, CHUNK_SIZE):
     end_idx = min(i + CHUNK_SIZE, total_pages)
     print(f"\n[进度 {end_idx}/{total_pages}] 正在炼金: 第 {i+1} - {end_idx} 页...")
     
-    # 切片
     writer = PdfWriter()
     for page_num in range(i, end_idx):
         writer.add_page(reader.pages[page_num])
@@ -89,13 +88,11 @@ for i in range(start_idx, total_pages, CHUNK_SIZE):
         writer.write(f)
         
     try:
-        # 上传并等待
         sample_file = genai.upload_file(path=tmp_pdf)
         while sample_file.state.name == 'PROCESSING':
             time.sleep(2)
             sample_file = genai.get_file(sample_file.name)
             
-        # 推理
         response = model.generate_content([prompt, sample_file], request_options={"timeout": 300})
         chunk_nodes = json.loads(response.text)
         
@@ -103,19 +100,29 @@ for i in range(start_idx, total_pages, CHUNK_SIZE):
             processed_data.extend(chunk_nodes)
             print(f"✅ 成功：捕获 {len(chunk_nodes)} 个节点。")
         
-        # 💾 立即保存断点（关键步骤）
         with open(checkpoint_file, "w", encoding="utf-8") as f:
             json.dump({
                 "last_page": end_idx - 1,
                 "nodes": processed_data
             }, f, indent=2, ensure_ascii=False)
             
+        # 🛡️ 新增：智能节流，避开 429 报错
+        print(f"⏳ 触发冷却阀，休息 {SLEEP_TIME_BETWEEN_PAGES} 秒...")
+        time.sleep(SLEEP_TIME_BETWEEN_PAGES)
+            
     except Exception as e:
-        print(f"❌ 警告：第 {i+1} 页处理失败: {e}")
-        print("程序将暂停 10 秒后尝试下一页。您可以随时 Ctrl+C 停止，下次运行会自动重试失败页。")
-        time.sleep(10)
+        error_msg = str(e)
+        print(f"❌ 警告：第 {i+1} 页处理失败: {error_msg}")
+        
+        # 🛡️ 智能熔断：如果真的是被彻底拉闸了，就直接停掉，别瞎撞了
+        if "429" in error_msg or "Quota" in error_msg:
+             print("🛑 触发严重 API 限制！程序终止。请等待一段时间后再跑。")
+             break
+        else:
+             print("程序将暂停 10 秒后尝试下一页...")
+             time.sleep(10)
+             
     finally:
-        # 🛡️ 给云端清理加上防护罩，防止网络闪断导致脚本崩溃
         if 'sample_file' in locals():
             try:
                 genai.delete_file(sample_file.name)
