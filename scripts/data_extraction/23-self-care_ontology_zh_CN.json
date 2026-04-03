@@ -1,0 +1,7306 @@
+[
+  {
+    "name": "学前儿童训练指南",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南，本指南旨在为学前儿童提供系统性的发展与训练框架。"
+  },
+  {
+    "name": "自理",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "自理能力训练，涵盖幼儿在日常生活中的基本生活自理技巧，旨在提升独立性与生活适应能力。"
+  },
+  {
+    "name": "学前儿童训练指南：自理",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童自理能力训练指南，涵盖训练理论、指导方法及具体生活技能活动建议。"
+  },
+  {
+    "name": "理论与指引",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南：自理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "包含序言、引言、学习范畴、基本理论及训练指引。"
+  },
+  {
+    "name": "活动建议",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南：自理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童日常生活自理能力的具体训练活动与技巧建议。"
+  },
+  {
+    "name": "进食技能",
+    "level": "L3",
+    "parent_name": "活动建议",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "培养儿童独立进食的技巧，包括餐具使用及进食习惯。"
+  },
+  {
+    "name": "如厕技能",
+    "level": "L3",
+    "parent_name": "活动建议",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "训练儿童建立如厕习惯及处理相关排泄清理技能。"
+  },
+  {
+    "name": "穿衣技能",
+    "level": "L3",
+    "parent_name": "活动建议",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "指导儿童掌握脱穿各类衣物、钮扣、拉链等细微动作。"
+  },
+  {
+    "name": "梳洗技能",
+    "level": "L3",
+    "parent_name": "活动建议",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "训练儿童个人清洁习惯，如刷牙、洗脸、梳头及洗手。"
+  },
+  {
+    "name": "家居技能",
+    "level": "L3",
+    "parent_name": "活动建议",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "涉及儿童在家居环境中的自理与协作能力，如整理物品、参与家务。"
+  },
+  {
+    "name": "学前儿童训练指南",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 0,
+    "age_max_months": 72,
+    "prompt_corpus": "全套训练指南包含六大核心发展领域，涵盖大肌肉、小肌肉、自理、认知、语言以及社交情绪，旨在为学龄前儿童提供系统化的教学工具与活动建议。"
+  },
+  {
+    "name": "大肌肉",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南",
+    "age_min_months": 0,
+    "age_max_months": 72,
+    "prompt_corpus": "针对学前儿童的大肌肉活动发展进行训练，包含由浅入深的活动建议。"
+  },
+  {
+    "name": "小肌肉",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南",
+    "age_min_months": 0,
+    "age_max_months": 72,
+    "prompt_corpus": "针对学前儿童的小肌肉操作能力发展进行训练，提供相关训练重点与活动建议。"
+  },
+  {
+    "name": "自理",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南",
+    "age_min_months": 0,
+    "age_max_months": 72,
+    "prompt_corpus": "针对儿童生活自理能力的训练，透过系统化教学提升其独立生活技巧。"
+  },
+  {
+    "name": "认知",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南",
+    "age_min_months": 0,
+    "age_max_months": 72,
+    "prompt_corpus": "针对儿童认知发展的训练，提供适用于不同发展阶段的学习目标与活动设计。"
+  },
+  {
+    "name": "语言",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南",
+    "age_min_months": 0,
+    "age_max_months": 72,
+    "prompt_corpus": "针对儿童语言沟通能力的训练，协助家长与老师进行有效的语言引导。"
+  },
+  {
+    "name": "社交情绪",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南",
+    "age_min_months": 0,
+    "age_max_months": 72,
+    "prompt_corpus": "针对儿童社交技巧与情绪表达能力的训练，旨在增进儿童的社会适应力。"
+  },
+  {
+    "name": "学前儿童训练指南",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "本指南旨在为学前儿童提供发展指导，重点关注儿童的日常独立生活能力。"
+  },
+  {
+    "name": "自理能力训练",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "自理即自我照顾，指个人日常起居的独立能力。训练重点包括进食、如厕、穿衣、梳洗及简单家居技能，目标是协助儿童在成长过程中建立自信及富责任感的独立个性。"
+  },
+  {
+    "name": "自理能力发展阶段",
+    "level": "L3",
+    "parent_name": "自理能力训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "儿童自婴儿期对成人的依赖，随年龄增长及能力提升，逐渐过渡至掌握各项自理技能的过程。此阶段对儿童健康成长具有十分重要的意义。"
+  },
+  {
+    "name": "自理能力",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "儿童在自理能力方面的学习范畴"
+  },
+  {
+    "name": "进食技能",
+    "level": "L2",
+    "parent_name": "自理能力",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "基本口肌控制、进饮技能、进食技能及处理食物包装能力。"
+  },
+  {
+    "name": "如厕技能",
+    "level": "L2",
+    "parent_name": "自理能力",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "安坐便盆或座厕能力、如厕时所需的穿脱衣物能力、如厕后的清洁能力、辨别男女洗手间及厕具能力及表达如厕需要的能力。"
+  },
+  {
+    "name": "穿衣技能",
+    "level": "L2",
+    "parent_name": "自理能力",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "穿、脱衣物能力及处理紧扣物能力。"
+  },
+  {
+    "name": "梳洗技能",
+    "level": "L2",
+    "parent_name": "自理能力",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "揩抹身体、清洗身体、刷牙漱口、梳理头发、护理皮肤及修剪指甲能力。"
+  },
+  {
+    "name": "家居技能",
+    "level": "L2",
+    "parent_name": "自理能力",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "收拾整理日常用品、打扫清洁、使用家居设施及使用公众设施能力。"
+  },
+  {
+    "name": "学前儿童自理能力",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童自理能力的发展与其心理、生理、体能及智能的发展息息相关。要建立良好的自理能力，儿童需要具备多方面的基础技巧。"
+  },
+  {
+    "name": "个人成长发展因素",
+    "level": "L2",
+    "parent_name": "学前儿童自理能力",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "个人成长发展因素是儿童自理能力的基础技巧，包括：感觉肌能、小肌肉技巧、认知概念、情绪行为及沟通技巧等。"
+  },
+  {
+    "name": "感觉肌能",
+    "level": "L3",
+    "parent_name": "个人成长发展因素",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "感觉肌能是影响自理能力发展的重要因素。感觉系统从身体及环境中获得视觉、听觉、味觉、嗅觉、触觉、前庭平衡和肌肉关节感觉，并由脑部处理后指导身体作出适当反应。"
+  },
+  {
+    "name": "小肌肉技巧",
+    "level": "L3",
+    "parent_name": "个人成长发展因素",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "小肌肉技巧对自理能力发展十分重要。例如扣钮活动，需要良好的前二、三指抓握能力、双手协调和手眼协调能力，才能进行握住、对准及穿过扣钮等动作。"
+  },
+  {
+    "name": "认知概念",
+    "level": "L3",
+    "parent_name": "个人成长发展因素",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "认知概念是自理能力的要素。进行自理活动时，儿童需从环境资讯中筛选出有用资讯，明白活动要求及掌握步骤，例如穿外套时分辨前后和里外，以及掌握空间关系及身体概念。"
+  },
+  {
+    "name": "情绪行为",
+    "level": "L3",
+    "parent_name": "个人成长发展因素",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "情绪行为影响自理能力发展。儿童对学习新技巧的兴趣、主动性、自信心、责任感与独立性等因素，会影响其学习动机；成功完成自理活动能带来满足感。"
+  },
+  {
+    "name": "影响幼儿自理能力发展的因素",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "分析幼儿自理能力发展的影响因素，涵盖个人成长发展因素（感觉肌能、小肌肉技巧、认知概念、情绪行为、沟通技巧）以及外在环境因素（生活常规、家居设施或布置安排、成人对儿童的要求及训练方法、成人对幼儿自理能力发展的认识）。"
+  },
+  {
+    "name": "个人成长发展因素",
+    "level": "L2",
+    "parent_name": "影响幼儿自理能力发展的因素",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "指儿童自身发展的各项能力对自理能力的影响。"
+  },
+  {
+    "name": "感觉肌能",
+    "level": "L3",
+    "parent_name": "个人成长发展因素",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "评估儿童在感觉统合与肌能运用方面对自理活动的影响。"
+  },
+  {
+    "name": "小肌肉技巧",
+    "level": "L3",
+    "parent_name": "个人成长发展因素",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "训练儿童运用手指及手腕进行精细动作，如扣钮扣、使用餐具等自理技能。"
+  },
+  {
+    "name": "认知概念",
+    "level": "L3",
+    "parent_name": "个人成长发展因素",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "提升儿童对周遭环境及自理步骤的理解与认知。"
+  },
+  {
+    "name": "情绪行为",
+    "level": "L3",
+    "parent_name": "个人成长发展因素",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "处理儿童因情绪困扰或行为问题而导致的自理学习障碍。"
+  },
+  {
+    "name": "沟通技巧",
+    "level": "L3",
+    "parent_name": "个人成长发展因素",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "包含理解能力与表达能力。当沟通能力较弱时，儿童无法理解成人指令或表达自身需求（如如厕需要），易导致焦虑或发脾气。"
+  },
+  {
+    "name": "外在环境因素",
+    "level": "L2",
+    "parent_name": "影响幼儿自理能力发展的因素",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "指日常生活环境安排、成人对儿童的要求及态度对自理能力的影响。"
+  },
+  {
+    "name": "生活常规",
+    "level": "L3",
+    "parent_name": "外在环境因素",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "检视日常生活规律的建立是否符合儿童自理发展需求。"
+  },
+  {
+    "name": "家居设施或布置安排",
+    "level": "L3",
+    "parent_name": "外在环境因素",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "确保家居布置方便儿童学习自理，避免因设施不当影响学习过程。"
+  },
+  {
+    "name": "成人对儿童的要求及训练方法",
+    "level": "L3",
+    "parent_name": "外在环境因素",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "成人应避免要求过严或训练方法错误，需根据儿童能力调整教学策略。"
+  },
+  {
+    "name": "成人对幼儿自理能力发展的认识",
+    "level": "L3",
+    "parent_name": "外在环境因素",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "提升家长或教育者对儿童各阶段自理能力发展里程碑的了解。"
+  },
+  {
+    "name": "学前儿童训练指南—自理",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童自理能力训练指南，包含行为训练方法如奖赏法、塑型法及连扣法。"
+  },
+  {
+    "name": "奖赏法 (Positive Reinforcement)",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南—自理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "当儿童做到目标行为时，以奖励方式加强其动机，并透过褪减(Fading)方式逐步减少奖赏的份量及频率，直至儿童能持续自行完成活动。"
+  },
+  {
+    "name": "强化儿童自行握匙进食的行为",
+    "level": "L3",
+    "parent_name": "奖赏法 (Positive Reinforcement)",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "目标：强化儿童自行握匙进食的行为。步骤1：每次奖赏后，逐次减少奖赏物的份量。步骤2：间隔奖赏后，逐次减少奖赏的频率，例如每两至三次成功行为才给予一次奖赏。"
+  },
+  {
+    "name": "学前儿童训练指南：自理",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南，本页重点为自我照顾技能的行为塑造法训练。"
+  },
+  {
+    "name": "行为增强与塑形",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南：自理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "教授如何透过奖励与塑形法（Shaping）来建立儿童的自理习惯。"
+  },
+  {
+    "name": "自行握匙进食训练",
+    "level": "L3",
+    "parent_name": "行为增强与塑形",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "步骤3：利用非实物奖励（如拍掌鼓励、赞赏语句）强化儿童自行握匙进食的行为。步骤4：持续练习直至该行为成为习惯。"
+  },
+  {
+    "name": "穿袜子能力训练",
+    "level": "L3",
+    "parent_name": "行为增强与塑形",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "目标：强化儿童自行穿袜子的能力。使用塑形法，将目标拆解为简单步骤：1. 练习穿胶圈于脚上；2. 练习穿布套于脚上；3. 最终练习穿袜子。透过由简入深，建立自信与成功感。"
+  },
+  {
+    "name": "连扣法 (Chaining)",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "连扣法是将目标活动细分为一连串的步骤，进行训练时，每次让儿童练习一至两个步骤，其余则由成人完成。当儿童掌握所练习的步骤后，成人逐步增加儿童要自行完成的步骤，直至儿童能自行完成整个目标活动。连扣法可分为顺序式连扣法（Forward chaining）和倒序式连扣法（Backward chaining）。顺序式连扣法是指按活动发生的步骤，顺序由先至后进行训练。相反，倒序式连扣法是指按活动发生的步骤，倒序进行训练。"
+  },
+  {
+    "name": "强化儿童自行洗头发的行为",
+    "level": "L2",
+    "parent_name": "连扣法 (Chaining)",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "训练目标：强化儿童自行洗头发的行为。将洗头发分为五个步骤：1. 冲湿头发、2. 挤出洗发水、3. 涂抹洗发水、4. 冲水、5. 抹干湿发。"
+  },
+  {
+    "name": "顺序式连扣法训练",
+    "level": "L3",
+    "parent_name": "强化儿童自行洗头发的行为",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "按活动发生的步骤，由先至后进行训练。第一阶段由儿童完成冲湿头发，其余步骤由家长协助；随后阶段逐步增加儿童自行完成的步骤数量，直至完成所有五个步骤。"
+  },
+  {
+    "name": "倒序式连扣法",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "由后至先进行训练，适用于洗头发等自理行为训练。透过将完整流程分解并由家长协助前期步骤，让儿童自行完成最后步骤，从而增加成功感并强化持续学习的动机。"
+  },
+  {
+    "name": "洗头发训练",
+    "level": "L2",
+    "parent_name": "倒序式连扣法",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "洗头发行为训练流程，包含步骤：冲湿头发、挤出洗发水、涂抹洗发水、冲水、抹干湿发。"
+  },
+  {
+    "name": "训练阶段",
+    "level": "L3",
+    "parent_name": "洗头发训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "训练分为五个阶段，逐步将家长协助的比例减少，最终转化为儿童自行完成。"
+  },
+  {
+    "name": "阶段一",
+    "level": "L4",
+    "parent_name": "训练阶段",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "儿童自行完成：抹干湿发。家长协助：冲湿头发、挤出洗发水、涂抹洗发水、冲水。"
+  },
+  {
+    "name": "阶段二",
+    "level": "L4",
+    "parent_name": "训练阶段",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "儿童自行完成：冲水、抹干湿发。家长协助：冲湿头发、挤出洗发水、涂抹洗发水。"
+  },
+  {
+    "name": "阶段三",
+    "level": "L4",
+    "parent_name": "训练阶段",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "儿童自行完成：涂抹洗发水、冲水、抹干湿发。家长协助：冲湿头发、挤出洗发水。"
+  },
+  {
+    "name": "阶段四",
+    "level": "L4",
+    "parent_name": "训练阶段",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "儿童自行完成：挤出洗发水、涂抹洗发水、冲水、抹干湿发。家长协助：冲湿头发。"
+  },
+  {
+    "name": "阶段五",
+    "level": "L4",
+    "parent_name": "训练阶段",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "儿童自行完成：冲湿头发、挤出洗发水、涂抹洗发水、冲水、抹干湿发。所有步骤均由儿童自行完成。"
+  },
+  {
+    "name": "进食技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 0,
+    "age_max_months": 48,
+    "prompt_corpus": "进食技能整体发展目录"
+  },
+  {
+    "name": "学习重点：进食技能",
+    "level": "L2",
+    "parent_name": "进食技能",
+    "age_min_months": 0,
+    "age_max_months": 48,
+    "prompt_corpus": "包含基本口腔控制、进饮、进食、餐具使用等核心训练目标。"
+  },
+  {
+    "name": "项目一：基本口腔控制",
+    "level": "L3",
+    "parent_name": "学习重点：进食技能",
+    "age_min_months": 0,
+    "age_max_months": 48,
+    "prompt_corpus": "训练口腔控制能力，目标包括吸吮奶瓶液体、吞咽流质/糊状/固体食物等。"
+  },
+  {
+    "name": "项目二：进饮技能",
+    "level": "L3",
+    "parent_name": "学习重点：进食技能",
+    "age_min_months": 6,
+    "age_max_months": 48,
+    "prompt_corpus": "训练进饮技巧，目标包括使用匙羹饮水、双手扶瓶、自行用杯进饮等。"
+  },
+  {
+    "name": "项目三：基本进食技能",
+    "level": "L3",
+    "parent_name": "学习重点：进食技能",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "训练基本进食动作，目标包括手抓食物及分辨可否食用物件。"
+  },
+  {
+    "name": "项目四：使用匙羹及碗进食",
+    "level": "L3",
+    "parent_name": "学习重点：进食技能",
+    "age_min_months": 4,
+    "age_max_months": 48,
+    "prompt_corpus": "训练使用匙羹与碗进食技巧，包括握匙、盛物、保持清洁等。"
+  },
+  {
+    "name": "项目五：使用筷子",
+    "level": "L3",
+    "parent_name": "学习重点：进食技能",
+    "age_min_months": 36,
+    "age_max_months": 60,
+    "prompt_corpus": "训练使用筷子进食，包含抓取及夹取食物技巧。"
+  },
+  {
+    "name": "项目六：使用其他餐具",
+    "level": "L3",
+    "parent_name": "学习重点：进食技能",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "训练使用叉子及牙签等进食辅助工具。"
+  },
+  {
+    "name": "进食技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 24,
+    "age_max_months": 72,
+    "prompt_corpus": "进食相关的动作控制与处理能力训练"
+  },
+  {
+    "name": "项目七：难度较高的进食技能",
+    "level": "L2",
+    "parent_name": "进食技能",
+    "age_min_months": 24,
+    "age_max_months": 72,
+    "prompt_corpus": "项目七：难度较高的进食技能"
+  },
+  {
+    "name": "目标：处理食物包装",
+    "level": "L2",
+    "parent_name": "进食技能",
+    "age_min_months": 36,
+    "age_max_months": 72,
+    "prompt_corpus": "项目八：处理食物包装"
+  },
+  {
+    "name": "如厕技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 12,
+    "age_max_months": 72,
+    "prompt_corpus": "如厕技能相关的自主能力训练"
+  },
+  {
+    "name": "项目一：如厕能力",
+    "level": "L2",
+    "parent_name": "如厕技能",
+    "age_min_months": 12,
+    "age_max_months": 36,
+    "prompt_corpus": "项目一：如厕能力相关训练，包含坐便盆、如厕等"
+  },
+  {
+    "name": "项目二：如厕时所需的穿脱衣服能力",
+    "level": "L2",
+    "parent_name": "如厕技能",
+    "age_min_months": 12,
+    "age_max_months": 36,
+    "prompt_corpus": "项目二：如厕时所需的穿脱衣服能力训练"
+  },
+  {
+    "name": "项目三：清洁能力",
+    "level": "L2",
+    "parent_name": "如厕技能",
+    "age_min_months": 24,
+    "age_max_months": 72,
+    "prompt_corpus": "项目三：清洁能力训练，包含洗手、冲厕及使用厕纸"
+  },
+  {
+    "name": "项目四：辨别洗手间",
+    "level": "L2",
+    "parent_name": "如厕技能",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "项目四：辨别洗手间标示与位置训练"
+  },
+  {
+    "name": "自理能力训练",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南-自理能力训练目录"
+  },
+  {
+    "name": "表达需要的能力",
+    "level": "L2",
+    "parent_name": "自理能力训练",
+    "age_min_months": 12,
+    "age_max_months": 36,
+    "prompt_corpus": "评估并训练儿童表达生理需要的各项技能"
+  },
+  {
+    "name": "表示已遗尿或已大便",
+    "level": "L3",
+    "parent_name": "表达需要的能力",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "训练儿童在发生遗尿或排便后能主动表示"
+  },
+  {
+    "name": "如厕前以手势、沟通图或声音表达如厕需要",
+    "level": "L3",
+    "parent_name": "表达需要的能力",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "训练儿童在有如厕意图时，使用非口语或声音方式寻求协助"
+  },
+  {
+    "name": "主动说出如厕的需要",
+    "level": "L3",
+    "parent_name": "表达需要的能力",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "训练儿童能以语言明确表达如厕意图"
+  },
+  {
+    "name": "穿衣技能",
+    "level": "L2",
+    "parent_name": "自理能力训练",
+    "age_min_months": 12,
+    "age_max_months": 48,
+    "prompt_corpus": "针对不同衣物进行脱卸技能训练"
+  },
+  {
+    "name": "脱鞋",
+    "level": "L3",
+    "parent_name": "穿衣技能",
+    "age_min_months": 12,
+    "age_max_months": 36,
+    "prompt_corpus": "训练儿童脱卸鞋子的各个阶段技能"
+  },
+  {
+    "name": "脱袜",
+    "level": "L3",
+    "parent_name": "穿衣技能",
+    "age_min_months": 12,
+    "age_max_months": 36,
+    "prompt_corpus": "训练儿童脱卸袜子的各个阶段技能"
+  },
+  {
+    "name": "脱裤",
+    "level": "L3",
+    "parent_name": "穿衣技能",
+    "age_min_months": 12,
+    "age_max_months": 36,
+    "prompt_corpus": "训练儿童脱卸裤子的各个阶段技能，包含短裤、内裤与长裤"
+  },
+  {
+    "name": "脱开胸衣服",
+    "level": "L3",
+    "parent_name": "穿衣技能",
+    "age_min_months": 12,
+    "age_max_months": 48,
+    "prompt_corpus": "训练儿童脱卸开胸背心、外套、衬衫或短袖开胸衫的技能"
+  },
+  {
+    "name": "脱T恤",
+    "level": "L3",
+    "parent_name": "穿衣技能",
+    "age_min_months": 12,
+    "age_max_months": 48,
+    "prompt_corpus": "训练儿童脱卸T恤的各个阶段技能"
+  },
+  {
+    "name": "脱衣物",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "项目六：脱衣物训练，包含脱掉帽子与脱下手套。"
+  },
+  {
+    "name": "脱掉帽子",
+    "level": "L2",
+    "parent_name": "脱衣物",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "目标 A：脱掉帽子。"
+  },
+  {
+    "name": "脱下手套",
+    "level": "L2",
+    "parent_name": "脱衣物",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "目标 B：脱下手套。"
+  },
+  {
+    "name": "穿鞋",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 12,
+    "age_max_months": 60,
+    "prompt_corpus": "项目七：穿鞋训练，包含配合脚套、撑开鞋口、穿上鞋子及分辨左右。"
+  },
+  {
+    "name": "配合将脚套入成人代张开的鞋口内",
+    "level": "L2",
+    "parent_name": "穿鞋",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "目标 A：配合将脚套入成人代张开的鞋口内。"
+  },
+  {
+    "name": "用双手握著鞋口的两侧并将其向外拉开",
+    "level": "L2",
+    "parent_name": "穿鞋",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "目标 B：用双手握著鞋口的两侧并将其向外拉开。"
+  },
+  {
+    "name": "穿上鞋子",
+    "level": "L2",
+    "parent_name": "穿鞋",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "目标 C：穿上鞋子。"
+  },
+  {
+    "name": "分辨鞋子的左右",
+    "level": "L2",
+    "parent_name": "穿鞋",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "目标 D：分辨鞋子的左右。"
+  },
+  {
+    "name": "穿袜",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 12,
+    "age_max_months": 60,
+    "prompt_corpus": "项目八：穿袜训练，包含撑开袜口、翻转及分辨左右。"
+  },
+  {
+    "name": "配合将脚套入已拉开的袜管口",
+    "level": "L2",
+    "parent_name": "穿袜",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "目标 A：配合将脚套入已拉开的袜管口。"
+  },
+  {
+    "name": "将橡筋圈套在脚上",
+    "level": "L2",
+    "parent_name": "穿袜",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "目标 B：将橡筋圈套在脚上。"
+  },
+  {
+    "name": "穿上没有脚踝部分的袜子",
+    "level": "L2",
+    "parent_name": "穿袜",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "目标 C：穿上没有脚踝部分的袜子。"
+  },
+  {
+    "name": "将袜子翻回正面",
+    "level": "L2",
+    "parent_name": "穿袜",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "目标 D：将袜子翻回正面。"
+  },
+  {
+    "name": "正确地穿上有脚踝部分的袜子",
+    "level": "L2",
+    "parent_name": "穿袜",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "目标 E：正确地穿上有脚踝部分的袜子。"
+  },
+  {
+    "name": "分辨袜子的底面",
+    "level": "L2",
+    "parent_name": "穿袜",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "目标 F：分辨袜子的底面。"
+  },
+  {
+    "name": "分辨左右不同印花的袜子",
+    "level": "L2",
+    "parent_name": "穿袜",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "目标 G：分辨左右不同印花的袜子。"
+  },
+  {
+    "name": "穿裤",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 12,
+    "age_max_months": 60,
+    "prompt_corpus": "项目九：穿裤训练，包含配合提裤、穿著短裤/长裤、分辨底面。"
+  },
+  {
+    "name": "配合将脚伸入成人代张开的裤管内",
+    "level": "L2",
+    "parent_name": "穿裤",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "目标 A：配合将脚伸入成人代张开的裤管内。"
+  },
+  {
+    "name": "将已套在小腿上的弹性布套拉至腰间",
+    "level": "L2",
+    "parent_name": "穿裤",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "目标 B：将已套在小腿上的弹性布套拉至腰间。"
+  },
+  {
+    "name": "坐著并将脚分别伸入不同的裤管内",
+    "level": "L2",
+    "parent_name": "穿裤",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "目标 C：坐著并将脚分别伸入不同的裤管内（成人已将裤的位置正确摆放）。"
+  },
+  {
+    "name": "穿裤",
+    "level": "L2",
+    "parent_name": "穿裤",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "目标 D：穿裤（短裤/2-3岁，长裤/3-4岁）。"
+  },
+  {
+    "name": "分辨裤的底面",
+    "level": "L2",
+    "parent_name": "穿裤",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "目标 E：分辨裤的底面。"
+  },
+  {
+    "name": "将裤管翻回正面",
+    "level": "L2",
+    "parent_name": "穿裤",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "目标 F：将裤管翻回正面。"
+  },
+  {
+    "name": "分辨裤的前后",
+    "level": "L2",
+    "parent_name": "穿裤",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "目标 G：分辨裤的前后。"
+  },
+  {
+    "name": "穿开胸衣服",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 12,
+    "age_max_months": 72,
+    "prompt_corpus": "项目十：穿开胸衣服训练，包含伸入手袖、背心与外套穿著。"
+  },
+  {
+    "name": "配合将手伸入成人代张开的衣袖内",
+    "level": "L2",
+    "parent_name": "穿开胸衣服",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "目标 A：配合将手伸入成人代张开的衣袖内。"
+  },
+  {
+    "name": "将橡筋圈套上手臂",
+    "level": "L2",
+    "parent_name": "穿开胸衣服",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "目标 B：将橡筋圈套上手臂。"
+  },
+  {
+    "name": "将已穿上一只袖而衣领已放在脖子后的背心穿妥",
+    "level": "L2",
+    "parent_name": "穿开胸衣服",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "目标 C：将已穿上一只袖而衣领已放在脖子后的背心穿妥。"
+  },
+  {
+    "name": "穿开胸衣服",
+    "level": "L2",
+    "parent_name": "穿开胸衣服",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "目标 D：穿开胸衣服（背心/2-3岁，外套或衬衫/3-4岁）。"
+  },
+  {
+    "name": "分辨外套的前后",
+    "level": "L2",
+    "parent_name": "穿开胸衣服",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "目标 E：分辨外套的前后。"
+  },
+  {
+    "name": "分辨外套的底面",
+    "level": "L2",
+    "parent_name": "穿开胸衣服",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "目标 F：分辨外套的底面。"
+  },
+  {
+    "name": "将外套翻回正面",
+    "level": "L2",
+    "parent_name": "穿开胸衣服",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "目标 G：将外套翻回正面。"
+  },
+  {
+    "name": "穿脱衣物与配件训练",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 12,
+    "age_max_months": 72,
+    "prompt_corpus": "学前儿童自理能力训练指南：穿著与配件操作"
+  },
+  {
+    "name": "项目十一：穿T恤",
+    "level": "L2",
+    "parent_name": "穿脱衣物与配件训练",
+    "age_min_months": 12,
+    "age_max_months": 60,
+    "prompt_corpus": "训练儿童穿著T恤的各项步骤与能力"
+  },
+  {
+    "name": "A 配合伸展将已套在头上的T恤往下拉至脖子",
+    "level": "L3",
+    "parent_name": "项目十一：穿T恤",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "配合伸展将已套在头上的T恤往下拉至脖子"
+  },
+  {
+    "name": "B 将已穿上一只袖的T恤穿妥",
+    "level": "L3",
+    "parent_name": "项目十一：穿T恤",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "将已穿上一只袖的T恤穿妥"
+  },
+  {
+    "name": "C 穿上T恤",
+    "level": "L3",
+    "parent_name": "项目十一：穿T恤",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "完整穿上T恤"
+  },
+  {
+    "name": "D 穿上背心内衣",
+    "level": "L3",
+    "parent_name": "项目十一：穿T恤",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "穿上背心内衣"
+  },
+  {
+    "name": "项目十二：穿其他衣物",
+    "level": "L2",
+    "parent_name": "穿脱衣物与配件训练",
+    "age_min_months": 24,
+    "age_max_months": 60,
+    "prompt_corpus": "训练儿童穿戴帽子、手套及围巾等配件"
+  },
+  {
+    "name": "A 戴上帽子",
+    "level": "L3",
+    "parent_name": "项目十二：穿其他衣物",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "戴上帽子"
+  },
+  {
+    "name": "B 将指环套在手指上",
+    "level": "L3",
+    "parent_name": "项目十二：穿其他衣物",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "将指环套在手指上"
+  },
+  {
+    "name": "C 穿上手套",
+    "level": "L3",
+    "parent_name": "项目十二：穿其他衣物",
+    "age_min_months": 36,
+    "age_max_months": 60,
+    "prompt_corpus": "穿上手套：包含没有个别手指部分的手套(3-4岁)及有个别手指部分的手套(4-5岁)"
+  },
+  {
+    "name": "D 把围巾围在脖子上",
+    "level": "L3",
+    "parent_name": "项目十二：穿其他衣物",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "把围巾围在脖子上"
+  },
+  {
+    "name": "项目十三：处理鞋的系扣物-魔术贴",
+    "level": "L2",
+    "parent_name": "穿脱衣物与配件训练",
+    "age_min_months": 12,
+    "age_max_months": 36,
+    "prompt_corpus": "学习操作鞋子的魔术贴开关"
+  },
+  {
+    "name": "A 解开魔术贴",
+    "level": "L3",
+    "parent_name": "项目十三：处理鞋的系扣物-魔术贴",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "解开魔术贴"
+  },
+  {
+    "name": "B 扣合魔术贴",
+    "level": "L3",
+    "parent_name": "项目十三：处理鞋的系扣物-魔术贴",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "扣合魔术贴"
+  },
+  {
+    "name": "项目十四：处理鞋的系扣物-鞋扣、鞋带",
+    "level": "L2",
+    "parent_name": "穿脱衣物与配件训练",
+    "age_min_months": 36,
+    "age_max_months": 72,
+    "prompt_corpus": "学习进阶鞋具系扣技巧"
+  },
+  {
+    "name": "A 解开鞋扣(穿扣类)",
+    "level": "L3",
+    "parent_name": "项目十四：处理鞋的系扣物-鞋扣、鞋带",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "解开鞋扣"
+  },
+  {
+    "name": "B 解开鞋带",
+    "level": "L3",
+    "parent_name": "项目十四：处理鞋的系扣物-鞋扣、鞋带",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "解开鞋带"
+  },
+  {
+    "name": "C 扣合鞋扣(穿扣类)",
+    "level": "L3",
+    "parent_name": "项目十四：处理鞋的系扣物-鞋扣、鞋带",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "扣合鞋扣"
+  },
+  {
+    "name": "D 用鞋带结基本结",
+    "level": "L3",
+    "parent_name": "项目十四：处理鞋的系扣物-鞋扣、鞋带",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "用鞋带结基本结"
+  },
+  {
+    "name": "E 系鞋带",
+    "level": "L3",
+    "parent_name": "项目十四：处理鞋的系扣物-鞋扣、鞋带",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "系鞋带"
+  },
+  {
+    "name": "F 穿鞋带",
+    "level": "L3",
+    "parent_name": "项目十四：处理鞋的系扣物-鞋扣、鞋带",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "穿鞋带"
+  },
+  {
+    "name": "项目十五：处理拉链",
+    "level": "L2",
+    "parent_name": "穿脱衣物与配件训练",
+    "age_min_months": 12,
+    "age_max_months": 60,
+    "prompt_corpus": "处理各类拉链操作"
+  },
+  {
+    "name": "A 拉开连尾拉链",
+    "level": "L3",
+    "parent_name": "项目十五：处理拉链",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "拉开连尾拉链"
+  },
+  {
+    "name": "B 拉合连尾拉链",
+    "level": "L3",
+    "parent_name": "项目十五：处理拉链",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "拉合连尾拉链"
+  },
+  {
+    "name": "C 拉开开尾拉链",
+    "level": "L3",
+    "parent_name": "项目十五：处理拉链",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "拉开开尾拉链"
+  },
+  {
+    "name": "D 拉合开尾拉链",
+    "level": "L3",
+    "parent_name": "项目十五：处理拉链",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "拉合开尾拉链"
+  },
+  {
+    "name": "项目十六：处理钮扣",
+    "level": "L2",
+    "parent_name": "穿脱衣物与配件训练",
+    "age_min_months": 24,
+    "age_max_months": 60,
+    "prompt_corpus": "处理钮扣操作"
+  },
+  {
+    "name": "A 解开放于桌上的大钮扣",
+    "level": "L3",
+    "parent_name": "项目十六：处理钮扣",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "解开放于桌上的大钮扣"
+  },
+  {
+    "name": "B 扣合放于桌上的大钮扣",
+    "level": "L3",
+    "parent_name": "项目十六：处理钮扣",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "扣合放于桌上的大钮扣"
+  },
+  {
+    "name": "C 解开大钮扣",
+    "level": "L3",
+    "parent_name": "项目十六：处理钮扣",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "解开大钮扣"
+  },
+  {
+    "name": "D 扣合大钮扣",
+    "level": "L3",
+    "parent_name": "项目十六：处理钮扣",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "扣合大钮扣"
+  },
+  {
+    "name": "E 解开小钮扣",
+    "level": "L3",
+    "parent_name": "项目十六：处理钮扣",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "解开小钮扣"
+  },
+  {
+    "name": "F 扣合小钮扣",
+    "level": "L3",
+    "parent_name": "项目十六：处理钮扣",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "扣合小钮扣"
+  },
+  {
+    "name": "项目十七：处理其他系扣物",
+    "level": "L2",
+    "parent_name": "穿脱衣物与配件训练",
+    "age_min_months": 24,
+    "age_max_months": 60,
+    "prompt_corpus": "处理其他特殊系扣物，如暗扣、安全扣、皮带扣"
+  },
+  {
+    "name": "A 解开大「暗」钮",
+    "level": "L3",
+    "parent_name": "项目十七：处理其他系扣物",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "解开大暗钮"
+  },
+  {
+    "name": "B 扣合大「暗」钮",
+    "level": "L3",
+    "parent_name": "项目十七：处理其他系扣物",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "扣合大暗钮"
+  },
+  {
+    "name": "C 扣合安全扣",
+    "level": "L3",
+    "parent_name": "项目十七：处理其他系扣物",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "扣合安全扣"
+  },
+  {
+    "name": "D 解开皮带扣",
+    "level": "L3",
+    "parent_name": "项目十七：处理其他系扣物",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "解开皮带扣"
+  },
+  {
+    "name": "E 解开安全扣",
+    "level": "L3",
+    "parent_name": "项目十七：处理其他系扣物",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "解开安全扣"
+  },
+  {
+    "name": "F 扣合皮带扣",
+    "level": "L3",
+    "parent_name": "项目十七：处理其他系扣物",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "扣合皮带扣"
+  },
+  {
+    "name": "梳洗技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "梳洗技能的整体训练架构，包含擦拭身体、清洗身体、刷牙漱口、梳理头发及护理皮肤五大项目。"
+  },
+  {
+    "name": "项目一：指抹身体",
+    "level": "L2",
+    "parent_name": "梳洗技能",
+    "age_min_months": 12,
+    "age_max_months": 72,
+    "prompt_corpus": "指抹身体的各阶段训练，包括用毛巾擦拭嘴、手、脸，以及用纸巾擦鼻涕、扭干毛巾、擦拭身体等精细动作训练。"
+  },
+  {
+    "name": "用毛巾抹嘴",
+    "level": "L3",
+    "parent_name": "项目一：指抹身体",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "训练儿童学习使用粗略毛巾进行抹嘴动作。"
+  },
+  {
+    "name": "用毛巾粗略地抹手",
+    "level": "L3",
+    "parent_name": "项目一：指抹身体",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "训练儿童学习使用粗略毛巾进行抹手动作。"
+  },
+  {
+    "name": "用毛巾粗略地抹脸",
+    "level": "L3",
+    "parent_name": "项目一：指抹身体",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "训练儿童学习使用粗略毛巾进行抹脸动作。"
+  },
+  {
+    "name": "取纸巾或厕纸抹鼻涕",
+    "level": "L3",
+    "parent_name": "项目一：指抹身体",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "训练儿童自主取纸巾或厕纸擦拭鼻涕的卫生习惯。"
+  },
+  {
+    "name": "扭干毛巾",
+    "level": "L3",
+    "parent_name": "项目一：指抹身体",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "训练儿童手部协调与力量，学习如何扭干毛巾。"
+  },
+  {
+    "name": "用毛巾仔细抹脸",
+    "level": "L3",
+    "parent_name": "项目一：指抹身体",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "训练儿童使用毛巾进行更细致的脸部清洁。"
+  },
+  {
+    "name": "用毛巾抹干身体",
+    "level": "L3",
+    "parent_name": "项目一：指抹身体",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "训练儿童独立使用毛巾擦干全身。"
+  },
+  {
+    "name": "项目二：清洗身体",
+    "level": "L2",
+    "parent_name": "梳洗技能",
+    "age_min_months": 12,
+    "age_max_months": 72,
+    "prompt_corpus": "涵盖洗手、开关水龙头、使用肥皂、模拟洗澡及自行淋浴等与身体清洁相关的训练。"
+  },
+  {
+    "name": "用水洗手",
+    "level": "L3",
+    "parent_name": "项目二：清洗身体",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "基础洗手训练，培养儿童用水洗手的习惯。"
+  },
+  {
+    "name": "开、关水龙头",
+    "level": "L3",
+    "parent_name": "项目二：清洗身体",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "训练儿童操作水龙头的力度与精准度。"
+  },
+  {
+    "name": "用肥皂洗手",
+    "level": "L3",
+    "parent_name": "项目二：清洗身体",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "学习配合肥皂进行手部清洁。"
+  },
+  {
+    "name": "用枧液洗手(按压式瓶装枧液)",
+    "level": "L3",
+    "parent_name": "项目二：清洗身体",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "学习使用按压式瓶装洗手液进行清洁。"
+  },
+  {
+    "name": "模拟用毛巾替洋娃娃洗脸",
+    "level": "L3",
+    "parent_name": "项目二：清洗身体",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "透过角色扮演，模拟洗脸的动作顺序。"
+  },
+  {
+    "name": "模拟替洋娃娃洗澡",
+    "level": "L3",
+    "parent_name": "项目二：清洗身体",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "透过模拟游戏，学习洗澡的程序。"
+  },
+  {
+    "name": "自行洗澡",
+    "level": "L3",
+    "parent_name": "项目二：清洗身体",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "培养儿童独立完成洗澡流程的能力。"
+  },
+  {
+    "name": "站在花洒或水龙头下冲洗头发",
+    "level": "L3",
+    "parent_name": "项目二：清洗身体",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "训练儿童适应在花洒或水龙头下冲水而不害怕的技巧。"
+  },
+  {
+    "name": "项目三：刷牙漱口",
+    "level": "L2",
+    "parent_name": "梳洗技能",
+    "age_min_months": 12,
+    "age_max_months": 72,
+    "prompt_corpus": "涵盖从成人协助到自行刷牙与漱口的完整口腔卫生训练路径。"
+  },
+  {
+    "name": "成人将牙刷轻贴唇部，能配合张口",
+    "level": "L3",
+    "parent_name": "项目三：刷牙漱口",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "口腔脱敏与合作训练，让儿童适应牙刷触碰。"
+  },
+  {
+    "name": "用手握牙刷放入口",
+    "level": "L3",
+    "parent_name": "项目三：刷牙漱口",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "训练儿童主动握住牙刷并放置口中的手眼协调能力。"
+  },
+  {
+    "name": "用牙刷粗略地刷牙",
+    "level": "L3",
+    "parent_name": "项目三：刷牙漱口",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "初步刷牙技巧培养。"
+  },
+  {
+    "name": "用清水漱口",
+    "level": "L3",
+    "parent_name": "项目三：刷牙漱口",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "训练漱口动作，学习不吞咽清水。"
+  },
+  {
+    "name": "用牙刷仔细地刷牙",
+    "level": "L3",
+    "parent_name": "项目三：刷牙漱口",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "提升刷牙的彻底度与细致度。"
+  },
+  {
+    "name": "用挤有牙膏的牙刷刷牙",
+    "level": "L3",
+    "parent_name": "项目三：刷牙漱口",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "适应使用牙膏刷牙的感觉。"
+  },
+  {
+    "name": "将适量牙膏挤在牙刷上",
+    "level": "L3",
+    "parent_name": "项目三：刷牙漱口",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "训练控制牙膏挤出量的精细动作。"
+  },
+  {
+    "name": "有早晚刷牙的习惯",
+    "level": "L3",
+    "parent_name": "项目三：刷牙漱口",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "建立规律的日常口腔卫生习惯。"
+  },
+  {
+    "name": "项目四：梳理头发",
+    "level": "L2",
+    "parent_name": "梳洗技能",
+    "age_min_months": 24,
+    "age_max_months": 72,
+    "prompt_corpus": "包含对吹风机的适应、模拟梳头到自行梳理头发的步骤。"
+  },
+  {
+    "name": "接受用吹风机吹头发",
+    "level": "L3",
+    "parent_name": "项目四：梳理头发",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "降低儿童对吹风机声音及风力的敏感度。"
+  },
+  {
+    "name": "模拟用梳替洋娃娃梳头",
+    "level": "L3",
+    "parent_name": "项目四：梳理头发",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "透过模拟练习掌握梳头动作。"
+  },
+  {
+    "name": "用梳粗略地梳头",
+    "level": "L3",
+    "parent_name": "项目四：梳理头发",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "初步训练自行操作梳子。"
+  },
+  {
+    "name": "自行用梳将头发梳理整齐",
+    "level": "L3",
+    "parent_name": "项目四：梳理头发",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "培养独立完成头发整理的能力。"
+  },
+  {
+    "name": "项目五：护理皮肤",
+    "level": "L2",
+    "parent_name": "梳洗技能",
+    "age_min_months": 12,
+    "age_max_months": 72,
+    "prompt_corpus": "关于护唇膏与润肤膏使用的训练，从成人协助到自行操作。"
+  },
+  {
+    "name": "成人代涂唇膏，配合不动(主要为头部)",
+    "level": "L3",
+    "parent_name": "项目五：护理皮肤",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "建立涂抹护唇膏时的配合度与身体稳定度。"
+  },
+  {
+    "name": "把润唇膏涂在唇上",
+    "level": "L3",
+    "parent_name": "项目五：护理皮肤",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "训练儿童正确操作润唇膏涂抹嘴唇。"
+  },
+  {
+    "name": "用手涂抹润肤膏或润肤液",
+    "level": "L3",
+    "parent_name": "项目五：护理皮肤",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "训练使用手部涂抹润肤产品。"
+  },
+  {
+    "name": "将适量的润肤膏或润肤液挤在手中",
+    "level": "L3",
+    "parent_name": "项目五：护理皮肤",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "精细动作训练：控制挤出润肤乳的用量。"
+  },
+  {
+    "name": "修剪指甲",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 12,
+    "age_max_months": 72,
+    "prompt_corpus": "修剪指甲训练：包括成人协助修剪指甲时儿童的配合，以及独立使用指甲钳修剪指甲与脚趾甲。"
+  },
+  {
+    "name": "家居技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 12,
+    "age_max_months": 72,
+    "prompt_corpus": "家居生活自理技能训练，涵盖收纳玩具、文具、书籍、衣物、餐具及简单家居用品整理。"
+  },
+  {
+    "name": "收拾－玩具、文具、书本",
+    "level": "L2",
+    "parent_name": "家居技能",
+    "age_min_months": 12,
+    "age_max_months": 60,
+    "prompt_corpus": "学习整理与摆放个人物品，包含将玩具交给成人、摆放在固定位置、装入书包或笔袋，以及放入玩具包装盒。"
+  },
+  {
+    "name": "收拾－衣物（摆放）",
+    "level": "L2",
+    "parent_name": "家居技能",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "学习衣物收纳技巧，包含将鞋袜放于指定位置、将衣物放入抽屉、推入抽屉以及拉开抽屉。"
+  },
+  {
+    "name": "收拾－衣物（钩挂）",
+    "level": "L2",
+    "parent_name": "家居技能",
+    "age_min_months": 24,
+    "age_max_months": 60,
+    "prompt_corpus": "学习衣物挂存技巧，包含将胶圈挂在钩子上、将物件挂在固定位置、将毛巾或外套挂在衣架上。"
+  },
+  {
+    "name": "收拾－餐具、食物",
+    "level": "L2",
+    "parent_name": "家居技能",
+    "age_min_months": 24,
+    "age_max_months": 72,
+    "prompt_corpus": "学习餐后清理与保存食物，包含收纳小毛巾、折叠毛巾、处理盖子、进食后清理、密封食物及收拾碗筷。"
+  },
+  {
+    "name": "收拾－家居用品",
+    "level": "L2",
+    "parent_name": "家居技能",
+    "age_min_months": 12,
+    "age_max_months": 72,
+    "prompt_corpus": "学习基础家务，包含将垃圾放入废纸箱、将椅子移至原位、整理枕头和被铺。"
+  },
+  {
+    "name": "打扫清洁",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "打扫清洁相关训练项目"
+  },
+  {
+    "name": "扭干毛巾",
+    "level": "L2",
+    "parent_name": "打扫清洁",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "训练儿童学会扭干毛巾的动作"
+  },
+  {
+    "name": "用抹桌子",
+    "level": "L2",
+    "parent_name": "打扫清洁",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "训练儿童使用抹布擦拭桌子"
+  },
+  {
+    "name": "简单地清洁餐具",
+    "level": "L2",
+    "parent_name": "打扫清洁",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "训练儿童进行简单的餐具清洁工作"
+  },
+  {
+    "name": "使用简单的清洁用品",
+    "level": "L2",
+    "parent_name": "打扫清洁",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "训练儿童正确使用简单的清洁工具或用品"
+  },
+  {
+    "name": "处理门窗户",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "有关操作门与窗户的训练项目"
+  },
+  {
+    "name": "将门关上",
+    "level": "L2",
+    "parent_name": "处理门窗户",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "训练儿童学习将门关上的动作"
+  },
+  {
+    "name": "扭动门的把手开门",
+    "level": "L2",
+    "parent_name": "处理门窗户",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "训练儿童通过扭动把手开启门扇"
+  },
+  {
+    "name": "拉动横拉式的开门",
+    "level": "L2",
+    "parent_name": "处理门窗户",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "训练儿童操作横拉式门扇的开关技巧"
+  },
+  {
+    "name": "用钥匙开关",
+    "level": "L2",
+    "parent_name": "处理门窗户",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "训练儿童使用钥匙开门或锁门"
+  },
+  {
+    "name": "开启及锁上防盗链",
+    "level": "L2",
+    "parent_name": "处理门窗户",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "训练儿童操作防盗链的安全技巧"
+  },
+  {
+    "name": "开关窗户",
+    "level": "L2",
+    "parent_name": "处理门窗户",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "训练儿童安全开关窗户"
+  },
+  {
+    "name": "使用家居电器",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "有关家居电器使用的训练项目"
+  },
+  {
+    "name": "开关冰箱门并从中取食物",
+    "level": "L2",
+    "parent_name": "使用家居电器",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "训练儿童安全开关冰箱并拿取简易食物"
+  },
+  {
+    "name": "开关电视机",
+    "level": "L2",
+    "parent_name": "使用家居电器",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "训练儿童操作电视机电源开关"
+  },
+  {
+    "name": "开关电灯",
+    "level": "L2",
+    "parent_name": "使用家居电器",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "训练儿童操作电灯开关"
+  },
+  {
+    "name": "正确地开关有热水供应的水龙头",
+    "level": "L2",
+    "parent_name": "使用家居电器",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "训练儿童安全操作供应热水的水龙头"
+  },
+  {
+    "name": "使用公众设施",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "有关公众设施使用的训练项目"
+  },
+  {
+    "name": "使用升降机的按钮",
+    "level": "L2",
+    "parent_name": "使用公众设施",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "训练儿童正确按压电梯楼层按钮"
+  },
+  {
+    "name": "使用自动电梯",
+    "level": "L2",
+    "parent_name": "使用公众设施",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "训练儿童安全搭乘自动扶梯"
+  },
+  {
+    "name": "使用交通灯",
+    "level": "L2",
+    "parent_name": "使用公众设施",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "训练儿童识别并遵守交通灯号规则"
+  },
+  {
+    "name": "进食技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 0,
+    "age_max_months": 48,
+    "prompt_corpus": "进食技能训练指南"
+  },
+  {
+    "name": "基本口肌控制",
+    "level": "L2",
+    "parent_name": "进食技能",
+    "age_min_months": 0,
+    "age_max_months": 48,
+    "prompt_corpus": "基本口肌控制训练项目"
+  },
+  {
+    "name": "吸啜奶瓶内的液体",
+    "level": "L3",
+    "parent_name": "基本口肌控制",
+    "age_min_months": 0,
+    "age_max_months": 3,
+    "prompt_corpus": "训练儿童吸啜奶瓶内的液体"
+  },
+  {
+    "name": "吞咽流质食物",
+    "level": "L3",
+    "parent_name": "基本口肌控制",
+    "age_min_months": 0,
+    "age_max_months": 3,
+    "prompt_corpus": "训练儿童吞咽流质食物"
+  },
+  {
+    "name": "吞咽稀糊状食物",
+    "level": "L3",
+    "parent_name": "基本口肌控制",
+    "age_min_months": 3,
+    "age_max_months": 6,
+    "prompt_corpus": "训练儿童吞咽稀糊状食物"
+  },
+  {
+    "name": "合唇取匙羹上的食物入口",
+    "level": "L3",
+    "parent_name": "基本口肌控制",
+    "age_min_months": 6,
+    "age_max_months": 6,
+    "prompt_corpus": "训练儿童合唇取匙羹上的食物入口"
+  },
+  {
+    "name": "吞咽黏糊状食物",
+    "level": "L3",
+    "parent_name": "基本口肌控制",
+    "age_min_months": 6,
+    "age_max_months": 12,
+    "prompt_corpus": "训练儿童吞咽黏糊状食物，包括粥及薯茸"
+  },
+  {
+    "name": "用乳齿门牙咬断脆的固体食物",
+    "level": "L3",
+    "parent_name": "基本口肌控制",
+    "age_min_months": 6,
+    "age_max_months": 12,
+    "prompt_corpus": "训练儿童用乳齿门牙咬断脆的固体食物"
+  },
+  {
+    "name": "咀嚼软的固体食物",
+    "level": "L3",
+    "parent_name": "基本口肌控制",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "训练儿童咀嚼软的固体食物"
+  },
+  {
+    "name": "咀嚼硬的固体食物",
+    "level": "L3",
+    "parent_name": "基本口肌控制",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "训练儿童咀嚼硬的固体食物"
+  },
+  {
+    "name": "进食硬而韧的固体食物",
+    "level": "L3",
+    "parent_name": "基本口肌控制",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "训练儿童进食硬而韧的固体食物"
+  },
+  {
+    "name": "嘴唇按摩活动",
+    "level": "L4",
+    "parent_name": "进食技能",
+    "age_min_months": 0,
+    "age_max_months": 3,
+    "prompt_corpus": "在儿童以奶瓶进食前，成人可先替儿童做简单的嘴唇按摩（如：用食指围绕嘴唇四周轻轻按压），加强儿童唇四周的触觉刺激。"
+  },
+  {
+    "name": "吸啜舌头运动训练",
+    "level": "L4",
+    "parent_name": "进食技能",
+    "age_min_months": 0,
+    "age_max_months": 3,
+    "prompt_corpus": "儿童以奶瓶进食时，用奶瓶上的奶嘴有节奏地轻轻按压儿童舌头数下，协助儿童建立吸啜及吞咽所需的舌头动作节奏。"
+  },
+  {
+    "name": "吞咽反射刺激训练",
+    "level": "L4",
+    "parent_name": "进食技能",
+    "age_min_months": 3,
+    "age_max_months": 6,
+    "prompt_corpus": "预备用水稀释了的苹果汁，以小吸管头吸起一小滴果汁，放进儿童口中，刺激口腔内的肌肉收缩作吞咽。"
+  },
+  {
+    "name": "学前儿童训练指南——自理",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童进食技能训练指南。"
+  },
+  {
+    "name": "进食技能",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南——自理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童的进食技能训练活动，包括吞咽反应诱导、咀嚼模仿及进食动作辅助。"
+  },
+  {
+    "name": "诱导吞咽动作",
+    "level": "L3",
+    "parent_name": "进食技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "训练目标：诱发吞咽动作。活动建议：使用稀糊状食物（如奶米糊），以较平而细小的胶匙轻触儿童唇边，待其张口后放入，鼓励闭唇并取出汤匙，成人可轻托下巴并向上扫，刺激吞咽反射。"
+  },
+  {
+    "name": "咀嚼及唇部动作训练",
+    "level": "L3",
+    "parent_name": "进食技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "训练目标：强化咀嚼及闭唇动作。活动建议：利用蘸酱的雪条棒，引导儿童舔食，并面对镜子模仿动作。可辅以「三指颚部控制法」：拇指置于下唇，中指于下颚，食指于面颊，协助儿童张闭口及合唇。"
+  },
+  {
+    "name": "进食动作辅助",
+    "level": "L3",
+    "parent_name": "进食技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "训练目标：辅助儿童顺利进食。活动建议：用匙羹取少量奶米糊放于口中，托住下颚提示合唇。待其合唇后缓慢拉出汤匙。成人可用拇指置于下唇，中指于下颚，食指于上唇，以手指协调动作帮助进食。"
+  },
+  {
+    "name": "学前儿童训练指南—自理",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南—自理"
+  },
+  {
+    "name": "进食技能",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南—自理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动建议—进食技能"
+  },
+  {
+    "name": "匙羹进食训练",
+    "level": "L3",
+    "parent_name": "进食技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "把盛有糊状食物（如麦皮、杏仁糊、芝麻糊、花生糊、合桃糊）的匙羹放进儿童的口中近嘴唇位置，接著鼓励儿童合唇，用上唇把食物从匙羹取下。如有需要，成人可将拇指放于儿童下唇，中指放于下颚，食指放于上唇位置，以拇指及食指动作协助儿童合唇进食匙羹上的食物。"
+  },
+  {
+    "name": "咀嚼能力训练",
+    "level": "L3",
+    "parent_name": "进食技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "1. 示范用手势及嘴巴有节奏地开合，以吸引儿童注视，接著将手放在儿童的下颚，协助他开合嘴巴，再将星星饼或粒状小吃放在门牙上，让儿童咬断食物。 2. 把饼干条或脆的条状食物放在儿童的门牙上，提示儿童把饼干咬断。"
+  },
+  {
+    "name": "学前儿童训练指南",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童进食技能训练指南，涵盖咀嚼能力发展。"
+  },
+  {
+    "name": "进食技能",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童的进食与咀嚼能力训练活动建议。"
+  },
+  {
+    "name": "咀嚼能力训练",
+    "level": "L3",
+    "parent_name": "进食技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过不同软硬度食物的引导，提升儿童大牙咀嚼及咬断食物的能力。"
+  },
+  {
+    "name": "纱布条包裹咀嚼训练",
+    "level": "L4",
+    "parent_name": "咀嚼能力训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "预先剪出较长的纱布条，包裹软的食物（如软糖），放入儿童的大牙上，引导儿童尝试咀嚼，待能力提升后可转用较硬的食物（如牙饼）。"
+  },
+  {
+    "name": "多样化质地食物训练",
+    "level": "L4",
+    "parent_name": "咀嚼能力训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "预备不同种类的软食物（如南瓜茸波、薯茸波、香蕉、芝士、鱼肉肠、蛋糕等），示范将食物放在大牙上咀嚼，接著让儿童尝试。能力提升后可尝试硬食物（如苹果粒、梨子粒）。"
+  },
+  {
+    "name": "咬断与咀嚼硬食物训练",
+    "level": "L4",
+    "parent_name": "咀嚼能力训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "将硬食物（如梨子、苹果、翠肉瓜、去皮菜心茎等）切成片状或粗条状，放置在儿童门牙位置，训练儿童自行咬断并进行咀嚼。"
+  },
+  {
+    "name": "进食技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童的进食技能训练。"
+  },
+  {
+    "name": "咀嚼能力训练",
+    "level": "L2",
+    "parent_name": "进食技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "提升儿童对不同硬度食物的咀嚼技巧。"
+  },
+  {
+    "name": "手偶咀嚼模拟",
+    "level": "L3",
+    "parent_name": "咀嚼能力训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "把玩具食物放进手偶的口中，模拟咀嚼食物，并一边操控手偶咬食物，一边从1数到10。接著示范把芒果干放在大牙用力咬，并请儿童点算成人咬了多少下。成人再把另一块芒果干放在儿童大牙上，请儿童用力咬，每咬一下，成人便数数，看看儿童能咬多少下，让儿童练习咀嚼硬而韧的食物。所需材料：硬而韧的食物（如：芒果干、猪肉干）、手偶、玩具食物。"
+  },
+  {
+    "name": "制作食物大串烧",
+    "level": "L3",
+    "parent_name": "咀嚼能力训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童一起制作「食物大串烧」，先将各种不同硬度的食物用竹签串起，接著请各人挑选自己喜欢的食物串享用，并于进食时鼓励儿童咀嚼食物。所需材料：不同软硬度的食物（如：鸡肉粒、牛肉粒、蕃薯干粒、芒果干、猪肉干等）。"
+  },
+  {
+    "name": "进饮技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 6,
+    "age_max_months": 48,
+    "prompt_corpus": "学前儿童训练指南—进饮技能概览"
+  },
+  {
+    "name": "进饮匙羹上的液体",
+    "level": "L2",
+    "parent_name": "进饮技能",
+    "age_min_months": 6,
+    "age_max_months": 12,
+    "prompt_corpus": "示范用匙羹将饮料放进口中，合唇取匙羹上的饮料并吞下，接著成人将1匙羹放进儿童口中，请儿童合唇取匙羹上的饮料。如有需要，成人可将拇指放于儿童下唇、中指放于下颚及食指放于上唇位置，以拇指及食指的动作协助儿童合唇进饮匙羹上的饮料。"
+  },
+  {
+    "name": "用双手捧奶瓶进饮",
+    "level": "L2",
+    "parent_name": "进饮技能",
+    "age_min_months": 9,
+    "age_max_months": 12,
+    "prompt_corpus": "示范用双手捧起奶瓶，接著成人握著儿童双手，捧起盛有儿童喜欢饮料的奶瓶进饮，待儿童握稳奶瓶后，成人尝试放开其中一只手，如儿童仍能握稳奶瓶进饮，成人可尝试放开另一只手，让儿童自行用双手捧奶瓶进饮。"
+  },
+  {
+    "name": "在成人代拿著杯时，懂得用杯进饮",
+    "level": "L2",
+    "parent_name": "进饮技能",
+    "age_min_months": 9,
+    "age_max_months": 12,
+    "prompt_corpus": "在成人代拿著杯时，学习并适应利用杯子进行进饮操作。"
+  },
+  {
+    "name": "用吸管吸饮",
+    "level": "L2",
+    "parent_name": "进饮技能",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "学习使用吸管进行吸饮动作。"
+  },
+  {
+    "name": "自行用杯进饮而不溅出",
+    "level": "L2",
+    "parent_name": "进饮技能",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "练习自行手持杯子进饮，并控制力度避免饮料溅出。"
+  },
+  {
+    "name": "用碗进饮",
+    "level": "L2",
+    "parent_name": "进饮技能",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "学习使用碗进行进饮练习。"
+  },
+  {
+    "name": "用汤匙喝汤而不溅出",
+    "level": "L2",
+    "parent_name": "进饮技能",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "练习控制手部动作，使用汤匙舀取汤水进饮而不溅出。"
+  },
+  {
+    "name": "用儿童水壶进饮",
+    "level": "L2",
+    "parent_name": "进饮技能",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "使用各类儿童水壶（包括吸管型、壶嘴型）进行独立进饮。"
+  },
+  {
+    "name": "学前儿童训练指南：进食技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南中的进食技能发展训练。"
+  },
+  {
+    "name": "饮水与吸吮训练",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南：进食技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过不同杯具及吸管训练儿童的进食与饮水技巧。"
+  },
+  {
+    "name": "小胶杯进饮训练",
+    "level": "L3",
+    "parent_name": "饮水与吸吮训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "拿著盛有一口份量饮料的小胶杯，靠向儿童的嘴唇，协助儿童合唇进饮。当儿童掌握技巧后，成人可把饮料的份量逐步增加，鼓励儿童持续进杯中饮料。"
+  },
+  {
+    "name": "吸管吸吮训练",
+    "level": "L3",
+    "parent_name": "饮水与吸吮训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "包含从简单吸吮到使用不同长度及形态吸管的进阶训练。"
+  },
+  {
+    "name": "基础直吸管训练",
+    "level": "L4",
+    "parent_name": "吸管吸吮训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "把吸管放进饮料内，用食指按著吸管的顶端开口，吸起少许饮料。接著把吸管底部放进儿童口中，当儿童开始有吸吮动作时，成人可轻轻放松按著吸管顶端的指头，让儿童进饮。"
+  },
+  {
+    "name": "纸包饮料吸吮技巧",
+    "level": "L4",
+    "parent_name": "吸管吸吮训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "示范用吸管吸纸包饮料，接著把饮料递向儿童，鼓励儿童合唇含著吸管。成人用手轻轻挤压纸包饮料，使饮料从吸管流入儿童的口内，让儿童知道可从吸管中吸吮饮料。尝试数次后，鼓励儿童自行用吸管吸吮。先用较短的吸管，让儿童较易成功吸吮，接著逐渐转用较长的吸管，提升儿童吸吮的力度。"
+  },
+  {
+    "name": "吸管进阶形态应用",
+    "level": "L4",
+    "parent_name": "吸管吸吮训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "当儿童能掌握运用普通吸管进饮后，成人出示不同形态的吸管，让儿童选择喜欢的吸管来进饮成人预先准备好的果汁，提升儿童使用吸管吸饮的能力。"
+  },
+  {
+    "name": "学前儿童训练指南：自理",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南：自理领域训练活动"
+  },
+  {
+    "name": "进食技能",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南：自理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "提升儿童独立进食的各项能力与技巧，包含饮水及使用餐具。"
+  },
+  {
+    "name": "吸管饮水训练",
+    "level": "L3",
+    "parent_name": "进食技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "示范用吸管吸迷你啫喱，接著请儿童用吸管吸啫喱，以提升儿童的吸啜能力。所需物资：吸管、迷你啫喱杯。"
+  },
+  {
+    "name": "双耳杯进食训练",
+    "level": "L3",
+    "parent_name": "进食技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "示范用双手拿著双耳杯进食，接著握著儿童双手，一同拿著盛有儿童一口份量饮料的双耳杯让儿童进食。如儿童能成功进食，成人可把饮料份量逐渐增加，当儿童开始进食，成人尝试放开手，让儿童自行拿著双耳杯进食。如儿童能自行利用双耳杯成功进食而不溅出，成人可把饮料份量逐步增加。所需物资：双耳杯、饮料。"
+  },
+  {
+    "name": "过渡至无耳杯训练",
+    "level": "L3",
+    "parent_name": "进食技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示盛有儿童喜爱饮料的单耳杯，请儿童以一手拿著杯子进食。成功后可把单耳杯转成无耳杯，让儿童再作尝试。所需物资：单耳杯、无耳杯、儿童喜欢的饮料。"
+  },
+  {
+    "name": "碗进食训练",
+    "level": "L3",
+    "parent_name": "进食技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "把少量饮料倒进儿童碗中，让儿童尝试双手拿起碗进食，并提示儿童慢慢进食。如儿童能自行用碗成功进食而不溅出，成人可把饮料的份量逐步增加。所需物资：儿童碗、饮料。"
+  },
+  {
+    "name": "汤匙进食与清洁训练",
+    "level": "L3",
+    "parent_name": "进食技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "预备2个盛了汤的儿童碗，把纸巾放在碗下面，与儿童一起用汤匙喝汤，提示儿童要小心地喝，不可弄湿纸巾。完成后，与儿童比较纸巾清洁。所需物资：碗及汤匙2份、汤、纸巾。"
+  },
+  {
+    "name": "学前儿童训练指南—自理",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南—自理"
+  },
+  {
+    "name": "进食技能",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南—自理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童的进食相关技能训练活动建议。"
+  },
+  {
+    "name": "学习使用不同类型的水壶",
+    "level": "L3",
+    "parent_name": "进食技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "当儿童能自行用杯和吸管进饮后，成人与儿童外出时，可以使用不同类型的水壶盛水供儿童饮用，借此让儿童学习操作和使用不同结构及设计的水壶来进饮。"
+  },
+  {
+    "name": "基本进食技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "基本进食技能的训练，涵盖使用手指抓取食物与辨别可进食物品的能力。"
+  },
+  {
+    "name": "用手指把食物放进口里",
+    "level": "L2",
+    "parent_name": "基本进食技能",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "目标为训练儿童使用手指抓取食物并正确放入口中。"
+  },
+  {
+    "name": "辨别可进食及不可进食的物件",
+    "level": "L2",
+    "parent_name": "基本进食技能",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "目标为训练儿童正确辨别适合进食与不适合进食的物件。"
+  },
+  {
+    "name": "模仿喂食娃娃",
+    "level": "L3",
+    "parent_name": "用手指把食物放进口里",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "示范用手指抓握玩具食物，喂洋娃娃进食，接著请儿童模仿成人的做法，用手指抓握食物喂洋娃娃。所需材料：玩具食物、洋娃娃。"
+  },
+  {
+    "name": "三指抓握食物进食",
+    "level": "L3",
+    "parent_name": "用手指把食物放进口里",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "示范用三指抓握粒状食物，并对著镜子把食物放进口中进食，请儿童模仿，成人可协助把儿童的手带到嘴巴附近，让儿童看著镜子尝试。所需材料：较易抓握的粒状食物（如：面包粒、蛋糕粒）、镜子。"
+  },
+  {
+    "name": "二指抓握小粒食物进食",
+    "level": "L3",
+    "parent_name": "用手指把食物放进口里",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "示范用二指抓握小粒的食物，并对著镜子把食物放进口中进食，请儿童模仿以二指抓握食物放进口中。所需材料：小粒食物（如：巧克力豆、葡萄干、玉米粒）、镜子。"
+  },
+  {
+    "name": "分类可进食与不可进食物件",
+    "level": "L3",
+    "parent_name": "辨别可进食及不可进食的物件",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "预先准备「可进食」及「不可进食」的物件，示范把「可进食」的玩具食物喂洋娃娃，并把「不可进食」的物件放进篮子，请儿童模仿成人的做法进行尝试。所需材料：玩具食物、物件、洋娃娃、篮子。"
+  },
+  {
+    "name": "学前儿童训练指南—自理",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南—自理"
+  },
+  {
+    "name": "进食技能",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南—自理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动建议—进食技能"
+  },
+  {
+    "name": "分辨可进食与不可进食物品",
+    "level": "L3",
+    "parent_name": "进食技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过游戏与生活示范，协助儿童学习辨别可进食与不可进食的物品。"
+  },
+  {
+    "name": "物品抽签配对游戏",
+    "level": "L4",
+    "parent_name": "分辨可进食与不可进食物品",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "把积木和葡萄干分别放在2个清洁的食物盒内，用毛巾盖著。请儿童抽出其中一个。当抽到盛有葡萄干的盒子时，奖励儿童进食1颗葡萄干；当抽到盛有积木的盒子时，教导儿童不可进食。重复游戏，并可用儿童喜欢的食物及其他不可进食的物件进行，以提升儿童辨别可进食及不可进食物件的能力。"
+  },
+  {
+    "name": "剥皮示范与认知",
+    "level": "L4",
+    "parent_name": "分辨可进食与不可进食物品",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "在儿童眼前把香蕉切开一半，示范剥开香蕉皮并进食香蕉，并告诉儿童：「香蕉好吃，但香蕉皮是不可进食的。」接著成人把香蕉皮放在碟上，请儿童也把香蕉皮留在碟上。成人亦可以其他有皮的水果或有骨的食物进行活动，如：橙、鸡翅膀等，让儿童学习辨别可进食及不可进食的概念。"
+  },
+  {
+    "name": "自理",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南—自理"
+  },
+  {
+    "name": "进食技能",
+    "level": "L2",
+    "parent_name": "自理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动建议—进食技能"
+  },
+  {
+    "name": "使用匙羹及碗进食",
+    "level": "L3",
+    "parent_name": "进食技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目四：使用匙羹及碗进食"
+  },
+  {
+    "name": "训练目标",
+    "level": "L4",
+    "parent_name": "使用匙羹及碗进食",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "A. 接受用匙羹喂食糊状食物/4-6 个月; B. 用掌心握匙羹/1-2 岁; C. 握匙羹并把食物送进口里（匙羹上盛有食物）/1-2 岁; D. 用匙羹进食/2-3 岁; E. 一手扶碗而另一手用匙羹从碗中舀取食物/2-3 岁; F. 用手指握匙羹/2-3 岁; G. 用匙羹进食而大致保持清洁/3-4 岁"
+  },
+  {
+    "name": "活动建议",
+    "level": "L4",
+    "parent_name": "使用匙羹及碗进食",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "1. 在儿童进餐前，先给儿童嗅一嗅南瓜茸，利用食物的香气吸引儿童。接著用婴儿胶匙羹舀少许南瓜茸，轻轻触碰儿童唇部，当儿童张开口时，把南瓜茸放入儿童口中让儿童舔食，并赞赏儿童。 2. 与儿童玩喂洋娃娃吃东西的假想游戏。把粗柄匙羹和碗交给儿童，协助儿童用掌心握匙羹，假装舀食物喂洋娃娃吃。 3. 预先在碗内放入儿童喜欢的食物，示范一手扶碗，另一手用匙羹舀食物，并假装把食物放进口里，接著请儿童模仿成人舀食物，并把食物放进口里进食。"
+  },
+  {
+    "name": "活动建议—进食技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南—自理，活动建议—进食技能。"
+  },
+  {
+    "name": "与儿童玩假想游戏",
+    "level": "L2",
+    "parent_name": "活动建议—进食技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "把玩具动物放在桌上，每只动物前面放1个碗，请儿童一起与小动物派对。预备1碗未煮熟的通心粉，示范用一手扶碗，另一手用手指握匙羹，把碗中的通心粉舀起，分放在其他小动物的碗中，一起开派对。准备物：碗、匙羹、玩具动物、未煮熟的通心粉。"
+  },
+  {
+    "name": "泥胶珠粒运送训练",
+    "level": "L2",
+    "parent_name": "活动建议—进食技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "预先将泥胶压平，放在儿童碗内，并在泥胶上放入不同颜色的珠粒或小豆。成人示范一手扶碗，另一手用手指握匙羹将珠粒放进另一个碗内，请儿童模仿成人的做法，自行尝试。准备物：儿童碗、小珠粒或小豆、小匙羹、泥胶。"
+  },
+  {
+    "name": "进食清洁技能训练",
+    "level": "L2",
+    "parent_name": "活动建议—进食技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "示范进食芝麻糊，并告诉儿童若不小心，便会弄脏嘴巴和脸。接著把镜子放在儿童面前，请儿童也舀食芝麻糊，提示儿童要保持清洁。完成后，与儿童一同看镜子，检查是否能保持清洁。准备物：碗、匙羹、芝麻糊、镜子。"
+  },
+  {
+    "name": "使用筷子",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 36,
+    "age_max_months": 60,
+    "prompt_corpus": "训练儿童使用筷子进行进食或游戏活动的基础技能。"
+  },
+  {
+    "name": "用筷子扒食物",
+    "level": "L2",
+    "parent_name": "使用筷子",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "训练儿童使用筷子扒动食物的基础动作。"
+  },
+  {
+    "name": "用筷子夹食物",
+    "level": "L2",
+    "parent_name": "使用筷子",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "训练儿童使用筷子夹取食物的精细动作。"
+  },
+  {
+    "name": "玩具小动物喂食游戏",
+    "level": "L3",
+    "parent_name": "用筷子扒食物",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "示范用儿童筷子把玩具食物从桌面一端拨到另一端的小动物前面，请儿童模仿大人的动作。当儿童练后，成人可与儿童比赛以手握筷子将食物推给动物，看谁比较快。"
+  },
+  {
+    "name": "洋娃娃喂食角色扮演",
+    "level": "L3",
+    "parent_name": "用筷子扒食物",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "与儿童玩喂洋娃娃吃东西的假想游戏，示范一手拿碗，一手拿儿童筷子，假装把玩具食物「扒」进洋娃娃口中。接著请儿童模仿，把洋娃娃背著自己放在膝上，再用筷子把食物「扒」进洋娃娃口中。"
+  },
+  {
+    "name": "棉花糖进食训练",
+    "level": "L3",
+    "parent_name": "用筷子扒食物",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "示范一手拿碗，一手拿儿童筷子，把碗内的小粒棉花糖，用筷子「扒」进口中，接著请儿童模仿。"
+  },
+  {
+    "name": "面条进食训练",
+    "level": "L3",
+    "parent_name": "用筷子扒食物",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "示范一手拿碗，一手拿儿童筷子，把面条用筷子「扒」进口中，请儿童模仿。"
+  },
+  {
+    "name": "进食技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学龄前儿童的进食相关技能训练，旨在提升手部操作与进食独立性。"
+  },
+  {
+    "name": "使用筷子夹取练习",
+    "level": "L2",
+    "parent_name": "进食技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过不同类型的夹取活动，循序渐进地训练儿童使用筷子夹取食物与分类物品。"
+  },
+  {
+    "name": "玩具夹取与放置",
+    "level": "L3",
+    "parent_name": "使用筷子夹取练习",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "示范用糖夹把玩具食物夹起并放于碗内，请儿童模仿。如儿童能力有所提升，成人可示范用夹型辅助筷进行活动。所需工具：方糖夹、玩具食物、碗、夹型辅助筷。"
+  },
+  {
+    "name": "水果分类游戏",
+    "level": "L3",
+    "parent_name": "使用筷子夹取练习",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童进行水果分类游戏，将4种玩具水果放在一起，并示范用辅助筷将水果夹起，放进盛有相同玩具水果的盒子内，请儿童模仿。成人可因应儿童能力，选用不同的辅助筷。所需工具：水果分类教材、辅助筷。"
+  },
+  {
+    "name": "夹取易夹食物练习",
+    "level": "L3",
+    "parent_name": "使用筷子夹取练习",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "预先把容易用筷子夹起的食物（如：面包粒、棉花糖等）放在碗内，示范一手拿辅助筷，一手拿碗，把食物夹起，放进口中进食，接著请儿童模仿。所需工具：容易用筷子夹起的食物、辅助筷。"
+  },
+  {
+    "name": "进餐时夹菜与肉",
+    "level": "L3",
+    "parent_name": "使用筷子夹取练习",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "进食时，把儿童的饭和菜分开盛载，请儿童用筷子在盛菜的小碟上夹菜和肉进食。所需工具：筷子、分开盛的饭、菜和肉。"
+  },
+  {
+    "name": "使用其他餐具",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 24,
+    "age_max_months": 60,
+    "prompt_corpus": "训练儿童使用除了筷子或汤匙之外的餐具，包括牙签、叉子及餐刀，以发展精细动作与进食独立性。"
+  },
+  {
+    "name": "用牙签取食物",
+    "level": "L2",
+    "parent_name": "使用其他餐具",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "学习使用牙签扎取食物，并练习精细动作控制。"
+  },
+  {
+    "name": "用叉子取食物",
+    "level": "L2",
+    "parent_name": "使用其他餐具",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "学习使用叉子扎取食物并送入口中。"
+  },
+  {
+    "name": "用叉子进食较难控制的食物",
+    "level": "L2",
+    "parent_name": "使用其他餐具",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "使用叉子处理如面条等较难控制或需要卷动的食物。"
+  },
+  {
+    "name": "用刀切开软的食物",
+    "level": "L2",
+    "parent_name": "使用其他餐具",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "学习使用餐刀正确用力切开软质食物。"
+  },
+  {
+    "name": "用刀把牛油或果酱涂在面包上",
+    "level": "L2",
+    "parent_name": "使用其他餐具",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "练习使用餐刀进行涂抹动作，增强手部控制力。"
+  },
+  {
+    "name": "牙签插生日蛋糕活动",
+    "level": "L3",
+    "parent_name": "用牙签取食物",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "预先用泥胶制作生日蛋糕，请儿童用前二指握牙签，插在蛋糕上当作蜡烛，并与成人一起唱生日歌。"
+  },
+  {
+    "name": "泥胶汤丸喂食游戏",
+    "level": "L3",
+    "parent_name": "用牙签取食物",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "准备有格子的方形盒子，与儿童一起用泥胶搓成汤丸，放进盒子小格中。使用前二指握牙签，插在汤丸上，假装喂给洋娃娃吃。"
+  },
+  {
+    "name": "食物串烧制作",
+    "level": "L3",
+    "parent_name": "用牙签取食物",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "与儿童一同制作小吃，将预先切好的香肠和凤梨放在碟子上，请儿童以牙签将食物串好。"
+  },
+  {
+    "name": "叉子取棉花糖与沾酱练习",
+    "level": "L3",
+    "parent_name": "用叉子取食物",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "出示碟上的棉花糖，示范用叉子取碟上的棉花糖并沾上巧克力酱，要求儿童模仿或依照指示取指定颜色的棉花糖。"
+  },
+  {
+    "name": "进食技能训练",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童进食技能训练活动建议"
+  },
+  {
+    "name": "使用工具进食与操作技能",
+    "level": "L2",
+    "parent_name": "进食技能训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过制作食物及模拟进食活动，提升儿童运用叉子及餐具的操作协调能力。"
+  },
+  {
+    "name": "制作沙拉与使用叉子",
+    "level": "L3",
+    "parent_name": "使用工具进食与操作技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童一同制作沙拉，成人负责将水果切成粒，请儿童用叉子取水果粒，放进沙拉碗内。完成后，让儿童加入沙拉酱，并以叉子拌匀。所需工具：各种水果、刀、叉子、沙拉酱、沙拉碗。"
+  },
+  {
+    "name": "叉子进食训练（义大利粉）",
+    "level": "L3",
+    "parent_name": "使用工具进食与操作技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "预先将义大利粉剪成小段，并示范用叉子舀起意粉进食，请儿童模仿成人以叉子舀粉进食。所需工具：义大利粉、叉子、剪刀。"
+  },
+  {
+    "name": "叉子操控训练（卷棉线）",
+    "level": "L3",
+    "parent_name": "使用工具进食与操作技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "预先把棉线放进碗内，示范握起并转动叉子把棉线卷起，接著喂洋娃娃进食，请儿童模仿。所需工具：棉线、碗、叉子、洋娃娃。"
+  },
+  {
+    "name": "转动叉子进食训练（米粉）",
+    "level": "L3",
+    "parent_name": "使用工具进食与操作技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "示范转动叉子，舀起米粉进食，请儿童模仿以转动叉子的方法舀起米粉进食。所需工具：米粉、叉子。"
+  },
+  {
+    "name": "模拟切割与烹饪技能",
+    "level": "L3",
+    "parent_name": "使用工具进食与操作技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童模拟煮食，示范用玩具刀切开玩具蔬菜，再放进玩具锅子内烹煮。接著请儿童合作切开玩具蔬菜或食物，放进锅子内煮食。所需工具：「家家酒」玩具（包括：能切开的玩具食物、玩具刀、玩具锅子）。"
+  },
+  {
+    "name": "泥胶切割技巧训练",
+    "level": "L3",
+    "parent_name": "使用工具进食与操作技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "预先压平泥胶并弄出坑纹，示范对准坑纹的位置，用小胶刀切开泥胶，接著请儿童模仿。当儿童熟练后，可将泥胶搓成不同的形状，让儿童学习拿刀切开软食物的技巧。所需工具：泥胶、小胶刀。"
+  },
+  {
+    "name": "学前儿童训练指南—自理",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童自理能力训练指南，涵盖各类生活技能训练。"
+  },
+  {
+    "name": "进食技能",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南—自理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童的进食技能训练活动建议。"
+  },
+  {
+    "name": "使用胶刀技巧训练",
+    "level": "L3",
+    "parent_name": "进食技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过切割、涂抹等活动，提升儿童使用胶刀的精细动作与协调能力。"
+  },
+  {
+    "name": "切割软食物",
+    "level": "L4",
+    "parent_name": "使用胶刀技巧训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "准备软食物（如香蕉、香肠）与胶刀，由成人示范将食物切开，并请儿童模仿切割动作。"
+  },
+  {
+    "name": "胶刀涂色练习",
+    "level": "L4",
+    "parent_name": "使用胶刀技巧训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "使用胶刀沾取颜料，在画纸上自由涂抹。待儿童熟悉后，进一步要求在特定范围内涂色，练习控制力度与边界，学习涂抹技巧。"
+  },
+  {
+    "name": "面包涂抹酱料",
+    "level": "L4",
+    "parent_name": "使用胶刀技巧训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "准备面包片与各种酱料（如牛油、果酱、巧克力酱）。成人示范使用胶刀将酱料涂在面包上，随后让儿童选择自己喜爱的酱料并模仿涂抹动作，最后共同享用成品。"
+  },
+  {
+    "name": "难度较高的进食技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 36,
+    "age_max_months": 60,
+    "prompt_corpus": "包含粗略地吐出食物内的核或骨以及用手拿鸡翅并吃掉骨上的肉的进食训练。"
+  },
+  {
+    "name": "粗略地吐出食物内的核或骨",
+    "level": "L2",
+    "parent_name": "难度较高的进食技能",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "训练儿童识别并吐出食物中的核或骨头。"
+  },
+  {
+    "name": "用手拿鸡翅并吃掉骨上的肉",
+    "level": "L2",
+    "parent_name": "难度较高的进食技能",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "训练儿童手持鸡翅啃食骨头上的肉。"
+  },
+  {
+    "name": "使用牙线吐出珠粒",
+    "level": "L3",
+    "parent_name": "粗略地吐出食物内的核或骨",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "用牙线串起1粒小珠，在末端打结并藏在香肠粒内。示范将香肠放入咀嚼后，使用牙线将珠粒拉出吐出。请儿童模仿，初始若不懂吐出，成人可轻拉牙线引导，逐步减少协助。"
+  },
+  {
+    "name": "进食带骨排骨或有核葡萄",
+    "level": "L3",
+    "parent_name": "粗略地吐出食物内的核或骨",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "准备切了粒的排骨或有核的葡萄。示范将带核或骨的食物放入进食，咀嚼后示范吐出骨头或核的动作，并请儿童模仿。"
+  },
+  {
+    "name": "学前儿童训练指南—自理",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南之自理能力训练。"
+  },
+  {
+    "name": "活动建议—进食技能",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南—自理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童的进食技巧训练，透过具体物体的操作与模仿，建立饮食结构概念。"
+  },
+  {
+    "name": "骨骼结构与处理训练",
+    "level": "L3",
+    "parent_name": "活动建议—进食技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "包含圆柱与泥胶的结构拆解、竹签串食物的操作、以及带骨肉类的进食技巧训练。"
+  },
+  {
+    "name": "圆柱与泥胶拆解练习",
+    "level": "L4",
+    "parent_name": "骨骼结构与处理训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示圆柱及泥胶，并示范运用圆柱在泥胶上滚动，使泥胶包裹圆柱，制成鸡锤。成人拿著圆柱两端，请儿童套上手偶，并假装将鸡锤（泥胶部分）吃掉，剩余圆柱，让儿童了解有些食物吃完后会剩下骨头。"
+  },
+  {
+    "name": "竹签食物操作练习",
+    "level": "L4",
+    "parent_name": "骨骼结构与处理训练",
+    "age_min_months": null,
+    "age_max_nums": null,
+    "prompt_corpus": "示范用竹筷子将1条香肠串起来，协助儿童一起串香肠。完成后，指示儿童用手握著竹筷的一端，把香肠吃掉，剩下竹筷。"
+  },
+  {
+    "name": "烤肉串进食技巧",
+    "level": "L4",
+    "parent_name": "骨骼结构与处理训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示1串烤肉串，示范用手持竹签，用口咬下肉来吃，最后剩下竹签。接著请儿童模仿成人的做法，吃掉竹签上的肉。"
+  },
+  {
+    "name": "鸡翅进食模拟训练",
+    "level": "L4",
+    "parent_name": "骨骼结构与处理训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "预先将鸡翅膀剖开两边，令每边只有1根骨头。示范用手拿著鸡翅膀头及尾的位置，把鸡肉咬出来吃，最后剩下骨头，接著请儿童模仿成人的做法进食鸡翅膀。当儿童熟习技巧后，成人可让儿童拿著整只鸡翅膀自行进食。"
+  },
+  {
+    "name": "处理食物包装",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 36,
+    "age_max_months": 72,
+    "prompt_corpus": "处理食物包装的训练项目，涵盖剥除外皮、处理盒装与瓶装饮料，以及开启各类包装封口。"
+  },
+  {
+    "name": "剥去糖纸",
+    "level": "L2",
+    "parent_name": "处理食物包装",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "剥去糖纸 / 3-4 岁"
+  },
+  {
+    "name": "剥软的食物外皮（如：香蕉）",
+    "level": "L2",
+    "parent_name": "处理食物包装",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "剥软的食物外皮（如：香蕉）/ 3-4 岁"
+  },
+  {
+    "name": "处理纸盒装饮料而不溅出",
+    "level": "L2",
+    "parent_name": "处理食物包装",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "处理纸盒装饮料而不溅出 / 3-4 岁"
+  },
+  {
+    "name": "扭开瓶装饮料的瓶盖进饮",
+    "level": "L2",
+    "parent_name": "处理食物包装",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "扭开瓶装饮料的瓶盖进饮 / 3-4 岁"
+  },
+  {
+    "name": "将饮料从小水壶中倒出来而不溅出",
+    "level": "L2",
+    "parent_name": "处理食物包装",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "将饮料从小水壶中倒出来而不溅出 / 4-5 岁"
+  },
+  {
+    "name": "撕开食物的包装袋",
+    "level": "L2",
+    "parent_name": "处理食物包装",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "撕开食物的包装袋 / 4-5 岁"
+  },
+  {
+    "name": "用手揭开盖掩式包装的食物（如：罐装薯片）",
+    "level": "L2",
+    "parent_name": "处理食物包装",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "用手揭开盖掩式包装的食物（如：罐装薯片）/ 5-6 岁"
+  },
+  {
+    "name": "拉开罐装饮料的盖掩进饮而不溅出",
+    "level": "L2",
+    "parent_name": "处理食物包装",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "拉开罐装饮料的盖掩进饮而不溅出 / 5-6 岁"
+  },
+  {
+    "name": "剥去糖纸活动建议",
+    "level": "L3",
+    "parent_name": "剥去糖纸",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "预先用方型纸巾包裹没有包装的糖果，接著示范打开方型纸巾，再取出糖果进食。将另一颗用方型纸巾包裹的糖果给儿童，请儿童同样地打开纸巾，取出糖果进食。"
+  },
+  {
+    "name": "自理能力训练",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童的进食技能与精细动作训练活动，透过生活化的情境提升儿童的自理能力。"
+  },
+  {
+    "name": "进食技能训练",
+    "level": "L2",
+    "parent_name": "自理能力训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过剥开包装与果皮的练习，训练儿童的手部精细动作与进食前的准备技能。"
+  },
+  {
+    "name": "拆解包装训练",
+    "level": "L3",
+    "parent_name": "进食技能训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动 2A：棉花糖拆解训练。利用不同颜色的玻璃纸包好棉花糖，让儿童选择喜欢的颜色，辅助其用手握住两端并用力拉开玻璃纸，取出棉花糖进食。器材：不同颜色的玻璃纸、较大粒的棉花糖。"
+  },
+  {
+    "name": "手眼协调与进食准备",
+    "level": "L3",
+    "parent_name": "进食技能训练",
+    "age_min_months": null,
+    "age_max_numbers": null,
+    "prompt_corpus": "活动 3A：抛圈取糖游戏。将不同包装的糖果放在桌上，与儿童比赛抛胶圈，成功套到糖果者可获得糖果作为奖励，随后练习剥开包装纸进食。器材：不同包装的糖果、胶圈。"
+  },
+  {
+    "name": "拆礼物精细动作",
+    "level": "L3",
+    "parent_name": "进食技能训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动 4A：礼物包装拆解。预先用不同颜色的纸层层包好小玩具，向儿童示范如何逐层剥开取出礼物，随后让儿童选择并练习剥开包装。器材：不同颜色的纸、小玩具。"
+  },
+  {
+    "name": "剥皮进食技巧",
+    "level": "L3",
+    "parent_name": "进食技能训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动 5B：香蕉剥皮练习。成人预先将香蕉切开一半示范剥皮并进食，接著引导儿童自行剥开剩余的一半香蕉并进食。器材：香蕉、刀。"
+  },
+  {
+    "name": "活动建议—进食技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南—进食技能相关活动建议"
+  },
+  {
+    "name": "使用吸管饮用盒装饮料",
+    "level": "L2",
+    "parent_name": "活动建议—进食技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "预先把纸盒装饮料的吸管孔剪大一点，并把饮料喝掉一半。在儿童面前示范将吸管插入吸管孔喝果汁，提示儿童轻轻拿著饮料盒才不会挤出果汁，接著请儿童仿成人的做法饮用果汁。当儿童能掌握技巧，成人可以提供较硬身的纸盒装饮料让儿童练习，再进而使用普通纸盒装饮料。"
+  },
+  {
+    "name": "转动动作与力度训练",
+    "level": "L2",
+    "parent_name": "活动建议—进食技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "训练儿童手部协调与控制力度的练习"
+  },
+  {
+    "name": "使用玩具螺丝与螺帽",
+    "level": "L3",
+    "parent_name": "转动动作与力度训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示紧的玩具螺丝及螺帽，请儿童一手执螺丝，另一手用力转动螺丝帽将其扭出来，练习扭开瓶盖的动作及力度。"
+  },
+  {
+    "name": "扭开与扭紧肥皂泡瓶盖",
+    "level": "L3",
+    "parent_name": "转动动作与力度训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "取出肥皂泡液，示范扭开瓶盖，用棒沾上肥皂泡液并吹出泡泡，吸引儿童注意。接著把肥皂泡液的瓶盖扭上，再交给儿童，请儿童扭开瓶盖玩吹泡泡。"
+  },
+  {
+    "name": "自理能力训练",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童自理技能发展训练"
+  },
+  {
+    "name": "进食及生活技能",
+    "level": "L2",
+    "parent_name": "自理能力训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过日常物件操作，训练儿童手眼协调及精细动作，并提升自理能力。"
+  },
+  {
+    "name": "扭开瓶盖",
+    "level": "L3",
+    "parent_name": "进食及生活技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "示范扭开瓶装饮料的瓶盖饮用果汁，接著把瓶盖扭上，请儿童仿成人扭开瓶盖进饮。所需材料：瓶装饮料。"
+  },
+  {
+    "name": "倒豆训练",
+    "level": "L3",
+    "parent_name": "进食及生活技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "预先在小水壶内盛满小豆，并示范将豆倒进杯中而不溅出，接著与儿童比赛，看谁能慢慢把水壶内的豆倒进杯中而不溅出。所需材料：小水壶、杯、小豆（如：红豆、绿豆）。"
+  },
+  {
+    "name": "制作彩色沙瓶",
+    "level": "L3",
+    "parent_name": "进食及生活技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "将不同的颜色沙各自放进不同的小水壶内，请儿童挑选喜欢的颜色沙，并依照成人指示，倒进预先画有不同刻度的透明瓶子内，至指定刻度。接著可继续倒其他颜色沙至不同的刻度，制作成彩色沙瓶。所需材料：颜色沙（可用不同颜色的粉笔碎及幼盐制成）、小水壶、透明瓶子。"
+  },
+  {
+    "name": "制作可可饮料",
+    "level": "L3",
+    "parent_name": "进食及生活技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "示范先将可可粉倒进杯内，再将水从小水壶里倒进杯内而不溅出，并用匙羹搅匀。请儿童模仿成人做法制作可可饮料，接著一同享用。所需材料：小水壶、可可粉、杯、匙羹。"
+  },
+  {
+    "name": "进食技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童的进食相关技巧训练建议。"
+  },
+  {
+    "name": "钓食物游戏",
+    "level": "L2",
+    "parent_name": "进食技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "预先在不同独立包装食物上夹上万字夹，示范用磁石鱼竿钓出食物，再协助儿童撕开包装分享享用。训练目的在于透过游戏增加儿童对进食的兴趣及手眼协调。准备物品：万字夹或文件夹、磁石鱼竿、独立包装食物（如：紫菜、糖果等）。"
+  },
+  {
+    "name": "揭盖寻宝练习",
+    "level": "L2",
+    "parent_name": "进食技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "利用大小不同的揭盖式盒子与儿童喜欢的小玩具进行练习。成人将玩具放入其中一个盒子，请儿童闭眼再张开，并尝试揭开盖子寻找玩具。此活动旨在练习揭开掩蔽容器的技巧，为独立进食准备。准备物品：不同大小的揭盖式盒子、儿童喜欢的小玩具。"
+  },
+  {
+    "name": "甜品装饰与制作",
+    "level": "L2",
+    "parent_name": "进食技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童合作制作甜品。利用匙羹将薯片压成小块，装饰在冰淇淋球上。成人示范揭开盖式包装的技巧，并引导儿童模仿。此练习涵盖器皿使用及开启食物包装的技巧。准备物品：冰淇淋、小碗、匙羹、盖掩式包装的薯片。"
+  },
+  {
+    "name": "学前儿童训练指南—自理",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南中的自理能力训练部分。"
+  },
+  {
+    "name": "活动建议—进食技能",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南—自理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童进食与相关操作技能的训练建议。"
+  },
+  {
+    "name": "制作杂果乳酪杯",
+    "level": "L3",
+    "parent_name": "活动建议—进食技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童合作制作「杂果乳酪杯」。预先准备杂果及盖掩式乳酪，并示范揭开盖掩式乳酪，将乳酪倒进杯中，再用匙羹把杂果加进杯中。接著请儿童模仿成人的做法，揭开另一杯盖掩式乳酪，制作自己的「杂果乳酪杯」，最后一同享用。"
+  },
+  {
+    "name": "练习使用手指拉环",
+    "level": "L3",
+    "parent_name": "活动建议—进食技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示手指拉环的震动玩具，并示范一手拿著玩具，另一手的食指套入指环并拉动它，使玩具震动。接著请儿童模仿，以练习用手指穿入拉环并用力拉盖掩的动作。"
+  },
+  {
+    "name": "学习开启罐装饮料",
+    "level": "L3",
+    "parent_name": "活动建议—进食技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "示范用手拉开罐装饮料的盖掩，接著请儿童选择另一罐他喜爱的饮料，模仿成人拉开饮料的盖掩并进饮。"
+  },
+  {
+    "name": "如厕技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 12,
+    "age_max_months": 60,
+    "prompt_corpus": "如厕技能相关训练，包含便盆使用、小便站立及成人座厕使用训练。"
+  },
+  {
+    "name": "如厕能力",
+    "level": "L2",
+    "parent_name": "如厕技能",
+    "age_min_months": 12,
+    "age_max_months": 60,
+    "prompt_corpus": "如厕能力的各项发展目标。"
+  },
+  {
+    "name": "安坐便盆如厕——大便",
+    "level": "L3",
+    "parent_name": "如厕能力",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "训练儿童安坐于便盆上进行排便。"
+  },
+  {
+    "name": "安坐便盆如厕——小便",
+    "level": "L3",
+    "parent_name": "如厕能力",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "训练儿童安坐于便盆上进行排尿。"
+  },
+  {
+    "name": "安坐儿童厕板上如厕",
+    "level": "L3",
+    "parent_name": "如厕能力",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "训练儿童使用儿童专用厕板安坐于成人厕所上进行如厕。"
+  },
+  {
+    "name": "站在尿槽前对准小便（男孩）",
+    "level": "L3",
+    "parent_name": "如厕能力",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "训练男童站在尿槽前进行对准小便。"
+  },
+  {
+    "name": "安坐成人座厕如厕",
+    "level": "L3",
+    "parent_name": "如厕能力",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "训练儿童独立使用成人座厕进行如厕。"
+  },
+  {
+    "name": "洋娃娃如厕扮演游戏",
+    "level": "L3",
+    "parent_name": "如厕技能",
+    "age_min_months": 12,
+    "age_max_months": 36,
+    "prompt_corpus": "透过与儿童玩假想游戏，示范洋娃娃如厕的过程，并鼓励儿童进行模仿。活动材料包括可脱下裤子的洋娃娃、玩具便盆或座厕。活动步骤为：1. 与儿童玩假想游戏，说『妹妹要上洗手间』；2. 成人脱下洋娃娃裤子，将其放在便盆或座厕上；3. 与儿童一同从1数到20，或唱一首儿歌；4. 将洋娃娃提起并赞赏其行为，随后帮洋娃娃穿回裤子，重复上述流程。"
+  },
+  {
+    "name": "学前儿童训练指南—自理",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南中的自理技能教学内容。"
+  },
+  {
+    "name": "如厕技能",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南—自理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "关于儿童如何学习正确如厕的各项训练活动。"
+  },
+  {
+    "name": "盆内如厕训练",
+    "level": "L3",
+    "parent_name": "如厕技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "告知儿童与洋娃娃一样坐在便盆上如厕，练习从1数到20或哼唱儿歌，并在成功后及时赞赏与协助清洁。"
+  },
+  {
+    "name": "儿童厕板辅助训练",
+    "level": "L3",
+    "parent_name": "如厕技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童一同将儿童厕板安装在座厕上，辅助儿童稳定如厕，必要时使用稳固脚踏并提醒双手扶住座厕边缘。"
+  },
+  {
+    "name": "站立小便准确度训练",
+    "level": "L3",
+    "parent_name": "如厕技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对男童设计，透过在尿槽前贴上脚印引导正确站位，或在尿槽内贴贴纸作为目标，练习对准小便。"
+  },
+  {
+    "name": "如厕时所需的穿脱衣服能力",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 12,
+    "age_max_months": 36,
+    "prompt_corpus": "如厕时所需的穿脱衣服能力训练，涵盖如厕前与如厕后的衣物处理。"
+  },
+  {
+    "name": "如厕前自行拉下裤子（橡筋腰或系扣已解开）",
+    "level": "L2",
+    "parent_name": "如厕时所需的穿脱衣服能力",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "如厕前自行拉下裤子，适用于橡筋腰裤子或系扣已预先解开的情况。"
+  },
+  {
+    "name": "如厕前自行拉下裤子及内裤（橡筋腰或系扣已解开）",
+    "level": "L2",
+    "parent_name": "如厕时所需的穿脱衣服能力",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "如厕前自行拉下裤子及内裤，适用于橡筋腰裤子或系扣已预先解开的情况。"
+  },
+  {
+    "name": "如厕后自行拉上裤子",
+    "level": "L2",
+    "parent_name": "如厕时所需的穿脱衣服能力",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "如厕后自行拉上裤子之训练。"
+  },
+  {
+    "name": "如厕后自行拉上内裤及裤子",
+    "level": "L2",
+    "parent_name": "如厕时所需的穿脱衣服能力",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "如厕后自行拉上内裤及裤子之训练。"
+  },
+  {
+    "name": "模拟如厕情境游戏",
+    "level": "L3",
+    "parent_name": "如厕时所需的穿脱衣服能力",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童玩假想游戏，请儿童为洋娃娃穿著不同款式的裤子，学习穿脱裤子的概念。接著告诉儿童：『妹妹想上洗手间，请你帮她拉下裤子好吗？』请儿童替洋娃娃拉下裤子，模拟洋娃娃如厕后，对儿童说：『妹妹上完洗手间了，请帮她拉上裤子吧！』让儿童帮洋娃娃把裤子穿好。所需材料：洋娃娃、玩具座厕、不同款式的洋娃娃裤子数条。"
+  },
+  {
+    "name": "呼拉圈穿脱练习",
+    "level": "L3",
+    "parent_name": "如厕时所需的穿脱衣服能力",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "示范将呼拉圈套至腰部，双手抓握呼拉圈的两旁，再将呼拉圈向下推至膝部，请儿童仿动作，以练习把裤子脱下的技巧。接著示范把呼拉圈拉回腰部，再请儿童模仿，以练习把裤子拉上的技巧，练习期间可以和儿童一同唱儿歌。所需材料：呼拉圈。"
+  },
+  {
+    "name": "自理能力训练",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童自理能力训练指南"
+  },
+  {
+    "name": "如厕技能",
+    "level": "L2",
+    "parent_name": "自理能力训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童如厕相关的动作与习惯训练。"
+  },
+  {
+    "name": "脱裤动作训练",
+    "level": "L3",
+    "parent_name": "如厕技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "请儿童手握套在腰部的布圈，弯腰向前，将布圈向下推至膝部。接著成人把2条颜色不同的布圈套于儿童腰部，并请儿童依照指示把布圈逐一推下，以练习拉下裤子及内裤的技巧。所需器材：不同颜色的布圈2条。"
+  },
+  {
+    "name": "镜子辅助如厕练习",
+    "level": "L3",
+    "parent_name": "如厕技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "把大镜子放进洗手间，请儿童如厕前，对著镜子拉下裤子和内裤，利用镜子提示儿童看看有没有把内裤和裤子妥当地拉下。儿童如厕后，再请他看著镜子把内裤和裤子拉上。所需器材：大镜子。"
+  },
+  {
+    "name": "实际如厕训练",
+    "level": "L3",
+    "parent_name": "如厕技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "带儿童往儿童洗手间，请他脱下裤子和内裤，坐在便盆或儿童厕板上大或小便。完成后，请儿童把内裤和裤子拉上。所需器材：儿童厕板或便盆。"
+  },
+  {
+    "name": "清洁能力",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 24,
+    "age_max_months": 72,
+    "prompt_corpus": "包含如厕后的个人卫生清洁训练，涵盖洗手、冲厕及用纸清洁技巧。"
+  },
+  {
+    "name": "如厕后自行洗手",
+    "level": "L2",
+    "parent_name": "清洁能力",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "把「如厕后洗手」的图卡贴在洗手间的洗手盆附近，在儿童如厕后跟儿童说：「大小便之后要洗手。」随即指出图卡的位置，提示儿童洗手，接著与儿童一边唱《洗手歌》，一边洗手。"
+  },
+  {
+    "name": "如厕后冲厕",
+    "level": "L2",
+    "parent_name": "清洁能力",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "把儿童喜爱的贴纸贴在马桶的冲水按钮上，儿童如厕后，请他找出贴纸，按下按钮冲水，并一同看著厕内的厕纸被冲走。"
+  },
+  {
+    "name": "小便后自行用纸清洁 (女孩子)",
+    "level": "L2",
+    "parent_name": "清洁能力",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "把少许水倒在桌面，请儿童用有颜色或图案的厕纸把水抹干，以练习用纸擦拭的技巧。接著带儿童往洗手间并把厕纸抛进桶内，请儿童按下按钮冲水，把厕纸冲走。"
+  },
+  {
+    "name": "撕下所需的卷装厕纸",
+    "level": "L2",
+    "parent_name": "清洁能力",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "学习控制力度与长度，练习从卷装厕纸架上撕下适量的厕纸。"
+  },
+  {
+    "name": "大便后，撕下所需的卷装厕纸，折叠好，准备清洁",
+    "level": "L2",
+    "parent_name": "清洁能力",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "练习撕下适量厕纸并进行折叠，为如厕后的清洁动作做准备。"
+  },
+  {
+    "name": "大便后用厕纸清洁干净",
+    "level": "L2",
+    "parent_name": "清洁能力",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "学习使用折好的厕纸进行清洁动作，确保如厕后卫生。"
+  },
+  {
+    "name": "如厕技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南——如厕技能相关训练活动。"
+  },
+  {
+    "name": "清洁习惯与技巧",
+    "level": "L2",
+    "parent_name": "如厕技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "指导儿童在如厕后进行正确的清洁流程。"
+  },
+  {
+    "name": "清洁引导训练",
+    "level": "L3",
+    "parent_name": "清洁习惯与技巧",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "儿童（女子）如厕后，成人向儿童出示「如厕后清洁」的图卡，并把厕纸递给儿童，协助儿童一起清洁小便处。"
+  },
+  {
+    "name": "撕厕纸技巧训练",
+    "level": "L3",
+    "parent_name": "清洁习惯与技巧",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "预先用白板笔在卷装厕纸上的虚线画上颜色，并示范沿著有颜色的位置撕下厕纸抹桌子，请儿童模仿，以学习撕下所需的厕纸。"
+  },
+  {
+    "name": "数量概念与撕纸结合",
+    "level": "L3",
+    "parent_name": "清洁习惯与技巧",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "预备1叠数字卡，请儿童抽出1张数字卡，并把相关格数的厕纸撕下，接著成人与儿童一起点算所撕下的厕纸格数是否和数字卡所示的相同。"
+  },
+  {
+    "name": "折纸技巧训练",
+    "level": "L3",
+    "parent_name": "清洁习惯与技巧",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "预备3格厕纸，并示范沿著每格厕纸之间的虚线把厕纸折叠好，接著请儿童模仿折叠厕纸的动作。"
+  },
+  {
+    "name": "综合操作训练",
+    "level": "L3",
+    "parent_name": "清洁习惯与技巧",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "儿童如厕后，请他一手按著厕纸卷，另一手拉下厕纸到若干长度（如：成人指定的格数），再把厕纸撕出，并折叠好准备清洁。"
+  },
+  {
+    "name": "如厕技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "如厕相关技能训练"
+  },
+  {
+    "name": "使用厕纸清理臀部",
+    "level": "L2",
+    "parent_name": "如厕技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "训练儿童清洁臀部的相关活动"
+  },
+  {
+    "name": "模拟如厕后清洁（洋娃娃）",
+    "level": "L3",
+    "parent_name": "使用厕纸清理臀部",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童玩假想游戏，向儿童表示洋娃娃要大便，请儿童把洋娃娃放在玩具座厕上。接著成人在洋娃娃臀部位置涂上啡色颜料，并向儿童说：「洋娃娃大便了，请你帮他清洁。」随即请儿童撕下厕纸并把厕纸折叠好，帮洋娃娃清洁臀部。"
+  },
+  {
+    "name": "手部向后伸展练习",
+    "level": "L3",
+    "parent_name": "使用厕纸清理臀部",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童围圈蹲下，玩「掉手帕」游戏。成人把手帕掉在儿童臀部下面，鼓励儿童伸手向后摸手帕，练习伸手向臀部后面的动作。"
+  },
+  {
+    "name": "清洁污渍练习",
+    "level": "L3",
+    "parent_name": "使用厕纸清理臀部",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "在儿童面前用啡色白板笔画在透明封箱胶纸上，并把胶纸贴在儿童臀部（裤子外面）。接著请儿童撕下厕纸，折叠好后，伸手向臀部抹掉胶纸上的颜色。完成后，请儿童看看厕纸上有没有颜色，如有颜色，请儿童把厕纸对折后再抹一次。当儿童认为已抹干净后，成人把胶纸撕下，并与儿童一同检查胶纸是否已被抹干净。"
+  },
+  {
+    "name": "真实如厕后清洁",
+    "level": "L3",
+    "parent_name": "使用厕纸清理臀部",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "儿童大便后，请他自行撕下厕纸，折叠好后自行清洁臀部，提示儿童每次清洁后，把厕纸对折一次才可继续清洁。如有需要，请儿童再撕新的厕纸清洁，直至厕纸上没有便渍，才算完成。"
+  },
+  {
+    "name": "自理",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南——自理能力培训"
+  },
+  {
+    "name": "辨别洗手间",
+    "level": "L2",
+    "parent_name": "自理",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "项目四：辨别洗手间，包含找出座厕或尿槽的位置以及分辨男女洗手间的符号。"
+  },
+  {
+    "name": "找出座厕或尿槽的位置",
+    "level": "L3",
+    "parent_name": "辨别洗手间",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "带儿童到学校的洗手间观看座厕和尿槽，向儿童介绍女孩子小便时要使用座厕；男孩子则要使用尿槽。接著请儿童辨别出适合自己小便的厕具。"
+  },
+  {
+    "name": "分辨男女洗手间的符号",
+    "level": "L3",
+    "parent_name": "辨别洗手间",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "向儿童展示不同款式的座厕和尿槽图卡，增加儿童对男、女洗手间的认识，并请儿童把图卡分别放进贴有男、女孩子图卡的篮子内。所需材料：座厕和尿槽图卡、男、女孩子图卡、篮子2个。"
+  },
+  {
+    "name": "自理能力训练",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南：自理技能训练单元。"
+  },
+  {
+    "name": "性别辨识与如厕概念",
+    "level": "L2",
+    "parent_name": "自理能力训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过视觉标志与身体活动，强化儿童对自身及他人性别的辨识，并连结至对应的如厕空间概念。"
+  },
+  {
+    "name": "辨识性别标志并分类",
+    "level": "L3",
+    "parent_name": "性别辨识与如厕概念",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "向儿童介绍男、女洗手间的标志图片，并把图片放在篮子内。接著出示不同性别的人物相片，向儿童表示他们想小便，请儿童按人物的性别，把相片放到正确的篮子内。所需器材：男、女洗手间标志图片、男性、女性人物相片、篮子2个。"
+  },
+  {
+    "name": "性别标志对应与跑步游戏",
+    "level": "L3",
+    "parent_name": "性别辨识与如厕概念",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "预先把男、女的标志图片分别贴在2个门上，接著请数位儿童一同玩游戏，成人从1数到3后，儿童即跑到贴有和自己性别相符的标志门前，看谁最快到达。成人可把男、女的标志图片交换位置，继续进行游戏。所需器材：男、女标志图片。"
+  },
+  {
+    "name": "表达需要的能力",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 12,
+    "age_max_months": 36,
+    "prompt_corpus": "训练儿童表达如厕的需求，包括表示已遗尿或已大便，以及在如厕前表达需要。"
+  },
+  {
+    "name": "表示已遗尿或已大便",
+    "level": "L2",
+    "parent_name": "表达需要的能力",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "训练儿童辨识并表达自己已经弄湿裤子或排便。"
+  },
+  {
+    "name": "在如厕前以手势、沟通图或声音表达如厕需要",
+    "level": "L2",
+    "parent_name": "表达需要的能力",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "训练儿童在产生便意或尿意时，能透过非语言或语言方式预先告知成人。"
+  },
+  {
+    "name": "主动说出如厕的需要",
+    "level": "L2",
+    "parent_name": "表达需要的能力",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "训练儿童能主动清晰地用语言表达需要上厕所。"
+  },
+  {
+    "name": "活动一：模拟洋娃娃遗尿",
+    "level": "L3",
+    "parent_name": "表示已遗尿或已大便",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "预先用喷水壶将洋娃娃的裤子喷湿，请儿童用手摸摸洋娃娃的裤子，并向儿童说：「XX尿湿了裤子了！」随即一同替洋娃娃更换裤子。材料：洋娃娃、喷水壶。"
+  },
+  {
+    "name": "活动二：辨识遗尿的洋娃娃",
+    "level": "L3",
+    "parent_name": "表示已遗尿或已大便",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "出示数个洋娃娃，并预先将其中一个洋娃娃的裤子用喷水壶喷湿。请儿童用手逐一摸摸洋娃娃的裤子，找出哪一个洋娃娃已遗尿。材料：洋娃娃数个、喷水壶。"
+  },
+  {
+    "name": "活动三：自我觉察与提示",
+    "level": "L3",
+    "parent_name": "表示已遗尿或已大便",
+    "age_min_months": 12,
+    "age_max_months": 36,
+    "prompt_corpus": "当儿童在纸尿裤或裤子上小便或大便，成人即拉著儿童的手摸摸自己的纸尿裤或裤子，告诉儿童：「有小便（或大便）呀！」鼓励儿童跟著说，并提醒儿童在小便或大便前先向成人表示。"
+  },
+  {
+    "name": "如厕技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南之如厕技能训练单元"
+  },
+  {
+    "name": "如厕沟通与表达",
+    "level": "L2",
+    "parent_name": "如厕技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "培养儿童在如厕需求时，透过声音、手势或图卡进行有效沟通与表达的能力。"
+  },
+  {
+    "name": "角色扮演：洋娃娃如厕",
+    "level": "L3",
+    "parent_name": "如厕沟通与表达",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童玩假想游戏，一起带洋娃娃到玩具洗手间内。询问儿童洋娃娃想做甚么，鼓励儿童用声音（如：唔唔、殊殊）或手势（如：拍拍或指著裤子）表示洋娃娃想如厕。所需材料：洋娃娃、玩具洗手间。"
+  },
+  {
+    "name": "图画辨识：认识如厕行为",
+    "level": "L3",
+    "parent_name": "如厕沟通与表达",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示1幅儿童如厕的图画，并问儿童：小朋友在做甚么？鼓励儿童用声音或手势表达如厕的需要。所需材料：儿童如厕的图画。"
+  },
+  {
+    "name": "情境练习：洗手间如厕引导",
+    "level": "L3",
+    "parent_name": "如厕沟通与表达",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "带儿童上洗手间，先问儿童：你要上洗手间吗？引导儿童用手势或沟通图示意。如儿童能力较佳，可鼓励儿童说出是否需要如厕。如儿童表示，成人即带儿童上洗手间。"
+  },
+  {
+    "name": "穿衣技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南—穿衣技能训练"
+  },
+  {
+    "name": "脱鞋",
+    "level": "L2",
+    "parent_name": "穿衣技能",
+    "age_min_months": 12,
+    "age_max_months": 36,
+    "prompt_corpus": "针对脱鞋能力的训练，涵盖脱掉过脚踝的鞋子、手握鞋跟向下推离脚踝以及推脱鞋子。"
+  },
+  {
+    "name": "将已脱过脚踝的鞋完全脱下",
+    "level": "L3",
+    "parent_name": "脱鞋",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "目标：将已脱过脚踝的鞋完全脱下。活动建议：与儿童外出回家后，请儿童坐在地上，先替儿童解松鞋子，并把鞋子稍稍推离脚踝，接著请儿童自行推脱鞋子。"
+  },
+  {
+    "name": "用手握鞋跟向下推离脚踝",
+    "level": "L3",
+    "parent_name": "脱鞋",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "目标：用手握鞋跟向下推离脚踝。活动建议：1. 与儿童玩假想游戏，模拟洋娃娃刚回到家中需要脱鞋，成人示范握著洋娃娃鞋子的鞋跟，将洋娃娃的鞋脱下，接著请儿童模仿。2. 与儿童外出回家后，成人先解松自己的鞋，接著协助儿童握著成人的鞋跟，一起用力把鞋跟推离脚踝。3. 请儿童坐在地上，先将贴纸贴在儿童的脚踝，再替儿童穿上款式简单易脱的鞋子。接著指示儿童用手握著鞋跟，将鞋推离脚踝，找回贴纸。"
+  },
+  {
+    "name": "推脱鞋子",
+    "level": "L3",
+    "parent_name": "脱鞋",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "目标：推脱鞋子。活动建议：1. 与儿童玩假想游戏，模拟洋娃娃刚回到家中需要脱鞋，成人示范握著洋娃娃鞋子的鞋跟，将洋娃娃的鞋脱下，接著请儿童模仿。2. 外出时替儿童穿上款式简单易脱的鞋子。回到家中，成人示范握著自己的鞋跟把鞋子推脱，请儿童模仿成人的做法，把自己的鞋子推脱。"
+  },
+  {
+    "name": "穿衣技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南——穿衣技能训练"
+  },
+  {
+    "name": "脱袜",
+    "level": "L2",
+    "parent_name": "穿衣技能",
+    "age_min_months": 12,
+    "age_max_months": 36,
+    "prompt_corpus": "教授儿童将袜子从脚部脱除的技能。"
+  },
+  {
+    "name": "目标A: 将已拉至脚掌部位的袜子完全拉脱",
+    "level": "L3",
+    "parent_name": "脱袜",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "目标A: 将已拉至脚掌部位的袜子完全拉脱 (1-2岁)"
+  },
+  {
+    "name": "目标B: 用拇指插入袜管口并尝试推脱袜子",
+    "level": "L3",
+    "parent_name": "脱袜",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "目标B: 用拇指插入袜管口并尝试推脱袜子 (1-2岁)"
+  },
+  {
+    "name": "目标C: 拉脱袜子",
+    "level": "L3",
+    "parent_name": "脱袜",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "目标C: 拉脱袜子 (2-3岁)"
+  },
+  {
+    "name": "活动1: 泥胶练习",
+    "level": "L4",
+    "parent_name": "目标A: 将已拉至脚掌部位的袜子完全拉脱",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "以泥胶包裹儿童的前脚掌，模拟袜子套著前脚掌的状态，请儿童把泥胶拉脱，交给成人。"
+  },
+  {
+    "name": "活动2: 外出回家脱袜",
+    "level": "L4",
+    "parent_name": "目标A: 将已拉至脚掌部位的袜子完全拉脱",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "与儿童外出回家，脱下鞋子后，协助儿童把袜子拉过脚踝（至脚掌部位），请儿童自行把袜子拉脱。"
+  },
+  {
+    "name": "活动3: 铃铛橡筋圈练习",
+    "level": "L4",
+    "parent_name": "目标B: 用拇指插入袜管口并尝试推脱袜子",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "与儿童一同把缝上铃铛的橡筋圈穿在脚上，并一面唱儿歌一面跳舞。完成活动后，成人示范把拇指从脚踝位置插入橡筋圈内，再将橡筋圈拉过脚踝脱下，接著请儿童模仿成人的做法，把自己脚上的橡筋圈脱下。"
+  },
+  {
+    "name": "活动4: 练习使用袜管口",
+    "level": "L4",
+    "parent_name": "目标B: 用拇指插入袜管口并尝试推脱袜子",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "替儿童穿上长度及小腿一半的袜子（让儿童难以只靠拉袜子前端便能拉脱的袜子），请儿童将拇指插入袜管口，并把袜子推向脚踝。接著成人协助把袜子推过脚踝，让儿童自行拉脱袜子。"
+  },
+  {
+    "name": "活动5: 独立脱袜",
+    "level": "L4",
+    "parent_name": "目标C: 拉脱袜子",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "外出时替儿童穿上稍松的袜子，回家脱去鞋子后，请儿童自行把袜子脱掉。"
+  },
+  {
+    "name": "脱裤",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 12,
+    "age_max_months": 36,
+    "prompt_corpus": "训练儿童学会自行脱下裤子，涵盖从腰部推下至腿部及脚部的动作技巧。"
+  },
+  {
+    "name": "训练目标",
+    "level": "L2",
+    "parent_name": "脱裤",
+    "age_min_months": 12,
+    "age_max_months": 36,
+    "prompt_corpus": "A: 用双手将裤头已推至臀部的裤向下推（但不用推离脚部）/ 1-2岁; B: 用双手拉开并推下已套在腰间的布套 / 1-2岁; C: 坐著并将裤头已脱至小腿的裤推离脚部 / 1-2岁; D: 脱下裤子（短裤、内裤 / 1-2岁；长裤 / 2-3岁）"
+  },
+  {
+    "name": "活动建议",
+    "level": "L2",
+    "parent_name": "脱裤",
+    "age_min_months": 12,
+    "age_max_months": 36,
+    "prompt_corpus": "1. 请儿童举起双手站在地上，成人把与儿童腰围相约的小呼拉圈穿过儿童双手并套至腰间，接著请儿童把小呼拉圈向下推至脚部，放在地上。材料：与儿童腰围相约的小呼拉圈。2. 替儿童换裤时，把裤头拉至儿童的臀部，接著请儿童自行把裤向下推至地上，成人再协助儿童把裤脱离双脚。材料：稍松的儿童裤子（橡筋腰）。3. 把弹性布套穿在儿童腰间，请儿童把双手拇指插入布套顶端，把布套拉开并向下推至地上。材料：弹性布套（长7.5厘米，阔25厘米）。"
+  },
+  {
+    "name": "穿衣技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南——穿衣技能训练单元"
+  },
+  {
+    "name": "脱裤子训练",
+    "level": "L2",
+    "parent_name": "穿衣技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童进行脱裤子及相关衣物的辅助训练活动"
+  },
+  {
+    "name": "脱弹性布套",
+    "level": "L3",
+    "parent_name": "脱裤子训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "请儿童坐在有靠背的儿童椅子或地上，成人将弹性布套（长7.5厘米，阔25厘米）套在儿童小腿位置，请儿童把布套完全推离双脚。所需器材：弹性布套、有靠背的儿童椅子。"
+  },
+  {
+    "name": "脱短裤（坐姿）",
+    "level": "L3",
+    "parent_name": "脱裤子训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "儿童换裤时，成人协助他把裤子脱至小腿，接著请儿童坐在有靠背的儿童椅子或地上，用手将裤管逐一推离脚部，把裤子完全脱下。所需器材：有靠背的儿童椅子、儿童裤子（橡筋腰）。"
+  },
+  {
+    "name": "对镜脱短裤与内裤",
+    "level": "L3",
+    "parent_name": "脱裤子训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "协助儿童洗澡前，先穿著短裤的儿童往一面全身镜前，请儿童看著镜子，以双手指拇拉开裤头，把短裤推过臀部，再推到脚部，放在地上。接著请儿童双手扶著墙壁，把脚逐一提起，把裤子拉脱。完成后，请儿童以相同方法把内裤脱掉。当儿童掌握技巧后，可提升难度，让儿童尝试自行脱长裤。所需器材：稍松的儿童短裤（橡筋腰）、儿童内裤、儿童长裤、全身镜。"
+  },
+  {
+    "name": "脱开胸衣服",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 12,
+    "age_max_months": 48,
+    "prompt_corpus": "训练儿童脱开胸衣服的系列技能，涵盖从简单的脱去手腕橡皮圈到复杂的脱去长袖外套。"
+  },
+  {
+    "name": "脱去手腕橡皮圈",
+    "level": "L2",
+    "parent_name": "脱开胸衣服",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "将已穿在手腕上的橡皮圈脱下。"
+  },
+  {
+    "name": "脱去开胸背心或外套",
+    "level": "L2",
+    "parent_name": "脱开胸衣服",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "将袖孔已脱离肩膀的开胸背心或外套脱下。"
+  },
+  {
+    "name": "抓握衣襟向后翻脱去肩膀",
+    "level": "L2",
+    "parent_name": "脱开胸衣服",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "抓握衣襟向后翻使袖孔脱离肩膀。"
+  },
+  {
+    "name": "脱去各类胸衣",
+    "level": "L2",
+    "parent_name": "脱开胸衣服",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "脱开胸衣服的综合练习，包括开胸背心（系扣部分已解开）、外套或衬衫以及短袖开胸恤衫。"
+  },
+  {
+    "name": "脱去长袖管衣物",
+    "level": "L2",
+    "parent_name": "脱开胸衣服",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "伸手在背后拉脱在手臂上的长袖管（长袖管 1 对）。"
+  },
+  {
+    "name": "橡皮圈脱卸游戏",
+    "level": "L3",
+    "parent_name": "脱去手腕橡皮圈",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "与儿童玩小动物爬隧道的游戏，把动物橡皮圈套在儿童双手手腕位置，请儿童爬过隧道，接著把动物橡皮圈脱下，放在篮子里。所需材料：动物橡皮圈（阔5厘米）、隧道、篮子。"
+  },
+  {
+    "name": "辅助脱衣训练",
+    "level": "L3",
+    "parent_name": "抓握衣襟向后翻脱去肩膀",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "替儿童脱开胸外套时，握著儿童的衣领，协助儿童双手抓握衣襟向后翻，使外套脱离肩膀，接著请儿童自行把双手逐一拉出。所需材料：儿童开胸外套。"
+  },
+  {
+    "name": "穿衣技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南中的穿衣技能系列活动，重点在于训练儿童的手部协调性、肩部活动范围以及脱衣的独立操作能力。"
+  },
+  {
+    "name": "脱衣技巧练习",
+    "level": "L2",
+    "parent_name": "穿衣技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过利用大呼拉圈、大毛巾及开胸背心等不同道具，引导儿童练习将物品从肩部向后脱下的动作，以强化脱衣技能的动作逻辑。"
+  },
+  {
+    "name": "呼拉圈脱肩训练",
+    "level": "L3",
+    "parent_name": "脱衣技巧练习",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "将大呼拉圈套在儿童肩上，请儿童双手抓握呼拉圈向后翻，把双手脱出呼拉圈。"
+  },
+  {
+    "name": "大毛巾脱肩训练",
+    "level": "L3",
+    "parent_name": "脱衣技巧练习",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "把大毛巾披在儿童肩上，请儿童双手握著毛巾向后翻，把毛巾从肩上褪下来。"
+  },
+  {
+    "name": "开胸背心脱衣训练",
+    "level": "L3",
+    "parent_name": "脱衣技巧练习",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "给儿童穿上稍松的开胸背心，接著伸进儿童肩膀位置，把大贴纸贴在儿童肩上。请儿童双手握著背心的开胸位置向后翻，把背心脱过肩膀，看看贴在肩上的是甚么贴纸，接著抖动双手将背心完全脱下。儿童掌握技巧后，请他尝试同样方法脱下开胸外套、衬衫或恤衫。"
+  },
+  {
+    "name": "穿衣技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南——自理之穿衣技能训练单元"
+  },
+  {
+    "name": "脱去美劳手袖套",
+    "level": "L2",
+    "parent_name": "穿衣技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "把美劳手袖套在儿童双手。请儿童双手伸向背后，以一手握著另一手的手袖边缘，将该手袖脱出，并把整个手袖拉离手部。接著换另一边重复动作，把另一只手袖也拉脱。"
+  },
+  {
+    "name": "脱去长袖开胸外套",
+    "level": "L2",
+    "parent_name": "穿衣技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "预先将1个安全扣针扣在儿童长袖开胸外套的其中一边袖口，替儿童穿上外套后，请儿童抓握衣襟向后翻，使袖孔脱离肩膀后，再把双手伸向后面，以没有安全扣针那一边的手握著扣针和袖口，把衣袖拉出，接著再把另一衣袖完全拉脱。"
+  },
+  {
+    "name": "穿衣技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "指导儿童穿衣相关的各项生活自理技能。"
+  },
+  {
+    "name": "脱T恤",
+    "level": "L2",
+    "parent_name": "穿衣技能",
+    "age_min_months": 12,
+    "age_max_months": 60,
+    "prompt_corpus": "学习独立脱掉T恤的训练项目，包含不同难度的步骤与技巧。"
+  },
+  {
+    "name": "将已脱至头部(在鼻梁左右)的T恤完全脱下",
+    "level": "L3",
+    "parent_name": "脱T恤",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "让儿童穿上领口较大的T恤，成人协助将T恤拉至儿童脖子位置，请儿童自行用双手将T恤向上拉，完全脱掉。"
+  },
+  {
+    "name": "将已脱一只袖的T恤完全脱下",
+    "level": "L3",
+    "parent_name": "脱T恤",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "儿童换衣时，成人协助脱出一只袖子，请儿童用已脱出袖子的手握著另一边的衣脚向上推，另一只手脱出后，再用双手把T恤拉过头部完全脱下。"
+  },
+  {
+    "name": "将已套在腰间的弹性布套向上拉并完全脱下",
+    "level": "L3",
+    "parent_name": "脱T恤",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "示范把呼拉圈穿在腰间，以双手把呼拉圈向上脱出，请儿童练习此动作，练习用双手握住并向上拉出。"
+  },
+  {
+    "name": "脱T恤",
+    "level": "L3",
+    "parent_name": "脱T恤",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "儿童能独立完成脱T恤的完整动作。"
+  },
+  {
+    "name": "学前儿童训练指南—自理",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南中的自理能力训练范畴。"
+  },
+  {
+    "name": "穿衣技能",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南—自理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "提升学前儿童独立穿脱衣物的操作能力。"
+  },
+  {
+    "name": "脱衣物训练",
+    "level": "L3",
+    "parent_name": "穿衣技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学习透过不同方法脱下上衣或弹性织物。"
+  },
+  {
+    "name": "脱弹性布套",
+    "level": "L4",
+    "parent_name": "脱衣物训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "把弹性布套在儿童腰间，请儿童将布套向上拉过头部，将布套完全脱掉。所需器材：弹性布套（长 25 厘米，阔 25 厘米）。"
+  },
+  {
+    "name": "脱短袖T恤",
+    "level": "L4",
+    "parent_name": "脱衣物训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "示范将双手交叉在躯干前面握著衣脚部分，将T恤向上拉，脱过肩膀及头部，将T恤完全脱下。所需器材：较宽松的短袖T恤。"
+  },
+  {
+    "name": "脱长袖T恤",
+    "level": "L4",
+    "parent_name": "脱衣物训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "预先将安全扣针扣在儿童长袖T恤的两边袖口，请儿童以一手握著扣针和袖口，让另一手从衣袖脱出，接著以相同方法把另一袖也脱出，最后请儿童用双手把T恤拉过头部，把长袖T恤完全脱掉。所需器材：较宽松的长袖T恤、安全扣针。"
+  },
+  {
+    "name": "脱其他衣物",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "脱其他衣物训练，涵盖脱帽子与脱手套技能。"
+  },
+  {
+    "name": "脱帽子",
+    "level": "L2",
+    "parent_name": "脱其他衣物",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "在儿童面前将糖果贴在帽子内，接著替儿童戴上帽子，请儿童伸手拉脱帽子，找出糖果。"
+  },
+  {
+    "name": "拉脱手套",
+    "level": "L2",
+    "parent_name": "脱其他衣物",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "练习拉脱手套的技能，包含互助按摩与操作练习。"
+  },
+  {
+    "name": "沐浴手套互动练习",
+    "level": "L3",
+    "parent_name": "拉脱手套",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "与儿童一起戴上成人尺寸的沐浴按摩手套，互相按摩对方的手和脚后，请儿童把按摩手套自行拉脱。"
+  },
+  {
+    "name": "透明手套操作练习",
+    "level": "L3",
+    "parent_name": "拉脱手套",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "与儿童一起戴上透明手套，制作简单小吃（如：用小胶签串起2粒大棉花糖）。完成后请儿童拉脱手套，与成人一同分享食物。"
+  },
+  {
+    "name": "贴纸与分指手套练习",
+    "level": "L3",
+    "parent_name": "拉脱手套",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "把贴纸贴在儿童手掌心，再替儿童戴上没有个别手指部分的手套，请儿童以拇指穿进手套开口，把手套脱下，露出贴纸。儿童掌握技巧后，可让儿童尝试脱出有个别手指部分的手套。"
+  },
+  {
+    "name": "自理能力训练",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童自理技能训练指导方案。"
+  },
+  {
+    "name": "穿鞋",
+    "level": "L2",
+    "parent_name": "自理能力训练",
+    "age_min_months": 12,
+    "age_max_months": 60,
+    "prompt_corpus": "训练儿童独立完成穿鞋动作的各项技能。"
+  },
+  {
+    "name": "配合将脚套入成人代张开的鞋口内",
+    "level": "L3",
+    "parent_name": "穿鞋",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "准备与儿童外出时，请儿童坐在椅子上，成人先替儿童穿上一只鞋子。接著拿著另一只鞋子，张开鞋口放在儿童脚前，请儿童提起脚配合成人，并将脚穿进鞋子内。"
+  },
+  {
+    "name": "用双手握著鞋口的两侧并将其向外拉开",
+    "level": "L3",
+    "parent_name": "穿鞋",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "与儿童一起替洋娃娃穿鞋子，成人先拉开鞋子的两边，请儿童把洋娃娃的脚穿进鞋子内。合作穿好一只鞋子后，二人交换角色，请儿童拉开鞋子的两边，成人则把洋娃娃的另一只脚穿进鞋子内。"
+  },
+  {
+    "name": "穿上鞋子",
+    "level": "L3",
+    "parent_name": "穿鞋",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "请儿童坐在椅子上，成人示范脚穿进密头拖鞋内，接著把儿童的密头拖鞋放在儿童脚前，请儿童自行把脚穿进拖鞋内。或与儿童一起坐在地上，成人以双手替儿童拉开鞋口，并递向儿童，让儿童把脚穿进鞋子。接著成人把另一只鞋交给儿童，请儿童自行拉开鞋子的两边，把脚穿进鞋子内。"
+  },
+  {
+    "name": "分辨鞋子的左右",
+    "level": "L3",
+    "parent_name": "穿鞋",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "学习识别左右脚对应的鞋子位置。"
+  },
+  {
+    "name": "穿衣技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南：穿衣技能训练单元"
+  },
+  {
+    "name": "穿鞋训练",
+    "level": "L2",
+    "parent_name": "穿衣技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对儿童穿脱鞋履的辅助训练活动"
+  },
+  {
+    "name": "学习穿著魔术贴鞋",
+    "level": "L3",
+    "parent_name": "穿鞋训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "5C：预备容易穿上的儿童鞋子，请儿童撕开魔术贴，以双手拉开鞋子把脚穿进鞋头后（如有需要，请儿童用一手固定鞋舌），再用食指拉著鞋跟部分，将脚踝穿进鞋内。工具：容易穿上的鞋子。"
+  },
+  {
+    "name": "分辨左右脚练习",
+    "level": "L3",
+    "parent_name": "穿鞋训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "6D：在儿童面前把儿童的一双鞋子放在大画纸上，用笔勾画出左右鞋子的外形，并和儿童一起描述左脚和右脚鞋印的分别。接著把鞋子左右调乱再交给儿童，请儿童将鞋子放回在相应的鞋印上。工具：儿童鞋子、画纸、颜色笔。"
+  },
+  {
+    "name": "建立归位及对照习惯",
+    "level": "L3",
+    "parent_name": "穿鞋训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "7D：预先把鞋印图片贴在鞋柜外，与儿童外出回家时，把鞋子脱掉后，请儿童把鞋子分好左右，再放回鞋柜内。如儿童有疑惑，请儿童对照鞋印图片来协助分辨左右。工具：鞋印图片、儿童鞋子。"
+  },
+  {
+    "name": "穿袜",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 12,
+    "age_max_months": 60,
+    "prompt_corpus": "儿童自理技能训练：穿袜技巧。"
+  },
+  {
+    "name": "目标",
+    "level": "L2",
+    "parent_name": "穿袜",
+    "age_min_months": 12,
+    "age_max_months": 60,
+    "prompt_corpus": "包含配合套袜、穿无脚踝袜、翻转袜子、正确穿袜及分辨底面和左右的训练目标。"
+  },
+  {
+    "name": "A-配合将脚套入已拉开的袜管口",
+    "level": "L3",
+    "parent_name": "目标",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "配合将脚套入已拉开的袜管口。"
+  },
+  {
+    "name": "B-将橡筋圈套在脚上",
+    "level": "L3",
+    "parent_name": "目标",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "将橡筋圈套在脚上。"
+  },
+  {
+    "name": "C-穿上没有脚踝部分的袜子",
+    "level": "L3",
+    "parent_name": "目标",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "穿上没有脚踝部分的袜子。"
+  },
+  {
+    "name": "D-将袜子翻回正面",
+    "level": "L3",
+    "parent_name": "目标",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "将袜子翻回正面。"
+  },
+  {
+    "name": "E-正确地穿上有脚踝部分的袜子",
+    "level": "L3",
+    "parent_name": "目标",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "正确地穿上有脚踝部分的袜子。"
+  },
+  {
+    "name": "F-分辨袜子的底面",
+    "level": "L3",
+    "parent_name": "目标",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "分辨袜子的底面。"
+  },
+  {
+    "name": "G-分辨左右不同印花的袜子",
+    "level": "L3",
+    "parent_name": "目标",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "分辨左右不同印花的袜子。"
+  },
+  {
+    "name": "活动建议",
+    "level": "L2",
+    "parent_name": "穿袜",
+    "age_min_months": 12,
+    "age_max_months": 60,
+    "prompt_corpus": "包含亲子协作穿袜、橡筋圈辅助模仿及带铃铛橡筋圈穿脱练习。"
+  },
+  {
+    "name": "活动一：准备与儿童外出穿袜",
+    "level": "L3",
+    "parent_name": "活动建议",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "准备与儿童外出时，请儿童坐在地上或椅子上，成人先替儿童穿上一只袜子，接著拉开另一只袜子的袜管口，放在儿童脚前，请儿童提起脚配合成人，并将脚穿进袜子内。"
+  },
+  {
+    "name": "活动二：橡筋圈套水瓶练习",
+    "level": "L3",
+    "parent_name": "活动建议",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "出示水瓶和大橡筋圈，示范以双手指穿在橡筋圈内，用力拉开橡筋圈，套在水瓶上，请儿童模仿，以学习双手拉开袜子套在脚上的动作。"
+  },
+  {
+    "name": "活动三：铃铛橡筋圈游戏",
+    "level": "L3",
+    "parent_name": "活动建议",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "请儿童将双手指穿进缝上铃铛的橡筋圈内，用力拉开橡筋圈并把它穿在脚上，接著与成人一同跳舞。"
+  },
+  {
+    "name": "穿衣技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学龄前儿童穿衣技能训练"
+  },
+  {
+    "name": "穿袜子练习",
+    "level": "L2",
+    "parent_name": "穿衣技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "通过不同类型的袜子，循序渐进练习穿袜技巧。"
+  },
+  {
+    "name": "穿无脚踝袜子",
+    "level": "L3",
+    "parent_name": "穿袜子练习",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "把没有脚踝部分的袜子交给儿童，请儿童以双手拉开袜管，把袜子穿在脚上。"
+  },
+  {
+    "name": "寻物翻转袜子",
+    "level": "L3",
+    "parent_name": "穿袜子练习",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "准备袜头有立体小玩物的袜子，在儿童面前将袜子里外翻转。示范用一手伸进已翻转的袜子内紧握小玩物，另一手握著袜管开口向上拉，把袜子翻回正面。鼓励儿童模仿，掌握技巧后可用普通袜子练习。"
+  },
+  {
+    "name": "辨识并穿著有脚踝袜子",
+    "level": "L3",
+    "parent_name": "穿袜子练习",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示款式简单、能让儿童清楚看到脚踝部分的袜子，示范拿著袜子时让脚踝部分向下。先协助儿童穿上一只袜子，将脚踝部分拉妥，再将另一只袜子交给儿童，请儿童自行穿上。"
+  },
+  {
+    "name": "穿衣技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童穿衣技能训练"
+  },
+  {
+    "name": "袜子辨识与穿著训练",
+    "level": "L2",
+    "parent_name": "穿衣技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过袜子图案辨识与穿著实践，提升儿童自我照顾与空间方位知觉能力。"
+  },
+  {
+    "name": "袜子正反面辨识",
+    "level": "L3",
+    "parent_name": "袜子辨识与穿著训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示多对印有不同图案的袜子，将每双袜子的其中一只里外翻转，请儿童指出哪一只袜子是正面、哪一只翻转了。接著请儿童把翻转了的袜子翻回正面，一对一对的放在一起。开始练习时，可选用图案较多的袜子，让儿童容易辨识哪一只翻转了。当儿童掌握技巧后，可选用款式简单，图案较少的袜子给儿童练习。"
+  },
+  {
+    "name": "袜子左右方位辨识",
+    "level": "L3",
+    "parent_name": "袜子辨识与穿著训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "预备左右图案不同的袜子，交给儿童穿上时，提示儿童应穿在哪只脚上。儿童穿好后，请儿童侧身站在镜子前，看看袜子的图案，再请儿童转身向另一边，看看另一只袜子的图案。接著请儿童脱下袜子，成人故意让儿童把袜子左右调乱并穿上，再侧身照镜子，并对儿童说：「啊，看不到图案了！」告诉儿童这样是左右调乱了，请儿童更正过来。当儿童再穿上袜子时，成人引导儿童先把袜子拼在脚上，检查方向是否正确，才再穿上。"
+  },
+  {
+    "name": "穿裤",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 12,
+    "age_max_months": 60,
+    "prompt_corpus": "项目九：穿裤。训练儿童学习穿著裤子的相关技巧。"
+  },
+  {
+    "name": "动作技巧训练",
+    "level": "L2",
+    "parent_name": "穿裤",
+    "age_min_months": 12,
+    "age_max_months": 60,
+    "prompt_corpus": "包含从简单的伸脚、拉裤至腰间，到进阶的辨别裤子正反面、前后幅等技能。"
+  },
+  {
+    "name": "基础穿裤训练",
+    "level": "L3",
+    "parent_name": "动作技巧训练",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "配合将脚伸入成人代张开的裤管内，将已套在小腿上的弹性布套拉至腰间，以及坐著并将脚分别伸入不同的裤管内。"
+  },
+  {
+    "name": "进阶穿裤训练",
+    "level": "L3",
+    "parent_name": "动作技巧训练",
+    "age_min_months": 24,
+    "age_max_months": 60,
+    "prompt_corpus": "学习穿著短裤（2-3岁）、长裤（3-4岁），以及辨别裤子的底面、前后幅（4-5岁）。"
+  },
+  {
+    "name": "儿歌辅助练习",
+    "level": "L3",
+    "parent_name": "穿裤",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "活动一：请儿童坐在椅子上，并依照成人指示轮流提起一只脚，唱儿歌《踏踏脚》，练习提起脚伸入裤管的动作。材料：儿童椅子。"
+  },
+  {
+    "name": "情境模拟穿著",
+    "level": "L3",
+    "parent_name": "穿裤",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "活动二：预备外出时，请儿童选择自己喜欢的裤子，接著坐在椅子上，依照成人指示提起一只脚，并将脚伸进成人已代为张开的裤管内。材料：儿童喜欢的裤子、儿童椅子。"
+  },
+  {
+    "name": "呼拉圈辅助练习",
+    "level": "L3",
+    "parent_name": "穿裤",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "活动三：示范踏放在地上的呼拉圈，蹲下拾起呼拉圈并拉至腰间，同时唱儿歌《扭扭腰》，请儿童模仿，以练习穿裤子的动作。材料：呼拉圈。"
+  },
+  {
+    "name": "穿衣技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童穿衣技能训练"
+  },
+  {
+    "name": "穿裤子训练",
+    "level": "L2",
+    "parent_name": "穿衣技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童的穿裤子技巧进行分步骤引导与训练"
+  },
+  {
+    "name": "使用弹性布套练习",
+    "level": "L3",
+    "parent_name": "穿裤子训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "请儿童踏进地上的弹性布套内，成人协助儿童把布套拉上至小腿位置，再请儿童自行把布套拉上至腰间。所需物资：弹性布套（长7.5厘米，阔25厘米）。"
+  },
+  {
+    "name": "质感地毯辅助穿裤训练",
+    "level": "L3",
+    "parent_name": "穿裤子训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "请儿童坐在椅子上学习穿裤，并把质感较粗的地毯放在椅子前儿童踏脚的地上。成人把儿童裤子的裤管打开，放在地毯上，请儿童自行把双脚穿进裤管内，感觉一下脚掌已踏在地毯上，接著请儿童站起来，弯下身子将裤子拉上。所需物资：儿童椅子、质感较粗的地毯、儿童裤子。"
+  },
+  {
+    "name": "坐姿穿裤训练",
+    "level": "L3",
+    "parent_name": "穿裤子训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "请儿童坐在椅子上学习穿裤，把裤子交给儿童，请儿童以双手拿著裤头，把脚逐一伸进裤管中，接著请儿童站起来，把裤子拉上。所需物资：儿童短裤或长裤、儿童椅子。"
+  },
+  {
+    "name": "分辨裤子正反面",
+    "level": "L3",
+    "parent_name": "穿裤子训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示数条印有儿童喜欢的图案或卡通人物的裤子，将部分裤子里外翻转，问儿童：『哪些裤子翻转了？』请儿童指出哪些裤子翻转了，哪些没有翻转。所需物资：儿童短裤或长裤数条。"
+  },
+  {
+    "name": "翻转裤子纠正技巧",
+    "level": "L3",
+    "parent_name": "穿裤子训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "示范拿著里外翻转的裤子，一手握著裤头，另一手从裤头伸到裤管口，并握著裤管口把裤管拉出来，把它翻回正面。请儿童以相同方法把另一边的裤管也翻过来。所需物资：儿童的裤子。"
+  },
+  {
+    "name": "利用标签辨识裤子前后",
+    "level": "L3",
+    "parent_name": "穿裤子训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示前幅印有儿童喜欢的图案或卡通人物的裤子，请儿童站在镜子前，告诉儿童拿著裤子拼在脚上时，看到该图案或卡通人物，便是前幅。可教导儿童看裤子里面的标签，告诉儿童有标签的一般是裤子的后幅。所需物资：前幅有儿童喜欢的图案或卡通人物的裤子、全身镜。"
+  },
+  {
+    "name": "穿开胸衣服",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 12,
+    "age_max_months": 72,
+    "prompt_corpus": "项目十：穿开胸衣服，包含多个阶段的穿衣技能训练。"
+  },
+  {
+    "name": "配合将手伸入成人代张开的衣袖内",
+    "level": "L2",
+    "parent_name": "穿开胸衣服",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "配合将手伸入成人代张开的衣袖内。活动建议：把儿童喜欢的小玩具，从开胸外套的袖子伸进外套内，张开衣袖让儿童看到小玩具，吸引儿童配合成人把手伸进袖内取玩具。"
+  },
+  {
+    "name": "将橡筋圈套上手臂",
+    "level": "L2",
+    "parent_name": "穿开胸衣服",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "将橡筋圈套上手臂。活动建议：1. 与儿童玩假想游戏，示范一手拿著橡筋圈，把胶圈穿在另一手的肩膀上，当作是手袋，请儿童模仿，把胶圈当成手袋穿在肩上。2. 示范将橡筋圈穿进手腕后，把橡筋圈拉至手臂位置，告诉儿童要穿更多橡筋圈在手上，所以要尽量把橡筋圈拉上，请儿童仿成人的动作，把数个橡筋圈穿在手臂上。"
+  },
+  {
+    "name": "将已穿上一只袖而衣领已放在脖子后的背心穿妥",
+    "level": "L2",
+    "parent_name": "穿开胸衣服",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "将已穿上一只袖而衣领已放在脖子后的背心穿妥。"
+  },
+  {
+    "name": "穿开胸衣服",
+    "level": "L2",
+    "parent_name": "穿开胸衣服",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "穿开胸衣服（包含背心、外套或衬衫）。"
+  },
+  {
+    "name": "分辨外套的前后幅",
+    "level": "L2",
+    "parent_name": "穿开胸衣服",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "分辨外套的前后幅。"
+  },
+  {
+    "name": "分辨外套的底面",
+    "level": "L2",
+    "parent_name": "穿开胸衣服",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "分辨外套的底面。"
+  },
+  {
+    "name": "将外套翻回正面",
+    "level": "L2",
+    "parent_name": "穿开胸衣服",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "将外套翻回正面。"
+  },
+  {
+    "name": "自理能力训练",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南中的自理能力训练范畴。"
+  },
+  {
+    "name": "穿衣技能",
+    "level": "L2",
+    "parent_name": "自理能力训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "提升儿童独立穿衣的协调能力与技巧。"
+  },
+  {
+    "name": "美劳手袖",
+    "level": "L3",
+    "parent_name": "穿衣技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童进行图工活动前，请儿童以一手握美劳手袖，把它穿在另一手上。过程中提示儿童手袖很长，要把手袖的橡筋开口拉到近肩膀的位置。"
+  },
+  {
+    "name": "长形披肩",
+    "level": "L3",
+    "parent_name": "穿衣技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "将长形披肩搭在儿童的一边肩膀上，并把披肩拉到儿童脖子后面，请儿童伸出未被披肩搭著的手，把披肩拉前来搭著肩膀。"
+  },
+  {
+    "name": "开胸背心",
+    "level": "L3",
+    "parent_name": "穿衣技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "拿起开胸背心，先请儿童伸出一只手穿进袖孔，接著将背心拉到儿童脖子后面，请儿童伸出另一只手把背心拉过肩膀，再把手穿进袖孔内。"
+  },
+  {
+    "name": "穿衣技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "穿衣技能训练活动建议"
+  },
+  {
+    "name": "穿著扣针外套",
+    "level": "L2",
+    "parent_name": "穿衣技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "预先将扣针扣在开胸背心前幅近衣领的位置。请儿童以一手穿进扣针的位置，把另一手穿进袖孔内，接著继续以握著扣针的手把衣领绕过脖子后方，拉过肩膀，并改用已穿衣的手固定衣领，最后把手穿进另一边袖孔内。儿童掌握技巧后，成人可让儿童尝试穿较宽松的长袖外套，进而练习穿贴身的长袖衬衫。"
+  },
+  {
+    "name": "辨识外套前幅",
+    "level": "L2",
+    "parent_name": "穿衣技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示前幅有儿童喜欢的图案或卡通人物的外套，请儿童站在镜子前，告诉儿童拿著外套拼在身上时，看到该图案或卡通人物，便是外套的前幅。"
+  },
+  {
+    "name": "辨识衣袖正反面",
+    "level": "L2",
+    "parent_name": "穿衣技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示数件手袖印有儿童喜欢的图案或卡通人物的外套，将部分外套里外翻转，问儿童：「哪些外套翻转了？」请儿童指出哪些外套翻转了，哪些没有翻转，以教导儿童分辨外套的底面。"
+  },
+  {
+    "name": "翻转衣袖练习",
+    "level": "L2",
+    "parent_name": "穿衣技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "示范拿著里外翻转的外套衣领，把手穿过衣袖，并用伸了出来的手握著衣袖，另一手握著衣领，把衣袖翻回正面。接著把外套交给儿童，请儿童以相同方法，把另一边的衣袖也翻过来，最后请儿童双手拿著外套，把翻回正面的外套弄整齐。"
+  },
+  {
+    "name": "自理训练",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童自理能力训练指南"
+  },
+  {
+    "name": "穿衣技能",
+    "level": "L2",
+    "parent_name": "自理训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "指导儿童掌握各类衣物的穿著技巧"
+  },
+  {
+    "name": "穿T恤",
+    "level": "L3",
+    "parent_name": "穿衣技能",
+    "age_min_months": 12,
+    "age_max_months": 60,
+    "prompt_corpus": "项目十一：穿T恤。包含配合拉下T恤、穿上T恤及穿背心内衣等系列动作训练。"
+  },
+  {
+    "name": "配合伸展将T恤拉至脖子",
+    "level": "L4",
+    "parent_name": "穿T恤",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "活动A：先将保暖颈套套在儿童头上，拉至嘴巴高度，请儿童以双手将颈套拉下至脖子，并进行鼓励。"
+  },
+  {
+    "name": "穿上已套住的T恤",
+    "level": "L4",
+    "parent_name": "穿T恤",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "活动B：将领口较松的T恤套在儿童头上，请儿童将领口拉至脖子，随后成人协助儿童将手穿进袖内。"
+  },
+  {
+    "name": "自行穿上T恤",
+    "level": "L4",
+    "parent_name": "穿T恤",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "活动C：请儿童自行将T恤套在头上，拉下至脖子，并练习将双手穿入袖子，最后将T恤下拉整齐。"
+  },
+  {
+    "name": "穿背心内衣",
+    "level": "L4",
+    "parent_name": "穿T恤",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "活动D：针对背心内衣的穿著训练，重点在于提升儿童穿著衣物的独立性与协调性。"
+  },
+  {
+    "name": "穿衣技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南中的基础穿衣技能训练单元。"
+  },
+  {
+    "name": "穿T恤技能",
+    "level": "L2",
+    "parent_name": "穿衣技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童的T恤穿著训练，包含领口调整与手臂穿著练习。"
+  },
+  {
+    "name": "穿宽领口T恤",
+    "level": "L3",
+    "parent_name": "穿T恤技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "步骤5：先协助儿童把领口较松的T恤穿过头部，套在脖子上。接著请儿童把手逐一穿进袖口，再拉著T恤的衣脚，把T恤拉整齐。所需工具：领口较松的T恤。"
+  },
+  {
+    "name": "穿背心内衣",
+    "level": "L3",
+    "parent_name": "穿T恤技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "步骤6：先请儿童坐在椅子上。成人将一件前幅有儿童喜欢的图案或卡通人物的背心内衣，放在儿童大腿上（前幅向下，后幅向著儿童），请儿童双手握著衣脚，把背心内衣穿过头，接著把双手穿过袖孔。儿童掌握技巧后，成人可让儿童以短袖T恤练习，进而再以长袖T恤练习。所需工具：儿童椅子、前幅有儿童喜欢的图案或卡通人物的背心内衣、短袖T恤、长袖T恤。"
+  },
+  {
+    "name": "穿其他衣物",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 24,
+    "age_max_months": 60,
+    "prompt_corpus": "训练儿童学会穿戴帽子、指环、手套及围巾等各类衣物配件的技巧。"
+  },
+  {
+    "name": "戴上帽子",
+    "level": "L2",
+    "parent_name": "穿其他衣物",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "与儿童玩假想游戏，模拟洋娃娃要去海滩，太阳很猛烈，需要戴上帽子，请儿童替洋娃娃戴上帽子。接著请儿童假想与成人和洋娃娃一同到了海滩，成人先戴上帽子，请儿童也戴上帽子，一同拍照留念。"
+  },
+  {
+    "name": "将指环套在手指上",
+    "level": "L2",
+    "parent_name": "穿其他衣物",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "出示闪灯指环吸引儿童注意，并示范将指环套在手指上。接著将另一只闪灯指环交给儿童，请儿童自行把指环套在手指上。"
+  },
+  {
+    "name": "穿上手套",
+    "level": "L2",
+    "parent_name": "穿其他衣物",
+    "age_min_months": 36,
+    "age_max_months": 60,
+    "prompt_corpus": "与儿童假想冬天来了，天气很冷，需要穿上手套。成人示范以一手握著没有个别手指部分的手套之开口位置，把另一手穿进手套内，接著请儿童尝试。当儿童掌握技巧后，可让儿童练习穿上有个别手指部分的手套。"
+  },
+  {
+    "name": "把围巾围在脖子上",
+    "level": "L2",
+    "parent_name": "穿其他衣物",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "教授儿童将围巾围绕在脖子上的技巧，可透过角色扮演或照镜子练习。"
+  },
+  {
+    "name": "自理",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南——自理领域"
+  },
+  {
+    "name": "穿衣技能",
+    "level": "L2",
+    "parent_name": "自理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与穿衣相关的基础生活自理技能训练"
+  },
+  {
+    "name": "围长毛巾",
+    "level": "L3",
+    "parent_name": "穿衣技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "示范以双手握著长毛巾的两端，把毛巾披在脖子上，再把毛巾的两端交叉围到脖子后面。接著请儿童模仿成人的做法围上长毛巾。"
+  },
+  {
+    "name": "围儿童围巾",
+    "level": "L3",
+    "parent_name": "穿衣技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "示范以双手握著围巾的两端，把围巾披在脖子上，再把围巾的一端穿进另一端的孔内。接著把围巾交给儿童，请儿童模仿成人的做法围上围巾。"
+  },
+  {
+    "name": "自理",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南中的自理能力训练范畴。"
+  },
+  {
+    "name": "处理鞋的系扣——魔术贴",
+    "level": "L2",
+    "parent_name": "自理",
+    "age_min_months": 12,
+    "age_max_months": 36,
+    "prompt_corpus": "针对学前儿童进行鞋类魔术贴的开合训练，包含解开与扣上两个阶段。"
+  },
+  {
+    "name": "解开魔术贴",
+    "level": "L3",
+    "parent_name": "处理鞋的系扣——魔术贴",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "训练儿童学会解开魔术贴的技巧。"
+  },
+  {
+    "name": "扣合魔术贴",
+    "level": "L3",
+    "parent_name": "处理鞋的系扣——魔术贴",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "训练儿童学会精准对准并扣合魔术贴。"
+  },
+  {
+    "name": "魔术贴拆卸练习",
+    "level": "L4",
+    "parent_name": "解开魔术贴",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "出示魔术贴板和玩具，示范将玩具从魔术贴板撕下，并放进篮子里，引导儿童尝试操作。"
+  },
+  {
+    "name": "魔术贴黏贴练习",
+    "level": "L4",
+    "parent_name": "扣合魔术贴",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "出示小型魔术贴玩具，请儿童小心对准魔术贴位置，将玩具贴上。"
+  },
+  {
+    "name": "实际穿鞋操作",
+    "level": "L4",
+    "parent_name": "处理鞋的系扣——魔术贴",
+    "age_min_months": 12,
+    "age_max_months": 36,
+    "prompt_corpus": "在准备外出时，请儿童自行撕开鞋子上的魔术贴，将脚放入鞋中，再自行拉紧魔术贴并贴好。"
+  },
+  {
+    "name": "处理鞋的系扣物—鞋扣、鞋带",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 36,
+    "age_max_months": 72,
+    "prompt_corpus": "处理鞋的系扣物，包括鞋扣与鞋带的操作训练。"
+  },
+  {
+    "name": "解开鞋扣",
+    "level": "L2",
+    "parent_name": "处理鞋的系扣物—鞋扣、鞋带",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "解开鞋扣的技巧训练。"
+  },
+  {
+    "name": "解开鞋带",
+    "level": "L2",
+    "parent_name": "处理鞋的系扣物—鞋扣、鞋带",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "解开鞋带的技巧训练。"
+  },
+  {
+    "name": "扣合鞋扣",
+    "level": "L2",
+    "parent_name": "处理鞋的系扣物—鞋扣、鞋带",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "扣合鞋扣的技巧训练。"
+  },
+  {
+    "name": "用鞋带结基本结",
+    "level": "L2",
+    "parent_name": "处理鞋的系扣物—鞋扣、鞋带",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "练习打鞋带的基本结。"
+  },
+  {
+    "name": "系鞋带",
+    "level": "L2",
+    "parent_name": "处理鞋的系扣物—鞋扣、鞋带",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "系鞋带的完整技巧训练。"
+  },
+  {
+    "name": "穿鞋带",
+    "level": "L2",
+    "parent_name": "处理鞋的系扣物—鞋扣、鞋带",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "穿鞋带的技巧训练。"
+  },
+  {
+    "name": "鞋扣操作活动",
+    "level": "L3",
+    "parent_name": "处理鞋的系扣物—鞋扣、鞋带",
+    "age_min_months": 36,
+    "age_max_months": 60,
+    "prompt_corpus": "与儿童外出时，成人先示范解开儿童鞋的鞋扣，再请儿童尝试解开另一只鞋的鞋扣，接著自行把鞋穿上。如儿童能掌握技巧，再请儿童模仿成人把鞋扣扣上，学习自行穿扣类鞋子穿妥。材料：穿扣类儿童鞋。"
+  },
+  {
+    "name": "鞋带操作活动",
+    "level": "L3",
+    "parent_name": "处理鞋的系扣物—鞋扣、鞋带",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "出示已预先结好蝴蝶结的系鞋带玩具，示范把蝴蝶结的两条绳尾拉开，接著仔细地把结解开，并请儿童模仿。如儿童能掌握技巧，成人可把系鞋带玩具放在地上，请儿童蹲在地上练习，模拟正确系鞋带的姿态，进而再让儿童穿上结好蝴蝶结的鞋来练习。材料：系鞋带玩具、有鞋带的儿童鞋。"
+  },
+  {
+    "name": "穿衣技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "指导学前儿童掌握日常穿衣及鞋带处理的基本生活自理技能。"
+  },
+  {
+    "name": "系鞋带训练",
+    "level": "L2",
+    "parent_name": "穿衣技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过玩具辅助及模仿学习，掌握系鞋带的基础技巧，包括打基本结、蝴蝶结及穿孔技术。"
+  },
+  {
+    "name": "打基本结",
+    "level": "L3",
+    "parent_name": "系鞋带训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示两条鞋带不同颜色的系鞋带玩具，示范将鞋带两端交叉叠起，并将叠在上面的一条绕过另一条，结成基本结，引导儿童模仿。"
+  },
+  {
+    "name": "打蝴蝶结",
+    "level": "L3",
+    "parent_name": "系鞋带训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "在完成基本结的基础上，示范将两边鞋带绕成一个圈，再将两个圈交叉叠起，形成蝴蝶结，引导儿童模仿。"
+  },
+  {
+    "name": "穿鞋带孔",
+    "level": "L3",
+    "parent_name": "系鞋带训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "利用两条鞋带不同颜色的穿鞋带玩具，示范将鞋带交叉穿进鞋带孔，引导儿童模仿。熟练后可进阶至使用真实有鞋带的儿童鞋练习。"
+  },
+  {
+    "name": "处理拉链",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 12,
+    "age_max_months": 60,
+    "prompt_corpus": "训练儿童掌握拉链的操作技巧，包含拉开及拉合连尾拉链，促进手部精细动作与协调能力。"
+  },
+  {
+    "name": "拉开连尾拉链",
+    "level": "L2",
+    "parent_name": "处理拉链",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "目标为拉开连尾拉链，对应活动为将玩具放入透明拉链袋中，示范一手固定袋子，另一手拉开拉链。"
+  },
+  {
+    "name": "拉合连尾拉链",
+    "level": "L2",
+    "parent_name": "处理拉链",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "目标为拉合连尾拉链，对应活动为准备外出时，与儿童共同执拾小背包，将物品放入后协助将拉链拉上。"
+  },
+  {
+    "name": "拉开开尾拉链",
+    "level": "L2",
+    "parent_name": "处理拉链",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "目标为拉开开尾拉链，对应活动为在拉链外套底部贴上贴纸作为引导，由成人协助稳定拉链底部，指导儿童拉开扣件。"
+  },
+  {
+    "name": "拉合开尾拉链",
+    "level": "L2",
+    "parent_name": "处理拉链",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "目标为拉合开尾拉链，对应活动为与儿童替洋娃娃穿上拉链外套，示范如何扣合拉链底部并将其拉上，鼓励儿童模仿练习。"
+  },
+  {
+    "name": "处理钮扣",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 24,
+    "age_max_months": 60,
+    "prompt_corpus": "针对学龄前儿童的自理能力训练，涵盖解开与扣上大、小钮扣的系列技能。"
+  },
+  {
+    "name": "解开位于桌上的大钮扣",
+    "level": "L2",
+    "parent_name": "处理钮扣",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "解开位于桌上的大钮扣，适合2-3岁儿童。"
+  },
+  {
+    "name": "扣合位于桌上的大钮扣",
+    "level": "L2",
+    "parent_name": "处理钮扣",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "扣合位于桌上的大钮扣，适合2-3岁儿童。"
+  },
+  {
+    "name": "解开大钮扣",
+    "level": "L2",
+    "parent_name": "处理钮扣",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "解开大钮扣，适合3-4岁儿童。"
+  },
+  {
+    "name": "扣合大钮扣",
+    "level": "L2",
+    "parent_name": "处理钮扣",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "扣合大钮扣，适合3-4岁儿童。"
+  },
+  {
+    "name": "解开小钮扣",
+    "level": "L2",
+    "parent_name": "处理钮扣",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "解开小钮扣，适合4-5岁儿童。"
+  },
+  {
+    "name": "扣合小钮扣",
+    "level": "L2",
+    "parent_name": "处理钮扣",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "扣合小钮扣，适合4-5岁儿童。"
+  },
+  {
+    "name": "投币模拟训练",
+    "level": "L3",
+    "parent_name": "处理钮扣",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "请儿童将钱币投进投币口在不同方向的钱箱，练习将钮扣穿进钮门的动作。"
+  },
+  {
+    "name": "钮扣开合练习",
+    "level": "L3",
+    "parent_name": "处理钮扣",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示钮扣已扣合的钮扣布。请儿童先以一手握钮扣，另一手握钮门，双手向两边拉开，让钮门显露出来，接著将钮扣穿过钮门后，互换双手的动作，即握钮门的手改为握钮扣；握钮扣的手改为握钮门，并把钮扣穿过钮门，解开钮扣。当儿童掌握解开钮扣的技巧后，可以钮扣直径较小的钮扣布来练习。"
+  },
+  {
+    "name": "学前儿童训练指南—自理",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南中的自理能力训练项目。"
+  },
+  {
+    "name": "穿衣技能",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南—自理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童的穿衣技能训练活动。"
+  },
+  {
+    "name": "扣钮扣训练",
+    "level": "L3",
+    "parent_name": "穿衣技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "训练儿童运用双手协调进行钮扣解开与扣上的操作技能。"
+  },
+  {
+    "name": "桌上扣钮布练习",
+    "level": "L4",
+    "parent_name": "扣钮扣训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "使用扣钮布（钮扣直径约1吋）。步骤：请儿童一手握钮扣，另一手握钮门，将钮扣穿过钮门，互换双手动作，调整握持方式，将钮扣拉过钮门扣上。待掌握后可练习直径较小的钮扣。"
+  },
+  {
+    "name": "身上衣物扣钮练习",
+    "level": "L4",
+    "parent_name": "扣钮扣训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "当儿童掌握桌上练习后，改为在身上练习。先穿著有大钮扣的外套练习解开和扣上，技巧熟练后，进阶练习直径较小的外套钮扣。"
+  },
+  {
+    "name": "处理其他系扣物",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 24,
+    "age_max_months": 60,
+    "prompt_corpus": "处理其他系扣物，包含大钮扣、安全扣及皮带扣的解开与扣合训练。"
+  },
+  {
+    "name": "解开大钮扣",
+    "level": "L2",
+    "parent_name": "处理其他系扣物",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "训练儿童运用双手解开大钮扣。活动建议：将儿童喜欢的小吃放进以大钮扣扣合的小袋内，示范以双手解开大钮扣并取出小吃，鼓励儿童模仿。"
+  },
+  {
+    "name": "扣合大钮扣",
+    "level": "L2",
+    "parent_name": "处理其他系扣物",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "训练儿童运用食指及拇指扣合大钮扣。活动建议：出示大钮扣的教材或衣服，示范将钮扣对准并扣上，接著请儿童模仿。"
+  },
+  {
+    "name": "扣合安全扣",
+    "level": "L2",
+    "parent_name": "处理其他系扣物",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "训练儿童扣合安全扣的技能。"
+  },
+  {
+    "name": "解开皮带扣",
+    "level": "L2",
+    "parent_name": "处理其他系扣物",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "训练儿童解开皮带扣的技能。"
+  },
+  {
+    "name": "解开安全扣",
+    "level": "L2",
+    "parent_name": "处理其他系扣物",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "训练儿童解开安全扣的技能。"
+  },
+  {
+    "name": "扣合皮带扣",
+    "level": "L2",
+    "parent_name": "处理其他系扣物",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "训练儿童扣合皮带扣的技能。"
+  },
+  {
+    "name": "学前儿童训练指南—自理",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南—自理教材内容总览。"
+  },
+  {
+    "name": "穿衣技能",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南—自理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童的穿衣自理技能训练建议。"
+  },
+  {
+    "name": "操作安全扣",
+    "level": "L3",
+    "parent_name": "穿衣技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示有安全扣的背包或教具，示范将安全扣对准并扣上，请儿童模仿。当儿童掌握技巧后，成人再示范把已扣合的安全扣以食指及姆指用力按开，请儿童模仿。"
+  },
+  {
+    "name": "操作皮带",
+    "level": "L3",
+    "parent_name": "穿衣技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示皮带扣较松的皮带，并示范把皮带末端退岀皮带扣和扣上的针，请儿童模仿。当儿童掌握技巧后，成人再示范把已解开的皮带穿进扣内，扣上针及把皮带拉出，请儿童模仿。"
+  },
+  {
+    "name": "梳洗技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 12,
+    "age_max_months": 72,
+    "prompt_corpus": "针对学前儿童的梳洗技能训练，涵盖各项清洁身体与五官的操作。"
+  },
+  {
+    "name": "项目一：揩抹身体",
+    "level": "L2",
+    "parent_name": "梳洗技能",
+    "age_min_months": 12,
+    "age_max_months": 72,
+    "prompt_corpus": "包含使用毛巾或纸巾进行身体各部位的清洁训练。"
+  },
+  {
+    "name": "用毛巾抹嘴",
+    "level": "L3",
+    "parent_name": "项目一：揩抹身体",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "使用毛巾进行抹嘴动作。"
+  },
+  {
+    "name": "用毛巾粗略地抹手",
+    "level": "L3",
+    "parent_name": "项目一：揩抹身体",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "使用毛巾粗略地擦拭双手。"
+  },
+  {
+    "name": "用毛巾粗略地抹脸",
+    "level": "L3",
+    "parent_name": "项目一：揩抹身体",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "使用毛巾粗略地擦拭脸部。"
+  },
+  {
+    "name": "取纸巾或厕纸抹鼻涕",
+    "level": "L3",
+    "parent_name": "项目一：揩抹身体",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "学习取用纸巾或厕纸擦拭鼻涕。"
+  },
+  {
+    "name": "扭干毛巾",
+    "level": "L3",
+    "parent_name": "项目一：揩抹身体",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "学习拧干毛巾的力度控制。"
+  },
+  {
+    "name": "用毛巾仔细抹脸",
+    "level": "L3",
+    "parent_name": "项目一：揩抹身体",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "练习细致地用毛巾清洁脸部。"
+  },
+  {
+    "name": "用毛巾抹干身体",
+    "level": "L3",
+    "parent_name": "项目一：揩抹身体",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "练习使用毛巾擦干身体。"
+  },
+  {
+    "name": "音乐镜子游戏",
+    "level": "L3",
+    "parent_name": "梳洗技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "在音乐游戏时，与儿童对著镜子一边唱与五官有关的儿歌，一边随歌词拿毛巾触摸各个部位，如：『摸摸头，摸摸脸，摸著嘴巴看不见！』借此加强儿童对五官名称的认识，及练习用毛巾抹嘴的动作。材料：镜子、毛巾。"
+  },
+  {
+    "name": "涂鸦涂抹练习",
+    "level": "L3",
+    "parent_name": "梳洗技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "先在人形脸孔胶片上用白板笔于不同部位涂鸦。接著请儿童按成人说出的五官名称，如：嘴巴，用抹干净该处，以加强儿童对五官名称的认识，及练习用毛巾抹嘴和脸的动作。材料：人形脸孔胶片、布、白板笔。"
+  },
+  {
+    "name": "喷水模仿练习",
+    "level": "L3",
+    "parent_name": "梳洗技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "在儿童的手或脸上喷水，接著用毛巾替儿童抹干，请儿童模仿成人用毛巾抹手或脸的动作。材料：喷水壶、毛巾。"
+  },
+  {
+    "name": "梳洗技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南——梳洗技能"
+  },
+  {
+    "name": "擦拭面部训练",
+    "level": "L2",
+    "parent_name": "梳洗技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "先在儿童的鼻翼位置涂上画脸颜料。接著请儿童把1块纸巾对折1次，成人协助儿童用双手持纸巾，对著镜子抹走鼻上的颜料，当纸巾染有颜色时，请儿童再对折纸巾1次并再抹鼻子，最后把纸巾多对折1次，才掉进废纸箱。如颜料仍未被抹干净，可请儿童再取纸巾，并重复上述步骤，直至把鼻子抹干净。所需工具：画脸颜料、纸巾、镜子、废纸箱。"
+  },
+  {
+    "name": "双手协调与扭动动作训练",
+    "level": "L2",
+    "parent_name": "梳洗技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过操作扭计骰和扭干海绵，练习双手相反方向扭动物件的协调动作。"
+  },
+  {
+    "name": "扭计骰训练",
+    "level": "L3",
+    "parent_name": "双手协调与扭动动作训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "把扭计骰（4格）的颜色弄乱，协助儿童运用双手以相反方向扭动扭计骰，练习扭毛巾所需的动作——双手相反方向扭动物件。所需工具：扭计骰。"
+  },
+  {
+    "name": "扭干海绵训练",
+    "level": "L3",
+    "parent_name": "双手协调与扭动动作训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "预备半盘水及1块海绵，并示范弄湿海绵后，用双手以相反方向扭干海绵。接著请儿童模仿成人用双手把湿的海绵以相反方向扭干。所需工具：胶盆、水、海绵。"
+  },
+  {
+    "name": "学前儿童训练指南—自理",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童自理能力训练指南，涵盖各项生活技能教学活动。"
+  },
+  {
+    "name": "梳洗技能",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南—自理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "训练儿童掌握基本的身体清洁与整理技能。"
+  },
+  {
+    "name": "镜子化妆与清洁练习",
+    "level": "L3",
+    "parent_name": "梳洗技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "请儿童对著镜子玩化妆游戏，如：涂润肤膏、用画脸颜料在脸上画图案等。游戏完毕后，成人给儿童湿毛巾，请他对著镜子仔细抹脸。所需物资：润肤膏、画脸颜料、湿毛巾、镜子。"
+  },
+  {
+    "name": "洋娃娃擦拭练习",
+    "level": "L3",
+    "parent_name": "梳洗技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示洋娃娃，并在洋娃娃身上喷水，请儿童利用毛巾替洋娃娃抹干身体。所需物资：洋娃娃、喷水壶、毛巾。"
+  },
+  {
+    "name": "毛巾抹除练习",
+    "level": "L3",
+    "parent_name": "梳洗技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "替儿童穿上绒衣，并在儿童身上不同位置贴上魔术贴小球，请儿童尝试利用毛巾，把身上的魔术贴小球抹掉，以练习用毛巾抹身体的动作。所需物资：绒衣、魔术贴小球、毛巾。"
+  },
+  {
+    "name": "身体喷水与擦干练习",
+    "level": "L3",
+    "parent_name": "梳洗技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童玩喷水游戏，用喷水壶将水喷向儿童手、脚、肚、背部等不同身体部位。接著请儿童利用毛巾把身上的水抹干。所需物资：喷水壶、毛巾。"
+  },
+  {
+    "name": "清洗身体",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 12,
+    "age_max_months": 72,
+    "prompt_corpus": "针对儿童进行身体清洁能力的训练，涵盖从洗手到自行洗澡的渐进式技能。"
+  },
+  {
+    "name": "用水洗手",
+    "level": "L2",
+    "parent_name": "清洗身体",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "训练儿童学习用水进行简单的洗手动作。"
+  },
+  {
+    "name": "开、关水龙头",
+    "level": "L2",
+    "parent_name": "清洗身体",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "教导儿童认识不同款式的水龙头，并练习开关动作。"
+  },
+  {
+    "name": "用肥皂洗手",
+    "level": "L2",
+    "parent_name": "清洗身体",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "学习使用肥皂进行洗手清洁。"
+  },
+  {
+    "name": "用枧液洗手（按压式瓶装枧液）",
+    "level": "L2",
+    "parent_name": "清洗身体",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "训练儿童学习操作按压式瓶装枧液进行洗手。"
+  },
+  {
+    "name": "模拟用毛巾替洋娃娃洗脸",
+    "level": "L2",
+    "parent_name": "清洗身体",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "通过模拟情境练习替洋娃娃洗脸，培养清洁技能。"
+  },
+  {
+    "name": "模拟替洋娃娃洗澡",
+    "level": "L2",
+    "parent_name": "清洗身体",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "通过模拟情境练习替洋娃娃洗澡。"
+  },
+  {
+    "name": "自行洗澡",
+    "level": "L2",
+    "parent_name": "清洗身体",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "培养儿童独立完成洗澡的能力。"
+  },
+  {
+    "name": "站在花洒或水龙头下冲洗头发",
+    "level": "L2",
+    "parent_name": "清洗身体",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "训练儿童在花洒或水龙头下进行冲洗头发的动作。"
+  },
+  {
+    "name": "洗手动作模仿训练",
+    "level": "L3",
+    "parent_name": "用水洗手",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "出示洗手动作图，与儿童一边唱儿歌，一边按照图示练习洗手的动作（搓手）。"
+  },
+  {
+    "name": "双手互动搓手训练",
+    "level": "L3",
+    "parent_name": "用水洗手",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "出示竹蜻蜓，示范以双手互搓使其旋转，随后请儿童模仿该动作，以练习洗手时的双手互搓动作。"
+  },
+  {
+    "name": "盆内洗手练习",
+    "level": "L3",
+    "parent_name": "用水洗手",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "将手放在胶盆内，成人一边唱儿歌，一边利用喷水壶向儿童的手喷水，训练其洗手动作。"
+  },
+  {
+    "name": "不同款式水龙头开关练习",
+    "level": "L3",
+    "parent_name": "开、关水龙头",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "带儿童到有不同款式水龙头（如左右推动、上下推动、扭动式及按钮式）的洗手间，示范并让儿童逐一尝试开关。"
+  },
+  {
+    "name": "梳洗技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南之梳洗技能相关单元"
+  },
+  {
+    "name": "洗手与清洁练习",
+    "level": "L2",
+    "parent_name": "梳洗技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过玩具与模拟操作，引导儿童学习洗手及清洁身体的基础动作。"
+  },
+  {
+    "name": "模拟洗手训练",
+    "level": "L3",
+    "parent_name": "洗手与清洁练习",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童玩假想游戏，示范开关玩具洗手盆的水龙头，假设用玩具肥皂清洁双手。接著请儿童模仿成人，练习开关水龙头及用肥皂洗手的动作。所需器材：玩具洗手盆、玩具肥皂。"
+  },
+  {
+    "name": "按压润肤膏训练",
+    "level": "L3",
+    "parent_name": "洗手与清洁练习",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示按压式瓶装润肤膏，示范按压出润肤膏，并均匀涂抹在手上。接著请儿童模仿，以学习按视液及洗手的动作。所需器材：按压式瓶装润肤膏。"
+  },
+  {
+    "name": "身体部位认知与清洁",
+    "level": "L2",
+    "parent_name": "梳洗技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过玩具和角色扮演，让儿童认识身体部位并练习基础清洁动作。"
+  },
+  {
+    "name": "五官擦拭训练",
+    "level": "L3",
+    "parent_name": "身体部位认知与清洁",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "预备五官图卡及洋娃娃，成人抽出其中一张五官图卡，请儿童用毛巾替洋娃娃抹图卡所示的部位（如：眼睛）。可把儿童分组进行活动，每组2人，一人负责抽图卡，另一人负责用毛巾替洋娃娃抹脸。所需器材：五官图卡、洋娃娃、毛巾。"
+  },
+  {
+    "name": "全身清洁练习",
+    "level": "L3",
+    "parent_name": "身体部位认知与清洁",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示洋娃娃及画脸颜料，并把颜料交给儿童，请儿童依照成人的指示，用颜料在洋娃娃的身上涂上颜色，如：背部、脚、手、脖子等。接著成人把毛巾给予儿童，请他把洋娃娃身上有颜料的地方抹干净。所需器材：洋娃娃、画脸颜料、毛巾。"
+  },
+  {
+    "name": "梳洗技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南：梳洗技能相关训练活动。"
+  },
+  {
+    "name": "洗澡流程与模仿",
+    "level": "L2",
+    "parent_name": "梳洗技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过图示、玩具及模拟操作，建立儿童洗澡的认知与生活自理能力。"
+  },
+  {
+    "name": "预备洗澡程序训练",
+    "level": "L3",
+    "parent_name": "洗澡流程与模仿",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "9. 预备洗澡程序图（如：清洗脖子→清洗双臂→清洗胸口及腹部→清洗背部→清洗臀部→清洗双脚），接著把洋娃娃放进胶盆，请儿童利用毛巾，按照程序尝试替洋娃娃洗澡。"
+  },
+  {
+    "name": "涂抹润肤膏模仿",
+    "level": "L3",
+    "parent_name": "洗澡流程与模仿",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "10. 出示润肤膏，并示范在身体不同部位涂抹，请儿童模仿成人，把润肤膏涂抹在身体各个部位，练习使用沐浴乳洗澡的动作。"
+  },
+  {
+    "name": "学习洗澡步骤",
+    "level": "L3",
+    "parent_name": "洗澡流程与模仿",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "11. 出示洗澡程序图，并指示儿童清洗的部位及程序，让儿童学习洗澡。"
+  },
+  {
+    "name": "洗头技巧训练",
+    "level": "L2",
+    "parent_name": "梳洗技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过角色扮演与感官刺激，协助儿童适应及学习洗头过程。"
+  },
+  {
+    "name": "模拟洗头角色扮演",
+    "level": "L3",
+    "parent_name": "洗头技巧训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "12. 预先在玩具花洒贴上纸条当作水，接著请儿童拿著花洒假装替成人洗头。完成后交换位置，由成人拿著花洒假装替儿童洗头。"
+  },
+  {
+    "name": "浴缸/企缸环境适应",
+    "level": "L3",
+    "parent_name": "洗头技巧训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "13. 请儿童站在浴缸或企缸内，用玩具花洒和儿童模拟洗头。"
+  },
+  {
+    "name": "脱敏与头发清洗",
+    "level": "L3",
+    "parent_name": "洗头技巧训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "14. 利用喷水壶慢慢地把儿童的头发喷湿，再用手指按摩儿童的头部，模拟洗头的动作。如儿童接受头发被弄湿的感觉，可在花洒或水龙头下进行。如儿童表现害怕，可尝试先用湿毛巾替儿童抹头发。"
+  },
+  {
+    "name": "刷牙漱口",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 12,
+    "age_max_months": 72,
+    "prompt_corpus": "训练儿童刷牙与漱口的自理能力，包括掌握刷牙动作、使用牙膏及建立卫生习惯。"
+  },
+  {
+    "name": "训练目标",
+    "level": "L2",
+    "parent_name": "刷牙漱口",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "包含从简单的张口配合到自主挤牙膏及建立刷牙习惯的系列目标。"
+  },
+  {
+    "name": "成人将牙刷轻贴唇部时，能配合张口",
+    "level": "L3",
+    "parent_name": "训练目标",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "成人将牙刷轻贴唇部时，能配合张口。"
+  },
+  {
+    "name": "用手握牙刷放入口",
+    "level": "L3",
+    "parent_name": "训练目标",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "用手握牙刷放入口。"
+  },
+  {
+    "name": "用牙刷粗略地刷牙",
+    "level": "L3",
+    "parent_name": "训练目标",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "用牙刷粗略地刷牙。"
+  },
+  {
+    "name": "用清水漱口",
+    "level": "L3",
+    "parent_name": "训练目标",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "用清水漱口。"
+  },
+  {
+    "name": "用牙刷仔细地刷牙",
+    "level": "L3",
+    "parent_name": "训练目标",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "用牙刷仔细地刷牙。"
+  },
+  {
+    "name": "用挤有牙膏的牙刷刷牙",
+    "level": "L3",
+    "parent_name": "训练目标",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "用挤有牙膏的牙刷刷牙。"
+  },
+  {
+    "name": "将适量牙膏挤在牙刷上",
+    "level": "L3",
+    "parent_name": "训练目标",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "将适量牙膏挤在牙刷上。"
+  },
+  {
+    "name": "有早晚刷牙的习惯",
+    "level": "L3",
+    "parent_name": "训练目标",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "有早晚刷牙的习惯。"
+  },
+  {
+    "name": "活动建议",
+    "level": "L2",
+    "parent_name": "刷牙漱口",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过手偶模仿、镜前示范及牙齿模型教学来引导儿童练习刷牙。"
+  },
+  {
+    "name": "手偶模仿练习",
+    "level": "L3",
+    "parent_name": "活动建议",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "先戴上可张开口的手偶，请儿童一手握著牙刷，尝试放进手偶的口中。当儿童的牙刷贴近手偶的唇部时，成人便把手偶的口张开，让儿童认识刷牙时需要张开口。接著交换角色，请儿童戴上手偶，当成人把牙刷贴近手偶的唇部时，请儿童把手偶的口张开。"
+  },
+  {
+    "name": "镜前示范",
+    "level": "L3",
+    "parent_name": "活动建议",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童一起站在镜子前面，并示范握著自己的牙刷放进口中，请儿童也握著自己的牙刷放进口中，一起假装刷牙。"
+  },
+  {
+    "name": "牙齿模型教学",
+    "level": "L3",
+    "parent_name": "活动建议",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示牙齿模型，请儿童握著牙刷替牙齿模型刷牙。进行活动时，可请儿童唱出《刷牙歌》，以提示儿童刷牙的方向，如：上、下、左、右、牙齿咀嚼面、牙齿内侧。"
+  },
+  {
+    "name": "梳洗技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南中的梳洗技能单元。"
+  },
+  {
+    "name": "口腔清洁训练",
+    "level": "L2",
+    "parent_name": "梳洗技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对儿童进行口腔清洁与刷牙技巧的训练活动。"
+  },
+  {
+    "name": "刷牙练习（模仿与操作）",
+    "level": "L3",
+    "parent_name": "口腔清洁训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过镜子、玩偶及各类感官练习，协助儿童建立刷牙习惯与技巧。"
+  },
+  {
+    "name": "镜面刷牙练习",
+    "level": "L4",
+    "parent_name": "刷牙练习（模仿与操作）",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "把镜子放在儿童面前，接著把果酱或巧克力酱沾在儿童的牙齿上，请儿童对著镜子用牙刷将果酱或巧克力酱刷走。所需物资：镜子、果酱或巧克力酱、牙刷。"
+  },
+  {
+    "name": "吐水技巧训练",
+    "level": "L4",
+    "parent_name": "刷牙练习（模仿与操作）",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "将1块小冰粒放在杯中，示范拿起杯把冰粒倒进口腔后，再将冰粒吐出。把另一只装有1块小冰粒的杯交给儿童，请儿童模仿成人的做法，让儿童学习从口中吐出东西的技巧。注意事项：小心避免儿童出现哽咽情况，或可改用冰水进行训练。所需物资：杯、小冰粒（或冰水）。"
+  },
+  {
+    "name": "漱口模仿训练",
+    "level": "L4",
+    "parent_name": "刷牙练习（模仿与操作）",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "成人及儿童各选1个喜爱的水杯，并由成人先示范漱口，请儿童模仿。所需物资：水杯、清水。"
+  },
+  {
+    "name": "歌曲互动刷牙",
+    "level": "L4",
+    "parent_name": "刷牙练习（模仿与操作）",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童一起面对镜子，一边唱《刷牙歌》，一边请儿童手执牙刷学习细细刷牙。所需物资：镜子、牙刷。"
+  },
+  {
+    "name": "模拟角色刷牙",
+    "level": "L4",
+    "parent_name": "刷牙练习（模仿与操作）",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "把洋娃娃的牙齿弄污，并示范用挤有清洁泡的牙刷，把洋娃娃的牙齿刷干净，接著请儿童模仿代替洋娃娃仔细刷牙。所需物资：洋娃娃、牙刷、清洁泡。"
+  },
+  {
+    "name": "牙膏感官适应",
+    "level": "L4",
+    "parent_name": "刷牙练习（模仿与操作）",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "在食指套上手套或牙刷手指套，接著沾上少许儿童牙膏，轻沾儿童的唇边或牙齿，让儿童逐步适应及接受牙膏的质感及味道。所需物资：手套或牙刷手指套、儿童牙膏（可选择儿童喜爱的味道）。"
+  },
+  {
+    "name": "梳洗技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "训练儿童掌握日常梳洗与个人卫生习惯。"
+  },
+  {
+    "name": "刷牙训练",
+    "level": "L2",
+    "parent_name": "梳洗技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对儿童刷牙技巧及习惯养成的具体指导活动。"
+  },
+  {
+    "name": "教授刷牙步骤",
+    "level": "L3",
+    "parent_name": "刷牙训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "把少许儿童牙膏沾在儿童的牙刷上，指导儿童刷牙的步骤。"
+  },
+  {
+    "name": "模拟挤牙膏动作",
+    "level": "L3",
+    "parent_name": "刷牙训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示金粉胶水及画纸，并示范将金粉胶水挤在画纸的小正方形或长方形图案上，请儿童模仿，以学习在牙刷上挤牙膏的动作。"
+  },
+  {
+    "name": "建立刷牙动机与习惯",
+    "level": "L3",
+    "parent_name": "刷牙训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "利用儿童喜爱的玩具作为奖励，或利用「好孩子早晚刷牙奖励表」，鼓励儿童养成早晚自行刷牙的习惯，并透过贴纸或定期奖励进行正向强化。"
+  },
+  {
+    "name": "梳理头发",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 24,
+    "age_max_months": 72,
+    "prompt_corpus": "项目四：梳理头发，包含各年龄层训练目标与实作活动建议。"
+  },
+  {
+    "name": "接受用吹风机吹干头发",
+    "level": "L2",
+    "parent_name": "梳理头发",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "目标A：接受用吹风机吹干头发。活动1：用喷水壶喷湿洋娃娃的头发，示范用吹风机吹干，再交给儿童尝试。活动2：玩假想游戏，喷水壶模拟下雨，示范吹风机吹干自己头发，邀请儿童参与。"
+  },
+  {
+    "name": "模拟用梳替洋娃娃梳头",
+    "level": "L2",
+    "parent_name": "梳理头发",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "目标B：模拟用梳替洋娃娃梳头。活动3：示范用梳替长发洋娃娃梳头，请儿童模仿大人的动作。"
+  },
+  {
+    "name": "用梳粗略地梳头",
+    "level": "L2",
+    "parent_name": "梳理头发",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "目标C：用梳粗略地梳头。活动4：在镜子前示范粗略梳头，并将梳子交给儿童模仿。"
+  },
+  {
+    "name": "自行用梳将头发梳理整齐",
+    "level": "L2",
+    "parent_name": "梳理头发",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "目标D：自行用梳将头发梳理整齐。活动5：穿上理发师围裙，透过理发游戏，请儿童在镜子前自行把头发细致梳理整齐，包含前、后、左、右方。"
+  },
+  {
+    "name": "护理皮肤",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 12,
+    "age_max_months": 72,
+    "prompt_corpus": "项目五：护理皮肤的训练目标与活动建议。"
+  },
+  {
+    "name": "成人代涂润唇膏，配合不动",
+    "level": "L2",
+    "parent_name": "护理皮肤",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "成人代涂润唇膏，配合不动（主要为头部）。活动建议：与儿童化妆舞会游戏，请儿童坐在镜子前面，成人使用画脸颜料、唇膏等为儿童化妆，鼓励儿童头部配合不动。完成后，一同随著音乐跳舞。"
+  },
+  {
+    "name": "把润唇膏涂在唇上",
+    "level": "L2",
+    "parent_name": "护理皮肤",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "把润唇膏涂在唇上。活动建议：出示镜子及润唇膏，并示范对著镜子涂润唇膏，接著请儿童模仿成人，自行涂润唇膏于唇上。"
+  },
+  {
+    "name": "用手涂抹润肤膏或润肤液",
+    "level": "L2",
+    "parent_name": "护理皮肤",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "用手涂抹润肤膏或润肤液。活动建议：把润肤液涂在儿童手掌、手背或手臂上，并与儿童一同唱儿歌，请儿童用手把润肤液涂开。如儿童能掌握技巧，可请儿童把润肤液在身体其他部位。"
+  },
+  {
+    "name": "将适量的润肤膏或润肤液挤在手中",
+    "level": "L2",
+    "parent_name": "护理皮肤",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "将适量的润肤膏或润肤液挤在手中。活动建议包括：1. 在按压式的瓶子内盛一些水，先示范一下瓶子挤出水，再取出冰格，把水挤在冰格内。接著请儿童模仿人的做法，把适量的水挤进冰格内，练习按瓶子挤出润肤液的动作。2. 请儿童从按压式的瓶子内把适量的颜料挤到预先画上手掌图案的画纸上，接著成人与儿童一起用手将颜料平均地涂抹在「纸手掌」上。"
+  },
+  {
+    "name": "修剪指甲",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 12,
+    "age_max_months": 72,
+    "prompt_corpus": "训练儿童配合修剪指甲与脚趾甲的相关技能与认知。"
+  },
+  {
+    "name": "目标A：成人替儿童修剪指甲",
+    "level": "L2",
+    "parent_name": "修剪指甲",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "成人替儿童修剪指甲时，儿童能配合。"
+  },
+  {
+    "name": "目标B：成人替儿童修剪脚趾甲",
+    "level": "L2",
+    "parent_name": "修剪指甲",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "成人替儿童修剪脚趾甲时，儿童能配合。"
+  },
+  {
+    "name": "目标C：自行修剪指甲",
+    "level": "L2",
+    "parent_name": "修剪指甲",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "用指甲钳修剪指甲。"
+  },
+  {
+    "name": "目标D：自行修剪脚趾甲",
+    "level": "L2",
+    "parent_name": "修剪指甲",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "用指甲钳修剪脚趾甲。"
+  },
+  {
+    "name": "活动建议一：手偶示范法",
+    "level": "L2",
+    "parent_name": "修剪指甲",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "预先在手偶的手指及脚趾上贴上用长形便条纸制成的黑边指甲及脚趾甲。成人戴上手偶，并告诉儿童指甲或脚趾甲太长会很脏，而且会弄伤皮肤。接著牵著儿童的手用指甲钳替手偶剪指甲及脚趾甲，让儿童认识指甲太长时需要修剪。"
+  },
+  {
+    "name": "活动建议二：模仿与实践法",
+    "level": "L2",
+    "parent_name": "修剪指甲",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "先在自己的手指或脚趾上贴上长形便条纸制成的指甲，并牵著儿童的手，与儿童一起用指甲钳修剪纸指甲。接著成人为儿童贴上纸指甲，鼓励儿童自行伸出手或脚，让成人修剪纸指甲。当儿童能配合成人修剪便条纸做的指甲后，请儿童伸出手或脚，让成人真正修剪其手指甲或脚趾甲。"
+  },
+  {
+    "name": "梳洗技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南之梳洗技能模块。"
+  },
+  {
+    "name": "指甲修剪训练",
+    "level": "L2",
+    "parent_name": "梳洗技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过模拟教具提升儿童修剪指甲的精细动作技能与逻辑顺序。"
+  },
+  {
+    "name": "使用打孔机模拟修剪手指甲",
+    "level": "L3",
+    "parent_name": "指甲修剪训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "预先将纸指甲贴在胶手套上，请儿童戴上手套。指导儿童运用前二指或前三指握住单孔打孔机，在纸指甲上打孔，以练习操作指甲钳所需的动作技巧。待动作熟练后，引导儿童尝试使用真实指甲钳修剪自己的手指甲。"
+  },
+  {
+    "name": "使用纸条模拟修剪脚趾甲",
+    "level": "L3",
+    "parent_name": "指甲修剪训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "在儿童脚趾上贴上长条纸制成的长形脚趾甲，指导儿童使用指甲钳精确地修剪这些纸质脚趾甲。在儿童熟练相关技巧与力度控制后，鼓励其进阶尝试使用指甲钳修剪自己真实的脚趾甲。"
+  },
+  {
+    "name": "家居技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童的居家生活能力训练，涵盖整理与收纳等基础生活自理技能。"
+  },
+  {
+    "name": "收拾—玩具、文具、书本",
+    "level": "L2",
+    "parent_name": "家居技能",
+    "age_min_months": 12,
+    "age_max_months": 60,
+    "prompt_corpus": "学习收纳各类日常物品，包括玩具、书籍及文具，建立物品归位的概念。"
+  },
+  {
+    "name": "将玩具交给成人代为摆放",
+    "level": "L3",
+    "parent_name": "收拾—玩具、文具、书本",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "将玩具交给成人代为摆放。"
+  },
+  {
+    "name": "将自己的玩具摆放在固定位置",
+    "level": "L3",
+    "parent_name": "收拾—玩具、文具、书本",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "将自己的玩具摆放在固定位置。"
+  },
+  {
+    "name": "将书本放入书包",
+    "level": "L3",
+    "parent_name": "收拾—玩具、文具、书本",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "将书本放入书包。"
+  },
+  {
+    "name": "将文具放入笔袋",
+    "level": "L3",
+    "parent_name": "收拾—玩具、文具、书本",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "将文具放入笔袋。"
+  },
+  {
+    "name": "将玩具放入玩具的包装盒内",
+    "level": "L3",
+    "parent_name": "收拾—玩具、文具、书本",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "将玩具放入玩具的包装盒内。"
+  },
+  {
+    "name": "滚球隧道游戏",
+    "level": "L4",
+    "parent_name": "将玩具交给成人代为摆放",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "示范将球放在滚球隧道玩具上，与儿童一同观看球在玩具上滚动，接著把球交给儿童。请儿童把球放在玩具上。成人将玩具放于儿童不能触及但仍看见的地方，接著引导儿童将球交给成人代为放在玩具上。"
+  },
+  {
+    "name": "计时器收纳游戏",
+    "level": "L4",
+    "parent_name": "将自己的玩具摆放在固定位置",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "在儿童面前从玩具箱中拿出玩具，预先说明计时器响起时游戏时间结束需要收纳。成人设定计时器（如5分钟），与儿童一同玩。时间到时说「时间到了，要把玩具收拾起来」，随即儿童伸出手时，请儿童将玩具交给成人，成人示范将玩具放回箱内。"
+  },
+  {
+    "name": "家居技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南—自理，家居技能相关训练活动。"
+  },
+  {
+    "name": "物品归位与整理",
+    "level": "L2",
+    "parent_name": "家居技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过配对与实物操作，学习将玩具及个人物品归位。"
+  },
+  {
+    "name": "玩具归位配对训练",
+    "level": "L3",
+    "parent_name": "物品归位与整理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "预备3件儿童常玩的玩具及该3件玩具的相片，请儿童进行配对，将玩具放在相应的相片上。接著成人在玩具篮贴上玩具的相片，并请儿童根据篮子上的相片，将相配的玩具放回篮子内。"
+  },
+  {
+    "name": "玩具箱归位练习",
+    "level": "L3",
+    "parent_name": "物品归位与整理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "把儿童玩具的相片贴在摆放玩具的箱子上，儿童玩完玩具后，成人示范把玩具配对放回箱内，请儿童把其余的玩具也放回相配的玩具箱内。"
+  },
+  {
+    "name": "车辆泊位练习",
+    "level": "L3",
+    "parent_name": "物品归位与整理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "预先在摆放脚踏车位置的地上贴上脚踏车的相片，并用电线胶布贴上泊车位。和儿童踏脚踏车后，请儿童把车泊回车位内。"
+  },
+  {
+    "name": "书包整理与拉链操作",
+    "level": "L3",
+    "parent_name": "物品归位与整理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "儿童完成课后，与儿童一同执拾书包。成人示范拉开书包的拉链，把书本放进书包内，接著把较小的书本交给儿童，请儿童尝试自行把书放进书包内。"
+  },
+  {
+    "name": "音乐传书与整理游戏",
+    "level": "L3",
+    "parent_name": "物品归位与整理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童玩「音乐传书」游戏。音乐响起时，请儿童把手上的书本传给身旁的同伴；音乐停止时，手上拿著书本的儿童要把书本拿到书包处，拉开书包的拉链并把书本放进书包内，再拉上拉链，继续下一轮游戏。"
+  },
+  {
+    "name": "学前儿童训练指南—自理",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南—自理"
+  },
+  {
+    "name": "家居技能",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南—自理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "家居技能"
+  },
+  {
+    "name": "认识与分类文具",
+    "level": "L3",
+    "parent_name": "家居技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "向儿童介绍各种常用文具的名称，如：铅笔、橡皮擦、间尺、剪刀等。接著成人将文具及玩具放进神秘袋中，和儿童逐一把物件抽出。如抽出的是玩具，便放进玩具篮内；如抽出的是文具，便放进笔袋内。"
+  },
+  {
+    "name": "文具组合配对",
+    "level": "L3",
+    "parent_name": "家居技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "预先制作文具组合相片，每张相片上有不同组合的文具（如：2枝笔和1把间尺、橡皮擦和剪刀等）。开始游戏时，先把不同的文具放在桌上，成人和儿童轮流抽出相片，并按相片中的文具组合，尽快从桌上找出该数量的文具放进笔袋内，并拉上笔袋的拉链，先完成的一方胜出。"
+  },
+  {
+    "name": "玩具归位训练",
+    "level": "L3",
+    "parent_name": "家居技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "向儿童展示1份新玩具，和儿童一同拆开包装盒玩耍后，示范把玩具放回盒内，接著请儿童尝试自行把玩具放回盒内。"
+  },
+  {
+    "name": "收拾—衣物（摆放）",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "训练儿童将鞋、袜及衣物放置在指定位置。"
+  },
+  {
+    "name": "将鞋、袜放在平日指定的位置",
+    "level": "L2",
+    "parent_name": "收拾—衣物（摆放）",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "将鞋、袜放在平日指定的位置。活动建议：1. 成人与儿童一起在画纸上画出鞋印，练习将脚对准鞋印踏步，学习将鞋放在鞋印上；2. 将印有鞋印的纸放在鞋架上，训练儿童外出回家后将鞋子放回鞋印位置，并把袜子放进鞋内。"
+  },
+  {
+    "name": "将自己的衣物放进抽屉内",
+    "level": "L2",
+    "parent_name": "收拾—衣物（摆放）",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "将自己的衣物放进抽屉内。活动建议：在儿童的抽屉上贴上喜爱的贴纸作为标识，示范并引导儿童将叠好的衣物放回自己的抽屉中。"
+  },
+  {
+    "name": "将抽屉推入柜",
+    "level": "L2",
+    "parent_name": "收拾—衣物（摆放）",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "学习独立完成将抽屉推入柜内的动作。"
+  },
+  {
+    "name": "拉开抽屉",
+    "level": "L2",
+    "parent_name": "收拾—衣物（摆放）",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "训练儿童掌握拉开抽屉的力度与技巧（使用容易抓握的把手）。"
+  },
+  {
+    "name": "学前儿童训练指南—自理",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南中的家居技能训练部分。"
+  },
+  {
+    "name": "家居技能",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南—自理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童的日常生活家居技能训练活动。"
+  },
+  {
+    "name": "开关抽屉技巧训练",
+    "level": "L3",
+    "parent_name": "家居技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "预先在容易拉开的抽屉中放入2件乐器。在儿童面前拉开抽屉拿出乐器，请求儿童协助将抽屉推回。接著将乐器交给儿童并共同唱歌，完成后请求儿童再次拉开抽屉以更换乐器，透过此互动重复练习开关抽屉的技巧。"
+  },
+  {
+    "name": "物体操作与控制训练",
+    "level": "L3",
+    "parent_name": "家居技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "将放满书本的手挽袋放在桌上，示范将手挽袋由桌的一边推到另一边，并控制其移动至靠近自己的一边而不掉在地上。引导儿童模仿动作，练习抽屉推拉及物体抓握的精细动作协调。"
+  },
+  {
+    "name": "收舍—衣物（钩挂）",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 24,
+    "age_max_months": 60,
+    "prompt_corpus": "项目三：收舍—衣物（钩挂）。包含训练目标：将小胶圈套挂在钩子上（2-3岁）、将自己的物件挂在固定的位置（3-4岁）、将毛巾挂在衣架上（4-5岁）、将外衣挂在衣架上（4-5岁）。"
+  },
+  {
+    "name": "雨伞钩挂游戏",
+    "level": "L2",
+    "parent_name": "收舍—衣物（钩挂）",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "把有手柄的雨伞倒挂并固定在墙上，造成大型的钩子，接著成人与儿童比赛将最多的小胶圈套挂在钩子上。"
+  },
+  {
+    "name": "小司机胶圈游戏",
+    "level": "L2",
+    "parent_name": "收舍—衣物（钩挂）",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "与儿童拿著胶圈扮小司机驾车，并一同唱儿歌《小司机》。游戏完毕后，示范把胶圈挂在钩子上，请儿童模仿。"
+  },
+  {
+    "name": "挂钩板模仿练习",
+    "level": "L2",
+    "parent_name": "收舍—衣物（钩挂）",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "出示挂钩板（或自制1排挂钩），并示范将钥匙圈挂在钩子上，接著请儿童模仿。"
+  },
+  {
+    "name": "学前儿童训练指南-自理",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童自理能力训练指导。"
+  },
+  {
+    "name": "家居技能",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南-自理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "日常生活家居整理与清洁技能训练。"
+  },
+  {
+    "name": "物品归位与衣物整理",
+    "level": "L3",
+    "parent_name": "家居技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "通过寻宝游戏和模仿操作，培养儿童将物品归位及整理衣物的习惯。"
+  },
+  {
+    "name": "物件定位寻宝",
+    "level": "L4",
+    "parent_name": "物品归位与衣物整理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "预先将儿童物件（毛巾、外套等）的相片贴在钩子上，将相应物件放在家中各处。请儿童进行寻宝游戏，将物件逐一找出来，再挂在对应的钩子上，学习将物品挂在固定位置。所需物资：儿童物件相片、与相片相配的物件、钩子。"
+  },
+  {
+    "name": "毛巾悬挂练习",
+    "level": "L4",
+    "parent_name": "物品归位与衣物整理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童梳洗后，示范将自己的毛巾穿在毛巾挂环内，请儿童模仿将毛巾挂在自己的毛巾挂环上。所需物资：毛巾、毛巾挂环。"
+  },
+  {
+    "name": "模拟洗衣与晾衣",
+    "level": "L4",
+    "parent_name": "物品归位与衣物整理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示玩具洗衣机，将小毛巾放入洗衣机清洗，取出后示范将毛巾挂在衣架上，模拟晾衣服的过程，随后将另一条毛巾交给儿童进行模仿。所需物资：玩具洗衣机、小毛巾、衣架。"
+  },
+  {
+    "name": "衣架挂置练习",
+    "level": "L4",
+    "parent_name": "物品归位与衣物整理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童洗澡后，示范将大毛巾抹身后挂在大衣架上，随后将衣架挂在固定的钩子上，请儿童模仿此系列动作。所需物资：抹身大毛巾、衣架、固定的钩子。"
+  },
+  {
+    "name": "学前儿童训练指南—自理",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童自理能力训练指南，本章节重点为家居技能。"
+  },
+  {
+    "name": "家居技能",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南—自理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童进行的居家生活自理训练，包含衣物收纳与整理。"
+  },
+  {
+    "name": "衣物收纳与整理",
+    "level": "L3",
+    "parent_name": "家居技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过模仿成人动作，学习将外套与背心挂于特定位置。"
+  },
+  {
+    "name": "将外套挂于椅背",
+    "level": "L4",
+    "parent_name": "衣物收纳与整理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "示范站在椅背后面，拿著开胸外套（外套背面朝向自己），用一只手把其中一边衣襟套在椅背的一边，另一只手把另一边的衣襟套在椅背的另一边。请儿童模仿成人的做法，把自己的外套套在儿童椅子的椅背上。"
+  },
+  {
+    "name": "将背心外套挂于衣架",
+    "level": "L4",
+    "parent_name": "衣物收纳与整理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "示范将背心外套挂于衣架上，请儿童模仿成人的做法，把自己的背心外套挂在衣架上。如儿童能掌握所需技巧，可用长袖或较厚的外套进行练习，以增加难度。"
+  },
+  {
+    "name": "收拾——餐具、食物",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 24,
+    "age_max_months": 72,
+    "prompt_corpus": "训练幼儿收拾餐具与食物的相关技能，包含将毛巾折叠放入盒、盖上容器盖子以及收拾碗碟。"
+  },
+  {
+    "name": "将已折好的小毛巾放入盒",
+    "level": "L2",
+    "parent_name": "收拾——餐具、食物",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "预先将不同形状的毛巾盒放在桌上，并在儿童面前把毛巾折成长方形、正方形或三角形，请儿童把毛巾放回形状相配的毛巾盒内。"
+  },
+  {
+    "name": "折叠小毛巾",
+    "level": "L2",
+    "parent_name": "收拾——餐具、食物",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "出示边缘有颜色的小方巾，示范折对小方巾（以颜色边作提示），接著请儿童模仿。"
+  },
+  {
+    "name": "喝水后，将学生水壶的盖盖上",
+    "level": "L2",
+    "parent_name": "收拾——餐具、食物",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "无特定活动建议，目标为让儿童在饮水后习惯盖上水壶盖子。"
+  },
+  {
+    "name": "进食或取食物后，将载食物的盛器盖上",
+    "level": "L2",
+    "parent_name": "收拾——餐具、食物",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "与儿童外出用餐后，用小毛巾替儿童抹嘴，接著请儿童自行把小毛巾放回毛巾盒内。"
+  },
+  {
+    "name": "用密封袋将食物封妥",
+    "level": "L2",
+    "parent_name": "收拾——餐具、食物",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "目标为训练儿童使用密封袋进行食物封存。"
+  },
+  {
+    "name": "在饭餐后收拾碗筷，将碗、碟分别叠好",
+    "level": "L2",
+    "parent_name": "收拾——餐具、食物",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "目标为训练儿童在饭后主动收拾餐具并将碗碟分类叠好。"
+  },
+  {
+    "name": "学前儿童训练指南—自理",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童自理能力训练指导。"
+  },
+  {
+    "name": "家居技能",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南—自理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过家居日常物品与情境，培养幼儿精细动作与自理能力。"
+  },
+  {
+    "name": "折叠毛巾练习",
+    "level": "L3",
+    "parent_name": "家居技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "预先在白色方巾的四角标上颜色或缝上记号，与儿童玩假想游戏。示范把方巾按记号折叠2次，变成三角形当作三明治，再把三明治放在食物盒内。接著请儿童模仿，以练习折叠毛巾的技巧。所需物资：四角有记号的方巾多条、食物盒。"
+  },
+  {
+    "name": "使用盒装湿纸巾",
+    "level": "L3",
+    "parent_name": "家居技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示婴儿盒装湿纸巾，示范按下按钮使纸巾盒盖弹开，取出1张湿纸巾后，用手指把盖按下盖好，请儿童模仿，练习使用弹盖式水壶的动作。所需物资：婴儿盒装湿纸巾。"
+  },
+  {
+    "name": "使用弹盖式水壶",
+    "level": "L3",
+    "parent_name": "家居技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示弹盖式儿童水壶，请儿童喝水后，用手指把盖按下盖好。所需物资：弹盖式儿童水壶。"
+  },
+  {
+    "name": "扭动练习",
+    "level": "L3",
+    "parent_name": "家居技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示有螺丝部分的玩具，示范把螺丝扭出来，请儿童尝试。可与儿童比赛扭出螺丝帽，看谁比较快。比赛完毕后，请儿童把螺丝帽扭上，以练习使用扭盖式水瓶的动作及加强用手指扭上瓶盖所需的力度。所需物资：有螺丝部分的玩具。"
+  },
+  {
+    "name": "家居技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南——家居技能"
+  },
+  {
+    "name": "手部操作与封口练习",
+    "level": "L2",
+    "parent_name": "家居技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过日常生活物件，练习扭转、盖合及拉合动作，提升手眼协调与精细动作控制。"
+  },
+  {
+    "name": "瓶盖开合训练",
+    "level": "L3",
+    "parent_name": "手部操作与封口练习",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "拿出瓶口较阔的瓶装果汁与儿童分享，请儿童扭开瓶盖，倒出果汁后再把瓶盖扭上。"
+  },
+  {
+    "name": "容器盖合训练",
+    "level": "L3",
+    "parent_name": "手部操作与封口练习",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "示范把铃铛放进不同的有盖食物盛器内（如：月饼盒、有盖薯片罐），并把盖盖好，制成音乐盒，接著请儿童模仿人的做法，自制音乐盒，练习把不同盛器的盖子盖上。"
+  },
+  {
+    "name": "拉链袋操作训练",
+    "level": "L3",
+    "parent_name": "手部操作与封口练习",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示不同的拉链袋，请儿童把小物件放进袋后拉上拉链，练习拉上密封袋扣的动作。"
+  },
+  {
+    "name": "家居技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童的日常生活自理与家居整理能力训练，涵盖进食后处理、物品收纳及分类技能。"
+  },
+  {
+    "name": "食品保存与密封",
+    "level": "L2",
+    "parent_name": "家居技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学习使用密封袋处理剩余食物，培养儿童的卫生习惯与生活自理能力。"
+  },
+  {
+    "name": "使用有扣密封袋",
+    "level": "L3",
+    "parent_name": "食品保存与密封",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童一同分享小吃。享用完毕后，成人示范把余下的小吃放进有扣的密封袋内，并把扣拉好，接著把另一个有扣的密封袋交给儿童，请儿童模仿成人的做法，保存余下的小吃。"
+  },
+  {
+    "name": "使用变色拉合密封袋",
+    "level": "L3",
+    "parent_name": "食品保存与密封",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "示范把食物放进拉合时封口会变色的密封袋，请儿童留意正确拉合时封口颜色的转变。接著把另一个密封袋交给儿童，请儿童模仿。"
+  },
+  {
+    "name": "玩具与餐具分类整理",
+    "level": "L2",
+    "parent_name": "家居技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "通过分类与叠放练习，增强儿童对物体归类的概念及手部精细动作能力。"
+  },
+  {
+    "name": "玩具餐具分类",
+    "level": "L3",
+    "parent_name": "玩具与餐具分类整理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童玩「家家酒」游戏。完成后，请儿童把玩具餐具，如：杯、碟及碗分别放进不同的篮子中。如儿童能恰当地完成，成人可请儿童把杯、碟及碗分别叠高，并放于篮子内。"
+  },
+  {
+    "name": "餐具叠放与收纳",
+    "level": "L3",
+    "parent_name": "玩具与餐具分类整理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童分享茶点后，示范把2个相同的餐具叠起（如：把2个碗叠起），并拿进厨房的洗碗盆内。接著请儿童把其他相同的餐具分类叠好，再放进厨房的洗碗盆内。"
+  },
+  {
+    "name": "收拾—家居用品",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "训练儿童整理及收拾家居用品的技能，涵盖不同年龄阶段的目标。"
+  },
+  {
+    "name": "将垃圾放进废纸箱内",
+    "level": "L2",
+    "parent_name": "收拾—家居用品",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "目标：将垃圾放进废纸箱内（开放式或活掩式）。活动建议：与儿童一起玩玩具，玩完后请儿童把玩具放进篮子内收拾妥当，模仿把垃圾放进开放式废纸箱的动作。"
+  },
+  {
+    "name": "将座椅移至原位或指定位置",
+    "level": "L2",
+    "parent_name": "收拾—家居用品",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "目标：将座椅移至原位或指定位置。活动建议：与儿童外出回家后，协助儿童脱去衣服，请儿童把要清洗的衣物放进洗衣篮内，模仿把垃圾放进开放式废纸箱的动作。"
+  },
+  {
+    "name": "简单地整理自己的枕头和被铺",
+    "level": "L2",
+    "parent_name": "收拾—家居用品",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "目标：简单地整理自己的枕头和被铺。活动建议：与儿童吃茶点后，请儿童用纸巾抹嘴，接著将纸巾放进桌上的小型活掩式废纸箱内。"
+  },
+  {
+    "name": "学前儿童训练指南—自理",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南中的家居技能训练，涵盖各项自理能力培养。"
+  },
+  {
+    "name": "家居技能",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南—自理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童设计的家居生活技能训练活动。"
+  },
+  {
+    "name": "模拟购物与空间操作",
+    "level": "L3",
+    "parent_name": "家居技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "利用游戏形式强化儿童对环境物体的操作能力。"
+  },
+  {
+    "name": "推车购物模拟",
+    "level": "L4",
+    "parent_name": "模拟购物与空间操作",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童玩假想游戏，把有靠背的儿童椅子模拟为超级市场的购物车，把想要购买的物件放在上面，接著推到收银处的桌子旁结账，以教导儿童移动椅子的技巧。所需材料：有靠背的儿童椅子、玩具食物、儿童桌子、玩具银机。"
+  },
+  {
+    "name": "定点放置训练",
+    "level": "L4",
+    "parent_name": "模拟购物与空间操作",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "预先在摆放儿童椅子的地上贴上颜色贴纸，并把儿童的椅子放到其他地方，接著请儿童帮忙把椅子推回颜色贴纸上。所需材料：儿童椅子、颜色贴纸。"
+  },
+  {
+    "name": "生活自理练习",
+    "level": "L3",
+    "parent_name": "家居技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过照顾玩具或整理床铺，培养儿童的责任感与精细动作。"
+  },
+  {
+    "name": "照顾洋娃娃游戏",
+    "level": "L4",
+    "parent_name": "生活自理练习",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童玩假想游戏，请儿童替洋娃娃放好玩具枕头和玩具被铺，让洋娃娃睡觉。洋娃娃起床后，请儿童替洋娃娃放好枕头和折好被铺。所需材料：洋娃娃、玩具枕头及玩具被铺。"
+  },
+  {
+    "name": "床铺整理练习",
+    "level": "L4",
+    "parent_name": "生活自理练习",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "把一面有花纹，另一面只有一种颜色的被铺平放于床上，示范如何把有花纹的一面「收藏」，即折叠被铺，完成后把枕头放于被铺上。请儿童模仿成人的做法，练习整理枕头及被铺。所需材料：一面有花纹而另一面只有一种颜色的被铺、枕头。"
+  },
+  {
+    "name": "打扫清洁",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "针对学前儿童的居家技能训练，涵盖扭毛巾、抹桌子及使用清洁用品等活动。"
+  },
+  {
+    "name": "扭干毛巾",
+    "level": "L2",
+    "parent_name": "打扫清洁",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "目标为训练儿童扭毛巾的动作及所需力度，可透过泥胶扭成螺丝粉或扭干海绵的游戏进行练习。"
+  },
+  {
+    "name": "用布抹桌子",
+    "level": "L2",
+    "parent_name": "打扫清洁",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "模拟桌面弄湿的情境，引导儿童主动拿毛巾将桌面抹干，训练其清洁家居环境的意识。"
+  },
+  {
+    "name": "简单地清洁餐具",
+    "level": "L2",
+    "parent_name": "打扫清洁",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "学习进行基础的餐具清洁活动。"
+  },
+  {
+    "name": "使用简单的清洁用品",
+    "level": "L2",
+    "parent_name": "打扫清洁",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "透过模拟清洁地面污渍的活动，教导儿童先将毛巾弄湿，并配合正确清洁步骤处理脏污。"
+  },
+  {
+    "name": "泥胶扭螺丝粉训练",
+    "level": "L3",
+    "parent_name": "扭干毛巾",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "以双手扭动的方法，示范将不同颜色的泥胶扭成螺丝粉，并请儿童模仿，以练习双手扭毛巾的动作及加强所需力度。"
+  },
+  {
+    "name": "海绵挤水训练",
+    "level": "L3",
+    "parent_name": "扭干毛巾",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "先把厚海绵泡水，并示范用双手扭动海绵把水挤出，请儿童模仿，以学习扭毛巾的动作。"
+  },
+  {
+    "name": "桌面清洁模拟",
+    "level": "L3",
+    "parent_name": "用布抹桌子",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "和儿童喝水时，扮作不小心弄湿桌面，并指著预先放在桌上的毛巾，请儿童拿毛巾把桌面抹干。"
+  },
+  {
+    "name": "地面污渍清洁练习",
+    "level": "L3",
+    "parent_name": "使用简单的清洁用品",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "预先在地面涂上水彩颜色，向儿童表示地面脏了，需要清洁。接著把1条干的毛巾交给儿童，请儿童先洗手，把毛巾弄湿，扭干毛巾后再来清洁地上的颜色。"
+  },
+  {
+    "name": "家居技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南中的家居技能训练模块。"
+  },
+  {
+    "name": "清洁餐具训练",
+    "level": "L2",
+    "parent_name": "家居技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过模拟及实际情境，训练儿童学习清洗餐具的技巧，培养生活自理能力。"
+  },
+  {
+    "name": "模拟家家酒清洗",
+    "level": "L3",
+    "parent_name": "清洁餐具训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童玩「家家酒」游戏，模拟吃完食物后，在水盆内用海绵把玩具碟及其他餐具清洗干净。所需物品：玩具碟及其他餐具、海绵、水盆。"
+  },
+  {
+    "name": "清理饼干碎",
+    "level": "L3",
+    "parent_name": "清洁餐具训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "把易碎的饼干放在小碟上，与儿童一同享用。享用完毕后，向儿童表示碟上有很多饼干碎，请儿童到厨房，用水及海绵把碟子清洗干净。所需物品：饼干、碟子、海绵。"
+  },
+  {
+    "name": "清洁黏稠餐具",
+    "level": "L3",
+    "parent_name": "清洁餐具训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "和儿童一起用果酱涂面包进食，享用完毕后，请儿童协助清洁黏有果酱的餐具。成人示范把洗洁精挤在海绵上以清洁餐具，请儿童模仿。所需物品：黏有果酱的餐具、海绵、洗洁精、水盆。"
+  },
+  {
+    "name": "处理门门窗户",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 12,
+    "age_max_months": 72,
+    "prompt_corpus": "训练儿童处理门与门锁、窗户的开关技能，包含从简单的推拉到复杂的钥匙与防盗锁操作。"
+  },
+  {
+    "name": "将门关上",
+    "level": "L2",
+    "parent_name": "处理门门窗户",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "学习基础的关门动作。"
+  },
+  {
+    "name": "扭动门的把手开门",
+    "level": "L2",
+    "parent_name": "处理门门窗户",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "练习透过扭动把手来开启门锁。"
+  },
+  {
+    "name": "拉动横拉式的闸门",
+    "level": "L2",
+    "parent_name": "处理门门窗户",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "练习操作横向拉动的闸门开关。"
+  },
+  {
+    "name": "用钥匙开关",
+    "level": "L2",
+    "parent_name": "处理门门窗户",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "学习使用钥匙进行开锁与锁门的操作。"
+  },
+  {
+    "name": "开启及锁上防盗链",
+    "level": "L2",
+    "parent_name": "处理门门窗户",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "学习正确操作防盗链的开关技巧。"
+  },
+  {
+    "name": "开关窗户",
+    "level": "L2",
+    "parent_name": "处理门门窗户",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "练习操作窗户的开关。"
+  },
+  {
+    "name": "活动建议一：玩具屋关门练习",
+    "level": "L3",
+    "parent_name": "将门关上",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "展示玩具屋及玩具人物，设定场景让玩具人物要回家了，请儿童协助把玩具屋的门关上。材料包括玩具人物、玩具屋。"
+  },
+  {
+    "name": "活动建议二：柜门图案配对关门",
+    "level": "L3",
+    "parent_name": "将门关上",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "在两边柜门贴上对称的图案，当门打开时，图案会分开一半；当门关上时，会出现完整的图案。请儿童把柜门关上，使图案出现，以学习关门的技巧。材料包括柜门、对称图案贴。"
+  },
+  {
+    "name": "活动建议三：贴纸对齐练习",
+    "level": "L3",
+    "parent_name": "将门关上",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "预先在门边及门上贴上贴纸，请儿童把门关上，使两个贴纸并排。材料包括门、贴纸 2 个。"
+  },
+  {
+    "name": "家居技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南—自理，家居技能活动建议。"
+  },
+  {
+    "name": "手腕旋转与扭动动作训练",
+    "level": "L2",
+    "parent_name": "家居技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过玩具操作与日常生活情境，练习手腕扭动动作，为旋转门柄动作打好基础。"
+  },
+  {
+    "name": "玩具扭蛋机扭动练习",
+    "level": "L3",
+    "parent_name": "手腕旋转与扭动动作训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示玩具扭蛋机，并示范以手腕动作扭动玩具掣。接著请儿童模仿，练习扭动门柄的动作。"
+  },
+  {
+    "name": "墙面扭掣旋转练习",
+    "level": "L3",
+    "parent_name": "手腕旋转与扭动动作训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "预先将有扭掣的玩具垂直固定在墙上，并示范以手腕动作扭动玩具掣，接著请儿童模仿，练习扭动门柄的动作。"
+  },
+  {
+    "name": "瓶盖旋转与手腕运用练习",
+    "level": "L3",
+    "parent_name": "手腕旋转与扭动动作训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "请儿童把小珠放进透明胶瓶内，成人协助把水注入瓶内，并扭上瓶盖。接著请儿童握著水瓶，并以手腕动作转动水瓶，观看在瓶内浮沉的小珠，练习扭动门柄的预备动作。"
+  },
+  {
+    "name": "家居技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童设计的各类居家生活技能训练活动。"
+  },
+  {
+    "name": "操作门锁与开关",
+    "level": "L2",
+    "parent_name": "家居技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学习日常生活中各类门锁与门户的操作方式。"
+  },
+  {
+    "name": "扭动式门锁操作",
+    "level": "L3",
+    "parent_name": "操作门锁与开关",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "带儿童到有扭动式门柄的门前，示范扭动门柄，将门打开，请儿童尝试扭动门柄开门。"
+  },
+  {
+    "name": "横拉式柜门操作",
+    "level": "L3",
+    "parent_name": "操作门锁与开关",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童玩送信游戏，成人示范开横拉式柜门，把信件放进柜内，再把门关上，接著请儿童模仿，把信件送进柜内。"
+  },
+  {
+    "name": "横拉式闸门操作",
+    "level": "L3",
+    "parent_name": "操作门锁与开关",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "带儿童到有横拉式闸门的地方，示范把闸门趟开及关上，请儿童模仿。"
+  },
+  {
+    "name": "精细动作与对准练习",
+    "level": "L2",
+    "parent_name": "家居技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过玩具操作训练儿童的手眼协调与对准能力。"
+  },
+  {
+    "name": "插桶玩具对准练习",
+    "level": "L3",
+    "parent_name": "精细动作与对准练习",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "示范将玩具胶剑对准插在小酒桶的小孔上，请儿童与成人轮流插胶剑，直至海盗娃娃弹出来，让儿童学习把钥匙插进匙孔的预备动作。"
+  },
+  {
+    "name": "家居技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "家居技能相关的基础生活自理与操作训练"
+  },
+  {
+    "name": "开锁与安全操作",
+    "level": "L2",
+    "parent_name": "家居技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "训练儿童运用工具进行开锁、关锁及相关物件操作的技能。"
+  },
+  {
+    "name": "使用钥匙开启玩具车库",
+    "level": "L3",
+    "parent_name": "开锁与安全操作",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "示范用钥匙开启玩具车库的门，将玩具车拿出。请儿童模仿动作，将车库内的车逐一拿出，玩完后请儿童将车放回车库，并用钥匙将门锁上。所需物品：玩具车库、钥匙。"
+  },
+  {
+    "name": "使用钥匙开启玩具",
+    "level": "L3",
+    "parent_name": "开锁与安全操作",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "示范用钥匙插入玩具的匙孔并扭开，请儿童模仿该操作。所需物品：可用钥匙开启的玩具。"
+  },
+  {
+    "name": "操作防盗链",
+    "level": "L3",
+    "parent_name": "开锁与安全操作",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "1. 练习预备动作：与儿童玩「乐智高」玩具，示范用手指把游戏板上的圆形由一处移至另一处，引导儿童模仿以建立操作防盗链的手指协调性。2. 实际操作：带儿童到有防盗链的大门前，示范开关防盗链，请儿童模仿。所需物品：「乐智高」游戏板、有防盗链的门。"
+  },
+  {
+    "name": "开关窗户",
+    "level": "L3",
+    "parent_name": "家居技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "带儿童到窗户旁边，示范开关窗户，请儿童模仿。注意事项：活动期间须格外注意安全，并使用有窗花的窗户。"
+  },
+  {
+    "name": "居家技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南：居家技能相关训练项目。"
+  },
+  {
+    "name": "使用家居电器",
+    "level": "L2",
+    "parent_name": "居家技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童进行使用家居电器的能力训练。"
+  },
+  {
+    "name": "开关冰箱并从中取食物",
+    "level": "L3",
+    "parent_name": "使用家居电器",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "训练儿童学会开关冰箱门，并从冰箱中取出指定食物的动作技能。"
+  },
+  {
+    "name": "形状盒模拟开关冰箱练习",
+    "level": "L4",
+    "parent_name": "开关冰箱并从中取食物",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "请儿童拉开形状盒的门，从中取出各形状积木，接著再推门关上形状盒，透过此动作练习开关冰箱门的技巧。所需材料：形状盒。"
+  },
+  {
+    "name": "模拟冰箱取物与进食游戏",
+    "level": "L4",
+    "parent_name": "开关冰箱并从中取食物",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "与儿童玩假想游戏，向儿童表示「肚子饿了」，请儿童帮忙打开玩具冰箱的门，取出成人所指定的食物，再关上冰箱门，最后与儿童一同模拟进食。所需材料：玩具冰箱、玩具食物。"
+  },
+  {
+    "name": "开关电视机",
+    "level": "L3",
+    "parent_name": "使用家居电器",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "训练儿童操作开关电视机的基础技能。"
+  },
+  {
+    "name": "开关电灯",
+    "level": "L3",
+    "parent_name": "使用家居电器",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "训练儿童操作开关电灯的基础技能。"
+  },
+  {
+    "name": "正确地开关有热水供应的水龙头",
+    "level": "L3",
+    "parent_name": "使用家居电器",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "训练儿童正确且安全地操作有热水供应的水龙头。"
+  },
+  {
+    "name": "学前儿童训练指南—自理",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童自理能力训练目录与活动指引"
+  },
+  {
+    "name": "家居技能",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南—自理",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "训练儿童在家居环境中的操作与互动技能"
+  },
+  {
+    "name": "冰箱取食训练",
+    "level": "L3",
+    "parent_name": "家居技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "训练目标：学会从冰箱取出食物。活动建议：预先把儿童喜欢的食物放进冰箱，当儿童向成人要求食物时，成人随即带儿童往冰箱，请儿童自行打开冰箱取食物。所需物资：冰箱、儿童喜欢的食物。"
+  },
+  {
+    "name": "操作电视训练",
+    "level": "L3",
+    "parent_name": "家居技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "训练目标：学会操作电视开关。活动建议：请儿童选取喜欢的卡通，接著成人指著电视开关按钮，请儿童开电视，一同欣赏卡通后，再请儿童按按钮关上电视。所需物资：电视机、影片播放器及卡通。"
+  },
+  {
+    "name": "阅读灯光控制训练",
+    "level": "L3",
+    "parent_name": "家居技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "训练目标：理解环境照明需求及操作开关。活动建议：在晚上与儿童一同看图书，告诉儿童看书时房间的灯光需要光亮一点，请儿童帮忙按台灯的开关按钮。看完图书后，再请儿童关掉台灯。所需物资：有开关按钮的台灯、图书。"
+  },
+  {
+    "name": "洗手间灯光操作训练",
+    "level": "L3",
+    "parent_name": "家居技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "训练目标：在特定情境下操作开关与使用辅助器具。活动建议：带儿童往洗手间梳洗，先让儿童站在矮櫈上，请儿童用手指按洗手间的电灯开关把灯亮著，接著一同梳洗。完成后，再请儿童把灯关上。所需物资：电灯开关、矮櫈。"
+  },
+  {
+    "name": "家居技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "家居生活自理能力训练"
+  },
+  {
+    "name": "自理能力",
+    "level": "L2",
+    "parent_name": "家居技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "教授儿童认识及正确使用生活中的设施与工具。"
+  },
+  {
+    "name": "认识冷热水设施",
+    "level": "L3",
+    "parent_name": "自理能力",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过玩具及实际操作，学习辨识冷热水标记与正确操作水龙头的方法。"
+  },
+  {
+    "name": "玩具洗手盆模拟操作",
+    "level": "L4",
+    "parent_name": "认识冷热水设施",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示有红色和蓝色水龙头的玩具洗手盆（或把红色和蓝色的贴纸贴在玩具洗手盆的2个水龙头上），并告诉儿童红色水龙头开出来的是热水；蓝色水龙头开出来的是冷水。接著和儿童一同玩「家家酒」游戏，请儿童假装用冷水清洁食物，煮食完毕后，用热水清洁餐具。"
+  },
+  {
+    "name": "实际生活操作练习",
+    "level": "L4",
+    "parent_name": "认识冷热水设施",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "带儿童往洗手间，向儿童讲解把手柄式水龙头拉至红色的一边会开出热水；拉向蓝色的一边则会开出冷水。接著对儿童说想用冷水，请儿童把水龙头拉至蓝色，开出冷水让成人洗手。接著成人再说想用热水，请儿童把水龙头拉至红色范围的中间位置，开出热水让成人洗手。"
+  },
+  {
+    "name": "使用公众设施",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学习在公共场所正确使用各类设施的训练。"
+  },
+  {
+    "name": "使用升降机的按钮",
+    "level": "L2",
+    "parent_name": "使用公众设施",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "训练儿童识别并操作升降机按钮。"
+  },
+  {
+    "name": "使用自动电梯",
+    "level": "L2",
+    "parent_name": "使用公众设施",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "训练儿童安全使用自动电梯。"
+  },
+  {
+    "name": "使用交通灯",
+    "level": "L2",
+    "parent_name": "使用公众设施",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "训练儿童正确识别并回应交通灯号。"
+  },
+  {
+    "name": "模拟升降机操作活动",
+    "level": "L3",
+    "parent_name": "使用升降机的按钮",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "透过假想游戏，与儿童认识「G」、开关门符号。利用升降机按钮相片贴在墙上模拟按键、等待抵达目的地并牵手离开的过程。"
+  },
+  {
+    "name": "实地升降机操作练习",
+    "level": "L3",
+    "parent_name": "使用升降机的按钮",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "在实际外出或回家时，示范升降机开关门按钮的操作，并请儿童在适当时机自行按压。"
+  },
+  {
+    "name": "自动电梯步法练习",
+    "level": "L3",
+    "parent_name": "使用自动电梯",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "带儿童到梯级处，示范一手按扶手，提脚并说「1, 2, 3, go!」，然后踏上第一级，模拟并引导儿童模仿动作。"
+  },
+  {
+    "name": "家居技能",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童家居技能训练活动指引。"
+  },
+  {
+    "name": "外出安全与社交训练",
+    "level": "L2",
+    "parent_name": "家居技能",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过模拟及实地操作，提升儿童对交通规则、电梯安全及红绿灯的认知。"
+  },
+  {
+    "name": "电梯安全训练",
+    "level": "L3",
+    "parent_name": "外出安全与社交训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "带儿童往扶手电梯，并牵著儿童的手说：「1，2，3，go！」随即轻轻拉一拉儿童的手，带领儿童踏进电梯。当要离开扶手电梯时，同样对儿童说：「1，2，3，go！」再轻轻拉著儿童的手踏出电梯。"
+  },
+  {
+    "name": "交通灯认知与规则训练",
+    "level": "L3",
+    "parent_name": "外出安全与社交训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过儿歌、模拟游戏及实地观察，强化儿童对红绿灯的辨识能力及遵守交通规则的意识。"
+  },
+  {
+    "name": "儿歌与动作认知",
+    "level": "L4",
+    "parent_name": "交通灯认知与规则训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童一同唱儿歌及做动作，加强对辨认红绿灯的认识。儿歌及动作参考：「过马路，要小心（步行），红灯停（站立），绿灯走（向前行），交通规则要遵守（竖起拇指）。」"
+  },
+  {
+    "name": "模拟马路游戏",
+    "level": "L4",
+    "parent_name": "交通灯认知与规则训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "准备玩具人物、玩具车及行人过路灯图卡。与儿童一同玩模拟马路游戏，把玩具人物摆放在马路旁边，玩具车放在马路上。细心观察行人过路灯图卡的显示，当图卡亮起红色时，教导儿童把玩具人物留在路边等候；当图卡亮起绿色时，让儿童持玩具人物过马路。"
+  },
+  {
+    "name": "实地马路训练",
+    "level": "L4",
+    "parent_name": "交通灯认知与规则训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "带儿童往有行人过路灯的地方过马路，成人沿路牵著儿童的手，请儿童告诉成人现在是甚么颜色的灯号，问儿童能不能过马路，如儿童答错了，便加以矫正，一同按交通规则过马路。"
+  },
+  {
+    "name": "参考书目",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "本页列出学前儿童训练指南（自理）的相关参考文献，包括：Christiansen, C. H. (2000) 的《Ways of Living: Self-Care Strategies for Special Needs》；Morris, S. E. 与 Klevin, M. D. (2000) 的《Pre-feeding Skills》；Shepherd, J. (2005) 关于日常生活活动的章节；以及协康会出版的《穿衣技巧训练手册》、《儿童学习纲领与儿童发展评估表（修订版）》和《提升幼儿自理能力手册》。"
+  },
+  {
+    "name": "学前儿童训练指南",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南，本指南系列包含六册，此册主题为自理训练。"
+  },
+  {
+    "name": "自理训练",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童的日常生活自理能力训练，涵盖各项基础生活技能指导。"
+  },
+  {
+    "name": "协康会特殊教育资源",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "此文件为协康会出版物之封底，包含国际标准书号（ISBN 978-962-7884-668），属于特殊教育资源教材之范畴，旨在提供特殊教育训练目标与活动指引。"
+  }
+]

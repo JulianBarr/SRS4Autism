@@ -1,0 +1,6890 @@
+[
+  {
+    "name": "学前儿童训练指南",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南，由协康会编著，旨在为学前儿童提供系统性的发展训练指引。"
+  },
+  {
+    "name": "社交与情绪",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "社交与情绪训练模块，专注于提升学前儿童的社交互动技巧及情绪管理与表达能力。"
+  },
+  {
+    "name": "学前儿童训练指南：社交与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南之社交与情绪目录框架"
+  },
+  {
+    "name": "前言与理论架构",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南：社交与情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "包含序言、引言、学习范畴、基本理论（社交与情绪）及编订训练指南之原则。"
+  },
+  {
+    "name": "活动建议",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南：社交与情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童的各项社交与情绪训练活动建议。"
+  },
+  {
+    "name": "自我概念",
+    "level": "L3",
+    "parent_name": "活动建议",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "促进儿童自我概念发展的相关训练活动。"
+  },
+  {
+    "name": "社交沟通",
+    "level": "L3",
+    "parent_name": "活动建议",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "提升儿童社交沟通技巧的训练活动。"
+  },
+  {
+    "name": "游戏技巧",
+    "level": "L3",
+    "parent_name": "活动建议",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "培养儿童游戏互动与参与技巧的训练活动。"
+  },
+  {
+    "name": "社会适应",
+    "level": "L3",
+    "parent_name": "活动建议",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "增进儿童社会适应能力的训练活动。"
+  },
+  {
+    "name": "情绪表现",
+    "level": "L3",
+    "parent_name": "活动建议",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "辅导儿童识别与表达情绪的训练活动。"
+  },
+  {
+    "name": "学前儿童训练指南",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 0,
+    "age_max_months": 72,
+    "prompt_corpus": "一套包含大肌肉、小肌肉、自理、认知、语言，以及社交与情绪六个范畴的学前儿童训练系统，旨在为0至6岁幼儿提供系统化的发展评估与训练建议。"
+  },
+  {
+    "name": "训练范畴",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南",
+    "age_min_months": 0,
+    "age_max_months": 72,
+    "prompt_corpus": "涵盖六大发展领域：大肌肉、小肌肉、自理、认知、语言，以及社交与情绪。"
+  },
+  {
+    "name": "训练流程",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南",
+    "age_min_months": 0,
+    "age_max_months": 72,
+    "prompt_corpus": "首先利用《儿童发展评估表》进行评估，再参照《儿童学习纲领》编定学习目标，最后从训练指南中挑选活动建议进行训练。"
+  },
+  {
+    "name": "学前儿童训练指南：社交与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "本指南介绍儿童社交与情绪发展的过程，阐述儿童早期社交情绪发展的基本要素，并提供相关的训练活动建议，强调正向情绪及社交经验对幼儿发展的促进作用。"
+  },
+  {
+    "name": "引言",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南：社交与情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "儿童的健康成长除了身体四肢、认知和语言能力外，社交能力与情绪气质均有举足轻重的影响。研究指出负面情绪会带来不良影响，而正面情绪及社交经验则可促进幼儿发展。"
+  },
+  {
+    "name": "学前儿童社交与情绪发展范畴",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童在社交与情绪方面的学习，主要分为自我概念、社交沟通、游戏技巧、社会适应、情绪表现五大范畴。"
+  },
+  {
+    "name": "自我概念",
+    "level": "L2",
+    "parent_name": "学前儿童社交与情绪发展范畴",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "由自我认识 (Self Knowledge) 及自我评价 (Self Evaluation) 两大元素组成。儿童分别从「认知」及「感觉」层面建立个人的认识，并为个人建立合理的评价。"
+  },
+  {
+    "name": "社交沟通",
+    "level": "L2",
+    "parent_name": "学前儿童社交与情绪发展范畴",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "帮助儿童发展建立人际关系的兴趣，与成人及友伴进行相互的交往、沟通及情感的交流。"
+  },
+  {
+    "name": "游戏技巧",
+    "level": "L2",
+    "parent_name": "学前儿童社交与情绪发展范畴",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "帮助儿童发展与人交往的动机，协助儿童组织和演绎生活经验，学习遵守游戏规则。"
+  },
+  {
+    "name": "社会适应",
+    "level": "L2",
+    "parent_name": "学前儿童社交与情绪发展范畴",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "协助儿童学习社会适应行为，包括：遵守环境规范、认识自己、家人及服务社区人士的不同角色、履行个人责任及表现基本社交礼仪。"
+  },
+  {
+    "name": "情绪表现",
+    "level": "L2",
+    "parent_name": "学前儿童社交与情绪发展范畴",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "帮助儿童建立安全感，与照顾者发展亲密及健康的依附行为。让儿童认识个人及别人的情绪，学习表达、调节和处理个人情绪。"
+  },
+  {
+    "name": "社交技能训练",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童的社交能力发展训练，涵盖自我认识、情绪处理与人际关系的基础理论指导。"
+  },
+  {
+    "name": "基本理论：社交",
+    "level": "L2",
+    "parent_name": "社交技能训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "介绍人类社交发展的历程，从婴儿期对成人反应的辨识、模仿行为，到幼儿期语言能力发展后的去自我中心化与社会化过程。"
+  },
+  {
+    "name": "学习论 (Learning Theories)",
+    "level": "L3",
+    "parent_name": "基本理论：社交",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "视人类发展为对环境的适应。核心机制为行为与结果的连结（强化/Reinforced），透过重复的回馈（如：母亲对婴儿注视的互动）来建立与强化社交行为。"
+  },
+  {
+    "name": "社会学习论 (Social Learning Theories)",
+    "level": "L3",
+    "parent_name": "基本理论：社交",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "强调透过观察外界事物或他人的行为进行模仿与学习。儿童借由模仿榜样建立社会角色与规范，观察与模仿是儿童习得社交技能的重要途径。"
+  },
+  {
+    "name": "心理社会发展论",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "理论认为人类的发展过程受个人及社会因素影响。婴儿期重点在于建立对外界的信心，随后（约八个月大时）转向建立自主能力，满足自我需求，并在成长过程中配合社会期望。"
+  },
+  {
+    "name": "智能发展论",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "强调幼儿是主动的学习者，透过与环境的同化与调适来发展智能。主张透过有趣且适合儿童程度的游戏来促进学习，并强调自我信念与能力感对人际关系处理技巧的影响。"
+  },
+  {
+    "name": "社交技能训练策略",
+    "level": "L2",
+    "parent_name": "智能发展论",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "成人应清楚了解儿童能力，帮助其认识长处并接受限制。透过日常与同侪互动（如兄弟姊妹、伙伴）、观察、模仿及处理冲突的经验，练习轮候、守规则、社交礼仪、互相照顾、妥协、忍让与分享。"
+  },
+  {
+    "name": "融入日常生活训练",
+    "level": "L3",
+    "parent_name": "社交技能训练策略",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "将社交技能训练具体融入儿童日常生活，在成人指导下，透过实际生活经验练习解决问题与社交技巧。"
+  },
+  {
+    "name": "基本理论：情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "基本理论：情绪，解释情绪是一种主观的经验，是个人对他人或事物的一种心理反应。情绪随接触对象而变化，且情绪应对与处理方式会随著儿童的观察和经验而逐步形成。"
+  },
+  {
+    "name": "发展阶段论",
+    "level": "L2",
+    "parent_name": "基本理论：情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "根据Erikson发展阶段论，说明儿童在不同阶段面对心理社会危机，若未能顺利发展会影响情绪健康与社交关系。"
+  },
+  {
+    "name": "信任与怀疑",
+    "level": "L3",
+    "parent_name": "发展阶段论",
+    "age_min_months": 0,
+    "age_max_months": 24,
+    "prompt_corpus": "儿童心理社会发展的首个阶段，婴儿透过与照顾者建立信任关系，获得安全感。若照顾者态度温和处理行为后果，有助于儿童建立自信；反之则产生怀疑与焦虑。"
+  },
+  {
+    "name": "自主与羞怯",
+    "level": "L3",
+    "parent_name": "发展阶段论",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "幼儿开始尝试自我控制的阶段，若照顾者要求过于严厉，幼儿可能对自身行为感到羞怯与怀疑。"
+  },
+  {
+    "name": "主动与罪疚",
+    "level": "L3",
+    "parent_name": "发展阶段论",
+    "age_min_months": 36,
+    "age_max_months": 72,
+    "prompt_corpus": "学前幼儿阶段，若能从主动探索中得到鼓励，便能发展出主动进取的精神；若常被禁止或受罚，则容易产生罪疚感和失败感。"
+  },
+  {
+    "name": "生态理论",
+    "level": "L2",
+    "parent_name": "基本理论：情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "根据Bronfenbrenner的生态理论，强调幼儿受不同层次外在环境影响，特别是家庭与照顾者。照顾者的热情、温和、谅解态度能促进幼儿发展同理心；反之则难以发展社交能力。学校与社会文化亦对幼儿的情绪发展有重要影响。"
+  },
+  {
+    "name": "学前儿童社交与情绪训练",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童发展的五个重要元素：儿童「自我概念」的建立、与环境中不同的人进行「社交沟通」、透过「游戏技巧」与别人联系及投射情绪、从生活经验中逐渐学习社会规范以发展「社会适应」的能力、以及「情绪表达」的能力。"
+  },
+  {
+    "name": "建立自我概念",
+    "level": "L2",
+    "parent_name": "学前儿童社交与情绪训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "自我概念是儿童对自己的一个主观看法，由自我认识和自我评价两大元素组成。"
+  },
+  {
+    "name": "自我认识",
+    "level": "L3",
+    "parent_name": "建立自我概念",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "包括身体形象（身体和五官名称、位置、作用和感觉）以及自我意识（认识自己是独立个体，有自己的名字、样貌、性别、喜好和身份；能自主行为，表达自己的意愿、选择、作决定并承担后果）。"
+  },
+  {
+    "name": "自我评价",
+    "level": "L3",
+    "parent_name": "建立自我概念",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "指儿童衡量自己是怎样的人（如：乖巧、顽皮、聪明、愚蠢等）。儿童从别人对其评语及态度，加上把自己能力与自己订立的标准作比较，从而对自己作出评价。"
+  },
+  {
+    "name": "社交沟通",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "社交沟通是儿童与他人接触并建立关系的基础，包括发展对别人的兴趣、与人交往的动机以及与人沟通和交流情感的能力。这建立在人际关系之上，范围涵盖建立安全感、进行互动和交流，以及认识社交规则。"
+  },
+  {
+    "name": "游戏技巧",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "游戏是儿童自发、自愿、积极参与且感到乐趣的活动，是儿童组织和演绎生活经验的工具。游戏容许与现实生活脱离，提供安全环境让儿童透过重复扮演，表达内心感受甚至负面情绪，尝试解决问题的方法，整理个人情绪并重建信心。"
+  },
+  {
+    "name": "游戏在儿童发展中的功能",
+    "level": "L2",
+    "parent_name": "游戏技巧",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过有趣的活动加深儿童对自己及外界的认识，例如透过肢体活动训练平衡与身体控制能力，以及透过角色扮演（如家庭角色、职业角色）或假想游戏（如上茶楼、坐火车）来认识社会环境。"
+  },
+  {
+    "name": "小组游戏与社交训练",
+    "level": "L2",
+    "parent_name": "游戏技巧",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "以小组形式进行游戏，提供与人交往及模仿的机会，学习遵守规则，与人合作及互相分享经验，借以训练及培养儿童的社交能力，包括学习不同概念及认识周遭环境。此外，户外探访也是儿童认识事物的好机会。"
+  },
+  {
+    "name": "社会适应",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "社会适应是指儿童在成长过程中学习遵守规矩、做出他人期望的理想表现以获取社会接纳的过程。建议让儿童多参与社区活动（如超市购物、邮局寄信、快餐店进食），以将学习过的技巧融入生活中。良好的社会适应能力能帮助儿童理解并尊重环境限制，培养自我约束与责任感。"
+  },
+  {
+    "name": "情绪表现",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "情绪表现受儿童先天气质影响，分为随和乐天型与难侍候型。随和型儿童生活有规律、开朗；难侍候型儿童则生活不规律、情绪易爆发。训练目标在于帮助儿童理解情绪，并透过社交互动发展出良好的处世技巧，避免因社交困难而影响自我概念的建立。"
+  },
+  {
+    "name": "学前儿童训练指南 - 社交与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童社交与情绪发展之基本理论指导。"
+  },
+  {
+    "name": "渐进适应型儿童的特征",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南 - 社交与情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "这类儿童起居生活不大有规律、适应力弱、对新的经验有所顾忌、对人的反应常有保留。"
+  },
+  {
+    "name": "儿童情绪发展与环境因素",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南 - 社交与情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "探讨儿童情绪对他人反应的差异（如同理心与逃避），以及气质、父母性格、父母处理情绪的态度如何对儿童情绪表达模式构成影响。"
+  },
+  {
+    "name": "父母教养对情绪控制的影响",
+    "level": "L3",
+    "parent_name": "儿童情绪发展与环境因素",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "分析父母对待负面情绪的态度（如否定或压抑）如何导致儿童丧失自我控制和学习处理情绪的机会。"
+  },
+  {
+    "name": "情绪表达与社交发展",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南 - 社交与情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "强调懂得表达情绪对儿童的自我觉察、身心健康及发展同理心的重要性。"
+  },
+  {
+    "name": "编订训练指南之原则",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童的社交情绪发展共分为五个不同的次范畴。本指南编订遵循三大原则：1. 按一般儿童的社交情绪发展，列出具代表性及生活化的学习目标。2. 配合儿童的发展年龄及需要，编订适切及合宜的活动。3. 根据儿童能力的先后次序，由浅入深地编排活动。此外，活动建议经整理后，保留了《儿童学习纲领》中的粤语用字以方便训练人员配合使用。"
+  },
+  {
+    "name": "编订原则",
+    "level": "L2",
+    "parent_name": "编订训练指南之原则",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "本指南编订依据三个核心原则：目标具代表性及生活化、活动配合发展年龄与需要、活动编排由浅入深。"
+  },
+  {
+    "name": "使用指引",
+    "level": "L2",
+    "parent_name": "编订训练指南之原则",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "为方便训练人员配合《儿童学习纲领》使用，活动建议中的部分目标经整理后，保留了《儿童学习纲领》中的粤语用字。"
+  },
+  {
+    "name": "学前儿童训练指南：社交与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童社交与情绪发展训练指南目录"
+  },
+  {
+    "name": "自我概念",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南：社交与情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "自我概念相关的训练内容与活动"
+  },
+  {
+    "name": "学习重点：自我认识",
+    "level": "L3",
+    "parent_name": "自我概念",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "包含自我意识与自主能力的发展训练"
+  },
+  {
+    "name": "项目一：自我意识",
+    "level": "L4",
+    "parent_name": "学习重点：自我认识",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对自我意识建立的训练活动"
+  },
+  {
+    "name": "项目二：自主能力",
+    "level": "L4",
+    "parent_name": "学习重点：自我认识",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对自主能力培养的训练活动"
+  },
+  {
+    "name": "学习重点：自我评价",
+    "level": "L3",
+    "parent_name": "自我概念",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "包含正面评价的训练内容"
+  },
+  {
+    "name": "项目：正面评价",
+    "level": "L4",
+    "parent_name": "学习重点：自我评价",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对建立正面自我评价的训练活动"
+  },
+  {
+    "name": "社交沟通",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南：社交与情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "社交沟通能力的训练内容与活动"
+  },
+  {
+    "name": "学习重点：与人交往的动机",
+    "level": "L3",
+    "parent_name": "社交沟通",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "包含与照顾者、熟人及友伴的互动动机训练"
+  },
+  {
+    "name": "项目一：有兴趣与照顾者情感的交流及回应",
+    "level": "L4",
+    "parent_name": "学习重点：与人交往的动机",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对与照顾者情感交流的训练活动"
+  },
+  {
+    "name": "项目二：有兴趣与熟悉的人接触",
+    "level": "L4",
+    "parent_name": "学习重点：与人交往的动机",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对与熟悉的人接触的训练活动"
+  },
+  {
+    "name": "项目三：与友伴发展互动关系",
+    "level": "L4",
+    "parent_name": "学习重点：与人交往的动机",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对与友伴建立互动关系的训练活动"
+  },
+  {
+    "name": "学习重点：沟通技巧",
+    "level": "L3",
+    "parent_name": "社交沟通",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "包含非语言与语言沟通技巧的训练"
+  },
+  {
+    "name": "项目一：非语言沟通",
+    "level": "L4",
+    "parent_name": "学习重点：沟通技巧",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对非语言沟通方式的训练活动"
+  },
+  {
+    "name": "项目二：语言沟通",
+    "level": "L4",
+    "parent_name": "学习重点：沟通技巧",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对语言表达与沟通的训练活动"
+  },
+  {
+    "name": "游戏技巧",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南：社交与情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "游戏技巧相关的训练内容与活动"
+  },
+  {
+    "name": "学习重点：游戏技巧",
+    "level": "L3",
+    "parent_name": "游戏技巧",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "包含交互式、独行式及假想游戏的技巧训练"
+  },
+  {
+    "name": "项目一：与成人进行交互式游戏",
+    "level": "L4",
+    "parent_name": "学习重点：游戏技巧",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对与成人进行交互式游戏的训练活动"
+  },
+  {
+    "name": "项目二：进行独行式的游戏",
+    "level": "L4",
+    "parent_name": "学习重点：游戏技巧",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对独立游戏技巧的训练活动"
+  },
+  {
+    "name": "项目三：进行假想游戏",
+    "level": "L4",
+    "parent_name": "学习重点：游戏技巧",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对假想与象征性游戏的训练活动"
+  },
+  {
+    "name": "学习重点：参与社交游戏",
+    "level": "L3",
+    "parent_name": "游戏技巧",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "包含与友伴游戏及遵守游戏规则的训练"
+  },
+  {
+    "name": "项目一：与友伴进行游戏",
+    "level": "L4",
+    "parent_name": "学习重点：参与社交游戏",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对与同伴互动游戏的训练活动"
+  },
+  {
+    "name": "项目二：遵守游戏规则",
+    "level": "L4",
+    "parent_name": "学习重点：参与社交游戏",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对遵守社会规则与游戏规范的训练活动"
+  },
+  {
+    "name": "社会适应",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "社会适应领域的训练目标，包含认识个人与熟悉的人的角色、认识个人责任、遵循环境规范及认识社交礼仪。"
+  },
+  {
+    "name": "学习重点：认识个人及熟悉的人的角色",
+    "level": "L2",
+    "parent_name": "社会适应",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过认识身边的人与其角色的活动，提升学龄前儿童的社会认知能力。"
+  },
+  {
+    "name": "项目一：称呼家庭以内熟悉的人",
+    "level": "L3",
+    "parent_name": "学习重点：认识个人及熟悉的人的角色",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "练习准确称呼家庭成员及家中熟悉的人。"
+  },
+  {
+    "name": "项目二：适当地回应有关个人的问题",
+    "level": "L3",
+    "parent_name": "学习重点：认识个人及熟悉的人的角色",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "训练儿童针对个人相关询问做出正确回应。"
+  },
+  {
+    "name": "项目三：适当地回应有关家庭的问题",
+    "level": "L3",
+    "parent_name": "学习重点：认识个人及熟悉的人的角色",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "训练儿童针对家庭成员或情况做出适当回应。"
+  },
+  {
+    "name": "学习重点：认识个人责任",
+    "level": "L2",
+    "parent_name": "社会适应",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "培养儿童对自身责任的意识，涵盖自我照顾与安全意识。"
+  },
+  {
+    "name": "项目一：完成个人责任",
+    "level": "L3",
+    "parent_name": "学习重点：认识个人责任",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "引导儿童执行并完成属于个人的基础责任。"
+  },
+  {
+    "name": "项目二：自我保护",
+    "level": "L3",
+    "parent_name": "学习重点：认识个人责任",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "训练儿童学习保护自己的安全。"
+  },
+  {
+    "name": "项目三：在有需要时懂得寻求适当的协助",
+    "level": "L3",
+    "parent_name": "学习重点：认识个人责任",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "教导儿童在遇到困难时，主动寻求正确对象协助。"
+  },
+  {
+    "name": "学习重点：遵循环境规范",
+    "level": "L2",
+    "parent_name": "社会适应",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "协助儿童建立规则意识，遵守不同环境下的生活程序与规范。"
+  },
+  {
+    "name": "项目一：依循固定的生活程序",
+    "level": "L3",
+    "parent_name": "学习重点：遵循环境规范",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "培养儿童养成稳定生活作息的习惯。"
+  },
+  {
+    "name": "项目二：遵从社区活动规则",
+    "level": "L3",
+    "parent_name": "学习重点：遵循环境规范",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "让儿童学习在公共场所遵守相关社会规范。"
+  },
+  {
+    "name": "项目三：培养公德心",
+    "level": "L3",
+    "parent_name": "学习重点：遵循环境规范",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过情境教育，引导儿童展现爱护环境与他人的公德心。"
+  },
+  {
+    "name": "项目四：遵守学校常规及指令",
+    "level": "L3",
+    "parent_name": "学习重点：遵循环境规范",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "训练儿童在校园环境中遵守指令与常规。"
+  },
+  {
+    "name": "学习重点：认识社交礼仪",
+    "level": "L2",
+    "parent_name": "社会适应",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "建立儿童基础社交礼貌，提升人际互动品质。"
+  },
+  {
+    "name": "项目一：基本社交礼仪",
+    "level": "L3",
+    "parent_name": "学习重点：认识社交礼仪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "练习问候、感谢等基本的社交互动礼仪。"
+  },
+  {
+    "name": "项目二：电话应对",
+    "level": "L3",
+    "parent_name": "学习重点：认识社交礼仪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "训练儿童在接听或拨打电话时的正确沟通方式。"
+  },
+  {
+    "name": "项目三：进食礼仪",
+    "level": "L3",
+    "parent_name": "学习重点：认识社交礼仪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学习用餐时的礼仪规范。"
+  },
+  {
+    "name": "情绪表现",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "情绪表现领域的训练目标，包含依附行为、情绪识别能力及认识与调节个人情绪。"
+  },
+  {
+    "name": "学习重点：依附行为",
+    "level": "L2",
+    "parent_name": "情绪表现",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "培养儿童与照顾者之间的安全感与依附关系。"
+  },
+  {
+    "name": "项目一：对成人的回应作出反应",
+    "level": "L3",
+    "parent_name": "学习重点：依附行为",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "强化儿童与照顾者之间的互动性。"
+  },
+  {
+    "name": "项目二：表示期望与照顾者亲近",
+    "level": "L3",
+    "parent_name": "学习重点：依附行为",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "让儿童练习表达情感需求，增进亲子亲密度。"
+  },
+  {
+    "name": "学习重点：识别情绪的能力",
+    "level": "L2",
+    "parent_name": "情绪表现",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "提升儿童对情绪的感知与辨识能力。"
+  },
+  {
+    "name": "项目一：回应别人的情绪",
+    "level": "L3",
+    "parent_name": "学习重点：识别情绪的能力",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "让儿童学会观察并适当回应他人的情绪状态。"
+  },
+  {
+    "name": "项目二：认识较复杂的情绪",
+    "level": "L3",
+    "parent_name": "学习重点：识别情绪的能力",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "协助儿童辨认与理解比基本喜怒哀乐更复杂的情绪。"
+  },
+  {
+    "name": "学习重点：认识个人的情绪",
+    "level": "L2",
+    "parent_name": "情绪表现",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "培养儿童自我觉察情绪的能力，并学习如何表达与调节。"
+  },
+  {
+    "name": "项目一：合适地表达情绪",
+    "level": "L3",
+    "parent_name": "学习重点：认识个人的情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "教导儿童以社会认可的方式适当表达内在情绪。"
+  },
+  {
+    "name": "项目二：调节或处理自己的情绪",
+    "level": "L3",
+    "parent_name": "学习重点：认识个人的情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "训练儿童学习自我情绪调节的策略，妥善处理负面情绪。"
+  },
+  {
+    "name": "社交与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "社交与情绪发展领域。"
+  },
+  {
+    "name": "自我概念",
+    "level": "L2",
+    "parent_name": "社交与情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "协助儿童建立对自我概念的认识与理解。"
+  },
+  {
+    "name": "自我认识",
+    "level": "L3",
+    "parent_name": "自我概念",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "包含自我意识的培养。"
+  },
+  {
+    "name": "自我意识",
+    "level": "L4",
+    "parent_name": "自我认识",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目一：培养儿童对自我镜像与影像的辨识能力。"
+  },
+  {
+    "name": "对镜中自己的影像作出反应",
+    "level": "L5",
+    "parent_name": "自我意识",
+    "age_min_months": 6,
+    "age_max_months": 12,
+    "prompt_corpus": "目标A：对镜中自己的影像作出反应（如：凝望、伸手触摸或亲吻镜子等）。活动建议：先让儿童照一面会前后转动的双面镜子，并呼唤儿童乳名或名字。重复轻声地呼唤儿童乳名或名字，再轻敲镜子以吸引儿童观看，随即扶著儿童的手去触摸镜子，并以喜悦表情及声音赞赏儿童的参与。"
+  },
+  {
+    "name": "分辨镜中的母亲与自己",
+    "level": "L5",
+    "parent_name": "自我意识",
+    "age_min_months": 6,
+    "age_max_months": 12,
+    "prompt_corpus": "目标B：分辨镜中的母亲与自己。活动建议：先把贴纸贴在儿童脸上，引导儿童看镜子及伸手触摸镜子。之后协助儿童照著镜子，并扶著他的手把脸上的贴纸轻轻撕去。接著成人邀请儿童一起将贴纸贴在镜上，指著镜子吸引儿童看自己在镜中的倒影，并伸手触摸镜子及撕下贴纸。"
+  },
+  {
+    "name": "辨认相片中自己的影像",
+    "level": "L5",
+    "parent_name": "自我意识",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "目标C：辨认相片中自己的影像。活动建议：在镜子上挂上薄纱丝巾或彩色纸条。引导儿童伸手拨开丝巾或纸条并望向镜子，成人此时露出喜悦表情，并声叫唤儿童乳名或名字。接著摸摸及亲亲儿童，引导儿童一起再看看成人及自己在镜中的倒影。注意事项：避免儿童把丝巾或纸条放进口中。"
+  },
+  {
+    "name": "自我概念",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南—社交与情绪：自我概念训练活动"
+  },
+  {
+    "name": "镜子与自我认识",
+    "level": "L2",
+    "parent_name": "自我概念",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过镜子及相片辅助，引导儿童认识自己的倒影与个人特征。"
+  },
+  {
+    "name": "镜中自我认知",
+    "level": "L3",
+    "parent_name": "镜子与自我认识",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "母亲抱著儿童在大镜子前，透过夸张表情吸引注意，引导儿童指认镜中的自己与母亲，并学习说出名字。"
+  },
+  {
+    "name": "角色扮演与自我观察",
+    "level": "L3",
+    "parent_name": "镜子与自我认识",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "母亲与儿童一同装扮并照镜子，拍摄儿童可爱模样，透过照片辨识自己与他人的影像，强化自我形象认知。"
+  },
+  {
+    "name": "影像配对与认人",
+    "level": "L3",
+    "parent_name": "镜子与自我认识",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "利用镜子旁贴的近照与相片进行配对练习，引导儿童回应『XX在哪里』，强化对自身及家人影像的连结。"
+  },
+  {
+    "name": "快乐经验与自我肯定",
+    "level": "L3",
+    "parent_name": "镜子与自我认识",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过拍照捕捉儿童开心表情，共同欣赏相片并给予正面回馈，将相片置于儿童随手可见处以增强自我认同。"
+  },
+  {
+    "name": "自我意识",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 6,
+    "age_max_months": 60,
+    "prompt_corpus": "学前儿童训练指南—社交与情绪：自我意识训练"
+  },
+  {
+    "name": "对自己惯常被称呼的名字作出反应",
+    "level": "L2",
+    "parent_name": "自我意识",
+    "age_min_months": 6,
+    "age_max_months": 12,
+    "prompt_corpus": "对自己惯常被称呼的名字作出反应"
+  },
+  {
+    "name": "说出自己的名字 (包括乳名或全名)",
+    "level": "L2",
+    "parent_name": "自我意识",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "说出自己的名字 (包括乳名或全名)"
+  },
+  {
+    "name": "辨认自己的名字",
+    "level": "L2",
+    "parent_name": "自我意识",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "辨认自己的名字"
+  },
+  {
+    "name": "准确说出家庭成员的名字",
+    "level": "L2",
+    "parent_name": "自我意识",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "准确说出家庭成员的名字"
+  },
+  {
+    "name": "游戏互动：呼唤与拥抱",
+    "level": "L3",
+    "parent_name": "自我意识",
+    "age_min_months": 6,
+    "age_max_months": 12,
+    "prompt_corpus": "2位成人与儿童玩游戏，一位叫唤儿童的名字，另一位抱著儿童转向呼唤者，呼唤者即时给予赞赏，然后与儿童玩身体接触的游戏，如：抱抱、亲亲或搔痒等。重复以上游戏步骤。调整难度：可按儿童的能力，在其背后呼唤他。"
+  },
+  {
+    "name": "儿歌互动：我在这里",
+    "level": "L3",
+    "parent_name": "自我意识",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "成人与儿童一起唱儿歌《我在这里》及做动作，歌词如下（可以配合环境更改）：「XX, XX（儿童名字）你在哪里？你在哪里？快点快点过来，快点快点过来，吃饼干，喝水啦。」「XX, XX（儿童名字）你在哪里？你在哪里？我在这里，我在这里，哈哈笑，拍拍手。」注意事项：日常生活中，给予儿童任何物件或指示前，先叫他的名字，提供机会让儿童熟习自己的名字。"
+  },
+  {
+    "name": "球类互动：推球游戏",
+    "level": "L3",
+    "parent_name": "自我意识",
+    "age_min_months": 36,
+    "age_max_months": 60,
+    "prompt_corpus": "2位成人与儿童围圈坐，玩推大球游戏。成人先叫唤儿童名字，当儿童有回应时（如：望向成人或伸出双手预备接球），立即把球推给儿童，待儿童接球后，成人即作赞赏：「XX（儿童名字），做得好。」调整难度：可按儿童能力改变玩法，如：比赛谁先说出名字，谁就能得到球。建议材料：大治疗球。"
+  },
+  {
+    "name": "社交与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南：社交与情绪训练模组"
+  },
+  {
+    "name": "自我概念",
+    "level": "L2",
+    "parent_name": "社交与情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过认识家庭成员与自我描述，强化儿童的自我概念与社交连结。"
+  },
+  {
+    "name": "家庭成员照片配对与命名",
+    "level": "L3",
+    "parent_name": "自我概念",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "在照片背后写上家庭成员名字，练习翻阅照片并正确说出称谓与名字。可调整为比赛形式，增加互动趣味性，并透过手拍照片辅助训练反应。"
+  },
+  {
+    "name": "家庭成员名牌配对游戏",
+    "level": "L3",
+    "parent_name": "自我概念",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "将名字卡与家庭成员照片进行配对。利用神秘袋抽取照片后，与对应名字卡配对，强化对名字的认读与对家人的认知，并可视能力提供不同程度的提示。"
+  },
+  {
+    "name": "绘画与介绍家庭成员",
+    "level": "L3",
+    "parent_name": "自我概念",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "请儿童绘画家人并描述特征（如眼镜、发型），由成人协助标注姓名。完成后由儿童简单介绍家人，包括名字、特征及正在做的事情，培养观察力与表达能力。"
+  },
+  {
+    "name": "自我意识",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "项目一：自我意识。训练目标：当被称赞时，会刻意地重复该动作 [如：儿童抱著洋娃娃亲吻，成人称赞儿童：「很好！」(粤语)] 儿童会刻意地再次亲吻洋娃娃。"
+  },
+  {
+    "name": "动作模仿与重复强化",
+    "level": "L2",
+    "parent_name": "自我意识",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "活动建议包含透过成人引导与鼓励，让儿童在获得赞美后，能刻意重复特定的模仿动作。"
+  },
+  {
+    "name": "音乐律动模仿",
+    "level": "L3",
+    "parent_name": "动作模仿与重复强化",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "播放轻快儿歌，成人与儿童一起跳舞及做动作，如：摇摇手、转转身、弯弯腰、踏踏脚等，并以欢愉表情拍手或竖起拇指称赞儿童：「很好！」当成人称赞儿童时，儿童若能重复动作，成人即再给予称赞。所需材料：儿歌、音乐播放器。"
+  },
+  {
+    "name": "洋娃娃互动游戏",
+    "level": "L3",
+    "parent_name": "动作模仿与重复强化",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "示范对洋娃娃表示亲爱，如：搂抱、亲吻、握手、抱著洋娃娃一起跳舞等。接著把洋娃娃交给儿童，请儿童手抱洋娃娃一起跳舞，成人以欢愉表情拍手称赞儿童：「很好！」重复游戏，当儿童能再次模仿成人动作，成人便即时予以称赞。所需材料：洋娃娃。"
+  },
+  {
+    "name": "操作发光玩具",
+    "level": "L3",
+    "parent_name": "动作模仿与重复强化",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "示范玩按钮后会发声发光的玩具，再把玩具交给儿童，并扶著他的手操作玩具。当儿童模仿按钮时，成人即时以欢愉表情拍手或竖起拇指称赞儿童：「很好！」成人再按其他的按钮，引导儿童重复模仿人玩玩具的动作。所需材料：按钮会发声发光的玩具。"
+  },
+  {
+    "name": "自我意识",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南—社交与情绪：自我意识训练"
+  },
+  {
+    "name": "物品归属感辨识",
+    "level": "L2",
+    "parent_name": "自我意识",
+    "age_min_months": 12,
+    "age_max_months": 36,
+    "prompt_corpus": "培养儿童对个人物品的拥有权概念，并能透过动作或言语表达取回物品。"
+  },
+  {
+    "name": "物品拥有权表达与区分",
+    "level": "L3",
+    "parent_name": "物品归属感辨识",
+    "age_min_months": 12,
+    "age_max_months": 36,
+    "prompt_corpus": "目标：当别人拿著自己的物品时，会用动作或说话表示取回（1-2岁）；区分物品的拥有权，并将物品分派给所属者（2-3岁）；指认或拿取属于自己的物品（2-3岁）。"
+  },
+  {
+    "name": "日常衣物拥有权练习",
+    "level": "L4",
+    "parent_name": "物品拥有权表达与区分",
+    "age_min_months": 12,
+    "age_max_months": 36,
+    "prompt_corpus": "活动：在上街前，成人出示衣物并说『这外套是我的』，随后询问儿童『这外套是谁的？』。若儿童未有能力表达，成人可握住儿童手取回物品并说『这是XX的』。建议使用熟悉的衣物或物件，并给予儿童充足的回应时间。"
+  },
+  {
+    "name": "个人标记识别训练",
+    "level": "L4",
+    "parent_name": "物品拥有权表达与区分",
+    "age_min_months": 12,
+    "age_max_months": 36,
+    "prompt_corpus": "活动：在个人物品贴上印有儿童肖像的标签，让儿童从一堆物品中找出自己的物品，例如水壶、毛巾盒等，以增强识别个人物品的能力。"
+  },
+  {
+    "name": "社交互动中的物品归还练习",
+    "level": "L4",
+    "parent_name": "物品拥有权表达与区分",
+    "age_min_months": 12,
+    "age_max_months": 36,
+    "prompt_corpus": "活动：透过角色扮演，成人示范『拿取』与『请给我』的动作。成人A示范并强调拥有权，成人B将物品交回给成人A，协助儿童指著自己的物品并伸出手说『这是我的，请给我』，最后对儿童取回物品的行为给予赞赏。"
+  },
+  {
+    "name": "自我概念",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南—社交与情绪范畴下的自我概念训练。"
+  },
+  {
+    "name": "物件归属感训练",
+    "level": "L2",
+    "parent_name": "自我概念",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过日常物件及喜爱玩具，引导儿童建立「我的」及区分归属权的概念。"
+  },
+  {
+    "name": "分享与归位游戏",
+    "level": "L3",
+    "parent_name": "物件归属感训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "邀请儿童携带喜爱的玩具进行互动介绍，由成人示范收拾过程，并在取物时强调「这是我的」，引导儿童做出相同动作与语言表达，最后将物品放回自己的篮子。"
+  },
+  {
+    "name": "日常生活物权区分",
+    "level": "L3",
+    "parent_name": "物件归属感训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "利用日常生活场景，让儿童分辨自己与家人的物品。成人引导儿童拿起并说出「这是我的」或「这是妈妈的」，并将物品分类放入不同的篮子。同时鼓励儿童在生活中协助取物，如帮忙拿取手镯，强化其对物权归属的理解。"
+  },
+  {
+    "name": "自我意识",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "自我意识训练模块，目标为培养儿童辨识与表达个人喜好。"
+  },
+  {
+    "name": "指出或说出自己喜欢的人物、物品或活动",
+    "level": "L2",
+    "parent_name": "自我意识",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "学习透过观察与表达，明确指出或说出自己喜欢的人物、物品或活动，建立自我概念。"
+  },
+  {
+    "name": "亲子沟通与表达偏好",
+    "level": "L3",
+    "parent_name": "指出或说出自己喜欢的人物、物品或活动",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "亲子交谈时，告知儿童家人、老师都很疼爱儿童。给予相关的相片作提示，问儿童：「你喜欢谁（或喜欢玩甚么）？」以鼓励儿童表达意见。告诉儿童可用行动表示对别人的喜爱，如：画画送给他、拥抱家人等。成人亦可在家庭、学校、节日、生日会等活动后，配合相片或图画，扶著儿童的手指出或说出自己喜欢的人物、物品或活动。"
+  },
+  {
+    "name": "纪录生活活动回顾",
+    "level": "L3",
+    "parent_name": "指出或说出自己喜欢的人物、物品或活动",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "和儿童一起活动时，拍下开心的活动相片，以能摄下家人正在进行的活动和活动地点（如：公园）为佳。活动后，利用相片与儿童重温，并扶著儿童的手指出喜欢的人、喜欢的活动、喜欢的食物和喜欢的玩具等。"
+  },
+  {
+    "name": "喜好统计图表分析",
+    "level": "L3",
+    "parent_name": "指出或说出自己喜欢的人物、物品或活动",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "利用活动相片做成图表，让儿童每周在最喜欢的活动上贴上贴纸，每次只可选2项。一个月后，看看哪个活动最多贴纸，之后利用图表跟儿童作交谈，鼓励儿童说出：「我喜欢XX（活动）。」"
+  },
+  {
+    "name": "自我意识",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 24,
+    "age_max_months": 72,
+    "prompt_corpus": "包含对性别认知、出生月份及日期的自我意识训练。"
+  },
+  {
+    "name": "准确地回答自己的性别",
+    "level": "L2",
+    "parent_name": "自我意识",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "能够准确说出自己的性别（我是男孩子/我是女孩子）。"
+  },
+  {
+    "name": "指出或说出男、女孩子的不同之处",
+    "level": "L2",
+    "parent_name": "自我意识",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "识别并描述男女性别特征的差异。"
+  },
+  {
+    "name": "准确说出自己出生的月份",
+    "level": "L2",
+    "parent_name": "自我意识",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "能够准确回答出自己的出生月份。"
+  },
+  {
+    "name": "准确说出自己出生的日期",
+    "level": "L2",
+    "parent_name": "自我意识",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "能够准确回答出自己的出生日期。"
+  },
+  {
+    "name": "性别分类与认同游戏",
+    "level": "L3",
+    "parent_name": "自我意识",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "活动：把不同年岁的男、女孩洋娃娃及图片分开。成人向儿童讲解男女洋娃娃及图片的外表相同与差异，并引导儿童回答「我是男孩子」或「我是女孩子」。注意事项：此阶段儿童对性别仅有初步字义理解，尚未完全建立性别认同。"
+  },
+  {
+    "name": "性别归属感音乐活动",
+    "level": "L3",
+    "parent_name": "自我意识",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "活动：在地板放置两个胶圈，分别贴上男女图片。儿童随音乐走动，音乐停止时需走到对应性别的圈内，并回答「我是男孩子」或「我是女孩子」。可根据儿童能力调整提示难度。"
+  },
+  {
+    "name": "自我概念",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学龄前儿童的自我概念发展与社交情绪训练活动。"
+  },
+  {
+    "name": "性别意识与如厕训练",
+    "level": "L2",
+    "parent_name": "自我概念",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "透过成人引导与视觉辅助，协助2至3岁儿童认识性别差异，并学习辨认男女洗手间标志与如厕规范。"
+  },
+  {
+    "name": "认识性别特征与差异",
+    "level": "L3",
+    "parent_name": "性别意识与如厕训练",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "1. 成人于如厕时口头告知儿童其性别（「你是男孩子」或「你是女孩子」）。\n2. 教导儿童正确的如厕姿势（站立或坐下）。\n3. 利用《德德家家亲子性教育卡通动画》及《孩子SEX Q&A》资源，搭配男、女洗手间图片，协助儿童辨识性别标志。"
+  },
+  {
+    "name": "性别差异观察与交流",
+    "level": "L3",
+    "parent_name": "性别意识与如厕训练",
+    "age_min_months": 36,
+    "age_max_months": null,
+    "prompt_corpus": "邀请1位男孩与1位女孩相对而坐，引导儿童观察并说出对方与自己的不同之处。活动可配合贴纸作为奖励，并根据儿童能力调整提示强度。"
+  },
+  {
+    "name": "自我概念",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童自我概念发展与认知训练"
+  },
+  {
+    "name": "性别认知与差异",
+    "level": "L2",
+    "parent_name": "自我概念",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "利用男、女孩洋娃娃及图书，介绍男、女有不同的性器官及性征，需穿著衣物以作保护。继而出示男、女图片各1张，成人示范指著图片说出不同之处，如：「这是男孩子，那是女孩子；男孩子短头发，女孩子喜欢长头发」。请儿童说出图中人物有何不同之处。再取出男、女图片及不同的洗手间图片，请儿童指出及说出不同之处，如「女孩子上洗手间」、「男孩子上洗手间」等，鼓励儿童说出相异之处。"
+  },
+  {
+    "name": "个人成长历程",
+    "level": "L2",
+    "parent_name": "自我概念",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "利用生日歌、生日活动相片、成长日志相片等，向儿童介绍成长过程，包括：婴儿躺卧、坐、站立、走路、吃东西、梳头、穿鞋等，引导儿童注意自己不同的面貌及成长能力的表现。看相片时，成人强调说：「XX（儿童名字）在X年X月X日生日，现在X岁」。鼓励儿童以手势或说话回应成人询问年岁的问题。"
+  },
+  {
+    "name": "生日月份统计",
+    "level": "L2",
+    "parent_name": "自我概念",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童制作一份学生的生日月份统计表，指导儿童把自己的名字写在生日月份统计表上，并统计哪个月份多儿童生日。最后，请每位儿童准确地说出自己生日的月份。"
+  },
+  {
+    "name": "自我概念",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南—社交与情绪范畴下的自我概念训练。"
+  },
+  {
+    "name": "制作生日小画册",
+    "level": "L2",
+    "parent_name": "自我概念",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "制作一本小画册，贴上不同款式的生日蛋糕图片。请儿童在蛋糕图片上按岁数画上正确数量的蜡烛，并写上生日的日期。利用相片册让儿童一起回忆不同岁数的生日活动，如：『X月X日五岁生日，我在幼儿园开生日会，学做蛋糕。』成人可协助儿童加插图片或文字，以作记录。所需物资：小画册、蛋糕图片、蜡笔、相片册。"
+  },
+  {
+    "name": "认识生日日期与年龄排序",
+    "level": "L2",
+    "parent_name": "自我概念",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "成人给儿童看出生证明书，协助儿童把自己的出生日期抄写在纸上，并读出自己的出生日期。接著成人把所有家人的生日日期依年龄由大至小顺序排列出来，看看谁的年岁最大，最后请各人准确地说出自己的出生日期。所需物资：纸、笔、儿童出生证明书。"
+  },
+  {
+    "name": "自主能力",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "自主能力是指儿童在不同环境下能进行独立活动的能力，分为在不熟悉环境中与熟悉环境中的独立游玩。"
+  },
+  {
+    "name": "在不熟悉环境中短时间独立游玩",
+    "level": "L2",
+    "parent_name": "自主能力",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "在不熟悉的环境中，短时间（如：2-3 分钟）离开主要照顾者的视线范围独自或跟其他人玩耍。"
+  },
+  {
+    "name": "在熟悉环境中独立游玩",
+    "level": "L2",
+    "parent_name": "自主能力",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "在熟悉的环境中，独自玩耍 10-15 分钟。"
+  },
+  {
+    "name": "建立地面游玩区",
+    "level": "L3",
+    "parent_name": "自主能力",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "在家中一角铺上软地垫，设立地面玩耍区，并每天陪伴儿童在该处玩耍，让儿童习惯在固定的地方玩耍。成人可逐渐坐到较远的位置察看，并给予儿童欣赏的反应，以鼓励儿童自玩耍，也可以逐步换上不同的玩具，吸引儿童主动去探索玩乐的乐趣。"
+  },
+  {
+    "name": "家家酒模拟练习",
+    "level": "L3",
+    "parent_name": "自主能力",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "在家中或儿童熟悉的地方，与儿童玩「家家酒」游戏或儿童喜爱的玩具，先示范怎样玩并与儿童一起玩一会儿。接著成人告诉儿童离开片刻，请儿童自行继续玩玩具，回来后成人赞赏儿童能独自玩耍。"
+  },
+  {
+    "name": "社交情境中独立参与",
+    "level": "L3",
+    "parent_name": "自主能力",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童参加朋友的生日会，陪伴儿童与同伴一起参与由成人带领的群体游戏。在儿童投入活动后，成人坐在儿童视线的范围内，并留意儿童参与的活动，让他持续与同伴一起游玩。当儿童望向成人时，即给予说话及手势作赞赏及回应。"
+  },
+  {
+    "name": "自主能力",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 12,
+    "age_max_months": 48,
+    "prompt_corpus": "训练儿童发展自主选择与表达需求的社交情感能力。"
+  },
+  {
+    "name": "当成人提供选择时，表示自己的喜好",
+    "level": "L2",
+    "parent_name": "自主能力",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "学习在成人提供选项时，能明确表达个人的喜好。"
+  },
+  {
+    "name": "主动用说话或动作向别人要求拿取东西",
+    "level": "L2",
+    "parent_name": "自主能力",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "学习透过口语或肢体动作，主动向他人提出需求以取得物品。"
+  },
+  {
+    "name": "简单地说出自己的想法",
+    "level": "L2",
+    "parent_name": "自主能力",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "学习组织简单的语言，向他人表达个人的想法与需求。"
+  },
+  {
+    "name": "活动建议一：玩具选择与偏好表达",
+    "level": "L3",
+    "parent_name": "自主能力",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "预备不同的玩具，如闪灯玩具、发声玩具、积木等。成人操作玩具以示范不同效果，并引导儿童尝试。成人拿著喜爱的玩具说「我喜欢这个」，接著询问儿童想玩哪一个，引导儿童指著自己喜欢的玩具后，再把玩具交给儿童。"
+  },
+  {
+    "name": "活动建议二：绘画材料选择与表达",
+    "level": "L3",
+    "parent_name": "自主能力",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "取出画纸夹在画架上，示范用画笔沾水彩随意在画纸上绘画，并说「好漂亮」。接著把颜料放在儿童面前，吸引儿童主动用说话或指出自己想要的水彩颜色，再给予儿童水彩进行绘画。"
+  },
+  {
+    "name": "活动建议三：食物需求表达",
+    "level": "L3",
+    "parent_name": "自主能力",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "在儿童面前进食他喜欢的小吃（如虾条、葡萄干），观察儿童的反应。如儿童想拿取时，成人即向儿童提问：「谁想吃东西？」，接著扶著儿童的手指出，或引导儿童以说话表示想吃的食物。"
+  },
+  {
+    "name": "活动建议四：生活情境想法表达",
+    "level": "L3",
+    "parent_name": "自主能力",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "利用日常生活的机会，示范说出自己的想法，引导儿童模仿及学习说出自己的想法，如在早餐、午餐及茶点时间说出想吃的食物和份量。玩耍时，成人可让儿童进行选择玩具，并要求儿童先指出或说出想玩的玩具，然后才给予他所选取的玩具。可按儿童的表达能力，提供适合物件作提示。"
+  },
+  {
+    "name": "自我概念",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南—社交与情绪：自我概念训练活动"
+  },
+  {
+    "name": "透过相片分享生活经验与感受",
+    "level": "L2",
+    "parent_name": "自我概念",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "利用活动相片作为媒介，引导儿童回顾生活经验并表达内在想法。"
+  },
+  {
+    "name": "个人经验描述",
+    "level": "L3",
+    "parent_name": "透过相片分享生活经验与感受",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "日常生活中，利用活动相片与儿童聊天，鼓励儿童说出自己的感受和想法，例如表达对特定活动的喜好及原因，如：『到海洋公园玩要开心』、『我喜欢玩机动游戏』、『我喜欢，因为……』。"
+  },
+  {
+    "name": "社交互动回顾与表达",
+    "level": "L3",
+    "parent_name": "透过相片分享生活经验与感受",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童一起看与同伴玩耍的相片，回顾与同伴的交往情况。引导儿童自由表达自己的意见和感受，例如透过成人提问：『为甚么你喜欢与XX（儿童名字）玩耍呢？』，引导和鼓励儿童说出原因及自己的想法，如：『我喜欢与XX（儿童名字）玩耍，因为她很乖！』。"
+  },
+  {
+    "name": "自主能力",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目二：自主能力"
+  },
+  {
+    "name": "遵循惯常的方式摆放或操作物件",
+    "level": "L2",
+    "parent_name": "自主能力",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "遵循惯常的方式摆放或操作物件（如：以惯常方法使用或摆放餐具），适用年龄：2-3岁。"
+  },
+  {
+    "name": "餐具模仿与使用训练",
+    "level": "L3",
+    "parent_name": "遵循惯常的方式摆放或操作物件",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "与儿童玩「家家酒」游戏时，在假想过程中，教导儿童模仿成人摆放及使用餐具的方式，接著请儿童模拟使用餐具。在日常进餐前，请儿童依照成人的方式，摆放自己的餐具及正确使用不同的餐具。所需材料：家家酒玩具、儿童日常用的餐具。"
+  },
+  {
+    "name": "穿脱鞋袜与归位训练",
+    "level": "L3",
+    "parent_name": "遵循惯常的方式摆放或操作物件",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "每天外出或上学前，教导儿童到指定的家具取物品，如：从鞋柜内取自己的鞋子穿上。回家后，教导儿童自行脱鞋和袜子后，放回指定的位置。所需材料：儿童的鞋子、家中鞋柜。"
+  },
+  {
+    "name": "物品收纳与复位训练",
+    "level": "L3",
+    "parent_name": "遵循惯常的方式摆放或操作物件",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "在日常生活中，多与儿童一起收拾家中的物品，如：将枕头放在床头的位置、被子叠好放在床上、牙刷及漱口杯放在洗手间的架子上等。在儿童使用物品后，请儿童把物品放回原位。所需材料：枕头、被子、床、牙刷及漱口杯。"
+  },
+  {
+    "name": "自主能力",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "自主能力训练单元"
+  },
+  {
+    "name": "在成人陪同下，探索家庭以外的环境",
+    "level": "L2",
+    "parent_name": "自主能力",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "目标：在成人陪同下，探索家庭以外的环境 (如：超级市场、公园) / 2-3 岁"
+  },
+  {
+    "name": "公园设施游玩模拟与体验",
+    "level": "L3",
+    "parent_name": "在成人陪同下，探索家庭以外的环境",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "利用洋娃娃及有关公园设施的玩具（如：滑梯、秋千等），模拟在公园玩乐，并介绍不同设施的玩法及要遵守的规则（如：排队、不推撞别人等）。之后与儿童到公园作户外学习，先与儿童重温公园设施名称、玩法及规则，接著鼓励儿童选择喜欢的设施游玩，并遵守游玩的方法及规则。当儿童自行去探索或模仿其他儿童使用不同的设施时，成人即时给予赞赏。所需材料：洋娃娃、玩具滑梯及秋千。"
+  },
+  {
+    "name": "超级市场购物行为模拟",
+    "level": "L3",
+    "parent_name": "在成人陪同下，探索家庭以外的环境",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "出示玩具购物手推车，模拟在超级市场购物的情况，教导儿童在公共场所要遵守的规则，如：不可随意乱跑或大叫、购物要付款等。之后与儿童到超级市场作户外学习，一起观察真实的环境及购物程序，并提示儿童遵守规则。所需材料：玩具购物手推车、玩具食物、玩具收银机、玩具钱币。"
+  },
+  {
+    "name": "图书馆借阅程序与规范学习",
+    "level": "L3",
+    "parent_name": "在成人陪同下，探索家庭以外的环境",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "将房间布置成图书馆，贴上「保持安静」的海报及文字，介绍在图书馆内要保持安静，看完的书本要放回原位，并模拟用图书证借书的过程。之后成人带领儿童到图书馆作户外学习，在真实的环境中，让儿童自行探索，找出自己喜欢的图书来阅读，成人则在旁提示他遵守图书馆的规则。所需材料：图书、「保持安静」的海报及文字、图书证。"
+  },
+  {
+    "name": "自主能力",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "自主能力训练，涵盖保护个人物品及参与群体事务。"
+  },
+  {
+    "name": "保护自己的物品",
+    "level": "L2",
+    "parent_name": "自主能力",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "教导儿童保护自己的物品，避免遗失或被抢走，学习说「这是我的」。"
+  },
+  {
+    "name": "参与群体事务",
+    "level": "L2",
+    "parent_name": "自主能力",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "在群体中积极举手，表示乐意帮忙大人做小差事。"
+  },
+  {
+    "name": "日常情境保护物品练习",
+    "level": "L3",
+    "parent_name": "保护自己的物品",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "利用日常活动（如工艺、午饭、茶点）分派食物或餐具的机会，教导儿童保护个人物品，避免被他人取走。"
+  },
+  {
+    "name": "角色扮演与社交技巧",
+    "level": "L3",
+    "parent_name": "保护自己的物品",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "透过角色扮演模拟被抢玩具情境，示范并引导儿童表达「不要取去我的玩具，这是我的！」，若情况持续可寻求成人协助，并交换角色进行练习。"
+  },
+  {
+    "name": "清洁活动助人练习",
+    "level": "L3",
+    "parent_name": "参与群体事务",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "提供清洁用品，让儿童练习清理教室，成人询问「谁愿意帮忙？」并鼓励儿童举手表达意愿。"
+  },
+  {
+    "name": "值日生小差事",
+    "level": "L3",
+    "parent_name": "参与群体事务",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "每日选出不同值日生处理事务（如擦黑板、派书），成人透过询问「谁可以帮忙？」赞赏并鼓励积极参与的儿童。"
+  },
+  {
+    "name": "故事引导助人美德",
+    "level": "L3",
+    "parent_name": "参与群体事务",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "讲述助人故事，透过角色扮演模拟日常生活情境（如捡起玩具、安慰同伴），鼓励儿童在现实生活中主动帮助有需要的人。"
+  },
+  {
+    "name": "自主能力",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "自主能力训练，旨在培养儿童表达意愿、付诸行动以及说出理由支持想法的能力。"
+  },
+  {
+    "name": "说出想做的事，并付诸行动",
+    "level": "L2",
+    "parent_name": "自主能力",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "训练儿童说出想做的事，并付诸行动，例如打电话给朋友或亲人、制作小手工或拼砌模型玩具。"
+  },
+  {
+    "name": "说出理由支持自己的想法",
+    "level": "L2",
+    "parent_name": "自主能力",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "训练儿童发展逻辑思维，学习透过说出理由来支持自己的想法。"
+  },
+  {
+    "name": "健康生活习惯推广活动",
+    "level": "L3",
+    "parent_name": "说出想做的事，并付诸行动",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "准备哈哈笑小卡。引导儿童说出健康生活的例子（如：多吃水果、不吃零食、早睡早起）。儿童每说出一个例子可获得一张哈哈笑小卡，累积最多卡片的儿童被选为「健康小朋友」。同时发放健康生活记录表，请儿童在家记录一周实行状况并带回学校分享，成人给予奖励与赞赏。"
+  },
+  {
+    "name": "好孩子记录表实践活动",
+    "level": "L3",
+    "parent_name": "说出想做的事，并付诸行动",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "准备好孩子记录表，让儿童填写姓名。与儿童共同订立好孩子行为（如：帮助同伴、收拾玩具、爱护家人等）。请儿童将行为填写或绘画在记录表内，每天检讨达成情况并给予贴纸奖励。一周后比较谁获得贴纸最多，同时庆祝并鼓励表现不理想的儿童继续努力。"
+  },
+  {
+    "name": "学前儿童训练指南—社交与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南中的社交与情绪发展单元。"
+  },
+  {
+    "name": "表达个人偏好与观点",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南—社交与情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "训练儿童选择个人喜好并陈述支持理由，建立自我概念与社交表达能力。"
+  },
+  {
+    "name": "喜好分享与统计活动",
+    "level": "L3",
+    "parent_name": "表达个人偏好与观点",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "展示不同动物图片，分发姓名卡让儿童选出「我最喜爱的动物」，制作统计表。引导儿童说出喜欢的理由（如：我喜欢兔子，因为牠很干净）。此活动亦可更换主题为「我最喜爱的食物」或「我最喜爱的人物」。所需材料：动物图片、姓名卡、统计表、不同种类的食物或人物图片。"
+  },
+  {
+    "name": "户外活动规划与决策",
+    "level": "L3",
+    "parent_name": "表达个人偏好与观点",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "在假日与儿童一起计划户外活动，鼓励儿童表达意见（如：我想去公园）。引导儿童说出原因或想玩的设施，并询问想带什么物品或食物去公园，引导其说明理由（如：带帽子防晒）。"
+  },
+  {
+    "name": "自我评价",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "训练儿童建立自我评价能力，包含正面评价与获得他人赞赏的互动。"
+  },
+  {
+    "name": "正面评价",
+    "level": "L2",
+    "parent_name": "自我评价",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "学习对自己做出正面评价，例如说自己乖巧或漂亮。"
+  },
+  {
+    "name": "给自己正面的评价",
+    "level": "L3",
+    "parent_name": "正面评价",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "目标：给自己正面的评价（如：说自己乖巧/漂亮）。活动建议：1. 利用手偶朗读：「乖孩子，乖孩子，自己穿衣穿袜子，会刷牙，会洗脸，早上起床叠被子，妈妈赞我乖孩子。」接著用手偶提问，请儿童说出自己会做的事，成人随即称赞儿童，然后让儿童也模仿称赞自己。可按儿童的能力制作图卡，以视觉提示协助儿童说出自己会做的事。材料：手偶、图卡。"
+  },
+  {
+    "name": "主动向别人展示自己的物品以获取赞赏",
+    "level": "L3",
+    "parent_name": "正面评价",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "目标：主动向别人展示自己的物品以获取赞赏。活动建议：2. 日常生活中，当儿童能依照成人指示完成工作，或遵守规则，如：完成作业或安坐等候，成人可多用动作及说话称赞儿童，如：「做得好，乖！」然后引导儿童用动作及说话称赞自己，如：「我乖！」"
+  },
+  {
+    "name": "自我概念",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童的社交与情绪发展进行自我概念的建立与强化。"
+  },
+  {
+    "name": "自我仪容与自信培养",
+    "level": "L2",
+    "parent_name": "自我概念",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过日常生活与节日庆典活动，建立儿童对自我外表、个人物品及创作成果的认同与自信。"
+  },
+  {
+    "name": "日常仪容自我检视",
+    "level": "L3",
+    "parent_name": "自我仪容与自信培养",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "在日常生活中，协助儿童进行自理项目（如梳理头发后照镜）。成人可向儿童表示：『XX，头发整齐，好漂亮！』并接续问儿童：『漂亮吗？』引导儿童用动作及说话回应：『头发整齐，我好漂亮！』"
+  },
+  {
+    "name": "社交分享与自我介绍",
+    "level": "L3",
+    "parent_name": "自我仪容与自信培养",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "在生日会时，请儿童出示及介绍自己带来的礼物或小吃。成人给予赞赏，并鼓励儿童互相欣赏同伴的礼物和小吃。"
+  },
+  {
+    "name": "创作成果展示与自我肯定",
+    "level": "L3",
+    "parent_name": "自我仪容与自信培养",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "在母亲节或父亲节时，协助儿童自制心意卡。完成后，请儿童介绍内容并供家人欣赏，成人给予赞赏，以协助儿童建立自信及对自己的正面评价。在日常生活中，当儿童展示作品（如美劳作品、作业）时，成人可即时给予赞赏以作鼓励。"
+  },
+  {
+    "name": "自我概念",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "自我概念领域活动"
+  },
+  {
+    "name": "正面评价",
+    "level": "L2",
+    "parent_name": "自我概念",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "训练目标：说出自己的优点及缺点。年龄范围：4-6岁。"
+  },
+  {
+    "name": "制作优点与缺点图卡",
+    "level": "L3",
+    "parent_name": "正面评价",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "成人与儿童讨论其优点及缺点，并制作成图卡（如：优点卡有喜欢笑、喜欢帮人；缺点卡则有发脾气、偏食等）。把图卡贴在墙上，每天与儿童作检讨，并奖励好的行为（优点），同时鼓励儿童改善表现较弱的行为（缺点）。所需材料：图卡。"
+  },
+  {
+    "name": "体能障碍赛后的自我反思",
+    "level": "L3",
+    "parent_name": "正面评价",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "安排儿童分组进行体能障碍赛。透过游戏胜负的结果，请各儿童逐一说出自己胜或负的原因，引导儿童说出自己的优点和可以改善的地方，如：「我跳得高」、「我跑得不够快」等。所需材料：平衡木、呼拉圈、豆袋、抛圈。"
+  },
+  {
+    "name": "积木叠高合作与自我评价",
+    "level": "L3",
+    "parent_name": "正面评价",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "预备大小及重量不同的积木，把儿童分成2组，每组派1人搬积木到自己组的范围内，其余组员要合作把积木叠高，看哪一组最快完成任务。游戏结束后，请各儿童逐一说出自己组胜或负的原因，并引导儿童说出各组的优点及可改善的地方，例如：每位队员都跑得快是优点；可改善的地方是每位队员要更小心叠积木，避免积木倒塌。所需材料：大小及重量不同的积木。"
+  },
+  {
+    "name": "正面评价",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学龄前儿童的社交情绪训练，透过正面评价鼓励良好行为。"
+  },
+  {
+    "name": "承担责任",
+    "level": "L2",
+    "parent_name": "正面评价",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "学习承担责任，例如努力完成成人分派的小差事。"
+  },
+  {
+    "name": "奖励表活动",
+    "level": "L3",
+    "parent_name": "承担责任",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "制作「奖励表」，鼓励儿童在日常生活中协助成人完成小差事（如：收拾物件、擦白板）。儿童完成后立即给予心形贴纸，每天放学统计贴纸数目，赞赏其主动协助的行为，并鼓励未达要求的儿童继续努力。"
+  },
+  {
+    "name": "值日生小助手活动",
+    "level": "L3",
+    "parent_name": "承担责任",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "安排儿童轮流担任「值日生」或「小助手」，协助老师完成小差事，如派发作业、送文件到办公室。每天放学前让儿童报告完成的工作，赞赏其承担责任的表现。"
+  },
+  {
+    "name": "日常差事训练",
+    "level": "L3",
+    "parent_name": "承担责任",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "指派小差事给儿童，例如帮忙拿取超市购买的食物、带小礼物去探访长辈，或请儿童带通告回家给家长签署。当儿童完成责任后，成人即时给予赞赏。"
+  },
+  {
+    "name": "社交沟通",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "社交沟通领域的训练与活动建议。"
+  },
+  {
+    "name": "与人交往的动机",
+    "level": "L2",
+    "parent_name": "社交沟通",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "培养儿童与他人建立互动的原始动机。"
+  },
+  {
+    "name": "有兴趣与照顾者作情感的交流及回应",
+    "level": "L3",
+    "parent_name": "与人交往的动机",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目一：有兴趣与照顾者作情感的交流及回应，包含针对不同年龄层的反应目标。"
+  },
+  {
+    "name": "训练目标",
+    "level": "L4",
+    "parent_name": "有兴趣与照顾者作情感的交流及回应",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "具体发展指标：A.被照顾者拥抱时会做出合适反应(0-2个月)；B.回应照顾者逗弄并建立基本技巧如目光接触(0-2个月)；C.清洁或喂奶时注视对方脸孔(0-12个月)；D.注视身旁走动的人(0-6个月)。"
+  },
+  {
+    "name": "活动建议",
+    "level": "L4",
+    "parent_name": "有兴趣与照顾者作情感的交流及回应",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动一：将儿童抱起贴近身体，透过夸张有趣的脸部表情吸引其注意并逗弄互动。活动二：播放儿歌并抱著儿童随音乐节拍摇动，保持目光接触并穿插停顿观察反应。活动三：让儿童躺在摇床并轻摇，同时唱儿歌、呼唤名字及逗弄发笑，最后以亲吻或微笑赞赏其回馈。"
+  },
+  {
+    "name": "社交与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童社交与情绪发展活动建议"
+  },
+  {
+    "name": "互动与注视练习",
+    "level": "L2",
+    "parent_name": "社交与情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过游戏与互动，引导儿童与成人建立视线接触及情感交流。"
+  },
+  {
+    "name": "躲猫猫游戏 (小毛巾)",
+    "level": "L3",
+    "parent_name": "互动与注视练习",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "让儿童仰卧在婴儿车或床上，脸孔朝向成人，然后逗弄儿童谈话及触摸其脸颊，以吸引儿童注视成人。接著拿起小毛巾阻挡儿童的视线一会，再拉开小毛巾，并发出有趣的声音吸引儿童注视，逗弄他微笑或发出婴儿声。若儿童有以上反应，即重复游戏。所需器材：婴儿床或婴儿车、小毛巾。"
+  },
+  {
+    "name": "儿歌互动与模仿",
+    "level": "L3",
+    "parent_name": "互动与注视练习",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "成人与儿童面对面坐或抱著儿童坐，并示范唱儿歌边做动作：『点虫虫，虫虫飞，飞去哪儿，飞去妈妈的鼻子！』。唱歌时可分段唱，并吸引儿童注视成人的脸或眼睛。接著成人引导儿童模仿唱儿歌、做动作，可捉著儿童的手指，点在成人的脸或儿童的脸上。当儿童注视成人的脸时，成人即以微笑或赞许作回应。"
+  },
+  {
+    "name": "社交沟通",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南之社交沟通范畴。"
+  },
+  {
+    "name": "眼神接触与注意力训练",
+    "level": "L2",
+    "parent_name": "社交沟通",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "通过日常互动与玩具操作，提升儿童对成人及环境的眼神关注与主动互动能力。"
+  },
+  {
+    "name": "喂食情境中的注视训练",
+    "level": "L3",
+    "parent_name": "眼神接触与注意力训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "在喂食前，成人将奶瓶或饼干放在儿童面前缓慢摇晃，随后将食物渐渐移近成人的脸孔，并对儿童说：『XX（儿童名字），牛奶（或饼干）』，以此吸引儿童注视成人的脸孔。注意事项：成人需留意与儿童之间的距离，避免距离过远。"
+  },
+  {
+    "name": "玩具追视训练",
+    "level": "L3",
+    "parent_name": "眼神接触与注意力训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "安排儿童坐在可观望周围环境的位置。成人手持发光或发声的玩具吸引儿童注意，在儿童面前挥动，并说『XX（儿童名字），看看』。接著在儿童视线范围内将玩具向左、右两边移动，吸引儿童注视成人的动作。成人亦可向后退2至3步，渐渐走到较远的地方，等候儿童的反应，并挥舞手中的玩具，吸引儿童注视成人的位置。"
+  },
+  {
+    "name": "社交与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "社交与情绪发展领域训练框架"
+  },
+  {
+    "name": "有兴趣与熟悉的人接触",
+    "level": "L2",
+    "parent_name": "社交与情绪",
+    "age_min_months": 0,
+    "age_max_months": 24,
+    "prompt_corpus": "针对幼儿对熟悉之成人建立正向互动与依附关系的训练项目"
+  },
+  {
+    "name": "对熟悉成人表示好感",
+    "level": "L3",
+    "parent_name": "有兴趣与熟悉的人接触",
+    "age_min_months": 0,
+    "age_max_months": 12,
+    "prompt_corpus": "对熟悉的人表示好感，如：伸出双手表示要抱、微笑、要求下吻成人的脸。"
+  },
+  {
+    "name": "以动作逗人笑",
+    "level": "L3",
+    "parent_name": "有兴趣与熟悉的人接触",
+    "age_min_months": 0,
+    "age_max_months": 12,
+    "prompt_corpus": "伸手触摸成人的脸孔，或做出有趣的动作，逗成人笑。"
+  },
+  {
+    "name": "与成人玩耍",
+    "level": "L3",
+    "parent_name": "有兴趣与熟悉的人接触",
+    "age_min_months": 0,
+    "age_max_months": 12,
+    "prompt_corpus": "与成人进行互动式游戏，如：玩「躲猫猫」。"
+  },
+  {
+    "name": "寻求成人协助",
+    "level": "L3",
+    "parent_name": "有兴趣与熟悉的人接触",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "有需要时找成人帮忙，如：示意成人帮忙打开盒盖或拿取放于高处的玩具。"
+  },
+  {
+    "name": "互动游戏建议：亲子日常接触",
+    "level": "L4",
+    "parent_name": "有兴趣与熟悉的人接触",
+    "age_min_months": 0,
+    "age_max_months": 24,
+    "prompt_corpus": "透过「躲猫猫」、身体搔痒、拥抱谈话、按摩身体等活动，建立良好亲子关系。在孩子面对陌生人出现抗拒反应时，应由熟悉的人安抚并提供安全感。"
+  },
+  {
+    "name": "互动游戏建议：面部接触游戏",
+    "level": "L4",
+    "parent_name": "有兴趣与熟悉的人接触",
+    "age_min_months": 0,
+    "age_max_months": 24,
+    "prompt_corpus": "让儿童坐在成人双腿上，成人拉著儿童的手触摸成人的脸。进一步可与儿童在床上、沙发或地垫上进行身体搔痒游戏，引发儿童手触摸成人的眼、耳、口，并以愉快的表情与微笑回应。"
+  },
+  {
+    "name": "社交沟通",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南—社交沟通"
+  },
+  {
+    "name": "互动游戏与社交反应",
+    "level": "L2",
+    "parent_name": "社交沟通",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过戴脸谱、捉迷藏及传接球游戏，建立儿童与成人的互动机制，培养观察力及社交回应能力。"
+  },
+  {
+    "name": "戴脸谱互动",
+    "level": "L3",
+    "parent_name": "互动游戏与社交反应",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动目标：练习观察并对成人的表情作出反应。活动内容：成人戴上脸谱与儿童玩耍，观察儿童反应（发笑、害怕、伸手触摸）。成人脱下脸谱时，以开心表情吸引儿童，并扶著儿童的手触摸成人的脸。若儿童表现高兴，可重复步骤，鼓励儿童主动伸手触摸。注意事项：注意儿童情绪，若害怕应立即脱下。选择温和可爱的脸谱。"
+  },
+  {
+    "name": "小方巾或扇子捉迷藏",
+    "level": "L3",
+    "parent_name": "互动游戏与社交反应",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动目标：提升社交互动与模仿能力。活动内容：成人与儿童面对面坐，用小方巾或扇子盖住自己的脸，引导儿童拉下遮盖物。当儿童拉下遮盖物，成人即做出不同表情（如伸舌头、张大口、开心笑），引导儿童模仿动作。当儿童注视成人时，再次进行互动。"
+  },
+  {
+    "name": "传接小球游戏",
+    "level": "L3",
+    "parent_name": "互动游戏与社交反应",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动目标：训练轮替能力与社交互动。活动内容：两人坐在地垫上，距离约2呎。成人出示小球，说出「XX，看看小球」，将球轻推给儿童。当儿童取得小球后，成人说「把小球给妈妈（或照顾者）」。当儿童将球推回后，成人给予口头鼓励「XX，乖」，并重复游戏。"
+  },
+  {
+    "name": "社交与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "社交与情绪领域的训练活动"
+  },
+  {
+    "name": "社交沟通",
+    "level": "L2",
+    "parent_name": "社交与情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "旨在提升儿童主动寻求协助与社交互动能力的活动"
+  },
+  {
+    "name": "主动寻求协助",
+    "level": "L3",
+    "parent_name": "社交沟通",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过创造需要协助的情境，引导儿童主动寻求成人帮助的训练"
+  },
+  {
+    "name": "打开胶瓶",
+    "level": "L4",
+    "parent_name": "主动寻求协助",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "将儿童喜爱的小吃放入小胶瓶并盖紧。成人把小胶瓶交给儿童，说：『请你吃。』等候儿童的反应，若儿童没有找成人帮忙，成人可把手放近儿童面前，并说：『要帮忙吗？』引导儿童找成人帮忙打开瓶盖，并再次将小胶瓶交给儿童，说：『请你吃。』等候儿童的反应，若儿童主动找成人帮忙，成人即赞赏：『懂得找人帮忙，做得很好！』成人可换个方式进行活动，把儿童喜爱的玩具放在儿童拿不到的地方，引导儿童找人帮忙拿取放于高处的玩具。"
+  },
+  {
+    "name": "穿鞋子",
+    "level": "L4",
+    "parent_name": "主动寻求协助",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "于外出前，成人替儿童穿一只鞋子，等候儿童的反应。若儿童没有找成人帮忙，成人即说：『上街街，鞋呢？』引导儿童找出鞋子并寻求成人帮忙穿上。下一次外出前，成人再次只替儿童穿一只鞋子，等候儿童的反应。若儿童主动找成人帮忙，成人立即赞赏：『找妈妈穿鞋，乖。』"
+  },
+  {
+    "name": "与伙伴发展互动关系",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "项目三：与伙伴发展互动关系"
+  },
+  {
+    "name": "用简单的动作或声音向其他儿童表达交往的意愿",
+    "level": "L2",
+    "parent_name": "与伙伴发展互动关系",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "用简单的动作或声音向其他儿童表达交往的意愿（如：注视他们、笑、伸手触摸或轻拍他们）/ 1-2 岁"
+  },
+  {
+    "name": "主动与成人及儿童分享玩具或食物",
+    "level": "L2",
+    "parent_name": "与伙伴发展互动关系",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "主动与成人及儿童分享玩具或食物（如：与别人一起玩同一件玩具或请他人吃东西）/ 1-2 岁"
+  },
+  {
+    "name": "活动一：握手打招呼",
+    "level": "L3",
+    "parent_name": "与伙伴发展互动关系",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童一同玩耍，并伸予其中一位儿童握手表示友好，鼓励儿童模仿成人的动作，与其他儿童握手打招呼。"
+  },
+  {
+    "name": "活动二：分享玩具",
+    "level": "L3",
+    "parent_name": "与伙伴发展互动关系",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童一同玩玩具，并伸手触摸及轻拍其中一位儿童说：「请我玩。」鼓励儿童点头、微笑表示「好」，接著一起分享同一份玩具。重复练习，让儿童学习点头、笑、伸手触摸或轻拍等简单动作，以表示交往的意愿。所需材料：玩具。"
+  },
+  {
+    "name": "活动三：暗中传物",
+    "level": "L3",
+    "parent_name": "与伙伴发展互动关系",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童玩「暗中传物」。把房间的灯光调暗，请儿童围圈坐在地垫上，成人拿出发光的玩具，在开始传玩具前，先轻拍接玩具的儿童，表示要把玩具交给他，并要求每位儿童要轻拍坐在旁边的同伴，才把发光的玩具传给别人。所需材料：发光的玩具、地垫。"
+  },
+  {
+    "name": "活动四：分享食物游戏",
+    "level": "L3",
+    "parent_name": "与伙伴发展互动关系",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童玩分薄饼或蛋糕游戏，并示范把玩具薄饼或蛋糕切开，分派给他人，然后告诉儿童每人都有食物，大家都很开心。接著把玩具水果交给儿童，提示儿童把玩具水果切开，与其他人一起分享。在日常生活中，若儿童会主动把食物或玩具与别人分享，成人即赞赏儿童。所需材料：玩具薄饼、蛋糕及水果（可切开的）、玩具胶刀。"
+  },
+  {
+    "name": "学前儿童训练指南—社交与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南中的社交与情绪发展模块。"
+  },
+  {
+    "name": "活动建议—社交沟通",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南—社交与情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "旨在提升儿童社交互动与沟通能力的实作建议。"
+  },
+  {
+    "name": "寻宝游戏",
+    "level": "L3",
+    "parent_name": "活动建议—社交沟通",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "向儿童展示一些细小的食物，如巧克力蛋、瑞士糖、合桃等。成人将儿童带离房间，请另一位成人在一首音乐的时间内，把所有食物收藏在房间的角落或隐蔽地方。之后请儿童回到房间，请他在指定范围内进行寻宝，并播放音乐作开始。让儿童自由寻宝，有需要时成人才作出提示。最后以音乐停顿作停止寻找的讯号，请儿童把「宝物」拿出来一起分享。"
+  },
+  {
+    "name": "与友伴发展互动关系",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "项目三：与友伴发展互动关系"
+  },
+  {
+    "name": "在成人提示下，安慰或帮助其他儿童",
+    "level": "L2",
+    "parent_name": "与友伴发展互动关系",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "目标 C：在成人提示下，安慰或帮助其他儿童（如：看见有儿童跌倒，会扶起对方或找老师帮忙）"
+  },
+  {
+    "name": "与其他儿童一同活动时，观察及模仿同伴",
+    "level": "L2",
+    "parent_name": "与友伴发展互动关系",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "目标 D：与其他儿童一同活动时，观察及模仿同伴的一些玩法（如：模仿搓泥胶的方法）"
+  },
+  {
+    "name": "日常互动协助训练",
+    "level": "L3",
+    "parent_name": "与友伴发展互动关系",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "利用日常生活的机会教导儿童帮助别人。如有儿童跌倒时，成人示范扶起跌倒的儿童，并邀请其他儿童来帮忙。日后在相同的情况下，成人先让儿童主动去协助扶起跌倒的儿童，若其他儿童没有作出合适的反应，成人则重复以上步骤，以提示儿童可互相帮助。"
+  },
+  {
+    "name": "小助手游戏",
+    "level": "L3",
+    "parent_name": "与友伴发展互动关系",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "请数位儿童玩「小助手」游戏，帮忙做一些简单的工作，如：抹桌子、派餐具等。当儿童工作时，成人问：「还有谁可以帮忙？」引导其他未有参与的儿童学习表示愿意帮助，并给予赞赏作回应及鼓励。材料：抹布及餐具。"
+  },
+  {
+    "name": "美劳角合作活动",
+    "level": "L3",
+    "parent_name": "与友伴发展互动关系",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "安排儿童分组参加「美劳角」活动。请儿童围著桌子坐，一同进行美劳活动，如：搓泥胶、剪纸、画画等。成人引导儿童互相观察对方的工作，并把作品展示出来，以吸引其他儿童去模仿。当有儿童能模仿同伴的做法时，即给予赞赏。材料：儿童桌椅、美劳用具。"
+  },
+  {
+    "name": "模仿镜子游戏",
+    "level": "L3",
+    "parent_name": "与友伴发展互动关系",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "先示范做出不同动作让儿童模仿，然后请2位儿童一组，其中一位儿童扮演镜子，模仿另一位儿童所做出的有趣表情或动作。请其他儿童作评判，看谁模仿得最相似，并给予赞赏。"
+  },
+  {
+    "name": "与伙伴发展互动关系",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "与伙伴发展互动关系，包含主动交谈、参与游戏及寻求协助。"
+  },
+  {
+    "name": "主动与伙伴作简单的交谈",
+    "level": "L2",
+    "parent_name": "与伙伴发展互动关系",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "训练儿童主动与同伴进行简单的交谈，例如说出自己喜欢的玩具或游戏。"
+  },
+  {
+    "name": "示范扮小记者",
+    "level": "L3",
+    "parent_name": "主动与伙伴作简单的交谈",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "示范扮小记者访问儿童，接著请儿童扮小记者访问另一位儿童，请被访问的儿童介绍自己（如：说出生日、住址、喜欢的水果、喜欢的人物、喜欢的玩具等），并说明喜欢的原因。鼓励其他儿童也介绍自己及作简单交谈。材料：记者牌、玩具咪。调整难度：如儿童有能力阅读文字，可制作文字问题卡，作交谈的提示。"
+  },
+  {
+    "name": "主动参与伙伴的游戏",
+    "level": "L2",
+    "parent_name": "与伙伴发展互动关系",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "训练儿童主动参与伙伴的游戏，例如问同伴「可不可以一起玩？」"
+  },
+  {
+    "name": "与儿童玩「躲猫猫」",
+    "level": "L3",
+    "parent_name": "主动参与伙伴的游戏",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "与儿童玩「躲猫猫」游戏，并表现出高兴的情绪。接著请其他儿童玩「躲猫猫」，并问正在玩的儿童：「可不可以一起玩？」在自由活动时，如儿童对别人的玩具或游戏表现兴趣，成人可引导他询问同伴：「可不可以一起玩？」鼓励儿童一起玩，当儿童能一起玩时，即给予赞赏。"
+  },
+  {
+    "name": "有需要时主动寻求伙伴的协助",
+    "level": "L2",
+    "parent_name": "与伙伴发展互动关系",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "训练儿童在有需要时主动寻求伙伴的协助。"
+  },
+  {
+    "name": "涂抹果酱活动",
+    "level": "L3",
+    "parent_name": "有需要时主动寻求伙伴的协助",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "给每位儿童1份面包、胶刀及碟子做酱面包，但只提供1瓶果酱。当有儿童手表示需要果酱时，请手上有果酱的儿童帮忙传递，并引导举手的儿童说：「请把果酱给我，谢谢。」让儿童学习遇到有需要时，主动寻求同伴的协助。最后，成人赞赏能主动寻求协助及提供帮忙的儿童。材料：面包、胶刀及碟子多份、果酱1瓶。"
+  },
+  {
+    "name": "学前儿童训练指南—社交与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童社交与情绪发展训练教材"
+  },
+  {
+    "name": "社交沟通",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南—社交与情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童社交技巧与沟通能力的训练活动。"
+  },
+  {
+    "name": "拔河比赛与互助合作",
+    "level": "L3",
+    "parent_name": "社交沟通",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "安排儿童分成2组，双方各派出1位儿童作拔河比赛，负方可在自己组内邀请同伴出来帮忙（胜方不可邀请别人帮忙）。比赛完结后，请儿童分享获胜的原因，借此引导儿童思考，明白若遇到做不到的事情，可以寻求友伴的协助。所需器材：绳子（长度足以作拔河）。"
+  },
+  {
+    "name": "与伙伴发展互动关系",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "训练儿童与同侪建立互动关系，涵盖主动分享、建立友谊及共同游玩。"
+  },
+  {
+    "name": "主动给伙伴展示或交换个人物品",
+    "level": "L2",
+    "parent_name": "与伙伴发展互动关系",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "在日常活动中，展示如拼砌完成的积木模型或画作，邀请同侪欣赏并进行介绍。"
+  },
+  {
+    "name": "与某些伙伴建立友谊",
+    "level": "L2",
+    "parent_name": "与伙伴发展互动关系",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "引导儿童在社交中表现出对特定友伴的喜好与亲近感。"
+  },
+  {
+    "name": "一起玩时，给伙伴分派岗位或差事",
+    "level": "L2",
+    "parent_name": "与伙伴发展互动关系",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "鼓励儿童在群体游戏中分配任务，透过共同参与活动增进互动。"
+  },
+  {
+    "name": "作品展示活动",
+    "level": "L3",
+    "parent_name": "主动给伙伴展示或交换个人物品",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "将儿童的积木作品或画作放在展览角，指导儿童向同侪介绍作品名称、内容及做法，并鼓励儿童主动展示。"
+  },
+  {
+    "name": "捏泥胶互动游戏",
+    "level": "L3",
+    "parent_name": "与某些伙伴建立友谊",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "在美劳活动中，成人与儿童一起玩泥胶，引导儿童互相交换泥胶工具，并模仿及主动与同伴互动，成人给予赞赏。"
+  },
+  {
+    "name": "拉拉手做朋友音乐游戏",
+    "level": "L3",
+    "parent_name": "一起玩时，给伙伴分派岗位或差事",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "播放旋律缓慢的音乐，利用大洋娃娃作为桥梁，成人带领儿童拉手围圈并配合儿歌歌词（如：放开手手，一二三拍拍手...）进行集体律动，最后鼓励儿童邀请自己的好朋友参与。"
+  },
+  {
+    "name": "社交与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童社交与情绪训练指南"
+  },
+  {
+    "name": "社交沟通",
+    "level": "L2",
+    "parent_name": "社交与情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "社交沟通活动建议"
+  },
+  {
+    "name": "气球传递游戏",
+    "level": "L3",
+    "parent_name": "社交沟通",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "成人与1名儿童面对面站立，紧握双手，将已充气的气球夹在两人间，由起点步行到终点，需保持气球不掉下。若气球掉下，需先拾起方可继续。随后安排2位儿童邀请3位朋友组成4人小组，每组2人为一小队进行接力比赛，以最短时间运送气球抵达终点者为胜。比赛时配合儿歌《吹波波》，并请旁观儿童拍手打气说：『加油！努力！』。可转换游戏方式，如：以背夹球、以额夹球。"
+  },
+  {
+    "name": "角色扮演游戏",
+    "level": "L3",
+    "parent_name": "社交沟通",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童玩『家家酒』游戏。先与儿童讨论及分派不同的岗位，如：爸爸、妈妈、哥哥等角色。熟习后，请儿童在玩其他游戏前，先与友伴讨论及分派不同的角色岗位，如：运积木比赛时，可分派负责搬运、叠高等不同岗位。"
+  },
+  {
+    "name": "与伙伴发展互动关系",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "发展与同侪合作、互动及给予正向回应的社交技巧。"
+  },
+  {
+    "name": "与伙伴合作完成小差事",
+    "level": "L2",
+    "parent_name": "与伙伴发展互动关系",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "鼓励儿童透过共同任务（如大肌肉活动搬运、日常生活小差事）建立合作关系。"
+  },
+  {
+    "name": "对别人的幸运与表现作正面回应",
+    "level": "L2",
+    "parent_name": "与伙伴发展互动关系",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "教导儿童运用语言对他人的成就或优点表达赞美、恭喜及正向评价。"
+  },
+  {
+    "name": "合作设计大肌肉循环活动",
+    "level": "L3",
+    "parent_name": "与伙伴合作完成小差事",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "大肌肉活动时，邀请儿童一起设计一个组合循环式的体能游戏，由成人简单绘图，完成设计后，请儿童按照图画，一同搬运及摆设所需器材，并引导儿童与伙伴合作完成搬运工作。"
+  },
+  {
+    "name": "日常合作小差事",
+    "level": "L3",
+    "parent_name": "与伙伴合作完成小差事",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "日常多给予儿童合作做小差事的机会，如：每天午睡后，请2位儿童合作折2张被单；每天午饭后，请2位儿童合作清理桌面；每星期请数位儿童合作简单地清理课室等。赞赏能互相合作完成工作的儿童。"
+  },
+  {
+    "name": "棋类游戏互赞互动",
+    "level": "L3",
+    "parent_name": "对别人的幸运与表现作正面回应",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "成人带领儿童一起玩棋类游戏，谁最快达成目标便胜出。比赛结束后，成人赞赏胜出的一方：「恭喜你，你胜出了。」对负方的儿童则给予安慰：「没事的，不用难过，下次再玩！」可更换不同的比赛游戏，如：叠积木，并引导负的一方赞赏胜方。"
+  },
+  {
+    "name": "「传赞赏」游戏",
+    "level": "L3",
+    "parent_name": "对别人的幸运与表现作正面回应",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "请儿童玩「传赞赏」游戏。当音乐响起，指示儿童把手上的音乐盒传给邻座的同伴。音乐停止时，持有音乐盒的儿童要称赞传来音乐盒的同伴，如：赞赏他的衣著整齐、能安静坐好、喜欢帮助别人等。日常生活中，成人宜多正面赞赏儿童做到的事情，亦鼓励其他儿童欣赏同伴，如：作业做得好、衣裙漂亮等。"
+  },
+  {
+    "name": "沟通技巧",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学龄前儿童的沟通与社交情绪训练。"
+  },
+  {
+    "name": "非语言的沟通",
+    "level": "L2",
+    "parent_name": "沟通技巧",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "培养儿童在尚未具备流畅语言能力前，透过肢体动作与他人进行互动沟通的基础能力。"
+  },
+  {
+    "name": "伸出双手回应照顾者的召唤",
+    "level": "L3",
+    "parent_name": "非语言的沟通",
+    "age_min_months": 0,
+    "age_max_months": 12,
+    "prompt_corpus": "训练儿童在听到照顾者召唤时，能主动伸出双手进行回应。"
+  },
+  {
+    "name": "明白简单的动作指示（如：给、坐、放）",
+    "level": "L3",
+    "parent_name": "非语言的沟通",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "训练儿童理解并执行简单的指令动作，增强生活沟通能力。"
+  },
+  {
+    "name": "用简单的手势或动作表达需要",
+    "level": "L3",
+    "parent_name": "非语言的沟通",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "训练儿童运用摇头、指物等动作来表达个人意愿与需求。"
+  },
+  {
+    "name": "动作模仿与回应训练",
+    "level": "L4",
+    "parent_name": "非语言的沟通",
+    "age_min_months": 0,
+    "age_max_months": 24,
+    "prompt_corpus": "活动一：成人伸出双手做『抱』的动作，引导儿童模仿回应，强化亲密互动；活动二：使用儿童喜欢的手偶或洋娃娃，引导儿童伸手回应召唤；活动三：在日常生活场景（如喝奶、吃饼干、玩玩具）中，引导儿童执行『取』、『给』、『放』的动作，强化对指令的理解；活动四：透过收玩具的情境，示范并教导儿童『放』的动作，建立顺从指令习惯。"
+  },
+  {
+    "name": "社交沟通",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南—社交沟通"
+  },
+  {
+    "name": "模仿与动作互动",
+    "level": "L2",
+    "parent_name": "社交沟通",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "成人A与儿童并排坐，玩站立及坐下游戏，成人B则在二人对面做站立或坐下的动作，让成人A与儿童一起模仿。儿童熟悉游戏后，成人B只需做站立或坐下的手势，成人A与儿童便一起提示做动作。成人A可稍为延迟做动作，让儿童有机会自行做，当儿童能独自依提示做动作，成人即给予赞赏。"
+  },
+  {
+    "name": "社交意图表达与互动",
+    "level": "L2",
+    "parent_name": "社交沟通",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "在儿童面前吹肥皂泡，并协助儿童伸手拍打泡泡。接著成人指著肥皂泡液，问儿童：『要不要？』因应儿童的表情（要：注视、伸手、微笑；不要：皱眉、转头、推开），引导儿童点头或用手指指著肥皂泡液以表示『要』，或以摇头或挥手表示『不要』。当儿童能主动表示『要』时，成人即吹出泡泡；当儿童能主动表示『不要』时，成人便收起肥皂泡液。"
+  },
+  {
+    "name": "感官与需求选择训练",
+    "level": "L2",
+    "parent_name": "社交沟通",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "准备不同味道的食物（如：柠檬、糖、苦瓜、醋），并请儿童逐一试味。当留意到儿童有不喜爱的表现时，成人即时教导儿童用动作（如：摇头、摇手）表示『不要』；当儿童表现喜爱时，成人即时教导儿童用手指指著想要的食物表示『要』。重复步骤，引导儿童用简单的手势或动作表达需要。注意事项：注意儿童是否对食物敏感，小心选取合适的食物进行活动。"
+  },
+  {
+    "name": "玩物需求表达训练",
+    "level": "L2",
+    "parent_name": "社交沟通",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童玩闪光玩具数次后，成人取出闪光玩具和其他物件，给儿童选择，并用动作教导儿童用手指指著『想要』的玩具。重复步骤，让儿童学习运用简单的手势或动作表达需要。可改用儿童喜欢和不喜欢的玩具给儿童选择。"
+  },
+  {
+    "name": "非语言的沟通",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 12,
+    "age_max_months": 36,
+    "prompt_corpus": "训练儿童运用简单的社交手势或动作，并能望向成人指著的地方。"
+  },
+  {
+    "name": "适当地运用简单的社交手势或动作",
+    "level": "L2",
+    "parent_name": "非语言的沟通",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "目标D：透过日常情境与模仿练习，让儿童学会运用简单的社交手势（如：再见、飞吻）与他人沟通。"
+  },
+  {
+    "name": "望向成人指著的地方",
+    "level": "L2",
+    "parent_name": "非语言的沟通",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "目标E：引导儿童注意并跟随成人指引的方向，建立共同注意力。"
+  },
+  {
+    "name": "日常问候与道别模仿",
+    "level": "L3",
+    "parent_name": "适当地运用简单的社交手势或动作",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "每天早上教导儿童以点头表示「早晨」。家人与儿童道别时，成人握著儿童的手挥动表示「再见」，并做出「飞吻」动作，鼓励儿童模仿，并对其表现即时给予赞赏。"
+  },
+  {
+    "name": "互动游戏以强化社交动机",
+    "level": "L3",
+    "parent_name": "适当地运用简单的社交手势或动作",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "成人面对成人做挥手、点头动作以吸引儿童。成人抱著儿童及握其手挥动回应，随后逐渐减少协助。可利用布偶或手指偶进行简单的见面或分手机会游戏。建议材料：布偶或手指偶。"
+  },
+  {
+    "name": "气球追踪游戏",
+    "level": "L3",
+    "parent_name": "望向成人指著的地方",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "把气球吹满气并握住顶端，在儿童面前挥动吸引注意，然后放手让气球飞走。成人指著气球最后停留的位置，吸引儿童望向气球，当儿童持续望著气球时，成人立即拾起气球再次吹气重复游戏。建议材料：气球。"
+  },
+  {
+    "name": "学前儿童训练指南——社交与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南——社交与情绪"
+  },
+  {
+    "name": "活动建议——社交沟通",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南——社交与情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动建议——社交沟通"
+  },
+  {
+    "name": "利用玩具车引导视觉注意力",
+    "level": "L3",
+    "parent_name": "活动建议——社交沟通",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "利用玩具车吸引儿童的注意，当儿童集中注视玩具车时，成人把玩具车推至稍远的位置，然后问儿童：「车在哪里？」接著成人用手指著玩具车的位置，若儿童望向及指向车的位置，成人便拾起玩具车给儿童玩。所需物品：玩具车。"
+  },
+  {
+    "name": "丝巾抛接互动游戏",
+    "level": "L3",
+    "parent_name": "活动建议——社交沟通",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童玩抛丝巾游戏。当儿童专注注视丝巾，而丝巾落在儿童头顶前，成人便把丝巾拨至离儿童稍远的位置，并问儿童：「丝巾在哪里？」接著指向丝巾并引导儿童望向或用手指指著丝巾跌落的位置，随即拾起丝巾再继续游戏。所需物品：丝巾。"
+  },
+  {
+    "name": "语言沟通",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 12,
+    "age_max_months": 48,
+    "prompt_corpus": "项目二：语言沟通。目标A：模仿声音、语调来沟通。目标B：明白及运用说话表达自己的意愿或覆述生活经验。"
+  },
+  {
+    "name": "单及双词阶段",
+    "level": "L2",
+    "parent_name": "语言沟通",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "单及双词（如：「吻」、「吃」、「要」、「喝」、「吃糖」、「喝水」、「脱鞋」）"
+  },
+  {
+    "name": "三词短句阶段",
+    "level": "L2",
+    "parent_name": "语言沟通",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "三词短句（如：「我要饼」、「爸爸看报纸」、「我踏脚踏车」）"
+  },
+  {
+    "name": "三词以上句子阶段",
+    "level": "L2",
+    "parent_name": "语言沟通",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "三词以上的句子（如：「我想玩红色球」、「昨天我和妈妈上街」）"
+  },
+  {
+    "name": "进食命名活动",
+    "level": "L3",
+    "parent_name": "语言沟通",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "给儿童进饮或进食时，向儿童说出食物名称。当儿童望向成人时，成人立即把食物递给儿童，并重复说出食物名称，让儿童清楚口型及重复听见物体的名称。当儿童日常有动作要求进饮或进食时，成人出示食物并说出名称，先鼓励儿童模仿说出名称，当儿童能模仿说出名称后，人才把食物交给儿童，并给予赞赏。"
+  },
+  {
+    "name": "推接球互动活动",
+    "level": "L3",
+    "parent_name": "语言沟通",
+    "age_min_months": 12,
+    "age_max_months": 36,
+    "prompt_corpus": "与儿童玩推球，推、接球时必须望著对方。开始时，成人叫儿童的名字，玩耍时一边说「玩」以引起儿童的注意。持续与儿童进行活动，中途稍作停顿，等待儿童说出「玩」，才再继续活动。可套用到其他亲子活动，如：「躲猫猫」、「点虫虫」等。"
+  },
+  {
+    "name": "配对取图游戏",
+    "level": "L3",
+    "parent_name": "语言沟通",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "把儿童分成2组游戏，请一组先抽图卡，再爬过隧道，向对方取图卡上指定的玩具；另一组则负责看管放在箱内的玩具。请看管玩具的儿童向对方发问简单的问题：「你要找甚么？」取玩具的儿童则依图卡所示回答，如：「我要积木」。如儿童未能说出短句，可由成人说出句子，让儿童模仿。"
+  },
+  {
+    "name": "社交沟通训练",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童社交沟通训练活动指南"
+  },
+  {
+    "name": "日常生活经验分享",
+    "level": "L2",
+    "parent_name": "社交沟通训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "在日常生活中，成人可在儿童刚完成活动（如用餐、玩游戏、踏单车）后进行引导提问，例如「你刚吃过（或做过）甚么？」或「你跟哪个小朋友玩游戏？」。注意事项：给予足够时间让儿童思考，亦可提供图片或相片提示，以增加儿童说话的信心。"
+  },
+  {
+    "name": "模拟快餐店购物情境",
+    "level": "L2",
+    "parent_name": "社交沟通训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "模拟在快餐店购买食物的情景：1. 角色扮演：儿童分别扮演店员及顾客，店员问顾客「你想买甚么？」，顾客回答「我要吃 XX（食物名称）」。2. 实地体验：带领儿童进行真实或模拟购买过程，并拍摄过程及食物相片。3. 回顾与讨论：透过电脑播放相片，鼓励儿童描述过程。成人提问引导，如「你怎样向店员购买食物？」或「你在快餐店吃过甚么食物？」。4. 目标：引导儿童以三词或以上的短句回答。所需器材：模型食物、照相机、电脑。"
+  },
+  {
+    "name": "社交与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "社交与情绪领域相关的训练指南。"
+  },
+  {
+    "name": "语言沟通",
+    "level": "L2",
+    "parent_name": "社交与情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对语言表达、理解与沟通能力的训练项目。"
+  },
+  {
+    "name": "简单说出故事内容",
+    "level": "L3",
+    "parent_name": "语言沟通",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "训练儿童能简单复述或叙述故事内容。"
+  },
+  {
+    "name": "运用因果关系表达",
+    "level": "L3",
+    "parent_name": "语言沟通",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "使用「因为」、「所以」来表达事件的因果关系。"
+  },
+  {
+    "name": "表达复杂观点与意见",
+    "level": "L3",
+    "parent_name": "语言沟通",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "较详细地表达自己对事情的意见，例如说明喜欢某人的原因。"
+  },
+  {
+    "name": "活动建议一：生活情境引导",
+    "level": "L4",
+    "parent_name": "语言沟通",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "成人在日常生活中观察儿童行为，当儿童做出特别事情时，询问「你为甚么...？」并引导儿童运用「因为」、「所以」作答。"
+  },
+  {
+    "name": "活动建议二：情境图卡练习",
+    "level": "L4",
+    "parent_name": "语言沟通",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "使用情境图卡，请儿童先描述画面内容，再引导其以「因为」、「所以」回答图卡中的因果问题，成人的提示强度应依儿童能力调整。"
+  },
+  {
+    "name": "活动建议三：影音故事提问",
+    "level": "L4",
+    "parent_name": "语言沟通",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童共同观看故事书、卡通或影片，并运用「谁」、「哪里」、「做甚么」、「何时」、「为甚么」等疑问词进行提问，协助儿童练习思考与回答。"
+  },
+  {
+    "name": "学前儿童训练指南—社交与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南—社交与情绪的训练活动建议"
+  },
+  {
+    "name": "社交沟通与表达",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南—社交与情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "社交沟通与情绪表达相关的训练活动"
+  },
+  {
+    "name": "情境指令回应游戏",
+    "level": "L3",
+    "parent_name": "社交沟通与表达",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童玩游戏，利用1张椅子代表「回家」、1个大胶圈代表「户外活动」。请儿童依照成人指令到所属位置，如：「小朋友玩滑梯去」或「旅行去」，便要立刻站在胶圈内；而当听到「小朋友回家吃饭（或看电视）」，儿童便要立刻坐在椅子上。若儿童找不到椅子，成人可询问：「为甚么没有座位？」并引导儿童回答，如：「因为我走慢了，所以没有座位。」"
+  },
+  {
+    "name": "故事内容表达与分享",
+    "level": "L3",
+    "parent_name": "社交沟通与表达",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "请儿童在聆听故事后，用画图的方式表达故事内容。完成后，请儿童拿画作给别人观看及分享，学习简单地介绍画的内容。可用画纸做成阅读报告，并将所有阅读报告钉装成小书册，以增加趣味。"
+  },
+  {
+    "name": "故事情节排序与情绪辨识",
+    "level": "L3",
+    "parent_name": "社交沟通与表达",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童阅读故事图卡后，请儿童把故事图卡按正确的次序排列，然后简单地说出故事内容。成人亦可请儿童为故事中的人物，画出合适的情绪感受，并用情绪脸孔图卡作提示，鼓励儿童说出其原因，如：「我认为小明会很开心，因为他看到很多好吃的食物。」"
+  },
+  {
+    "name": "游戏技巧",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 0,
+    "age_max_months": 36,
+    "prompt_corpus": "针对学前儿童的社交与情绪发展进行游戏技巧训练。"
+  },
+  {
+    "name": "与成人进行互相交往式游戏",
+    "level": "L2",
+    "parent_name": "游戏技巧",
+    "age_min_months": 0,
+    "age_max_months": 36,
+    "prompt_corpus": "训练儿童与成人进行互动的社交游戏，建立沟通基础与轮替概念。"
+  },
+  {
+    "name": "模仿简单动作",
+    "level": "L3",
+    "parent_name": "与成人进行互相交往式游戏",
+    "age_min_months": 0,
+    "age_max_months": 12,
+    "prompt_corpus": "模仿简单动作（如：请请、开手、合手）。活动建议：示范边唱歌边做动作，并以小吃奖励引导模仿，可扩展至点头、踏脚等动作。"
+  },
+  {
+    "name": "参与简单而需要与人沟通的游戏",
+    "level": "L3",
+    "parent_name": "与成人进行互相交往式游戏",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "参与简单且需沟通的游戏（如：躲猫猫、点虫虫、骚痒）。活动建议：用开心的语气和表情重复玩耍，注意儿童的专注力，给予赞赏。"
+  },
+  {
+    "name": "与成人玩简单的轮流作转游戏",
+    "level": "L3",
+    "parent_name": "与成人进行互相交往式游戏",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "进行轮流作转游戏（如：推车、推球）。活动建议：使用被子进行摇晃游戏，引导儿童表达想玩的情绪，需注意情绪反应避免过度兴奋。"
+  },
+  {
+    "name": "参与由成人带领的简单群体游戏",
+    "level": "L3",
+    "parent_name": "与成人进行互相交往式游戏",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "参与群体游戏（如：传音乐盒、有只雀仔跌落水）。"
+  },
+  {
+    "name": "社交情绪训练活动",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童社交情绪发展与训练活动，包含互动游戏技巧。"
+  },
+  {
+    "name": "社交互动游戏",
+    "level": "L2",
+    "parent_name": "社交情绪训练活动",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过群体游戏促进儿童的社交互动、轮流及听从指令能力。"
+  },
+  {
+    "name": "传球互动游戏",
+    "level": "L3",
+    "parent_name": "社交互动游戏",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "先向儿童示范抛接、推接及滚接。成人叫儿童名字，儿童举手示意；成人抛/推/滚球给儿童，儿童接球后再回传。进阶训练可让儿童自行呼唤另一位儿童名字并传球。辅助指令：『准备，1，2，3，接球。好！』、『好，1，2，3，推球/滚球。』、『（儿童名字），该你了！』。可使用球、豆袋、小圈等道具。"
+  },
+  {
+    "name": "音乐椅游戏",
+    "level": "L3",
+    "parent_name": "社交互动游戏",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "将椅子背对背排成一列，数量比参与人数少1至2张。儿童绕椅走动，音乐停止时须抢坐椅子，未坐到者淘汰。训练重点在于遵守游戏规则、轮流及胜负心态的处理，并学习参与集体活动。需准备椅子及音乐播放器。"
+  },
+  {
+    "name": "学前儿童训练指南——社交与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童社交与情绪发展训练指南"
+  },
+  {
+    "name": "活动建议——游戏技巧",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南——社交与情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "旨在透过角色扮演与互动游戏提升儿童社交技巧的活动建议。"
+  },
+  {
+    "name": "角色扮演：浇花与感恩互动",
+    "level": "L3",
+    "parent_name": "活动建议——游戏技巧",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "成人与儿童围圈而坐，中央放置花帽及浇花壶。成人示范戴上花帽并扮演花朵，透过对话（如：天气很热，我要喝水）引导儿童轮流传递浇花壶并给予浇水，同时演唱《来浇水》歌。互动结束时，成人扮演的花朵需说：「谢谢你！谢谢你！我已经喝够了。」最后一起合唱《大红花》作为结尾。"
+  },
+  {
+    "name": "进行独行式的游戏",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 0,
+    "age_max_months": 24,
+    "prompt_corpus": "核心领域：社交情绪，目标为透过独行游戏建立儿童对玩具操作的初步探索与技能发展。"
+  },
+  {
+    "name": "探索玩具的操作方式",
+    "level": "L2",
+    "parent_name": "进行独行式的游戏",
+    "age_min_months": 0,
+    "age_max_months": 12,
+    "prompt_corpus": "探索玩具的操作方式，例如拍打摇铃。"
+  },
+  {
+    "name": "操作简单功能的玩具",
+    "level": "L2",
+    "parent_name": "进行独行式的游戏",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "适当操作简单的玩具，如拉、推、拨等功能的玩具。"
+  },
+  {
+    "name": "运用玩具配件",
+    "level": "L2",
+    "parent_name": "进行独行式的游戏",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "适当运用玩具配件，如使用鼓棍打鼓。"
+  },
+  {
+    "name": "利用装饰诱发拍打动作",
+    "level": "L3",
+    "parent_name": "探索玩具的操作方式",
+    "age_min_months": 0,
+    "age_max_months": 12,
+    "prompt_corpus": "利用反光纸或彩纸条装饰摇鼓，引导儿童拍打摇鼓。成人重复轻拍，吸引儿童视线，当儿童主动伸手时给予语言鼓励。"
+  },
+  {
+    "name": "模仿探索乐器声响",
+    "level": "L3",
+    "parent_name": "操作简单功能的玩具",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "在儿童面前放置摇铃、沙槌、摇鼓等乐器，成人边唱儿歌边摇动乐器，鼓励儿童模仿并自行探索发声。"
+  },
+  {
+    "name": "探索拉推拨功能玩具",
+    "level": "L3",
+    "parent_name": "操作简单功能的玩具",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "将有拉、推、拨功能的玩具放在儿童视线范围内，重复动作吸引儿童注意，并鼓励其自行尝试。"
+  },
+  {
+    "name": "模仿节奏打击乐器",
+    "level": "L3",
+    "parent_name": "运用玩具配件",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "播放打鼓庆祝节目的影片，成人示范使用鼓棍打鼓，营造氛围后将鼓棍交给儿童，引导其跟随音乐敲击。"
+  },
+  {
+    "name": "进行独行式的游戏",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目二：进行独行式的游戏"
+  },
+  {
+    "name": "进行建构性游戏",
+    "level": "L2",
+    "parent_name": "进行独行式的游戏",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "目标 D：进行建构性游戏（如：积木、拼砌玩具）"
+  },
+  {
+    "name": "积木拼砌示范与创作",
+    "level": "L3",
+    "parent_name": "进行建构性游戏",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "1. 示范拼砌积木，并说出所砌的是甚么物件，如：「车」，同时边砌边说出加上部位名称，如：「加上圆形做车轮」。请儿童模仿成人拼砌积木，也可鼓励儿童自行创作，并引导儿童说出是甚么物件。材料：立体形状积木。"
+  },
+  {
+    "name": "依程序图拼砌",
+    "level": "L3",
+    "parent_name": "进行建构性游戏",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "2. 示范依拼砌火车的程序图卡拼砌积木，并指示儿童按照成人的步骤，砌出指定物件。接著请儿童说出自己想砌甚么，并鼓励儿童尝试自行砌出该物件。难度调整：若儿童感困难，可以先替儿童画出该物件的完成图，供儿童参考。材料：拼砌程序图、积木、纸和笔。"
+  },
+  {
+    "name": "形状模仿与拼组",
+    "level": "L3",
+    "parent_name": "进行建构性游戏",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "3. 请儿童模仿成人砌不同的形状板。接著鼓励儿童创作有趣的物件图案，过程中可以用真实物件的形状作引导，如：花芯及花瓣的形状是大小不同的圆形。材料：形状拼板。"
+  },
+  {
+    "name": "进行假想游戏",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 18,
+    "age_max_months": 36,
+    "prompt_corpus": "训练儿童运用假想能力进行生活情境模拟及象征性游戏。"
+  },
+  {
+    "name": "利用仿实物玩具模仿日常生活经验",
+    "level": "L2",
+    "parent_name": "进行假想游戏",
+    "age_min_months": 18,
+    "age_max_months": 24,
+    "prompt_corpus": "利用仿实物玩具模仿或扮演日常生活经验（如：假装喝茶、假装与洋娃娃睡觉）。"
+  },
+  {
+    "name": "象征性游戏",
+    "level": "L2",
+    "parent_name": "进行假想游戏",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "进行象征性游戏（如：把椅子当作汽车或把珠子串当作项链）。"
+  },
+  {
+    "name": "活动一：日常模拟游戏",
+    "level": "L3",
+    "parent_name": "利用仿实物玩具模仿日常生活经验",
+    "age_min_months": 18,
+    "age_max_months": 24,
+    "prompt_corpus": "与儿童一起进行模拟日常生活经验的游戏，如：模仿妈妈照顾婴儿等。成人引导儿童用仿实物玩具进行活动，如：假装喝茶、喂洋娃娃进食、放洋娃娃在床上，假装与洋娃娃睡觉等。当儿童主动模仿时，成人应即时给予赞赏。所需材料：仿实物玩具（如：茶具、洋娃娃、婴儿床）。"
+  },
+  {
+    "name": "活动二：绘图与情境连结",
+    "level": "L3",
+    "parent_name": "象征性游戏",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "与儿童一起在大画纸上画出熟悉的地方，如：儿童自己的家、公园、商店、马路等。接著出示积木，引导儿童握著不同大小的积木当作汽车，从自己家出发，并说：「我们到爷爷家」、「我们去公园」等，让儿童扮演日常外出的生活经验。所需材料：大画纸、颜色笔、不同大小的积木。"
+  },
+  {
+    "name": "活动三：角色扮演与物体代换",
+    "level": "L3",
+    "parent_name": "象征性游戏",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "与儿童一起玩装扮游戏。把珠串、帽子佩戴在身上，并背上背包，然后把椅子当作公车，一起乘公车上街。接著成人离开，由儿童独自模拟以上游戏。日常生活中，当儿童玩象征性游戏时，成人可询问儿童拿著的是甚么，如：把小书当作钱包，夹著小书装作上街买东西。所需材料：衣饰（如：珠串、帽子、小背包等）、椅子。"
+  },
+  {
+    "name": "进行假想游戏",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "项目三：进行假想游戏，透过角色扮演提升幼儿社交与情绪发展。"
+  },
+  {
+    "name": "利用成人的物品扮演成人角色",
+    "level": "L2",
+    "parent_name": "进行假想游戏",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "利用成人的物品扮演成人角色（如：穿上爸爸的水鞋扮作消防员）。"
+  },
+  {
+    "name": "进行简单角色扮演游戏",
+    "level": "L2",
+    "parent_name": "进行假想游戏",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "进行简单角色扮演游戏（如：家家酒）。"
+  },
+  {
+    "name": "扮演一些生活中常见的角色",
+    "level": "L2",
+    "parent_name": "进行假想游戏",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "扮演一些生活中常见的角色（如：医生、护士、老师）。"
+  },
+  {
+    "name": "日常物品角色扮演活动",
+    "level": "L3",
+    "parent_name": "进行假想游戏",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "在日常活动中，利用成人的物品与儿童玩简单的角色扮演游戏，例如：模仿爸爸拿著公事包上班去，放工回家后，坐在沙发上看报纸；或抱著洋娃娃，模仿妈妈照顾婴儿，喂他吃奶和在床上一起睡觉。成人亦可利用「家家酒」玩具与儿童一起扮演妈妈煮饭，成人则可扮作婴儿，让儿童喂食。"
+  },
+  {
+    "name": "衣物与道具角色扮演活动",
+    "level": "L3",
+    "parent_name": "进行假想游戏",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "请儿童带家中成人的衣物回学校玩游戏，如：白衬衫、雨靴、围裙等。请儿童介绍物件后，再想想可以用这些衣物模仿甚么人物。成人可加入其他人扮演的物件，如：胶喉管、「家家酒」玩具、医生诊症玩具等，让儿童扮演不同的成人角色，如：穿上白衬衫扮演医生、穿上雨靴扮演消防员、穿上围裙扮演厨师等。在扮演过程中，成人引导儿童按扮演的角色发问问题，如：扮演妈妈时，问孩子想吃甚么；扮演医生时，问病人身体哪里不适、教病人多休息等。成人可在儿童进行扮演游戏时，替儿童拍照，并在相片上加上句子，如：「我是医生」。最后把相片贴在墙上，与儿童一起欣赏。"
+  },
+  {
+    "name": "进行假想游戏",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "包含扮演故事或虚构人物，以及与其他儿童进行较复杂的角色扮演游戏。"
+  },
+  {
+    "name": "扮演故事或虚构人物",
+    "level": "L2",
+    "parent_name": "进行假想游戏",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "扮演如士兵、公主、超人等故事或虚构人物。"
+  },
+  {
+    "name": "进行较复杂的角色扮演游戏",
+    "level": "L2",
+    "parent_name": "进行假想游戏",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "与其他儿童进行需要分配角色及安排情节的较复杂角色扮演游戏。"
+  },
+  {
+    "name": "活动一：皇帝的新衣角色扮演",
+    "level": "L3",
+    "parent_name": "进行较复杂的角色扮演游戏",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "先向儿童讲述故事《皇帝的新衣》，再替儿童戴上皇冠及披上大毛巾，扮演皇帝，请其他儿童扮演臣子和小孩，由成人提示进行较复杂的角色扮演游戏。如儿童忘记故事情节，成人可再以故事书的图片及文字作提示。材料包括：自制的皇冠、大毛巾、故事书《皇帝的新衣》。"
+  },
+  {
+    "name": "活动二：白雪公主拯救情节扮演",
+    "level": "L3",
+    "parent_name": "进行较复杂的角色扮演游戏",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "播放卡通《白雪公主》，与儿童扮演拯救公主的情节。请儿童讨论扮演什么角色，及计划用什么道具配合角色等，如：用报纸棒代替配剑、以扫帚代替白马，由儿童扮演王子拯救公主。材料包括：《白雪公主》卡通及影片播放器、报纸棒、扫帚。"
+  },
+  {
+    "name": "进行假想游戏",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "在假想游戏过程中表现解难的能力（如：知道妈妈病了要看医生）"
+  },
+  {
+    "name": "医生诊症角色扮演",
+    "level": "L2",
+    "parent_name": "进行假想游戏",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "预备医生诊症玩具，与儿童一起玩假想游戏。成人假装生病了，并询问扮演医生的儿童要怎么办。成人可说出以往给医生诊症的过程及经验，以提示儿童思考问题及如何解决困难。"
+  },
+  {
+    "name": "社交问题解决故事讨论",
+    "level": "L2",
+    "parent_name": "进行假想游戏",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "利用故事书《我迷路了》，引导儿童思考该如何解决问题，如：逛商场时，与妈妈失散了要怎么办，该自己离开，还是要站在原地等妈妈回来等。请儿童讨论相关的解决方法，及分享自己的经验。"
+  },
+  {
+    "name": "参与社交游戏",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 12,
+    "age_max_months": 36,
+    "prompt_corpus": "参与社交游戏的训练框架，旨在提升儿童与同伴互动的能力。"
+  },
+  {
+    "name": "与友伴进行游戏",
+    "level": "L2",
+    "parent_name": "参与社交游戏",
+    "age_min_months": 12,
+    "age_max_months": 36,
+    "prompt_corpus": "项目一：与友伴进行游戏。包含平行游戏与协同游戏两阶段目标。"
+  },
+  {
+    "name": "进行平行游戏",
+    "level": "L3",
+    "parent_name": "与友伴进行游戏",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "在其他儿童身旁独自玩耍，不时会观察对方，但没有说话或交换物件。"
+  },
+  {
+    "name": "进行协同游戏",
+    "level": "L3",
+    "parent_name": "与友伴进行游戏",
+    "age_min_months": 12,
+    "age_max_months": 36,
+    "prompt_corpus": "与1至2名儿童一起进行协同游戏（如追逐、玩滑梯、搓泥胶等），期间会观察和模仿对方，并作简单交谈或交换物件。"
+  },
+  {
+    "name": "活动建议一：共处互动",
+    "level": "L4",
+    "parent_name": "与友伴进行游戏",
+    "age_min_months": 12,
+    "age_max_months": 36,
+    "prompt_corpus": "与儿童探访亲友时，安排他与其他儿童坐在地垫上一起玩玩具（如：入形状盒）。成人可在旁陪伴，并同时用说话形容其他儿童玩玩具的情况，引导大家互相留意对方。材料：玩具、地垫。"
+  },
+  {
+    "name": "活动建议二：示范与交换",
+    "level": "L4",
+    "parent_name": "与友伴进行游戏",
+    "age_min_months": 12,
+    "age_max_months": 36,
+    "prompt_corpus": "展示不同的有趣或发声玩具，示范各玩具的把玩方法，再给每位儿童1份玩具。儿童玩耍过程中，成人示范与其中一位儿童交谈，如：「你的玩具很好玩，可以交换玩吗？」鼓励其他儿童模仿。成人亦可描述某一儿童的玩法，吸引其他儿童注意及互相模仿。材料：有趣或发声玩具。"
+  },
+  {
+    "name": "活动建议三：社交模仿游戏",
+    "level": "L4",
+    "parent_name": "与友伴进行游戏",
+    "age_min_months": 12,
+    "age_max_months": 36,
+    "prompt_corpus": "带儿童到公园吹肥皂泡，并让儿童追拍泡泡，吸引其他儿童一起玩拍泡泡游戏。过程中，引导儿童互相留意对方及模仿别人的玩法，如：提示儿童别人会用手指去戳破泡泡，或用脚去踏黏在地上的泡泡。材料：肥皂泡玩具。"
+  },
+  {
+    "name": "与友伴进行游戏",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "社交与情绪领域的互动训练，目标为发展与同侪合作的社会技能。"
+  },
+  {
+    "name": "简单合作游戏",
+    "level": "L2",
+    "parent_name": "与友伴进行游戏",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "在没有成人督导下，与1名友伴进行简单合作游戏，例如一起砌积木或拼拼图。"
+  },
+  {
+    "name": "复杂合作游戏",
+    "level": "L2",
+    "parent_name": "与友伴进行游戏",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "与3至4名友伴一起进行较复杂的合作游戏，例如合作画一幅大图画。"
+  },
+  {
+    "name": "自由创作合作活动",
+    "level": "L3",
+    "parent_name": "与友伴进行游戏",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "鼓励儿童玩合作游戏，如砌大拼图、砌大积木、搓泥胶或做模型，成人从旁引导与鼓励，并鼓励完成后分享过程中的开心或困难。"
+  },
+  {
+    "name": "集体纸艺拼贴",
+    "level": "L3",
+    "parent_name": "与友伴进行游戏",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "将儿童分组（每组3至4人），每人分配一张颜色纸，请儿童将纸撕碎后合作黏贴在指定范围内，完成后分享过程。"
+  },
+  {
+    "name": "运送积木竞赛",
+    "level": "L3",
+    "parent_name": "与友伴进行游戏",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "将儿童分成2组（每组4人）进行比赛。由两名儿童手持木棒运送积木，第三名负责运送，第四名负责堆叠。成人以摇钟计时，完成后讨论并分享比赛合作感受。"
+  },
+  {
+    "name": "与友伴进行游戏",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 36,
+    "age_max_months": 72,
+    "prompt_corpus": "训练儿童与友伴进行社交互动，透过桌上游戏与地上游戏提升社交沟通与合作技巧。"
+  },
+  {
+    "name": "简单桌上游戏（成人带领）",
+    "level": "L2",
+    "parent_name": "与友伴进行游戏",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "在成人带领下，与友伴玩简单桌上游戏（如：扑克牌、飞行棋）。"
+  },
+  {
+    "name": "复杂桌上及地上游戏",
+    "level": "L2",
+    "parent_name": "与友伴进行游戏",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "在没有成人督导下，与同伴玩较复杂的桌上游戏及地上游戏。"
+  },
+  {
+    "name": "记忆配对游戏",
+    "level": "L3",
+    "parent_name": "简单桌上游戏（成人带领）",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "把图卡翻转排列在桌上，与儿童玩记忆卡游戏。成人带领儿童轮流翻开图卡，每次2张。若选得相同图案的图卡便可将图卡抽起，若选得不同图案的图卡则把图卡翻转放回原位。最后获得最多图卡的儿童为胜。"
+  },
+  {
+    "name": "颜色跳棋游戏",
+    "level": "L3",
+    "parent_name": "简单桌上游戏（成人带领）",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "请2位儿童选择于自己的棋子，玩颜色跳棋，并把棋子放在起点上，由成人决定谁先掷颜色骰子的次序，才开始轮流掷骰子。请儿童按掷到的颜色，把自己的棋子前进至该颜色格上，最快到达终点者为胜。"
+  },
+  {
+    "name": "过三关游戏",
+    "level": "L3",
+    "parent_name": "简单桌上游戏（成人带领）",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "请儿童玩过三关，并自行商量选择交叉或圆圈的棋子，以及谁先放棋子。决定后便开始轮流放棋子，最快把3只棋子连成直、横或斜线的一方为胜。"
+  },
+  {
+    "name": "棋赛游戏示范",
+    "level": "L3",
+    "parent_name": "简单桌上游戏（成人带领）",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "示范桌上棋赛游戏玩法，并先由成人带领儿童玩。熟习后，由儿童自行与同伴玩较复杂的桌上棋赛游戏。完成后，一起分享合作游戏的过程。"
+  },
+  {
+    "name": "与伙伴进行游戏",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "无需成人协助下，与一群儿童一起进行竞赛性游戏（如：赛跑、音乐椅）"
+  },
+  {
+    "name": "眼明手快游戏",
+    "level": "L2",
+    "parent_name": "与伙伴进行游戏",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "请儿童围圈站著，玩「眼明手快」游戏。把1件物件（如：水瓶）放在圆圈中间，成人随即从1数到3，最快抢到物件的儿童便胜出。"
+  },
+  {
+    "name": "剪刀石头布游戏",
+    "level": "L2",
+    "parent_name": "与伙伴进行游戏",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "请所有儿童排队玩「剪刀石头布」，最后胜出者坐在宝座（沙发或椅子）上，扮作皇帝，其余的儿童则排队继续与皇帝猜拳。如皇帝猜败了，便要让座予胜出者，并到队的末端排队。重复以上步骤继续游戏。"
+  },
+  {
+    "name": "户外赛跑游戏",
+    "level": "L2",
+    "parent_name": "与伙伴进行游戏",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "带多位儿童往户外公园比赛跑步。先让儿童自行决定赛道的起点及终点，并选1位儿童做评判。请所有儿童排在起点，评判负责发出指令，数到3参赛者便要起跑。评判负责监察参赛者在过程中有否违反规则，并决定最终胜利者。所有儿童须遵从评判的最终决定。"
+  },
+  {
+    "name": "遵守游戏规则",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "训练儿童在成人指引下遵守游戏规则、轮候与分享，并与其他儿童进行合作性游戏。"
+  },
+  {
+    "name": "排队与轮候训练",
+    "level": "L2",
+    "parent_name": "遵守游戏规则",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "在成人指引下，愿意轮候和分享，例如：排队玩滑梯。活动建议：在课室张贴排队海报或图片，在日常活动（如排队取水果、午餐）及大肌肉游戏（如踢球、走平衡木）中提示儿童进行轮候。"
+  },
+  {
+    "name": "指令与规则遵守",
+    "level": "L2",
+    "parent_name": "遵守游戏规则",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "在成人指引下，遵守简单的游戏规则，例如：依指示把物件传给别人。"
+  },
+  {
+    "name": "合作性游戏",
+    "level": "L2",
+    "parent_name": "遵守游戏规则",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "与其他儿童进行合作游戏时，会互相帮忙、轮候及遵守规则。"
+  },
+  {
+    "name": "互动游戏活动",
+    "level": "L3",
+    "parent_name": "遵守游戏规则",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动一：音乐指令动作游戏（分组两人一组，按音乐停止后的指令使用身体部位如背贴背、脸贴脸等进行互动）；活动二：数字排队游戏（分组按顺序排队并将胶圈抛入柱座）；活动三：合作运送游戏（分组两人合作托住小毛巾运送豆袋，训练互助协调）。"
+  },
+  {
+    "name": "学前儿童训练指南-社交与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童社交与情绪发展训练指南"
+  },
+  {
+    "name": "活动建议-游戏技巧",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南-社交与情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童的社交与情绪游戏技巧训练活动建议"
+  },
+  {
+    "name": "报纸游戏",
+    "level": "L3",
+    "parent_name": "活动建议-游戏技巧",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "将儿童分成3组，每组2人，站在一张完整打开的报纸旁。音乐开始时，请儿童围著报纸行走，音乐停止时，儿童要把报纸对折1次，然后2位儿童一同站在报纸上面，如此类推。每次音乐停止，便要对折报纸1次。当报纸愈折愈小，成人提示儿童若要不跌出报纸外，便要想方法，如：大家互相抱著。最后没有跌出报纸外的组别为胜。所需器材：音乐播放器、报纸。"
+  },
+  {
+    "name": "遵守游戏规则",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "项目二：遵守游戏规则，目标包含主动参与群体活动及主动轮候和分享。"
+  },
+  {
+    "name": "主动参与群体活动",
+    "level": "L2",
+    "parent_name": "遵守游戏规则",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "目标D：主动参与群体活动（如：讨论时主动发言）。"
+  },
+  {
+    "name": "主动轮候和分享",
+    "level": "L2",
+    "parent_name": "遵守游戏规则",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "目标E：主动轮候和分享（如：排队取物件和分享自己的食物）。"
+  },
+  {
+    "name": "森林探险寻宝",
+    "level": "L3",
+    "parent_name": "主动参与群体活动",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "虚拟一个森林探险寻宝情景，邀请儿童协助寻找糖果以建成糖果屋。活动包含规划行程、拼图、讨论如何解决路途中的困难（如渡河、雷雨、猛兽、高空跨越），并在完成后分享达成目标的心情及克服困难的方法。"
+  },
+  {
+    "name": "森林大火救援",
+    "level": "L3",
+    "parent_name": "主动轮候和分享",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "向儿童讲述故事《森林大火》，引导儿童讨论拯救动物的计划，自行分配角色，参与跨越椅子障碍的救援活动，并利用大毛巾包裹动物将其救出。活动后成人对儿童主动提出意见及互助行为给予赞赏。"
+  },
+  {
+    "name": "学前儿童训练指南—社交与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南—社交与情绪"
+  },
+  {
+    "name": "游戏技巧",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南—社交与情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "游戏技巧相关活动建议"
+  },
+  {
+    "name": "合作夹软糖游戏",
+    "level": "L3",
+    "parent_name": "游戏技巧",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "请2位儿童一组，比赛用自选工具取出胶袋内的软糖，以最快完成的一组为胜。请每组组员先商讨从下列物品中选取2款较合适的工具：铅笔、吸管、搅拌棒、纸条、竹签、胶刀。游戏进行时，每组组员必须轮流运用所选择的工具取出软糖，有需要时可以再作商讨，然后一起到工具桌选取另一款工具。完成游戏后，请每组轮流分享：选取了甚么工具？进行时有没有困难？两人如何合作？当未能取出软糖时，感觉如何？取到软糖，有甚么感觉？最后，成人向儿童讲解与别人一同商讨能更容易解决问题。"
+  },
+  {
+    "name": "分享小吃活动",
+    "level": "L3",
+    "parent_name": "游戏技巧",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "请儿童带备小吃在休息时间与其他儿童分享。成人请儿童介绍小吃的名称和味道后，便分给其他儿童品尝。欲品尝的儿童须排队轮候，当接到小吃后要说声「多谢」，才可取去小吃；而分享食物的儿童则回应「不客气」。"
+  },
+  {
+    "name": "遵守游戏规则",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "遵守游戏规则，包括在游戏中服从大多数人的意愿，以及按游戏规则参与竞赛性游戏并接受胜负结果。"
+  },
+  {
+    "name": "服从大多数人的意愿",
+    "level": "L2",
+    "parent_name": "遵守游戏规则",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "在游戏中服从大多数人的意愿，例如跟随大家一起玩积木。"
+  },
+  {
+    "name": "按游戏规则参与竞赛性游戏",
+    "level": "L2",
+    "parent_name": "遵守游戏规则",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "按游戏规则参与竞赛性游戏，并接受胜负结果，例如愿意遵从输了要受罚的规则。"
+  },
+  {
+    "name": "民主投票游戏",
+    "level": "L3",
+    "parent_name": "服从大多数人的意愿",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "成人介绍游戏如大风吹、音乐椅、抛手巾等，说明少数服从多数的做法，请儿童互相讨论并举手表达想玩的游戏，最后一起玩多人选择的游戏。"
+  },
+  {
+    "name": "老鼠围圈游戏",
+    "level": "L3",
+    "parent_name": "按游戏规则参与竞赛性游戏",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "请儿童扮演小老鼠围圈，1位儿童戴猫帽扮演花猫。当花猫说「我起床了」，扮演老鼠的儿童坐在位子上；当花猫说「我回家了」，儿童可离开座位。被花猫捉到需接受惩罚，如唱歌。"
+  },
+  {
+    "name": "抢地垫竞赛游戏",
+    "level": "L3",
+    "parent_name": "按游戏规则参与竞赛性游戏",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "游戏前与儿童讨论地垫摆放方法，透过投票学习服从多数意愿，并讨论惩罚方式（如唱歌、跳舞）。游戏中听指令跳进地垫，每张地垫仅限1人，未站上的儿童需接受惩罚。"
+  },
+  {
+    "name": "社会适应",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "社会适应领域相关训练内容。"
+  },
+  {
+    "name": "认识个人及熟悉的人的角色",
+    "level": "L2",
+    "parent_name": "社会适应",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过认识熟悉的人之角色，提升儿童的社交互动能力。"
+  },
+  {
+    "name": "称呼家庭以内熟悉的人",
+    "level": "L3",
+    "parent_name": "认识个人及熟悉的人的角色",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "训练儿童辨识并称呼家庭成员。"
+  },
+  {
+    "name": "称呼家庭以内熟悉的人 - 目标A",
+    "level": "L4",
+    "parent_name": "称呼家庭以内熟悉的人",
+    "age_min_months": 24,
+    "age_max_months": 24,
+    "prompt_corpus": "当有需要时，主动注意（如：望）或叫唤熟悉的家人（如：爸爸、妈妈）。"
+  },
+  {
+    "name": "称呼家庭以内熟悉的人 - 目标B",
+    "level": "L4",
+    "parent_name": "称呼家庭以内熟悉的人",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "当有需要时，主动注意（如：望）或叫唤家庭外熟悉的人（如：姐姐、阿姨、叔叔、伯伯）。"
+  },
+  {
+    "name": "活动建议：推球/玩具车互动",
+    "level": "L5",
+    "parent_name": "称呼家庭以内熟悉的人",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "和儿童面对面而坐，互推手中的球或玩具车，同时说：「给宝宝」或「给妈妈」，说话时鼓励儿童眼睛望向成人。所需材料：球、玩具车。"
+  },
+  {
+    "name": "活动建议：假想分享食物游戏",
+    "level": "L5",
+    "parent_name": "称呼家庭以内熟悉的人",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童玩假想游戏，模拟分享食物。把盛有小吃的碗及汤匙给儿童，成人引导儿童假扮爸爸、妈妈吃小吃，并说：「爸爸吃」或「妈妈吃」。可转换角色，说：「宝宝吃」，以吸引儿童注意成人。所需材料：碗、汤匙、小吃。"
+  },
+  {
+    "name": "活动建议：观看家庭相片册",
+    "level": "L5",
+    "parent_name": "称呼家庭以内熟悉的人",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童一起翻看家庭相片册或在电脑观看相片，并指著其中一张相片内的人物作介绍。引导儿童注意相片内熟悉的人物，然后叫唤熟悉的人，被叫唤者立即回应，以吸引儿童注意。重复步骤，请儿童叫唤家庭以外熟悉的人，如：阿姨、伯伯，让儿童熟习家人及亲友的称谓。所需材料：家庭相片册。"
+  },
+  {
+    "name": "活动建议：探访送礼活动",
+    "level": "L5",
+    "parent_name": "称呼家庭以内熟悉的人",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "带儿童往探访亲友，请儿童把礼物依成人指示送给亲人，例如：送给叔叔。成人指向该亲人，引导儿童注视后，才把礼物送上。所需材料：礼物。"
+  },
+  {
+    "name": "适当地回应有关个人的问题",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 24,
+    "age_max_months": 72,
+    "prompt_corpus": "适当地回应有关个人的问题，包括回答简单的个人问题（如：性别、年龄、名字）及较复杂的个人问题（如：学校、居所地址、喜好）。"
+  },
+  {
+    "name": "回答简单的个人问题",
+    "level": "L2",
+    "parent_name": "适当地回应有关个人的问题",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "回答简单的个人问题，如：性别、年龄、名字。"
+  },
+  {
+    "name": "回答较复杂的个人问题",
+    "level": "L2",
+    "parent_name": "适当地回应有关个人的问题",
+    "age_min_months": 36,
+    "age_max_months": 72,
+    "prompt_corpus": "回答较复杂的个人问题，如：学校、居所地址、喜好。"
+  },
+  {
+    "name": "自我介绍示范",
+    "level": "L3",
+    "parent_name": "适当地回应有关个人的问题",
+    "age_min_months": 24,
+    "age_max_months": 72,
+    "prompt_corpus": "利用布偶示范自我介绍，如说出性别、名字等，与儿童做朋友。并配合男、女孩子的图卡以及数字卡，向儿童发问简单的个人问题，引导儿童回答自己的性别、年龄、名字等。"
+  },
+  {
+    "name": "音乐传球游戏",
+    "level": "L3",
+    "parent_name": "适当地回应有关个人的问题",
+    "age_min_months": 24,
+    "age_max_months": 72,
+    "prompt_corpus": "请儿童围圈站立，玩音乐传球游戏。当音乐开始时，请儿童将球传给邻座的儿童，音乐停止时，手持球的儿童在成人协助下，向其中一位儿童提问有关个人的问题，例如：性别、年龄、名字等。完成后成人即赞赏能发问及回答问题的儿童，然后重复游戏。"
+  },
+  {
+    "name": "记者采访角色扮演",
+    "level": "L3",
+    "parent_name": "适当地回应有关个人的问题",
+    "age_min_months": 24,
+    "age_max_months": 72,
+    "prompt_corpus": "先与儿童重温自己的个人资料（性别、年龄、名字），接著扮演记者访问儿童。当儿童熟悉自己的个人资料后，成人每次请2位儿童接受访问，并在性别、年龄、名字当中随意问儿童其中一项，请2位儿童分别回答，同时请其他儿童当观众，分辨他们的答案有否相同之处。"
+  },
+  {
+    "name": "社会适应",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童社会适应训练指导"
+  },
+  {
+    "name": "自我认识与表达",
+    "level": "L2",
+    "parent_name": "社会适应",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过制作个人小册子及问答互动，引导儿童认识自我并进行社会化表达"
+  },
+  {
+    "name": "制作「我是谁」小册子",
+    "level": "L3",
+    "parent_name": "自我认识与表达",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "预先制作「我是谁」小册子，介绍自己的工作、住址、喜好等。再运用图画协助儿童制作一本属于自己的「我是谁」小册子，过程中可询问儿童问题，引导儿童依图画回答。"
+  },
+  {
+    "name": "个人资讯统计活动",
+    "level": "L3",
+    "parent_name": "自我认识与表达",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "访问儿童并引导儿童适当地回应较复杂的个人问题，如：喜好、住址、就读学校名称等。完成后，成人把儿童的资料写在白板上做成统计图表，如：最多人喜爱的活动是游泳，并与其他儿童分享。"
+  },
+  {
+    "name": "适当地回应有关家庭的问题",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "适当地回应有关家庭的问题，目标为简单说出日常家庭生活的流程。"
+  },
+  {
+    "name": "日常家庭生活流程口述训练",
+    "level": "L2",
+    "parent_name": "适当地回应有关家庭的问题",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "透过图卡或相片引导儿童描述日常家庭生活流程，建立时间序列概念。"
+  },
+  {
+    "name": "生活流程图卡排序",
+    "level": "L3",
+    "parent_name": "日常家庭生活流程口述训练",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "出示起床、上学、放学、晚饭、看电视、睡觉等流程图卡，成人与儿童一起按顺序排列，并鼓励儿童说出流程。可依儿童能力加入时间词（早上、中午、晚上）。"
+  },
+  {
+    "name": "生活流程相片回顾",
+    "level": "L3",
+    "parent_name": "日常家庭生活流程口述训练",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "拍摄儿童日常活动照片（如洗澡、做功课、玩玩具等），成人与儿童看照片并提问引导（如：你今天上学做甚么、你在家做甚么、吃饭后做了甚么），请儿童说出自己的生活流程。"
+  },
+  {
+    "name": "社交与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南中的社交与情绪发展领域。"
+  },
+  {
+    "name": "适当地回应有关家庭的问题",
+    "level": "L2",
+    "parent_name": "社交与情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目三：适当地回应有关家庭的问题"
+  },
+  {
+    "name": "认识熟悉家人的称谓",
+    "level": "L3",
+    "parent_name": "适当地回应有关家庭的问题",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "目标B：认识熟悉家人的称谓（如：爸爸、妈妈）"
+  },
+  {
+    "name": "认识部分亲戚的称谓",
+    "level": "L3",
+    "parent_name": "适当地回应有关家庭的问题",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "目标C：认识部分亲戚的称谓（如：爷爷、表姐、姨妈）"
+  },
+  {
+    "name": "活动一：分发糖果练习称谓",
+    "level": "L4",
+    "parent_name": "适当地回应有关家庭的问题",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与家人及亲友共聚的时候，请各人坐在一起，成人拿出1袋糖果，对儿童说：『给 XX（家人称谓如：爸爸、爷爷、表姐）』。接著协助儿童逐一派糖果给家人及亲友，同时引导儿童说：『XX（家人称谓），请你吃。』"
+  },
+  {
+    "name": "活动二：家庭合照认识称谓",
+    "level": "L4",
+    "parent_name": "适当地回应有关家庭的问题",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示1幅家庭成员合照，介绍相片中各成员的称谓及其外貌特征，请儿童说出在相片中看到的人物称谓（如：爸爸、妈妈）。接著成人向儿童提问家中各成员的称谓。"
+  },
+  {
+    "name": "活动三：家家酒游戏互动",
+    "level": "L4",
+    "parent_name": "适当地回应有关家庭的问题",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童玩『家家酒』游戏，假想煮出不同的菜式，如：蔬菜、香肠、鸡蛋，并对儿童说：『我们煮了很多菜，送给其他亲友吃吧。』接著问儿童家里有谁，请儿童说出家人及其他亲友的称谓，再把食物送给该亲友。"
+  },
+  {
+    "name": "适当地回应有关家庭的问题",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 36,
+    "age_max_months": 72,
+    "prompt_corpus": "训练儿童适当地回应有关家庭的问题，包括家庭成员的工作及生活事件。"
+  },
+  {
+    "name": "回答有关家庭的问题",
+    "level": "L2",
+    "parent_name": "适当地回应有关家庭的问题",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "回答有关家庭的问题，如家中的电话号码、家人的工作。"
+  },
+  {
+    "name": "说出较复杂的家庭生活事件",
+    "level": "L2",
+    "parent_name": "适当地回应有关家庭的问题",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "能描述并说出较复杂的家庭生活事件。"
+  },
+  {
+    "name": "家人的工作与生活辨识活动",
+    "level": "L3",
+    "parent_name": "回答有关家庭的问题",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "出示有关于家人工作模样或工作地点的相片（如公车司机在开车），请儿童说出图中家人正在做什么，并由成人提问深化互动。"
+  },
+  {
+    "name": "家庭电话记忆训练",
+    "level": "L3",
+    "parent_name": "回答有关家庭的问题",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "将家人电话号码写在电话簿，与儿童一起读出号码，模拟致电家人。透过擦掉部分数字的方式，辅助儿童逐步记忆家人电话。"
+  },
+  {
+    "name": "家庭资讯识别与回应",
+    "level": "L3",
+    "parent_name": "回答有关家庭的问题",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "将家庭资料如名字、工作、电话写成字条，透过出示字条进行问答练习。可调整数量或利用图卡辅助，提升儿童对家庭资讯的掌握度。"
+  },
+  {
+    "name": "家庭生活经验分享",
+    "level": "L3",
+    "parent_name": "说出较复杂的家庭生活事件",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "利用描述人物生病的图卡，引导儿童分享自己或家人曾经生病的经验，并讨论应对与处理方法。"
+  },
+  {
+    "name": "社会适应",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南中的社会适应范畴，旨在培养儿童与环境、家庭及他人建立联系的能力。"
+  },
+  {
+    "name": "与儿童制作「假日活动回忆录」",
+    "level": "L2",
+    "parent_name": "社会适应",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过制作假日活动回忆录，促进儿童对过往经验的重整与表达能力。"
+  },
+  {
+    "name": "活动执行与分享",
+    "level": "L3",
+    "parent_name": "与儿童制作「假日活动回忆录」",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "准备活动相片与回忆录页面，与儿童将活动的日期、地点、活动内容及人物贴在纸页上。在制作过程中，与儿童一起讨论活动的内容和感受。在闲时，成人取出「假日活动回忆录」，与儿童重温开心的时光，并鼓励儿童忆述有关活动的资料。"
+  },
+  {
+    "name": "认识个人责任",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目一：完成个人责任"
+  },
+  {
+    "name": "按指示将物件放回原位",
+    "level": "L2",
+    "parent_name": "认识个人责任",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "按指示将物件放回原位（如：把鞋放入鞋柜）"
+  },
+  {
+    "name": "照顾个人的清洁",
+    "level": "L2",
+    "parent_name": "认识个人责任",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "照顾个人的清洁（如：主动洗手或有需要时要求更换衣服）"
+  },
+  {
+    "name": "简单照顾个人的仪容",
+    "level": "L2",
+    "parent_name": "认识个人责任",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "简单照顾个人的仪容（如：整理衣服、梳理头发）"
+  },
+  {
+    "name": "放置物件回原位训练",
+    "level": "L3",
+    "parent_name": "认识个人责任",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "利用日常生活机会教导儿童将物件放回原位，例如完成功课后将笔放回笔盒，将功课放进书包。每天放学后观察儿童有无执拾自己的物件，并留意有无遗漏，适时给予引导或口头提示。建议教材：书包、文具。"
+  },
+  {
+    "name": "视觉提示整理物训练",
+    "level": "L3",
+    "parent_name": "认识个人责任",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "将儿童日常使用的物件拍摄照片（如：鞋子、衣服、玩具），贴在存放物件的位置。儿童每次使用后，依照照片指示把物件放回原位，待熟习后可移除照片。建议教材：儿童鞋子、衣服、玩具的照片。"
+  },
+  {
+    "name": "清洁与更衣训练",
+    "level": "L3",
+    "parent_name": "认识个人责任",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童进行弄脏双手的活动（如玩印章或发型定型泡沫），结束后提示手部脏污需要清洁，衣物脏污需要更换。带领儿童洗手并解说程序，协助更换衣服。后续可询问儿童如何清洁或更换衣物，鼓励自行处理。建议教材：颜料、画纸、定型泡沫、洗手程序图或图卡。"
+  },
+  {
+    "name": "学前儿童训练指南",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南-社与情绪"
+  },
+  {
+    "name": "社会适应",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童的社会适应能力训练活动建议。"
+  },
+  {
+    "name": "自我照顾技能训练",
+    "level": "L3",
+    "parent_name": "社会适应",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过模拟与日常生活示范，提升儿童个人清洁与仪容整理能力。"
+  },
+  {
+    "name": "仪容整理：梳理头发与衣著检视",
+    "level": "L4",
+    "parent_name": "自我照顾技能训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动：出示1个头发凌乱的洋娃娃及梳子，与儿童一起替洋娃娃梳理头发。早上起床后，成人问儿童头发乱了应怎么办，当儿童能自行梳理头发，即予以赞赏。当儿童更换衣服后，检视是否整齐，有需要时提示或协助儿童整理衣服。所需工具：洋娃娃、梳子。"
+  },
+  {
+    "name": "个人卫生习惯：清洁与护理",
+    "level": "L4",
+    "parent_name": "自我照顾技能训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动：利用手偶讲解及示范动作，向儿童说明起床及睡前刷牙、洗脸；进食前后应洗手，及应每天洗澡。日常生活中，成人可提示或协助儿童照顾个人清洁，如：进食后用纸巾清洁嘴巴、早晚刷牙、如厕后洗手等等。所需工具：手偶。"
+  },
+  {
+    "name": "完成个人责任",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 36,
+    "age_max_months": 72,
+    "prompt_corpus": "包含完成简单收拾工作、完成工作后告知成人，以及检视遗漏物品的训练内容。"
+  },
+  {
+    "name": "完成简单的收拾工作",
+    "level": "L2",
+    "parent_name": "完成个人责任",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "完成简单的收拾工作（如：收拾玩具、挂书包）。"
+  },
+  {
+    "name": "完成工作后会告知成人",
+    "level": "L2",
+    "parent_name": "完成个人责任",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "完成工作后会告知成人。"
+  },
+  {
+    "name": "收拾自己的物件，并留心自己的物件有没有被遗漏",
+    "level": "L2",
+    "parent_name": "完成个人责任",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "收拾自己的物件，并留心自己的物件有没有被遗漏。"
+  },
+  {
+    "name": "物件归位游戏",
+    "level": "L3",
+    "parent_name": "完成个人责任",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "先把玩具车、积木、书包、毛巾、鞋子等放在原处，即玩具篮、积木盒、书包挂勾、毛巾盒及鞋柜，并在物件及其摆放处贴上相同编号，接著对儿童说：「这些物件想回家，它们身上都有数字，请你把它们带回家。」请儿童按数字配对，把牠们放回原处，并提示儿童完成工作后要告知成人，成人立即给予赞赏。"
+  },
+  {
+    "name": "环境整理讨论",
+    "level": "L3",
+    "parent_name": "完成个人责任",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "把课室内的物件随意摆放，请儿童留意课室内的状况，再与儿童一同讨论对混乱环境的感觉。接著对儿童说：「课室很混乱，我们一起收拾整理吧！」请儿童完成工作后告知成人，成人并与儿童一同讨论对整洁环境的感觉，鼓励儿童表达自己的感受，最后强调整洁的环境，才使人生活得舒适。"
+  },
+  {
+    "name": "书包整理练习",
+    "level": "L3",
+    "parent_name": "完成个人责任",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "请儿童自行收拾书包，把属于自己的物件收好，如：手册、水杯、毛巾盒等。接著请儿童互相帮忙检查书包，看看有没有东西被遗漏。最后鼓励儿童在家也自行收拾书包。"
+  },
+  {
+    "name": "文具与作业归位",
+    "level": "L3",
+    "parent_name": "完成个人责任",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "请儿童完成作业后，把属于自己的文具，如：铅笔、橡皮擦、间尺等放进笔盒，作业则放进书包内。接著请儿童检查自己的物件是否已收拾好，之后对儿童作出赞赏。"
+  },
+  {
+    "name": "餐后餐具清理",
+    "level": "L3",
+    "parent_name": "完成个人责任",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "请儿童每次用餐后，把自己的餐具如：碗、筷子、碟子等收拾好，或整齐摆放及叠好，接著请儿童检查自己的餐具是否已收拾好。"
+  },
+  {
+    "name": "社会与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南中的社会与情绪训练领域。"
+  },
+  {
+    "name": "完成个人责任",
+    "level": "L2",
+    "parent_name": "社会与情绪",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "训练儿童主动协助及完成家中或学校的简单事务，例如：派发餐具、抹桌子等。"
+  },
+  {
+    "name": "模拟餐厅角色扮演",
+    "level": "L3",
+    "parent_name": "完成个人责任",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "将课室一角布置成小餐厅，与儿童讨论及编排扮演不同角色（厨师、服务员、客人），并挂上名牌。透过角色扮演体会各人职责，并引导讨论在家中可帮忙的琐事。"
+  },
+  {
+    "name": "模拟美食制作与服务",
+    "level": "L3",
+    "parent_name": "完成个人责任",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "邀请儿童合作制作食品，成人介绍不同角色（派发物料、派发餐具、清洁桌面、收拾餐具）。以猜拳方式选择角色，透过活动提高儿童协助及完成学校简单事务的主动性。"
+  },
+  {
+    "name": "课室清洁与整理",
+    "level": "L3",
+    "parent_name": "完成个人责任",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "与儿童观察课室摆设并共同清洁，分配清洁工作（如抹桌子、摆放整齐等），完成后讨论活动过程与成果并分享感受。"
+  },
+  {
+    "name": "完成个人责任",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "包含照护个人物品、保护易碎物品及保管他人托付物品的责任训练。"
+  },
+  {
+    "name": "照顾自己的物件",
+    "level": "L2",
+    "parent_name": "完成个人责任",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "训练儿童在有需要时，能自行照顾或请别人代为看管个人物件。"
+  },
+  {
+    "name": "小心保护易碎的物件",
+    "level": "L2",
+    "parent_name": "完成个人责任",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "训练儿童具备保护易碎物品的意识与行为。"
+  },
+  {
+    "name": "当别人交付看管物件时，懂得嘱咐其他人不要拿取",
+    "level": "L2",
+    "parent_name": "完成个人责任",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "训练儿童在承担看管他人物件责任时，能保护该物件不被他人随意拿走。"
+  },
+  {
+    "name": "代为保管成人物件活动",
+    "level": "L3",
+    "parent_name": "照顾自己的物件",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "把1件成人的物件交予儿童，请其代为保管，然后邀请儿童一同进行其他活动。引导儿童妥善处理手中的物件，如：请别人代为看管、把物件摆放到合适的位置，或嘱咐其他人不可拿取。活动完结后，感谢及赞赏儿童尽责保管物件，并一同分享保管物件的方法。"
+  },
+  {
+    "name": "保护鸡蛋活动",
+    "level": "L3",
+    "parent_name": "小心保护易碎的物件",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "先与儿童互相讨论保护鸡蛋的方法，如：放在衣袋里。接著给每位儿童1只鸡蛋，请儿童好好保管至活动完成或放学，才交回给成人。对成功保管及保持鸡蛋完整的儿童，成人可给予赞赏及小礼物作奖励。如儿童未能交还完整的鸡蛋，可询问他的原因并鼓励他参考其他儿童保护鸡蛋的方法。"
+  },
+  {
+    "name": "完成个人责任",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "完成个人责任，参考《自理》一册。"
+  },
+  {
+    "name": "关注个人仪容",
+    "level": "L2",
+    "parent_name": "完成个人责任",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "关注个人仪容（如：选择适合活动的衣服、要求添饰物以修饰外貌）。"
+  },
+  {
+    "name": "活动：衣物配搭情境练习",
+    "level": "L3",
+    "parent_name": "关注个人仪容",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "把男女不同衣著的图卡，包括：睡衣、泳装、运动装、便服等，贴在白板上，并介绍穿著这些服装的情境。取出纸偶，告诉儿童纸偶要去游泳，请儿童判断穿著睡衣是否合适，并引导儿童说出：「睡衣应该是睡觉时穿著的，游泳应该穿泳装。」接著请儿童分组进行讨论，依成人贴在白板上的情境图卡提示，挑选合适的衣服图卡贴在纸偶上。"
+  },
+  {
+    "name": "活动：个人仪容形象设计",
+    "level": "L3",
+    "parent_name": "关注个人仪容",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "先为儿童拍大头照片，然后运用杂志上的发型图片，在儿童的相片上配上不同的发型，请儿童欣赏自己的样貌。再为儿童拍一张头发凌乱的照片，与儿童讨论喜欢哪个形象。接著介绍个人仪容整洁的重要性，以及怎样整理仪容，如：头发长了需要修剪、女孩子可以用橡皮圈把头发束起，或用发夹固定头发，以保持整洁。"
+  },
+  {
+    "name": "学前儿童训练指南—社交与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南—社交与情绪教学大纲"
+  },
+  {
+    "name": "社会适应",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南—社交与情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童的社会适应能力训练，包括生活常规与环境适应。"
+  },
+  {
+    "name": "天气与衣著配对活动",
+    "level": "L3",
+    "parent_name": "社会适应",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "预备不同衣饰，包括：颈巾、帽子、手套等，并介绍其功用及配戴的原因。接著出示不同的天气图卡（如：太阳猛烈、寒冷等），与儿童讨论怎样因应天气配对合适的衣饰。最后请儿童依天气图卡，选择适合的衣饰，再尝试穿上，成人则替儿童拍照并一起分享。所需器材：颈巾、帽子、手套、天气图卡。"
+  },
+  {
+    "name": "社交与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南：社交与情绪发展范畴。"
+  },
+  {
+    "name": "完成个人责任",
+    "level": "L2",
+    "parent_name": "社交与情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目一：完成个人责任，参考自理一册。"
+  },
+  {
+    "name": "照顾较自己弱小的儿童",
+    "level": "L3",
+    "parent_name": "完成个人责任",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "目标：培养儿童照顾较自己弱小儿童的能力与意识。"
+  },
+  {
+    "name": "主动让座给予有需要的人",
+    "level": "L3",
+    "parent_name": "完成个人责任",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "目标：培养儿童主动让座给予有需要人士的品德。"
+  },
+  {
+    "name": "课堂互助实践",
+    "level": "L4",
+    "parent_name": "照顾较自己弱小的儿童",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "活动：请儿童做大哥哥、大姐姐，到年纪小的班级帮忙，如协助分派茶点、穿衣服、收拾书包等。完成后，请儿童一起分享如何帮助照顾自己弱小的儿童。"
+  },
+  {
+    "name": "布偶情境扮演",
+    "level": "L4",
+    "parent_name": "照顾较自己弱小的儿童",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "活动：利用布偶演绎不同的情景，如：受伤、迷路、扭不动水龙头等。请儿童扮演哥哥或姐姐帮助布偶，借此思考自己可以怎样帮忙或照顾比自己年幼的儿童。材料：布偶、玩具洗手盆。"
+  },
+  {
+    "name": "让座教育与德育故事",
+    "level": "L4",
+    "parent_name": "主动让座给予有需要的人",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "活动：配合德育故事，教导儿童可用自己的能力去帮助别人。如：乘搭交通工具时，可以让座给有需要的人（长者、抱著小孩的成人、孕妇及伤残人士）。解释为何他们需要帮助，并介绍公共汽车的专属座位。最后请儿童分享曾让座予他人的经验及感受。材料：让座的标语图片。"
+  },
+  {
+    "name": "社交与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南-社交与情绪"
+  },
+  {
+    "name": "完成个人责任",
+    "level": "L2",
+    "parent_name": "社交与情绪",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "参考《自理》一册"
+  },
+  {
+    "name": "就自己的过失主动道歉，并作出补救",
+    "level": "L3",
+    "parent_name": "完成个人责任",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "目标：就自己的过失主动道歉，并作出补救"
+  },
+  {
+    "name": "故事教学法",
+    "level": "L4",
+    "parent_name": "就自己的过失主动道歉，并作出补救",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "向儿童讲述故事《亮亮认错》：『亮亮不小心弄掉了姐姐心爱的拼图，后来经过爸爸妈妈的教导，明白做错事要道歉，于是对姐姐说了对不起后，得到了她的原谅，最后更合力找回遗失了的拼图。』借故事让儿童明白需要就自己的过失主动道歉，并作出补救。"
+  },
+  {
+    "name": "情景模拟法",
+    "level": "L4",
+    "parent_name": "就自己的过失主动道歉，并作出补救",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "利用情景图卡向儿童讲解不同的意外情景，请儿童尝试想出解决的办法，如：『小明不小心将果汁倒在小丽身上，应怎样做？』若儿童未能想出解决办法，成人便进一步引导儿童思考：『小明不小心做错事，应该说甚么』、『小丽的衣服湿了，小明可以怎样帮助小丽』等。"
+  },
+  {
+    "name": "社会适应",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "社会适应相关训练内容"
+  },
+  {
+    "name": "自我保护",
+    "level": "L2",
+    "parent_name": "社会适应",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目二：自我保护训练"
+  },
+  {
+    "name": "明自自我保护的原因",
+    "level": "L3",
+    "parent_name": "自我保护",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "目标：明白自我保护的原因（如：热水及火会灼伤皮肤）"
+  },
+  {
+    "name": "活动时注意个人安全",
+    "level": "L3",
+    "parent_name": "自我保护",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "目标：活动时注意个人安全（如：不随意攀爬物件）"
+  },
+  {
+    "name": "不随便接受陌生人的物件或邀约",
+    "level": "L3",
+    "parent_name": "自我保护",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "目标：不随便接受陌生人的物件或邀约"
+  },
+  {
+    "name": "居家安全认知活动",
+    "level": "L4",
+    "parent_name": "自我保护",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示有关居家安全的图片（如：煮食炉、刀、药物等），向儿童解释这些东西不可以触摸的原因，并透过故事让儿童明白需要自我保护的原因。建议教材：家居安全图片、《幼儿生活安全故事丛书系列》或题材类同的故事书。"
+  },
+  {
+    "name": "情景分辨安全活动",
+    "level": "L4",
+    "parent_name": "自我保护",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示不同的情景图片，请儿童分辨对与错。例如：成人出示儿童在椅上跳的图片，儿童要举起「X」牌表示不对，并说出原因（这会造成危险）；成人出示儿童安静地坐在椅上看书的图片，儿童要举「V」牌。可改用不同的主题进行活动，如：到公园游玩、在学校学习及玩耍时应注意的安全。建议教材：情景图片、「X」牌、「V」牌。"
+  },
+  {
+    "name": "陌生人与走失防范角色扮演",
+    "level": "L4",
+    "parent_name": "自我保护",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "利用新闻报纸，介绍儿童失踪的事件，跟儿童讨论如何预防事件的发生，如：外出时要拉著父母或亲人的手。接著模拟情景，进行角色扮演，让儿童更进一步明白遇陌生人强行带走自己时，要大声呼救及说「不要」。以新闻影片教导儿童，不要随便接受陌生人的物件，如：糖或玩具，也不要跟陌生人离开。建议教材：报纸、新闻报导影片、影片播放器。"
+  },
+  {
+    "name": "社会适应",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童社会适应训练活动建议。"
+  },
+  {
+    "name": "应对陌生人情境训练",
+    "level": "L2",
+    "parent_name": "社会适应",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过图卡配对与故事分享，提升儿童对陌生人的警觉性与正确应对能力。"
+  },
+  {
+    "name": "情境图卡判断训练",
+    "level": "L3",
+    "parent_name": "应对陌生人情境训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "准备情境图卡（如：在街上遇到陌生人、陌生人按门铃、陌生人送礼物）及回应行为图卡（如：接受邀请、不理会、告知成人、接受礼物、跟随陌生人）。请儿童先抽1张情境图卡，再抽1张回应行为图卡配对，评估情境处理是否合理，最后邀请儿童分享过往类似经验。"
+  },
+  {
+    "name": "危险认知故事引导",
+    "level": "L3",
+    "parent_name": "应对陌生人情境训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "讲述《危险！亮亮》故事，内容关于亮亮独自回家时遇到陌生人问路，并想起妈妈教导不随便跟陌生人说话或离开的叮咛。借此让儿童明白拒绝陌生人邀请或物件的重要性，避免潜在危险。"
+  },
+  {
+    "name": "在有需要时懂得寻求适当的协助",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "项目三：在有需要时懂得寻求适当的协助。包含在社区寻找并辨认常用标志、公共洗手间标志及身体不适时主动告知成人。"
+  },
+  {
+    "name": "在社区寻找并辨认常用的标志",
+    "level": "L2",
+    "parent_name": "在有需要时懂得寻求适当的协助",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "目标：在社区寻找并辨认常用的标志（如：港铁站）。活动建议：出示及介绍常见标志，并进行寻找与拍照活动。"
+  },
+  {
+    "name": "有需要时，在社区寻找及辨认公共洗手间的标志",
+    "level": "L2",
+    "parent_name": "在有需要时懂得寻求适当的协助",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "目标：有需要时，在社区寻找及辨认公共洗手间的标志。活动建议：透过实地考察与角色扮演，教导儿童识别并寻找洗手间。"
+  },
+  {
+    "name": "身体不适时，主动告诉熟悉的成人（如：父母、老师）",
+    "level": "L2",
+    "parent_name": "在有需要时懂得寻求适当的协助",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "目标：身体不适时，主动告诉熟悉的成人。活动建议：讲述《医生，谢谢你》故事并引导儿童模仿主角，或透过角色扮演练习寻求协助，以及辨认合适的求助对象。"
+  },
+  {
+    "name": "活动：标志认识与实地寻找",
+    "level": "L3",
+    "parent_name": "在社区寻找并辨认常用的标志",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "出示及介绍港铁站、男/女洗手间等标志，进行地面贴标志游戏；设定目标标志，实地寻找并拍照，回校后在电脑重温并说出名称与功能。"
+  },
+  {
+    "name": "活动：绘本故事与角色模仿",
+    "level": "L3",
+    "parent_name": "身体不适时，主动告诉熟悉的成人（如：父母、老师）",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "讲述《医生，谢谢你》故事，让儿童明白身体不适应告知大人；进行角色扮演，练习遇到困难或受伤时寻求适当协助。"
+  },
+  {
+    "name": "活动：情境选择比赛",
+    "level": "L3",
+    "parent_name": "身体不适时，主动告诉熟悉的成人（如：父母、老师）",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "展示不同人物（老师、妈妈、医生等）照片，给予不同情境（如：弄湿衣服），请儿童比赛找出正确帮助者。"
+  },
+  {
+    "name": "在有需要时懂得寻求适当的协助",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "训练儿童在有需要时识别社区设施并寻求协助，同时认识社区常见人物及其工作。"
+  },
+  {
+    "name": "认识常见社区设施及其功能",
+    "level": "L2",
+    "parent_name": "在有需要时懂得寻求适当的协助",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "透过社区设施相片，让儿童认识邮筒、废纸箱、公园长櫈、交通灯、篮球场、图书馆、公车站及码头等设施名称与功能。"
+  },
+  {
+    "name": "有需要时寻求协助",
+    "level": "L2",
+    "parent_name": "在有需要时懂得寻求适当的协助",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "在有需要时，能寻找社区内适当的设施（如洗手间）及人物（如警察）以获得协助。"
+  },
+  {
+    "name": "认识社区人物的工作",
+    "level": "L2",
+    "parent_name": "在有需要时懂得寻求适当的协助",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "简单说出警察、医生、消防员、老师等社区人物的工作。"
+  },
+  {
+    "name": "社区设施认知与配对活动",
+    "level": "L3",
+    "parent_name": "认识常见社区设施及其功能",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "出示社区设施相片，逐一向儿童介绍名称与功能，并进行场景模拟：成人说出需求（如「我想寄信」），请儿童找出合适的社区设施相片。"
+  },
+  {
+    "name": "社区场景棋盘游戏",
+    "level": "L3",
+    "parent_name": "认识常见社区设施及其功能",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "将地线及不同社区设施相片贴在地上作为棋盘。儿童掷骰子前进，停在特定相片上时，需说出该设施的目的。"
+  },
+  {
+    "name": "职业角色扮演游戏",
+    "level": "L3",
+    "parent_name": "认识社区人物的工作",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "透过图卡介绍警察、医生、消防员、老师、清洁夫、邮差、护士及司机。请儿童选择角色，穿上制服或使用工具进行扮演，并说出所扮人物的名称、工作与职责内容。"
+  },
+  {
+    "name": "社交与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南之社交与情绪领域。"
+  },
+  {
+    "name": "社会适应",
+    "level": "L2",
+    "parent_name": "社交与情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童的社会适应能力训练活动。"
+  },
+  {
+    "name": "困难情境应对训练",
+    "level": "L3",
+    "parent_name": "社会适应",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过分组比赛形式，训练儿童在遇到困难情境时，识别并说出正确的求助对象。"
+  },
+  {
+    "name": "情境求助活动",
+    "level": "L4",
+    "parent_name": "困难情境应对训练",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动说明：1. 将儿童分组进行比赛。2. 成人出示不同的困难情境图卡（例如：儿童迷路了）。3. 儿童需正确说出在该情境下应该向谁寻求协助（例如：找警察）。4. 胜出的组别可获得小吃奖励。准备物品：不同的困难情境图卡、小吃。"
+  },
+  {
+    "name": "在有需要时懂得寻求适当的协助",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "项目三：在有需要时懂得寻求适当的协助。目标：有需要时，主动打电话给别人。"
+  },
+  {
+    "name": "教导打电话的过程及礼仪",
+    "level": "L2",
+    "parent_name": "在有需要时懂得寻求适当的协助",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "教导儿童打电话的过程及礼仪：先按正确的号码，当听到对方回应或说「喂」时，便说出找的人之名字及目的。叮嘱儿童有需要时才打电话找人帮忙，并利用手提电话让儿童实习，每次实习都设定电话的目的及电话号码，让儿童明白打电话的意义及方法。建议材料：手提电话、电话号码纸。"
+  },
+  {
+    "name": "透过故事学习求助情境",
+    "level": "L2",
+    "parent_name": "在有需要时懂得寻求适当的协助",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "透过说故事，向儿童讲解当「有困难时，可打电话给别人寻求帮助」。然后请儿童回答故事有关的问题，并与儿童讨论在有需要时，打电话给别人的做法。成人亦可利用情景程序图卡教导儿童，如：有火灾或车祸，告诉成人打电话报警。请儿童依次排出程序图卡及说出当中的内容，再解释为何要打电话给别人。建议材料：故事书、玩具电话、情景程序图卡。"
+  },
+  {
+    "name": "情景配对与模拟演练",
+    "level": "L2",
+    "parent_name": "在有需要时懂得寻求适当的协助",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "先出示不同的图卡，图卡上写有人物及其电话号码。接著成人说出情景，请儿童找出正确的图卡，并模拟打电话给对方，说出目的，例如情景是「请妈妈带外套给我」，儿童便要找出妈妈的图卡，然后依据图卡上显示的号码电话，最后说出目的。建议材料：写有电话号码的人物图卡。"
+  },
+  {
+    "name": "社会适应",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南——社会适应领域。"
+  },
+  {
+    "name": "遵从环境规范",
+    "level": "L2",
+    "parent_name": "社会适应",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学习并遵从环境中的固定规范与秩序。"
+  },
+  {
+    "name": "依循固定的生活程序",
+    "level": "L3",
+    "parent_name": "遵从环境规范",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "建立依循固定生活程序的能力。"
+  },
+  {
+    "name": "观察环境，前往固定地方进行活动",
+    "level": "L4",
+    "parent_name": "依循固定的生活程序",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "观察环境并前往固定地方活动（如：到饭桌进食或到洗手间）。建议活动：使用房子模型与洋娃娃进行模拟演示，或带儿童参观校园设施并练习前往指定地点。"
+  },
+  {
+    "name": "按指示将物件放回惯常的摆放位置",
+    "level": "L4",
+    "parent_name": "依循固定的生活程序",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "训练儿童将物件放回惯常位置。建议活动：平时外出前一起找衣物、回家后将鞋子放回鞋柜，或在日常活动中引导儿童将物品归位。"
+  },
+  {
+    "name": "依循固定的生活程序",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "训练儿童依循固定的生活程序，建立外出准备的习惯。"
+  },
+  {
+    "name": "外出时，按需要拿取所需的物件",
+    "level": "L2",
+    "parent_name": "依循固定的生活程序",
+    "age_min_months": 28,
+    "age_max_months": 59,
+    "prompt_corpus": "学习外出前穿上鞋子等基本准备工作。"
+  },
+  {
+    "name": "出发前检查带物件",
+    "level": "L2",
+    "parent_name": "依循固定的生活程序",
+    "age_min_months": 72,
+    "age_max_months": 72,
+    "prompt_corpus": "学习出发前自我检查所需携带的物品。"
+  },
+  {
+    "name": "外出前检查物品训练",
+    "level": "L3",
+    "parent_name": "外出时，按需要拿取所需的物件",
+    "age_min_months": 28,
+    "age_max_months": 59,
+    "prompt_corpus": "向儿童表示要到超级市场购买食物，请儿童在出发前想一想及检查带的物件（如：八达通、环保袋及钱包），可按儿童能力提供2件物件选择。"
+  },
+  {
+    "name": "物品配对游戏",
+    "level": "L3",
+    "parent_name": "外出时，按需要拿取所需的物件",
+    "age_min_months": 28,
+    "age_max_months": 59,
+    "prompt_corpus": "预备物件图片（如：外套、书、笔、雨伞、泳衣及眼镜等），与儿童玩「老师说」游戏。成人表示「出门时，下雨了」，儿童需找出对应图片「雨伞」。"
+  },
+  {
+    "name": "清单检查练习",
+    "level": "L3",
+    "parent_name": "出发前检查带物件",
+    "age_min_months": 72,
+    "age_max_months": 72,
+    "prompt_corpus": "替儿童列出上学所需物件的清单，每天晚上与儿童依照清单检查上学带之物件，并请儿童说明携带该物件的原因（如：水壶内有足够的饮用水，供休息时饮用）。"
+  },
+  {
+    "name": "绘图分类活动",
+    "level": "L3",
+    "parent_name": "出发前检查带物件",
+    "age_min_months": 72,
+    "age_max_months": 72,
+    "prompt_corpus": "向儿童派发附有10个大格的工作纸，请儿童按要去的地方（如：公园、沙滩、学校及超级市场等），画出所需携带的物件，可以比赛形式进行。若儿童绘画能力较弱，可提供相关图卡代替。"
+  },
+  {
+    "name": "社会适应",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童的社会适应能力训练。"
+  },
+  {
+    "name": "依循固定的生活程序",
+    "level": "L2",
+    "parent_name": "社会适应",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "训练儿童适应生活中的固定程序与常规。"
+  },
+  {
+    "name": "成人陪同下愿意到理发店剪发",
+    "level": "L3",
+    "parent_name": "依循固定的生活程序",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "目标为4-5岁儿童，透过模拟与实地经验，协助儿童克服对剪发的恐惧，并愿意配合理发流程。"
+  },
+  {
+    "name": "活动建议：模拟理发情境",
+    "level": "L4",
+    "parent_name": "成人陪同下愿意到理发店剪发",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "利用《社区适应乐融融—发型屋剪发》教材，观看教学影片并配合角色扮演游戏。运用塑胶剪刀、梳子、喷水壶、围巾、吹风机等道具进行模拟；辅以程序图卡讲解进入理发店、围围巾、接受剪发、照镜子及付款流程；活动后进行实地观看他人剪发，最后带领儿童亲自体验理发。"
+  },
+  {
+    "name": "活动建议：实地参与与正向鼓励",
+    "level": "L4",
+    "parent_name": "成人陪同下愿意到理发店剪发",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "带领儿童在理发店旁观成人理发过程，赞赏其陪伴行为，并鼓励与理发师打招呼。留意儿童对各程序的接受度，若有困难应即时给予安慰或暂停，避免产生不快经验。"
+  },
+  {
+    "name": "活动建议：奖励计划",
+    "level": "L4",
+    "parent_name": "成人陪同下愿意到理发店剪发",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "与儿童订立奖励计划，当儿童每月完成剪发，即可挑选一项喜爱的活动（如游泳、看电影）作为奖励，强化其参与意愿。"
+  },
+  {
+    "name": "遵守社区活动规则",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "训练儿童遵守公共规则，包括交通安全及乘车礼仪。"
+  },
+  {
+    "name": "交通安全与规则",
+    "level": "L2",
+    "parent_name": "遵守社区活动规则",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "学习识别道路危险，遵守红绿灯指示及交通规则。"
+  },
+  {
+    "name": "乘车规则",
+    "level": "L2",
+    "parent_name": "遵守社区活动规则",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "学习搭乘交通工具时的礼仪与安全规范，如排队及保持秩序。"
+  },
+  {
+    "name": "交通灯反应游戏",
+    "level": "L3",
+    "parent_name": "交通安全与规则",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "使用红绿灯颜色卡，训练儿童根据指令做出相应动作（绿灯行、红灯停），培养遵守交通规则的意识。"
+  },
+  {
+    "name": "交通情境模拟游戏",
+    "level": "L3",
+    "parent_name": "交通安全与规则",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "在地板上标示界线，分配儿童扮演行人与车辆，透过成人指挥红绿灯，模拟过马路情境，实践交通规则。"
+  },
+  {
+    "name": "乘车规则图卡练习",
+    "level": "L3",
+    "parent_name": "乘车规则",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "运用乘车规则标语海报介绍规则，并透过情境图卡让儿童判断行为对错（如排队、不饮食、不乱跑），强化正确乘车观念。"
+  },
+  {
+    "name": "社会适应",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童社会适应训练指南"
+  },
+  {
+    "name": "遵从社区活动规则",
+    "level": "L2",
+    "parent_name": "社会适应",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "培养儿童在公共场合遵守既定活动范围规则的能力"
+  },
+  {
+    "name": "在成人指定的公众范围内活动，不随便跑到别处",
+    "level": "L3",
+    "parent_name": "遵从社区活动规则",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "目标D：在成人指定的公众范围内活动，不随便跑到别处（如：在公园范围内玩耍）。活动建议：带儿童去公园或室内游乐场玩耍，并向儿童强调规则，如：不可离开指定的范围。成人在旁观察，若儿童走出指定范围，即给予提示。尝试多次后，成人可坐在一旁，给予眼神及手势回应或赞赏。"
+  },
+  {
+    "name": "依从成人的嘱咐，自律地在指定范围内活动，并会提醒其他儿童遵守",
+    "level": "L3",
+    "parent_name": "遵从社区活动规则",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "目标E：依从成人的嘱咐，自律地在指定范围内活动，并会提醒其他儿童遵守。活动建议：1. 带儿童去公园或室内游乐场玩耍，并向儿童强调规则。2. 先预备地垫，并在上面放大积木，每次安排3至4位儿童到地垫上玩大积木，并告诉儿童玩耍规则：只准在地垫上玩大积木，如有其他儿童越线则须提醒他。成人留意儿童有否越线，并即时给予提示及赞赏。材料：地垫、大积木。3. 预备地垫并播放音乐，请儿童在地垫上跳舞，强调只能在地垫上走动，不可越线，否则要坐在外围看其他儿童玩耍，至下一首乐曲才可再次加入。坐在外围的儿童则要帮忙看跳舞的儿童有否越线。当音乐停止时，请所有儿童坐在地垫上，数一数不在指定范围跳舞的儿童有多少位，并鼓励越线的儿童再度玩耍时加倍留意。材料：地垫、音乐播放器。"
+  },
+  {
+    "name": "遵守社区活动规则",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 36,
+    "age_max_months": 60,
+    "prompt_corpus": "学习在社区环境中遵循适当的行为规范，包括正确使用设施及排队守则。"
+  },
+  {
+    "name": "遵守社区设施规则",
+    "level": "L2",
+    "parent_name": "遵守社区活动规则",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "目标：遵守使用社区设施的规则（如：在公众泳池不乱跑）。活动建议：预先制作正确及不正确行为的图卡，如：在公园赏花、在图书馆看书、在泳池游泳、在邮局寄信、在茶楼唱歌、在泳池内进食、在图书馆内打球、在公园采摘花朵等。请儿童在正确行为的图画画上「V」，不正确的则画「X」。"
+  },
+  {
+    "name": "进行活动时的排队与秩序",
+    "level": "L2",
+    "parent_name": "遵守社区活动规则",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "目标：进行活动（如：洗手、玩滑梯）时排队，明白插队是不对的。活动建议：逐一出示社区设施的规则图卡，如：不准饮食、不准使用手提电话、不准践踏草地及不准踏脚踏车等，并向儿童讲解有关内容。接著与儿童到户外活动，寻找有关标示图，当找到后请儿童说出标示的内容。"
+  },
+  {
+    "name": "遵守社区活动规则",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 36,
+    "age_max_months": 60,
+    "prompt_corpus": "训练儿童在社区活动时遵守规则及注意安全。"
+  },
+  {
+    "name": "在社区内活动时会紧随成人",
+    "level": "L2",
+    "parent_name": "遵守社区活动规则",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "目标：在社区内活动时会紧随成人。"
+  },
+  {
+    "name": "成人陪同使用扶手电梯或升降机时会注意安全",
+    "level": "L2",
+    "parent_name": "遵守社区活动规则",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "目标：成人陪同使用扶手电梯或升降机时会注意安全。"
+  },
+  {
+    "name": "活动建议：影片教学",
+    "level": "L3",
+    "parent_name": "遵守社区活动规则",
+    "age_min_months": 36,
+    "age_max_months": 60,
+    "prompt_corpus": "播放使用扶手电梯及升降机的影片，教导儿童在外出和使用这些设施时须紧随成人及注意安全。"
+  },
+  {
+    "name": "活动建议：家居训练与奖励计划",
+    "level": "L3",
+    "parent_name": "遵守社区活动规则",
+    "age_min_months": 36,
+    "age_max_months": 60,
+    "prompt_corpus": "利用「好孩子奖励册」，与儿童订立外出的规则及安全守则（如：在社区进行活动时，应紧随成人、在成人陪同下方使用扶手电梯或升降机，并须注意安全）。若儿童能遵守订下的安全规则，成人便在册上贴上贴纸。每星期检阅奖励册，按所订立的标准奖励儿童的良好行为。"
+  },
+  {
+    "name": "活动建议：情境辨别训练",
+    "level": "L3",
+    "parent_name": "遵守社区活动规则",
+    "age_min_months": 36,
+    "age_max_months": 60,
+    "prompt_corpus": "出示不同的情境图卡，请儿童分辨对与错，如：「儿童在扶手电梯上走动」，应举起「X」牌表示不对，并说出这会造成甚么危险。如成人出示「儿童在扶手电梯上站稳，而且一手拖着成人，另一手紧握扶手」，儿童应举起「V」，如此类推。"
+  },
+  {
+    "name": "遵守社区活动规则",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "训练儿童明白在商店内购物需付款，不随便触摸、拆开或擅自取走物品；并能依从商店特定买卖方式去选购东西。"
+  },
+  {
+    "name": "角色扮演：超市购物模拟",
+    "level": "L2",
+    "parent_name": "遵守社区活动规则",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "利用协康会《社区适应乐融》—「超级市场」程序图卡及影片，讲解购物的过程和守则。接著请儿童轮流扮演顾客和收款员的角色，活动后讨论过程中的感受。"
+  },
+  {
+    "name": "社区实践：真实商店购物",
+    "level": "L2",
+    "parent_name": "遵守社区活动规则",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "运用购物程序图卡向儿童讲解购物程序，并请儿童尝试自行排列图卡。当儿童掌握购物程序后，成人与儿童进行社区实践活动，带儿童前往附近商店购买食物，并把购物程序拍摄下来，活动后利用电脑与儿童重温购物过程的影片或相片及分享食物。"
+  },
+  {
+    "name": "社会与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南中的社会适应范畴"
+  },
+  {
+    "name": "培养公德心",
+    "level": "L2",
+    "parent_name": "社会与情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目三：培养公德心"
+  },
+  {
+    "name": "遵守公众卫生的规则，将垃圾放入废纸箱",
+    "level": "L3",
+    "parent_name": "培养公德心",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "训练目标为让儿童遵守公众卫生的规则，将垃圾放入废纸箱，建议适用年龄为3-4岁。"
+  },
+  {
+    "name": "情境讨论与行为辨识",
+    "level": "L4",
+    "parent_name": "遵守公众卫生的规则，将垃圾放入废纸箱",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "出示与儿童生活相关的图卡，与儿童讨论图卡中人物的行为是否正确。教导儿童正确处理垃圾的方法，应将垃圾放在废纸箱内。材料包括：情境图卡、废纸箱图卡。"
+  },
+  {
+    "name": "废弃物分类练习",
+    "level": "L4",
+    "parent_name": "遵守公众卫生的规则，将垃圾放入废纸箱",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "预先放置3个自制的废物分类集箱，并展示1个内有未分类废物（如：胶叉、纸杯、汽水罐等）的篮子。请儿童先把垃圾分作纸类、塑胶和铝罐3类，并放在不同的篮子里，最后把已分类的废物放入特定的收集箱。材料包括：篮子3个、各类废物（如：胶叉、纸杯、汽水罐）、自制废物分类收集箱。"
+  },
+  {
+    "name": "户外观察与实践",
+    "level": "L4",
+    "parent_name": "遵守公众卫生的规则，将垃圾放入废纸箱",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "带儿童到户外学习，把不同款式的废纸箱拍摄下来。利用相片与儿童讨论废纸箱的功用是甚么，及甚么需要把垃圾放入废纸箱，并鼓励儿童分享使用废纸箱的经验。材料包括：不同款式的废纸箱相片。"
+  },
+  {
+    "name": "培养公德心",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "训练儿童在指定地方如厕，并在如厕后自行冲厕。"
+  },
+  {
+    "name": "如厕训练",
+    "level": "L2",
+    "parent_name": "培养公德心",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "利用洋娃娃示范如厕的整个过程，及与儿童一起重复哼唱儿歌《卫生小常识》：「如厕后，清洁好，穿好裤子，记得冲厕，洗手抹手没问题，个人卫生我做得到！」接著用程序图向儿童讲解正确如厕过程为：走进洗手间、坐于座厕上如厕、整理好衣服、按掣冲水。最后，请儿童自行尝试排列程序图及说出图卡内容。"
+  },
+  {
+    "name": "场所与规则认知",
+    "level": "L2",
+    "parent_name": "培养公德心",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "先向儿童讲解不同活动应于不同的地方进行，并要遵守不同的规则，如：「小便」要于「洗手间」进行，完成后要冲厕及洗手；「吃饭」要于「餐桌」进行，吃完要抹嘴及收拾餐具；「做作业」要于「书桌」进行，完成后要收拾书包等。预备日常活动的相片，与儿童玩配对活动。成人先作示范，接著请儿童按成人出示的活动相片，配对正确进行的地方及所要守的规则的相片，并请儿童说出各相片的内容及规则。"
+  },
+  {
+    "name": "社会与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南之社会与情绪发展领域"
+  },
+  {
+    "name": "培养公德心",
+    "level": "L2",
+    "parent_name": "社会与情绪",
+    "age_min_months": 36,
+    "age_max_months": 72,
+    "prompt_corpus": "项目三：培养公德心，目标为不随地吐痰或吐口水；打喷嚏或咳嗽时，会用手或手帕掩口。"
+  },
+  {
+    "name": "示范与辨识卫生行为",
+    "level": "L3",
+    "parent_name": "培养公德心",
+    "age_min_months": 36,
+    "age_max_months": 72,
+    "prompt_corpus": "预备正确个人卫生行为的相片，向儿童介绍良好的行为。成人模拟相片中的行为，如：打喷嚏或咳嗽时，立即用手或纸巾掩口；吐痰于纸巾内并放入废纸箱。告诉儿童这是正确的行为，一定要遵守。接著成人做出对与错的行为，请儿童判断说出那样的行为是否正确。建议材料：打喷嚏或咳嗽时，用手或手帕掩口的相片、纸巾、废纸箱。"
+  },
+  {
+    "name": "偶戏角色扮演",
+    "level": "L3",
+    "parent_name": "培养公德心",
+    "age_min_months": 36,
+    "age_max_months": 72,
+    "prompt_corpus": "利用手偶与儿童打招呼，在过程中成人A把手偶面对著成人B打喷嚏，成人B刻意抹自己的脸并说：「哗！好肮脏！这是不好的行为！口水内有很多病菌，当打喷嚏或咳嗽时，需要用手掩著嘴巴，然后立即洗手或用纸巾把手擦干净，避免病菌传播。」接著成人A示范用手偶掩著嘴巴，请儿童也一起让实手偶。在日常生活中，成人可按不同情景而作出提示，若儿童做出恰当及对的行为，应即时给予赞赏。建议材料：手偶、纸巾。"
+  },
+  {
+    "name": "情境讨论与卫生教育",
+    "level": "L3",
+    "parent_name": "培养公德心",
+    "age_min_months": 36,
+    "age_max_months": 72,
+    "prompt_corpus": "出示情景图卡，介绍小明在游乐场游玩，不小心踏中路边的痰涎而滑倒，导致双膝跌损，步行时露出痛苦的表情。接著与儿童一起讨论小明的感受、吐痰对他人的影响，以及发现自己有痰涎该怎样处理。最后出示「不准随处吐痰」的标语海报，说明随处吐痰是不正确的行为，痰涎会传播细菌，成人并示范正确的处理方法：把痰涎吐在纸巾内，并将纸巾放入废纸箱后立即洗手。建议材料：情景图卡、「不准随处吐痰」标语海报。"
+  },
+  {
+    "name": "培养公德心",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "项目三：培养公德心。目标包含：爱惜公共物品，有需要时懂得把使用完之物品放回原处；在公众场所，会轻步走路及轻声说话，不随意喧哗；明白看表演时要保持安静，否则会妨碍他人欣赏；明白阅读图书馆的图书时要小心和依时归还图书，以便其他人可以借阅。"
+  },
+  {
+    "name": "归位训练：物品分类与归位",
+    "level": "L2",
+    "parent_name": "培养公德心",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "先把文具架上盛载了不同物品的篮子贴上不同物件的图片及颜色标贴（如：颜色笔、浆糊等），并在架上放置该篮子的位置贴上同样的颜色标贴。每当用完架上的物品后，请儿童把物品放回原来的篮子里，再配对颜色篮子放回架上适当位置。"
+  },
+  {
+    "name": "行为规范：儿歌加强印象",
+    "level": "L2",
+    "parent_name": "培养公德心",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "与儿童一起重复哼唱儿歌《好孩子》，加深儿童对所要遵守之规则的印象，并把儿歌贴在课室当眼处，以提醒儿童在公众场所不随意喧哗才是好孩子。儿歌内容：『好孩子，本领高，走路轻，说话轻，人见人爱做得好。』"
+  },
+  {
+    "name": "情境演练：表演与电影院礼仪",
+    "level": "L2",
+    "parent_name": "培养公德心",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "以投影片介绍看表演及看电影时应遵守的规则，教导儿童在看表演或看电影时要保持安静，不要妨碍他人欣赏。接著模拟往电影院观看电影，播放儿童喜爱的卡通片，请儿童在观看时要保持安坐及安静地欣赏。活动结束后，赞赏儿童能遵守电影院的规则。"
+  },
+  {
+    "name": "学前儿童训练指南：社交与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南中的社交与情绪发展单元。"
+  },
+  {
+    "name": "社会适应",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南：社交与情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童的社会适应能力培养活动。"
+  },
+  {
+    "name": "图书馆的使用与公民规范",
+    "level": "L3",
+    "parent_name": "社会适应",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过讲述「小明在图书馆」的经历故事，引导儿童理解图书馆借阅程序、书籍归还责任以及爱护公物的重要性。活动包括讨论故事主角感受、解释借阅规则，并教育儿童遵守社会公共规范。"
+  },
+  {
+    "name": "培养公德心",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "项目三：培养公德心。目标包括分享公用的物品设备（如：公众抹手纸），不会浪费或拿取过多；在公众场所进餐时，运用公筷取食物，不进饮或进食别人吃过的食物。"
+  },
+  {
+    "name": "分享公用物品与设备",
+    "level": "L2",
+    "parent_name": "培养公德心",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "播放德育影片，内容说明分享公用品及设备，如：不会浪费或拿取过多公众抹手纸，在公众场所进餐时运用公筷取食物、不进饮或进食别人吃过的食物等。成人利用影片内容发问问题，以加深儿童对正确行为的认识，并给小吃或贴纸予回答正确的儿童，以示奖励。"
+  },
+  {
+    "name": "公众场所自助餐礼仪模拟",
+    "level": "L2",
+    "parent_name": "培养公德心",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "先以图卡教导儿童进食自助餐的守则及注意事项，如：排队取食物、使用公筷或夹子取食物、选取食物后返回自己的座位慢慢享用、过程中不能进饮或进食别人吃过的食物等。预备模型食物、餐具及安排场地，与儿童玩模拟吃自助餐游戏。把儿童分配扮演不同的角色，如：服务员要负责带位、准备餐具、清理桌上的食物；客人则遵守吃自助餐的守则，选取喜爱的食物及不应浪费食物。"
+  },
+  {
+    "name": "遵守学校常规及指令",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 24,
+    "age_max_months": 42,
+    "prompt_corpus": "项目四：遵守学校常规及指令，包含愿意轮候及成人在身旁时仍会继续活动的训练。"
+  },
+  {
+    "name": "愿意轮候",
+    "level": "L2",
+    "parent_name": "遵守学校常规及指令",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "愿意轮候（如：排队或耐心等候老师分派食物）。"
+  },
+  {
+    "name": "成人在身旁时仍会继续原来的活动",
+    "level": "L2",
+    "parent_name": "遵守学校常规及指令",
+    "age_min_months": 30,
+    "age_max_months": 36,
+    "prompt_corpus": "即使成人在身旁，儿童仍能持续参与原本的活动。"
+  },
+  {
+    "name": "玩具轮替活动",
+    "level": "L3",
+    "parent_name": "遵守学校常规及指令",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "先准备一些儿童喜欢及不太喜欢的玩具，再把玩具分派给儿童，鼓励他们在成人不在身旁时自行玩耍。接著给予他们适当的玩耍时间，如2分钟，并用闹钟作提示。钟声响起后，各人要转换手上所把玩的玩具，借此让儿童学习轮候及交换玩具。按儿童能力，可增加轮候的时间。"
+  },
+  {
+    "name": "滚球游戏活动",
+    "level": "L3",
+    "parent_name": "遵守学校常规及指令",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "将汽水罐、薯片罐或胶饮料瓶当作保龄球瓶，并依下图排列（可在地上画上记号作提示）。请儿童排队，轮流以球推向保龄球瓶，每推倒1瓶便可得1分。每位儿童推球后须把倒下的罐子重新排好，然后拾回球交给下一位儿童继续参与活动。儿童熟习以上玩法后，可分成2队比赛，推倒较多瓶子的一方便获胜。过程中成人可赞赏儿童懂得耐心排队及轮候参与。可改成同类游戏让儿童学习轮候，如：轮流抛豆袋、套胶圈。"
+  },
+  {
+    "name": "遵守学校常规及指令",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 36,
+    "age_max_months": 60,
+    "prompt_corpus": "遵守学校常规及指令，包括摆放物品、收拾餐具、依照指令拿取或交出物件以及协助完成简单差事。"
+  },
+  {
+    "name": "摆放自己的书包、物品及收拾食后的餐具",
+    "level": "L2",
+    "parent_name": "遵守学校常规及指令",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "训练儿童学会整理自己的个人物品并归位。"
+  },
+  {
+    "name": "依照老师的指令拿取物件",
+    "level": "L2",
+    "parent_name": "遵守学校常规及指令",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "训练儿童听取指令并完成指定物件的拿取任务。"
+  },
+  {
+    "name": "依照老师的指令交出物件",
+    "level": "L2",
+    "parent_name": "遵守学校常规及指令",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "训练儿童听取指令并将指定物件交给老师或他人。"
+  },
+  {
+    "name": "协助老师完成简单的差事",
+    "level": "L2",
+    "parent_name": "遵守学校常规及指令",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "训练儿童协助执行班级事务，如收通告、抹黑板等。"
+  },
+  {
+    "name": "日常差事训练",
+    "level": "L3",
+    "parent_name": "遵守学校常规及指令",
+    "age_min_months": 36,
+    "age_max_months": 60,
+    "prompt_corpus": "在日常生活中指示儿童帮忙做小差事，鼓励留心聆听并依指令行动，过程如遇困难即时给予协助或提示。"
+  },
+  {
+    "name": "收货佬游戏",
+    "level": "L3",
+    "parent_name": "遵守学校常规及指令",
+    "age_min_months": 36,
+    "age_max_months": 60,
+    "prompt_corpus": "将儿童分组，听从指令拿取指定数量的书包或物品，培养听觉理解与指令执行速度。"
+  },
+  {
+    "name": "值日生任务",
+    "level": "L3",
+    "parent_name": "遵守学校常规及指令",
+    "age_min_months": 36,
+    "age_max_months": 60,
+    "prompt_corpus": "安排轮流当值日生，根据工作表完成每日任务，如收集通告、抹黑板、收拾餐具等，并由成人给予赞赏。"
+  },
+  {
+    "name": "遵守学校常规及指令",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 36,
+    "age_max_months": 72,
+    "prompt_corpus": "项目四：遵守学校常规及指令，包含在课室上课时安坐、游戏或活动时不骚扰别人、课堂或活动中会先举手才发言、参与活动时保持安静。"
+  },
+  {
+    "name": "在课室上课时安坐",
+    "level": "L2",
+    "parent_name": "遵守学校常规及指令",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "目标G：训练儿童在课室上课时安坐。"
+  },
+  {
+    "name": "游戏或活动时不骚扰别人",
+    "level": "L2",
+    "parent_name": "遵守学校常规及指令",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "目标H：训练儿童在游戏或活动时不骚扰别人。"
+  },
+  {
+    "name": "课堂或活动中会先举手才发言",
+    "level": "L2",
+    "parent_name": "遵守学校常规及指令",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "目标I：训练儿童在课堂或活动中会先举手才发言。"
+  },
+  {
+    "name": "参与活动时保持安静",
+    "level": "L2",
+    "parent_name": "遵守学校常规及指令",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "目标J：训练儿童在参与活动时保持安静。"
+  },
+  {
+    "name": "活动建议一：奖励制度建立常规",
+    "level": "L3",
+    "parent_name": "遵守学校常规及指令",
+    "age_min_months": 36,
+    "age_max_months": 72,
+    "prompt_corpus": "在课室进行活动前，先以投影片或海报向儿童讲解课室常规和其重要性，如：安坐上课、保持安静并专注地参与活动、不骚扰别人、先举手才发言、要轻声说话，及在课室内要慢步行走等。在活动时，儿童能遵守「先举手才发言」这规则便会获得1个贴纸。下课时请儿童结算所得贴纸数量，并可按所得的数量换取小礼物以示奖励，如：1至2个贴纸可换巧克力1颗、3至4个贴纸可换棉花糖1颗。成人可多制造儿童举手发言的机会，强调「先举手才发言」的好行为。所需材料：课室规则海报、贴纸、计分表、巧克力、棉花糖。"
+  },
+  {
+    "name": "活动建议二：情境讨论与示范",
+    "level": "L3",
+    "parent_name": "遵守学校常规及指令",
+    "age_min_months": 36,
+    "age_max_months": 72,
+    "prompt_corpus": "出示有关遵守规则及没有遵守规则的情景图卡，与儿童一起讨论遵守规则及没有遵守规则的后果，让儿童明白遵守规则的好处。当儿童说出及示范如何遵守规则时，请其他儿童以掌声鼓励。最后请儿童用投票形式，决定哪些是课室应要遵守的规则（如：参与活动时保持安静、征求成人的同意才离开课室）。所需材料：遵守及没有遵守课室规则的情景图卡。"
+  },
+  {
+    "name": "活动建议三：标语创作与视觉提示",
+    "level": "L3",
+    "parent_name": "遵守学校常规及指令",
+    "age_min_months": 36,
+    "age_max_months": 72,
+    "prompt_corpus": "向儿童说明遵守规则的好处，并请儿童创作标语海报，如「成人说话时，我会保持安静」、「我会举手表达需要」等，并张贴在课室内以提醒儿童。成人也可展示有关遵守规则的图画，让儿童观察及激发灵感，鼓励儿童一起创作属于自己课室的守规标语及图画。成人可按儿童的能力附以文字提示。所需材料：画纸、颜色笔、有关遵守规则的图画/图片。"
+  },
+  {
+    "name": "社交与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南中的社交与情绪发展领域。"
+  },
+  {
+    "name": "遵守学校常规及指令",
+    "level": "L2",
+    "parent_name": "社交与情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "训练儿童对于学校常规的遵守能力以及对指令的执行能力。"
+  },
+  {
+    "name": "替老师传达简单的口讯给指定的人物",
+    "level": "L3",
+    "parent_name": "遵守学校常规及指令",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "训练目标为让儿童能够替老师传达简单的口讯给指定的人物（例如：替老师找李小明）。"
+  },
+  {
+    "name": "电话传讯游戏",
+    "level": "L4",
+    "parent_name": "替老师传达简单的口讯给指定的人物",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "成人利用电话与儿童对话，说出口讯，并请儿童把口讯传给指定的儿童。请儿童放下电话后，前往找成人指定的儿童传达口讯。可按儿童的能力，加长口讯的内容（如：告诉陈小明，请他拿作业往见老师）。所需教材：电话。"
+  },
+  {
+    "name": "传声筒游戏",
+    "level": "L4",
+    "parent_name": "替老师传达简单的口讯给指定的人物",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "把儿童分成2组玩「传声筒」游戏。成人先把指示写在便条上（如：取1块积木），并把指示告诉第一位儿童，第一位儿童便需将便条的内容传给排在第二位的儿童，如此类推。最后一位儿童在收到指示后，要以行动做出指示的内容，接著成人把便条上的指示读出，做得最快又最准确的一组胜出。注意事项：指示的内容必须为儿童能力所及。调整难度：可由简单的指示开始，渐渐加长至3项指示。所需教材：便条、指示提及的物件。"
+  },
+  {
+    "name": "遵守学校常规及指令",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "训练儿童遵守学校安排、转换课室及寻求老师同意的社交与情绪能力。"
+  },
+  {
+    "name": "愿意接受学校的安排",
+    "level": "L2",
+    "parent_name": "遵守学校常规及指令",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "培养儿童在转换课室、更换老师或变更活动时的适应与接受能力。"
+  },
+  {
+    "name": "按要求自行前往各学习场所",
+    "level": "L2",
+    "parent_name": "遵守学校常规及指令",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "训练儿童在如厕后或课间转换时，能够独立并按要求返回指定学习场所。"
+  },
+  {
+    "name": "有需要离开课室时会征求老师同意",
+    "level": "L2",
+    "parent_name": "遵守学校常规及指令",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "教导儿童在有特殊需要（如如厕）欲离开课室前，主动向老师寻求许可。"
+  },
+  {
+    "name": "课室流程卡辅助活动",
+    "level": "L3",
+    "parent_name": "愿意接受学校的安排",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "在课室张贴流程卡，当课程有变动时贴上「X」并标注变动后的内容。成人每天请儿童依照流程图前往指定地点，并赞赏儿童的配合行为。所需材料：上课流程卡、「X」牌。"
+  },
+  {
+    "name": "活动时间表与指引应用",
+    "level": "L3",
+    "parent_name": "按要求自行前往各学习场所",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "展示图画活动时间表介绍资讯。转换地点前，邀请儿童查阅时间表并提示其他儿童。赞赏能依照指示前往正确地点的儿童。所需材料：活动时间表。"
+  },
+  {
+    "name": "课室规则评核与奖励",
+    "level": "L3",
+    "parent_name": "有需要离开课室时会征求老师同意",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "展示课室规则列表并进行介绍。每日课堂结束时，与儿童一同分享并回顾当日遵守规则的情况，对表现良好的儿童给予贴纸奖励。所需材料：课室规则列表、贴纸。"
+  },
+  {
+    "name": "遵守学校常规及指令",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 48,
+    "age_max_months": 71,
+    "prompt_corpus": "活动时注意适当的人、物及事"
+  },
+  {
+    "name": "合作竞赛游戏",
+    "level": "L2",
+    "parent_name": "遵守学校常规及指令",
+    "age_min_months": 48,
+    "age_max_months": 71,
+    "prompt_corpus": "将儿童分成2组，每组3人，比赛跨过障碍物。先模仿百足虫姿态，搭着肩膀蹲下前行；后续可变换为螃蟹走姿态，模仿螃蟹横行并跨过障碍物。活动目标为提升合作意识与专注力。材料：空盒或大积木、音乐播放器。"
+  },
+  {
+    "name": "领袖模仿游戏",
+    "level": "L2",
+    "parent_name": "遵守学校常规及指令",
+    "age_min_months": 48,
+    "age_max_months": 71,
+    "prompt_corpus": "由一位儿童担任领袖在房内做出不同动作，其他儿童在室外等待后进入，并有3次机会猜测谁是领袖。游戏后给予星星贴纸作为专注模仿的奖励。材料：奖品、星星贴纸。"
+  },
+  {
+    "name": "社交与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南中的社交与情绪发展领域。"
+  },
+  {
+    "name": "社会适应",
+    "level": "L2",
+    "parent_name": "社交与情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童的社会适应能力训练活动建议。"
+  },
+  {
+    "name": "儿歌互动与角色轮替游戏",
+    "level": "L3",
+    "parent_name": "社会适应",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "示范唱儿歌《小公鸡》，鼓励儿童进行模仿与互动。活动目标为提升儿童的专注力、参与感及理解轮替规则。玩法为：1. 成人示范唱《小公鸡》；2. 当唱到「轮到轮到你」时，成人望著或指著特定儿童，该儿童便担任「领袖」；3. 在成人协助下，被邀请的儿童站出来或在原地重复动作；4. 其他儿童需模仿动作，重复玩法直至每位儿童均尝试过领袖角色。成人应适时赞赏专注参与的儿童。"
+  },
+  {
+    "name": "社交情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南中的社交情绪领域。"
+  },
+  {
+    "name": "遵守学校常规及指令",
+    "level": "L2",
+    "parent_name": "社交情绪",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "项目四：遵守学校常规及指令。目标为适当地表达愿意或拒绝参与群体活动的意愿。"
+  },
+  {
+    "name": "群体活动意愿表达训练",
+    "level": "L3",
+    "parent_name": "遵守学校常规及指令",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "活动一：透过统计表与贴纸，询问儿童喜爱的活动，记录并引导儿童表达原因，借此让儿童辨识群体中受欢迎与不受欢迎的活动。活动二：利用活动图片，让儿童选择参与意愿，并训练儿童透过声音、动作、表情或文字表达喜爱（举手）或不喜欢（双手交叉）的参与意愿。"
+  },
+  {
+    "name": "遵守学校常规及指令",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "项目四：遵守学校常规及指令，目标：无需协助下完成指定的习作。"
+  },
+  {
+    "name": "分组轮转活动",
+    "level": "L2",
+    "parent_name": "遵守学校常规及指令",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "把课室内的活动划分为3组：图工、图书及教具，并将儿童分成3组（A、B、C）参与活动。活动进行前，告诉儿童课室每15分钟会响钟一次，请儿童听到钟声后，自行顺序往下一项活动。成人在各组内附设不同的印章，请儿童在入组时自行盖章。活动完结后，儿童集齐3个印章，便可在游戏时间内，选取自己喜欢的玩具。成人在过程中赞赏无需协助下能完成指定活动的儿童。"
+  },
+  {
+    "name": "制作与执行个人工作表",
+    "level": "L2",
+    "parent_name": "遵守学校常规及指令",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "制作工作表，并编订工作项目（工作项目及数量须视乎儿童能力而定），如：阅读图书1本、完成课外练习1页、默写英文生字5个。之后列出成人与儿童共同协商的奖励，如：到公园玩15分钟。每次完成一个项目后，请儿童在项目旁加上「V」号，并于完成所有项目后，给成人检查工作表，及换领所设定的奖励。"
+  },
+  {
+    "name": "认识社交礼仪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童社交与情绪训练指南：认识社交礼仪"
+  },
+  {
+    "name": "基本社交礼仪",
+    "level": "L2",
+    "parent_name": "认识社交礼仪",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "项目一：基本社交礼仪。训练目标：适当地运用简单的社交手势或动作（如：再见、点头、摇头、飞吻）。"
+  },
+  {
+    "name": "日常作息手势练习",
+    "level": "L3",
+    "parent_name": "基本社交礼仪",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "成人每天早上对儿童说早晨，分离时则说再见，并配合儿歌及律动来增加趣味。例如使用《早晨歌》配合挥手与点头动作，或《Bye-bye 歌》配合挥手与亲亲动作。"
+  },
+  {
+    "name": "社交小火车互动",
+    "level": "L3",
+    "parent_name": "基本社交礼仪",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "请2位儿童前后排列为一组，排后面的一位手要按前面那位儿童的肩旁扮成小火车。接著播放音乐，请儿童们模拟小火车在教室内四处走动，当2辆小火车迎面碰到时，要向对方打招呼说「早安」或「你好」。音乐停止时，则向一起玩的同伴说「再见」。需要音乐播放器。"
+  },
+  {
+    "name": "动物手偶打招呼游戏",
+    "level": "L3",
+    "parent_name": "基本社交礼仪",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "成人与儿童各拿取1只动物手偶，各自操作手偶「打招呼」游戏。当音乐响起时，两只动物便一同「上街玩」。音乐停止时，请两只动物以点头打招呼，直至歌曲播放完毕，便挥手说再见。需要音乐播放器及动物手偶2只。"
+  },
+  {
+    "name": "基本社交礼仪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "基本社交礼仪教学单元，涵盖对门铃声的反应与应对训练。"
+  },
+  {
+    "name": "听到门铃声，作出简单的反应（如：前去应门）",
+    "level": "L2",
+    "parent_name": "基本社交礼仪",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "训练儿童在听到门铃声时，能作出简单的反应动作，例如直接前去应门。"
+  },
+  {
+    "name": "听到门铃声，作较复杂的回应（如：前去应门时，分辨应否开门）",
+    "level": "L2",
+    "parent_name": "基本社交礼仪",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "训练儿童在听到门铃声时，能作出较复杂的判断与回应，例如在开门前先进行安全评估与分辨。"
+  },
+  {
+    "name": "活动建议一：利用简报小故事教学",
+    "level": "L3",
+    "parent_name": "基本社交礼仪",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "制作包含4幅图画的简报，利用电脑播放，内容描述门铃响起、儿童听到铃声、儿童找成人开门、发现是爷爷到访的过程。透过故事与儿童讨论如何正确应门及寻求成人协助。"
+  },
+  {
+    "name": "活动建议二：模拟客人到访游戏",
+    "level": "L3",
+    "parent_name": "基本社交礼仪",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "模拟真实情境，由儿童分配担任访客与接待者角色。当模拟门铃响起时，由儿童以自己的方式作出回应。活动后与儿童进行讨论，分析并确认正确的应对方式，以增强儿童的理解与记忆。"
+  },
+  {
+    "name": "基本社交礼仪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "训练幼儿在接受别人物件或称赞时，能够做出适当的社交回应。"
+  },
+  {
+    "name": "接受别人的物件或称赞时，会说：「谢谢」",
+    "level": "L2",
+    "parent_name": "基本社交礼仪",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "当接受别人的物件或称赞时，学会说「谢谢」这一基本的社交用语。"
+  },
+  {
+    "name": "洋娃娃礼貌模仿",
+    "level": "L3",
+    "parent_name": "接受别人的物件或称赞时，会说：「谢谢」",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "利用洋娃娃介绍明明是一位非常有礼貌的好孩子，当明明接受别人的物件或称赞时，都会说：「谢谢」，大家都喜欢明明。接著请儿童轮流模拟接受明明送礼物，并做出适当的回应。所需材料：洋娃娃、不同的物件或食物。"
+  },
+  {
+    "name": "简报故事教学",
+    "level": "L3",
+    "parent_name": "接受别人的物件或称赞时，会说：「谢谢」",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "自制简报小故事（4幅），片中主角是位没有礼貌的小孩，当收取别人礼物的时候不会说谢谢，故大家都讨厌他。利用小故事教导儿童，当接受别人的物件或称赞时，应该说：「谢谢」。最后引导儿童分享个人经验。所需材料：简报小故事、电脑。"
+  },
+  {
+    "name": "抽奖礼物互动",
+    "level": "L3",
+    "parent_name": "接受别人的物件或称赞时，会说：「谢谢」",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "成人负责抽奖，请儿童留心聆听，当听到自己姓名时，便起来接受礼物，并在接受礼物时，说出：「谢谢」，才可以从成人手上取得礼物。所需材料：抽奖箱、儿童姓名卡、小礼物。"
+  },
+  {
+    "name": "社会与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童社会与情绪发展领域训练框架"
+  },
+  {
+    "name": "基本社交礼仪",
+    "level": "L2",
+    "parent_name": "社会与情绪",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "训练儿童在社交互动中获取许可、表达感谢及进行礼貌交流的技能"
+  },
+  {
+    "name": "获取物品许可训练",
+    "level": "L3",
+    "parent_name": "基本社交礼仪",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "透过「交换玩具」游戏，训练儿童在拿取他人物品前，先征求对方同意（如：用纸或手势表示）。活动：播放音乐，音乐停止时，提示儿童在与他人交换玩具前，先取得对方同意。"
+  },
+  {
+    "name": "借用物品礼仪训练",
+    "level": "L3",
+    "parent_name": "基本社交礼仪",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "训练儿童借用他人物品时先征求许可。活动：发给每位儿童不同颜色的画笔，引导儿童向他人借用不同颜色时，需先询问并询问「请问我可以借用你的红色笔吗？」"
+  },
+  {
+    "name": "表达感谢与求助训练",
+    "level": "L3",
+    "parent_name": "基本社交礼仪",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "训练儿童接受他人帮助时说「谢谢」。活动：透过模拟购物游戏，让儿童向扮演店员的对象购买食物，并在完成交易后学习说「谢谢」。"
+  },
+  {
+    "name": "社交礼仪应用训练",
+    "level": "L3",
+    "parent_name": "基本社交礼仪",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "训练儿童作客时递送礼物并说道贺的话。活动：利用图画故事讲述探访他人时的礼仪，并进行角色扮演游戏，提示儿童练习递送礼物并说出道贺语（如「生日快乐」）。"
+  },
+  {
+    "name": "基本社交礼仪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南——社交情绪课程，核心领域为基本社交礼仪。"
+  },
+  {
+    "name": "说话时会按情景调节音量",
+    "level": "L2",
+    "parent_name": "基本社交礼仪",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "训练儿童根据不同场所（如图书馆、公园、戏院、市场）调整说话音量。"
+  },
+  {
+    "name": "情景音量游戏：呼啦圈问候",
+    "level": "L3",
+    "parent_name": "说话时会按情景调节音量",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "请儿童围圈坐，中间放一个呼啦圈。成人站在圈内扮演主持人，出示写有「大声」或「轻声」的图卡，儿童需根据图卡音量进行问候。随后引入情景图卡，引导儿童理解在图书馆、公园等不同场合应使用合适的音量说话。"
+  },
+  {
+    "name": "情景音量游戏：手偶小故事",
+    "level": "L3",
+    "parent_name": "说话时会按情景调节音量",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "利用手偶演绎情景：当手偶A在看书时，手偶B大声说话导致A不开心。引导儿童讨论为何A不开心，理解与人说话需按情景调节音量，并根据随机抽出的情景图卡决定应使用「大声」或「轻声」回应。"
+  },
+  {
+    "name": "情景音量游戏：渔夫与海豚",
+    "level": "L3",
+    "parent_name": "说话时会按情景调节音量",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "邀请6位儿童参与游戏，1位扮演渔夫，5位戴上海豚帽。渔夫需与海豚保持4呎距离并呼唤「海豚，过来吧！」。练习若声音太细，海豚听不到；若声音太大，海豚会被吓跑，借此训练儿童尝试调节适当的音量。"
+  },
+  {
+    "name": "基本社交礼仪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "项目一：基本社交礼仪。包含作客时参与活动、协助招呼客人及谈话、收敛行为等训练目标。"
+  },
+  {
+    "name": "家家酒角色扮演游戏",
+    "level": "L2",
+    "parent_name": "基本社交礼仪",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "与儿童玩「家家酒」游戏，成人与儿童轮流扮演客人及主人的角色，让儿童学习接待客人，如：招呼别人坐下，给他喝杯水，与他分享食物等。当儿童做得对时，成人可给予口头赞赏，并鼓励儿童在家中，做妈妈的小帮手，帮助招待客人。游戏过程可配合儿歌：「作客时，先按铃，点点头，问句好，别人东西勿乱碰，做个有礼乖宝宝。」"
+  },
+  {
+    "name": "模拟生日会活动",
+    "level": "L2",
+    "parent_name": "基本社交礼仪",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "模拟举办生日会，请儿童一起预备生日会的食物及餐具。成人扮演访客，请儿童模拟做主人及招呼客人。儿童及成人可以轮流扮演不同的角色。"
+  },
+  {
+    "name": "手偶互动教学",
+    "level": "L2",
+    "parent_name": "基本社交礼仪",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "出示手偶，向儿童介绍它是「我们的新成员」，到家中作客。接著拿著手偶把儿童的物件胡乱翻弄，把原本收拾好的地方（儿童重视，平时会自己收拾的物件，例如：玩具箱、书包）弄乱，引导儿童说出物件被翻乱的感受，并问儿童手偶的行为是否正确。成人继而用严肃的语气对手偶说作客时应有的礼貌，如：安坐，若想拿主人的东西必须征求他的同意，并教导手偶一起把刚才翻乱的物件收拾整理好，完成后给予手偶赞赏。"
+  },
+  {
+    "name": "社交与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南中的社交与情绪发展领域。"
+  },
+  {
+    "name": "基本社交礼仪",
+    "level": "L2",
+    "parent_name": "社交与情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目一：基本社交礼仪，包含适当社交距离与赞赏他人之训练。"
+  },
+  {
+    "name": "与别人说话时会保持适当的距离",
+    "level": "L3",
+    "parent_name": "基本社交礼仪",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "训练目标：与别人说话时会保持适当的距离。活动建议：成人带领儿童在房间排开，利用颜色标志练习行走与对话，引导儿童体会远、近、适中距离对沟通的影响，并选出合适的说话距离。"
+  },
+  {
+    "name": "在成人指导下，运用礼貌语称赞别人",
+    "level": "L3",
+    "parent_name": "基本社交礼仪",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "训练目标：在成人指导下，运用礼貌语称赞别人。活动建议1：在儿童完成作业后，成人展示作品并示范给予口头赞赏，引导儿童学习赞赏他人。活动建议2：举行「我会说话称赞别人」创作比赛，将语句贴在课室内，成人示范并协助儿童练习运用礼貌语。"
+  },
+  {
+    "name": "基本社交礼仪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "基本社交礼仪培训，专注于犯错后经纠正作出道歉。"
+  },
+  {
+    "name": "犯错后，经纠正作出道歉",
+    "level": "L2",
+    "parent_name": "基本社交礼仪",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "训练目标为使儿童在犯错后，经由适当引导能主动或跟随作出道歉。"
+  },
+  {
+    "name": "活动一：故事教学",
+    "level": "L3",
+    "parent_name": "犯错后，经纠正作出道歉",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "利用故事《认错的亮亮》讲述主角在做错事时向人说对不起，因而得到许多人的赞赏。借此教导儿童犯错时要说「对不起」，以作出道歉。"
+  },
+  {
+    "name": "活动二：布偶情境扮演",
+    "level": "L3",
+    "parent_name": "犯错后，经纠正作出道歉",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "利用2个不同的布偶，扮演犯下不同错误的情况（如：没有问别人便拿走玩具）。询问儿童主角应说甚么话，教导儿童在犯错时应说「对不起」，并依成人提示向别人道歉，将错误纠正过来。"
+  },
+  {
+    "name": "活动三：词语卡配对练习",
+    "level": "L3",
+    "parent_name": "犯错后，经纠正作出道歉",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "先将「唔该」、「谢谢」及「对不起」之词语贴在白板上，接著利用图片或图卡向儿童说明不同的情境。请儿童找出合适的词语贴在相配的图片或图卡上，并说出应如何改正所犯的错误行为及处理方法。"
+  },
+  {
+    "name": "基本社交礼仪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "基本社交礼仪训练：培养儿童愿意聆听、待对方说话完毕后才开始说话的能力，并能以礼貌方式回应。"
+  },
+  {
+    "name": "愿意聆听，先让对方说话完毕后才开始说话",
+    "level": "L2",
+    "parent_name": "基本社交礼仪",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "训练目标：培养儿童愿意聆听，待对方说话完毕后才开始说话。"
+  },
+  {
+    "name": "聆听别人的讲话，并有礼貌地简单回应",
+    "level": "L2",
+    "parent_name": "基本社交礼仪",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "训练目标：培养儿童聆听别人的讲话，并能以礼貌的方式进行简单回应。"
+  },
+  {
+    "name": "模拟电话对话",
+    "level": "L3",
+    "parent_name": "基本社交礼仪",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "活动建议：拿出玩具电话，模拟与儿童进行电话对话。因应儿童能力提出一些简单的问题，例如：『你叫甚么名字？』请儿童留心聆听，并学习待对方说完后才轻声回应。所需材料：玩具电话。"
+  },
+  {
+    "name": "设立奖励计划",
+    "level": "L3",
+    "parent_name": "基本社交礼仪",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "活动建议：设立奖励计划，提示儿童与别人谈话时要留心聆听，并等待对方说话完毕后才开始说话。当儿童做到时，可获得一个盖印，当累积到5个盖印，便可获得儿童喜爱的小吃作奖励。所需材料：记录表、印章、小吃。"
+  },
+  {
+    "name": "日常互动观察与引导",
+    "level": "L3",
+    "parent_name": "基本社交礼仪",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "活动建议：在日常生活中，当有人与儿童谈话时，成人可站在儿童身旁，当儿童做到等待对方说话完毕后才开始说话，并有礼貌地作出简单回应时，即可给予赞赏。若儿童未能做到，成人则要在儿童身旁轻声提示，让儿童模仿并学习基本社交礼仪。"
+  },
+  {
+    "name": "社会适应",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "社会适应领域相关训练目标与活动建议。"
+  },
+  {
+    "name": "电话应对",
+    "level": "L2",
+    "parent_name": "社会适应",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "训练儿童在不同情境下使用电话进行沟通与应对的社交技能。"
+  },
+  {
+    "name": "在成人提示下，提起听筒并作简单的回应",
+    "level": "L3",
+    "parent_name": "电话应对",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "在成人提示下，提起听筒并作简单的回应（如：说「喂」、「再见」）。"
+  },
+  {
+    "name": "接听电话后，通知家人前来听电话或告诉对方「他不在家」",
+    "level": "L3",
+    "parent_name": "电话应对",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "接听电话后，通知家人前来听电话或告诉对方「他不在家」。"
+  },
+  {
+    "name": "在电话中与别人进行简短的倾谈",
+    "level": "L3",
+    "parent_name": "电话应对",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "在电话中与别人进行简短的倾谈。"
+  },
+  {
+    "name": "进行电话应对时，代传简单讯息",
+    "level": "L3",
+    "parent_name": "电话应对",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "进行电话应对时，代传简单讯息。"
+  },
+  {
+    "name": "活动建议一：歌曲情境演练",
+    "level": "L3",
+    "parent_name": "电话应对",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童围圈而坐，放置1台真实电话。成人一起唱儿歌《小小电话》，于歌曲停止时致电。由成人示范礼仪与用语，请儿童接听并简单对谈，完成后挂上电话返回原位。教材：电话。"
+  },
+  {
+    "name": "活动建议二：图片情境角色扮演",
+    "level": "L3",
+    "parent_name": "电话应对",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "利用生活情境图卡（睡觉、煮饭等），引导儿童描述情境并进行角色扮演。练习说出「喂」、「请问找谁」或回答「妈妈不在家」。鼓励儿童自行思考回应技巧。教材：不同生活情境图卡。"
+  },
+  {
+    "name": "社会适应",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南——社会适应领域相关活动"
+  },
+  {
+    "name": "电话沟通与应对技巧",
+    "level": "L2",
+    "parent_name": "社会适应",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过模拟电话情境，训练儿童掌握电话对话的流程、社交礼仪及讯息传递技巧。"
+  },
+  {
+    "name": "邀请同侪参加生日会",
+    "level": "L3",
+    "parent_name": "电话沟通与应对技巧",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "告诉儿童将举行生日会，请儿童模拟用电话邀请其他儿童参加，并告诉对方日期、时间及地点。成人指导儿童遵循打招呼、说明来意、介绍自己、说出重要讯息、说再见的程序，并确认对方出席意愿。活动需配合玩具电话进行。"
+  },
+  {
+    "name": "远端电话对话训练",
+    "level": "L3",
+    "parent_name": "电话沟通与应对技巧",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "制造使用电话通话的环境及机会，与儿童分别在不同地方用电话对话。教导儿童使用电话的程序：打招呼、介绍自己、说明重要讯息、说再见。范例内容可涵盖「你在哪里」、「何时到达」或「协助购物」。可安排成人于旁协助。"
+  },
+  {
+    "name": "日常讯息传递与互动",
+    "level": "L3",
+    "parent_name": "电话沟通与应对技巧",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童模拟互相通话，由成人询问儿童学校生活或感兴趣的事（如「上课写甚么字」、「有甚么趣事发生」），鼓励儿童练习回答。并尝试在日常生活中让儿童接听电话，实际练习对话技巧。"
+  },
+  {
+    "name": "社会适应",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童的社会适应能力训练，涵盖各类社交与生活常规指导。"
+  },
+  {
+    "name": "进食礼仪",
+    "level": "L2",
+    "parent_name": "社会适应",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "培养儿童在指定地方（如餐桌）进食，避免随意乱跑的训练目标。"
+  },
+  {
+    "name": "活动一：绘本引导与规则认知",
+    "level": "L3",
+    "parent_name": "进食礼仪",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "与儿童阅读《好品德故事》，讲述在家里、学校及公众地方进食的规矩，透过提问引导儿童思考并遵守规则。"
+  },
+  {
+    "name": "活动二：情境图卡辨识与讨论",
+    "level": "L3",
+    "parent_name": "进食礼仪",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "自制酒楼进食图画，展示正确与错误的进食行为，让儿童利用「✓」和「×」图卡标记，并讨论正确的做法，例如不可乱跑及需安坐。"
+  },
+  {
+    "name": "活动三：公众场合实地练习",
+    "level": "L3",
+    "parent_name": "进食礼仪",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "带领儿童至餐厅、超市、游泳池等公众地方，活动前预先提示规则（如拉手、不乱跑、安坐），并利用环境中的标语海报进行即时指导。"
+  },
+  {
+    "name": "社交情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "学前儿童训练指南-社交情绪"
+  },
+  {
+    "name": "社会适应",
+    "level": "L2",
+    "parent_name": "社交情绪",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "社交情绪训练中的社会适应领域"
+  },
+  {
+    "name": "进食礼仪",
+    "level": "L3",
+    "parent_name": "社会适应",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "目标B：在成人提示下，吃完被安排的食物，不把玩或挑选食物；目标C：分辨属于自己的食物，不擅自取去别人的食物或饮品。"
+  },
+  {
+    "name": "进食习惯建立",
+    "level": "L4",
+    "parent_name": "进食礼仪",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "日常生活中，当儿童进食时，可先给予较少份量的食物，并提示儿童在进食的过程中，不应把玩或挑选食物，当儿童完成成人安排的食物后可向成人表示添加份量。若儿童能正确地完成进食所安排的食物，成人便可添加食物的份量以作奖励。"
+  },
+  {
+    "name": "认识食物金字塔",
+    "level": "L4",
+    "parent_name": "进食礼仪",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "出示食物金字塔的图片，分享故事《不偏食》，告诉儿童要有均衡饮食及偏食之害处。接著取出多款健康食物，请儿童按健康饮食的比例（1份肉、2份蔬菜水果、3份饭面）选择喜欢的食物及份量。提示儿童把食物吃后，才可再加添。材料：食物多款、食物金字塔图片。"
+  },
+  {
+    "name": "进食秩序与分享",
+    "level": "L4",
+    "parent_name": "进食礼仪",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "请各儿童预备1个盒子，把自己喜欢的食物放在盒子内，作为休息时间的小吃，盒子上贴有儿童自己的相片或姓名。请其中一位儿童依盒上姓名，把食物盒子逐一派发给所属的儿童，然后请儿童进食自己食物盒内的小吃。过程中，成人赞赏没有擅自取去别人食物的儿童，也赞赏会把食物分享给其他人的儿童。材料：胶盆、食物盒、餐具。"
+  },
+  {
+    "name": "社会适应",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "社会适应领域相关训练内容。"
+  },
+  {
+    "name": "进食礼仪",
+    "level": "L2",
+    "parent_name": "社会适应",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "项目三：进食礼仪"
+  },
+  {
+    "name": "正确使用餐具并保持清洁",
+    "level": "L3",
+    "parent_name": "进食礼仪",
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "进食时，适当地运用餐具进食及保持清洁。活动建议：示范如何正确地使用餐具（如：汤匙、叉、筷子、碗、杯），并把儿童进食的样子摄录或拍照，以作日后讨论及分享。接著让儿童尝试选出自己喜欢的餐具（每次1款），并安坐于自己的座位上学习正确地运用该餐具进食。以相片提示儿童进食时要有礼貌，如：手要扶著碗、进食时不说话、注意保持桌面清洁、饭后要保持仪容整洁等。材料：汤匙、叉、筷子等餐具、儿童进食行为的相片。"
+  },
+  {
+    "name": "耐性等候与进食习惯",
+    "level": "L3",
+    "parent_name": "进食礼仪",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "有耐性地等候共同进食的人一起进食；保持合适的进食速度及份量，不吃得过急或过饱。活动建议：成人与儿童阅读图书《品德教育－进食礼仪》，透过故事教导儿童学习有耐性地等候及进食，并保持合适的进食速度及份量，不吃得过急或过饱。接著出示一家人用餐的图片，请儿童描述有关内容，并问儿童有关进食的问题，如：「一起进食的感觉如何」、「为何要等候家人进食」、「在等待的过程中可学习甚么礼仪」等，请儿童凭其日常进食的经验回答问题。材料：图书《品德教育－进食礼仪》、一家人用餐的图片。"
+  },
+  {
+    "name": "情绪表现",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "情绪表现相关的发展与训练指南"
+  },
+  {
+    "name": "依附行为",
+    "level": "L2",
+    "parent_name": "情绪表现",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对依附行为的学习重点与发展目标"
+  },
+  {
+    "name": "对成人的回应作出反应",
+    "level": "L3",
+    "parent_name": "依附行为",
+    "age_min_months": 0,
+    "age_max_months": 24,
+    "prompt_corpus": "针对儿童对成人回应的各项发展目标：A.对人脸或人声作出合适反应(0-6个月)；B.对生理需求作出合适反应(0-12个月)；C.对情绪需求作出合适反应(0-12个月)；D.找熟悉的成人满足生理或情绪需要(1-2岁)"
+  },
+  {
+    "name": "活动一：遮脸与现脸互动",
+    "level": "L4",
+    "parent_name": "对成人的回应作出反应",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "用1块颜色卡纸遮盖自己脸孔，在距离儿童约20厘米处慢慢上下移动，让儿童看见成人的整张脸孔。成人微笑地望著儿童观察反应，亦可使用颜色鲜艳的丝巾或扇子。注意事项：移动卡纸时动作要缓慢，以助儿童逐步看见成人脸孔。所需材料：颜色卡纸(12吋x12吋)、颜色鲜艳的丝巾或扇子。"
+  },
+  {
+    "name": "活动二：温柔对话与回应观察",
+    "level": "L4",
+    "parent_name": "对成人的回应作出反应",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "在距离儿童约30厘米处，用温柔语调及微笑表情与儿童说话。当儿童注视成人时，成人稍作停顿，观察儿童反应。持续注视、微笑、发声等均为表示成人继续对话的反应。重复上述动作，吸引儿童对照顾者作出合适回应。"
+  },
+  {
+    "name": "活动三：追视与目光转移",
+    "level": "L4",
+    "parent_name": "对成人的回应作出反应",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "成人与儿童面对面，拿出儿童喜欢的物件(如奶瓶)，在儿童眼前约15厘米缓慢地左右移动。待儿童注视该物件后，把物件移近自己的脸及轻唤儿童名字，借此吸引儿童注意成人。成人以微笑回应，并鼓励儿童持续专注四周环境及作出合适反应。所需材料：儿童喜欢的物件(如：奶瓶)。"
+  },
+  {
+    "name": "学前儿童训练指南—社交与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南—社交与情绪"
+  },
+  {
+    "name": "情绪表现",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南—社交与情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动建议—情绪表现"
+  },
+  {
+    "name": "安抚哭泣的儿童",
+    "level": "L3",
+    "parent_name": "情绪表现",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "当儿童哭泣的时候，成人首先抱著儿童及用说话加以安抚，并尝试猜测其原因，同时留意是否已接近儿童的进食时间。尝试把牛奶或食物放在儿童面前，及让其嗅到食物的香味，再观察儿童的反应，如：逐渐停止哭泣、看著食物、微笑或伸手拿取等。"
+  },
+  {
+    "name": "应对恐惧",
+    "level": "L3",
+    "parent_name": "情绪表现",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "当儿童看见陌生的人或事物时，或会表现恐惧，如：依偎著成人或哭泣。成人应抱著儿童及用说话加以安慰，同时尝试介绍陌生人或事物，并在稍有距离的地方和对方打招呼。过程中观察儿童会否停止哭泣或注视对方等。"
+  },
+  {
+    "name": "处理愤怒与不安",
+    "level": "L3",
+    "parent_name": "情绪表现",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "当儿童表现愤怒或哭泣时，成人观察周围环境并猜测其原因，再作安抚。也可带儿童到另一安静的环境，并逗儿童玩耍，缓和其不安的情绪。过程中观察儿童的反应，如：停止哭泣，或转为微笑。"
+  },
+  {
+    "name": "社交与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南之社交与情绪发展领域"
+  },
+  {
+    "name": "表示期望与照顾者亲近",
+    "level": "L2",
+    "parent_name": "社交与情绪",
+    "age_min_months": 0,
+    "age_max_months": 30,
+    "prompt_corpus": "透过感官互动与游戏，引导儿童与照顾者建立亲密关系并表达情感。"
+  },
+  {
+    "name": "对熟悉的人表示好感",
+    "level": "L3",
+    "parent_name": "表示期望与照顾者亲近",
+    "age_min_months": 0,
+    "age_max_months": 12,
+    "prompt_corpus": "透过微笑或发出声音对熟悉的人表达好感。"
+  },
+  {
+    "name": "用动作或声音表示期望照顾者拥抱",
+    "level": "L3",
+    "parent_name": "表示期望与照顾者亲近",
+    "age_min_months": 0,
+    "age_max_months": 12,
+    "prompt_corpus": "主动运用动作或声音表达期望被照顾者拥抱的需求。"
+  },
+  {
+    "name": "主动拥抱或亲吻熟悉的成人",
+    "level": "L3",
+    "parent_name": "表示期望与照顾者亲近",
+    "age_min_months": 18,
+    "age_max_months": 30,
+    "prompt_corpus": "主动透过肢体接触如拥抱或亲吻来表达情感。"
+  },
+  {
+    "name": "全身按摩与音乐互动",
+    "level": "L4",
+    "parent_name": "表示期望与照顾者亲近",
+    "age_min_months": 0,
+    "age_max_months": 30,
+    "prompt_corpus": "让儿童舒适地躺卧，播放柔和音乐，成人与儿童面对面轻声说话或唱歌，进行全身按摩，引导儿童对触摸作出主动拥抱或亲吻的回应。"
+  },
+  {
+    "name": "摇摆互动与情绪模仿",
+    "level": "L4",
+    "parent_name": "表示期望与照顾者亲近",
+    "age_min_months": 0,
+    "age_max_months": 30,
+    "prompt_corpus": "抱著儿童左右轻摇，以发声吸引注意并观察儿童反应，成人透过微笑、发声与开心表情，引导儿童模仿以表达对拥抱的期望。"
+  },
+  {
+    "name": "接近与逗弄互动",
+    "level": "L4",
+    "parent_name": "表示期望与照顾者亲近",
+    "age_min_months": 0,
+    "age_max_months": 30,
+    "prompt_corpus": "在儿童独自玩耍后，成人靠近并逗弄，鼓励儿童伸出双手发声，明确表示对成人拥抱的期望。"
+  },
+  {
+    "name": "躲猫猫游戏",
+    "level": "L4",
+    "parent_name": "表示期望与照顾者亲近",
+    "age_min_months": 0,
+    "age_max_months": 30,
+    "prompt_corpus": "使用毛巾与儿童玩躲猫猫，透过暂停与等待，观察并描述儿童的表情或细微动作，鼓励其重复动作或表情，以训练其表达好感与重复游戏的意图。"
+  },
+  {
+    "name": "学前儿童训练指南—社交与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童社交与情绪训练指南，旨在提升儿童社交能力与情绪调节。"
+  },
+  {
+    "name": "表示期望与照顾者亲近",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南—社交与情绪",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "与照顾者分离时，经由成人安抚下能平伏不舍或不安的情绪。"
+  },
+  {
+    "name": "分离情境安抚与互动",
+    "level": "L3",
+    "parent_name": "表示期望与照顾者亲近",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "当儿童与成人分离时，成人可先怀抱儿童加以安抚，并用说话向儿童解释只是短暂分离，提示儿童向成人说再见。注意事项：成人必须在短时间内再次回来跟儿童接触或玩耍，以增强他独处的信心。"
+  },
+  {
+    "name": "情感增强与赞赏",
+    "level": "L3",
+    "parent_name": "表示期望与照顾者亲近",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "在日常生活中多给予儿童赞赏，增强儿童对成人的信任和表达情感的信心。若儿童能自行玩玩具，成人可给予口头赞赏及拥抱，以示鼓励。"
+  },
+  {
+    "name": "情感表达故事教学",
+    "level": "L3",
+    "parent_name": "表示期望与照顾者亲近",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "透过有关情感表达的故事书，教导儿童正确地向熟悉的成人表达情感，例如：对喜欢的成人可给予拥抱、恐惧时可拥抱熟悉的成人以寻求支援等。成人在日常生活中，可多示范正确表达情感的方法。建议材料：有关情感表达的故事书。"
+  },
+  {
+    "name": "识别情绪的能力",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 6,
+    "age_max_months": 12,
+    "prompt_corpus": "训练儿童识别情绪的能力，包含回应他人的情绪。"
+  },
+  {
+    "name": "回应别人的情绪",
+    "level": "L2",
+    "parent_name": "识别情绪的能力",
+    "age_min_months": 6,
+    "age_max_months": 12,
+    "prompt_corpus": "理解照顾者表示「不行」或「危险」的脸部表情及动作，并能分辨成人友善的语气而做出合适的反应。"
+  },
+  {
+    "name": "即时制止危险行为训练",
+    "level": "L3",
+    "parent_name": "回应别人的情绪",
+    "age_min_months": 6,
+    "age_max_months": 12,
+    "prompt_corpus": "当儿童伸手触碰危险物件（如电掣、热水等），成人应立即以「不行」的脸部表情配合严肃的语调说：「不可以」，并立即用动作去停止儿童的危险行为，随后再向儿童解释，让儿童明白其危险性。"
+  },
+  {
+    "name": "模拟情境练习",
+    "level": "L3",
+    "parent_name": "回应别人的情绪",
+    "age_min_months": 6,
+    "age_max_months": 12,
+    "prompt_corpus": "以手偶扮演触碰危险物件（如电掣、热水、煮食炉等），当手偶触碰危险物件时，成人立即用「不行」或「危险」的脸部表情及动作去停止手偶。接著询问儿童可否随意去触碰危险物件，鼓励儿童以动作（摇手）或说话（不）来明确表示对「危险」的表情及动作提示。"
+  },
+  {
+    "name": "日常行为正向强化",
+    "level": "L3",
+    "parent_name": "回应别人的情绪",
+    "age_min_months": 6,
+    "age_max_months": 12,
+    "prompt_corpus": "在日常生活中多赞赏儿童的正确行为，给予拥抱或微笑的表情。当儿童有不正确的行为时，成人立即停止儿童的活动，或以不喜悦的表情提示儿童。指示必须具体及正面，如儿童吃饭时到处走，成人要指示儿童「坐好」，当儿童坐下后即指出「你能坐好吃饭，真乖」。"
+  },
+  {
+    "name": "回应别人的情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 12,
+    "age_max_months": 42,
+    "prompt_corpus": "核心目标为训练儿童展现简单的同情感，包括观察他人情绪并作出相应的安抚或回应。"
+  },
+  {
+    "name": "表现简单的同情感",
+    "level": "L2",
+    "parent_name": "回应别人的情绪",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "训练目标：如看见别人快乐时，会跟别人一起笑；看见别人忧愁时，会注视别人的脸孔，静静坐在旁边不作声。"
+  },
+  {
+    "name": "留意及回应他人情绪",
+    "level": "L2",
+    "parent_name": "回应别人的情绪",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "训练目标：当看见其他儿童哭时，对他们说「不要哭」，并给他们纸巾或玩具以作安慰。"
+  },
+  {
+    "name": "故事书表情教学",
+    "level": "L3",
+    "parent_name": "回应别人的情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "运用故事书《千变万化的脸》，配合夸张的表情，演绎不同情绪的脸孔，教导儿童看到别人有不同情绪时，该如何表现友好。例如看见别人快乐时给予拥抱或微笑；看见别人忧愁时，轻拍肩膀安慰。调整难度：按儿童的理解能力，教导不同的情绪变化。"
+  },
+  {
+    "name": "生活情境模拟",
+    "level": "L3",
+    "parent_name": "回应别人的情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "从新闻剪报或故事书找出不同情景（与儿童的生活经验有关），可按儿童的理解能力作出不同变化。例如：在公园看见其他儿童跌倒及哭泣时，可以上前扶起并安慰。成人也可与儿童玩情境游戏，模拟有同伴因掉了饼干或心爱的故事书损毁而哭泣，请儿童以动作及说话帮助及安慰他们。"
+  },
+  {
+    "name": "手偶互动练习",
+    "level": "L3",
+    "parent_name": "回应别人的情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "利用手偶说故事，讲述有儿童不小心将水倒在地上，感到十分害怕而哭泣。接著再拿出另一手偶，示范用说话安慰对方说：「不要哭，我们一起把水擦干」。成人可继续用手偶模拟其他情景，教导儿童面对他人不同的情绪时，可以怎样做。"
+  },
+  {
+    "name": "认识复杂的情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目二：认识复杂的情绪"
+  },
+  {
+    "name": "表现简单的道德感",
+    "level": "L2",
+    "parent_name": "认识复杂的情绪",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "表现简单的道德感（如：当被成人责备，会不高兴；当被成人表扬，会表现开心）"
+  },
+  {
+    "name": "透过故事书学习情绪表达",
+    "level": "L3",
+    "parent_name": "表现简单的道德感",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "运用有关情绪表达的故事书，教导儿童正确的情绪表达方式。接著请儿童分享一件被人赞赏或责骂的事，表达当时的感受，并鼓励其他儿童假想自己遇有相同的情况，然后做出及说出会有怎样的反应及感受。建议材料：有关情绪表达的故事书。"
+  },
+  {
+    "name": "绘画与情绪贴图",
+    "level": "L3",
+    "parent_name": "表现简单的道德感",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "给儿童画纸和笔，让儿童画出有关于他当天心情的图画，内容可以是人物、物件、天气和个人感受等。完成后，引导儿童用说话表达图画的意思。接著预备情绪小脸谱，包括：「笑」、「哭」、「开心」及「不开心」。请儿童选择适当的脸谱贴在所画的图画上，以表达其当天的情绪。注意事项：在过程中成人无需给予个人意见，只要协助儿童表达情绪。若儿童能力许可，可以在图画中加入文字描述。建议材料：画纸、颜色笔、情绪脸谱、浆糊笔。"
+  },
+  {
+    "name": "听音辨位与情境连结",
+    "level": "L3",
+    "parent_name": "表现简单的道德感",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "先让儿童聆听一些笑声和哭喊声，再挑选相关的情绪图卡，如：笑、哭等。接著请儿童选出引起该情绪的原因的情景图卡（如：跌倒、吃蛋糕等）。日常生活中多鼓励儿童用不同方式表达自己的感受和情绪，包括：开心、不开心、喜欢、不喜欢的事情和物件。建议材料：笑声和哭喊声的声音片段、音乐播放器、情绪图卡、情景图卡。"
+  },
+  {
+    "name": "认识较复杂的情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 54,
+    "age_max_months": 72,
+    "prompt_corpus": "训练儿童识别并表达复杂情绪，透过生活情境与活动提升情绪认知与社交表达能力。"
+  },
+  {
+    "name": "目标 B: 用说话表达自豪感",
+    "level": "L2",
+    "parent_name": "认识较复杂的情绪",
+    "age_min_months": 54,
+    "age_max_months": 60,
+    "prompt_corpus": "练习使用言语表达自豪感，例如说出「妈妈，看我多棒」。"
+  },
+  {
+    "name": "目标 C: 用说话表达意愿",
+    "level": "L2",
+    "parent_name": "认识较复杂的情绪",
+    "age_min_months": 54,
+    "age_max_months": 60,
+    "prompt_corpus": "练习使用言语表达个人意愿，例如说出「妈妈，小明有玩具车，我也想要」。"
+  },
+  {
+    "name": "目标 D: 用说话表达理解别人的情绪",
+    "level": "L2",
+    "parent_name": "认识较复杂的情绪",
+    "age_min_months": 72,
+    "age_max_months": 72,
+    "prompt_corpus": "练习使用言语表达对他人情绪的理解，例如说出「小明不要再吵，老师生气了」。"
+  },
+  {
+    "name": "活动建议：正面赞赏积木游戏",
+    "level": "L3",
+    "parent_name": "认识较复杂的情绪",
+    "age_min_months": 54,
+    "age_max_months": 72,
+    "prompt_corpus": "与儿童一起玩叠积木，示范正面的说话赞赏自己，如「小明，你看妈妈多棒，能把积木叠得这么高，你也一起来叠积木」。当儿童能把积木叠高时，成人应立即赞赏，并引导儿童模仿正面的语句赞赏自己。"
+  },
+  {
+    "name": "活动建议：表达意愿训练",
+    "level": "L3",
+    "parent_name": "认识较复杂的情绪",
+    "age_min_months": 54,
+    "age_max_months": 72,
+    "prompt_corpus": "成人向儿童示范拿取玩具并说出意愿，引导儿童选出喜欢的玩具并说出2至3句说话表达意愿。亦可利用糖果等食物作为诱因，鼓励儿童以语言表达「我喜欢玩某玩具」或「他有糖果，我也想要」等需求。"
+  },
+  {
+    "name": "活动建议：镜子表情游戏",
+    "level": "L3",
+    "parent_name": "认识较复杂的情绪",
+    "age_min_months": 54,
+    "age_max_months": 72,
+    "prompt_corpus": "与儿童面对面站立，进行玩照镜子游戏。成人先模仿儿童动作，当两人动作相同时，成人展露笑容并描述当下情绪；若动作不一致，成人则露出不悦表情。调换角色重复游戏，让儿童练习留意对方的脸部表情与情绪状态。"
+  },
+  {
+    "name": "活动建议：情绪配对训练",
+    "level": "L3",
+    "parent_name": "认识较复杂的情绪",
+    "age_min_months": 54,
+    "age_max_months": 72,
+    "prompt_corpus": "准备成人不同情绪与儿童不同行为的照片。当儿童做出不同行为时，展示相应情绪照片（如完成工作出示开心照片、跌倒出示伤心照片）。透过把照片贴在墙上，让儿童描述情境并找出相对应的情绪照片配对。"
+  },
+  {
+    "name": "认识个人的情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 12,
+    "age_max_months": 36,
+    "prompt_corpus": "认识个人的情绪"
+  },
+  {
+    "name": "合适地表达情绪",
+    "level": "L2",
+    "parent_name": "认识个人的情绪",
+    "age_min_months": 12,
+    "age_max_months": 36,
+    "prompt_corpus": "合适地表达情绪训练目标"
+  },
+  {
+    "name": "用行动适当地表达简单的正面情绪",
+    "level": "L3",
+    "parent_name": "合适地表达情绪",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "用行动适当地表达简单的正面情绪（如：开心、轻松等）"
+  },
+  {
+    "name": "用行动适当地表达简单的负面情绪",
+    "level": "L3",
+    "parent_name": "合适地表达情绪",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "用行动适当地表达简单的负面情绪（如：生气、伤心等）"
+  },
+  {
+    "name": "用语言表达正面的情绪",
+    "level": "L3",
+    "parent_name": "合适地表达情绪",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "用语言表达正面的情绪（如：说「我很高兴」、「我好开心」、「我很喜欢」、「我好钟意」）"
+  },
+  {
+    "name": "用语言表达负面的情绪",
+    "level": "L3",
+    "parent_name": "合适地表达情绪",
+    "age_min_months": 24,
+    "age_max_months": 36,
+    "prompt_corpus": "用语言表达负面的情绪（如：说「不好」、「唔好」、「我不喜欢」、「我唔钟意」、「我不要」、「我唔制」、「我怕」、「我惊」）"
+  },
+  {
+    "name": "镜子表情模仿活动",
+    "level": "L3",
+    "parent_name": "合适地表达情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童面对著镜子一起扮鬼脸，并配合以不同的语调说出不同的情绪，如：以轻快语调说「去公园玩，好开心」；低沉的语调说「下雨啦，不能去公园，很不开心」。在过程中，成人需模仿儿童的表情和声音，引导儿童重复学习有关的表情和动作。注意事项：当儿童有负面情绪时，成人应避免反应过强。"
+  },
+  {
+    "name": "情绪图卡配对拍照活动",
+    "level": "L3",
+    "parent_name": "合适地表达情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "展示情绪图卡，介绍各种情绪的词汇。把情绪图卡贴在墙上，接著用手电筒的光照在其中一张情绪图卡上，请儿童对著镜子模仿出该情绪表情及说出词汇。成人替儿童拍照，在相片上加上儿童姓名及情绪字句，如「XX（儿童名字），开心笑」。"
+  },
+  {
+    "name": "情绪相片拼图活动",
+    "level": "L3",
+    "parent_name": "合适地表达情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示情绪相片，并介绍各种情绪的词汇，接著把情绪相片剪开数份做成拼图，请儿童砌回完整的表情。完成后，成人引导儿童说出情绪词汇，并做出该情绪的表情。"
+  },
+  {
+    "name": "社交与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南中的社交与情绪发展领域。"
+  },
+  {
+    "name": "情绪表现",
+    "level": "L2",
+    "parent_name": "社交与情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童进行的情绪辨识与情绪表达训练。"
+  },
+  {
+    "name": "情绪辨识与词汇学习",
+    "level": "L3",
+    "parent_name": "情绪表现",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动内容：出示情绪图卡，介绍各种情绪词汇。请儿童按照情绪图卡的模样，找出相同的情绪脸谱，并说出该情绪的词汇。所需物资：情绪图卡、情绪脸谱。"
+  },
+  {
+    "name": "透过故事学习情绪表达",
+    "level": "L3",
+    "parent_name": "情绪表现",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动内容：向儿童讲述故事的内容，过程中鼓励儿童模仿不同角色的正、负面情绪反应，并说出情绪的词汇。建议书籍：《说100遍我爱你》、《上帝把好东西给我》、《椅子树》。"
+  },
+  {
+    "name": "学前儿童训练指南—社交与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南—社交与情绪训练体系"
+  },
+  {
+    "name": "合适地表达情绪",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南—社交与情绪",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "说出引发情绪的原因，如：妈妈不买玩具给我，我不开心；或小龟死了，我好伤心。"
+  },
+  {
+    "name": "情绪图卡认知与表达",
+    "level": "L3",
+    "parent_name": "合适地表达情绪",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "出示不同的情绪图卡，并介绍各种情绪词汇，如：开心、伤心、惊慌等。把情绪图卡贴在白板上，请儿童依照成人所说的情景，站在适当的情绪图卡前并尝试说出原因。日常多留意儿童的情绪反应，并给予适时的辅导。对一些未有能力用语言表达情绪的儿童，可把儿童已认识的情绪图卡放在他们容易拿到的地方，方便儿童按需要取出图卡以表示自己的情绪。当儿童有情绪表现时，成人可提示儿童选取有关的情绪图卡，表达自己当时的情绪反应。成人也可透过儿童的情绪反应，指出及回应儿童的感受，如：「我知道你不开心，因为小明把你的玩具碰掉在地上。」让儿童学习说出引起情绪的原因。"
+  },
+  {
+    "name": "情绪幸运轮游戏",
+    "level": "L3",
+    "parent_name": "合适地表达情绪",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "预先制作一个情绪幸运轮，上面画有开心、不开心、生气、惊恐等情绪脸谱。出示一些画有不同情景的图卡，如：儿童喜爱的玩具、食物、去海洋公园、吃冰淇淋、打破花瓶等。邀请1位儿童转动情绪轮，按指针所停在的脸谱，先请儿童扮出该情绪的表情，再选取1张配合该情绪的情景图卡，最后鼓励儿童说出情景及情绪之间的关系，如：「我开心笑，因为可以吃冰淇淋。」"
+  },
+  {
+    "name": "学前儿童训练指南—社交与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南中的社交与情绪发展领域。"
+  },
+  {
+    "name": "情绪表现",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南—社交与情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童的情绪认知与表达能力训练。"
+  },
+  {
+    "name": "利用图卡描述情境与情绪反应",
+    "level": "L3",
+    "parent_name": "情绪表现",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "利用图卡描述情境，引导儿童说出相关的情绪反应，或贴上情绪脸谱。成人需写出描述情绪的句子，讲解情境与情绪的关系，例如：『当爸爸抱著我时，我觉得很开心。』所需工具：情境图卡、情绪脸谱。"
+  },
+  {
+    "name": "推测情绪反应的原因",
+    "level": "L3",
+    "parent_name": "情绪表现",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "利用情绪相片或图片，请儿童猜测为何会出现该情绪反应，例如：『婴儿哭是因为肚子饿或不舒服』等。接著利用儿童自己的情绪相片，让儿童忆述该情绪表现的原因。所需工具：情绪相片或图片。"
+  },
+  {
+    "name": "调节或处理自己的情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 12,
+    "age_max_months": 48,
+    "prompt_corpus": "训练儿童适当调节正面情绪、负面情绪，并能以言语表达需求与不满。"
+  },
+  {
+    "name": "适当调节正面情绪",
+    "level": "L2",
+    "parent_name": "调节或处理自己的情绪",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "学会于兴奋时能控制短暂的叫喊或跳跃，恢复平伏状态。"
+  },
+  {
+    "name": "适当调节负面情绪",
+    "level": "L2",
+    "parent_name": "调节或处理自己的情绪",
+    "age_min_months": 12,
+    "age_max_months": 24,
+    "prompt_corpus": "学会于不开心或哭泣时，能够平静下来，不会持续太久。"
+  },
+  {
+    "name": "运用语言表达需求与不满",
+    "level": "L2",
+    "parent_name": "调节或处理自己的情绪",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "在调节负面情绪时，能使用语言表达内在需求与不满，例如哭泣时能说出「我要自己吃」。"
+  },
+  {
+    "name": "情绪镜子练习",
+    "level": "L3",
+    "parent_name": "调节或处理自己的情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "请儿童看著情绪脸谱并对著镜子练习模仿表情。配合儿歌与音乐进行，成人给予鼓励。情绪儿歌内容：快乐嘻嘻嘻、兴奋哈哈哈、愤怒哼哼哼、伤心呜呜呜、害怕呀呀呀。"
+  },
+  {
+    "name": "情绪调节动作模仿",
+    "level": "L3",
+    "parent_name": "调节或处理自己的情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "利用动作图卡介绍调节情绪的方法，如深呼吸、笑笑拍手、抱膝扮石头、伏在桌上等。在音乐配合下，成人示范并引导儿童模仿动作与相关情绪词。"
+  },
+  {
+    "name": "情绪发泄练习（出气袋）",
+    "level": "L3",
+    "parent_name": "调节或处理自己的情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "利用情景图卡讨论导致不开心的原因。引导儿童分享感受并将不开心与紧张情绪「放进」纸袋。教导儿童对著纸袋大叫，将袋口扎紧后用力拍破，再将其挤成一团丢入废纸箱，以消减不快感。"
+  },
+  {
+    "name": "社交与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南中的社交与情绪发展领域。"
+  },
+  {
+    "name": "情绪表现",
+    "level": "L2",
+    "parent_name": "社交与情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童的情绪表达与调节能力训练。"
+  },
+  {
+    "name": "日常情绪回应与疏导",
+    "level": "L3",
+    "parent_name": "情绪表现",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "在日常生活中观察儿童行为，当儿童表现不安时，成人应即时回应情绪，如用说话反映儿童状况（「我知道你很伤心，很难过」），然后给予肢体安抚（拍他、抱抱他），引导儿童情绪平复，并教导儿童用简单语言表达需求和不满，例如「我的玩具不见了，我很伤心」。"
+  },
+  {
+    "name": "情绪识别与演绎游戏",
+    "level": "L3",
+    "parent_name": "情绪表现",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "先在地上放置4个呼拉圈，内放4种情绪图卡。利用不同的情景图卡介绍不同处境，请儿童按情景图卡内容走进相应的情绪圈内。接著请儿童扮演该情绪的表情与动作，并模拟情绪平复的过程。成人需赞赏儿童表现，并给予贴纸奖励。所需物资：情绪图卡4张、呼拉圈4个、与情绪有关的情景图卡、贴纸。"
+  },
+  {
+    "name": "调节或处理自己的情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 36,
+    "age_max_months": 60,
+    "prompt_corpus": "调节或处理自己的情绪：包含愿意尝试新活动或挑战、面对困难时忍受挫折并寻求协助、在未满足需求时忍耐或接受，以及接受他人的开玩笑或批评。"
+  },
+  {
+    "name": "鼓励尝试新活动或挑战",
+    "level": "L2",
+    "parent_name": "调节或处理自己的情绪",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "在日常生活中，当儿童不愿意尝试面对新挑战（如做作业或砌模型），成人应鼓励儿童尝试，并以身体接触（如拉手、微笑）给予陪伴与支持。注意需给予儿童时间适应，避免操之过急。"
+  },
+  {
+    "name": "忍受挫折并寻求协助",
+    "level": "L2",
+    "parent_name": "调节或处理自己的情绪",
+    "age_min_months": 36,
+    "age_max_months": 48,
+    "prompt_corpus": "当儿童在游戏中遇到无法自行打开容器的困难时，成人可引导儿童向他人求助，并在儿童完成后给予正面具体赞赏，训练其忍受挫折与主动求助的能力。"
+  },
+  {
+    "name": "未满足需求时的忍耐与接受",
+    "level": "L2",
+    "parent_name": "调节或处理自己的情绪",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "透过游戏情境学习在需求未即时满足时保持忍耐，并学习接受游戏规则与结果。"
+  },
+  {
+    "name": "接受他人的开玩笑或批评",
+    "level": "L2",
+    "parent_name": "调节或处理自己的情绪",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "提升儿童对社交互动中玩笑或批评的耐受度，培养情绪稳定性。"
+  },
+  {
+    "name": "活动建议—情绪表现",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动建议—情绪表现"
+  },
+  {
+    "name": "我是蛋糕师",
+    "level": "L2",
+    "parent_name": "活动建议—情绪表现",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "请儿童当蛋糕师，随意抽取1张蛋糕食谱。其他儿童每人挂上1张不同材料的牌子，牌子背面外向。随著音乐四处走动，音乐停止时与儿童进行问答互动，学习应对拒绝或接受的社交情境，完成材料收集后围圈庆祝，训练挫折忍受力。"
+  },
+  {
+    "name": "寻找鼓励",
+    "level": "L2",
+    "parent_name": "活动建议—情绪表现",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "在课室不同位置贴上动物贴纸或鼓励性句子，并提供路线图。儿童需按图寻找贴纸，当儿童经过只有鼓励性句子的位置时，成人鼓励儿童坚持。活动结束后分享寻找过程中的情绪感受，提升自我激励与挫折应对能力。"
+  },
+  {
+    "name": "学前儿童训练指南—社交与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南—社交与情绪，包含活动建议—情绪表现相关内容。"
+  },
+  {
+    "name": "活动建议—情绪表现",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南—社交与情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "针对学前儿童的情绪表现与社交互动训练活动。"
+  },
+  {
+    "name": "请求协助与社交互动",
+    "level": "L3",
+    "parent_name": "活动建议—情绪表现",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动5：预先将食物放入盒子或袋子内，并将它悬挂于半空。另准备1把长棒形玩具夹子。请儿童随著音乐传长棒，当音乐停止时，成人邀请手上持有长棒的儿童上前，用夹子夹开悬挂于半空的盒子或袋子。若儿童未能完成指示，成人便提示儿童可向别人（如：老师或其他儿童）求助，并学习说：「请你帮助我。」同时，请旁观的儿童给予参与者正面的鼓励。所需物资：食物包、盒子或袋子、长棒形玩具夹子（尾端可以开合）、音乐播放器。"
+  },
+  {
+    "name": "绘画与社交反馈处理",
+    "level": "L3",
+    "parent_name": "活动建议—情绪表现",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动6：请儿童分2组仿画同一幅有趣的图画。完成后，请儿童互相检视对方的图画。如图画完全正确，便向对方说出「你做得很好」等鼓励的说话。如有错处，则礼貌地告诉对方「这里错了，不要紧，下次小心点。」成人留意被批评的儿童当下的情绪表现，有需要时，提示儿童应接受别人善意的批评。所需物资：图画、画纸、颜色笔。"
+  },
+  {
+    "name": "调节或处理自己的情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 48,
+    "age_max_months": 72,
+    "prompt_corpus": "调节或处理自己的情绪：包含使用简单方法解决问题、商量妥协、运用适当方法缓解负面情绪，以及口语表达情绪与解决方案。"
+  },
+  {
+    "name": "用简单方法解决问题",
+    "level": "L2",
+    "parent_name": "调节或处理自己的情绪",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "用简单方法解决问题（如：与友伴发生冲突时会离开现场或告诉老师）。"
+  },
+  {
+    "name": "用商量、妥协等方式解决问题",
+    "level": "L2",
+    "parent_name": "调节或处理自己的情绪",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "用商量、妥协等方式解决问题（如：说「我先玩然后才到你，好不好？」）。"
+  },
+  {
+    "name": "运用合适的方法以缓和负面情绪",
+    "level": "L2",
+    "parent_name": "调节或处理自己的情绪",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "运用合适的方法以缓和负面情绪（如：参与其他活动，以分散注意力或与成人分享经历）。"
+  },
+  {
+    "name": "说出缓和负面情绪或解决问题的方法",
+    "level": "L2",
+    "parent_name": "调节或处理自己的情绪",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "说出缓和负面情绪或解决问题的方法（如：「小明再打我，我会告诉妈妈」）。"
+  },
+  {
+    "name": "积木冲突解决活动",
+    "level": "L3",
+    "parent_name": "用简单方法解决问题",
+    "age_min_months": 48,
+    "age_max_months": 60,
+    "prompt_corpus": "安排3至4位儿童一起进行积木活动。当儿童与同伴发生冲突时，成人留意其解决方式并即时指导，提示儿童如被别人抢去积木，可以告诉老师，寻求协助。"
+  },
+  {
+    "name": "负面情绪行为纪录与讨论",
+    "level": "L3",
+    "parent_name": "运用合适的方法以缓和负面情绪",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "用照相机或摄录机拍下儿童的负面情绪及行为，并与儿童一起观看所拍下的影片，讨论当时儿童表达情绪的方法是否适当。成人需先回应儿童的情绪，再建议合适的处理方法，让儿童学习。"
+  },
+  {
+    "name": "拼图分组竞争与协调",
+    "level": "L3",
+    "parent_name": "用商量、妥协等方式解决问题",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "展示分块的拼图，将儿童分成2组进行拼图对赛。分别引导2组儿童商讨分工，如出现争持，成人引导儿童以商量、妥协的方式解决问题，并在完成后鼓励儿童分享感受。"
+  },
+  {
+    "name": "社交情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童社交情绪能力发展与训练"
+  },
+  {
+    "name": "情绪表现",
+    "level": "L2",
+    "parent_name": "社交情绪",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "透过视觉辅助工具识别与表达各种复杂情绪状态"
+  },
+  {
+    "name": "情绪图表应用练习",
+    "level": "L3",
+    "parent_name": "情绪表现",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "1. 将情绪图表贴在白板上。2. 设定情境（例如：打破了爸爸的花瓶）。3. 请儿童说出主角可能出现的情绪。4. 引导儿童表达若自己面临相同情境时的感受，以及讨论解决问题的方法。"
+  },
+  {
+    "name": "参考书目",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "本页面列出了学前儿童训练指南—社交与情绪领域的学术参考文献与评估工具，包含儿童情绪发展、友谊建立、依附关系以及儿童发展手册与评估表。"
+  },
+  {
+    "name": "学术文献",
+    "level": "L2",
+    "parent_name": "参考书目",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "包含关于儿童情绪发展、社交与学校准备度的核心理论文献，如C. Cybele Raver (2002)、Costin & Jones (1992)、Denham (1998) 以及 Laible & Thompson (1998) 的相关著作。"
+  },
+  {
+    "name": "实务评估与指南",
+    "level": "L2",
+    "parent_name": "参考书目",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "由协康会编著的实务工具，包括《儿童发展手册》(2002) 与《儿童学习纲领与儿童发展评估表》(2006)，用于学前儿童的社交与情绪发展评估与训练指导。"
+  },
+  {
+    "name": "学前儿童训练指南 — 社交与情绪",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "本教材为学前儿童社交与情绪发展的专业训练指南，由协康会编著，旨在为儿童提供系统性的社交与情绪辅导与训练架构。"
+  },
+  {
+    "name": "协康会特殊教育教材",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "此页面为协康会出版物封底，提供国际标准书号（ISBN 978-962-7884-668），该出版物旨在为特殊教育需求儿童提供系统性的训练框架与活动指引。"
+  }
+]

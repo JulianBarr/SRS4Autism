@@ -1,0 +1,1522 @@
+[
+  {
+    "name": "学前儿童训练指南",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "协康会出版《学前儿童训练指南》系列书籍。"
+  },
+  {
+    "name": "语言",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "本册为「语言」分册封面。鸣谢：携手扶弱基金、PRINCE太子珠宝钟表。"
+  },
+  {
+    "name": "学前儿童训练指南 — 语言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南 — 语言 目录"
+  },
+  {
+    "name": "序言",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南 — 语言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "见第3页"
+  },
+  {
+    "name": "引言",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南 — 语言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "见第4页"
+  },
+  {
+    "name": "学习范畴",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南 — 语言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "见第5页"
+  },
+  {
+    "name": "基本理论",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南 — 语言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "见第6页"
+  },
+  {
+    "name": "训练指引",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南 — 语言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "见第8页"
+  },
+  {
+    "name": "活动目录",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南 — 语言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "见第10页"
+  },
+  {
+    "name": "活动建议",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南 — 语言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "见第14页"
+  },
+  {
+    "name": "语言表达",
+    "level": "L3",
+    "parent_name": "活动建议",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "见第14页"
+  },
+  {
+    "name": "语言理解",
+    "level": "L3",
+    "parent_name": "活动建议",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "见第114页"
+  },
+  {
+    "name": "学前儿童训练指南—语言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 0,
+    "age_max_months": 72,
+    "prompt_corpus": "全套六册的活动指南涵盖大肌肉、小肌肉、自理、认知、语言，以及社交与情绪六个范畴，解构初生至六岁幼儿在各范畴的成长发展阶段、学习基础与理论外，提供由浅入深及生活化的训练活动建议。"
+  },
+  {
+    "name": "序言",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南—语言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "为让老师能够深入了解儿童的发展需要，从而因材施教，本会于一九八二年开始编写第一套《儿童训练指南》，当中包括一本《儿童发展评估表》及五本《活动指引》。指南自八六年出版后，一直为业界称誉，并广泛于中港澳台使用，是儿童教育工作者及家长最具实用性的教学工具。累积二十多年的实践经验后，协康会专业同工早于二零零六年时已重新修订了《儿童发展评估表》，并完成编写《儿童学习纲领》。因应前者的改动和业界对专业教材的殷切需求，本会同工再次整理指南中活动指引的部分，现推出全新版的《学前儿童训练指南》，内容更丰富及完备。全套六册的活动指南涵盖大肌肉、小肌肉、自理、认知、语言，以及社交与情绪六个范畴。\n\n除了解构初生至六岁幼儿在各范畴的成长发展阶段、学习基础与理论外，本套指南共提供逾三千三百项不同程度、由浅入深及生活化的训练活动建议，并附有图片及教材范例，使老师和家长更容易掌握有关的训练重点及技巧。\n\n本套指南不但适用于普通儿童的学习，对有发展迟缓、学习障碍的儿童更为合用。老师可先利用《儿童发展评估表》为儿童进行评估，再按评估结果参照《儿童学习纲领》为儿童编定学习目标，然后从本指南拣选活动建议为儿童进行训练，使教与学更有系统，更具成效和轻松愉快。\n\n我们衷心感谢工作小组每位成员和本会中心老师的积极参与及协助，以及太子珠宝钟表公司及携手扶弱基金的拨款，令本套指南得以顺利完成。本会日后将继续修订指南的内容，以求与时并进，配合不断更新的教学及服务需要。欢迎各界人士提供意见，以作日后修订之参考。\n\n曾兰斯\n总干事\n二零一三年六月"
+  },
+  {
+    "name": "学前儿童训练指南—语言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南—语言"
+  },
+  {
+    "name": "引言",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南—语言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "语言是人与人沟通的主要媒介，透过有系统地组织语言符号，我们可以相互交换讯息、交流情感或进行思维活动。语言基本上是以符号代表事物和概念，符号可以是有声的（如：说话），也可以是无声的（如：文字、手势、脸部表情等）。在不同的语言符号中，口语（又称为说话或言语）是一种有声符号，是利用语音去代表事物和思想，也是最有效、最直接的沟通方法。语言发展一般是指口语能力的发展，但由于在沟通的过程中，我们需要听得明白别人的说话，才能够适切地回应，以达到传情达意的效果，故此在讨论语言发展时，需要包括语言理解和语言表达两个次范畴。"
+  },
+  {
+    "name": "语言理解",
+    "level": "L3",
+    "parent_name": "引言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "在沟通的过程中，我们需要听得明白别人的说话，才能够适切地回应，以达到传情达意的效果。此为语言发展的次范畴之一。"
+  },
+  {
+    "name": "语言表达",
+    "level": "L3",
+    "parent_name": "引言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "口语（又称为说话或言语）是一种有声符号，是利用语音去代表事物和思想，也是最有效、最直接的沟通方法。语言发展一般是指口语能力的发展。此为语言发展的次范畴之一。"
+  },
+  {
+    "name": "语言学习",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "语言的学习主要分为语言理解与语言表达两个次范畴。语言理解及表达能力包括词汇和句子、问句两个主要部分。"
+  },
+  {
+    "name": "语言理解",
+    "level": "L2",
+    "parent_name": "语言学习",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "语言理解是指凭经验、记忆和对事物的印象，而能将语言符号与物件或活动联系的能力。"
+  },
+  {
+    "name": "语言表达",
+    "level": "L2",
+    "parent_name": "语言学习",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "语言表达是指可以稳定地使用同一语言符号来表达一个特定意思的能力。"
+  },
+  {
+    "name": "词汇和句子",
+    "level": "L2",
+    "parent_name": "语言学习",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "语言理解及表达能力的主要部分之一。包含单词、双词短句、三词或以上句子。"
+  },
+  {
+    "name": "单词",
+    "level": "L3",
+    "parent_name": "词汇和句子",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "指含一个概念或意思的词汇，例如：「杯」、「跑步」等。"
+  },
+  {
+    "name": "双词短句",
+    "level": "L3",
+    "parent_name": "词汇和句子",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "指由两个不同概念或意思的词汇所组成的短语或句子，例如：「吃苹果」、「红色汽球」等。"
+  },
+  {
+    "name": "三词或以上句子",
+    "level": "L3",
+    "parent_name": "词汇和句子",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "指由三个或以上不同概念或意思的词汇所组成的句子，例如：「公公买蛋糕。」、「姐姐放橙和菜在碟子上。」"
+  },
+  {
+    "name": "问句",
+    "level": "L2",
+    "parent_name": "语言学习",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "语言理解及表达能力的主要部分之一。例如：「谁买东西？」、「为甚么哥哥没有上学？」"
+  },
+  {
+    "name": "基本理论",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "在儿童发展语言的期间，发展速度虽然会因个别情况而有差异，但发展的顺序和模式却大致是相似的。由于语言的结构是按一定的规则组成，而语言的组织亦由简至繁地发展，故此，语言学习会以循序渐进的形式，按发展阶段进行。在没有概念基础或理解基础下，儿童不能说出有意义的字词；在单字词阶段的儿童亦不能说出复杂的句子。所以当儿童能说出第一个有意义的单字词时，表示他们已具备基本的概念和理解能力；当儿童能使用复杂的句子时，表示他们已掌握了词汇运用与组句能力。"
+  },
+  {
+    "name": "语言前阶段",
+    "level": "L2",
+    "parent_name": "基本理论",
+    "age_min_months": 0,
+    "age_max_months": 12,
+    "prompt_corpus": "早期的语言发展约由婴儿出生至十或十二个月期间进行，这阶段的儿童依赖很多非语言资料（如：表情、手势、动作、环境等）来对语言的整体行为作出理解。儿童的视觉及听觉接收是语言发展的基础。故此，语言理解的初期训练重点主要在建立视觉反应、社交反应、听觉反应，以及建立语言前技能，如：配对技巧、游戏技巧、轮流作转技巧、环境性理解等。在这阶段，表达能力的发展是整体性的，儿童会运用声音、语调、身体动作及手势来表达意思。因此，语言表达的初期训练重点主要在建立儿童的发声能力、动作或手势沟通，以及模仿能力。儿童必须掌握这些基本的技能，及具备适当的语言理解能力，才能进入口语阶段。"
+  },
+  {
+    "name": "单词阶段",
+    "level": "L2",
+    "parent_name": "基本理论",
+    "age_min_months": 10,
+    "age_max_months": 14,
+    "prompt_corpus": "精细的语言理解大概于出生十个月后开始，这阶段的儿童开始能理解语句中的重要字眼。初期理解的词汇主要以名词为主，继而发展至动词、形容词等。至于表达能力一般较理解能力迟三至四个月才出现，大概十至十四个月大的儿童才能运用单字词沟通，其中亦以名词占多数，其后渐渐增加动词、形容词等其它词类。在词汇的学习过程中，除了语言能力外，儿童亦须具备记忆、组织、顺序等能力。故此，语言能力和认知能力是不可分割的。基于上述原因，在语言范畴内有部分的学习目标，会与认知范畴内的目标相同。"
+  },
+  {
+    "name": "语言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南—语言。学习范畴 - 基本理论。"
+  },
+  {
+    "name": "句子阶段",
+    "level": "L2",
+    "parent_name": "语言",
+    "age_min_months": 24,
+    "age_max_months": 48,
+    "prompt_corpus": "语言发展期间，理解能力和表达能力是互相影响，并且互相配合的，两者的发展程序和发展模式大致是相同的。随著词汇数量和类别的增加，以及对语法规则的掌握，儿童的理解及表达能力会发展至句子阶段。在这阶段，儿童能明白句子中不同词汇之间的关系，以理解别人的说话。到了两岁左右，儿童便会将词汇组合成句，例如：动作词和名词、形容词和名词等，渐渐会使用短句来表达需要。随著词汇的不断增加，以及在短句运用中对语法规则的熟习，三岁的儿童会进一步将更多的词汇连结成句，扩展语句的长度和复杂性，能将人、物、事的关系表达出来，进而增加具修饰及语法功用的词汇运用，例如：形容词、数量词、副词等。一般来说，四岁的儿童已能明白大部分日常生活的说话，及运用结构完整的简单句和复合句与人沟通。"
+  },
+  {
+    "name": "语言思考",
+    "level": "L2",
+    "parent_name": "语言",
+    "age_min_months": 60,
+    "age_max_months": 72,
+    "prompt_corpus": "到了五至六岁，儿童已能掌握和运用许多语法规则。在这阶段，儿童的语言能力开始跟思考力、想像力、记忆力、创造力等有著紧密的联系，彼此相辅相成，互相影响。儿童会利用已掌握的词汇和按语法规则，以具体的语言形式进行思维活动，学习分析问题、定下假设、作出判断及推论。因此，当儿童已建立良好的基础语言能力后，训练应著重发展儿童的抽象思维，例如：逻辑推理、解难能力等，以及发展儿童运用语言作描述的能力，例如：报告事件、说故事等。"
+  },
+  {
+    "name": "语言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南—语言"
+  },
+  {
+    "name": "训练指引",
+    "level": "L2",
+    "parent_name": "语言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "按照儿童的训练目标选择适当的训练活动后，训练人员在预备及进行活动时请注意以下事项："
+  },
+  {
+    "name": "粤语 (口语) 的应用",
+    "level": "L3",
+    "parent_name": "训练指引",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "香港人以粤语 (广东话) 为口语沟通的语言，故训练目标及活动设计均以口语化的粤语为蓝本。活动建议中的说话以书面语形式显示，并在有需要时以「粤」符号在括号内标示粤语的词汇或句子。由于活动内容是以香港的社会环境及文化背景而设计，活动内容所提及的某些词汇或未能适用于其他地区，故本章最后列出一词汇对照表，为香港以外地区的读者提供参考。"
+  },
+  {
+    "name": "词汇的选取",
+    "level": "L3",
+    "parent_name": "训练指引",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "一般来说，儿童接触得最多的事物，就是最早能掌握到的词汇。故此，在选取词汇作训练时，宜先选取一些儿童常接触的词汇，再选择一些较少接触的词汇。"
+  },
+  {
+    "name": "教材的选择",
+    "level": "L3",
+    "parent_name": "训练指引",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "教材应以儿童熟悉及喜爱的物件为主，并要考虑儿童的能力以选取合适的教具。一般来说，儿童最容易掌握的为实物及玩具，进而是彩色相片或图画，黑白的线条图则比较抽象，是较难掌握的教具。"
+  },
+  {
+    "name": "示范及提示的运用",
+    "level": "L3",
+    "parent_name": "训练指引",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "在活动开始时，成人应给予清晰的示范。以语言表达的训练为例，成人须示范说出目标词汇或句子；而在语言理解的训练中，成人在说出目标词汇或句子后，须示范做出相关的行为（如：指向物件、进行句子中的意思等）。成人在示范后，可鼓励儿童模仿，以确认儿童明白活动的做法及要求。进行活动时，成人需运用不同的提示方法，引导儿童学习。当儿童渐渐熟习后，成人可逐步减少提示，并鼓励儿童自行完成。"
+  },
+  {
+    "name": "学前儿童训练指南—语言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南—语言"
+  },
+  {
+    "name": "常用词汇的粤语（口语）及书面语对照参考",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南—语言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "提供常用词汇的粤语（口语）及书面语对照或释义，帮助儿童理解和转换口语与书面语言。\n\n粤语（口语）对应书面语对照/释义如下：\n- 巴士：公车\n- 的士：计程车 / 出租车\n- 小巴：（一种于香港境内行驶的小型公共汽车）\n- 电单车：摩托车\n- 私家车：轿车 / 房车\n- 雪糕：冰淇淋\n- 朱古力：巧克力\n- 焗炉：烤箱 / 烤炉\n- 雪柜：冰箱\n- 波波池：彩球池（一种儿童游乐设施，在宽阔的池子内有大量小型塑胶球，通常会淹没过儿童的小腿，玩耍时造成失重的感觉）\n- 衫：上衣"
+  },
+  {
+    "name": "语言表达",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "训练项目/目标：语言表达 (活动建议页数：14)"
+  },
+  {
+    "name": "学习重点：发声能力",
+    "level": "L2",
+    "parent_name": "语言表达",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学习重点：发声能力 (活动建议页数：14)"
+  },
+  {
+    "name": "项目一：发出不同的声音",
+    "level": "L3",
+    "parent_name": "学习重点：发声能力",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目一：发出不同的声音 (活动建议页数：14)"
+  },
+  {
+    "name": "项目二：发出有意义的声音",
+    "level": "L3",
+    "parent_name": "学习重点：发声能力",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目二：发出有意义的声音 (活动建议页数：16)"
+  },
+  {
+    "name": "学习重点：动作 / 手势沟通",
+    "level": "L2",
+    "parent_name": "语言表达",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学习重点：动作 / 手势沟通 (活动建议页数：18)"
+  },
+  {
+    "name": "项目一：运用简单身体动作 / 手势来沟通",
+    "level": "L3",
+    "parent_name": "学习重点：动作 / 手势沟通",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目一：运用简单身体动作 / 手势来沟通 (活动建议页数：18)"
+  },
+  {
+    "name": "项目二：运用表达性身体动作 / 手势来沟通",
+    "level": "L3",
+    "parent_name": "学习重点：动作 / 手势沟通",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目二：运用表达性身体动作 / 手势来沟通 (活动建议页数：22)"
+  },
+  {
+    "name": "学习重点：模仿能力",
+    "level": "L2",
+    "parent_name": "语言表达",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学习重点：模仿能力 (活动建议页数：24)"
+  },
+  {
+    "name": "项目一：模仿动作",
+    "level": "L3",
+    "parent_name": "学习重点：模仿能力",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目一：模仿动作 (活动建议页数：24)"
+  },
+  {
+    "name": "项目二：模仿玩玩具方法",
+    "level": "L3",
+    "parent_name": "学习重点：模仿能力",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目二：模仿玩玩具方法 (活动建议页数：26)"
+  },
+  {
+    "name": "项目三：模仿发声",
+    "level": "L3",
+    "parent_name": "学习重点：模仿能力",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目三：模仿发声 (活动建议页数：30)"
+  },
+  {
+    "name": "学习重点：词汇运用",
+    "level": "L2",
+    "parent_name": "语言表达",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学习重点：词汇运用 (活动建议页数：31)"
+  },
+  {
+    "name": "项目一：运用名词",
+    "level": "L3",
+    "parent_name": "学习重点：词汇运用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目一：运用名词 (活动建议页数：31)"
+  },
+  {
+    "name": "项目二：运用动词",
+    "level": "L3",
+    "parent_name": "学习重点：词汇运用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目二：运用动词 (活动建议页数：45)"
+  },
+  {
+    "name": "项目三：运用社交词汇",
+    "level": "L3",
+    "parent_name": "学习重点：词汇运用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目三：运用社交词汇 (活动建议页数：46)"
+  },
+  {
+    "name": "项目四：运用形容词",
+    "level": "L3",
+    "parent_name": "学习重点：词汇运用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目四：运用形容词 (活动建议页数：47)"
+  },
+  {
+    "name": "项目五：运用位置词",
+    "level": "L3",
+    "parent_name": "学习重点：词汇运用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目五：运用位置词 (活动建议页数：50)"
+  },
+  {
+    "name": "项目六：运用数词",
+    "level": "L3",
+    "parent_name": "学习重点：词汇运用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目六：运用数词 (活动建议页数：52)"
+  },
+  {
+    "name": "项目七：运用量词",
+    "level": "L3",
+    "parent_name": "学习重点：词汇运用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目七：运用量词 (活动建议页数：54)"
+  },
+  {
+    "name": "项目八：运用代名词",
+    "level": "L3",
+    "parent_name": "学习重点：词汇运用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目八：运用代名词 (活动建议页数：55)"
+  },
+  {
+    "name": "项目九：运用属有代名词",
+    "level": "L3",
+    "parent_name": "学习重点：词汇运用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目九：运用属有代名词 (活动建议页数：57)"
+  },
+  {
+    "name": "项目十：运用副词",
+    "level": "L3",
+    "parent_name": "学习重点：词汇运用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目十：运用副词 (活动建议页数：59)"
+  },
+  {
+    "name": "项目十一：运用时貌词",
+    "level": "L3",
+    "parent_name": "学习重点：词汇运用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目十一：运用时貌词 (活动建议页数：61)"
+  },
+  {
+    "name": "项目十二：运用否定词",
+    "level": "L3",
+    "parent_name": "学习重点：词汇运用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目十二：运用否定词 (活动建议页数：61)"
+  },
+  {
+    "name": "项目十三：运用连接词",
+    "level": "L3",
+    "parent_name": "学习重点：词汇运用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目十三：运用连接词 (活动建议页数：62)"
+  },
+  {
+    "name": "简单句子运用",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学习重点：简单句子运用"
+  },
+  {
+    "name": "运用双词短句",
+    "level": "L2",
+    "parent_name": "简单句子运用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目一：运用双词短句"
+  },
+  {
+    "name": "运用三词句子",
+    "level": "L2",
+    "parent_name": "简单句子运用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目二：运用三词句子"
+  },
+  {
+    "name": "运用四词句子",
+    "level": "L2",
+    "parent_name": "简单句子运用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目三：运用四词句子"
+  },
+  {
+    "name": "复合句子运用",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学习重点：复合句子运用"
+  },
+  {
+    "name": "运用不同的复合句子",
+    "level": "L2",
+    "parent_name": "复合句子运用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目：运用不同的复合句子"
+  },
+  {
+    "name": "问句运用",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学习重点：问句运用"
+  },
+  {
+    "name": "运用不同的问句",
+    "level": "L2",
+    "parent_name": "问句运用",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目：运用不同的问句"
+  },
+  {
+    "name": "语言思考",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学习重点：语言思考"
+  },
+  {
+    "name": "词汇寻找（归纳性）",
+    "level": "L2",
+    "parent_name": "语言思考",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目一：词汇寻找（归纳性）"
+  },
+  {
+    "name": "词汇寻找（扩散性）",
+    "level": "L2",
+    "parent_name": "语言思考",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目二：词汇寻找（扩散性）"
+  },
+  {
+    "name": "词汇定义",
+    "level": "L2",
+    "parent_name": "语言思考",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目三：词汇定义"
+  },
+  {
+    "name": "比较异同",
+    "level": "L2",
+    "parent_name": "语言思考",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目四：比较异同"
+  },
+  {
+    "name": "类比",
+    "level": "L2",
+    "parent_name": "语言思考",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目五：类比"
+  },
+  {
+    "name": "程序概念",
+    "level": "L2",
+    "parent_name": "语言思考",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目六：程序概念"
+  },
+  {
+    "name": "因果关系",
+    "level": "L2",
+    "parent_name": "语言思考",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目七：因果关系"
+  },
+  {
+    "name": "解决问题",
+    "level": "L2",
+    "parent_name": "语言思考",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目八：解决问题"
+  },
+  {
+    "name": "批判",
+    "level": "L2",
+    "parent_name": "语言思考",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目九：批判"
+  },
+  {
+    "name": "推理能力",
+    "level": "L2",
+    "parent_name": "语言思考",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目十：推理能力"
+  },
+  {
+    "name": "叙事能力",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学习重点：叙事能力"
+  },
+  {
+    "name": "叙述个人性事件",
+    "level": "L2",
+    "parent_name": "叙事能力",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目一：叙述个人性事件"
+  },
+  {
+    "name": "叙述一般性事件",
+    "level": "L2",
+    "parent_name": "叙事能力",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目二：叙述一般性事件"
+  },
+  {
+    "name": "叙述简单故事",
+    "level": "L2",
+    "parent_name": "叙事能力",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "项目三：叙述简单故事"
+  },
+  {
+    "name": "语言理解",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "学习重点：视觉反应",
+    "level": "L2",
+    "parent_name": "语言理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "项目一：目光专注",
+    "level": "L3",
+    "parent_name": "学习重点：视觉反应",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "项目二：目光追视",
+    "level": "L3",
+    "parent_name": "学习重点：视觉反应",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "项目三：目光转移",
+    "level": "L3",
+    "parent_name": "学习重点：视觉反应",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "学习重点：社交反应",
+    "level": "L2",
+    "parent_name": "语言理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "项目一：注视成人",
+    "level": "L3",
+    "parent_name": "学习重点：社交反应",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "项目二：追视成人",
+    "level": "L3",
+    "parent_name": "学习重点：社交反应",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "学习重点：轮流作转技巧",
+    "level": "L2",
+    "parent_name": "语言理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "项目一：轮流玩玩具",
+    "level": "L3",
+    "parent_name": "学习重点：轮流作转技巧",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "项目二：轮流发声",
+    "level": "L3",
+    "parent_name": "学习重点：轮流作转技巧",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "学习重点：配对技巧",
+    "level": "L2",
+    "parent_name": "语言理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "项目一：配对相同的符号",
+    "level": "L3",
+    "parent_name": "学习重点：配对技巧",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "项目二：配对相似的符号",
+    "level": "L3",
+    "parent_name": "学习重点：配对技巧",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "学习重点：游戏技巧",
+    "level": "L2",
+    "parent_name": "语言理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "项目一：探索性游戏",
+    "level": "L3",
+    "parent_name": "学习重点：游戏技巧",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "项目二：功能性游戏",
+    "level": "L3",
+    "parent_name": "学习重点：游戏技巧",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "项目三：假想性游戏",
+    "level": "L3",
+    "parent_name": "学习重点：游戏技巧",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "学习重点：听觉反应",
+    "level": "L2",
+    "parent_name": "语言理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "项目一：对声音作出反应",
+    "level": "L3",
+    "parent_name": "学习重点：听觉反应",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "项目二：理解说话的语气",
+    "level": "L3",
+    "parent_name": "学习重点：听觉反应",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "学习重点：环境性理解",
+    "level": "L2",
+    "parent_name": "语言理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "项目一：对自己的名字作出反应",
+    "level": "L3",
+    "parent_name": "学习重点：环境性理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "项目二：对生活的说话作出反应",
+    "level": "L3",
+    "parent_name": "学习重点：环境性理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "项目三：理解「不」的意思",
+    "level": "L3",
+    "parent_name": "学习重点：环境性理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "项目四：理解环境指令",
+    "level": "L3",
+    "parent_name": "学习重点：环境性理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "学前儿童训练指南—语言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南—语言活动目录"
+  },
+  {
+    "name": "学习重点：日常指示理解",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南—语言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动建议页数：141"
+  },
+  {
+    "name": "项目一：理解日常指令",
+    "level": "L3",
+    "parent_name": "学习重点：日常指示理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动建议页数：141"
+  },
+  {
+    "name": "项目二：理解一个部分的指令",
+    "level": "L3",
+    "parent_name": "学习重点：日常指示理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动建议页数：142"
+  },
+  {
+    "name": "学习重点：词汇理解",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南—语言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动建议页数：143"
+  },
+  {
+    "name": "项目一：理解名词",
+    "level": "L3",
+    "parent_name": "学习重点：词汇理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动建议页数：143"
+  },
+  {
+    "name": "项目二：理解动作词",
+    "level": "L3",
+    "parent_name": "学习重点：词汇理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动建议页数：152"
+  },
+  {
+    "name": "项目三：理解形容词",
+    "level": "L3",
+    "parent_name": "学习重点：词汇理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动建议页数：153"
+  },
+  {
+    "name": "项目四：理解位置词",
+    "level": "L3",
+    "parent_name": "学习重点：词汇理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动建议页数：155"
+  },
+  {
+    "name": "项目五：理解数词",
+    "level": "L3",
+    "parent_name": "学习重点：词汇理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动建议页数：157"
+  },
+  {
+    "name": "项目六：理解量词",
+    "level": "L3",
+    "parent_name": "学习重点：词汇理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动建议页数：159"
+  },
+  {
+    "name": "项目七：理解代名词",
+    "level": "L3",
+    "parent_name": "学习重点：词汇理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动建议页数：160"
+  },
+  {
+    "name": "项目八：理解属有代名词",
+    "level": "L3",
+    "parent_name": "学习重点：词汇理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动建议页数：161"
+  },
+  {
+    "name": "项目九：理解副词",
+    "level": "L3",
+    "parent_name": "学习重点：词汇理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动建议页数：162"
+  },
+  {
+    "name": "项目十：理解时貌词",
+    "level": "L3",
+    "parent_name": "学习重点：词汇理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动建议页数：164"
+  },
+  {
+    "name": "项目十一：理解否定词",
+    "level": "L3",
+    "parent_name": "学习重点：词汇理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动建议页数：165"
+  },
+  {
+    "name": "项目十二：理解连接词",
+    "level": "L3",
+    "parent_name": "学习重点：词汇理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动建议页数：166"
+  },
+  {
+    "name": "学习重点：简单句子理解",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南—语言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动建议页数：167"
+  },
+  {
+    "name": "项目一：理解双词短句",
+    "level": "L3",
+    "parent_name": "学习重点：简单句子理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动建议页数：167"
+  },
+  {
+    "name": "项目二：理解三词句子",
+    "level": "L3",
+    "parent_name": "学习重点：简单句子理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动建议页数：177"
+  },
+  {
+    "name": "学习重点：复合句子理解",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南—语言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动建议页数：184"
+  },
+  {
+    "name": "项目：理解不同的复合句子",
+    "level": "L3",
+    "parent_name": "学习重点：复合句子理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动建议页数：184"
+  },
+  {
+    "name": "学习重点：问句理解",
+    "level": "L2",
+    "parent_name": "学前儿童训练指南—语言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动建议页数：187"
+  },
+  {
+    "name": "项目：理解不同的问句",
+    "level": "L3",
+    "parent_name": "学习重点：问句理解",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动建议页数：187"
+  },
+  {
+    "name": "语言表达",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "发声能力",
+    "level": "L2",
+    "parent_name": "语言表达",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "项目一：发出不同的声音",
+    "level": "L3",
+    "parent_name": "发声能力",
+    "age_min_months": 0,
+    "age_max_months": 12,
+    "prompt_corpus": "注意事项：此项目的训练，主要是成人观察儿童于活动或日常生活中的反应，并对儿童的发声给予即时的回应，以鼓励他再次发声。而下列各项活动建议，主要是为成人提供一些刺激儿童的方法，以鼓励他发出笑声或其他声音。\n\n活动建议：\n1. 与儿童玩搔痒游戏，引发儿童发出笑声或声音。\n2. 与儿童玩「躲猫猫」游戏，引发儿童发出笑声或声音。"
+  },
+  {
+    "name": "目标A：发出哭声",
+    "level": "L4",
+    "parent_name": "项目一：发出不同的声音",
+    "age_min_months": 0,
+    "age_max_months": null,
+    "prompt_corpus": "发出哭声 / >0岁"
+  },
+  {
+    "name": "目标B：发出哭声以外的其他声音",
+    "level": "L4",
+    "parent_name": "项目一：发出不同的声音",
+    "age_min_months": 0,
+    "age_max_months": 6,
+    "prompt_corpus": "发出哭声以外的其他声音（如：打气嗝声、咳声、咕咕声）/ 0-6个月"
+  },
+  {
+    "name": "目标C：发出笑声",
+    "level": "L4",
+    "parent_name": "项目一：发出不同的声音",
+    "age_min_months": 0,
+    "age_max_months": 6,
+    "prompt_corpus": "发出笑声 / 0-6个月"
+  },
+  {
+    "name": "目标D：发出不同的哭声来代表不同的需要",
+    "level": "L4",
+    "parent_name": "项目一：发出不同的声音",
+    "age_min_months": 0,
+    "age_max_months": 6,
+    "prompt_corpus": "发出不同的哭声来代表不同的需要（如：肚饿、疲倦、尿布湿了）/ 0-6个月"
+  },
+  {
+    "name": "目标E：发声自娱",
+    "level": "L4",
+    "parent_name": "项目一：发出不同的声音",
+    "age_min_months": 6,
+    "age_max_months": 12,
+    "prompt_corpus": "发声自娱 / 6-12个月"
+  },
+  {
+    "name": "语言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南—语言"
+  },
+  {
+    "name": "语言表达",
+    "level": "L2",
+    "parent_name": "语言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动建议 — 语言表达"
+  },
+  {
+    "name": "活动建议 3",
+    "level": "L3",
+    "parent_name": "语言表达",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "在儿童面前做出不同的表情或扮鬼脸，并发出笑声或其他有趣的声音，吸引儿童发出笑声或声音。"
+  },
+  {
+    "name": "活动建议 4",
+    "level": "L3",
+    "parent_name": "语言表达",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "用布遮盖著脸孔，在儿童面前将布移开，并做出不同的表情及发出有趣的声音，吸引儿童发笑或发声。\n\n教具：\n- 布"
+  },
+  {
+    "name": "活动建议 5",
+    "level": "L3",
+    "parent_name": "语言表达",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "儿童把玩玩具一段时间后，突然停止儿童的活动，或取去儿童手中的玩具。若儿童发出类似哭声或其他声音，成人给予即时回应，并让儿童继续把玩玩具。\n\n教具：\n- 玩具"
+  },
+  {
+    "name": "活动建议 6",
+    "level": "L3",
+    "parent_name": "语言表达",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童玩耍后，成人表示需要分离。若儿童发出类似哭声或其他声音，成人给予即时回应，并继续与儿童玩耍。"
+  },
+  {
+    "name": "活动建议 7",
+    "level": "L3",
+    "parent_name": "语言表达",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "播放儿童喜爱的卡通片，成人夸张地模仿卡通片中的声音，吸引儿童发出笑声或声音。\n\n教具：\n- 卡通片\n- 影片播放器"
+  },
+  {
+    "name": "活动建议 8",
+    "level": "L3",
+    "parent_name": "语言表达",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "给予儿童喜爱的发声玩具，让儿童自行玩耍。成人在旁模仿发出声音，吸引儿童发出笑声或声音。\n\n教具：\n- 发声玩具"
+  },
+  {
+    "name": "活动建议 9",
+    "level": "L3",
+    "parent_name": "语言表达",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示儿童喜爱的食物，并发出「yum yum」的声音表示很美味，吸引儿童发出声音。\n\n教具：\n- 食物"
+  },
+  {
+    "name": "语言表达",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南—语言；活动建议—语言表达"
+  },
+  {
+    "name": "项目二：发出有意义的声音",
+    "level": "L2",
+    "parent_name": "语言表达",
+    "age_min_months": 6,
+    "age_max_months": 12,
+    "prompt_corpus": "目标 A：发出有沟通意识的声音来表达需要和回应成人（6-12个月）\n目标 B：发出类似字词的声音来表达需要和回应成人（6-12个月）\n注意事项：此项目中的两个训练目标，均可以运用下列各项活动。成人可视乎儿童的训练情况及需要，选择引导儿童发出「有沟通意识的声音」或「类似字词的声音」。"
+  },
+  {
+    "name": "活动 1：与儿童玩搔痒游戏",
+    "level": "L3",
+    "parent_name": "项目二：发出有意义的声音",
+    "age_min_months": 6,
+    "age_max_months": 12,
+    "prompt_corpus": "活动建议：与儿童玩搔痒游戏。成人将食指放在唇边并发出「bu bu」声，并在搔痒儿童时发出「吱吱吱」的连串声音。接著成人协助儿童将食指放在唇边，鼓励他发出「bu bu」声，或协助儿童搔痒成人，鼓励他发出「吱吱吱」的声音来表达意思和回应。"
+  },
+  {
+    "name": "活动 2：出示奶瓶或食物",
+    "level": "L3",
+    "parent_name": "项目二：发出有意义的声音",
+    "age_min_months": 6,
+    "age_max_months": 12,
+    "prompt_corpus": "材料/建议教材：奶瓶或食物\n活动建议：出示奶瓶或食物，并一面摇晃奶瓶或食物，一面说「奶奶」或「mum mum」，以吸引儿童的注意。鼓励儿童发出近似「奶奶」或「mum mum」的声音后，再让他进饮或进食。"
+  },
+  {
+    "name": "活动 3：出示儿童喜欢的玩具并模仿声音",
+    "level": "L3",
+    "parent_name": "项目二：发出有意义的声音",
+    "age_min_months": 6,
+    "age_max_months": 12,
+    "prompt_corpus": "材料/建议教材：车、飞机、枪或乐器等可用声音代表的玩具\n活动建议：出示儿童喜欢的玩具（如：车、枪），并一面把玩玩具，一面模仿玩具的声音（如：车声、枪声），以吸引儿童的注意。鼓励儿童在把玩玩具时，发出近似的声音。"
+  },
+  {
+    "name": "活动 4：出示儿童喜欢的玩具并说出名称",
+    "level": "L3",
+    "parent_name": "项目二：发出有意义的声音",
+    "age_min_months": 6,
+    "age_max_months": 12,
+    "prompt_corpus": "材料/建议教材：玩具\n活动建议：出示儿童喜欢的玩具，并一面把玩玩具，一面说出玩具的名称（如：「球」、「车车」），以吸引儿童的注意。鼓励儿童发出声音，或类似字词的声音，再把玩具给予他把玩。"
+  },
+  {
+    "name": "语言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南—语言"
+  },
+  {
+    "name": "语言表达",
+    "level": "L2",
+    "parent_name": "语言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动建议—语言表达"
+  },
+  {
+    "name": "活动 5：与儿童玩吹肥皂泡",
+    "level": "L3",
+    "parent_name": "语言表达",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童玩吹肥皂泡。成人并指著飘浮在空中的肥皂泡说：「哗！泡泡！」当所有肥皂泡消失后，向儿童说：「噢！没有泡泡了！」鼓励儿童发出声音，或近似「泡」的声音，才继续吹肥皂泡。所需教具/玩具：肥皂泡玩具。"
+  },
+  {
+    "name": "活动 6：与儿童玩「打哗哗」游戏",
+    "level": "L3",
+    "parent_name": "语言表达",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童玩「打哗哗」游戏。成人示范「打哗哗」，接著协助儿童用手轻拍口部，鼓励他发出声音，或近似「哗哗」的声音。"
+  },
+  {
+    "name": "活动 7：与儿童唱儿歌",
+    "level": "L3",
+    "parent_name": "语言表达",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童唱儿歌，鼓励儿童发出声音，或近似儿歌的声音。"
+  },
+  {
+    "name": "动作/手势沟通",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "运用简单身体动作/手势来沟通",
+    "level": "L2",
+    "parent_name": "动作/手势沟通",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "注意事项：年幼的儿童不时有一些沟通意识不明显的动作，成人可多留意并作即时回应，让儿童明白这些动作是可以用来表达需要的，以提升他们与别人沟通的动机。如儿童的动作控制能力较弱，成人可给予适当的动作协助，并接受儿童一些不大准确的动作或手势。"
+  },
+  {
+    "name": "伸手取物",
+    "level": "L3",
+    "parent_name": "运用简单身体动作/手势来沟通",
+    "age_min_months": 6,
+    "age_max_months": 12,
+    "prompt_corpus": "活动建议 1：出示儿童喜欢的食物或玩具，鼓励他伸手取物。（材料/建议教材：食物或玩具）\n活动建议 2：出示小型发声玩具，在儿童面前把玩，使其发出声响。待取得儿童的注意后，再把玩具藏在身上，如：口袋或衣袖中，鼓励儿童伸手往成人身上把玩具取出来。（材料/建议教材：小型发声玩具）"
+  },
+  {
+    "name": "拖拉成人来要求协助",
+    "level": "L3",
+    "parent_name": "运用简单身体动作/手势来沟通",
+    "age_min_months": 9,
+    "age_max_months": 18,
+    "prompt_corpus": "活动建议 3：出示儿童喜欢的玩具，待取得儿童的注意后，把玩具放在儿童面前但触摸不到的地方 (如：柜子上较高的位置)。成人把手移近儿童的手，鼓励儿童拉成人的手寻求协助。（材料/建议教材：玩具）"
+  },
+  {
+    "name": "用手指指向物件",
+    "level": "L3",
+    "parent_name": "运用简单身体动作/手势来沟通",
+    "age_min_months": 9,
+    "age_max_months": 18,
+    "prompt_corpus": "活动建议 4：将乐器放在儿童面前但触摸不到的地方，并示范把玩乐器。待取得儿童的注意后，问儿童：「你要甚么？」鼓励儿童指向乐器以表示需要。注意事项：选取色彩缤纷的乐器，更能吸引儿童的注意力。（材料/建议教材：乐器）\n活动建议 5：吹出肥皂泡吸引儿童的注意，示范及鼓励儿童用手指戳破肥皂泡。待肥皂泡消失后，鼓励儿童指向肥皂泡液的瓶子，以表示要求成人再吹肥皂泡。（材料/建议教材：肥皂泡玩具）\n活动建议 6：出示2件玩具或食物，待取得儿童的注意后，问儿童：「你要甚么？」鼓励儿童用手指指向想要的物件。若儿童未能指向物件，可握著儿童的手做一次。（材料/建议教材：玩具或食物）"
+  },
+  {
+    "name": "运用简单身体动作 / 手势来沟通",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": 9,
+    "age_max_months": 18,
+    "prompt_corpus": "注意事项：如儿童的动作控制能力较弱，成人可给予适当的动作协助，并接受儿童一些不大准确的动作或手势。"
+  },
+  {
+    "name": "开合手 / 摇晃手表示「拜拜」",
+    "level": "L2",
+    "parent_name": "运用简单身体动作 / 手势来沟通",
+    "age_min_months": 9,
+    "age_max_months": 18,
+    "prompt_corpus": "活动建议 1：家长送儿童到达学校后，成人（老师）说：「和 XX（家人称谓）说再见！」鼓励儿童向家人做出开合手或挥手的动作以表示再见。\n活动建议 2：收拾玩具时，鼓励儿童向玩具做出开合手或挥手的动作，以表示再见。 材料 / 建议教材：玩具\n活动建议 3：下课时，成人向儿童做出开合手或挥手的动作表示再见，接著向儿童说：「你也挥手再见吧！」鼓励儿童模仿做出「拜拜」的动作回应。"
+  },
+  {
+    "name": "拍手表示「好」",
+    "level": "L2",
+    "parent_name": "运用简单身体动作 / 手势来沟通",
+    "age_min_months": 9,
+    "age_max_months": 18,
+    "prompt_corpus": "活动建议 4：当儿童完成活动或游戏（如：将积木叠起）时，成人拍手并说：「好！」鼓励儿童模仿做出「拍手」的动作回应。 材料 / 建议教材：玩具\n活动建议 5：进行小组活动时，当其他儿童作出良好的表现时，鼓励儿童做出「拍手」动作以表示「好」。"
+  },
+  {
+    "name": "张开手表示「抱」",
+    "level": "L2",
+    "parent_name": "运用简单身体动作 / 手势来沟通",
+    "age_min_months": 9,
+    "age_max_months": 18,
+    "prompt_corpus": "活动建议 6：示范张开手表示「抱」，并说：「抱一抱吧！」接著抱起儿童。放下儿童后，待儿童张开手表示「抱」，才再次抱起儿童。有需要时，成人可用动作协助儿童张开手来表示「抱」。"
+  },
+  {
+    "name": "摊开手表示「没有」",
+    "level": "L2",
+    "parent_name": "运用简单身体动作 / 手势来沟通",
+    "age_min_months": 9,
+    "age_max_months": 18,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "点头表示「好」",
+    "level": "L2",
+    "parent_name": "运用简单身体动作 / 手势来沟通",
+    "age_min_months": 9,
+    "age_max_months": 18,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "摇头 / 摇手表示「不」",
+    "level": "L2",
+    "parent_name": "运用简单身体动作 / 手势来沟通",
+    "age_min_months": 9,
+    "age_max_months": 18,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "语言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "语言表达",
+    "level": "L2",
+    "parent_name": "语言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": ""
+  },
+  {
+    "name": "活动 7",
+    "level": "L3",
+    "parent_name": "语言表达",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童玩洋娃娃，并示范抱起洋娃娃，以吸引儿童的注意。当儿童想抱洋娃娃时，鼓励儿童做出「抱」的动作，才把洋娃娃交给他。\n\n所需教材：\n• 洋娃娃"
+  },
+  {
+    "name": "活动 8",
+    "level": "L3",
+    "parent_name": "语言表达",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示玩具，并放进其中一个盒子中，鼓励儿童找出有玩具的盒子。若儿童能找到，成人即时给予适当的鼓励，并再重复游戏。若儿童未能找到有玩具的盒子，成人可张开双手表示「没有」，并鼓励儿童模仿张开手做出「没有」的动作。\n\n注意事项：成人要让儿童交替打开有玩具及没有玩具的盒子，以训练儿童在没有玩具时才用「没有」的动作来表示。\n\n所需教材：\n• 玩具\n• 盒子 2 个"
+  },
+  {
+    "name": "活动 9",
+    "level": "L3",
+    "parent_name": "语言表达",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "吃小吃时，拿出空的食物盒子（如：薯片罐），打开盖后向儿童说：「没有啊！」并张开手表示没有食物，鼓励儿童模仿「没有」的动作。\n\n注意事项：成人要让儿童交替打开有食物及没有食物的盒子，以训练儿童在没有食物时才用「没有」的动作来表示。\n\n所需教材：\n• 有食物的盒子\n• 没有食物的盒子"
+  },
+  {
+    "name": "活动 10",
+    "level": "L3",
+    "parent_name": "语言表达",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "在桌面玩一些可滚动的玩具（如：车、球）时，成人故意把玩具推离桌面，接著示范张开手的动作并说：「没有了！」鼓励儿童张开手表示没有玩具。\n\n所需教材：\n• 可滚动的玩具（如：车、球）"
+  },
+  {
+    "name": "语言",
+    "level": "L1",
+    "parent_name": null,
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "学前儿童训练指南—语言"
+  },
+  {
+    "name": "语言表达",
+    "level": "L2",
+    "parent_name": "语言",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "活动建议—语言表达"
+  },
+  {
+    "name": "活动11",
+    "level": "L3",
+    "parent_name": "语言表达",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示儿童喜爱的食物或玩具，问儿童：「吃 / 玩 XX（食物或玩具名称）好不好？」并示范「点头」表示「好」，接著用手轻力协助儿童「点头」，鼓励儿童模仿「点头」的动作。\n所需材料：食物或玩具"
+  },
+  {
+    "name": "活动12",
+    "level": "L3",
+    "parent_name": "语言表达",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "与儿童进行喜爱的活动 (如：唱歌)，完成一次后说：「再玩好不好？」提示或等待儿童点头表示「好」，才再次进行活动。成人可按儿童的喜好，重复同一个活动，或改用另一个活动。"
+  },
+  {
+    "name": "活动13",
+    "level": "L3",
+    "parent_name": "语言表达",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "出示儿童抗拒的食物或玩具 (如：鳄鱼牙医)，问儿童：「你吃不吃？」或「你玩不玩？」协助儿童摇头或摇手表示拒绝，接著将食物或玩具收起。\n所需材料：儿童抗拒的食物或玩具"
+  },
+  {
+    "name": "活动14",
+    "level": "L3",
+    "parent_name": "语言表达",
+    "age_min_months": null,
+    "age_max_months": null,
+    "prompt_corpus": "在日常生活中，故意给儿童不合适的用具 (如：喝汤时给儿童筷子)。当儿童摇头或摇手表示「不要」后，将不合适的用具拿走，并将合适的用具交给儿童。\n所需材料：不合适的用具"
+  }
+]
