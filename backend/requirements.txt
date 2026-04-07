@@ -4,7 +4,7 @@ uvicorn==0.24.0
 pyparsing<3.2
 pydantic==2.5.0
 python-multipart==0.0.6
-google-generativeai==0.3.2
+google-generativeai>=0.8.0
 requests==2.31.0
 httpx>=0.25.0
 python-dotenv==1.0.0
@@ -12,3 +12,4 @@ PyYAML==6.0.1
 sqlalchemy==2.0.23
 simpleeval
 PyJWT>=2.8.0
+opencc-python-reimplemented>=0.1.7

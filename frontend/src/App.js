@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, useNavigate } from 'react-router-dom';
 import ChatAssistant from './components/ChatAssistant';
 import CardCuration from './components/CardCuration';
 import ChildProfileSettings from './components/ChildProfileSettings';
 import LanguageContentManager from './components/LanguageContentManager';
 import CognitionContentManager from './components/CognitionContentManager';
+import HHHContentManager from './components/HHHContentManager';
 import TemplateManager from './components/TemplateManager';
 import ContentCategoryNav from './components/ContentCategoryNav';
 import MariosWorld from './components/MariosWorld';
@@ -556,7 +557,9 @@ function App() {
               </div>
             )}
 
-            {/* Remove HHH content section as per requirements */}
+            {activeCategory === 'hhh' && (
+              <HHHContentManager />
+            )}
 
             
             {activeCategory === 'math' && (

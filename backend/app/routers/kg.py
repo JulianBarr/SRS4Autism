@@ -150,6 +150,97 @@ Return ONLY a JSON array, no other text:
         raise HTTPException(status_code=500, detail=str(e))
 
 
+@router.get("/hhh/language")
+async def get_hhh_language_curriculum():
+    """
+    Extracts the top-level hierarchy for the HHH Language curriculum.
+    Maps Age Groups to specific Training Objectives/Targets.
+    """
+    try:
+        from database.kg_client import KnowledgeGraphClient
+        client = KnowledgeGraphClient()
+        sparql = """
+        PREFIX hhh-kg: <http://cuma.org/schema/hhh/>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+        SELECT ?moduleLabel ?submoduleLabel ?focusLabel ?itemLabel ?minAge ?maxAge ?targetLabel ?activityLabel ?materialLabel
+        WHERE {
+            GRAPH <http://cuma.org/graph/heep-hong-language> {
+                ?item a hhh-kg:CurriculumItem ;
+                      rdfs:label ?itemLabel .
+                
+                OPTIONAL { ?item hhh-kg:ageMinMonths ?minAge . }
+                OPTIONAL { ?item hhh-kg:ageMaxMonths ?maxAge . }
+                
+                OPTIONAL {
+                    ?item hhh-kg:hasTarget ?target .
+                    ?target rdfs:label ?targetLabel .
+                    OPTIONAL {
+                        ?target hhh-kg:hasActivity ?activity .
+                        ?activity rdfs:label ?activityLabel .
+                        OPTIONAL {
+                            ?activity hhh-kg:requiresMaterial ?material .
+                            ?material rdfs:label ?materialLabel .
+                        }
+                    }
+                }
+                
+                # Go up the tree
+                OPTIONAL {
+                    ?focus hhh-kg:hasCurriculumItem ?item ;
+                           rdfs:label ?focusLabel .
+                    OPTIONAL {
+                        ?submodule hhh-kg:hasLearningFocus ?focus ;
+                                   rdfs:label ?submoduleLabel .
+                        OPTIONAL {
+                            ?module hhh-kg:hasSubmodule ?submodule ;
+                                    rdfs:label ?moduleLabel .
+                        }
+                    }
+                }
+            }
+        }
+        """
+        bindings = client.query_bindings(sparql)
+        
+        # Group by age bracket
+        # Structure: Age -> Module -> Submodule -> Focus -> Item -> [Targets]
+        from collections import defaultdict
+        
+        hierarchy = defaultdict(lambda: defaultdict(lambda: defaultdict(lambda: defaultdict(lambda: defaultdict(list)))))
+        
+        for row in bindings:
+            min_age = row.get("minAge", {}).get("value")
+            max_age = row.get("maxAge", {}).get("value")
+            
+            # Format age nicely, e.g., "12-24个月"
+            age_bracket = f"{min_age}-{max_age}个月" if min_age and max_age else "未分类年龄段"
+            if age_bracket == "0-12个月": age_bracket = "0-1岁"
+            elif age_bracket == "12-24个月": age_bracket = "1-2岁"
+            elif age_bracket == "24-36个月": age_bracket = "2-3岁"
+            elif age_bracket == "36-48个月": age_bracket = "3-4岁"
+            elif age_bracket == "48-60个月": age_bracket = "4-5岁"
+            elif age_bracket == "60-72个月": age_bracket = "5-6岁"
+            
+            module = row.get("moduleLabel", {}).get("value", "未分类模块")
+            submodule = row.get("submoduleLabel", {}).get("value", "未分类子范畴")
+            focus = row.get("focusLabel", {}).get("value", "未分类学习重点")
+            item = row.get("itemLabel", {}).get("value", "未分类项目")
+            target = row.get("targetLabel", {}).get("value")
+            
+            if target:
+                if target not in hierarchy[age_bracket][module][submodule][focus][item]:
+                    hierarchy[age_bracket][module][submodule][focus][item].append(target)
+            else:
+                # Ensure the item exists even if it has no target
+                hierarchy[age_bracket][module][submodule][focus][item]
+                
+        return {"data": hierarchy}
+    except Exception as e:
+        logger.error(f"❌ KG HHH language query error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @router.get("/cognition-macro-structure")
 async def get_cognition_macro_structure(source: OntologySource = Depends(get_ontology_source)):
     """
