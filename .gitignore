@@ -135,3 +135,8 @@ scripts/data_extraction/tmp_processing.pdf
 *.pdf
 *_progress.json
 final_book_ontology.json
+
+# Oxigraph database
+**/cuma_oxigraph_db/
+# Editor temporary files
+scripts/data_extraction/.!*
