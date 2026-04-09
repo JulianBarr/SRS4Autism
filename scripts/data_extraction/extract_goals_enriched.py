@@ -156,9 +156,9 @@ def main():
     genai.configure(api_key=api_key)
     
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    skeleton_path = os.path.join(base_dir, "21_heep_hong_language_skeleton.json")
-    pdf_path = os.path.join(base_dir, "21_heep_hong_language.pdf")
-    output_path = os.path.join(base_dir, "21_heep_hong_language_enriched_abox.json")
+    skeleton_path = os.path.join(base_dir, "23_self_care_skeleton.json")
+    pdf_path = os.path.join(base_dir, "23-self-care.pdf")
+    output_path = os.path.join(base_dir, "23_self_care_enriched_abox.json")
     
     chunks_dir = os.path.join(base_dir, "temp_chunks")
     os.makedirs(chunks_dir, exist_ok=True)

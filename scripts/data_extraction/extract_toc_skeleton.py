@@ -1,154 +1,167 @@
 import os
 import json
-from pydantic import BaseModel
-from typing import List
-from google import genai
-from google.genai import types
+import time
+import traceback
+import google.generativeai as genai
+from pypdf import PdfReader, PdfWriter
 
-# Load .env variables if python-dotenv is available, as a best practice
-try:
-    from dotenv import load_dotenv
-    load_dotenv()
-except ImportError:
-    pass
+def call_gemini_single_page(pdf_path: str, prompt: str):
+    """Handles upload and extraction for a single page with retries."""
+    uploaded_file = None
+    for attempt in range(1, 4):
+        try:
+            uploaded_file = genai.upload_file(pdf_path)
+            break
+        except Exception as e:
+            print(f"      Upload attempt {attempt} failed: {e}")
+            time.sleep(5)
+            
+    if not uploaded_file:
+        return []
 
-# ------------------------------------------------------------------
-# 1. Define the Pydantic Models for Structured Outputs
-# ------------------------------------------------------------------
+    try:
+        while True:
+            file_info = genai.get_file(uploaded_file.name)
+            if file_info.state.name == "ACTIVE":
+                break
+            elif file_info.state.name == "FAILED":
+                return []
+            time.sleep(2)
 
-class PhasalObjective(BaseModel):
-    index: str      # e.g., "1.1", "2.3"
-    title: str      # The description/title of the item
-
-class Objective(BaseModel):
-    title: str      # e.g., "1. 发出不同声音"
-    phasal_objectives: List[PhasalObjective]
-
-class Submodule(BaseModel):
-    title: str      # e.g., "知觉篇" or "配对篇"
-    objectives: List[Objective]
-
-class CurriculumSkeleton(BaseModel):
-    module: str = "认知" # UPDATED: Changed from Language to Cognition
-    submodules: List[Submodule]
-
-# ------------------------------------------------------------------
-# 2. Main Execution Pipeline
-# ------------------------------------------------------------------
+        model = genai.GenerativeModel('gemini-3.1-pro-preview')
+        for attempt in range(1, 4):
+            try:
+                response = model.generate_content(
+                    [uploaded_file, prompt],
+                    generation_config=genai.GenerationConfig(temperature=0.0),
+                    request_options={"timeout": 600.0}
+                )
+        
+                raw_text = response.text.strip()
+                if "```json" in raw_text:
+                    raw_text = raw_text.split("```json")[1].split("```")[0]
+                elif "```" in raw_text:
+                    raw_text = raw_text.split("```")[1].split("```")[0]
+                    
+                return json.loads(raw_text.strip())
+                
+            except Exception as e:
+                print(f"      API attempt {attempt} failed: {e}")
+                time.sleep(5)
+                
+    except Exception as e:
+        print(f"      Unexpected error: {e}")
+        
+    finally:
+        if uploaded_file:
+            try:
+                genai.delete_file(uploaded_file.name)
+            except Exception:
+                pass
+            
+    return []
 
 def main():
-    # File paths
-    pdf_path = "scripts/data_extraction/22-cognition-toc.pdf"
-    output_json_path = "scripts/data_extraction/22_cognition_skeleton.json" # UPDATED path
+    pdf_path = "scripts/data_extraction/23-self-care-toc.pdf"
+    output_json_path = "scripts/data_extraction/23_self_care_skeleton.json"
 
     if not os.path.exists(pdf_path):
         print(f"Error: PDF file not found at {pdf_path}")
         return
 
     api_key = os.getenv("GEMINI_API_KEY")
-    if not api_key:
-        print("Error: Please set the GEMINI_API_KEY environment variable. (e.g. export GEMINI_API_KEY='your_key')")
-        return
+    genai.configure(api_key=api_key)
 
-    # Add a custom timeout to the client config to be safe
-    client = genai.Client(api_key=api_key, http_options={'timeout': 600000})
+    print(f"Reading TOC PDF {pdf_path}...")
+    reader = PdfReader(pdf_path)
+    total_pages = len(reader.pages)
+    
+    prompt = """
+    You are extracting Table of Contents data from a SINGLE page of a special education curriculum.
+    Translate all text to Simplified Chinese.
+    
+    Output a strictly valid JSON ARRAY of flat objects, one for each "Phasal Objective" (the lowest level, e.g., 1.1, 1.2, 2.1).
+    For each item, identify its parent Objective (e.g., "1. 视觉追踪") and parent Submodule (e.g., "知觉篇").
+    If the Submodule or Objective header is NOT visible on this specific page (because it started on a previous page), output an empty string "" for it.
+    
+    JSON SCHEMA:
+    [
+      {
+        "submodule": "string (or empty string)",
+        "objective": "string (or empty string)",
+        "phasal_index": "string (e.g., '1.1')",
+        "phasal_title": "string"
+      }
+    ]
+    """
 
-    uploaded_file = None
-    try:
-        # Step 1: Upload the Image PDF to Gemini File API
-        print(f"Uploading {pdf_path} to Gemini...")
-        uploaded_file = client.files.upload(file=pdf_path)
-        print(f"Successfully uploaded file: {uploaded_file.name}")
-
-        system_prompt = """
-        You are an expert Special Education data structural extractor.
-        Read the provided Image PDF of a Table of Contents.
-        Your task is to extract a strictly formatted structural skeleton (the first 4 hierarchical levels) 
-        from the provided Table of Contents (TOC) of a special education cognition curriculum.
-
-        The original text is in Traditional Chinese. You MUST translate all extracted text into Simplified Chinese.
-
-        The hierarchy is as follows:
-        - Module (Level 1): Already defined as "认知" (Cognition).
-        - Submodule (Level 2): e.g., "知觉篇", "配对篇".
-        - Objective (Level 3): The main goals, typically numbered like "1. 视觉追踪" or "1 配对".
-        - Phasal Objective (Level 4): The sub-goals under each main goal, typically numbered like "1.1", "1.2", "2.1", etc.
-
-        Instructions:
-        1. Only extract the structural hierarchy based on the schema provided.
-        2. Do NOT invent goals, materials, passing criteria, or anything else not in the TOC.
-        3. Ensure the numbering scheme is correctly extracted and assigned.
-        4. Group Phasal Objectives under their corresponding Objectives correctly.
-        5. Group Objectives under their corresponding Submodules correctly.
-        6. You MUST translate all extracted text into Simplified Chinese.
+    master_list = []
+    
+    # Process page by page
+    for p in range(total_pages):
+        print(f"\nProcessing TOC Page {p+1}/{total_pages}...")
+        temp_pdf = f"scripts/data_extraction/temp_toc_page_{p}.pdf"
         
-        JSON SCHEMA REQUIREMENT:
-        You MUST output strictly valid JSON that matches this exact structure:
-        {
-          "module": "认知",
-          "submodules": [
-            {
-              "title": "string",
-              "objectives": [
-                {
-                  "title": "string",
-                  "phasal_objectives": [
-                    {
-                      "index": "string",
-                      "title": "string"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-        """
-
-        # Step 2: Use Multimodal Gemini Call
-        print("Sending request to Gemini using Markdown JSON mode to prevent 504 timeouts...")
-        response = client.models.generate_content(
-            model="gemini-3.1-pro-preview", 
-            contents=[
-                uploaded_file,
-                "Please extract the skeleton from the provided PDF Table of Contents. Ensure all output is in Simplified Chinese and strictly mapped to the provided schema."
-            ],
-            config=types.GenerateContentConfig(
-                system_instruction=system_prompt,
-                temperature=0.0,
-                # REMOVED strict response_mime_type to allow the backend to breathe
-            )
-        )
-
-        # Step 3: Parse the Markdown JSON
-        raw_text = response.text.strip()
-        if raw_text.startswith("```json"):
-            raw_text = raw_text[7:]
-        elif raw_text.startswith("```"):
-            raw_text = raw_text[3:]
+        writer = PdfWriter()
+        writer.add_page(reader.pages[p])
+        with open(temp_pdf, "wb") as f_out:
+            writer.write(f_out)
             
-        if raw_text.endswith("```"):
-            raw_text = raw_text[:-3]
+        page_items = call_gemini_single_page(temp_pdf, prompt)
+        
+        if page_items:
+            print(f"  -> Successfully extracted {len(page_items)} items from page {p+1}.")
+            master_list.extend(page_items)
+        else:
+            print(f"  -> WARNING: Failed to extract data from page {p+1}.")
             
-        skeleton_data = json.loads(raw_text.strip())
+        # Cleanup temp file
+        if os.path.exists(temp_pdf):
+            os.remove(temp_pdf)
 
-        # Step 4: Export to JSON
-        print(f"Saving extracted skeleton to {output_json_path}...")
-        with open(output_json_path, 'w', encoding='utf-8') as f:
-            json.dump(skeleton_data, f, ensure_ascii=False, indent=4)
-        print("Done! Skeleton JSON created successfully.")
+    # Reconstruct the hierarchy (Forward Fill missing parents)
+    print("\nReconstructing nested skeleton...")
+    current_sub = "未知篇"
+    current_obj = "未知目标"
+    
+    skeleton = {"module": "认知", "submodules": []}
+    sub_dict = {}
 
-    except Exception as e:
-        print(f"Error during processing: {e}")
-    finally:
-        # Step 5: Cleanup
-        if uploaded_file:
-            print(f"Cleaning up: deleting {uploaded_file.name} from Gemini servers...")
-            try:
-                client.files.delete(name=uploaded_file.name)
-                print("Cleanup complete.")
-            except Exception as e:
-                print(f"Error deleting file: {e}")
+    for item in master_list:
+        if item.get("submodule"): current_sub = item["submodule"]
+        if item.get("objective"): current_obj = item["objective"]
+        
+        p_idx = item.get("phasal_index", "").strip()
+        p_title = item.get("phasal_title", "").strip()
+        
+        if not p_idx: continue # Skip if no index found
+        
+        if current_sub not in sub_dict:
+            sub_dict[current_sub] = {"title": current_sub, "objectives": {}}
+            
+        if current_obj not in sub_dict[current_sub]["objectives"]:
+            sub_dict[current_sub]["objectives"][current_obj] = {"title": current_obj, "phasal_objectives": []}
+            
+        sub_dict[current_sub]["objectives"][current_obj]["phasal_objectives"].append({
+            "index": p_idx,
+            "title": p_title
+        })
+
+    # Convert dictionaries back to lists for the final JSON
+    for sub_k, sub_v in sub_dict.items():
+        sub_obj = {"title": sub_v["title"], "objectives": []}
+        for obj_k, obj_v in sub_v["objectives"].items():
+            sub_obj["objectives"].append({
+                "title": obj_v["title"],
+                "phasal_objectives": obj_v["phasal_objectives"]
+            })
+        skeleton["submodules"].append(sub_obj)
+
+    print(f"Saving extracted skeleton to {output_json_path}...")
+    with open(output_json_path, 'w', encoding='utf-8') as f:
+        json.dump(skeleton, f, ensure_ascii=False, indent=4)
+        
+    print("Done! Skeleton JSON created successfully.")
 
 if __name__ == "__main__":
     main()
