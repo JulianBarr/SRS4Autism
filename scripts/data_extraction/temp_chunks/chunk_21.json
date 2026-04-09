@@ -1,0 +1,103 @@
+{
+  "items_found": [
+    {
+      "skeleton_index": "E",
+      "goals": [
+        {
+          "description": "伸手在背后拉脱穿在手臂上的长袖管",
+          "materials": [
+            "美劳手袖 1 对"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "先把美劳手袖套在儿童双手。请儿童双手伸向背后，以一手握着另一手的手袖边缘，将该手袖脱出，并把整个手袖拉离手部。接着换另一边重复动作，把另一只手袖也拉脱。"
+        },
+        {
+          "description": "伸手在背后拉脱穿在手臂上的长袖管",
+          "materials": [
+            "长袖开胸外套",
+            "安全扣针"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "预先将 1 个安全扣针扣在儿童长袖开胸外套的其中一边袖口，替儿童穿上外套后，请儿童抓握衣襟向后翻，使袖孔脱离肩膀后，再把双手伸向后面，以没有安全扣针那一边的手握着扣针和袖口，把衣袖拉出，接着再把另一衣袖完全拉脱。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "A",
+      "goals": [
+        {
+          "description": "将已脱至头部（在鼻梁左右）的T恤完全脱下",
+          "materials": [
+            "领口较大的 T 恤"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "让儿童穿上领口较大的 T 恤，当儿童换衣服时，请儿童坐下，成人协助儿童从衣脚把 T 恤拉起，让儿童的双手完全脱出，把 T 恤脱至脖子的位置。接着请儿童自行以双手将 T 恤向上拉，将 T 恤完全脱掉。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "B",
+      "goals": [
+        {
+          "description": "将已脱一只袖的T恤完全脱下",
+          "materials": [
+            "较宽松的 T 恤"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "让儿童穿上较宽松的 T 恤，儿童换衣服时，成人协助儿童脱出一袖，请儿童用已脱出衣袖的手握着另一边的衣脚向上推，把另一手也脱出，最后请儿童用双手把 T 恤拉过头部，把 T 恤完全脱下。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "C",
+      "goals": [
+        {
+          "description": "将已套在腰间的弹性布套向上拉并完全脱下",
+          "materials": [
+            "呼拉圈"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "示范把呼拉圈穿在腰间，以双手把呼拉圈向上脱出。接着替儿童把呼拉圈穿到腰间，请儿童以双手握着，并伸手向上脱出呼拉圈。"
+        },
+        {
+          "description": "将已套在腰间的弹性布套向上拉并完全脱下",
+          "materials": [
+            "弹性布套（长 25 厘米，阔 25 厘米）"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "把弹性布套套在儿童腰间，请儿童将布套向上拉过头部，将布套完全脱掉。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "D",
+      "goals": [
+        {
+          "description": "脱T恤",
+          "materials": [
+            "较宽松的短袖 T 恤"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "示范将双手交叉在躯干前面握着衣脚部分，将 T 恤向上拉，脱过肩膀及头部，将 T 恤完全脱下。"
+        },
+        {
+          "description": "脱T恤",
+          "materials": [
+            "较宽松的长袖 T 恤",
+            "安全扣针"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "预先将安全扣针扣在儿童长袖 T 恤的两边袖口，请儿童以一手握着扣针和袖口，让另一手从衣袖脱出，接着以相同方法把另一袖也脱出，最后请儿童用双手把 T 恤拉过头部，把长袖 T 恤完全脱掉。"
+        }
+      ]
+    }
+  ]
+}

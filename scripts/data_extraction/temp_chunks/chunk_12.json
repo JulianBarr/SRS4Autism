@@ -1,0 +1,151 @@
+{
+  "items_found": [
+    {
+      "skeleton_index": "B",
+      "goals": [
+        {
+          "description": "",
+          "materials": [
+            "各种水果",
+            "刀",
+            "叉子",
+            "沙拉酱",
+            "沙拉碗"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "与儿童一同制作沙拉，成人负责将水果切成粒，请儿童用叉子取水果粒，放进沙拉碗内。完成后，让儿童加入沙拉酱，并以叉子拌匀。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "C",
+      "goals": [
+        {
+          "description": "",
+          "materials": [
+            "意大利粉",
+            "叉子",
+            "剪刀"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "预先将意大利粉剪成小段，并示范用叉子舀起意粉进食，请儿童模仿成人以叉子舀意粉进食。"
+        },
+        {
+          "description": "",
+          "materials": [
+            "棉线",
+            "碗",
+            "叉子",
+            "洋娃娃"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "预先把棉线放进碗内，示范握起并转动叉子把棉线卷起，接着喂洋娃娃进食，请儿童模仿。"
+        },
+        {
+          "description": "",
+          "materials": [
+            "米粉",
+            "叉子"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "示范转动叉子，舀起米粉进食，请儿童模仿成人以转动叉子的方法舀起米粉进食。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "D",
+      "goals": [
+        {
+          "description": "",
+          "materials": [
+            "“家家酒”玩具（包括：能切开的玩具食物、玩具刀、玩具锅子）"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "与儿童模拟煮食，示范用玩具刀切开玩具蔬菜，再放进玩具锅子内烹煮。接着请儿童合作切开玩具蔬菜或食物，放进锅子内煮食。"
+        },
+        {
+          "description": "",
+          "materials": [
+            "泥胶",
+            "小胶刀"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "预先压平泥胶并弄出坑纹，示范对准坑纹的位置，用小胶刀切开泥胶，接着请儿童模仿。当儿童熟练后，可将泥胶搓成不同的形状，让儿童学习拿刀切开软食物的技巧。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "D",
+      "goals": [
+        {
+          "description": "",
+          "materials": [
+            "较软的食物（如：香蕉、香肠）",
+            "小胶刀"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "示范用小胶刀将较软的食物切开，接着请儿童模仿。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "E",
+      "goals": [
+        {
+          "description": "",
+          "materials": [
+            "胶刀",
+            "颜料",
+            "画纸"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "示范用胶刀沾上颜料，在画纸上自由涂出颜色，请儿童模仿。当儿童熟练后，成人在画纸上画出图案，并要求儿童在涂颜色时不出界，学习用刀涂酱料的技巧。"
+        },
+        {
+          "description": "",
+          "materials": [
+            "胶刀",
+            "面包片",
+            "各种酱料（如：牛油、果酱、巧克力酱）"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "预备不同的面包用酱料，示范用刀沾上酱料来涂面包。接着请儿童选择自己喜欢的酱料，并用刀把酱料涂在面包上，完成后和成人一同享用。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "A",
+      "goals": [
+        {
+          "description": "练习吐出藏在食物中的珠粒",
+          "materials": [
+            "牙线",
+            "珠粒",
+            "香肠"
+          ],
+          "passing_criteria": null,
+          "precautions": "过程中成人须确保拿稳牙线后，才把香肠放进儿童口中。",
+          "activity_suggestions": "用牙线串起1粒小珠后，在牙线的末端打结，接着将珠粒藏在食物中，如：藏在香肠粒内。示范拿着牙线把香肠粒放进口中，吃了香肠后，将珠粒吐出来。接着请儿童模仿。开始时如儿童不懂吐出珠粒，成人可轻拉牙线，将珠粒拉出，再慢慢减少协助。"
+        },
+        {
+          "description": "练习吐出排骨的骨头或葡萄的核",
+          "materials": [
+            "切了粒的排骨或有核葡萄"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "预先准备切了粒的小排骨或有核的葡萄，并示范把整粒排骨或葡萄放进口内进食，再把骨或核吐出，接着请儿童模仿。"
+        }
+      ]
+    }
+  ]
+}

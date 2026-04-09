@@ -1,0 +1,88 @@
+{
+  "items_found": [
+    {
+      "skeleton_index": "A",
+      "goals": [
+        {
+          "description": "成人替儿童修剪指甲时，儿童能配合",
+          "materials": [
+            "手偶",
+            "长形便条纸制黑边指甲",
+            "指甲钳"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "预先在手偶的手指及脚趾上贴上用长形便条纸制成的黑边指甲及脚趾甲。成人戴上手偶，并告诉儿童指甲或脚趾甲太长会很脏，而且会弄伤皮肤。接着牵着儿童的手用指甲钳替手偶剪指甲及脚趾甲，让儿童认识指甲太长时需要修剪。"
+        },
+        {
+          "description": "成人替儿童修剪指甲时，儿童能配合",
+          "materials": [
+            "长形便条纸制指甲",
+            "指甲钳"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "先在自己的手指或脚趾上贴上长形便条纸制成的指甲，并牵着儿童的手，与儿童一起用指甲钳修剪纸指甲。接着成人为儿童贴上纸指甲，鼓励儿童自行伸出手或脚，让成人修剪纸指甲。当儿童能配合被成人修剪便条纸做的指甲后，请儿童伸出手或脚，让成人真正修剪其手指甲或脚趾甲。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "B",
+      "goals": [
+        {
+          "description": "成人替儿童修剪脚趾甲时，儿童能配合",
+          "materials": [
+            "手偶",
+            "长形便条纸制黑边指甲",
+            "指甲钳"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "预先在手偶的手指及脚趾上贴上用长形便条纸制成的黑边指甲及脚趾甲。成人戴上手偶，并告诉儿童指甲或脚趾甲太长会很脏，而且会弄伤皮肤。接着牵着儿童的手用指甲钳替手偶剪指甲及脚趾甲，让儿童认识指甲太长时需要修剪。"
+        },
+        {
+          "description": "成人替儿童修剪脚趾甲时，儿童能配合",
+          "materials": [
+            "长形便条纸制指甲",
+            "指甲钳"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "先在自己的手指或脚趾上贴上长形便条纸制成的指甲，并牵着儿童的手，与儿童一起用指甲钳修剪纸指甲。接着成人为儿童贴上纸指甲，鼓励儿童自行伸出手或脚，让成人修剪纸指甲。当儿童能配合被成人修剪便条纸做的指甲后，请儿童伸出手或脚，让成人真正修剪其手指甲或脚趾甲。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "C",
+      "goals": [
+        {
+          "description": "用指甲钳修剪指甲",
+          "materials": [
+            "纸指甲",
+            "胶手套",
+            "单孔打孔机",
+            "指甲钳"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "预先把较长的纸指甲贴在胶手套上，请儿童戴上手套，并以前二指或前三指紧握单孔打孔机，于纸指甲上打出圆孔，以学习使用指甲钳的动作及技巧。当儿童熟练所需技巧后，请儿童尝试用指甲钳修剪自己的指甲。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "D",
+      "goals": [
+        {
+          "description": "用指甲钳修剪脚趾甲",
+          "materials": [
+            "便条纸制长形脚趾甲",
+            "指甲钳"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "在儿童的脚趾上贴上便条纸制成的长形脚趾甲，请儿童用指甲钳修剪纸脚趾甲。当儿童熟练所需技巧后，请儿童尝试用指甲钳修剪自己的脚趾甲。"
+        }
+      ]
+    }
+  ]
+}

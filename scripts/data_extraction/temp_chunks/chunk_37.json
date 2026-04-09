@@ -1,0 +1,134 @@
+{
+  "items_found": [
+    {
+      "skeleton_index": "B",
+      "goals": [
+        {
+          "description": null,
+          "materials": [
+            "四角有记号的方巾多条",
+            "食物盒"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "预先把白色方巾的四角点上颜色或缝上记号，与儿童玩假想游戏，示范把方巾按记号折叠2次，变成三角形当作三明治，再把三明治放在食物盒内。接着请儿童模仿，以练习折叠毛巾的技巧。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "C",
+      "goals": [
+        {
+          "description": null,
+          "materials": [
+            "婴儿盒装湿纸巾"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "出示婴儿盒装湿纸巾，示范按下按钮使纸巾盒盖弹开，取出1张湿纸巾后，用手指把盖按下盖好，请儿童模仿，练习使用弹盖式水壶的动作。"
+        },
+        {
+          "description": null,
+          "materials": [
+            "弹盖式儿童水壶"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "出示弹盖式儿童水壶，请儿童喝水后，用手指把盖按下盖好。"
+        },
+        {
+          "description": null,
+          "materials": [
+            "有螺丝部分的玩具"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "出示有螺丝部分的玩具，示范把螺丝扭出来，请儿童尝试。可与儿童比赛扭出螺丝帽，看谁比较快。比赛完毕后，请儿童把螺丝帽扭上，以练习使用扭盖式水瓶的动作及加强用手指扭上瓶盖所需的力度。"
+        },
+        {
+          "description": null,
+          "materials": [
+            "瓶口较阔的瓶装果汁"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "拿出瓶口较阔的瓶装果汁和儿童分享，请儿童扭开瓶盖，倒出果汁后再把瓶盖扭上。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "D",
+      "goals": [
+        {
+          "description": null,
+          "materials": [
+            "铃铛",
+            "有盖的食物盛器"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "示范把铃铛放进不同的有盖食物盛器内（如：月饼盒、有盖薯片罐），并把盖盖好，制成音乐盒，接着请儿童模仿成人的做法，自制音乐盒，练习把不同盛器的盖子盖上。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "E",
+      "goals": [
+        {
+          "description": null,
+          "materials": [
+            "拉链袋",
+            "小物件"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "出示不同的拉链袋，请儿童把小物件放进袋后拉上拉链，练习拉上密封袋扣的动作。"
+        },
+        {
+          "description": null,
+          "materials": [
+            "有扣密封袋",
+            "小吃"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "与儿童一同分享小吃。享用完毕后，成人示范把剩下的小吃放进有扣的密封袋内，并把扣拉好，接着把另一个有扣的密封袋交给儿童，请儿童模仿成人的做法，保存剩下的小吃。"
+        },
+        {
+          "description": null,
+          "materials": [
+            "变色封口密封袋",
+            "食物"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "示范把食物放进拉合时封口会变色的密封袋，请儿童留意正确拉合时封口颜色的转变。接着把另一个密封袋交给儿童，请儿童模仿。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "F",
+      "goals": [
+        {
+          "description": null,
+          "materials": [
+            "玩具餐具",
+            "篮子"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "与儿童玩“家家酒”游戏。完成后，请儿童把玩具餐具，如：杯、碟及碗分别放进不同的篮子中。如儿童能恰当地完成，成人可请儿童把杯、碟及碗分别叠高，并放于篮子内。"
+        },
+        {
+          "description": null,
+          "materials": [
+            "餐具"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "与儿童分享茶点后，示范把2个相同的餐具叠起（如：把2个碗叠起），并拿进厨房的洗碗盆内。接着请儿童把其他相同的餐具分类叠好，再放进厨房的洗碗盆内。"
+        }
+      ]
+    }
+  ]
+}

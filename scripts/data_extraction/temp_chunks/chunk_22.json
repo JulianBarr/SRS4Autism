@@ -1,0 +1,151 @@
+{
+  "items_found": [
+    {
+      "skeleton_index": "A",
+      "goals": [
+        {
+          "description": "在儿童面前将糖果贴在帽子内，接着替儿童戴上帽子，请儿童伸手拉脱帽子，找出糖果。",
+          "materials": [
+            "独立包装糖果",
+            "帽子"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": null
+        }
+      ]
+    },
+    {
+      "skeleton_index": "B",
+      "goals": [
+        {
+          "description": "与儿童一起戴上成人尺寸的沐浴按摩手套，互相按摩对方的手和脚后，请儿童把按摩手套自行拉脱。",
+          "materials": [
+            "沐浴按摩手套"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": null
+        },
+        {
+          "description": "与儿童一起戴上透明胶手套，制作简单小吃（如：用小胶签串起2粒大棉花糖）。完成后请儿童拉脱手套，与成人一同分享食物。",
+          "materials": [
+            "透明胶手套",
+            "制作小吃的材料及用具"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": null
+        },
+        {
+          "description": "把贴纸贴在儿童手掌心，再替儿童戴上没有个别手指部分的手套，请儿童以拇指穿进手套开口，把手套脱下，露出贴纸。儿童掌握技巧后，可让儿童尝试脱出有个别手指部分的手套。",
+          "materials": [
+            "没有个别手指部分的手套",
+            "有个别手指部分的手套",
+            "贴纸"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": null
+        }
+      ]
+    },
+    {
+      "skeleton_index": "A",
+      "goals": [
+        {
+          "description": "准备与儿童外出时，请儿童坐在椅子上，成人先替儿童穿上一只鞋子。接着拿着另一只鞋子，张开鞋口放在儿童脚前，请儿童提起脚配合成人，并将脚穿进鞋子内。",
+          "materials": [
+            "容易穿上的鞋子（如：非长靴款式）",
+            "儿童椅子"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": null
+        }
+      ]
+    },
+    {
+      "skeleton_index": "B",
+      "goals": [
+        {
+          "description": "与儿童一起替洋娃娃穿鞋子，成人先拉开鞋子的两边，请儿童把洋娃娃的脚穿进鞋子内。合作穿好一只鞋子后，二人交换角色，请儿童拉开鞋子的两边，成人则把洋娃娃的另一只脚穿进鞋子内。",
+          "materials": [
+            "可穿脱鞋子的洋娃娃"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": null
+        },
+        {
+          "description": "与儿童一起坐在地上，成人以双手替儿童拉开鞋口，并递向儿童，让儿童把脚穿进鞋子。接着成人把另一只鞋交给儿童，请儿童自行拉开鞋子的两边，把脚穿进鞋子内。",
+          "materials": [
+            "容易穿上的鞋子"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": null
+        }
+      ]
+    },
+    {
+      "skeleton_index": "C",
+      "goals": [
+        {
+          "description": "请儿童坐在椅子上，成人示范把脚穿进密头拖鞋内，接着把儿童的密头拖鞋放在儿童脚前，请儿童自行把脚穿进拖鞋内。",
+          "materials": [
+            "成人和儿童的密头拖鞋",
+            "儿童椅子"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": null
+        },
+        {
+          "description": "与儿童一起坐在地上，成人以双手替儿童拉开鞋口，并递向儿童，让儿童把脚穿进鞋子。接着成人把另一只鞋交给儿童，请儿童自行拉开鞋子的两边，把脚穿进鞋子内。",
+          "materials": [
+            "容易穿上的鞋子"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": null
+        },
+        {
+          "description": "预备容易穿上的儿童鞋子，请儿童撕开魔术贴，以双手拉开鞋子把脚穿进鞋头后（如有需要，请儿童用一手固定鞋舌），再用食指拉着鞋跟部分，将脚踝穿进鞋子内。",
+          "materials": [
+            "容易穿上的鞋子"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": null
+        }
+      ]
+    },
+    {
+      "skeleton_index": "D",
+      "goals": [
+        {
+          "description": "在儿童面前把儿童的一双鞋子放在大画纸上，用笔勾画出左右鞋子的外形，并和儿童一起描述左脚和右脚鞋印的分别。接着把鞋子左右调乱再交给儿童，请儿童将鞋子放回在相应的鞋印上。",
+          "materials": [
+            "儿童鞋子",
+            "画纸",
+            "颜色笔"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": null
+        },
+        {
+          "description": "预先把鞋印图片贴在鞋柜外，与儿童外出回家时，把鞋子脱掉后，请儿童把鞋子分好左右，再放回鞋柜内。如儿童有疑惑，请儿童对照鞋印图片来协助分辨左右。",
+          "materials": [
+            "鞋印图片",
+            "儿童鞋子"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": null
+        }
+      ]
+    }
+  ]
+}

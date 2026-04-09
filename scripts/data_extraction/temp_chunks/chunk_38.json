@@ -1,0 +1,135 @@
+{
+  "items_found": [
+    {
+      "skeleton_index": "A",
+      "goals": [
+        {
+          "description": "将垃圾放进废纸箱内（开放式或活掩式）",
+          "materials": [
+            "筒形玩具篮",
+            "玩具",
+            "衣物",
+            "洗衣篮",
+            "纸巾",
+            "小型活掩式废纸箱"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "1. 与儿童一起玩玩具，玩完后请儿童把玩具放进篮子内收拾妥当，模仿把垃圾放进开放式废纸箱的动作。\n2. 与儿童外出回家后，协助儿童脱去衣服，请儿童把要清洗的衣物放进洗衣篮内，模仿把垃圾放进开放式废纸箱的动作。\n3. 与儿童吃茶点后，请儿童用纸巾抹嘴，接着将纸巾放进桌上的小型活掩式废纸箱内。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "B",
+      "goals": [
+        {
+          "description": "与儿童玩假想游戏，把有靠背的儿童椅子模拟为超级市场的购物车，把想要购买的物件放在上面，接着推到收银处的桌子旁结账，以教导儿童移动椅子的技巧。",
+          "materials": [
+            "有靠背的儿童椅子",
+            "玩具食物",
+            "儿童桌子",
+            "玩具收银机"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "与儿童玩假想游戏，把有靠背的儿童椅子模拟为超级市场的购物车，把想要购买的物件放在上面，接着推到收银处的桌子旁结账，以教导儿童移动椅子的技巧。"
+        },
+        {
+          "description": "预先在摆放儿童椅子的地上贴上颜色贴纸，并把儿童的椅子放到其他地方，接着请儿童帮忙把椅子推回颜色贴纸上。",
+          "materials": [
+            "儿童椅子",
+            "颜色贴纸"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "预先在摆放儿童椅子的地上贴上颜色贴纸，并把儿童的椅子放到其他地方，接着请儿童帮忙把椅子推回颜色贴纸上。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "C",
+      "goals": [
+        {
+          "description": "与儿童玩假想游戏，请儿童替洋娃娃放好玩具枕头和玩具被铺，让洋娃娃睡觉。洋娃娃起床后，请儿童替洋娃娃放好枕头和折好被铺。",
+          "materials": [
+            "洋娃娃",
+            "玩具枕头及玩具被铺"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "与儿童玩假想游戏，请儿童替洋娃娃放好玩具枕头和玩具被铺，让洋娃娃睡觉。洋娃娃起床后，请儿童替洋娃娃放好枕头和折好被铺。"
+        },
+        {
+          "description": "把一面有花纹，另一面只有一种颜色的被铺平放于床上，示范如何把有花纹的一面「收藏」，即折叠被铺，完成后把枕头放于被铺上。请儿童模仿成人的做法，练习整理枕头及被铺。",
+          "materials": [
+            "一面有花纹而另一面只有一种颜色的被铺",
+            "枕头"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "把一面有花纹，另一面只有一种颜色的被铺平放于床上，示范如何把有花纹的一面「收藏」，即折叠被铺，完成后把枕头放于被铺上。请儿童模仿成人的做法，练习整理枕头及被铺。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "A",
+      "goals": [
+        {
+          "description": "练习双手扭毛巾的动作及加强扭毛巾所需的力度。",
+          "materials": [
+            "不同颜色的彩泥"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "以双手扭动的方法，示范将不同颜色的彩泥扭成螺丝粉，并请儿童模仿，一起制作螺丝粉大餐，以练习双手扭毛巾的动作及加强扭毛巾所需的力度。"
+        },
+        {
+          "description": "学习扭干毛巾的动作。",
+          "materials": [
+            "厚海绵",
+            "水及水盆"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "先把厚海绵泡水，并示范用双手扭动海绵把水挤出，请儿童模仿，以学习扭干毛巾的动作。"
+        },
+        {
+          "description": "弄湿毛巾、扭干毛巾并清洁地上的颜色。",
+          "materials": [
+            "水彩",
+            "毛巾"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "预先在地面涂上水彩颜色，向儿童表示地面脏了，需要清洁。接着把1条干的毛巾交给儿童，请儿童先往洗手盆把毛巾弄湿，扭干毛巾后再拿来清洁地上的颜色。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "B",
+      "goals": [
+        {
+          "description": "拿毛巾把桌面抹干。",
+          "materials": [
+            "水杯",
+            "桌子",
+            "毛巾"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "和儿童喝水时，扮作不小心弄湿桌面，并指着预先放在桌上的毛巾，请儿童拿毛巾把桌面抹干。"
+        },
+        {
+          "description": "弄湿毛巾、扭干毛巾并清洁地上的颜色。",
+          "materials": [
+            "水彩",
+            "毛巾"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "预先在地面涂上水彩颜色，向儿童表示地面脏了，需要清洁。接着把1条干的毛巾交给儿童，请儿童先往洗手盆把毛巾弄湿，扭干毛巾后再拿来清洁地上的颜色。"
+        }
+      ]
+    }
+  ]
+}

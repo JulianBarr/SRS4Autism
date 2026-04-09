@@ -1,0 +1,51 @@
+{
+  "items_found": [
+    {
+      "skeleton_index": "A",
+      "goals": [
+        {
+          "description": "儿童以奶瓶进饮前，成人可先替儿童做简单的嘴唇按摩（如：用食指围绕嘴唇四周轻轻按压），加强儿童唇部四周的触觉刺激。",
+          "materials": [],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "儿童以奶瓶进饮前，成人可先替儿童做简单的嘴唇按摩（如：用食指围绕嘴唇四周轻轻按压），加强儿童唇部四周的触觉刺激。"
+        },
+        {
+          "description": "儿童以奶瓶进饮时，用奶瓶上的奶嘴有节奏地轻轻按压儿童舌头数下，协助儿童建立吸啜及吞咽所需的舌头动作节奏。",
+          "materials": [
+            "奶瓶",
+            "牛奶"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "儿童以奶瓶进饮时，用奶瓶上的奶嘴有节奏地轻轻按压儿童舌头数下，协助儿童建立吸啜及吞咽所需的舌头动作节奏。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "B",
+      "goals": [
+        {
+          "description": "儿童以奶瓶进饮时，用奶瓶上的奶嘴有节奏地轻轻按压儿童舌头数下，协助儿童建立吸啜及吞咽所需的舌头动作节奏。",
+          "materials": [
+            "奶瓶",
+            "牛奶"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "儿童以奶瓶进饮时，用奶瓶上的奶嘴有节奏地轻轻按压儿童舌头数下，协助儿童建立吸啜及吞咽所需的舌头动作节奏。"
+        },
+        {
+          "description": "预备用水稀释了的苹果汁，以小吸管头吸起一小滴果汁，放进儿童口中，刺激口腔内的肌肉收缩作吞咽。",
+          "materials": [
+            "较浓味流质食物（如：苹果水）",
+            "小吸管"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "预备用水稀释了的苹果汁，以小吸管头吸起一小滴果汁，放进儿童口中，刺激口腔内的肌肉收缩作吞咽。"
+        }
+      ]
+    }
+  ]
+}

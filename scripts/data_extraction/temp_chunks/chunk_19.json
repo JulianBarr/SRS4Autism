@@ -1,0 +1,172 @@
+{
+  "items_found": [
+    {
+      "skeleton_index": "A",
+      "goals": [
+        {
+          "description": "将已脱过脚踝的鞋完全脱下 / 1-2 岁",
+          "materials": [
+            "儿童鞋子"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "与儿童外出回家后，请儿童坐在地上，先替儿童解松鞋子，并把鞋子稍稍推离脚踝，接着请儿童自行推脱鞋子。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "B",
+      "goals": [
+        {
+          "description": "用手握鞋跟向下推离脚踝 / 1-2 岁",
+          "materials": [
+            "可脱鞋的洋娃娃"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "与儿童玩假想游戏，模拟洋娃娃刚回到家中，需要脱鞋。成人示范握着洋娃娃鞋子的鞋跟，将洋娃娃的鞋脱下，接着请儿童模仿。"
+        },
+        {
+          "description": "用手握鞋跟向下推离脚踝 / 1-2 岁",
+          "materials": [
+            "成人鞋子"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "与儿童外出回家后，成人先解松自己的鞋，接着协助儿童握着成人的鞋跟，一起用力把鞋跟推离脚踝。"
+        },
+        {
+          "description": "用手握鞋跟向下推离脚踝 / 1-2 岁",
+          "materials": [
+            "简单易脱的儿童鞋子",
+            "贴纸"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "请儿童坐在地上，先将贴纸贴在儿童的脚踝，再替儿童穿上款式简单易脱的鞋子。接着指示儿童用手握着鞋跟，将鞋推离脚踝，找回贴纸。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "C",
+      "goals": [
+        {
+          "description": "推脱鞋子 / 2-3 岁",
+          "materials": [
+            "可脱鞋的洋娃娃"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "与儿童玩假想游戏，模拟洋娃娃刚回到家中，需要脱鞋。成人示范握着洋娃娃鞋子的鞋跟，将洋娃娃的鞋脱下，接着请儿童模仿。"
+        },
+        {
+          "description": "推脱鞋子 / 2-3 岁",
+          "materials": [
+            "成人鞋子",
+            "简单易脱的儿童鞋子"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "外出时替儿童穿上款式简单易脱的鞋子。回到家中，成人示范握着自己的鞋跟把鞋子推脱，请儿童模仿成人的做法，把自己的鞋子推脱。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "A",
+      "goals": [
+        {
+          "description": "活动建议 1",
+          "materials": [
+            "泥胶"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "以泥胶包裹着儿童的前脚掌，模拟袜子套着前脚掌的状态，请儿童把泥胶拉脱，交给成人。"
+        },
+        {
+          "description": "活动建议 2",
+          "materials": [
+            "儿童袜子"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "与儿童外出回家，脱下鞋子后，协助儿童把袜子拉过脚踝（至脚掌部位），请儿童自行把袜子拉脱。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "B",
+      "goals": [
+        {
+          "description": "活动建议 3",
+          "materials": [
+            "缝上铃铛的橡筋圈（阔5厘米）"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "与儿童一同把缝上铃铛的橡筋圈穿在脚上，并一面唱儿歌一面跳舞。完成活动后，成人示范把拇指从脚踝位置插入橡筋圈内，再将橡筋圈拉过脚踝脱下，接着请儿童模仿成人的做法，把自己脚上的橡筋圈脱下。"
+        },
+        {
+          "description": "活动建议 4",
+          "materials": [
+            "长袜子（长度及儿童小腿一半）"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "替儿童穿上长度及小腿一半的袜子（让儿童难以只靠拉袜子前端便能拉脱的袜子），请儿童将拇指插入袜管口，并把袜子推向脚踝。接着成人协助把袜子推过脚踝，让儿童自行拉脱袜子。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "C",
+      "goals": [
+        {
+          "description": "活动建议 5",
+          "materials": [
+            "袜子"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "外出时替儿童穿上稍松的袜子，回家脱去鞋子后，请儿童自行把袜子脱掉。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "A",
+      "goals": [
+        {
+          "description": "",
+          "materials": [
+            "与儿童腰围相约的小呼拉圈"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "请儿童举起双手站在地上，成人把与儿童腰围相约的小呼拉圈穿过儿童双手并套至腰间，接着请儿童把小呼拉圈向下推至脚部，放在地上。"
+        },
+        {
+          "description": "",
+          "materials": [
+            "稍松的儿童裤子（橡筋腰）"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "替儿童换裤时，把裤头拉至儿童的臀部，接着请儿童自行把裤向下推至地上，成人再协助儿童把裤脱离双脚。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "B",
+      "goals": [
+        {
+          "description": "",
+          "materials": [
+            "弹性布套（长 7.5 厘米，阔 25 厘米）"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "把弹性布套穿在儿童腰间，请儿童把双手拇指插入布套顶端，把布套拉开并向下推至地上。"
+        }
+      ]
+    }
+  ]
+}

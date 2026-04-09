@@ -1,0 +1,208 @@
+{
+  "items_found": [
+    {
+      "skeleton_index": "B",
+      "goals": [
+        {
+          "description": "提升儿童辨别可进食及不可进食物件的能力",
+          "materials": [
+            "食物盒2个",
+            "毛巾",
+            "葡萄干",
+            "积木"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "把积木和葡萄干分别放在2个清洁的食物盒内，用毛巾盖着2个食物盒，请儿童抽出其中一个。当抽到盛有葡萄干的盒时，奖励儿童进食1颗葡萄干；当抽到盛有积木的盒时，教导儿童不可进食。重复游戏，并可用儿童喜欢的食物及其他不可进食的物件进行，以提升儿童辨别可进食及不可进食物件的能力。"
+        },
+        {
+          "description": "让儿童学习辨别可进食及不可进食的概念",
+          "materials": [
+            "香蕉",
+            "碟子"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "在儿童眼前把香蕉切开一半，示范剥开香蕉皮进食香蕉，并告诉儿童：「香蕉真好吃，但香蕉皮是不可进食的。」接着成人把香蕉皮放在碟上，请儿童也把香蕉皮留于碟上。成人亦可以其他有皮的水果或有骨的食物进行活动，如：橙、鸡翅膀等，让儿童学习辨别可进食及不可进食的概念。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "A",
+      "goals": [
+        {
+          "description": "接受用匙羹喂食糊状食物",
+          "materials": [
+            "碗",
+            "婴儿胶匙羹",
+            "南瓜茸"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "在儿童进餐前，先给儿童嗅一嗅南瓜茸，利用食物的香气吸引儿童。接着用婴儿胶匙羹舀少许南瓜茸，轻轻触碰儿童唇部，当儿童张开口时，把南瓜茸放入儿童口中让儿童舔食，并赞赏儿童。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "B",
+      "goals": [
+        {
+          "description": "用掌心握匙羹",
+          "materials": [
+            "碗",
+            "粗柄匙羹",
+            "洋娃娃"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "与儿童玩喂洋娃娃吃东西的假想游戏。把粗柄匙羹和碗交给儿童，协助儿童用掌心握匙羹柄，假装舀食物喂洋娃娃吃。"
+        },
+        {
+          "description": "用掌心握匙羹",
+          "materials": [
+            "碗",
+            "儿童喜欢的食物",
+            "匙羹"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "预先在碗内放入儿童喜欢的食物，示范一手扶碗，另一手用匙羹舀食物，并假装把食物放进口里，接着请儿童模仿成人舀食物，并把食物放进口里进食。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "C",
+      "goals": [
+        {
+          "description": "握匙羹并把食物送进口里（匙羹上盛有食物）",
+          "materials": [
+            "碗",
+            "粗柄匙羹",
+            "洋娃娃"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "与儿童玩喂洋娃娃吃东西的假想游戏。把粗柄匙羹和碗交给儿童，协助儿童用掌心握匙羹柄，假装舀食物喂洋娃娃吃。"
+        },
+        {
+          "description": "握匙羹并把食物送进口里（匙羹上盛有食物）",
+          "materials": [
+            "碗",
+            "儿童喜欢的食物",
+            "匙羹"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "预先在碗内放入儿童喜欢的食物，示范一手扶碗，另一手用匙羹舀食物，并假装把食物放进口里，接着请儿童模仿成人舀食物，并把食物放进口里进食。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "D",
+      "goals": [
+        {
+          "description": "用匙羹进食",
+          "materials": [
+            "碗",
+            "儿童喜欢的食物",
+            "匙羹"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "预先在碗内放入儿童喜欢的食物，示范一手扶碗，另一手用匙羹舀食物，并假装把食物放进口里，接着请儿童模仿成人舀食物，并把食物放进口里进食。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "E",
+      "goals": [
+        {
+          "description": "一手扶碗而另一手用匙羹从碗中舀取食物",
+          "materials": [
+            "碗",
+            "儿童喜欢的食物",
+            "匙羹"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "预先在碗内放入儿童喜欢的食物，示范一手扶碗，另一手用匙羹舀食物，并假装把食物放进口里，接着请儿童模仿成人舀食物，并把食物放进口里进食。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "E",
+      "goals": [
+        {
+          "description": "",
+          "materials": [
+            "碗",
+            "匙羹",
+            "玩具动物",
+            "未煮熟的通心粉"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "与儿童玩假想游戏，把玩具动物放在桌上，每只动物前面放1个碗，请儿童一起与小动物开派对。预备1碗未煮熟的通心粉，示范用一手扶碗，另一手用手指握匙羹，把碗中的通心粉舀起，分放在其他小动物的碗中，一起开派对。"
+        },
+        {
+          "description": "",
+          "materials": [
+            "儿童碗",
+            "小珠粒或小豆",
+            "小匙羹",
+            "泥胶"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "预先将泥胶压平，放在儿童碗内，并在泥胶上放入不同颜色的珠粒或小豆。成人示范一手扶碗，另一手用手指握匙羹舀珠粒放进另一个碗内，请儿童模仿成人的做法，自行尝试。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "F",
+      "goals": [
+        {
+          "description": "",
+          "materials": [
+            "碗",
+            "匙羹",
+            "玩具动物",
+            "未煮熟的通心粉"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "与儿童玩假想游戏，把玩具动物放在桌上，每只动物前面放1个碗，请儿童一起与小动物开派对。预备1碗未煮熟的通心粉，示范用一手扶碗，另一手用手指握匙羹，把碗中的通心粉舀起，分放在其他小动物的碗中，一起开派对。"
+        },
+        {
+          "description": "",
+          "materials": [
+            "儿童碗",
+            "小珠粒或小豆",
+            "小匙羹",
+            "泥胶"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "预先将泥胶压平，放在儿童碗内，并在泥胶上放入不同颜色的珠粒或小豆。成人示范一手扶碗，另一手用手指握匙羹舀珠粒放进另一个碗内，请儿童模仿成人的做法，自行尝试。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "G",
+      "goals": [
+        {
+          "description": "",
+          "materials": [
+            "碗",
+            "匙羹",
+            "芝麻糊",
+            "镜子"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "示范进食芝麻糊，并告诉儿童若不小心，便会弄脏嘴巴和脸。接着把镜子放在儿童面前，请儿童也舀食芝麻糊，提示儿童要保持清洁。完成后，与儿童一同看镜子，检查是否能保持清洁。"
+        }
+      ]
+    }
+  ]
+}

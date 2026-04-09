@@ -1,0 +1,160 @@
+{
+  "items_found": [
+    {
+      "skeleton_index": "A",
+      "goals": [
+        {
+          "description": "请儿童坐在椅子上，并依照成人指示轮流提起一只脚，唱儿歌《踏踏脚》，练习提起脚伸入裤管的动作。",
+          "materials": [
+            "儿童椅子"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "请儿童坐在椅子上，并依照成人指示轮流提起一只脚，唱儿歌《踏踏脚》，练习提起脚伸入裤管的动作。"
+        },
+        {
+          "description": "预备外出时，请儿童选择自己喜欢的裤子，接着坐在椅子上，依照成人指示提起一只脚，并将脚伸进成人已代为张开的裤管内。",
+          "materials": [
+            "儿童喜欢的裤子",
+            "儿童椅子"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "预备外出时，请儿童选择自己喜欢的裤子，接着坐在椅子上，依照成人指示提起一只脚，并将脚伸进成人已代为张开的裤管内。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "B",
+      "goals": [
+        {
+          "description": "示范踏进放在地上的呼拉圈内，蹲下拾起呼拉圈并拉上至腰间，同时唱儿歌《扭扭腰》，请儿童模仿，以练习穿裤子的动作。",
+          "materials": [
+            "呼拉圈"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "示范踏进放在地上的呼拉圈内，蹲下拾起呼拉圈并拉上至腰间，同时唱儿歌《扭扭腰》，请儿童模仿，以练习穿裤子的动作。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "B",
+      "goals": [
+        {
+          "description": "将已套在小腿上的弹性布套拉至腰间",
+          "materials": [
+            "弹性布套（长 7.5 厘米，宽 25 厘米）"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "请儿童踏进地上的弹性布套内，成人协助儿童把布套拉上至小腿位置，再请儿童自行把布套拉上至腰间。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "C",
+      "goals": [
+        {
+          "description": "坐着并将脚分别伸入不同的裤管内",
+          "materials": [
+            "儿童椅子",
+            "质感较粗的地毯",
+            "儿童裤子"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "请儿童坐在椅子上学习穿裤，并把质感较粗的地毯放在椅子前儿童踏脚的地上。成人把儿童裤子的裤管打开，放在地毯上，请儿童自行把双脚穿进裤管内，感觉一下脚掌已踏在地毯上，接着请儿童站起来，弯下身子将裤子拉上。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "D",
+      "goals": [
+        {
+          "description": "穿裤",
+          "materials": [
+            "儿童短裤或长裤",
+            "儿童椅子"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "请儿童坐在椅子上学习穿裤，把裤子交给儿童，请儿童以双手拿着裤头，把脚逐一伸进裤管中，接着请儿童站起来，把裤子拉上。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "E",
+      "goals": [
+        {
+          "description": "分辨裤的底面",
+          "materials": [
+            "儿童短裤或长裤数条"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "出示数条印有儿童喜欢的图案或卡通人物的裤子，将部分裤子里外翻转，问儿童：「哪些裤子翻转了？」请儿童指出哪些裤子翻转了，哪些没有翻转。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "F",
+      "goals": [
+        {
+          "description": "将裤管翻回正面",
+          "materials": [
+            "儿童的裤子"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "示范拿着里外翻转了的裤子，一手握着裤头，另一手从裤头伸到裤管口，并握着裤管口把裤管拉出来，把它翻回正面。请儿童以相同方法把另一边的裤管也翻过来。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "G",
+      "goals": [
+        {
+          "description": "分辨裤子的前后幅",
+          "materials": [
+            "前幅印有儿童喜欢的图案或卡通人物的裤子",
+            "全身镜"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "出示前幅印有儿童喜欢的图案或卡通人物的裤子，请儿童站在镜子前，告诉儿童拿着裤子拼在脚上时，看到该图案或卡通人物，便是前幅。可教导儿童看看裤子里面的标签，告诉儿童缝有标签的一般是裤子的后幅。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "A",
+      "goals": [
+        {
+          "description": "配合将手伸入成人代张开的衣袖内 / 1-2 岁",
+          "materials": [
+            "儿童喜欢的小玩具",
+            "开胸外套"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "把儿童喜欢的小玩具，从开胸外套的袖子伸进外套内，张开衣袖让儿童看到小玩具，吸引儿童配合成人把手伸进衣袖内取玩具。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "B",
+      "goals": [
+        {
+          "description": "将橡筋圈套上手臂 / 1-2 岁",
+          "materials": [
+            "胶圈",
+            "橡筋圈（宽5厘米）"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "1. 与儿童玩假想游戏，示范一手拿着胶圈，把胶圈穿在另一手的肩膀上，当作是手袋，请儿童模仿，把胶圈当成手袋穿在肩上。\n2. 示范将橡筋圈穿进手腕后，把橡筋圈拉上至手臂位置，告诉儿童要穿更多橡筋圈在手上，所以要尽量把橡筋圈拉上，请儿童模仿成人的动作，把数个橡筋圈穿在手臂上。"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "items_found": [
+    {
+      "skeleton_index": "B",
+      "goals": [
+        {
+          "description": "带儿童到有扭动式门柄的门前，示范扭动门柄，将门打开，请儿童尝试扭动门柄开门。",
+          "materials": [
+            "有扭动式门柄的门"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": null
+        }
+      ]
+    },
+    {
+      "skeleton_index": "C",
+      "goals": [
+        {
+          "description": "与儿童玩送信游戏，成人示范拉开横趟式柜门，把信件放进柜内后，再把趟门关上。接着请儿童模仿，把信件送进柜内。",
+          "materials": [
+            "有横趟式柜门的柜子",
+            "信件"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": null
+        },
+        {
+          "description": "带儿童到有横拉式闸门的地方，示范把闸门趟开及关上，请儿童模仿。",
+          "materials": [
+            "横拉式闸门"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": null
+        }
+      ]
+    },
+    {
+      "skeleton_index": "D",
+      "goals": [
+        {
+          "description": "示范将玩具胶剑对准插在小酒桶的小孔上，请儿童与成人轮流插胶剑，直至海盗娃娃弹出来，让儿童学习把钥匙插进匙孔的预备动作。",
+          "materials": [
+            "插酒桶玩具"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": null
+        },
+        {
+          "description": "示范用钥匙开启玩具车库的门，把玩具车拿出来玩，请儿童模仿，把车库内的车逐一拿出来。玩完后请儿童把车放回车库，接着用钥匙将门锁上。",
+          "materials": [
+            "玩具车库",
+            "钥匙"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": null
+        },
+        {
+          "description": "出示1件以钥匙开门的玩具，并示范把钥匙插进匙孔扭开门，接着请儿童模仿。",
+          "materials": [
+            "用钥匙开门的玩具"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": null
+        }
+      ]
+    },
+    {
+      "skeleton_index": "E",
+      "goals": [
+        {
+          "description": "和儿童玩“乐智高”玩具，示范用手指把游戏板上的圆形由一处移至另一处，请儿童模仿，以练习开关防盗链的预备动作。",
+          "materials": [
+            "“乐智高”游戏板"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": null
+        },
+        {
+          "description": "带儿童到有防盗链的大门前，示范开关防盗链，请儿童模仿。",
+          "materials": [
+            "有防盗链的门"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": null
+        }
+      ]
+    },
+    {
+      "skeleton_index": "F",
+      "goals": [
+        {
+          "description": "带儿童到窗户旁边，示范开关窗户，请儿童模仿。",
+          "materials": [],
+          "passing_criteria": null,
+          "precautions": "活动期间须格外注意安全，并使用有窗花的窗户。",
+          "activity_suggestions": null
+        }
+      ]
+    },
+    {
+      "skeleton_index": "A",
+      "goals": [
+        {
+          "description": "请儿童拉开形状盒的门，从中取出各形状积木，接着再推门关上形状盒，练习开关冰箱门的动作。",
+          "materials": [
+            "形状盒"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": null
+        },
+        {
+          "description": "与儿童玩假想游戏，向儿童表示“肚子饿了”，请儿童帮忙打开玩具冰箱的门，取出成人所指定的食物，再关上冰箱门。接着成人与儿童一同模拟进食。",
+          "materials": [
+            "玩具冰箱",
+            "玩具食物"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": null
+        }
+      ]
+    }
+  ]
+}

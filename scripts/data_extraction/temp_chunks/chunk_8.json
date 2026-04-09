@@ -1,0 +1,109 @@
+{
+  "items_found": [
+    {
+      "skeleton_index": "I",
+      "goals": [
+        {
+          "description": "练习咀嚼硬而韧的食物。",
+          "materials": [
+            "硬而韧的食物（如：芒果干、猪肉干）",
+            "手偶",
+            "玩具食物"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "把玩具食物放进手偶的口中，模拟咀嚼食物，并一边操控手偶咬食物，一边从1数到10。接着示范把芒果干放在大牙用力咬，并请儿童点算成人咬了多少下。成人再把另一块芒果干放在儿童大牙上，请儿童用力咬，每咬一下，成人便数数，看看儿童能咬多少下，让儿童练习咀嚼硬而韧的食物。"
+        },
+        {
+          "description": "鼓励儿童咀嚼不同软硬度的食物。",
+          "materials": [
+            "不同软硬度的食物（如：鸡肉粒、牛肉粒、番薯干粒、芒果干、猪肉干等）"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "与儿童一起制作“食物大串烧”，先将各种不同软硬度的食物用竹签串起，接着请各人挑选自己喜欢的食物串享用，并于进食时鼓励儿童咀嚼食物。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "A",
+      "goals": [
+        {
+          "description": "进饮匙羹上的液体",
+          "materials": [
+            "儿童喜欢的饮料",
+            "匙羹"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "示范用匙羹舀饮料放进口中，合唇取匙羹上的饮料并吞下，接着成人舀1匙羹放进儿童口中，请儿童合唇取匙羹上的饮料。如有需要，成人可将拇指放于儿童下唇、中指放于下颚及食指放于上唇位置，以拇指及食指的动作协助儿童合唇进饮匙羹上的饮料。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "B",
+      "goals": [
+        {
+          "description": "用双手捧奶瓶进饮（不适用于母乳喂哺的儿童）",
+          "materials": [
+            "奶瓶",
+            "儿童喜欢的饮料"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "示范用双手捧起奶瓶，接着成人握着儿童双手，捧起盛有儿童喜欢饮料的奶瓶进饮，待儿童握稳奶瓶后，成人尝试放开其中一只手，如儿童仍能握稳奶瓶进饮，成人可尝试放开另一只手，让儿童自行用双手捧奶瓶进饮。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "C",
+      "goals": [
+        {
+          "description": "活动建议 3",
+          "materials": [
+            "小胶杯",
+            "饮料"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "拿着盛有一口份量饮料的小胶杯，靠向儿童的嘴唇，协助儿童合唇进饮。当儿童掌握技巧后，成人可把饮料的份量逐步增加，鼓励儿童持续进饮杯中饮料。"
+        }
+      ]
+    },
+    {
+      "skeleton_index": "D",
+      "goals": [
+        {
+          "description": "活动建议 4",
+          "materials": [
+            "直吸管",
+            "儿童喜欢的饮料"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "把吸管放进饮料内，用食指按着吸管的顶端开口，吸起少许饮料。接着把吸管底部放进儿童口中，当儿童开始有吸啜动作时，成人可轻轻放松按着吸管顶端的指头，让儿童进饮。"
+        },
+        {
+          "description": "活动建议 5",
+          "materials": [
+            "不同长度的吸管",
+            "纸包饮料"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "示范用吸管吸啜纸包饮料，接着把饮料递向儿童，鼓励儿童合唇含着吸管。成人用手轻轻挤压纸包饮料，使饮料从吸管流入儿童的口内，让儿童知道可从吸管中吸啜饮料。尝试数次后，鼓励儿童自行用吸管吸饮。先用较短的吸管，让儿童较易成功吸啜，接着逐渐转用较长的吸管，提升儿童吸啜的力度。"
+        },
+        {
+          "description": "活动建议 6",
+          "materials": [
+            "不同形态的吸管",
+            "果汁"
+          ],
+          "passing_criteria": null,
+          "precautions": null,
+          "activity_suggestions": "当儿童能掌握运用普通吸管进饮后，成人出示不同形态的吸管，让儿童选择喜欢的吸管来进饮成人预先准备好的果汁，提升儿童使用吸管吸饮的能力。"
+        }
+      ]
+    }
+  ]
+}
