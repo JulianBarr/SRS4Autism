@@ -1,155 +1,47 @@
 {
   "items_found": [
     {
-      "skeleton_index": "A",
+      "skeleton_index": "项目六",
       "goals": [
         {
-          "description": "示范用儿童筷子把玩具食物从桌面一端拨到另一端的小动物前面，请儿童模仿成人的动作。当儿童熟练后，成人便与儿童比赛以手握筷子将食物推给动物，看谁比较快。",
+          "description": "要求成人帮忙以达目的（如：发出咿咿呀呀的声音示意成人继续玩有趣的游戏，如：抱着在空中摇晃、搔痒等）/ 1-2 岁",
           "materials": [
-            "儿童筷子2对",
-            "玩具食物",
-            "玩具动物"
+            "儿童喜爱的玩具"
           ],
           "passing_criteria": null,
           "precautions": null,
-          "activity_suggestions": null
+          "activity_suggestions": "1. 与儿童玩「小熊去花园」游戏。在玩耍过程中，引导及鼓励儿童用动作或声音，向成人示意想继续再玩。「小熊去花园」口令及动作：\n- 「小熊去到花园，快乐氹氹转。」成人用2只手指在儿童的手掌上模拟走路。\n- 「一步两步，好快就行完。」成人的2只手指从儿童的手掌沿手臂向上行，行至颈部后轻搔儿童，令儿童产生痕痒感。\n2. 与儿童玩「躲猫猫」游戏。当停止活动时，观察儿童反应，并鼓励儿童发出声音或以动作示意，要求成人继续玩耍。\n3. 与儿童玩其喜爱的玩具。当停止活动时，观察儿童反应，并鼓励儿童发出声音或以动作示意，要求成人继续玩耍。"
         },
         {
-          "description": "与儿童玩喂洋娃娃吃东西的假想游戏，示范一手拿碗，一手拿儿童筷子，假装把玩具食物「扒」进洋娃娃口中。接着请儿童模仿，把洋娃娃背着自己放在膝上，再用筷子把食物「扒」进洋娃娃口中。",
+          "description": "示意成人帮忙（如：拿取高物、开罐子取食物）/ 2-3 岁",
           "materials": [
-            "儿童筷子",
-            "碗",
-            "玩具食物",
-            "洋娃娃"
+            "透明瓶",
+            "儿童喜爱的食物或玩具",
+            "玩具或气球",
+            "「家家酒」玩具"
           ],
           "passing_criteria": null,
           "precautions": null,
-          "activity_suggestions": null
-        },
-        {
-          "description": "示范一手拿碗，一手拿儿童筷子，把碗内的小粒棉花糖，用筷子「扒」进口中，接着请儿童模仿。",
-          "materials": [
-            "儿童筷子",
-            "碗",
-            "小粒棉花糖"
-          ],
-          "passing_criteria": null,
-          "precautions": null,
-          "activity_suggestions": null
-        },
-        {
-          "description": "示范一手拿碗，一手拿儿童筷子，把面条用筷子「扒」进口中，请儿童模仿。",
-          "materials": [
-            "儿童筷子",
-            "碗",
-            "面条"
-          ],
-          "passing_criteria": null,
-          "precautions": null,
-          "activity_suggestions": null
+          "activity_suggestions": "1. 把儿童喜爱的玩具或食物放进一个不容易打开的透明瓶内。指示儿童打开瓶子取出食物，若儿童未能成功扭开瓶盖，鼓励及引导儿童用动作、声音或语言向成人求助，如：拉成人的手以开启瓶子。\n2. 把玩具放在儿童未能触及的位置，并指示儿童去取玩（如：拍打吊在儿童未能触及的高度之气球）。若儿童未能成功取得玩具，鼓励及引导儿童用动作、声音或语言向成人求助，如：举手示意要成人抱起他。\n3. 与儿童玩「家家酒」游戏。当儿童不在意时，把「家家酒」玩具放置于儿童未能触及的地方，鼓励及引导儿童用动作、声音或语言，向成人表示要求协助拿取，再继续游戏。"
         }
       ]
     },
     {
-      "skeleton_index": "B",
+      "skeleton_index": "项目一",
       "goals": [
         {
-          "description": "示范用方糖夹把玩具食物夹起并放于碗内，请儿童模仿。如儿童能力有所提升，成人可示范用夹型辅助筷子进行活动。",
+          "description": "如：当听见电话铃声，尝试提起电话筒 / 1-2 岁",
           "materials": [
-            "方糖夹",
-            "玩具食物",
-            "碗",
-            "夹型辅助筷子"
+            "毛巾",
+            "电筒",
+            "有绳音乐盒",
+            "乐器",
+            "电视遥控器或其他安全的家庭小电器",
+            "玩具对讲机"
           ],
           "passing_criteria": null,
           "precautions": null,
-          "activity_suggestions": null
-        },
-        {
-          "description": "与儿童进行水果分类游戏，将4种玩具水果放在一起，并示范用辅助筷子将水果夹起，放进盛有相同玩具水果的盒子内，请儿童模仿。成人可因应儿童能力，选用不同的辅助筷子。如有需要，可咨询职业治疗师的意见。",
-          "materials": [
-            "水果分类教材",
-            "辅助筷子"
-          ],
-          "passing_criteria": null,
-          "precautions": null,
-          "activity_suggestions": null
-        },
-        {
-          "description": "预先把容易用筷子夹起的食物（如：面包粒、棉花糖等）放在碗内，示范一手拿辅助筷子，一手拿碗，把食物夹起，放进口中进食，接着请儿童模仿。",
-          "materials": [
-            "容易用筷子夹起的食物（如：面包粒、棉花糖）",
-            "辅助筷子"
-          ],
-          "passing_criteria": null,
-          "precautions": null,
-          "activity_suggestions": null
-        },
-        {
-          "description": "进食时，把儿童的饭和菜分开盛载，请儿童用筷子在盛菜的小碟上夹菜和肉进食。",
-          "materials": [
-            "筷子",
-            "分开盛的饭、菜和肉"
-          ],
-          "passing_criteria": null,
-          "precautions": null,
-          "activity_suggestions": null
-        }
-      ]
-    },
-    {
-      "skeleton_index": "A",
-      "goals": [
-        {
-          "description": "预先用泥胶制作成生日蛋糕，请儿童用前二指握牙签，插在蛋糕上当作蜡烛，接着成人与儿童一起唱生日歌。",
-          "materials": [
-            "泥胶",
-            "牙签"
-          ],
-          "passing_criteria": null,
-          "precautions": null,
-          "activity_suggestions": null
-        },
-        {
-          "description": "出示有多格的方形盒子，并与儿童一起用泥胶搓成汤丸，放进盒内的小格中。接着与儿童一起以前二指握牙签，插在泥胶汤丸上，假装喂给洋娃娃吃。",
-          "materials": [
-            "泥胶",
-            "牙签",
-            "多格的方形盒子",
-            "洋娃娃"
-          ],
-          "passing_criteria": null,
-          "precautions": null,
-          "activity_suggestions": null
-        },
-        {
-          "description": "与儿童一同制作小吃，将预先切好的香肠和凤梨放在碟子上，请儿童以牙签将食物串好。",
-          "materials": [
-            "牙签",
-            "香肠",
-            "凤梨",
-            "碟子"
-          ],
-          "passing_criteria": null,
-          "precautions": null,
-          "activity_suggestions": null
-        }
-      ]
-    },
-    {
-      "skeleton_index": "B",
-      "goals": [
-        {
-          "description": "出示1碟棉花糖，示范用叉子取碟上的棉花糖，并沾上巧克力酱进食，接着请儿童模仿。可要求儿童依照成人指示，取指定颜色的棉花糖。",
-          "materials": [
-            "叉子",
-            "碟子",
-            "棉花糖",
-            "巧克力酱"
-          ],
-          "passing_criteria": null,
-          "precautions": null,
-          "activity_suggestions": null
+          "activity_suggestions": "1. 用毛巾将已开启的电筒盖着，但露出少许光源，以吸引儿童注意，并引导儿童伸手掀起盖着电筒的毛巾，寻找光源。\n2. 拉动音乐盒的绳，使其发出声音，以吸引儿童注意。待音乐停顿后，观察儿童的反应，并鼓励儿童寻找声音的来源，然后自行用手拉动绳子，使音乐盒发声。\n3. 摇动或敲打乐器，使其发出声音，以吸引儿童注意。观察儿童的反应，鼓励儿童寻找声音的来源，并尝试自行摇动乐器，使其发出声音。\n4. 此活动适用于日常训练及观察。示范用电视遥控器开启电视，再关掉电视。把遥控器放在儿童附近，观察儿童会否尝试按遥控器上的按钮开启电视。可改用其他安全的家庭小电器。\n5. 利用玩具对讲机与儿童玩游戏。当对讲机发出声音时，请儿童拿起对讲机与成人通话。"
         }
       ]
     }

@@ -62,8 +62,8 @@ def call_gemini_single_page(pdf_path: str, prompt: str):
     return []
 
 def main():
-    pdf_path = "scripts/data_extraction/23-self-care-toc.pdf"
-    output_json_path = "scripts/data_extraction/23_self_care_skeleton.json"
+    pdf_path = "scripts/data_extraction/22-cognition-toc.pdf"
+    output_json_path = "scripts/data_extraction/22_cognition_skeleton.json"
 
     if not os.path.exists(pdf_path):
         print(f"Error: PDF file not found at {pdf_path}")

@@ -1,23 +1,30 @@
 import React, { useState, useCallback } from 'react';
 import theme from '../styles/theme';
-// CRA only bundles JSON under src/. Files mirror scripts/data_extraction/{21,22,23}_*_enriched_abox.json.
+
+/**
+ * Temporary direct imports of enriched ABox JSON (language, cognition, self-care).
+ * Source of truth in repo: `scripts/data_extraction/`
+ *   - 21_heep_hong_language_enriched_abox.json
+ *   - 22_cognition_enriched_abox.json
+ *   - 23_self_care_enriched_abox.json
+ * Create React App only resolves JSON imports from `src/`; `frontend/src/data/` mirrors those files.
+ */
 import languageData from '../data/21_heep_hong_language_enriched_abox.json';
 import cognitionData from '../data/22_cognition_enriched_abox.json';
 import selfCareData from '../data/23_self_care_enriched_abox.json';
 
-/** Canonical Level-1 labels (third file may use a mismatched `module` in JSON). */
+/** Canonical Level-1 labels (self-care JSON may still say `module`: "认知"). */
 const MODULE_LEVEL_LABELS = ['语言', '认知', '自理'];
 
 const fullCurriculum = [languageData, cognitionData, selfCareData];
 
-/** Matches age suffix after slash, e.g. "/ 0-6 个月", "/ 1-2岁", "/ >0 岁". */
+/**
+ * Legacy goal descriptions: age fragments after / or ／ (language & cognition data).
+ * Used only when rendering the old `goals` array (no `sub_goals`).
+ */
 const GOAL_DESCRIPTION_AGE_SUFFIX =
   /\s*[/／]\s*((?:>\s*)?\d+(?:\s*[-–]\s*\d+)?\s*(?:个月|岁))/g;
 
-/**
- * Extracts age fragments after an ASCII or fullwidth slash.
- * Removes every matched segment from the description and returns unique age strings for badges.
- */
 function stripAgeFromDescriptionText(raw) {
   if (!raw || typeof raw !== 'string') {
     return { cleanText: '', ageBadges: [] };
@@ -53,6 +60,7 @@ const badgeStyle = {
 };
 
 function AccordionHeader({ id, title, expanded, onToggle, level, emoji }) {
+  const panelId = `${id}-panel`;
   const indent = level * 12;
   const palette = [
     { bg: '#eff6ff', border: '#bfdbfe', title: '#1e3a8a' },
@@ -66,6 +74,8 @@ function AccordionHeader({ id, title, expanded, onToggle, level, emoji }) {
     <button
       type="button"
       id={id}
+      aria-expanded={expanded}
+      aria-controls={panelId}
       onClick={onToggle}
       style={{
         width: '100%',
@@ -94,9 +104,52 @@ function AccordionHeader({ id, title, expanded, onToggle, level, emoji }) {
   );
 }
 
-function GoalCard({ goal }) {
+/** Normalizes `materials` to string tags for display. */
+function normalizeMaterialTags(raw) {
+  if (raw == null) return [];
+  if (Array.isArray(raw)) {
+    return raw.map((m) => (typeof m === 'string' ? m.trim() : String(m))).filter(Boolean);
+  }
+  if (typeof raw === 'string') {
+    return raw
+      .split(/[,，、;；]/)
+      .map((s) => s.trim())
+      .filter(Boolean);
+  }
+  return [];
+}
+
+/** Normalizes `shared_activity_suggestions` to ordered-list items (array or newline-separated string). */
+function normalizeOrderedLines(raw) {
+  if (raw == null) return [];
+  if (Array.isArray(raw)) {
+    return raw.map((s) => (typeof s === 'string' ? s.trim() : String(s))).filter(Boolean);
+  }
+  if (typeof raw === 'string') {
+    return raw
+      .split(/\n+/)
+      .map((s) => s.trim())
+      .filter(Boolean);
+  }
+  return [];
+}
+
+const phasalParentCardStyle = {
+  backgroundColor: theme.ui.background,
+  borderRadius: theme.borderRadius.lg,
+  border: `1px solid ${theme.ui.border}`,
+  padding: theme.spacing.lg,
+  boxShadow: theme.shadows?.sm ?? '0 1px 2px rgba(0,0,0,0.06)',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: theme.spacing.md,
+  minHeight: '80px',
+};
+
+/** Single goal card for legacy `goals[]` (unchanged behavior vs. previous GoalCard). */
+function LegacyGoalCard({ goal }) {
   const { cleanText, ageBadges } = stripAgeFromDescriptionText(goal.description || '');
-  const materials = Array.isArray(goal.materials) ? goal.materials : [];
+  const materials = normalizeMaterialTags(goal.materials);
   const precautions = goal.precautions;
   const activitySuggestions = goal.activity_suggestions;
 
@@ -104,16 +157,8 @@ function GoalCard({ goal }) {
     <div
       style={{
         position: 'relative',
-        backgroundColor: theme.ui.background,
-        borderRadius: theme.borderRadius.lg,
-        border: `1px solid ${theme.ui.border}`,
-        padding: theme.spacing.lg,
+        ...phasalParentCardStyle,
         paddingTop: ageBadges.length ? theme.spacing.xl : theme.spacing.lg,
-        boxShadow: theme.shadows?.sm ?? '0 1px 2px rgba(0,0,0,0.06)',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: theme.spacing.md,
-        minHeight: '80px',
       }}
     >
       {ageBadges.length > 0 && (
@@ -160,8 +205,8 @@ function GoalCard({ goal }) {
             材料
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: theme.spacing.xs }}>
-            {materials.map((m) => (
-              <span key={m} style={tagStyle}>
+            {materials.map((m, ti) => (
+              <span key={`${m}-${ti}`} style={tagStyle}>
                 {m}
               </span>
             ))}
@@ -220,6 +265,173 @@ function GoalCard({ goal }) {
       ) : null}
     </div>
   );
+}
+
+/**
+ * Phasal objective: Target Set (`sub_goals` + `shared_*`) or legacy `goals[]` grid.
+ */
+function PhasalObjectiveContainer({ phasalObjective }) {
+  const phase = phasalObjective || {};
+  const subGoals = Array.isArray(phase.sub_goals) ? phase.sub_goals : [];
+  const legacyGoals = Array.isArray(phase.goals) ? phase.goals : [];
+
+  if (subGoals.length > 0) {
+    const sharedMaterials = normalizeMaterialTags(phase.shared_materials);
+    const sharedPrecautions = phase.shared_precautions;
+    const sharedActivityLines = normalizeOrderedLines(phase.shared_activity_suggestions);
+
+    return (
+      <div style={phasalParentCardStyle}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: theme.spacing.sm }}>
+          {subGoals.map((sg, sgi) => {
+            const label = sg.label != null ? String(sg.label) : '';
+            const desc = sg.description != null ? String(sg.description) : '';
+            const ageTag = sg.age_group != null ? String(sg.age_group).trim() : '';
+            return (
+              <div
+                key={sgi}
+                style={{
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  alignItems: 'flex-start',
+                  gap: theme.spacing.sm,
+                  padding: `${theme.spacing.sm} ${theme.spacing.md}`,
+                  backgroundColor: theme.ui.backgrounds?.surface ?? '#f1f5f9',
+                  borderRadius: theme.borderRadius.sm,
+                  border: `1px solid ${theme.ui.border}`,
+                }}
+              >
+                {label ? (
+                  <span
+                    style={{
+                      fontWeight: 700,
+                      fontSize: '13px',
+                      color: theme.ui.text.primary,
+                      minWidth: '1.25em',
+                      flexShrink: 0,
+                    }}
+                  >
+                    {label}
+                  </span>
+                ) : null}
+                <div
+                  style={{
+                    flex: '1 1 200px',
+                    fontSize: '14px',
+                    lineHeight: 1.6,
+                    color: theme.ui.text.primary,
+                    whiteSpace: 'pre-wrap',
+                    wordBreak: 'break-word',
+                  }}
+                >
+                  {desc || '（无描述）'}
+                </div>
+                {ageTag ? (
+                  <span style={{ ...badgeStyle, marginLeft: 'auto', flexShrink: 0 }}>{ageTag}</span>
+                ) : null}
+              </div>
+            );
+          })}
+        </div>
+
+        {sharedMaterials.length > 0 ? (
+          <div>
+            <div
+              style={{
+                fontSize: '12px',
+                fontWeight: 600,
+                color: theme.ui.text.secondary,
+                marginBottom: theme.spacing.xs,
+              }}
+            >
+              材料
+            </div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: theme.spacing.xs }}>
+              {sharedMaterials.map((m, ti) => (
+                <span key={`${m}-${ti}`} style={tagStyle}>
+                  {m}
+                </span>
+              ))}
+            </div>
+          </div>
+        ) : null}
+
+        {sharedPrecautions ? (
+          <div>
+            <div
+              style={{
+                fontSize: '12px',
+                fontWeight: 600,
+                color: theme.ui.text.secondary,
+                marginBottom: theme.spacing.xs,
+              }}
+            >
+              注意事项
+            </div>
+            <p
+              style={{
+                margin: 0,
+                fontSize: '13px',
+                color: theme.ui.text.secondary,
+                lineHeight: 1.6,
+                whiteSpace: 'pre-wrap',
+              }}
+            >
+              {sharedPrecautions}
+            </p>
+          </div>
+        ) : null}
+
+        {sharedActivityLines.length > 0 ? (
+          <div>
+            <div
+              style={{
+                fontSize: '12px',
+                fontWeight: 600,
+                color: theme.ui.text.secondary,
+                marginBottom: theme.spacing.xs,
+              }}
+            >
+              活动建议
+            </div>
+            <ol
+              style={{
+                margin: 0,
+                paddingLeft: '1.25em',
+                fontSize: '13px',
+                color: theme.ui.text.secondary,
+                lineHeight: 1.6,
+              }}
+            >
+              {sharedActivityLines.map((line, li) => (
+                <li key={li} style={{ marginBottom: '0.25em' }}>
+                  {line}
+                </li>
+              ))}
+            </ol>
+          </div>
+        ) : null}
+      </div>
+    );
+  }
+
+  if (legacyGoals.length > 0) {
+    return (
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+          gap: theme.spacing.md,
+        }}
+      >
+        {legacyGoals.map((goal, gi) => (
+          <LegacyGoalCard key={gi} goal={goal} />
+        ))}
+      </div>
+    );
+  }
+
+  return null;
 }
 
 const MODULE_EMOJI = ['🗣️', '🧠', '🧴'];
@@ -294,7 +506,12 @@ const HHHContentManager = () => {
                 emoji={MODULE_EMOJI[mi] ?? '📚'}
               />
               {mExpanded && (
-                <div style={{ padding: theme.spacing.md, paddingTop: 0 }}>
+                <div
+                  id={`hhh-${mKey}-panel`}
+                  role="region"
+                  aria-labelledby={`hhh-${mKey}`}
+                  style={{ padding: theme.spacing.md, paddingTop: 0 }}
+                >
                   {submodules.map((sub, si) => {
                     const sKey = `${mKey}-s-${si}`;
                     const sExpanded = isOpen(sKey, false);
@@ -310,7 +527,12 @@ const HHHContentManager = () => {
                           level={1}
                         />
                         {sExpanded && (
-                          <div style={{ marginLeft: 12, marginTop: theme.spacing.sm }}>
+                          <div
+                            id={`hhh-${sKey}-panel`}
+                            role="region"
+                            aria-labelledby={`hhh-${sKey}`}
+                            style={{ marginLeft: 12, marginTop: theme.spacing.sm }}
+                          >
                             {objectives.map((objective, oi) => {
                               const oKey = `${sKey}-o-${oi}`;
                               const oExpanded = isOpen(oKey, false);
@@ -328,14 +550,24 @@ const HHHContentManager = () => {
                                     level={2}
                                   />
                                   {oExpanded && (
-                                    <div style={{ marginLeft: 12, marginTop: theme.spacing.sm }}>
+                                    <div
+                                      id={`hhh-${oKey}-panel`}
+                                      role="region"
+                                      aria-labelledby={`hhh-${oKey}`}
+                                      style={{ marginLeft: 12, marginTop: theme.spacing.sm }}
+                                    >
                                       {phases.map((phase, pi) => {
                                         const pKey = `${oKey}-p-${pi}`;
                                         const pExpanded = isOpen(pKey, false);
                                         const phaseLabel = phase.index
                                           ? `${phase.index} ${phase.title || ''}`.trim()
                                           : phase.title || `阶段 ${pi + 1}`;
+                                        const subGoals = Array.isArray(phase.sub_goals)
+                                          ? phase.sub_goals
+                                          : [];
                                         const goals = Array.isArray(phase.goals) ? phase.goals : [];
+                                        const hasGoalContent =
+                                          subGoals.length > 0 || goals.length > 0;
 
                                         return (
                                           <div key={pKey} style={{ marginBottom: theme.spacing.sm }}>
@@ -346,37 +578,31 @@ const HHHContentManager = () => {
                                               onToggle={() => toggle(pKey)}
                                               level={3}
                                             />
-                                            {pExpanded && goals.length > 0 && (
+                                            {pExpanded && (
                                               <div
+                                                id={`hhh-${pKey}-panel`}
+                                                role="region"
+                                                aria-labelledby={`hhh-${pKey}`}
                                                 style={{
-                                                  display: 'grid',
-                                                  gridTemplateColumns:
-                                                    'repeat(auto-fill, minmax(300px, 1fr))',
-                                                  gap: theme.spacing.md,
                                                   marginLeft: 12,
                                                   marginTop: theme.spacing.sm,
                                                   marginBottom: theme.spacing.md,
                                                 }}
                                               >
-                                                {goals.map((goal, gi) => (
-                                                  <GoalCard
-                                                    key={`${pKey}-g-${gi}`}
-                                                    goal={goal}
-                                                  />
-                                                ))}
+                                                {hasGoalContent ? (
+                                                  <PhasalObjectiveContainer phasalObjective={phase} />
+                                                ) : (
+                                                  <p
+                                                    style={{
+                                                      fontSize: '13px',
+                                                      color: theme.ui.text.hint,
+                                                      fontStyle: 'italic',
+                                                    }}
+                                                  >
+                                                    暂无训练目标
+                                                  </p>
+                                                )}
                                               </div>
-                                            )}
-                                            {pExpanded && goals.length === 0 && (
-                                              <p
-                                                style={{
-                                                  marginLeft: 12,
-                                                  fontSize: '13px',
-                                                  color: theme.ui.text.hint,
-                                                  fontStyle: 'italic',
-                                                }}
-                                              >
-                                                暂无训练目标
-                                              </p>
                                             )}
                                           </div>
                                         );
