@@ -75,8 +75,15 @@ def parse_markdown_to_json(md_file, output_json):
         elif raw_line.startswith('## '):
             flush_goal_content()
             sub_title = raw_line.replace('## Submodule:', '').replace('##', '').strip()
-            current_sub = {"title": sub_title, "objectives": []}
-            ontology["submodules"].append(current_sub)
+            # 【合并逻辑】：查找是否已存在同名的 Submodule
+            existing_sub = next((s for s in ontology["submodules"] if s["title"] == sub_title), None)
+            if existing_sub:
+                current_sub = existing_sub
+            else:
+                current_sub = {"title": sub_title, "objectives": []}
+                ontology["submodules"].append(current_sub)
+            
+            # 无论新建还是复用，下级标题需重置，等待后续匹配
             current_obj = None
             current_phasal = None
             current_goal = None
@@ -85,8 +92,14 @@ def parse_markdown_to_json(md_file, output_json):
             flush_goal_content()
             if current_sub is not None:
                 obj_title = raw_line.replace('### Objective:', '').replace('###', '').strip()
-                current_obj = {"title": obj_title, "phasal_objectives": []}
-                current_sub["objectives"].append(current_obj)
+                # 【合并逻辑】：查找是否已存在同名的 Objective
+                existing_obj = next((o for o in current_sub["objectives"] if o["title"] == obj_title), None)
+                if existing_obj:
+                    current_obj = existing_obj
+                else:
+                    current_obj = {"title": obj_title, "phasal_objectives": []}
+                    current_sub["objectives"].append(current_obj)
+                
                 current_phasal = None
                 current_goal = None
                 
@@ -100,19 +113,26 @@ def parse_markdown_to_json(md_file, output_json):
                 else:
                     index, title = "", raw_line.replace('####', '').strip()
                 
-                current_phasal = {"index": index, "title": title, "goals": []}
-                current_obj["phasal_objectives"].append(current_phasal)
+                # 【合并逻辑】：查找是否已存在同名且同序号的 Phasal Objective
+                existing_phasal = next((p for p in current_obj["phasal_objectives"] if p["title"] == title and p["index"] == index), None)
+                if existing_phasal:
+                    current_phasal = existing_phasal
+                else:
+                    current_phasal = {"index": index, "title": title, "goals": []}
+                    current_obj["phasal_objectives"].append(current_phasal)
+                    
                 current_goal = None
                 
         elif raw_line.startswith('##### '):
             flush_goal_content()
             if current_phasal is not None:
                 desc = raw_line.replace('#####', '').strip()
+                # Goals 是最细粒度目标，通常不合并，直接追加
                 current_goal = {"description": desc}
                 current_phasal["goals"].append(current_goal)
         
-        # 匹配非标题正文（过滤掉标签如 <18,18> 和 </>）
-        elif not re.match(r'^<.*>$', raw_line) and not raw_line.startswith('<!--'):
+        # 匹配非标题正文（过滤掉标签如 <18,18> 和 HTML注释以十六进制转义安全规避 UI 截断 Bug）
+        elif not re.match(r'^<.*>$', raw_line) and not raw_line.startswith('\x3c\x21\x2d\x2d'):
             if current_goal is not None:
                 current_text_buffer.append(raw_line)
 
@@ -122,7 +142,7 @@ def parse_markdown_to_json(md_file, output_json):
     with open(output_json, 'w', encoding='utf-8') as f:
         json.dump(ontology, f, ensure_ascii=False, indent=2)
 
-    print(f"🎉 完美！Markdown 已成功转换为精美的 A-Box JSON: {output_json}")
+    print(f"🎉 完美！Markdown 已成功合并并转换为精美的 A-Box JSON: {output_json}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Convert Patched Motor Markdown to A-Box JSON")
