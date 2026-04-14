@@ -12,11 +12,14 @@ import theme from '../styles/theme';
 import languageData from '../data/21_heep_hong_language_enriched_abox.json';
 import cognitionData from '../data/22_cognition_enriched_abox.json';
 import selfCareData from '../data/23_self_care_enriched_abox.json';
+import socialEmotionsData from '../data/24_social_emotions_enriched_abox.json';
+import grossMotorData from '../data/25_gross_motor_enriched_abox.json';
+import fineMotorData from '../data/26_fine_motor_enriched_abox.json';
 
 /** Canonical Level-1 labels (self-care JSON may still say `module`: "认知"). */
-const MODULE_LEVEL_LABELS = ['语言', '认知', '自理'];
+const MODULE_LEVEL_LABELS = ['语言', '认知', '自理', '社交与情绪', '大肌肉', '小肌肉'];
 
-const fullCurriculum = [languageData, cognitionData, selfCareData];
+const fullCurriculum = [languageData, cognitionData, selfCareData, socialEmotionsData, grossMotorData, fineMotorData];
 
 /**
  * Legacy goal descriptions: age fragments after / or ／ (language & cognition data).

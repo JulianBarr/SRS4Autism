@@ -1,0 +1,1152 @@
+{
+  "module": "小肌肉",
+  "submodules": [
+    {
+      "title": "伸手拾放物件",
+      "objectives": [
+        {
+          "title": "伸手拾放物件",
+          "phasal_objectives": [
+            {
+              "index": "项目一",
+              "title": "伸手拾放物件前准备 — 视觉运用",
+              "goals": [
+                {
+                  "description": "[A] 眼睛凝视物件 / 0-12 个月"
+                },
+                {
+                  "description": "[B] 望着自己的双手 / 0-12 个月"
+                },
+                {
+                  "description": "[C] 视线随着物件从中线移至旁边及从旁边移至中线 / 0-12 个月"
+                },
+                {
+                  "description": "[D] 视线随着物件移动 (如：左至右 / 上至下) / 0-12 个月"
+                },
+                {
+                  "description": "[E] 重复先后注视 2 件相隔一段距离的物件 / 0-12 个月"
+                }
+              ]
+            },
+            {
+              "index": "项目二",
+              "title": "伸手",
+              "goals": [
+                {
+                  "description": "[A] 拍打或扫拨胸口附近的物件 / 3 个月"
+                },
+                {
+                  "description": "[B] 主动地向着物件伸手 / 0-6 个月"
+                },
+                {
+                  "description": "[C] 主动地向着物件伸手，并抓握该物件 / 0-6 个月"
+                },
+                {
+                  "description": "[D] 向前伸直手肘触摸物件 / 4-6 个月"
+                },
+                {
+                  "description": "[E] 伸手至不同位置 (如：上 / 下；左 / 右；前 / 后) / 1-2 岁"
+                }
+              ]
+            },
+            {
+              "index": "项目三",
+              "title": "拾物",
+              "goals": [
+                {
+                  "description": "[A] 用掌心抓握物件 / 0-6 个月"
+                },
+                {
+                  "description": "[B] 持续用掌心抓握物件而物件不易跌下 / 6-7 个月"
+                },
+                {
+                  "description": "[C] 用桡侧掌心抓握物件 / 6-7 个月"
+                },
+                {
+                  "description": "[D] 用前三指抓握物件 / 7-9 个月"
+                },
+                {
+                  "description": "[E] 前二指拾物前准备 — 运用食指头指着东西 / 6-12 个月"
+                },
+                {
+                  "description": "[F] 伸直食指或拇指按物件 / 10-12 个月"
+                },
+                {
+                  "description": "[G] 用拇指及食指头相向地拾取物件 / 1-2 岁"
+                }
+              ]
+            },
+            {
+              "index": "项目四",
+              "title": "放物",
+              "goals": [
+                {
+                  "description": "[A] 张开手掌触摸物件 / 0-6 个月"
+                },
+                {
+                  "description": "[B] 放下手中的物件来接受另一件物件 / 7-9 个月"
+                },
+                {
+                  "description": "[C] 粗略放物技巧 — 把物件放入大盛器中 / 10-12 个月"
+                },
+                {
+                  "description": "[D] 精细放物技巧 — 把小物件放入小瓶中 / 1-2 岁"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "基本操作能力",
+      "objectives": [
+        {
+          "title": "物件操控",
+          "phasal_objectives": [
+            {
+              "index": "项目一",
+              "title": "探索物件",
+              "goals": [
+                {
+                  "description": "[A] 用手触摸玩具 / 3-6 个月"
+                },
+                {
+                  "description": "[B] 把玩具放入口中探索 / 3-7 个月"
+                },
+                {
+                  "description": "[C] 用手指拨动玩具或物件 / 6-7 个月"
+                },
+                {
+                  "description": "[D] 翻转物件探索 / 7-9 个月"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "小肌肉",
+      "objectives": [
+        {
+          "title": "训练项目",
+          "phasal_objectives": [
+            {
+              "index": "项目一",
+              "title": "探索物件",
+              "goals": [
+                {
+                  "description": "[E] 用手指及掌心把玩物件 / 6-12 个月"
+                },
+                {
+                  "description": "[F] 用食指探索按钮 / 10-12 个月"
+                }
+              ]
+            },
+            {
+              "index": "项目二",
+              "title": "摇晃物件",
+              "goals": [
+                {
+                  "description": "[A] 粗略地扫拨可摇摆的玩具 / 3-6 个月"
+                },
+                {
+                  "description": "[B] 摇晃玩具 / 3-6 个月"
+                }
+              ]
+            },
+            {
+              "index": "项目三",
+              "title": "敲击物件",
+              "goals": [
+                {
+                  "description": "[A] 用手拍打桌面或玩具 / 7-12 个月"
+                },
+                {
+                  "description": "[B] 用物件敲击桌面 / 7-12 个月"
+                },
+                {
+                  "description": "[C] 一只手拿着物件，另一只手敲击 / 1-2 岁"
+                },
+                {
+                  "description": "[D] 有目标地对准位置敲打物件 / 2-3 岁"
+                },
+                {
+                  "description": "[E] 跟随简单节奏敲打不同类型的乐器 / 4-6 岁"
+                }
+              ]
+            },
+            {
+              "index": "项目四",
+              "title": "按压物件",
+              "goals": [
+                {
+                  "description": "[A] 用力挤压玩具 / 3-6 个月"
+                },
+                {
+                  "description": "[B] 用食指按玩具或玩具按钮 / 1-2 岁"
+                },
+                {
+                  "description": "[C] 用手指动作按琴键 / 1-2 岁"
+                },
+                {
+                  "description": "[D] 用掌心及手指动作按泥胶 / 1-2 岁"
+                }
+              ]
+            },
+            {
+              "index": "项目五",
+              "title": "推拉物件",
+              "goals": [
+                {
+                  "description": "[A] 推动桌上的小车 / 9-12 个月"
+                },
+                {
+                  "description": "[B] 拉动有绳玩具 / 9-12 个月"
+                },
+                {
+                  "description": "[C] 把玩具掣推上及拉下 / 9-12 个月"
+                },
+                {
+                  "description": "[D] 推动物件 / 1-2 岁"
+                },
+                {
+                  "description": "[E] 把玩具掣向左及向右推 / 1-2 岁"
+                },
+                {
+                  "description": "[F] 拉动绳索使玩具发声或发动 / 1-2 岁"
+                }
+              ]
+            },
+            {
+              "index": "项目六",
+              "title": "拿取物件",
+              "goals": [
+                {
+                  "description": "[A] 伸手入器皿中取物件 / 9-12 个月"
+                },
+                {
+                  "description": "[B] 从洞洞板中取出小木柱 / 1-2 岁"
+                },
+                {
+                  "description": "[C] 从柱中取出套圈 / 1-2 岁"
+                },
+                {
+                  "description": "[D] 翻转盛器倒出物件 / 1-2 岁"
+                },
+                {
+                  "description": "[E] 从袋中取出物件 / 1-2 岁"
+                },
+                {
+                  "description": "[F] 摇动小瓶把物件倒出 / 1-2 岁"
+                }
+              ]
+            },
+            {
+              "index": "项目七",
+              "title": "揭开物件",
+              "goals": [
+                {
+                  "description": "[A] 揭盖 / 1-2 岁"
+                },
+                {
+                  "description": "[B] 揭开玩具盖 / 1-2 岁"
+                },
+                {
+                  "description": "[C] 两至三页地揭书 / 1-2 岁"
+                },
+                {
+                  "description": "[D] 一页一页地揭书 / 2-3 岁"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "书写及画画",
+          "phasal_objectives": [
+            {
+              "index": "项目四",
+              "title": "画线及写字前准备",
+              "goals": [
+                {
+                  "description": "[D-i] 在曲线隧道内画线不出界：2厘米 / 4岁"
+                },
+                {
+                  "description": "[D-ii] 在曲线隧道内画线不出界：1厘米 / 4-5岁"
+                },
+                {
+                  "description": "[D-iii] 在曲线隧道内画线不出界：0.5厘米 / 5-6岁"
+                },
+                {
+                  "description": "[E-i] 完成点线画：约10点 / 4-5岁"
+                },
+                {
+                  "description": "[E-ii] 完成点线画：多于20点 / 5-6岁"
+                },
+                {
+                  "description": "[F-i] 在方格内写字不出界：边长2.5厘米 / 4-5岁"
+                },
+                {
+                  "description": "[F-ii] 在方格内写字不出界：2厘米、1.5厘米 / 5-6岁"
+                },
+                {
+                  "description": "[G] 在简单的迷宫练习纸上画线不出界 / 4-5岁"
+                }
+              ]
+            },
+            {
+              "index": "项目五",
+              "title": "仿画图形及抄写文字",
+              "goals": [
+                {
+                  "description": "[A-i] 按图形卡仿画：「○」、「+」、「/」、「\\」、「□」、「x」、「△」 / 4-5岁"
+                },
+                {
+                  "description": "[A-ii] 按图形卡仿画：「◇」 / 5-6岁"
+                },
+                {
+                  "description": "[B-i] 抄写中文字：简单的中文字（如：日、人、上、田、中） / 4-5岁"
+                },
+                {
+                  "description": "[B-ii] 抄写中文字：复杂的中文字（如：花、狗、过、乐、飞） / 5-6岁"
+                },
+                {
+                  "description": "[C] 抄写数目字 1-9 / 4-5岁"
+                },
+                {
+                  "description": "[D-i] 抄写英文字：大楷 / 4-5岁"
+                },
+                {
+                  "description": "[D-ii] 抄写英文字：小楷 / 5-6岁"
+                },
+                {
+                  "description": "[E] 仿画较复杂的图案（如：☆） / 5-6岁"
+                },
+                {
+                  "description": "[F] 从黑板中抄写图案或文字 / 5-6岁"
+                }
+              ]
+            },
+            {
+              "index": "项目六",
+              "title": "依从不同格式写画",
+              "goals": [
+                {
+                  "description": "[A] 在空格纸写画 / 3-4岁"
+                },
+                {
+                  "description": "[B] 在空格纸上一格接一格，由上至下、左至右地抄写 / 4-5岁"
+                },
+                {
+                  "description": "[C] 在横线上由左至右一行接一行地抄写 / 4-5岁"
+                },
+                {
+                  "description": "[D] 用英文线条簿抄写 / 5-6岁"
+                }
+              ]
+            },
+            {
+              "index": "项目七",
+              "title": "涂颜色",
+              "goals": [
+                {
+                  "description": "[A] 有范围的概念，在图案上着色，大致不出界 / 3-4岁"
+                },
+                {
+                  "description": "[B] 在图案内着色不出界 / 4-5岁"
+                },
+                {
+                  "description": "[C] 在复杂图案填上不同颜色 / 5-6岁"
+                }
+              ]
+            },
+            {
+              "index": "项目八",
+              "title": "画图画",
+              "goals": [
+                {
+                  "description": "[A-i] 画出图形：简单图形（如：太阳、苹果、饼） / 4-5岁"
+                },
+                {
+                  "description": "[A-ii] 画出图形：较复杂图形（如：人、树、屋） / 5岁"
+                },
+                {
+                  "description": "[B] 摹拟画出成人所描绘的图画 / 5-6岁"
+                },
+                {
+                  "description": "[C] 自行画出一般物件或生活情景 / 5-6岁"
+                },
+                {
+                  "description": "[D] 按主题画图画 / 5-6岁"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "文具及纸张操作",
+          "phasal_objectives": [
+            {
+              "index": "项目五",
+              "title": "剪纸技巧",
+              "goals": [
+                {
+                  "description": "[F] 把 15 厘米宽的纸张剪开两半 / 3-4 岁"
+                },
+                {
+                  "description": "[G-i] 沿着纸上的线剪开：8-15 厘米的直线 / 4-5 岁"
+                },
+                {
+                  "description": "[G-ii] 沿着纸上的线剪开：曲线 / 4-5 岁"
+                },
+                {
+                  "description": "[H-i] 剪出图形：正方形或三角形 / 4-5 岁"
+                },
+                {
+                  "description": "[H-ii] 剪出图形：圆形 / 5-6 岁"
+                },
+                {
+                  "description": "[H-iii] 剪出图形：简单或复杂图形 / 5-6 岁"
+                },
+                {
+                  "description": "[I] 剪开不同质料物件（如：绒布、吸管、卡纸、尼龙绳等）/ 5-6 岁"
+                }
+              ]
+            },
+            {
+              "index": "项目六",
+              "title": "折纸技巧",
+              "goals": [
+                {
+                  "description": "[A] 粗略地摹拟折纸 / 2-3 岁"
+                },
+                {
+                  "description": "[B] 把毛巾整齐地对折 / 3-4 岁"
+                },
+                {
+                  "description": "[C] 把纸沿边对折成长方形 / 4-5 岁"
+                },
+                {
+                  "description": "[D] 把纸沿边对折 2 次成小正方形 / 4-5 岁"
+                },
+                {
+                  "description": "[E] 把纸沿边对折成长三角形 / 4-5 岁"
+                },
+                {
+                  "description": "[F] 把纸沿边对折 2 次成小三角形 / 5-6 岁"
+                },
+                {
+                  "description": "[G] 经示范后，可依照简单的图案折叠纸张 / 5-6 岁"
+                }
+              ]
+            },
+            {
+              "index": "项目七",
+              "title": "笔袋使用",
+              "goals": [
+                {
+                  "description": "[A] 揭开及关上磁石笔盒 / 2-3 岁"
+                },
+                {
+                  "description": "[B] 拉开及关上笔袋的拉链 / 2-3 岁"
+                },
+                {
+                  "description": "[C] 拉开及扣上笔袋的隐钮 / 3-4 岁"
+                },
+                {
+                  "description": "[D] 揭开及关上铁笔盒 / 4-5 岁"
+                }
+              ]
+            },
+            {
+              "index": "项目八",
+              "title": "使用橡皮擦",
+              "goals": [
+                {
+                  "description": "[A] 使用橡皮擦而不擦破纸张 / 3-4 岁"
+                },
+                {
+                  "description": "[B] 使用橡皮擦而不弄皱纸张 / 4-5 岁"
+                },
+                {
+                  "description": "[C] 擦掉格子内的字 / 4-5 岁"
+                }
+              ]
+            },
+            {
+              "index": "项目九",
+              "title": "使用纸夹",
+              "goals": [
+                {
+                  "description": "[A] 把较松的纸夹夹在一小叠纸上 / 2-3 岁"
+                },
+                {
+                  "description": "[B] 把较紧的纸夹夹在纸上 / 4-5 岁"
+                },
+                {
+                  "description": "[C] 用万字夹把 2 张纸夹稳 / 4-5 岁"
+                }
+              ]
+            },
+            {
+              "index": "项目十",
+              "title": "使用文件套",
+              "goals": [
+                {
+                  "description": "[A] 把纸张放进单边开的文件套中 / 4-5 岁"
+                },
+                {
+                  "description": "[B] 把纸张插入文件夹的侧袋中 / 4-5 岁"
+                },
+                {
+                  "description": "[C] 把纸张放进用魔术贴扣合的文件袋中 / 4-5 岁"
+                },
+                {
+                  "description": "[D] 把纸张放进拉链文件袋中，并把拉链拉上 / 4-5 岁"
+                },
+                {
+                  "description": "[E] 把已打孔的纸张夹在双孔文件夹中 / 5-6 岁"
+                },
+                {
+                  "description": "[F] 把纸张叠齐放进公文袋中，并把绳系上 / 5-6 岁"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "使用工具及文具",
+          "phasal_objectives": [
+            {
+              "index": "项目十一",
+              "title": "使用尺子",
+              "goals": [
+                {
+                  "description": "[用尺子画线] 画横、直线 / 4-5岁"
+                },
+                {
+                  "description": "[用尺子画线] 画长5厘米的线 / 4-5岁"
+                },
+                {
+                  "description": "[用尺子画线] 画长10厘米的线 / 5-6岁"
+                },
+                {
+                  "description": "[用尺子画线] 画斜线 / 5-6岁"
+                }
+              ]
+            },
+            {
+              "index": "项目十二",
+              "title": "使用不同类形的笔",
+              "goals": [
+                {
+                  "description": "[A] 按笔顶的开关按钮 / 2-3岁"
+                },
+                {
+                  "description": "[B] 拉开及插上笔套 / 2-3岁"
+                },
+                {
+                  "description": "[C] 使用活动笔芯的笔 / 5-6岁"
+                }
+              ]
+            },
+            {
+              "index": "项目十三",
+              "title": "使用铅笔刨",
+              "goals": [
+                {
+                  "description": "用铅笔刨刨铅笔 / 4-5岁"
+                }
+              ]
+            },
+            {
+              "index": "项目十四",
+              "title": "使用书包",
+              "goals": [
+                {
+                  "description": "[A] 把叠齐的书本放进书包 / 4-5岁"
+                },
+                {
+                  "description": "[B] 背上书包 / 4-5岁"
+                },
+                {
+                  "description": "[C] 打开装有不同类型扣的书包（如：插扣、安全扣、拉链、系绳、大隐钮等） / 5-6岁"
+                }
+              ]
+            },
+            {
+              "index": "项目十五",
+              "title": "使用打孔机",
+              "goals": [
+                {
+                  "description": "在纸上打孔 / 4-5岁"
+                }
+              ]
+            },
+            {
+              "index": "项目十六",
+              "title": "使用磁石",
+              "goals": [
+                {
+                  "description": "用磁石把纸张贴在金属板上 / 4-5岁"
+                }
+              ]
+            },
+            {
+              "index": "项目十七",
+              "title": "使用钉书机",
+              "goals": [
+                {
+                  "description": "用钉书机把2张纸钉上 / 5-6岁"
+                }
+              ]
+            },
+            {
+              "index": "项目十八",
+              "title": "使用水彩",
+              "goals": [
+                {
+                  "description": "自行混合颜料和水，并用水彩画画 / 5-6岁"
+                }
+              ]
+            },
+            {
+              "index": "项目十九",
+              "title": "制作小礼物",
+              "goals": [
+                {
+                  "description": "[A] 把礼物放在礼物袋中并贴上胶纸 / 4-5岁"
+                },
+                {
+                  "description": "[B] 在礼物包上系蝴蝶结 / 5-6岁"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "基本手部操作",
+      "objectives": [
+        {
+          "title": "基本手部操作",
+          "phasal_objectives": [
+            {
+              "index": "项目八",
+              "title": "摆放物件",
+              "goals": [
+                {
+                  "description": "[A] 将物件放进器皿中 / 10-12 个月"
+                },
+                {
+                  "description": "[B] 将套圈放入柱中 / 1-2 岁"
+                },
+                {
+                  "description": "[C] 把小套杯放入大套杯中 / 1-2 岁"
+                },
+                {
+                  "description": "[D] 把物件摆放在另一物件上 / 1-2 岁"
+                },
+                {
+                  "description": "[E] 将小圆柱放入洞板 / 1-2 岁"
+                }
+              ]
+            },
+            {
+              "index": "项目九",
+              "title": "旋扭物件",
+              "goals": [
+                {
+                  "description": "[A] 用手指转动简单形状块放入板孔 / 1-2 岁"
+                },
+                {
+                  "description": "[B] 用手指转动较复杂形状块放入板孔 / 2-3 岁"
+                },
+                {
+                  "description": "[C] 扭开瓶盖 / 2-3 岁"
+                },
+                {
+                  "description": "[D] 扭动玩具发条（大）/ 2-4 岁"
+                },
+                {
+                  "description": "[E] 使用旋转动作搅动小手把 / 3-4 岁"
+                },
+                {
+                  "description": "[F] 扭动玩具发条（小）/ 3-4 岁"
+                },
+                {
+                  "description": "[G] 扭动玩具钥匙开锁 / 4-5 岁"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "双手配合运用",
+      "objectives": [
+        {
+          "title": "双手配合运用",
+          "phasal_objectives": [
+            {
+              "index": "项目一",
+              "title": "双手接触",
+              "goals": [
+                {
+                  "description": "[A] 把双手放在胸前 / 3 个月"
+                },
+                {
+                  "description": "[B] 把玩双手 / 3-5 个月"
+                },
+                {
+                  "description": "[C] 用双手把玩物件 / 4-5 个月"
+                }
+              ]
+            },
+            {
+              "index": "项目二",
+              "title": "将物件从一手交到另一手中",
+              "goals": [
+                {
+                  "description": "把手中的物件交到另一手中 / 6-12 个月"
+                }
+              ]
+            },
+            {
+              "index": "项目三",
+              "title": "用双手做同一动作",
+              "goals": [
+                {
+                  "description": "[A] 用双手同时拿着 1 件物件 / 4-6 个月"
+                },
+                {
+                  "description": "[B] 用双手同时分别拿着 2 件物件 / 6-12 个月"
+                },
+                {
+                  "description": "[C] 拍手 / 7-12 个月"
+                },
+                {
+                  "description": "[D] 把 2 件物件相向地敲起来 / 8-12 个月"
+                },
+                {
+                  "description": "[E] 用双手拉开较松的插拼玩具 / 1-2 岁"
+                },
+                {
+                  "description": "[F] 用双手推开大皮球 / 1-2 岁"
+                },
+                {
+                  "description": "[G] 用双手拉开较硬的泥胶或较紧的插拼玩具 / 1-2 岁"
+                },
+                {
+                  "description": "[H] 用双手拼合玩具 / 2-3 岁"
+                },
+                {
+                  "description": "[I] 用双手拼合较紧的玩具 / 3-4 岁"
+                },
+                {
+                  "description": "[J] 用双手拉开较紧及较细小的插拼玩具 / 4-5 岁"
+                },
+                {
+                  "description": "[K] 用双手拼合较紧及较小的玩具 / 4-5 岁"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "双手运用",
+      "objectives": [
+        {
+          "title": "双手运用",
+          "phasal_objectives": [
+            {
+              "index": "项目四",
+              "title": "一手固定物件，另一手操作物件",
+              "goals": [
+                {
+                  "description": "[A] 一手按着玩具，用另一手把玩 / 1-2 岁"
+                },
+                {
+                  "description": "[B] 一手拿着小棒，用另一手把圈套在棒上 / 1-2 岁"
+                },
+                {
+                  "description": "[C] 一手固定瓶身，同时用另一手扭开瓶盖 / 2-3 岁"
+                },
+                {
+                  "description": "[D] 一手固定玩具，同时用另一手扭动玩具发条（大）/ 2-3 岁"
+                },
+                {
+                  "description": "[E] 一手固定玩具水果，同时用另一手把它切开 / 2-3 岁"
+                },
+                {
+                  "description": "[F] 一手按稳纸张，同时用另一手画写 / 2-3 岁"
+                },
+                {
+                  "description": "[G] 一手拿着纸张，同时用另一手把纸张剪开 / 2-3 岁"
+                },
+                {
+                  "description": "[H] 一手固定纸卡，同时用另一手把文具夹夹在纸卡上 / 3-4 岁"
+                },
+                {
+                  "description": "[I] 一手固定玩具，同时用另一手扭动玩具发条（小）/ 3-4 岁"
+                },
+                {
+                  "description": "[J] 一手握着碗，另一手使用餐具进食 / 4-5 岁"
+                }
+              ]
+            },
+            {
+              "index": "项目五",
+              "title": "双手以不同动作操作物件",
+              "goals": [
+                {
+                  "description": "[A] 扭开玩具小酒桶 / 2-3 岁"
+                },
+                {
+                  "description": "[B] 穿珠 / 2-3 岁"
+                },
+                {
+                  "description": "[C] 双手前后互搓地洗手 / 2-3 岁"
+                },
+                {
+                  "description": "[D] 一手拿布，另一手拿系扣物，协调地双手解开系扣物 / 3-4 岁"
+                },
+                {
+                  "description": "[E] 一手拿布，另一手拿系扣物，协调地双手扣合系扣物 / 3-4 岁"
+                },
+                {
+                  "description": "[F] 一手拿稳衣物边缘，另一手把衣物（如：袜、衣袖）翻过来 / 3-4 岁"
+                },
+                {
+                  "description": "[G] 一手握洞洞板，另一手握绳穿洞 / 4-5 岁"
+                },
+                {
+                  "description": "[H] 用双手以相反方向地扭干毛巾 / 4-5 岁"
+                },
+                {
+                  "description": "[I] 双手各执绳的两端，交替动作地结简单绳结 / 5-6 岁"
+                },
+                {
+                  "description": "[J] 系鞋绳 / 5-6 岁"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "手眼协调",
+      "objectives": [
+        {
+          "title": "手眼协调",
+          "phasal_objectives": [
+            {
+              "index": "项目一",
+              "title": "叠高物件",
+              "goals": [
+                {
+                  "description": "[叠起积木] 2-6 块 / 1-2 岁"
+                },
+                {
+                  "description": "[叠起积木] 7-9 块 / 2-3 岁"
+                },
+                {
+                  "description": "[叠起积木] 10 块 / 3-4 岁"
+                }
+              ]
+            },
+            {
+              "index": "项目二",
+              "title": "穿珠",
+              "goals": [
+                {
+                  "description": "[穿珠] 大型珠粒 / 1-2 岁"
+                },
+                {
+                  "description": "[穿珠] 中型珠粒 / 2-3 岁"
+                },
+                {
+                  "description": "[穿珠] 小型珠粒 / 3-4 岁"
+                },
+                {
+                  "description": "[穿珠] 微型珠粒（直径约 0.25 厘米）/ 4-5 岁"
+                }
+              ]
+            },
+            {
+              "index": "项目三",
+              "title": "准确地提取物件",
+              "goals": [
+                {
+                  "description": "[A] 从洞板中拿出小柱条 / 1-2 岁"
+                },
+                {
+                  "description": "[B] 从小钉板中取出小钉 / 2-3 岁"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "手部功能",
+      "objectives": [
+        {
+          "title": "学习重点：手部功能",
+          "phasal_objectives": [
+            {
+              "index": "项目四",
+              "title": "准确地摆放物件",
+              "goals": [
+                {
+                  "description": "[A] 将物件或小玩具放入器皿中 / 1-2 岁"
+                },
+                {
+                  "description": "[B] 将小珠粒放入小瓶内 / 1-2 岁"
+                },
+                {
+                  "description": "[C] 将直径或边长约 3 厘米的大圆柱、正方形柱及三角形柱对准位置放入相对的柱板 / 1-2 岁"
+                },
+                {
+                  "description": "[D] 将形状块对准位置放入形状底板上 / 1-2 岁"
+                },
+                {
+                  "description": "[E] 将小钱币放入钱箱内 / 1-2 岁"
+                },
+                {
+                  "description": "[F] 将小钉放入小钉板的洞内 / 1-2 岁"
+                },
+                {
+                  "description": "[G] 对准位置砌相连拼图 / 2-3 岁"
+                },
+                {
+                  "description": "[H] 准确地将边长约 5 厘米的图形（如：三角形、正方形、星形、多角形）贴于相对的图案上 / 4-5 岁"
+                },
+                {
+                  "description": "[I] 对准匙孔位置把钥匙插进钥匙玩具 / 4-5 岁"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "执笔写画",
+      "objectives": [
+        {
+          "title": "学习重点：执笔写画",
+          "phasal_objectives": [
+            {
+              "index": "项目一",
+              "title": "握笔模式",
+              "goals": [
+                {
+                  "description": "[A] 用掌心握笔 / 1-2 岁"
+                },
+                {
+                  "description": "[B] 用手指握笔 / 2-3 岁"
+                },
+                {
+                  "description": "[C] 用前三指粗略地握笔 / 2-3 岁"
+                },
+                {
+                  "description": "[D] 用前三指灵活地握笔 / 5-6 岁"
+                }
+              ]
+            },
+            {
+              "index": "项目二",
+              "title": "涂画意识",
+              "goals": [
+                {
+                  "description": "[A] 玩手指画，在白纸上涂鸦 / 1-2 岁"
+                },
+                {
+                  "description": "[B] 在白纸或神奇画板上模仿成人涂画 / 1-2 岁"
+                },
+                {
+                  "description": "[C] 自行握笔在纸上涂鸦 / 1-2 岁"
+                }
+              ]
+            },
+            {
+              "index": "项目三",
+              "title": "摹拟画线条及简单图形",
+              "goals": [
+                {
+                  "description": "[A-i] 摹拟画线条：「|」、「—」、「/」、「\\」、「十」 / 2-3 岁"
+                },
+                {
+                  "description": "[A-ii] 摹拟画线条：「×」 / 3-4 岁"
+                },
+                {
+                  "description": "[B-i] 摹拟画简单图形：「○」、「□」 / 2-3 岁"
+                },
+                {
+                  "description": "[B-ii] 摹拟画简单图形：「△」 / 3-4 岁"
+                }
+              ]
+            },
+            {
+              "index": "项目四",
+              "title": "控笔能力",
+              "goals": [
+                {
+                  "description": "[A-i] 在直线隧道内画线不出界：2.5 厘米 / 2-3 岁"
+                },
+                {
+                  "description": "[A-ii] 在直线隧道内画线不出界：1 厘米、0.5 厘米 / 3-4 岁"
+                },
+                {
+                  "description": "[B] 将距离 5 厘米的 2 个圆点连起来 / 3-4 岁"
+                },
+                {
+                  "description": "[C-i] 在虚线上画线不出界：直线和横线 / 3-4 岁"
+                },
+                {
+                  "description": "[C-ii] 在虚线上画线不出界：曲线 / 4-5 岁"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "文具及用品操作",
+      "objectives": [
+        {
+          "title": "学习重点：文具及用品操作",
+          "phasal_objectives": [
+            {
+              "index": "项目一",
+              "title": "把玩泥胶及泥胶工具",
+              "goals": [
+                {
+                  "description": "[A] 用刀把泥胶切开 / 2-3 岁"
+                },
+                {
+                  "description": "[B] 把泥胶弄成条状 / 3-4 岁"
+                },
+                {
+                  "description": "[C] 把散放在桌上的小块碎泥胶弄成一大块 / 3-4 岁"
+                },
+                {
+                  "description": "[D] 把泥胶弄成小球 / 3-4 岁"
+                },
+                {
+                  "description": "[E] 使用不同工具压印图形 / 4-6 岁"
+                },
+                {
+                  "description": "[F] 把泥胶弄成碗状 / 5-6 岁"
+                }
+              ]
+            },
+            {
+              "index": "项目二",
+              "title": "黏贴物件",
+              "goals": [
+                {
+                  "description": "[A] 在协助下用手指把浆糊涂在约 8 厘米的图形上 / 1-2 岁"
+                },
+                {
+                  "description": "[B] 用手指把浆糊涂在约 5 厘米大小的图形上 / 2-3 岁"
+                },
+                {
+                  "description": "[C] 把涂上浆糊的图形纸粗略地贴在纸上 / 2-3 岁"
+                },
+                {
+                  "description": "[D] 用浆糊涂在图形上 / 3-4 岁"
+                },
+                {
+                  "description": "[E] 用胶水涂在图形上 / 3-4 岁"
+                },
+                {
+                  "description": "[F] 用白胶浆涂在图形上 / 3-4 岁"
+                },
+                {
+                  "description": "[G] 把一般贴纸撕出并贴在纸张上 / 3-4 岁"
+                },
+                {
+                  "description": "[H] 用浆糊笔涂图形纸，然后贴在相配的图案上 / 3-4 岁"
+                },
+                {
+                  "description": "[I] 用宝贴万用胶把纸张贴在板上 / 4-5 岁"
+                },
+                {
+                  "description": "[J] 用胶纸把纸张贴稳 / 4-5 岁"
+                },
+                {
+                  "description": "[K] 使用浆糊及扫子做图工 / 4-5 岁"
+                },
+                {
+                  "description": "[L] 从胶纸座取出胶纸 / 5-6 岁"
+                }
+              ]
+            },
+            {
+              "index": "项目三",
+              "title": "撕纸",
+              "goals": [
+                {
+                  "description": "[A] 粗略地撕开纸张 / 1-2 岁"
+                },
+                {
+                  "description": "[B] 撕开有针孔虚线（直线）的纸张 / 2-3 岁"
+                },
+                {
+                  "description": "[C] 沿直线折痕撕开纸张 / 5-6 岁"
+                },
+                {
+                  "description": "[D] 撕出简单的图形 / 5-6 岁"
+                }
+              ]
+            },
+            {
+              "index": "项目四",
+              "title": "印画",
+              "goals": [
+                {
+                  "description": "[A] 使用原子印做印画 / 1-2 岁"
+                },
+                {
+                  "description": "[B] 使用印台及印章做印画 / 3-4 岁"
+                }
+              ]
+            },
+            {
+              "index": "项目五",
+              "title": "使用剪刀",
+              "goals": [
+                {
+                  "description": "[A] 用两只手开合剪刀 / 1-2 岁"
+                },
+                {
+                  "description": "[B] 用单手持剪刀 / 2-3 岁"
+                },
+                {
+                  "description": "[C] 开合剪刀 / 2-3 岁"
+                },
+                {
+                  "description": "[D] 在纸张上剪一小刀 / 2-3 岁"
+                },
+                {
+                  "description": "[E] 剪断 5 厘米宽的纸条 / 3-4 岁"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,225 @@
+[
+  {
+    "module": "社交与情绪",
+    "submodules": [
+      {
+        "title": "自我概念",
+        "objectives": [
+          {
+            "title": "自我认识",
+            "phasal_objectives": [
+              {
+                "index": "项目一",
+                "title": "自我意识"
+              },
+              {
+                "index": "项目二",
+                "title": "自主能力"
+              }
+            ]
+          },
+          {
+            "title": "自我评价",
+            "phasal_objectives": [
+              {
+                "index": "项目",
+                "title": "正面评价"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "社交沟通",
+        "objectives": [
+          {
+            "title": "与人交往的动机",
+            "phasal_objectives": [
+              {
+                "index": "项目一",
+                "title": "有兴趣与照顾者作情感的交流及回应"
+              },
+              {
+                "index": "项目二",
+                "title": "有兴趣与熟悉的人接触"
+              },
+              {
+                "index": "项目三",
+                "title": "与友伴发展互动关系"
+              }
+            ]
+          },
+          {
+            "title": "沟通技巧",
+            "phasal_objectives": [
+              {
+                "index": "项目一",
+                "title": "非语言的沟通"
+              },
+              {
+                "index": "项目二",
+                "title": "语言沟通"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "游戏技巧",
+        "objectives": [
+          {
+            "title": "游戏技巧",
+            "phasal_objectives": [
+              {
+                "index": "项目一",
+                "title": "与成人进行互相交往式游戏"
+              },
+              {
+                "index": "项目二",
+                "title": "进行独行式的游戏"
+              },
+              {
+                "index": "项目三",
+                "title": "进行假想游戏"
+              }
+            ]
+          },
+          {
+            "title": "参与社交游戏",
+            "phasal_objectives": [
+              {
+                "index": "项目一",
+                "title": "与友伴进行游戏"
+              },
+              {
+                "index": "项目二",
+                "title": "遵守游戏规则"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "社会适应",
+        "objectives": [
+          {
+            "title": "认识个人及熟悉的人的角色",
+            "phasal_objectives": [
+              {
+                "index": "项目一",
+                "title": "称呼家庭以内熟悉的人"
+              },
+              {
+                "index": "项目二",
+                "title": "适当地回应有关个人的问题"
+              },
+              {
+                "index": "项目三",
+                "title": "适当地回应有关家庭的问题"
+              }
+            ]
+          },
+          {
+            "title": "认识个人责任",
+            "phasal_objectives": [
+              {
+                "index": "项目一",
+                "title": "完成个人责任"
+              },
+              {
+                "index": "项目二",
+                "title": "自我保护"
+              },
+              {
+                "index": "项目三",
+                "title": "在有需要时懂得寻求适当的协助"
+              }
+            ]
+          },
+          {
+            "title": "遵从环境规范",
+            "phasal_objectives": [
+              {
+                "index": "项目一",
+                "title": "依循固定的生活程序"
+              },
+              {
+                "index": "项目二",
+                "title": "遵从社区活动规则"
+              },
+              {
+                "index": "项目三",
+                "title": "培养公德心"
+              },
+              {
+                "index": "项目四",
+                "title": "遵守学校常规及指令"
+              }
+            ]
+          },
+          {
+            "title": "认识社交礼仪",
+            "phasal_objectives": [
+              {
+                "index": "项目一",
+                "title": "基本社交礼仪"
+              },
+              {
+                "index": "项目二",
+                "title": "电话应对"
+              },
+              {
+                "index": "项目三",
+                "title": "进食礼仪"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "情绪表现",
+        "objectives": [
+          {
+            "title": "依附行为",
+            "phasal_objectives": [
+              {
+                "index": "项目一",
+                "title": "对成人的回应作出反应"
+              },
+              {
+                "index": "项目二",
+                "title": "表示期望与照顾者亲近"
+              }
+            ]
+          },
+          {
+            "title": "识别情绪的能力",
+            "phasal_objectives": [
+              {
+                "index": "项目一",
+                "title": "回应别人的情绪"
+              },
+              {
+                "index": "项目二",
+                "title": "认识较复杂的情绪"
+              }
+            ]
+          },
+          {
+            "title": "认识个人的情绪",
+            "phasal_objectives": [
+              {
+                "index": "项目一",
+                "title": "合适地表达情绪"
+              },
+              {
+                "index": "项目二",
+                "title": "调节或处理自己的情绪"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
