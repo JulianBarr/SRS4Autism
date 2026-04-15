@@ -1,0 +1,122 @@
+[
+    {
+        "id": "domain-play",
+        "type": "Domain",
+        "domain": "Play",
+        "level": 2,
+        "title": "Play",
+        "description": "Independent Play - Level 2",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "play-6-m",
+            "play-7-m",
+            "play-8-m",
+            "play-9-m",
+            "play-10-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "domain-social-behavior-and-social-play",
+        "type": "Domain",
+        "domain": "Social Behavior and Social Play",
+        "level": 2,
+        "title": "Social Behavior and Social Play",
+        "description": "Social Behavior and Social Play - Level 2",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "social-behavior-and-social-play-6-m",
+            "social-behavior-and-social-play-7-m",
+            "social-behavior-and-social-play-8-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "play-6-m",
+        "type": "Milestone",
+        "domain": "Play",
+        "level": 2,
+        "title": "Play 6-M",
+        "description": "Searches for a missing or corresponding toy or part of a set for 5 items or sets (e.g., a puzzle piece, a ball for a drop-in toy, a bottle for a baby doll). (E)",
+        "scoring_criteria": "1 point: Give the child 1 point if he actively and independently searches for a missing or corresponding toy or part of a set for 5 items or sets when items are removed or naturally missing. 1/2 point: Give the child 1/2 point if he actively and independently searches for a missing or corresponding toy or part of a set 2 items or sets when items are removed or naturally missing.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "play-7-m",
+        "type": "Milestone",
+        "domain": "Play",
+        "level": 2,
+        "title": "Play 7-M",
+        "description": "Independently demonstrates the use of toys or objects according to their function for 5 items (e.g., placing a train on a track, pulling a wagon, holding a telephone to the ear). (O)",
+        "scoring_criteria": "1 point: Give the child 1 point if he independently demonstrates the use of toys or objects according to their function for 5 items. 1/2 point: Give the child 1/2 point if he independently demonstrates the use of toys or objects according to their function for 2 items.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "play-8-m",
+        "type": "Milestone",
+        "domain": "Play",
+        "level": 2,
+        "title": "Play 8-M",
+        "description": "Plays with everyday items in creative ways 2 times (e.g., uses a bowl as a drum or a box as an imaginary car). (O)",
+        "scoring_criteria": "1 point: Give the child 1 point if he plays with 2 different everyday items in creative ways (except for stimming on a toy). 1/2 point: Give the child 1/2 point if he plays with 1 item in a creative way.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "play-9-m",
+        "type": "Milestone",
+        "domain": "Play",
+        "level": 2,
+        "title": "Play 9-M",
+        "description": "Independently engages in play on structures and playground equipment for a total of 5 minutes (e.g., going down a slide, swinging). (TO: 30 min.)",
+        "scoring_criteria": "1 point: Give the child 1 point if he engages in play on play structures and playground equipment for a total of 5 minutes during a 30-minute observation. 1/2 point: Give the child 1/2 point if he engages in play on play structures and playground equipment for a total of 2 minutes during a 30-minute observation.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "play-10-m",
+        "type": "Milestone",
+        "domain": "Play",
+        "level": 2,
+        "title": "Play 10-M",
+        "description": "Assembles toys that have multiple parts for 5 different sets of materials (e.g., Mr. Potato Head, Little People sets, Cooties bugs, Kid K'NEX). (O)",
+        "scoring_criteria": "1 point: Give the child 1 point if he independently constructs, assembles, or sets up toys or other play items and does so for 5 different sets of materials. 1/2 point: Give the child 1/2 point if he independently constructs, assembles, or sets up toys or other play items and does so for 2 different sets of materials.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "social-behavior-and-social-play-6-m",
+        "type": "Milestone",
+        "domain": "Social Behavior and Social Play",
+        "level": 2,
+        "title": "Social Behavior and Social Play 6-M",
+        "description": "Initiates a physical interaction with a peer 2 times (e.g., a push in a wagon, hand holding, Ring Around the Rosy). (TO: 30 min.)",
+        "scoring_criteria": "1 point: Give the child 1 point if he initiates an interaction with a peer 2 times during a 30-minute observation. Note that unprompted initiations may occur with negative events first, such as the child pushing another child off a bike in order to obtain the bike; however, do not count negative types of initiations. 1/2 point: Give the child 1/2 point if he initiates an interaction with a peer 1 time during a 30-minute observation.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "social-behavior-and-social-play-7-m",
+        "type": "Milestone",
+        "domain": "Social Behavior and Social Play",
+        "level": 2,
+        "title": "Social Behavior and Social Play 7-M",
+        "description": "Spontaneously mands to peers 5 times (e.g., My turn. Push me. Look! Come on.). (TO: 60 min.)",
+        "scoring_criteria": "1 point: Give the child 1 point if he spontaneously mands to peers 5 times during a 1-hour observation. 1/2 point: Give the child 1/2 point if he spontaneously mands to peers 2 times during a 1-hour observation.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "social-behavior-and-social-play-8-m",
+        "type": "Milestone",
+        "domain": "Social Behavior and Social Play",
+        "level": 2,
+        "title": "Social Behavior and Social Play 8-M",
+        "description": "Engages in sustained social play with peers for 3 minutes without adult prompts or reinforcement (e.g., cooperatively setting up a play set, water play). (TO: 30 min.)",
+        "scoring_criteria": null,
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    }
+]

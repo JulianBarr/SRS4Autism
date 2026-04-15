@@ -1,0 +1,86 @@
+[
+    {
+        "id": "domain-lrffc",
+        "type": "Domain",
+        "domain": "LRFFC",
+        "level": 3,
+        "title": "LRFFC",
+        "description": "Listener Responding by Function, Feature, and Class",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "lrffc-15-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "lrffc-15-m",
+        "type": "Milestone",
+        "domain": "LRFFC",
+        "level": 3,
+        "title": "LRFFC 15-M",
+        "description": "Demonstrates 1000 different LRFFC responses, tested or obtained from an accumulated list of known responses. (T)",
+        "scoring_criteria": "1 point: Give the child 1 point if he correctly demonstrates 1000 different LRFFC responses, tested or obtained from an accumulated list of known responses. 1/2 point: Give the child 1/2 point if he correctly demonstrates 750 different LRFFC responses, tested or obtained from an accumulated list of known responses.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "domain-intraverbal",
+        "type": "Domain",
+        "domain": "Intraverbal",
+        "level": 3,
+        "title": "Intraverbal",
+        "description": "Intraverbal - Level 3",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "intraverbal-11-m",
+            "intraverbal-12-m",
+            "intraverbal-13-m",
+            "intraverbal-14-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "intraverbal-11-m",
+        "type": "Milestone",
+        "domain": "Intraverbal",
+        "level": 3,
+        "title": "Intraverbal 11-M",
+        "description": "Spontaneously emits 20 intraverbal comments (can be part mand) (e.g., Dad says I’m going to the car, and the child spontaneously says I want to go for a ride!). (O)",
+        "scoring_criteria": "1 point: Give the child 1 point if he spontaneously emits 20 intraverbal responses in the natural environment in the course of a single day. 1/2 point: Give the child 1/2 point if he spontaneously emits 10 intraverbal comments in a day.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "intraverbal-12-m",
+        "type": "Milestone",
+        "domain": "Intraverbal",
+        "level": 3,
+        "title": "Intraverbal 12-M",
+        "description": "Demonstrates 300 different intraverbal responses, tested or obtained from an accumulated list of known intraverbals. (T)",
+        "scoring_criteria": "1 point: Give the child 1 point if he demonstrates at least 300 different intraverbal responses when asked to do so. Many programs maintain data sheets containing known intraverbal responses. This list can be used if it is reliable. 1/2 point: Give the child 1/2 point if he demonstrates at least 200 different intraverbal responses when asked to do so.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "intraverbal-13-m",
+        "type": "Milestone",
+        "domain": "Intraverbal",
+        "level": 3,
+        "title": "Intraverbal 13-M",
+        "description": "Answers 2 questions after being read short passages (15+ words) from books, for 25 passages (e.g., Who blew the house down?). (T)",
+        "scoring_criteria": "1 point: Give the child 1 point if he answers 2 questions for each of 25 short passages (15+ words) from books, or other written materials. 1/2 point: Give the child 1/2 point if he answers 1 question for each of 25 short passages of at least 10 words.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "intraverbal-14-m",
+        "type": "Milestone",
+        "domain": "Intraverbal",
+        "level": 3,
+        "title": "Intraverbal 14-M",
+        "description": "Describes 25 different events, videos, stories, etc. with 8+ words (e.g., Tell me what happened... The big monster scared everybody and they all ran into the house). (E)",
+        "scoring_criteria": null,
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    }
+]

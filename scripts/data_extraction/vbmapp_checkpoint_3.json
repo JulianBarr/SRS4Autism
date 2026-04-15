@@ -1,0 +1,122 @@
+[
+    {
+        "id": "domain-listener",
+        "type": "Domain",
+        "domain": "Listener",
+        "level": 1,
+        "title": "Listener",
+        "description": "Listener Responding Skills",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "listener-5-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "listener-5-m",
+        "type": "Milestone",
+        "domain": "Listener",
+        "level": 1,
+        "title": "Listener 5-M",
+        "description": "Selects the correct item from an array of 4, for 20 different objects or pictures (e.g., Show me cat. Touch shoe). (T)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he correctly identifies 20 different items in an array of 4 on the first trial during testing. When giving credit for differentially looking at items to demonstrate listener skills, make sure there is an array from which to discriminate, and that the response is clearly directed to the target stimulus. 1/2 point score: Give the child 1/2 point if he correctly identifies 15 different items in an array of 4 on the first trial during testing.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "domain-vp-mts",
+        "type": "Domain",
+        "domain": "VP-MTS",
+        "level": 1,
+        "title": "Visual Perceptual Skills and Matching-to-Sample (VP-MTS)",
+        "description": "Visual Perceptual Skills and Matching-to-Sample (VP-MTS) - Level 1",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "vp-mts-1-m",
+            "vp-mts-2-m",
+            "vp-mts-3-m",
+            "vp-mts-4-m",
+            "vp-mts-5-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "vp-mts-1-m",
+        "type": "Milestone",
+        "domain": "VP-MTS",
+        "level": 1,
+        "title": "VP-MTS 1-M",
+        "description": "Visually tracks moving stimuli for 2 seconds, 5 times.(TO:30 min.)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he visually tracks moving stimuli for 2 seconds, 5 times during the 30-minute observation. 1/2 point score: Give the child 1/2 point if tracks moving stimuli for 2 seconds, 2 times during the 30-minute observation.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "vp-mts-2-m",
+        "type": "Milestone",
+        "domain": "VP-MTS",
+        "level": 1,
+        "title": "VP-MTS 2-M",
+        "description": "Grasps small objects with thumb, index finger, and middle finger (pincer grasp) 5 times. (O)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he is successful with small motor eye-hand coordination activities, such as reaching for and grabbing small toys and other objects, 5 times during observation. 1/2 point score: Give the child 1/2 point if he usually requires 2 or more attempts to successfully obtain small items in front of him.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "vp-mts-3-m",
+        "type": "Milestone",
+        "domain": "VP-MTS",
+        "level": 1,
+        "title": "VP-MTS 3-M",
+        "description": "Visually attends to a toy or book for 30 seconds (not a self-stim item). (O)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he demonstrates sustained attention to a specific, and possibly reinforcing, visual stimulus for 30 seconds. Do not give the child a point if it is always the same item, or other items that might be classified as self-stimulation for the child (e.g., a stick that the child stims with). 1/2 point score: Give the child 1/2 point if he attends to visual stimuli for 15 seconds.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "vp-mts-4-m",
+        "type": "Milestone",
+        "domain": "VP-MTS",
+        "level": 1,
+        "title": "VP-MTS 4-M",
+        "description": "Places 3 items in a container, stacks 3 blocks, or places 3 rings on a peg for 2 of these or similar activities. (E)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he successfully and independently places 3 items in a container, stacks 3 blocks, places 3 rings on a peg, etc., for any 2 activities during observation or testing. 1/2 point score: Give the child 1/2 point if he places 2 items in a container, stacks 2 blocks, places 2 rings on a peg, etc., for any single activity during observation or testing.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "vp-mts-5-m",
+        "type": "Milestone",
+        "domain": "VP-MTS",
+        "level": 1,
+        "title": "VP-MTS 5-M",
+        "description": "Matches any 10 identical items (e.g., inset puzzles, toys, objects, or pictures). (E)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he successfully matches 10 items. 1/2 point score: Give the child 1/2 point if he matches 5 items.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "domain-independent-play",
+        "type": "Domain",
+        "domain": "Independent Play",
+        "level": 1,
+        "title": "Independent Play",
+        "description": "Independent Play - Level 1",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "independent-play-1-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "independent-play-1-m",
+        "type": "Milestone",
+        "domain": "Independent Play",
+        "level": 1,
+        "title": "Independent Play 1-M",
+        "description": "Manipulates and explores objects for 1 minute (e.g., looks at a toy, turns it over, presses buttons). (TO: 30 min.).",
+        "scoring_criteria": "1 point score: Give the child 1 point if he independently manipulates and explores objects for 1 minute during a 30-minute observation. 1/2 point score: Give the child 1/2 point if he independently manipulates and explores objects for 30 seconds during a 30-minute observation.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    }
+]

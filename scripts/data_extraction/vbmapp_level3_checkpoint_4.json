@@ -1,0 +1,146 @@
+[
+    {
+        "id": "domain-independent-play",
+        "type": "Domain",
+        "domain": "Independent Play",
+        "level": 2,
+        "title": "Independent Play",
+        "description": "Independent Play domain skills for Level 2.",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "play-11-m",
+            "play-12-m",
+            "play-13-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "play-11-m",
+        "type": "Milestone",
+        "domain": "Independent Play",
+        "level": 2,
+        "title": "Play 11-M",
+        "description": "Spontaneously engages in pretend or imaginary play on 5 occasions (e.g., dressing up, a pretend party with stuffed animals, pretends to cook).",
+        "scoring_criteria": "1 point score: Give the child 1 point if he spontaneously engages in pretend or imaginary play on 5 occasions. 1/2 point score: Give the child 1/2 point if he spontaneously engages in pretend or imaginary play on 2 occasions.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "play-12-m",
+        "type": "Milestone",
+        "domain": "Independent Play",
+        "level": 2,
+        "title": "Play 12-M",
+        "description": "Repeats a gross motor play behavior to obtain a better effect for 2 activities (e.g., throwing a ball in a basket, swinging a bat at a T-ball, foot stomping to launch a rocket, pumping a swing).",
+        "scoring_criteria": "1 point score: Give the child 1 point if he will repeat a gross motor play behavior in an attempt to obtain a desired effect for 2 activities. 1/2 point score: Give the child 1/2 point if he will repeat a gross motor play behavior in an attempt to obtain a desired effect for 1 activity.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "play-13-m",
+        "type": "Milestone",
+        "domain": "Independent Play",
+        "level": 2,
+        "title": "Play 13-M",
+        "description": "Independently engages in arts and crafts type activities for 5 minutes (e.g., drawing, coloring, painting, cutting, pasting).",
+        "scoring_criteria": "1 point score: Give the child 1 point if he independently engages in arts and crafts type activities for 5 minutes. 1/2 point score: Give the child 1/2 point if he independently engages in arts and crafts type activities for 2 minutes.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "domain-social",
+        "type": "Domain",
+        "domain": "Social",
+        "level": 3,
+        "title": "Social Behavior and Social Play",
+        "description": "Social Behavior and Social Play domain skills for Level 3.",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "social-11-m",
+            "social-12-m",
+            "social-13-m",
+            "social-14-m",
+            "social-15-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "social-11-m",
+        "type": "Milestone",
+        "domain": "Social",
+        "level": 3,
+        "title": "Social 11-M",
+        "description": "Engages with peers in a pretend or social play activity for 5 minutes.",
+        "scoring_criteria": "1 point score: Give the child 1 point if he engages with peers in a pretend or social play activity for 5 minutes. 1/2 point score: Give the child 1/2 point if he engages with peers in a pretend or social play activity for 2 minutes.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "social-12-m",
+        "type": "Milestone",
+        "domain": "Social",
+        "level": 3,
+        "title": "Social 12-M",
+        "description": "Spontaneously cooperates with a peer to accomplish a specific outcome 5 times.",
+        "scoring_criteria": "1 point score: Give the child 1 point if he spontaneously cooperates with a peer to accomplish a specific outcome 5 times during observation or testing (the peer can be prompted to engage the target child in a cooperative activity such as helping to carry a box). 1/2 point score: Give the child 1/2 point if he spontaneously cooperates with a peer to accomplish a specific outcome 2 times during observation or testing.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "social-13-m",
+        "type": "Milestone",
+        "domain": "Social",
+        "level": 3,
+        "title": "Social 13-M",
+        "description": "Spontaneously mands to peers with a WH question 5 times (e.g., Where are you going? What's that? Who are you being?).",
+        "scoring_criteria": "1 point score: Give the child 1 point if he emits 5 spontaneous mands in a 1-hour period that involves asking peers questions, or for other mands seeking information. 1/2 point score: Give the child 1/2 point if he emits 2 spontaneous mands in a 1-hour period that involves asking peers questions, or for other mands seeking information.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "social-14-m",
+        "type": "Milestone",
+        "domain": "Social",
+        "level": 3,
+        "title": "Social 14-M",
+        "description": "Intraverbally responds to a peer's verbal behavior without adult prompting or reinforcement.",
+        "scoring_criteria": "1 point score: Give the child 1 point if he intraverbally responds to 5 different questions or statements from peers without adult prompting or reinforcement during a 1-hour observation or testing period. 1/2 point score: Give the child 1/2 point if he intraverbally responds to 2 different questions or statements from peers without adult prompting or reinforcement, during a 1-hour observation or testing period.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "social-15-m",
+        "type": "Milestone",
+        "domain": "Social",
+        "level": 3,
+        "title": "Social 15-M",
+        "description": "Engages in 4 verbal exchanges on 1 topic with peers for 5 topics (e.g., the children go back and forth talking about making a creek in a sandbox).",
+        "scoring_criteria": "1 point score: Give the child 1 point if he initiates a verbal interaction, or spontaneously responds to the verbal behavior of a peer with additional and relevant verbal behavior, and has a reciprocal verbal interaction that lasts for 4 exchanges during a 1-hour observation period (note that any type of verbal behavior counts—mands, tacts, or intraverbals). 1/2 point score: Give the child 1/2 point if he initiates a verbal interaction, or spontaneously responds to the verbal behavior of a peer with additional and relevant verbal behavior, and has a reciprocal verbal interaction that lasts for 2 exchanges during a 1-hour observation period.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "domain-reading",
+        "type": "Domain",
+        "domain": "Reading",
+        "level": 3,
+        "title": "Reading",
+        "description": "Reading domain skills for Level 3.",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "reading-11-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "reading-11-m",
+        "type": "Milestone",
+        "domain": "Reading",
+        "level": 3,
+        "title": "Reading 11-M",
+        "description": "Shows an interest in books and having adults read to him.",
+        "scoring_criteria": null,
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    }
+]

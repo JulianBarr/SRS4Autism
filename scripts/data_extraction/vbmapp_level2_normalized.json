@@ -1,0 +1,905 @@
+[
+    {
+        "id": "domain-mand",
+        "type": "Domain",
+        "domain": "Mand",
+        "level": 2,
+        "title": "Mand",
+        "description": "Mand - Level 2",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "mand-6-m",
+            "mand-7-m",
+            "mand-8-m",
+            "mand-9-m",
+            "mand-10-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "mand-6-m",
+        "type": "Milestone",
+        "domain": "Mand",
+        "level": 2,
+        "title": "Mand 6-M",
+        "description": "Mands for 20 different missing items without prompts (except, e.g., What do you need?) (e.g., mands for paper when given a crayon). (E)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he mands for 20 different missing items without prompts (other than verbal prompts such as, \"What's missing?\" or \"What do you need?\"). It is important that the item that is missing be valuable to the child at that moment, (i.e., there must be a current MO at strength for the item). 1/2 point score: Give the child 1/2 point if he mands for 10 different missing items without prompts.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "mand-7-m",
+        "type": "Milestone",
+        "domain": "Mand",
+        "level": 2,
+        "title": "Mand 7-M",
+        "description": "Mands for others to emit 5 different actions or missing actions needed to enjoy a desired activity (e.g., open to get outside, push when on a swing). (E)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he mands for 5 different actions or missing actions needed to enjoy a desired activity during observation or testing without prompts (other than verbal prompts such as, \"What do you want me to do?\"). It is important that the activity that is missing be valuable to the child, (i.e., there must be a current MO at strength for the activity). 1/2 point score: Give the child 1/2 point if he mands for 2 different actions or missing actions needed to enjoy a desired activity during observation or testing without prompts (other than verbal prompts such as, \"What do you want me to do?\").",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "mand-8-m",
+        "type": "Milestone",
+        "domain": "Mand",
+        "level": 2,
+        "title": "Mand 8-M",
+        "description": "Emits 5 different mands that contain 2 or more words (not including I want) (e.g., Go fast. My turn. Pour juice) (TO: 60 min.)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he emits 5 different mands that contain 2 or more words (not including \"I want\") during a 1-hour observation or testing. A list of the different mands emitted by the child should be kept and used as the data base for meeting this milestone. 1/2 point score: Give the child 1/2 point if he emits 2 different mands that contain 2 or more words (not including \"I want\") during a 1-hour observation or testing.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "mand-9-m",
+        "type": "Milestone",
+        "domain": "Mand",
+        "level": 2,
+        "title": "Mand 9-M",
+        "description": "Spontaneously emits 15 different mands. (e.g., Let's play. Open. I want book.) (TO: 30 min.)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he spontaneously emits 15 different mands (no adult delivered prompts) during a 30-minute observation. The mands should be controlled by different MOs. 1/2 point score: Give the child 1/2 point if he spontaneously mands (no adult delivered prompts) 8 times during a 30-minute observation. Also, give the child 1/2 point if his mands contain different response topographies, but are for the same MO (i.e., he asks for the same thing with different words). There must be at least two different MOs involved.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "mand-10-m",
+        "type": "Milestone",
+        "domain": "Mand",
+        "level": 2,
+        "title": "Mand 10-M",
+        "description": "Emits 10 new mands without specific training (e. g., spontaneously says Where kitty go? without formal mand training).(O)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he learns 10 new mands without formal training. Record each new mand on a daily data sheet. 1/2 point score: Give the child 1/2 point if he learns 5 new mands without formal training.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "domain-tact",
+        "type": "Domain",
+        "domain": "Tact",
+        "level": 2,
+        "title": "Tact",
+        "description": "Tact Skills Level 2",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "tact-6-m",
+            "tact-7-m",
+            "tact-8-m",
+            "tact-9-m",
+            "tact-10-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "tact-6-m",
+        "type": "Milestone",
+        "domain": "Tact",
+        "level": 2,
+        "title": "Tact 6-M",
+        "description": "Tacts 25 items when asked, What's that? (e.g., book, shoe, car, dog, hat). (T)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he tacts 25 items when tested. 1/2 point score: Give the child 1/2 point if he tacts 20 items when tested.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "tact-7-m",
+        "type": "Milestone",
+        "domain": "Tact",
+        "level": 2,
+        "title": "Tact 7-M",
+        "description": "Generalizes tacts across 3 examples of 50 items, tested or from a list of known generalizations (e.g., tacts 3 different cars). (T)",
+        "scoring_criteria": "1 point score: Give the child 1 point if his tacts have generalized across 3 examples of 50 items when tested. A list of mastered (known) generalizations can be used if it is available and the scoring has been reliable. 1/2 point score: Give the child 1/2 point if his tacts have generalized across 2 examples of 50 items when tested.",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "tact-6-m"
+        ]
+    },
+    {
+        "id": "tact-8-m",
+        "type": "Milestone",
+        "domain": "Tact",
+        "level": 2,
+        "title": "Tact 8-M",
+        "description": "Tacts 10 actions when asked, for example, What am I doing? (e.g., jumping, sleeping, eating). (T)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he tacts 10 actions when tested. 1/2 point score: Give the child 1/2 point if he tacts 5 actions when tested.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "tact-9-m",
+        "type": "Milestone",
+        "domain": "Tact",
+        "level": 2,
+        "title": "Tact 9-M",
+        "description": "Tacts 50 two-component verb-noun or noun-verb combinations tested or from a list of known two-component tacts (e.g., washing face, Joe swinging, baby sleeping).",
+        "scoring_criteria": "1 point score: Give the child 1 point if he tacts 50 two-component noun-verb (or verb-noun) relations when tested. A list of mastered (known) noun-verb or verb-noun combinations can be used if it is available and reliable. 1/2 point score: Give the child 1/2 point if he tacts 25 two-component noun-verb (or verb-noun) relations.",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "tact-6-m",
+            "tact-8-m"
+        ]
+    },
+    {
+        "id": "tact-10-m",
+        "type": "Milestone",
+        "domain": "Tact",
+        "level": 2,
+        "title": "Tact 10-M",
+        "description": "Tacts a total of 200 nouns and/or verbs (or other parts of speech) tested or from an accumulated list of known tacts. (T)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he tacts 200 items and/or actions when tested. A list of the child's known nouns and verbs can be used for this measure. 1/2 point score: Give the child 1/2 point if he provides the name of 150 items and/or actions.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "domain-listener-responding",
+        "type": "Domain",
+        "domain": "Listener",
+        "level": 2,
+        "title": "Listener Responding",
+        "description": "Listener Responding Skills Level 2",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "listener-responding-6-m",
+            "listener-responding-7-m",
+            "listener-responding-8-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "listener-responding-6-m",
+        "type": "Milestone",
+        "domain": "Listener",
+        "level": 2,
+        "title": "Listener Responding 6-M",
+        "description": "Selects the correct item from a messy array of 6, for 40 different objects or pictures (e.g., Find cat. Touch ball.). (T)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he identifies 40 items in a messy array of 6 (i.e., not lined up) when tested. 1/2 point score: Give the child 1/2 point if he identifies 25 items in a messy array of 6 when tested.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "listener-responding-7-m",
+        "type": "Milestone",
+        "domain": "Listener",
+        "level": 2,
+        "title": "Listener Responding 7-M",
+        "description": "Generalizes listener discriminations (LDs) in a messy array of 8, for 3 different examples of 50 items (e.g., the child can find 3 examples of a train). (T)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he generalizes LDs across 3 examples of 50 items. 1/2 point score: Give the child 1/2 point if he generalizes LDs across 2 examples of 25 items.",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "listener-responding-6-m"
+        ]
+    },
+    {
+        "id": "listener-responding-8-m",
+        "type": "Milestone",
+        "domain": "Listener",
+        "level": 2,
+        "title": "Listener Responding 8-M",
+        "description": "Performs 10 specific motor actions on command (e.g., Show me clapping. Can you hop?). (T)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he demonstrates 10 actions on command. Approximations should be scored as correct. 1/2 point score: Give the child 1/2 point if he demonstrates 5 actions on command.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "domain-listener",
+        "type": "Domain",
+        "domain": "Listener",
+        "level": 2,
+        "title": "Listener",
+        "description": "Listener skills and responding to language.",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "listener-9-m",
+            "listener-10-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "listener-9-m",
+        "type": "Milestone",
+        "domain": "Listener",
+        "level": 2,
+        "title": "Listener 9-M",
+        "description": "Follows 50 two-component noun-verb and/or verb-noun instructions (e.g., Show me the baby sleeping. Push the swing.).",
+        "scoring_criteria": "1 point: Give the child 1 point if he follows (LDs) 50 two-component noun-verb and/or verb-noun instructions. 1/2 point: Give the child 1/2 point if he follows (LDs) 25 two-component noun-verb and/or verb-noun instructions.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "listener-10-m",
+        "type": "Milestone",
+        "domain": "Listener",
+        "level": 2,
+        "title": "Listener 10-M",
+        "description": "Selects the correct item in a book, picture scene, or natural environment when named, for 250 items (tested or from an accumulated list of known words). (T)",
+        "scoring_criteria": "1 point: Give the child 1 point if he selects 250 different items in a book, picture scene, or natural environment when named. An accumulated list of known LDs with nouns can be used for this measure (e.g., the 240 word list from Sundberg & Partington, 1998), and children's picture books like Pictionary. 1/2 point: Give the child 1/2 point if he selects 150 items in a book, picture scene, or natural environment when asked.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "domain-vp-mts",
+        "type": "Domain",
+        "domain": "VP-MTS",
+        "level": 2,
+        "title": "Visual Perceptual Skills and Matching-to-Sample (VP-MTS)",
+        "description": "Visual perceptual skills and matching-to-sample.",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "vp-mts-6-m",
+            "vp-mts-7-m",
+            "vp-mts-8-m",
+            "vp-mts-9-m",
+            "vp-mts-10-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "vp-mts-6-m",
+        "type": "Milestone",
+        "domain": "VP-MTS",
+        "level": 2,
+        "title": "VP-MTS 6-M",
+        "description": "Matches identical objects or pictures in a messy array of 6, for 25 items. (T)",
+        "scoring_criteria": "1 point: Give the child 1 point if he successfully matches 25 identical objects or pictures in a messy array of 6 (the items are not lined up on the table). 1/2 point: Give the child 1/2 point if he successfully matches 15 identical objects or pictures in a messy array of 4.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "vp-mts-7-m",
+        "type": "Milestone",
+        "domain": "VP-MTS",
+        "level": 2,
+        "title": "VP-MTS 7-M",
+        "description": "Sorts similar colors and shapes for 10 different colors or shapes given models (e.g., given red, blue, and green bowls and a pile of red, blue, and green bears the child sorts the items by color). (T)",
+        "scoring_criteria": "1 point: Give the child 1 point if he sorts similar colors and shapes for 10 different colors or shapes given models, but no other prompts (other than a verbal prompts such as 'sort the colors,' or 'sort the shapes'). 1/2 point: Give the child 1/2 point if he sorts similar colors and shapes for 5 different colors or shapes given models, but no other prompts (other than verbal prompts).",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "vp-mts-8-m",
+        "type": "Milestone",
+        "domain": "VP-MTS",
+        "level": 2,
+        "title": "VP-MTS 8-M",
+        "description": "Matches identical objects or pictures in a messy array of 8 containing 3 similar stimuli, for 25 items (e.g., matches a dog to a dog in an array that also contains a cat, pig, and pony). (T)",
+        "scoring_criteria": "1 point: Give the child 1 point if he successfully matches identical objects or pictures in a messy array of 6 containing 3 similar stimuli, for 25 items. 1/2 point: Give the child 1/2 point if he successfully matches identical objects or pictures in a messy array of 6 containing 3 similar stimuli, for 15 items.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "vp-mts-9-m",
+        "type": "Milestone",
+        "domain": "VP-MTS",
+        "level": 2,
+        "title": "VP-MTS 9-M",
+        "description": "Matches non-identical objects or non-identical pictures in a messy array of 10, for 35 items (e.g. matches a Ford truck to a Toyota truck).",
+        "scoring_criteria": "1 point: Give the child 1 point if he matches non-identical objects or non-identical pictures in a messy array of 10 containing 3 similar stimuli, for 25 items. 1/2 point: Give the child 1/2 point if he matches non-identical objects or non-identical pictures in a messy array of 10 containing 3 similar stimuli, for 15 items.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "vp-mts-10-m",
+        "type": "Milestone",
+        "domain": "VP-MTS",
+        "level": 2,
+        "title": "VP-MTS 10-M",
+        "description": "Matches non-identical objects (3D) to pictures (2D) and/or vice versa, in a messy array of 10 containing 3 similar stimuli, for 25 items.",
+        "scoring_criteria": "1 point: Give the child 1 point if he matches non-identical objects (3D) to pictures (2D) and/or vice versa in a messy array of 10 containing 3 similar stimuli, for 25 items. 1/2 point: Give the child 1/2 point if he matches non-identical objects (3D) to pictures (2D) and/or vice versa in a messy array of 10 containing 3 similar stimuli, for 15 items.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "domain-play",
+        "type": "Domain",
+        "domain": "Play",
+        "level": 2,
+        "title": "Play",
+        "description": "Independent Play - Level 2",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "play-6-m",
+            "play-7-m",
+            "play-8-m",
+            "play-9-m",
+            "play-10-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "domain-social-behavior-and-social-play",
+        "type": "Domain",
+        "domain": "Social",
+        "level": 2,
+        "title": "Social Behavior and Social Play",
+        "description": "Social Behavior and Social Play - Level 2",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "social-behavior-and-social-play-6-m",
+            "social-behavior-and-social-play-7-m",
+            "social-behavior-and-social-play-8-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "play-6-m",
+        "type": "Milestone",
+        "domain": "Play",
+        "level": 2,
+        "title": "Play 6-M",
+        "description": "Searches for a missing or corresponding toy or part of a set for 5 items or sets (e.g., a puzzle piece, a ball for a drop-in toy, a bottle for a baby doll). (E)",
+        "scoring_criteria": "1 point: Give the child 1 point if he actively and independently searches for a missing or corresponding toy or part of a set for 5 items or sets when items are removed or naturally missing. 1/2 point: Give the child 1/2 point if he actively and independently searches for a missing or corresponding toy or part of a set 2 items or sets when items are removed or naturally missing.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "play-7-m",
+        "type": "Milestone",
+        "domain": "Play",
+        "level": 2,
+        "title": "Play 7-M",
+        "description": "Independently demonstrates the use of toys or objects according to their function for 5 items (e.g., placing a train on a track, pulling a wagon, holding a telephone to the ear). (O)",
+        "scoring_criteria": "1 point: Give the child 1 point if he independently demonstrates the use of toys or objects according to their function for 5 items. 1/2 point: Give the child 1/2 point if he independently demonstrates the use of toys or objects according to their function for 2 items.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "play-8-m",
+        "type": "Milestone",
+        "domain": "Play",
+        "level": 2,
+        "title": "Play 8-M",
+        "description": "Plays with everyday items in creative ways 2 times (e.g., uses a bowl as a drum or a box as an imaginary car). (O)",
+        "scoring_criteria": "1 point: Give the child 1 point if he plays with 2 different everyday items in creative ways (except for stimming on a toy). 1/2 point: Give the child 1/2 point if he plays with 1 item in a creative way.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "play-9-m",
+        "type": "Milestone",
+        "domain": "Play",
+        "level": 2,
+        "title": "Play 9-M",
+        "description": "Independently engages in play on structures and playground equipment for a total of 5 minutes (e.g., going down a slide, swinging). (TO: 30 min.)",
+        "scoring_criteria": "1 point: Give the child 1 point if he engages in play on play structures and playground equipment for a total of 5 minutes during a 30-minute observation. 1/2 point: Give the child 1/2 point if he engages in play on play structures and playground equipment for a total of 2 minutes during a 30-minute observation.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "play-10-m",
+        "type": "Milestone",
+        "domain": "Play",
+        "level": 2,
+        "title": "Play 10-M",
+        "description": "Assembles toys that have multiple parts for 5 different sets of materials (e.g., Mr. Potato Head, Little People sets, Cooties bugs, Kid K'NEX). (O)",
+        "scoring_criteria": "1 point: Give the child 1 point if he independently constructs, assembles, or sets up toys or other play items and does so for 5 different sets of materials. 1/2 point: Give the child 1/2 point if he independently constructs, assembles, or sets up toys or other play items and does so for 2 different sets of materials.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "social-behavior-and-social-play-6-m",
+        "type": "Milestone",
+        "domain": "Social",
+        "level": 2,
+        "title": "Social Behavior and Social Play 6-M",
+        "description": "Initiates a physical interaction with a peer 2 times (e.g., a push in a wagon, hand holding, Ring Around the Rosy). (TO: 30 min.)",
+        "scoring_criteria": "1 point: Give the child 1 point if he initiates an interaction with a peer 2 times during a 30-minute observation. Note that unprompted initiations may occur with negative events first, such as the child pushing another child off a bike in order to obtain the bike; however, do not count negative types of initiations. 1/2 point: Give the child 1/2 point if he initiates an interaction with a peer 1 time during a 30-minute observation.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "social-behavior-and-social-play-7-m",
+        "type": "Milestone",
+        "domain": "Social",
+        "level": 2,
+        "title": "Social Behavior and Social Play 7-M",
+        "description": "Spontaneously mands to peers 5 times (e.g., My turn. Push me. Look! Come on.). (TO: 60 min.)",
+        "scoring_criteria": "1 point: Give the child 1 point if he spontaneously mands to peers 5 times during a 1-hour observation. 1/2 point: Give the child 1/2 point if he spontaneously mands to peers 2 times during a 1-hour observation.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "social-behavior-and-social-play-8-m",
+        "type": "Milestone",
+        "domain": "Social",
+        "level": 2,
+        "title": "Social Behavior and Social Play 8-M",
+        "description": "Engages in sustained social play with peers for 3 minutes without adult prompts or reinforcement (e.g., cooperatively setting up a play set, water play). (TO: 30 min.)",
+        "scoring_criteria": null,
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "domain-social-play",
+        "type": "Domain",
+        "domain": "Social",
+        "level": 2,
+        "title": "Social Behavior and Social Play",
+        "description": "Skills related to social interaction, responding to and initiating mands with peers, and participating in games or social play.",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "social-play-9-m",
+            "social-play-10-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "social-play-9-m",
+        "type": "Milestone",
+        "domain": "Social",
+        "level": 2,
+        "title": "Social Play 9-M",
+        "description": "Spontaneously responds to the mands from peers 5 times (e.g., Pull me in the wagon. I want the train.). (E)",
+        "scoring_criteria": "1 point: Give the child 1 point if he spontaneously responds to the mands from peers 5 times during observation or testing. Do not give the child any points if an adult must prompt the behavior in any way. 1/2 point: Give the child 1/2 point if he spontaneously responds to the mands from peers 2 times during observation or testing.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "social-play-10-m",
+        "type": "Milestone",
+        "domain": "Social",
+        "level": 2,
+        "title": "Social Play 10-M",
+        "description": "Spontaneously mands to peers to participate in games, social play, etc., 2 times (e.g., Come on you guys. Let's dig a hole.). (TO: 60 min.)",
+        "scoring_criteria": "1 point: Give the child 1 point if he spontaneously mands to peers to participate in games, social play, or other social activities 2 times during a 1-hour observation. 1/2 point: Give the child 1/2 point if he spontaneously mands to peers to participate in games, social play, or other social activities 1 time during a 1-hour observation.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "domain-motor-imitation",
+        "type": "Domain",
+        "domain": "Motor Imitation",
+        "level": 2,
+        "title": "Motor Imitation",
+        "description": "Skills involving the ability to imitate the motor actions of others, progressing to specific object selection, fine motor skills, sequences, and generalized imitation.",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "motor-imitation-6-m",
+            "motor-imitation-7-m",
+            "motor-imitation-8-m",
+            "motor-imitation-9-m",
+            "motor-imitation-10-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "motor-imitation-6-m",
+        "type": "Milestone",
+        "domain": "Motor Imitation",
+        "level": 2,
+        "title": "Motor Imitation 6-M",
+        "description": "Imitates 10 actions that require selecting a specific object from an array (e.g., selects a drumstick from an array also containing a horn and a bell, and imitates an adult's drumming). (T)",
+        "scoring_criteria": "1 point: Give the child 1 point if he imitates 10 actions with a specific object selected from an array of 3 when prompted, \"Do this.\" 1/2 point: Give the child 1/2 point if he imitates 5 actions with a specific object selected from an array of 3 when prompted, \"Do this.\"",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "motor-imitation-7-m",
+        "type": "Milestone",
+        "domain": "Motor Imitation",
+        "level": 2,
+        "title": "Motor Imitation 7-M",
+        "description": "Imitates 20 different fine motor actions when prompted, Do this (e.g., wiggling fingers, pinching, making a fist, making a butterfly).",
+        "scoring_criteria": "1 point: Give the child 1 point if he imitates 20 different fine motor actions when prompted, \"Do this.\" 1/2 point: Give the child 1/2 point if he imitates 10 different fine motor actions when prompted, \"Do this.\"",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "motor-imitation-8-m",
+        "type": "Milestone",
+        "domain": "Motor Imitation",
+        "level": 2,
+        "title": "Motor Imitation 8-M",
+        "description": "Imitates 10 different three-component sequences of actions when prompted, Do this (e.g., clapping, jumping, touching toes; pick up a doll, place her in a crib, and rock the crib). (T)",
+        "scoring_criteria": "1 point: Give the child 1 point if he imitates 10 three-component actions in contrived or natural settings modeled by a peer or an adult. 1/2 point: Give the child 1/2 point if he imitates 5 two-component actions in contrived or natural settings modeled by a peer or an adult.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "motor-imitation-9-m",
+        "type": "Milestone",
+        "domain": "Motor Imitation",
+        "level": 2,
+        "title": "Motor Imitation 9-M",
+        "description": "Spontaneously, imitates 5 functional skills in the natural environment (e.g., eating with a spoon, putting on a coat, removing shoes). (O)",
+        "scoring_criteria": "1 point: Give the child 1 point if he spontaneously imitates 5 functional skills in the natural environment. 1/2 point: Give the child 1/2 point if he spontaneously imitates 2 functional skills in the natural environment.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "motor-imitation-10-m",
+        "type": "Milestone",
+        "domain": "Motor Imitation",
+        "level": 2,
+        "title": "Motor Imitation 10-M",
+        "description": "Imitates (or attempts to with approximations) any novel motor action modeled by an adult with and without objects (i.e., a \"generalized imitative repertoire\"). (T)",
+        "scoring_criteria": "1 point: Give the child 1 point if he imitates (or approximates) many novel motor actions with and without objects modeled by an adult when prompted with, \"Do this.\" 1/2 point: None.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "domain-echoic",
+        "type": "Domain",
+        "domain": "Echoic",
+        "level": 2,
+        "title": "Echoic (EESA Subtest)",
+        "description": "Echoic (EESA Subtest) — Level 2",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "echoic-6-m",
+            "echoic-7-m",
+            "echoic-8-m",
+            "echoic-9-m",
+            "echoic-10-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "echoic-6-m",
+        "type": "Milestone",
+        "domain": "Echoic",
+        "level": 2,
+        "title": "Echoic 6-M",
+        "description": "Scores at least 50 on the EESA subtest (at least 20 from Group 2).(T)",
+        "scoring_criteria": "1 point: Give the child 1 point if he scores 50 on the EESA subtest (20 from Group 2). 1/2 point: Give the child 1/2 point if he scores 40 on the EESA subtest (15 from Group 2).",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "echoic-7-m",
+        "type": "Milestone",
+        "domain": "Echoic",
+        "level": 2,
+        "title": "Echoic 7-M",
+        "description": "Scores at least 60 on the EESA subtest.",
+        "scoring_criteria": "1 point: Give the child 1 point if he scores 60 on the EESA subtest. 1/2 point: Give the child 1/2 point if he scores 55 on the EESA subtest.",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "echoic-6-m"
+        ]
+    },
+    {
+        "id": "echoic-8-m",
+        "type": "Milestone",
+        "domain": "Echoic",
+        "level": 2,
+        "title": "Echoic 8-M",
+        "description": "Scores at least 70 on the EESA subtest.",
+        "scoring_criteria": "1 point: Give the child 1 point if he scores 70 on the EESA subtest. 1/2 point: Give the child 1/2 point if he scores 65 on the EESA subtest.",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "echoic-7-m"
+        ]
+    },
+    {
+        "id": "echoic-9-m",
+        "type": "Milestone",
+        "domain": "Echoic",
+        "level": 2,
+        "title": "Echoic 9-M",
+        "description": "Scores at least 80 on the EESA subtest.",
+        "scoring_criteria": "1 point: Give the child 1 point if he scores 80 on the EESA subtest. 1/2 point: Give the child 1/2 point if he scores 75 on the EESA subtest.",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "echoic-8-m"
+        ]
+    },
+    {
+        "id": "echoic-10-m",
+        "type": "Milestone",
+        "domain": "Echoic",
+        "level": 2,
+        "title": "Echoic 10-M",
+        "description": "Scores at least 90 on the EESA subtest (at least 10 from Groups 4 and 5).",
+        "scoring_criteria": "1 point: Give the child 1 point if he scores 90 on the EESA subtest (at least 10 from Groups 4 and 5). 1/2 point: Give the child 1/2 point if he scores 85 on the EESA subtest (at least 10 from Groups 4 and 5).",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "echoic-9-m"
+        ]
+    },
+    {
+        "id": "domain-lrffc",
+        "type": "Domain",
+        "domain": "LRFFC",
+        "level": 2,
+        "title": "Listener Responding by Function, Feature, and Class (LRFFC)",
+        "description": "Listener Responding by Function, Feature, and Class (LRFFC) — Level 2",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "lrffc-7-m",
+            "lrffc-9-m",
+            "lrffc-10-m",
+            "lrffc-8-m",
+            "lrffc-6-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "lrffc-6-m",
+        "type": "Milestone",
+        "domain": "LRFFC",
+        "level": 2,
+        "title": "LRFFC 6-M",
+        "description": "Selects an animal or object from an array of 3, for 5 different sounds made by the corresponding items (e.g., Meow says a... Toot, toot goes the...). (T)",
+        "scoring_criteria": "1 point: Give the child 1 point if he correctly selects an animal or object from an array of 3, for 5 different sounds made by the corresponding items. 1/2 point: Give the child 1/2 point if he correctly selects an animal or object from an array of 3, for 2 different sounds made by the corresponding items.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "lrffc-7-m",
+        "type": "Milestone",
+        "domain": "LRFFC",
+        "level": 2,
+        "title": "LRFFC 7-M",
+        "description": "Selects 5 different foods or drinks when each are presented in an array of 5 (along with 4 non-food or non-drink items) and asked the verbal fill-ins you eat... and you drink... (T)",
+        "scoring_criteria": "1 point: Give the child 1 point if he correctly selects 5 different food or drink items when each are presented an array of 5 items, and an adult gives the verbal statement \"you eat...\" and \"you drink....\" 1/2 point: Give the child 1/2 point if he correctly selects 2 different food or drink items when each are presented an array of 5 items, and an adult gives the verbal statement \"you eat...\" and \"you drink....\"",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "lrffc-6-m"
+        ]
+    },
+    {
+        "id": "lrffc-8-m",
+        "type": "Milestone",
+        "domain": "LRFFC",
+        "level": 2,
+        "title": "LRFFC 8-M",
+        "description": "Selects the correct item from an array of 8, for 25 different LRFFC fill-in statements of any type (e.g., You sit on a...). (T)",
+        "scoring_criteria": "1 point: Give the child 1 point if he correctly selects the item from an array of 5, for 25 different LRFFC fill-in-the-blank statements. 1/2 point: Give the child 1/2 point if he correctly selects 12 items in this type of LRFFC task.",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "lrffc-7-m"
+        ]
+    },
+    {
+        "id": "lrffc-9-m",
+        "type": "Milestone",
+        "domain": "LRFFC",
+        "level": 2,
+        "title": "LRFFC 9-M",
+        "description": "Selects the correct item from an array of 10 (or from a book), for 25 different verb-noun LRFFC what, which, or who questions (e.g., What do you ride? Which one barks? Who can hop?). (T)",
+        "scoring_criteria": null,
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "lrffc-8-m"
+        ]
+    },
+    {
+        "id": "lrffc-10-m",
+        "type": "Milestone",
+        "domain": "LRFFC",
+        "level": 2,
+        "title": "LRFFC 10-M",
+        "description": "Spontaneously tacts the item on 50% of the LRFFC trials (e.g., says dog given the verbal statement find an animal, and a visual array containing a picture of a dog).",
+        "scoring_criteria": "1 point score: Give the child 1 point if he spontaneously tacts the target item on 50% of the LRFFC trials. Some children will quickly begin to tact the items given a couple of verbal prompts. Give the child credit if he continues to tact the items after prompts have been removed and does so at least 50% of the time on future trials. 1/2 point score: Give the child 1/2 point if he spontaneously tacts the target item on 25% of the LRFFC trials, or if he tacts on 50% of the trials, but always requires one prompt at the beginning of an LRFFC session.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "domain-intraverbal",
+        "type": "Domain",
+        "domain": "Intraverbal",
+        "level": 2,
+        "title": "Intraverbal - Level 2",
+        "description": "Intraverbal behavior consists of words controlled by other words, not words controlled by objects or actions (tacts), or words controlled by motivation (mands).",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "intraverbal-6-m",
+            "intraverbal-7-m",
+            "intraverbal-8-m",
+            "intraverbal-9-m",
+            "intraverbal-10-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "intraverbal-6-m",
+        "type": "Milestone",
+        "domain": "Intraverbal",
+        "level": 2,
+        "title": "Intraverbal 6-M",
+        "description": "Completes 10 different fill-in-the-blank phrases of any type (e.g., song fill-ins, social games and fun fill-ins, animal or object sounds). (T)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he fills in the missing words for 10 different songs, fun activities, animal sounds, toys or object sounds, or any other verbal associations. 1/2 point score: Give the child 1/2 point if he fills in 5 phrases.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "intraverbal-7-m",
+        "type": "Milestone",
+        "domain": "Intraverbal",
+        "level": 2,
+        "title": "Intraverbal 7-M",
+        "description": "Provides first name when asked, What is your name? (T)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he can say his name when asked without echoic prompts. 1/2 point score: None.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "intraverbal-8-m",
+        "type": "Milestone",
+        "domain": "Intraverbal",
+        "level": 2,
+        "title": "Intraverbal 8-M",
+        "description": "Completes 25 different fill-in-the-blank phrases (not including songs) (e.g., You eat..., You sleep in a..., Shoes and...). (T)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he fills in the missing words from 25 different phrases, associations, common sayings, or out-of-context daily activities. 1/2 point score: Give the child 1/2 point if he fills in 12 phrases.",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "intraverbal-6-m"
+        ]
+    },
+    {
+        "id": "intraverbal-9-m",
+        "type": "Milestone",
+        "domain": "Intraverbal",
+        "level": 2,
+        "title": "Intraverbal 9-M",
+        "description": "Answers 25 different what questions (e.g., What do you like to eat?). (T)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he answers 25 different what questions without echoic prompts, and without the presence of the relevant object. 1/2 point score: Give the child 1/2 point if he answers 12 what questions.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "intraverbal-10-m",
+        "type": "Milestone",
+        "domain": "Intraverbal",
+        "level": 2,
+        "title": "Intraverbal 10-M",
+        "description": "Answers 25 different who or where questions (e.g., Whose your friend? Where is...).",
+        "scoring_criteria": "1 point score: Give the child 1 point if he answers 25 different “who” or “where” questions without echoic prompts, or the presence of the object. 1/2 point score: Give the child 1/2 point if he answers 12 different “who” or “where” questions.",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "intraverbal-9-m"
+        ]
+    },
+    {
+        "id": "domain-group",
+        "type": "Domain",
+        "domain": "Group",
+        "level": 2,
+        "title": "Classroom Routines and Group Skills",
+        "description": "Classroom Routines and Group Skills - Level 2",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "group-7-m",
+            "group-8-m",
+            "group-9-m",
+            "group-6-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "group-6-m",
+        "type": "Milestone",
+        "domain": "Group",
+        "level": 2,
+        "title": "Group 6-M",
+        "description": "Sits at a group snack or lunch table without negative behavior for 3 minutes. (O)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he sits at a group snack or lunch table with gestural and verbal prompts without negative behavior for 3 minutes. He can be prompted to sit down, but must remain seated for 3 minutes without an adult prompt to sit back down. 1/2 point score: Give the child 1/2 point if he sits at a group snack or lunch table with gestural and verbal prompts without negative behavior for 1 minute.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "group-7-m",
+        "type": "Milestone",
+        "domain": "Group",
+        "level": 2,
+        "title": "Group 7-M",
+        "description": "Puts away personal items, lines up, or comes to a table with only 1 verbal prompt. (O)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he puts away a backpack, coat or lunch, and lines up and comes to a table when verbally prompted only once by an adult.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "group-8-m",
+        "type": "Milestone",
+        "domain": "Group",
+        "level": 2,
+        "title": "Group 8-M",
+        "description": "Sits in a small group for 5 minutes without disruptive behavior or attempting to leave the group. (O)",
+        "scoring_criteria": "1 point: Give the child 1 point if he sits in a circle group of 3 or more children for 5 minutes without disruptive behavior or attempting to leave the group. 1/2 point: Give the child 1/2 point if he sits in a circle group of 3 or more children for 2 minutes without disruptive behavior or attempting to leave the group.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "group-9-m",
+        "type": "Milestone",
+        "domain": "Group",
+        "level": 2,
+        "title": "Group 9-M",
+        "description": "Sits in a small group for 10 minutes, attends to the teacher or material for 50% of the period, and responds to 5 of a teacher's SDs. (O)",
+        "scoring_criteria": "1 point: Give the child 1 point if he sits in a group activity (e.g., circle, arts and crafts, stations) with 3 or more children for 10 minutes and attends to the teacher or presented material for 50% of the period (using a time sample recording system), and responds to 5 teacher questions or instructions. 1/2 point: Give the child 1/2 point if he sits in a group activity (e.g., circle, arts and crafts, stations) with 3 or more children for 10 minutes and attends to the teacher or presented material for 33% of the period, and responds to 2 teacher questions or instructions.",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "group-8-m"
+        ]
+    },
+    {
+        "id": "domain-linguistic-structure",
+        "type": "Domain",
+        "domain": "Linguistics",
+        "level": 2,
+        "title": "Linguistic Structure",
+        "description": "Skills assessing articulation, growing listener/speaker vocabulary, multi-word utterances, and functional prosody.",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "linguistics-6-m",
+            "linguistics-7-m",
+            "linguistics-8-m",
+            "linguistics-9-m",
+            "linguistics-10-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "linguistics-6-m",
+        "type": "Milestone",
+        "domain": "Linguistics",
+        "level": 2,
+        "title": "Linguistics 6-M",
+        "description": "The child's articulation of 10 tacts can be understood by familiar adults who cannot see the item tacted. (T)",
+        "scoring_criteria": "1 point: Give the child 1 point if familiar adults who cannot see the item tacted can understand his articulation of 10 tacts. 1/2 point: Give the child 1/2 point if familiar adults who cannot see the item tacted can understand his articulation of 5 tacts.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "linguistics-7-m",
+        "type": "Milestone",
+        "domain": "Linguistics",
+        "level": 2,
+        "title": "Linguistics 7-M",
+        "description": "Has a total listener vocabulary of 100 words.",
+        "scoring_criteria": "1 point: Give the child 1 point if he has a total listener vocabulary of 100 words. 1/2 point: Give the child 1/2 point if he has a total listener vocabulary of 50 words.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "linguistics-8-m",
+        "type": "Milestone",
+        "domain": "Linguistics",
+        "level": 2,
+        "title": "Linguistics 8-M",
+        "description": "Emits 10 different 2-word utterances per day of any type except echoic (e.g., mand, tact). (O)",
+        "scoring_criteria": "1 point: Give the child 1 point if he emits 10 different 2-word utterances per day of any type except echoic (e.g., mand, tact). These responses can include verbal prompts to respond such as, 'What is that?' or 'What do you want?' 1/2 point: Give the child 1/2 point if he emits 5 different 2-word utterances per day of any type except echoic (e.g., mand, tact).",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "linguistics-9-m",
+        "type": "Milestone",
+        "domain": "Linguistics",
+        "level": 2,
+        "title": "Linguistics 9-M",
+        "description": "Emits functional prosody (i.e., rhythm, stress, intonation) on 5 occasions in one day (e.g., puts emphasis or stress on certain words such as It's MINE!). (O)",
+        "scoring_criteria": "1 point: Give the child 1 point if he emits functional prosody (i.e., rhythm, stress, intonation) on 5 occasions in one day. 1/2 point: Give the child 1/2 point if he emits functional prosody (i.e., rhythm, stress, intonation) on 2 occasions in one day.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "linguistics-10-m",
+        "type": "Milestone",
+        "domain": "Linguistics",
+        "level": 2,
+        "title": "Linguistics 10-M",
+        "description": "Has a total speaker vocabulary of 300 words (all verbal operants, except echoic). (E)",
+        "scoring_criteria": "1 point: Give the child 1 point if he has a total speaker vocabulary size of 300 words. 1/2 point: Give the child 1/2 point if he has a total speaker vocabulary size of 200 words.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    }
+]

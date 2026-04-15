@@ -1,0 +1,82 @@
+[
+    {
+        "id": "domain-mand",
+        "type": "Domain",
+        "domain": "Mand",
+        "level": 1,
+        "title": "Mand",
+        "description": "Level 1 manding includes three types of response forms: speech, sign language, and PECS. Assessment of the child's ability to mand (request) desired items, actions, or activities to determine the operant level and where to start an intervention program.",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "mand-1-m",
+            "mand-2-m",
+            "mand-3-m",
+            "mand-4-m",
+            "mand-5-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "mand-1-m",
+        "type": "Milestone",
+        "domain": "Mand",
+        "level": 1,
+        "title": "Mand 1-M",
+        "description": "Emits 2 words, signs, or PECS, but may require echoic, imitative, or pointing prompts, but no physical prompts (e.g., cracker, book). (E)",
+        "scoring_criteria": "1 point: Give the child 1 point if he responds when an adult provides an echoic prompt, such as 'say cookie' when a cookie is present, for 2 desired items or activities. For a child using sign language, give him 1 point if he responds when the adult provides an imitative prompt, or speaks the word (intraverbal prompt). For a child using a picture system, the adult may point to the target picture and verbally prompt the child to pick it up. Do not give the child any points if physical prompts are required for signing or selecting a picture or icon. 1/2 point: Give the child 1/2 point if he only emits 1 mand.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "mand-2-m",
+        "type": "Milestone",
+        "domain": "Mand",
+        "level": 1,
+        "title": "Mand 2-M",
+        "description": "Emits 4 different mands without prompts (except, What do you want?) the desired item can be present (e.g., music, Slinky, ball). (E)",
+        "scoring_criteria": "1 point: Give the child 1 point if he mands for 4 different reinforcers without the adult saying the target word (echoic prompt), giving an imitative or pointing prompt, or for a child using signs, speaking the word (intraverbal prompt). The desired item or activity can be present, as well as the verbal prompt, 'What do you want?' (or something similar). 1/2 point: Give the child 1/2 point if he emits 3 of these types of mands.",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "mand-1-m"
+        ]
+    },
+    {
+        "id": "mand-3-m",
+        "type": "Milestone",
+        "domain": "Mand",
+        "level": 1,
+        "title": "Mand 3-M",
+        "description": "Generalizes 6 mands across 2 people, 2 settings, and 2 different examples of a reinforcer (e.g., mands bubbles from mom and dad, inside and outside, a red bottle and a blue bottle). (E)",
+        "scoring_criteria": "1 point: Give the child 1 point if he generalizes 6 mands across 2 people, 2 settings, and 2 examples of the reinforcer. 1/2 point: Give the child 1/2 point if he generalizes to 3 mands across 2 people, 2 settings, and 2 examples of the reinforcer.",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "mand-2-m"
+        ]
+    },
+    {
+        "id": "mand-4-m",
+        "type": "Milestone",
+        "domain": "Mand",
+        "level": 1,
+        "title": "Mand 4-M",
+        "description": "Spontaneously emits (no verbal prompts) 5 mands — the desired item can be present. (TO: 60 min.)",
+        "scoring_criteria": "1 point: Give the child 1 point if he spontaneously mands 5 times during a 1-hour observation (without, 'What do you want?' or similar prompts). 1/2 point: Give the child 1/2 point if he spontaneously mands 2 times during a 1-hour observation.",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "mand-3-m"
+        ]
+    },
+    {
+        "id": "mand-5-m",
+        "type": "Milestone",
+        "domain": "Mand",
+        "level": 1,
+        "title": "Mand 5-M",
+        "description": "Emits 10 different mands without prompts (except, What do you want?) the desired item can be present. (e.g., apple, swing, car, juice). (E)",
+        "scoring_criteria": "1 point: Give the child 1 point if he mands for 10 different reinforcers without the adult saying the target word, giving an imitative or pointing prompt, or for a child using signs, speaking the word (intraverbal prompt). The desired item can be present, as well as the verbal prompt, 'What do you want?' (or something similar). Mands to remove aversives such as saying 'no' or 'mine' can also be counted. 1/2 point: Give the child 1/2 point if he emits 8 different mands.",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "mand-4-m"
+        ]
+    }
+]

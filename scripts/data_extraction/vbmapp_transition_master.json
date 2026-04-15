@@ -1,0 +1,254 @@
+[
+    {
+        "id": "trans-overall-milestones",
+        "type": "TransitionItem",
+        "title": "Overall VB-MAPP Milestones score",
+        "description": "Evaluates the child's overall language and social skills to provide guidance on academic independence and how restrictive the placement needs to be.",
+        "scoring_criteria": "Scored on a 0 to 4 scale based on criteria identified in the VB-MAPP Protocol scoring forms, evaluating overall language and social readiness for a less restrictive environment."
+    },
+    {
+        "id": "trans-overall-barriers",
+        "type": "TransitionItem",
+        "title": "Overall VB-MAPP Barriers score",
+        "description": "Evaluates the existence of potential learning and language barriers that will affect learning in a less restrictive educational environment.",
+        "scoring_criteria": "Scored on a 0 to 4 scale based on criteria identified in the VB-MAPP Protocol scoring forms, measuring the level of overall learning and language barriers."
+    },
+    {
+        "id": "trans-barriers-negative-behaviors",
+        "type": "TransitionItem",
+        "title": "VB-MAPP Barriers score on negative behaviors and instructional control",
+        "description": "Assesses the specific impact of negative behaviors and the level of instructional control on the child's capability to learn in a less restrictive setting.",
+        "scoring_criteria": "Scored on a 0 to 4 scale based on criteria identified in the VB-MAPP Protocol scoring forms, with scores reflecting the severity and management of negative behaviors."
+    },
+    {
+        "id": "trans-routines-group-skills",
+        "type": "TransitionItem",
+        "title": "VB-MAPP scores on classroom routines and group skills",
+        "description": "Evaluates the child's ability to participate in group learning and adhere to classroom routines.",
+        "scoring_criteria": "Scored on a 0 to 4 scale based on criteria identified in the VB-MAPP Protocol scoring forms, evaluating independence and participation in group settings."
+    },
+    {
+        "id": "trans-social-behavior-play",
+        "type": "TransitionItem",
+        "title": "VB-MAPP scores on social behavior and social play",
+        "description": "Assesses the child's social behavior and peer-play abilities, which affect inclusion in a typical classroom.",
+        "scoring_criteria": "Scored on a 0 to 4 scale based on criteria identified in the VB-MAPP Protocol scoring forms, measuring the child's level of social interaction and play skills."
+    },
+    {
+        "id": "trans-independent-academic-tasks",
+        "type": "TransitionItem",
+        "title": "Works independently on academic tasks",
+        "description": "Evaluates the child's academic independence and ability to focus and complete tasks without constant 1:1 supervision.",
+        "scoring_criteria": "Scored on a 0 to 4 scale based on criteria identified in the VB-MAPP Protocol scoring forms, assessing the duration and complexity of independent academic work."
+    },
+    {
+        "id": "trans-generalization",
+        "type": "TransitionItem",
+        "title": "Generalization",
+        "description": "Evaluates the child's learning patterns, specifically their ability to generalize acquired skills to new settings, people, or materials outside of intensive teaching.",
+        "scoring_criteria": "Scored on a 0 to 4 scale based on criteria identified in the VB-MAPP Protocol scoring forms, measuring the spontaneous generalization of skills."
+    },
+    {
+        "id": "trans-variation-reinforcers",
+        "type": "TransitionItem",
+        "title": "Variation of reinforcers",
+        "description": "Assesses the breadth and flexibility of reinforcers necessary for the child to acquire and maintain new skills.",
+        "scoring_criteria": "Scored on a 0 to 4 scale based on criteria identified in the VB-MAPP Protocol scoring forms, evaluating whether learning requires specific or varied reinforcers."
+    },
+    {
+        "id": "trans-rate-acquisition",
+        "type": "TransitionItem",
+        "title": "Rate of skill acquisition",
+        "description": "Evaluates how quickly the child acquires new skills, informing the necessary teacher-to-student ratio and intensity of instruction.",
+        "scoring_criteria": "Scored on a 0 to 4 scale based on criteria identified in the VB-MAPP Protocol scoring forms, measuring the speed and efficiency of learning new targets."
+    },
+    {
+        "id": "trans-retention-new-skills",
+        "type": "TransitionItem",
+        "title": "Retention of new skills",
+        "description": "Assesses the child's ability to remember and demonstrate newly acquired skills over time without intensive structured teaching.",
+        "scoring_criteria": "Scored on a 0 to 4 scale based on criteria identified in the VB-MAPP Protocol scoring forms, evaluating the durability of learned skills."
+    },
+    {
+        "id": "trans-natural-environment-learning",
+        "type": "TransitionItem",
+        "title": "Natural environment learning",
+        "description": "Evaluates the child's ability to learn directly from the natural environment without explicit or intensive training.",
+        "scoring_criteria": "Scored on a 0 to 4 scale based on criteria identified in the VB-MAPP Protocol scoring forms, assessing incidental learning capabilities."
+    },
+    {
+        "id": "trans-transfer-new-verbal-operants",
+        "type": "TransitionItem",
+        "title": "Transfer to new verbal operants",
+        "description": "Assesses the child's ability to apply known language across different verbal operants (e.g., from tact to mand).",
+        "scoring_criteria": "Scored on a 0 to 4 scale based on criteria identified in the VB-MAPP Protocol scoring forms, evaluating cross-operant transfer skills."
+    },
+    {
+        "id": "trans-adaptability-change",
+        "type": "TransitionItem",
+        "title": "Adaptability to change",
+        "description": "Evaluates the child's flexibility and adaptability to changes in routines, materials, or environments.",
+        "scoring_criteria": "Scored on a 0 to 4 scale based on criteria identified in the VB-MAPP Protocol scoring forms, measuring behavioral flexibility."
+    },
+    {
+        "id": "trans-spontaneous-behaviors",
+        "type": "TransitionItem",
+        "title": "Spontaneous behaviors",
+        "description": "Assesses the frequency and appropriateness of spontaneous, self-directed behaviors across settings.",
+        "scoring_criteria": "Scored on a 0 to 4 scale based on criteria identified in the VB-MAPP Protocol scoring forms, evaluating the level of spontaneity and independence."
+    },
+    {
+        "id": "trans-independent-play-skills",
+        "type": "TransitionItem",
+        "title": "Independent play skills",
+        "description": "Evaluates the child's self-directed leisure time and ability to engage in play skills independently.",
+        "scoring_criteria": "Scored on a 0 to 4 scale based on criteria identified in the VB-MAPP Protocol scoring forms, measuring sustained independent play and leisure."
+    },
+    {
+        "id": "trans-general-self-help",
+        "type": "TransitionItem",
+        "title": "General self-help skills",
+        "description": "Assesses the child's overall self-help skills, which factor into independence within a less restrictive environment.",
+        "scoring_criteria": "Scored on a 0 to 4 scale based on criteria identified in the VB-MAPP Protocol scoring forms, evaluating mastery of general self-help and daily living skills."
+    },
+    {
+        "id": "trans-toileting-skills",
+        "type": "TransitionItem",
+        "title": "Toileting skills",
+        "description": "Evaluates the child's independence in using the toilet. While relevant to setting independence, it should not be the sole preventing factor for inclusion.",
+        "scoring_criteria": "Scored on a 0 to 4 scale based on criteria identified in the VB-MAPP Protocol scoring forms, assessing the level of independent toileting."
+    },
+    {
+        "id": "trans-eating-skills",
+        "type": "TransitionItem",
+        "title": "Eating skills",
+        "description": "Assesses the child's ability to eat independently and appropriately during meal or snack times.",
+        "scoring_criteria": "Scored on a 0 to 4 scale based on criteria identified in the VB-MAPP Protocol scoring forms, measuring independence during eating routines."
+    },
+    {
+        "id": "trans-1-milestones",
+        "type": "TransitionItem",
+        "title": "Overall VB-MAPP Milestones Assessment Score",
+        "description": "Evaluates the child's comprehension level and overall language acquisition to determine if they have the linguistic foundation to learn alongside other children in a less restrictive environment.",
+        "scoring_criteria": "Level 1 scores: Needs an intensive and specialized intervention program (e.g., 1:1 ratio); peer interaction is secondary. Level 2 scores: Has basic skills and benefits from some group teaching and natural environment training, but still requires high-ratio intensive teaching for the bulk of instructional time. Level 3 scores: Has advanced mand, tact, and intraverbal skills, providing a linguistic foundation for advanced academic and social placement in a less restrictive setting."
+    },
+    {
+        "id": "trans-2-barriers",
+        "type": "TransitionItem",
+        "title": "Overall VB-MAPP Barriers Assessment Score",
+        "description": "Identifies overall language and learning barriers that impede skill acquisition, determining the level of restriction needed for the child's daily intervention program.",
+        "scoring_criteria": "High Score (31 to 96): Suggests the child is experiencing several barriers and needs a more restrictive program designed to focus on reducing or removing them. Lower Score (30 or less): Suggests a less restrictive placement may be successful depending on the specific barriers present."
+    },
+    {
+        "id": "trans-3-negative-behaviors",
+        "type": "TransitionItem",
+        "title": "VB-MAPP Barriers Assessment Score on Negative Behaviors and Instructional Control",
+        "description": "Assesses severe behavior problems (screaming, aggression, non-compliance) and instructional control to determine if they limit access to less restrictive settings due to safety and teaching difficulties.",
+        "scoring_criteria": "Score 1 or 2: Placement in a less restrictive classroom may be difficult, unsafe, and unproductive; requires a carefully designed behavior intervention program in a setting focused on behavior reduction. Score 3: Negative behaviors are less likely to regularly disrupt the educational process; more options available for placement. Score 4 or 5: Negative behaviors should not be an issue in deciding placement."
+    },
+    {
+        "id": "trans-4-routines-group",
+        "type": "TransitionItem",
+        "title": "VB-MAPP Milestones Assessment Score on Classroom Routines and Group Skills",
+        "description": "Evaluates the child's ability to follow classroom routines and learn effectively in a group-teaching format without requiring extensive prompting or a 1:1 ratio.",
+        "scoring_criteria": "Score 1 or 2: Placement in a less restrictive classroom may be difficult and not productive; requires careful teaching procedures involving prompting, shaping, and rich schedules of reinforcement in a 1:1 or 1:2 ratio. Score 3: Intermediate group functioning. Score 4 or 5: The child follows classroom routines and learns in a group teaching format, marking a major component for progression to less restrictive settings."
+    },
+    {
+        "id": "trans-5-social",
+        "type": "TransitionItem",
+        "title": "VB-MAPP Milestones Assessment Score on Social Behavior and Social Play",
+        "description": "Assesses the child's social skills, peer imitation, and play behavior to find an educational setting where their skills appropriately match the range of peers in the classroom, preventing social isolation.",
+        "scoring_criteria": "Score 1 or 2 (with primarily Level 1 overall): Better served in a more restrictive setting with an intensive teaching format. Score 3 (with primarily Level 2 overall): Benefits from a less restrictive setting with partial integration into a classroom of typically developing peers (e.g., lunch, music, recess). Score 4 or 5 (with primarily Level 3 overall): Placement in a classroom with verbal and social peers would be highly beneficial; requires a less intensive teaching format."
+    },
+    {
+        "id": "trans-6-works-independently",
+        "type": "TransitionItem",
+        "title": "Works Independently on Academic Tasks",
+        "description": "Assesses a child's ability to independently engage in a specified activity or complete an assigned worksheet without teacher prompting to stay on task or stop disruptive behavior.",
+        "scoring_criteria": "Score 1: Works independently for at least 30 seconds with only 1 adult prompt to stay on task. Score 4: Stays on task for 5 minutes without any adult prompts. Score 5: Demonstrates high independence suggesting the child will do well in a regular classroom with independent academic activities."
+    },
+    {
+        "id": "trans-7-generalization",
+        "type": "TransitionItem",
+        "title": "Generalization of Skills Across Time, Settings, Behaviors, Materials, and People",
+        "description": "Assesses the child's ability to demonstrate stimulus and response generalization across different times, settings, people, and materials without the need for direct training for each variation.",
+        "scoring_criteria": "Score 1: Only generalizes to other people, but not easily to other materials. Score 2-4: Gradual progression of generalization abilities. Score 5: Easily and frequently demonstrates both stimulus and response generalization."
+    },
+    {
+        "id": "trans-8-reinforcers",
+        "type": "TransitionItem",
+        "title": "Range of Items and Events that Function as Reinforcers",
+        "description": "Assesses the variety of items and events that function as reinforcement, evaluating the transition from frequent, unlearned/innate reinforcers to less frequent, social, automatic, and age-appropriate reinforcers.",
+        "scoring_criteria": "Score 1: Reinforcement must occur frequently and is mostly limited to unlearned (innate) reinforcers. Scores 2-4: Movement toward a wider variety of reinforcers that are social, age-appropriate, peer-delivered, change often, and are delivered less frequently. Score 5: Easily reinforced by social praise, verbal information, and age-appropriate games/toys/activities; reinforcers are widely varied and change frequently."
+    },
+    {
+        "id": "trans-9-rate-of-acquisition",
+        "type": "TransitionItem",
+        "title": "Rate of Acquisition of New Skills",
+        "description": "Assesses the number of training trials required for the child to acquire a new skill (trials to criteria).",
+        "scoring_criteria": "Score 1: Requires several days or weeks of training sessions that may contain hundreds of trials to acquire a new response, but eventually does so. Scores 2-4: Gradual progression toward fewer and fewer training trials necessary to acquire new skills. Score 5: Acquires new skills in only a few training trials."
+    },
+    {
+        "id": "trans-10-retention",
+        "type": "TransitionItem",
+        "title": "Retention of New Skills",
+        "description": "Assesses the child's ability to retain newly acquired skills over time without constant re-training or failure to maintain the skill.",
+        "scoring_criteria": "Score 1: Successful with a short time delay (e.g., 20 minutes) after training. Scores 2-4: Gradual increase in time delay between training and testing, including maintenance trials (Score 4 specifically measures retention without maintenance trials). Score 5: Consistently maintains a new skill after long periods of time (e.g., 1 week) without maintenance trials."
+    },
+    {
+        "id": "trans-11-natural-environment",
+        "type": "TransitionItem",
+        "title": "11. Learning from the Natural Environment",
+        "description": "Assesses a child's ability to acquire new skills (motor, verbal, etc.) from natural consequences and observational learning in day-to-day activities without formal programming, structured teaching, or direct intervention.",
+        "scoring_criteria": "0: Does not meet criteria for 1. 1: Demonstrates at least two new skills that were acquired in the natural environment without the formal programming of antecedents and consequences. 2-4: Progression towards learning depending on the frequency and complexity of new skills acquired without formal or structured teaching. 5: Easily and frequently learns new skills in a natural environment setting."
+    },
+    {
+        "id": "trans-12-transfer-operants",
+        "type": "TransitionItem",
+        "title": "12. Demonstrates Transfer Between the Verbal Operants Without Training",
+        "description": "Evaluates whether learning one type of verbal behavior automatically transfers to other types without direct training (e.g., learning a tact that naturally transfers to a mand without additional teaching trials).",
+        "scoring_criteria": "0: Does not meet criteria for 1. 1: Demonstrates transfer from one skill to another (e.g., echoic to mand) for two new verbal responses with two or less transfer training trials. 2-4: Progression towards more frequent transfers with less training and increasing complexity of verbal skills. 5: Transfer between the verbal skills occurs daily and reliably, and involves more advanced parts of speech (i.e., adjectives, prepositions, or adverbs) and intraverbal behavior."
+    },
+    {
+        "id": "trans-13-adaptability",
+        "type": "TransitionItem",
+        "title": "13. Adaptability to Change",
+        "description": "Assesses the child's flexibility and ability to handle unexpected changes in routines, unplanned events, or disruptions without severe negative behavior, anxiety, or verbal perseveration.",
+        "scoring_criteria": "0: Does not meet criteria for 1. 1: Adapts to some changes with verbal preparation and pre-planning, but generally demonstrates negative behavior when unpredictable changes occur. 2-4: Progression towards improved adaptability to change in terms of a reduction of negative behavior and a reduction in the amount of preparation necessary to make changes. 5: Easily adapts to changes and disruptions in routines and activities and rarely emits any negative behavior when these changes occur."
+    },
+    {
+        "id": "trans-14-spontaneous-behaviors",
+        "type": "TransitionItem",
+        "title": "14. Spontaneous Behaviors",
+        "description": "Evaluates the degree of spontaneity in a child's language and social skills, measuring if target behaviors are self-generated or if they are prompt-bound and rely on extraneous antecedent prompts.",
+        "scoring_criteria": "0: Does not meet criteria for 1. 1: Emits some behaviors without prompts, but most of his language and social interactions must be prompted. 2-4: Progression towards more spontaneous behavior as measured by less prompting, and a wider range of behaviors that occur spontaneously. 5: Emits strong and frequent spontaneous behaviors across all 16 areas of the VB-MAPP Milestones Assessment."
+    },
+    {
+        "id": "trans-15-self-directed-play",
+        "type": "TransitionItem",
+        "title": "15. Self-Directed Play and Leisure Skills",
+        "description": "Evaluates a child's ability to independently entertain themselves and self-direct play and leisure time without adult prompting or reinforcement, especially during non-directed downtime in educational settings.",
+        "scoring_criteria": "Score 0: Does not meet the criteria for a score of 1. Score 1: Total score on the VB-MAPP Milestones independent play area is at least 3. Scores 2-4: Progression toward the ability to independently engage in a variety of play and leisure activities without adult direction (e.g., playground play, toys, drawing, arts, sports, imaginary play). Score 5: Total score of at least 14 on the independent play area of the VB-MAPP Milestones Assessment."
+    },
+    {
+        "id": "trans-16-general-self-help",
+        "type": "TransitionItem",
+        "title": "16. General Self-help Skills",
+        "description": "Evaluates the child's ability to independently care for themselves based on motivation, self-initiation, attempting approximations, generalization, and the absence of negative behaviors during personal care routines (e.g., hand washing, dressing, brushing teeth).",
+        "scoring_criteria": "Score 0: Does not meet the criteria for a score of 1. Score 1: No independent self-help, but usually does not engage in negative behaviors when adults provide personal care. Scores 2-4: Progression towards more independent and successful self-help (fading from physical to verbal prompts, more independent attempts, self-initiating, and partial success). Score 5: Motivated to perform tasks, initiates and attempts approximations, and generalizes skills across different settings and people."
+    },
+    {
+        "id": "trans-17-toileting-skills",
+        "type": "TransitionItem",
+        "title": "17. Toileting Skills",
+        "description": "Evaluates the child's level of toileting skills, including toilet training readiness, bladder and bowel control, and independence in completing age-appropriate toileting routines.",
+        "scoring_criteria": "Score 0: Does not meet the criteria for a score of 1. Score 1: Demonstrates toilet training readiness (e.g., dry periods, sits still for 2 minutes, shows indication of need) but still wears a diaper. Scores 2-4: Progression towards independent toileting, learning the toileting routines (undressing, wiping, flushing, washing), and the emergence of bladder and bowel control. Score 5: Initiates or mands to use the bathroom, and independently completes the age-appropriate steps of the toileting routine."
+    },
+    {
+        "id": "trans-18-eating-skills",
+        "type": "TransitionItem",
+        "title": "18. Eating Skills",
+        "description": "Evaluates the child's independent eating skills, allowing participation in lunch settings with typically developing peers with minimum supervision.",
+        "scoring_criteria": "Score 0: Does not meet the criteria for a score of 1. Score 1: Can eat some things independently (highly desired finger foods) but usually requires full physical prompting to eat most things. Scores 2-4: Progression towards independent eating (requires fewer prompts, uses a spoon, independently gets/opens lunch box, cleans up). Score 5: Independently gets and opens own food items, eats without prompts, uses utensils, and cleans up with just a few prompts for the whole group."
+    }
+]

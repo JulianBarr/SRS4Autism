@@ -1,0 +1,125 @@
+[
+    {
+        "id": "domain-writing",
+        "type": "Domain",
+        "domain": "Writing",
+        "level": 3,
+        "title": "Writing",
+        "description": "Writing skills including tracing, copying letters/numbers, and writing own name.",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "writing-12-m",
+            "writing-13-m",
+            "writing-14-m",
+            "writing-15-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "writing-12-m",
+        "type": "Milestone",
+        "domain": "Writing",
+        "level": 3,
+        "title": "Independently traces 5 different geometrical shapes",
+        "description": "To determine if the child can independently trace different geometrical shapes.",
+        "scoring_criteria": "1 point: Give the child 1 point if he independently traces within 1/4 inch of 5 different geometrical shapes. Shapes with several angles (e.g., a star) may be difficult but give the child full credit if he is close. 1/2 point: Give the child 1/2 point if he independently traces within 1/2 inch of 5 different geometrical shapes.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "writing-13-m",
+        "type": "Milestone",
+        "domain": "Writing",
+        "level": 3,
+        "title": "Copies 10 letters or numbers legibly. (T)",
+        "description": "Objective: To determine if the child can copy specific letters and numbers.",
+        "scoring_criteria": "1 point: Give the child 1 point if he copies 10 letters or numbers of any size legibly (i.e., an observer can identify the letter or number without seeing the model). 1/2 point: Give the child 1/2 point if he copies 5 letters or numbers of any size legibly.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "writing-14-m",
+        "type": "Milestone",
+        "domain": "Writing",
+        "level": 3,
+        "title": "Writes own name legibly",
+        "description": "Objective: To determine if the child can write his own name, and that it is legible by a second party.",
+        "scoring_criteria": "1 point: Give the child 1 point if he independently and legibly writes and correctly spells his own name ('legible' does not need to be neat, this will come with practice). 1/2 point: Give the child 1/2 point if he approximates the letters in his name, but they are not clear enough to read, and/or he misspells his name.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "writing-15-m",
+        "type": "Milestone",
+        "domain": "Writing",
+        "level": 3,
+        "title": "Copies all 26 uppercase and lowercase letters",
+        "description": "Objective: To determine the child’s ability to copy specific letters.",
+        "scoring_criteria": "1 point: Give the child 1 point if he independently copies all 26 uppercase and lowercase letters with legible facsimiles. 1/2 point: Give the child 1/2 point if he approximates the letters, but they are not clear enough to read.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "domain-lrffc",
+        "type": "Domain",
+        "domain": "Listener Responding by Function, Feature, and Class (LRFFC)",
+        "level": 3,
+        "title": "Listener Responding by Function, Feature, and Class (LRFFC)",
+        "description": "Listener Responding by Function, Feature, and Class skills involving complex verbal components, similar stimuli, and rotating WH-questions.",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "lrffc-11-m",
+            "lrffc-12-m",
+            "lrffc-13-m",
+            "lrffc-14-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "lrffc-11-m",
+        "type": "Milestone",
+        "domain": "Listener Responding by Function, Feature, and Class (LRFFC)",
+        "level": 3,
+        "title": "Selects the correct item from an array of 10 that contains 3 similar stimuli",
+        "description": "Objective: To determine if a child discriminates among items that look very similar in the array given an LRFFC task. Target task for 25 different WH-question LRFFC tasks. (T)",
+        "scoring_criteria": "1 point: Give the child 1 point if he correctly selects the item from an array of 10 or from a book that contains 3 or more similar stimuli, for 25 different LRFFC tasks. 1/2 point: Give the child 1/2 point if he correctly selects 15 items given this type of LRFFC task.",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "domain-tact",
+            "domain-listener-responding"
+        ]
+    },
+    {
+        "id": "lrffc-12-m",
+        "type": "Milestone",
+        "domain": "Listener Responding by Function, Feature, and Class (LRFFC)",
+        "level": 3,
+        "title": "Selects items from a book based on 2 verbal components",
+        "description": "Objective: To determine if a child can respond to more complex verbal stimuli in an LRFFC format. The verbal stimuli become more complex by involving two or more words that containing a function, feature, or class. Targets 25 LRFFC tasks. (T)",
+        "scoring_criteria": "1 point: Give the child 1 point if he correctly selects 25 items given this type of LRFFC task. 1/2 point: Give the child 1/2 point if he correctly selects 15 items given this type of LRFFC task.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "lrffc-13-m",
+        "type": "Milestone",
+        "domain": "Listener Responding by Function, Feature, and Class (LRFFC)",
+        "level": 3,
+        "title": "Selects items from a page in a book or in the natural environment based on 3 verbal components",
+        "description": "Objective: To determine if the child can respond to even more complex verbal stimuli (a mix of verbs, nouns, prepositions, adjectives, or adverbs) embedded in a WH-question format, and can respond to nonverbal arrays that contain multiple stimuli and stimuli that look similar to the target stimulus. Targets 25 WH-question LRFFC tasks. (T)",
+        "scoring_criteria": "1 point: Give the child 1 point if he correctly selects 25 items given this type of LRFFC task. 1/2 point: Give the child 1/2 point if he correctly selects 15 items given this type of LRFFC task.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "lrffc-14-m",
+        "type": "Milestone",
+        "domain": "Listener Responding by Function, Feature, and Class (LRFFC)",
+        "level": 3,
+        "title": "Selects correct items from a book or the natural environment given 4 rotating LRFFC questions about a single topic",
+        "description": "Objective: To determine if the child can respond to several different rotating WH questions about a single topic when presented in succession. Each question will change what will be the correct response. This task will require that the child carefully attend to the changing and multiple verbal stimuli. Targets 25 different topics. (T)",
+        "scoring_criteria": "1 point: Give the child 1 point if he correctly selects 4 items for 25 different topics presented in this type of LRFFC task. Note that the child may also verbalize the correct answer instead of pointing to it, which would make it part intraverbal.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    }
+]

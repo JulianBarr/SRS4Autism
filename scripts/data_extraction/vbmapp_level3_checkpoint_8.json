@@ -1,0 +1,110 @@
+[
+    {
+        "id": "domain-intraverbal",
+        "type": "Domain",
+        "domain": "Intraverbal",
+        "level": 3,
+        "title": "Intraverbal",
+        "description": "Intraverbal skills for Level 3.",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "intraverbal-14-m",
+            "intraverbal-15-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "intraverbal-14-m",
+        "type": "Milestone",
+        "domain": "Intraverbal",
+        "level": 3,
+        "title": "Intraverbal 14-M",
+        "description": "Describes different events, videos, stories, etc. with at least 8 words.",
+        "scoring_criteria": "1 point: Give the child a score of 1 if he describes 25 different events, videos, stories, etc. with at least 8 words. The responses should only be scored as correct if they occur without echoic prompts. Also, the verbal descriptions should be evoked by other words, not the visual events themselves. 1/2 point: Give the child 1/2 point if he describes at least 12 different events, videos, stories, etc., with at least 5 words.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "intraverbal-15-m",
+        "type": "Milestone",
+        "domain": "Intraverbal",
+        "level": 3,
+        "title": "Intraverbal 15-M",
+        "description": "Answers 4 different rotating WH questions about a single topic for 10 topics (e.g., Who takes you to school? Where do you go to school? What do you take to school?). (T)",
+        "scoring_criteria": "1 point: Give the child 1 point if he answers 4 different WH questions about a single topic for 10 topics. The questions should be asked one right after another. 1/2 point: Give the child 1/2 point if he answers 3 different WH questions about a single topic for 5 topics.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "domain-classroom-routines-and-group-skills",
+        "type": "Domain",
+        "domain": "Classroom Routines and Group Skills",
+        "level": 3,
+        "title": "Classroom Routines and Group Skills",
+        "description": "Classroom Routines and Group Skills for Level 3.",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "classroom-routines-11-m",
+            "classroom-routines-12-m",
+            "classroom-routines-13-m",
+            "classroom-routines-14-m",
+            "classroom-routines-15-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "classroom-routines-11-m",
+        "type": "Milestone",
+        "domain": "Classroom Routines and Group Skills",
+        "level": 3,
+        "title": "Classroom Routines 11-M",
+        "description": "Uses the toilet and washes hands with only verbal prompts.(O)",
+        "scoring_criteria": "1 point: Give the child 1 point if he uses the toilet and washes his hands with verbal prompts. 1/2 point: Give the child 1/2 point if he uses the toilet and washes his hands, but requires physical assistance.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "classroom-routines-12-m",
+        "type": "Milestone",
+        "domain": "Classroom Routines and Group Skills",
+        "level": 3,
+        "title": "Classroom Routines 12-M",
+        "description": "Responds to 5 different group instructions or questions without direct prompts in a group of 3 or more children (e.g., Everybody stand up. Does anyone have a red shirt on?).(O)",
+        "scoring_criteria": "1 point: Give the child 1 point if he responds to 5 different group instructions or questions without prompts in a group of 3 or more children. 1/2 point: Give the child 1/2 point if he responds to 2 different group instructions or questions without prompts in a group of 3 or more children.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "classroom-routines-13-m",
+        "type": "Milestone",
+        "domain": "Classroom Routines and Group Skills",
+        "level": 3,
+        "title": "Classroom Routines 13-M",
+        "description": "Works independently for 5 minutes in a group, and stays on task for 50% of the period.",
+        "scoring_criteria": "1 point: Give the child 1 point if he works independently for 5 minutes in a group activity/session involving 3 or more children, and stays on task for 50% of the period. 1/2 point: Give the child 1/2 point if he works independently for 2 minutes in a group activity/session involving 3 or more children, and stays on task for 50% of the period.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "classroom-routines-14-m",
+        "type": "Milestone",
+        "domain": "Classroom Routines and Group Skills",
+        "level": 3,
+        "title": "Classroom Routines 14-M",
+        "description": "Acquires 2 new behaviors during a 15-minute group-teaching format involving 5 or more children. (T)",
+        "scoring_criteria": "1 point: Give the child 1 point if he acquires 2 new behaviors in a 15-minute group-teaching format involving 5 or more children as measured by an individual post-test. 1/2 point: Give the child 1/2 point if he acquires 1 new behavior in a 15-minute group-teaching format involving 5 or more children as measured by an individual post-test.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "classroom-routines-15-m",
+        "type": "Milestone",
+        "domain": "Classroom Routines and Group Skills",
+        "level": 3,
+        "title": "Classroom Routines 15-M",
+        "description": "Sits in a 20-minute group session involving 5 children without problem behaviors, and answers 5 intraverbal questions. (T)",
+        "scoring_criteria": "1 point: Give the child 1 point if he sits appropriately, and answers 5 intraverbal questions presented in a 20-minute group-teaching format involving 5 or more children. 1/2 point: Give the child 1/2 point if he sits appropriately, and answers 2 intraverbal questions presented in a 20-minute group-teaching format involving 5 or more children.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    }
+]

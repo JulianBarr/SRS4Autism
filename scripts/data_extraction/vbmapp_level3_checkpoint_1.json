@@ -1,0 +1,98 @@
+[
+    {
+        "id": "domain-mand",
+        "type": "Domain",
+        "domain": "Mand",
+        "level": 3,
+        "title": "Mand",
+        "description": "Mand Level 3",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "mand-11-m",
+            "mand-12-m",
+            "mand-13-m",
+            "mand-14-m",
+            "mand-15-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "mand-11-m",
+        "type": "Milestone",
+        "domain": "Mand",
+        "level": 3,
+        "title": "Mand 11-M",
+        "description": "Spontaneously mands for different verbal information using a WH question or 1 question word 5 times (e.g., What's your name? Where do I go?). (TO: 60 min.)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he spontaneously mands for different verbal information using a WH question or other question words 5 times during a 1-hour observation. 1/2 point score: Give the child 1/2 point if he spontaneously mands for different verbal information using a WH question or other question words 2 times during a 1-hour observation.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "mand-12-m",
+        "type": "Milestone",
+        "domain": "Mand",
+        "level": 3,
+        "title": "Mand 12-M",
+        "description": "Politely mands to stop an undesirable activity, or remove any aversive MO under 5 different circumstances (e.g., Please stop pushing me. No thank you. Excuse me, can you move?). (E)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he appropriately (i.e., without negative behavior) mands without prompts to stop an undesirable activity, not participate in an activity, or to otherwise remove an aversive under 5 different circumstances. 1/2 point score: Give the child 1/2 point if he appropriately (i.e., without negative behavior) mands without prompts to stop an undesirable activity, not participate in an activity, or to otherwise remove an aversive under 2 different circumstances.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "mand-13-m",
+        "type": "Milestone",
+        "domain": "Mand",
+        "level": 3,
+        "title": "Mand 13-M",
+        "description": "Mands with 10 different adjectives, prepositions, or adverbs (e.g., My crayon is broken. Don't take it out. Go fast.). (TO: 60 min.)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he mands with 10 different adjectives, prepositions, or adverbs during a 1-hour observation or testing. There should be at least 2 from each group (i.e., adjectives, prepositions, or adverbs) in order to get full credit. 1/2 point score: Give the child 1/2 point if he mands with 5 different adjectives, prepositions, or adverbs during a 1-hour observation or testing.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "mand-14-m",
+        "type": "Milestone",
+        "domain": "Mand",
+        "level": 3,
+        "title": "Mand 14-M",
+        "description": "Gives directions, instructions, or explanations as to how to do something or how to participate in an activity 5 times (e.g.,You put the glue on first, then stick it. You sit here while I get a book). (O)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he gives directions, instructions, or explanations as to how to do something or participate in an activity 5 times as measured by a daily tracking sheet. 1/2 point score: Give the child 1/2 point if he gives directions, instructions, or explanations as to how to do something or participate in an activity 2 times as measured by a daily tracking sheet.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "mand-15-m",
+        "type": "Milestone",
+        "domain": "Mand",
+        "level": 3,
+        "title": "Mand 15-M",
+        "description": "Mands for others to attend to his own intraverbal behavior 5 times (e.g., Listen to me... I'll tell you... Here's what happened... I'm telling the story...). (O)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he mands for others to attend to his own intraverbal behavior 5 times during observation. Generally, this can be measured by a mand that precedes or is imbedded in some intraverbal sequence (e.g., a child's description of how to make pancakes). 1/2 point score: Give the child 1/2 point if he mands for others to attend to his own intraverbal behavior 2 times during observation.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "domain-tact",
+        "type": "Domain",
+        "domain": "Tact",
+        "level": 3,
+        "title": "Tact",
+        "description": "Tact Level 3",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "tact-11-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "tact-11-m",
+        "type": "Milestone",
+        "domain": "Tact",
+        "level": 3,
+        "title": "Tact 11-M",
+        "description": "Tacts the color, shape, and function of 5 objects (15 trials) when each object and question is presented in a mixed order (e.g., What color is the refrigerator? What shape is the valentine? What do you do with the ball?) (part tact and part intraverbal). (T)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he tacts the color, shape, and function of 5 different objects (15 trials) when each is asked during a mixed order of testing.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    }
+]

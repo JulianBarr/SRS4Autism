@@ -1,0 +1,30 @@
+[
+    {
+        "id": "barrier-motor-imitation",
+        "type": "Barrier",
+        "title": "Absent, Weak, or Defective Motor Imitation",
+        "description": "Imitating the motor behavior of others is critical for development. Barriers occur when a child fails to establish imitation, becomes prompt bound, learns non-functional skills, relies on subtle imitative prompts, or imitates negative/inappropriate behaviors.",
+        "scoring_criteria": "0 score: Motor imitation skills are consistently growing, are age appropriate, and in proportion with other milestones. 1 score: Does imitate, but imitation scores are lower than other skills. 2 score: Difficulty generalizing imitation skills, dependent on imitative prompts, or copies inappropriate behaviors. 3 score: Imitation is physically or verbally prompt bound, or demonstrates a weak motivation for imitation. 4 score: No imitation skills and previous attempts have failed, or never imitates spontaneously or functionally."
+    },
+    {
+        "id": "barrier-echoic-repertoire",
+        "type": "Barrier",
+        "title": "Absent, Weak, or Defective Echoic Repertoire",
+        "description": "A child's ability to echo words on command is a key component of early language development. Barriers include an inability to echo words, becoming prompt bound, or exhibiting echolalia, delayed echolalia (palilalia), and excessive scripting.",
+        "scoring_criteria": "0 score: Echoic skills are consistently growing, age appropriate, and in proportion with other milestones. 1 score: Does echo, but echoic scores are lower than other milestones. 2 score: Becomes echoically prompt bound, transfer of control is difficult, or echoic acquisition is falling behind other skills. 3 score: Echoic repertoire becomes too strong (echolalia/delayed echolalia) or is relatively weak, slow to acquire, and lacks spontaneous echoic behavior. 4 score: Fails to acquire any echoic behavior despite other basic skills, or attempts to teach evoke negative behaviors."
+    },
+    {
+        "id": "barrier-vp-mts",
+        "type": "Barrier",
+        "title": "Absent, Weak, or Defective Visual Perceptual Skills and Matching-to-Sample (VP-MTS)",
+        "description": "The ability to attend to and discriminate among visual stimuli. Common barriers include failing to attend to the sample stimulus or scan the array, guessing, scrolling, side or position biases, and rote patterns of responding.",
+        "scoring_criteria": "0 score: VP-MTS skills are growing consistently, age appropriate, and in proportion with other milestones. 1 score: Demonstrates some matching, but VP-MTS scores are lower than other skills (especially Listener Discriminations). 2 score: Shows missing task elements (failing to scan/attend), side or position bias, scrolling, rote patterns, or is limited to small arrays. 3 score: Acquired some MTS skills but is not progressing, exhibits negative behaviors during teaching, or fails to generalize. 4 score: Fails to acquire significant MTS skills despite repeated attempts, or acquired skills are rote, defective, or never functional in the natural environment."
+    },
+    {
+        "id": "barrier-listener-repertoires",
+        "type": "Barrier",
+        "title": "Absent, Weak, or Defective Listener Repertoires (LD and LRFFC)",
+        "description": "Involves attending to a speaker, reinforcing a speaker, and demonstrating understanding of what is said (receptive language). Barriers include failing to scan arrays, position biases, scrolling, and difficulty with multiple verbal stimuli or conditional discriminations.",
+        "scoring_criteria": "0 score: Listener skills are growing consistently, age appropriate, and in proportion with other milestones. 1 score: Demonstrates some listener skills, but scores are lower than other skills (especially tacts). 2 score: Shows missing elements of the task (failing to scan/attend, early responding), side or position bias, rote patterns, scrolling, or limitations to small arrays. 3 score: Acquired some LD skills but is not progressing, exhibits negative behaviors, or struggles with complex/similar stimuli and generalization. 4 score: Fails to acquire any significant LD skills despite having other related skills."
+    }
+]

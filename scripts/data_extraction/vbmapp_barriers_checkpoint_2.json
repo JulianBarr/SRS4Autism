@@ -1,0 +1,30 @@
+[
+    {
+        "id": "barrier-negative-behavior",
+        "type": "Barrier",
+        "title": "Negative Behavior",
+        "description": "Negative behaviors that impede learning or cause difficulty for those working with the child, such as crying, tantrums, property destruction, or aggression, often functioning to gain attention or escape demands.",
+        "scoring_criteria": "0 score: typically does not demonstrate behavior problems that impede learning or cause difficulty. 1 score: has some minor behavior problems (e.g., occasional crying or whining), but they are brief and recovery is quick. 2 score: emits a variety of minor negative behaviors every day (e.g., crying, verbal refusal, falling to the floor) which may be persistent and long lasting. 3 score: emits more severe and frequent negative behavior (e.g., tantrums, throwing things, property destruction) that may result in the child controlling daily activities. 4 score: negative behaviors occur several times a day and present a danger to himself or others (e.g., aggression, property destruction, or self-injurious behavior)."
+    },
+    {
+        "id": "barrier-poor-instructional-control",
+        "type": "Barrier",
+        "title": "Poor Instructional Control (escape and avoidance of demands placed upon a child)",
+        "description": "Behaviors emitted by a child to avoid or terminate demands, instructions, or undesirable activities. These range from mild noncompliance (looking away) to severe aggression or self-injury.",
+        "scoring_criteria": "0 score: typically cooperative with adult instructions and demands. 1 score: some demands evoke minor noncompliant behavior, but usually the child is cooperative and recovers quickly. 2 score: emits noncompliant behavior a few times a day with minor tantrums or other behaviors, and it is often difficult to get him to stop. 3 score: showing a progression towards more persistent and severe instructional control problems as measured by an increase in frequency, wider range of situations, and increased severity of avoidance/escape behavior. 4 score: noncompliant behavior is a major issue everyday and the child is quick to emit strong and severe behaviors, such as aggression or property destruction if demands are not removed."
+    },
+    {
+        "id": "barrier-defective-mand-repertoire",
+        "type": "Barrier",
+        "title": "Absent, Weak, or Defective Mand Repertoire",
+        "description": "Difficulty acquiring an effective mand repertoire to inform adults of motivators (e.g., hunger, thirst) or remove aversive events, resulting in mands trailing behind other language skills, being prompt-bound, rote, or entirely absent.",
+        "scoring_criteria": "0 score: has an appropriate mand repertoire that is proportionate with his other skills on the Milestones Assessment. 1 score: does mand, but his LD and tact VB-MAPP Milestones Assessment scores are higher than his mand scores. 2 score: mands are few in number and limited to a small set of consumable or tangible reinforcers, despite strong tacts, LDs, and echoic skills. 3 score: mands are prompt bound, rote, scrolling occurs, responses do not match the MOs, negative behaviors function as mands, excessive or inappropriate mands occur, and the child rarely mands spontaneously. 4 score: does not have any functional mands, or demonstrates the problems listed in score 3 but does not have many other verbal skills either."
+    },
+    {
+        "id": "barrier-defective-tact-repertoire",
+        "type": "Barrier",
+        "title": "Absent, Weak, or Defective Tact Repertoire",
+        "description": "Problems related to establishing a functional tact repertoire, such as the wrong nonverbal stimulus acquiring control (rote tacting errors), scrolling, failing to generalize, or lack of spontaneity.",
+        "scoring_criteria": "0 score: has an appropriate tact repertoire that is in proportion with his other skills on the Milestones Assessment. 1 score: can tact some items and has good echoic skills, but his listener discrimination (LD) vocabulary markedly outnumbers his tact vocabulary. 2 score: tacting errors occur frequently, the child scrolls, or the tacts are prompt bound and require frequent maintenance trials. 3 score: tact repertoire is significantly out of balance with other skills, and tacts are clearly defective as indicated by failing to generalize, lack of spontaneity, limited functional use, rote tacts, escape/avoidance during training, or failing to move beyond single word tacts. 4 score: tact repertoire is nonexistent or limited to a few tacts, despite a strong echoic and LD repertoire."
+    }
+]

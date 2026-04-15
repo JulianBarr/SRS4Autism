@@ -1,0 +1,146 @@
+[
+    {
+        "id": "domain-social",
+        "type": "Domain",
+        "domain": "Social Behavior and Social Play",
+        "level": 3,
+        "title": "Social Behavior and Social Play",
+        "description": "Social Behavior and Social Play skills for Level 3.",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "social-pretend-play",
+            "social-verbal-exchanges"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "social-pretend-play",
+        "type": "Milestone",
+        "domain": "Social Behavior and Social Play",
+        "level": 3,
+        "title": "Engages with peers in a pretend or social play activity",
+        "description": "Participates in play activities, following other children, manding to peers, imitating peers, and intraverbally responding to peers' verbal behavior.",
+        "scoring_criteria": "1 point: Give the child 1 point if he engages with peers in a pretend or social play activity for 5 minutes. 1/2 point: Give the child 1/2 point if he engages with peers in a pretend or social play activity for 2 minutes.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "social-verbal-exchanges",
+        "type": "Milestone",
+        "domain": "Social Behavior and Social Play",
+        "level": 3,
+        "title": "Engages in 4 verbal exchanges on 1 topic with peers for 5 topics",
+        "description": "To determine if a child will have a “conversation” with peers that consists of exchanges back and forth on a single topic.",
+        "scoring_criteria": "1 point: Give the child 1 point if he initiates a verbal interaction, or spontaneously responds to the verbal behavior of a peer with additional and relevant verbal behavior, and has a reciprocal verbal interaction that lasts for 4 exchanges during a 1-hour observation period (note that any type of verbal behavior counts—mands, tacts, or intraverbals). 1/2 point: Give the child 1/2 point if he initiates a verbal interaction, or spontaneously responds to the verbal behavior of a peer with additional and relevant verbal behavior, and has a reciprocal verbal interaction that lasts for 2 exchanges during a 1-hour observation period.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "domain-reading",
+        "type": "Domain",
+        "domain": "Reading",
+        "level": 3,
+        "title": "READING — LEVEL 3",
+        "description": "Reading skills for Level 3.",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "reading-attends-to-books",
+            "reading-selects-uppercase-letters",
+            "reading-tacts-uppercase-letters",
+            "reading-reads-own-name",
+            "reading-matches-words-to-pictures"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "reading-attends-to-books",
+        "type": "Milestone",
+        "domain": "Reading",
+        "level": 3,
+        "title": "Shows an interest in books and having adults read to him",
+        "description": "To determine if the child shows an interest in books and having adults read to him.",
+        "scoring_criteria": "1 point: Give the child 1 point if he attends to a book when a story is being read to him for 75% of the time in a 3 minute period, without any prompts to attend to the book. 1/2 point: Give the child 1/2 point if he attends to a book when a story is being read to him for 50% of the time in a 3-minute period, without any prompts to attend to the book.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "reading-selects-uppercase-letters",
+        "type": "Milestone",
+        "domain": "Reading",
+        "level": 3,
+        "title": "Selects (LDs) the correct uppercase letter from an array of 5 letters, for 10 different letters. (T)",
+        "description": "To determine if the child discriminates as a listener among uppercase letters.",
+        "scoring_criteria": "1 point: Give the child 1 point if he selects the correct uppercase letter from an array of 5 letters for 10 different letters. 1/2 point: Give the child 1/2 point if he selects the correct uppercase letter from an array of 5 letters for 5 different letters.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "reading-tacts-uppercase-letters",
+        "type": "Milestone",
+        "domain": "Reading",
+        "level": 3,
+        "title": "Tacts 10 uppercase letters on command. (T)",
+        "description": "To determine if the child tacts some uppercase letters.",
+        "scoring_criteria": "1 point: Give the child 1 point if he tacts 10 uppercase letters. 1/2 point: Give the child 1/2 point if he tacts 5 uppercase letters.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "reading-reads-own-name",
+        "type": "Milestone",
+        "domain": "Reading",
+        "level": 3,
+        "title": "Reads his own name. (T)",
+        "description": "To determine if the child reads his name.",
+        "scoring_criteria": "1 point: Give the child 1 point if he reads his own name when shown his name and given the verbal prompt, “What does this say?” Be careful not to say something like, “Whose name is this?” as this verbal stimulus alone may intraverbally evoke the child’s name (unless several names are used). Also, be sure other words don’t evoke his own name, or that it is not just his personal name card that evokes the response (certain colors, patterns, etc., may be the source of control). 1/2 point: None",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "reading-matches-words-to-pictures",
+        "type": "Milestone",
+        "domain": "Reading",
+        "level": 3,
+        "title": "Matches 5 words to the corresponding pictures or items in an array of 5, and vice versa. (T)",
+        "description": "To determine if the child matches written words to the corresponding pictures or items, and vice versa (this is one example of reading comprehension).",
+        "scoring_criteria": "1 point: Give the child 1 point if he matches 5 words to the corresponding pictures or items in an array of 5, and vice versa. 1/2 point: Give the child 1/2 point if he matches 3 words to the corresponding pictures or items in an array of 3, and vice versa.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "domain-writing",
+        "type": "Domain",
+        "domain": "Writing",
+        "level": 3,
+        "title": "WRITING — LEVEL 3",
+        "description": "Writing skills for Level 3.",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "writing-imitates-writing-actions",
+            "writing-traces-geometric-shapes"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "writing-imitates-writing-actions",
+        "type": "Milestone",
+        "domain": "Writing",
+        "level": 3,
+        "title": "Imitates 5 different writing actions modeled by an adult using a writing instrument and writing surface. (T)",
+        "description": "To determine if the child can hold a writing instrument and copy simple drawing movements of an adult.",
+        "scoring_criteria": "1 point: Give the child 1 point if he imitates 5 different writing actions modeled by an adult. 1/2 point: Give the child 1/2 point if he imitates 3 different writing actions modeled by an adult.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "writing-traces-geometric-shapes",
+        "type": "Milestone",
+        "domain": "Writing",
+        "level": 3,
+        "title": "Traces specific geometric shapes within a defined boundary.",
+        "description": "To determine if the child can control the writing instrument enough to trace specific geometric shapes within a defined boundary.",
+        "scoring_criteria": null,
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    }
+]

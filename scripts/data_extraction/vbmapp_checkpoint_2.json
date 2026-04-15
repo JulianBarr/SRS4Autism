@@ -1,0 +1,148 @@
+[
+    {
+        "id": "domain-tact",
+        "type": "Domain",
+        "domain": "Tact",
+        "level": 1,
+        "title": "Tact",
+        "description": "Tact - Level 1 Milestones",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "tact-1-m",
+            "tact-2-m",
+            "tact-3-m",
+            "tact-4-m",
+            "tact-5-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "tact-1-m",
+        "type": "Milestone",
+        "domain": "Tact",
+        "level": 1,
+        "title": "Tact 1-M: Tacts 2 reinforcing items",
+        "description": "Objective: To determine if a particular nonverbal stimulus (e.g., a child’s mother) evokes the word “mama” (or an approximation). A child’s first tacts may also be part mand in that young children tend to tact things that are reinforcing to them, such as their parents, siblings, pets, favorite characters, toys, etc. It may be hard to tell if the response “mama” is a mand or a tact, but that’s okay because at this early stage the goal is to determine if the child discriminates between the nonverbal stimulus of his mother versus, for example, his father. If he calls everybody “mama” do not give him credit for this skill.",
+        "scoring_criteria": "1 point score: Give the child 1 point if he names 2 items without echoic prompts when tested (e.g., “Who’s that?” or “What’s that?”). 1/2 point score: Give the child 1/2 point if he names 1 item without echoic prompts when tested, but do not give him 1/2 point if he calls everything by the same name.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "tact-2-m",
+        "type": "Milestone",
+        "domain": "Tact",
+        "level": 1,
+        "title": "Tact 2-M: Tacts 4 items (e.g., people, pets, characters, or other objects). (T)",
+        "description": "Objective: To determine if the tact repertoire is growing, and if an adult can evoke tacts during testing. These tacts may also still be part mand at this point.",
+        "scoring_criteria": "1 point score: Give the child 1 point if he names 4 items without echoic prompts when tested. 1/2 point score: Give the child 1/2 point if he names 3 items without echoic prompts when tested.",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "tact-1-m"
+        ]
+    },
+    {
+        "id": "tact-3-m",
+        "type": "Milestone",
+        "domain": "Tact",
+        "level": 1,
+        "title": "Tact 3-M: Tacts 6 non-reinforcing items (e.g., shoe, hat, spoon, car, cup, bed). (T)",
+        "description": "Objective: To determine if the tacts are breaking free from motivation as a source of control, and that the tact repertoire is growing.",
+        "scoring_criteria": "1 point score: Give the child 1 point if he tacts 6 items without echoic prompts when tested. Do not give the child credit for responses that are also part mand (e.g., he says “book” because he sees and wants the book). 1/2 point score: Give the child 1/2 point if he tacts 5 items.",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "tact-2-m"
+        ]
+    },
+    {
+        "id": "tact-4-m",
+        "type": "Milestone",
+        "domain": "Tact",
+        "level": 1,
+        "title": "Tact 4-M: Spontaneously tacts 2 different items",
+        "description": "Objective: To determine if tacting is occurring without adult prompts to tact. Typically, children begin to tact items without prompts or contrived reinforcers, because tacting the item correctly becomes automatically reinforcing for the child (e.g., “Dora!”).",
+        "scoring_criteria": "1 point score: Give the child 1 point if he spontaneously tacts (no verbal prompts) 2 different items during an observation (no time limits). 1/2 point score: Give the child 1/2 point if he spontaneously tacts 1 item during an observation.",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "tact-3-m"
+        ]
+    },
+    {
+        "id": "tact-5-m",
+        "type": "Milestone",
+        "domain": "Tact",
+        "level": 1,
+        "title": "Tact 5-M: Tacts 10 items (e.g., common objects, people, body parts, or pictures). (T)",
+        "description": "Objective: To determine if the tact repertoire is growing.",
+        "scoring_criteria": "1 point score: Give the child 1 point if he tacts 10 items without echoic prompts when tested. 1/2 point score: Give the child 1/2 point if he tacts 8 items.",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "tact-4-m"
+        ]
+    },
+    {
+        "id": "domain-listener",
+        "type": "Domain",
+        "domain": "Listener Responding",
+        "level": 1,
+        "title": "Listener Responding",
+        "description": "Listener Responding - Level 1 Milestones",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "listener-1-m",
+            "listener-2-m",
+            "listener-3-m",
+            "listener-4-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "listener-1-m",
+        "type": "Milestone",
+        "domain": "Listener Responding",
+        "level": 1,
+        "title": "Listener 1-M: Attends to speech sounds",
+        "description": "Objective: To determine if speech sounds are discriminative stimuli (SDs) for attending to people. Also, to determine if the child discriminates between speech sounds and other sounds in his environment.",
+        "scoring_criteria": "1 point score: Give the child 1 point if he attends to speech sounds 5 times. 1/2 point score: Give the child 1/2 point if he attends to speech sounds 2 times.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "listener-2-m",
+        "type": "Milestone",
+        "domain": "Listener Responding",
+        "level": 1,
+        "title": "Listener 2-M: Responds to hearing his own name 5 times (e.g., looks at the speaker). (T)",
+        "description": "Objective: To determine if a child discriminates between his own name and other verbal stimuli that he hears throughout the day. This is one of the most common forms of early listener understanding for a child, and occurs because of the frequent pairing of a child’s name with adult attention, physical contact, and delivery of other reinforcers.",
+        "scoring_criteria": "1 point score: Give the child 1 point if he attends to adults by making eye contact when his name is called on 5 separate trials, with no specified time limit. 1/2 point score: There is no 1/2 point score for this skill.",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "listener-1-m"
+        ]
+    },
+    {
+        "id": "listener-3-m",
+        "type": "Milestone",
+        "domain": "Listener Responding",
+        "level": 1,
+        "title": "Listener 3-M: Looks at, touches, or points to the correct family member, pet, or other reinforcer when presented in an array of 2, for 5 different reinforcers (e.g., Where's Elmo? Where's mommy?). (E)",
+        "description": "Objective: To determine if the child discriminates as a listener among verbal stimuli and associates those verbal stimuli with the matching nonverbal stimuli. Children learn to distinguish between their parents and strangers quite early in development, and the related verbal stimuli (i.e., “mama” and “dada”) are often in the first group of words that acquire differential stimulus control over listener behavior. Other reinforcing items such as a favorite pet, stuffed animal, a cartoon character, or toy may also help to establish early listener skills.",
+        "scoring_criteria": "1 point score: Give the child 1 point if he correctly identifies 5 different family members, pets, or other reinforcers when individually named by an adult. 1/2 point score: Give the child 1/2 point if he correctly identifies 2 different reinforcing stimuli.",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "listener-2-m"
+        ]
+    },
+    {
+        "id": "listener-4-m",
+        "type": "Milestone",
+        "domain": "Listener Responding",
+        "level": 1,
+        "title": "Listener 4-M: Performs 4 different motor actions on command without a visual prompt (e.g., Can you jump? Show me clapping). (T)",
+        "description": "Objective: To determine if a child’s motor behavior is under an adult’s verbal stimulus control (no imitative prompts).",
+        "scoring_criteria": null,
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "listener-3-m"
+        ]
+    }
+]

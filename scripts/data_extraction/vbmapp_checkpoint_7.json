@@ -1,0 +1,50 @@
+[
+    {
+        "id": "domain-vocal",
+        "type": "Domain",
+        "domain": "Vocal",
+        "level": 1,
+        "title": "Vocal",
+        "description": "Measures the frequency and complexity of spontaneous vocal sounds and word approximations.",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "vocal-3-m",
+            "vocal-4-m",
+            "vocal-5-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "vocal-3-m",
+        "type": "Milestone",
+        "domain": "Vocal",
+        "level": 1,
+        "title": "Vocal 3-M",
+        "description": "Spontaneously emits 10 different sounds with varying intonations, averaging 25 total sounds each hour. (TO: 60 min.)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he spontaneously emits 10 different sounds with varying intonations, averaging 25 total sounds each hour. 1/2 point score: Give the child 1/2 point if he spontaneously emits 5 different sounds with varying intonations, averaging 25 total sounds each hour.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "vocal-4-m",
+        "type": "Milestone",
+        "domain": "Vocal",
+        "level": 1,
+        "title": "Vocal 4-M",
+        "description": "Spontaneously emits 5 different whole word approximations.",
+        "scoring_criteria": "1 point score: Give the child 1 point if he spontaneously emits 5 word approximations during observation. 1/2 point score: Give the child 1/2 point if he spontaneously emits 2 word approximations during observation.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "vocal-5-m",
+        "type": "Milestone",
+        "domain": "Vocal",
+        "level": 1,
+        "title": "Vocal 5-M",
+        "description": "Spontaneously emits 15 different identifiable word approximations during a 1-hour observation.",
+        "scoring_criteria": "1 point score: Give the child 1 point if he spontaneously emits 15 different identifiable word approximations during a 1-hour observation. 1/2 point score: Give the child 1/2 point if he spontaneously emits 8 different identifiable word approximations during a 1-hour observation.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    }
+]

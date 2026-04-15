@@ -1,0 +1,110 @@
+[
+    {
+        "id": "domain-social-play",
+        "type": "Domain",
+        "domain": "Social Play",
+        "level": 2,
+        "title": "Social Behavior and Social Play",
+        "description": "Skills related to social interaction, responding to and initiating mands with peers, and participating in games or social play.",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "social-play-9-m",
+            "social-play-10-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "social-play-9-m",
+        "type": "Milestone",
+        "domain": "Social Play",
+        "level": 2,
+        "title": "Social Play 9-M",
+        "description": "Spontaneously responds to the mands from peers 5 times (e.g., Pull me in the wagon. I want the train.). (E)",
+        "scoring_criteria": "1 point: Give the child 1 point if he spontaneously responds to the mands from peers 5 times during observation or testing. Do not give the child any points if an adult must prompt the behavior in any way. 1/2 point: Give the child 1/2 point if he spontaneously responds to the mands from peers 2 times during observation or testing.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "social-play-10-m",
+        "type": "Milestone",
+        "domain": "Social Play",
+        "level": 2,
+        "title": "Social Play 10-M",
+        "description": "Spontaneously mands to peers to participate in games, social play, etc., 2 times (e.g., Come on you guys. Let's dig a hole.). (TO: 60 min.)",
+        "scoring_criteria": "1 point: Give the child 1 point if he spontaneously mands to peers to participate in games, social play, or other social activities 2 times during a 1-hour observation. 1/2 point: Give the child 1/2 point if he spontaneously mands to peers to participate in games, social play, or other social activities 1 time during a 1-hour observation.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "domain-motor-imitation",
+        "type": "Domain",
+        "domain": "Motor Imitation",
+        "level": 2,
+        "title": "Motor Imitation",
+        "description": "Skills involving the ability to imitate the motor actions of others, progressing to specific object selection, fine motor skills, sequences, and generalized imitation.",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "motor-imitation-6-m",
+            "motor-imitation-7-m",
+            "motor-imitation-8-m",
+            "motor-imitation-9-m",
+            "motor-imitation-10-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "motor-imitation-6-m",
+        "type": "Milestone",
+        "domain": "Motor Imitation",
+        "level": 2,
+        "title": "Motor Imitation 6-M",
+        "description": "Imitates 10 actions that require selecting a specific object from an array (e.g., selects a drumstick from an array also containing a horn and a bell, and imitates an adult's drumming). (T)",
+        "scoring_criteria": "1 point: Give the child 1 point if he imitates 10 actions with a specific object selected from an array of 3 when prompted, \"Do this.\" 1/2 point: Give the child 1/2 point if he imitates 5 actions with a specific object selected from an array of 3 when prompted, \"Do this.\"",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "motor-imitation-7-m",
+        "type": "Milestone",
+        "domain": "Motor Imitation",
+        "level": 2,
+        "title": "Motor Imitation 7-M",
+        "description": "Imitates 20 different fine motor actions when prompted, Do this (e.g., wiggling fingers, pinching, making a fist, making a butterfly).",
+        "scoring_criteria": "1 point: Give the child 1 point if he imitates 20 different fine motor actions when prompted, \"Do this.\" 1/2 point: Give the child 1/2 point if he imitates 10 different fine motor actions when prompted, \"Do this.\"",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "motor-imitation-8-m",
+        "type": "Milestone",
+        "domain": "Motor Imitation",
+        "level": 2,
+        "title": "Motor Imitation 8-M",
+        "description": "Imitates 10 different three-component sequences of actions when prompted, Do this (e.g., clapping, jumping, touching toes; pick up a doll, place her in a crib, and rock the crib). (T)",
+        "scoring_criteria": "1 point: Give the child 1 point if he imitates 10 three-component actions in contrived or natural settings modeled by a peer or an adult. 1/2 point: Give the child 1/2 point if he imitates 5 two-component actions in contrived or natural settings modeled by a peer or an adult.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "motor-imitation-9-m",
+        "type": "Milestone",
+        "domain": "Motor Imitation",
+        "level": 2,
+        "title": "Motor Imitation 9-M",
+        "description": "Spontaneously, imitates 5 functional skills in the natural environment (e.g., eating with a spoon, putting on a coat, removing shoes). (O)",
+        "scoring_criteria": "1 point: Give the child 1 point if he spontaneously imitates 5 functional skills in the natural environment. 1/2 point: Give the child 1/2 point if he spontaneously imitates 2 functional skills in the natural environment.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "motor-imitation-10-m",
+        "type": "Milestone",
+        "domain": "Motor Imitation",
+        "level": 2,
+        "title": "Motor Imitation 10-M",
+        "description": "Imitates (or attempts to with approximations) any novel motor action modeled by an adult with and without objects (i.e., a \"generalized imitative repertoire\"). (T)",
+        "scoring_criteria": "1 point: Give the child 1 point if he imitates (or approximates) many novel motor actions with and without objects modeled by an adult when prompted with, \"Do this.\" 1/2 point: None.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    }
+]

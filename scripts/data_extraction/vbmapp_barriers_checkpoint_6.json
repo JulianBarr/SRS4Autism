@@ -1,0 +1,37 @@
+[
+    {
+        "id": "barrier-motivation",
+        "type": "Barrier",
+        "title": "Motivation",
+        "description": "The child has a limited range of motivators, both unlearned and learned, or relies on odd and aberrant motivators (e.g., self-stims, repetitive motions) that make creating and capturing motivation for teaching purposes difficult.",
+        "scoring_criteria": "0 score: Demonstrates a wide range of age-appropriate MOs, and they are predictably strong and show variation. 1 score: Motivators are slightly different from those of typically developing children. 2 score: Demonstrates MOs for odd behavior patterns or has weak MOs for age-appropriate and social reinforcers. 3 score: Demonstrates aberrant MOs for unlearned reinforcers or MOs quickly weaken after a short contact with a desired item; high rates of stereotypy. 4 score: Very limited range of MOs (perhaps just 2 or 3) that may be odd but very strong, and negative behavior occurs if not allowed to engage in them."
+    },
+    {
+        "id": "barrier-response-requirement-weakens-mo",
+        "type": "Barrier",
+        "title": "Response Requirement Weakens the MO",
+        "description": "The child quickly loses interest in a reinforcer when a demand or response requirement is placed on them, functioning as an abolishing operation (AO) and reducing the value of the reinforcement.",
+        "scoring_criteria": "0 score: Does not typically lose interest in reinforcers when reasonable demands are placed on him. 1 score: Demonstrates some lack of interest if demands become too high or if signs show the demand is about to increase. 2 score: Strongly motivated by a wide variety of items but quick to walk away or lose interest if demands exceed a small set or are not in a predicted routine. 3 score: Quick to show a lack of interest after a few responses are required. 4 score: Will walk away for what are considered his strongest reinforcers if even the slightest demand is placed on him."
+    },
+    {
+        "id": "barrier-reinforcement-dependent",
+        "type": "Barrier",
+        "title": "Reinforcement Dependent",
+        "description": "The child is dependent on consumable and tangible reinforcers and struggles to transition to intermittent reinforcement schedules or social and verbal reinforcers.",
+        "scoring_criteria": "0 score: Has no problem with moving to intermittent reinforcement or to social and verbal reinforcers. 1 score: Prefers consumables and tangibles, but is reinforced by praise and attention; may show reluctance to go without them but eventually does. 2 score: Reluctant to go without preferred reinforcers and learning is slower without them; however, will work on intermittent schedules and shows consistent skill growth. 3 score: Difficult to work with without frequently delivered consumable/tangible reinforcement; quick to emit negative behaviors or escape instructional tasks. 4 score: Takes an extensive amount of consumable and tangible reinforcers to establish a single skill, and that level is necessary to maintain it."
+    },
+    {
+        "id": "barrier-self-stimulation",
+        "type": "Barrier",
+        "title": "Self-Stimulation",
+        "description": "The child engages in self-stimulatory or stereotypic behaviors that provide automatic reinforcement. These behaviors compete with typical reinforcers, other activities, and the development of instructional control, thereby disrupting learning.",
+        "scoring_criteria": "0 score: Does not engage in self-stimulatory or repetitive behaviors that are out of the ordinary. 1 score: Engages in some self-stimulation, but it is not too problematic and doesn't seem to compete with learning. 2 score: Engages in a relatively high rate of self-stimulation and may emit several types; it may compete with other reinforcers, but the child still learns and demonstrates some control over the behavior. 3 score: Engages in a high rate of self-stimulation that competes with learning and social interactions, and will not stop, or only stop briefly, with verbal reprimands. 4 score: Almost constantly engages in some form of self-stimulation, other reinforcers are weak, learning is very disrupted, and skill acquisition is slow."
+    },
+    {
+        "id": "barrier-articulation-problems",
+        "type": "Barrier",
+        "title": "Articulation Problems",
+        "description": "The child experiences articulation errors or completely unintelligible speech, which impedes communication and language development, sometimes requiring an augmentative communication (AC) system.",
+        "scoring_criteria": "0 score: Most adults can understand his existing vocal behavior, even if the vocabulary is small. 1 score: Demonstrates some difficulty pronouncing certain words, but usually can be understood and articulation improves. 2 score: Has difficulty being understood by strangers, despite showing mostly Level 2 Milestones. 3 score: Has very limited vocal skills and demonstrates a wide variety of articulation errors. 4 score: Is non-vocal, or has completely unintelligible speech, despite other elevated Milestone scores."
+    }
+]

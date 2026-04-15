@@ -1,0 +1,124 @@
+[
+    {
+        "id": "domain-group",
+        "type": "Domain",
+        "domain": "Group",
+        "level": 2,
+        "title": "Classroom Routines and Group Skills",
+        "description": "Skills related to participating in classroom routines, transitioning between activities, and sitting in group settings.",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "group-7-m",
+            "group-8-m",
+            "group-9-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "group-7-m",
+        "type": "Milestone",
+        "domain": "Group",
+        "level": 2,
+        "title": "Group 7-M",
+        "description": "Transitions between classroom activities with no more than 1 gestural or verbal prompt.",
+        "scoring_criteria": "1 point: Give the child 1 point if he transitions between classroom activities with only 1 gestural and/or 1 verbal prompt and no negative behavior. 1/2 point: Give the child 1/2 point if he transitions between classroom activities, but requires 2 or more prompts of any type (except physical).",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "group-8-m",
+        "type": "Milestone",
+        "domain": "Group",
+        "level": 2,
+        "title": "Group 8-M",
+        "description": "Sits in a small group for 5 minutes without disruptive behavior or attempting to leave the group. (O)",
+        "scoring_criteria": "1 point: Give the child 1 point if he sits in a circle group of 3 or more children for 5 minutes without disruptive behavior or attempting to leave the group. 1/2 point: Give the child 1/2 point if he sits in a circle group of 3 or more children for 2 minutes without disruptive behavior or attempting to leave the group.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "group-9-m",
+        "type": "Milestone",
+        "domain": "Group",
+        "level": 2,
+        "title": "Group 9-M",
+        "description": "Sits in a small group for 10 minutes, attends to the teacher or material for 50% of the period, and responds to 5 of a teacher's SDs. (O)",
+        "scoring_criteria": "1 point: Give the child 1 point if he sits in a group activity (e.g., circle, arts and crafts, stations) with 3 or more children for 10 minutes and attends to the teacher or presented material for 50% of the period (using a time sample recording system), and responds to 5 teacher questions or instructions. 1/2 point: Give the child 1/2 point if he sits in a group activity (e.g., circle, arts and crafts, stations) with 3 or more children for 10 minutes and attends to the teacher or presented material for 33% of the period, and responds to 2 teacher questions or instructions.",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "group-8-m"
+        ]
+    },
+    {
+        "id": "domain-linguistic-structure",
+        "type": "Domain",
+        "domain": "Linguistic Structure",
+        "level": 2,
+        "title": "Linguistic Structure",
+        "description": "Skills assessing articulation, growing listener/speaker vocabulary, multi-word utterances, and functional prosody.",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "linguistics-6-m",
+            "linguistics-7-m",
+            "linguistics-8-m",
+            "linguistics-9-m",
+            "linguistics-10-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "linguistics-6-m",
+        "type": "Milestone",
+        "domain": "Linguistic Structure",
+        "level": 2,
+        "title": "Linguistics 6-M",
+        "description": "The child's articulation of 10 tacts can be understood by familiar adults who cannot see the item tacted. (T)",
+        "scoring_criteria": "1 point: Give the child 1 point if familiar adults who cannot see the item tacted can understand his articulation of 10 tacts. 1/2 point: Give the child 1/2 point if familiar adults who cannot see the item tacted can understand his articulation of 5 tacts.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "linguistics-7-m",
+        "type": "Milestone",
+        "domain": "Linguistic Structure",
+        "level": 2,
+        "title": "Linguistics 7-M",
+        "description": "Has a total listener vocabulary of 100 words.",
+        "scoring_criteria": "1 point: Give the child 1 point if he has a total listener vocabulary of 100 words. 1/2 point: Give the child 1/2 point if he has a total listener vocabulary of 50 words.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "linguistics-8-m",
+        "type": "Milestone",
+        "domain": "Linguistic Structure",
+        "level": 2,
+        "title": "Linguistics 8-M",
+        "description": "Emits 10 different 2-word utterances per day of any type except echoic (e.g., mand, tact). (O)",
+        "scoring_criteria": "1 point: Give the child 1 point if he emits 10 different 2-word utterances per day of any type except echoic (e.g., mand, tact). These responses can include verbal prompts to respond such as, 'What is that?' or 'What do you want?' 1/2 point: Give the child 1/2 point if he emits 5 different 2-word utterances per day of any type except echoic (e.g., mand, tact).",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "linguistics-9-m",
+        "type": "Milestone",
+        "domain": "Linguistic Structure",
+        "level": 2,
+        "title": "Linguistics 9-M",
+        "description": "Emits functional prosody (i.e., rhythm, stress, intonation) on 5 occasions in one day (e.g., puts emphasis or stress on certain words such as It's MINE!). (O)",
+        "scoring_criteria": "1 point: Give the child 1 point if he emits functional prosody (i.e., rhythm, stress, intonation) on 5 occasions in one day. 1/2 point: Give the child 1/2 point if he emits functional prosody (i.e., rhythm, stress, intonation) on 2 occasions in one day.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "linguistics-10-m",
+        "type": "Milestone",
+        "domain": "Linguistic Structure",
+        "level": 2,
+        "title": "Linguistics 10-M",
+        "description": "Has a total speaker vocabulary of 300 words (all verbal operants, except echoic). (E)",
+        "scoring_criteria": "1 point: Give the child 1 point if he has a total speaker vocabulary size of 300 words. 1/2 point: Give the child 1/2 point if he has a total speaker vocabulary size of 200 words.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    }
+]

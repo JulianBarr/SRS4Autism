@@ -1,0 +1,74 @@
+[
+    {
+        "id": "domain-mand",
+        "type": "Domain",
+        "domain": "Mand",
+        "level": 2,
+        "title": "Mand",
+        "description": "Mand - Level 2",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "mand-6-m",
+            "mand-7-m",
+            "mand-8-m",
+            "mand-9-m",
+            "mand-10-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "mand-6-m",
+        "type": "Milestone",
+        "domain": "Mand",
+        "level": 2,
+        "title": "Mand 6-M",
+        "description": "Mands for 20 different missing items without prompts (except, e.g., What do you need?) (e.g., mands for paper when given a crayon). (E)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he mands for 20 different missing items without prompts (other than verbal prompts such as, \"What's missing?\" or \"What do you need?\"). It is important that the item that is missing be valuable to the child at that moment, (i.e., there must be a current MO at strength for the item). 1/2 point score: Give the child 1/2 point if he mands for 10 different missing items without prompts.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "mand-7-m",
+        "type": "Milestone",
+        "domain": "Mand",
+        "level": 2,
+        "title": "Mand 7-M",
+        "description": "Mands for others to emit 5 different actions or missing actions needed to enjoy a desired activity (e.g., open to get outside, push when on a swing). (E)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he mands for 5 different actions or missing actions needed to enjoy a desired activity during observation or testing without prompts (other than verbal prompts such as, \"What do you want me to do?\"). It is important that the activity that is missing be valuable to the child, (i.e., there must be a current MO at strength for the activity). 1/2 point score: Give the child 1/2 point if he mands for 2 different actions or missing actions needed to enjoy a desired activity during observation or testing without prompts (other than verbal prompts such as, \"What do you want me to do?\").",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "mand-8-m",
+        "type": "Milestone",
+        "domain": "Mand",
+        "level": 2,
+        "title": "Mand 8-M",
+        "description": "Emits 5 different mands that contain 2 or more words (not including I want) (e.g., Go fast. My turn. Pour juice) (TO: 60 min.)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he emits 5 different mands that contain 2 or more words (not including \"I want\") during a 1-hour observation or testing. A list of the different mands emitted by the child should be kept and used as the data base for meeting this milestone. 1/2 point score: Give the child 1/2 point if he emits 2 different mands that contain 2 or more words (not including \"I want\") during a 1-hour observation or testing.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "mand-9-m",
+        "type": "Milestone",
+        "domain": "Mand",
+        "level": 2,
+        "title": "Mand 9-M",
+        "description": "Spontaneously emits 15 different mands. (e.g., Let's play. Open. I want book.) (TO: 30 min.)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he spontaneously emits 15 different mands (no adult delivered prompts) during a 30-minute observation. The mands should be controlled by different MOs. 1/2 point score: Give the child 1/2 point if he spontaneously mands (no adult delivered prompts) 8 times during a 30-minute observation. Also, give the child 1/2 point if his mands contain different response topographies, but are for the same MO (i.e., he asks for the same thing with different words). There must be at least two different MOs involved.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "mand-10-m",
+        "type": "Milestone",
+        "domain": "Mand",
+        "level": 2,
+        "title": "Mand 10-M",
+        "description": "Emits 10 new mands without specific training (e. g., spontaneously says Where kitty go? without formal mand training).(O)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he learns 10 new mands without formal training. Record each new mand on a daily data sheet. 1/2 point score: Give the child 1/2 point if he learns 5 new mands without formal training.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    }
+]

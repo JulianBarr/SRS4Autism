@@ -1,0 +1,268 @@
+[
+    {
+        "id": "barrier-negative-behaviors",
+        "type": "Barrier",
+        "title": "Negative behaviors",
+        "description": "Strong and persistent negative behaviors that impede teaching and learning, such as whining, crying, tantrums, aggression, or self-injurious behaviors.",
+        "scoring_criteria": "0 score: No significant barriers in the targeted area, and no intervention is necessary. 1 score: An occasional problem exists and it should be monitored, but it may not warrant a formal intervention. 2 score: A moderate problem exists and a further analysis and possibly an intervention program should be considered before the problem becomes worse. 3 score: A persistent problem exists and is in need of a behavioral analysis and formal intervention program. 4 score: A severe problem exists and is also in need of an analysis and formal intervention program."
+    },
+    {
+        "id": "barrier-instructional-control",
+        "type": "Barrier",
+        "title": "Instructional control (escape and avoidance behaviors)",
+        "description": "Escape and avoidance behaviors that negatively impact instructional control and impede learning.",
+        "scoring_criteria": "0 score: No significant barriers in the targeted area, and no intervention is necessary. 1 score: An occasional problem exists and it should be monitored, but it may not warrant a formal intervention. 2 score: A moderate problem exists and a further analysis and possibly an intervention program should be considered before the problem becomes worse. 3 score: A persistent problem exists and is in need of a behavioral analysis and formal intervention program. 4 score: A severe problem exists and is also in need of an analysis and formal intervention program."
+    },
+    {
+        "id": "barrier-defective-mand",
+        "type": "Barrier",
+        "title": "Absent, weak, or defective mand",
+        "description": "The mand repertoire is absent, weak, or defective, which requires an individualized analysis to determine the nature of the problem.",
+        "scoring_criteria": "0 score: No significant barriers in the targeted area, and no intervention is necessary. 1 score: An occasional problem exists and it should be monitored, but it may not warrant a formal intervention. 2 score: A moderate problem exists and a further analysis and possibly an intervention program should be considered before the problem becomes worse. 3 score: A persistent problem exists and is in need of a behavioral analysis and formal intervention program. 4 score: A severe problem exists and is also in need of an analysis and formal intervention program."
+    },
+    {
+        "id": "barrier-defective-tact",
+        "type": "Barrier",
+        "title": "Absent, weak, or defective tact",
+        "description": "The tact repertoire is absent, weak, or defective, impeding language acquisition.",
+        "scoring_criteria": "0 score: No significant barriers in the targeted area, and no intervention is necessary. 1 score: An occasional problem exists and it should be monitored, but it may not warrant a formal intervention. 2 score: A moderate problem exists and a further analysis and possibly an intervention program should be considered before the problem becomes worse. 3 score: A persistent problem exists and is in need of a behavioral analysis and formal intervention program. 4 score: A severe problem exists and is also in need of an analysis and formal intervention program."
+    },
+    {
+        "id": "barrier-defective-motor-imitation",
+        "type": "Barrier",
+        "title": "Absent, weak, or defective motor imitation",
+        "description": "Motor imitation skills are absent, weak, or defective, potentially due to physical limitations or other barriers.",
+        "scoring_criteria": "0 score: No significant barriers in the targeted area, and no intervention is necessary. 1 score: An occasional problem exists and it should be monitored, but it may not warrant a formal intervention. 2 score: A moderate problem exists and a further analysis and possibly an intervention program should be considered before the problem becomes worse. 3 score: A persistent problem exists and is in need of a behavioral analysis and formal intervention program. 4 score: A severe problem exists and is also in need of an analysis and formal intervention program."
+    },
+    {
+        "id": "barrier-defective-echoic",
+        "type": "Barrier",
+        "title": "Absent, weak, or defective echoic",
+        "description": "Echoic skills are absent, weak, or defective, which can include non-functional repetition such as echolalia.",
+        "scoring_criteria": "0 score: No significant barriers in the targeted area, and no intervention is necessary. 1 score: An occasional problem exists and it should be monitored, but it may not warrant a formal intervention. 2 score: A moderate problem exists and a further analysis and possibly an intervention program should be considered before the problem becomes worse. 3 score: A persistent problem exists and is in need of a behavioral analysis and formal intervention program. 4 score: A severe problem exists and is also in need of an analysis and formal intervention program."
+    },
+    {
+        "id": "barrier-defective-matching-to-sample",
+        "type": "Barrier",
+        "title": "Absent, weak, or defective matching-to-sample",
+        "description": "Matching-to-sample skills are absent, weak, or defective, which may be related to visual limitations or other learning barriers.",
+        "scoring_criteria": "0 score: No significant barriers in the targeted area, and no intervention is necessary. 1 score: An occasional problem exists and it should be monitored, but it may not warrant a formal intervention. 2 score: A moderate problem exists and a further analysis and possibly an intervention program should be considered before the problem becomes worse. 3 score: A persistent problem exists and is in need of a behavioral analysis and formal intervention program. 4 score: A severe problem exists and is also in need of an analysis and formal intervention program."
+    },
+    {
+        "id": "barrier-defective-listener-repertoires",
+        "type": "Barrier",
+        "title": "Absent, weak, or defective listener repertoires",
+        "description": "Listener repertoires are absent, weak, or defective, interfering with the child's ability to understand spoken language.",
+        "scoring_criteria": "0 score: No significant barriers in the targeted area, and no intervention is necessary. 1 score: An occasional problem exists and it should be monitored, but it may not warrant a formal intervention. 2 score: A moderate problem exists and a further analysis and possibly an intervention program should be considered before the problem becomes worse. 3 score: A persistent problem exists and is in need of a behavioral analysis and formal intervention program. 4 score: A severe problem exists and is also in need of an analysis and formal intervention program."
+    },
+    {
+        "id": "barrier-defective-intraverbal",
+        "type": "Barrier",
+        "title": "Absent, weak, or defective intraverbal",
+        "description": "Intraverbal skills are absent, weak, or defective, such as relying heavily on rote intraverbals.",
+        "scoring_criteria": "0 score: No significant barriers in the targeted area, and no intervention is necessary. 1 score: An occasional problem exists and it should be monitored, but it may not warrant a formal intervention. 2 score: A moderate problem exists and a further analysis and possibly an intervention program should be considered before the problem becomes worse. 3 score: A persistent problem exists and is in need of a behavioral analysis and formal intervention program. 4 score: A severe problem exists and is also in need of an analysis and formal intervention program."
+    },
+    {
+        "id": "barrier-defective-social-behavior",
+        "type": "Barrier",
+        "title": "Absent, weak, or defective social behavior",
+        "description": "Social behavior is defective for a variety of reasons, such as limited motivation for social interaction.",
+        "scoring_criteria": "0 score: No significant barriers in the targeted area, and no intervention is necessary. 1 score: An occasional problem exists and it should be monitored, but it may not warrant a formal intervention. 2 score: A moderate problem exists and a further analysis and possibly an intervention program should be considered before the problem becomes worse. 3 score: A persistent problem exists and is in need of a behavioral analysis and formal intervention program. 4 score: A severe problem exists and is also in need of an analysis and formal intervention program."
+    },
+    {
+        "id": "barrier-prompt-dependent",
+        "type": "Barrier",
+        "title": "Prompt dependent",
+        "description": "A fundamental learning barrier where the child relies excessively on prompts (e.g., to emit mands) rather than independent responding.",
+        "scoring_criteria": "0 score: No significant barriers in the targeted area, and no intervention is necessary. 1 score: An occasional problem exists and it should be monitored, but it may not warrant a formal intervention. 2 score: A moderate problem exists and a further analysis and possibly an intervention program should be considered before the problem becomes worse. 3 score: A persistent problem exists and is in need of a behavioral analysis and formal intervention program. 4 score: A severe problem exists and is also in need of an analysis and formal intervention program."
+    },
+    {
+        "id": "barrier-scrolling-responses",
+        "type": "Barrier",
+        "title": "Scrolling responses",
+        "description": "The child guesses or scrolls through words when learning new vocabulary or attempting to mand.",
+        "scoring_criteria": "0 score: No significant barriers in the targeted area, and no intervention is necessary. 1 score: An occasional problem exists and it should be monitored, but it may not warrant a formal intervention. 2 score: A moderate problem exists and a further analysis and possibly an intervention program should be considered before the problem becomes worse. 3 score: A persistent problem exists and is in need of a behavioral analysis and formal intervention program. 4 score: A severe problem exists and is also in need of an analysis and formal intervention program."
+    },
+    {
+        "id": "barrier-defective-scanning-skills",
+        "type": "Barrier",
+        "title": "Defective scanning skills",
+        "description": "Scanning skills are defective, preventing the child from effectively locating targets in learning tasks.",
+        "scoring_criteria": "0 score: No significant barriers in the targeted area, and no intervention is necessary. 1 score: An occasional problem exists and it should be monitored, but it may not warrant a formal intervention. 2 score: A moderate problem exists and a further analysis and possibly an intervention program should be considered before the problem becomes worse. 3 score: A persistent problem exists and is in need of a behavioral analysis and formal intervention program. 4 score: A severe problem exists and is also in need of an analysis and formal intervention program."
+    },
+    {
+        "id": "barrier-failure-conditional-discriminations",
+        "type": "Barrier",
+        "title": "Failure to make conditional discriminations (CDs)",
+        "description": "The child fails to make conditional discriminations, impeding complex learning tasks.",
+        "scoring_criteria": "0 score: No significant barriers in the targeted area, and no intervention is necessary. 1 score: An occasional problem exists and it should be monitored, but it may not warrant a formal intervention. 2 score: A moderate problem exists and a further analysis and possibly an intervention program should be considered before the problem becomes worse. 3 score: A persistent problem exists and is in need of a behavioral analysis and formal intervention program. 4 score: A severe problem exists and is also in need of an analysis and formal intervention program."
+    },
+    {
+        "id": "barrier-failure-to-generalize",
+        "type": "Barrier",
+        "title": "Failure to generalize",
+        "description": "A fundamental learning barrier characterized by the inability to generalize skills across time, settings, behaviors, materials, and people.",
+        "scoring_criteria": "0 score: No significant barriers in the targeted area, and no intervention is necessary. 1 score: An occasional problem exists and it should be monitored, but it may not warrant a formal intervention. 2 score: A moderate problem exists and a further analysis and possibly an intervention program should be considered before the problem becomes worse. 3 score: A persistent problem exists and is in need of a behavioral analysis and formal intervention program. 4 score: A severe problem exists and is also in need of an analysis and formal intervention program."
+    },
+    {
+        "id": "barrier-weak-motivators",
+        "type": "Barrier",
+        "title": "Weak or atypical motivators",
+        "description": "Motivators for the child are weak or atypical, functioning as a fundamental barrier to achieving significant gains.",
+        "scoring_criteria": "0 score: No significant barriers in the targeted area, and no intervention is necessary. 1 score: An occasional problem exists and it should be monitored, but it may not warrant a formal intervention. 2 score: A moderate problem exists and a further analysis and possibly an intervention program should be considered before the problem becomes worse. 3 score: A persistent problem exists and is in need of a behavioral analysis and formal intervention program. 4 score: A severe problem exists and is also in need of an analysis and formal intervention program."
+    },
+    {
+        "id": "barrier-response-requirement-weakens-mo",
+        "type": "Barrier",
+        "title": "Response requirement weakens motivation",
+        "description": "The effort or requirement to emit a response reduces or weakens the child's motivation to perform.",
+        "scoring_criteria": "0 score: No significant barriers in the targeted area, and no intervention is necessary. 1 score: An occasional problem exists and it should be monitored, but it may not warrant a formal intervention. 2 score: A moderate problem exists and a further analysis and possibly an intervention program should be considered before the problem becomes worse. 3 score: A persistent problem exists and is in need of a behavioral analysis and formal intervention program. 4 score: A severe problem exists and is also in need of an analysis and formal intervention program."
+    },
+    {
+        "id": "barrier-reinforcement-dependent",
+        "type": "Barrier",
+        "title": "Reinforcement dependent",
+        "description": "The child relies excessively on reinforcement to perform skills, indicating a dependence that impedes natural learning.",
+        "scoring_criteria": "0 score: No significant barriers in the targeted area, and no intervention is necessary. 1 score: An occasional problem exists and it should be monitored, but it may not warrant a formal intervention. 2 score: A moderate problem exists and a further analysis and possibly an intervention program should be considered before the problem becomes worse. 3 score: A persistent problem exists and is in need of a behavioral analysis and formal intervention program. 4 score: A severe problem exists and is also in need of an analysis and formal intervention program."
+    },
+    {
+        "id": "barrier-self-stimulation",
+        "type": "Barrier",
+        "title": "Self-stimulation",
+        "description": "A specific behavior that competes with learning, characterized by self-stimulatory actions.",
+        "scoring_criteria": "0 score: No significant barriers in the targeted area, and no intervention is necessary. 1 score: An occasional problem exists and it should be monitored, but it may not warrant a formal intervention. 2 score: A moderate problem exists and a further analysis and possibly an intervention program should be considered before the problem becomes worse. 3 score: A persistent problem exists and is in need of a behavioral analysis and formal intervention program. 4 score: A severe problem exists and is also in need of an analysis and formal intervention program."
+    },
+    {
+        "id": "barrier-articulation-problems",
+        "type": "Barrier",
+        "title": "Articulation problems",
+        "description": "Physical barriers related to articulation errors that must be overcome or accounted for during language acquisition.",
+        "scoring_criteria": "0 score: No significant barriers in the targeted area, and no intervention is necessary. 1 score: An occasional problem exists and it should be monitored, but it may not warrant a formal intervention. 2 score: A moderate problem exists and a further analysis and possibly an intervention program should be considered before the problem becomes worse. 3 score: A persistent problem exists and is in need of a behavioral analysis and formal intervention program. 4 score: A severe problem exists and is also in need of an analysis and formal intervention program."
+    },
+    {
+        "id": "barrier-obsessive-compulsive-behavior",
+        "type": "Barrier",
+        "title": "Obsessive-compulsive behavior",
+        "description": "Obsessive-compulsive actions or routines that compete with and impede the teaching and learning process.",
+        "scoring_criteria": "0 score: No significant barriers in the targeted area, and no intervention is necessary. 1 score: An occasional problem exists and it should be monitored, but it may not warrant a formal intervention. 2 score: A moderate problem exists and a further analysis and possibly an intervention program should be considered before the problem becomes worse. 3 score: A persistent problem exists and is in need of a behavioral analysis and formal intervention program. 4 score: A severe problem exists and is also in need of an analysis and formal intervention program."
+    },
+    {
+        "id": "barrier-hyperactivity",
+        "type": "Barrier",
+        "title": "Hyperactivity",
+        "description": "Specific hyperactive behavior that acts as a physical or attention barrier competing with successful learning.",
+        "scoring_criteria": "0 score: No significant barriers in the targeted area, and no intervention is necessary. 1 score: An occasional problem exists and it should be monitored, but it may not warrant a formal intervention. 2 score: A moderate problem exists and a further analysis and possibly an intervention program should be considered before the problem becomes worse. 3 score: A persistent problem exists and is in need of a behavioral analysis and formal intervention program. 4 score: A severe problem exists and is also in need of an analysis and formal intervention program."
+    },
+    {
+        "id": "barrier-failure-to-make-eye-contact",
+        "type": "Barrier",
+        "title": "Failure to make eye contact, or attend to people",
+        "description": "The child fails to make eye contact or attend to others, forming a social barrier to learning and language acquisition.",
+        "scoring_criteria": "0 score: No significant barriers in the targeted area, and no intervention is necessary. 1 score: An occasional problem exists and it should be monitored, but it may not warrant a formal intervention. 2 score: A moderate problem exists and a further analysis and possibly an intervention program should be considered before the problem becomes worse. 3 score: A persistent problem exists and is in need of a behavioral analysis and formal intervention program. 4 score: A severe problem exists and is also in need of an analysis and formal intervention program."
+    },
+    {
+        "id": "barrier-sensory-defensiveness",
+        "type": "Barrier",
+        "title": "Sensory defensiveness",
+        "description": "Behaviors stemming from sensory defensiveness that compete with the child's ability to engage and learn.",
+        "scoring_criteria": "0 score: No significant barriers in the targeted area, and no intervention is necessary. 1 score: An occasional problem exists and it should be monitored, but it may not warrant a formal intervention. 2 score: A moderate problem exists and a further analysis and possibly an intervention program should be considered before the problem becomes worse. 3 score: A persistent problem exists and is in need of a behavioral analysis and formal intervention program. 4 score: A severe problem exists and is also in need of an analysis and formal intervention program."
+    },
+    {
+        "id": "barrier-negative-behavior",
+        "type": "Barrier",
+        "title": "Negative Behavior",
+        "description": "Negative behaviors that impede learning or cause difficulty for those working with the child, such as crying, tantrums, property destruction, or aggression, often functioning to gain attention or escape demands.",
+        "scoring_criteria": "0 score: typically does not demonstrate behavior problems that impede learning or cause difficulty. 1 score: has some minor behavior problems (e.g., occasional crying or whining), but they are brief and recovery is quick. 2 score: emits a variety of minor negative behaviors every day (e.g., crying, verbal refusal, falling to the floor) which may be persistent and long lasting. 3 score: emits more severe and frequent negative behavior (e.g., tantrums, throwing things, property destruction) that may result in the child controlling daily activities. 4 score: negative behaviors occur several times a day and present a danger to himself or others (e.g., aggression, property destruction, or self-injurious behavior)."
+    },
+    {
+        "id": "barrier-poor-instructional-control",
+        "type": "Barrier",
+        "title": "Poor Instructional Control (escape and avoidance of demands placed upon a child)",
+        "description": "Behaviors emitted by a child to avoid or terminate demands, instructions, or undesirable activities. These range from mild noncompliance (looking away) to severe aggression or self-injury.",
+        "scoring_criteria": "0 score: typically cooperative with adult instructions and demands. 1 score: some demands evoke minor noncompliant behavior, but usually the child is cooperative and recovers quickly. 2 score: emits noncompliant behavior a few times a day with minor tantrums or other behaviors, and it is often difficult to get him to stop. 3 score: showing a progression towards more persistent and severe instructional control problems as measured by an increase in frequency, wider range of situations, and increased severity of avoidance/escape behavior. 4 score: noncompliant behavior is a major issue everyday and the child is quick to emit strong and severe behaviors, such as aggression or property destruction if demands are not removed."
+    },
+    {
+        "id": "barrier-defective-mand-repertoire",
+        "type": "Barrier",
+        "title": "Absent, Weak, or Defective Mand Repertoire",
+        "description": "Difficulty acquiring an effective mand repertoire to inform adults of motivators (e.g., hunger, thirst) or remove aversive events, resulting in mands trailing behind other language skills, being prompt-bound, rote, or entirely absent.",
+        "scoring_criteria": "0 score: has an appropriate mand repertoire that is proportionate with his other skills on the Milestones Assessment. 1 score: does mand, but his LD and tact VB-MAPP Milestones Assessment scores are higher than his mand scores. 2 score: mands are few in number and limited to a small set of consumable or tangible reinforcers, despite strong tacts, LDs, and echoic skills. 3 score: mands are prompt bound, rote, scrolling occurs, responses do not match the MOs, negative behaviors function as mands, excessive or inappropriate mands occur, and the child rarely mands spontaneously. 4 score: does not have any functional mands, or demonstrates the problems listed in score 3 but does not have many other verbal skills either."
+    },
+    {
+        "id": "barrier-defective-tact-repertoire",
+        "type": "Barrier",
+        "title": "Absent, Weak, or Defective Tact Repertoire",
+        "description": "Problems related to establishing a functional tact repertoire, such as the wrong nonverbal stimulus acquiring control (rote tacting errors), scrolling, failing to generalize, or lack of spontaneity.",
+        "scoring_criteria": "0 score: has an appropriate tact repertoire that is in proportion with his other skills on the Milestones Assessment. 1 score: can tact some items and has good echoic skills, but his listener discrimination (LD) vocabulary markedly outnumbers his tact vocabulary. 2 score: tacting errors occur frequently, the child scrolls, or the tacts are prompt bound and require frequent maintenance trials. 3 score: tact repertoire is significantly out of balance with other skills, and tacts are clearly defective as indicated by failing to generalize, lack of spontaneity, limited functional use, rote tacts, escape/avoidance during training, or failing to move beyond single word tacts. 4 score: tact repertoire is nonexistent or limited to a few tacts, despite a strong echoic and LD repertoire."
+    },
+    {
+        "id": "barrier-motor-imitation",
+        "type": "Barrier",
+        "title": "Absent, Weak, or Defective Motor Imitation",
+        "description": "Imitating the motor behavior of others is critical for development. Barriers occur when a child fails to establish imitation, becomes prompt bound, learns non-functional skills, relies on subtle imitative prompts, or imitates negative/inappropriate behaviors.",
+        "scoring_criteria": "0 score: Motor imitation skills are consistently growing, are age appropriate, and in proportion with other milestones. 1 score: Does imitate, but imitation scores are lower than other skills. 2 score: Difficulty generalizing imitation skills, dependent on imitative prompts, or copies inappropriate behaviors. 3 score: Imitation is physically or verbally prompt bound, or demonstrates a weak motivation for imitation. 4 score: No imitation skills and previous attempts have failed, or never imitates spontaneously or functionally."
+    },
+    {
+        "id": "barrier-echoic-repertoire",
+        "type": "Barrier",
+        "title": "Absent, Weak, or Defective Echoic Repertoire",
+        "description": "A child's ability to echo words on command is a key component of early language development. Barriers include an inability to echo words, becoming prompt bound, or exhibiting echolalia, delayed echolalia (palilalia), and excessive scripting.",
+        "scoring_criteria": "0 score: Echoic skills are consistently growing, age appropriate, and in proportion with other milestones. 1 score: Does echo, but echoic scores are lower than other milestones. 2 score: Becomes echoically prompt bound, transfer of control is difficult, or echoic acquisition is falling behind other skills. 3 score: Echoic repertoire becomes too strong (echolalia/delayed echolalia) or is relatively weak, slow to acquire, and lacks spontaneous echoic behavior. 4 score: Fails to acquire any echoic behavior despite other basic skills, or attempts to teach evoke negative behaviors."
+    },
+    {
+        "id": "barrier-vp-mts",
+        "type": "Barrier",
+        "title": "Absent, Weak, or Defective Visual Perceptual Skills and Matching-to-Sample (VP-MTS)",
+        "description": "The ability to attend to and discriminate among visual stimuli. Common barriers include failing to attend to the sample stimulus or scan the array, guessing, scrolling, side or position biases, and rote patterns of responding.",
+        "scoring_criteria": "0 score: VP-MTS skills are growing consistently, age appropriate, and in proportion with other milestones. 1 score: Demonstrates some matching, but VP-MTS scores are lower than other skills (especially Listener Discriminations). 2 score: Shows missing task elements (failing to scan/attend), side or position bias, scrolling, rote patterns, or is limited to small arrays. 3 score: Acquired some MTS skills but is not progressing, exhibits negative behaviors during teaching, or fails to generalize. 4 score: Fails to acquire significant MTS skills despite repeated attempts, or acquired skills are rote, defective, or never functional in the natural environment."
+    },
+    {
+        "id": "barrier-listener-repertoires",
+        "type": "Barrier",
+        "title": "Absent, Weak, or Defective Listener Repertoires (LD and LRFFC)",
+        "description": "Involves attending to a speaker, reinforcing a speaker, and demonstrating understanding of what is said (receptive language). Barriers include failing to scan arrays, position biases, scrolling, and difficulty with multiple verbal stimuli or conditional discriminations.",
+        "scoring_criteria": "0 score: Listener skills are growing consistently, age appropriate, and in proportion with other milestones. 1 score: Demonstrates some listener skills, but scores are lower than other skills (especially tacts). 2 score: Shows missing elements of the task (failing to scan/attend, early responding), side or position bias, rote patterns, scrolling, or limitations to small arrays. 3 score: Acquired some LD skills but is not progressing, exhibits negative behaviors, or struggles with complex/similar stimuli and generalization. 4 score: Fails to acquire any significant LD skills despite having other related skills."
+    },
+    {
+        "id": "barrier-defective-social-skills",
+        "type": "Barrier",
+        "title": "Absent, Weak, or Defective Social Skills",
+        "description": "Struggles with learning appropriate social behavior and suffers from a variety of social deficits, often due to weak motivators, aversive motivators, lack of verbal behavior, or negative behavior problems.",
+        "scoring_criteria": "0 score: No barrier (implied). 1 score: Social skills are growing consistently and are in proportion with other skills, or social behavior occurs but scores are falling behind other Milestones. 2 score: Rarely initiates a social interaction with a peer, emits socially negative behavior, or rarely spontaneously imitates, plays with, or mands to peers. 3 score: Stays by himself during play periods, does not take turns or share items, does not respond to peer's mands, or does not verbally engage with peers. 4 score: Has language skills but actively avoids other children, emits negative or inappropriate behaviors when forced into a social situation, or almost never responds to mands from peers."
+    },
+    {
+        "id": "barrier-scrolling",
+        "type": "Barrier",
+        "title": "Scrolling",
+        "description": "The child emits multiple responses (scrolling) without establishing correct stimulus control before moving on to a new word, which is sometimes inadvertently reinforced by adults.",
+        "scoring_criteria": "0 score: does not scroll responses. 1 score: occasionally scrolls when new words are added, but stops after a small number of discrimination training trials. 2 score: scrolling is frequently a problem and usually occurs when new words are introduced, taking several trials to stop. 3 score: scrolling continues to resurface with previously 'acquired' words, indicating they may have been prompted. 4 score: scrolling occurs during almost every trial with a long history of failure to fix."
+    },
+    {
+        "id": "barrier-failure-to-make-conditional-discriminations",
+        "type": "Barrier",
+        "title": "A Failure to Make Conditional Discriminations",
+        "description": "The child fails to learn responses involving conditional discriminations, where one stimulus changes the significance of another stimulus across multiple interlocking contingencies.",
+        "scoring_criteria": "0 score: makes conditional discriminations at a level in balance with other Milestone scores. 1 score: has trouble when the conditional discrimination requires more effort or attending (e.g., bigger arrays, similar stimuli, natural settings). 2 score: has difficulty when the stimulus involves multiple verbal components, but can respond to each independently. 3 score: fails at most tasks that involve conditional discriminations, except matching-to-sample, and frequently emits negative behavior. 4 score: does not make conditional discriminations, despite having simple discrimination skills."
+    },
+    {
+        "id": "barrier-weak-or-atypical-motivating-operations",
+        "type": "Barrier",
+        "title": "Weak or Atypical Motivating Operations (MOs)",
+        "description": "The child demonstrates a limited range of motivating operations, weak unlearned motivators, or a collection of odd or atypical motivators that may become excessively strong.",
+        "scoring_criteria": "0 score: N/A (Text cuts off before explicitly listing the 0-4 scoring criteria for this specific barrier). 1 score: N/A. 2 score: N/A. 3 score: N/A. 4 score: N/A."
+    },
+    {
+        "id": "barrier-motivation",
+        "type": "Barrier",
+        "title": "Motivation",
+        "description": "The child has a limited range of motivators, both unlearned and learned, or relies on odd and aberrant motivators (e.g., self-stims, repetitive motions) that make creating and capturing motivation for teaching purposes difficult.",
+        "scoring_criteria": "0 score: Demonstrates a wide range of age-appropriate MOs, and they are predictably strong and show variation. 1 score: Motivators are slightly different from those of typically developing children. 2 score: Demonstrates MOs for odd behavior patterns or has weak MOs for age-appropriate and social reinforcers. 3 score: Demonstrates aberrant MOs for unlearned reinforcers or MOs quickly weaken after a short contact with a desired item; high rates of stereotypy. 4 score: Very limited range of MOs (perhaps just 2 or 3) that may be odd but very strong, and negative behavior occurs if not allowed to engage in them."
+    },
+    {
+        "id": "barrier-failure-to-make-eye-contact-or-attend-to-people",
+        "type": "Barrier",
+        "title": "Failure to Make Eye Contact or Attend to People",
+        "description": "The failure to use eye contact as a form of early communication or to appropriately attend to other people's eyes and faces, which can impede social and academic development.",
+        "scoring_criteria": "0 score: Makes age-appropriate eye contact with others, and appropriately attends to people. 1 score: Adults begin to notice that the child is not making eye contact in a manner similar to typically developing children. 2 score: Does not make frequent eye contact, or attends to faces and people in a manner similar to typically developing children. 3 score: Makes no eye contact while manding and it is difficult to get him to make eye contact under most circumstances. 4 score: Almost never makes eye contact and avoids looking at faces and people."
+    }
+]

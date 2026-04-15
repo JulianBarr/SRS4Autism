@@ -1,0 +1,30 @@
+[
+    {
+        "id": "barrier-obsessive-compulsive-behavior",
+        "type": "Barrier",
+        "title": "Obsessive-Compulsive Behavior",
+        "description": "Demonstrating strong obsessions over particular aspects of the environment (e.g., clothing, textures, routines, patterns) that compete with instructional stimulus control and disrupt learning.",
+        "scoring_criteria": "0 score: Does not demonstrate any obsessive-compulsive behaviors that impede learning. 1 score: Demonstrates some minor obsessions, but they are easily overcome and don't interfere with learning. 2 score: Has several different obsessions, and emits mild negative behaviors when they are not met but will usually comply and participate in learning tasks without further disruption. 3 score: Emits several different obsessions or a few very strong ones, and if disrupted engages in immediate and strong negative behaviors that impede learning. 4 score: Obsessions are consistent and strong, are the major focus of each day, and if not allowed, negative behaviors may be severe and learning is regularly disrupted."
+    },
+    {
+        "id": "barrier-hyperactivity",
+        "type": "Barrier",
+        "title": "Hyperactivity",
+        "description": "Exhibiting high rates of motor behavior such as running around, climbing on things, fidgeting, difficulty playing quietly, and having difficulty attending to academic work or completing tasks.",
+        "scoring_criteria": "0 score: Is not excessively hyperactive compared to typically developing peers, and attends to most tasks and activities without difficulty. 1 score: Occasionally emits hyperactive behavior or fails to attend, but behaviors are not disruptive to learning or daily living. 2 score: Moves around frequently, seems restless, and has difficulty attending to tasks; hyperactive and inattentive behaviors are interfering with learning. 3 score: Often difficult to control hyperactive behavior; requires frequent prompting to attend, sit still, and complete an activity. 4 score: Constantly 'on the go,' behavior is the major focus of each day, and is generally difficult to manage or keep engaged in any academic or social activity."
+    },
+    {
+        "id": "barrier-failure-to-make-eye-contact-or-attend-to-people",
+        "type": "Barrier",
+        "title": "Failure to Make Eye Contact or Attend to People",
+        "description": "The failure to use eye contact as a form of early communication or to appropriately attend to other people's eyes and faces, which can impede social and academic development.",
+        "scoring_criteria": "0 score: Makes age-appropriate eye contact with others, and appropriately attends to people. 1 score: Adults begin to notice that the child is not making eye contact in a manner similar to typically developing children. 2 score: Does not make frequent eye contact, or attends to faces and people in a manner similar to typically developing children. 3 score: Makes no eye contact while manding and it is difficult to get him to make eye contact under most circumstances. 4 score: Almost never makes eye contact and avoids looking at faces and people."
+    },
+    {
+        "id": "barrier-sensory-defensiveness",
+        "type": "Barrier",
+        "title": "Sensory Defensiveness",
+        "description": "Hypersensitivity to various types of sensory stimulation (auditory, tactile, visual, smells, tastes) where the stimulation functions as an aversive motivator and evokes avoidance or negative behaviors.",
+        "scoring_criteria": "0 score: Does not have any problems related to sensory stimuli. 1 score: Adults begin to notice that sensitivity to various sensory stimuli is different from that of other children. 2 score: Certain sensory stimulation predictably affect the child, but the defensiveness is mild and does not usually interfere with learning activities. 3 score: Frequently reacts to specific sensory stimuli with avoidance behavior (e.g., hands over ears) and may become quite agitated. 4 score: Consistently reacts to specific sensory stimuli with more severe negative behavior such as tantrums and aggression."
+    }
+]

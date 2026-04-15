@@ -1,0 +1,138 @@
+[
+    {
+        "id": "domain-lrffc",
+        "type": "Domain",
+        "domain": "LRFFC",
+        "level": 2,
+        "title": "Listener Responding by Function, Feature, and Class",
+        "description": "Listener Responding by Function, Feature, and Class (LRFFC)",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "lrffc-10-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "lrffc-10-m",
+        "type": "Milestone",
+        "domain": "LRFFC",
+        "level": 2,
+        "title": "LRFFC 10-M",
+        "description": "Spontaneously tacts the item on 50% of the LRFFC trials (e.g., says dog given the verbal statement find an animal, and a visual array containing a picture of a dog).",
+        "scoring_criteria": "1 point score: Give the child 1 point if he spontaneously tacts the target item on 50% of the LRFFC trials. Some children will quickly begin to tact the items given a couple of verbal prompts. Give the child credit if he continues to tact the items after prompts have been removed and does so at least 50% of the time on future trials. 1/2 point score: Give the child 1/2 point if he spontaneously tacts the target item on 25% of the LRFFC trials, or if he tacts on 50% of the trials, but always requires one prompt at the beginning of an LRFFC session.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "domain-intraverbal",
+        "type": "Domain",
+        "domain": "Intraverbal",
+        "level": 2,
+        "title": "Intraverbal - Level 2",
+        "description": "Intraverbal behavior consists of words controlled by other words, not words controlled by objects or actions (tacts), or words controlled by motivation (mands).",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "intraverbal-6-m",
+            "intraverbal-7-m",
+            "intraverbal-8-m",
+            "intraverbal-9-m",
+            "intraverbal-10-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "intraverbal-6-m",
+        "type": "Milestone",
+        "domain": "Intraverbal",
+        "level": 2,
+        "title": "Intraverbal 6-M",
+        "description": "Completes 10 different fill-in-the-blank phrases of any type (e.g., song fill-ins, social games and fun fill-ins, animal or object sounds). (T)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he fills in the missing words for 10 different songs, fun activities, animal sounds, toys or object sounds, or any other verbal associations. 1/2 point score: Give the child 1/2 point if he fills in 5 phrases.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "intraverbal-7-m",
+        "type": "Milestone",
+        "domain": "Intraverbal",
+        "level": 2,
+        "title": "Intraverbal 7-M",
+        "description": "Provides first name when asked, What is your name? (T)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he can say his name when asked without echoic prompts. 1/2 point score: None.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "intraverbal-8-m",
+        "type": "Milestone",
+        "domain": "Intraverbal",
+        "level": 2,
+        "title": "Intraverbal 8-M",
+        "description": "Completes 25 different fill-in-the-blank phrases (not including songs) (e.g., You eat..., You sleep in a..., Shoes and...). (T)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he fills in the missing words from 25 different phrases, associations, common sayings, or out-of-context daily activities. 1/2 point score: Give the child 1/2 point if he fills in 12 phrases.",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "intraverbal-6-m"
+        ]
+    },
+    {
+        "id": "intraverbal-9-m",
+        "type": "Milestone",
+        "domain": "Intraverbal",
+        "level": 2,
+        "title": "Intraverbal 9-M",
+        "description": "Answers 25 different what questions (e.g., What do you like to eat?). (T)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he answers 25 different what questions without echoic prompts, and without the presence of the relevant object. 1/2 point score: Give the child 1/2 point if he answers 12 what questions.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "intraverbal-10-m",
+        "type": "Milestone",
+        "domain": "Intraverbal",
+        "level": 2,
+        "title": "Intraverbal 10-M",
+        "description": "Answers 25 different who or where questions (e.g., Whose your friend? Where is...).",
+        "scoring_criteria": "1 point score: Give the child 1 point if he answers 25 different “who” or “where” questions without echoic prompts, or the presence of the object. 1/2 point score: Give the child 1/2 point if he answers 12 different “who” or “where” questions.",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "intraverbal-9-m"
+        ]
+    },
+    {
+        "id": "domain-group",
+        "type": "Domain",
+        "domain": "Group",
+        "level": 2,
+        "title": "Classroom Routines and Group Skills",
+        "description": "Classroom Routines and Group Skills - Level 2",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "group-6-m",
+            "group-7-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "group-6-m",
+        "type": "Milestone",
+        "domain": "Group",
+        "level": 2,
+        "title": "Group 6-M",
+        "description": "Sits at a group snack or lunch table without negative behavior for 3 minutes. (O)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he sits at a group snack or lunch table with gestural and verbal prompts without negative behavior for 3 minutes. He can be prompted to sit down, but must remain seated for 3 minutes without an adult prompt to sit back down. 1/2 point score: Give the child 1/2 point if he sits at a group snack or lunch table with gestural and verbal prompts without negative behavior for 1 minute.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "group-7-m",
+        "type": "Milestone",
+        "domain": "Group",
+        "level": 2,
+        "title": "Group 7-M",
+        "description": "Puts away personal items, lines up, or comes to a table with only 1 verbal prompt. (O)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he puts away a backpack, coat or lunch, and lines up and comes to a table when verbally prompted only once by an adult.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    }
+]

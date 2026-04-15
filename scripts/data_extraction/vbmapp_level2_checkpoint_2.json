@@ -1,0 +1,129 @@
+[
+    {
+        "id": "domain-tact",
+        "type": "Domain",
+        "domain": "Tact",
+        "level": 2,
+        "title": "Tact",
+        "description": "Tact Skills Level 2",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "tact-6-m",
+            "tact-7-m",
+            "tact-8-m",
+            "tact-9-m",
+            "tact-10-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "tact-6-m",
+        "type": "Milestone",
+        "domain": "Tact",
+        "level": 2,
+        "title": "Tact 6-M",
+        "description": "Tacts 25 items when asked, What's that? (e.g., book, shoe, car, dog, hat). (T)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he tacts 25 items when tested. 1/2 point score: Give the child 1/2 point if he tacts 20 items when tested.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "tact-7-m",
+        "type": "Milestone",
+        "domain": "Tact",
+        "level": 2,
+        "title": "Tact 7-M",
+        "description": "Generalizes tacts across 3 examples of 50 items, tested or from a list of known generalizations (e.g., tacts 3 different cars). (T)",
+        "scoring_criteria": "1 point score: Give the child 1 point if his tacts have generalized across 3 examples of 50 items when tested. A list of mastered (known) generalizations can be used if it is available and the scoring has been reliable. 1/2 point score: Give the child 1/2 point if his tacts have generalized across 2 examples of 50 items when tested.",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "tact-6-m"
+        ]
+    },
+    {
+        "id": "tact-8-m",
+        "type": "Milestone",
+        "domain": "Tact",
+        "level": 2,
+        "title": "Tact 8-M",
+        "description": "Tacts 10 actions when asked, for example, What am I doing? (e.g., jumping, sleeping, eating). (T)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he tacts 10 actions when tested. 1/2 point score: Give the child 1/2 point if he tacts 5 actions when tested.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "tact-9-m",
+        "type": "Milestone",
+        "domain": "Tact",
+        "level": 2,
+        "title": "Tact 9-M",
+        "description": "Tacts 50 two-component verb-noun or noun-verb combinations tested or from a list of known two-component tacts (e.g., washing face, Joe swinging, baby sleeping).",
+        "scoring_criteria": "1 point score: Give the child 1 point if he tacts 50 two-component noun-verb (or verb-noun) relations when tested. A list of mastered (known) noun-verb or verb-noun combinations can be used if it is available and reliable. 1/2 point score: Give the child 1/2 point if he tacts 25 two-component noun-verb (or verb-noun) relations.",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "tact-6-m",
+            "tact-8-m"
+        ]
+    },
+    {
+        "id": "tact-10-m",
+        "type": "Milestone",
+        "domain": "Tact",
+        "level": 2,
+        "title": "Tact 10-M",
+        "description": "Tacts a total of 200 nouns and/or verbs (or other parts of speech) tested or from an accumulated list of known tacts. (T)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he tacts 200 items and/or actions when tested. A list of the child's known nouns and verbs can be used for this measure. 1/2 point score: Give the child 1/2 point if he provides the name of 150 items and/or actions.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "domain-listener-responding",
+        "type": "Domain",
+        "domain": "Listener Responding",
+        "level": 2,
+        "title": "Listener Responding",
+        "description": "Listener Responding Skills Level 2",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "listener-responding-6-m",
+            "listener-responding-7-m",
+            "listener-responding-8-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "listener-responding-6-m",
+        "type": "Milestone",
+        "domain": "Listener Responding",
+        "level": 2,
+        "title": "Listener Responding 6-M",
+        "description": "Selects the correct item from a messy array of 6, for 40 different objects or pictures (e.g., Find cat. Touch ball.). (T)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he identifies 40 items in a messy array of 6 (i.e., not lined up) when tested. 1/2 point score: Give the child 1/2 point if he identifies 25 items in a messy array of 6 when tested.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "listener-responding-7-m",
+        "type": "Milestone",
+        "domain": "Listener Responding",
+        "level": 2,
+        "title": "Listener Responding 7-M",
+        "description": "Generalizes listener discriminations (LDs) in a messy array of 8, for 3 different examples of 50 items (e.g., the child can find 3 examples of a train). (T)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he generalizes LDs across 3 examples of 50 items. 1/2 point score: Give the child 1/2 point if he generalizes LDs across 2 examples of 25 items.",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "listener-responding-6-m"
+        ]
+    },
+    {
+        "id": "listener-responding-8-m",
+        "type": "Milestone",
+        "domain": "Listener Responding",
+        "level": 2,
+        "title": "Listener Responding 8-M",
+        "description": "Performs 10 specific motor actions on command (e.g., Show me clapping. Can you hop?). (T)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he demonstrates 10 actions on command. Approximations should be scored as correct. 1/2 point score: Give the child 1/2 point if he demonstrates 5 actions on command.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    }
+]

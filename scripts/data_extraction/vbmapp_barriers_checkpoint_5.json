@@ -1,0 +1,37 @@
+[
+    {
+        "id": "barrier-scrolling",
+        "type": "Barrier",
+        "title": "Scrolling",
+        "description": "The child emits multiple responses (scrolling) without establishing correct stimulus control before moving on to a new word, which is sometimes inadvertently reinforced by adults.",
+        "scoring_criteria": "0 score: does not scroll responses. 1 score: occasionally scrolls when new words are added, but stops after a small number of discrimination training trials. 2 score: scrolling is frequently a problem and usually occurs when new words are introduced, taking several trials to stop. 3 score: scrolling continues to resurface with previously 'acquired' words, indicating they may have been prompted. 4 score: scrolling occurs during almost every trial with a long history of failure to fix."
+    },
+    {
+        "id": "barrier-defective-scanning-skills",
+        "type": "Barrier",
+        "title": "Defective Scanning Skills",
+        "description": "The child fails to properly scan a visual array (carefully look at stimuli), which is essential for matching-to-sample, listener discriminations (LDs), and listener responding by function, feature, and class (LRFFC).",
+        "scoring_criteria": "0 score: typically scans a visual array on tasks that require it. 1 score: scans arrays with 6 to 8 items without prompts, but has difficulty with arrays larger than 10 or with similar stimuli. 2 score: must be frequently prompted to attend, usually cannot select correctly from an array larger than 5 or a scene. 3 score: scanning is limited to an array of 2 or 3, and correct selection is often by chance or prompted. 4 score: does not scan arrays, responds before scanning, or emits negative behavior when required to scan."
+    },
+    {
+        "id": "barrier-failure-to-make-conditional-discriminations",
+        "type": "Barrier",
+        "title": "A Failure to Make Conditional Discriminations",
+        "description": "The child fails to learn responses involving conditional discriminations, where one stimulus changes the significance of another stimulus across multiple interlocking contingencies.",
+        "scoring_criteria": "0 score: makes conditional discriminations at a level in balance with other Milestone scores. 1 score: has trouble when the conditional discrimination requires more effort or attending (e.g., bigger arrays, similar stimuli, natural settings). 2 score: has difficulty when the stimulus involves multiple verbal components, but can respond to each independently. 3 score: fails at most tasks that involve conditional discriminations, except matching-to-sample, and frequently emits negative behavior. 4 score: does not make conditional discriminations, despite having simple discrimination skills."
+    },
+    {
+        "id": "barrier-failure-to-generalize",
+        "type": "Barrier",
+        "title": "Failure to Generalize",
+        "description": "The child acquires exactly what is taught but fails to generalize to new conditions (stimulus generalization) or fails to provide variations in responses (response generalization).",
+        "scoring_criteria": "0 score: typically demonstrates both stimulus and response generalization commensurate with other skills. 1 score: shows some kind of difficulty with any type of stimulus generalization or any specific skill falling behind. 2 score: requires formal generalization training on most skills, needing multiple exemplars, but usually retains them. 3 score: generalization training is laborious, often unsuccessful, and frequently loses generalized skills. 4 score: does not demonstrate any generalization to untrained stimuli despite extensive efforts."
+    },
+    {
+        "id": "barrier-weak-or-atypical-motivating-operations",
+        "type": "Barrier",
+        "title": "Weak or Atypical Motivating Operations (MOs)",
+        "description": "The child demonstrates a limited range of motivating operations, weak unlearned motivators, or a collection of odd or atypical motivators that may become excessively strong.",
+        "scoring_criteria": "0 score: N/A (Text cuts off before explicitly listing the 0-4 scoring criteria for this specific barrier). 1 score: N/A. 2 score: N/A. 3 score: N/A. 4 score: N/A."
+    }
+]

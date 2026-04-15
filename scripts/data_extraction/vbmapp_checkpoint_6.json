@@ -1,0 +1,120 @@
+[
+    {
+        "id": "domain-echoic",
+        "type": "Domain",
+        "domain": "Echoic",
+        "level": 1,
+        "title": "Echoic (EESA Subtest) - Level 1",
+        "description": "Assessment of echoic behaviors utilizing the Early Echoic Skills Assessment (EESA).",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "echoic-1-m",
+            "echoic-2-m",
+            "echoic-3-m",
+            "echoic-4-m",
+            "echoic-5-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "echoic-1-m",
+        "type": "Milestone",
+        "domain": "Echoic",
+        "level": 1,
+        "title": "Echoic 1-M",
+        "description": "Scores at least 2 on the EESA subtest.",
+        "scoring_criteria": "1 point: Give the child 1 point if he scores 2 or more on the EESA subtest. 1/2 point: Give the child 1/2 point if he scores 1 on the EESA subtest.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "echoic-2-m",
+        "type": "Milestone",
+        "domain": "Echoic",
+        "level": 1,
+        "title": "Echoic 2-M",
+        "description": "Scores at least 5 on the EESA subtest.",
+        "scoring_criteria": "1 point: Give the child 1 point if he scores 5 or more on the EESA subtest. 1/2 point: Give the child 1/2 point if he scores 3 on the EESA subtest.",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "echoic-1-m"
+        ]
+    },
+    {
+        "id": "echoic-3-m",
+        "type": "Milestone",
+        "domain": "Echoic",
+        "level": 1,
+        "title": "Echoic 3-M",
+        "description": "Scores at least 10 on the EESA subtest.",
+        "scoring_criteria": "1 point: Give the child 1 point if he scores 10 or more on the EESA subtest. 1/2 point: Give the child 1/2 point if he scores 7 on the EESA.",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "echoic-2-m"
+        ]
+    },
+    {
+        "id": "echoic-4-m",
+        "type": "Milestone",
+        "domain": "Echoic",
+        "level": 1,
+        "title": "Echoic 4-M",
+        "description": "Scores at least 15 on the EESA subtest.",
+        "scoring_criteria": "1 point: Give the child 1 point if he scores 15 or more on the EESA subtest. 1/2 point: Give the child 1/2 point if he scores 12 on the EESA subtest.",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "echoic-3-m"
+        ]
+    },
+    {
+        "id": "echoic-5-m",
+        "type": "Milestone",
+        "domain": "Echoic",
+        "level": 1,
+        "title": "Echoic 5-M",
+        "description": "Scores at least 25 on the EESA subtest (at least 20 from group 1).",
+        "scoring_criteria": "1 point: Give the child 1 point if he scores 25 or more on the EESA subtest, with at least 20 from group 1. 1/2 point: Give the child 1/2 point if he scores 20 on the EESA subtest with at least 15 from group 1.",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "echoic-4-m"
+        ]
+    },
+    {
+        "id": "domain-vocal",
+        "type": "Domain",
+        "domain": "Spontaneous Vocal Behavior",
+        "level": 1,
+        "title": "Spontaneous Vocal Behavior - Level 1",
+        "description": "Assessment of a child's spontaneous emission of speech sounds without prompts.",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "vocal-1-m",
+            "vocal-2-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "vocal-1-m",
+        "type": "Milestone",
+        "domain": "Spontaneous Vocal Behavior",
+        "level": 1,
+        "title": "Vocal 1-M",
+        "description": "Spontaneously emits an average of 5 speech sounds each hour.",
+        "scoring_criteria": "1 point: Give the child 1 point if he spontaneously emits an average of 5 speech sounds each hour. A time-sample type of data recording can be used to measure this behavior. 1/2 point: Give the child 1/2 point if he spontaneously emits an average of 2 speech sounds each hour.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "vocal-2-m",
+        "type": "Milestone",
+        "domain": "Spontaneous Vocal Behavior",
+        "level": 1,
+        "title": "Vocal 2-M",
+        "description": "Spontaneously emits 5 different sounds, averaging 10 total sounds each hour. (TO: 60 min.)",
+        "scoring_criteria": "1 point: Give the child 1 point if he spontaneously emits 5 different sounds, averaging 10 total sounds each hour. 1/2 point: Give the child 1/2 point if he spontaneously emits 3 different sounds, averaging 10 total sounds each hour.",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "vocal-1-m"
+        ]
+    }
+]

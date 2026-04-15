@@ -1,0 +1,110 @@
+[
+    {
+        "id": "domain-listener",
+        "type": "Domain",
+        "domain": "Listener",
+        "level": 3,
+        "title": "Listener",
+        "description": "Listener milestones for Level 3.",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "listener-14-m",
+            "listener-15-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "listener-14-m",
+        "type": "Milestone",
+        "domain": "Listener",
+        "level": 3,
+        "title": "Listener 14-M",
+        "description": "Follows 3-step directions for 10 different directions (e.g., Get your coat, hang it up, and sit down.). (T)",
+        "scoring_criteria": "1 point: Give the child 1 point if he follows ten 3-step directions. 1/2 point: Give the child 1/2 point if he follows five 3-step directions.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "listener-15-m",
+        "type": "Milestone",
+        "domain": "Listener",
+        "level": 3,
+        "title": "Listener 15-M",
+        "description": "Has a total listener repertoire of 1200 words (nouns, verbs, adjectives, etc.), or from an accumulated list of known words. (T)",
+        "scoring_criteria": "1 point: Give the child 1 point if he identifies 1200 nonverbal stimuli (nouns, verbs, adjectives, adverbs, pronouns, etc.). An accumulated list of the child’s known words can be used for this measure, if it is reliable. (Note: see the comments regarding this measure in Tact Level 3-15.) 1/2 point: Give the child 1/2 point if he identifies 800 nonverbal stimuli (nouns, verbs, adjectives, adverbs, pronouns, etc.). An accumulated list of the child’s known words can be used for this measure, if it is reliable.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "domain-vp-mts",
+        "type": "Domain",
+        "domain": "Visual Perceptual Skills and Matching-to-Sample",
+        "level": 3,
+        "title": "Visual Perceptual Skills and Matching-to-Sample (VP-MTS)",
+        "description": "Visual Perceptual Skills and Matching-to-Sample (VP-MTS) milestones for Level 3.",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "vp-mts-11-m",
+            "vp-mts-12-m",
+            "vp-mts-13-m",
+            "vp-mts-14-m",
+            "vp-mts-15-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "vp-mts-11-m",
+        "type": "Milestone",
+        "domain": "Visual Perceptual Skills and Matching-to-Sample",
+        "level": 3,
+        "title": "VP-MTS 11-M",
+        "description": "Spontaneously matches any part of an arts and crafts activity to another person’s sample 2 times (e.g., a peer colors a balloon red and the child copies the peer's red color for his balloon). (O)",
+        "scoring_criteria": "1 point: Give the child 1 point if he spontaneously matches any part of an arts and crafts activity to an adult or peer's sample 2 times. 1/2 point: Give the child 1/2 point if he spontaneously matches any part of an arts and crafts activity to an adult or peer's sample once.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "vp-mts-12-m",
+        "type": "Milestone",
+        "domain": "Visual Perceptual Skills and Matching-to-Sample",
+        "level": 3,
+        "title": "VP-MTS 12-M",
+        "description": "Demonstrates generalized non-identical matching in a messy array of 10 with 3 similar stimuli, for 25 items (i.e., matches new items on the first trial). (T)",
+        "scoring_criteria": "1 point: Give the child 1 point if he demonstrates generalized non-identical matching with a novel item in a messy array of 10 with 3 similar stimuli, for 25 items. 1/2 point: Give the child 1/2 point if he demonstrates generalized non-identical matching with a novel item in a messy array of 10 with 3 similar stimuli, for 15 items.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "vp-mts-13-m",
+        "type": "Milestone",
+        "domain": "Visual Perceptual Skills and Matching-to-Sample",
+        "level": 3,
+        "title": "VP-MTS 13-M",
+        "description": "Completes 20 different block designs, parquetry, shape puzzles, or similar tasks with at least 8 different pieces. (T)",
+        "scoring_criteria": "1 point: Give the child 1 point if he completes 20 different block designs, shape puzzles, or similar tasks with at least 8 different parts. 1/2 point: Give the child 1/2 point if he completes 20 different block designs, shape puzzles, or similar tasks with at least 4 different parts.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "vp-mts-14-m",
+        "type": "Milestone",
+        "domain": "Visual Perceptual Skills and Matching-to-Sample",
+        "level": 3,
+        "title": "VP-MTS 14-M",
+        "description": "Sorts 5 items from 5 different categories without a model (e.g., animals, clothing, furniture). (T)",
+        "scoring_criteria": "1 point: Give the child 1 point if sorts at least 5 items from 5 different categories without a model (but the adult can use a starter prompts such as, “Can you sort these?”). 1/2 point: Give the child 1/2 point if he sorts at least 3 items from 3 different categories without a model (other than verbal prompts).",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "vp-mts-15-m",
+        "type": "Milestone",
+        "domain": "Visual Perceptual Skills and Matching-to-Sample",
+        "level": 3,
+        "title": "VP-MTS 15-M",
+        "description": "Continues 20 three-step patterns, sequences, or seriation tasks (e.g., star, square, heart, star, triangle...). (T)",
+        "scoring_criteria": "1 point: Give the child 1 point if he continues 20 three-step patterns, sequences, or seriation tasks. 1/2 point: Give the child 1/2 point if he continues 20 two-step patterns, sequences, or seriation tasks.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    }
+]

@@ -1,0 +1,110 @@
+[
+    {
+        "id": "domain-tact",
+        "type": "Domain",
+        "domain": "Tact",
+        "level": 3,
+        "title": "Tact",
+        "description": "Tact Domain Level 3",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "tact-12-m",
+            "tact-13-m",
+            "tact-14-m",
+            "tact-15-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "tact-12-m",
+        "type": "Milestone",
+        "domain": "Tact",
+        "level": 3,
+        "title": "Tact 12-M",
+        "description": "Tacts 4 different prepositions (e.g., in, out, on, under) and 4 pronouns (e.g., I, you, me, mine). (E)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he tacts 4 different prepositions and 4 different pronouns when tested.\n1/2 point score: Give the child 1/2 point if he tacts a total of 4 preposition or pronouns, but has some from each category. Give the child 1/2 point if he tacts 4 different prepositions, but not 4 pronouns, or vice versa. Identify what he was able to do, and not do, in the “Comments/notes” section of the VB-MAPP Milestones form.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "tact-13-m",
+        "type": "Milestone",
+        "domain": "Tact",
+        "level": 3,
+        "title": "Tact 13-M",
+        "description": "Tacts 4 different adjectives, excluding colors and shapes (e.g., big, little, long, short) and 4 adverbs (e.g., fast, slow, quietly, gently). (E)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he tacts 4 different adjectives (excluding color and shape) and 4 different adverbs when tested.\n1/2 point score: Give the child 1/2 point if he tacts a total of 4 adjectives or adverbs, but has some from each category. Give the child 1/2 point if he tacts 4 different adjectives, but not 4 adverbs, or vice versa. Identify what he was able to do, and not do, in the “Comments/notes” section of the VB-MAPP Milestones form.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "tact-14-m",
+        "type": "Milestone",
+        "domain": "Tact",
+        "level": 3,
+        "title": "Tact 14-M",
+        "description": "Tacts with complete sentences containing 4 or more words, 20 times. (E)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he tacts with complete sentences containing 4 or more words 20 times.\n1/2 point score: Give the child 1/2 point if he tacts with complete sentences containing 3 or more words 20 times.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "tact-15-m",
+        "type": "Milestone",
+        "domain": "Tact",
+        "level": 3,
+        "title": "Tact 15-M",
+        "description": "Has a tact vocabulary of 1000 words (nouns, verbs, adjectives, etc.), tested or from an accumulated list of known tacts. (T)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he tacts 1000 nonverbal stimuli (nouns, verbs, adjectives, adverbs, pronouns, etc.). An accumulated list of the child’s known words can be used for this measure. Note that this may seem like a lot of words, but a typically developing 4 year old has a 1500 to 2000 word speaking vocabulary. There are many children’s books (e.g., Pictionary) that contain over 1000 pictures. This measure can occur over longer periods of time if necessary (i.e., an accumulated list) or by sampling the repertoire. If a child can easily tact hundreds of items, actions, properties, etc., it is unlikely that he will need tacting IEP goals.\n1/2 point score: Give the child 1/2 point if he tacts 750 nonverbal stimuli (nouns, verbs, adjectives, adverbs, pronouns, etc.). An accumulated list of the child’s known words can be used for this measure.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "domain-listener",
+        "type": "Domain",
+        "domain": "Listener Responding",
+        "level": 3,
+        "title": "Listener Responding",
+        "description": "Listener Responding Domain Level 3",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "listener-11-m",
+            "listener-12-m",
+            "listener-13-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "listener-11-m",
+        "type": "Milestone",
+        "domain": "Listener Responding",
+        "level": 3,
+        "title": "Listener 11-M",
+        "description": "Selects items by color and shape from an array of 6 similar stimuli, for 4 colors and 4 shapes (e.g., Find the red car. Find the square cracker.). (T)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he selects items by color and shape from an array of 6 similar stimuli for 4 colors and 4 shapes when tested.\n1/2 point score: Give the child 1/2 point if he selects items by color and shape from an array of 6 similar stimuli for 2 colors and 2 shapes.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "listener-12-m",
+        "type": "Milestone",
+        "domain": "Listener Responding",
+        "level": 3,
+        "title": "Listener 12-M",
+        "description": "Follows 2 instructions involving 6 different prepositions (e.g., Stand behind the chair.) and 4 different pronouns (e.g., Touch my ear.). (T)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he follows 2 instructions for each of 6 different prepositions and 4 different pronouns when tested.\n1/2 point score: Give the child 1/2 point if he follows 2 instructions for each of 3 different prepositions and 2 different pronouns. Give the child 1/2 point if he follows 2 instructions for each of 6 different prepositions, but not 4 pronouns, or vice versa. Identify what he was able to do, and not do, in the “Comments/notes” section of the VB-MAPP form.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "listener-13-m",
+        "type": "Milestone",
+        "domain": "Listener Responding",
+        "level": 3,
+        "title": "Listener 13-M",
+        "description": "Selects items from an array of similar stimuli based on 4 pairs of relative adjectives (e.g., big-little, long-short) and demonstrates actions based on 4 pairs of relative adverbs (e.g., quiet-loud, fast-slow). (T)",
+        "scoring_criteria": null,
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    }
+]

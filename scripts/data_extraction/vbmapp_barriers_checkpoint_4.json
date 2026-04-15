@@ -1,0 +1,30 @@
+[
+    {
+        "id": "barrier-defective-intraverbal",
+        "type": "Barrier",
+        "title": "Absent, Weak, or Defective Intraverbal Repertoire",
+        "description": "Intraverbal behavior is complex and prone to becoming defective. Problems include rote responding to questions, failing to maintain a conversation, or irrelevant and out-of-context verbal responses.",
+        "scoring_criteria": "0 score: No barrier (implied). 1 score: Intraverbal repertoire is growing consistently and is in proportion with other skills, or some intraverbal responses occur but scores are markedly lower than other Level 2 Milestones. 2 score: Intraverbal errors occur frequently, prompt bound, scrolling, echolalia, spontaneous intraverbal never occurs, or rote intraverbal responses occur despite context. 3 score: Rote responding is frequent, responses quickly forgotten, no generalization, prompt bound, never engages spontaneously or with peers despite strong other skills. 4 score: Fails to acquire any significant or functional intraverbal behavior despite strong mand, tact, and LRFFC skills, or demonstrates scrolling exclusively with intraverbals."
+    },
+    {
+        "id": "barrier-defective-social-skills",
+        "type": "Barrier",
+        "title": "Absent, Weak, or Defective Social Skills",
+        "description": "Struggles with learning appropriate social behavior and suffers from a variety of social deficits, often due to weak motivators, aversive motivators, lack of verbal behavior, or negative behavior problems.",
+        "scoring_criteria": "0 score: No barrier (implied). 1 score: Social skills are growing consistently and are in proportion with other skills, or social behavior occurs but scores are falling behind other Milestones. 2 score: Rarely initiates a social interaction with a peer, emits socially negative behavior, or rarely spontaneously imitates, plays with, or mands to peers. 3 score: Stays by himself during play periods, does not take turns or share items, does not respond to peer's mands, or does not verbally engage with peers. 4 score: Has language skills but actively avoids other children, emits negative or inappropriate behaviors when forced into a social situation, or almost never responds to mands from peers."
+    },
+    {
+        "id": "barrier-prompt-dependent",
+        "type": "Barrier",
+        "title": "Prompt Dependent",
+        "description": "The child becomes 'prompt bound', where responses are controlled by additional hints or prompts rather than the correct antecedent variable, typically because prompts have not been properly faded.",
+        "scoring_criteria": "0 score: Consistently learning new skills and does not show any signs of prompt dependency. 1 score: Usually needs several trials of prompting and prompt fading to learn new skills, but the transfer of stimulus control process is typically successful. 2 score: Often hard to fade prompts, especially with more difficult skills (e.g., intraverbal or social interactions). 3 score: Hard to eliminate prompts, verbal skills are limited, and prompts may be subtle. 4 score: Prompts are very difficult to fade, most skills are prompt bound by echoic, imitative, or verbal prompts, and child may emit negative behaviors when prompts are not provided."
+    },
+    {
+        "id": "barrier-scrolling-responses",
+        "type": "Barrier",
+        "title": "Scrolling Responses",
+        "description": "The tendency to guess at the correct answer by emitting a series of several words, signs, or picture selections that have been reinforced in previous sessions.",
+        "scoring_criteria": "0-4 scoring criteria not available in the provided text."
+    }
+]

@@ -1,0 +1,117 @@
+[
+    {
+        "id": "domain-social",
+        "type": "Domain",
+        "domain": "Social",
+        "level": 1,
+        "title": "Social Behavior and Social Play",
+        "description": "Assessment of early social and play behaviors involving peers.",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "social-5-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "social-5-m",
+        "type": "Milestone",
+        "domain": "Social",
+        "level": 1,
+        "title": "Social 5-M",
+        "description": "Spontaneously follows peers or imitates their motor behavior 2 times. (e.g., follows a peer into a playhouse). (TO: 30 min.)",
+        "scoring_criteria": "1 point: Give the child 1 point if he spontaneously follows peers or imitates their motor behavior 2 times during a 30-minute observation. 1/2 point: Give the child 1/2 point if he spontaneously follows peers or imitates their motor behavior 1 time during a 30-minute observation.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "domain-motor-imitation",
+        "type": "Domain",
+        "domain": "Motor Imitation",
+        "level": 1,
+        "title": "MOTOR IMITATION — LEVEL 1",
+        "description": "Assessment of a child's ability to imitate the gross motor behaviors, fine motor behaviors, and actions with objects modeled by others.",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "motor-imitation-1-m",
+            "motor-imitation-2-m",
+            "motor-imitation-3-m",
+            "motor-imitation-4-m",
+            "motor-imitation-5-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "motor-imitation-1-m",
+        "type": "Milestone",
+        "domain": "Motor Imitation",
+        "level": 1,
+        "title": "Motor Imitation 1-M",
+        "description": "Imitates 2 gross motor movements when prompted with, Do this (e.g., Clapping, raising arms). (T)",
+        "scoring_criteria": "1 point: Give the child 1 point if he imitates 2 gross motor movements presented by an adult. Even if the responses are approximations, score them as correct. 1/2 point: Give the child 1/2 point if he imitates only one motor action. Don’t give any points if the child always emits the same behavior, such as clapping.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "motor-imitation-2-m",
+        "type": "Milestone",
+        "domain": "Motor Imitation",
+        "level": 1,
+        "title": "Motor Imitation 2-M",
+        "description": "Imitates 4 gross motor movements when prompted with, Do this. (T)",
+        "scoring_criteria": "1 point: Give the child 1 point if he imitates 4 gross motor movements presented by an adult. Even if the responses are approximations, score them as correct. 1/2 point: Give the child 1/2 point if he imitates 3 motor actions.",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "motor-imitation-1-m"
+        ]
+    },
+    {
+        "id": "motor-imitation-3-m",
+        "type": "Milestone",
+        "domain": "Motor Imitation",
+        "level": 1,
+        "title": "Motor Imitation 3-M",
+        "description": "Imitates 8 motor movements, 2 of which involve objects (e.g., shaking a maraca, tapping sticks together). (T)",
+        "scoring_criteria": "1 point: Give the child 1 point if he imitates 6 motor movements presented by an adult, and can imitate 2 adult motor behaviors involving objects (a total of 8 imitations). Even if the responses are approximations, score them as correct. 1/2 point: Give the child 1/2 point if he imitates 6 behaviors of any type.",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "motor-imitation-2-m"
+        ]
+    },
+    {
+        "id": "motor-imitation-4-m",
+        "type": "Milestone",
+        "domain": "Motor Imitation",
+        "level": 1,
+        "title": "Motor Imitation 4-M",
+        "description": "Spontaneously imitates the motor behaviors of others on 5 occasions. (O)",
+        "scoring_criteria": "1 point: Give the child 1 point if he spontaneously imitates the motor behaviors of others on 5 occasions. 1/2 point: Give the child 1/2 point if he spontaneously imitates the motor behaviors of others on 2 occasions.",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "motor-imitation-3-m"
+        ]
+    },
+    {
+        "id": "motor-imitation-5-m",
+        "type": "Milestone",
+        "domain": "Motor Imitation",
+        "level": 1,
+        "title": "Motor Imitation 5-M",
+        "description": "Imitates 20 motor movements of any type (e.g., fine motor, gross motor, imitation with objects). (T)",
+        "scoring_criteria": "1 point: Give the child 1 point if he imitates 20 motor behaviors of any type. 1/2 point: Give the child 1/2 point if he imitates 15 motor behaviors of any type.",
+        "hasSubTask": [],
+        "requiresPrerequisite": [
+            "motor-imitation-4-m"
+        ]
+    },
+    {
+        "id": "domain-echoic",
+        "type": "Domain",
+        "domain": "Echoic",
+        "level": 1,
+        "title": "EARLY ECHOIC SKILLS ASSESSMENT (EESA)",
+        "description": "Evaluates a child’s ability to repeat a speech model, including speech phonemes, syllable combinations, and intonation patterns typically acquired between birth and 30 months of age.",
+        "scoring_criteria": null,
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    }
+]

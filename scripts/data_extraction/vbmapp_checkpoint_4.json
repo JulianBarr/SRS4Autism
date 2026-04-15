@@ -1,0 +1,122 @@
+[
+    {
+        "id": "domain-play",
+        "type": "Domain",
+        "domain": "Play",
+        "level": 1,
+        "title": "Play",
+        "description": "Play and Leisure Skills.",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "play-2-m",
+            "play-3-m",
+            "play-4-m",
+            "play-5-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "play-2-m",
+        "type": "Milestone",
+        "domain": "Play",
+        "level": 1,
+        "title": "Play 2-M",
+        "description": "Shows variation in play by independently interacting with 5 different items (e.g., plays with rings, then a ball, then a block). (TO: 30 min.)",
+        "scoring_criteria": "1 point: Give the child 1 point if he independently plays with 5 different items during a 30-minute observation. 1/2 point: Give the child 1/2 point if he independently plays with 3 different items during a 30-minute observation.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "play-3-m",
+        "type": "Milestone",
+        "domain": "Play",
+        "level": 1,
+        "title": "Play 3-M",
+        "description": "Demonstrates generalization by engaging in exploratory movement and playing with the toys in a novel environment for 2 minutes (e.g., in a new playroom). (TO: 30 min.)",
+        "scoring_criteria": "1 point: Give the child 1 point if he independently engages in exploratory movement and touching in a new or novel play area for 2 minutes during a 30-minute observation. 1/2 point: Give the child 1/2 point if he independently engages in exploratory movement and touching in a new or novel play area for 1 minute during a 30-minute observation.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "play-4-m",
+        "type": "Milestone",
+        "domain": "Play",
+        "level": 1,
+        "title": "Play 4-M",
+        "description": "Independently engages in movement play for 2 minutes (e.g., swinging, dancing, rocking, jumping, climbing). (TO: 30 min.)",
+        "scoring_criteria": "1 point: Give the child 1 point if he engages in movement play for 2 minutes during a 30-minute observation. 1/2 point: Give the child 1/2 point if he engages in movement play for 1 minute during a 30-minute observation.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "play-5-m",
+        "type": "Milestone",
+        "domain": "Play",
+        "level": 1,
+        "title": "Play 5-M",
+        "description": "Independently engages in cause-and-effect play for 2 minutes (e.g., dumping containers, playing with pop-up toys, pulling toys, etc.). (TO: 30 min.)",
+        "scoring_criteria": "1 point: Give the child 1 point if he independently engages in cause-and-effect play for 2 minutes during a 30-minute observation. 1/2 point: Give the child 1/2 point if he independently engages in cause-and-effect play for 1 minute during a 30-minute observation.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "domain-social",
+        "type": "Domain",
+        "domain": "Social Behavior and Social Play",
+        "level": 1,
+        "title": "Social Behavior and Social Play",
+        "description": "Social Behavior and Social Play.",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "social-1-m",
+            "social-2-m",
+            "social-3-m",
+            "social-4-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "social-1-m",
+        "type": "Milestone",
+        "domain": "Social Behavior and Social Play",
+        "level": 1,
+        "title": "Social 1-M",
+        "description": "Visually tracks and shows interest in people's movement at least 5 times. (TO: 30 min)",
+        "scoring_criteria": "1 point: Give the child 1 point if he visually tracks and shows interest in people's movement at least 5 times during a 30-minute observation. 1/2 point: Give the child 1/2 point if he visually tracks and shows interest in people's movement at least 2 times during a 30-minute observation.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "social-2-m",
+        "type": "Milestone",
+        "domain": "Social Behavior and Social Play",
+        "level": 1,
+        "title": "Social 2-M",
+        "description": "Indicates that he wants to be held or physically played with 2 times (e.g., climbs up on his mom's lap). (TO: 60 min.)",
+        "scoring_criteria": "1 point: Give the child 1 point if he indicates that he wants to be held or physically played with 2 times during a 1-hour observation. 1/2 point: Give the child 1/2 point if he indicates that he wants to be held or physically played with 1 time during a 1-hour observation.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "social-3-m",
+        "type": "Milestone",
+        "domain": "Social Behavior and Social Play",
+        "level": 1,
+        "title": "Social 3-M",
+        "description": "Spontaneously looks (glances) at other children 5 times. (TO: 30 min.)",
+        "scoring_criteria": "1 point: Give the child 1 point if he spontaneously looks (glances) at other children 5 times during a 30-minute observation. 1/2 point: Give the child 1/2 point if he spontaneously looks (glances) at other children 2 times during a 30-minute observation.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "social-4-m",
+        "type": "Milestone",
+        "domain": "Social Behavior and Social Play",
+        "level": 1,
+        "title": "Social 4-M",
+        "description": "Spontaneously engages in parallel play by other children for a total of 2 minutes (e.g., sits in the sandbox near other children). (TO: 30 min.)",
+        "scoring_criteria": "1 point: Give the child 1 point if he spontaneously engages in parallel play by other children for a total of 2 minutes during a 30-minute observation. 1/2 point: Give the child 1/2 point if he spontaneously engages in parallel play by other children for a total of 1 minute during a 30-minute observation.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    }
+]

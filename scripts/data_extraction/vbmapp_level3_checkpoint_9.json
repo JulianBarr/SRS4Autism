@@ -1,0 +1,122 @@
+[
+    {
+        "id": "domain-linguistics",
+        "type": "Domain",
+        "domain": "Linguistic Structure",
+        "level": 3,
+        "title": "Linguistic Structure",
+        "description": "Linguistic Structure — Level 3",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "linguistics-11-m",
+            "linguistics-12-m",
+            "linguistics-13-m",
+            "linguistics-14-m",
+            "linguistics-15-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "linguistics-11-m",
+        "type": "Milestone",
+        "domain": "Linguistic Structure",
+        "level": 3,
+        "title": "Linguistics 11-M",
+        "description": "Emits noun inflections by combining 10 root nouns with suffixes for plurals (e.g., dog vs. dogs) and 10 root nouns with suffixes for possessions (e.g., dog's collar vs. cat's collar). (E)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he emits noun inflections in any of the verbal operants but echoic (i.e., mand, tact, or intraverbal) by combining 10 root nouns with suffixes for plurals and 10 root nouns with suffixes for possessions. 1/2 point score: Give the child 1/2 point if he emits noun inflections for 10 noun-plural combinations, but not for 10 noun-possession combinations, or vice versa.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "linguistics-12-m",
+        "type": "Milestone",
+        "domain": "Linguistic Structure",
+        "level": 3,
+        "title": "Linguistics 12-M",
+        "description": "Emits verb inflections by combining 10 root verbs with affixes for regular past tense (e.g., played) and 10 root verbs with affixes for future tense (e.g., will play). (E)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he emits verb inflections in any of the verbal operants but echoic (i.e., mand, tact, or intraverbal) by combining 10 root verbs with suffixes for past tense and 10 root verbs with affixes for future tense. 1/2 point score: Give the child 1/2 point if he emits verb inflections in any of the verbal operants but echoic (i.e., mand, tact, or intraverbal) for 10 past tense verbs, but not for 10 future tense verbs or vice versa.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "linguistics-13-m",
+        "type": "Milestone",
+        "domain": "Linguistic Structure",
+        "level": 3,
+        "title": "Linguistics 13-M",
+        "description": "Emits 10 different noun phrases containing at least 3 words with 2 modifiers (e.g., adjectives, prepositions, pronouns) (e.g., He's my peas. I want chocolate ice cream.). (E)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he emits 10 different 3-word noun phrases in any of the verbal operants except echoic (mand, tact, or intraverbal) with 2 modifiers. 1/2 point score: Give the child 1/2 point if he emits 5 different 3-word noun phrases in any of the verbal operants except echoic (mand, tact, or intraverbal) with 2 modifiers.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "linguistics-14-m",
+        "type": "Milestone",
+        "domain": "Linguistic Structure",
+        "level": 3,
+        "title": "Linguistics 14-M",
+        "description": "Emits 10 different verb phrases containing at least 3 words with 2 modifiers (e.g., adverbs, prepositions, pronouns) (e.g., Push me hard. Go up the steps.). (E)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he emits 10 different 3-word verb phrases in any of the verbal operants except echoic (mand, tact, or intraverbal) with 2 modifiers. 1/2 point score: Give the child 1/2 point if he emits 5 different 3-word verb phrases in any of the verbal operants except echoic (mand, tact, or intraverbal) with 2 modifiers.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "linguistics-15-m",
+        "type": "Milestone",
+        "domain": "Linguistic Structure",
+        "level": 3,
+        "title": "Linguistics 15-M",
+        "description": "Combines noun and verb phrases to produce 10 different syntactically correct clauses or sentences containing at least 5 words (e.g., The dog licked my face.). (E)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he combines noun and verb phrases in any of the verbal operants except echoic (mand, tact, or intraverbal) to produce 10 different syntactically correct clauses or sentences. 1/2 point score: Give the child 1/2 point if he combines noun and verb phrases in any of the verbal operants except echoic (mand, tact, or intraverbal) to produce 5 different syntactically correct clauses or sentences.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "domain-math",
+        "type": "Domain",
+        "domain": "Math",
+        "level": 3,
+        "title": "Math",
+        "description": "Math — Level 3",
+        "scoring_criteria": null,
+        "hasSubTask": [
+            "math-11-m",
+            "math-12-m",
+            "math-13-m"
+        ],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "math-11-m",
+        "type": "Milestone",
+        "domain": "Math",
+        "level": 3,
+        "title": "Math 11-M",
+        "description": "Identifies as a listener the numbers 1-5 in an array of 5 different numbers. (T)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he discriminates as a listener among the numbers 1-5 in an array of 5 different numbers. 1/2 point score: Give the child 1/2 point if he discriminates as a listener among the numbers 1-3 in an array of 3 different numbers.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "math-12-m",
+        "type": "Milestone",
+        "domain": "Math",
+        "level": 3,
+        "title": "Math 12-M",
+        "description": "Tacts the numbers 1-5. (T)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he tacts the numbers 1 to 5 when they are presented in a mixed up order, one at a time. 1/2 point score: Give the child 1/2 point if he tacts any 3 numbers.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    },
+    {
+        "id": "math-13-m",
+        "type": "Milestone",
+        "domain": "Math",
+        "level": 3,
+        "title": "Math 13-M",
+        "description": "Counts out 1-5 items from a larger set of items with 1 to 1 correspondence (e.g., Give me 4 cars. Now give me 2 cars). (T)",
+        "scoring_criteria": "1 point score: Give the child 1 point if he counts out 1-5 items from a larger set of items with 1 to 1 correspondence when verbally asked.",
+        "hasSubTask": [],
+        "requiresPrerequisite": []
+    }
+]
