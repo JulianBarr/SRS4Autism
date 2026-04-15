@@ -46,6 +46,115 @@ DOMAIN_CODE_TO_URI_SUFFIX: dict[str, str] = {
     "CVB": "domain_cvb",   # 行为特征-语言
 }
 
+# PEP-3 领域代码 → HHS 一级模块（与 scripts/data_extraction/*.ttl 中 Module 标签一致）
+PEP_TO_HHS_MODULES: dict[str, tuple[str, ...]] = {
+    "CVP": ("认知", "自理"),
+    "EL": ("语言",),
+    "RL": ("语言",),
+    "FM": ("小肌肉",),
+    "GM": ("大肌肉",),
+    "VMI": ("认知", "大肌肉", "小肌肉"),
+    "AE": ("社交与情绪",),  # 情感表达 → 社交与情绪领域
+    "SR": ("社交与情绪",),
+    "CMB": ("社交与情绪", "认知"),
+    "CVB": ("语言",),
+}
+
+
+def _hhs_table_exists(db_path: Path) -> bool:
+    try:
+        conn = sqlite3.connect(str(db_path))
+        cur = conn.cursor()
+        cur.execute(
+            "SELECT name FROM sqlite_master WHERE type='table' AND name='hhs_goals'"
+        )
+        ok = cur.fetchone() is not None
+        conn.close()
+        return ok
+    except OSError:
+        return False
+
+
+def _row_to_hhs_quest(row: sqlite3.Row) -> dict:
+    materials = json.loads(row["materials_json"] or "[]")
+    activities = json.loads(row["activities_json"] or "[]")
+    precautions = json.loads(row["precautions_json"] or "[]")
+    steps_parts: list[str] = []
+    if activities:
+        steps_parts.append("\n".join(activities))
+    if precautions:
+        steps_parts.append("注意事项：\n" + "\n".join(precautions))
+    teaching_steps = "\n\n".join(steps_parts) if steps_parts else None
+    title = f"[HHS - {row['module_label']}] {row['label']}"
+    return {
+        "quest_id": row["quest_id"],
+        "label": title,
+        "content_source": "HHS",
+        "hhs_module": row["module_label"],
+        "age_group": row["age_group"],
+        "pep3_items": [],
+        "pep3_item_nums": [],
+        "suggested_materials": materials,
+        "teaching_steps": teaching_steps,
+        "group_class_generalization": None,
+        "home_generalization": None,
+        "ecumenical_integration": None,
+    }
+
+
+def load_hhs_quests_for_scheduler(
+    db_path: Path,
+    pep_domain_code: Optional[str],
+) -> list[dict]:
+    """
+    Load HHS goals from SQLite hhs_goals.
+    If pep_domain_code is set, restrict to modules mapped from that PEP code; if None, all HHS rows.
+    """
+    if not _hhs_table_exists(db_path):
+        return []
+    modules: Optional[set[str]] = None
+    if pep_domain_code:
+        mapped = PEP_TO_HHS_MODULES.get(pep_domain_code.upper())
+        if not mapped:
+            return []
+        modules = set(mapped)
+    conn = sqlite3.connect(str(db_path))
+    conn.row_factory = sqlite3.Row
+    cur = conn.cursor()
+    if modules:
+        ph = ",".join("?" * len(modules))
+        cur.execute(
+            f"SELECT * FROM hhs_goals WHERE module_label IN ({ph})",
+            tuple(modules),
+        )
+    else:
+        cur.execute("SELECT * FROM hhs_goals")
+    rows = cur.fetchall()
+    conn.close()
+    return [_row_to_hhs_quest(r) for r in rows]
+
+
+def load_hhs_quest_map(db_path: Path) -> dict[str, dict]:
+    """quest_id -> quest dict (for history labels)."""
+    return {q["quest_id"]: q for q in load_hhs_quests_for_scheduler(db_path, None)}
+
+
+def merge_quest_pools(primary: list[dict], extra: list[dict]) -> list[dict]:
+    """Append extra quests without duplicate quest_id (primary order preserved)."""
+    seen: set[str] = set()
+    out: list[dict] = []
+    for q in primary:
+        qid = q["quest_id"]
+        if qid not in seen:
+            out.append(q)
+            seen.add(qid)
+    for q in extra:
+        qid = q["quest_id"]
+        if qid not in seen:
+            out.append(q)
+            seen.add(qid)
+    return out
+
 
 def get_db_path() -> Path:
     """获取 content_db 下的 SQLite 路径（与 backend 配置一致）。"""
@@ -287,22 +396,38 @@ def _parse_last_review_date(state: dict) -> Optional[datetime]:
     return None
 
 
+def _history_entry_matches_source(qid: str, quest: dict, schedule_source: str) -> bool:
+    """Whether a history row belongs to the requested schedule (QCQ vs HHS)."""
+    is_hhs = quest.get("content_source") == "HHS" or str(qid).startswith("hhs_")
+    if schedule_source == "qcq":
+        return not is_hhs
+    if schedule_source == "hhs":
+        return is_hhs
+    return True
+
+
 def run_targeted_scheduler(
     child_name: str,
     target_date: datetime,
     count: int = 3,
     db_path: Optional[Path] = None,
+    schedule_source: str = "mixed",
 ) -> tuple[dict, Optional[tuple[str, str, int]]]:
     """
     运行靶向调度：找最短板 → SPARQL 靶向任务池 → 严格 FSRS 过滤 → 排序。
     严格从 extracted_data['fsrs_states'] 读取：due > --date 的任务坚决剔除。
     今日已打卡（last_review 日期 == target_date）的任务放入 completed_today；未打卡且到期的放入 pending。
     名额计算：pending 最多 count - len(completed_today) 个。
+    schedule_source: qcq = 仅 ECTA/QCQ 手册任务；hhs = 仅 Heep Hong SQLite 任务；mixed = 两者合并（旧行为）。
     返回: ({"pending": [...], "completed_today": [...]}, weakest_domain_info)
     """
     from fsrs import FSRS, Card
 
     db_path = db_path or get_db_path()
+    src = (schedule_source or "mixed").strip().lower()
+    if src not in ("qcq", "hhs", "mixed"):
+        src = "mixed"
+
     profile_row = find_child_profile(db_path, child_name)
 
     weakest: Optional[tuple[str, str, int]] = None
@@ -312,15 +437,40 @@ def run_targeted_scheduler(
         weakest = find_weakest_domain(extracted)
         fsrs_states = extracted.get("fsrs_states") or {}
 
-    graph = load_graph()
+    graph = None
 
-    if weakest:
-        domain_code, domain_name, age_months = weakest
-        quest_pool = get_targeted_quests(graph, domain_code)
-        if not quest_pool:
-            quest_pool = _get_fallback_quest_pool(graph)
+    def ensure_graph():
+        nonlocal graph
+        if graph is None:
+            graph = load_graph()
+        return graph
+
+    if src == "hhs":
+        hhs_pep = weakest[0] if weakest else None
+        quest_pool = load_hhs_quests_for_scheduler(db_path, hhs_pep)
+    elif src == "qcq":
+        g = ensure_graph()
+        if weakest:
+            domain_code, domain_name, age_months = weakest
+            quest_pool = get_targeted_quests(g, domain_code)
+            if not quest_pool:
+                quest_pool = _get_fallback_quest_pool(g)
+        else:
+            quest_pool = _get_fallback_quest_pool(g)
     else:
-        quest_pool = _get_fallback_quest_pool(graph)
+        g = ensure_graph()
+        if weakest:
+            domain_code, domain_name, age_months = weakest
+            quest_pool = get_targeted_quests(g, domain_code)
+            if not quest_pool:
+                quest_pool = _get_fallback_quest_pool(g)
+        else:
+            quest_pool = _get_fallback_quest_pool(g)
+        hhs_pep = weakest[0] if weakest else None
+        quest_pool = merge_quest_pools(
+            quest_pool,
+            load_hhs_quests_for_scheduler(db_path, hhs_pep),
+        )
 
     target_date_d = target_date.date()
     target_dt = target_date.replace(hour=0, minute=0, second=0, microsecond=0)
@@ -372,8 +522,16 @@ def run_targeted_scheduler(
     selected_pending = pending_unsorted[:quota]
     pending = [{"quest": q, "card": c, "due": d} for d, q, c in selected_pending]
 
-    # 历史打卡任务：last_review 存在且日期 != 今天
-    quest_map = {q["quest_id"]: q for q in _get_fallback_quest_pool(graph)}
+    # 历史打卡任务：last_review 存在且日期 != 今天（按 schedule_source 区分 QCQ / HHS）
+    if src == "hhs":
+        quest_map = load_hhs_quest_map(db_path)
+    elif src == "qcq":
+        g = ensure_graph()
+        quest_map = {q["quest_id"]: q for q in _get_fallback_quest_pool(g)}
+    else:
+        g = ensure_graph()
+        quest_map = {q["quest_id"]: q for q in _get_fallback_quest_pool(g)}
+        quest_map.update(load_hhs_quest_map(db_path))
     history_quests: list[dict] = []
     for qid, card_data in fsrs_states.items():
         last_review = _parse_last_review_date(card_data)
@@ -387,6 +545,8 @@ def run_targeted_scheduler(
         if last_review_local_str == today_local_str:
             continue
         quest = quest_map.get(qid) or {"quest_id": qid, "label": qid}
+        if not _history_entry_matches_source(str(qid), quest, src):
+            continue
         history_quests.append({"quest": quest, "last_review": last_review})
     history_quests.sort(key=lambda x: x["last_review"].timestamp(), reverse=True)
     history_quests = history_quests[:20]
@@ -481,7 +641,10 @@ def _get_fallback_quest_pool(graph) -> list[dict]:
 
 
 def format_pep3_short(quest: dict) -> str:
-    """生成 PEP-3 题号简写，如 '86题、133题'。"""
+    """生成 PEP-3 题号简写，如 '86题、133题'。HHS 任务显示年龄或 HHS 标记。"""
+    if quest.get("content_source") == "HHS":
+        ag = quest.get("age_group")
+        return f"HHS · {ag}" if ag else "HHS"
     nums = quest.get("pep3_item_nums")
     if nums:
         return "、".join(f"{n}题" for n in sorted(set(nums)))
@@ -500,6 +663,8 @@ def format_materials(quest: dict) -> str:
     mats = quest.get("suggested_materials", [])
     if mats:
         return "、".join(mats)
+    if quest.get("content_source") == "HHS":
+        return "（未列出教具）"
     return "利用自然环境"
 
 
@@ -579,9 +744,12 @@ def print_daily_quests(
     target_date: datetime,
     count: int = 3,
     db_path: Optional[Path] = None,
+    schedule_source: str = "mixed",
 ) -> None:
     """在终端打印靶向 Daily Quests。"""
-    result, weakest = run_targeted_scheduler(child_name, target_date, count, db_path)
+    result, weakest = run_targeted_scheduler(
+        child_name, target_date, count, db_path, schedule_source=schedule_source
+    )
     pending = result["pending"]
     completed_today = result["completed_today"]
     date_str = target_date.strftime("%Y-%m-%d")
@@ -698,6 +866,12 @@ def main() -> None:
     parser.add_argument("--date", default=None, help="目标日期 YYYY-MM-DD")
     parser.add_argument("--count", type=int, default=3, help="每日任务数量")
     parser.add_argument("--db", default=None, help="SQLite 数据库路径（默认 data/content_db/srs4autism.db）")
+    parser.add_argument(
+        "--source",
+        choices=["mixed", "qcq", "hhs"],
+        default="mixed",
+        help="任务池：mixed=QCQ+HHS，qcq=仅 ECTA 手册，hhs=仅 Heep Hong",
+    )
     subparsers = parser.add_subparsers(dest="cmd", help="子命令")
 
     subparsers.add_parser("schedule", help="生成每日靶向任务 (默认)")
@@ -714,7 +888,9 @@ def main() -> None:
 
     if args.cmd is None or args.cmd == "schedule":
         target = datetime.strptime(args.date, "%Y-%m-%d") if args.date else datetime.now()
-        print_daily_quests(args.child, target, args.count, db_path)
+        print_daily_quests(
+            args.child, target, args.count, db_path, schedule_source=args.source
+        )
     elif args.cmd == "record":
         record_feedback(args.child, args.quest_id, args.prompt_level, db_path)
 

@@ -10,7 +10,7 @@ from typing import Optional
 import sys
 
 import uuid
-from fastapi import APIRouter, HTTPException, Form, File, UploadFile
+from fastapi import APIRouter, HTTPException, Form, File, UploadFile, Query
 from pydantic import BaseModel
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
@@ -62,7 +62,7 @@ def _quest_to_api_item(q: dict, format_pep3_short, format_materials) -> dict:
         except Exception:
             parsed_integration = None
 
-    return {
+    item = {
         "quest_id": q["quest_id"],
         "label": q["label"],
         "pep3_standard": format_pep3_short(q),
@@ -73,21 +73,38 @@ def _quest_to_api_item(q: dict, format_pep3_short, format_materials) -> dict:
         "home_generalization": q.get("home_generalization"),
         "ecumenical_integration": parsed_integration,
     }
+    if q.get("content_source") == "HHS":
+        item["content_source"] = "HHS"
+        item["hhs_module"] = q.get("hhs_module")
+        item["age_group"] = q.get("age_group")
+    return item
 
 
 @router.get("/daily_quests")
-def get_daily_quests(child_name: str = "小明", count: int = 3):
+def get_daily_quests(
+    child_name: str = "小明",
+    count: int = 3,
+    source: str = Query(
+        "qcq",
+        description="任务池：qcq=仅 ECTA/QCQ 手册；hhs=仅 Heep Hong；mixed=两者合并",
+    ),
+):
     """获取今日靶向任务课表。默认 3 个任务，可通过 count 参数自定义数量。
     返回 pending（待完成）和 completed_today（今日已打卡）两个列表。"""
     run_targeted_scheduler, _, format_pep3_short, format_materials, _, _ = _import_scheduler()
     target_date = datetime.now(timezone.utc)
     count = max(1, min(count, 20))  # Clamp 1–20
 
+    src = (source or "qcq").strip().lower()
+    if src not in ("qcq", "hhs", "mixed"):
+        src = "qcq"
+
     try:
         result, weakest = run_targeted_scheduler(
             child_name=child_name,
             target_date=target_date,
             count=count,
+            schedule_source=src,
         )
     except FileNotFoundError as e:
         raise HTTPException(status_code=503, detail=str(e))

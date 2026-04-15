@@ -55,6 +55,7 @@ function App() {
   const [cognitionLanguage, setCognitionLanguage] = useState(null); // 'zh' | 'en' for Cognition Cove modal
   const [cognitionContentType, setCognitionContentType] = useState(null); // Content type based on language
   const [cognitionContentView, setCognitionContentView] = useState('quests'); // 'quests' | 'daily-deck'
+  const [hhhContentView, setHhhContentView] = useState('library'); // 'library' | 'daily-deck'
   const [showLogicCityModal, setShowLogicCityModal] = useState(false); // Modal state for Logic City
   const [logicCityContentType, setLogicCityContentType] = useState(null); // Content type for Logic City ('vocab-advanced', etc.)
   const [profiles, setProfiles] = useState([]);
@@ -546,11 +547,15 @@ function App() {
                       color: cognitionContentView === 'daily-deck' ? '#b45309' : '#6b7280',
                     }}
                   >
-                    📋 每日靶向课表
+                    📋 QCQ 每日靶向课表
                   </button>
                 </div>
                 {cognitionContentView === 'daily-deck' ? (
-                  <DailyDeck childName={currentProfile?.name || null} childId={currentProfile?.id} />
+                  <DailyDeck
+                    childName={currentProfile?.name || null}
+                    childId={currentProfile?.id}
+                    scheduleSource="qcq"
+                  />
                 ) : (
                   <CognitionContentManager source={ontologySource} />
                 )}
@@ -558,7 +563,50 @@ function App() {
             )}
 
             {activeCategory === 'hhh' && (
-              <HHHContentManager />
+              <div style={{ marginTop: '20px' }}>
+                <div style={{ display: 'flex', gap: '12px', marginBottom: '16px', flexWrap: 'wrap' }}>
+                  <button
+                    type="button"
+                    onClick={() => setHhhContentView('library')}
+                    style={{
+                      padding: '8px 16px',
+                      borderRadius: '8px',
+                      border: 'none',
+                      cursor: 'pointer',
+                      fontWeight: hhhContentView === 'library' ? 600 : 400,
+                      background: hhhContentView === 'library' ? '#e0f2fe' : '#f3f4f6',
+                      color: hhhContentView === 'library' ? '#0369a1' : '#6b7280',
+                    }}
+                  >
+                    📚 HHH 课程浏览
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setHhhContentView('daily-deck')}
+                    style={{
+                      padding: '8px 16px',
+                      borderRadius: '8px',
+                      border: 'none',
+                      cursor: 'pointer',
+                      fontWeight: hhhContentView === 'daily-deck' ? 600 : 400,
+                      background: hhhContentView === 'daily-deck' ? '#fef3c7' : '#f3f4f6',
+                      color: hhhContentView === 'daily-deck' ? '#b45309' : '#6b7280',
+                    }}
+                  >
+                    📋 HHS 每日靶向课表
+                  </button>
+                </div>
+                {hhhContentView === 'daily-deck' ? (
+                  <DailyDeck
+                    childName={currentProfile?.name || null}
+                    childId={currentProfile?.id}
+                    scheduleSource="hhs"
+                    showDemoButton={false}
+                  />
+                ) : (
+                  <HHHContentManager />
+                )}
+              </div>
             )}
 
             

@@ -302,3 +302,39 @@ class ChatSession(Base):
     def __repr__(self):
         return f"<ChatSession(session_id='{self.session_id}', topic_id='{self.topic_id}', roster_id='{self.roster_id}')>"
 
+
+class HhsGoal(Base):
+    """
+    Heep Hong Society (HHS) curriculum goals ingested from scripts/data_extraction/*.ttl.
+    Used by the daily scheduler / FSRS alongside QCQ (ECTA) PhasalObjectives from quest_full.ttl.
+    """
+
+    __tablename__ = "hhs_goals"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    quest_id = Column(String, nullable=False, unique=True, index=True)
+    goal_iri = Column(String, nullable=False, unique=True, index=True)
+    content_source = Column(String, nullable=False, default="HHS")
+    domain_file = Column(String, nullable=False)
+    label = Column(Text, nullable=False)
+    module_label = Column(String, nullable=False, index=True)
+    submodule_label = Column(String)
+    objective_label = Column(String)
+    phasal_label = Column(String)
+    breadcrumb_json = Column(Text)
+    goal_code = Column(String)
+    age_group = Column(String)
+    materials_json = Column(Text)
+    activities_json = Column(Text)
+    precautions_json = Column(Text)
+    passing_criteria = Column(Text)
+    created_at = Column(DateTime, default=func.now())
+    updated_at = Column(DateTime, default=func.now(), onupdate=func.now())
+
+    __table_args__ = (
+        Index("idx_hhs_goals_module", "module_label"),
+    )
+
+    def __repr__(self) -> str:
+        return f"<HhsGoal(quest_id='{self.quest_id}', label='{self.label[:40]}...')>"
+

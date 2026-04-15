@@ -578,7 +578,12 @@ const ExpandableQuestCard = ({ quest, isCompleted, showButtons, submitting, onRe
   );
 };
 
-function DailyDeck({ childName = null, childId }) {
+function DailyDeck({
+  childName = null,
+  childId,
+  scheduleSource = 'qcq',
+  showDemoButton = true,
+}) {
   const [pending, setPending] = useState([]);
   const [completedToday, setCompletedToday] = useState([]);
   const [historyQuests, setHistoryQuests] = useState([]);
@@ -627,7 +632,13 @@ function DailyDeck({ childName = null, childId }) {
     setLoading(true);
     setError(null);
     try {
-      const res = await api.get(`/api/daily_quests?child_name=${encodeURIComponent(childName)}&count=${questCount}`);
+      const res = await api.get('/api/daily_quests', {
+        params: {
+          child_name: childName,
+          count: questCount,
+          source: scheduleSource,
+        },
+      });
       const data = res.data;
       setPending(data.pending || []);
       setCompletedToday(data.completed_today || []);
@@ -641,7 +652,7 @@ function DailyDeck({ childName = null, childId }) {
     } finally {
       setLoading(false);
     }
-  }, [childName, questCount]);
+  }, [childName, questCount, scheduleSource]);
 
   useEffect(() => {
     fetchDailyQuests();
@@ -679,6 +690,13 @@ function DailyDeck({ childName = null, childId }) {
       </div>
     );
   }
+
+  const deckHeadline =
+    scheduleSource === 'hhs'
+      ? `今天的${childName} HHS 靶向课表`
+      : scheduleSource === 'mixed'
+        ? `今天的${childName} 靶向课表（QCQ+HHS）`
+        : `今天的${childName} QCQ 靶向课表`;
 
   if (loading) {
     return (
@@ -819,7 +837,7 @@ function DailyDeck({ childName = null, childId }) {
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div>
             <h1 className="text-lg font-semibold text-slate-800">
-              今天的{childName}专属课表
+              {deckHeadline}
             </h1>
             {weakestDomainInfo && (
               <p className="text-sm text-amber-700 mt-1">
@@ -847,15 +865,18 @@ function DailyDeck({ childName = null, childId }) {
             >
               刷新
             </button>
-            <button
-              onClick={() => {
-                setPending([DEMO_MOCK_DATA]);
-                setCompletedToday([]);
-              }}
-              className="text-sm px-4 py-1.5 bg-indigo-600 text-white hover:bg-indigo-700 rounded-lg font-bold shadow-md transition-all ml-2"
-            >
-              ✨ 载入大一统 Demo
-            </button>
+            {showDemoButton && scheduleSource === 'qcq' ? (
+              <button
+                type="button"
+                onClick={() => {
+                  setPending([DEMO_MOCK_DATA]);
+                  setCompletedToday([]);
+                }}
+                className="text-sm px-4 py-1.5 bg-indigo-600 text-white hover:bg-indigo-700 rounded-lg font-bold shadow-md transition-all ml-2"
+              >
+                ✨ 载入大一统 Demo
+              </button>
+            ) : null}
           </div>
         </div>
       </header>
