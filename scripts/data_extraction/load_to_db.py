@@ -2,7 +2,7 @@ import pyoxigraph
 import os
 
 # 已经根据你的配置，指向了上两级的持久化目录
-DB_PATH = "../../knowledge_graph_data"  
+DB_PATH = "../../data/knowledge_graph_store"  
 
 def main():
     print(f"🧱 正在连接物理图数据库: {DB_PATH}")

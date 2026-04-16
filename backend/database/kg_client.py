@@ -70,7 +70,7 @@ class KnowledgeGraphClient:
             # Use embedded Oxigraph store
             print("Using embedded Oxigraph store.")
             try:
-                from backend.app.utils.oxigraph_utils import get_kg_store
+                from app.utils.oxigraph_utils import get_kg_store
                 self.store = get_kg_store()
                 self.endpoint_url = "oxigraph://embedded" # Standardize internal representation
             except Exception as e:

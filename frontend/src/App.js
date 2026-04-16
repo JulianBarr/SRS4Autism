@@ -24,6 +24,7 @@ import DailyDeck from './components/DailyDeck';
 import Login from './components/Login';
 import ParentDashboard from './components/ParentDashboard'; // New import for ParentDashboard
 import TeacherPendingDrafts from './components/TeacherPendingDrafts'; // AI Copilot for Teachers
+import GraphTest from './components/GraphTest';
 import { useLanguage } from './i18n/LanguageContext';
 import businessApi from './utils/api';
 import './App.css';
@@ -630,6 +631,10 @@ function App() {
                 <p>Culture content coming soon...</p>
               </div>
             )}
+
+            <div style={{ marginTop: '20px' }}>
+              <GraphTest />
+            </div>
           </div>
         )}
 

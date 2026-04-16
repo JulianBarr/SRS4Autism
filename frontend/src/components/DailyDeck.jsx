@@ -2,6 +2,33 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import api, { API_BASE, cloudApi } from '../utils/api';
 import AICard from './AICard';
 
+function cleanTaskTitle(rawTitle) {
+  if (!rawTitle) return '';
+
+  let cleaned = String(rawTitle)
+    // 1) Remove common list prefixes: "A. ", "3. ", "(3) "
+    .replace(/^(?:[A-Z]\.|[0-9]+\.|\(\d+\))\s*/u, '')
+    // 2) Remove age suffixes like "/ 1-3 岁"
+    .replace(/\s*\/\s*\d+\s*-\s*\d+\s*岁.*$/u, '');
+
+  // 3) Repeatedly remove bracketed examples, including nested fragments.
+  let prev;
+  do {
+    prev = cleaned;
+    cleaned = cleaned.replace(/[（(【][^）)】]*[）)】]/gu, '');
+  } while (cleaned !== prev);
+
+  // 4) Trim punctuation noise around the core phrase.
+  return cleaned
+    .replace(/^[、，。：；\s]+|[、，。：；\s]+$/gu, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function escapeSparqlLiteral(value) {
+  return value.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+}
+
 //       onMouseEnter={() => setShow(true)}
 //       onMouseLeave={() => setShow(false)}
 //     >
@@ -402,12 +429,16 @@ function QuestTopicChatModal({ quest, childName, childId, onClose }) {
 
 const ExpandableQuestCard = ({ quest, isCompleted, showButtons, submitting, onRecordFeedback, onOpenChat }) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [vbmappLabel, setVbmappLabel] = useState('');
+  const [loadingVbmapp, setLoadingVbmapp] = useState(false);
   const isSubmitting = submitting === quest.quest_id;
   const pep3Items = quest.pep3_items || [];
   
   const title = quest.label || quest.title || "(未命名任务)";
   const isHhs = (quest.source || '').toLowerCase() === 'hhs' || quest.content_source === 'HHS';
   const hhsModuleText = (quest.hhs_module || '').trim() || '未分配模块';
+  const cleanedTaskTitle = cleanTaskTitle(title);
+  const shouldQueryVbmapp = cleanedTaskTitle.length >= 2;
   
   const badges = [];
   if (quest.badges) {
@@ -440,6 +471,64 @@ const ExpandableQuestCard = ({ quest, isCompleted, showButtons, submitting, onRe
     ? [...activityItems.map((a) => `活动: ${a}`), ...precautionItems.map((p) => `注意: ${p}`)].join('\n')
     : fallbackStepText;
   let generalization = quest.home_generalization || quest.generalization || quest.ecumenical_integration?.generalization?.content || "";
+
+  useEffect(() => {
+    if (!isHhs || prerequisite || !shouldQueryVbmapp) {
+      setVbmappLabel('');
+      setLoadingVbmapp(false);
+      return;
+    }
+
+    let active = true;
+    const fetchVbmapp = async () => {
+      setLoadingVbmapp(true);
+      try {
+        const sparql = `PREFIX cuma-schema: <http://cuma.ai/schema/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?vbmappLabel ?score WHERE {
+  ?hhsGoal rdfs:label ?hhsLabel .
+  FILTER(CONTAINS(STR(?hhsLabel), "${escapeSparqlLiteral(cleanedTaskTitle)}"))
+  ?hhsGoal cuma-schema:alignsWith ?vbmappInst .
+  ?vbmappInst rdfs:label ?vbmappLabel .
+  FILTER(LANG(?vbmappLabel) = "zh")
+  OPTIONAL { ?hhsGoal cuma-schema:matchScore ?score . }
+} ORDER BY DESC(?score) LIMIT 1`;
+        const response = await fetch(`${API_BASE}/api/kg/query`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/sparql-query; charset=utf-8',
+            Accept: 'application/sparql-results+json',
+            Authorization: localStorage.getItem('access_token')
+              ? `Bearer ${localStorage.getItem('access_token')}`
+              : '',
+          },
+          body: sparql,
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          throw new Error(data?.detail || `HTTP ${response.status}`);
+        }
+        const first = data?.results?.bindings?.[0];
+        if (!active) return;
+        setVbmappLabel(first?.vbmappLabel?.value || '');
+      } catch (err) {
+        if (active) {
+          setVbmappLabel('');
+          console.warn('Failed to fetch VB-MAPP prerequisite for HHS card:', err);
+        }
+      } finally {
+        if (active) {
+          setLoadingVbmapp(false);
+        }
+      }
+    };
+
+    fetchVbmapp();
+    return () => {
+      active = false;
+    };
+  }, [isHhs, prerequisite, shouldQueryVbmapp, cleanedTaskTitle]);
 
   return (
     <div className={`border border-slate-200 rounded-xl bg-white overflow-hidden shadow-sm ${isCompleted ? 'opacity-60 bg-slate-50' : ''}`}>
@@ -498,6 +587,16 @@ const ExpandableQuestCard = ({ quest, isCompleted, showButtons, submitting, onRe
               </h3>
               <div className="whitespace-pre-wrap leading-relaxed">
                 {prerequisite}
+              </div>
+            </div>
+          )}
+          {!prerequisite && (loadingVbmapp || vbmappLabel) && (
+            <div className="bg-purple-50 text-purple-800 p-3 rounded-lg text-sm">
+              <h3 className="font-bold mb-1 flex items-center gap-2">
+                <span>🧠</span> 前置能力 (VB-MAPP)
+              </h3>
+              <div className="whitespace-pre-wrap leading-relaxed">
+                {loadingVbmapp ? '加载前置能力中...' : `【VB-MAPP】${vbmappLabel}`}
               </div>
             </div>
           )}
