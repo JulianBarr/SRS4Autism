@@ -20,6 +20,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import random
 import sqlite3
 import threading
 from datetime import datetime, timezone, timedelta
@@ -76,25 +77,39 @@ def _hhs_table_exists(db_path: Path) -> bool:
 
 
 def _row_to_hhs_quest(row: sqlite3.Row) -> dict:
-    materials = json.loads(row["materials_json"] or "[]")
-    activities = json.loads(row["activities_json"] or "[]")
-    precautions = json.loads(row["precautions_json"] or "[]")
+    def _loads_list(raw_value: object) -> list[str]:
+        if raw_value is None:
+            return []
+        if isinstance(raw_value, list):
+            return [str(v).strip() for v in raw_value if str(v).strip()]
+        try:
+            parsed = json.loads(raw_value) if isinstance(raw_value, str) else raw_value
+            if isinstance(parsed, list):
+                return [str(v).strip() for v in parsed if str(v).strip()]
+        except Exception:
+            return []
+        return []
+
+    materials = _loads_list(row["materials_json"])
+    activities = _loads_list(row["activities_json"])
+    precautions = _loads_list(row["precautions_json"])
     steps_parts: list[str] = []
     if activities:
-        steps_parts.append("\n".join(activities))
+        steps_parts.append("活动建议：\n" + "\n".join(f"• {item}" for item in activities))
     if precautions:
-        steps_parts.append("注意事项：\n" + "\n".join(precautions))
+        steps_parts.append("注意事项：\n" + "\n".join(f"• {item}" for item in precautions))
     teaching_steps = "\n\n".join(steps_parts) if steps_parts else None
-    title = f"[HHS - {row['module_label']}] {row['label']}"
     return {
         "quest_id": row["quest_id"],
-        "label": title,
+        "label": row["label"],
         "content_source": "HHS",
         "hhs_module": row["module_label"],
         "age_group": row["age_group"],
         "pep3_items": [],
         "pep3_item_nums": [],
         "suggested_materials": materials,
+        "activities": activities,
+        "precautions": precautions,
         "teaching_steps": teaching_steps,
         "group_class_generalization": None,
         "home_generalization": None,
@@ -124,11 +139,11 @@ def load_hhs_quests_for_scheduler(
     if modules:
         ph = ",".join("?" * len(modules))
         cur.execute(
-            f"SELECT * FROM hhs_goals WHERE module_label IN ({ph})",
+            f"SELECT * FROM hhs_goals WHERE module_label IN ({ph}) ORDER BY RANDOM()",
             tuple(modules),
         )
     else:
-        cur.execute("SELECT * FROM hhs_goals")
+        cur.execute("SELECT * FROM hhs_goals ORDER BY RANDOM()")
     rows = cur.fetchall()
     conn.close()
     return [_row_to_hhs_quest(r) for r in rows]
@@ -518,8 +533,19 @@ def run_targeted_scheduler(
         return d.timestamp()
 
     pending_unsorted.sort(key=_sort_key)
+    # For "new" cards with identical due date, randomize selection order
+    # so the daily batch is diversified instead of fixed by ingestion sequence.
+    due_groups: dict[str, list[tuple[datetime, dict, Card | None]]] = {}
+    for item in pending_unsorted:
+        due_key = item[0].isoformat()
+        due_groups.setdefault(due_key, []).append(item)
+    randomized_pending: list[tuple[datetime, dict, Card | None]] = []
+    for due_key in sorted(due_groups.keys()):
+        group_items = due_groups[due_key]
+        random.shuffle(group_items)
+        randomized_pending.extend(group_items)
     quota = max(0, count - len(completed_today))
-    selected_pending = pending_unsorted[:quota]
+    selected_pending = randomized_pending[:quota]
     pending = [{"quest": q, "card": c, "due": d} for d, q, c in selected_pending]
 
     # 历史打卡任务：last_review 存在且日期 != 今天（按 schedule_source 区分 QCQ / HHS）

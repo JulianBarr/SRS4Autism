@@ -16,11 +16,14 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 import sqlite3
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Optional
+
+import opencc
 
 # Project root
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,6 +34,14 @@ from rdflib import Graph, Literal, Namespace, RDF, URIRef  # noqa: E402
 from rdflib.namespace import RDFS  # noqa: E402
 
 HHS_ONT = Namespace("http://example.org/hhs/ontology#")
+T2S_CONVERTER = opencc.OpenCC("t2s.json")
+NOISY_PREFIXES = (
+    "/ 建议教材：",
+    "建议教材：",
+    "活动: * **Activities:**",
+    "活动：",
+)
+MATERIAL_VERB_HINTS = ("示范", "把", "放在", "接着", "然后", "引导", "让儿童")
 
 DOMAIN_FILES = (
     "21_language.ttl",
@@ -75,6 +86,70 @@ def collect_literals(g: Graph, subj: URIRef, pred) -> list[str]:
         if s and s not in out:
             out.append(s)
     return out
+
+
+def _convert_and_clean_text(text: str) -> str:
+    normalized = T2S_CONVERTER.convert(str(text or "")).strip()
+    for prefix in NOISY_PREFIXES:
+        prefix_pattern = r"^\s*" + re.escape(prefix) + r"\s*"
+        normalized = re.sub(prefix_pattern, "", normalized).strip()
+    return normalized
+
+
+def cleanse_string_list(items: list[str]) -> list[str]:
+    cleaned: list[str] = []
+    for item in items:
+        normalized = _convert_and_clean_text(item)
+        if normalized and normalized not in cleaned:
+            cleaned.append(normalized)
+    return cleaned
+
+
+def should_move_material_to_activity(material: str) -> bool:
+    if len(material) > 18:
+        return True
+    return any(verb in material for verb in MATERIAL_VERB_HINTS)
+
+
+def cleanse_goal_row(row: dict[str, Any]) -> dict[str, Any]:
+    row["label"] = _convert_and_clean_text(row.get("label", ""))
+    row["module_label"] = _convert_and_clean_text(row.get("module_label", ""))
+
+    for field in (
+        "submodule_label",
+        "objective_label",
+        "phasal_label",
+        "goal_code",
+        "age_group",
+        "passing_criteria",
+    ):
+        value = row.get(field)
+        if isinstance(value, str):
+            row[field] = _convert_and_clean_text(value)
+
+    breadcrumb = json.loads(row.get("breadcrumb_json") or "[]")
+    if isinstance(breadcrumb, list):
+        row["breadcrumb_json"] = json.dumps(
+            cleanse_string_list([str(item) for item in breadcrumb]),
+            ensure_ascii=False,
+        )
+
+    materials = cleanse_string_list(json.loads(row.get("materials_json") or "[]"))
+    activities = cleanse_string_list(json.loads(row.get("activities_json") or "[]"))
+    precautions = cleanse_string_list(json.loads(row.get("precautions_json") or "[]"))
+
+    kept_materials: list[str] = []
+    for material in materials:
+        if should_move_material_to_activity(material):
+            if material not in activities:
+                activities.append(material)
+        else:
+            kept_materials.append(material)
+
+    row["materials_json"] = json.dumps(kept_materials, ensure_ascii=False)
+    row["activities_json"] = json.dumps(activities, ensure_ascii=False)
+    row["precautions_json"] = json.dumps(precautions, ensure_ascii=False)
+    return row
 
 
 def climb_ancestors(g: Graph, goal: URIRef) -> tuple[str, str, str, str]:
@@ -137,24 +212,26 @@ def parse_goals_from_file(path: Path) -> list[dict[str, Any]]:
             break
 
         rows.append(
-            {
-                "quest_id": stable_quest_id(goal_iri),
-                "goal_iri": goal_iri,
-                "content_source": "HHS",
-                "domain_file": path.name,
-                "label": label or "(未命名)",
-                "module_label": mod or "未知模块",
-                "submodule_label": subm or None,
-                "objective_label": obj or None,
-                "phasal_label": phasal or None,
-                "breadcrumb_json": json.dumps(breadcrumb, ensure_ascii=False),
-                "goal_code": goal_code,
-                "age_group": age_group,
-                "materials_json": json.dumps(materials, ensure_ascii=False),
-                "activities_json": json.dumps(activities, ensure_ascii=False),
-                "precautions_json": json.dumps(precautions, ensure_ascii=False),
-                "passing_criteria": passing,
-            }
+            cleanse_goal_row(
+                {
+                    "quest_id": stable_quest_id(goal_iri),
+                    "goal_iri": goal_iri,
+                    "content_source": "HHS",
+                    "domain_file": path.name,
+                    "label": label or "(未命名)",
+                    "module_label": mod or "未知模块",
+                    "submodule_label": subm or None,
+                    "objective_label": obj or None,
+                    "phasal_label": phasal or None,
+                    "breadcrumb_json": json.dumps(breadcrumb, ensure_ascii=False),
+                    "goal_code": goal_code,
+                    "age_group": age_group,
+                    "materials_json": json.dumps(materials, ensure_ascii=False),
+                    "activities_json": json.dumps(activities, ensure_ascii=False),
+                    "precautions_json": json.dumps(precautions, ensure_ascii=False),
+                    "passing_criteria": passing,
+                }
+            )
         )
     return rows
 

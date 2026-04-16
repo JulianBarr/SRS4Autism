@@ -62,16 +62,28 @@ def _quest_to_api_item(q: dict, format_pep3_short, format_materials) -> dict:
         except Exception:
             parsed_integration = None
 
+    raw_materials = q.get("suggested_materials")
+    if isinstance(raw_materials, list):
+        suggested_materials = [str(v).strip() for v in raw_materials if str(v).strip()]
+    elif isinstance(raw_materials, str) and raw_materials.strip():
+        suggested_materials = [raw_materials.strip()]
+    else:
+        formatted = format_materials(q)
+        suggested_materials = [formatted] if formatted else []
+
     item = {
         "quest_id": q["quest_id"],
         "label": q["label"],
         "pep3_standard": format_pep3_short(q),
         "pep3_items": q.get("pep3_items") or [],
-        "suggested_materials": format_materials(q),
+        "suggested_materials": suggested_materials,
         "teaching_steps": q.get("teaching_steps"),
         "group_class_generalization": q.get("group_class_generalization"),
         "home_generalization": q.get("home_generalization"),
         "ecumenical_integration": parsed_integration,
+        "activities": q.get("activities") or [],
+        "precautions": q.get("precautions") or [],
+        "source": "hhs" if q.get("content_source") == "HHS" else "qcq",
     }
     if q.get("content_source") == "HHS":
         item["content_source"] = "HHS"

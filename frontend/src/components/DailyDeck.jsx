@@ -406,18 +406,39 @@ const ExpandableQuestCard = ({ quest, isCompleted, showButtons, submitting, onRe
   const pep3Items = quest.pep3_items || [];
   
   const title = quest.label || quest.title || "(未命名任务)";
+  const isHhs = (quest.source || '').toLowerCase() === 'hhs' || quest.content_source === 'HHS';
+  const hhsModuleText = (quest.hhs_module || '').trim() || '未分配模块';
   
   const badges = [];
   if (quest.badges) {
     badges.push(...quest.badges);
+  } else if (isHhs) {
+    const ageText = quest.age_group || '通用';
+    badges.push(`协康会 HHS | 模块: ${hhsModuleText} | 适用年龄: ${ageText}`);
   } else if (quest.pep3_standard) {
     badges.push(`PEP-3: ${quest.pep3_standard}`);
   }
   
   let conditions = quest.conditions || quest.ecumenical_integration?.assessment?.content || "";
   let prerequisite = quest.prerequisite || quest.ecumenical_integration?.prerequisite?.content || "";
-  let materials = quest.suggested_materials || quest.materials || quest.ecumenical_integration?.teaching?.materials || "";
-  let steps = quest.teaching_steps || quest.steps || quest.ecumenical_integration?.teaching?.steps || quest.ecumenical_integration?.teaching?.content || "";
+  const normalizeList = (value) => {
+    if (Array.isArray(value)) return value.filter(Boolean).map((item) => String(item).trim()).filter(Boolean);
+    if (typeof value === 'string') {
+      const txt = value.trim();
+      return txt ? [txt] : [];
+    }
+    return [];
+  };
+
+  const materialItems = normalizeList(quest.suggested_materials).length
+    ? normalizeList(quest.suggested_materials)
+    : normalizeList(quest.materials || quest.ecumenical_integration?.teaching?.materials);
+  const activityItems = normalizeList(quest.activities);
+  const precautionItems = normalizeList(quest.precautions);
+  const fallbackStepText = quest.teaching_steps || quest.steps || quest.ecumenical_integration?.teaching?.steps || quest.ecumenical_integration?.teaching?.content || "";
+  const renderedSteps = [...activityItems, ...precautionItems].length > 0
+    ? [...activityItems.map((a) => `活动: ${a}`), ...precautionItems.map((p) => `注意: ${p}`)].join('\n')
+    : fallbackStepText;
   let generalization = quest.home_generalization || quest.generalization || quest.ecumenical_integration?.generalization?.content || "";
 
   return (
@@ -437,7 +458,7 @@ const ExpandableQuestCard = ({ quest, isCompleted, showButtons, submitting, onRe
                 {badge}
               </span>
             ))}
-            {quest.pep3_standard && !quest.badges && (
+            {!isHhs && quest.pep3_standard && !quest.badges && (
                <Pep3Tooltip pep3Standard={quest.pep3_standard} pep3Items={pep3Items} />
             )}
           </div>
@@ -482,19 +503,24 @@ const ExpandableQuestCard = ({ quest, isCompleted, showButtons, submitting, onRe
           )}
 
           {/* 区块 C - 🛠️ 教具与步骤 */}
-          {(materials || steps) && (
+          {(materialItems.length > 0 || renderedSteps) && (
             <div className="bg-white border border-slate-100 p-3 rounded-lg">
               <h3 className="font-bold text-slate-700 mb-2 flex items-center gap-2">
                 <span>🛠️</span> 教具与步骤
               </h3>
-              {materials && (
+              {materialItems.length > 0 && (
                 <div className="mb-2 text-sm text-slate-700">
-                  <span className="font-semibold text-slate-800">教具准备：</span> {materials}
+                  <span className="font-semibold text-slate-800">教具准备：</span>
+                  <ul className="mt-1 list-disc list-inside">
+                    {materialItems.map((item, idx) => (
+                      <li key={idx}>{item}</li>
+                    ))}
+                  </ul>
                 </div>
               )}
-              {steps && (
+              {renderedSteps && (
                 <div className="text-sm text-slate-600 whitespace-pre-wrap leading-relaxed">
-                  {steps}
+                  {renderedSteps}
                 </div>
               )}
             </div>
@@ -748,9 +774,13 @@ function DailyDeck({
                   className="card opacity-60 bg-slate-50 p-4 rounded-lg"
                 >
                   <h3 className="font-semibold text-slate-700">{quest.label}</h3>
-                  {quest.pep3_standard && (
+                  {((quest.source || '').toLowerCase() === 'hhs' || quest.content_source === 'HHS') ? (
+                    <p className="text-sm text-slate-500 mt-1">
+                      协康会 HHS | 模块: {(quest.hhs_module || '').trim() || '未分配模块'} | 适用年龄: {quest.age_group || '通用'}
+                    </p>
+                  ) : quest.pep3_standard ? (
                     <p className="text-sm text-slate-500 mt-1">PEP-3: {quest.pep3_standard}</p>
-                  )}
+                  ) : null}
                   <hr className="my-4 border-gray-100" />
                   <div className="flex justify-between items-center bg-gray-50 p-3 rounded-lg">
                     <div className="flex items-center gap-2 text-emerald-700 font-bold">
