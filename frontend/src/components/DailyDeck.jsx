@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import api, { API_BASE, cloudApi } from '../utils/api';
 import AICard from './AICard';
+import VBMappSubgraphExplorer from './VBMappSubgraphExplorer';
+import { Network } from 'lucide-react';
 
 function cleanTaskTitle(rawTitle) {
   if (!rawTitle) return '';
@@ -27,6 +29,15 @@ function cleanTaskTitle(rawTitle) {
 
 function escapeSparqlLiteral(value) {
   return value.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+}
+
+function extractVbmappLabel(rawText) {
+  if (!rawText) return '';
+  const text = String(rawText).trim();
+  if (!text) return '';
+  const withoutPrefix = text.replace(/^【\s*VB-MAPP\s*】/i, '').trim();
+  const [head] = withoutPrefix.split(/[：:]/);
+  return (head || withoutPrefix).trim();
 }
 
 //       onMouseEnter={() => setShow(true)}
@@ -430,7 +441,12 @@ function QuestTopicChatModal({ quest, childName, childId, onClose }) {
 const ExpandableQuestCard = ({ quest, isCompleted, showButtons, submitting, onRecordFeedback, onOpenChat }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [vbmappLabel, setVbmappLabel] = useState('');
+  const [vbmappUri, setVbmappUri] = useState('');
   const [loadingVbmapp, setLoadingVbmapp] = useState(false);
+  const [showGraphExplorer, setShowGraphExplorer] = useState(false);
+  const [resolvingGraphUri, setResolvingGraphUri] = useState(false);
+  const [graphResolveError, setGraphResolveError] = useState('');
+  const [graphCenterUri, setGraphCenterUri] = useState('');
   const isSubmitting = submitting === quest.quest_id;
   const pep3Items = quest.pep3_items || [];
   
@@ -471,10 +487,100 @@ const ExpandableQuestCard = ({ quest, isCompleted, showButtons, submitting, onRe
     ? [...activityItems.map((a) => `活动: ${a}`), ...precautionItems.map((p) => `注意: ${p}`)].join('\n')
     : fallbackStepText;
   let generalization = quest.home_generalization || quest.generalization || quest.ecumenical_integration?.generalization?.content || "";
+  const inferredQuestVbmappUri =
+    quest.vbmapp_uri ||
+    quest.vbmappUri ||
+    quest.vbmapp_node_uri ||
+    quest.vbmappNodeUri ||
+    quest.ecumenical_integration?.prerequisite?.uri ||
+    quest.ecumenical_integration?.prerequisite?.node_uri ||
+    '';
+  const currentVbmappUri = (inferredQuestVbmappUri || vbmappUri || '').trim();
+  const resolvedCenterUri = (graphCenterUri || currentVbmappUri).trim();
+  const vbmappCandidateLabel = extractVbmappLabel(prerequisite || vbmappLabel || '');
+  const canTriggerGraphExplorer = Boolean(vbmappCandidateLabel || cleanedTaskTitle || currentVbmappUri);
+
+  const resolveUriByLabel = useCallback(async (labelText) => {
+    const candidate = (labelText || '').trim();
+    if (!candidate) return '';
+    const exactSparql = `PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?vbmappInst WHERE {
+  ?vbmappInst rdfs:label ?lbl .
+  FILTER(LANG(?lbl) = "zh")
+  FILTER(STR(?lbl) = "${escapeSparqlLiteral(candidate)}")
+} LIMIT 1`;
+    const fuzzySparql = `PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?vbmappInst WHERE {
+  ?vbmappInst rdfs:label ?lbl .
+  FILTER(LANG(?lbl) = "zh")
+  FILTER(CONTAINS(STR(?lbl), "${escapeSparqlLiteral(candidate)}"))
+} LIMIT 1`;
+
+    const runQuery = async (sparql) => {
+      const response = await fetch(`${API_BASE}/api/kg/query`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/sparql-query; charset=utf-8',
+          Accept: 'application/sparql-results+json',
+          Authorization: localStorage.getItem('access_token')
+            ? `Bearer ${localStorage.getItem('access_token')}`
+            : '',
+        },
+        body: sparql,
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data?.detail || `HTTP ${response.status}`);
+      }
+      return data?.results?.bindings?.[0]?.vbmappInst?.value || '';
+    };
+
+    const exact = await runQuery(exactSparql);
+    if (exact) return exact;
+    return runQuery(fuzzySparql);
+  }, []);
+
+  const handleOpenGraphExplorer = useCallback(async (event) => {
+    event.stopPropagation();
+    setGraphResolveError('');
+    if (currentVbmappUri) {
+      setGraphCenterUri(currentVbmappUri);
+      setShowGraphExplorer(true);
+      return;
+    }
+
+    const candidates = [vbmappCandidateLabel, cleanedTaskTitle].filter(Boolean);
+    if (candidates.length === 0) {
+      setGraphResolveError('未找到可定位的 VB-MAPP 节点标签');
+      return;
+    }
+
+    setResolvingGraphUri(true);
+    try {
+      let resolved = '';
+      for (const label of candidates) {
+        resolved = await resolveUriByLabel(label);
+        if (resolved) break;
+      }
+      if (!resolved) {
+        setGraphResolveError('未解析到图谱节点 URI，请检查前置能力文本');
+        return;
+      }
+      setVbmappUri(resolved);
+      setGraphCenterUri(resolved);
+      setShowGraphExplorer(true);
+    } catch (err) {
+      console.warn('Failed to resolve VB-MAPP URI for graph explorer:', err);
+      setGraphResolveError('图谱节点解析失败，请稍后重试');
+    } finally {
+      setResolvingGraphUri(false);
+    }
+  }, [cleanedTaskTitle, currentVbmappUri, resolveUriByLabel, vbmappCandidateLabel]);
 
   useEffect(() => {
     if (!isHhs || prerequisite || !shouldQueryVbmapp) {
       setVbmappLabel('');
+      setVbmappUri('');
       setLoadingVbmapp(false);
       return;
     }
@@ -486,7 +592,7 @@ const ExpandableQuestCard = ({ quest, isCompleted, showButtons, submitting, onRe
         const sparql = `PREFIX cuma-schema: <http://cuma.ai/schema/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-SELECT ?vbmappLabel ?score WHERE {
+SELECT ?vbmappInst ?vbmappLabel ?score WHERE {
   ?hhsGoal rdfs:label ?hhsLabel .
   FILTER(CONTAINS(STR(?hhsLabel), "${escapeSparqlLiteral(cleanedTaskTitle)}"))
   ?hhsGoal cuma-schema:alignsWith ?vbmappInst .
@@ -512,9 +618,11 @@ SELECT ?vbmappLabel ?score WHERE {
         const first = data?.results?.bindings?.[0];
         if (!active) return;
         setVbmappLabel(first?.vbmappLabel?.value || '');
+        setVbmappUri(first?.vbmappInst?.value || '');
       } catch (err) {
         if (active) {
           setVbmappLabel('');
+          setVbmappUri('');
           console.warn('Failed to fetch VB-MAPP prerequisite for HHS card:', err);
         }
       } finally {
@@ -582,8 +690,22 @@ SELECT ?vbmappLabel ?score WHERE {
           {/* 区块 B - 🧠 前置能力 */}
           {prerequisite && (
             <div className="bg-purple-50 text-purple-800 p-3 rounded-lg text-sm">
-              <h3 className="font-bold mb-1 flex items-center gap-2">
-                <span>🧠</span> 前置能力 (VB-MAPP)
+              <h3 className="font-bold mb-1 flex items-center justify-between gap-2">
+                <span className="flex items-center gap-2">
+                  <span>🧠</span> 前置能力 (VB-MAPP)
+                </span>
+                {canTriggerGraphExplorer && (
+                  <button
+                    type="button"
+                    onClick={handleOpenGraphExplorer}
+                    disabled={resolvingGraphUri}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-purple-200 bg-white/70 px-2 py-0.5 text-xs font-medium text-purple-700 hover:bg-white transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                    title="在图谱中分析"
+                  >
+                    <Network className="h-3.5 w-3.5" />
+                    <span>{resolvingGraphUri ? '解析中...' : '🗺️ 在图谱中分析'}</span>
+                  </button>
+                )}
               </h3>
               <div className="whitespace-pre-wrap leading-relaxed">
                 {prerequisite}
@@ -592,11 +714,54 @@ SELECT ?vbmappLabel ?score WHERE {
           )}
           {!prerequisite && (loadingVbmapp || vbmappLabel) && (
             <div className="bg-purple-50 text-purple-800 p-3 rounded-lg text-sm">
-              <h3 className="font-bold mb-1 flex items-center gap-2">
-                <span>🧠</span> 前置能力 (VB-MAPP)
+              <h3 className="font-bold mb-1 flex items-center justify-between gap-2">
+                <span className="flex items-center gap-2">
+                  <span>🧠</span> 前置能力 (VB-MAPP)
+                </span>
+                {canTriggerGraphExplorer && (
+                  <button
+                    type="button"
+                    onClick={handleOpenGraphExplorer}
+                    disabled={resolvingGraphUri}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-purple-200 bg-white/70 px-2 py-0.5 text-xs font-medium text-purple-700 hover:bg-white transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                    title="在图谱中分析"
+                  >
+                    <Network className="h-3.5 w-3.5" />
+                    <span>{resolvingGraphUri ? '解析中...' : '🗺️ 在图谱中分析'}</span>
+                  </button>
+                )}
               </h3>
               <div className="whitespace-pre-wrap leading-relaxed">
                 {loadingVbmapp ? '加载前置能力中...' : `【VB-MAPP】${vbmappLabel}`}
+              </div>
+            </div>
+          )}
+          {graphResolveError && (
+            <p className="text-xs text-red-600 -mt-2">{graphResolveError}</p>
+          )}
+          {showGraphExplorer && resolvedCenterUri && (
+            <div className="rounded-xl border border-purple-200 bg-white p-3">
+              <div className="mb-2 flex items-center justify-between gap-2">
+                <div className="text-xs text-slate-600 truncate">
+                  图谱中心节点: {resolvedCenterUri}
+                </div>
+                <button
+                  type="button"
+                  className="text-xs text-slate-500 hover:text-slate-700 border border-slate-200 rounded px-2 py-0.5"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setShowGraphExplorer(false);
+                  }}
+                >
+                  关闭图谱
+                </button>
+              </div>
+              <div className="h-[80vh] min-h-[520px] w-full rounded-lg border border-slate-200 overflow-hidden">
+                <VBMappSubgraphExplorer
+                  initialCenterUri={resolvedCenterUri}
+                  className="!h-full"
+                  style={{ height: '100%' }}
+                />
               </div>
             </div>
           )}
