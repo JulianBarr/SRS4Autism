@@ -1,16 +1,17 @@
 from __future__ import annotations
 
-from collections import deque
 from enum import Enum
 from typing import Optional
 
 from fastapi import APIRouter, HTTPException, Query
+from rdflib import Namespace
 
 from app.utils.oxigraph_utils import get_kg_store
 
 router = APIRouter()
 
-REQUIRES_PREREQUISITE = "http://cuma.ai/schema/requiresPrerequisite"
+VBMAPP_SCHEMA = Namespace("http://cuma.ai/schema/vbmapp/")
+REQUIRES_PREREQUISITE = str(VBMAPP_SCHEMA.requiresPrerequisite)
 RDFS_LABEL = "http://www.w3.org/2000/01/rdf-schema#label"
 
 
@@ -48,43 +49,61 @@ def _run_query_bindings(query: str) -> list[dict[str, dict[str, str]]]:
     return bindings
 
 
-def _fetch_neighbor_edges(uri: str, direction: GraphDirection) -> list[tuple[str, str]]:
-    clauses: list[str] = []
-    if direction in {GraphDirection.forward, GraphDirection.both}:
-        clauses.append(
-            f"""
-            {{
-              BIND(<{uri}> AS ?source)
-              ?source <{REQUIRES_PREREQUISITE}> ?target .
-            }}
-            """
-        )
-    if direction in {GraphDirection.backward, GraphDirection.both}:
-        clauses.append(
-            f"""
-            {{
-              BIND(<{uri}> AS ?target)
-              ?source <{REQUIRES_PREREQUISITE}> ?target .
-            }}
-            """
-        )
+def _build_property_path(direction: GraphDirection) -> str:
+    predicate = f"<{REQUIRES_PREREQUISITE}>"
+    if direction == GraphDirection.forward:
+        return predicate
+    if direction == GraphDirection.backward:
+        return f"^{predicate}"
+    return f"({predicate}|^{predicate})"
 
-    if not clauses:
-        return []
 
+def _fetch_reachable_nodes(center_uri: str, direction: GraphDirection, max_hops: int) -> set[str]:
+    path_step = _build_property_path(direction)
+    hop_clauses = []
+    for hop in range(1, max_hops + 1):
+        path_expr = "/".join(path_step for _ in range(hop))
+        hop_clauses.append(f"{{ ?center {path_expr} ?node . }}")
+    hop_union = "\n      UNION\n      ".join(hop_clauses)
     query = f"""
-    SELECT DISTINCT ?source ?target
+    SELECT DISTINCT ?node
     WHERE {{
-      {' UNION '.join(clauses)}
+      BIND(<{center_uri}> AS ?center)
+      {{
+        BIND(?center AS ?node)
+      }}
+      UNION
+      {hop_union}
     }}
     """
     rows = _run_query_bindings(query)
-    edges: list[tuple[str, str]] = []
+    nodes: set[str] = set()
+    for row in rows:
+        node = _node_term_to_value(row.get("node"))
+        if node:
+            nodes.add(node)
+    return nodes
+
+
+def _fetch_edges_within_nodes(node_uris: set[str]) -> set[tuple[str, str]]:
+    if not node_uris:
+        return set()
+    values = " ".join(f"<{uri}>" for uri in sorted(node_uris))
+    query = f"""
+    SELECT DISTINCT ?source ?target
+    WHERE {{
+      VALUES ?source {{ {values} }}
+      VALUES ?target {{ {values} }}
+      ?source <{REQUIRES_PREREQUISITE}> ?target .
+    }}
+    """
+    rows = _run_query_bindings(query)
+    edges: set[tuple[str, str]] = set()
     for row in rows:
         source = _node_term_to_value(row.get("source"))
         target = _node_term_to_value(row.get("target"))
         if source and target:
-            edges.append((source, target))
+            edges.add((source, target))
     return edges
 
 
@@ -115,7 +134,7 @@ def _fetch_labels(uris: set[str]) -> dict[str, str]:
 @router.get("/subgraph")
 async def get_subgraph(
     center_uri: str = Query(..., description="Center node URI"),
-    max_hops: int = Query(2, ge=1, le=6, description="Max BFS hops"),
+    max_hops: int = Query(2, ge=1, le=6, description="Max traversal hops"),
     direction: GraphDirection = Query(
         GraphDirection.both, description="Traversal direction: forward/backward/both"
     ),
@@ -124,22 +143,8 @@ async def get_subgraph(
     if not center_uri.startswith("http://") and not center_uri.startswith("https://"):
         raise HTTPException(status_code=400, detail="center_uri must be an absolute URI")
 
-    visited: set[str] = {center_uri}
-    edges: set[tuple[str, str]] = set()
-    queue: deque[tuple[str, int]] = deque([(center_uri, 0)])
-
-    while queue:
-        current_uri, depth = queue.popleft()
-        if depth >= max_hops:
-            continue
-        for source, target in _fetch_neighbor_edges(current_uri, direction):
-            edges.add((source, target))
-            if source not in visited:
-                visited.add(source)
-                queue.append((source, depth + 1))
-            if target not in visited:
-                visited.add(target)
-                queue.append((target, depth + 1))
+    visited = _fetch_reachable_nodes(center_uri, direction, max_hops)
+    edges = _fetch_edges_within_nodes(visited)
 
     labels = _fetch_labels(visited)
 
