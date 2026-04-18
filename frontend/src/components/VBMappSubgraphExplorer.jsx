@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import ForceGraph2D from 'react-force-graph-2d';
 import businessApi from '../utils/api';
+import { useLanguage } from '../i18n/LanguageContext';
 
 const DEFAULT_HOPS = 2;
 const DEFAULT_DIRECTION = 'both';
@@ -29,6 +30,34 @@ export default function VBMappSubgraphExplorer({
   const [error, setError] = useState('');
   const [graphData, setGraphData] = useState({ nodes: [], links: [] });
   const debouncedSearch = useDebouncedValue(searchInput, 300);
+  const { language } = useLanguage();
+
+  const nodeDisplayTitle = useCallback(
+    (node) => {
+      if (!node) return '';
+      if (language === 'zh' && node.label_zh) {
+        return node.label_zh;
+      }
+      return node.label || node.id || '';
+    },
+    [language]
+  );
+
+  /** Tooltip: short title, full vbmapp:description for current UI language, then URI. */
+  const nodeHoverText = useCallback(
+    (node) => {
+      if (!node) return '';
+      const title = nodeDisplayTitle(node);
+      const desc =
+        language === 'zh' ? node.description_zh : node.description_en;
+      const lines = [];
+      if (title) lines.push(title);
+      if (desc) lines.push(desc);
+      if (node.uri) lines.push(node.uri);
+      return lines.join('\n');
+    },
+    [language, nodeDisplayTitle]
+  );
 
   const loadSubgraph = useCallback(async (focusUri, maxHops, dir) => {
     if (!focusUri) return;
@@ -100,8 +129,8 @@ export default function VBMappSubgraphExplorer({
     const next = node?.uri || node?.id;
     if (!next || next === centerUri) return;
     setCenterUri(next);
-    setSearchInput(node.label || next);
-  }, [centerUri]);
+    setSearchInput(nodeDisplayTitle(node) || next);
+  }, [centerUri, nodeDisplayTitle]);
 
   const selectedOption = useMemo(
     () => nodeOptions.find((item) => item.uri === centerUri),
@@ -185,9 +214,9 @@ export default function VBMappSubgraphExplorer({
           width={900}
           height={720}
           nodeRelSize={6}
-          nodeLabel={(node) => `${node.label}\n${node.uri}`}
+          nodeLabel={(node) => nodeHoverText(node)}
           nodeCanvasObject={(node, ctx, globalScale) => {
-            const label = node.label || node.id;
+            const label = nodeDisplayTitle(node) || node.id;
             const isCenter = node.is_center || node.uri === centerUri;
             const fontSize = isCenter ? 15 / globalScale : 11 / globalScale;
             ctx.font = `${isCenter ? 700 : 500} ${fontSize}px Sans-Serif`;

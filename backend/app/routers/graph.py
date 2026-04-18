@@ -12,6 +12,7 @@ router = APIRouter()
 
 VBMAPP_SCHEMA = Namespace("http://cuma.ai/schema/vbmapp/")
 REQUIRES_PREREQUISITE = str(VBMAPP_SCHEMA.requiresPrerequisite)
+VBMAPP_DESCRIPTION = str(VBMAPP_SCHEMA.description)
 RDFS_LABEL = "http://www.w3.org/2000/01/rdf-schema#label"
 
 
@@ -107,7 +108,24 @@ def _fetch_edges_within_nodes(node_uris: set[str]) -> set[tuple[str, str]]:
     return edges
 
 
-def _fetch_labels(uris: set[str]) -> dict[str, str]:
+# Prefer English-tagged (or untagged) literals for default `label`; Chinese variants use `label_zh`.
+_EN_LANG_FILTER = (
+    'FILTER(LANG(?labelLit) IN ("en", "en-US") || LANG(?labelLit) = "")'
+)
+_ZH_LANG_FILTER = (
+    'FILTER(LANG(?labelLit) IN ("zh", "zh-CN", "zh-Hans", "zh-Hant"))'
+)
+
+_DESC_EN_LANG_FILTER = (
+    'FILTER(LANG(?descLit) IN ("en", "en-US") || LANG(?descLit) = "")'
+)
+_DESC_ZH_LANG_FILTER = (
+    'FILTER(LANG(?descLit) IN ("zh", "zh-CN", "zh-Hans", "zh-Hant"))'
+)
+
+
+def _fetch_labels_any(uris: set[str]) -> dict[str, str]:
+    """One arbitrary rdfs:label per node (fallback when language-specific query misses)."""
     if not uris:
         return {}
     values = " ".join(f"<{uri}>" for uri in sorted(uris))
@@ -131,6 +149,54 @@ def _fetch_labels(uris: set[str]) -> dict[str, str]:
     return labels
 
 
+def _fetch_labels_with_lang_filter(uris: set[str], lang_filter: str) -> dict[str, str]:
+    """rdfs:labels matching the given LANG() filter (one SAMPLE per node)."""
+    if not uris:
+        return {}
+    values = " ".join(f"<{uri}>" for uri in sorted(uris))
+    query = f"""
+    SELECT ?node (SAMPLE(?labelLit) AS ?label)
+    WHERE {{
+      VALUES ?node {{ {values} }}
+      ?node <{RDFS_LABEL}> ?labelLit .
+      {lang_filter}
+    }}
+    GROUP BY ?node
+    """
+    rows = _run_query_bindings(query)
+    labels: dict[str, str] = {}
+    for row in rows:
+        node_uri = _node_term_to_value(row.get("node"))
+        label = _node_term_to_value(row.get("label"))
+        if node_uri and label:
+            labels[node_uri] = label
+    return labels
+
+
+def _fetch_vbmapp_descriptions_with_lang_filter(uris: set[str], lang_filter: str) -> dict[str, str]:
+    """vbmapp:description literals matching the given LANG() filter (one SAMPLE per node)."""
+    if not uris:
+        return {}
+    values = " ".join(f"<{uri}>" for uri in sorted(uris))
+    query = f"""
+    SELECT ?node (SAMPLE(?descLit) AS ?desc)
+    WHERE {{
+      VALUES ?node {{ {values} }}
+      ?node <{VBMAPP_DESCRIPTION}> ?descLit .
+      {lang_filter}
+    }}
+    GROUP BY ?node
+    """
+    rows = _run_query_bindings(query)
+    out: dict[str, str] = {}
+    for row in rows:
+        node_uri = _node_term_to_value(row.get("node"))
+        desc = _node_term_to_value(row.get("desc"))
+        if node_uri and desc:
+            out[node_uri] = desc
+    return out
+
+
 @router.get("/subgraph")
 async def get_subgraph(
     center_uri: str = Query(..., description="Center node URI"),
@@ -146,17 +212,28 @@ async def get_subgraph(
     visited = _fetch_reachable_nodes(center_uri, direction, max_hops)
     edges = _fetch_edges_within_nodes(visited)
 
-    labels = _fetch_labels(visited)
+    labels_en = _fetch_labels_with_lang_filter(visited, _EN_LANG_FILTER)
+    labels_zh = _fetch_labels_with_lang_filter(visited, _ZH_LANG_FILTER)
+    labels_any = _fetch_labels_any(visited)
+    descriptions_en = _fetch_vbmapp_descriptions_with_lang_filter(visited, _DESC_EN_LANG_FILTER)
+    descriptions_zh = _fetch_vbmapp_descriptions_with_lang_filter(visited, _DESC_ZH_LANG_FILTER)
 
-    nodes = [
-        {
-            "id": uri,
-            "uri": uri,
-            "label": labels.get(uri, uri.rsplit("/", 1)[-1]),
-            "is_center": uri == center_uri,
-        }
-        for uri in sorted(visited)
-    ]
+    nodes = []
+    for uri in sorted(visited):
+        slug = uri.rsplit("/", 1)[-1]
+        label = labels_en.get(uri) or labels_zh.get(uri) or labels_any.get(uri, slug)
+        label_zh = labels_zh.get(uri)
+        nodes.append(
+            {
+                "id": uri,
+                "uri": uri,
+                "label": label,
+                "label_zh": label_zh,
+                "description_en": descriptions_en.get(uri),
+                "description_zh": descriptions_zh.get(uri),
+                "is_center": uri == center_uri,
+            }
+        )
     links = [
         {
             "source": source,
