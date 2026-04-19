@@ -30,7 +30,7 @@ export default function VBMappSubgraphExplorer({
   const [error, setError] = useState('');
   const [graphData, setGraphData] = useState({ nodes: [], links: [] });
   const debouncedSearch = useDebouncedValue(searchInput, 300);
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
 
   const nodeDisplayTitle = useCallback(
     (node) => {
@@ -77,13 +77,13 @@ export default function VBMappSubgraphExplorer({
       });
     } catch (err) {
       const message =
-        err?.response?.data?.detail || err?.message || 'Failed to load subgraph';
+        err?.response?.data?.detail || err?.message || t('vbmappLoadSubgraphFailed');
       setError(String(message));
       setGraphData({ nodes: [], links: [] });
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [t]);
 
   useEffect(() => {
     if (!centerUri) return;
@@ -140,14 +140,14 @@ export default function VBMappSubgraphExplorer({
   return (
     <div className={`flex h-[720px] w-full gap-4 ${className}`} style={style}>
       <aside className="w-80 shrink-0 rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
-        <h3 className="mb-3 text-base font-semibold text-slate-800">VB-MAPP Subgraph Explorer</h3>
+        <h3 className="mb-3 text-base font-semibold text-slate-800">{t('vbmappSubgraphExplorerTitle')}</h3>
 
-        <label className="mb-1 block text-sm font-medium text-slate-700">Focal Node</label>
+        <label className="mb-1 block text-sm font-medium text-slate-700">{t('vbmappFocalNode')}</label>
         <input
           list="vbmapp-node-suggestions"
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
-          placeholder="Search URI or label..."
+          placeholder={t('vbmappSearchPlaceholder')}
           className="mb-2 w-full rounded-md border border-slate-300 px-3 py-2 text-sm outline-none ring-blue-500 focus:ring-2"
         />
         <datalist id="vbmapp-node-suggestions">
@@ -164,12 +164,12 @@ export default function VBMappSubgraphExplorer({
           disabled={!searchInput.trim() || loading}
           className="mb-4 w-full rounded-md bg-blue-600 px-3 py-2 text-sm font-medium text-white disabled:cursor-not-allowed disabled:bg-slate-400"
         >
-          Explore Node
+          {t('vbmappExploreNode')}
         </button>
 
         <div className="mb-4">
           <label className="mb-1 block text-sm font-medium text-slate-700">
-            Hops: <span className="font-semibold">{hops}</span>
+            {t('vbmappHops')}: <span className="font-semibold">{hops}</span>
           </label>
           <input
             type="range"
@@ -182,21 +182,21 @@ export default function VBMappSubgraphExplorer({
         </div>
 
         <div className="mb-4">
-          <label className="mb-1 block text-sm font-medium text-slate-700">Direction</label>
+          <label className="mb-1 block text-sm font-medium text-slate-700">{t('vbmappDirection')}</label>
           <select
             value={direction}
             onChange={(e) => setDirection(e.target.value)}
             className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
           >
-            <option value="both">both</option>
-            <option value="forward">forward</option>
-            <option value="backward">backward</option>
+            <option value="both">{t('vbmappDirBoth')}</option>
+            <option value="forward">{t('vbmappDirForward')}</option>
+            <option value="backward">{t('vbmappDirBackward')}</option>
           </select>
         </div>
 
         <div className="rounded-md bg-slate-50 p-3 text-xs text-slate-600">
-          <div className="mb-1 font-semibold text-slate-700">Current Focus</div>
-          <div className="break-all">{selectedOption?.label || centerUri || 'Not selected'}</div>
+          <div className="mb-1 font-semibold text-slate-700">{t('vbmappCurrentFocus')}</div>
+          <div className="break-all">{selectedOption?.label || centerUri || t('vbmappNotSelected')}</div>
         </div>
 
         {error ? <p className="mt-3 text-sm text-red-600">{error}</p> : null}
@@ -205,7 +205,7 @@ export default function VBMappSubgraphExplorer({
       <section className="relative min-w-0 flex-1 rounded-xl border border-slate-200 bg-white">
         {loading ? (
           <div className="absolute inset-0 z-10 flex items-center justify-center bg-white/70 text-sm text-slate-700">
-            Loading subgraph...
+            {t('vbmappLoadingSubgraph')}
           </div>
         ) : null}
         <ForceGraph2D

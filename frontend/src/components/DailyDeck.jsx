@@ -3,6 +3,7 @@ import api, { API_BASE, cloudApi } from '../utils/api';
 import AICard from './AICard';
 import VBMappSubgraphExplorer from './VBMappSubgraphExplorer';
 import { Network } from 'lucide-react';
+import { useLanguage } from '../i18n/LanguageContext';
 
 function cleanTaskTitle(rawTitle) {
   if (!rawTitle) return '';
@@ -95,6 +96,7 @@ function extractVbmappLabel(rawText) {
 
 /** PEP3 悬停提示：鼠标悬停显示完整描述 */
 function Pep3Tooltip({ pep3Standard, pep3Items }) {
+  const { t } = useLanguage();
   const [show, setShow] = useState(false);
   if (!pep3Standard) return null;
   const hasDetails = pep3Items && pep3Items.length > 0;
@@ -120,7 +122,7 @@ function Pep3Tooltip({ pep3Standard, pep3Items }) {
               className="absolute z-10 left-0 top-full mt-1 w-72 max-w-[90vw] p-3 text-xs text-left bg-slate-800 text-slate-100 rounded-lg shadow-lg border border-slate-600"
               role="tooltip"
             >
-              <div className="font-medium text-indigo-200 mb-2">PEP-3 评估项描述</div>
+              <div className="font-medium text-indigo-200 mb-2">{t('ddPep3AssessmentTitle')}</div>
               <ul className="space-y-1 list-disc list-inside">
                 {pep3Items.map((item, i) => (
                   <li key={i} className="leading-relaxed">{item}</li>
@@ -137,6 +139,7 @@ function Pep3Tooltip({ pep3Standard, pep3Items }) {
 
 /** Topic Chat 沟通与记录模态框 - 家校接力 */
 function QuestTopicChatModal({ quest, childName, childId, onClose }) {
+  const { t } = useLanguage();
   const [logs, setLogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [input, setInput] = useState('');
@@ -248,7 +251,7 @@ function QuestTopicChatModal({ quest, childName, childId, onClose }) {
     }
   };
 
-  const roleLabel = { parent: '家长', teacher: '老师', ai: 'AI' };
+  const roleLabel = { parent: t('ddRoleParent'), teacher: t('ddRoleTeacher'), ai: t('ddRoleAi') };
 
   return (
     <div
@@ -284,7 +287,7 @@ function QuestTopicChatModal({ quest, childName, childId, onClose }) {
         {/* Header：左右两端对齐，X在右上角 */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 24px', borderBottom: '1px solid #f1f5f9', backgroundColor: '#f8fafc', flexShrink: 0 }}>
           <h3 style={{ fontWeight: 600, fontSize: '1.125rem', color: '#1e293b', margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-            💬 沟通与记录 — {quest?.label || ''}
+            💬 {t('ddChatModalTitle').replace('{label}', quest?.label || '')}
           </h3>
           <button
             onClick={onClose}
@@ -297,9 +300,9 @@ function QuestTopicChatModal({ quest, childName, childId, onClose }) {
         {/* Chat Body：保留原有的渲染逻辑 */}
         <div style={{ flex: 1, overflowY: 'auto', padding: '24px', backgroundColor: '#f8fafc', display: 'flex', flexDirection: 'column', gap: '16px' }}>
           {loading ? (
-            <div style={{ color: '#64748b', fontSize: '14px', textAlign: 'center', padding: '32px 0' }}>加载中...</div>
+            <div style={{ color: '#64748b', fontSize: '14px', textAlign: 'center', padding: '32px 0' }}>{t('ddChatLoading')}</div>
           ) : logs.length === 0 ? (
-            <div style={{ color: '#94a3b8', fontSize: '14px', textAlign: 'center', padding: '32px 0' }}>暂无记录，可在此添加沟通内容</div>
+            <div style={{ color: '#94a3b8', fontSize: '14px', textAlign: 'center', padding: '32px 0' }}>{t('ddChatEmpty')}</div>
           ) : (
             logs.map((log, i) => {
               if (log.role === 'system') {
@@ -404,7 +407,7 @@ function QuestTopicChatModal({ quest, childName, childId, onClose }) {
             onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#e2e8f0'; }}
             onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; }}
             style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: '18px', padding: '8px', borderRadius: '6px' }}
-            title="上传图片或视频"
+            title={t('ddUploadMediaTitle')}
           >
             📎
           </button>
@@ -418,7 +421,7 @@ function QuestTopicChatModal({ quest, childName, childId, onClose }) {
                 handleSend();
               }
             }}
-            placeholder="输入沟通内容... (按 Cmd/Ctrl + Enter 快捷发送)"
+            placeholder={t('ddChatPlaceholder')}
             rows={3}
             style={{ flex: 1, padding: '12px', borderRadius: '8px', border: '1px solid #cbd5e1', outline: 'none', resize: 'none', fontFamily: 'inherit', fontSize: '14px', lineHeight: '1.5' }}
           />
@@ -428,7 +431,7 @@ function QuestTopicChatModal({ quest, childName, childId, onClose }) {
             disabled={sending || !input.trim()}
             style={{ padding: '10px 24px', backgroundColor: '#334155', color: '#fff', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 500, alignSelf: 'stretch', opacity: (sending || !input.trim()) ? 0.5 : 1 }}
           >
-            发送
+            {t('ddSend')}
           </button>
           </div>
         </div>
@@ -439,6 +442,7 @@ function QuestTopicChatModal({ quest, childName, childId, onClose }) {
 
 
 const ExpandableQuestCard = ({ quest, isCompleted, showButtons, submitting, onRecordFeedback, onOpenChat }) => {
+  const { t } = useLanguage();
   const [isExpanded, setIsExpanded] = useState(false);
   const [vbmappLabel, setVbmappLabel] = useState('');
   const [vbmappUri, setVbmappUri] = useState('');
@@ -450,9 +454,9 @@ const ExpandableQuestCard = ({ quest, isCompleted, showButtons, submitting, onRe
   const isSubmitting = submitting === quest.quest_id;
   const pep3Items = quest.pep3_items || [];
   
-  const title = quest.label || quest.title || "(未命名任务)";
+  const title = quest.label || quest.title || t('ddUnnamedTask');
   const isHhs = (quest.source || '').toLowerCase() === 'hhs' || quest.content_source === 'HHS';
-  const hhsModuleText = (quest.hhs_module || '').trim() || '未分配模块';
+  const hhsModuleText = (quest.hhs_module || '').trim() || t('ddUnassignedModule');
   const cleanedTaskTitle = cleanTaskTitle(title);
   const shouldQueryVbmapp = cleanedTaskTitle.length >= 2;
   
@@ -460,8 +464,10 @@ const ExpandableQuestCard = ({ quest, isCompleted, showButtons, submitting, onRe
   if (quest.badges) {
     badges.push(...quest.badges);
   } else if (isHhs) {
-    const ageText = quest.age_group || '通用';
-    badges.push(`协康会 HHS | 模块: ${hhsModuleText} | 适用年龄: ${ageText}`);
+    const ageText = quest.age_group || t('ddAgeGeneral');
+    badges.push(
+      t('ddHhsBadgeLine').replace('{module}', hhsModuleText).replace('{age}', ageText)
+    );
   } else if (quest.pep3_standard) {
     badges.push(`PEP-3: ${quest.pep3_standard}`);
   }
@@ -484,7 +490,10 @@ const ExpandableQuestCard = ({ quest, isCompleted, showButtons, submitting, onRe
   const precautionItems = normalizeList(quest.precautions);
   const fallbackStepText = quest.teaching_steps || quest.steps || quest.ecumenical_integration?.teaching?.steps || quest.ecumenical_integration?.teaching?.content || "";
   const renderedSteps = [...activityItems, ...precautionItems].length > 0
-    ? [...activityItems.map((a) => `活动: ${a}`), ...precautionItems.map((p) => `注意: ${p}`)].join('\n')
+    ? [
+        ...activityItems.map((a) => `${t('ddActivityPrefix')} ${a}`),
+        ...precautionItems.map((p) => `${t('ddPrecautionPrefix')} ${p}`),
+      ].join('\n')
     : fallbackStepText;
   let generalization = quest.home_generalization || quest.generalization || quest.ecumenical_integration?.generalization?.content || "";
   const inferredQuestVbmappUri =
@@ -551,7 +560,7 @@ SELECT ?vbmappInst WHERE {
 
     const candidates = [vbmappCandidateLabel, cleanedTaskTitle].filter(Boolean);
     if (candidates.length === 0) {
-      setGraphResolveError('未找到可定位的 VB-MAPP 节点标签');
+      setGraphResolveError(t('graphErrorNoVbmappLabel'));
       return;
     }
 
@@ -563,7 +572,7 @@ SELECT ?vbmappInst WHERE {
         if (resolved) break;
       }
       if (!resolved) {
-        setGraphResolveError('未解析到图谱节点 URI，请检查前置能力文本');
+        setGraphResolveError(t('graphErrorUriUnresolved'));
         return;
       }
       setVbmappUri(resolved);
@@ -571,11 +580,11 @@ SELECT ?vbmappInst WHERE {
       setShowGraphExplorer(true);
     } catch (err) {
       console.warn('Failed to resolve VB-MAPP URI for graph explorer:', err);
-      setGraphResolveError('图谱节点解析失败，请稍后重试');
+      setGraphResolveError(t('graphErrorResolveFailed'));
     } finally {
       setResolvingGraphUri(false);
     }
-  }, [cleanedTaskTitle, currentVbmappUri, resolveUriByLabel, vbmappCandidateLabel]);
+  }, [cleanedTaskTitle, currentVbmappUri, resolveUriByLabel, vbmappCandidateLabel, t]);
 
   useEffect(() => {
     if (!isHhs || prerequisite || !shouldQueryVbmapp) {
@@ -679,7 +688,7 @@ SELECT ?vbmappInst ?vbmappLabel ?score WHERE {
           {conditions && (
             <div className="bg-blue-50 text-blue-800 p-3 rounded-lg">
               <h3 className="font-bold mb-1 flex items-center gap-2">
-                <span>🎯</span> 核心目标
+                <span>🎯</span> {t('ddCoreGoal')}
               </h3>
               <div className="whitespace-pre-wrap leading-relaxed text-sm">
                 {conditions}
@@ -692,7 +701,7 @@ SELECT ?vbmappInst ?vbmappLabel ?score WHERE {
             <div className="bg-purple-50 text-purple-800 p-3 rounded-lg text-sm">
               <h3 className="font-bold mb-1 flex items-center justify-between gap-2">
                 <span className="flex items-center gap-2">
-                  <span>🧠</span> 前置能力 (VB-MAPP)
+                  <span>🧠</span> {t('ddPrerequisite')}
                 </span>
                 {canTriggerGraphExplorer && (
                   <button
@@ -700,10 +709,10 @@ SELECT ?vbmappInst ?vbmappLabel ?score WHERE {
                     onClick={handleOpenGraphExplorer}
                     disabled={resolvingGraphUri}
                     className="inline-flex items-center gap-1.5 rounded-full border border-purple-200 bg-white/70 px-2 py-0.5 text-xs font-medium text-purple-700 hover:bg-white transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
-                    title="在图谱中分析"
+                    title={t('ddAnalyzeInGraph')}
                   >
                     <Network className="h-3.5 w-3.5" />
-                    <span>{resolvingGraphUri ? '解析中...' : '🗺️ 在图谱中分析'}</span>
+                    <span>{resolvingGraphUri ? t('ddAnalyzingGraph') : `🗺️ ${t('ddAnalyzeInGraph')}`}</span>
                   </button>
                 )}
               </h3>
@@ -716,7 +725,7 @@ SELECT ?vbmappInst ?vbmappLabel ?score WHERE {
             <div className="bg-purple-50 text-purple-800 p-3 rounded-lg text-sm">
               <h3 className="font-bold mb-1 flex items-center justify-between gap-2">
                 <span className="flex items-center gap-2">
-                  <span>🧠</span> 前置能力 (VB-MAPP)
+                  <span>🧠</span> {t('ddPrerequisite')}
                 </span>
                 {canTriggerGraphExplorer && (
                   <button
@@ -724,15 +733,15 @@ SELECT ?vbmappInst ?vbmappLabel ?score WHERE {
                     onClick={handleOpenGraphExplorer}
                     disabled={resolvingGraphUri}
                     className="inline-flex items-center gap-1.5 rounded-full border border-purple-200 bg-white/70 px-2 py-0.5 text-xs font-medium text-purple-700 hover:bg-white transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
-                    title="在图谱中分析"
+                    title={t('ddAnalyzeInGraph')}
                   >
                     <Network className="h-3.5 w-3.5" />
-                    <span>{resolvingGraphUri ? '解析中...' : '🗺️ 在图谱中分析'}</span>
+                    <span>{resolvingGraphUri ? t('ddAnalyzingGraph') : `🗺️ ${t('ddAnalyzeInGraph')}`}</span>
                   </button>
                 )}
               </h3>
               <div className="whitespace-pre-wrap leading-relaxed">
-                {loadingVbmapp ? '加载前置能力中...' : `【VB-MAPP】${vbmappLabel}`}
+                {loadingVbmapp ? t('ddLoadingPrerequisite') : `${t('ddVbmappBadgePrefix')}${vbmappLabel}`}
               </div>
             </div>
           )}
@@ -743,7 +752,7 @@ SELECT ?vbmappInst ?vbmappLabel ?score WHERE {
             <div className="rounded-xl border border-purple-200 bg-white p-3">
               <div className="mb-2 flex items-center justify-between gap-2">
                 <div className="text-xs text-slate-600 truncate">
-                  图谱中心节点: {resolvedCenterUri}
+                  {t('ddGraphCenterLabel')} {resolvedCenterUri}
                 </div>
                 <button
                   type="button"
@@ -753,7 +762,7 @@ SELECT ?vbmappInst ?vbmappLabel ?score WHERE {
                     setShowGraphExplorer(false);
                   }}
                 >
-                  关闭图谱
+                  {t('ddCloseGraph')}
                 </button>
               </div>
               <div className="h-[80vh] min-h-[520px] w-full rounded-lg border border-slate-200 overflow-hidden">
@@ -770,11 +779,11 @@ SELECT ?vbmappInst ?vbmappLabel ?score WHERE {
           {(materialItems.length > 0 || renderedSteps) && (
             <div className="bg-white border border-slate-100 p-3 rounded-lg">
               <h3 className="font-bold text-slate-700 mb-2 flex items-center gap-2">
-                <span>🛠️</span> 教具与步骤
+                <span>🛠️</span> {t('ddMaterialsSteps')}
               </h3>
               {materialItems.length > 0 && (
                 <div className="mb-2 text-sm text-slate-700">
-                  <span className="font-semibold text-slate-800">教具准备：</span>
+                  <span className="font-semibold text-slate-800">{t('ddMaterialsPrep')}</span>
                   <ul className="mt-1 list-disc list-inside">
                     {materialItems.map((item, idx) => (
                       <li key={idx}>{item}</li>
@@ -794,7 +803,7 @@ SELECT ?vbmappInst ?vbmappLabel ?score WHERE {
           {generalization && (
             <div className="bg-amber-50 text-amber-900 p-3 rounded-lg border-l-4 border-amber-400">
               <h3 className="font-bold mb-1 flex items-center gap-2">
-                <span>🏡</span> 家庭泛化
+                <span>🏡</span> {t('ddHomeGeneralization')}
               </h3>
               <div className="text-sm whitespace-pre-wrap leading-relaxed">
                 {generalization}
@@ -810,14 +819,14 @@ SELECT ?vbmappInst ?vbmappLabel ?score WHERE {
                 className="text-sm bg-white text-slate-700 border border-slate-300 px-4 py-2 rounded-lg hover:bg-slate-50 transition font-medium flex items-center gap-2"
                 onClick={(e) => { e.stopPropagation(); }}
               >
-                <span>📹</span> 示范视频 (待添加)
+                <span>📹</span> {t('ddDemoVideoTbd')}
               </button>
               <button
                 type="button"
                 onClick={(e) => { e.stopPropagation(); onOpenChat(quest); }}
                 className="text-sm bg-indigo-50 text-indigo-700 border border-indigo-100 px-4 py-2 rounded-lg hover:bg-indigo-100 transition font-medium flex items-center gap-2"
               >
-                <span>💬</span> 沟通与记录
+                <span>💬</span> {t('ddChatAndLog')}
               </button>
             </div>
 
@@ -828,35 +837,35 @@ SELECT ?vbmappInst ?vbmappLabel ?score WHERE {
                   disabled={isSubmitting}
                   className={`flex-1 bg-red-50 text-red-600 border border-red-200 px-4 py-3 rounded-xl hover:bg-red-500 hover:text-white transition-all font-bold shadow-sm ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
-                  🟥 全辅助
+                  🟥 {t('ddPromptFull')}
                 </button>
                 <button
                   onClick={(e) => { e.stopPropagation(); onRecordFeedback(quest.quest_id, '部分辅助'); }}
                   disabled={isSubmitting}
                   className={`flex-1 bg-amber-50 text-amber-600 border border-amber-200 px-4 py-3 rounded-xl hover:bg-amber-500 hover:text-white transition-all font-bold shadow-sm ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
-                  🟨 部分辅助
+                  🟨 {t('ddPromptPartial')}
                 </button>
                 <button
                   onClick={(e) => { e.stopPropagation(); onRecordFeedback(quest.quest_id, '独立完成'); }}
                   disabled={isSubmitting}
                   className={`flex-1 bg-emerald-50 text-emerald-600 border border-emerald-200 px-4 py-3 rounded-xl hover:bg-emerald-500 hover:text-white transition-all font-bold shadow-sm ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
-                  🟩 独立完成
+                  🟩 {t('ddPromptIndependent')}
                 </button>
               </div>
             ) : (
               <div className="flex justify-between items-center bg-white border border-slate-200 p-4 rounded-xl shadow-sm">
                 <div className="flex items-center gap-2 text-emerald-600 font-bold">
                   <span className="text-xl">✅</span>
-                  今日已完成
+                  {t('ddCompletedToday')}
                 </div>
                 <button
                   type="button"
                   onClick={(e) => { e.stopPropagation(); onOpenChat(quest); }}
                   className="text-sm bg-slate-50 border border-slate-200 text-slate-700 px-4 py-2 rounded-lg hover:bg-slate-100 transition font-medium"
                 >
-                  💬 补充记录
+                  💬 {t('ddSupplementLog')}
                 </button>
               </div>
             )}
@@ -874,6 +883,7 @@ function DailyDeck({
   scheduleSource = 'qcq',
   showDemoButton = true,
 }) {
+  const { t } = useLanguage();
   const [pending, setPending] = useState([]);
   const [completedToday, setCompletedToday] = useState([]);
   const [historyQuests, setHistoryQuests] = useState([]);
@@ -935,14 +945,14 @@ function DailyDeck({
       setHistoryQuests(data.history_quests || []);
       setWeakestDomainInfo(data.weakest_domain_info || null);
     } catch (err) {
-      setError(err.message || '获取课表失败');
+      setError(err.message || t('ddFetchScheduleFailed'));
       setPending([]);
       setCompletedToday([]);
       setHistoryQuests([]);
     } finally {
       setLoading(false);
     }
-  }, [childName, questCount, scheduleSource]);
+  }, [childName, questCount, scheduleSource, t]);
 
   useEffect(() => {
     fetchDailyQuests();
@@ -958,12 +968,12 @@ function DailyDeck({
           prompt_level: promptLevel,
       });
       const data = res.data;
-      if (data.status !== 'success') throw new Error('记录失败');
+      if (data.status !== 'success') throw new Error(t('ddRecordFailed'));
 
       // 打卡成功后重新拉取数据，将任务从 pending 移到 completed_today
       await fetchDailyQuests();
     } catch (err) {
-      setError(err.message || '记录反馈失败');
+      setError(err.message || t('ddRecordFeedbackFailed'));
     } finally {
       setSubmitting(null);
     }
@@ -976,22 +986,22 @@ function DailyDeck({
   if (!childName) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-slate-600 text-lg">请先选择儿童档案</div>
+        <div className="text-slate-600 text-lg">{t('ddSelectChildFirst')}</div>
       </div>
     );
   }
 
   const deckHeadline =
     scheduleSource === 'hhs'
-      ? `今天的${childName} HHS 靶向课表`
+      ? t('ddDeckHeadlineHhs').replace('{name}', childName)
       : scheduleSource === 'mixed'
-        ? `今天的${childName} 靶向课表（QCQ+HHS）`
-        : `今天的${childName} QCQ 靶向课表`;
+        ? t('ddDeckHeadlineMixed').replace('{name}', childName)
+        : t('ddDeckHeadlineQcq').replace('{name}', childName);
 
   if (loading) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-slate-600 text-lg">加载今日课表...</div>
+        <div className="text-slate-600 text-lg">{t('ddLoadingSchedule')}</div>
       </div>
     );
   }
@@ -1005,7 +1015,7 @@ function DailyDeck({
             onClick={fetchDailyQuests}
             className="px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-600"
           >
-            重试
+            {t('ddRetry')}
           </button>
         </div>
       </div>
@@ -1018,19 +1028,19 @@ function DailyDeck({
         <div className="flex flex-col items-center justify-center p-6 shrink-0">
           <div className="text-6xl mb-4">🎉</div>
           <h2 className="text-2xl font-bold text-slate-800 mb-2">
-            今天的靶向干预已全部完成！
+            {t('ddAllDoneTitle')}
           </h2>
-          <p className="text-slate-600 mb-6">继续保持，明天见～</p>
+          <p className="text-slate-600 mb-6">{t('ddAllDoneSubtitle')}</p>
           <button
             onClick={fetchDailyQuests}
             className="px-6 py-3 bg-amber-500 text-white rounded-xl hover:bg-amber-600 font-medium"
           >
-            刷新课表
+            {t('ddRefreshSchedule')}
           </button>
         </div>
         {completedToday.length > 0 && (
           <div className="max-w-2xl mx-auto w-full px-4 pb-8">
-            <h2 className="text-base font-semibold text-slate-600 mb-4">✅ 今日已打卡</h2>
+            <h2 className="text-base font-semibold text-slate-600 mb-4">✅ {t('ddCompletedTodaySection')}</h2>
             <div className="space-y-4">
               {completedToday.map((quest) => (
                 <div
@@ -1040,7 +1050,9 @@ function DailyDeck({
                   <h3 className="font-semibold text-slate-700">{quest.label}</h3>
                   {((quest.source || '').toLowerCase() === 'hhs' || quest.content_source === 'HHS') ? (
                     <p className="text-sm text-slate-500 mt-1">
-                      协康会 HHS | 模块: {(quest.hhs_module || '').trim() || '未分配模块'} | 适用年龄: {quest.age_group || '通用'}
+                      {t('ddHhsBadgeLine')
+                        .replace('{module}', (quest.hhs_module || '').trim() || t('ddUnassignedModule'))
+                        .replace('{age}', quest.age_group || t('ddAgeGeneral'))}
                     </p>
                   ) : quest.pep3_standard ? (
                     <p className="text-sm text-slate-500 mt-1">PEP-3: {quest.pep3_standard}</p>
@@ -1049,14 +1061,14 @@ function DailyDeck({
                   <div className="flex justify-between items-center bg-gray-50 p-3 rounded-lg">
                     <div className="flex items-center gap-2 text-emerald-700 font-bold">
                       <span>✅</span>
-                      今日已打卡
+                      {t('ddMarkedComplete')}
                     </div>
                     <button
                       type="button"
                       onClick={() => openChat(quest)}
                       className="text-sm bg-white border border-gray-200 text-gray-700 px-3 py-1.5 rounded-md hover:bg-gray-50 transition font-medium"
                     >
-                      💬 补充记录
+                      💬 {t('ddSupplementLog')}
                     </button>
                   </div>
                 </div>
@@ -1066,7 +1078,7 @@ function DailyDeck({
         )}
         {historyQuests.length > 0 && (
           <div className="max-w-2xl mx-auto w-full px-4 pb-8">
-            <h2 className="text-base font-semibold text-slate-600 mb-4">🕰️ 历史干预记录 (History)</h2>
+            <h2 className="text-base font-semibold text-slate-600 mb-4">🕰️ {t('ddHistorySection')}</h2>
             <div className="space-y-2">
               {historyQuests.map((item) => (
                 <div
@@ -1098,7 +1110,7 @@ function DailyDeck({
                       cursor: 'pointer'
                     }}
                   >
-                    💬 查看记录
+                    💬 {t('ddViewLog')}
                   </button>
                 </div>
               ))}
@@ -1120,7 +1132,7 @@ function DailyDeck({
   if (pending.length === 0 && completedToday.length === 0) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-slate-600 text-lg">今日暂无任务</div>
+        <div className="text-slate-600 text-lg">{t('ddNoTasksToday')}</div>
       </div>
     );
   }
@@ -1135,29 +1147,29 @@ function DailyDeck({
             </h1>
             {weakestDomainInfo && (
               <p className="text-sm text-amber-700 mt-1">
-                🚨 靶向短板：{weakestDomainInfo.domain_name}
+                🚨 {t('ddWeakestDomain').replace('{domain}', weakestDomainInfo.domain_name)}
               </p>
             )}
             <p className="text-sm text-slate-500 mt-1">
-              进度: {completedCount} / {totalCount} 已完成
+              {t('ddProgress').replace('{done}', String(completedCount)).replace('{total}', String(totalCount))}
             </p>
           </div>
           <div className="flex items-center gap-2">
-            <label className="text-sm text-slate-600">任务数量：</label>
+            <label className="text-sm text-slate-600">{t('ddTaskCountLabel')}</label>
             <select
               value={questCount}
               onChange={(e) => setQuestCount(Number(e.target.value))}
               className="text-sm border border-slate-300 rounded-lg px-2 py-1"
             >
               {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
-                <option key={n} value={n}>{n} 个</option>
+                <option key={n} value={n}>{`${n} ${t('ddTasksUnit')}`}</option>
               ))}
             </select>
             <button
               onClick={fetchDailyQuests}
               className="text-sm px-3 py-1 bg-slate-200 hover:bg-slate-300 rounded-lg"
             >
-              刷新
+              {t('ddRefresh')}
             </button>
             {showDemoButton && scheduleSource === 'qcq' ? (
               <button
@@ -1168,7 +1180,7 @@ function DailyDeck({
                 }}
                 className="text-sm px-4 py-1.5 bg-indigo-600 text-white hover:bg-indigo-700 rounded-lg font-bold shadow-md transition-all ml-2"
               >
-                ✨ 载入大一统 Demo
+                ✨ {t('ddLoadDemo')}
               </button>
             ) : null}
           </div>
@@ -1181,7 +1193,7 @@ function DailyDeck({
           {pending.length > 0 && (
             <section>
               <h2 className="text-base font-semibold text-slate-700 mb-4 flex items-center gap-2">
-                📌 今日待完成 (Pending)
+                📌 {t('ddPendingSection')}
               </h2>
               <div className="space-y-4">
                 {pending.map((quest) => (
@@ -1203,7 +1215,7 @@ function DailyDeck({
           {completedToday.length > 0 && (
             <section>
               <h2 className="text-base font-semibold text-slate-600 mb-4 flex items-center gap-2">
-                ✅ 今日已打卡 (Completed)
+                ✅ {t('ddCompletedSectionHeader')}
               </h2>
               <div className="space-y-4">
                 {completedToday.map((quest) => (
@@ -1225,7 +1237,7 @@ function DailyDeck({
           {historyQuests.length > 0 && (
             <section>
               <h2 className="text-base font-semibold text-slate-600 mb-4 flex items-center gap-2">
-                🕰️ 历史干预记录 (History)
+                🕰️ {t('ddHistorySection')}
               </h2>
               <div className="space-y-2">
                 {historyQuests.map((item) => (
@@ -1258,7 +1270,7 @@ function DailyDeck({
                         cursor: 'pointer'
                       }}
                     >
-                      💬 查看记录
+                      💬 {t('ddViewLog')}
                     </button>
                   </div>
                 ))}
