@@ -37,6 +37,7 @@ def main():
         LEGACY_KG_DIR / "world_model_core.ttl",              # 23MB 纯净内核
         LEGACY_KG_DIR / "quest_full_with_vbmapp.ttl",        # Quest 桥接
         LEGACY_KG_DIR / "pep3_master.ttl",                   # PEP-3 量表
+        LEGACY_KG_DIR / "survey_parent_full.ttl",                   # 家长问卷
 
         # ==========================================
         # 2. 真正的语法层 (来自 tools/ 下的专属目录)

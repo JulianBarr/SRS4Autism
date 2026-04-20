@@ -94,12 +94,13 @@ app.include_router(profiles.router, tags=["profiles"])
 from .routers import cards
 # Inject the Gemini model into cards router (will be set after Gemini initialization below)
 
-from .routers import chat, kg, kg_router, daily_deck, test_sync, graph
+from .routers import chat, kg, kg_router, daily_deck, test_sync, graph, survey
 app.include_router(chat.router, tags=["chat"])
 app.include_router(kg.router, prefix="/kg", tags=["Knowledge Graph"])
 app.include_router(kg_router.router, prefix="/api/kg", tags=["Knowledge Graph"])
 app.include_router(graph.router, prefix="/api/graph", tags=["Knowledge Graph"])
 app.include_router(daily_deck.router, tags=["daily-deck"])
+app.include_router(survey.router, tags=["survey"])
 # cards._set_genai_model will be called after _genai_model is initialized
 app.include_router(cards.router, tags=["cards"])
 app.include_router(test_sync.router, tags=["debug"])
@@ -256,6 +257,31 @@ async def startup_event():
                 print(f"✅ Loaded {name} into Oxigraph")
             else:
                 print(f"⚠️  {name} not found at {path}")
+        survey_schema = PROJECT_ROOT / "knowledge_graph" / "ontology" / "survey_schema.ttl"
+        survey_parent = PROJECT_ROOT / "knowledge_graph" / "survey_parent_full.ttl"
+        vbmapp_candidates = [
+            PROJECT_ROOT / "knowledge_graph" / "ontology" / "vbmapp_woven_ontology.ttl",
+            PROJECT_ROOT / "scripts" / "data_extraction" / "vbmapp_woven_ontology.ttl",
+        ]
+        if survey_schema.exists():
+            client.load_file(str(survey_schema))
+            print(f"✅ Loaded survey_schema.ttl into Oxigraph")
+        else:
+            print(f"⚠️  survey_schema.ttl not found at {survey_schema}")
+        loaded_vbmapp = False
+        for vbmapp_path in vbmapp_candidates:
+            if vbmapp_path.exists():
+                client.load_file(str(vbmapp_path))
+                print(f"✅ Loaded {vbmapp_path.name} into Oxigraph")
+                loaded_vbmapp = True
+                break
+        if not loaded_vbmapp:
+            print("⚠️  vbmapp_woven_ontology.ttl not found — survey level filter may return no rows")
+        if survey_parent.exists():
+            client.load_file(str(survey_parent))
+            print(f"✅ Loaded survey_parent_full.ttl into Oxigraph")
+        else:
+            print(f"⚠️  survey_parent_full.ttl not found at {survey_parent}")
     except Exception as e:
         print(f"⚠️  Warning: Failed to load quest TTL into Oxigraph: {e}")
 

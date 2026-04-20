@@ -1,302 +1,190 @@
 #!/usr/bin/env python3
-"""
-Batch-generate bilingual parent-facing survey TTL from VB-MAPP Milestone nodes
-using Gemini, with checkpointing and level-1 bottleneck tagging.
-"""
-
-from __future__ import annotations
-
+# -*- coding: utf-8 -*-
 import os
 import re
 import time
 from pathlib import Path
-from typing import Any, Iterable, Optional
-from urllib.parse import urlparse
-
 import google.generativeai as genai
-from dotenv import load_dotenv
-from rdflib import Graph
-from rdflib.namespace import RDF, RDFS
-from rdflib.term import URIRef
+from rdflib import Graph, Namespace
 
-# -----------------------------------------------------------------------------
-# Paths (project root = two levels up from this file)
-# -----------------------------------------------------------------------------
+# --- 配置区 ---
 SCRIPT_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = SCRIPT_DIR.parent.parent
 
-SURVEY_SCHEMA_TTL = PROJECT_ROOT / "knowledge_graph" / "ontology" / "survey_schema.ttl"
-VBMAPP_CANDIDATES = [
-    PROJECT_ROOT / "knowledge_graph" / "ontology" / "vbmapp_woven_ontology.ttl",
-    SCRIPT_DIR / "vbmapp_woven_ontology.ttl",
-]
+# 尝试兼容不同的文件路径结构
+VBMAPP_TTL = PROJECT_ROOT / "scripts" / "data_extraction" / "vbmapp_woven_ontology.ttl"
 OUTPUT_TTL = PROJECT_ROOT / "knowledge_graph" / "survey_parent_full.ttl"
 
-VBMAPP_SCHEMA = "http://cuma.ai/schema/vbmapp/"
-VBMAPP_INST = "http://cuma.ai/instance/vbmapp/"
-
+MODEL_NAME = "gemini-3.1-flash-lite-preview" 
 BATCH_SIZE = 5
-API_RETRY_SLEEP_SEC = 10
-MODEL_NAME = "gemini-2.5-flash"
 
-EVALUATES_NODE_PATTERN = re.compile(
-    r"evaluatesNode\s+<([^>]+)>", re.IGNORECASE | re.MULTILINE
-)
-# Alternate Turtle style: evaluatesNode vbmapp-inst:mand_1_m .
-EVALUATES_NODE_CURIE_PATTERN = re.compile(
-    r"evaluatesNode\s+vbmapp-inst:([A-Za-z0-9_]+)\s*\.",
-    re.IGNORECASE | re.MULTILINE,
-)
-TURTLE_FENCE_PATTERN = re.compile(
-    r"```(?:turtle|ttl)\s*\n(.*?)```", re.IGNORECASE | re.DOTALL
-)
+CUMA_SURVEY_URI = "http://cuma.ai/schema/survey/"
+SURVEY_INST_URI = "http://cuma.ai/instance/survey/parent#"
+RDFS_URI = "http://www.w3.org/2000/01/rdf-schema#"
+XSD_URI = "http://www.w3.org/2001/XMLSchema#"
+VBMAPP_SCHEMA_URI = "http://cuma.ai/schema/vbmapp/"
 
+CUMA_SURVEY = Namespace(CUMA_SURVEY_URI)
+SURVEY_INST = SURVEY_INST_URI
 
-def resolve_vbmapp_ttl() -> Path:
-    for p in VBMAPP_CANDIDATES:
-        if p.is_file():
-            return p
-    tried = ", ".join(str(p) for p in VBMAPP_CANDIDATES)
-    raise FileNotFoundError(
-        f"vbmapp_woven_ontology.ttl not found. Tried: {tried}"
-    )
+def get_deterministic_ids(milestone_uri):
+    """根据里程碑 URI 生成确定的问卷和选项 ID"""
+    base_id = str(milestone_uri).split('/')[-1].replace('-', '_')
+    q_uri = f"{SURVEY_INST}{base_id}_q"
+    opt_uris = [f"{q_uri}_opt{i}" for i in [1, 2, 3]]
+    return q_uri, opt_uris
 
+def build_prompt(batch_nodes):
+    """使用严格的 One-Shot Template，强制 LLM 像填空题一样输出，杜绝幻觉"""
+    nodes_info = []
+    for node in batch_nodes:
+        q_uri, opt_uris = get_deterministic_ids(node['uri'])
+        num_match = re.search(r'(\d+)', node['label'])
+        is_bottleneck = (node['level'] == 1 and num_match and num_match.group(1) in ['1', '5'])
+        bottleneck_str = 'cuma-survey:isBottleneck "true"^^xsd:boolean ;' if is_bottleneck else ''
+        
+        info = f"""
+### DATA TO CONVERT:
+- Milestone: {node['label']}
+- evaluatesNode: <{node['uri']}>
+- Question URI: <{q_uri}>
+- Option 1 URI: <{opt_uris[0]}>
+- Option 2 URI: <{opt_uris[1]}>
+- Option 3 URI: <{opt_uris[2]}>
+- Bottleneck Line: {bottleneck_str}
+"""
+        nodes_info.append(info)
 
-def load_checkpoint_evaluates_uris(path: Path) -> set[str]:
-    if not path.is_file():
-        return set()
-    text = path.read_text(encoding="utf-8", errors="replace")
-    out: set[str] = set(EVALUATES_NODE_PATTERN.findall(text))
-    for local in EVALUATES_NODE_CURIE_PATTERN.findall(text):
-        out.add(f"{VBMAPP_INST}{local}")
-    return out
+    return f"""
+You are a BCBA expert. Convert the following VB-MAPP Milestones into parent-friendly survey questions. 
+You MUST output ONLY valid Turtle (.ttl) code. 
 
+CRITICAL RULE: You MUST strictly copy this EXACT format for EVERY question. Do not invent your own structures, classes, or syntax. Use {{child_name}} and {{pronoun}} in the text.
 
-def extract_local_name(uri: str) -> str:
-    if uri.startswith("http://") or uri.startswith("https://"):
-        parsed = urlparse(uri)
-        seg = parsed.path.rstrip("/").split("/")[-1]
-        if seg:
-            return seg
-    if "#" in uri:
-        return uri.rsplit("#", 1)[-1]
-    return uri.rsplit("/", 1)[-1]
+### EXACT TEMPLATE TO FOLLOW:
+<[Question URI]> a cuma-survey:ParentQuestion ;
+    cuma-survey:evaluatesNode <[evaluatesNode]> ;
+    [Bottleneck Line (if applicable)]
+    cuma-survey:promptTemplate "[English Question here]"@en, "[Chinese Question here]"@zh ;
+    cuma-survey:hasOption <[Option 1 URI]>, <[Option 2 URI]>, <[Option 3 URI]> .
 
+<[Option 1 URI]> a cuma-survey:Option ;
+    cuma-survey:optionText "Cannot do it"@en, "无法完成"@zh ;
+    cuma-survey:stateAction "FAIL" .
 
-def extract_milestone_index(uri: str, label: Optional[str]) -> Optional[int]:
-    """Prefer patterns like mand_5_m -> 5; fallback to first integer in label."""
-    local = extract_local_name(uri)
-    m = re.search(r"_(\d+)_m(?:\b|_)", local)
-    if m:
-        return int(m.group(1))
-    m = re.search(r"(\d+)", local)
-    if m:
-        return int(m.group(1))
-    if label:
-        m = re.search(r"\b(\d+)\b", label)
-        if m:
-            return int(m.group(1))
-    return None
+<[Option 2 URI]> a cuma-survey:Option ;
+    cuma-survey:optionText "Needs prompts"@en, "需提示"@zh ;
+    cuma-survey:stateAction "FAIL_PROMPT_DEPENDENT" .
 
+<[Option 3 URI]> a cuma-survey:Option ;
+    cuma-survey:optionText "Does it independently"@en, "独立完成"@zh ;
+    cuma-survey:stateAction "PASS_NODE" .
 
-def iter_milestone_rows(g: Graph) -> list[dict[str, Any]]:
-    """Return Milestone nodes with level, label, and bottleneck flag."""
-    milestone = URIRef(VBMAPP_SCHEMA + "Milestone")
-    level_pred = URIRef(VBMAPP_SCHEMA + "level")
-    domain_name = URIRef(VBMAPP_SCHEMA + "domainName")
-    description = URIRef(VBMAPP_SCHEMA + "description")
-    scoring = URIRef(VBMAPP_SCHEMA + "scoringCriteria")
-
-    rows: list[dict[str, Any]] = []
-    for m in g.subjects(RDF.type, milestone):
-        uri = str(m)
-        label_lit = g.value(m, RDFS.label)
-        label = str(label_lit) if label_lit else None
-        lvl_lit = g.value(m, level_pred)
-        level: Optional[int] = None
-        if lvl_lit is not None:
-            try:
-                level = int(lvl_lit)
-            except (TypeError, ValueError):
-                level = None
-
-        idx = extract_milestone_index(uri, label)
-        is_bottleneck = bool(
-            level == 1 and idx is not None and idx in (1, 5)
-        )
-
-        dn_lit = g.value(m, domain_name)
-        desc_lit = g.value(m, description)
-        score_lit = g.value(m, scoring)
-
-        rows.append(
-            {
-                "uri": uri,
-                "label": label or "",
-                "level": level,
-                "milestone_index": idx,
-                "is_bottleneck": is_bottleneck,
-                "domainName": str(dn_lit) if dn_lit else "",
-                "description": str(desc_lit) if desc_lit else "",
-                "scoringCriteria": str(score_lit) if score_lit else "",
-            }
-        )
-    rows.sort(key=lambda r: r["uri"])
-    return rows
-
-
-def build_user_payload(batch: list[dict[str, Any]]) -> str:
-    lines: list[str] = [
-        "Convert the following VB-MAPP Milestone nodes into parent-facing survey "
-        "Turtle (see system instructions). One question per node.\n",
-    ]
-    for i, row in enumerate(batch, 1):
-        lines.append(f"--- Node {i} ---")
-        lines.append(f"vb_milestone_uri: {row['uri']}")
-        lines.append(f"rdfs_label_en: {row['label']}")
-        lines.append(f"vbmapp_level: {row['level']}")
-        lines.append(f"extracted_milestone_number: {row['milestone_index']}")
-        lines.append(f"is_bottleneck: {str(row['is_bottleneck']).lower()}")
-        lines.append(f"domainName: {row['domainName']}")
-        lines.append(f"description: {row['description'][:4000]}")
-        if row["scoringCriteria"]:
-            lines.append(
-                f"scoringCriteria_excerpt: {row['scoringCriteria'][:2000]}"
-            )
-        lines.append("")
-    return "\n".join(lines)
-
-
-SYSTEM_PROMPT_TEMPLATE = """You are a top-tier BCBA (Board Certified Behavior Analyst).
-
-Task: Turn each provided VB-MAPP Milestone into one parent-friendly survey question for progressive assessment.
-
-Output rules (strict):
-1) Output ONLY content inside ONE fenced block: use markdown ```turtle ... ``` and put valid Turtle inside the fence. No prose outside the fence.
-2) Follow the CUMA survey vocabulary in survey_schema.ttl: classes cuma-survey:ParentQuestion and cuma-survey:Option; properties cuma-survey:evaluatesNode, cuma-survey:promptTemplate, cuma-survey:hasOption, cuma-survey:optionText, cuma-survey:stateAction, and when applicable cuma-survey:isBottleneck.
-3) Use prefix cuma-survey: <http://cuma.ai/schema/survey/> and declare @prefix rdfs: and @prefix xsd: as needed. Use a distinct instance URI per question under a stable path such as <http://cuma.ai/instance/survey/parent#...> or <http://cuma.ai/instance/survey/...> — your choice, but be consistent and unique per question.
-4) cuma-survey:evaluatesNode MUST reference the exact VB milestone URI given in the input (full IRI in angle brackets).
-5) cuma-survey:promptTemplate MUST include BOTH language tags: one @en and one @zh string for the same template. Each MUST contain the placeholders {{child_name}} and {{pronoun}}.
-6) Exactly three options per question, in this order, with these stateAction values:
-   - Cannot do it / 无法完成 -> cuma-survey:stateAction "FAIL" .
-   - Needs prompts / 需提示 -> cuma-survey:stateAction "FAIL_PROMPT_DEPENDENT" .
-   - Does it independently / 独立完成 -> cuma-survey:stateAction "PASS_NODE" .
-7) If the input line is_bottleneck is true, add: cuma-survey:isBottleneck "true"^^xsd:boolean . on that ParentQuestion. If false, omit isBottleneck.
-8) ParentQuestion typing: each question instance a cuma-survey:ParentQuestion .
-
---- survey_schema.ttl (authoritative vocabulary) ---
-<<<SCHEMA_TTL_INLINE>>>
+{"".join(nodes_info)}
 """
 
-
-def extract_turtle_from_response(text: str) -> str:
-    matches = TURTLE_FENCE_PATTERN.findall(text)
-    if matches:
-        return "\n\n".join(m.strip() for m in matches).strip()
-    return text.strip()
-
-
-def chunked(items: list[Any], n: int) -> Iterable[list[Any]]:
-    for i in range(0, len(items), n):
-        yield items[i : i + n]
-
-
-def append_ttl_block(path: Path, block: str, is_first: bool) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    prefix_header = """@prefix cuma-survey: <http://cuma.ai/schema/survey/> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+def write_header():
+    """写入标准头部，避免重复声明前缀"""
+    if not OUTPUT_TTL.exists():
+        # 确保目录存在
+        OUTPUT_TTL.parent.mkdir(parents=True, exist_ok=True)
+        header = f"""@prefix cuma-survey: <{CUMA_SURVEY_URI}> .
+@prefix rdfs: <{RDFS_URI}> .
+@prefix xsd: <{XSD_URI}> .
+@prefix cuma-inst: <{SURVEY_INST_URI}> .
 
 """
-    mode = "w" if is_first else "a"
-    with open(path, mode, encoding="utf-8") as f:
-        if is_first:
-            f.write(prefix_header)
-        f.write(block.rstrip() + "\n")
+        with open(OUTPUT_TTL, 'w', encoding='utf-8') as f:
+            f.write(header)
 
-
-def main() -> None:
-    load_dotenv()
-    api_key = os.environ.get("GEMINI_API_KEY")
-    if not api_key:
-        print("Set GEMINI_API_KEY (e.g. in .env).")
-        raise SystemExit(1)
-
-    if not SURVEY_SCHEMA_TTL.is_file():
-        print(f"Missing survey schema: {SURVEY_SCHEMA_TTL}")
-        raise SystemExit(1)
-
-    vbmapp_path = resolve_vbmapp_ttl()
-
+def run_generation():
+    genai.configure(api_key=os.environ["GEMINI_API_KEY"])
+    model = genai.GenerativeModel(MODEL_NAME)
+    
     g = Graph()
-    g.parse(SURVEY_SCHEMA_TTL.as_posix(), format="turtle")
-    g.parse(vbmapp_path.as_posix(), format="turtle")
+    
+    # 兼容查找逻辑：如果根目录下没有，尝试在当前脚本目录查找
+    if not VBMAPP_TTL.exists():
+        fallback_path = SCRIPT_DIR / "vbmapp_woven_ontology.ttl"
+        if fallback_path.exists():
+            g.parse(fallback_path, format="turtle")
+        else:
+            print(f"Error: Could not find ontology file at {VBMAPP_TTL} or {fallback_path}")
+            return
+    else:
+        g.parse(VBMAPP_TTL, format="turtle")
+    
+    # 强大的 Checkpoint 逻辑
+    done_uris = set()
+    if OUTPUT_TTL.exists():
+        with open(OUTPUT_TTL, 'r', encoding='utf-8') as f:
+            content = f.read()
+            # 必须匹配具体的 URI 来验证这道题真的做完了
+            done_uris = set(re.findall(r'evaluatesNode\s+<(.*?)>', content))
 
-    done_uris = load_checkpoint_evaluates_uris(OUTPUT_TTL)
-    rows = iter_milestone_rows(g)
-    pending = [r for r in rows if r["uri"] not in done_uris]
+    milestones = []
+    # Dynamic injection of hexadecimal string constants
+    query = f"""
+    PREFIX vbmapp-schema: <{VBMAPP_SCHEMA_URI}>
+    PREFIX rdfs: <{RDFS_URI}>
+    SELECT ?s ?label ?desc ?level WHERE {{
+        ?s a vbmapp-schema:Milestone ;
+           rdfs:label ?label ;
+           vbmapp-schema:description ?desc ;
+           vbmapp-schema:level ?level .
+    }} ORDER BY ?level ?s
+    """
+    
+    for row in g.query(query):
+        if str(row.s) not in done_uris:
+            milestones.append({
+                'uri': str(row.s),
+                'label': str(row.label),
+                'desc': str(row.desc),
+                'level': int(row.level)
+            })
 
-    total = len(rows)
-    remaining = len(pending)
-    print(
-        f"Milestones total={total}, already in output={len(done_uris)}, "
-        f"to process={remaining}"
-    )
-
-    if not pending:
-        print("Nothing to do; all milestones already have survey entries.")
+    if not milestones:
+        print("All milestones already processed.")
         return
 
-    schema_ttl_text = SURVEY_SCHEMA_TTL.read_text(encoding="utf-8")
-    system_prompt = SYSTEM_PROMPT_TEMPLATE.replace(
-        "<<<SCHEMA_TTL_INLINE>>>", schema_ttl_text
-    )
+    print(f"Total pending: {len(milestones)}. Starting generation...")
+    write_header()
 
-    genai.configure(api_key=api_key)
-    model = genai.GenerativeModel(MODEL_NAME, system_instruction=system_prompt)
-
-    file_exists = OUTPUT_TTL.is_file() and OUTPUT_TTL.stat().st_size > 0
-    # First write only if file missing or empty; if checkpoint had matches but file empty, still first write.
-    first_write = not file_exists
-
-    processed_in_run = 0
-    batch_num = 0
-    for batch in chunked(pending, BATCH_SIZE):
-        batch_num += 1
-        user_text = build_user_payload(batch)
-        response_text = ""
+    for i in range(0, len(milestones), BATCH_SIZE):
+        batch = milestones[i:i+BATCH_SIZE]
+        print(f"Processing batch {i//BATCH_SIZE + 1}/{(len(milestones)+BATCH_SIZE-1)//BATCH_SIZE} ({batch[0]['label']}...)")
+        
+        prompt = build_prompt(batch)
+        
+        # 带指数退避的 API 请求逻辑
         while True:
             try:
-                resp = model.generate_content(user_text)
-                response_text = (resp.text or "").strip()
-                break
-            except Exception as exc:  # noqa: BLE001 — retry all API errors
-                print(
-                    f"API error (batch {batch_num}): {exc!s}; "
-                    f"retrying in {API_RETRY_SLEEP_SEC}s..."
-                )
-                time.sleep(API_RETRY_SLEEP_SEC)
-
-        turtle_body = extract_turtle_from_response(response_text)
-        if not turtle_body:
-            print(f"Warning: empty turtle for batch {batch_num}; raw response saved to stderr length check.")
-            raise RuntimeError(f"Empty turtle extraction for batch {batch_num}")
-
-        append_ttl_block(OUTPUT_TTL, turtle_body, is_first=first_write)
-        first_write = False
-        processed_in_run += len(batch)
-
-        for r in batch:
-            done_uris.add(r["uri"])
-
-        print(
-            f"Batch {batch_num}: wrote {len(batch)} question(s); "
-            f"cumulative done={len(done_uris)}/{total} "
-            f"(+{processed_in_run} this run)"
-        )
-
-    print(f"Finished. Output: {OUTPUT_TTL}")
-
+                response = model.generate_content(prompt)
+                
+                # 更强壮的正则：匹配 \x60\x60\x60turtle, \x60\x60\x60ttl, 或仅仅是 \x60\x60\x60 (Hex编码防冲突)
+                ttl_match = re.search(r'\x60\x60\x60(?:turtle|ttl)?\n(.*?)\n\x60\x60\x60', response.text, re.DOTALL | re.IGNORECASE)
+                
+                if ttl_match:
+                    ttl_content = ttl_match.group(1)
+                else:
+                    # 如果 LLM 没有用代码块包裹，直接去除多余标记
+                    ttl_content = response.text.replace('\x60\x60\x60turtle', '').replace('\x60\x60\x60ttl', '').replace('\x60\x60\x60', '')
+                
+                with open(OUTPUT_TTL, 'a', encoding='utf-8') as f:
+                    f.write(f"\n# Batch {i//BATCH_SIZE + 1}\n")
+                    f.write(ttl_content.strip() + "\n")
+                
+                time.sleep(4)
+                break 
+                
+            except Exception as e:
+                if "429" in str(e):
+                    print(f"  [Rate Limit 429] 触发限流，休眠 15 秒后重试该批次...")
+                    time.sleep(15)
+                else:
+                    print(f"  [API Error] {e}。休眠 5 秒后重试...")
+                    time.sleep(5)
 
 if __name__ == "__main__":
-    main()
+    run_generation()
