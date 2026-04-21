@@ -48,7 +48,7 @@ class IntentDetector:
         try:
             # 3. Call the "Micro-Router" (Cheap & Fast)
             # Use fastest models for routing
-            model_name = "gemini-2.0-flash" if provider == "google" else "gpt-3.5-turbo"
+            model_name = "gemini-3.1-pro-preview" if provider == "google" else "gpt-3.5-turbo"
             
             # Ensure we have an API key (AgentService._call_llm requires it)
             if not api_key:
@@ -66,6 +66,10 @@ class IntentDetector:
             clean = response_text.replace("```json", "").replace("```", "").strip()
             data = json.loads(clean)
             
+            if isinstance(data, list):
+                # Handle fallback "[]" or unexpected list
+                data = data[0] if len(data) > 0 and isinstance(data[0], dict) else {}
+                
             intent_str = data.get("intent", "CONVERSATION").upper()
             topic = data.get("topic")
             

@@ -20,9 +20,9 @@ import PinyinTypingManager from './components/widgets/PinyinTypingManager';
 import CharacterRecognition from './components/CharacterRecognition';
 import SettingsModal from './components/SettingsModal';
 import UserProfile from './components/UserProfile';
-import DailyDeck from './components/DailyDeck';
 import Login from './components/Login';
-import ParentDashboard from './components/ParentDashboard'; // New import for ParentDashboard
+import ParentDashboard from './components/ParentDashboard';
+import ReviewInterventionWorkbench from './components/ReviewInterventionWorkbench';
 import TeacherPendingDrafts from './components/TeacherPendingDrafts'; // AI Copilot for Teachers
 import GraphTest from './components/GraphTest';
 import { useLanguage } from './i18n/LanguageContext';
@@ -552,10 +552,12 @@ function App() {
                   </button>
                 </div>
                 {cognitionContentView === 'daily-deck' ? (
-                  <DailyDeck
-                    childName={currentProfile?.name || null}
-                    childId={currentProfile?.id}
-                    scheduleSource="qcq"
+                  <ReviewInterventionWorkbench
+                    dailyDeckProps={{
+                      childName: currentProfile?.name || null,
+                      childId: currentProfile?.id,
+                      scheduleSource: 'qcq',
+                    }}
                   />
                 ) : (
                   <CognitionContentManager source={ontologySource} />
@@ -598,11 +600,13 @@ function App() {
                   </button>
                 </div>
                 {hhhContentView === 'daily-deck' ? (
-                  <DailyDeck
-                    childName={currentProfile?.name || null}
-                    childId={currentProfile?.id}
-                    scheduleSource="hhs"
-                    showDemoButton={false}
+                  <ReviewInterventionWorkbench
+                    dailyDeckProps={{
+                      childName: currentProfile?.name || null,
+                      childId: currentProfile?.id,
+                      scheduleSource: 'hhs',
+                      showDemoButton: false,
+                    }}
                   />
                 ) : (
                   <HHHContentManager />

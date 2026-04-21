@@ -38,7 +38,7 @@ if not GEMINI_API_KEY:
     sys.exit(1)
 
 genai.configure(api_key=GEMINI_API_KEY)
-model = genai.GenerativeModel('gemini-2.0-flash-exp')
+model = genai.GenerativeModel('gemini-3.1-pro-preview')
 
 # Define namespaces
 SRS_KG = Namespace("http://srs4autism.com/schema/")

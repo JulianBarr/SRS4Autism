@@ -105,7 +105,7 @@ Return ONLY a JSON array, no other text:
 ]
 """
                 response = AgentService._call_llm(
-                    system_prompt, api_key, "google", "gemini-2.0-flash"
+                    system_prompt, api_key, "google", "gemini-3.1-pro-preview"
                 )
                 if response and response != "[]":
                     clean = response.replace("```json", "").replace("```", "").strip()

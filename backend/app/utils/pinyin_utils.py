@@ -35,8 +35,8 @@ logger = logging.getLogger(__name__)
 WORD_IMAGE_MAP_FILE = PROJECT_ROOT / "data" / "word_image_map.json"
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-# FIX: Changed default from deprecated "gemini-pro" to current "gemini-2.0-flash"
-GEMINI_MODEL_NAME = os.getenv("GEMINI_MODEL_NAME", "gemini-2.0-flash")
+# FIX: Changed default from deprecated "gemini-pro" to current "gemini-3.1-pro-preview"
+GEMINI_MODEL_NAME = os.getenv("GEMINI_MODEL_NAME", "gemini-3.1-pro-preview")
 
 # Initialize Gemini model
 _genai_model: Optional[genai.GenerativeModel] = None

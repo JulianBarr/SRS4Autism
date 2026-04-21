@@ -124,6 +124,39 @@ def get_daily_quests(
         raise HTTPException(status_code=500, detail=str(e))
 
     pending = [_quest_to_api_item(item["quest"], format_pep3_short, format_materials) for item in result["pending"]]
+    
+    # Insert custom quests from drafts
+    try:
+        import json
+        import os
+        custom_quests_file = os.path.join(os.path.dirname(__file__), "../../../data/custom_quests.json")
+        if os.path.exists(custom_quests_file):
+            with open(custom_quests_file, 'r', encoding='utf-8') as f:
+                custom_quests = json.load(f)
+                
+            existing_quest_ids = {item["quest"]["quest_id"] for item in result["pending"]} | \
+                                 {item["quest"]["quest_id"] for item in result["completed_today"]}
+            seen_custom_signatures = set()
+            for q in custom_quests:
+                # Child-scoped custom quests only
+                q_child_name = str(q.get("child_name") or "")
+                # Legacy custom quests without child_name are kept visible for cleanup.
+                if q_child_name and q_child_name != str(child_name):
+                    continue
+
+                signature = (
+                    str(q.get("label") or "").strip(),
+                    str(q.get("teaching_steps") or "").strip(),
+                )
+                if signature in seen_custom_signatures:
+                    continue
+                seen_custom_signatures.add(signature)
+
+                if q["quest_id"] not in existing_quest_ids:
+                    pending.insert(0, q)
+    except Exception as e:
+        print(f"Error loading custom quests: {e}")
+
     completed_today = [
         _quest_to_api_item(item["quest"], format_pep3_short, format_materials)
         for item in result["completed_today"]

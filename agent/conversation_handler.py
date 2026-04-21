@@ -33,12 +33,12 @@ class ConversationHandler:
         # Map model IDs to actual Gemini model names
         self._model_map = {
             "gemini-3-pro-preview": "models/gemini-3-pro-preview",
-            "gemini-2.0-flash": "models/gemini-2.0-flash",
-            "gemini-2.5-flash": "models/gemini-2.5-flash",
+            "gemini-2.0-flash": "models/gemini-3.1-pro-preview",
+            "gemini-2.5-flash": "models/gemini-3.1-pro-preview",
         }
         
         # Initialize the model for text generation
-        model_name = self._model_map.get(card_model, card_model) if card_model else "models/gemini-2.5-flash"
+        model_name = self._model_map.get(card_model, card_model) if card_model else "models/gemini-3.1-pro-preview"
         if model_name and not model_name.startswith("models/"):
             model_name = f"models/{model_name}"
         self.model = genai.GenerativeModel(model_name)

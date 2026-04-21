@@ -311,7 +311,7 @@ app.add_middleware(
 
 # Gemini configuration for fallback knowledge lookups
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-GEMINI_MODEL_NAME = os.getenv("GEMINI_MODEL", "models/gemini-2.5-flash")
+GEMINI_MODEL_NAME = os.getenv("GEMINI_MODEL", "models/gemini-3.1-pro-preview")
 _genai_model = None
 if GEMINI_API_KEY:
     try:

@@ -180,8 +180,8 @@ class ContentGenerator:
             # Map model IDs to actual Gemini model names
             model_map = {
                 "gemini-3-pro-preview": "models/gemini-3-pro-preview",
-                "gemini-2.0-flash": "models/gemini-2.0-flash",
-                "gemini-2.5-flash": "models/gemini-2.5-flash",
+                "gemini-2.0-flash": "models/gemini-3.1-pro-preview",
+                "gemini-2.5-flash": "models/gemini-3.1-pro-preview",
             }
             
             model_name = model_map.get(self.card_model_id, self.card_model_id)

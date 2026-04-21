@@ -213,13 +213,13 @@ You must adhere to these rules above all else:
         # Default Models
         if not model_name:
             if provider == "google":
-                model_name = "gemini-2.0-flash"
+                model_name = "gemini-3.1-pro-preview"
             elif provider == "deepseek":
                 model_name = "deepseek-chat"
             elif provider == "openai":
                 model_name = "gpt-4o-mini"
             else:
-                model_name = "gemini-2.0-flash"  # Ultimate fallback
+                model_name = "gemini-3.1-pro-preview"  # Ultimate fallback
         
         max_retries = 3
         attempt = 0

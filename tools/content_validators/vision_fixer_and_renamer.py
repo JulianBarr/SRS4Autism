@@ -25,8 +25,8 @@ if not API_KEY:
 
 genai.configure(api_key=API_KEY)
 
-# Using Gemini 2.0 Flash (Fast & Smart)
-model = genai.GenerativeModel("gemini-2.0-flash")
+# Using Gemini 3.1 Pro Preview (Fast & Smart)
+model = genai.GenerativeModel("gemini-3.1-pro-preview")
 
 # Path Configuration
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
