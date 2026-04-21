@@ -105,6 +105,9 @@ app.include_router(survey.router, tags=["survey"])
 app.include_router(cards.router, tags=["cards"])
 app.include_router(test_sync.router, tags=["debug"])
 
+from .routers import quests
+app.include_router(quests.router)
+
 
 # ============================================================================
 # KG_Map Helper Functions (Following Strict Schema from Knowledge Tracking Spec)

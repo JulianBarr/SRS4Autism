@@ -9,7 +9,8 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 # Files to load (order matters if one depends on another, though RDF is generally order-independent for loading)
 DEFAULT_FILES = [
     PROJECT_ROOT / "knowledge_graph" / "world_model_rescued_v3.ttl",
-    PROJECT_ROOT / "knowledge_graph" / "world_model_complete_v2.ttl"
+    PROJECT_ROOT / "knowledge_graph" / "world_model_complete_v2.ttl",
+    PROJECT_ROOT / "knowledge_graph" / "ontology" / "hhs_vbmapp_draft_alignment.ttl"
 ]
 STORE_PATH = PROJECT_ROOT / "data" / "kg_store"
 
