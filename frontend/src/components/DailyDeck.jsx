@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import api, { API_BASE, cloudApi } from '../utils/api';
+import SurveyFeedCard from './SurveyFeedCard';
 import AICard from './AICard';
 import VBMappSubgraphExplorer from './VBMappSubgraphExplorer';
 import { Network } from 'lucide-react';
@@ -893,6 +894,48 @@ function DailyDeck({
   const [submitting, setSubmitting] = useState(null); // quest_id when submitting
   const [questCount, setQuestCount] = useState(3);
   const [currentChatQuest, setCurrentChatQuest] = useState(null);
+  const [surveyQuestion, setSurveyQuestion] = useState(null);
+  const [surveyBooting, setSurveyBooting] = useState(true);
+
+  const { language } = useLanguage(); // Destructure language from useLanguage here
+  const fetchSurveyNext = useCallback(async () => {
+    try {
+      const res = await api.get(`/api/survey/next?lang=${language}`);
+      const d = res.data;
+      console.log("fetchSurveyNext received data:", d); // DEBUG LINE
+      if (d?.question_uri) {
+        setSurveyQuestion(d);
+      } else {
+        setSurveyQuestion(null);
+      }
+    } catch (e) {
+      console.warn('Survey feed unavailable', e);
+      setSurveyQuestion(null);
+    } finally {
+      setSurveyBooting(false);
+    }
+  }, [language]);
+
+  useEffect(() => {
+    if (!childName) return;
+    setSurveyBooting(true);
+    fetchSurveyNext();
+  }, [childName, fetchSurveyNext]);
+
+  const handleSurveyAnswered = useCallback(async () => {
+    await fetchSurveyNext();
+  }, [fetchSurveyNext]);
+
+  const renderSurveySection = () =>
+    !surveyBooting && surveyQuestion?.question_uri ? (
+      <section className="mb-8" aria-label="Adaptive survey">
+        <SurveyFeedCard
+          key={surveyQuestion.question_uri}
+          question={surveyQuestion}
+          onAnswerSubmitted={handleSurveyAnswered}
+        />
+      </section>
+    ) : null;
 
   // Prevent background scroll when modal is open; always restore on unmount
   useEffect(() => {
@@ -1025,6 +1068,7 @@ function DailyDeck({
   if (allDone && pending.length === 0) {
     return (
       <div className="min-h-screen bg-white flex flex-col">
+        <div className="max-w-2xl mx-auto w-full px-4 pt-6">{renderSurveySection()}</div>
         <div className="flex flex-col items-center justify-center p-6 shrink-0">
           <div className="text-6xl mb-4">🎉</div>
           <h2 className="text-2xl font-bold text-slate-800 mb-2">
@@ -1131,7 +1175,8 @@ function DailyDeck({
 
   if (pending.length === 0 && completedToday.length === 0) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="min-h-screen bg-white flex flex-col items-center justify-center p-4">
+        <div className="max-w-2xl w-full mb-6">{renderSurveySection()}</div>
         <div className="text-slate-600 text-lg">{t('ddNoTasksToday')}</div>
       </div>
     );
@@ -1195,6 +1240,7 @@ function DailyDeck({
               <h2 className="text-base font-semibold text-slate-700 mb-4 flex items-center gap-2">
                 📌 {t('ddPendingSection')}
               </h2>
+              {renderSurveySection()}
               <div className="space-y-4">
                 {pending.map((quest) => (
                   <ExpandableQuestCard
@@ -1210,6 +1256,8 @@ function DailyDeck({
               </div>
             </section>
           )}
+
+          {pending.length === 0 && renderSurveySection()}
 
           {/* 今日已打卡 */}
           {completedToday.length > 0 && (

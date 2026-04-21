@@ -1,86 +1,34 @@
-"""
-Adaptive parent survey feed — SPARQL-backed next-question selection with mock fallback.
-"""
-
 from __future__ import annotations
 
 import logging
 from typing import Any, Optional
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel, Field
+from sqlalchemy.orm import Session
+from sqlalchemy import func
 
-from fastapi import Depends
 from backend.database.kg_client import KnowledgeGraphClient, KnowledgeGraphQueryError
-from backend.app.utils.oxigraph_utils import get_kg_store # Import get_kg_store
+from backend.app.utils.oxigraph_utils import get_kg_store
+from backend.database.db import get_db
+from backend.app.models import ChildProfile, MilestoneProgress
 
 
 logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/api", tags=["survey"])
 
-# --- Session-local storage (replace with DB / profile-scoped store later) ---
-_survey_answer_log: list[dict[str, Any]] = []
-_answered_uris: set[str] = set()
+STATE_ACTION_TO_STATUS = {
+    "PASS_NODE": "PASS",
+    "FAIL": "FAIL",
+    "FAIL_PROMPT_DEPENDENT": "PROMPT_DEPENDENT",
+    "ASSUMED_MASTERED": "ASSUMED_MASTERED",
+}
 
 _CUMA_SURVEY = "http://cuma.ai/schema/survey/"
 _VBMAPP = "http://cuma.ai/schema/vbmapp/"
 
 _OPTION_ORDER = ("FAIL", "FAIL_PROMPT_DEPENDENT", "PASS_NODE")
-
-_MOCK_QUESTIONS: tuple[dict[str, Any], ...] = (
-    {
-        "question_uri": "http://cuma.ai/instance/survey/parent#mock_q1",
-        "promptTemplate": (
-            "Can {child_name} imitate a gross motor movement when you say "
-            "\"Do this\"? /\n"
-            "当你说「跟我做」时，{child_name}能模仿一个大动作吗？"
-        ),
-        "options": [
-            {
-                "option_uri": "http://cuma.ai/instance/survey/parent#mock_q1_opt_fail",
-                "optionText": "Cannot do it / 无法完成",
-                "stateAction": "FAIL",
-            },
-            {
-                "option_uri": "http://cuma.ai/instance/survey/parent#mock_q1_opt_prompt",
-                "optionText": "Needs prompts / 需提示",
-                "stateAction": "FAIL_PROMPT_DEPENDENT",
-            },
-            {
-                "option_uri": "http://cuma.ai/instance/survey/parent#mock_q1_opt_pass",
-                "optionText": "Does it independently / 独立完成",
-                "stateAction": "PASS_NODE",
-            },
-        ],
-        "source": "mock",
-    },
-    {
-        "question_uri": "http://cuma.ai/instance/survey/parent#mock_q2",
-        "promptTemplate": (
-            "Does {child_name} make eye contact when you call their name? /\n"
-            "当你叫{child_name}的名字时，他/她会看你吗？"
-        ),
-        "options": [
-            {
-                "option_uri": "http://cuma.ai/instance/survey/parent#mock_q2_opt_fail",
-                "optionText": "Cannot do it / 无法完成",
-                "stateAction": "FAIL",
-            },
-            {
-                "option_uri": "http://cuma.ai/instance/survey/parent#mock_q2_opt_prompt",
-                "optionText": "Needs prompts / 需提示",
-                "stateAction": "FAIL_PROMPT_DEPENDENT",
-            },
-            {
-                "option_uri": "http://cuma.ai/instance/survey/parent#mock_q2_opt_pass",
-                "optionText": "Does it independently / 独立完成",
-                "stateAction": "PASS_NODE",
-            },
-        ],
-        "source": "mock",
-    },
-)
 
 
 def _fill_prompt_template(text: str, child_label: str = "宝宝") -> str:
@@ -146,37 +94,6 @@ def _sort_options(options: list[dict[str, Any]]) -> list[dict[str, Any]]:
 def get_kg_client() -> KnowledgeGraphClient:
     return KnowledgeGraphClient(endpoint_url="oxigraph://embedded")
 
-# ... (rest of the file)
-
-
-
-
-
-def _pick_next_mock(lang: str = "en") -> dict[str, Any]:
-    """Rotate through mock questions; when all are answered, clear and repeat."""
-    mock_uris = {m["question_uri"] for m in _MOCK_QUESTIONS}
-    unanswered = [m for m in _MOCK_QUESTIONS if m["question_uri"] not in _answered_uris]
-    if not unanswered:
-        _answered_uris.difference_update(mock_uris)
-        unanswered = list(_MOCK_QUESTIONS)
-    chosen = unanswered[0]
-    localized_options = [
-        {
-            "option_uri": opt["option_uri"],
-            "optionText": _localize_bilingual_text(opt["optionText"], lang),
-            "stateAction": opt["stateAction"],
-        }
-        for opt in chosen["options"]
-    ]
-    return {
-        "question_uri": chosen["question_uri"],
-        "promptTemplate": _fill_prompt_template(
-            _localize_bilingual_text(chosen["promptTemplate"], lang)
-        ),
-        "options": localized_options,
-        "source": chosen["source"],
-    }
-
 
 class SurveyAnswerBody(BaseModel):
     question_uri: str = Field(..., description="URI of the ParentQuestion answered")
@@ -187,6 +104,7 @@ class SurveyAnswerBody(BaseModel):
 def get_next_survey_question(
     lang: str = "en",  # Add language parameter with default "en"
     kg_client: KnowledgeGraphClient = Depends(get_kg_client),
+    db: Session = Depends(get_db), # Add DB session dependency
 ) -> dict[str, Any]:
     """
     Next ParentQuestion from KG (level-1 milestones; bottleneck first), excluding session answers.
@@ -205,8 +123,8 @@ def get_next_survey_question(
                  cuma-survey:stateAction ?stateAction .
 
         # Force language filtering based on request
-        FILTER(LANG(?prompt_literal) = "{{lang}}")
-        FILTER(LANG(?opt_literal) = "{{lang}}")
+        FILTER(LANG(?prompt_literal) = "{lang}")
+        FILTER(LANG(?opt_literal) = "{lang}")
         
         BIND(STR(?prompt_literal) AS ?promptText)
         BIND(STR(?opt_literal) AS ?optText)
@@ -234,7 +152,10 @@ def get_next_survey_question(
         print("=======================================================")
     except KnowledgeGraphQueryError as exc:
         logger.error("Failed to query knowledge graph for survey questions: %s", exc)
-        return _pick_next_mock(normalized_lang)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to retrieve survey questions from knowledge graph"
+        )
 
     questions_map: dict[str, dict[str, Any]] = {}
 
@@ -269,12 +190,40 @@ def get_next_survey_question(
             
     # Convert dictionary to a list of questions and sort options
     questions = []
-    for q_uri, q_data in questions_map.items():
-        if q_uri in _answered_uris:
-            continue
-        q_data["options"] = _sort_options(q_data["options"])
-        questions.append(q_data)
 
+    # Get answered milestone URIs for the default child (Yiming)
+    child_profile = db.query(ChildProfile).filter(ChildProfile.name == "Yiming").first()
+    if not child_profile:
+        logger.warning("Default child profile 'Yiming' not found for survey. Proceeding without filtering.")
+        answered_milestone_uris = set()
+    else:
+        answered_milestone_uris = set(
+            [mp.milestone_uri for mp in db.query(MilestoneProgress).filter(MilestoneProgress.child_id == child_profile.id).all()]
+        )
+
+    for q_uri, q_data in questions_map.items():
+        # Query the milestone_uri for the current question_uri
+        milestone_query = """
+            PREFIX cuma-survey: <http://cuma.ai/schema/survey/>
+            SELECT ?milestone_uri
+            WHERE {{
+                <{q_uri}> cuma-survey:evaluatesNode ?milestone_uri .
+            }}
+        """
+        templated_milestone_query = milestone_query.format(q_uri=q_uri)
+        milestone_results = kg_client.query_bindings(templated_milestone_query)
+        associated_milestone_uri = None
+        for row in milestone_results:
+            associated_milestone_uri = _binding_str(row.get("milestone_uri"))
+            break
+
+        # Only add question if its associated milestone has not been answered
+        if associated_milestone_uri and associated_milestone_uri not in answered_milestone_uris:
+            q_data["options"] = _sort_options(q_data["options"])
+            questions.append(q_data)
+
+    # If there are still questions, sort them (e.g., by some priority) and return the first one
+    # For now, just return the first available (unanswered) question.
     if questions:
         final_question = questions[0]
         print("========== [DEBUG] FINAL JSON PAYLOAD ==========")
@@ -282,18 +231,106 @@ def get_next_survey_question(
         print("================================================")
         return final_question
     
-    # Fallback to mock questions if no KG questions are found
-    return _pick_next_mock(normalized_lang)
+    # Fallback to mock questions if no KG questions are found (if _pick_next_mock was defined)
+    # For now, raise an error if no questions are found
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail="No survey questions found in knowledge graph"
+    )
 
 
 @router.post("/survey/answer")
-def post_survey_answer(body: SurveyAnswerBody) -> dict[str, str]:
-    _answered_uris.add(body.question_uri)
-    entry = {
-        "question_uri": body.question_uri,
-        "stateAction": body.stateAction,
-    }
-    _survey_answer_log.append(entry)
-    logger.info("survey answer recorded: %s", entry)
-    print(f"[survey] answer: {entry}")
-    return {"status": "success"}
+async def post_survey_answer(
+    body: SurveyAnswerBody,
+    db: Session = Depends(get_db),
+    kg_client: KnowledgeGraphClient = Depends(get_kg_client),
+) -> dict[str, str]:
+    # 1. Use SPARQL to query the milestone_uri for the given question_uri
+    sparql_query = """
+        PREFIX cuma-survey: <http://cuma.ai/schema/survey/>
+        SELECT ?milestone_uri
+        WHERE {
+            <{{question_uri}}> cuma-survey:evaluatesNode ?milestone_uri .
+        }
+    """
+    sparql_query_templated = sparql_query.replace("{{question_uri}}", body.question_uri)
+
+    try:
+        kg_results = kg_client.query_bindings(sparql_query_templated)
+        milestone_uri = None
+        for row in kg_results:
+            milestone_uri = _binding_str(row.get("milestone_uri"))
+            break  # Get the first milestone_uri found
+        
+        if not milestone_uri:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"Milestone URI not found for question: {body.question_uri}"
+            )
+
+    except KnowledgeGraphQueryError as exc:
+        logger.error("Failed to query knowledge graph for milestone URI: %s", exc)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to retrieve milestone information from knowledge graph"
+        )
+    
+    # 2. Get the current Mock Child (Yiming)
+    # In a real application, child_id would come from authentication or path parameter
+    child_profile = db.query(ChildProfile).filter(ChildProfile.name == "Yiming").first()
+    if not child_profile:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Default child profile 'Yiming' not found. Please ensure it's seeded."
+        )
+    child_id = child_profile.id
+
+    # 3. Map stateAction to DB status
+    db_status = STATE_ACTION_TO_STATUS.get(body.stateAction)
+    if not db_status:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Invalid stateAction: {body.stateAction}"
+        )
+    
+    # 4. Upsert MilestoneProgress
+    try:
+        milestone_progress = db.query(MilestoneProgress).filter(
+            MilestoneProgress.child_id == child_id,
+            MilestoneProgress.milestone_uri == milestone_uri
+        ).first()
+
+        if milestone_progress:
+            # Update existing record
+            milestone_progress.status = db_status
+            milestone_progress.source = "SURVEY"  # Assuming all survey answers are from 'SURVEY'
+            milestone_progress.created_at = func.now() # Manually update timestamp
+        else:
+            # Create new record
+            milestone_progress = MilestoneProgress(
+                child_id=child_id,
+                milestone_uri=milestone_uri,
+                status=db_status,
+                source="SURVEY"
+            )
+            db.add(milestone_progress)
+        
+        db.commit()
+        db.refresh(milestone_progress)
+        logger.info(
+            "MilestoneProgress upserted: Child ID %s, Milestone URI %s, Status %s",
+            child_id,
+            milestone_uri,
+            db_status,
+        )
+        print(f"[survey] answer recorded in DB: {milestone_progress.milestone_uri} -> {milestone_progress.status}")
+
+    except Exception as e:
+        db.rollback()
+        logger.error("Failed to upsert MilestoneProgress: %s", e)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to record survey answer in database"
+        )
+
+    return {"status": "success", "milestone_uri": milestone_uri, "recorded_status": db_status}

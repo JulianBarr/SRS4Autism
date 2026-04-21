@@ -1,15 +1,16 @@
 """
-Database connection and session management
+Database connection and session management.
 """
 
-import os
-from pathlib import Path
 from contextlib import contextmanager
-from sqlalchemy import create_engine, event
-from sqlalchemy.orm import sessionmaker, Session
-from sqlalchemy.pool import StaticPool
+from pathlib import Path
 
-from .models import Base
+from sqlalchemy import create_engine, event
+from sqlalchemy.pool import StaticPool
+from sqlalchemy.orm import Session, sessionmaker
+
+# Import models
+from backend.app.models import Base, ChildProfile, MilestoneProgress
 
 # Project root
 from backend.app.core.config import PROJECT_ROOT, DATABASE_PATH
@@ -45,16 +46,31 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
 def init_db():
-    """Initialize database by creating all tables"""
+    """Initialize database by creating all tables and seeding initial data"""
     print(f"Initializing database at: {DB_PATH}")
     Base.metadata.create_all(bind=engine)
     print("✅ Database initialized successfully")
+    seed_initial_data()
+
+def seed_initial_data():
+    """Seed initial data for ChildProfile if not already present."""
+    with get_db_session() as db:
+        # Check if "Yiming" profile already exists
+        yiming_profile = db.query(ChildProfile).filter(ChildProfile.name == "Yiming").first()
+        if not yiming_profile:
+            yiming_profile = ChildProfile(name="Yiming")
+            db.add(yiming_profile)
+            db.commit()
+            db.refresh(yiming_profile)
+            print("🌱 Seeded initial child profile: Yiming")
+        else:
+            print(" Skipping seeding: Yiming profile already exists.")
 
 
 def get_db() -> Session:
     """
     Get database session (for FastAPI dependency injection)
-    
+
     Usage in FastAPI:
         @app.get("/items")
         def read_items(db: Session = Depends(get_db)):
@@ -71,10 +87,10 @@ def get_db() -> Session:
 def get_db_session():
     """
     Get database session as context manager
-    
+
     Usage:
         with get_db_session() as db:
-            profile = db.query(Profile).filter_by(id='123').first()
+            profile = db.query(Profile).filter_by(id="123").first()
     """
     db = SessionLocal()
     try:
@@ -90,21 +106,21 @@ def get_db_session():
 def create_backup(backup_path: Path = None):
     """
     Create a backup of the SQLite database
-    
+
     Args:
         backup_path: Optional custom backup path
     """
     import shutil
     from datetime import datetime
-    
+
     if not DB_PATH.exists():
         print("⚠️  Database file does not exist, nothing to backup")
         return
-    
+
     if backup_path is None:
-        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         backup_path = PROJECT_ROOT / "data" / "backups" / f"srs4autism_{timestamp}.db"
-    
+
     backup_path.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(DB_PATH, backup_path)
     print(f"✅ Database backup created: {backup_path}")
@@ -114,48 +130,45 @@ def create_backup(backup_path: Path = None):
 def restore_backup(backup_path: Path):
     """
     Restore database from a backup
-    
-    Args:
-        backup_path: Path to backup file
+
+    Args:\n        backup_path: Path to backup file
     """
     import shutil
-    
+
     if not backup_path.exists():
         raise FileNotFoundError(f"Backup file not found: {backup_path}")
-    
+
     # Create a backup of current database before restoring
     if DB_PATH.exists():
         create_backup(DB_PATH.parent / f"{DB_PATH.stem}_before_restore{DB_PATH.suffix}")
-    
+
     shutil.copy2(backup_path, DB_PATH)
     print(f"✅ Database restored from: {backup_path}")
 
 
 # For testing: create in-memory database
 def get_test_db():
-    """Get an in-memory SQLite database for testing"""
+    """Get an in-memory SQLite database for testing."""
     test_engine = create_engine(
         "sqlite:///:memory:",
         connect_args={"check_same_thread": False},
         poolclass=StaticPool,
     )
-    
+
     # Enable foreign keys
     @event.listens_for(test_engine, "connect")
     def set_sqlite_pragma(dbapi_conn, connection_record):
         cursor = dbapi_conn.cursor()
         cursor.execute("PRAGMA foreign_keys=ON")
         cursor.close()
-    
+
     Base.metadata.create_all(bind=test_engine)
-    
+
     TestSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=test_engine)
-    
+
     return TestSessionLocal()
 
 
 if __name__ == "__main__":
     # Initialize database if run directly
     init_db()
-
-
