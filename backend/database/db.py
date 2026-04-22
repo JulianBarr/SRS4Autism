@@ -55,14 +55,15 @@ def init_db():
 def seed_initial_data():
     """Seed initial data for ChildProfile if not already present."""
     with get_db_session() as db:
-        # Check if "Yiming" profile already exists
-        yiming_profile = db.query(ChildProfile).filter(ChildProfile.name == "Yiming").first()
+        # Demo seed: stable id matches milestone_progress.child_id / header selector
+        demo_id = "Zhou Yiming (周一鸣）"
+        yiming_profile = db.query(ChildProfile).filter(ChildProfile.id == demo_id).first()
         if not yiming_profile:
-            yiming_profile = ChildProfile(name="Yiming")
+            yiming_profile = ChildProfile(id=demo_id, name=demo_id)
             db.add(yiming_profile)
             db.commit()
             db.refresh(yiming_profile)
-            print("🌱 Seeded initial child profile: Yiming")
+            print("🌱 Seeded initial child profile: Zhou Yiming")
         else:
             print(" Skipping seeding: Yiming profile already exists.")
 

@@ -3,7 +3,7 @@ from __future__ import annotations
 import logging
 from typing import Any, Optional
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 from sqlalchemy import func
@@ -98,11 +98,38 @@ def get_kg_client() -> KnowledgeGraphClient:
 class SurveyAnswerBody(BaseModel):
     question_uri: str = Field(..., description="URI of the ParentQuestion answered")
     stateAction: str = Field(..., description="Selected option state, e.g. FAIL, PASS_NODE")
+    child_id: str = Field(
+        ...,
+        min_length=1,
+        description="Stable child key: profiles.id (same as header child selector value)",
+    )
+
+
+def _require_child_profile(db: Session, child_id: str) -> ChildProfile:
+    """Resolve profiles row by primary key; no name-based guessing."""
+    cid = (child_id or "").strip()
+    if not cid:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="child_id is required",
+        )
+    child_profile = db.query(ChildProfile).filter(ChildProfile.id == cid).first()
+    if not child_profile:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"No profile found for child_id={cid!r}",
+        )
+    return child_profile
 
 
 @router.get("/survey/next")
 def get_next_survey_question(
     lang: str = "en",  # Add language parameter with default "en"
+    child_id: str = Query(
+        ...,
+        min_length=1,
+        description="profiles.id from the authenticated child selector",
+    ),
     kg_client: KnowledgeGraphClient = Depends(get_kg_client),
     db: Session = Depends(get_db), # Add DB session dependency
 ) -> dict[str, Any]:
@@ -110,6 +137,8 @@ def get_next_survey_question(
     Next ParentQuestion from KG (level-1 milestones; bottleneck first), excluding session answers.
     Falls back to built-in mock pairs when the graph has no matching data.
     """
+    child_profile = _require_child_profile(db, child_id)
+
     sparql_query = """
     PREFIX cuma-survey: <http://cuma.ai/schema/survey/>
     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -191,15 +220,10 @@ def get_next_survey_question(
     # Convert dictionary to a list of questions and sort options
     questions = []
 
-    # Get answered milestone URIs for the default child (Yiming)
-    child_profile = db.query(ChildProfile).filter(ChildProfile.name == "Yiming").first()
-    if not child_profile:
-        logger.warning("Default child profile 'Yiming' not found for survey. Proceeding without filtering.")
-        answered_milestone_uris = set()
-    else:
-        answered_milestone_uris = set(
-            [mp.milestone_uri for mp in db.query(MilestoneProgress).filter(MilestoneProgress.child_id == child_profile.id).all()]
-        )
+    answered_milestone_uris = {
+        mp.milestone_uri
+        for mp in db.query(MilestoneProgress).filter(MilestoneProgress.child_id == child_profile.id).all()
+    }
 
     for q_uri, q_data in questions_map.items():
         # Query the milestone_uri for the current question_uri
@@ -275,14 +299,7 @@ async def post_survey_answer(
             detail="Failed to retrieve milestone information from knowledge graph"
         )
     
-    # 2. Get the current Mock Child (Yiming)
-    # In a real application, child_id would come from authentication or path parameter
-    child_profile = db.query(ChildProfile).filter(ChildProfile.name == "Yiming").first()
-    if not child_profile:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Default child profile 'Yiming' not found. Please ensure it's seeded."
-        )
+    child_profile = _require_child_profile(db, body.child_id)
     child_id = child_profile.id
 
     # 3. Map stateAction to DB status

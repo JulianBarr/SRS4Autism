@@ -184,17 +184,25 @@ def get_db_path() -> Path:
 
 def find_child_profile(db_path: Path, child_query: str) -> Optional[tuple[str, str, dict]]:
     """
-    从 SQLite 查找儿童档案。支持模糊匹配 name 或精确 id。
-    返回: (profile_id, name, extracted_data_dict) 或 None
+    从 SQLite 查找儿童档案。
+
+    解析顺序（避免误匹配）：
+    1. ``profiles.id`` 精确匹配（主键，UI / API 应始终传这个）
+    2. ``profiles.name`` 精确匹配（仅兼容旧调用方按显示名查询）
     """
     conn = sqlite3.connect(str(db_path))
     conn.row_factory = sqlite3.Row
     cur = conn.cursor()
-    cur.execute(
-        "SELECT id, name, extracted_data FROM profiles WHERE id LIKE ? OR name LIKE ?",
-        (f"%{child_query}%", f"%{child_query}%"),
-    )
+    q = (child_query or "").strip()
+    if not q:
+        conn.close()
+        return None
+
+    cur.execute("SELECT id, name, extracted_data FROM profiles WHERE id = ?", (q,))
     row = cur.fetchone()
+    if not row:
+        cur.execute("SELECT id, name, extracted_data FROM profiles WHERE name = ?", (q,))
+        row = cur.fetchone()
     conn.close()
     if not row:
         return None
@@ -923,3 +931,82 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+def get_target_milestone_uri(profile_id: str, db_path: Path) -> tuple[Optional[str], str]:
+    """
+    根据 milestone_progress 确定每日任务的目标节点 (milestone_uri) 与来源 (milestone_source)。
+    A: 优先寻找明确的 LEARNING 状态。
+    B: 若无 LEARNING，则根据最近的 PASS 推演进阶节点，并将其注册为新 LEARNING 前沿。
+    C: 依概率（<20%）选取 PASS 的历史节点用于复习。
+    """
+    import sqlite3
+    import random
+    import re
+    from datetime import datetime, timezone
+
+    milestone_uri = None
+    milestone_source = "none"
+
+    conn = sqlite3.connect(str(db_path))
+    conn.row_factory = sqlite3.Row
+    cur = conn.cursor()
+
+    try:
+        # Step C: Review logic
+        if random.random() < 0.2:
+            cur.execute(
+                "SELECT milestone_uri FROM milestone_progress WHERE child_id = ? AND status = 'PASS' ORDER BY RANDOM() LIMIT 1",
+                (profile_id,)
+            )
+            prog_row = cur.fetchone()
+            if prog_row:
+                milestone_uri = prog_row["milestone_uri"]
+                milestone_source = "survey_review_pass"
+
+        # Step A: Explicit LEARNING state
+        if not milestone_uri:
+            cur.execute(
+                "SELECT milestone_uri FROM milestone_progress WHERE child_id = ? AND status = 'LEARNING' ORDER BY RANDOM() LIMIT 1",
+                (profile_id,)
+            )
+            prog_row = cur.fetchone()
+            if prog_row:
+                milestone_uri = prog_row["milestone_uri"]
+                milestone_source = "survey_learning"
+
+        # Step B: Deduce Frontier from latest PASS state
+        if not milestone_uri:
+            cur.execute(
+                "SELECT milestone_uri FROM milestone_progress WHERE child_id = ? AND status = 'PASS' ORDER BY created_at DESC LIMIT 1",
+                (profile_id,)
+            )
+            prog_row = cur.fetchone()
+            if prog_row:
+                pass_uri = prog_row["milestone_uri"]
+                match = re.search(r'_(\d+)_m$', pass_uri)
+                if match:
+                    current_level = int(match.group(1))
+                    next_level = current_level + 1
+                    deduced_uri = pass_uri[:match.start(1)] + str(next_level) + "_m"
+                    
+                    milestone_uri = deduced_uri
+                    milestone_source = "survey_deduced_learning"
+                    
+                    now_str = datetime.now(timezone.utc).isoformat()
+                    cur.execute(
+                        """
+                        INSERT INTO milestone_progress (child_id, milestone_uri, status, source, created_at)
+                        VALUES (?, ?, 'LEARNING', 'deduced', ?)
+                        ON CONFLICT(child_id, milestone_uri) DO UPDATE SET status='LEARNING'
+                        """,
+                        (profile_id, milestone_uri, now_str)
+                    )
+                    conn.commit()
+                    print(f"[INFO] Target deduced from latest PASS state ({pass_uri}) -> New Frontier: {milestone_uri}")
+
+        return milestone_uri, milestone_source
+    except Exception as e:
+        print(f"[ERROR] get_target_milestone_uri failed: {e}")
+        return None, "error"
+    finally:
+        conn.close()

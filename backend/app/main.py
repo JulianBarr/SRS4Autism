@@ -38,6 +38,8 @@ import zipfile
 import shutil
 import re
 import logging
+from logging import StreamHandler
+from sys import stdout
 
 
 # Database imports
@@ -48,10 +50,21 @@ from database.services import ProfileService, CardService, ChatService
 from sqlalchemy.orm import Session
 from fastapi import Depends
 
+from logging import StreamHandler
+from sys import stdout
+
 import google.generativeai as genai
 
 # Configure logging
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)  # Ensure our logger captures INFO messages
+# Prevent propagation to the root logger which might be configured by uvicorn
+logger.propagate = False
+# Add a handler to output to stdout, which is then TeeOutput-ed to file and console
+handler = StreamHandler(stdout)
+formatter = logging.Formatter("%(levelname)s:     %(message)s")
+handler.setFormatter(formatter)
+logger.addHandler(handler)
 
 print(f"PROJECT_ROOT: {PROJECT_ROOT}")
 

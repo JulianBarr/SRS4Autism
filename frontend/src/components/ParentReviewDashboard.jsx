@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import api from '../utils/api';
-import { Check, X, Edit3, Save, CheckCircle2, HeartHandshake, Sparkles } from 'lucide-react';
+import { Check, X, Edit3, Save, CheckCircle2, HeartHandshake, Sparkles, Info } from 'lucide-react';
 
 const ParentReviewDashboard = ({ childId, childName }) => {
   const [drafts, setDrafts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editingId, setEditingId] = useState(null);
+  const [localizingId, setLocalizingId] = useState(null);
   const [editFormData, setEditFormData] = useState({});
   const getDraftId = (draft) => draft?.quest_id || draft?.id || draft?.draft_id;
   const normalizeQuest = (q) => {
@@ -111,22 +112,63 @@ const ParentReviewDashboard = ({ childId, childName }) => {
   };
 
   const handleAutoGenerateQuest = async () => {
-    if (!childId && !childName) {
-        console.error("Cannot auto-generate quest: No child selected.");
-        // Optionally, show a user-friendly message
-        return;
+    if (!childId || String(childId).trim() === '') {
+      console.error(
+        'Cannot auto-generate quest: stable child_id (profiles.id) is required — pick a child in the header.',
+      );
+      return;
     }
     setLoading(true);
     try {
         await api.post('/api/quests/auto-generate', {
             child_id: childId,
-            child_name: childName
+            child_name: childName || undefined,
         });
         fetchDrafts(); // Refresh drafts to show the newly generated one
     } catch (error) {
         console.error("Failed to auto-generate quest:", error);
+        alert(error.response?.data?.detail || "生成备课失败，请重试。");
     } finally {
         setLoading(false);
+    }
+  };
+
+  const handleLocalize = async (draft) => {
+    if (!childId || String(childId).trim() === '') {
+      alert('请先在顶部选择儿童档案，才能进行个性化适配。');
+      return;
+    }
+    const draftId = getDraftId(draft);
+    setLocalizingId(draftId);
+    
+    try {
+      let response;
+      if (draft.milestone_uri) {
+        response = await api.post('/api/quests/generate', {
+          milestone_uri: draft.milestone_uri,
+          child_id: childId,
+          child_name: childName || undefined,
+        });
+      } else {
+        response = await api.post('/api/quests/auto-generate', {
+          child_id: childId,
+          child_name: childName || undefined,
+        });
+      }
+      
+      const newDraft = normalizeQuest(response.data);
+      
+      // Quietly reject the old draft
+      api.post(`/api/quests/drafts/${draftId}/reject`).catch(e => console.error('Failed to reject old draft:', e));
+      
+      // Update the current draft in place
+      setDrafts(prev => prev.map(d => getDraftId(d) === draftId ? newDraft : d));
+      
+    } catch (error) {
+      console.error("Failed to localize quest:", error);
+      alert(error.response?.data?.detail || '个性化适配失败，请重试。');
+    } finally {
+      setLocalizingId(null);
     }
   };
 
@@ -206,11 +248,24 @@ const ParentReviewDashboard = ({ childId, childName }) => {
                 </div>
 
                 {/* Objective */}
-                <div className="bg-orange-50 rounded-xl p-4 mb-5 border border-orange-100/50">
-                  <p className="text-orange-800">
-                    <span className="font-semibold mr-2">🎯 训练目的：</span>
-                    {draft.objective}
+                <div className="bg-orange-50 rounded-xl p-4 mb-5 border border-orange-100/50 relative group cursor-help">
+                  <p className="text-orange-800 flex items-start sm:items-center">
+                    <span className="font-semibold mr-2 flex items-center shrink-0">
+                      🎯 训练目的：
+                      {draft.hhs_source_label && (
+                        <Info size={16} className="ml-1 mr-1 text-orange-400 opacity-80" />
+                      )}
+                    </span>
+                    <span>{draft.objective}</span>
                   </p>
+                  
+                  {/* Tooltip */}
+                  {draft.hhs_source_label && (
+                    <div className="absolute bottom-full left-4 mb-2 px-3 py-2 bg-gray-800 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 shadow-lg max-w-sm">
+                      📚 专业来源：协康会 - {draft.hhs_source_label}
+                      <div className="absolute -bottom-1 left-6 w-2 h-2 bg-gray-800 rotate-45"></div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Steps */}
@@ -258,12 +313,14 @@ const ParentReviewDashboard = ({ childId, childName }) => {
                       <button 
                         onClick={cancelEdit}
                         className="px-4 py-2 text-gray-500 hover:bg-gray-200 rounded-xl font-medium transition-colors"
+                        disabled={localizingId === draftId}
                       >
                         取消
                       </button>
                       <button 
                         onClick={() => handleSaveEdit(draftId)}
                         className="px-4 py-2 bg-gray-800 text-white hover:bg-gray-700 rounded-xl font-medium transition-colors flex items-center gap-2"
+                        disabled={localizingId === draftId}
                       >
                         <Save size={18} />
                         保存修改
@@ -274,13 +331,27 @@ const ParentReviewDashboard = ({ childId, childName }) => {
                         <button 
                           onClick={() => handleReject(draftId)}
                           className="px-4 py-2.5 text-gray-500 hover:bg-red-50 hover:text-red-500 rounded-xl font-medium transition-colors flex items-center gap-2"
+                          disabled={localizingId === draftId}
                         >
                           <X size={18} />
                           换一个
                         </button>
                         <button 
+                          onClick={() => handleLocalize(draft)}
+                          className="px-5 py-2.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 rounded-xl font-medium transition-colors flex items-center gap-2 disabled:opacity-50"
+                          disabled={localizingId === draftId}
+                        >
+                          {localizingId === draftId ? (
+                            <Sparkles size={18} className="animate-spin" />
+                          ) : (
+                            <Sparkles size={18} />
+                          )}
+                          {localizingId === draftId ? '生成中...' : '✨ 个性化适配'}
+                        </button>
+                        <button 
                           onClick={() => handleApprove(draftId)}
-                          className="px-6 py-2.5 bg-sky-500 hover:bg-sky-600 text-white shadow-sm hover:shadow-md rounded-xl font-medium transition-all flex items-center gap-2 active:scale-95"
+                          className="px-6 py-2.5 bg-sky-500 hover:bg-sky-600 text-white shadow-sm hover:shadow-md rounded-xl font-medium transition-all flex items-center gap-2 active:scale-95 disabled:opacity-50"
+                          disabled={localizingId === draftId}
                         >
                           <Check size={18} />
                           采纳并加入今天任务

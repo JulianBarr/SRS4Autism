@@ -6,10 +6,10 @@ from sqlalchemy import func
 Base = declarative_base()
 
 class ChildProfile(Base):
-    __tablename__ = 'child_profiles'
+    __tablename__ = 'profiles'
 
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, index=True, unique=True, nullable=False)
+    id = Column(String, primary_key=True, index=True)
+    name = Column(String, nullable=False)
     created_at = Column(DateTime, default=func.now())
 
     milestone_progress = relationship("MilestoneProgress", back_populates="child")
@@ -18,7 +18,7 @@ class MilestoneProgress(Base):
     __tablename__ = 'milestone_progress'
 
     id = Column(Integer, primary_key=True, index=True)
-    child_id = Column(Integer, ForeignKey('child_profiles.id'), nullable=False)
+    child_id = Column(String, ForeignKey('profiles.id'), nullable=False)
     milestone_uri = Column(String, index=True, nullable=False)
     status = Column(String, nullable=False)  # e.g., 'PASS', 'FAIL', 'PROMPT_DEPENDENT', 'ASSUMED_MASTERED'
     source = Column(String, nullable=False)  # e.g., 'SURVEY', 'INTERVENTION'

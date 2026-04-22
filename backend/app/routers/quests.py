@@ -1,15 +1,24 @@
 import logging
+import sys
 import json
+
+# --- 绝对防弹的 Logger 配置 ---
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG) # 确保 DEBUG 级别被放行
+if not logger.handlers:
+    handler = logging.StreamHandler(sys.stdout)
+    formatter = logging.Formatter('\n🚀 [%(levelname)s] %(message)s\n')
+    handler.setFormatter(formatter)
+    logger.addHandler(handler)
+# ------------------------------
 import google.generativeai as genai
-from typing import Optional, Dict, Any
+from typing import Any, Dict, Optional
 from fastapi import APIRouter, HTTPException, Query
 
 from pydantic import BaseModel, Field
 from app.utils.oxigraph_utils import get_kg_store
-from scripts.daily_scheduler import record_feedback, find_child_profile, find_weakest_domain, get_db_path
+from scripts.daily_scheduler import record_feedback, find_child_profile, find_weakest_domain, get_db_path, get_target_milestone_uri
 from datetime import datetime
-
-logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/api/quests", tags=["Quests"])
 
@@ -18,10 +27,12 @@ class QuestGenerateRequest(BaseModel):
     child_context: Optional[str] = Field(None, description="e.g., 喜欢小汽车，注意力较短")
     child_id: Optional[str] = Field(None, description="Child profile ID")
     child_name: Optional[str] = Field(None, description="Child profile name")
+    localize: Optional[bool] = Field(False, description="Whether to inject child specific context into the prompt")
 
 class AutoGenerateQuestRequest(BaseModel):
     child_id: Optional[str] = Field(None, description="Child profile ID")
     child_name: Optional[str] = Field(None, description="Child profile name")
+    localize: Optional[bool] = Field(False, description="Whether to inject child specific context into the prompt")
 
 import os
 
@@ -246,6 +257,7 @@ async def approve_draft(draft_id: str, request_data: dict = None):
             "source": "custom",
             "child_id": merged_quest.get("child_id"),
             "child_name": merged_quest.get("child_name"),
+            "hhs_source_label": merged_quest.get("hhs_source_label"),
         }
         save_custom_quest(custom_quest)
 
@@ -277,6 +289,26 @@ async def reject_draft(draft_id: str):
     save_draft_quests(draft_quests)
     return {"status": "success", "message": f"Draft {draft_id} rejected"}
 
+def _summarize_extracted_for_log(extracted: Any) -> str:
+    """Short string for logs; avoid dumping huge JSON."""
+    if not isinstance(extracted, dict):
+        return repr(type(extracted).__name__)
+    keys = sorted(extracted.keys())
+    cc = extracted.get("child_context")
+    if isinstance(cc, str):
+        has_child_context = bool(cc.strip())
+    else:
+        has_child_context = cc is not None
+    return json.dumps(
+        {
+            "keys": keys,
+            "has_child_context": has_child_context,
+            "has_pep3_baseline": bool(extracted.get("pep3_baseline")),
+        },
+        ensure_ascii=False,
+    )
+
+
 @router.post("/generate")
 async def generate_quest(request: QuestGenerateRequest):
     """
@@ -284,12 +316,25 @@ async def generate_quest(request: QuestGenerateRequest):
     """
     store = get_kg_store()
 
-    # 1. SPARQL 反向查询
+    # 1. SPARQL 反向查询 (寻找目标和关联活动)
+    # Note: Using OPTIONAL on the hhs_goal part as well to allow fallback to just getting the milestone label
+    # if no HHS goal aligns with it.
     query = f"""
     PREFIX cuma-schema: <http://cuma.ai/schema/>
-    SELECT ?hhs_goal
+    PREFIX hhs-ont: <http://example.org/hhs/ontology#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+    SELECT ?hhs_goal ?goal_label ?activity ?material ?milestone_label
     WHERE {{
-        ?hhs_goal cuma-schema:alignsWith <{request.milestone_uri}> .
+        OPTIONAL {{
+            ?hhs_goal cuma-schema:alignsWith <{request.milestone_uri}> .
+            ?hhs_goal rdfs:label ?goal_label .
+            OPTIONAL {{ ?hhs_goal hhs-ont:hasActivity ?activity . }}
+            OPTIONAL {{ ?hhs_goal hhs-ont:hasMaterial ?material . }}
+        }}
+        OPTIONAL {{
+            <{request.milestone_uri}> rdfs:label ?milestone_label .
+        }}
     }}
     """
     
@@ -299,63 +344,282 @@ async def generate_quest(request: QuestGenerateRequest):
         logger.error(f"SPARQL query failed: {e}")
         raise HTTPException(status_code=500, detail="Query execution failed")
 
+    # If no results at all, we can't do anything
     if not results:
-        raise HTTPException(status_code=404, detail="No HHS goal aligned with this milestone")
+        raise HTTPException(status_code=404, detail="No HHS goal or milestone found for this URI")
+
+    # Filter out empty bindings that might result from all OPTIONALs failing
+    # In rdflib, results row objects behave differently. Sometimes they are QuerySolution dict-like objects, 
+    # sometimes just namedtuples depending on parser.
+    # Let's use a safe extraction method.
+    def get_node(row, key):
+        try:
+            return row[key]
+        except (KeyError, TypeError, Exception):
+            return getattr(row, key, None)
+            
+    valid_results = [r for r in results if get_node(r, "goal_label") or get_node(r, "milestone_label")]
+    if not valid_results:
+        # Check if we can extract a name from the URI as a last resort
+        uri_parts = str(request.milestone_uri).split("/")
+        if uri_parts:
+            fallback_label = uri_parts[-1].replace("_", " ").title()
+            valid_results = [{"milestone_label": type('obj', (object,), {'value': fallback_label})()}]
+        else:
+            raise HTTPException(status_code=404, detail="No HHS goal or milestone found for this URI")
 
     # 2. 提取与清洗
-    # Get the first match
-    hhs_goal_uri = results[0]["hhs_goal"].value
+    target_skill_text = ""
+    hhs_source_label = ""
+    expert_activities_set = set()
+    expert_materials_set = set()
+
+    # Aggregate all activities and materials
+    for row in valid_results:
+        if isinstance(row, dict): # Handle the fallback case
+             milestone_label_node = row.get("milestone_label")
+             if milestone_label_node and not target_skill_text:
+                 target_skill_text = milestone_label_node.value
+             continue
+        
+        goal_label_node = get_node(row, "goal_label")
+        milestone_label_node = get_node(row, "milestone_label")
+        
+        if goal_label_node is not None:
+            hhs_source_label = goal_label_node.value
+            if not target_skill_text:
+                target_skill_text = goal_label_node.value
+        elif milestone_label_node is not None and not target_skill_text:
+            target_skill_text = milestone_label_node.value
+                
+        activity_node = get_node(row, "activity")
+        if activity_node is not None:
+            expert_activities_set.add(activity_node.value)
+            
+        material_node = get_node(row, "material")
+        if material_node is not None:
+            expert_materials_set.add(material_node.value)
+            
+    expert_activities = list(expert_activities_set)
+    expert_materials = list(expert_materials_set)
+
+    import random
+
+    DEFAULT_ACTIVITY_SHELLS = [
+        "玩具小动物喂食游戏",
+        "神秘摸彩箱游戏",
+        "扮演小医生/过家家",
+        "寻宝游戏 (在房间内找寻)",
+        "推车/运货游戏",
+        "钓鱼游戏 (磁性小鱼)",
+    ]
+
+    kg_activity_count = len(expert_activities)
+    kg_material_count = len(expert_materials)
+    used_activity_shell_fallback = False
+    used_material_default_fallback = False
+
+    # 👇👇👇 请将这段 Debug 代码插入到构建 system_prompt 之前 👇👇👇
+    logger.debug("="*60)
+    logger.debug(f"🎯 正在为目标生成 Quest: 【{target_skill_text}】")
+    logger.debug(f"📚 从图谱查到的活动 (Activities): {expert_activities}")
+    logger.debug(f"🛠️ 从图谱查到的材料 (Materials): {expert_materials}")
+    logger.debug("="*60)
+    # 👆👆👆 ======================================================= 👆👆👆
+
+    if not expert_activities:
+        used_activity_shell_fallback = True
+        expert_activities = [random.choice(DEFAULT_ACTIVITY_SHELLS)]
+
+    if not expert_materials:
+        used_material_default_fallback = True
+        expert_materials = ["家里常见的玩具", "日常用品 (如碗、勺子、绘本)"]
+
+    import sqlite3
     
-    # Example URI: http://cuma.ai/instance/hhs/Goal_语言表达_模仿发声_模仿发声_如_哗_呠呠_汪汪
-    # Extract the last segment
-    last_segment = hhs_goal_uri.split("/")[-1]
+    db_path = get_db_path()
+    db_child_context = ""
     
-    # Replace underscores with spaces
-    target_skill_text = last_segment.replace("_", " ")
-    logger.info(f"Retrieved target_skill_text: {target_skill_text}")
+    if request.localize and (request.child_id or request.child_name):
+        conn = sqlite3.connect(str(db_path))
+        conn.row_factory = sqlite3.Row
+        cur = conn.cursor()
+        
+        lookup_row = None
+        if request.child_id:
+            cur.execute("SELECT interests, character_roster FROM profiles WHERE id = ?", (request.child_id,))
+            lookup_row = cur.fetchone()
+        
+        if not lookup_row and request.child_name:
+            cur.execute("SELECT interests, character_roster FROM profiles WHERE name = ?", (request.child_name,))
+            lookup_row = cur.fetchone()
+            
+        conn.close()
+        
+        if lookup_row:
+            interests_list = []
+            if lookup_row["interests"]:
+                try:
+                    parsed = json.loads(lookup_row["interests"])
+                    if isinstance(parsed, list):
+                        interests_list = parsed
+                    elif isinstance(parsed, str):
+                        interests_list = [parsed]
+                except Exception:
+                    interests_list = [str(lookup_row["interests"])]
+                    
+            chars_list = []
+            if lookup_row["character_roster"]:
+                try:
+                    parsed = json.loads(lookup_row["character_roster"])
+                    if isinstance(parsed, list):
+                        chars_list = parsed
+                    elif isinstance(parsed, str):
+                        chars_list = [parsed]
+                except Exception:
+                    chars_list = [str(lookup_row["character_roster"])]
+                    
+            parts = []
+            if interests_list:
+                parts.append(f"孩子非常喜欢{', '.join(str(i) for i in interests_list)}")
+            if chars_list:
+                parts.append(f"最爱的角色是{', '.join(str(c) for c in chars_list)}")
+                
+            if parts:
+                db_child_context = "，".join(parts) + "。"
+                
+    if request.localize:
+        final_child_context = db_child_context or request.child_context or "无特定偏好"
+    else:
+        final_child_context = "无特定偏好"
 
     # 3. 调用 Gemini 模型
     system_prompt = f"""
-你是一个资深的 BCBA（应用行为分析师）。
-今天孩子的训练目标是 (来源于协康会纲要)：{target_skill_text}
-孩子的个人偏好：{request.child_context or "无特定偏好"}
+你是一个资深的 BCBA（应用行为分析师）。你现在需要对协康会（HHS）的专家建议进行改编，为家长编写居家干预说明。
 
-请为家长设计一个 3-5 分钟的居家干预小游戏 (Quest)。
-必须输出 JSON 格式，严格包含以下字段：
-{{
-  "quest_title": "吸引人的游戏名称",
-  "objective": "一句话说明这个游戏在练什么",
-  "setup": "需要的道具或环境准备",
-  "steps": ["第一步", "第二步", "第三步"],
-  "feedback_options": [
-    {{"label": "A: 完全独立清晰地做到", "value": "A", "confidence_weight": 1.0}},
-    {{"label": "B: 稍微延迟或在口头提示下做到", "value": "B", "confidence_weight": 0.6}},
-    {{"label": "C: 需要大量夸张示范或肢体辅助", "value": "C", "confidence_weight": 0.2}},
-    {{"label": "D: 完全没有反应或抗拒", "value": "D", "confidence_weight": 0.0}}
-  ]
-}}
-注意：feedback_options 的内容必须固定为这四种程度（A/B/C/D），代表系统收集的贝叶斯证据强度。
+【训练目标】: {target_skill_text}
+【专家原始建议】: {expert_activities} (这是你的唯一合法参考，不准自行发明新游戏机制)
+【建议教具】: {expert_materials} (这是你的唯一合法教具参考，严禁自行发明新教具)
 """
 
+    if request.localize and final_child_context != "无特定偏好":
+        system_prompt += f"""
+【孩子个性化上下文】: {final_child_context}
+
+你的职责：
+1. **核心逻辑不动**：保持 HHS 专家建议中的干预步骤和物理操作逻辑。如果专家建议里写的是“出示形状板”，操作上仍然必须是出示形状板。
+2. **套上兴趣外壳**：将游戏的情境、角色、或对话内容，巧妙地替换为孩子喜爱的【{final_child_context}】。
+3. **示例**：如果目标是‘辨认形状’且孩子喜欢‘小猪佩奇’，可以将教具描述为‘佩奇的形状饼干’，将指令改为‘把圆形给佩奇吃’。
+4. **严格遵守教具建议**：必须使用【建议教具】中列出的材料（可在此基础上加糖，如上面示例的形状板变成饼干）。如果列表中为空，则引导家长使用“家里常见的玩具”或“日常用品”。严禁自行发明或要求家长制作复杂的教具。
+5. **口语化改编**：将专家生硬的文字转化为家长听得懂、好操作的“第一步、第二步、第三步”。
+
+必须返回 JSON 格式：{{ "quest_title": "...", "objective": "...", "setup": "需要的日常道具 (务必基于【建议教具】列出，可进行兴趣外壳包装，严禁要求手工制作复杂教具)", "steps": [...] }}
+"""
+    else:
+        system_prompt += f"""
+你的职责：
+1. **核心逻辑不动**：保持 HHS 专家建议中的干预步骤和物理操作逻辑。如果专家建议里写的是“出示形状板”，操作上仍然必须是出示形状板。
+2. **严格遵守教具建议**：必须使用【建议教具】中列出的材料。如果列表中为空，则引导家长使用“家里常见的玩具”或“日常用品”。严禁自行发明或要求家长制作复杂的教具。
+3. **口语化改编**：将专家生硬的文字转化为家长听得懂、好操作的“第一步、第二步、第三步”。不要添加特定角色的外壳。
+
+必须返回 JSON 格式：{{ "quest_title": "...", "objective": "...", "setup": "需要的日常道具 (务必基于【建议教具】列出，严禁要求手工制作复杂教具)", "steps": [...] }}
+"""
+
+    llm_model_name = "gemini-3.1-pro-preview"
+    raw_child_ctx = final_child_context
+    child_ctx_stripped = raw_child_ctx.strip()
+    child_ctx_for_log = child_ctx_stripped or "(none)"
+    if len(child_ctx_for_log) > 1200:
+        child_ctx_for_log = child_ctx_for_log[:1200] + "…[truncated]"
+
+    logger.info(
+        "\n"
+        "================================================================================\n"
+        "QUEST /generate — DATA USED BEFORE LLM\n"
+        "================================================================================\n"
+        "milestone_uri=%s\n"
+        "child_id=%s child_name=%s\n"
+        "child_context_len=%s child_context=%s\n"
+        "sparql_row_count=%s\n"
+        "kg_distinct_activity_strings=%s kg_distinct_material_strings=%s\n"
+        "used_activity_shell_fallback=%s used_material_default_fallback=%s\n"
+        "target_skill_text=%s\n"
+        "hhs_source_label=%s\n"
+        "expert_activities_for_prompt=%s\n"
+        "expert_materials_for_prompt=%s\n"
+        "--------------------------------------------------------------------------------\n"
+        "SPARQL (embedded Oxigraph):\n%s\n"
+        "--------------------------------------------------------------------------------\n"
+        "FULL SYSTEM PROMPT → %s\n"
+        "--------------------------------------------------------------------------------\n"
+        "%s\n"
+        "================================================================================\n",
+        request.milestone_uri,
+        request.child_id,
+        request.child_name,
+        len(raw_child_ctx),
+        child_ctx_for_log,
+        len(results),
+        kg_activity_count,
+        kg_material_count,
+        used_activity_shell_fallback,
+        used_material_default_fallback,
+        target_skill_text,
+        hhs_source_label,
+        json.dumps(expert_activities, ensure_ascii=False),
+        json.dumps(expert_materials, ensure_ascii=False),
+        query.strip(),
+        llm_model_name,
+        system_prompt.strip(),
+    )
+
     try:
-        model = genai.GenerativeModel('gemini-3.1-pro-preview')
-        
+        model = genai.GenerativeModel(llm_model_name)
+
         response = model.generate_content(
             system_prompt,
             generation_config=genai.types.GenerationConfig(
                 response_mime_type="application/json",
-            )
+            ),
         )
-        
+
         # 4. 返回数据
-        quest_data = json.loads(response.text)
-        
+        raw_text = response.text
+        try:
+            quest_data = json.loads(raw_text)
+        except json.JSONDecodeError:
+            # Fallback if the response is not valid JSON
+            logger.error(f"Failed to parse JSON from LLM: {raw_text}")
+            raise ValueError("LLM did not return valid JSON")
+
+        if isinstance(quest_data, list):
+            if len(quest_data) > 0:
+                quest_data = quest_data[0]
+                logger.warning("LLM returned a list of quests. Using the first one.")
+            else:
+                logger.error("LLM returned an empty list.")
+                raise ValueError("LLM returned an empty list")
+
+        if not isinstance(quest_data, dict):
+            logger.error(f"LLM returned an unexpected type: {type(quest_data)}. Content: {quest_data}")
+            raise ValueError("LLM returned an unexpected JSON structure")
+
+        logger.info(
+            "QUEST /generate — LLM OUTPUT: quest_title=%r objective_len=%s setup_len=%s steps=%s",
+            quest_data.get("quest_title"),
+            len(str(quest_data.get("objective") or "")),
+            len(str(quest_data.get("setup") or "")),
+            len(quest_data.get("steps") or []),
+        )
+
         # Assign a unique quest_id and save as a draft
         quest_id = f"draft_{os.urandom(4).hex()}"
         quest_data["quest_id"] = quest_id
         quest_data["source"] = "draft"
         quest_data["child_id"] = request.child_id
         quest_data["child_name"] = request.child_name
+        quest_data["hhs_source_label"] = hhs_source_label
+        quest_data["milestone_uri"] = request.milestone_uri
         save_draft_quests([*load_draft_quests(), quest_data])
         
         return quest_data
@@ -370,47 +634,91 @@ async def auto_generate_quest(request: AutoGenerateQuestRequest):
     """
     Automatically generate a daily quest based on the child's weakest PEP-3 domain.
     """
-    if not request.child_name and not request.child_id:
-        raise HTTPException(status_code=400, detail="Child name or ID is required for auto-generation")
-    
+    if not (request.child_id and str(request.child_id).strip()) and not (
+        request.child_name and str(request.child_name).strip()
+    ):
+        raise HTTPException(
+            status_code=400,
+            detail="Provide child_id (profiles.id from the selector) or exact child_name",
+        )
+
     db_path = get_db_path()
-    profile_row = find_child_profile(db_path, request.child_name or request.child_id)
+    # Prefer stable primary key from the header — resolution is exact id, then exact name only.
+    lookup = (str(request.child_id).strip() if request.child_id else "") or (
+        str(request.child_name).strip() if request.child_name else ""
+    )
+    profile_row = find_child_profile(db_path, lookup)
 
     if not profile_row:
         raise HTTPException(status_code=404, detail=f"Child profile not found for {request.child_name or request.child_id}")
     
     profile_id, _, extracted_data = profile_row
-    weakest_domain_info = find_weakest_domain(extracted_data)
 
-    if not weakest_domain_info:
-        # Fallback to a generic milestone if no weakest domain is found
-        # In a real system, you'd have a more sophisticated fallback mechanism
-        logger.warning(f"No weakest domain found for child {request.child_name or request.child_id}, using a generic milestone.")
-        milestone_uri = "http://cuma.ai/instance/vbmapp/listener_5_m" # Example generic milestone
+    # 1. Target Milestone Selection based on Survey Progress
+    try:
+        milestone_uri, milestone_source = get_target_milestone_uri(profile_id, db_path)
+
+        if milestone_uri:
+            if milestone_source == "survey_review_pass":
+                logger.info("[INFO] Target selected from PASSED milestone for review: %s", milestone_uri)
+            elif milestone_source == "survey_learning":
+                logger.info("[INFO] Target selected from explicit LEARNING state: %s", milestone_uri)
+            # Deduced log is printed inside get_target_milestone_uri, but we can log it here too if needed
+
+        if not milestone_uri:
+            raise HTTPException(
+                status_code=400,
+                detail="No survey records found. Please complete the initial survey to establish a baseline before generating quests."
+            )
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error("Error determining milestone target: %s", e)
+        raise HTTPException(status_code=500, detail="Internal server error during milestone selection.")
+
+    # Context extraction for LLM
+    if request.localize:
+        interests = extracted_data.get("interests", [])
+        if isinstance(interests, list) and interests:
+            child_context_str = "孩子的兴趣爱好包含: " + ", ".join(str(i) for i in interests)
+        elif isinstance(interests, str) and interests.strip():
+            child_context_str = "孩子的兴趣爱好包含: " + interests.strip()
+        else:
+            child_context_str = "无特定偏好"
     else:
-        domain_code, _, _ = weakest_domain_info
-        # For simplicity, map domain code back to a generic milestone URI
-        # A more robust solution would query the KG for a specific milestone
-        milestone_map = {
-            "CVP": "http://cuma.ai/instance/vbmapp/visual_2_m",
-            "EL": "http://cuma.ai/instance/vbmapp/echoic_1_m",
-            "RL": "http://cuma.ai/instance/vbmapp/listener_5_m",
-            "FM": "http://cuma.ai/instance/vbmapp/motor_2_m",
-            "GM": "http://cuma.ai/instance/vbmapp/motor_1_m",
-            "VMI": "http://cuma.ai/instance/vbmapp/visual_4_m",
-            "AE": "http://cuma.ai/instance/vbmapp/social_1_m",
-            "SR": "http://cuma.ai/instance/vbmapp/social_2_m",
-            "CMB": "http://cuma.ai/instance/vbmapp/behavior_1_m",
-            "CVB": "http://cuma.ai/instance/vbmapp/echoic_3_m",
-        }
-        milestone_uri = milestone_map.get(domain_code, "http://cuma.ai/instance/vbmapp/listener_5_m") # Default fallback
+        child_context_str = "无特定偏好"
+
+    child_ctx_preview = child_context_str
+    if len(child_ctx_preview) > 1200:
+        child_ctx_preview = child_ctx_preview[:1200] + "…[truncated]"
+
+    logger.info(
+        "\n"
+        "================================================================================\n"
+        "QUEST /auto-generate — RESOLVED INPUT (before /generate)\n"
+        "================================================================================\n"
+        "lookup=%s profile_id=%s profile_name=%s\n"
+        "milestone_source=%s milestone_uri=%s\n"
+        "extracted_data_summary=%s\n"
+        "child_context_passed_to_llm_len=%s child_context=%s\n"
+        "================================================================================\n",
+        lookup,
+        profile_id,
+        profile_row[1],
+        milestone_source,
+        milestone_uri,
+        _summarize_extracted_for_log(extracted_data),
+        len(child_context_str),
+        child_ctx_preview,
+    )
 
     # Use the existing generate_quest logic
     generate_request = QuestGenerateRequest(
         milestone_uri=milestone_uri,
-        child_context=extracted_data.get("child_context"), # assuming this might exist in extracted_data
+        child_context=child_context_str,
         child_id=profile_id,
-        child_name=request.child_name or profile_row[1] # Use actual profile name if provided by request or from DB
+        child_name=request.child_name or profile_row[1],
+        localize=request.localize,
     )
 
     return await generate_quest(generate_request)

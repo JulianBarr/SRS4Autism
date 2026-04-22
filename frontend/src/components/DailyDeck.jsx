@@ -899,8 +899,15 @@ function DailyDeck({
 
   const { language } = useLanguage(); // Destructure language from useLanguage here
   const fetchSurveyNext = useCallback(async () => {
+    if (!childId || String(childId).trim() === '') {
+      setSurveyBooting(false);
+      setSurveyQuestion(null);
+      return;
+    }
     try {
-      const res = await api.get(`/api/survey/next?lang=${language}`);
+      const res = await api.get('/api/survey/next', {
+        params: { lang: language, child_id: childId },
+      });
       const d = res.data;
       console.log("fetchSurveyNext received data:", d); // DEBUG LINE
       if (d?.question_uri) {
@@ -914,13 +921,17 @@ function DailyDeck({
     } finally {
       setSurveyBooting(false);
     }
-  }, [language]);
+  }, [language, childId]);
 
   useEffect(() => {
-    if (!childName) return;
+    if (!childId || String(childId).trim() === '') {
+      setSurveyBooting(false);
+      setSurveyQuestion(null);
+      return;
+    }
     setSurveyBooting(true);
     fetchSurveyNext();
-  }, [childName, fetchSurveyNext]);
+  }, [childId, fetchSurveyNext]);
 
   const handleSurveyAnswered = useCallback(async () => {
     await fetchSurveyNext();
@@ -932,6 +943,7 @@ function DailyDeck({
         <SurveyFeedCard
           key={surveyQuestion.question_uri}
           question={surveyQuestion}
+          childId={childId}
           onAnswerSubmitted={handleSurveyAnswered}
         />
       </section>

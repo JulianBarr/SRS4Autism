@@ -5,7 +5,7 @@ import { useLanguage } from '../i18n/LanguageContext'; // Assume this exists for
 /**
  * Adaptive parent survey card — distinct from daily quest cards (soft purple panel).
  */
-function SurveyFeedCard({ question, onAnswerSubmitted }) {
+function SurveyFeedCard({ question, childId, onAnswerSubmitted }) {
   const { language } = useLanguage();
   const [selectedOptionUri, setSelectedOptionUri] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -22,11 +22,16 @@ function SurveyFeedCard({ question, onAnswerSubmitted }) {
     const selectedOption = options.find(opt => (opt.option_uri || opt.stateAction) === selectedOptionUri);
     if (!selectedOption) return;
 
+    if (!childId || String(childId).trim() === '') {
+      console.error('survey answer: child_id is required');
+      return;
+    }
     setIsSubmitting(true);
     try {
       await api.post('/api/survey/answer', {
         question_uri: questionUri,
         stateAction: selectedOption.stateAction,
+        child_id: childId,
       });
       // Ensure onAnswerSubmitted is awaited for proper parent state management
       await onAnswerSubmitted?.();
