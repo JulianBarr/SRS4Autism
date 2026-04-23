@@ -17,7 +17,7 @@ from fastapi import APIRouter, HTTPException, Query
 
 from pydantic import BaseModel, Field
 from app.utils.oxigraph_utils import get_kg_store
-from scripts.daily_scheduler import record_feedback, find_child_profile, find_weakest_domain, get_db_path, get_target_milestone_uri
+from scripts.daily_scheduler import record_feedback, find_child_profile, find_weakest_domain, get_db_path
 from datetime import datetime
 
 router = APIRouter(prefix="/api/quests", tags=["Quests"])
@@ -221,6 +221,34 @@ async def delete_custom_quest(quest_id: str):
     save_custom_quests(next_quests)
     return {"status": "success", "message": f"Custom quest {quest_id} deleted"}
 
+class QuestFeedbackRequest(BaseModel):
+    child_name: str
+    prompt_level: str
+    score: Optional[float] = None
+
+@router.post("/custom/{quest_id}/feedback")
+async def record_custom_quest_feedback(quest_id: str, request: QuestFeedbackRequest):
+    """Record feedback for a custom quest."""
+    valid_levels = {"全辅助", "部分辅助", "独立完成", "少量辅助", "大量辅助", "拒绝/无反应"}
+    if request.prompt_level not in valid_levels:
+        raise HTTPException(
+            status_code=400,
+            detail=f"prompt_level 必须是 {valid_levels} 之一",
+        )
+    
+    try:
+        record_feedback(
+            child_name=request.child_name,
+            quest_id=quest_id,
+            prompt_level=request.prompt_level,
+        )
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+    return {"status": "success"}
+
 @router.post("/drafts/{draft_id}/approve")
 async def approve_draft(draft_id: str, request_data: dict = None):
     """
@@ -258,23 +286,9 @@ async def approve_draft(draft_id: str, request_data: dict = None):
             "child_id": merged_quest.get("child_id"),
             "child_name": merged_quest.get("child_name"),
             "hhs_source_label": merged_quest.get("hhs_source_label"),
+            "milestone_uri": merged_quest.get("milestone_uri"),
         }
         save_custom_quest(custom_quest)
-
-        # NEW: Record initial state of the custom quest into fsrs_states
-        if custom_quest.get("child_name") and custom_quest.get("quest_id"):
-            try:
-                child_name_to_record = custom_quest["child_name"]
-                quest_id_to_record = custom_quest["quest_id"]
-                logger.info(f"Attempting to record FSRS state for child: {child_name_to_record}, quest_id: {quest_id_to_record}")
-                record_feedback(
-                    child_name=child_name_to_record,
-                    quest_id=quest_id_to_record,
-                    prompt_level="独立完成"
-                )
-                logger.info(f"Successfully recorded initial FSRS state for approved custom quest {quest_id_to_record} for child {child_name_to_record}")
-            except Exception as e:
-                logger.error(f"Failed to record initial FSRS state for custom quest {custom_quest['quest_id']} for child {custom_quest['child_name']}: {e}", exc_info=True) # Log full traceback
         
     return {"status": "success", "message": f"Draft {draft_id} approved"}
 
@@ -439,61 +453,125 @@ async def generate_quest(request: QuestGenerateRequest):
     
     db_path = get_db_path()
     db_child_context = ""
+    last_rating_val = None
     
-    if request.localize and (request.child_id or request.child_name):
+    if request.child_id or request.child_name:
         conn = sqlite3.connect(str(db_path))
         conn.row_factory = sqlite3.Row
         cur = conn.cursor()
         
         lookup_row = None
         if request.child_id:
-            cur.execute("SELECT interests, character_roster FROM profiles WHERE id = ?", (request.child_id,))
+            cur.execute("SELECT id, interests, character_roster, extracted_data FROM profiles WHERE id = ?", (request.child_id,))
             lookup_row = cur.fetchone()
         
         if not lookup_row and request.child_name:
-            cur.execute("SELECT interests, character_roster FROM profiles WHERE name = ?", (request.child_name,))
+            cur.execute("SELECT id, interests, character_roster, extracted_data FROM profiles WHERE name = ?", (request.child_name,))
             lookup_row = cur.fetchone()
             
         conn.close()
         
         if lookup_row:
-            interests_list = []
-            if lookup_row["interests"]:
-                try:
-                    parsed = json.loads(lookup_row["interests"])
-                    if isinstance(parsed, list):
-                        interests_list = parsed
-                    elif isinstance(parsed, str):
-                        interests_list = [parsed]
-                except Exception:
-                    interests_list = [str(lookup_row["interests"])]
-                    
-            chars_list = []
-            if lookup_row["character_roster"]:
-                try:
-                    parsed = json.loads(lookup_row["character_roster"])
-                    if isinstance(parsed, list):
-                        chars_list = parsed
-                    elif isinstance(parsed, str):
-                        chars_list = [parsed]
-                except Exception:
-                    chars_list = [str(lookup_row["character_roster"])]
-                    
-            parts = []
-            if interests_list:
-                parts.append(f"孩子非常喜欢{', '.join(str(i) for i in interests_list)}")
-            if chars_list:
-                parts.append(f"最爱的角色是{', '.join(str(c) for c in chars_list)}")
+            # 1. Context Fetching for Adaptive Instruction
+            try:
+                extracted_data = json.loads(lookup_row["extracted_data"]) if lookup_row["extracted_data"] else {}
+                custom_quests = load_custom_quests()
                 
-            if parts:
-                db_child_context = "，".join(parts) + "。"
+                # Find quest_ids for this milestone_uri and this child
+                target_quest_ids = [
+                    q.get("quest_id") for q in custom_quests
+                    if q.get("milestone_uri") == request.milestone_uri and 
+                    (q.get("child_id") == lookup_row["id"] or q.get("child_name") == request.child_name)
+                ]
+                
+                most_recent_time = None
+                
+                quest_logs = extracted_data.get("quest_logs", {})
+                for q_id in target_quest_ids:
+                    logs = quest_logs.get(q_id, [])
+                    for log in logs:
+                        if log.get("role") == "system" and "✅ 打卡完成:" in str(log.get("content")):
+                            log_time_str = log.get("timestamp", "")
+                            try:
+                                log_time = datetime.fromisoformat(log_time_str.replace("Z", "+00:00"))
+                            except Exception:
+                                continue
+                                
+                            if most_recent_time is None or log_time > most_recent_time:
+                                most_recent_time = log_time
+                                content = log.get("content")
+                                prompt_level = content.replace("✅ 打卡完成:", "").strip()
+                                
+                                mapping = {
+                                    "拒绝/无反应": 1,
+                                    "全辅助": 1, 
+                                    "大量辅助": 1,
+                                    "部分辅助": 2, 
+                                    "少量辅助": 3,
+                                    "独立完成": 4,
+                                }
+                                last_rating_val = mapping.get(prompt_level, 3)
+            except Exception as e:
+                logger.error(f"Error fetching historical feedback: {e}")
+
+            if request.localize:
+                # Prepare interests context
+                interests_list = []
+                if lookup_row["interests"]:
+                    try:
+                        parsed = json.loads(lookup_row["interests"])
+                        if isinstance(parsed, list):
+                            interests_list = parsed
+                        elif isinstance(parsed, str):
+                            interests_list = [parsed]
+                    except Exception:
+                        interests_list = [str(lookup_row["interests"])]
+                        
+                chars_list = []
+                if lookup_row["character_roster"]:
+                    try:
+                        parsed = json.loads(lookup_row["character_roster"])
+                        if isinstance(parsed, list):
+                            chars_list = parsed
+                        elif isinstance(parsed, str):
+                            chars_list = [parsed]
+                    except Exception:
+                        chars_list = [str(lookup_row["character_roster"])]
+                        
+                parts = []
+                if interests_list:
+                    parts.append(f"孩子非常喜欢{', '.join(str(i) for i in interests_list)}")
+                if chars_list:
+                    parts.append(f"最爱的角色是{', '.join(str(c) for c in chars_list)}")
+                    
+                if parts:
+                    db_child_context = "，".join(parts) + "。"
                 
     if request.localize:
         final_child_context = db_child_context or request.child_context or "无特定偏好"
     else:
         final_child_context = "无特定偏好"
 
-    # 3. 调用 Gemini 模型
+    # 3. 动态组装“自适应指令” (Adaptive Prompt Engineering)
+    adaptive_instruction = ""
+
+    if last_rating_val in [1, 2]:
+        adaptive_instruction = """
+⚠️ 【自适应调整指令】：经系统查明，该儿童上一次尝试此干预目标时遇到严重困难（表现为抗拒或需要大量/部分辅助）。
+**你必须放弃之前生硬的或常规的操作方式！** 请在严格遵循【专家原始建议】核心动作的前提下，设计一个截然不同的、更具吸引力的游戏外壳（糖衣），并显著降低【第一步】的参与门槛。严禁复用常规枯燥的指令。
+"""
+    elif last_rating_val in [3, 4]:
+        adaptive_instruction = """
+✅ 【自适应调整指令】：儿童上次在该目标上表现良好。
+为了防止过度学习导致的枯燥，请在保持专业性的同时，更换一套全新的场景或道具（从建议教具中挑选），以保持新鲜感，巩固该技能。
+"""
+    else:
+        adaptive_instruction = """
+🆕 【自适应调整指令】：这是该儿童首次进行此目标的靶向干预。
+请提供最标准、最易上手、最经典的游戏形式，以建立初步的成功体验。
+"""
+
+    # 4. 调用 Gemini 模型
     system_prompt = f"""
 你是一个资深的 BCBA（应用行为分析师）。你现在需要对协康会（HHS）的专家建议进行改编，为家长编写居家干预说明。
 
@@ -513,6 +591,8 @@ async def generate_quest(request: QuestGenerateRequest):
 4. **严格遵守教具建议**：必须使用【建议教具】中列出的材料（可在此基础上加糖，如上面示例的形状板变成饼干）。如果列表中为空，则引导家长使用“家里常见的玩具”或“日常用品”。严禁自行发明或要求家长制作复杂的教具。
 5. **口语化改编**：将专家生硬的文字转化为家长听得懂、好操作的“第一步、第二步、第三步”。
 
+{adaptive_instruction}
+
 必须返回 JSON 格式：{{ "quest_title": "...", "objective": "...", "setup": "需要的日常道具 (务必基于【建议教具】列出，可进行兴趣外壳包装，严禁要求手工制作复杂教具)", "steps": [...] }}
 """
     else:
@@ -521,6 +601,8 @@ async def generate_quest(request: QuestGenerateRequest):
 1. **核心逻辑不动**：保持 HHS 专家建议中的干预步骤和物理操作逻辑。如果专家建议里写的是“出示形状板”，操作上仍然必须是出示形状板。
 2. **严格遵守教具建议**：必须使用【建议教具】中列出的材料。如果列表中为空，则引导家长使用“家里常见的玩具”或“日常用品”。严禁自行发明或要求家长制作复杂的教具。
 3. **口语化改编**：将专家生硬的文字转化为家长听得懂、好操作的“第一步、第二步、第三步”。不要添加特定角色的外壳。
+
+{adaptive_instruction}
 
 必须返回 JSON 格式：{{ "quest_title": "...", "objective": "...", "setup": "需要的日常道具 (务必基于【建议教具】列出，严禁要求手工制作复杂教具)", "steps": [...] }}
 """
@@ -656,16 +738,27 @@ async def auto_generate_quest(request: AutoGenerateQuestRequest):
 
     # 1. Target Milestone Selection based on Survey Progress
     try:
-        milestone_uri, milestone_source = get_target_milestone_uri(profile_id, db_path)
+        # 1. 获取要排除的 uri 列表
+        exclude_uris = set()
+        custom_quests = load_custom_quests()
+        for q in custom_quests:
+            if q.get("child_id") == profile_id or (q.get("child_name") and profile_row[1] and q.get("child_name").casefold() == profile_row[1].casefold()):
+                # 无论 PENDING 还是 COMPLETED，只要在今日课表里，就尽量不重复生成同类目标
+                uri = q.get("milestone_uri")
+                if uri:
+                    exclude_uris.add(uri)
 
-        if milestone_uri:
-            if milestone_source == "survey_review_pass":
-                logger.info("[INFO] Target selected from PASSED milestone for review: %s", milestone_uri)
-            elif milestone_source == "survey_learning":
-                logger.info("[INFO] Target selected from explicit LEARNING state: %s", milestone_uri)
-            # Deduced log is printed inside get_target_milestone_uri, but we can log it here too if needed
+        from scripts.daily_scheduler import get_multiple_target_milestone_uris
+        targets = get_multiple_target_milestone_uris(profile_id, db_path, limit=3, exclude_uris=exclude_uris)
 
-        if not milestone_uri:
+        if targets:
+            for uri, source in targets:
+                if source == "survey_review_pass":
+                    logger.info("[INFO] Target selected from PASSED milestone for review: %s", uri)
+                elif source == "survey_learning":
+                    logger.info("[INFO] Target selected from explicit LEARNING state: %s", uri)
+
+        if not targets:
             raise HTTPException(
                 status_code=400,
                 detail="No survey records found. Please complete the initial survey to establish a baseline before generating quests."
@@ -698,27 +791,43 @@ async def auto_generate_quest(request: AutoGenerateQuestRequest):
         "QUEST /auto-generate — RESOLVED INPUT (before /generate)\n"
         "================================================================================\n"
         "lookup=%s profile_id=%s profile_name=%s\n"
-        "milestone_source=%s milestone_uri=%s\n"
+        "targets_count=%s targets=%s\n"
         "extracted_data_summary=%s\n"
         "child_context_passed_to_llm_len=%s child_context=%s\n"
         "================================================================================\n",
         lookup,
         profile_id,
         profile_row[1],
-        milestone_source,
-        milestone_uri,
+        len(targets),
+        targets,
         _summarize_extracted_for_log(extracted_data),
         len(child_context_str),
         child_ctx_preview,
     )
 
-    # Use the existing generate_quest logic
-    generate_request = QuestGenerateRequest(
-        milestone_uri=milestone_uri,
-        child_context=child_context_str,
-        child_id=profile_id,
-        child_name=request.child_name or profile_row[1],
-        localize=request.localize,
-    )
+    import asyncio
 
-    return await generate_quest(generate_request)
+    tasks = []
+    for m_uri, m_source in targets:
+        generate_request = QuestGenerateRequest(
+            milestone_uri=m_uri,
+            child_context=child_context_str,
+            child_id=profile_id,
+            child_name=request.child_name or profile_row[1],
+            localize=request.localize,
+        )
+        tasks.append(generate_quest(generate_request))
+
+    results = await asyncio.gather(*tasks, return_exceptions=True)
+
+    successful_quests = []
+    for res in results:
+        if isinstance(res, Exception):
+            logger.error(f"Error generating candidate quest: {res}")
+        else:
+            successful_quests.append(res)
+
+    if not successful_quests:
+        raise HTTPException(status_code=500, detail="Failed to generate any candidate quests.")
+
+    return successful_quests
