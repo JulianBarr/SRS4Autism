@@ -84,6 +84,9 @@ def _quest_to_api_item(q: dict, format_pep3_short, format_materials) -> dict:
         "activities": q.get("activities") or [],
         "precautions": q.get("precautions") or [],
         "source": "hhs" if q.get("content_source") == "HHS" else "qcq",
+        "quest_title": q.get("quest_title"),
+        "objective": q.get("objective"),
+        "steps": q.get("steps") or [],
     }
     if q.get("content_source") == "HHS":
         item["content_source"] = "HHS"
@@ -129,21 +132,60 @@ def get_daily_quests(
     try:
         import json
         import os
+        from scripts.daily_scheduler import _parse_due_from_fsrs_state, _parse_last_review_date
         custom_quests_file = os.path.join(os.path.dirname(__file__), "../../../data/custom_quests.json")
         if os.path.exists(custom_quests_file):
             with open(custom_quests_file, 'r', encoding='utf-8') as f:
                 custom_quests = json.load(f)
                 
-            existing_quest_ids = {item["quest"]["quest_id"] for item in result["pending"]} | \
-                                 {item["quest"]["quest_id"] for item in result["completed_today"]}
-            seen_custom_signatures = set()
-            for q in custom_quests:
-                # Child-scoped custom quests only
-                q_child_name = str(q.get("child_name") or "")
-                # Legacy custom quests without child_name are kept visible for cleanup.
-                if q_child_name and q_child_name != str(child_name):
-                    continue
+            # Need to figure out which custom quests are already completed today vs pending
+            from scripts.daily_scheduler import find_child_profile, get_db_path
+            db_path = get_db_path()
+            profile_row = find_child_profile(db_path, child_name)
+            
+            completed_custom_quests = []
+            pending_custom_quests = []
+            
+            if profile_row:
+                _, _, extracted = profile_row
+                fsrs_states = extracted.get("fsrs_states", {})
+                today_local_str = datetime.now().strftime("%Y-%m-%d")
+                
+                for q in custom_quests:
+                    q_child_name = str(q.get("child_name") or "")
+                    if q_child_name and q_child_name != str(child_name):
+                        continue
+                        
+                    qid = q["quest_id"]
+                    card_data = fsrs_states.get(qid)
+                    
+                    is_completed_today = False
+                    if card_data:
+                        last_review = _parse_last_review_date(card_data)
+                        if last_review is not None:
+                            last_review_local_str = (
+                                last_review.astimezone().strftime("%Y-%m-%d")
+                                if last_review.tzinfo
+                                else last_review.strftime("%Y-%m-%d")
+                            )
+                            if last_review_local_str == today_local_str:
+                                is_completed_today = True
+                                
+                    if is_completed_today:
+                        completed_custom_quests.append(q)
+                    else:
+                        pending_custom_quests.append(q)
+            else:
+                pending_custom_quests = [
+                    q for q in custom_quests 
+                    if not str(q.get("child_name") or "") or str(q.get("child_name") or "") == str(child_name)
+                ]
 
+            existing_pending_ids = {item["quest"]["quest_id"] for item in result["pending"]}
+            seen_custom_signatures = set()
+            
+            # Add to pending if not completed today and not already in pending
+            for q in pending_custom_quests:
                 signature = (
                     str(q.get("label") or "").strip(),
                     str(q.get("teaching_steps") or "").strip(),
@@ -152,8 +194,15 @@ def get_daily_quests(
                     continue
                 seen_custom_signatures.add(signature)
 
-                if q["quest_id"] not in existing_quest_ids:
+                if q["quest_id"] not in existing_pending_ids:
                     pending.insert(0, q)
+                    
+            # Add to completed today if completed today
+            existing_completed_ids = {item["quest"]["quest_id"] for item in result["completed_today"]}
+            for q in completed_custom_quests:
+                if q["quest_id"] not in existing_completed_ids:
+                    result["completed_today"].insert(0, {"quest": q, "card": None, "due": None})
+                    
     except Exception as e:
         print(f"Error loading custom quests: {e}")
 
